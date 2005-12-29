@@ -1,0 +1,711 @@
+\chapter{Opérateurs et fonctions}
+\label{operateurs}
+
+<<echo=FALSE>>=
+options(width=52)
+@
+
+Ce chapitre présente les principaux opérateurs arithmétiques,
+fonctions mathématiques et structures de contrôles offertes par le S.
+La liste est évidemment loin d'être exhaustive, surtout étant donné
+l'évolution rapide du langage. Un des meilleurs endroits pour
+connaître de nouvelles fonctions demeure la section \texttt{See Also}
+des rubriques d'aide, qui offre des hyperliens vers des fonctions
+apparentées au sujet de la rubrique.
+
+
+\section{Opérations arithmétiques}
+\label{operateurs:operations}
+
+L'unité de base en S est le vecteur\index{vecteur}.
+
+\begin{itemize}
+\item Les opérations sur les vecteurs sont effectuées \emph{élément
+    par élément}:
+<<echo=TRUE>>=
+c(1, 2, 3) + c(4, 5, 6)
+1:3 * 4:6
+@
+\item Si les vecteurs impliqués dans une expression arithmétique ne
+  sont pas de la même longueur, les plus courts sont \emph{recyclés}
+  de façon à correspondre au plus long vecteur.  Cette règle est
+  particulièrement apparente avec les vecteurs de longueur 1:
+<<echo=TRUE>>=
+1:10 + 2
+1:10 + rep(2, 10)
+@
+\item Si la longueur du plus long vecteur est un multiple de celle du
+  ou des autres vecteurs, ces derniers sont recyclés un nombre entier
+  de fois:
+<<echo=TRUE>>=
+1:10 + 1:5 + c(2, 4)  # vecteurs recyclés 2 et 5 fois
+1:10 + rep(1:5, 2) + rep(c(2, 4), 5)  # équivalent
+@
+\item Sinon, le plus court vecteur est recyclé un nombre fractionnaire
+  de fois, mais comme cela est rarement souhaité et provient
+  généralement d'une erreur de programmation, un avertissement est
+  affiché:
+\begin{Schunk}
+\begin{Sinput}
+> 1:10 + c(2, 4, 6)
+\end{Sinput}
+\begin{Soutput}
+ [1]  3  6  9  6  9 12  9 12 15 12
+Message d'avis :
+la longueur de l'objet le plus long n'est pas un
+multiple de la longueur de l'objet le plus court in:
+1:10 + c(2, 4, 6)
+\end{Soutput}
+\end{Schunk}
+\end{itemize}
+
+
+\section{Opérateurs}
+\label{operateurs:operateurs}
+
+On trouvera dans le tableau \ref{tab:operateurs} les opérateurs
+mathématiques et logiques les plus fréquemment employés, en ordre
+décroissant de priorité des opérations. Le tableau 3.1 de \citet{MASS}
+contient une liste plus complète.
+
+\begin{table}
+  \centering
+  \renewcommand{\arraystretch}{1.1}
+  \begin{tabular}{lp{7cm}}
+    \toprule
+    \Fonction{\^} ou \Fonction{**} & puissance \\
+    \Fonction{-} & changement de signe \\
+    \Fonction{*} \Fonction{/} & multiplication, division \\
+    \Fonction{+} \Fonction{-} & addition, soustraction \\
+    \Fonction{\%*\%} \Fonction{\%\%} \Fonction{\%/\%} & produit
+    matriciel, modulo, division entière \\
+    \Fonction{<} \Fonction{<=} \Fonction{==} \Fonction{>=}
+    \Fonction{>} \verb|!=|\Index{"!=@\code{"!=}} & plus petit, plus petit ou égal, égal,
+    plus grand ou égal, plus grand, différent de \\
+    \verb|!|\Index{"!@\code{"!}} & négation logique \\
+    \Fonction{\&} \Fonction{|} & «et» logique, «ou» logique \\
+    \bottomrule
+  \end{tabular}
+  \caption{Principaux opérateurs mathématiques, en ordre décroissant
+    de priorité des opérations}
+  \label{tab:operateurs}
+\end{table}
+
+
+\section{Appels de fonctions}
+\index{fonction!appel}
+\label{operateurs:appelfonctions}
+
+Ou comment spécifier les arguments d'une fonction interne ou
+personnelle.
+
+\begin{itemize}
+\item Il n'y a pas de limite pratique quant au nombre d'arguments que
+  peut avoir une fonction.
+\item Les arguments d'une fonction peuvent être spécifiés dans
+  l'ordre établi dans la définition de la fonction.
+\item Cependant, il est beaucoup plus prudent et \emph{fortement
+    recommandé} de spécifier les arguments par leur nom, surtout après
+  les deux ou trois premiers arguments.
+\item L'ordre des arguments étant important, il est nécessaire de les
+  nommer s'ils ne sont pas appelés dans l'ordre.
+\item Certains arguments ont une valeur par défaut qui sera utilisée
+  si l'argument n'est pas spécifié dans l'appel de la fonction.
+\end{itemize}
+
+\subsection{Exemple}
+
+La définition de la fonction \texttt{matrix} est la suivante:
+\begin{verbatim}
+   matrix(data=NA, nrow=1, ncol=1, byrow=FALSE,
+          dimnames=NULL)
+\end{verbatim}
+\begin{itemize}
+  \sloppy
+\item La fonction compte cinq arguments: \argument{data},
+  \argument{nrow}, \argument{ncol}, \argument{byrow} et
+  \argument{dimnames}.
+\item Ici, chaque argument a une valeur par défaut (ce n'est pas
+  toujours le cas). Ainsi, un appel à \code{matrix} sans
+  argument résulte en une matrice $1 \times 1$ remplie par colonne
+  (sans importance, ici) de la «valeur» \code{NA} et dont les
+  dimensions sont dépourvues d'étiquettes.
+<<echo=TRUE>>=
+matrix()
+@
+\item Appel plus élaboré utilisant tous les arguments. Le premier
+  argument est rarement nommé.
+<<echo=TRUE>>=
+matrix(1:6, nrow=2, ncol=3, byrow=TRUE,
+       dimnames=list(c("Gauche", "Droit"),
+       c("Rouge", "Vert", "Bleu")))
+@
+\end{itemize}
+
+La section 3.6 de \citet{MASS} contient de plus amples détails.
+
+
+\section{Quelques fonctions utiles}
+\label{operateurs:fonctionsutiles}
+
+Le langage S compte un très grand nombre de fonctions internes. La
+terminologie du système de classement de ces fonctions et la façon de
+les charger en mémoire diffèrent quelque peu entre S-Plus et
+\textsf{R}.
+
+Dans S-Plus, \Splus les fonctions sont classées dans des
+\emph{sections} d'une bibliothèque\index{bibliothèque}
+(\emph{library}). La bibliothèque principale se trouve dans le dossier
+\texttt{library} du dossier d'installation de S-Plus.  Au démarrage,
+plusieurs sections de la bibliothèque de base (dont, entre autres,
+\texttt{main}, \texttt{splus} et \texttt{stat}) sont immédiatement
+chargées en mémoire, avec comme conséquence qu'un très grand nombre de
+fonctions sont immédiatement disponibles.
+
+Dans \textsf{R}, \R un ensemble de fonctions est appelé un
+package\index{package} (terme non traduit). Par défaut, \textsf{R}
+charge en mémoire quelques packages de la bibliothèque seulement, ce
+qui économise l'espace mémoire et accélère le démarrage.  En revanche,
+on a plus souvent recours à la fonction \texttt{library} pour charger
+de nouveaux packages.
+
+Nous utiliserons dorénavant la terminologie de \textsf{R} pour référer
+à un élément de la bibliothèque.
+
+Cette section présente quelques unes seulement des nombreuses
+fonctions disponibles dans S-Plus et \textsf{R}. On s'y concentre sur
+les fonctions de base les plus souvent utilisées pour programmer en S
+et pour manipuler des données.
+
+\subsection{Manipulation de vecteurs}
+
+\begin{ttscript}{unique}
+\item[\Fonction{seq}] génération de suites de nombres\index{suite de nombres}
+\item[\Fonction{rep}] répétition\index{repetition@répétition de valeurs} de
+  valeurs ou de vecteurs
+\item[\Fonction{sort}] tri\index{tri} en ordre croissant ou
+  décroissant
+\item[\Fonction{order}] positions dans un vecteur des valeurs en ordre
+  croissant ou décroissant
+\item[\Fonction{rank}] rang\index{rang} des éléments d'un vecteur en
+  ordre croissant ou décroissant
+\item[\Fonction{rev}] renverser\index{renverser un vecteur} un vecteur
+\item[\Fonction{head}] extraction\index{extraction!premières valeurs}
+  des $n$ premières valeurs (\textsf{R} seulement)
+  \index{extraction|seealso{indiçage}}
+\item[\Fonction{tail}] extraction\index{extraction!dernières valeurs}
+  des $n$ dernières valeurs (\textsf{R} seulement)
+\item[\Fonction{unique}] extraction des éléments
+  différents\index{extraction!elements différents@éléments différents}
+  d'un vecteur
+\end{ttscript}
+
+\subsection{Recherche d'éléments dans un vecteur}
+
+\begin{ttscript}{which.max}
+\item[\Fonction{which}] positions des valeurs \texttt{TRUE} dans un vecteur
+  booléen
+\item[\Fonction{which.min}] position du minimum\index{minimum!position
+    dans un vecteur} dans un vecteur
+\item[\Fonction{which.max}] position du maximum\index{maximum!position
+    dans un vecteur} dans un vecteur
+\item[\Fonction{match}] position de la première occurrence d'un élément dans un
+  vecteur
+\item[\Fonction{\%in\%}] appartenance d'une ou plusieurs valeurs à un vecteur
+\end{ttscript}
+
+\subsection{Arrondi}
+
+\begin{ttscript}{ceiling}
+\item[\Fonction{round}] arrondi\index{arrondi} à un nombre défini de
+  décimales
+\item[\Fonction{floor}] plus grand entier inférieur ou égal à l'argument
+\item[\Fonction{ceiling}] plus petit entier supérieur ou égal à l'argument
+\item[\Fonction{trunc}] troncature vers zéro de l'argument; différent de
+  \texttt{floor} pour les nombres négatifs
+\end{ttscript}
+
+\subsection{Sommaires et statistiques descriptives}
+
+\begin{ttscript}{sum, prod}
+\item[\Fonction{sum}, \Fonction{prod}] somme\index{somme} et
+  produit\index{produit} des éléments d'un vecteur
+\item[\Fonction{diff}] différences\index{différences} entre les
+  éléments d'un vecteur
+\item[\Fonction{mean}] moyenne
+  arithmétique\index{moyenne!arithmétique} et moyenne
+  tronquée\index{moyenne!tronquée}
+\item[\Fonction{var}, \Fonction{sd}] variance\index{variance} et écart
+  type\index{ecart type@écart type} (versions sans biais)
+\item[\Fonction{min}, \Fonction{max}] minimum\index{minimum!d'un
+    vecteur} et maximum\index{maximum!d'un vecteur} d'un vecteur
+\item[\Fonction{range}] vecteur contenant le minimum et le maximum
+  d'un vecteur
+\item[\Fonction{median}] médiane\index{mediane@médiane} empirique
+\item[\Fonction{quantile}] quantiles\index{quantile} empiriques
+\item[\Fonction{summary}] statistiques descriptives d'un échantillon
+\end{ttscript}
+
+\subsection{Sommaires cumulatifs et comparaisons élément par élément}
+
+\begin{ttscript}{cumsum, cumprod}
+\item[\Fonction{cumsum}, \Fonction{cumprod}]
+  somme\index{somme!cumulative} et produit\index{produit!cumulatif}
+  cumulatif d'un vecteur
+\item[\Fonction{cummin}, \Fonction{cummax}]
+  minimum\index{minimum!cumulatif} et maximum\index{maximum!cumulatif}
+  cumulatif
+\item[\Fonction{pmin}, \Fonction{pmax}]
+  minimum\index{minimum!parallèle} et maximum\index{maximum!parallèle}
+  en parallèle, c'est-à-dire élément par élément entre deux vecteurs
+  ou plus
+\end{ttscript}
+
+\subsection{Opérations sur les matrices}
+
+\begin{ttscript}{rowMeans, colMeans}
+\item[\Fonction{t}] transposée\index{matrice!transposée}
+\item[\Fonction{solve}] avec un seul argument (une matrice carrée):
+  inverse\index{matrice!inverse} d'une matrice; avec deux arguments
+  (une matrice carrée et un vecteur): solution du système d'équation
+  $\mat{A} \mat{x} = \mat{b}$
+\item[\Fonction{diag}] avec une matrice en argument: diagonale de la
+  matrice; avec un vecteur en argument: matrice
+  diagonale\index{matrice!diagonale} formée avec le vecteur; avec un
+  scalaire $p$ en argument: matrice identité\index{matrice!identité}
+  $p \times p$
+\item[\Fonction{nrow}, \Fonction{ncol}] nombre de lignes et de
+  colonnes d'une matrice
+\item[\Fonction{rowSums}, \Fonction{colSums}]
+  sommes\index{matrice!sommes par ligne} par ligne et par
+  colonne\index{matrice!somme par colonne}, respectivement, des
+  éléments d'une matrice; voir aussi la fonction \texttt{apply} à la
+  section \ref{avance:apply}
+\item[\Fonction{rowMeans}, \Fonction{colMeans}]
+  moyennes\index{matrice!moyennes par ligne} par ligne et par
+  colonne\index{matrice!moyennes par colonne}, respectivement, des
+  éléments d'une matrice; voir aussi la fonction \texttt{apply} à la
+  section \ref{avance:apply}
+\item[\Fonction{rowVars}, \Fonction{colVars}]
+  variance\index{matrice!variance par ligne} par ligne et par
+  colonne\index{matrice!variance par colonne} des éléments d'une
+  matrice (S-Plus seulement)
+\end{ttscript}
+
+\subsection{Produit extérieur}
+\index{produit!extérieur}
+
+La fonction \Fonction{outer}, dont la syntaxe est
+\begin{center}
+  \code{outer(X, Y, FUN)},
+\end{center}
+applique la fonction \code{FUN} (\fonction{prod} par défaut) entre
+chacun des éléments de \code{X} et chacun des éléments de \code{Y}.
+\begin{itemize}
+\item La dimension du résultat est par conséquent \code{c(dim(X),
+    dim(Y))}.
+\item Par exemple, le résultat du produit extérieur entre
+  deux vecteurs est une matrice contenant tous les produits entre les
+  éléments des deux vecteurs:
+<<echo=TRUE>>=
+outer(c(1, 2, 5), c(2, 3, 6))
+@
+\item L'opérateur \Fonction{\%o\%} est un raccourci de \code{outer(X,
+    Y, prod)}.
+\end{itemize}
+
+
+\section{Structures de contrôle}
+\label{operateurs:structures}
+
+On se contente, ici, de mentionner les structures de contrôle
+disponibles en S. Se reporter à \citet[section 3.8]{MASS} pour plus de
+détails sur leur utilisation.
+
+\subsection{Exécution conditionnelle}
+
+\begin{struclist}
+\item[\fbox{if (\emph{condition}) \emph{branche.vrai} else
+    \emph{branche.faux}}]
+  \rule{0em}{2.5ex}%
+  \Indexfonction{if}%
+  \Indexfonction{else}%
+  \sloppy Si \code{\emph{condition}} est vraie, \code{\emph{branche.vrai}} est
+  exécutée, et \code{\emph{branche.faux}} sinon. Dans le cas où l'une
+  ou l'autre de \code{\emph{branche.vrai}} ou
+  \code{\emph{branche.faux}} comporte plus d'une expression, grouper
+  celles-ci dans des accolades \verb={ }=.
+\item[\fbox{ifelse(\emph{condition}, \emph{expression.vrai},
+    \emph{expression.faux})}]
+  \rule{0em}{2.5ex}%
+  \Indexfonction{ifelse}%
+  Fonction vectorisée qui remplace chaque élément \code{TRUE} du
+  vecteur \code{\emph{condition}} par l'élément correspondant de
+  \code{\emph{expression.vrai}} et chaque élément \code{FALSE} par
+  l'élément correspondant de \code{\emph{expression.faux}}.
+  L'utilisation n'est pas très intuitive, alors examiner attentivement
+  les exemples de la rubrique d'aide.
+\item[\fbox{switch(\emph{test}, \emph{cas.1 = action.1}, \emph{cas.2 =
+      action.2}, ...)}]
+  \rule{0em}{2.5ex}%
+  \Indexfonction{switch}%
+  Utilisé plutôt rarement.
+\end{struclist}
+
+\subsection{Boucles}
+
+Les boucles\index{boucle} sont et doivent être utilisées avec
+parcimonie en S, car elles sont généralement inefficaces
+(particulièrement avec S-Plus).  Dans la majeure partie des cas, il
+est possible de vectoriser les calcul pour éviter les boucles
+explicites, ou encore de s'en remettre aux fonctions \fonction{apply},
+\fonction{lapply} et \fonction{sapply} (section \ref{avance:apply})
+pour faire les boucles de manière plus efficace.
+
+\begin{struclist}
+\item[\fbox{for (\emph{variable} in \emph{suite}) \emph{expression}}]
+  \rule{0em}{2.5ex}%
+  \Indexfonction{for}%
+  Exécuter \code{\emph{expression}} successivement pour chaque valeur
+  de \code{\emph{variable}} contenue dans \code{\emph{suite}}.  Encore
+  ici, on groupera les expressions dans des accolades \verb={ }=. À
+  noter que \code{\emph{suite}} n'a pas à être composée de nombres
+  consécutifs, ni même par ailleurs de nombres.
+\item[\fbox{while (\emph{condition}) \emph{expression}}]
+  \rule{0em}{2.5ex}%
+  \Indexfonction{while}%
+  Exécuter \code{\emph{expression}} tant que \code{\emph{condition}}
+  est vraie. Si \code{\emph{condition}} est fausse lors de l'entrée
+  dans la boucle, celle-ci n'est pas exécutée. Une boucle \code{while}
+  n'est par conséquent pas nécessairement toujours exécutée.
+\item[\fbox{repeat \emph{expression}}]
+  \rule{0em}{2.5ex}%
+  \Indexfonction{repeat}%
+  Répéter \code{\emph{expression}}. Cette dernière devra comporter un
+  test d'arrêt qui utilisera la commande \code{break}. Une boucle
+  \code{repeat} est toujours exécutée au moins une fois.
+\item[\fbox{break}]
+  \rule{0em}{2.5ex}%
+  \Indexfonction{break}%
+  Sortie immédiate d'une boucle \code{for}, \code{while} ou
+  \code{repeat}.
+\item[\fbox{next}]
+  \rule{0em}{2.5ex}%
+  \Indexfonction{next}%
+  Passage immédiat à la prochaine itération d'une boucle \code{for},
+  \code{while} ou \code{repeat}.
+\end{struclist}
+
+
+\section{Exemples}
+\label{operateurs:exemples}
+
+\lstinputlisting{operateurs.R}
+
+
+\section{Exercices}
+\label{operateurs:exercices}
+
+\Opensolutionfile{reponses}[reponses-operateurs]
+\Writetofile{reponses}{\protect\section*{Chapitre \protect\ref{operateurs}}}
+
+\SweaveOpts{echo=FALSE,term=FALSE}
+\begin{exercice}
+  À l'aide des fonctions \fonction{rep}, \fonction{seq} et
+  \code{c} seulement, générer les séquences suivantes.
+  \begin{enumerate}
+  \item
+<<>>=
+cat(rep(c(0, 6), 3))
+@
+  \item
+<<>>=
+cat(seq(1, 10, by=3))
+@
+  \item
+<<>>=
+cat(rep(1:3, 4))
+@
+  \item
+<<>>=
+cat(rep(1:3, 1:3))
+@
+  \item
+<<>>=
+cat(rep(1:3, 3:1))
+@
+  \item
+<<>>=
+cat(seq(1, 10, length=3))
+@
+  \item
+<<>>=
+cat(rep(1:3, rep(4,3)))
+@
+  \end{enumerate}
+  \SweaveOpts{echo=TRUE,eval=FALSE}
+  \begin{rep}
+    \begin{enumerate}
+\item
+<<>>=
+rep(c(0, 6), 3)
+@
+\item
+<<>>=
+seq(1, 10, by=3)
+@
+\item
+<<>>=
+rep(1:3, 4)
+@
+\item
+<<>>=
+rep(1:3, 1:3)
+@
+\item
+<<>>=
+rep(1:3, 3:1)
+@
+\item
+<<>>=
+seq(1, 10, length=3)
+@
+\item
+<<>>=
+rep(1:3, rep(4,3))
+@
+    \end{enumerate}
+  \end{rep}
+\end{exercice}
+
+\SweaveOpts{echo=FALSE,eval=TRUE,term=FALSE}
+\begin{exercice}
+  Générer les suites de nombres suivantes à l'aide des fonctions
+  \verb|:|\index{:@\verb|:|} et \texttt{rep} seulement, donc sans
+  utiliser la fonction \fonction{seq}.
+  \begin{enumerate}
+  \item
+<<>>=
+cat(11:20 / 10)
+@
+  \item
+<<>>=
+cat(2 * 0:9 + 1)
+@
+  \item
+<<>>=
+cat(rep(-2:2, 2))
+@
+  \item
+<<>>=
+cat(rep(-2:2, each=2))
+@
+  \item
+<<>>=
+cat(10 * 1:10)
+@
+  \end{enumerate}
+  \SweaveOpts{echo=TRUE,eval=FALSE}
+  \begin{rep}
+    \begin{enumerate}
+\item
+<<>>=
+11:20 / 10
+@
+\item
+<<>>=
+2 * 0:9 + 1
+@
+\item
+<<>>=
+rep(-2:2, 2)
+@
+\item
+<<>>=
+rep(-2:2, each=2)
+@
+\item
+<<>>=
+10 * 1:10
+@
+    \end{enumerate}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  À l'aide de la commande \fonction{apply}, écrire des expressions S
+  qui remplaceraient les fonctions suivantes.
+  \begin{enumerate}
+  \item \fonction{rowSums}
+  \item \fonction{colSums}
+  \item \fonction{rowMeans}
+  \item \fonction{colMeans}
+  \end{enumerate}
+  \begin{rep}
+    Soit \code{mat} une matrice.
+    \begin{enumerate}
+\item
+<<>>=
+apply(mat, 1, sum)
+@
+\item
+<<>>=
+apply(mat, 2, sum)
+@
+\item
+<<>>=
+apply(mat, 1, mean)
+@
+\item
+<<>>=
+apply(mat, 2, mean)
+@
+    \end{enumerate}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  Sans utiliser les fonctions \fonction{factorial},
+  \fonction{lfactorial}, \fonction{gamma} ou \fonction{lgamma},
+  générer la séquence 1!, 2!, ..., 10!
+  \begin{rep}
+<<>>=
+cumprod(1:10)
+@
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  Trouver une relation entre \code{x}, \code{y}, \code{x \%\% y}
+  et \code{x \%/\% y}, où \code{y != 0}.
+  \begin{rep}
+    \verb|x == (x %% y) + y * ( x %/% y )|
+  \end{rep}
+\end{exercice}
+
+\enlargethispage{10mm}
+\begin{exercice}
+  Simuler un échantillon $\mat{x} = (x_1, x_2, x_3, ..., x_{20})$ avec
+  la fonction \fonction{sample}.  Écrire une expression S permettant
+  d'obtenir ou de calculer chacun des résultats demandés ci-dessous.
+  \begin{enumerate}
+  \item Les cinq premiers éléments de l'échantillon.
+  \item La valeur maximale de l'échantillon.
+  \item La moyenne des cinq premiers éléments de l'échantillon.
+  \item La moyenne des cinq derniers éléments de l'échantillon.
+  \end{enumerate}
+  \begin{rep}
+    \begin{enumerate}
+\item
+<<>>=
+x[1:5]
+head(x, 5) # R seulement
+@
+\item
+<<>>=
+max(x)
+@
+\item
+<<>>=
+mean(x[1:5])
+mean(head(x, 5)) # R seulement
+@
+\item
+<<>>=
+mean(x[16:20])
+mean(x[(length(x)-4):length(x)])  # plus général
+mean(tail(x, 5))                      # R seulement
+@
+    \end{enumerate}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  \label{exercice:operateurs:ijk}
+  \begin{enumerate}
+  \item Trouver une formule pour calculer la position, dans le vecteur
+    sous-jacent, de l'élément $(i, j)$ d'une matrice\index{matrice} $I
+    \times J$ remplie par colonne.
+  \item Répéter la partie (a) pour l'élément $(i, j, k)$ d'un
+    tableau\index{tableau} $I \times J \times K$.
+  \end{enumerate}
+  \begin{rep}
+    \begin{enumerate}
+    \item \verb|(j - 1)*I + i|
+    \item \verb|((k - 1)*J + j - 1)*I + i|
+    \end{enumerate}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  Simuler une matrice\index{matrice} \code{mat} $10 \times 7$, puis
+  écrire des expressions S permettant d'effectuer les tâches demandées
+  ci-dessous.
+  \begin{enumerate}
+  \item Calculer la somme des éléments de chacunes des lignes de la
+    matrice.
+  \item Calculer la moyenne des éléments de chacunes des colonnes de
+    la matrice.
+  \item Calculer la valeur maximale prise par les éléments de la
+    sous-matrice formée par les trois premières lignes et les trois
+    premières colonnes.
+  \item Extraire toutes les lignes de la matrice dont la moyenne des
+    éléments est supérieure à 7.
+  \end{enumerate}
+  \begin{rep}
+    \begin{enumerate}
+\item
+<<>>=
+rowSums(mat)
+@
+\item
+<<>>=
+colMeans(mat)
+@
+\item
+<<>>=
+max(mat[1:3, 1:3])
+@
+\item
+<<>>=
+mat[rowMeans(mat) > 7,]
+@
+    \end{enumerate}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  On vous donne la liste et la date des 31 meilleurs temps enregistrés
+  au 100~mètres homme entre 1964 et 2005:
+<<echo=TRUE>>=
+temps <- c(10.06, 10.03, 10.02,  9.95, 10.04, 10.07, 10.08, 10.05,
+           9.98, 10.09, 10.01, 10.00,  9.97,  9.93,  9.96,  9.99,
+           9.92,  9.94,  9.90,  9.86,  9.88,  9.87,  9.85,  9.91,
+           9.84,  9.89,  9.79,  9.80,  9.82,  9.78,  9.77)
+names(temps) <- c("1964-10-15", "1968-06-20", "1968-10-13",
+                  "1968-10-14", "1968-10-14", "1968-10-14",
+                  "1968-10-14", "1975-08-20", "1977-08-11",
+                  "1978-07-30", "1979-09-04", "1981-05-16",
+                  "1983-05-14", "1983-07-03", "1984-05-05",
+                  "1984-05-06", "1988-09-24", "1989-06-16",
+                  "1991-06-14", "1991-08-25", "1991-08-25",
+                  "1993-08-15", "1994-07-06", "1994-08-23",
+                  "1996-07-27", "1996-07-27", "1999-06-16",
+                  "1999-08-22", "2001-08-05", "2002-09-14",
+                  "2005-06-14")
+@
+  Extraire de ce vecteur les records du monde seulement, c'est-à-dire
+  la première fois que chaque temps est survenu.
+  \begin{rep}
+<<>>=
+temps[match(unique(cummin(temps)), temps)]
+@
+  \end{rep}
+\end{exercice}
+
+\Closesolutionfile{reponses}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "introduction_programmation_S"
+%%% End:

@@ -1,0 +1,62 @@
+\newlength{\gauche}
+\newlength{\droite}
+
+\calccentering{\unitlength}
+\addtolength{\gauche}{\unitlength}
+\addtolength{\gauche}{-1.5cm}
+\addtolength{\droite}{\unitlength}
+\addtolength{\droite}{1.5cm}
+\begin{adjustwidth*}{\gauche}{-\droite}
+  \centering
+  \vspace*{2cm}
+  \thetitle \\
+\end{adjustwidth*}
+\cleardoublepage
+
+\begin{adjustwidth*}{\gauche}{-\droite}
+  \centering
+  \vspace*{2cm}
+  \thetitle \\
+  \vspace*{3cm}
+  \theauthor \\
+  \vspace*{\fill}
+  \thedate
+\end{adjustwidth*}
+\clearpage
+
+\begingroup
+\begin{adjustwidth*}{\unitlength}{-\unitlength}
+  \footnotesize 
+  \setlength{\parindent}{0pt}
+  \setlength{\parskip}{\baselineskip}
+  
+  \textcopyright{} 2005 Vincent Goulet \\
+  Tous droits réservés
+
+  Il est permis de copier, distribuer et/ou modifier ce document selon
+  les termes de la GNU Free Documentation License, Version 1.2 ou
+  toute version subséquente publiée par la Free Software Foundation;
+  avec aucune section inaltérable (\emph{Invariant Sections}), aucun
+  texte de couverture avant (\emph{Front-Cover Texts}), et aucun texte
+  de couverture arrière (\emph{Back-Cover Texts}). Une copie de la
+  licence est incluse dans l'annexe \ref{fdl}.
+
+  \begin{center}
+    \begin{tabular}{ll}
+      Version 0.99: & 29 novembre 2005 \\
+      Version 0.9:  & 9 novembre 2005 \\
+      Version 0.8:  & 16 septembre 2005 \\
+    \end{tabular}
+  \end{center}
+
+  \textbf{Avis de marque de commerce} \\
+  S-Plus\textregistered{} est une marque déposée de Insightful
+  Corporation.
+\end{adjustwidth*}
+\endgroup
+\clearpage
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "introduction_programmation_S"
+%%% End: 

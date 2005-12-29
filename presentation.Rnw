@@ -1,0 +1,288 @@
+\chapter{Présentation du langage S}
+\label{presentation}
+
+<<echo=FALSE>>=
+options(width=52)
+@
+
+\section{Le langage S}
+\label{presentation:langage}
+
+Le S est un langage pour «programmer avec des données» développé chez
+Bell Laboratories (anciennement propriété de AT\&T, maintenant de
+Lucent Technologies).
+
+\begin{itemize}
+\item Ce n'est pas seulement un «autre» environnement statistique
+  (comme SPSS ou SAS, par exemple), mais bien un langage de
+  programmation complet et autonome.
+\item Le S est inspiré de plusieurs langages, dont l'APL et le Lisp:
+  \begin{itemize}
+  \item interprété (et non compilé);
+  \item sans déclaration obligatoire des variables;
+  \item basé sur la notion de vecteur;
+  \item particulièrement puissant pour les applications mathématiques
+    et statistiques (et donc actuarielles).
+  \end{itemize}
+\end{itemize}
+
+
+\section{Les moteurs S}
+\label{presentation:moteurs}
+
+Il existe quelques «moteurs» ou dialectes du langage S.
+
+\begin{itemize}
+\item Le plus connu est S-Plus, un logiciel commercial de
+  Insightful Corporation. (Bell Labs octroie à Insightful la licence
+  exclusive de leur système S.)
+\item \textsf{R}, ou GNU S, est une version libre (\emph{Open Source})
+  «\emph{not unlike S}».
+\end{itemize}
+
+S-Plus et \textsf{R} constituent tous deux des environnements intégrés
+de manipulation de données, de calcul et de préparation de graphiques.
+
+
+\section{Où trouver de la documentation}
+\label{presentation:doc}
+
+S-Plus est livré avec quatre livres (disponibles en format PDF depuis
+le menu \texttt{Help} de l'interface graphique), mais aucun ne s'avère
+vraiment utile pour apprendre le langage S.
+
+Plusieurs livres --- en versions papier ou électronique, gratuits ou
+non --- ont été publiés sur S-Plus et/ou \textsf{R}. On trouvera des
+listes exhaustives dans les sites de Insightful et du projet
+\textsf{R}:
+\begin{itemize}
+\item \url{http://www.insightful.com/support/splusbooks.asp}
+\item \url{http://www.r-project.org} (dans la section
+  \texttt{Documentation}).
+\end{itemize}
+
+De plus, \citet{Sprogramming,MASS} constituent des références sur le
+langage S devenues au cours des dernières années des standards
+\emph{de facto}.
+
+
+\section{Interfaces pour S-Plus et \textsf{R}}
+\label{presentation:interfaces}
+
+Provenant du monde Unix, tant S-Plus que \textsf{R} sont d'abord et
+avant tout des applications en ligne de commande (\texttt{sqpe.exe} et
+\texttt{rterm.exe} sous Windows).
+
+\begin{itemize}
+\item S-Plus possède toutefois une interface graphique élaborée
+  permettant d'utiliser le logiciel sans trop connaître le langage de
+  programmation.
+\item \textsf{R} dispose également d'une interface graphique
+  rudimentaire sous Windows et Mac OS.
+\item L'édition sérieuse de code S bénéficie cependant grandement d'un
+  bon éditeur de texte.
+\item À la question 6.2 de la foire aux questions (FAQ) de \textsf{R},
+  «Devrais-je utiliser \textsf{R} à l'intérieur de
+  Emacs?»\index{Emacs}, la réponse est: «Oui, définitivement.» Nous
+  partageons cet avis, aussi ce document supposera-t-il que S-Plus ou
+  \textsf{R} sont utilisés à l'intérieur de GNU Emacs avec le mode
+  ESS\index{ESS}.
+\item Autre option: WinEdt (partagiciel) avec l'ajout R-WinEdt.
+\end{itemize}
+
+
+\section{Installation de Emacs avec ESS}
+\label{presentation:emacs}
+
+Il n'existe pas de procédure d'installation similaire aux autres
+applications Windows pour Emacs.  L'installation n'en demeure pas
+moins très simple: il suffit de décompresser un ensemble de fichiers
+au bon endroit.
+
+\begin{itemize}
+\item Pour une installation simplifiée de Emacs et ESS, consulter le
+  site Internet
+  \begin{quote}
+    \url{http://vgoulet.act.ulaval.ca/pub/emacs/}
+  \end{quote}
+  On y trouve une version modifiée de GNU Emacs et des instructions
+  d'installation détaillées.
+\item L'annexe \ref{ess} présente les plus importantes commandes à
+  connaître pour utiliser Emacs et le mode ESS.
+\end{itemize}
+
+
+\section{Démarrer et quitter S-Plus ou \textsf{R}}
+\label{presentation:demarrer}
+
+On suppose ici que S-Plus ou R sont utilisés à l'intérieur de Emacs.
+
+\begin{itemize}
+\item Pour démarrer \textsf{R} \R à l'intérieur de Emacs:
+\begin{verbatim}
+M-x R RET
+\end{verbatim}
+  puis spécifier un dossier de travail (voir la section
+  \ref{presentation:workspace}). Une console \textsf{R} est ouverte
+  dans un \emph{buffer} nommé \texttt{*R*}.
+\item Pour démarrer S-Plus sous Windows, \Splus la procédure est
+  similaire, sauf que la commande à utiliser est
+\begin{verbatim}
+M-x Sqpe RET
+\end{verbatim}
+  Consulter l'annexe \ref{s-plus_windows} pour de plus amples
+  détails.
+\item Pour quitter, deux options sont disponibles:
+  \begin{enumerate}
+  \item Taper \fonction{q()} à la ligne de commande.
+  \item Dans Emacs, faire \ess{C-c C-q}. ESS va alors s'occuper de
+    fermer le processus S ainsi que tous les \emph{buffers} associés à
+    ce processus.
+  \end{enumerate}
+\end{itemize}
+
+
+\section{Stratégies de travail}
+\label{presentation:strategies}
+
+Il existe principalement deux façons de travailler avec S-Plus et
+\textsf{R}.
+\begin{enumerate}
+\item Le code est virtuel et les objets sont réels. C'est l'approche
+  qu'encouragent les interfaces graphiques, mais aussi la moins
+  pratique à long terme. On entre des expressions directement à la
+  ligne de commande pour les évaluer immédiatement.
+<<echo=TRUE>>=
+2 + 3
+-2 * 7
+exp(1)
+log(exp(1))
+@
+  Les objets créés au cours d'une session de travail sont sauvegardés.
+  Par contre, le code utilisé pour créer ces objets est perdu lorsque
+  l'on quitte S-Plus ou \textsf{R}, à moins de sauvegarder celui-ci dans
+  des fichiers.
+\item Le code est réel et les objets sont virtuels. C'est l'approche
+  que nous favorisons. Le travail se fait essentiellement dans des
+  fichiers de script (de simples fichiers de texte) dans lesquels sont
+  sauvegardées les expressions (parfois complexes!) et le code des
+  fonctions personnelles. Les objets sont créés au besoin en exécutant
+  le code. Emacs permet ici de passer efficacement des fichiers de
+  script à l'exécution du code:
+  \begin{enumerate}[i)]
+  \item Démarrer un processus S-Plus (\texttt{M-x Sqpe}) ou
+    \textsf{R} (\texttt{M-x R}) et spécifier le dossier de travail.
+  \item Ouvrir un fichier de script avec \ess{C-x C-f}. Pour créer un
+    nouveau fichier, ouvrir un fichier n'existant pas.
+  \item Positionner le curseur sur une expression et faire \ess{C-c
+      C-n} pour l'évaluer.
+  \item Le résultat apparaît dans le \emph{buffer} \texttt{*S+6*} ou
+    \texttt{*R*}.
+  \end{enumerate}
+\end{enumerate}
+
+
+\section{Gestion des projets ou environnements de travail}
+\label{presentation:workspace}
+
+S-Plus et \textsf{R} ont une manière différente, mais tout aussi
+particulière de sauvegarder les objets créés au cours d'une session de
+travail.
+\begin{itemize}
+\item Tous deux doivent travailler dans un dossier et non avec des
+  fichiers individuels.
+\item Dans S-Plus, \Splus tout objet créé au cours d'une session de
+  travail est sauvegardé de façon permanente sur le disque dur dans le
+  sous-dossier \texttt{\_\_Data} du dossier de travail.
+\item Dans \textsf{R}, \R les objets créés sont conservés en mémoire
+  jusqu'à ce que l'on quitte l'application ou que l'on enregistre le
+  travail avec la commande \fonction{save.image()}. L'environnement de
+  travail (\emph{workspace}) est alors sauvegardé dans le fichier
+  \texttt{.RData} dans le dossier de travail.
+\end{itemize}
+
+Le dossier de travail est déterminé au lancement de l'application.
+\begin{itemize}
+\item Avec Emacs et ESS on doit spécifier le dossier de travail à
+  chaque fois que l'on démarre un processus S-Plus ou R.
+\item Les interfaces graphiques permettent également de spécifier le
+  dossier de travail.
+  \begin{itemize}
+    \sloppy
+  \item Dans \Splus l'interface graphique de S-Plus, choisir
+    \texttt{General Settings} dans le menu \texttt{Options}, puis
+    l'onglet \texttt{Startup}. Cocher la case \texttt{Prompt for
+      project folder}.  Consulter également le chapitre 13 du guide de
+    l'utilisateur de S-Plus.
+  \item Dans \R l'interface graphique de \textsf{R}, le plus simple
+    consiste à changer le dossier de travail à partir du menu
+    \texttt{Fichier|Changer le répertoire courant...}. Consulter aussi
+    la \emph{R for Windows FAQ}.
+  \end{itemize}
+\end{itemize}
+
+
+\section{Consulter l'aide en ligne}
+\label{presentation:aide}
+
+Les rubriques d'aide des diverses fonctions disponibles dans S-Plus et
+\textsf{R} contiennent une foule d'informations ainsi que des exemples
+d'utilisation. Leur consultation est tout à fait essentielle.
+
+\begin{itemize}
+\item Pour consulter la rubrique d'aide de la fonction \code{foo},
+  on peut entrer à la ligne de commande
+\begin{Schunk}
+\begin{Sinput}
+> ?foo
+\end{Sinput}
+\end{Schunk}
+\item Dans Emacs, \code{C-c C-v foo RET}\indexess{C-c C-v} ouvrira la
+  rubrique d'aide de la fonction \code{foo} dans un nouveau
+  \emph{buffer}.
+\item Il existe plusieurs touches de raccourcis utiles pour la
+  consultation des rubriques d'aide (voir la carte de référence
+  ESS).
+\item Entre autres, la touche \texttt{l} permet d'exécuter ligne par
+  ligne les exemples se trouvant à la fin de chaque rubrique d'aide.
+\end{itemize}
+
+
+\section{Exemples}
+\label{presentation:exemples}
+
+\lstinputlisting{presentation.R}
+
+
+\section{Exercices}
+\label{presentation:exercices}
+
+\begin{exercice}
+  Démarrer un processus S-Plus ou \textsf{R} à l'intérieur de Emacs.
+\end{exercice}
+
+\begin{exercice}
+  Exécuter un à un les exemples de la section précédente. Une version
+  électronique du code de cette section est disponible dans le site
+  mentionné dans la préface.
+\end{exercice}
+
+\begin{exercice}
+  Consulter les rubriques d'aide d'une ou plusieurs des fonctions
+  rencontrées lors de l'exercice précédent. Observer d'abord comment
+  les ru\-bri\-ques d'aide sont structurées --- elles sont toutes
+  identiques --- puis exécuter quelques lignes d'exemples.
+\end{exercice}
+
+\begin{exercice}
+  Lire le chapitre 1 de \cite{MASS} et exécuter les commandes de
+  l'exemple de session de travail de la section 1.3. Bien que
+  davantage orienté vers les application statistiques que vers la
+  programmation, cet exemple démontre quelques unes des possibilités
+  du langage S.
+\end{exercice}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "introduction_programmation_S"
+%%% End:

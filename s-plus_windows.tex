@@ -1,0 +1,96 @@
+\chapter{Utilisation de ESS et S-Plus sous Windows}
+\index{Emacs!et S-Plus|(}
+\label{s-plus_windows}
+
+L'utilisation de \textsf{R} et S-Plus avec ESS dans Emacs est
+virtuellement identique sous Unix. Sous Windows, la procédure est
+exactement la même que sous Unix pour \textsf{R}, mais l'interface
+avec S-Plus est légèrement plus compliquée.
+
+Avant toute chose, il faut s'assurer d'avoir une installation de
+Emacs, ESS et S-Plus fonctionnelle. L'installation de la version
+modifiée de Emacs distribuées dans le site Internet
+\begin{quote}
+  \url{http://vgoulet.act.ulaval.ca/pub/emacs/}
+\end{quote}
+devrait permettre de satisfaire cette exigence rapidement.
+
+Il y a deux façons de travailler avec S-Plus depuis Emacs sous
+Windows: tout dans Emacs ou une combinaison de Emacs et de l'interface
+graphique de S-Plus.
+
+
+\section{Tout dans Emacs}
+
+Cette approche est similaire à celle favorisée sous Unix ainsi qu'avec
+\textsf{R}. Un processus S-Plus est démarré à l'intérieur même de
+Emacs, un fichier de script (habituellement avec une extension
+\texttt{.S}) est ouvert dans Emacs et les lignes de ce fichier sont
+exécutées dans le processus S-Plus. La fenêtre Emacs est alors scindée
+en deux. C'est l'approche prônée à la section
+\ref{presentation:strategies}.
+
+Le truc consiste ici à utiliser non pas l'exécutable
+\texttt{splus.exe} (qui est l'interface graphique), mais plutôt
+l'interface en ligne de commande, plus simple et rapide. L'exécutable
+est \texttt{sqpe.exe}. Pour démarrer une session S-Plus dans Emacs, on
+fera donc
+
+\begin{quote}
+  \ttfamily M-x Sqpe RET
+\end{quote}
+Lorsque demandé, on spécifie le dossier de travail. Une fois l'invite
+de commande S-Plus obtenue, on pourra exécuter des lignes du fichier
+de script dans le processus S-Plus avec \texttt{C-c C-n}, \texttt{C-c
+  C-f}, etc.
+
+Il y a toutefois un os avec cette approche: aucun périphérique
+graphique n'est disponible. Sauf depuis la version 6.1 de S-Plus: on
+peut utiliser un périphérique graphique Java. Afin de pouvoir
+l'utiliser, il faut exécuter les deux lignes suivantes \emph{avant} de
+créer un graphique:
+\begin{Schunk}
+  \begin{Sinput}
+> library(winjava)
+> java.graph()
+  \end{Sinput}
+\end{Schunk}
+
+Il est possible d'automatiser ce processus en sauvegardant ces deux
+lignes dans un fichier nommé \texttt{S.init} dans le dossier de
+travail. Le contenu de ce fichier sera exécuté à chaque fois que
+S-Plus sera démarré dans ce dossier.
+
+
+\section[Combinaison Emacs et S-Plus GUI]{Combinaison Emacs et interface graphique de S-Plus}
+
+Cette option est moins élégante que la précédente, mais certains
+pourraient lui voir comme avantage d'utiliser l'interface graphique
+(GUI) de S-Plus. En fin de compte, la procédure ci-dessous revient à
+remplacer par Emacs la fenêtre d'édition de script incluse dans
+S-Plus.
+
+En faisant
+\begin{quote}
+  \ttfamily M-x S RET
+\end{quote}
+à l'intérieur de Emacs, une nouvelle session graphique de S-Plus sera
+démarrée (il faut être patient, les négociations entre les deux
+logiciels peuvent prendre du temps). On se retrouve donc avec deux
+fenêtres: une pour Emacs et une pour S-Plus.
+
+Ouvrir un fichier de script dans Emacs et exécuter les lignes de comme
+ci-dessus. Les lignes de code seront exécutées dans l'interface
+graphique. En d'autres mots, le code source se trouve dans une fenêtre
+(Emacs) et les résultats de ce code source dans une autre (S-Plus). Il
+faut bien disposer les fenêtres côte à côte pour que cette stratégie
+se révèle minimalement efficace.
+
+L'information ci-dessus se trouve dans la documentation de ESS.
+
+\index{Emacs!et S-Plus|)}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "introduction_programmation_S"
+%%% End: 

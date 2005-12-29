@@ -1,0 +1,764 @@
+\chapter{Fonctions définies par l'usager}
+\label{fonctions}
+
+<<echo=FALSE>>=
+options(width=52)
+@
+
+La possibilité pour l'usager de définir facilement et rapidement de
+nouvelles fonctions --- et donc des extensions au langage --- est une
+des grandes forces du S.
+
+
+\section{Définition d'une fonction}
+\index{fonction!définie par l'usager}
+\label{fonctions:definition}
+
+On définit une nouvelle fonction de la manière suivante:
+\begin{center}
+  \Indexfonction{function}
+  \code{fun <- function(\emph{arguments}) \emph{expression}}
+\end{center}
+où
+\begin{itemize}
+\item \code{fun} est le nom de la fonction (les règles pour les noms
+  de fonctions étant les mêmes que pour tout autre objet);
+\item \code{\itshape arguments} est la liste des arguments, séparés
+  par des virgules;
+\item \code{\itshape expression} constitue le corps de la fonction,
+  soit une liste d'expressions groupées entre accolades (nécessaires
+  s'il y a plus d'une expression seulement).
+\end{itemize}
+
+
+\section{Retourner des résultats}
+\index{fonction!resultats@résultat}
+\label{fonctions:resultats}
+
+La plupart des fonctions sont écrites dans le but de retourner un
+résultat.
+\begin{itemize}
+\item Une fonction retourne tout simplement le résultat de la
+  \emph{dernière expression} du corps de la fonction.
+\item On évitera donc que la dernière expression soit une affectation,
+  car la fonction ne retournera alors rien.
+\item On peut également utiliser explicitement la fonction
+  \Fonction{return} pour retourner un résultat, mais cela est rarement
+  nécessaire.
+\item Lorsqu'une fonction doit retourner plusieurs résultats, il est
+  en général préférable de le faire dans une liste nommée.
+\end{itemize}
+
+
+\section{Variables locales et globales}
+\label{fonctions:variables}
+
+Comme dans la majorité des langages de programmation, les concepts de
+variable locale et de variable globale existent en S.
+
+\begin{itemize}
+\item Toute variable définie dans une fonction est
+  locale\index{variable!locale} à cette fonction, c'est-à-dire
+  \begin{itemize}
+  \item qu'elle n'apparaît pas dans l'espace de travail;
+  \item qu'elle n'écrase pas une variable du même nom dans l'espace de
+    travail.
+  \end{itemize}
+\item Il est possible de définir une variable\index{variable!globale}
+  dans l'espace de travail depuis une fonction avec l'opérateur
+  d'affectation \verb|<<-|\index{<<-@\verb=<<-=|textbf}. Il est très
+  rare --- et généralement non recommandé --- de devoir recourir à de
+  telles variables globales.
+\item On peut définir une fonction à l'intérieur d'une autre fonction.
+  Cette fonction sera locale à la fonction dans laquelle elle est
+  définie.
+\end{itemize}
+
+
+\section{Exemple de fonction}
+\label{fonctions:exemple}
+
+Le code développé pour l'exemple de point fixe\index{point fixe} de la
+section \ref{exemples:pointfixe} peut être intégré dans une fonction
+tel que montré à la figure \ref{fig:fp}.
+
+\begin{figure}
+  \centering
+  \begin{framed}
+\begin{lstlisting}
+fp <- function(k, n, start=0.05, TOL=1E-10)
+{
+    ## Fonction pour trouver par la méthode du point
+    ## fixe le taux d'intérêt auquel une série de 'n'
+    ## paiements vaut 'k'.
+    ##
+    ## ARGUMENTS
+    ##
+    ##     k: la valeur présente des paiements
+    ##     n: le nombre de paiements
+    ## start: point de départ des itérations
+    ##   TOL: niveau de précision souhaité
+    ##
+    ## RETOURNE
+    ##
+    ## Le taux d'intérêt
+
+    i <- start
+    repeat
+    {
+        it <- i
+        i <- (1 - (1 + it)^(-n))/k
+        if (abs(i - it)/it < TOL)
+            break
+    }
+    i  # ou return(i)
+}
+\end{lstlisting}
+  \end{framed}
+  \caption{Exemple de fonction de point fixe}
+  \label{fig:fp}
+\end{figure}
+
+\begin{itemize}
+\item Le nom de la fonction est \code{fp}.
+\item La fonction compte cinq arguments: \code{k}, \code{n},
+  \code{start} et \code{TOL}.
+\item Les deux derniers arguments ont des valeurs par défaut de $0,05$
+  et $10^{-10}$, respectivement.
+\item La fonction retourne la valeur de la variable \code{i}.
+\item Avec Emacs\index{Emacs} et le mode ESS\index{ESS}, positionner
+  le curseur à l'intérieur de la fonction et soumettre le code d'une
+  fonction à un processus S-Plus ou \textsf{R} avec \ess{C-c C-f}.
+\end{itemize}
+
+
+
+\section{Fonctions anonymes}
+\index{fonction!anonyme}
+\label{fonctions:anonymes}
+
+Il est parfois utile de définir une fonction sans lui attribuer un nom
+--- d'où la notion de \emph{fonction anonyme}. Il s'agira en général
+de fonctions courtes utilisées dans une autre fonction. Par exemple,
+pour calculer la valeur de $x y^2$ pour toutes les combinaisons de $x$
+et $y$ stockées dans des vecteurs du même nom, on pourrait utiliser la
+fonction \fonction{outer} ainsi:
+<<echo=TRUE>>=
+x <- 1:3; y <- 4:6
+f <- function(x, y) x * y^2
+outer(x, y, f)
+@
+Cependant, si la fonction \code{f} ne sert à rien ultérieurement, on
+peut simplement utiliser une fonction anonyme à l'intérieur de
+\fonction{outer}:
+<<echo=TRUE>>=
+outer(x, y, function(x, y) x * y^2)
+@
+
+
+\section{Débogage de fonctions}
+\index{fonction!débogage}
+\label{fonctions:debogage}
+
+Nous n'abordons ici que les techniques les plus simples et naïves.
+\begin{itemize}
+\item Les simples erreurs de syntaxe sont les plus fréquentes (en
+  particulier l'oubli de virgules). Lors de la définition d'une
+  fonction, une vérification de la syntaxe est effectuée.
+\item Lorsqu'une fonction ne retourne pas le résultat attendu, placer
+  des commandes \fonction{print} à l'intérieur de la fonction, de
+  façon à pouvoir suivre les valeurs prises par les différentes
+  variables.
+
+  Par exemple, la modification suivante à la boucle de la fonction
+  \code{fp} permet d'afficher les valeurs successives de la variable
+  \code{i} et de détecter une procédure itérative divergente:
+\begin{verbatim}
+repeat
+{
+    it <- i
+    i <- (1 - (1 + it)^(-n))/k
+    print(i)
+    if (abs((i - it)/it < TOL))
+        break
+}
+\end{verbatim}
+\item Avec Emacs\index{Emacs} et le mode ESS\index{ESS}, la principale
+  technique de débogage consiste à s'assurer que toutes les variables
+  passées en arguments à une fonction existent dans l'espace de
+  travail, puis à exécuter successivement les lignes de la fonction
+  avec \ess{C-c C-n}. Les interfaces graphiques de S-Plus et
+  \textsf{R} ne permettent pas une telle procédure puisque la fenêtre
+  d'édition de fonctions bloque l'accès à l'interface de commande.
+\end{itemize}
+
+
+\section{Styles de codage}
+\index{style}
+\label{fonctions:style}
+
+Si tous s'entendent que l'adoption qu'un style propre et uniforme
+favorise le développement et la lecture de code, il existe plusieurs
+chapelles dans le monde des programmeurs quant à la «bonne façon» de
+présenter et, surtout, d'indenter du code informatique.
+
+Par exemple, Emacs\index{Emacs} reconnaît et supporte les styles de
+codage suivants, entre autres:
+\begin{center}
+  \begin{minipage}[t]{9cm}
+    C++/Stroustrup
+    \hfill
+    \begin{minipage}[t]{5cm}
+\begin{verbatim}
+for (i in 1:10)
+{
+    expression
+}
+\end{verbatim}
+    \end{minipage}
+  \end{minipage}
+  \vspace{\baselineskip}
+
+  \begin{minipage}[t]{9cm}
+    K\&R (1TBS)
+    \hfill
+    \begin{minipage}[t]{5cm}
+\begin{verbatim}
+for (i in 1:10){
+     expression
+}
+\end{verbatim}
+    \end{minipage}
+  \end{minipage}
+  \vspace{\baselineskip}
+
+  \begin{minipage}[t]{9cm}
+    Whitesmith
+    \hfill
+    \begin{minipage}[t]{5cm}
+\begin{verbatim}
+for (i in 1:10)
+     {
+     expression
+     }
+\end{verbatim}
+    \end{minipage}
+  \end{minipage}
+  \vspace{\baselineskip}
+
+  \begin{minipage}[t]{9cm}
+    GNU
+    \hfill
+    \begin{minipage}[t]{5cm}
+\begin{verbatim}
+for (i in 1:10)
+  {
+    expression
+  }
+\end{verbatim}
+    \end{minipage}
+  \end{minipage}
+\end{center}
+
+\begin{itemize}
+\item Pour des raisons générales de lisibilité et de popularité, le
+  style C$++$, avec les accolades sur leurs propres lignes et une
+  indentation de quatre (4) espaces est considéré standard en
+  programmation en S.
+\item Pour utiliser ce style dans Emacs\index{Emacs}, faire
+\begin{verbatim}
+    M-x ess-set-style RET C++ RET
+\end{verbatim}
+  une fois qu'un fichier de script est ouvert.
+\item Pour éviter de devoir répéter cette commande à chaque session de
+  travail, créer ou éditer le fichier de configuration \texttt{.emacs}
+  dans le dossier vers lequel pointe la variable d'environnement
+  \texttt{HOME} et y placer les lignes suivantes:
+\begin{verbatim}
+(add-hook 'ess-mode-hook
+          (lambda () (ess-set-style 'C++)))
+\end{verbatim}
+\end{itemize}
+
+
+\section{Exemples}
+\label{fonctions:exemples}
+
+\lstinputlisting{fonctions.R}
+
+
+\section{Exercices}
+\label{fonctions:exercices}
+
+\Opensolutionfile{reponses}[reponses-fonctions]
+\Writetofile{reponses}{\protect\section*{Chapitre \protect\ref{fonctions}}}
+
+\begin{exercice}
+  La fonctions \texttt{var} calcule l'estimateur sans biais de la
+  variance d'une population à partir de l'échantillon donné en
+  argument. Écrire une fonction \code{variance} qui calculera
+  l'estimateur biaisé ou sans biais selon que l'argument \code{biased}
+  sera \code{TRUE} ou \code{FALSE}, respectivement. Le comportement
+  par défaut de \code{variance} devrait être le même que celui de
+  \fonction{var}.  L'estimateur sans biais de la variance à partir
+  d'un échantillon $X_1, \dots, X_n$ est
+  \begin{align*}
+    S^2_{n-1}
+    &= \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar{X})^2, \\
+    \intertext{alors que l'estimateur biaisé est}
+    S^2_n
+    &= \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2,
+  \end{align*}
+  où $\bar{X} = n^{-1}(X_1 + \dots + X_n)$.
+  \begin{rep}
+\begin{verbatim}
+variance <- function(x, biased=FALSE)
+{
+    if (biased)
+    {
+        n <- length(x)
+        (n - 1)/n * var(x)
+    }
+    else
+        var(x)
+}
+\end{verbatim}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  \index{matrice}
+  Écrire une fonction \code{matrix2} qui, contrairement à la fonction
+  \fonction{matrix}, remplira par défaut la matrice par ligne.  La
+  fonction \emph{ne doit pas} utiliser \code{matrix}. Les arguments
+  de la fonction \code{matrix2} seront les mêmes que ceux de
+  \code{matrix}, sauf que l'argument \code{byrow} sera remplacé
+  par \code{bycol}.
+  \begin{rep}
+    Une première solution utilise la transposée. La première
+    expression de la fonction s'assure que la longueur de
+    \code{data} est compatible avec le nombre de lignes et de
+    colonnes de la matrice demandée.
+\begin{verbatim}
+matrix2 <- function(data=NA, nrow=1, ncol=1,
+                    bycol=FALSE, dimnames=NULL)
+{
+    data <- rep(data, length=nrow * ncol)
+
+    if (bycol)
+        dim(data) <- c(nrow, ncol)
+    else
+    {
+        dim(data) <- c(ncol, nrow)
+        data <- t(data)
+    }
+
+    dimnames(data) <- dimnames
+    data
+}
+\end{verbatim}
+    La seconde solution n'a pas recours à la transposée. Si l'on doit
+    remplir la matrice par ligne, l'idée consiste à réordonner les
+    éléments du vecteur \code{data} en utilisant la formule obtenue
+    à l'exercice \ref{operateurs}.\ref{exercice:operateurs:ijk}.
+\begin{verbatim}
+matrix2 <- function(data=NA, nrow=1, ncol=1,
+                    bycol=FALSE, dimnames=NULL)
+{
+    data <- rep(data, length=nrow * ncol)
+
+    if (!bycol)
+    {
+        i <- 1:nrow
+        j <- rep(1:ncol, each=nrow)
+        data <- data[(i - 1)*ncol + j]
+    }
+    dim(data) <- c(nrow, ncol)
+    dimnames(data) <- dimnames
+    data
+}
+\end{verbatim}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  \index{distribution!normale}
+  \label{exercice:fonctions:phi}
+  Écrire une fonction \code{phi} servant à calculer la fonction de
+  densité de probabilité d'une loi normale centrée réduite, soit
+  \begin{displaymath}
+    \phi(x) = \frac{1}{\sqrt{2 \pi}} e^{-x^2/2},
+    \quad -\infty < x < \infty.
+  \end{displaymath}
+  La fonction devrait prendre en argument un vecteur de valeurs de
+  $x$. Comparer les résultats avec ceux de la fonction \fonction{dnorm}.
+  \begin{rep}
+\begin{verbatim}
+phi <- function(x)
+{
+    exp(-x^2/2) / sqrt(2 * pi)
+}
+\end{verbatim}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  \index{distribution!normale}
+  \label{exercice:fonctions:Phi}
+  Écrire une fonction \code{Phi} servant à calculer la fonction de
+  répartition d'une loi normale centrée réduite, soit
+  \begin{displaymath}
+    \Phi(x) = \int_{-\infty}^x \frac{1}{\sqrt{2 \pi}} e^{-y^2/2}\, dy,
+     \quad -\infty < x < \infty.
+  \end{displaymath}
+  Supposer, pour le moment, que $x \geq 0$. L'évaluation numérique de
+  l'intégrale ci-dessus peut se faire avec l'identité
+  \begin{displaymath}
+    \Phi(x) = \frac{1}{2} + \phi(x) \sum_{n=0}^\infty
+    \frac{x^{2n + 1}}{1 \cdot 3 \cdot 5 \cdots (2n + 1)},
+    \quad x \geq 0.
+  \end{displaymath}
+  Utiliser la fonction \code{phi} de l'exercice
+  \ref{fonctions}.\ref{exercice:fonctions:phi} et tronquer la somme
+  infinie à une grande valeur, 50 par exemple. La fonction ne doit pas
+  utiliser de boucles, mais peut ne prendre qu'une seule valeur de $x$
+  à la fois.  Comparer les résultats avec ceux de la fonction
+  \fonction{pnorm}.
+  \begin{rep}
+\begin{verbatim}
+Phi <- function(x)
+{
+    n <- 1 + 2 * 0:50
+    0.5 + phi(x) * sum(x^n / cumprod(n))
+}
+\end{verbatim}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  \index{distribution!normale}
+  \label{exercice:fonctions:Phi2}
+  Modifier la fonction \code{Phi} de l'exercice
+  \ref{fonctions}.\ref{exercice:fonctions:Phi} afin qu'elle admette
+  des valeurs de $x$ négatives. Lorsque $x < 0$, $\Phi(x) = 1 -
+  \Phi(-x)$. La solution simple consiste à utiliser une structure de
+  contrôle \code{if ...  else}, mais les curieux chercheront à s'en
+  passer. Les plus ambitieux regarderont même du côté de la fonction
+  \fonction{Recall} \cite[page 49]{Sprogramming}.
+  \begin{rep}
+    Première solution utilisant une fonction interne et une structure
+    de contrôle \code{if ... else}.
+\begin{verbatim}
+Phi <- function(x)
+{
+    fun <- function(x)
+    {
+        n <- 1 + 2 * 0:50
+        0.5 + phi(x) * sum(x^n / cumprod(n))
+    }
+
+    if (x < 0)
+        1 - fun(-x)
+    else
+        fun(x)
+}
+\end{verbatim}
+    Seconde solution récursive, c'est-à-dire que si $x < 0$, la
+    fonction s'appelle elle-même avec un argument positif.
+\begin{verbatim}
+Phi <- function(x)
+{
+    if (x < 0)
+        1 - Recall(-x)
+    else
+    {
+        n <- 1 + 2 * 0:50
+        0.5 + phi(x) * sum(x^n / cumprod(n))
+    }
+}
+\end{verbatim}
+    Troisième solution sans structure de contrôle \code{if ...
+      else}. Rappelons que dans des calculs algébriques,
+    \code{FALSE} vaut 0 et \code{TRUE} vaut 1.
+\begin{verbatim}
+Phi <- function(x)
+{
+    n <- 1 + 2 * 0:50
+    neg <- x < 0
+    x <- abs(x)
+    neg + (-1)^neg * (0.5 + phi(x) *
+                      sum(x^n / cumprod(n)))
+}
+\end{verbatim}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  \index{distribution!normale}
+  Généraliser maintenant la fonction de l'exercice
+  \ref{fonctions}.\ref{exercice:fonctions:Phi2} pour qu'elle prenne
+  en argument un vecteur de valeurs de $x$. Ne pas utiliser de boucle.
+  Comparer les résultats avec ceux de la fonction \fonction{pnorm}.
+  \begin{rep}
+\begin{verbatim}
+Phi <- function(x)
+{
+    n <- 1 + 2 * 0:30
+    0.5 + phi(x) * colSums(t(outer(x, n, "^")) /
+                           cumprod(n))
+}
+\end{verbatim}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  \index{matrice}
+  Sans utiliser l'opérateur \fonction{\%*\%}, écrire une fonction
+  \code{prod.mat} qui effectuera le produit matriciel de deux
+  matrices seulement si les dimensions de celles-ci le permettent.
+  Cette fonction aura deux arguments (\code{mat1} et \code{mat2})
+  et devra tout d'abord vérifier si le produit matriciel est possible.
+  Si celui-ci est impossible, la fonction retourne un message
+  d'erreur.
+  \begin{enumerate}
+  \item Utiliser une structure de contrôle \code{if ... else} et deux
+    boucles.
+  \item Utiliser une structure de contrôle \code{if ... else} et une
+    seule boucle.
+  \end{enumerate}
+  Dans chaque cas, comparer le résultat avec l'opérateur \code{\%*\%}.
+  \begin{rep}
+    \begin{enumerate}
+    \item
+\begin{verbatim}
+prod.mat <- function(mat1, mat2)
+{
+    if (ncol(mat1) == nrow(mat2))
+    {
+        res <- matrix(0, nrow=nrow(mat1),
+                      ncol=ncol(mat2))
+        for (i in 1:nrow(mat1))
+        {
+            for (j in 1:ncol(mat2))
+            {
+                res[i, j] <- sum(mat1[i,] * mat2[,j])
+            }
+        }
+        res
+    }
+    else
+        stop("Les dimensions des matrices ne
+permettent pas le produit matriciel.")
+}
+\end{verbatim}
+    \item
+\begin{verbatim}
+prod.mat<-function(mat1, mat2)
+{
+    if (ncol(mat1) == nrow(mat2))
+    {
+        res <- matrix(0, nrow=nrow(mat1),
+                      ncol=ncol(mat2))
+        for (i in 1:nrow(mat1))
+            res[i,] <- colSums(mat1[i,] * mat2)
+        res
+    }
+    else
+        stop("Les dimensions des matrices ne
+permettent pas le produit matriciel.")
+}
+\end{verbatim}
+    \end{enumerate}
+    Solutions bonus: deux façons de faire équivalentes qui cachent la
+    boucle dans un \fonction{sapply}.
+\begin{verbatim}
+prod.mat<-function(mat1, mat2)
+{
+    if (ncol(mat1) == nrow(mat2))
+        t(sapply(1:nrow(mat1),
+                 function(i) colSums(mat1[i,] * mat2)))
+    else
+        stop("Les dimensions des matrices ne permettent
+pas le produit matriciel.")
+}
+
+prod.mat<-function(mat1, mat2)
+{
+    if (ncol(mat1) == nrow(mat2))
+        t(sapply(1:ncol(mat2),
+                 function(j) colSums(t(mat1) * mat2[,j])))
+    else
+        stop("Les dimensions des matrices ne permettent
+pas le produit matriciel.")
+}
+\end{verbatim}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  \index{matrice}
+  Vous devez calculer la note finale d'un groupe d'étudiants à partir
+  de deux informations:
+  \begin{inparaenum}[(1)]
+  \item une matrice contenant la note sur 100 de chacun des étudiants
+    à chacune des évaluations, et
+  \item un vecteur contenant la pondération de chacune des
+    évaluations.
+  \end{inparaenum}
+  Un collègue a composé la fonction \code{notes.finales} ci-dessous
+  afin de calculer la note finale de chacun des étudiants.  Votre
+  collègue vous mentionne toutefois que sa fonction est plutôt lente
+  et inefficace pour de grands groupes d'étudiants.  Vous décidez donc
+  de modifier la fonction afin d'en réduire le nombre d'opérations et
+  qu'elle n'utilise aucune boucle.
+\begin{verbatim}
+notes.finales <- function(notes, p)
+{
+    netud <- nrow(notes)
+    neval <- ncol(notes)
+    final <- (1:netud) * 0
+    for(i in 1:netud)
+    {
+        for(j in 1:neval)
+        {
+            final[i] <- final[i] + notes[i, j] * p[j]
+        }
+    }
+    final
+}
+\end{verbatim}
+  \begin{rep}
+\begin{verbatim}
+notes.finales <- function(notes, p) notes %*% p
+\end{verbatim}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  Trouver les erreurs qui empêchent la définition de la fonction
+  ci-dessous.
+\begin{verbatim}
+AnnuiteFinPeriode <- function(n, i)
+{{
+    v <- 1/1 + i)
+    ValPresChaquePmt <- v^(1:n)
+    sum(ValPresChaquepmt)
+}
+\end{verbatim}
+\end{exercice}
+
+\begin{exercice}
+  \index{distribution!normale}
+  \index{distribution!gamma}
+  \index{distribution!Pareto}
+  La fonction ci-dessous calcule la valeur des paramètres d'une loi
+  normale, gamma ou Pareto à partir de la moyenne et de la variance,
+  qui sont connues par l'utilisateur.
+\begin{verbatim}
+param <- function(moyenne, variance, loi)
+{
+    loi <- tolower(loi)
+    if (loi == "normale")
+        param1 <- moyenne
+        param2 <- sqrt(variance)
+        return(list(mean=param1, sd=param2))
+    if (loi == "gamma")
+        param2 <- moyenne/variance
+        param1 <- moyenne * param2
+        return(list(shape=param1, scale=param2))
+    if (loi == "pareto")
+        cte <- variance/moyenne^2
+        param1 <- 2 * cte/(cte-1)
+        param2 <- moyenne * (param1 - 1)
+        return(list(alpha=param1, lambda=param2))
+    stop("La loi doit etre une de \"normale\",
+\"gamma\" ou \"pareto\"")
+}
+\end{verbatim}
+  L'utilisation de la fonction pour diverses lois donne les résultats
+  suivants:
+<<echo=FALSE>>=
+param <- function(moyenne, variance, loi)
+{
+    loi <- tolower(loi)
+    if (loi == "normale")
+        param1 <- moyenne
+        param2 <- sqrt(variance)
+        return(list(mean=param1, sd=param2))
+    if (loi == "gamma")
+        param2 <- moyenne/variance
+        param1 <- moyenne * param2
+        return(list(shape=param1, scale=param2))
+    if (loi == "pareto")
+        cte <- variance/moyenne^2
+        param1 <- 2 * cte/(cte-1)
+        param2 <- moyenne * (param1 - 1)
+        return(list(alpha=param1, lambda=param2))
+    stop("La loi doit etre une de \"normale\", \"gamma\" ou \"pareto\"")
+}
+@
+<<echo=TRUE>>=
+param(2, 4, "normale")
+@
+<<eval=FALSE>>=
+param(50, 7500, "gamma")
+@
+\begin{Schunk}
+\begin{Soutput}
+Erreur dans param(50, 7500, "gamma") : Objet "param1"
+non trouvé
+\end{Soutput}
+\end{Schunk}
+<<eval=FALSE>>=
+param(50, 7500, "pareto")
+@
+\begin{Schunk}
+\begin{Soutput}
+Erreur dans param(50, 7500, "pareto") : Objet "param1"
+non trouvé
+\end{Soutput}
+\end{Schunk}
+  \begin{enumerate}
+  \item Expliquer pour quelle raison la fonction se comporte ainsi.
+  \item Appliquer les corrections nécessaires à la fonction pour que
+    celle-ci puisse calculer les bonnes valeurs. (Les erreurs ne sont
+    pas contenues dans les mathématiques de la fonction.) \emph{Astuce}:
+    tirer profit du moteur d'indentation de Emacs.
+  \end{enumerate}
+  \begin{rep}
+\begin{verbatim}
+param <- function (moyenne, variance, loi)
+{
+    loi <- tolower(loi)
+    if (loi == "normale")
+    {
+        param1 <- moyenne
+        param2 <- sqrt(variance)
+        return(list(mean=param1, sd=param2))
+    }
+    if (loi == "gamma")
+    {
+        param2 <- moyenne/variance
+        param1 <- moyenne * param2
+        return(list(shape=param1, scale=param2))
+    }
+    if (loi == "pareto")
+    {
+        cte <- variance/moyenne^2
+        param1 <- 2 * cte/(cte-1)
+        param2 <- moyenne * (param1 - 1)
+        return(list(alpha=param1, lambda=param2))
+    }
+    stop("La loi doit etre une de \"normale\",
+\"gamma\" ou \"pareto\"")
+}
+\end{verbatim}
+  \end{rep}
+\end{exercice}
+
+\Closesolutionfile{reponses}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "introduction_programmation_S"
+%%% End:
