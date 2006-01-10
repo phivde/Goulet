@@ -1,0 +1,593 @@
+\chapter{Exemples résolus}
+\label{exemples}
+
+
+Ce chapitre propose de faire le point sur les concepts étudiés jusqu'à
+maintenant par le biais de quelques exemples résolus. On y met
+particulièrement en évidence les avantages de l'approche vectorielle
+du langage S.
+
+La compréhension du contexte de ces exemples requiert quelques
+connaissances de base en mathématiques financières et en théorie des
+probabilités.
+
+
+\section{Calcul de valeurs présentes}
+\index{valeur présente}
+\label{exemples:vp}
+
+Un prêt est remboursé par une série de cinq paiements, le premier dans
+un an. Trouver le montant du prêt pour chacune des hypothèses
+ci-dessous.
+\begin{enumerate}[(a)]
+\item Paiement annuel de \nombre{1000}, taux d'intérêt de 6~\% effectif
+  annuellement.
+\item Paiements annuels de 500, 800, 900, 750 et \nombre{1000}, taux
+  d'intérêt de 6~\% effectif annuellement.
+\item Paiements annuels de 500, 800, 900, 750 et \nombre{1000}, taux
+  d'intérêt de 5~\%, 6~\%, 5,5~\%, 6,5~\% et 7~\% effectifs
+  annuellement.
+\end{enumerate}
+
+\begin{sol}
+  De manière générale, la valeur présente d'une série de paiements
+  $P_1, P_2, \dots, P_n$ à la fin des années $1, 2, \dots, n$ est
+  \begin{equation}
+    \label{eq:vp}
+    \sum_{j=1}^n \prod_{k=1}^j (1 + i_k)^{-1} P_j,
+  \end{equation}
+  où $i_k$ est le taux d'intérêt effectif annuellement durant l'année
+  $k$. Lorsque le taux d'intérêt est constant au cours des $n$ années,
+  cette formule se simplifie en
+  \begin{equation}
+    \label{eq:vp2}
+    \sum_{j=1}^n (1 + i)^{-j} P_j.
+  \end{equation}
+  \begin{enumerate}[(a)]
+  \item Un seul paiement annuel, un seul taux d'intérêt. On utilise la
+    formule \eqref{eq:vp2} avec $P_j = P = \nombre{1000}$.
+\begin{Schunk}
+\begin{Sinput}
+> 1000 * sum((1 + 0.06)^(-(1:5)))
+\end{Sinput}
+\begin{Soutput}
+[1] 4212.364
+\end{Soutput}
+\end{Schunk}
+  \item Différents paiements annuels, un seul taux d'intérêt: la
+    formule \eqref{eq:vp2} s'applique directement.
+\begin{Schunk}
+\begin{Sinput}
+> sum(c(500, 800, 900, 750, 1000) * (1 + 
++     0.06)^(-(1:5)))
+\end{Sinput}
+\begin{Soutput}
+[1] 3280.681
+\end{Soutput}
+\end{Schunk}
+\item Avec différents paiements annuels et différents taux d'intérêt,
+  il faut employer la formule \eqref{eq:vp}. Le produit des taux
+  d'intérêts est obtenu avec la fonction \fonction{cumprod}.
+\begin{Schunk}
+\begin{Sinput}
+> sum(c(500, 800, 900, 750, 1000)/cumprod(1 + 
++     c(0.05, 0.06, 0.055, 0.065, 0.07)))
+\end{Sinput}
+\begin{Soutput}
+[1] 3308.521
+\end{Soutput}
+\end{Schunk}
+  \end{enumerate}
+\end{sol}
+
+\section{Fonctions de probabilité}
+\label{exemples:fp}
+
+Calculer toutes ou la majeure partie des probabilités des deux lois de
+probabilité ci-dessous. Vérifier que la somme des probabilités est
+bien égale à 1.
+
+\begin{enumerate}[(a)]
+\item La distribution binomiale\index{distribution!binomiale}, dont la
+  fonction de masse de probabilité est
+  \begin{displaymath}
+    f(x) = \binom{n}{x} p^x (1 - p)^{n - x}, \quad x = 0, \dots, n.
+  \end{displaymath}
+\item La distribution de Poisson\index{distribution!Poisson}, dont la
+  fonction de masse de probabilité est
+  \begin{displaymath}
+    f(x) = \frac{\lambda^x e^{-\lambda}}{x!}, \quad x = 0, 1, \dots,
+  \end{displaymath}
+  où $x! = x(x - 1) \cdots 2 \cdot 1$.
+\end{enumerate}
+
+\begin{sol}
+  Cet exemple est quelque peu artificiel dans la mesure où il existe,
+  dans S-Plus et \textsf{R}, des fonctions internes pour calculer les
+  principales caractéristiques des lois de probabilité les plus
+  usuelles (voir l'annexe \ref{rng}).
+  \begin{enumerate}[(a)]
+  \item Solution pour le cas $n = 10$ et $p = 0,8$. Les coefficients
+    binomiaux sont calculés avec la fonction \fonction{choose}.
+    \indexfonction{rev}
+\begin{Schunk}
+\begin{Sinput}
+> n <- 10
+> p <- 0.8
+> x <- 0:n
+> choose(n, x) * p^x * (1 - p)^rev(x)
+\end{Sinput}
+\begin{Soutput}
+ [1] 0.0000001024 0.0000040960 0.0000737280
+ [4] 0.0007864320 0.0055050240 0.0264241152
+ [7] 0.0880803840 0.2013265920 0.3019898880
+[10] 0.2684354560 0.1073741824
+\end{Soutput}
+\end{Schunk}
+    On vérifie les réponses obtenues avec la fonction interne
+    \fonction{dbinom}.
+\begin{Schunk}
+\begin{Sinput}
+> dbinom(x, n, prob = 0.8)
+\end{Sinput}
+\begin{Soutput}
+ [1] 0.0000001024 0.0000040960 0.0000737280
+ [4] 0.0007864320 0.0055050240 0.0264241152
+ [7] 0.0880803840 0.2013265920 0.3019898880
+[10] 0.2684354560 0.1073741824
+\end{Soutput}
+\end{Schunk}
+    On vérifie enfin que les probabilités somment à 1.
+\begin{Schunk}
+\begin{Sinput}
+> sum(choose(n, x) * p^x * (1 - p)^rev(x))
+\end{Sinput}
+\begin{Soutput}
+[1] 1
+\end{Soutput}
+\end{Schunk}
+
+  \item La loi de Poisson ayant un support infini, on calcule les
+    probabilités en $x = 0, 1, \dots, 10$ seulement avec $\lambda = 5$.
+    On calcule les factorielles avec la fonction \Fonction{factorial}.
+    On notera au passage que \code{factorial(x) == gamma(x + 1)}, où
+    \Fonction{gamma} calcule les valeurs de la fonction gamma
+    \begin{displaymath}
+      \Gamma(n) = \int_0^\infty x^{n - 1} e^{-x}\, dx
+      = (n - 1) \Gamma(n - 1),
+    \end{displaymath}
+    avec $\Gamma(0) = 1$. Pour $n$ entier, on a donc $\Gamma(n) = (n -
+    1)!$. \indexfonction{exp}
+\begin{Schunk}
+\begin{Sinput}
+> lambda <- 5
+> x <- 0:10
+> exp(-lambda) * (lambda^x/factorial(x))
+\end{Sinput}
+\begin{Soutput}
+ [1] 0.006737947 0.033689735 0.084224337
+ [4] 0.140373896 0.175467370 0.175467370
+ [7] 0.146222808 0.104444863 0.065278039
+[10] 0.036265577 0.018132789
+\end{Soutput}
+\end{Schunk}
+    Vérification avec la fonction interne \fonction{dpois}:
+\begin{Schunk}
+\begin{Sinput}
+> dpois(x, lambda)
+\end{Sinput}
+\begin{Soutput}
+ [1] 0.006737947 0.033689735 0.084224337
+ [4] 0.140373896 0.175467370 0.175467370
+ [7] 0.146222808 0.104444863 0.065278039
+[10] 0.036265577 0.018132789
+\end{Soutput}
+\end{Schunk}
+    Pour vérifier que les probabilités somment à 1, il faudra d'abord
+    tronquer le support infini de la Poisson à une «grande» valeur.
+    Ici, $200$ est suffisamment éloigné de la moyenne de la
+    distribution, $5$. Remarquer que le produit par $e^{-\lambda}$
+    est placé à l'extérieur de la somme pour ainsi faire un seul
+    produit plutôt que $201$.
+\begin{Schunk}
+\begin{Sinput}
+> x <- 0:200
+> exp(-lambda) * sum((lambda^x/factorial(x)))
+\end{Sinput}
+\begin{Soutput}
+[1] 1
+\end{Soutput}
+\end{Schunk}
+  \end{enumerate}
+\end{sol}
+
+\section{Fonction de répartition de la loi gamma}
+\label{exemples:gamma}
+
+La loi gamma\index{distribution!gamma} est fréquemment utilisée pour
+la modélisation d'événements ne pouvant prendre que des valeurs
+positives et pour lesquels les petites valeurs sont plus fréquentes
+que les grandes. Par exemple, la loi gamma est parfois utilisée en
+sciences actuarielles pour la modélisation des montants de sinistres.
+Nous utiliserons la paramétrisation où la fonction de densité de
+probabilité est
+\begin{equation}
+  \label{eq:exemples:gamma:fdp}
+  f(x) = \frac{\lambda^\alpha}{\Gamma(\alpha)}\, x^{\alpha-1}
+  e^{-\lambda x}, \quad x > 0,
+\end{equation}
+où $\Gamma(\cdot)$ est la fonction gamma définie dans la solution de
+l'exemple précédent.
+
+Il n'existe pas de formule explicite de la fonction de répartition de
+la loi gamma. Néanmoins, la valeur de la fonction de répartition d'une
+loi gamma de paramètre $\alpha$ entier et $\lambda = 1$ peut être
+obtenue à partir de la formule
+\begin{equation}
+  \label{eq:exemples:gamma:fr}
+  F(x; \alpha, 1) = 1 - e^{-x} \sum_{j=0}^{\alpha-1} \frac{x^j}{j!}.
+\end{equation}
+
+\begin{enumerate}[(a)]
+\item Évaluer $F(4; 5, 1)$.
+\item Évaluer $F(x; 5, 1)$ pour $x = 2, 3, \dots, 10$ en une seule
+  expression.
+\end{enumerate}
+
+\begin{sol}
+  Le premier exercice est plutôt simple, alors que le second est plus
+  compliqué qu'il n'y paraît au premier abord.
+  \begin{enumerate}[(a)]
+  \item Calcul de la fonction de répartition en une seule valeur de
+    $x$ et avec un paramètre $\alpha$ fixe. \indexfonction{exp}
+\begin{Schunk}
+\begin{Sinput}
+> alpha <- 5
+> x <- 4
+> 1 - exp(-x) * sum(x^(0:(alpha - 1))/gamma(1:alpha))
+\end{Sinput}
+\begin{Soutput}
+[1] 0.3711631
+\end{Soutput}
+\end{Schunk}
+    Vérification avec la fonction interne \fonction{pgamma}:
+\begin{Schunk}
+\begin{Sinput}
+> pgamma(x, alpha)
+\end{Sinput}
+\begin{Soutput}
+[1] 0.3711631
+\end{Soutput}
+\end{Schunk}
+    On peut aussi éviter de générer essentiellement la même suite de
+    nombres à deux reprises en ayant recours à une variable
+    intermédiaire. Au risque de rendre le code un peu moins lisible (mais
+    plus compact!), l'affectation et le calcul final peuvent même se faire
+    dans une seule expression.
+\begin{Schunk}
+\begin{Sinput}
+> 1 - exp(-x) * sum(x^(-1 + (j <- 1:alpha))/gamma(j))
+\end{Sinput}
+\begin{Soutput}
+[1] 0.3711631
+\end{Soutput}
+\end{Schunk}
+
+  \item Ici, la valeur de $\alpha$ demeure fixe, mais on doit calculer
+    la valeur de la fonction de répartition en plusieurs points en une
+    seule expression. C'est un travail pour la fonction
+    \fonction{outer}.
+\begin{Schunk}
+\begin{Sinput}
+> x <- 2:10
+> 1 - exp(-x) * colSums(t(outer(x, 0:(alpha - 
++     1), "^"))/gamma(1:alpha))
+\end{Sinput}
+\begin{Soutput}
+[1] 0.05265302 0.18473676 0.37116306 0.55950671
+[5] 0.71494350 0.82700839 0.90036760 0.94503636
+[9] 0.97074731
+\end{Soutput}
+\end{Schunk}
+    Vérification avec la fonction interne \fonction{pgamma}:
+\begin{Schunk}
+\begin{Sinput}
+> pgamma(x, alpha)
+\end{Sinput}
+\begin{Soutput}
+[1] 0.05265302 0.18473676 0.37116306 0.55950671
+[5] 0.71494350 0.82700839 0.90036760 0.94503636
+[9] 0.97074731
+\end{Soutput}
+\end{Schunk}
+  \indexfonction{colSums}
+  \end{enumerate}
+\end{sol}
+
+
+\section{Algorithme du point fixe}
+\index{point fixe}
+\label{exemples:pointfixe}
+
+Trouver la racine d'une fonction $g$ --- c'est-à-dire le point $x$ où
+$g(x) = 0$ --- est un problème classique en mathématiques. Très
+souvent, il est possible de reformuler le problème de façon à plutôt
+chercher le point $x$ où $f(x) = x$. La solution d'un tel problème est
+appelée \emph{point fixe}.
+
+L'algorithme du calcul numérique du point fixe d'une fonction $f(x)$
+est très simple:
+\begin{enumerate}
+\item choisir une valeur de départ $x_0$;
+\item calculer $x_n = f(x_{n-1})$;
+\item répéter l'étape 2 jusqu'à ce que $|x_n - x_{n-1}| < \epsilon$ ou
+  $|x_n - x_{n-1}|/|{x_{n-1}}| < \epsilon$.
+\end{enumerate}
+
+Trouver, à l'aide de la méthode du point fixe, la valeur de $i$ telle
+que
+\begin{displaymath}
+  a_{\angl{10}} = \frac{1 - (1 + i)^{-10}}{i} = 8,21.
+\end{displaymath}
+
+\begin{sol}
+  Puisque, d'une part, nous ignorons combien de fois la procédure
+  itérative devra être répétée et que, d'autre part, il faut exécuter
+  la procédure au moins une fois, le choix logique pour la structure
+  de contrôle à utiliser dans cette procédure itérative est
+  \fonction{repeat}. Nous verrons au chapitre \ref{fonctions} comment
+  faire une fonction à partir de ce code.
+\begin{Schunk}
+\begin{Sinput}
+> i <- 0.05
+> repeat {
++     it <- i
++     i <- (1 - (1 + it)^(-10))/8.21
++     if (abs(i - it)/it < 1e-10) 
++         break
++ }
+> i
+\end{Sinput}
+\begin{Soutput}
+[1] 0.03756777
+\end{Soutput}
+\end{Schunk}
+  Vérification:
+\begin{Schunk}
+\begin{Sinput}
+> (1 - (1 + i)^(-10))/i
+\end{Sinput}
+\begin{Soutput}
+[1] 8.21
+\end{Soutput}
+\end{Schunk}
+\end{sol}
+
+
+\section{Exercices}
+\label{exemples:exercices}
+
+\Opensolutionfile{reponses}[reponses-exemples]
+\Writetofile{reponses}{\protect\section*{Chapitre \protect\ref{exemples}}}
+
+Dans chacun des exercices ci-dessous, écrire une expression S pour
+faire le calcul demandé. Parce qu'elles ne sont pas nécessaires, il
+est interdit d'utiliser des boucles\index{boucle}.
+
+\begin{exercice}
+  \index{valeur présente}
+  Calculer la valeur présente d'une série de paiements fournie dans un
+  vecteur \code{P} en utilisant les taux d'intérêt annuels d'un
+  vecteur \code{i}.
+  \begin{rep}
+\begin{Schunk}
+\begin{Sinput}
+> sum(P/cumprod(1 + i))
+\end{Sinput}
+\end{Schunk}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  \index{moyenne!pondérée}
+  \label{exercice:exemples:moyennes}
+  Étant donné un vecteur d'observations $\mat{x} = (x_1, \dots, x_n)$
+  et un vecteur de poids correspondants $\mat{w} = (w_1, \dots, w_n)$,
+  calculer la moyenne pondérée des observations,
+  \begin{displaymath}
+    \sum_{i=1}^n \frac{w_i}{w_\pt} x_i,
+  \end{displaymath}
+  où $w_\pt = \sum_{i=1}^n w_i$. Tester l'expression avec les vecteurs
+  de données
+  \begin{align*}
+    \mat{x}
+    &= (7, 13, 3, 8, 12, 12, 20, 11) \\
+    \intertext{et} \mat{w}
+    &= (0,15,\; 0,04,\; 0,05,\; 0,06,\; 0,17,\; 0,16,\; 0,11,\; 0,09).
+  \end{align*}
+  \begin{rep}
+\begin{Schunk}
+\begin{Sinput}
+> x <- c(7, 13, 3, 8, 12, 12, 20, 11)
+> w <- c(0.15, 0.04, 0.05, 0.06, 0.17, 0.16, 
++     0.11, 0.09)
+> sum(x * w)/sum(w)
+\end{Sinput}
+\end{Schunk}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  \index{moyenne!harmonique}
+  Soit un vecteur d'observations $\mat{x} = (x_1, \dots, x_n)$.
+  Calculer la moyenne harmonique de ce vecteur, définie comme
+  \begin{displaymath}
+    \frac{n}{\D \frac{1}{x_1} + \dots + \frac{1}{x_n}}.
+  \end{displaymath}
+  Tester l'expression avec les valeurs de l'exercice
+  \ref{exemples}.\ref{exercice:exemples:moyennes}.
+  \begin{rep}
+\begin{Schunk}
+\begin{Sinput}
+> 1/mean(1/x)
+\end{Sinput}
+\end{Schunk}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  \index{distribution!Poisson}
+  Calculer la fonction de répartition en $x = 5$ d'une loi de
+  Poisson avec paramètre $\lambda = 2$, qui est donnée par
+  \begin{displaymath}
+    \sum_{k=0}^5 \frac{2^k e^{-2}}{k!},
+  \end{displaymath}
+  où $k! = 1 \cdot 2 \cdots k$.
+  \begin{rep}
+\begin{Schunk}
+\begin{Sinput}
+> lambda <- 2
+> x <- 5
+> exp(-lambda) * sum(lambda^(0:x)/gamma(1 + 
++     0:x))
+\end{Sinput}
+\end{Schunk}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  \begin{enumerate}
+  \item Calculer l'espérance d'une variable aléatoire $X$ dont le
+    support est $x = 1, 10, 100, ..., \nombre{1000000}$ et les
+    probabilités correspondant à chacun de ces points $\frac{1}{28},
+    \frac{2}{28}, ..., \frac{7}{28}$, respectivement.
+  \item Calculer la variance de la variable aléatoire $X$ définie en
+    (a).
+  \end{enumerate}
+  \begin{rep}
+    \begin{enumerate}
+\item
+\begin{Schunk}
+\begin{Sinput}
+> x <- 10^(0:6)
+> probs <- (1:7)/28
+\end{Sinput}
+\end{Schunk}
+\item
+\begin{Schunk}
+\begin{Sinput}
+> sum(x^2 * probs) - (sum(x * probs))^2
+\end{Sinput}
+\end{Schunk}
+    \end{enumerate}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  Calculer le taux d'intérêt nominal composé quatre fois par année,
+  $i^{(4)}$, équivalent à un taux de $i = 6~\%$ effectif annuellement.
+  \begin{rep}
+\begin{Schunk}
+\begin{Sinput}
+> i <- 0.06
+> 4 * ((1 + i)^0.25 - 1)
+\end{Sinput}
+\end{Schunk}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  \index{valeur présente}
+  La valeur présente d'une série de $n$ paiements de fin d'année à un
+  taux d'intérêt $i$ effectif annuellement est
+  \begin{displaymath}
+    a_\angln
+    = v + v^2 + \dots + v^n
+    = \frac{1 - v^n}{i},
+  \end{displaymath}
+  où $v = (1 + i)^{-1}$. Calculer en une seule expression, toujours
+  sans boucle, un tableau des valeurs présentes de séries de $n = 1,
+  2, \dots, 10$ paiements à chacun des taux d'intérêt effectifs
+  annuellement $i = 0,05, 0,06, \dots, 0,10$.
+  \begin{rep}
+\begin{Schunk}
+\begin{Sinput}
+> n <- 1:10
+> i <- seq(0.05, 0.1, by = 0.01)
+> (1 - outer((1 + i), -n, "^"))/i
+\end{Sinput}
+\end{Schunk}
+ou
+\begin{Schunk}
+\begin{Sinput}
+> n <- 1:10
+> i <- (5:10)/100
+> apply(outer(1/(1 + i), n, "^"), 1, cumsum)
+\end{Sinput}
+\end{Schunk}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  \index{valeur présente}
+  Calculer la valeur présente d'une annuité croissante de 1~\$ payable
+  annuellement en début d'année pendant 10 ans si le taux
+  d'actualisation est de 6~\%. Cette valeur présente est donnée par
+  \begin{displaymath}
+    I\ddot{a}_{\angl{10}}=\sum_{k=1}^{10}kv^{k-1},
+  \end{displaymath}
+  toujours avec $v = (1 + i)^{-1}$.
+  \begin{rep}
+\begin{Schunk}
+\begin{Sinput}
+> v <- 1/1.06
+> k <- 1:10
+> sum(k * v^(k - 1))
+\end{Sinput}
+\end{Schunk}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  \index{valeur présente}
+  \label{exercice:exemples:serie}
+  Calculer la valeur présente de la séquence de paiements 1, 2, 2, 3,
+  3, 3, 4, 4, 4, 4 si les paiements sont effectués en fin d'année et
+  que le taux d'actualisation est de 7~\%.
+  \begin{rep}
+\begin{Schunk}
+\begin{Sinput}
+> pmts <- rep(1:4, 1:4)
+> v <- 1/1.07
+> k <- 1:10
+> sum(pmts * v^k)
+\end{Sinput}
+\end{Schunk}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  \index{valeur présente}
+  Calculer la valeur présente de la séquence de paiements définie à
+  l'exercice \ref{exemples}.\ref{exercice:exemples:serie} en supposant
+  que le taux d'intérêt d'actualisation alterne successivement entre
+  5~\% et 8~\% à chaque année, c'est-à-dire que le taux d'intérêt est
+  5~\%, 8~\%, 5~\%, 8~\%, etc.
+  \begin{rep}
+\begin{Schunk}
+\begin{Sinput}
+> v <- cumprod(1/(1 + rep(c(0.05, 0.08), 
++     5)))
+> pmts <- rep(1:4, 1:4)
+> sum(pmts * v)
+\end{Sinput}
+\end{Schunk}
+  \end{rep}
+\end{exercice}
+
+\Closesolutionfile{reponses}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "introduction_programmation_S"
+%%% End:

@@ -1,0 +1,22 @@
+\begin{thebibliography}{xx}
+
+\harvarditem[Cameron et al.]{Cameron, Elliott, Loy, Raymond \&
+  Rosenblatt}{2004}{LearningEmacs}
+Cameron, D., Elliott, J., Loy, M., Raymond, E.~S. \& Rosenblatt, B.  (2004),
+  {\em Leaning {GNU} {E}macs}, third edn, O'Reilly.
+
+\harvarditem[Venables \& Ripley]{Venables \& Ripley}{2000}{Sprogramming}
+Venables, W.~N. \& Ripley, B.~D.  (2000), {\em {S} programming}, Springer, New
+  York.
+
+\harvarditem[Venables \& Ripley]{Venables \& Ripley}{2002}{MASS}
+Venables, W.~N. \& Ripley, B.~D.  (2002), {\em Modern applied statistics with
+  {S}}, fourth edn, Springer, New York.
+
+\harvarditem[Venables et al.]{Venables, Smith \& the {R Development Core
+  Team}}{2005}{Rintro}
+Venables, W.~N., Smith, D.~M. \& the {R Development Core Team}  (2005), {\em An
+  introduction to {R}: A language and environment for statistical computing}, R
+  Foundation for Statistical Computing, Vienna, Austria.
+
+\end{thebibliography}

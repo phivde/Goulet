@@ -1,0 +1,509 @@
+\chapter{Fonctions d'optimisation}
+\label{optimisation}
+
+
+
+Les méthodes de bissection, du point fixe, de Newton--Raphson et
+consorts permettent de résoudre des équations à une variable de la
+forme $f(x) = 0$ ou $g(x) = x$. Il existe également des versions de
+ces méthodes pour les systèmes à plusieurs variables de la forme
+\begin{align*}
+  f_1(x_1, x_2, x_3) &= 0 \\
+  f_2(x_1, x_2, x_3) &= 0 \\
+  f_3(x_1, x_2, x_3) &= 0.
+\end{align*}
+
+De tels systèmes d'équations surviennent plus souvent qu'autrement
+lors de l'optimisation d'une fonction. Par exemple, en recherchant le
+maximum ou le minimum d'une fonction $f(x, y)$, on souhaitera résoudre
+le système d'équations
+\begin{align*}
+  \frac{\partial}{\partial x}\, f(x, y) &= 0 \\
+  \frac{\partial}{\partial y}\, f(x, y) &= 0.
+\end{align*}
+
+En statistique, les fonctions d'optimisation sont fréquemment
+employées pour calculer numériquement des estimateurs du maximum de
+vraisemblance.
+
+La grande majorité des suites logicielles de calcul comportent des
+outils d'optimisation de fonctions. Ce chapitre passe en revue les
+fonctions disponibles dans S-Plus et \textsf{R}.
+
+
+\section{Le package \texttt{MASS}}
+\label{optimisation:MASS}
+
+L'offre en fonctions d'optimisation est un des domaines où S-Plus et
+\textsf{R} diffèrent passablement. Il existe toutefois une option
+commune avec le package \texttt{MASS}\index{package@\texttt{MASS}}.
+
+Le package \texttt{MASS} \citep{MASS} contient plusieurs fonctions
+utiles et de grande qualité.  Les auteurs de ces fonctions contribuent
+activement au développement de \textsf{R} et de S-Plus et, tel que
+mentionné au chapitre \ref{presentation}, leurs livres sur le langage
+S \citep{Sprogramming,MASS} constituent des références de choix.
+
+Le package \texttt{MASS} est distribué autant avec S-Plus (depuis au
+moins la version 6.1) que \textsf{R}.  On peut aussi le télécharger
+gratuitement depuis l'URL
+\begin{quote}
+  \url{http://www.stats.ox.ac.uk/pub/MASS4/Software.html}
+\end{quote}
+Pour accéder aux fonctions du package, il suffit de le charger en
+mémoire avec la commande
+\begin{Schunk}
+\begin{Sinput}
+> library(MASS)
+\end{Sinput}
+\end{Schunk}
+
+
+\section{Fonctions d'optimisation disponibles}
+\label{optimisation:fonctions}
+
+Les fonctions d'optimisation disponibles dans S-Plus et \textsf{R}
+sont les suivantes.
+
+\medskip
+
+\subsection{\code{uniroot}}
+\label{optimisation:uniroot}
+
+La fonction \Fonction{uniroot} recherche la
+racine\index{racine!d'une fonction}\index{fonction!racine} d'une fonction
+\code{f} entre les points \code{lower} et \code{upper}. C'est la
+fonction de base pour trouver la solution (unique) de l'équation $f(x)
+= 0$.
+\begin{ex}
+  Trouver la racine de la fonction $f(x) = x - 2^{-x}$ dans
+  l'intervalle $[0, 1]$.
+\end{ex}
+\begin{sol}
+  \mbox{}
+\begin{Schunk}
+\begin{Sinput}
+> uniroot(function(x) x - 2^(-x), lower = 0, 
++     upper = 1)
+\end{Sinput}
+\begin{Soutput}
+$root
+[1] 0.6411922
+
+$f.root
+[1] 9.310346e-06
+
+$iter
+[1] 3
+
+$estim.prec
+[1] 6.103516e-05
+\end{Soutput}
+\end{Schunk}
+\end{sol}
+
+\subsection{\code{polyroot}}
+\label{optimisation:polyroot}
+
+La fonction \Fonction{polyroot} calcule toutes les
+racines\index{racine!d'un polynôme} (complexes) du polynôme $\sum_{i=0}^n
+a_i x^i$.  Le premier argument est le vecteur des coefficients $a_0,
+a_1, \dots, a_n$, dans cet ordre.
+\begin{ex}
+  Trouver les racines du polynôme $x^3 + 4x^2 - 10$.
+\end{ex}
+\begin{sol}
+  \mbox{}
+\begin{Schunk}
+\begin{Sinput}
+> polyroot(c(-10, 0, 4, 1))
+\end{Sinput}
+\begin{Soutput}
+[1]  1.365230-0.000000i -2.682615+0.358259i
+[3] -2.682615-0.358259i
+\end{Soutput}
+\end{Schunk}
+\end{sol}
+
+\subsection{\code{optimize}}
+\label{optimisation:optimize}
+
+La fonction \Fonction{optimize} recherche le
+maximum\index{maximum!local}\index{fonction!maximum local} ou
+minimum\index{minimum!local}\index{fonction!minimum local} local d'une
+fonction \code{f} entre les points \code{lower} et \code{upper}.
+\begin{ex}
+  Trouver l'extremum de la fonction de densité de la loi bêta de
+  paramètres $\alpha = 3$ et $\beta = 2$.
+\end{ex}
+\begin{sol}
+  On sait que l'extremum se trouve dans l'intervalle $[0, 1]$.
+\begin{Schunk}
+\begin{Sinput}
+> f <- function(x) dbeta(x, 3, 2)
+> optimize(f, lower = 0, upper = 1, maximum = TRUE)
+\end{Sinput}
+\begin{Soutput}
+$maximum
+[1] 0.6666795
+
+$objective
+[1] 1.777778
+\end{Soutput}
+\end{Schunk}
+\end{sol}
+
+\subsection{\code{ms}}
+\label{optimisation:ms}
+
+La \Splus fonction \Fonction{ms}, minimise une
+somme\index{minimum!d'une somme}. C'est une des principales fonction
+d'optimisation de S-Plus. Elles est utile, par exemple, pour minimiser
+la valeur négative d'une fonction de
+log-vraisemblance\index{vraisemblance}, $-l(\theta) = - \sum_{i=1}^n
+\ln f(x_i; \theta)$.  Son utilisation est toutefois compliquée par
+l'usage de formules\index{formule} (voir la section
+\ref{regression:formules}) et de \emph{data frames}\index{data frame}
+(section \ref{bases:dataframes}).
+\begin{ex}
+  \label{ex:optimisation:ms}
+  Calculer les estimateurs du maximum de vraisemblance des paramètres
+  $\alpha$ et $\lambda$ de la distribution gamma dont la densité est
+  donnée à l'équation \eqref{eq:exemples:gamma:fdp} à la page
+  \pageref{eq:exemples:gamma:fdp} à partir de l'échantillon aléatoire
+\begin{Schunk}
+\begin{Sinput}
+> x
+\end{Sinput}
+\begin{Soutput}
+ [1] 2.2557923 2.6291918 2.1579953 5.2925777
+ [5] 0.8625360 0.6744605 1.5091443 1.0829637
+ [9] 2.5340812 1.9135480
+\end{Soutput}
+\end{Schunk}
+\end{ex}
+\begin{sol}
+  On cherche à minimiser $-l(\alpha, \lambda) = -\sum_{i=1}^n \ln
+  f(x_i; \alpha, \lambda)$, donc l'argument de \code{ms} doit être
+  $- \ln f(x_i; \alpha, \lambda)$.
+\begin{Schunk}
+\begin{Sinput}
+> x <- rgamma(10, shape=5, rate=2)
+> ms(~-log(dgamma(x, a, l)),
+           data=as.data.frame(x),
+           start=list(a=1, l=1))
+\end{Sinput}
+\begin{Soutput}
+value: 14.60445
+parameters:
+        a        l
+ 3.217898 1.538759
+formula:  ~   - log(dgamma(x, a, l))
+100 observations
+call: ms(formula =  ~  - log(dgamma(x, a, l)), data =
+as.data.frame(x), start = list(         a = 1, l = 1))
+\end{Soutput}
+\end{Schunk}
+\end{sol}
+
+\subsection{\code{nlmin}}
+\label{optimisation:nlmin}
+
+La fonction \Fonction{nlmin}, \Splus propre à S-Plus, minimise une
+fonction non linéaire\index{minimum!fonction non
+  linéaire}\index{fonction!minimum}.  La fonction que \code{nlmin}
+minimisera ne peut avoir qu'un seul argument, soit le vecteur des
+paramètres à trouver.
+\begin{ex}
+  Répéter l'exemple \ref{ex:optimisation:ms} à l'aide de
+  \code{nlmin} dans S-Plus.
+\end{ex}
+\begin{sol}
+  Il faut cette fois passer en argument la fonction $-l(\alpha,
+  \lambda)$. Le second argument, \code{c(1, 1)}, contient des
+  valeurs de départ.
+\begin{Schunk}
+\begin{Sinput}
+> f <- function(p) -sum(log(dgamma(x, p[1], p[2])))
+> nlmin(f, c(1, 1))
+\end{Sinput}
+\begin{Soutput}
+$x:
+[1] 3.217898 1.538759
+
+$converged:
+[1] T
+
+$conv.type:
+[1] "relative function convergence"
+\end{Soutput}
+\end{Schunk}
+%$
+\end{sol}
+
+\subsection{\code{nlminb}}
+\Indexfonction{nlminb}
+\label{optimisation:nlminb}
+
+Minimisation \Splus d'une fonction non linéaire avec des bornes
+inférieure et/ou supérieure pour les paramètres (S-Plus seulement).
+
+
+\subsection{\code{nlm}}
+\label{optimisation:nlm}
+
+La fonction \Fonction{nlm}, \R propre à \textsf{R}, minimise aussi une
+fonction non linéaire\index{minimum!fonction non
+  linéaire}\index{fonction!minimum}.  La principale différence entre
+la fonction \fonction{nlmin} de S-Plus et \code{nlm} est que cette
+dernière peut passer des arguments à la fonction à minimiser, ce qui
+en facilite l'utilisation.
+\begin{ex}
+  \label{ex:optimisation:nlm}
+  Répéter l'exemple \ref{ex:optimisation:ms} à l'aide de
+  \code{nlm} dans \textsf{R}.
+\end{ex}
+\begin{sol}
+  Remarquer comment on peut passer le vecteur de données à la fonction
+  de log-vraisemblance à optimiser.
+\begin{Schunk}
+\begin{Sinput}
+> f <- function(p, x) -sum(dgamma(x, p[1], 
++     p[2], log = TRUE))
+> nlm(f, c(1, 1), x = x)
+\end{Sinput}
+\begin{Soutput}
+$minimum
+[1] 14.60445
+
+$estimate
+[1] 3.217881 1.538752
+
+$gradient
+[1] -1.057352e-05  2.737923e-05
+
+$code
+[1] 2
+
+$iterations
+[1] 15
+\end{Soutput}
+\end{Schunk}
+\end{sol}
+
+\subsection{\code{optim}}
+\label{optimisation:optim}
+
+La fonction \Fonction{optim}\index{fonction!optimisation} est un outil
+d'optimisation tout usage, souvent utilisée par d'autres fonctions.
+Elle permet, selon l'algorithme utilisé, de fixer des seuils minimum
+et/ou maximum aux paramètres à optimiser.  Dans S-Plus, il faut
+charger la section \texttt{MASS}\index{package@\texttt{MASS}} de la
+bibliothèque.
+\begin{ex}
+  Répéter l'exemple \ref{ex:optimisation:ms} à l'aide de
+  \code{optim}.
+\end{ex}
+\begin{sol}
+  En réutilisant la fonction \code{f} définie dans la solution de
+  l'exemple \ref{ex:optimisation:nlm}:
+\begin{Schunk}
+\begin{Sinput}
+> optim(c(1, 1), f, x = x)
+\end{Sinput}
+\begin{Soutput}
+$par
+[1] 3.217098 1.538413
+
+$value
+[1] 14.60445
+
+$counts
+function gradient 
+      65       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL
+\end{Soutput}
+\end{Schunk}
+\end{sol}
+
+\begin{rem}
+  L'option \R \code{log = TRUE} de la fonction \fonction{dgamma} (et
+  de toutes les autres fonctions de densité) permet de calculer plus
+  précisément le logarithme de la densité.  Cette option n'est
+  disponible que dans \textsf{R}.
+\end{rem}
+
+\begin{rem}
+  L'estimation par le maximum de vraisemblance\index{vraisemblance}
+  est beaucoup simplifiée par l'utilisation de la fonction
+  \fonction{fitdistr} du package
+  \texttt{MASS}\index{package@\texttt{MASS}}.
+\end{rem}
+
+
+\section{Exemples}
+\label{optimisation:exemples}
+
+\lstinputlisting{optimisation.R}
+
+
+
+\section{Exercices}
+\label{optimisation:exercices}
+
+\Opensolutionfile{reponses}[reponses-optimisation]
+\Writetofile{reponses}{\protect\section*{Chapitre \protect\ref{optimisation}}}
+
+
+\begin{exercice}
+  Trouver la solution des équations suivantes à l'aide des fonctions S
+  appropriées.
+  \begin{enumerate}
+  \item $x^3 - 2 x^2 - 5 = 0$ pour $1 \leq x \leq 4$
+  \item $x^3 + 3 x^2 - 1 = 0$ pour $-4 \leq x \leq 0$
+  \item $x - 2^{-x} = 0$ pour $0 \leq x \leq 1$
+  \item $e^x + 2^{-x} + 2 \cos x - 6 = 0$ pour $1 \leq x \leq 2$
+  \item $e^x - x^2 + 3x - 2 = 0$ pour $0 \leq x \leq 1$
+  \end{enumerate}
+  \begin{rep}
+    \begin{enumerate}
+\item
+\begin{Schunk}
+\begin{Sinput}
+> f <- function(x) x^3 - 2 * x^2 - 5
+> uniroot(f, lower = 1, upper = 4)
+\end{Sinput}
+\end{Schunk}
+\item
+\begin{Schunk}
+\begin{Sinput}
+> f <- function(x) x^3 + 3 * x^2 - 1
+> uniroot(f, lower = -4, upper = -1)
+\end{Sinput}
+\end{Schunk}
+\item
+\begin{Schunk}
+\begin{Sinput}
+> f <- function(x) x - 2^(-x)
+> uniroot(f, lower = 0, upper = 1)
+\end{Sinput}
+\end{Schunk}
+\item
+\begin{Schunk}
+\begin{Sinput}
+> f <- function(x) exp(x) + 2^(-x) + 2 * cos(x) - 
++     6
+> uniroot(f, lower = 1, upper = 2)
+\end{Sinput}
+\end{Schunk}
+\item
+\begin{Schunk}
+\begin{Sinput}
+> f <- function(x) exp(x) - x^2 + 3 * x - 
++     2
+> uniroot(f, lower = 0, upper = 1)
+\end{Sinput}
+\end{Schunk}
+    \end{enumerate}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  En théorie de la crédibilité, l'estimateur d'un paramètre $a$ est
+  donné sous forme de point fixe
+  \begin{displaymath}
+    \hat{a} = \frac{1}{n - 1} \sum_{i=1}^n z_i (X_i - \bar{X}_z)^2,
+  \end{displaymath}
+  où
+  \begin{align*}
+    z_i &= \frac{\hat{a} w_i}{\hat{a} w_i + s^2} \\
+    \bar{X}_z &= \sum_{i=1}^n \frac{z_i}{z_\pt} X_i
+  \end{align*}
+  et $X_1, \dots, X_n$, $w_1, \dots, w_n$ et $s^2$ sont des données.
+  Calculer la valeur de $\hat{a}$ si $s^2 = \nombre{140 000 000}$ et
+  que les valeurs de $X_i$ et $w_i$ sont telles que données dans le
+  tableau ci-dessous.
+  \begin{center}
+    \begin{tabular}{crrrrr}
+      \toprule
+      $i$ & 1 & 2 & 3 & 4 & 5 \\
+      \midrule
+      $X_i$ &
+      \nombre{2061} & \nombre{1511} &
+      \nombre{1806} & \nombre{1353} & \nombre{1600} \\
+      $w_i$ &
+      \nombre{100155} & \nombre{19895} &
+      \nombre{13735}  & \nombre{4152}  & \nombre{36110} \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  \begin{rep}
+\begin{Schunk}
+\begin{Sinput}
+> X <- c(2061, 1511, 1806, 1353, 1600)
+> w <- c(100155, 19895, 13735, 4152, 36110)
+> g <- function(a, X, w, s2) {
++     z <- 1/(1 + s2/(a * w))
++     Xz <- sum(z * X)/sum(z)
++     sum(z * (X - Xz)^2)/(length(X) - 1)
++ }
+> uniroot(function(x) g(x, X, w, 1.4e+08) - 
++     x, c(50000, 80000))
+\end{Sinput}
+\end{Schunk}
+  \end{rep}
+\end{exercice}
+
+
+\begin{exercice}
+  Les fonctions de densité de probabilité et de répartition de la
+  distribution de Pareto sont données à l'exercice
+  \ref{avance}.\ref{exercice:avance:pareto}. Calculer les estimateurs
+  du maximum de vraisemblance des paramètres de la Pareto à partir d'un
+  échantillon aléatoire obtenu par simulation avec la commande
+\begin{Schunk}
+\begin{Sinput}
+> x <- lambda * (runif(100)^(-1/alpha) - 1)
+\end{Sinput}
+\end{Schunk}
+  pour des valeurs de \texttt{alpha} et \texttt{lambda} choisies.
+  \begin{rep}
+\begin{Schunk}
+\begin{Sinput}
+> dpareto <- function(x, alpha, lambda) {
++     (alpha * lambda^alpha)/(x + lambda)^(alpha + 
++         1)
++ }
+> f <- function(par, x) -sum(log(dpareto(x, 
++     par[1], par[2])))
+> optim(c(1, 1000), f, x = x)
+\end{Sinput}
+\end{Schunk}
+    ou
+\begin{Schunk}
+\begin{Sinput}
+> dpareto <- function(x, logAlpha, logLambda) {
++     alpha <- exp(logAlpha)
++     lambda <- exp(logLambda)
++     (alpha * lambda^alpha)/(x + lambda)^(alpha + 
++         1)
++ }
+> optim(c(log(2), log(1000)), f, x = x)
+> exp(optim(c(log(2), log(1000)), f, x = x)$par)
+\end{Sinput}
+\end{Schunk}
+  \end{rep}
+\end{exercice}
+
+\Closesolutionfile{reponses}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "introduction_language_S"
+%%% End:

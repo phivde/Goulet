@@ -1,0 +1,63 @@
+This is BibTeX, Version 0.99c (Web2C 7.4.5)
+The top-level auxiliary file: introduction_programmation_S.aux
+A level-1 auxiliary file: pagetitre.aux
+A level-1 auxiliary file: preface.aux
+A level-1 auxiliary file: presentation.aux
+A level-1 auxiliary file: bases.aux
+A level-1 auxiliary file: operateurs.aux
+A level-1 auxiliary file: exemples.aux
+A level-1 auxiliary file: fonctions.aux
+A level-1 auxiliary file: avance.aux
+A level-1 auxiliary file: optimisation.aux
+A level-1 auxiliary file: regression.aux
+A level-1 auxiliary file: ts.aux
+A level-1 auxiliary file: ess.aux
+A level-1 auxiliary file: s-plus_windows.aux
+A level-1 auxiliary file: rng.aux
+A level-1 auxiliary file: simulation.aux
+A level-1 auxiliary file: fdl.aux
+A level-1 auxiliary file: reponses.aux
+The style file: agsm.bst
+Database file #1: stat.bib
+Database file #2: informatique.bib
+You've used 4 entries,
+            2638 wiz_defined-function locations,
+            642 strings with 5202 characters,
+and the built_in function-call counts, 1778 in all, are:
+= -- 137
+> -- 160
+< -- 0
++ -- 50
+- -- 48
+* -- 151
+:= -- 376
+add.period$ -- 4
+call.type$ -- 4
+change.case$ -- 30
+chr.to.int$ -- 4
+cite$ -- 4
+duplicate$ -- 53
+empty$ -- 94
+format.name$ -- 64
+if$ -- 333
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 6
+newline$ -- 15
+num.names$ -- 24
+pop$ -- 23
+preamble$ -- 1
+purify$ -- 32
+quote$ -- 0
+skip$ -- 25
+stack$ -- 0
+substring$ -- 46
+swap$ -- 4
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 10
+warning$ -- 0
+while$ -- 16
+width$ -- 0
+write$ -- 63

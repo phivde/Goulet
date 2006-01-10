@@ -1,0 +1,227 @@
+\chapter{Générateurs de nombres aléatoires}
+\label{rng}
+
+
+Avant d'utiliser pour quelque tâche de simulation moindrement
+importante un générateur de nombres aléatoires inclus dans un
+logiciel, il importe de s'assurer de la qualité de celui-ci. On
+trouvera en général relativement facilement de l'information dans
+Internet.
+
+On présente ici, sans entrer dans les détails, les générateurs de
+nombres uniformes utilisés dans S-Plus et \textsf{R} ainsi que la
+liste des différentes fonctions de simulation de variables aléatoires.
+
+
+\section{Générateurs de nombres aléatoires}
+\index{simulation!nombres uniformes}
+\label{rng:generateurs}
+
+On obtient des nombres uniformes sur un intervalle quelconque (par
+défaut $[0, 1]$) avec la fonction \Fonction{runif} dans S-Plus et
+\textsf{R}. L'amorce du générateur aléatoire est déterminée avec la
+fonction \Fonction{set.seed}.
+
+Dans S-Plus, \Splus le générateur utilisé est une version modifiée de
+\emph{Super Duper}. Sa période est $2^{30} \times \nombre{4292868097}
+\approx 4,6 \times 10^{18}$.
+
+Dans \textsf{R}, \R on a la possibilité de choisir entre six
+générateurs de nombres aléatoires différents, ou encore de spécifier
+son propre générateur. Par défaut, \textsf{R} utilise le générateur
+Marsenne--Twister, considéré comme le plus avancé au moment d'écrire
+ces lignes.  La période de ce générateur est $2^{\nombre{19937}} - 1$,
+rien de moins!
+
+Consulter les rubriques d'aide des fonctions \code{.Random.seed}
+\index{Random.seed@\code{.Random.seed}} et \code{set.seed} pour de
+plus amples détails.
+
+
+\section{Fonctions de simulation de variables aléatoires}
+\index{simulation!variables aléatoires}
+\label{rng:va}
+
+Les caractéristiques de plusieurs lois de probabilité sont directement
+accessibles dans S-Plus et \textsf{R} par un large éventail de
+fonctions. La logique règne dans les noms de fonctions: pour chaque
+racine \code{\textit{loi}}, il existe quatre fonctions différentes:
+\begin{enumerate}
+\item \code{d\textit{loi}} calcule la fonction de densité de
+  probabilité (lois continues) ou la fonction de masse de probabilité
+  (lois discrètes);
+\item \code{p\textit{loi}} calcule la fonction de répartition;
+\item \code{q\textit{loi}} calcule la fonction de quantile;
+\item \code{r\textit{loi}} simule des observations de cette loi.
+\end{enumerate}
+
+Les différentes lois de probabilité disponibles dans S-Plus et
+\textsf{R}, leur racine et le nom de leurs paramètres sont rassemblées
+au tableau \ref{tab:rng:lois}
+
+\begin{table}
+  \index{distribution!bêta}
+  \index{distribution!binomiale}
+  \index{distribution!binomiale négative}
+  \index{distribution!Cauchy}
+  \index{distribution!exponentielle}
+  \index{distribution!F}
+  \index{distribution!gamma}
+  \index{distribution!geometrique@géométrique}
+  \index{distribution!hypergéométrique}
+  \index{distribution!khi carré}
+  \index{distribution!logistique}
+  \index{distribution!log-normale}
+  \index{distribution!normale}
+  \index{distribution!Poisson}
+  \index{distribution!t}
+  \index{distribution!uniforme}
+  \index{distribution!Weibull}
+  \index{distribution!Wilcoxon}
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    Loi de probabilité & Racine dans S & Noms des paramètres \\
+    \midrule
+    Bêta & \texttt{beta} & \texttt{shape1}, \texttt{shape2} \\
+    Binomiale & \texttt{binom} & \texttt{size}, \texttt{prob} \\
+    Binomiale négative & \texttt{nbinom} & \texttt{size},
+    \texttt{prob} ou \texttt{mu} \\
+    Cauchy & \texttt{cauchy} & \texttt{location}, \texttt{scale} \\
+    Exponentielle & \texttt{exp} & \texttt{rate} \\
+    \emph{F} (Fisher) & \texttt{f} & \texttt{df1}, \texttt{df2} \\
+    Gamma & \texttt{gamma} & \texttt{shape}, \texttt{rate} ou
+    \texttt{scale} \\
+    Géométrique & \texttt{geom} & \texttt{prob} \\
+    Hypergéométrique & \texttt{hyper} & \texttt{m}, \texttt{n},
+    \texttt{k} \\
+    Khi carré & \texttt{chisq} & \texttt{df} \\
+    Logistique & \texttt{logis} & \texttt{location}, \texttt{scale} \\
+    Log-normale & \texttt{lnorm} & \texttt{meanlog}, \texttt{sdlog} \\
+    Normale & \texttt{norm} & \texttt{mean}, \texttt{sd} \\
+    Poisson & \texttt{pois} & \texttt{lambda} \\
+    \emph{t} (Student) & \texttt{t} & \texttt{df} \\
+    Uniforme & \texttt{unif} & \texttt{min}, \texttt{max} \\
+    Weibull & \texttt{weibull} & \texttt{shape}, \texttt{scale} \\
+    Wilcoxon & \texttt{wilcox} & \texttt{m}, \texttt{n} \\
+    \bottomrule
+  \end{tabular}
+  \caption{Lois de probabilité pour lesquelles existent des fonctions dans S-Plus et \textsf{R}}
+  \label{tab:rng:lois}
+\end{table}
+
+Toutes les fonctions du tableau \ref{tab:rng:lois} sont vectorielles,
+c'est-à-dire qu'elles acceptent en argument un vecteur de points où la
+fonction (de densité, de répartition ou de quantile) doit être évaluée
+et même un vecteur de paramètres. Par exemple,
+\begin{Schunk}
+\begin{Sinput}
+> dpois(c(3, 0, 8), lambda = c(1, 4, 10))
+\end{Sinput}
+\begin{Soutput}
+[1] 0.06131324 0.01831564 0.11259903
+\end{Soutput}
+\end{Schunk}
+retourne la probabilité que des lois de Poisson de paramètre 1, 4, et
+10 prennent les valeurs 3, 0 et 8, respectivement.
+
+Le premier argument des fonctions de simulation est la quantité de
+nom\-bres aléatoires désirée.  Ainsi,
+\begin{Schunk}
+\begin{Sinput}
+> rpois(3, lambda = c(1, 4, 10))
+\end{Sinput}
+\begin{Soutput}
+[1] 2 4 7
+\end{Soutput}
+\end{Schunk}
+retourne trois nombres aléatoires issus de distributions de Poisson
+de paramètre 1, 4 et 10, respectivement.  Évidemment, passer un
+vecteur comme premier argument n'a pas tellement de sens, mais, si
+c'est fait, S retournera une quantité de nombres aléatoires égale à la
+\emph{longueur} du vecteur (sans égard aux valeurs contenues dans le
+vecteur).
+
+La fonction \Fonction{sample} permet de simuler des nombres d'une
+distribution discrète quelconque. Sa syntaxe est
+\begin{center}
+  \code{sample(x, size, replace = FALSE, prob = NULL)},
+\end{center}
+où \code{x} est un vecteur des valeurs possibles de l'échantillon à
+simuler (le support de la distribution), \code{size} est la quantité
+de nombres à simuler et \code{prob} est un vecteur de probabilités
+associées à chaque valeur de \code{x} (\code{1/length(x)} par défaut).
+Enfin, si \code{replace} est \code{TRUE}, l'échantillonnage se fait
+avec remise.
+
+\section{Exercices}
+\label{rng:exercices}
+
+\Opensolutionfile{reponses}[reponses-rng]
+\Writetofile{reponses}{\protect\section*{Annexe \protect\ref{rng}}}
+
+\begin{exercice}
+  La loi log-normale\index{distribution!log-normale} est obtenue par
+  transformation de la loi normale: si la distribution de la variable
+  alatoire $X$ est une normale de paramètres $\mu$ et $\sigma^2$,
+  alors la distribution de $e^X$ est une log-normale. Simuler
+  \nombre{1000} observations d'une loi log-normale de paramètres $\mu
+  = \ln 5000 - \frac{1}{2}$ et $\sigma^2 = 1$, puis tracer
+  l'histogramme de l'échantillon aléatoire obtenu.
+  \begin{rep}
+\begin{Schunk}
+\begin{Sinput}
+> x <- rlnorm(1000, meanlog = log(5000) - 
++     0.5, sdlog = 1)
+> hist(x)
+\end{Sinput}
+\end{Schunk}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  Simuler \nombre{10000} observations d'un mélange continu
+  Poisson/gamma\index{distribution!mélange Poisson/gamma} où les
+  paramètres de la loi gamma sont $\alpha = 5$ et $\lambda = 4$, puis
+  tracer la distribution de fréquence de l'échantillon aléatoire
+  obtenu à l'aide des fonctions \fonction{plot} et \fonction{table}.
+  Superposer à ce graphique la fonction de probabilité d'une binomiale
+  négative de paramètres $r = 5$ et $\theta = 0,8$.
+  \begin{rep}
+\begin{Schunk}
+\begin{Sinput}
+> x <- rpois(10000, lambda = rgamma(10000, 
++     shape = 5, rate = 4))
+> px <- table(x)
+> plot(px/sum(px))
+> points(0:10, dnbinom(0:10, size = 5, prob = 0.8))
+\end{Sinput}
+\end{Schunk}
+  \end{rep}
+\end{exercice}
+
+\begin{exercice}
+  Simuler \nombre{10000} observations d'un mélange
+  discret\index{distribution!mélange discret} de deux distributions
+  log-normales, l'une de paramètres $(\mu=3,5, \sigma^2=0,6)$ et
+  l'autre de paramètres $(\mu=4,6, \sigma^2=0,3)$.  Utiliser un
+  paramètre de mélange $p = 0,55$. Tracer ensuite l'histogramme de
+  l'échantillon aléatoire obtenu.
+  \begin{rep}
+\begin{Schunk}
+\begin{Sinput}
+> w <- rbinom(1, 10000, 0.55)
+> x <- c(rlnorm(w, 3.5, 0.6), rlnorm(10000 - 
++     w, 4.6, 0.3))
+> hist(x)
+\end{Sinput}
+\end{Schunk}
+  \end{rep}
+\end{exercice}
+
+\Closesolutionfile{reponses}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "introduction_programation_S"
+%%% End:

@@ -1,0 +1,116 @@
+\section*{Chapitre \ref{exemples}}
+\begin{reponse}{4.1}
+\begin{Schunk}
+\begin{Sinput}
+> sum(P/cumprod(1 + i))
+\end{Sinput}
+\end{Schunk}
+  
+\end{reponse}
+\begin{reponse}{4.2}
+\begin{Schunk}
+\begin{Sinput}
+> x <- c(7, 13, 3, 8, 12, 12, 20, 11)
+> w <- c(0.15, 0.04, 0.05, 0.06, 0.17, 0.16,
++     0.11, 0.09)
+> sum(x * w)/sum(w)
+\end{Sinput}
+\end{Schunk}
+  
+\end{reponse}
+\begin{reponse}{4.3}
+\begin{Schunk}
+\begin{Sinput}
+> 1/mean(1/x)
+\end{Sinput}
+\end{Schunk}
+  
+\end{reponse}
+\begin{reponse}{4.4}
+\begin{Schunk}
+\begin{Sinput}
+> lambda <- 2
+> x <- 5
+> exp(-lambda) * sum(lambda^(0:x)/gamma(1 +
++     0:x))
+\end{Sinput}
+\end{Schunk}
+  
+\end{reponse}
+\begin{reponse}{4.5}
+    \begin{enumerate}
+\item
+\begin{Schunk}
+\begin{Sinput}
+> x <- 10^(0:6)
+> probs <- (1:7)/28
+\end{Sinput}
+\end{Schunk}
+\item
+\begin{Schunk}
+\begin{Sinput}
+> sum(x^2 * probs) - (sum(x * probs))^2
+\end{Sinput}
+\end{Schunk}
+    \end{enumerate}
+  
+\end{reponse}
+\begin{reponse}{4.6}
+\begin{Schunk}
+\begin{Sinput}
+> i <- 0.06
+> 4 * ((1 + i)^0.25 - 1)
+\end{Sinput}
+\end{Schunk}
+  
+\end{reponse}
+\begin{reponse}{4.7}
+\begin{Schunk}
+\begin{Sinput}
+> n <- 1:10
+> i <- seq(0.05, 0.1, by = 0.01)
+> (1 - outer((1 + i), -n, "^"))/i
+\end{Sinput}
+\end{Schunk}
+ou
+\begin{Schunk}
+\begin{Sinput}
+> n <- 1:10
+> i <- (5:10)/100
+> apply(outer(1/(1 + i), n, "^"), 1, cumsum)
+\end{Sinput}
+\end{Schunk}
+  
+\end{reponse}
+\begin{reponse}{4.8}
+\begin{Schunk}
+\begin{Sinput}
+> v <- 1/1.06
+> k <- 1:10
+> sum(k * v^(k - 1))
+\end{Sinput}
+\end{Schunk}
+  
+\end{reponse}
+\begin{reponse}{4.9}
+\begin{Schunk}
+\begin{Sinput}
+> pmts <- rep(1:4, 1:4)
+> v <- 1/1.07
+> k <- 1:10
+> sum(pmts * v^k)
+\end{Sinput}
+\end{Schunk}
+  
+\end{reponse}
+\begin{reponse}{4.10}
+\begin{Schunk}
+\begin{Sinput}
+> v <- cumprod(1/(1 + rep(c(0.05, 0.08),
++     5)))
+> pmts <- rep(1:4, 1:4)
+> sum(pmts * v)
+\end{Sinput}
+\end{Schunk}
+  
+\end{reponse}

@@ -1,0 +1,1268 @@
+\indexentry{Emacs}{2}
+\indexentry{ESS}{2}
+\indexentry{q()@\texttt  {q()}}{3}
+\indexentry{ESS!C-c C-q@\texttt  {C-c C-q}}{3}
+\indexentry{ESS!C-x C-f@\texttt  {C-x C-f}}{4}
+\indexentry{ESS!C-c C-n@\texttt  {C-c C-n}}{4}
+\indexentry{save.image()@\texttt  {save.image()}}{4}
+\indexentry{ESS!C-c C-v@\texttt  {C-c C-v}}{5}
+\indexentry{rnorm@\texttt  {rnorm}}{5}
+\indexentry{rnorm@\texttt  {rnorm}}{5}
+\indexentry{plot@\texttt  {plot}}{5}
+\indexentry{plot@\texttt  {plot}}{5}
+\indexentry{density@\texttt  {density}}{5}
+\indexentry{seq@\texttt  {seq}}{5}
+\indexentry{by@\texttt  {by}}{5}
+\indexentry{seq@\texttt  {seq}}{5}
+\indexentry{length@\texttt  {length}}{5}
+\indexentry{rep@\texttt  {rep}}{5}
+\indexentry{rep@\texttt  {rep}}{5}
+\indexentry{rep@\texttt  {rep}}{5}
+\indexentry{runif@\texttt  {runif}}{5}
+\indexentry{min@\texttt  {min}}{5}
+\indexentry{max@\texttt  {max}}{5}
+\indexentry{runif@\texttt  {runif}}{5}
+\indexentry{min@\texttt  {min}}{5}
+\indexentry{max@\texttt  {max}}{5}
+\indexentry{round@\texttt  {round}}{5}
+\indexentry{matrix@\texttt  {matrix}}{6}
+\indexentry{nrow@\texttt  {nrow}}{6}
+\indexentry{ncol@\texttt  {ncol}}{6}
+\indexentry{t@\texttt  {t}}{6}
+\indexentry{solve@\texttt  {solve}}{6}
+\indexentry{solve@\texttt  {solve}}{6}
+\indexentry{round@\texttt  {round}}{6}
+\indexentry{solve@\texttt  {solve}}{6}
+\indexentry{ls@\texttt  {ls}}{6}
+\indexentry{rm@\texttt  {rm}}{6}
+\indexentry{affectation}{7}
+\indexentry{expression}{7}
+\indexentry{<-@\texttt  {<-}|textbf}{7}
+\indexentry{->@\texttt  {->}|textbf}{7}
+\indexentry{=@\texttt  {=}}{7}
+\indexentry{\_@\texttt  {\_}}{8}
+\indexentry{noms d'objets!conventions}{8}
+\indexentry{noms d'objets!r\'eserv\'es}{8}
+\indexentry{T@\code{T}|see{\code{TRUE}}}{8}
+\indexentry{TRUE@\texttt  {TRUE}}{8}
+\indexentry{F@\code{F}|see{\code{FALSE}}}{8}
+\indexentry{FALSE@\texttt  {FALSE}}{8}
+\indexentry{numeric@\texttt  {numeric} (mode)|textbf}{9}
+\indexentry{complex@\texttt  {complex} (mode)|textbf}{9}
+\indexentry{logical@\texttt  {logical} (mode)|textbf}{9}
+\indexentry{character@\texttt  {character} (mode)|textbf}{9}
+\indexentry{function@\texttt  {function} (mode)|textbf}{9}
+\indexentry{list@\texttt  {list} (mode)|textbf}{9}
+\indexentry{mode@\texttt  {mode}|textbf}{9}
+\indexentry{length@\texttt  {length}|textbf}{9}
+\indexentry{mode|textbf}{9}
+\indexentry{longueur|textbf}{9}
+\indexentry{class@\texttt  {class} (attribut)|textbf}{10}
+\indexentry{dim@\texttt  {dim} (attribut)|textbf}{10}
+\indexentry{dimension}{10}
+\indexentry{dimnames@\texttt  {dimnames} (attribut)|textbf}{10}
+\indexentry{etiquette@\'etiquette}{10}
+\indexentry{names@\texttt  {names} (attribut)|textbf}{10}
+\indexentry{vide|see{\code{NULL}}}{10}
+\indexentry{attribut|textbf}{10}
+\indexentry{NA@\texttt  {NA}|textbf}{10}
+\indexentry{logical@\texttt  {logical} (mode)}{10}
+\indexentry{sum@\texttt  {sum}}{10}
+\indexentry{mean@\texttt  {mean}}{10}
+\indexentry{na.rm@\texttt  {na.rm}|textbf}{10}
+\indexentry{is.na@\texttt  {is.na}|textbf}{10}
+\indexentry{NULL@\texttt  {NULL}|textbf}{10}
+\indexentry{NULL@\texttt  {NULL} (mode)|textbf}{10}
+\indexentry{is.null@\texttt  {is.null}|textbf}{11}
+\indexentry{vecteur}{11}
+\indexentry{c@\texttt  {c}|textbf}{11}
+\indexentry{numeric@\texttt  {numeric}|textbf}{11}
+\indexentry{numeric@\texttt  {numeric} (mode)}{11}
+\indexentry{logical@\texttt  {logical}|textbf}{11}
+\indexentry{logical@\texttt  {logical} (mode)}{11}
+\indexentry{character@\texttt  {character}|textbf}{11}
+\indexentry{character@\texttt  {character} (mode)}{11}
+\indexentry{[\ ]@\texttt  {[\ ]}}{11}
+\indexentry{matrice}{12}
+\indexentry{tableau}{12}
+\indexentry{dim@\texttt  {dim} (attribut)}{12}
+\indexentry{matrix@\texttt  {matrix}|textbf}{12}
+\indexentry{array@\texttt  {array}|textbf}{12}
+\indexentry{rbind@\texttt  {rbind}|textbf}{12}
+\indexentry{cbind@\texttt  {cbind}|textbf}{13}
+\indexentry{liste}{13}
+\indexentry{list@\texttt  {list} (mode)}{13}
+\indexentry{list@\texttt  {list}|textbf}{13}
+\indexentry{indi\c cage!liste|textbf}{13}
+\indexentry{[[\ ]]@\texttt  {[[\ ]]}}{13}
+\indexentry{unlist@\texttt  {unlist}|textbf}{13}
+\indexentry{data frame|textbf}{13}
+\indexentry{data.frame@\texttt  {data.frame} (classe)}{13}
+\indexentry{names@\texttt  {names}}{14}
+\indexentry{colnames@\texttt  {colnames}}{14}
+\indexentry{row.names@\texttt  {row.names}}{14}
+\indexentry{rownames@\texttt  {rownames}}{14}
+\indexentry{numeric@\texttt  {numeric} (mode)}{14}
+\indexentry{complex@\texttt  {complex} (mode)}{14}
+\indexentry{character@\texttt  {character} (mode)}{14}
+\indexentry{logical@\texttt  {logical} (mode)}{14}
+\indexentry{data.frame@\texttt  {data.frame}|textbf}{14}
+\indexentry{as.data.frame@\texttt  {as.data.frame}|textbf}{14}
+\indexentry{rbind@\texttt  {rbind}}{14}
+\indexentry{cbind@\texttt  {cbind}}{14}
+\indexentry{attach@\texttt  {attach}|textbf}{14}
+\indexentry{detach@\texttt  {detach}|textbf}{14}
+\indexentry{indi\c cage!vecteur|textbf}{14}
+\indexentry{indi\c cage!matrice|textbf}{14}
+\indexentry{[\ ]@\texttt  {[\ ]}|textbf}{14}
+\indexentry{length@\texttt  {length}}{15}
+\indexentry{length@\texttt  {length}}{15}
+\indexentry{length@\texttt  {length}}{15}
+\indexentry{numeric@\texttt  {numeric}}{15}
+\indexentry{length@\texttt  {length}}{15}
+\indexentry{sample@\texttt  {sample}}{16}
+\indexentry{class@\texttt  {class}}{16}
+\indexentry{plot@\texttt  {plot}}{16}
+\indexentry{class@\texttt  {class}}{16}
+\indexentry{plot@\texttt  {plot}}{16}
+\indexentry{matrix@\texttt  {matrix}}{16}
+\indexentry{nrow@\texttt  {nrow}}{16}
+\indexentry{ncol@\texttt  {ncol}}{16}
+\indexentry{dim@\texttt  {dim}}{16}
+\indexentry{length@\texttt  {length}}{16}
+\indexentry{dim@\texttt  {dim}}{16}
+\indexentry{class@\texttt  {class}}{16}
+\indexentry{length@\texttt  {length}}{16}
+\indexentry{array@\texttt  {array}}{16}
+\indexentry{dim@\texttt  {dim}}{16}
+\indexentry{length@\texttt  {length}}{16}
+\indexentry{dim@\texttt  {dim}}{16}
+\indexentry{class@\texttt  {class}}{16}
+\indexentry{length@\texttt  {length}}{16}
+\indexentry{matrix@\texttt  {matrix}}{16}
+\indexentry{nrow@\texttt  {nrow}}{16}
+\indexentry{dimnames@\texttt  {dimnames}}{16}
+\indexentry{dimnames@\texttt  {dimnames}}{16}
+\indexentry{list@\texttt  {list}}{16}
+\indexentry{dimnames@\texttt  {dimnames}}{16}
+\indexentry{names@\texttt  {names}}{16}
+\indexentry{names@\texttt  {names}}{16}
+\indexentry{names@\texttt  {names}}{16}
+\indexentry{names@\texttt  {names}}{17}
+\indexentry{mean@\texttt  {mean}}{17}
+\indexentry{mean@\texttt  {mean}}{17}
+\indexentry{na.rm@\texttt  {na.rm}}{17}
+\indexentry{mode@\texttt  {mode}}{17}
+\indexentry{length@\texttt  {length}}{17}
+\indexentry{length@\texttt  {length}}{17}
+\indexentry{mode@\texttt  {mode}}{17}
+\indexentry{names@\texttt  {names}}{17}
+\indexentry{length@\texttt  {length}}{17}
+\indexentry{numeric@\texttt  {numeric}}{17}
+\indexentry{logical@\texttt  {logical}}{17}
+\indexentry{character@\texttt  {character}}{17}
+\indexentry{matrix@\texttt  {matrix}}{17}
+\indexentry{nrow@\texttt  {nrow}}{17}
+\indexentry{ncol@\texttt  {ncol}}{17}
+\indexentry{class@\texttt  {class}}{17}
+\indexentry{length@\texttt  {length}}{17}
+\indexentry{dim@\texttt  {dim}}{17}
+\indexentry{dim@\texttt  {dim}}{17}
+\indexentry{class@\texttt  {class}}{18}
+\indexentry{length@\texttt  {length}}{18}
+\indexentry{dim@\texttt  {dim}}{18}
+\indexentry{matrix@\texttt  {matrix}}{18}
+\indexentry{nrow@\texttt  {nrow}}{18}
+\indexentry{array@\texttt  {array}}{18}
+\indexentry{class@\texttt  {class}}{18}
+\indexentry{length@\texttt  {length}}{18}
+\indexentry{dim@\texttt  {dim}}{18}
+\indexentry{matrix@\texttt  {matrix}}{18}
+\indexentry{matrix@\texttt  {matrix}}{18}
+\indexentry{matrix@\texttt  {matrix}}{18}
+\indexentry{rbind@\texttt  {rbind}}{18}
+\indexentry{rbind@\texttt  {rbind}}{18}
+\indexentry{cbind@\texttt  {cbind}}{18}
+\indexentry{cbind@\texttt  {cbind}}{18}
+\indexentry{rbind@\texttt  {rbind}}{18}
+\indexentry{cbind@\texttt  {cbind}}{18}
+\indexentry{rbind@\texttt  {rbind}}{18}
+\indexentry{cbind@\texttt  {cbind}}{18}
+\indexentry{list@\texttt  {list}}{18}
+\indexentry{mode@\texttt  {mode}}{18}
+\indexentry{length@\texttt  {length}}{18}
+\indexentry{mode@\texttt  {mode}}{19}
+\indexentry{mode@\texttt  {mode}}{19}
+\indexentry{length@\texttt  {length}}{19}
+\indexentry{matrix@\texttt  {matrix}}{19}
+\indexentry{list@\texttt  {list}}{19}
+\indexentry{seq@\texttt  {seq}}{19}
+\indexentry{unlist@\texttt  {unlist}}{19}
+\indexentry{unlist@\texttt  {unlist}}{19}
+\indexentry{mode@\texttt  {mode}}{19}
+\indexentry{dim@\texttt  {dim}}{19}
+\indexentry{class@\texttt  {class}}{19}
+\indexentry{exists@\texttt  {exists}}{20}
+\indexentry{attach@\texttt  {attach}}{20}
+\indexentry{exists@\texttt  {exists}}{20}
+\indexentry{detach@\texttt  {detach}}{20}
+\indexentry{exists@\texttt  {exists}}{20}
+\indexentry{sample@\texttt  {sample}}{20}
+\indexentry{replace@\texttt  {replace}}{20}
+\indexentry{names@\texttt  {names}}{20}
+\indexentry{sample@\texttt  {sample}}{20}
+\indexentry{is.na@\texttt  {is.na}}{20}
+\indexentry{is.na@\texttt  {is.na}}{20}
+\indexentry{etiquette@\'etiquette}{21}
+\indexentry{mode}{21}
+\indexentry{longueur}{21}
+\indexentry{dimension}{21}
+\indexentry{indi\c cage!liste}{21}
+\indexentry{indi\c cage!vecteur}{21}
+\indexentry{indi\c cage!matrice}{21}
+\indexentry{vecteur}{23}
+\indexentry{\^@\texttt  {\^}|textbf}{24}
+\indexentry{**@\texttt  {**}|textbf}{24}
+\indexentry{-@\texttt  {-}|textbf}{24}
+\indexentry{*@\texttt  {*}|textbf}{24}
+\indexentry{/@\texttt  {/}|textbf}{24}
+\indexentry{+@\texttt  {+}|textbf}{24}
+\indexentry{-@\texttt  {-}|textbf}{24}
+\indexentry{\%*\%@\texttt  {\%*\%}|textbf}{24}
+\indexentry{\%\%@\texttt  {\%\%}|textbf}{24}
+\indexentry{\%/\%@\texttt  {\%/\%}|textbf}{24}
+\indexentry{<@\texttt  {<}|textbf}{24}
+\indexentry{<=@\texttt  {<=}|textbf}{24}
+\indexentry{==@\texttt  {==}|textbf}{24}
+\indexentry{>=@\texttt  {>=}|textbf}{24}
+\indexentry{>@\texttt  {>}|textbf}{24}
+\indexentry{"!=@\texttt  {"!=}|textbf}{24}
+\indexentry{"!@\texttt  {"!}|textbf}{24}
+\indexentry{\&@\texttt  {\&}|textbf}{24}
+\indexentry{|@\texttt  {|}|textbf}{24}
+\indexentry{fonction!appel}{24}
+\indexentry{data@\texttt  {data}}{25}
+\indexentry{nrow@\texttt  {nrow}}{25}
+\indexentry{ncol@\texttt  {ncol}}{25}
+\indexentry{byrow@\texttt  {byrow}}{25}
+\indexentry{dimnames@\texttt  {dimnames}}{25}
+\indexentry{biblioth\`eque}{25}
+\indexentry{package}{26}
+\indexentry{seq@\texttt  {seq}|textbf}{26}
+\indexentry{suite de nombres}{26}
+\indexentry{rep@\texttt  {rep}|textbf}{26}
+\indexentry{repetition@r\'ep\'etition de valeurs}{26}
+\indexentry{sort@\texttt  {sort}|textbf}{26}
+\indexentry{tri}{26}
+\indexentry{order@\texttt  {order}|textbf}{26}
+\indexentry{rank@\texttt  {rank}|textbf}{26}
+\indexentry{rang}{26}
+\indexentry{rev@\texttt  {rev}|textbf}{26}
+\indexentry{renverser un vecteur}{26}
+\indexentry{head@\texttt  {head}|textbf}{26}
+\indexentry{extraction!premi\`eres valeurs}{26}
+\indexentry{extraction|seealso{indi\c cage}}{26}
+\indexentry{tail@\texttt  {tail}|textbf}{26}
+\indexentry{extraction!derni\`eres valeurs}{26}
+\indexentry{unique@\texttt  {unique}|textbf}{26}
+\indexentry{extraction!elements diff\'erents@\'el\'ements diff\'erents}{26}
+\indexentry{which@\texttt  {which}|textbf}{26}
+\indexentry{which.min@\texttt  {which.min}|textbf}{26}
+\indexentry{minimum!position     dans un vecteur}{26}
+\indexentry{which.max@\texttt  {which.max}|textbf}{26}
+\indexentry{maximum!position     dans un vecteur}{26}
+\indexentry{match@\texttt  {match}|textbf}{26}
+\indexentry{\%in\%@\texttt  {\%in\%}|textbf}{26}
+\indexentry{round@\texttt  {round}|textbf}{26}
+\indexentry{arrondi}{26}
+\indexentry{floor@\texttt  {floor}|textbf}{26}
+\indexentry{ceiling@\texttt  {ceiling}|textbf}{26}
+\indexentry{trunc@\texttt  {trunc}|textbf}{27}
+\indexentry{sum@\texttt  {sum}|textbf}{27}
+\indexentry{prod@\texttt  {prod}|textbf}{27}
+\indexentry{somme}{27}
+\indexentry{produit}{27}
+\indexentry{diff@\texttt  {diff}|textbf}{27}
+\indexentry{diff\'erences}{27}
+\indexentry{mean@\texttt  {mean}|textbf}{27}
+\indexentry{moyenne!arithm\'etique}{27}
+\indexentry{moyenne!tronqu\'ee}{27}
+\indexentry{var@\texttt  {var}|textbf}{27}
+\indexentry{sd@\texttt  {sd}|textbf}{27}
+\indexentry{variance}{27}
+\indexentry{ecart type@\'ecart type}{27}
+\indexentry{min@\texttt  {min}|textbf}{27}
+\indexentry{max@\texttt  {max}|textbf}{27}
+\indexentry{minimum!d'un     vecteur}{27}
+\indexentry{maximum!d'un vecteur}{27}
+\indexentry{range@\texttt  {range}|textbf}{27}
+\indexentry{median@\texttt  {median}|textbf}{27}
+\indexentry{mediane@m\'ediane}{27}
+\indexentry{quantile@\texttt  {quantile}|textbf}{27}
+\indexentry{quantile}{27}
+\indexentry{summary@\texttt  {summary}|textbf}{27}
+\indexentry{cumsum@\texttt  {cumsum}|textbf}{27}
+\indexentry{cumprod@\texttt  {cumprod}|textbf}{27}
+\indexentry{somme!cumulative}{27}
+\indexentry{produit!cumulatif}{27}
+\indexentry{cummin@\texttt  {cummin}|textbf}{27}
+\indexentry{cummax@\texttt  {cummax}|textbf}{27}
+\indexentry{minimum!cumulatif}{27}
+\indexentry{maximum!cumulatif}{27}
+\indexentry{pmin@\texttt  {pmin}|textbf}{27}
+\indexentry{pmax@\texttt  {pmax}|textbf}{27}
+\indexentry{minimum!parall\`ele}{27}
+\indexentry{maximum!parall\`ele}{27}
+\indexentry{t@\texttt  {t}|textbf}{27}
+\indexentry{matrice!transpos\'ee}{27}
+\indexentry{solve@\texttt  {solve}|textbf}{27}
+\indexentry{matrice!inverse}{27}
+\indexentry{diag@\texttt  {diag}|textbf}{27}
+\indexentry{matrice!diagonale}{27}
+\indexentry{matrice!identit\'e}{27}
+\indexentry{nrow@\texttt  {nrow}|textbf}{27}
+\indexentry{ncol@\texttt  {ncol}|textbf}{27}
+\indexentry{rowSums@\texttt  {rowSums}|textbf}{27}
+\indexentry{colSums@\texttt  {colSums}|textbf}{27}
+\indexentry{matrice!sommes par ligne}{27}
+\indexentry{matrice!somme par colonne}{27}
+\indexentry{rowMeans@\texttt  {rowMeans}|textbf}{27}
+\indexentry{colMeans@\texttt  {colMeans}|textbf}{27}
+\indexentry{matrice!moyennes par ligne}{27}
+\indexentry{matrice!moyennes par colonne}{27}
+\indexentry{rowVars@\texttt  {rowVars}|textbf}{27}
+\indexentry{colVars@\texttt  {colVars}|textbf}{27}
+\indexentry{matrice!variance par ligne}{27}
+\indexentry{matrice!variance par colonne}{27}
+\indexentry{produit!ext\'erieur}{28}
+\indexentry{outer@\texttt  {outer}|textbf}{28}
+\indexentry{prod@\texttt  {prod}}{28}
+\indexentry{\%o\%@\texttt  {\%o\%}|textbf}{28}
+\indexentry{if@\texttt  {if}|textbf}{28}
+\indexentry{else@\texttt  {else}|textbf}{28}
+\indexentry{ifelse@\texttt  {ifelse}|textbf}{28}
+\indexentry{switch@\texttt  {switch}|textbf}{28}
+\indexentry{boucle}{29}
+\indexentry{apply@\texttt  {apply}}{29}
+\indexentry{lapply@\texttt  {lapply}}{29}
+\indexentry{sapply@\texttt  {sapply}}{29}
+\indexentry{for@\texttt  {for}|textbf}{29}
+\indexentry{while@\texttt  {while}|textbf}{29}
+\indexentry{repeat@\texttt  {repeat}|textbf}{29}
+\indexentry{break@\texttt  {break}|textbf}{29}
+\indexentry{next@\texttt  {next}|textbf}{29}
+\indexentry{for@\texttt  {for}}{29}
+\indexentry{if@\texttt  {if}}{29}
+\indexentry{print@\texttt  {print}}{30}
+\indexentry{for@\texttt  {for}}{30}
+\indexentry{if@\texttt  {if}}{30}
+\indexentry{print@\texttt  {print}}{30}
+\indexentry{matrix@\texttt  {matrix}}{30}
+\indexentry{matrix@\texttt  {matrix}}{30}
+\indexentry{ncol@\texttt  {ncol}}{30}
+\indexentry{nrow@\texttt  {nrow}}{30}
+\indexentry{matrix@\texttt  {matrix}}{30}
+\indexentry{nrow@\texttt  {nrow}}{30}
+\indexentry{ncol@\texttt  {ncol}}{30}
+\indexentry{data@\texttt  {data}}{30}
+\indexentry{matrix@\texttt  {matrix}}{30}
+\indexentry{nrow@\texttt  {nrow}}{30}
+\indexentry{ncol@\texttt  {ncol}}{30}
+\indexentry{matrix@\texttt  {matrix}}{30}
+\indexentry{nrow@\texttt  {nrow}}{30}
+\indexentry{ncol@\texttt  {ncol}}{30}
+\indexentry{seq@\texttt  {seq}}{31}
+\indexentry{seq@\texttt  {seq}}{31}
+\indexentry{length@\texttt  {length}}{31}
+\indexentry{seq@\texttt  {seq}}{31}
+\indexentry{by@\texttt  {by}}{31}
+\indexentry{rep@\texttt  {rep}}{31}
+\indexentry{rep@\texttt  {rep}}{31}
+\indexentry{rep@\texttt  {rep}}{31}
+\indexentry{rep@\texttt  {rep}}{31}
+\indexentry{sort@\texttt  {sort}}{31}
+\indexentry{sort@\texttt  {sort}}{31}
+\indexentry{sort@\texttt  {sort}}{31}
+\indexentry{sort@\texttt  {sort}}{31}
+\indexentry{order@\texttt  {order}}{31}
+\indexentry{order@\texttt  {order}}{31}
+\indexentry{rank@\texttt  {rank}}{31}
+\indexentry{rev@\texttt  {rev}}{31}
+\indexentry{length@\texttt  {length}}{31}
+\indexentry{length@\texttt  {length}}{31}
+\indexentry{rev@\texttt  {rev}}{31}
+\indexentry{rev@\texttt  {rev}}{31}
+\indexentry{unique@\texttt  {unique}}{31}
+\indexentry{which@\texttt  {which}}{31}
+\indexentry{which.min@\texttt  {which.min}}{31}
+\indexentry{which.max@\texttt  {which.max}}{31}
+\indexentry{match@\texttt  {match}}{32}
+\indexentry{match@\texttt  {match}}{32}
+\indexentry{\%in\%@\texttt  {\%in\%}}{32}
+\indexentry{\%in\%@\texttt  {\%in\%}}{32}
+\indexentry{round@\texttt  {round}}{32}
+\indexentry{round@\texttt  {round}}{32}
+\indexentry{round@\texttt  {round}}{32}
+\indexentry{ceiling@\texttt  {ceiling}}{32}
+\indexentry{floor@\texttt  {floor}}{32}
+\indexentry{trunc@\texttt  {trunc}}{32}
+\indexentry{sum@\texttt  {sum}}{32}
+\indexentry{prod@\texttt  {prod}}{32}
+\indexentry{diff@\texttt  {diff}}{32}
+\indexentry{mean@\texttt  {mean}}{32}
+\indexentry{mean@\texttt  {mean}}{32}
+\indexentry{var@\texttt  {var}}{32}
+\indexentry{length@\texttt  {length}}{32}
+\indexentry{length@\texttt  {length}}{32}
+\indexentry{var@\texttt  {var}}{32}
+\indexentry{sd@\texttt  {sd}}{32}
+\indexentry{max@\texttt  {max}}{32}
+\indexentry{min@\texttt  {min}}{32}
+\indexentry{range@\texttt  {range}}{32}
+\indexentry{diff@\texttt  {diff}}{32}
+\indexentry{range@\texttt  {range}}{32}
+\indexentry{median@\texttt  {median}}{32}
+\indexentry{quantile@\texttt  {quantile}}{32}
+\indexentry{quantile@\texttt  {quantile}}{32}
+\indexentry{summary@\texttt  {summary}}{32}
+\indexentry{sample@\texttt  {sample}}{32}
+\indexentry{sample@\texttt  {sample}}{32}
+\indexentry{cumsum@\texttt  {cumsum}}{32}
+\indexentry{cumprod@\texttt  {cumprod}}{32}
+\indexentry{rev@\texttt  {rev}}{32}
+\indexentry{cumprod@\texttt  {cumprod}}{32}
+\indexentry{rev@\texttt  {rev}}{32}
+\indexentry{cummin@\texttt  {cummin}}{32}
+\indexentry{cummax@\texttt  {cummax}}{32}
+\indexentry{pmin@\texttt  {pmin}}{32}
+\indexentry{pmax@\texttt  {pmax}}{32}
+\indexentry{sample@\texttt  {sample}}{32}
+\indexentry{replace@\texttt  {replace}}{32}
+\indexentry{dim@\texttt  {dim}}{32}
+\indexentry{t@\texttt  {t}}{32}
+\indexentry{solve@\texttt  {solve}}{32}
+\indexentry{solve@\texttt  {solve}}{33}
+\indexentry{solve@\texttt  {solve}}{33}
+\indexentry{diag@\texttt  {diag}}{33}
+\indexentry{diag@\texttt  {diag}}{33}
+\indexentry{diag@\texttt  {diag}}{33}
+\indexentry{cbind@\texttt  {cbind}}{33}
+\indexentry{nrow@\texttt  {nrow}}{33}
+\indexentry{ncol@\texttt  {ncol}}{33}
+\indexentry{rowSums@\texttt  {rowSums}}{33}
+\indexentry{colSums@\texttt  {colSums}}{33}
+\indexentry{apply@\texttt  {apply}}{33}
+\indexentry{sum@\texttt  {sum}}{33}
+\indexentry{apply@\texttt  {apply}}{33}
+\indexentry{sum@\texttt  {sum}}{33}
+\indexentry{apply@\texttt  {apply}}{33}
+\indexentry{prod@\texttt  {prod}}{33}
+\indexentry{outer@\texttt  {outer}}{33}
+\indexentry{\%o\%@\texttt  {\%o\%}}{33}
+\indexentry{outer@\texttt  {outer}}{33}
+\indexentry{outer@\texttt  {outer}}{33}
+\indexentry{outer@\texttt  {outer}}{33}
+\indexentry{pmax@\texttt  {pmax}}{33}
+\indexentry{rep@\texttt  {rep}}{33}
+\indexentry{rep@\texttt  {rep}}{33}
+\indexentry{numeric@\texttt  {numeric}}{33}
+\indexentry{for@\texttt  {for}}{33}
+\indexentry{if@\texttt  {if}}{33}
+\indexentry{else@\texttt  {else}}{33}
+\indexentry{print@\texttt  {print}}{33}
+\indexentry{numeric@\texttt  {numeric}}{34}
+\indexentry{for@\texttt  {for}}{34}
+\indexentry{if@\texttt  {if}}{34}
+\indexentry{else@\texttt  {else}}{34}
+\indexentry{print@\texttt  {print}}{34}
+\indexentry{is.na@\texttt  {is.na}}{34}
+\indexentry{numeric@\texttt  {numeric}}{34}
+\indexentry{while@\texttt  {while}}{34}
+\indexentry{if@\texttt  {if}}{34}
+\indexentry{else@\texttt  {else}}{34}
+\indexentry{print@\texttt  {print}}{34}
+\indexentry{numeric@\texttt  {numeric}}{34}
+\indexentry{repeat@\texttt  {repeat}}{34}
+\indexentry{if@\texttt  {if}}{34}
+\indexentry{else@\texttt  {else}}{34}
+\indexentry{print@\texttt  {print}}{34}
+\indexentry{if@\texttt  {if}}{34}
+\indexentry{break@\texttt  {break}}{35}
+\indexentry{rep@\texttt  {rep}}{35}
+\indexentry{seq@\texttt  {seq}}{35}
+\indexentry{:@\verb|:|}{35}
+\indexentry{seq@\texttt  {seq}}{35}
+\indexentry{apply@\texttt  {apply}}{35}
+\indexentry{rowSums@\texttt  {rowSums}}{35}
+\indexentry{colSums@\texttt  {colSums}}{35}
+\indexentry{rowMeans@\texttt  {rowMeans}}{35}
+\indexentry{colMeans@\texttt  {colMeans}}{35}
+\indexentry{factorial@\texttt  {factorial}}{35}
+\indexentry{lfactorial@\texttt  {lfactorial}}{35}
+\indexentry{gamma@\texttt  {gamma}}{35}
+\indexentry{lgamma@\texttt  {lgamma}}{35}
+\indexentry{sample@\texttt  {sample}}{35}
+\indexentry{matrice}{36}
+\indexentry{tableau}{36}
+\indexentry{matrice}{36}
+\indexentry{valeur pr\'esente}{37}
+\indexentry{cumprod@\texttt  {cumprod}}{38}
+\indexentry{distribution!binomiale}{38}
+\indexentry{distribution!Poisson}{38}
+\indexentry{choose@\texttt  {choose}}{38}
+\indexentry{rev@\texttt  {rev}}{38}
+\indexentry{dbinom@\texttt  {dbinom}}{39}
+\indexentry{factorial@\texttt  {factorial}|textbf}{39}
+\indexentry{gamma@\texttt  {gamma}|textbf}{39}
+\indexentry{exp@\texttt  {exp}}{39}
+\indexentry{dpois@\texttt  {dpois}}{39}
+\indexentry{distribution!gamma}{40}
+\indexentry{exp@\texttt  {exp}}{40}
+\indexentry{pgamma@\texttt  {pgamma}}{40}
+\indexentry{outer@\texttt  {outer}}{40}
+\indexentry{pgamma@\texttt  {pgamma}}{41}
+\indexentry{colSums@\texttt  {colSums}}{41}
+\indexentry{point fixe}{41}
+\indexentry{repeat@\texttt  {repeat}}{41}
+\indexentry{boucle}{42}
+\indexentry{valeur pr\'esente}{42}
+\indexentry{moyenne!pond\'er\'ee}{42}
+\indexentry{moyenne!harmonique}{42}
+\indexentry{distribution!Poisson}{42}
+\indexentry{valeur pr\'esente}{43}
+\indexentry{valeur pr\'esente}{43}
+\indexentry{valeur pr\'esente}{43}
+\indexentry{valeur pr\'esente}{43}
+\indexentry{fonction!d\'efinie par l'usager}{45}
+\indexentry{function@\texttt  {function}|textbf}{45}
+\indexentry{fonction!resultats@r\'esultat}{45}
+\indexentry{return@\texttt  {return}|textbf}{45}
+\indexentry{variable!locale}{46}
+\indexentry{variable!globale}{46}
+\indexentry{<<-@\verb=<<-=|textbf}{46}
+\indexentry{point fixe}{46}
+\indexentry{Emacs}{46}
+\indexentry{ESS}{46}
+\indexentry{ESS!C-c C-f@\texttt  {C-c C-f}}{46}
+\indexentry{fonction!anonyme}{46}
+\indexentry{outer@\texttt  {outer}}{46}
+\indexentry{function@\texttt  {function}}{47}
+\indexentry{start@\texttt  {start}}{47}
+\indexentry{start@\texttt  {start}}{47}
+\indexentry{repeat@\texttt  {repeat}}{47}
+\indexentry{if@\texttt  {if}}{47}
+\indexentry{abs@\texttt  {abs}}{47}
+\indexentry{break@\texttt  {break}}{47}
+\indexentry{outer@\texttt  {outer}}{47}
+\indexentry{fonction!d\'ebogage}{48}
+\indexentry{print@\texttt  {print}}{48}
+\indexentry{Emacs}{48}
+\indexentry{ESS}{48}
+\indexentry{ESS!C-c C-n@\texttt  {C-c C-n}}{48}
+\indexentry{style}{48}
+\indexentry{Emacs}{48}
+\indexentry{Emacs}{49}
+\indexentry{function@\texttt  {function}}{49}
+\indexentry{start@\texttt  {start}}{49}
+\indexentry{start@\texttt  {start}}{49}
+\indexentry{repeat@\texttt  {repeat}}{49}
+\indexentry{if@\texttt  {if}}{49}
+\indexentry{abs@\texttt  {abs}}{49}
+\indexentry{break@\texttt  {break}}{49}
+\indexentry{start@\texttt  {start}}{50}
+\indexentry{function@\texttt  {function}}{50}
+\indexentry{start\unhbox \voidb@x \kern \z@ @\texttt  {start\unhbox \voidb@x \kern \z@ }}{50}
+\indexentry{start@\texttt  {start}}{50}
+\indexentry{repeat@\texttt  {repeat}}{50}
+\indexentry{if@\texttt  {if}}{50}
+\indexentry{print@\texttt  {print}}{50}
+\indexentry{if@\texttt  {if}}{50}
+\indexentry{abs@\texttt  {abs}}{50}
+\indexentry{break@\texttt  {break}}{50}
+\indexentry{function@\texttt  {function}}{50}
+\indexentry{function@\texttt  {function}}{50}
+\indexentry{start@\texttt  {start}}{50}
+\indexentry{function@\texttt  {function}}{50}
+\indexentry{start\unhbox \voidb@x \kern \z@ @\texttt  {start\unhbox \voidb@x \kern \z@ }}{50}
+\indexentry{start@\texttt  {start}}{50}
+\indexentry{if@\texttt  {if}}{50}
+\indexentry{expression@\texttt  {expression}}{50}
+\indexentry{print@\texttt  {print}}{50}
+\indexentry{else@\texttt  {else}}{50}
+\indexentry{expression@\texttt  {expression}}{50}
+\indexentry{repeat@\texttt  {repeat}}{50}
+\indexentry{eval@\texttt  {eval}}{51}
+\indexentry{if@\texttt  {if}}{51}
+\indexentry{abs@\texttt  {abs}}{51}
+\indexentry{break@\texttt  {break}}{51}
+\indexentry{function@\texttt  {function}}{51}
+\indexentry{start@\texttt  {start}}{51}
+\indexentry{function@\texttt  {function}}{51}
+\indexentry{for@\texttt  {for}}{51}
+\indexentry{function@\texttt  {function}}{51}
+\indexentry{numeric@\texttt  {numeric}}{51}
+\indexentry{for@\texttt  {for}}{51}
+\indexentry{sys.time@\texttt  {sys.time}}{52}
+\indexentry{sys.time@\texttt  {sys.time}}{52}
+\indexentry{system.time@\texttt  {system.time}}{52}
+\indexentry{system.time@\texttt  {system.time}}{52}
+\indexentry{function@\texttt  {function}}{52}
+\indexentry{while@\texttt  {while}}{52}
+\indexentry{var@\texttt  {var}}{52}
+\indexentry{matrice}{53}
+\indexentry{matrix@\texttt  {matrix}}{53}
+\indexentry{distribution!normale}{53}
+\indexentry{dnorm@\texttt  {dnorm}}{53}
+\indexentry{distribution!normale}{53}
+\indexentry{pnorm@\texttt  {pnorm}}{53}
+\indexentry{distribution!normale}{53}
+\indexentry{Recall@\texttt  {Recall}}{53}
+\indexentry{distribution!normale}{54}
+\indexentry{pnorm@\texttt  {pnorm}}{54}
+\indexentry{matrice}{54}
+\indexentry{\%*\%@\texttt  {\%*\%}}{54}
+\indexentry{matrice}{54}
+\indexentry{distribution!normale}{54}
+\indexentry{distribution!gamma}{54}
+\indexentry{distribution!Pareto}{54}
+\indexentry{...@\texttt  {...}|textbf}{57}
+\indexentry{apply@\texttt  {apply}}{57}
+\indexentry{lapply@\texttt  {lapply}}{57}
+\indexentry{sapply@\texttt  {sapply}}{57}
+\indexentry{apply@\texttt  {apply}|textbf}{57}
+\indexentry{matrice}{57}
+\indexentry{tableau}{57}
+\indexentry{apply@\texttt  {apply}}{58}
+\indexentry{rowSums@\texttt  {rowSums}}{58}
+\indexentry{colSums@\texttt  {colSums}}{58}
+\indexentry{rowMeans@\texttt  {rowMeans}}{58}
+\indexentry{colMeans@\texttt  {colMeans}}{58}
+\indexentry{apply@\texttt  {apply}}{58}
+\indexentry{apply@\texttt  {apply}}{58}
+\indexentry{lapply@\texttt  {lapply}|textbf}{58}
+\indexentry{sapply@\texttt  {sapply}|textbf}{58}
+\indexentry{apply@\texttt  {apply}}{58}
+\indexentry{lapply@\texttt  {lapply}}{59}
+\indexentry{sapply@\texttt  {sapply}}{59}
+\indexentry{lapply@\texttt  {lapply}}{59}
+\indexentry{sapply@\texttt  {sapply}}{59}
+\indexentry{for@\texttt  {for}}{60}
+\indexentry{lapply@\texttt  {lapply}}{60}
+\indexentry{sapply@\texttt  {sapply}}{60}
+\indexentry{mapply@\texttt  {mapply}|textbf}{60}
+\indexentry{replicate@\texttt  {replicate}|textbf}{61}
+\indexentry{sapply@\texttt  {sapply}}{61}
+\indexentry{class@\texttt  {class}}{61}
+\indexentry{fonction!g\'en\'erique}{61}
+\indexentry{print@\texttt  {print}}{61}
+\indexentry{plot@\texttt  {plot}}{61}
+\indexentry{summary@\texttt  {summary}}{61}
+\indexentry{methods@\texttt  {methods}|textbf}{61}
+\indexentry{print@\texttt  {print}}{62}
+\indexentry{matrix@\texttt  {matrix}}{62}
+\indexentry{sample@\texttt  {sample}}{62}
+\indexentry{nrow@\texttt  {nrow}}{62}
+\indexentry{ncol@\texttt  {ncol}}{62}
+\indexentry{array@\texttt  {array}}{62}
+\indexentry{sample@\texttt  {sample}}{62}
+\indexentry{dim@\texttt  {dim}}{62}
+\indexentry{rowSums@\texttt  {rowSums}}{62}
+\indexentry{apply@\texttt  {apply}}{62}
+\indexentry{sum@\texttt  {sum}}{62}
+\indexentry{colMeans@\texttt  {colMeans}}{62}
+\indexentry{apply@\texttt  {apply}}{62}
+\indexentry{mean@\texttt  {mean}}{63}
+\indexentry{apply@\texttt  {apply}}{63}
+\indexentry{max@\texttt  {max}}{63}
+\indexentry{apply@\texttt  {apply}}{63}
+\indexentry{prod@\texttt  {prod}}{63}
+\indexentry{sample@\texttt  {sample}}{63}
+\indexentry{apply@\texttt  {apply}}{63}
+\indexentry{var\unhbox \voidb@x \kern \z@ @\texttt  {var\unhbox \voidb@x \kern \z@ }}{63}
+\indexentry{na.rm@\texttt  {na.rm}}{63}
+\indexentry{apply@\texttt  {apply}}{63}
+\indexentry{sum@\texttt  {sum}}{63}
+\indexentry{apply@\texttt  {apply}}{63}
+\indexentry{prod@\texttt  {prod}}{63}
+\indexentry{list@\texttt  {list}}{63}
+\indexentry{matrix@\texttt  {matrix}}{63}
+\indexentry{sum@\texttt  {sum}}{63}
+\indexentry{lapply@\texttt  {lapply}}{63}
+\indexentry{sum@\texttt  {sum}}{63}
+\indexentry{sapply@\texttt  {sapply}}{63}
+\indexentry{sum@\texttt  {sum}}{63}
+\indexentry{lapply@\texttt  {lapply}}{63}
+\indexentry{seq@\texttt  {seq}}{63}
+\indexentry{unlist@\texttt  {unlist}}{63}
+\indexentry{lapply@\texttt  {lapply}}{63}
+\indexentry{seq@\texttt  {seq}}{63}
+\indexentry{function@\texttt  {function}}{63}
+\indexentry{sum@\texttt  {sum}}{63}
+\indexentry{sum@\texttt  {sum}}{63}
+\indexentry{list@\texttt  {list}}{63}
+\indexentry{list@\texttt  {list}}{63}
+\indexentry{list@\texttt  {list}}{63}
+\indexentry{sample@\texttt  {sample}}{64}
+\indexentry{list@\texttt  {list}}{64}
+\indexentry{sapply@\texttt  {sapply}}{64}
+\indexentry{lapply@\texttt  {lapply}}{64}
+\indexentry{rep@\texttt  {rep}}{64}
+\indexentry{sample\unhbox \voidb@x \kern \z@ @\texttt  {sample\unhbox \voidb@x \kern \z@ }}{64}
+\indexentry{mapply@\texttt  {mapply}}{64}
+\indexentry{mean\unhbox \voidb@x \kern \z@ @\texttt  {mean\unhbox \voidb@x \kern \z@ }}{64}
+\indexentry{sapply@\texttt  {sapply}}{64}
+\indexentry{rep@\texttt  {rep}}{64}
+\indexentry{function@\texttt  {function}}{64}
+\indexentry{sample@\texttt  {sample}}{64}
+\indexentry{replicate@\texttt  {replicate}}{64}
+\indexentry{sample@\texttt  {sample}}{64}
+\indexentry{function@\texttt  {function}}{64}
+\indexentry{mean\unhbox \voidb@x \kern \z@ @\texttt  {mean\unhbox \voidb@x \kern \z@ }}{64}
+\indexentry{sd@\texttt  {sd}}{64}
+\indexentry{mean@\texttt  {mean}}{64}
+\indexentry{rnorm@\texttt  {rnorm}}{64}
+\indexentry{mean@\texttt  {mean}}{64}
+\indexentry{mean\unhbox \voidb@x \kern \z@ @\texttt  {mean\unhbox \voidb@x \kern \z@ }}{64}
+\indexentry{sd@\texttt  {sd}}{64}
+\indexentry{sd@\texttt  {sd}}{64}
+\indexentry{replicate@\texttt  {replicate}}{64}
+\indexentry{hist@\texttt  {hist}}{64}
+\indexentry{mean@\texttt  {mean}}{64}
+\indexentry{function@\texttt  {function}}{65}
+\indexentry{if@\texttt  {if}}{65}
+\indexentry{mode@\texttt  {mode}}{65}
+\indexentry{cat@\texttt  {cat}}{65}
+\indexentry{print@\texttt  {print}}{65}
+\indexentry{diag@\texttt  {diag}}{65}
+\indexentry{else@\texttt  {else}}{65}
+\indexentry{methods@\texttt  {methods}}{65}
+\indexentry{print@\texttt  {print}}{65}
+\indexentry{class@\texttt  {class}}{65}
+\indexentry{class@\texttt  {class}}{65}
+\indexentry{class@\texttt  {class}}{65}
+\indexentry{class@\texttt  {class}}{65}
+\indexentry{matrix@\texttt  {matrix}}{65}
+\indexentry{class@\texttt  {class}}{65}
+\indexentry{class@\texttt  {class}}{65}
+\indexentry{mode@\texttt  {mode}}{66}
+\indexentry{class@\texttt  {class}}{66}
+\indexentry{moyenne!pond\'er\'ee}{66}
+\indexentry{distribution!Pareto}{67}
+\indexentry{paste@\texttt  {paste}}{67}
+\indexentry{hist@\texttt  {hist}}{67}
+\indexentry{package@\texttt{MASS}}{71}
+\indexentry{uniroot@\texttt  {uniroot}|textbf}{72}
+\indexentry{racine!d'une fonction}{72}
+\indexentry{fonction!racine}{72}
+\indexentry{polyroot@\texttt  {polyroot}|textbf}{72}
+\indexentry{racine!d'un polyn\^ome}{72}
+\indexentry{optimize@\texttt  {optimize}|textbf}{73}
+\indexentry{maximum!local}{73}
+\indexentry{fonction!maximum local}{73}
+\indexentry{minimum!local}{73}
+\indexentry{fonction!minimum local}{73}
+\indexentry{ms@\texttt  {ms}|textbf}{73}
+\indexentry{minimum!d'une somme}{73}
+\indexentry{vraisemblance}{73}
+\indexentry{formule}{73}
+\indexentry{data frame}{73}
+\indexentry{nlmin@\texttt  {nlmin}|textbf}{74}
+\indexentry{minimum!fonction non   lin\'eaire}{74}
+\indexentry{fonction!minimum}{74}
+\indexentry{nlminb@\texttt  {nlminb}|textbf}{74}
+\indexentry{nlm@\texttt  {nlm}|textbf}{75}
+\indexentry{minimum!fonction non   lin\'eaire}{75}
+\indexentry{fonction!minimum}{75}
+\indexentry{nlmin@\texttt  {nlmin}}{75}
+\indexentry{optim@\texttt  {optim}|textbf}{75}
+\indexentry{fonction!optimisation}{75}
+\indexentry{package@\texttt{MASS}}{75}
+\indexentry{dgamma@\texttt  {dgamma}}{76}
+\indexentry{vraisemblance}{76}
+\indexentry{fitdistr@\texttt  {fitdistr}}{76}
+\indexentry{package@\texttt{MASS}}{76}
+\indexentry{uniroot@\texttt  {uniroot}}{76}
+\indexentry{function@\texttt  {function}}{76}
+\indexentry{lower@\texttt  {lower}}{76}
+\indexentry{upper@\texttt  {upper}}{76}
+\indexentry{polyroot@\texttt  {polyroot}}{76}
+\indexentry{Re@\texttt  {Re}}{76}
+\indexentry{polyroot@\texttt  {polyroot}}{76}
+\indexentry{Im@\texttt  {Im}}{76}
+\indexentry{polyroot@\texttt  {polyroot}}{76}
+\indexentry{function@\texttt  {function}}{77}
+\indexentry{dbeta@\texttt  {dbeta}}{77}
+\indexentry{optimize@\texttt  {optimize}}{77}
+\indexentry{lower@\texttt  {lower}}{77}
+\indexentry{upper@\texttt  {upper}}{77}
+\indexentry{rgamma@\texttt  {rgamma}}{77}
+\indexentry{ms@\texttt  {ms}}{77}
+\indexentry{log@\texttt  {log}}{77}
+\indexentry{dgamma@\texttt  {dgamma}}{77}
+\indexentry{data@\texttt  {data}}{77}
+\indexentry{start@\texttt  {start}}{77}
+\indexentry{list@\texttt  {list}}{77}
+\indexentry{function@\texttt  {function}}{77}
+\indexentry{sum@\texttt  {sum}}{77}
+\indexentry{log@\texttt  {log}}{77}
+\indexentry{dgamma@\texttt  {dgamma}}{77}
+\indexentry{nlmin@\texttt  {nlmin}}{77}
+\indexentry{nlm@\texttt  {nlm}}{77}
+\indexentry{library@\texttt  {library}}{77}
+\indexentry{optim@\texttt  {optim}}{77}
+\indexentry{regression@r\'egression|(}{79}
+\indexentry{regression@r\'egression!importation de donn\'ees}{79}
+\indexentry{data frame}{79}
+\indexentry{read.table@\texttt  {read.table}|textbf}{79}
+\indexentry{data.frame@\texttt  {data.frame}}{80}
+\indexentry{as.data.frame@\texttt  {as.data.frame}}{80}
+\indexentry{read.table@\texttt  {read.table}}{80}
+\indexentry{cbind@\texttt  {cbind}}{80}
+\indexentry{rbind@\texttt  {rbind}}{80}
+\indexentry{names@\texttt  {names}}{80}
+\indexentry{colnames@\texttt  {colnames}}{80}
+\indexentry{row.names@\texttt  {row.names}}{80}
+\indexentry{rownames@\texttt  {rownames}}{80}
+\indexentry{attach@\texttt  {attach}}{80}
+\indexentry{detach@\texttt  {detach}}{80}
+\indexentry{lm@\texttt  {lm}}{80}
+\indexentry{add1@\texttt  {add1}}{80}
+\indexentry{addterm@\texttt  {addterm}}{80}
+\indexentry{drop1@\texttt  {drop1}}{80}
+\indexentry{dropterm@\texttt  {dropterm}}{80}
+\indexentry{step@\texttt  {step}}{80}
+\indexentry{stepAIC@\texttt  {stepAIC}}{80}
+\indexentry{summary@\texttt  {summary}}{80}
+\indexentry{anova@\texttt  {anova}}{80}
+\indexentry{coef@\texttt  {coef}}{80}
+\indexentry{coefficients@\texttt  {coefficients}}{80}
+\indexentry{confint@\texttt  {confint}}{80}
+\indexentry{residuals@\texttt  {residuals}}{80}
+\indexentry{fitted@\texttt  {fitted}}{80}
+\indexentry{deviance@\texttt  {deviance}}{80}
+\indexentry{df.residual@\texttt  {df.residual}}{80}
+\indexentry{update@\texttt  {update}}{80}
+\indexentry{predict@\texttt  {predict}}{80}
+\indexentry{plot@\texttt  {plot}}{80}
+\indexentry{abline@\texttt  {abline}}{80}
+\indexentry{matplot@\texttt  {matplot}}{80}
+\indexentry{matlines@\texttt  {matlines}}{80}
+\indexentry{package@\texttt{MASS}}{80}
+\indexentry{regression@r\'egression!formules}{81}
+\indexentry{formule|textbf}{81}
+\indexentry{+@\texttt  {+}}{81}
+\indexentry{-@\texttt  {-}}{81}
+\indexentry{regression@r\'egression!mod\'elisation}{81}
+\indexentry{plot@\texttt  {plot}}{81}
+\indexentry{formula@\texttt  {formula} (classe)}{82}
+\indexentry{lm@\texttt  {lm}|textbf}{82}
+\indexentry{lm@\texttt  {lm} (classe)}{82}
+\indexentry{lm@\texttt  {lm}}{83}
+\indexentry{lm@\texttt  {lm} (classe)}{83}
+\indexentry{coef@\texttt  {coef}}{83}
+\indexentry{coefficients@\texttt  {coefficients}}{83}
+\indexentry{fitted@\texttt  {fitted}}{83}
+\indexentry{residuals@\texttt  {residuals}}{83}
+\indexentry{deviance@\texttt  {deviance}}{83}
+\indexentry{df.residual@\texttt  {df.residual}}{83}
+\indexentry{summary@\texttt  {summary}}{83}
+\indexentry{confint@\texttt  {confint}|textbf}{83}
+\indexentry{anova@\texttt  {anova}}{83}
+\indexentry{abline@\texttt  {abline}}{84}
+\indexentry{regression@r\'egression!diagnostics}{84}
+\indexentry{summary@\texttt  {summary}}{84}
+\indexentry{anova@\texttt  {anova}}{84}
+\indexentry{plot@\texttt  {plot}}{84}
+\indexentry{lm@\texttt  {lm} (classe)}{84}
+\indexentry{plot.lm@\texttt  {plot.lm}}{84}
+\indexentry{regression@r\'egression!pr\'evision}{84}
+\indexentry{update@\texttt  {update}}{84}
+\indexentry{predict@\texttt  {predict}}{84}
+\indexentry{predict@\texttt  {predict}}{84}
+\indexentry{predict@\texttt  {predict}}{84}
+\indexentry{fitted@\texttt  {fitted}}{84}
+\indexentry{predict@\texttt  {predict}}{84}
+\indexentry{newdata@\texttt  {newdata}}{84}
+\indexentry{predict@\texttt  {predict}}{84}
+\indexentry{ci.fit@\texttt  {ci.fit}}{84}
+\indexentry{pi.fit@\texttt  {pi.fit}}{84}
+\indexentry{predict@\texttt  {predict}}{85}
+\indexentry{conf.level@\texttt  {conf.level}}{85}
+\indexentry{predict@\texttt  {predict}}{85}
+\indexentry{predict@\texttt  {predict}}{85}
+\indexentry{interval@\texttt  {interval}}{85}
+\indexentry{level@\texttt  {level}}{85}
+\indexentry{matlines@\texttt  {matlines}}{85}
+\indexentry{matplot@\texttt  {matplot}}{85}
+\indexentry{regression@r\'egression|)}{85}
+\indexentry{data@\texttt  {data}}{85}
+\indexentry{mode@\texttt  {mode}}{85}
+\indexentry{class@\texttt  {class}}{85}
+\indexentry{names@\texttt  {names}}{86}
+\indexentry{colnames@\texttt  {colnames}}{86}
+\indexentry{row.names@\texttt  {row.names}}{86}
+\indexentry{rownames@\texttt  {rownames}}{86}
+\indexentry{plot@\texttt  {plot}}{86}
+\indexentry{data@\texttt  {data}}{86}
+\indexentry{attach@\texttt  {attach}}{86}
+\indexentry{plot@\texttt  {plot}}{86}
+\indexentry{lm@\texttt  {lm}}{86}
+\indexentry{data@\texttt  {data}}{86}
+\indexentry{class@\texttt  {class}}{86}
+\indexentry{summary@\texttt  {summary}}{86}
+\indexentry{attach@\texttt  {attach}}{86}
+\indexentry{sum@\texttt  {sum}}{86}
+\indexentry{residuals@\texttt  {residuals}}{86}
+\indexentry{sum@\texttt  {sum}}{86}
+\indexentry{mean@\texttt  {mean}}{86}
+\indexentry{deviance@\texttt  {deviance}}{86}
+\indexentry{sum@\texttt  {sum}}{86}
+\indexentry{mean@\texttt  {mean}}{86}
+\indexentry{detach@\texttt  {detach}}{86}
+\indexentry{anova@\texttt  {anova}}{87}
+\indexentry{abline@\texttt  {abline}}{87}
+\indexentry{update@\texttt  {update}}{87}
+\indexentry{update@\texttt  {update}}{87}
+\indexentry{lm@\texttt  {lm}}{87}
+\indexentry{data@\texttt  {data}}{87}
+\indexentry{predict@\texttt  {predict}}{87}
+\indexentry{predict@\texttt  {predict}}{87}
+\indexentry{predict@\texttt  {predict}}{87}
+\indexentry{predict@\texttt  {predict}}{87}
+\indexentry{attach@\texttt  {attach}}{88}
+\indexentry{predict@\texttt  {predict}}{88}
+\indexentry{predict@\texttt  {predict}}{88}
+\indexentry{predict@\texttt  {predict}}{88}
+\indexentry{matlines@\texttt  {matlines}}{88}
+\indexentry{sort@\texttt  {sort}}{88}
+\indexentry{order@\texttt  {order}}{88}
+\indexentry{col@\texttt  {col}}{88}
+\indexentry{matlines@\texttt  {matlines}}{88}
+\indexentry{sort@\texttt  {sort}}{88}
+\indexentry{order@\texttt  {order}}{88}
+\indexentry{col@\texttt  {col}}{88}
+\indexentry{matlines@\texttt  {matlines}}{88}
+\indexentry{sort@\texttt  {sort}}{88}
+\indexentry{order@\texttt  {order}}{88}
+\indexentry{col@\texttt  {col}}{88}
+\indexentry{matlines@\texttt  {matlines}}{88}
+\indexentry{sort@\texttt  {sort}}{88}
+\indexentry{order@\texttt  {order}}{88}
+\indexentry{col@\texttt  {col}}{88}
+\indexentry{cbind@\texttt  {cbind}}{88}
+\indexentry{plot@\texttt  {plot}}{88}
+\indexentry{range@\texttt  {range}}{88}
+\indexentry{range@\texttt  {range}}{88}
+\indexentry{matlines@\texttt  {matlines}}{88}
+\indexentry{sort@\texttt  {sort}}{88}
+\indexentry{order@\texttt  {order}}{88}
+\indexentry{col@\texttt  {col}}{88}
+\indexentry{cbind@\texttt  {cbind}}{88}
+\indexentry{matplot@\texttt  {matplot}}{88}
+\indexentry{sort@\texttt  {sort}}{88}
+\indexentry{order@\texttt  {order}}{88}
+\indexentry{rep@\texttt  {rep}}{88}
+\indexentry{rep@\texttt  {rep}}{89}
+\indexentry{col@\texttt  {col}}{89}
+\indexentry{read.table@\texttt  {read.table}}{89}
+\indexentry{summary@\texttt  {summary}}{89}
+\indexentry{series@s\'eries chronologiques|(}{91}
+\indexentry{series@s\'eries chronologiques|seealso{processus}}{91}
+\indexentry{package@\texttt{MASS}}{91}
+\indexentry{arima@\texttt  {arima}}{91}
+\indexentry{predict@\texttt  {predict}}{91}
+\indexentry{Arima@\texttt  {Arima} (classe)}{91}
+\indexentry{series@s\'eries chronologiques!importation de donn\'ees}{91}
+\indexentry{scan@\texttt  {scan}|textbf}{91}
+\indexentry{read.table@\texttt  {read.table}}{91}
+\indexentry{ts@\texttt  {ts}}{92}
+\indexentry{rts@\texttt  {rts}}{92}
+\indexentry{cts@\texttt  {cts}}{92}
+\indexentry{its@\texttt  {its}}{92}
+\indexentry{time@\texttt  {time}}{92}
+\indexentry{start@\texttt  {start}}{92}
+\indexentry{end@\texttt  {end}}{92}
+\indexentry{frequency@\texttt  {frequency}}{92}
+\indexentry{cycle@\texttt  {cycle}}{92}
+\indexentry{window@\texttt  {window}}{92}
+\indexentry{diff@\texttt  {diff}}{92}
+\indexentry{filter@\texttt  {filter}}{92}
+\indexentry{stl@\texttt  {stl}}{92}
+\indexentry{ts.plot@\texttt  {ts.plot}}{92}
+\indexentry{plot@\texttt  {plot}}{92}
+\indexentry{acf@\texttt  {acf}}{92}
+\indexentry{pacf@\texttt  {pacf}}{92}
+\indexentry{ar@\texttt  {ar}}{92}
+\indexentry{arima@\texttt  {arima}}{92}
+\indexentry{arima.mle@\texttt  {arima.mle}}{92}
+\indexentry{ARMAacf@\texttt  {ARMAacf}}{92}
+\indexentry{ARMAtoMA@\texttt  {ARMAtoMA}}{92}
+\indexentry{tsdiag@\texttt  {tsdiag}}{92}
+\indexentry{predict@\texttt  {predict}}{92}
+\indexentry{arima.forecast@\texttt  {arima.forecast}}{92}
+\indexentry{arima.sim@\texttt  {arima.sim}}{92}
+\indexentry{series@s\'eries chronologiques!cr\'eation}{92}
+\indexentry{ts@\texttt  {ts}|textbf}{92}
+\indexentry{rts@\texttt  {rts}}{92}
+\indexentry{cts@\texttt  {cts}}{92}
+\indexentry{its@\texttt  {its}}{92}
+\indexentry{timeSeries@\texttt  {timeSeries} (classe)}{92}
+\indexentry{signalSeries@\texttt  {signalSeries} (classe)}{92}
+\indexentry{window@\texttt  {window}|textbf}{92}
+\indexentry{series@s\'eries chronologiques!identification}{93}
+\indexentry{corr\'elogramme}{93}
+\indexentry{ts.plot@\texttt  {ts.plot}}{93}
+\indexentry{plot@\texttt  {plot}}{93}
+\indexentry{acf@\texttt  {acf}|textbf}{93}
+\indexentry{autocovariance}{93}
+\indexentry{autocorr\'elation}{93}
+\indexentry{autocorr\'elation!partielle}{93}
+\indexentry{pacf@\texttt  {pacf}|textbf}{93}
+\indexentry{series@s\'eries chronologiques!mod\'elisation}{93}
+\indexentry{processus!ARMA}{93}
+\indexentry{series@s\'eries chronologiques!param\'etrisation}{93}
+\indexentry{processus!ARMA!param\'etrisation}{93}
+\indexentry{package@\texttt{MASS}}{93}
+\indexentry{arima.mle@\texttt  {arima.mle}}{93}
+\indexentry{arima.sim@\texttt  {arima.sim}}{93}
+\indexentry{processus!ARIMA}{93}
+\indexentry{ar@\texttt  {ar}|textbf}{93}
+\indexentry{arima@\texttt  {arima}|textbf}{93}
+\indexentry{order@\texttt  {order}}{94}
+\indexentry{processus!SARIMA}{94}
+\indexentry{arima@\texttt  {arima}}{94}
+\indexentry{seasonal@\texttt  {seasonal}}{94}
+\indexentry{ARMAacf@\texttt  {ARMAacf}|textbf}{94}
+\indexentry{autocorr\'elation}{94}
+\indexentry{autocorr\'elation!partielle}{94}
+\indexentry{ARMAtoMA@\texttt  {ARMAtoMA}|textbf}{94}
+\indexentry{processus!ARMA!inversion}{94}
+\indexentry{series@s\'eries chronologiques!diagnostics}{94}
+\indexentry{tsdiag@\texttt  {tsdiag}|textbf}{94}
+\indexentry{package@\texttt{MASS}}{94}
+\indexentry{corr\'elogramme}{94}
+\indexentry{Ljung--Box}{94}
+\indexentry{portmanteau}{94}
+\indexentry{tsdiag@\texttt  {tsdiag}}{94}
+\indexentry{series@s\'eries chronologiques!pr\'evision}{95}
+\indexentry{arima.forecast@\texttt  {arima.forecast}}{95}
+\indexentry{package@\texttt{MASS}}{95}
+\indexentry{predict@\texttt  {predict}}{95}
+\indexentry{Arima@\texttt  {Arima} (classe)}{95}
+\indexentry{arima@\texttt  {arima}}{95}
+\indexentry{predict@\texttt  {predict}}{95}
+\indexentry{predict@\texttt  {predict}}{95}
+\indexentry{predict@\texttt  {predict}}{95}
+\indexentry{ts@\texttt  {ts} (classe)}{95}
+\indexentry{rts@\texttt  {rts}}{95}
+\indexentry{cts@\texttt  {cts}}{95}
+\indexentry{series@s\'eries chronologiques!simulation}{95}
+\indexentry{arima.sim@\texttt  {arima.sim}|textbf}{95}
+\indexentry{model@\texttt  {model}}{95}
+\indexentry{arima.sim@\texttt  {arima.sim}}{95}
+\indexentry{arima.sim@\texttt  {arima.sim}}{95}
+\indexentry{series@s\'eries chronologiques|)}{95}
+\indexentry{scan@\texttt  {scan}}{96}
+\indexentry{scan@\texttt  {scan}}{96}
+\indexentry{scan@\texttt  {scan}}{96}
+\indexentry{scan@\texttt  {scan}}{96}
+\indexentry{ts@\texttt  {ts}}{96}
+\indexentry{start@\texttt  {start}}{96}
+\indexentry{frequency@\texttt  {frequency}}{96}
+\indexentry{mode@\texttt  {mode}}{96}
+\indexentry{class@\texttt  {class}}{96}
+\indexentry{ts@\texttt  {ts}}{96}
+\indexentry{start@\texttt  {start}}{96}
+\indexentry{window@\texttt  {window}}{96}
+\indexentry{start@\texttt  {start}}{96}
+\indexentry{end@\texttt  {end}}{96}
+\indexentry{ts.plot@\texttt  {ts.plot}}{96}
+\indexentry{plot@\texttt  {plot}}{96}
+\indexentry{ts.plot@\texttt  {ts.plot}}{97}
+\indexentry{plot@\texttt  {plot}}{97}
+\indexentry{acf@\texttt  {acf}}{97}
+\indexentry{acf@\texttt  {acf}}{97}
+\indexentry{plot@\texttt  {plot}}{97}
+\indexentry{ar@\texttt  {ar}}{97}
+\indexentry{arima@\texttt  {arima}}{97}
+\indexentry{order@\texttt  {order}}{97}
+\indexentry{arima@\texttt  {arima}}{97}
+\indexentry{order@\texttt  {order}}{97}
+\indexentry{seasonal@\texttt  {seasonal}}{97}
+\indexentry{ar@\texttt  {ar}}{97}
+\indexentry{ar@\texttt  {ar}}{97}
+\indexentry{predict@\texttt  {predict}}{98}
+\indexentry{ts.plot@\texttt  {ts.plot}}{98}
+\indexentry{se\unhbox \voidb@x \kern \z@ @\texttt  {se\unhbox \voidb@x \kern \z@ }}{98}
+\indexentry{se\unhbox \voidb@x \kern \z@ @\texttt  {se\unhbox \voidb@x \kern \z@ }}{98}
+\indexentry{col@\texttt  {col}}{98}
+\indexentry{arima.sim@\texttt  {arima.sim}}{98}
+\indexentry{model@\texttt  {model}}{98}
+\indexentry{list@\texttt  {list}}{98}
+\indexentry{ar@\texttt  {ar}}{98}
+\indexentry{arima.sim@\texttt  {arima.sim}}{98}
+\indexentry{model@\texttt  {model}}{98}
+\indexentry{list@\texttt  {list}}{98}
+\indexentry{ar@\texttt  {ar}}{98}
+\indexentry{order@\texttt  {order}}{98}
+\indexentry{sd@\texttt  {sd}}{98}
+\indexentry{package@\texttt{MASS}}{99}
+\indexentry{mfrow@\texttt  {mfrow}}{99}
+\indexentry{mfcol@\texttt  {mfcol}}{99}
+\indexentry{par@\texttt  {par}}{99}
+\indexentry{par@\texttt  {par}}{99}
+\indexentry{package@\texttt{MASS}}{100}
+\indexentry{ar@\texttt  {ar}}{100}
+\indexentry{arima@\texttt  {arima}}{100}
+\indexentry{tsdiag@\texttt  {tsdiag}}{100}
+\indexentry{ts.plot@\texttt  {ts.plot}}{100}
+\indexentry{Emacs|(}{101}
+\indexentry{Emacs!configuration}{101}
+\indexentry{Emacs!nouveau fichier}{102}
+\indexentry{Emacs!C-x C-f@\texttt  {C-x C-f}}{102}
+\indexentry{Emacs!C-x C-s@\texttt  {C-x C-s}}{102}
+\indexentry{Emacs!sauvegarder}{102}
+\indexentry{Emacs!C-x C-w@\texttt  {C-x C-w}}{102}
+\indexentry{Emacs!sauvegarder sous}{102}
+\indexentry{Emacs!C-x k@\texttt  {C-x k}}{102}
+\indexentry{Emacs!C-x C-c@\texttt  {C-x C-c}}{102}
+\indexentry{Emacs!C-g@\texttt  {C-g}}{103}
+\indexentry{Emacs!C-\_@\texttt  {C-\_}}{103}
+\indexentry{Emacs!C-x u@\texttt  {C-x u}}{103}
+\indexentry{Emacs!C-s@\texttt  {C-s}}{103}
+\indexentry{Emacs!C-r@\texttt  {C-r}}{103}
+\indexentry{Emacs!M-\%@\texttt  {M-\%}}{103}
+\indexentry{Emacs!rechercher et remplacer}{103}
+\indexentry{Emacs!C-x b@\texttt  {C-x b}}{103}
+\indexentry{Emacs!C-x 2@\texttt  {C-x 2}}{103}
+\indexentry{Emacs!C-x 1@\texttt  {C-x 1}}{103}
+\indexentry{Emacs!C-x 0@\texttt  {C-x 0}}{103}
+\indexentry{Emacs!C-x o@\texttt  {C-x o}}{103}
+\indexentry{Emacs!s\'election}{103}
+\indexentry{Emacs!C-SPC@\texttt  {C-SPC}}{103}
+\indexentry{Emacs!C-w@\texttt  {C-w}}{103}
+\indexentry{Emacs!M-w@\texttt  {M-w}}{103}
+\indexentry{Emacs!C-y@\texttt  {C-y}}{103}
+\indexentry{Emacs!M-y@\texttt  {M-y}}{103}
+\indexentry{Emacs|)}{103}
+\indexentry{ESS|(}{103}
+\indexentry{ESS!C-c C-n@\texttt  {C-c C-n}}{104}
+\indexentry{ESS!C-c C-r@\texttt  {C-c C-r}}{104}
+\indexentry{ESS!C-c C-f@\texttt  {C-c C-f}}{104}
+\indexentry{ESS!C-c C-l@\texttt  {C-c C-l}}{104}
+\indexentry{ESS!C-c C-v@\texttt  {C-c C-v}}{104}
+\indexentry{ESS!C-c C-s@\texttt  {C-c C-s}}{104}
+\indexentry{ESS!C-c C-e@\texttt  {C-c C-e}}{104}
+\indexentry{ESS!M-h@\texttt  {M-h}}{104}
+\indexentry{ESS!C-c C-o@\texttt  {C-c C-o}}{104}
+\indexentry{ESS!C-c C-v@\texttt  {C-c C-v}}{104}
+\indexentry{ESS!C-c C-q@\texttt  {C-c C-q}}{104}
+\indexentry{ESS|)}{104}
+\indexentry{Emacs!et S-Plus|(}{105}
+\indexentry{Emacs!et S-Plus|)}{106}
+\indexentry{simulation!nombres uniformes}{107}
+\indexentry{runif@\texttt  {runif}|textbf}{107}
+\indexentry{set.seed@\texttt  {set.seed}|textbf}{107}
+\indexentry{Random.seed@\code{.Random.seed}}{107}
+\indexentry{simulation!variables al\'eatoires}{107}
+\indexentry{distribution!b\^eta}{108}
+\indexentry{distribution!binomiale}{108}
+\indexentry{distribution!binomiale n\'egative}{108}
+\indexentry{distribution!Cauchy}{108}
+\indexentry{distribution!exponentielle}{108}
+\indexentry{distribution!F}{108}
+\indexentry{distribution!gamma}{108}
+\indexentry{distribution!geometrique@g\'eom\'etrique}{108}
+\indexentry{distribution!hyperg\'eom\'etrique}{108}
+\indexentry{distribution!khi carr\'e}{108}
+\indexentry{distribution!logistique}{108}
+\indexentry{distribution!log-normale}{108}
+\indexentry{distribution!normale}{108}
+\indexentry{distribution!Poisson}{108}
+\indexentry{distribution!t}{108}
+\indexentry{distribution!uniforme}{108}
+\indexentry{distribution!Weibull}{108}
+\indexentry{distribution!Wilcoxon}{108}
+\indexentry{sample@\texttt  {sample}|textbf}{109}
+\indexentry{distribution!log-normale}{109}
+\indexentry{distribution!m\'elange Poisson/gamma}{109}
+\indexentry{plot@\texttt  {plot}}{109}
+\indexentry{table@\texttt  {table}}{109}
+\indexentry{distribution!m\'elange discret}{109}
+\indexentry{simulation!planification|(}{111}
+\indexentry{boucle}{112}
+\indexentry{for@\texttt  {for}}{112}
+\indexentry{lapply@\texttt  {lapply}}{112}
+\indexentry{sapply@\texttt  {sapply}}{112}
+\indexentry{lapply@\texttt  {lapply}}{112}
+\indexentry{sapply@\texttt  {sapply}}{112}
+\indexentry{...@\texttt  {...}}{112}
+\indexentry{sapply@\texttt  {sapply}}{112}
+\indexentry{matrix@\texttt  {matrix}}{113}
+\indexentry{nrow@\texttt  {nrow}}{113}
+\indexentry{ncol@\texttt  {ncol}}{113}
+\indexentry{rownames@\texttt  {rownames}}{113}
+\indexentry{for@\texttt  {for}}{113}
+\indexentry{runif@\texttt  {runif}}{113}
+\indexentry{mean@\texttt  {mean}}{113}
+\indexentry{median@\texttt  {median}}{113}
+\indexentry{mean@\texttt  {mean}}{113}
+\indexentry{range@\texttt  {range}}{113}
+\indexentry{rowMeans@\texttt  {rowMeans}}{113}
+\indexentry{apply@\texttt  {apply}}{113}
+\indexentry{var@\texttt  {var}}{113}
+\indexentry{function@\texttt  {function}}{114}
+\indexentry{matrix@\texttt  {matrix}}{114}
+\indexentry{nrow@\texttt  {nrow}}{114}
+\indexentry{ncol@\texttt  {ncol}}{114}
+\indexentry{rownames@\texttt  {rownames}}{114}
+\indexentry{for@\texttt  {for}}{114}
+\indexentry{runif@\texttt  {runif}}{114}
+\indexentry{mean@\texttt  {mean}}{114}
+\indexentry{median@\texttt  {median}}{114}
+\indexentry{mean@\texttt  {mean}}{114}
+\indexentry{range@\texttt  {range}}{114}
+\indexentry{list@\texttt  {list}}{114}
+\indexentry{rowMeans@\texttt  {rowMeans}}{114}
+\indexentry{apply@\texttt  {apply}}{114}
+\indexentry{var@\texttt  {var}}{114}
+\indexentry{function@\texttt  {function}}{114}
+\indexentry{runif@\texttt  {runif}}{114}
+\indexentry{mean@\texttt  {mean}}{114}
+\indexentry{median@\texttt  {median}}{114}
+\indexentry{mean@\texttt  {mean}}{114}
+\indexentry{range@\texttt  {range}}{114}
+\indexentry{function@\texttt  {function}}{115}
+\indexentry{sapply@\texttt  {sapply}}{115}
+\indexentry{list@\texttt  {list}}{115}
+\indexentry{rowMeans@\texttt  {rowMeans}}{115}
+\indexentry{apply@\texttt  {apply}}{115}
+\indexentry{var@\texttt  {var}}{115}
+\indexentry{replicate@\texttt  {replicate}}{115}
+\indexentry{function@\texttt  {function}}{116}
+\indexentry{runif@\texttt  {runif}}{116}
+\indexentry{mean@\texttt  {mean}}{116}
+\indexentry{median@\texttt  {median}}{116}
+\indexentry{mean@\texttt  {mean}}{116}
+\indexentry{range@\texttt  {range}}{116}
+\indexentry{function@\texttt  {function}}{116}
+\indexentry{replicate@\texttt  {replicate}}{116}
+\indexentry{list@\texttt  {list}}{116}
+\indexentry{rowMeans@\texttt  {rowMeans}}{116}
+\indexentry{apply@\texttt  {apply}}{116}
+\indexentry{var@\texttt  {var}}{116}
+\indexentry{replicate@\texttt  {replicate}}{116}
+\indexentry{system.time@\texttt  {system.time}}{117}
+\indexentry{sys.time@\texttt  {sys.time}}{117}
+\indexentry{system.time@\texttt  {system.time}}{117}
+\indexentry{source@\texttt  {source}}{117}
+\indexentry{rownames@\texttt  {rownames}}{118}
+\indexentry{row.names@\texttt  {row.names}}{118}
+\indexentry{dimnames@\texttt  {dimnames}}{118}
+\indexentry{rowVars@\texttt  {rowVars}}{118}
+\indexentry{colVars@\texttt  {colVars}}{118}
+\indexentry{simulation!planification|)}{119}
+\indexentry{sapply@\texttt  {sapply}}{134}
+\indexentry{[[@\texttt  {[[}}{136}
+\indexentry{ecdf@\texttt  {ecdf}}{137}
+\indexentry{ecdf@\texttt  {ecdf}}{137}

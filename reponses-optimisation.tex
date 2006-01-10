@@ -1,0 +1,86 @@
+\section*{Chapitre \ref{optimisation}}
+\begin{reponse}{7.1}
+    \begin{enumerate}
+\item
+\begin{Schunk}
+\begin{Sinput}
+> f <- function(x) x^3 - 2 * x^2 - 5
+> uniroot(f, lower = 1, upper = 4)
+\end{Sinput}
+\end{Schunk}
+\item
+\begin{Schunk}
+\begin{Sinput}
+> f <- function(x) x^3 + 3 * x^2 - 1
+> uniroot(f, lower = -4, upper = -1)
+\end{Sinput}
+\end{Schunk}
+\item
+\begin{Schunk}
+\begin{Sinput}
+> f <- function(x) x - 2^(-x)
+> uniroot(f, lower = 0, upper = 1)
+\end{Sinput}
+\end{Schunk}
+\item
+\begin{Schunk}
+\begin{Sinput}
+> f <- function(x) exp(x) + 2^(-x) + 2 * cos(x) -
++     6
+> uniroot(f, lower = 1, upper = 2)
+\end{Sinput}
+\end{Schunk}
+\item
+\begin{Schunk}
+\begin{Sinput}
+> f <- function(x) exp(x) - x^2 + 3 * x -
++     2
+> uniroot(f, lower = 0, upper = 1)
+\end{Sinput}
+\end{Schunk}
+    \end{enumerate}
+  
+\end{reponse}
+\begin{reponse}{7.2}
+\begin{Schunk}
+\begin{Sinput}
+> X <- c(2061, 1511, 1806, 1353, 1600)
+> w <- c(100155, 19895, 13735, 4152, 36110)
+> g <- function(a, X, w, s2) {
++     z <- 1/(1 + s2/(a * w))
++     Xz <- sum(z * X)/sum(z)
++     sum(z * (X - Xz)^2)/(length(X) - 1)
++ }
+> uniroot(function(x) g(x, X, w, 1.4e+08) -
++     x, c(50000, 80000))
+\end{Sinput}
+\end{Schunk}
+  
+\end{reponse}
+\begin{reponse}{7.3}
+\begin{Schunk}
+\begin{Sinput}
+> dpareto <- function(x, alpha, lambda) {
++     (alpha * lambda^alpha)/(x + lambda)^(alpha +
++         1)
++ }
+> f <- function(par, x) -sum(log(dpareto(x,
++     par[1], par[2])))
+> optim(c(1, 1000), f, x = x)
+\end{Sinput}
+\end{Schunk}
+    ou
+\begin{Schunk}
+\begin{Sinput}
+> dpareto <- function(x, logAlpha, logLambda) {
++     alpha <- exp(logAlpha)
++     lambda <- exp(logLambda)
++     (alpha * lambda^alpha)/(x + lambda)^(alpha +
++         1)
++ }
+> optim(c(log(2), log(1000)), f, x = x)
+> exp(optim(c(log(2), log(1000)), f, x = x)$par)
+\end{Sinput}
+\end{Schunk}
+  
+\end{reponse}
