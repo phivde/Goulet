@@ -1,0 +1,99 @@
+\documentclass[landscape]{vgslides}
+  \usepackage{vgmath,actu,amsmath,amsthm,url}
+  \usepackage{palatino,mathpazo}
+  \usepackage{textcomp,fourier-orns,mathabx}
+  \usepackage{Sweave-sans-ae}
+  \usepackage{threeparttable,paralist,expdlist}
+  \usepackage{xr}
+
+  \externaldocument{../introduction_programmation_S}
+
+  %%% Utilisation des numéros de chapitres
+  \newcounter{chapter}
+  \makeatletter
+  \renewcommand\thesection{\thechapter.\@arabic\c@section}
+  \renewcommand\thesubsection{\thesection.\@arabic\c@subsection}
+  \renewcommand\thesubsubsection{\thesubsection .\@arabic\c@subsubsection}
+  \makeatother
+
+  %%% Désactivation de certaines commandes
+  \newcommand{\R}{}
+  \newcommand{\Splus}{}
+  
+  %%% Styles pour les environnements d'exemples et al.
+  \theoremstyle{plain}
+  \newtheorem{ex}{Exemple}[chapter]
+  \theoremstyle{remark}
+  \newtheorem*{rem}{Remarque}
+  \theoremstyle{definition}
+  \newtheorem*{astuce}{Astuce}
+  \newenvironment{sol}{\begin{proof}[Solution]}{\end{proof}}
+
+  %%% Environnement pour les listes de commandes
+  \newenvironment{ttscript}[1]{%
+    \begin{list}{}{%
+        \setlength{\labelsep}{1.5ex}
+        \settowidth{\labelwidth}{\code{#1}}
+        \setlength{\leftmargin}{\labelwidth}
+        \addtolength{\leftmargin}{\labelsep}
+        \setlength{\parsep}{0.5ex plus0.2ex minus0.2ex}
+        \setlength{\itemsep}{0.3ex}
+        \renewcommand{\makelabel}[1]{##1\hfill}}}
+    {\end{list}}
+
+  %%% Environnement pour les listes de structures de contrôle
+  \newenvironment{struclist}{%
+    \begin{description}[\breaklabel\setlabelstyle{\mdseries\ttfamily}%
+      \setleftmargin{\parindent}]}
+    {\end{description}}
+
+  %%% Styles pour les noms de fonctions, code, etc.
+  \newcommand{\code}[1]{\texttt{#1}}
+  \newcommand{\attribut}[1]{\code{#1}}
+  \newcommand{\Attribut}[1]{\code{#1}}
+  \newcommand{\argument}[1]{\code{#1}}
+  \newcommand{\Argument}[1]{\code{#1}}
+  \newcommand{\classe}[1]{\code{#1}}
+  \newcommand{\Classe}[1]{\code{#1}}
+  \newcommand{\fonction}[1]{\code{#1}}
+  \newcommand{\Fonction}[1]{\code{#1}}
+  \newcommand{\mode}[1]{\code{#1}}
+  \newcommand{\Mode}[1]{\code{#1}}
+  \newcommand{\objet}[1]{\code{#1}}
+  \newcommand{\Objet}[1]{\code{#1}}
+  \newcommand{\emacs}[1]{\code{#1}}
+  \newcommand{\ess}[1]{\code{#1}}
+  \newcommand{\Index}[1]{}
+  \newcommand{\indexargument}[1]{}
+  \newcommand{\Indexargument}[1]{}
+  \newcommand{\indexattribut}[1]{}
+  \newcommand{\Indexattribut}[1]{}
+  \newcommand{\indexclasse}[1]{}
+  \newcommand{\Indexclasse}[1]{}
+  \newcommand{\indexfonction}[1]{}
+  \newcommand{\Indexfonction}[1]{}
+  \newcommand{\indexmode}[1]{}
+  \newcommand{\Indexmode}[1]{}
+  \newcommand{\indexobjet}[1]{}
+  \newcommand{\Indexobjet}[1]{} 
+  \newcommand{\indexemacs}[1]{}
+  \newcommand{\indexess}[1]{}
+
+\begin{document}
+
+\renewcommand{\FrenchLabelItem}{\small$\sqbullet$}
+\renewcommand{\labelitemii}{\textendash}
+
+\include{presentation_slides}
+%\include{bases_slides}
+%\include{operateurs_slides}
+%\include{exemples_slides}
+%\include{fonctions_slides}
+%\include{avance_slides}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
