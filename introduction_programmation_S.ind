@@ -1,0 +1,524 @@
+\begin{theindex}
+
+  \item \texttt  {!}, \textbf{24}
+  \item \texttt  {!=}, \textbf{24}
+  \item \texttt  {*}, \textbf{24}
+  \item \texttt  {**}, \textbf{24}
+  \item \texttt  {+}, \textbf{24}, 81
+  \item \texttt  {-}, \textbf{24}, 81
+  \item \texttt  {->}, \textbf{7}
+  \item \texttt  {...}, \textbf{57}, 112
+  \item \texttt  {/}, \textbf{24}
+  \item \texttt  {<}, \textbf{24}
+  \item \texttt  {<-}, \textbf{7}
+  \item \verb=<<-=, \textbf{46}
+  \item \texttt  {<=}, \textbf{24}
+  \item \texttt  {=}, 7
+  \item \texttt  {==}, \textbf{24}
+  \item \texttt  {>}, \textbf{24}
+  \item \texttt  {>=}, \textbf{24}
+  \item \texttt  {[[}, 136
+  \item \texttt  {[[\ ]]}, 13
+  \item \texttt  {[\ ]}, 11, \textbf{14}
+  \item \texttt  {\%*\%}, \textbf{24}, 54
+  \item \texttt  {\%/\%}, \textbf{24}
+  \item \texttt  {\%\%}, \textbf{24}
+  \item \texttt  {\%in\%}, \textbf{26}, 32
+  \item \texttt  {\%o\%}, \textbf{28}, 33
+  \item \texttt  {\&}, \textbf{24}
+  \item \texttt  {\^}, \textbf{24}
+  \item \texttt  {\_}, 8
+
+  \indexspace
+
+  \item \texttt  {abline}, 80, 84, 87
+  \item \texttt  {abs}, 47, 49--51
+  \item \texttt  {acf}, 92, \textbf{93}, 97
+  \item \texttt  {add1}, 80
+  \item \texttt  {addterm}, 80
+  \item affectation, 7
+  \item \texttt  {anova}, 80, 83, 84, 87
+  \item \texttt  {apply}, 29, 33, 35, 57, \textbf{57}, 58, 62, 63, 
+		113--116
+  \item \texttt  {ar}, 92, \textbf{93}, 97, 98, 100
+  \item \texttt  {Arima} (classe), 91, 95
+  \item \texttt  {arima}, 91, 92, \textbf{93}, 94, 95, 97, 100
+  \item \texttt  {arima.forecast}, 92, 95
+  \item \texttt  {arima.mle}, 92, 93
+  \item \texttt  {arima.sim}, 92, 93, 95, \textbf{95}, 98
+  \item \texttt  {ARMAacf}, 92, \textbf{94}
+  \item \texttt  {ARMAtoMA}, 92, \textbf{94}
+  \item \texttt  {array}, \textbf{12}, 16, 18, 62
+  \item arrondi, 26
+  \item \texttt  {as.data.frame}, \textbf{14}, 80
+  \item \texttt  {attach}, \textbf{14}, 20, 80, 86, 88
+  \item attribut, \textbf{10}
+  \item autocorr\'elation, 93, 94
+    \subitem partielle, 93, 94
+  \item autocovariance, 93
+
+  \indexspace
+
+  \item biblioth\`eque, 25
+  \item boucle, 29, 42, 112
+  \item \texttt  {break}, \textbf{29}, 35, 47, 49--51
+  \item \texttt  {by}, 5, 31
+  \item \texttt  {byrow}, 25
+
+  \indexspace
+
+  \item \texttt  {c}, \textbf{11}
+  \item \texttt  {cat}, 65
+  \item \texttt  {cbind}, \textbf{13}, 14, 18, 33, 80, 88
+  \item \texttt  {ceiling}, \textbf{26}, 32
+  \item \texttt  {character}, \textbf{11}, 17
+  \item \texttt  {character} (mode), \textbf{9}, 11, 14
+  \item \texttt  {choose}, 38
+  \item \texttt  {ci.fit}, 84
+  \item \texttt  {class}, 16--19, 61, 65, 66, 85, 86, 96
+  \item \texttt  {class} (attribut), \textbf{10}
+  \item \texttt  {coef}, 80, 83
+  \item \texttt  {coefficients}, 80, 83
+  \item \texttt  {col}, 88, 89, 98
+  \item \texttt  {colMeans}, \textbf{27}, 35, 58, 62
+  \item \texttt  {colnames}, 14, 80, 86
+  \item \texttt  {colSums}, \textbf{27}, 33, 35, 41, 58
+  \item \texttt  {colVars}, \textbf{27}, 118
+  \item \texttt  {complex} (mode), \textbf{9}, 14
+  \item \texttt  {conf.level}, 85
+  \item \texttt  {confint}, 80, \textbf{83}
+  \item corr\'elogramme, 93, 94
+  \item \texttt  {cts}, 92, 95
+  \item \texttt  {cummax}, \textbf{27}, 32
+  \item \texttt  {cummin}, \textbf{27}, 32
+  \item \texttt  {cumprod}, \textbf{27}, 32, 38
+  \item \texttt  {cumsum}, \textbf{27}, 32
+  \item \texttt  {cycle}, 92
+
+  \indexspace
+
+  \item \texttt  {data}, 25, 30, 77, 85--87
+  \item data frame, \textbf{13}, 73, 79
+  \item \texttt  {data.frame}, \textbf{14}, 80
+  \item \texttt  {data.frame} (classe), 13
+  \item \texttt  {dbeta}, 77
+  \item \texttt  {dbinom}, 39
+  \item \texttt  {density}, 5
+  \item \texttt  {detach}, \textbf{14}, 20, 80, 86
+  \item \texttt  {deviance}, 80, 83, 86
+  \item \texttt  {df.residual}, 80, 83
+  \item \texttt  {dgamma}, 76, 77
+  \item \texttt  {diag}, \textbf{27}, 33, 65
+  \item \texttt  {diff}, \textbf{27}, 32, 92
+  \item diff\'erences, 27
+  \item \texttt  {dim}, 16--19, 32, 62
+  \item \texttt  {dim} (attribut), \textbf{10}, 12
+  \item dimension, 10, 21
+  \item \texttt  {dimnames}, 16, 25, 118
+  \item \texttt  {dimnames} (attribut), \textbf{10}
+  \item distribution
+    \subitem b\^eta, 108
+    \subitem binomiale, 38, 108
+    \subitem binomiale n\'egative, 108
+    \subitem Cauchy, 108
+    \subitem exponentielle, 108
+    \subitem F, 108
+    \subitem gamma, 40, 54, 108
+    \subitem g\'eom\'etrique, 108
+    \subitem hyperg\'eom\'etrique, 108
+    \subitem khi carr\'e, 108
+    \subitem log-normale, 108, 109
+    \subitem logistique, 108
+    \subitem m\'elange discret, 109
+    \subitem m\'elange Poisson/gamma, 109
+    \subitem normale, 53, 54, 108
+    \subitem Pareto, 54, 67
+    \subitem Poisson, 38, 42, 108
+    \subitem t, 108
+    \subitem uniforme, 108
+    \subitem Weibull, 108
+    \subitem Wilcoxon, 108
+  \item \texttt  {dnorm}, 53
+  \item \texttt  {dpois}, 39
+  \item \texttt  {drop1}, 80
+  \item \texttt  {dropterm}, 80
+
+  \indexspace
+
+  \item \'ecart type, 27
+  \item \texttt  {ecdf}, 137
+  \item \texttt  {else}, \textbf{28}, 33, 34, 50, 65
+  \item Emacs, 2, 46, 48, 49, 101--103
+    \subitem \texttt  {C-\_}, 103
+    \subitem \texttt  {C-g}, 103
+    \subitem \texttt  {C-r}, 103
+    \subitem \texttt  {C-s}, 103
+    \subitem \texttt  {C-SPC}, 103
+    \subitem \texttt  {C-w}, 103
+    \subitem \texttt  {C-x 0}, 103
+    \subitem \texttt  {C-x 1}, 103
+    \subitem \texttt  {C-x 2}, 103
+    \subitem \texttt  {C-x b}, 103
+    \subitem \texttt  {C-x C-c}, 102
+    \subitem \texttt  {C-x C-f}, 102
+    \subitem \texttt  {C-x C-s}, 102
+    \subitem \texttt  {C-x C-w}, 102
+    \subitem \texttt  {C-x k}, 102
+    \subitem \texttt  {C-x o}, 103
+    \subitem \texttt  {C-x u}, 103
+    \subitem \texttt  {C-y}, 103
+    \subitem configuration, 101
+    \subitem et S-Plus, 105--106
+    \subitem \texttt  {M-\%}, 103
+    \subitem \texttt  {M-w}, 103
+    \subitem \texttt  {M-y}, 103
+    \subitem nouveau fichier, 102
+    \subitem rechercher et remplacer, 103
+    \subitem s\'election, 103
+    \subitem sauvegarder, 102
+    \subitem sauvegarder sous, 102
+  \item \texttt  {end}, 92, 96
+  \item ESS, 2, 46, 48, 103--104
+    \subitem \texttt  {C-c C-e}, 104
+    \subitem \texttt  {C-c C-f}, 46, 104
+    \subitem \texttt  {C-c C-l}, 104
+    \subitem \texttt  {C-c C-n}, 4, 48, 104
+    \subitem \texttt  {C-c C-o}, 104
+    \subitem \texttt  {C-c C-q}, 3, 104
+    \subitem \texttt  {C-c C-r}, 104
+    \subitem \texttt  {C-c C-s}, 104
+    \subitem \texttt  {C-c C-v}, 5, 104
+    \subitem \texttt  {C-x C-f}, 4
+    \subitem \texttt  {M-h}, 104
+  \item \'etiquette, 10, 21
+  \item \texttt  {eval}, 51
+  \item \texttt  {exists}, 20
+  \item \texttt  {exp}, 39, 40
+  \item expression, 7
+  \item \texttt  {expression}, 50
+  \item extraction, \seealso{indi\c cage}{26}
+    \subitem derni\`eres valeurs, 26
+    \subitem \'el\'ements diff\'erents, 26
+    \subitem premi\`eres valeurs, 26
+
+  \indexspace
+
+  \item \code{F}, \see{\code{FALSE}}{8}
+  \item \texttt  {factorial}, 35, \textbf{39}
+  \item \texttt  {FALSE}, 8
+  \item \texttt  {filter}, 92
+  \item \texttt  {fitdistr}, 76
+  \item \texttt  {fitted}, 80, 83, 84
+  \item \texttt  {floor}, \textbf{26}, 32
+  \item fonction
+    \subitem anonyme, 46
+    \subitem appel, 24
+    \subitem d\'ebogage, 48
+    \subitem d\'efinie par l'usager, 45
+    \subitem g\'en\'erique, 61
+    \subitem maximum local, 73
+    \subitem minimum, 74, 75
+    \subitem minimum local, 73
+    \subitem optimisation, 75
+    \subitem racine, 72
+    \subitem r\'esultat, 45
+  \item \texttt  {for}, 29, \textbf{29}, 30, 33, 34, 51, 60, 112--114
+  \item \texttt  {formula} (classe), 82
+  \item formule, 73, \textbf{81}
+  \item \texttt  {frequency}, 92, 96
+  \item \texttt  {function}, \textbf{45}, 47, 49--52, 63--65, 76, 77, 
+		114--116
+  \item \texttt  {function} (mode), \textbf{9}
+
+  \indexspace
+
+  \item \texttt  {gamma}, 35, \textbf{39}
+
+  \indexspace
+
+  \item \texttt  {head}, \textbf{26}
+  \item \texttt  {hist}, 64, 67
+
+  \indexspace
+
+  \item \texttt  {if}, \textbf{28}, 29, 30, 33, 34, 47, 49--51, 65
+  \item \texttt  {ifelse}, \textbf{28}
+  \item \texttt  {Im}, 76
+  \item indi\c cage
+    \subitem liste, \textbf{13}, 21
+    \subitem matrice, \textbf{14}, 21
+    \subitem vecteur, \textbf{14}, 21
+  \item \texttt  {interval}, 85
+  \item \texttt  {is.na}, \textbf{10}, 20, 34
+  \item \texttt  {is.null}, \textbf{11}
+  \item \texttt  {its}, 92
+
+  \indexspace
+
+  \item \texttt  {lapply}, 29, 57, \textbf{58}, 59, 60, 63, 64, 112
+  \item \texttt  {length}, 5, \textbf{9}, 15--19, 31, 32
+  \item \texttt  {level}, 85
+  \item \texttt  {lfactorial}, 35
+  \item \texttt  {lgamma}, 35
+  \item \texttt  {library}, 77
+  \item \texttt  {list}, \textbf{13}, 16, 18, 19, 63, 64, 77, 98, 
+		114--116
+  \item \texttt  {list} (mode), \textbf{9}, 13
+  \item liste, 13
+  \item Ljung--Box, 94
+  \item \texttt  {lm}, 80, \textbf{82}, 83, 86, 87
+  \item \texttt  {lm} (classe), 82--84
+  \item \texttt  {log}, 77
+  \item \texttt  {logical}, \textbf{11}, 17
+  \item \texttt  {logical} (mode), \textbf{9}, 10, 11, 14
+  \item longueur, \textbf{9}, 21
+  \item \texttt  {lower}, 76, 77
+  \item \texttt  {ls}, 6
+
+  \indexspace
+
+  \item \texttt  {mapply}, \textbf{60}, 64
+  \item \texttt  {match}, \textbf{26}, 32
+  \item \texttt  {matlines}, 80, 85, 88
+  \item \texttt  {matplot}, 80, 85, 88
+  \item matrice, 12, 36, 53, 54, 57
+    \subitem diagonale, 27
+    \subitem identit\'e, 27
+    \subitem inverse, 27
+    \subitem moyennes par colonne, 27
+    \subitem moyennes par ligne, 27
+    \subitem somme par colonne, 27
+    \subitem sommes par ligne, 27
+    \subitem transpos\'ee, 27
+    \subitem variance par colonne, 27
+    \subitem variance par ligne, 27
+  \item \texttt  {matrix}, 6, \textbf{12}, 16--19, 30, 53, 62, 63, 65, 
+		113, 114
+  \item \texttt  {max}, 5, \textbf{27}, 32, 63
+  \item maximum
+    \subitem cumulatif, 27
+    \subitem d'un vecteur, 27
+    \subitem local, 73
+    \subitem parall\`ele, 27
+    \subitem position     dans un vecteur, 26
+  \item \texttt  {mean}, 10, 17, \textbf{27}, 32, 63, 64, 86, 113, 114, 
+		116
+  \item \texttt  {median}, \textbf{27}, 32, 113, 114, 116
+  \item m\'ediane, 27
+  \item \texttt  {methods}, \textbf{61}, 65
+  \item \texttt  {mfcol}, 99
+  \item \texttt  {mfrow}, 99
+  \item \texttt  {min}, 5, \textbf{27}, 32
+  \item minimum
+    \subitem cumulatif, 27
+    \subitem d'un     vecteur, 27
+    \subitem d'une somme, 73
+    \subitem fonction non   lin\'eaire, 74, 75
+    \subitem local, 73
+    \subitem parall\`ele, 27
+    \subitem position     dans un vecteur, 26
+  \item mode, \textbf{9}, 21
+  \item \texttt  {mode}, \textbf{9}, 17--19, 65, 66, 85, 96
+  \item \texttt  {model}, 95, 98
+  \item moyenne
+    \subitem arithm\'etique, 27
+    \subitem harmonique, 42
+    \subitem pond\'er\'ee, 42, 66
+    \subitem tronqu\'ee, 27
+  \item \texttt  {ms}, \textbf{73}, 77
+
+  \indexspace
+
+  \item \texttt  {NA}, \textbf{10}
+  \item \texttt  {na.rm}, \textbf{10}, 17, 63
+  \item \texttt  {names}, 14, 16, 17, 20, 80, 86
+  \item \texttt  {names} (attribut), \textbf{10}
+  \item \texttt  {ncol}, 6, 16, 17, 25, \textbf{27}, 30, 33, 62, 
+		113, 114
+  \item \texttt  {newdata}, 84
+  \item \texttt  {next}, \textbf{29}
+  \item \texttt  {nlm}, \textbf{75}, 77
+  \item \texttt  {nlmin}, \textbf{74}, 75, 77
+  \item \texttt  {nlminb}, \textbf{74}
+  \item noms d'objets
+    \subitem conventions, 8
+    \subitem r\'eserv\'es, 8
+  \item \texttt  {nrow}, 6, 16--18, 25, \textbf{27}, 30, 33, 62, 
+		113, 114
+  \item \texttt  {NULL}, \textbf{10}
+  \item \texttt  {NULL} (mode), \textbf{10}
+  \item \texttt  {numeric}, \textbf{11}, 15, 17, 33, 34, 51
+  \item \texttt  {numeric} (mode), \textbf{9}, 11, 14
+
+  \indexspace
+
+  \item \texttt  {optim}, \textbf{75}, 77
+  \item \texttt  {optimize}, \textbf{73}, 77
+  \item \texttt  {order}, \textbf{26}, 31, 88, 94, 97, 98
+  \item \texttt  {outer}, \textbf{28}, 33, 40, 46, 47
+
+  \indexspace
+
+  \item \texttt  {pacf}, 92, \textbf{93}
+  \item package, 26
+  \item \texttt{MASS}, 71, 75, 76, 80, 91, 93--95, 99, 100
+  \item \texttt  {par}, 99
+  \item \texttt  {paste}, 67
+  \item \texttt  {pgamma}, 40, 41
+  \item \texttt  {pi.fit}, 84
+  \item \texttt  {plot}, 5, 16, 61, 80, 81, 84, 86, 88, 92, 93, 96, 97, 
+		109
+  \item \texttt  {plot.lm}, 84
+  \item \texttt  {pmax}, \textbf{27}, 32, 33
+  \item \texttt  {pmin}, \textbf{27}, 32
+  \item \texttt  {pnorm}, 53, 54
+  \item point fixe, 41, 46
+  \item \texttt  {polyroot}, \textbf{72}, 76
+  \item portmanteau, 94
+  \item \texttt  {predict}, 80, 84, 85, 87, 88, 91, 92, 95, 98
+  \item \texttt  {print}, 30, 33, 34, 48, 50, 61, 62, 65
+  \item processus
+    \subitem ARIMA, 93
+    \subitem ARMA, 93
+      \subsubitem inversion, 94
+      \subsubitem param\'etrisation, 93
+    \subitem SARIMA, 94
+  \item \texttt  {prod}, \textbf{27}, 28, 32, 33, 63
+  \item produit, 27
+    \subitem cumulatif, 27
+    \subitem ext\'erieur, 28
+
+  \indexspace
+
+  \item \texttt  {q()}, 3
+  \item quantile, 27
+  \item \texttt  {quantile}, \textbf{27}, 32
+
+  \indexspace
+
+  \item racine
+    \subitem d'un polyn\^ome, 72
+    \subitem d'une fonction, 72
+  \item \code{.Random.seed}, 107
+  \item rang, 26
+  \item \texttt  {range}, \textbf{27}, 32, 88, 113, 114, 116
+  \item \texttt  {rank}, \textbf{26}, 31
+  \item \texttt  {rbind}, \textbf{12}, 14, 18, 80
+  \item \texttt  {Re}, 76
+  \item \texttt  {read.table}, \textbf{79}, 80, 89, 91
+  \item \texttt  {Recall}, 53
+  \item r\'egression, 79--85
+    \subitem diagnostics, 84
+    \subitem formules, 81
+    \subitem importation de donn\'ees, 79
+    \subitem mod\'elisation, 81
+    \subitem pr\'evision, 84
+  \item renverser un vecteur, 26
+  \item \texttt  {rep}, 5, \textbf{26}, 31, 33, 35, 64, 88, 89
+  \item \texttt  {repeat}, \textbf{29}, 34, 41, 47, 49, 50
+  \item r\'ep\'etition de valeurs, 26
+  \item \texttt  {replace}, 20, 32
+  \item \texttt  {replicate}, \textbf{61}, 64, 115, 116
+  \item \texttt  {residuals}, 80, 83, 86
+  \item \texttt  {return}, \textbf{45}
+  \item \texttt  {rev}, \textbf{26}, 31, 32, 38
+  \item \texttt  {rgamma}, 77
+  \item \texttt  {rm}, 6
+  \item \texttt  {rnorm}, 5, 64
+  \item \texttt  {round}, 5, 6, \textbf{26}, 32
+  \item \texttt  {row.names}, 14, 80, 86, 118
+  \item \texttt  {rowMeans}, \textbf{27}, 35, 58, 113--116
+  \item \texttt  {rownames}, 14, 80, 86, 113, 114, 118
+  \item \texttt  {rowSums}, \textbf{27}, 33, 35, 58, 62
+  \item \texttt  {rowVars}, \textbf{27}, 118
+  \item \texttt  {rts}, 92, 95
+  \item \texttt  {runif}, 5, \textbf{107}, 113, 114, 116
+
+  \indexspace
+
+  \item \texttt  {sample}, 16, 20, 32, 35, 62--64, \textbf{109}
+  \item \texttt  {sapply}, 29, 57, \textbf{58}, 59--61, 63, 64, 112, 
+		115, 134
+  \item \texttt  {save.image()}, 4
+  \item \texttt  {scan}, \textbf{91}, 96
+  \item \texttt  {sd}, \textbf{27}, 32, 64, 98
+  \item \texttt  {seasonal}, 94, 97
+  \item \texttt  {seq}, 5, 19, \textbf{26}, 31, 35, 63
+  \item s\'eries chronologiques, \seealso{processus}{91}, 91--95
+    \subitem cr\'eation, 92
+    \subitem diagnostics, 94
+    \subitem identification, 93
+    \subitem importation de donn\'ees, 91
+    \subitem mod\'elisation, 93
+    \subitem param\'etrisation, 93
+    \subitem pr\'evision, 95
+    \subitem simulation, 95
+  \item \texttt  {set.seed}, \textbf{107}
+  \item \texttt  {signalSeries} (classe), 92
+  \item simulation
+    \subitem nombres uniformes, 107
+    \subitem planification, 111--119
+    \subitem variables al\'eatoires, 107
+  \item \texttt  {solve}, 6, \textbf{27}, 32, 33
+  \item somme, 27
+    \subitem cumulative, 27
+  \item \texttt  {sort}, \textbf{26}, 31, 88
+  \item \texttt  {source}, 117
+  \item \texttt  {start}, 47, 49--51, 77, 92, 96
+  \item \texttt  {step}, 80
+  \item \texttt  {stepAIC}, 80
+  \item \texttt  {stl}, 92
+  \item style, 48
+  \item suite de nombres, 26
+  \item \texttt  {sum}, 10, \textbf{27}, 32, 33, 62, 63, 77, 86
+  \item \texttt  {summary}, \textbf{27}, 32, 61, 80, 83, 84, 86, 89
+  \item \texttt  {switch}, \textbf{28}
+  \item \texttt  {sys.time}, 52, 117
+  \item \texttt  {system.time}, 52, 117
+
+  \indexspace
+
+  \item \code{T}, \see{\code{TRUE}}{8}
+  \item \texttt  {t}, 6, \textbf{27}, 32
+  \item \texttt  {table}, 109
+  \item tableau, 12, 36, 57
+  \item \texttt  {tail}, \textbf{26}
+  \item \texttt  {time}, 92
+  \item \texttt  {timeSeries} (classe), 92
+  \item tri, 26
+  \item \texttt  {TRUE}, 8
+  \item \texttt  {trunc}, \textbf{27}, 32
+  \item \texttt  {ts}, 92, \textbf{92}, 96
+  \item \texttt  {ts} (classe), 95
+  \item \texttt  {ts.plot}, 92, 93, 96--98, 100
+  \item \texttt  {tsdiag}, 92, 94, \textbf{94}, 100
+
+  \indexspace
+
+  \item \texttt  {unique}, \textbf{26}, 31
+  \item \texttt  {uniroot}, \textbf{72}, 76
+  \item \texttt  {unlist}, \textbf{13}, 19, 63
+  \item \texttt  {update}, 80, 84, 87
+  \item \texttt  {upper}, 76, 77
+
+  \indexspace
+
+  \item valeur pr\'esente, 37, 42, 43
+  \item \texttt  {var}, \textbf{27}, 32, 52, 113--116
+  \item variable
+    \subitem globale, 46
+    \subitem locale, 46
+  \item variance, 27
+  \item vecteur, 11, 23
+  \item vide, \see{\code{NULL}}{10}
+  \item vraisemblance, 73, 76
+
+  \indexspace
+
+  \item \texttt  {which}, \textbf{26}, 31
+  \item \texttt  {which.max}, \textbf{26}, 31
+  \item \texttt  {which.min}, \textbf{26}, 31
+  \item \texttt  {while}, \textbf{29}, 34, 52
+  \item \texttt  {window}, 92, \textbf{92}, 96
+
+\end{theindex}
