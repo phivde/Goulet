@@ -1,17 +1,23 @@
-\documentclass[landscape]{vgslides}
+\documentclass{beamer}
+  \usepackage[T1]{fontenc}
+  \usepackage[latin1]{inputenc}
+  \usepackage[francais]{babel}
+  \usepackage{icomma}
   \usepackage{vgmath,actu,amsmath,amsthm,url}
   \usepackage{palatino,mathpazo}
   \usepackage{textcomp,fourier-orns,mathabx}
   \usepackage{Sweave-sans-ae}
-  \usepackage{threeparttable,paralist,expdlist}
+  \usepackage{threeparttable,expdlist}
 
-  %%% Utilisation des numéros de chapitres
-  \newcounter{chapter}
-  \makeatletter
-  \renewcommand\thesection{\thechapter.\@arabic\c@section}
-  \renewcommand\thesubsection{\thesection.\@arabic\c@subsection}
-  \renewcommand\thesubsubsection{\thesubsection .\@arabic\c@subsubsection}
-  \makeatother
+  %%% Paramètres de beamer
+  \usetheme{Rochester}
+  \setbeamercovered{transparent}
+
+  %%% Titre
+  \title{Introduction à la programmation en S}
+  \author{Vincent Goulet}
+  \institute{École d'actuariat \\ Université Laval}
+  \date{}
 
   %%% Désactivation de certaines commandes
   \newcommand{\R}{}
@@ -33,13 +39,14 @@
   \newcommand{\indexess}[1]{}
   
   %%% Styles pour les environnements d'exemples et al.
-  \theoremstyle{plain}
-  \newtheorem{ex}{Exemple}[chapter]
-  \theoremstyle{remark}
-  \newtheorem*{rem}{Remarque}
-  \theoremstyle{definition}
-  \newtheorem*{astuce}{Astuce}
-  \newenvironment{sol}{\begin{proof}[Solution]}{\end{proof}}
+%   \theoremstyle{plain}
+% %  \newtheorem{ex}{Exemple}[chapter]
+%   \theoremstyle{remark}
+%   \newtheorem*{rem}{Remarque}
+%   \theoremstyle{definition}
+%   \newtheorem*{astuce}{Astuce}
+%   \newenvironment{ex}{\begin{example}}{\end{example}}
+%   \newenvironment{sol}{\begin{proof}[Solution]}{\end{proof}}
 
   %%% Environnement pour les listes de commandes
   \newenvironment{ttscript}[1]{%
@@ -69,7 +76,7 @@
   \newcommand{\Classe}[1]{\code{#1}}
   \newcommand{\fonction}[1]{\code{#1}}
   \newcommand{\Fonction}[1]{\code{#1}}
-  \newcommand{\mode}[1]{\code{#1}}
+  \renewcommand{\mode}[1]{\code{#1}}
   \newcommand{\Mode}[1]{\code{#1}}
   \newcommand{\objet}[1]{\code{#1}}
   \newcommand{\Objet}[1]{\code{#1}}
@@ -78,17 +85,21 @@
 
 \begin{document}
 
-\renewcommand{\FrenchLabelItem}{\small$\sqbullet$}
-\renewcommand{\labelitemii}{\textendash}
+\begin{frame}
+  \titlepage
+\end{frame}
 
+\lecture{Présentation}{cours 1}
 \include{presentation_slides}
+
 %\include{bases_slides}
 %\include{operateurs_slides}
 %\include{exemples_slides}
 %\include{fonctions_slides}
 %\include{avance_slides}
 
-\include{ess_slides}
+\lecture{Emacs et ESS}{lab 1}
+%\include{ess_slides}
 
 \end{document}
 
