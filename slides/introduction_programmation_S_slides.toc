@@ -1,15 +1,24 @@
 \beamer@endinputifotherversion {3.06pt}
 \select@language {french}
-\beamer@sectionintoc {1}{Commandes S}{4}{1}{1}
-\beamer@sectionintoc {2}{Conventions pour les noms d'objets}{10}{1}{2}
-\beamer@sectionintoc {3}{Les objets S}{22}{1}{3}
-\beamer@subsectionintoc {3}{1}{Modes et types de donn\'ees}{25}{1}{3}
-\beamer@subsectionintoc {3}{2}{Longueur}{26}{1}{3}
-\beamer@subsectionintoc {3}{3}{Attributs}{30}{1}{3}
-\beamer@subsectionintoc {3}{4}{L'objet sp\'ecial \texttt {NA}}{31}{1}{3}
-\beamer@subsectionintoc {3}{5}{L'objet sp\'ecial \texttt {NULL}}{36}{1}{3}
-\beamer@sectionintoc {4}{Vecteurs}{43}{1}{4}
-\beamer@sectionintoc {5}{Matrices et tableaux}{51}{1}{5}
-\beamer@sectionintoc {6}{Listes}{60}{1}{6}
-\beamer@sectionintoc {7}{Data frames}{67}{1}{7}
-\beamer@sectionintoc {8}{Indi\c cage}{74}{1}{8}
+\beamer@sectionintoc {1}{Le langage S}{4}{1}{1}
+\beamer@sectionintoc {2}{Les moteurs S}{7}{1}{2}
+\beamer@sectionintoc {3}{O\`u trouver de la documentation}{9}{1}{3}
+\beamer@sectionintoc {4}{Interfaces pour S-Plus et R}{11}{1}{4}
+\beamer@sectionintoc {5}{Installation de Emacs avec ESS}{18}{1}{5}
+\beamer@sectionintoc {6}{D\'emarrer et quitter S-Plus ou R}{20}{1}{6}
+\beamer@sectionintoc {7}{Strat\'egies de travail}{25}{1}{7}
+\beamer@sectionintoc {8}{Gestion des projets ou environnements de travail}{32}{1}{8}
+\beamer@sectionintoc {9}{Consulter l'aide en ligne}{38}{1}{9}
+\beamer@sectionintoc {1}{Commandes S}{43}{2}{10}
+\beamer@sectionintoc {2}{Conventions pour les noms d'objets}{49}{2}{11}
+\beamer@sectionintoc {3}{Les objets S}{61}{2}{12}
+\beamer@subsectionintoc {3}{1}{Modes et types de donn\'ees}{64}{2}{12}
+\beamer@subsectionintoc {3}{2}{Longueur}{65}{2}{12}
+\beamer@subsectionintoc {3}{3}{Attributs}{69}{2}{12}
+\beamer@subsectionintoc {3}{4}{L'objet sp\'ecial \texttt {NA}}{70}{2}{12}
+\beamer@subsectionintoc {3}{5}{L'objet sp\'ecial \texttt {NULL}}{75}{2}{12}
+\beamer@sectionintoc {4}{Vecteurs}{82}{2}{13}
+\beamer@sectionintoc {5}{Matrices et tableaux}{90}{2}{14}
+\beamer@sectionintoc {6}{Listes}{99}{2}{15}
+\beamer@sectionintoc {7}{Data frames}{106}{2}{16}
+\beamer@sectionintoc {8}{Indi\c cage}{113}{2}{17}
