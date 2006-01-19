@@ -1,0 +1,28 @@
+\frametitle {Indi^^e7age d'un vecteur}
+
+  \begin{itemize}[<+->]
+  \item Se fait avec \fonction{[\ ]}.
+  \item On peut extraire un ^^e9l^^e9ment d'un vecteur par
+    \begin{itemize}
+    \item sa position ou
+    \item son ^^e9tiquette, si elle existe (auquel cas cette approche est
+      beaucoup plus s^^fbre).
+    \end{itemize}
+  \item[]
+\begin{Schunk}
+\begin{Sinput}
+> v[3]
+\end{Sinput}
+\begin{Soutput}
+c
+5
+\end{Soutput}
+\begin{Sinput}
+> v["c"]
+\end{Sinput}
+\begin{Soutput}
+c
+5
+\end{Soutput}
+\end{Schunk}
+  \end{itemize}
