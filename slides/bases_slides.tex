@@ -1,5 +1,7 @@
 \part{BASES DU LANGAGE S}
 
+\setcounter{section}{0}
+
 \begin{frame}
   \partpage
 \end{frame}
@@ -8,6 +10,14 @@
   \frametitle{Sommaire}
   \tableofcontents
 \end{frame}
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Sommaire}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
 
 \section{Commandes S}
 
@@ -245,9 +255,8 @@ l'assignation (do_set) incorrect
 
 \subsection{Modes et types de données}
 
-
 \begin{frame}
-  \frametitle{Modes et types de données }
+  \frametitle{Modes et types de données}
 
   \begin{itemize}
   \item Le mode prescrit ce qu'un objet peut contenir.
@@ -271,9 +280,8 @@ l'assignation (do_set) incorrect
 
 \subsection{Longueur}
 
-
 \begin{frame}[fragile]
-  \frametitle{Longueur d'un objet}
+  \frametitle{Longueur}
   
   La longueur\Index{longueur} d'un objet est égale au nombre
   d'éléments qu'il contient.
@@ -325,7 +333,7 @@ l'assignation (do_set) incorrect
 \subsection{Attributs}
 
 \begin{frame}
-  \frametitle{Définition et liste des attributs}
+  \frametitle{Attributs}
   
   \begin{itemize}
   \item Éléments d'information additionnels liés à cet objet.
@@ -351,7 +359,7 @@ l'assignation (do_set) incorrect
 \subsection{L'objet spécial \code{NA}}
 
 \begin{frame}
-  \frametitle{Représentation des données manquantes}
+  \frametitle{L'objet spécial \code{NA}}
 
   \Objet{NA} est fréquemment utilisé pour représenter les données
   manquantes.
@@ -373,7 +381,7 @@ l'assignation (do_set) incorrect
 \subsection{L'objet spécial \code{NULL}}
 
 \begin{frame}
-  \frametitle{Représentation du vide}
+  \frametitle{L'objet spécial \code{NULL}}
 
   \Objet{NULL} représente «rien», ou le vide.
   \pause
@@ -444,6 +452,8 @@ a b c
     \item sa position ou
     \item son étiquette, si elle existe (auquel cas cette approche est
       beaucoup plus sûre).
+    \end{itemize}
+  \item[]
 \begin{Schunk}
 \begin{Sinput}
 > v[3]
@@ -460,26 +470,37 @@ c
 5 
 \end{Soutput}
 \end{Schunk}
-    \end{itemize}
   \end{itemize}
 \end{frame}
 
 \section{Matrices et tableaux}
 \label{bases:matrices}
 
-Une matrice\index{matrice} ou, de façon plus générale, un
-tableau\index{tableau} (\emph{array}) n'est rien d'autre qu'un vecteur
-doté d'un attribut \attribut{dim}. À l'interne, une matrice est donc
-stockée sous forme de vecteur.
+\begin{frame}
+  \frametitle{Une matrice est un vecteur?}
 
-\begin{itemize}
-\item La fonction de base pour créer des matrices est
-  \Fonction{matrix}.
-\item La fonction de base pour créer des tableaux est
-  \Fonction{array}.
-\item \alert{Important}: \warning les matrices et tableaux sont remplis
-  en faisant d'abord varier la première dimension, puis la seconde,
-  etc. Pour les matrices, cela revient à remplir par colonne.
+  Une matrice\index{matrice} ou, de façon plus générale, un
+  tableau\index{tableau} (\emph{array}) n'est rien d'autre qu'un
+  vecteur doté d'un attribut \attribut{dim}.
+  \pause
+
+  \begin{itemize}[<+->]
+  \item À l'interne, une matrice est donc stockée sous forme de
+    vecteur.
+  \item La fonction de base pour créer des matrices est
+    \Fonction{matrix}.
+  \item La fonction de base pour créer des tableaux est
+    \Fonction{array}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+  \frametitle{Remplissage d'une matrice}
+  
+  \begin{itemize}
+  \item \alert{Important}: les matrices et tableaux sont remplis en
+    faisant d'abord varier la première dimension, puis la seconde,
+    etc.
 \begin{Schunk}
 \begin{Sinput}
 > matrix(1:6, nrow = 2, ncol = 3)
@@ -490,7 +511,8 @@ stockée sous forme de vecteur.
 [2,]    2    4    6
 \end{Soutput}
 \begin{Sinput}
-> matrix(1:6, nrow = 2, ncol = 3, byrow = TRUE)
+> matrix(1:6, nrow = 2, ncol = 3, 
++     byrow = TRUE)
 \end{Sinput}
 \begin{Soutput}
      [,1] [,2] [,3]
@@ -498,9 +520,16 @@ stockée sous forme de vecteur.
 [2,]    4    5    6
 \end{Soutput}
 \end{Schunk}
-\item On extrait les éléments d'une matrice en précisant leurs
-  positions sous la forme (ligne, colonne) dans la matrice, ou encore
-  leurs positions dans le vecteur sous-jacent.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+  \frametitle{Indiçage d'une matrice}
+  
+  \begin{itemize}
+  \item On extrait les éléments d'une matrice en précisant leurs
+    positions sous la forme (ligne, colonne) dans la matrice, ou
+    encore leurs positions dans le vecteur sous-jacent.
 \begin{Schunk}
 \begin{Sinput}
 > (m <- matrix(c(40, 80, 45, 21, 55, 32), 
@@ -524,8 +553,15 @@ stockée sous forme de vecteur.
 [1] 45
 \end{Soutput}
 \end{Schunk}
-\item La fonction \Fonction{rbind} permet de fusionner verticalement
-  deux matrices (ou plus) ayant le même nombre de colonnes.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+  \frametitle{Fusion verticale de matrices}
+  
+  \begin{itemize}
+  \item La fonction \Fonction{rbind} permet de fusionner verticalement
+    deux matrices (ou plus) ayant le même nombre de colonnes.
 \begin{Schunk}
 \begin{Sinput}
 > n <- matrix(1:9, nrow = 3)
@@ -540,8 +576,16 @@ stockée sous forme de vecteur.
 [5,]    3    6    9
 \end{Soutput}
 \end{Schunk}
-\item La fonction \Fonction{cbind} permet de fusionner horizontalement
-  deux matrices (ou plus) ayant le même nombre de lignes.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+  \frametitle{Fusion horizontale de matrices}
+  
+  \begin{itemize}
+  \item La fonction \Fonction{cbind} permet de fusionner
+    horizontalement deux matrices (ou plus) ayant le même nombre de
+    lignes.
 \begin{Schunk}
 \begin{Sinput}
 > n <- matrix(1:4, nrow = 2)
@@ -553,89 +597,76 @@ stockée sous forme de vecteur.
 [2,]   80   21   32    2    4
 \end{Soutput}
 \end{Schunk}
-\end{itemize}
+  \end{itemize}
+\end{frame}
 
 
 \section{Listes}
-\label{bases:listes}
 
-Une liste\index{liste} est un type de vecteur spécial dont les
-éléments peuvent être de n'importe quel mode, y compris le mode
-\Mode{list} (ce qui permet d'emboîter des listes).
+\begin{frame}
+  \frametitle{Un vecteur très général}
 
-\begin{itemize}
-\item La fonction de base pour créer des listes est \Fonction{list}.
-\item Il est généralement préférable de nommer les éléments d'une
-  liste. Il est en effet plus simple et sûr d'extraire les éléments
-  par leur étiquette.
-\item L'extraction\Index{indiçage!liste} des éléments d'une liste peut
-  se faire de deux façons:
-  \begin{enumerate}
-  \item avec des doubles crochets \fonction{[[\ ]]};
-  \item par leur étiquette avec \code{nom.liste\$etiquette.element}.
-  \end{enumerate}
-\item La fonction \Fonction{unlist} convertit une liste en un vecteur
-  simple. Attention, cette fonction peut être destructrice si la
-  structure de la liste est importante.
-\end{itemize}
+  Une liste\index{liste} est un type de vecteur spécial dont les
+  éléments peuvent être de n'importe quel mode, y compris le mode
+  \Mode{list} (ce qui permet d'emboîter des listes).
+  \pause
+
+  \begin{itemize}[<+->]
+  \item La fonction de base pour créer des listes est \Fonction{list}.
+  \item Généralement préférable de nommer les éléments d'une liste:
+    plus simple et sûr d'extraire les éléments par leur étiquette.
+  \end{itemize}
+\end{frame}
 
 
-\section{\emph{Data frames}}
-\label{bases:dataframes}
+\begin{frame}
+  \frametitle{Indiçage d'une liste}
 
-Les vecteurs, matrices, tableaux (\emph{arrays}) et listes sont les
-types d'objets les plus fréquemment utilisés en S pour la
-programmation de fonctions personnelles ou la simulation. L'analyse de
-données --- la régression linéaire, par exemple --- repose toutefois
-davantage sur les \emph{data frames}\Index{data frame}.
+  \begin{itemize}[<+->]
+  \item L'extraction\Index{indiçage!liste} des éléments d'une liste
+    peut se faire de deux façons:
+    \begin{enumerate}
+    \item avec des doubles crochets \fonction{[[\ ]]}
+    \item par leur étiquette avec \code{nom.liste\$etiquette.element}.
+    \end{enumerate}
+  \end{itemize}
+\end{frame}
 
-\begin{itemize}
-\item Un \emph{data frame} est une liste de classe \classe{data.frame}
-  dont tous les éléments sont de la même longueur.
-\item Généralement représenté sous forme d'un tableau à deux
-  dimensions (visuellement similaire à une matrice). Chaque élément de
-  la liste sous-jacente correspond à une colonne.
-\item On peut donc obtenir les étiquettes des colonnes avec la fonction
-  \fonction{names} (ou \fonction{colnames} \R dans \textsf{R}).  Les
-  étiquettes des lignes sont quant à elles obtenues avec
-  \fonction{row.names} (ou \fonction{rownames} dans \textsf{R}).
-\item Plus général qu'une matrice puisque les colonnes peuvent être de
-  modes différents (\Mode{numeric}, \Mode{complex}, \Mode{character}
-  ou \Mode{logical}).
-\item Peut être indicé à la fois comme une liste et comme une matrice.
-\item Créé avec la fonction \Fonction{data.frame} ou
-  \Fonction{as.data.frame} (pour convertir une matrice en \emph{data
-    frame}, par exemple).
-\item Les fonctions \fonction{rbind} et \fonction{cbind} peuvent être
-  utilisées pour ajouter des lignes ou des colonnes, respectivement.
-\item On peut rendre les colonnes d'un \emph{data frame} (ou d'une
-  liste) visibles dans l'espace de travail avec la fonction
-  \Fonction{attach}, puis les masquer avec \Fonction{detach}.
-\end{itemize}
+\section{Data frames}
 
-Ce type d'objet est moins important lors de l'apprentissage du langage
-de programmation.
+\begin{frame}
+  \frametitle{Liste ou matrice? Un peu des deux!}
 
-
+  \begin{itemize}[<+->]
+  \item L'analyse de données --- la régression linéaire, par exemple
+    --- repose sur les \emph{data frames}.
+  \item Liste de classe \classe{data.frame} dont tous les éléments
+    sont de la même longueur.
+  \item Généralement représenté sous forme d'un tableau à deux
+    dimensions (visuellement similaire à une matrice).
+  \item Plus général qu'une matrice puisque les colonnes peuvent être
+    de modes différents (\Mode{numeric}, \Mode{complex},
+    \Mode{character} ou \Mode{logical}).
+  \item Créé avec la fonction \Fonction{data.frame} ou
+    \Fonction{as.data.frame}.
+  \item Moins important lors de l'apprentissage du langage de
+    programmation.
+  \end{itemize}
+\end{frame}
 
 
 \section{Indiçage}
-\label{bases:indicage}
 
-L'indiçage des vecteurs\Index{indiçage!vecteur} et
-matrices\Index{indiçage!matrice} a déjà été brièvement présenté aux
-sections \ref{bases:vecteurs} et \ref{bases:matrices}. Cette section
-contient plus de détails sur cette procédure des plus communes lors de
-l'utilisation du langage S. On se concentre toutefois sur le
-traitement des vecteurs. Se référer également à \citet[section
-2.3]{MASS} pour de plus amples détails.
 
-Il existe quatre façons d'indicer un vecteur dans le langage S. Dans
-tous les cas, l'indiçage se fait à l'intérieur de crochets \Fonction{[\ ]}.
-\begin{enumerate}
-\item Avec un vecteur d'entiers positifs. Les éléments se trouvant aux
-  positions correspondant aux entiers sont extraits du vecteur, dans
-  l'ordre. C'est la technique la plus courante.
+\begin{frame}[fragile=singleslide]
+  \frametitle{Quatre façons d'indicer un vecteur}
+  
+  Dans tous les cas, l'indiçage se fait avec des crochets
+  \Fonction{[\ ]}.
+  \begin{enumerate}
+  \item Avec un vecteur d'entiers positifs. Les éléments se trouvant
+    aux positions correspondant aux entiers sont extraits du vecteur,
+    dans l'ordre. C'est la technique la plus courante.
 \begin{Schunk}
 \begin{Sinput}
 > letters[c(1:3, 22, 5)]
@@ -644,44 +675,66 @@ tous les cas, l'indiçage se fait à l'intérieur de crochets \Fonction{[\ ]}.
 [1] "a" "b" "c" "v" "e"
 \end{Soutput}
 \end{Schunk}
-\item Avec un vecteur d'entiers négatifs. Les éléments se trouvant aux
-  positions correspondant aux entiers négatifs sont alors
-  \alert{éliminés} du vecteur.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+  \begin{enumerate}
+    \setcounter{enumi}{1}
+  \item Avec un vecteur d'entiers négatifs. Les éléments se trouvant
+    aux positions correspondant aux entiers négatifs sont alors
+    \alert{éliminés} du vecteur.
 \begin{Schunk}
 \begin{Sinput}
 > letters[c(-(1:3), -5, -22)]
 \end{Sinput}
 \begin{Soutput}
- [1] "d" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p"
-[13] "q" "r" "s" "t" "u" "w" "x" "y" "z"
+ [1] "d" "f" "g" "h" "i" "j" "k" "l" "m"
+[10] "n" "o" "p" "q" "r" "s" "t" "u" "w"
+[19] "x" "y" "z"
 \end{Soutput}
 \end{Schunk}
-\item Avec un vecteur booléen. Le vecteur d'indiçage doit alors être
-  de la même longueur que le vecteur indicé. Les éléments
-  correspondant à une valeur \code{TRUE} sont extraits du vecteur,
-  alors que ceux correspondant à \code{FALSE} sont éliminés.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+  \begin{enumerate}
+    \setcounter{enumi}{2}
+  \item Avec un vecteur booléen. Le vecteur d'indiçage doit alors être
+    de la même longueur que le vecteur indicé. Les éléments
+    correspondant à une valeur \code{TRUE} sont \alert{extraits} du vecteur,
+    alors que ceux correspondant à \code{FALSE} sont \alert{éliminés}.
 \begin{Schunk}
 \begin{Sinput}
 > letters > "f" & letters < "q"
 \end{Sinput}
 \begin{Soutput}
- [1] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE
- [9]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-[17] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+ [1] FALSE FALSE FALSE FALSE FALSE FALSE
+ [7]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+[13]  TRUE  TRUE  TRUE  TRUE FALSE FALSE
+[19] FALSE FALSE FALSE FALSE FALSE FALSE
 [25] FALSE FALSE
 \end{Soutput}
 \begin{Sinput}
 > letters[letters > "f" & letters < "q"]
 \end{Sinput}
 \begin{Soutput}
- [1] "g" "h" "i" "j" "k" "l" "m" "n" "o" "p"
+ [1] "g" "h" "i" "j" "k" "l" "m" "n" "o"
+[10] "p"
 \end{Soutput}
 \end{Schunk}
-\item Avec une chaîne de caractères. Utile pour extraire les éléments
-  d'un vecteur à condition que ceux-ci soient nommés.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+  \begin{enumerate}
+    \setcounter{enumi}{3}
+  \item Avec une chaîne de caractères. Utile pour extraire les
+    éléments d'un vecteur à condition que ceux-ci soient nommés.
 \begin{Schunk}
 \begin{Sinput}
-> x <- c(Rouge = 2, Bleu = 4, Vert = 9, Jaune = -5)
+> x <- c(Rouge = 2, Bleu = 4, Vert = 9, 
++ Jaune = -5)
 > x[c("Bleu", "Jaune")]
 \end{Sinput}
 \begin{Soutput}
@@ -689,7 +742,8 @@ tous les cas, l'indiçage se fait à l'intérieur de crochets \Fonction{[\ ]}.
     4    -5 
 \end{Soutput}
 \end{Schunk}
-\end{enumerate}
+  \end{enumerate}
+\end{frame}
 
 %%% Local Variables: 
 %%% mode: latex
