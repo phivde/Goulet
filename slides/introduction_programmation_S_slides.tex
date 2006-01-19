@@ -7,10 +7,11 @@
   \usepackage{palatino,mathpazo}
   \usepackage{textcomp,fourier-orns,mathabx}
   \usepackage{Sweave-sans-ae}
-  \usepackage{threeparttable,expdlist}
+  \usepackage{booktabs,threeparttable,expdlist}
 
   %%% Paramètres de beamer
-  \usetheme{Rochester}
+  \usetheme{Copenhagen}
+%  \useouterthme{infolines}
   \setbeamercovered{transparent}
 
   %%% Titre
@@ -22,7 +23,7 @@
   %%% Désactivation de certaines commandes
   \newcommand{\R}{}
   \newcommand{\Splus}{}
-%   \newcommand{\Index}[1]{}
+  \newcommand{\Index}[1]{}
 %   \newcommand{\indexargument}[1]{}
 %   \newcommand{\Indexargument}[1]{}
 %   \newcommand{\indexattribut}[1]{}
@@ -83,6 +84,8 @@
   \newcommand{\emacs}[1]{\code{#1}}
   \newcommand{\ess}[1]{\code{#1}}
 
+  \includeonlylecture{cours 2}
+  
 \begin{document}
 
 \begin{frame}
@@ -92,7 +95,9 @@
 \lecture{Présentation}{cours 1}
 \include{presentation_slides}
 
-%\include{bases_slides}
+\lecture{Bases}{cours 2}
+\include{bases_slides}
+
 %\include{operateurs_slides}
 %\include{exemples_slides}
 %\include{fonctions_slides}
