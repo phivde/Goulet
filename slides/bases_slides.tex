@@ -1,0 +1,697 @@
+\part{BASES DU LANGAGE S}
+
+\begin{frame}
+  \partpage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sommaire}
+  \tableofcontents
+\end{frame}
+
+\section{Commandes S}
+
+\begin{frame}[fragile]
+  \frametitle{Affectations et expressions}
+
+  Toute commande S est soit une \emph{affectation}\index{affectation},
+  soit une \emph{expression}\index{expression}.
+  \begin{itemize}
+  \item Normalement, une expression est immédiatement évaluée et le
+    résultat est affiché à l'écran:
+\begin{Schunk}
+\begin{Sinput}
+> 2 + 3
+\end{Sinput}
+\begin{Soutput}
+[1] 5
+\end{Soutput}
+\begin{Sinput}
+> pi
+\end{Sinput}
+\begin{Soutput}
+[1] 3.141593
+\end{Soutput}
+\begin{Sinput}
+> cos(pi/4)
+\end{Sinput}
+\begin{Soutput}
+[1] 0.7071068
+\end{Soutput}
+\end{Schunk}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Affectations et expressions}
+
+  \begin{itemize}
+  \item Lors d'une affectation, une expression est évaluée, mais le
+    résultat est stocké dans un objet (variable) et rien n'est affiché
+    à l'écran.
+  \item Le symbole d'affectation est \Fonction{<-} (ou
+    \Fonction{->}).
+\begin{Schunk}
+\begin{Sinput}
+> a <- 5
+> a
+\end{Sinput}
+\begin{Soutput}
+[1] 5
+\end{Soutput}
+\begin{Sinput}
+> b <- a
+> b
+\end{Sinput}
+\begin{Soutput}
+[1] 5
+\end{Soutput}
+\end{Schunk}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Deux symboles d'affectation à éviter}
+
+  \begin{itemize}
+  \item<+-> L'opérateur \code{=}
+    \begin{itemize}
+    \item peut porter à confusion.
+    \end{itemize}
+  \item<+-> Le caractère \code{\_}
+    \begin{itemize}
+    \item permis dans S-Plus, mais plus dans \textsf{R} depuis la version
+      1.8.0
+    \item emploi  fortement découragé
+    \item rend le code difficile à lire
+    \item dans le mode ESS de Emacs, taper ce caractère génère
+      carrément \verb*| <- |.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+  \frametitle{Astuce} 
+
+  Pour affecter le résultat d'un calcul dans un objet et en même temps
+  voir ce résultat, placer l'affectation entre
+  parenthèses. \\[\baselineskip]
+
+  L'opération d'affectation devient alors une nouvelle expression:
+\begin{Schunk}
+\begin{Sinput}
+> (a <- 2 + 3)
+\end{Sinput}
+\begin{Soutput}
+[1] 5
+\end{Soutput}
+\end{Schunk}
+\end{frame}
+
+
+\section{Conventions pour les noms d'objets}
+
+\begin{frame}
+  \frametitle{Caractères permis dans les noms d'objets}
+
+  \begin{itemize}[<+->]
+  \item Les lettres a--z, A--Z
+  \item Les chiffres 0--9
+  \item Le point «.»
+  \item «\code{\_}» est maintenant permis dans \textsf{R}, mais son
+    utilisation est découragée.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Règles pour les noms d'objets}
+
+  \begin{itemize}
+  \item Les noms d'objets ne peuvent commencer par un chiffre.
+  \item<2-> Le S est sensible à la casse: \code{foo}, \code{Foo} et
+    \code{FOO} sont trois objets distincts.
+  \item<2-> Moyen simple d'éviter des erreurs liées à la casse: employer
+    seulement des lettres minuscules.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Noms déjà utilisés et réservés}
+
+  \begin{itemize}[<+->]
+  \item Certains noms sont utilisés par le système, aussi vaut-il
+    mieux éviter de les utiliser. En particulier, éviter d'utiliser
+    \begin{center}
+      \code{c}, \code{q}, \code{t}, \code{C}, \code{D}, \code{I},
+      \code{diff}, \code{length}, \code{mean}, \code{pi},
+      \code{range}, \code{var}.
+    \end{center}
+  \item Certains mots sont réservés pour le système et il est interdit
+    de les utiliser comme nom d'objet:
+    \begin{center}
+      \code{Inf}, \code{NA}, \code{NaN},
+      \code{NULL} \\
+      \code{break}, \code{else}, \code{for}, \code{function},
+      \code{if}, \code{in}, \code{next}, \code{repeat}, \code{return},
+      \code{while}.
+    \end{center}
+  \item Dans S-Plus 6.1 et plus, \Splus \code{T} et \objet{TRUE}
+    (vrai), ainsi que \code{F} et \objet{FALSE} (faux) sont également
+    des noms réservés.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\texttt{TRUE} et \texttt{FALSE} dans R}
+
+  \begin{itemize}[<+->]
+  \item Dans \textsf{R}, \R les noms \code{TRUE} et \code{FALSE}
+    sont également réservés.
+  \item Les variables \code{T} et \code{F} prennent par défaut les
+    valeurs \code{TRUE} et \code{FALSE}, respectivement, mais peuvent
+    être réaffectées.
+\begin{Schunk}
+\begin{Sinput}
+> T
+\end{Sinput}
+\begin{Soutput}
+[1] TRUE
+\end{Soutput}
+\end{Schunk}
+\begin{Schunk}
+\begin{Sinput}
+> TRUE <- 3
+\end{Sinput}
+\end{Schunk}
+\begin{Schunk}
+\begin{Soutput}
+Erreur dans TRUE <- 3 : membre gauche de
+l'assignation (do_set) incorrect
+\end{Soutput}
+\end{Schunk}
+\begin{Schunk}
+\begin{Sinput}
+> (T <- 3)
+\end{Sinput}
+\begin{Soutput}
+[1] 3
+\end{Soutput}
+\end{Schunk}
+  \end{itemize}
+\end{frame}
+
+\section{Les objets S}
+
+\begin{frame}
+  \frametitle{Tout est un objet}
+  
+  \begin{itemize}
+  \item Tout dans le langage S est un objet, même les fonctions et les
+    opérateurs.
+  \item Les objets possèdent au minimum un \alert{mode} et une
+    \alert{longueur}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Mode et longueur}
+
+  \begin{itemize}
+  \item Le mode d'un objet est obtenu avec la fonction \Fonction{mode}.
+\begin{Schunk}
+\begin{Sinput}
+> v <- c(1, 2, 5, 9)
+> mode(v)
+\end{Sinput}
+\begin{Soutput}
+[1] "numeric"
+\end{Soutput}
+\end{Schunk}
+  \item La longueur d'un objet est obtenue avec la fonction
+    \Fonction{length}.
+\begin{Schunk}
+\begin{Sinput}
+> length(v)
+\end{Sinput}
+\begin{Soutput}
+[1] 4
+\end{Soutput}
+\end{Schunk}
+  \item Certains objets sont également dotés d'un ou plusieurs
+    \alert{attributs}.
+  \end{itemize}
+\end{frame}
+
+\subsection{Modes et types de données}
+
+
+\begin{frame}
+  \frametitle{Modes et types de données }
+
+  \begin{itemize}
+  \item Le mode prescrit ce qu'un objet peut contenir.
+  \item Un objet ne peut donc avoir qu'un seul mode.
+  \item Modes disponibles en S:
+  \end{itemize}
+  \begin{center}
+    \begin{tabular}{ll}
+      \toprule
+      \Mode{numeric}   & nombres réels \\
+      \Mode{complex}   & nombres complexes \\
+      \Mode{logical}   & valeurs booléennes (vrai/faux) \\
+      \Mode{character} & chaînes de caractères \\
+      \Mode{function}  & fonction \\
+      \Mode{list}      & données quelconques \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+
+\subsection{Longueur}
+
+
+\begin{frame}[fragile]
+  \frametitle{Longueur d'un objet}
+  
+  La longueur\Index{longueur} d'un objet est égale au nombre
+  d'éléments qu'il contient.
+
+  \begin{itemize}[<2->]
+  \item La longueur d'une chaîne de caractères est toujours 1. Un
+    objet de mode \code{character} doit contenir plusieurs chaînes
+    de caractères pour que sa longueur soit supérieure à 1.
+\begin{Schunk}
+\begin{Sinput}
+> v <- "actuariat"
+> length(v)
+\end{Sinput}
+\begin{Soutput}
+[1] 1
+\end{Soutput}
+\begin{Sinput}
+> v <- c("a", "c", "t", "u", "a", "r", "i", 
++     "a", "t")
+> length(v)
+\end{Sinput}
+\begin{Soutput}
+[1] 9
+\end{Soutput}
+\end{Schunk}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Objet vide}
+  
+  \begin{itemize}[<+->]
+  \item Un objet peut être de longueur 0.
+  \item Doit alors être interprété comme un contenant
+    vide.
+\begin{Schunk}
+\begin{Sinput}
+> v <- numeric(0)
+> length(v)
+\end{Sinput}
+\begin{Soutput}
+[1] 0
+\end{Soutput}
+\end{Schunk}
+  \end{itemize}
+\end{frame}
+
+
+\subsection{Attributs}
+
+\begin{frame}
+  \frametitle{Définition et liste des attributs}
+  
+  \begin{itemize}
+  \item Éléments d'information additionnels liés à cet objet.
+  \item Attributs les plus fréquemment rencontrés:
+  \end{itemize}
+  \begin{center}
+    \begin{tabular}{ll}
+      \toprule
+      \Attribut{class}    &
+      affecte le comportement d'un objet \\
+      \Attribut{dim}      &
+      dimensions\index{dimension} des matrices et tableaux \\
+      \Attribut{dimnames} &
+      étiquettes\index{etiquette@étiquette} des dimensions des matrices
+      et tableaux \\
+      \Attribut{names}    &
+      étiquettes des éléments d'un objet \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\subsection{L'objet spécial \code{NA}}
+
+\begin{frame}
+  \frametitle{Représentation des données manquantes}
+
+  \Objet{NA} est fréquemment utilisé pour représenter les données
+  manquantes.
+  \pause
+
+  \begin{itemize}[<+->]
+  \item Son mode est \Mode{logical}.
+  \item Toute opération impliquant une donnée \code{NA} a comme
+    résultat \code{NA}.
+  \item Certaines fonctions (\fonction{sum}, \fonction{mean}, par
+    exemple), ont par conséquent un argument \Argument{na.rm} qui,
+    lorsque \code{TRUE}, élimine les données manquantes avant de faire
+    un calcul.
+  \item La fonction \Fonction{is.na} permet de tester si les éléments
+    d'un objet sont \code{NA} ou non.
+  \end{itemize}
+\end{frame}
+
+\subsection{L'objet spécial \code{NULL}}
+
+\begin{frame}
+  \frametitle{Représentation du vide}
+
+  \Objet{NULL} représente «rien», ou le vide.
+  \pause
+
+  \begin{itemize}[<+->]
+  \item Son mode est \Mode{NULL}.
+  \item Sa longueur est 0.
+  \item Différent d'un objet vide:
+    \begin{itemize}
+    \item un objet de longueur 0 est un contenant vide;
+    \item \code{NULL} est «pas de contenant».
+    \end{itemize}
+  \item La fonction \Fonction{is.null} teste si un objet est
+    \code{NULL} ou non.
+  \end{itemize}
+\end{frame}
+
+\section{Vecteurs}
+
+\begin{frame}[fragile]
+  \frametitle{En S, tout est un vecteur}
+
+  \begin{itemize}
+  \item Dans un vecteur simple, tous les éléments doivent être du même
+    mode.
+  \item Il est possible (et souvent souhaitable) de donner une
+    étiquette à chacun des éléments d'un vecteur.
+\begin{Schunk}
+\begin{Sinput}
+> (v <- c(a = 1, b = 2, c = 5))
+\end{Sinput}
+\begin{Soutput}
+a b c
+1 2 5
+\end{Soutput}
+\begin{Sinput}
+> v <- c(1, 2, 5) 
+> names(v) <- c("a", "b", "c") 
+> v
+\end{Sinput}
+\begin{Soutput}
+a b c
+1 2 5
+\end{Soutput}
+\end{Schunk}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Et comment crée-t-on ces vecteurs?}
+
+  Les fonctions de base pour créer des vecteurs sont
+  \begin{itemize}
+  \item \Fonction{c} (concaténation)
+  \item \Fonction{numeric} (vecteur de mode \Mode{numeric})
+  \item \Fonction{logical} (vecteur de mode \Mode{logical})
+  \item \Fonction{character} (vecteur de mode \Mode{character}).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Indiçage d'un vecteur}
+
+  \begin{itemize}[<+->]
+  \item Se fait avec \fonction{[\ ]}.
+  \item On peut extraire un élément d'un vecteur par
+    \begin{itemize}
+    \item sa position ou
+    \item son étiquette, si elle existe (auquel cas cette approche est
+      beaucoup plus sûre).
+\begin{Schunk}
+\begin{Sinput}
+> v[3]
+\end{Sinput}
+\begin{Soutput}
+c 
+5 
+\end{Soutput}
+\begin{Sinput}
+> v["c"]
+\end{Sinput}
+\begin{Soutput}
+c 
+5 
+\end{Soutput}
+\end{Schunk}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Matrices et tableaux}
+\label{bases:matrices}
+
+Une matrice\index{matrice} ou, de façon plus générale, un
+tableau\index{tableau} (\emph{array}) n'est rien d'autre qu'un vecteur
+doté d'un attribut \attribut{dim}. À l'interne, une matrice est donc
+stockée sous forme de vecteur.
+
+\begin{itemize}
+\item La fonction de base pour créer des matrices est
+  \Fonction{matrix}.
+\item La fonction de base pour créer des tableaux est
+  \Fonction{array}.
+\item \alert{Important}: \warning les matrices et tableaux sont remplis
+  en faisant d'abord varier la première dimension, puis la seconde,
+  etc. Pour les matrices, cela revient à remplir par colonne.
+\begin{Schunk}
+\begin{Sinput}
+> matrix(1:6, nrow = 2, ncol = 3)
+\end{Sinput}
+\begin{Soutput}
+     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6
+\end{Soutput}
+\begin{Sinput}
+> matrix(1:6, nrow = 2, ncol = 3, byrow = TRUE)
+\end{Sinput}
+\begin{Soutput}
+     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6
+\end{Soutput}
+\end{Schunk}
+\item On extrait les éléments d'une matrice en précisant leurs
+  positions sous la forme (ligne, colonne) dans la matrice, ou encore
+  leurs positions dans le vecteur sous-jacent.
+\begin{Schunk}
+\begin{Sinput}
+> (m <- matrix(c(40, 80, 45, 21, 55, 32), 
++     nrow = 2, ncol = 3))
+\end{Sinput}
+\begin{Soutput}
+     [,1] [,2] [,3]
+[1,]   40   45   55
+[2,]   80   21   32
+\end{Soutput}
+\begin{Sinput}
+> m[1, 2]
+\end{Sinput}
+\begin{Soutput}
+[1] 45
+\end{Soutput}
+\begin{Sinput}
+> m[3]
+\end{Sinput}
+\begin{Soutput}
+[1] 45
+\end{Soutput}
+\end{Schunk}
+\item La fonction \Fonction{rbind} permet de fusionner verticalement
+  deux matrices (ou plus) ayant le même nombre de colonnes.
+\begin{Schunk}
+\begin{Sinput}
+> n <- matrix(1:9, nrow = 3)
+> rbind(m, n)
+\end{Sinput}
+\begin{Soutput}
+     [,1] [,2] [,3]
+[1,]   40   45   55
+[2,]   80   21   32
+[3,]    1    4    7
+[4,]    2    5    8
+[5,]    3    6    9
+\end{Soutput}
+\end{Schunk}
+\item La fonction \Fonction{cbind} permet de fusionner horizontalement
+  deux matrices (ou plus) ayant le même nombre de lignes.
+\begin{Schunk}
+\begin{Sinput}
+> n <- matrix(1:4, nrow = 2)
+> cbind(m, n)
+\end{Sinput}
+\begin{Soutput}
+     [,1] [,2] [,3] [,4] [,5]
+[1,]   40   45   55    1    3
+[2,]   80   21   32    2    4
+\end{Soutput}
+\end{Schunk}
+\end{itemize}
+
+
+\section{Listes}
+\label{bases:listes}
+
+Une liste\index{liste} est un type de vecteur spécial dont les
+éléments peuvent être de n'importe quel mode, y compris le mode
+\Mode{list} (ce qui permet d'emboîter des listes).
+
+\begin{itemize}
+\item La fonction de base pour créer des listes est \Fonction{list}.
+\item Il est généralement préférable de nommer les éléments d'une
+  liste. Il est en effet plus simple et sûr d'extraire les éléments
+  par leur étiquette.
+\item L'extraction\Index{indiçage!liste} des éléments d'une liste peut
+  se faire de deux façons:
+  \begin{enumerate}
+  \item avec des doubles crochets \fonction{[[\ ]]};
+  \item par leur étiquette avec \code{nom.liste\$etiquette.element}.
+  \end{enumerate}
+\item La fonction \Fonction{unlist} convertit une liste en un vecteur
+  simple. Attention, cette fonction peut être destructrice si la
+  structure de la liste est importante.
+\end{itemize}
+
+
+\section{\emph{Data frames}}
+\label{bases:dataframes}
+
+Les vecteurs, matrices, tableaux (\emph{arrays}) et listes sont les
+types d'objets les plus fréquemment utilisés en S pour la
+programmation de fonctions personnelles ou la simulation. L'analyse de
+données --- la régression linéaire, par exemple --- repose toutefois
+davantage sur les \emph{data frames}\Index{data frame}.
+
+\begin{itemize}
+\item Un \emph{data frame} est une liste de classe \classe{data.frame}
+  dont tous les éléments sont de la même longueur.
+\item Généralement représenté sous forme d'un tableau à deux
+  dimensions (visuellement similaire à une matrice). Chaque élément de
+  la liste sous-jacente correspond à une colonne.
+\item On peut donc obtenir les étiquettes des colonnes avec la fonction
+  \fonction{names} (ou \fonction{colnames} \R dans \textsf{R}).  Les
+  étiquettes des lignes sont quant à elles obtenues avec
+  \fonction{row.names} (ou \fonction{rownames} dans \textsf{R}).
+\item Plus général qu'une matrice puisque les colonnes peuvent être de
+  modes différents (\Mode{numeric}, \Mode{complex}, \Mode{character}
+  ou \Mode{logical}).
+\item Peut être indicé à la fois comme une liste et comme une matrice.
+\item Créé avec la fonction \Fonction{data.frame} ou
+  \Fonction{as.data.frame} (pour convertir une matrice en \emph{data
+    frame}, par exemple).
+\item Les fonctions \fonction{rbind} et \fonction{cbind} peuvent être
+  utilisées pour ajouter des lignes ou des colonnes, respectivement.
+\item On peut rendre les colonnes d'un \emph{data frame} (ou d'une
+  liste) visibles dans l'espace de travail avec la fonction
+  \Fonction{attach}, puis les masquer avec \Fonction{detach}.
+\end{itemize}
+
+Ce type d'objet est moins important lors de l'apprentissage du langage
+de programmation.
+
+
+
+
+\section{Indiçage}
+\label{bases:indicage}
+
+L'indiçage des vecteurs\Index{indiçage!vecteur} et
+matrices\Index{indiçage!matrice} a déjà été brièvement présenté aux
+sections \ref{bases:vecteurs} et \ref{bases:matrices}. Cette section
+contient plus de détails sur cette procédure des plus communes lors de
+l'utilisation du langage S. On se concentre toutefois sur le
+traitement des vecteurs. Se référer également à \citet[section
+2.3]{MASS} pour de plus amples détails.
+
+Il existe quatre façons d'indicer un vecteur dans le langage S. Dans
+tous les cas, l'indiçage se fait à l'intérieur de crochets \Fonction{[\ ]}.
+\begin{enumerate}
+\item Avec un vecteur d'entiers positifs. Les éléments se trouvant aux
+  positions correspondant aux entiers sont extraits du vecteur, dans
+  l'ordre. C'est la technique la plus courante.
+\begin{Schunk}
+\begin{Sinput}
+> letters[c(1:3, 22, 5)]
+\end{Sinput}
+\begin{Soutput}
+[1] "a" "b" "c" "v" "e"
+\end{Soutput}
+\end{Schunk}
+\item Avec un vecteur d'entiers négatifs. Les éléments se trouvant aux
+  positions correspondant aux entiers négatifs sont alors
+  \alert{éliminés} du vecteur.
+\begin{Schunk}
+\begin{Sinput}
+> letters[c(-(1:3), -5, -22)]
+\end{Sinput}
+\begin{Soutput}
+ [1] "d" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p"
+[13] "q" "r" "s" "t" "u" "w" "x" "y" "z"
+\end{Soutput}
+\end{Schunk}
+\item Avec un vecteur booléen. Le vecteur d'indiçage doit alors être
+  de la même longueur que le vecteur indicé. Les éléments
+  correspondant à une valeur \code{TRUE} sont extraits du vecteur,
+  alors que ceux correspondant à \code{FALSE} sont éliminés.
+\begin{Schunk}
+\begin{Sinput}
+> letters > "f" & letters < "q"
+\end{Sinput}
+\begin{Soutput}
+ [1] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE
+ [9]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+[17] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[25] FALSE FALSE
+\end{Soutput}
+\begin{Sinput}
+> letters[letters > "f" & letters < "q"]
+\end{Sinput}
+\begin{Soutput}
+ [1] "g" "h" "i" "j" "k" "l" "m" "n" "o" "p"
+\end{Soutput}
+\end{Schunk}
+\item Avec une chaîne de caractères. Utile pour extraire les éléments
+  d'un vecteur à condition que ceux-ci soient nommés.
+\begin{Schunk}
+\begin{Sinput}
+> x <- c(Rouge = 2, Bleu = 4, Vert = 9, Jaune = -5)
+> x[c("Bleu", "Jaune")]
+\end{Sinput}
+\begin{Soutput}
+ Bleu Jaune 
+    4    -5 
+\end{Soutput}
+\end{Schunk}
+\end{enumerate}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "introduction_programmation_S_slides"
+%%% End: 
