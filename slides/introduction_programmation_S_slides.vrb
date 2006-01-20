@@ -1,28 +1,18 @@
-\frametitle {Indi^^e7age d'un vecteur}
-
-  \begin{itemize}[<+->]
-  \item Se fait avec \fonction{[\ ]}.
-  \item On peut extraire un ^^e9l^^e9ment d'un vecteur par
-    \begin{itemize}
-    \item sa position ou
-    \item son ^^e9tiquette, si elle existe (auquel cas cette approche est
-      beaucoup plus s^^fbre).
-    \end{itemize}
-  \item[]
+\begin {itemize}[<+->]
+  \item Par exemple: le produit ext^^e9rieur entre deux vecteurs est une
+    matrice contenant tous les produits entre les ^^e9l^^e9ments des deux
+    vecteurs:
 \begin{Schunk}
 \begin{Sinput}
-> v[3]
+> outer(c(1, 2, 5), c(2, 3, 6))
 \end{Sinput}
 \begin{Soutput}
-c
-5
-\end{Soutput}
-\begin{Sinput}
-> v["c"]
-\end{Sinput}
-\begin{Soutput}
-c
-5
+     [,1] [,2] [,3]
+[1,]    2    3    6
+[2,]    4    6   12
+[3,]   10   15   30
 \end{Soutput}
 \end{Schunk}
+  \item L'op^^e9rateur \Fonction{\%o\%} est un raccourci de \code{outer(X,
+      Y, prod)}.
   \end{itemize}

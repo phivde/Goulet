@@ -9,6 +9,12 @@
   \usepackage{Sweave-sans-ae}
   \usepackage{booktabs,threeparttable,expdlist}
 
+  %%% Titre
+  \title{Introduction à la programmation en S}
+  \author{Vincent Goulet}
+  \institute{École d'actuariat \\ Université Laval}
+  \date{}
+
   %%% Paramètres de beamer
   \usetheme[hideallsubsections]{Berkeley}
   \usecolortheme{sidebartab}
@@ -19,13 +25,6 @@
     \leavevmode\leftskip=1.75ex\llap{%
       \usebeamercolor[bg]{subsection number projected}%
       \vrule width1.25ex height1.25ex\kern1ex}\inserttocsection\par}
-  
-
-  %%% Titre
-  \title{Introduction à la programmation en S}
-  \author{Vincent Goulet}
-  \institute{École d'actuariat \\ Université Laval}
-  \date{}
 
   %%% Désactivation de certaines commandes
   \newcommand{\R}{}
@@ -57,22 +56,16 @@
 %   \newenvironment{sol}{\begin{proof}[Solution]}{\end{proof}}
 
   %%% Environnement pour les listes de commandes
-%   \newenvironment{ttscript}[1]{%
-%     \begin{list}{}{%
-%         \setlength{\labelsep}{1.5ex}
-%         \settowidth{\labelwidth}{\code{#1}}
-%         \setlength{\leftmargin}{\labelwidth}
-%         \addtolength{\leftmargin}{\labelsep}
-%         \setlength{\parsep}{0.5ex plus0.2ex minus0.2ex}
-%         \setlength{\itemsep}{0.3ex}
-%         \renewcommand{\makelabel}[1]{##1\hfill}}}
-%     {\end{list}}
-
-  %%% Environnement pour les listes de structures de contrôle
-%   \newenvironment{struclist}{%
-%     \begin{description}[\breaklabel\setlabelstyle{\mdseries\ttfamily}%
-%       \setleftmargin{\parindent}]}
-%     {\end{description}}
+  \newenvironment{ttscript}[1]{%
+    \begin{list}{}{%
+        \setlength{\labelsep}{1.5ex}
+        \settowidth{\labelwidth}{\code{#1}}
+        \setlength{\leftmargin}{\labelwidth}
+        \addtolength{\leftmargin}{\labelsep}
+        \setlength{\parsep}{0.5ex plus0.2ex minus0.2ex}
+        \setlength{\itemsep}{0.3ex}
+        \renewcommand{\makelabel}[1]{##1\hfill}}}
+    {\end{list}}
 
   %%% Styles pour les noms de fonctions, code, etc.
   \newcommand{\code}[1]{\texttt{#1}}
@@ -91,7 +84,7 @@
   \newcommand{\emacs}[1]{\code{#1}}
   \newcommand{\ess}[1]{\code{#1}}
 
-%  \includeonlylecture{cours 2}
+%  \includeonlylecture{lab 2}
   
 \begin{document}
 
@@ -109,10 +102,20 @@
 \lecture{Présentation}{cours 1}
 \include{presentation_slides}
 
-\lecture{Bases}{cours 2}
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Sommaire}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\lecture{Bases}{cours 2}        % Indiçage fait au lab 2
 \include{bases_slides}
 
-%\include{operateurs_slides}
+\lecture{Opérateurs}{lab 2}
+\include{operateurs_slides}
+
 %\include{exemples_slides}
 %\include{fonctions_slides}
 %\include{avance_slides}

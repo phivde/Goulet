@@ -9,16 +9,31 @@
 \beamer@sectionintoc {7}{Strat\'egies de travail}{25}{1}{7}
 \beamer@sectionintoc {8}{Gestion des projets ou environnements de travail}{32}{1}{8}
 \beamer@sectionintoc {9}{Consulter l'aide en ligne}{38}{1}{9}
-\beamer@sectionintoc {1}{Commandes S}{43}{2}{10}
-\beamer@sectionintoc {2}{Conventions pour les noms d'objets}{49}{2}{11}
-\beamer@sectionintoc {3}{Les objets S}{61}{2}{12}
-\beamer@subsectionintoc {3}{1}{Modes et types de donn\'ees}{64}{2}{12}
-\beamer@subsectionintoc {3}{2}{Longueur}{65}{2}{12}
-\beamer@subsectionintoc {3}{3}{Attributs}{69}{2}{12}
-\beamer@subsectionintoc {3}{4}{L'objet sp\'ecial \texttt {NA}}{70}{2}{12}
-\beamer@subsectionintoc {3}{5}{L'objet sp\'ecial \texttt {NULL}}{75}{2}{12}
-\beamer@sectionintoc {4}{Vecteurs}{82}{2}{13}
-\beamer@sectionintoc {5}{Matrices et tableaux}{90}{2}{14}
-\beamer@sectionintoc {6}{Listes}{99}{2}{15}
-\beamer@sectionintoc {7}{Data frames}{106}{2}{16}
-\beamer@sectionintoc {8}{Indi\c cage}{113}{2}{17}
+\beamer@sectionintoc {10}{Commandes S}{43}{2}{10}
+\beamer@sectionintoc {11}{Conventions pour les noms d'objets}{49}{2}{11}
+\beamer@sectionintoc {12}{Les objets S}{61}{2}{12}
+\beamer@subsectionintoc {12}{1}{Modes et types de donn\'ees}{64}{2}{12}
+\beamer@subsectionintoc {12}{2}{Longueur}{65}{2}{12}
+\beamer@subsectionintoc {12}{3}{Attributs}{69}{2}{12}
+\beamer@subsectionintoc {12}{4}{L'objet sp\'ecial \texttt {NA}}{70}{2}{12}
+\beamer@subsectionintoc {12}{5}{L'objet sp\'ecial \texttt {NULL}}{75}{2}{12}
+\beamer@sectionintoc {13}{Vecteurs}{82}{2}{13}
+\beamer@sectionintoc {14}{Matrices et tableaux}{90}{2}{14}
+\beamer@sectionintoc {15}{Listes}{99}{2}{15}
+\beamer@sectionintoc {16}{Data frames}{106}{2}{16}
+\beamer@sectionintoc {17}{Indi\c cage}{113}{2}{17}
+\beamer@sectionintoc {18}{Op\'erations arithm\'etiques}{121}{3}{18}
+\beamer@sectionintoc {19}{Op\'erateurs}{126}{3}{19}
+\beamer@sectionintoc {20}{Appels de fonctions}{128}{3}{20}
+\beamer@subsectionintoc {20}{1}{Exemple}{134}{3}{20}
+\beamer@sectionintoc {21}{Quelques fonctions utiles}{138}{3}{21}
+\beamer@subsectionintoc {21}{1}{Manipulation de vecteurs}{145}{3}{21}
+\beamer@subsectionintoc {21}{2}{Recherche d'\'el\'ements dans un vecteur}{146}{3}{21}
+\beamer@subsectionintoc {21}{3}{Arrondi}{147}{3}{21}
+\beamer@subsectionintoc {21}{4}{Sommaires et statistiques descriptives}{148}{3}{21}
+\beamer@subsectionintoc {21}{5}{Sommaires cumulatifs et comparaisons \'el\'ement par \'el\'ement}{149}{3}{21}
+\beamer@subsectionintoc {21}{6}{Op\'erations sur les matrices}{150}{3}{21}
+\beamer@subsectionintoc {21}{7}{Produit ext\'erieur}{152}{3}{21}
+\beamer@sectionintoc {22}{Structures de contr\^ole}{155}{3}{22}
+\beamer@subsectionintoc {22}{1}{Ex\'ecution conditionnelle}{156}{3}{22}
+\beamer@subsectionintoc {22}{2}{Boucles}{158}{3}{22}
