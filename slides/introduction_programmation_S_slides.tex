@@ -84,7 +84,7 @@
   \newcommand{\emacs}[1]{\code{#1}}
   \newcommand{\ess}[1]{\code{#1}}
 
-%  \includeonlylecture{lab 2}
+  \includeonlylecture{cours 3}
   
 \begin{document}
 
@@ -99,6 +99,7 @@
   \titlepage
 \end{frame}
 
+%% Cours 1 et lab 1: Présentation.
 \lecture{Présentation}{cours 1}
 \include{presentation_slides}
 
@@ -110,18 +111,27 @@
   \end{frame}
 }
 
-\lecture{Bases}{cours 2}        % Indiçage fait au lab 2
+%% Cours 2: Bases, sauf la section Indiçage, faite au lab 2.
+\lecture{Bases}{cours 2}
 \include{bases_slides}
 
+%% Hiver 2006: chapitre Opérateurs présenté au lab 2 (sauf les
+%% structures de contrôle). Pas vraiment nécessaire, dans la mesure où
+%% les exemples résolus sont faits au lab 3.
 \lecture{Opérateurs}{lab 2}
 \include{operateurs_slides}
 
-%\include{exemples_slides}
+%% Cours 3: Exemples résolus.
+\lecture{Exemples}{cours 3}
+\include{exemples_slides}
+
 %\include{fonctions_slides}
 %\include{avance_slides}
 
+\appendix
+
 \lecture{Emacs et ESS}{lab 1}
-%\include{ess_slides}
+\include{ess_slides}
 
 \end{document}
 

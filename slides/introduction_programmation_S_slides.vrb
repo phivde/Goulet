@@ -1,18 +1,26 @@
-\begin {itemize}[<+->]
-  \item Par exemple: le produit ext^^e9rieur entre deux vecteurs est une
-    matrice contenant tous les produits entre les ^^e9l^^e9ments des deux
-    vecteurs:
+\begin {proof}[Le code]
 \begin{Schunk}
 \begin{Sinput}
-> outer(c(1, 2, 5), c(2, 3, 6))
+> i <- 0.05
+> repeat {
++     it <- i
++     i <- (1 - (1 + it)^(-10))/8.21
++     if (abs(i - it)/it < 1e-10)
++         break
++ }
+> i
 \end{Sinput}
 \begin{Soutput}
-     [,1] [,2] [,3]
-[1,]    2    3    6
-[2,]    4    6   12
-[3,]   10   15   30
+[1] 0.03756777
 \end{Soutput}
 \end{Schunk}
-  \item L'op^^e9rateur \Fonction{\%o\%} est un raccourci de \code{outer(X,
-      Y, prod)}.
-  \end{itemize}
+  \pause
+\begin{Schunk}
+\begin{Sinput}
+> (1 - (1 + i)^(-10))/i
+\end{Sinput}
+\begin{Soutput}
+[1] 8.21
+\end{Soutput}
+\end{Schunk}
+  \end{proof}
