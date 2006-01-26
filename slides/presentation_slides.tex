@@ -12,16 +12,15 @@
 \section{Le langage S}
 
 \begin{frame}
-  \frametitle{Le langage S}
+  \frametitle{Un langage pour «programmer avec des données»}
 
-  Le S est un langage pour «programmer avec des données» développé
-  chez Bell Laboratories (anciennement propriété de AT\&T, maintenant
-  de Lucent Technologies).
+  Le S est développé chez Bell Laboratories (anciennement propriété de
+  AT\&T, maintenant de Lucent Technologies).
 
-  \begin{itemize}
-  \item<2-> Pas seulement un «autre» environnement statistique, mais
+  \begin{itemize}[<+(1)->]
+  \item Pas seulement un «autre» environnement statistique, mais
     bien un langage de programmation complet et autonome.
-  \item<3-> Inspiré de plusieurs langages, dont l'APL et le Lisp:
+  \item Inspiré de plusieurs langages, dont l'APL et le Lisp:
     \begin{itemize}
     \item interprété (et non compilé);
     \item sans déclaration obligatoire des variables;
@@ -36,28 +35,25 @@
 \section{Les moteurs S}
 
 \begin{frame}
-  \frametitle{Les moteurs S}
+  \frametitle{Quelques «moteurs» ou dialectes du langage S}
 
-  Il existe quelques «moteurs» ou dialectes du langage S.
-
-  \begin{itemize}[<+->]
+  \begin{itemize}
   \item Le plus connu est S-Plus, un logiciel commercial de Insightful
     Corporation. (Bell Labs octroie à Insightful la licence exclusive
     de leur système S.)
   \item \textsf{R}, ou GNU S, est une version libre (\emph{Open
       Source}) «\emph{not unlike S}».
+  \item S-Plus et \textsf{R} constituent tous deux des environnements
+    intégrés de manipulation de données, de calcul et de préparation
+    de graphiques.
   \end{itemize}
-
-  S-Plus et \textsf{R} constituent tous deux des environnements
-  intégrés de manipulation de données, de calcul et de préparation de
-  graphiques.
 \end{frame}
 
 
 \section[Documentation]{Où trouver de la documentation}
 
 \begin{frame}
-  \frametitle{Où trouver de la documentation}
+  \frametitle{Plusieurs ressources disponibles}
 
   \begin{itemize}[<+->]
   \item S-Plus est livré avec quatre livres, mais aucun ne s'avère
@@ -73,12 +69,7 @@
 \section[Interfaces]{Interfaces pour S-Plus et R}
 
 \begin{frame}
-  \frametitle{Interfaces pour S-Plus et R}
-
-  S-Plus et \textsf{R} sont d'abord et avant tout des applications en
-  ligne de commande (\texttt{sqpe.exe} et \texttt{rterm.exe} sous
-  Windows).
-  \pause
+  \frametitle{D'abord des applications en ligne de commande}
 
   \begin{itemize}[<+->]
   \item S-Plus possède toutefois une interface graphique élaborée
@@ -112,9 +103,9 @@
   \begin{itemize}[<+->]
   \item Pour une installation simplifiée de Emacs et ESS, consulter le
     site Internet
-
-    \url{http://vgoulet.act.ulaval.ca/pub/emacs/}
-      
+    \begin{center}
+      \url{http://vgoulet.act.ulaval.ca/pub/emacs/}
+    \end{center}
     On y trouve une version modifiée de GNU Emacs et des instructions
     d'installation détaillées.
   \item L'annexe A du document d'accompagnement présente les plus
@@ -152,10 +143,7 @@
 \section{Stratégies de travail}
 
 \begin{frame}
-  \frametitle{Stratégies de travail}
-
-  Il existe principalement deux façons de travailler avec S-Plus et
-  \textsf{R}.
+  \frametitle{Deux grandes façons de travailler avec S-Plus et \textsf{R}}
 
   \begin{enumerate}
   \item Le code est virtuel et les objets sont réels.
@@ -222,14 +210,16 @@
   \begin{itemize}[<+->]
   \item Tous deux doivent travailler dans un dossier et non avec des
     fichiers individuels.
-  \item Dans S-Plus, \Splus tout objet créé au cours d'une session de
-    travail est sauvegardé de façon permanente sur le disque dur dans
-    le sous-dossier \texttt{\_\_Data} du dossier de travail.
-  \item Dans \textsf{R}, \R les objets créés sont conservés en mémoire
-    jusqu'à ce que l'on quitte l'application ou que l'on enregistre le
-    travail avec la commande \fonction{save.image()}. L'environnement
-    de travail (\emph{workspace}) est alors sauvegardé dans le fichier
-    \texttt{.RData} dans le dossier de travail.
+  \item Dans S-Plus, \Splus tous les objets sont immédiatement
+    sauvegardés permanente sur le disque dur dans le sous-dossier
+    \texttt{\_\_Data} du dossier de travail.
+  \item Dans \textsf{R}, \R les objets créés sont conservés en mémoire;
+    \begin{itemize}
+    \item sauvegardés en quittant l'application
+    \item avec la commande \fonction{save.image()}.
+    \end{itemize}
+  \item L'environnement de travail (\emph{workspace}) est sauvegardé
+    dans le fichier \texttt{.RData} dans le dossier de travail.
   \end{itemize}
 \end{frame}
 
@@ -247,13 +237,14 @@
 \section{Consulter l'aide en ligne}
 
 \begin{frame}[fragile]
+  \frametitle{La première source d'aide}
+
   Les rubriques d'aide des diverses fonctions disponibles dans S-Plus
   et \textsf{R} contiennent une foule d'informations ainsi que des
   exemples d'utilisation. Leur consultation est tout à fait
   essentielle.
-  \pause
 
-  \begin{itemize}[<+->]
+  \begin{itemize}[<+(1)->]
   \item Pour consulter la rubrique d'aide de la fonction \code{foo},
     on peut entrer à la ligne de commande
 \begin{Sinput}
