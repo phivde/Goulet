@@ -8,7 +8,8 @@
   \usepackage{textcomp,fourier-orns,mathabx}
   \usepackage{Sweave-sans-ae}
   \usepackage{booktabs,threeparttable,expdlist}
-
+  \usepackage[normalem]{ulem}
+  
   %%% Titre
   \title{Introduction à la programmation en S}
   \author{Vincent Goulet}
@@ -18,6 +19,7 @@
   %%% Paramètres de beamer
   \usetheme[hideallsubsections]{Berkeley}
   \usecolortheme{sidebartab}
+  \usefonttheme{professionalfonts}
   \setbeamercovered{transparent}
 
   %%% Sections non numérotées dans la table des matières
@@ -26,34 +28,13 @@
       \usebeamercolor[bg]{subsection number projected}%
       \vrule width1.25ex height1.25ex\kern1ex}\inserttocsection\par}
 
+  %%% Épaisseur de la ligne pour biffer du texte (ulem)
+  \renewcommand{\ULthickness}{1pt}
+
   %%% Désactivation de certaines commandes
   \newcommand{\R}{}
   \newcommand{\Splus}{}
   \newcommand{\Index}[1]{}
-%   \newcommand{\indexargument}[1]{}
-%   \newcommand{\Indexargument}[1]{}
-%   \newcommand{\indexattribut}[1]{}
-%   \newcommand{\Indexattribut}[1]{}
-%   \newcommand{\indexclasse}[1]{}
-%   \newcommand{\Indexclasse}[1]{}
-%   \newcommand{\indexfonction}[1]{}
-%   \newcommand{\Indexfonction}[1]{}
-%   \newcommand{\indexmode}[1]{}
-%   \newcommand{\Indexmode}[1]{}
-%   \newcommand{\indexobjet}[1]{}
-%   \newcommand{\Indexobjet}[1]{} 
-%   \newcommand{\indexemacs}[1]{}
-%   \newcommand{\indexess}[1]{}
-  
-  %%% Styles pour les environnements d'exemples et al.
-%   \theoremstyle{plain}
-% %  \newtheorem{ex}{Exemple}[chapter]
-%   \theoremstyle{remark}
-%   \newtheorem*{rem}{Remarque}
-%   \theoremstyle{definition}
-%   \newtheorem*{astuce}{Astuce}
-%   \newenvironment{ex}{\begin{example}}{\end{example}}
-%   \newenvironment{sol}{\begin{proof}[Solution]}{\end{proof}}
 
   %%% Environnement pour les listes de commandes
   \newenvironment{ttscript}[1]{%
@@ -84,7 +65,7 @@
   \newcommand{\emacs}[1]{\code{#1}}
   \newcommand{\ess}[1]{\code{#1}}
 
-  \includeonlylecture{cours 3}
+%  \includeonlylecture{cours 3}
   
 \begin{document}
 
@@ -125,7 +106,10 @@
 \lecture{Exemples}{cours 3}
 \include{exemples_slides}
 
-%\include{fonctions_slides}
+%% Cours 4: Fonctions
+\lecture{Fonctions}{cours 4}
+\include{fonctions_slides}
+
 %\include{avance_slides}
 
 \appendix
