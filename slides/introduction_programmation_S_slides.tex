@@ -21,6 +21,13 @@
   \usecolortheme{sidebartab}
   \usefonttheme{professionalfonts}
   \setbeamercovered{transparent}
+  \AtBeginSection[]
+  {
+    \begin{frame}
+      \frametitle{Sommaire}
+      \tableofcontents[currentsection]
+    \end{frame}
+  }
 
   %%% Sections non numérotées dans la table des matières
   \setbeamertemplate{section in toc}{%
@@ -58,14 +65,13 @@
   \newcommand{\Classe}[1]{\code{#1}}
   \newcommand{\fonction}[1]{\code{#1}}
   \newcommand{\Fonction}[1]{\code{#1}}
-%  \newcommand{\mode}[1]{\code{#1}}
   \newcommand{\Mode}[1]{\code{#1}}
   \newcommand{\objet}[1]{\code{#1}}
   \newcommand{\Objet}[1]{\code{#1}}
   \newcommand{\emacs}[1]{\code{#1}}
   \newcommand{\ess}[1]{\code{#1}}
 
-%  \includeonlylecture{cours 3}
+%  \includeonlylecture{cours 1}
   
 \begin{document}
 
@@ -75,45 +81,49 @@
 \renewcommand{\partname}{Chapitre}
 \renewcommand{\insertromanpartnumber}{\arabic{part}}
 
-
+%%%
+%%% PAGE TITRE
+%%%
 \begin{frame}
   \titlepage
 \end{frame}
 
-%% Cours 1 et lab 1: Présentation.
+
+%%%
+%%% CHAPITRES
+%%% 
+
+%% COURS 1: Présentation.
 \lecture{Présentation}{cours 1}
 \include{presentation_slides}
 
-\AtBeginSection[]
-{
-  \begin{frame}
-    \frametitle{Sommaire}
-    \tableofcontents[currentsection]
-  \end{frame}
-}
-
-%% Cours 2: Bases, sauf la section Indiçage, faite au lab 2.
-\lecture{Bases}{cours 2}
+%% COURS 2: Bases
+\lecture{Bases}{cours 2}        % hiver 2006: section Indiçage au lab 2
 \include{bases_slides}
 
-%% Hiver 2006: chapitre Opérateurs présenté au lab 2 (sauf les
-%% structures de contrôle). Pas vraiment nécessaire, dans la mesure où
-%% les exemples résolus sont faits au lab 3.
-\lecture{Opérateurs}{lab 2}
+%% COURS 3: Opérateurs
+\lecture{Opérateurs}{cours 3}   % hiver 2006: fait au lab 2
 \include{operateurs_slides}
 
-%% Cours 3: Exemples résolus.
-\lecture{Exemples}{cours 3}
+%% LAB 3: Exemples résolus.
+\lecture{Exemples}{lab 3}       % hiver 2006: fait au cours 3
 \include{exemples_slides}
 
-%% Cours 4: Fonctions
+%% COURS 4: Fonctions et Concepts avancés
 \lecture{Fonctions}{cours 4}
 \include{fonctions_slides}
+\include{avance_slides}
 
-%\include{avance_slides}
 
-\appendix
+%%%
+%%% ANNEXES
+%%%
 
+\setcounter{part}{0}
+\renewcommand{\partname}{Annexe}
+\renewcommand{\insertromanpartnumber}{\Alph{part}}
+
+%% LAB 1: présentation de Emacs et ESS.
 \lecture{Emacs et ESS}{lab 1}
 \include{ess_slides}
 
