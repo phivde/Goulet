@@ -1,26 +1,11 @@
-\begin {proof}[Le code]
-\begin{Schunk}
-\begin{Sinput}
-> i <- 0.05
-> repeat {
-+     it <- i
-+     i <- (1 - (1 + it)^(-10))/8.21
-+     if (abs(i - it)/it < 1e-10)
-+         break
-+ }
-> i
-\end{Sinput}
-\begin{Soutput}
-[1] 0.03756777
-\end{Soutput}
-\end{Schunk}
-  \pause
-\begin{Schunk}
-\begin{Sinput}
-> (1 - (1 + i)^(-10))/i
-\end{Sinput}
-\begin{Soutput}
-[1] 8.21
-\end{Soutput}
-\end{Schunk}
-  \end{proof}
+\frametitle {Standard pour la programmation en S}
+
+  \begin{itemize}
+  \item Style C$++$, avec les accolades sur leurs propres lignes.
+  \item Une indentation de quatre (4) espaces.
+  \item<2-> Pour utiliser ce style dans Emacs\index{Emacs}, faire
+\begin{verbatim}
+    M-x ess-set-style RET C++ RET
+\end{verbatim}
+    une fois qu'un fichier de script est ouvert.
+  \end{itemize}

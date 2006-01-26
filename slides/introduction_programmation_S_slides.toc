@@ -1,6 +1,2 @@
 \beamer@endinputifotherversion {3.06pt}
 \select@language {french}
-\beamer@sectionintoc {1}{Calcul de valeurs pr\'esentes}{4}{1}{1}
-\beamer@sectionintoc {2}{Fonctions de probabilit\'e}{21}{1}{2}
-\beamer@sectionintoc {3}{Fonction de r\'epartition de la loi gamma}{27}{1}{3}
-\beamer@sectionintoc {4}{Algorithme du point fixe}{35}{1}{4}
