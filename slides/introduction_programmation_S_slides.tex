@@ -75,12 +75,6 @@
   
 \begin{document}
 
-%% Faire passer les parties pour des chapitres et numéroter ceux-ci en
-%% chiffres arabes. Doit être fait ici, autrement babel redéfinit
-%% \partname.
-\renewcommand{\partname}{Chapitre}
-\renewcommand{\insertromanpartnumber}{\arabic{part}}
-
 %%%
 %%% PAGE TITRE
 %%%
@@ -92,6 +86,9 @@
 %%%
 %%% CHAPITRES
 %%% 
+
+\renewcommand{\partname}{Chapitre}
+\renewcommand{\insertromanpartnumber}{\arabic{part}}
 
 %% COURS 1: Présentation.
 \lecture{Présentation}{cours 1}
@@ -119,9 +116,13 @@
 %%% ANNEXES
 %%%
 
-\setcounter{part}{0}
+%% Utiliser un autre compteur pour les annexe, autrement les sections
+%% de l'annexe A sont mélangées avec celles du chapitre 1, etc.
+\newcounter{annexe}
+\setcounter{annexe}{\value{part}}
+\addtocounter{annexe}{-6}
 \renewcommand{\partname}{Annexe}
-\renewcommand{\insertromanpartnumber}{\Alph{part}}
+\renewcommand{\insertromanpartnumber}{\stepcounter{annexe}\Alph{annexe}}
 
 %% LAB 1: présentation de Emacs et ESS.
 \lecture{Emacs et ESS}{lab 1}

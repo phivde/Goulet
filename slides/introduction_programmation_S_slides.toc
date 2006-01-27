@@ -54,5 +54,5 @@
 \beamer@sectionintoc {37}{Fonction \texttt {mapply}}{291}{6}{37}
 \beamer@sectionintoc {38}{Fonction \texttt {replicate}}{298}{6}{38}
 \beamer@sectionintoc {39}{Classes et fonctions g\'en\'eriques}{304}{6}{39}
-\beamer@sectionintoc {40}{GNU Emacs}{315}{1}{40}
-\beamer@sectionintoc {41}{Mode ESS}{336}{1}{41}
+\beamer@sectionintoc {40}{GNU Emacs}{315}{7}{40}
+\beamer@sectionintoc {41}{Mode ESS}{336}{7}{41}
