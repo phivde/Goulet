@@ -145,6 +145,7 @@ fichier
 
 \section{Sélection de texte}
 \index{Emacs!sélection}  
+\label{ess:selection}
 
 La sélection de texte fonctionne différemment du standard Windows.
 
@@ -228,6 +229,72 @@ GNU Emacs distribuée dans le site Internet
   \end{ttscript}
 \end{itemize}
 \index{ESS|)}
+
+
+\section{Session de travail type}
+\label{ess:session_travail}
+
+On décrit, dans cette section, les différentes étapes et principaux
+raccourcis claviers d'une session de travail type avec S-Plus ou
+\textsf{R}, Emacs et ESS.
+
+\begin{enumerate}
+\item Déterminer le dossier de travail et le créer au besoin.
+  Normalement, le dossier de travail pour S-Plus ou \textsf{R} sera le
+  même que celui où les fichiers de script sont sauvegardés. Si l'on
+  prévoit sauvegarder des objets S, il est important de choisir un
+  nouveau dossier pour le projet.
+\item Lancer Emacs et démarrer un processus S dans le dossier de
+  travail déterminé ci-dessus.
+  \begin{itemize}
+  \item \code{M-x R RET} ou \code{M-x Sqpe RET}
+  \end{itemize}
+\item Ouvrir un fichier de script dans lequel on sauvegardera le code
+  source.
+  \begin{itemize}
+  \item \emacs{C-x C-f} pour ouvrir un fichier existant ou un nouveau
+    fichier.
+  \end{itemize}
+\item Composer le code. Lors de cette étape, on se déplacera souvent
+  du fichier de script à la ligne de commande afin d'essayer diverses
+  expressions. On exécutera également des parties seulement du code se
+  trouvant dans le fichier de script.
+  \begin{itemize}
+  \item \emacs{C-x o} pour se déplacer de la fenêtre de script à la
+    ligne de commande et vice-versa.
+  \item \ess{C-c C-e} pour replacer le curseur à la ligne de commande
+    et au bas de la fenêtre.
+  \item \ess{C-c C-o} pour effacer le résultat de la dernière
+    commande, surtout s'il est très long.
+  \item \ess{C-c C-n} pour exécuter une ligne du fichier de script.
+  \item \ess{C-c C-r} pour exécuter une région du fichier de script
+    (voir la section \ref{ess:selection} pour sélectionner une région).
+  \item \ess{C-c C-f} pour définir une fonction.
+  \end{itemize}
+\item Sauvegarder le fichier de script. Les quatrième et cinquième
+  caractères de la ligne de mode changent de \verb|**| à \verb|--|.
+  \begin{itemize}
+  \item \emacs{C-x C-s} pour sauvegarder le fichier de script.
+  \end{itemize}
+\item Il est également possible de sauvegarder le texte de la session
+  interactive (la ligne de commande). Il est recommandé de nommer de
+  telles transcriptions de la session de travail avec une extension
+  \texttt{.St} ou \texttt{.Rt}. En effet, ESS possède un mode spécial
+  pour les transcriptions. Consulter à cet effet le chapitre 5 de la
+  documentation de ESS.
+  \begin{itemize}
+  \item \emacs{C-x C-s} pour sauvegarder le texte de la session.
+  \end{itemize}
+\item Quitter le processus S. Utiliser la commande ESS pour ce faire
+  puisque ESS se chargera de fermer tous les fichiers associés au
+  processus S. À moins qu'il ne contienne des objets importants,
+  l'espace de travail \R en \textsf{R} n'est habituellement pas
+  sauvegardé.
+  \begin{itemize}
+  \item \ess{C-c C-q} pour quitter le processus S.
+  \end{itemize}
+\end{enumerate}
+
 
 %%% Local Variables: 
 %%% mode: latex
