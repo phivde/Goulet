@@ -132,7 +132,7 @@ nom\-bres aléatoires désirée.  Ainsi,
 > rpois(3, lambda = c(1, 4, 10))
 \end{Sinput}
 \begin{Soutput}
-[1] 2 4 7
+[1] 1 2 4
 \end{Soutput}
 \end{Schunk}
 retourne trois nombres aléatoires issus de distributions de Poisson
@@ -192,9 +192,11 @@ avec remise.
 \begin{Sinput}
 > x <- rpois(10000, lambda = rgamma(10000, 
 +     shape = 5, rate = 4))
+> xx <- seq(min(x), max(x))
 > px <- table(x)
-> plot(px/sum(px))
-> points(0:10, dnbinom(0:10, size = 5, prob = 0.8))
+> plot(xx, dnbinom(xx, size = 5, prob = 0.8), 
++     type = "h", lwd = 5, col = "blue")
+> points(xx, px/length(x), pch = 16)
 \end{Sinput}
 \end{Schunk}
   \end{rep}

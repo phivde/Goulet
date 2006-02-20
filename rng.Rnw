@@ -179,10 +179,12 @@ hist(x)
   négative de paramètres $r = 5$ et $\theta = 0,8$.
   \begin{rep}
 <<echo=TRUE,eval=FALSE>>=
-x <- rpois(10000, lambda=rgamma(10000, shape=5, rate=4))
+x <- rpois(10000, lambda = rgamma(10000, shape = 5, rate = 4))
+xx <- seq(min(x), max(x))
 px <- table(x)
-plot(px/sum(px))
-points(0:10, dnbinom(0:10, size=5, prob=0.8))
+plot(xx, dnbinom(xx, size = 5, prob = 0.8),
+     type = "h", lwd = 5, col = "blue")
+points(xx, px/length(x), pch = 16)
 @
   \end{rep}
 \end{exercice}
