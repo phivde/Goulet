@@ -157,10 +157,10 @@ x
   $- \ln f(x_i; \alpha, \lambda)$.
 \begin{Schunk}
 \begin{Sinput}
-> x <- rgamma(10, shape=5, rate=2)
+> x <- rgamma(10, shape = 5, rate = 2)
 > ms(~-log(dgamma(x, a, l)),
-           data=as.data.frame(x),
-           start=list(a=1, l=1))
+           data = as.data.frame(x),
+           start = list(a = 1, l = 1))
 \end{Sinput}
 \begin{Soutput}
 value: 14.60445
