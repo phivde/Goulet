@@ -137,11 +137,14 @@ fonction \code{f} entre les points \code{lower} et \code{upper}.
   paramètres $\alpha = 3$ et $\beta = 2$.
 \end{ex}
 \begin{sol}
-  On sait que l'extremum se trouve dans l'intervalle $[0, 1]$.
+  La loi bêta étant définie dans $[0, 1]$, on sait que l'extremum se
+  trouve dans cet intervalle. On utilise l'argument \code{...} de
+  \texttt{optimize} pour passer les paramètres de la loi bêta à
+  \texttt{dbeta()}.
 \begin{Schunk}
 \begin{Sinput}
-> f <- function(x) dbeta(x, 3, 2)
-> optimize(f, lower = 0, upper = 1, maximum = TRUE)
+> optimize(dbeta, interval = c(0, 1), maximum = TRUE, 
++     shape1 = 3, shape2 = 2)
 \end{Sinput}
 \begin{Soutput}
 $maximum
@@ -188,10 +191,10 @@ l'usage de formules\index{formule} (voir la section
   $- \ln f(x_i; \alpha, \lambda)$.
 \begin{Schunk}
 \begin{Sinput}
-> x <- rgamma(10, shape=5, rate=2)
+> x <- rgamma(10, shape = 5, rate = 2)
 > ms(~-log(dgamma(x, a, l)),
-           data=as.data.frame(x),
-           start=list(a=1, l=1))
+           data = as.data.frame(x),
+           start = list(a = 1, l = 1))
 \end{Sinput}
 \begin{Soutput}
 value: 14.60445
@@ -461,6 +464,7 @@ NULL
 
 
 \begin{exercice}
+  \label{exercice:optimisation:optim}
   Les fonctions de densité de probabilité et de répartition de la
   distribution de Pareto sont données à l'exercice
   \ref{avance}.\ref{exercice:avance:pareto}. Calculer les estimateurs

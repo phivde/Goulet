@@ -103,43 +103,44 @@
 \contentsline {section}{\numberline {9.7}Simulation}{95}
 \contentsline {section}{\numberline {9.8}Exemples}{95}
 \contentsline {section}{\numberline {9.9}Exercices}{99}
-\contentsline {appendix}{\chapternumberline {A}GNU Emacs et ESS: la base}{101}
+\contentsline {chapter}{\chapternumberline {A}GNU Emacs et ESS: la base}{101}
 \contentsline {section}{\numberline {A.1}Mise en contexte}{101}
 \contentsline {section}{\numberline {A.2}Configuration de l'\'editeur}{101}
 \contentsline {section}{\numberline {A.3}\emph {Emacs-ismes} et \emph {Unix-ismes}}{102}
 \contentsline {section}{\numberline {A.4}Commandes d'\'edition de base}{102}
 \contentsline {section}{\numberline {A.5}S\'election de texte}{103}
 \contentsline {section}{\numberline {A.6}Mode ESS}{103}
-\contentsline {appendix}{\chapternumberline {B}Utilisation de ESS et S-Plus sous Windows}{105}
-\contentsline {section}{\numberline {B.1}Tout dans Emacs}{105}
-\contentsline {section}{\numberline {B.2}Combinaison Emacs et S-Plus GUI}{106}
-\contentsline {appendix}{\chapternumberline {C}G\'en\'erateurs de nombres al\'eatoires}{107}
-\contentsline {section}{\numberline {C.1}G\'en\'erateurs de nombres al\'eatoires}{107}
-\contentsline {section}{\numberline {C.2}Fonctions de simulation de variables al\'eatoires}{107}
-\contentsline {section}{\numberline {C.3}Exercices}{109}
-\contentsline {appendix}{\chapternumberline {D}Planification d'une simulation en S}{111}
-\contentsline {section}{\numberline {D.1}Introduction}{111}
-\contentsline {section}{\numberline {D.2}Premi\`ere approche: avec une boucle}{112}
-\contentsline {section}{\numberline {D.3}Seconde approche: avec \texttt {sapply}}{112}
-\contentsline {section}{\numberline {D.4}Variante de la seconde approche}{115}
-\contentsline {section}{\numberline {D.5}Comparaison des temps de calcul}{117}
-\contentsline {section}{\numberline {D.6}Gestion des fichiers}{117}
-\contentsline {section}{\numberline {D.7}Ex\'ecution en lot}{118}
-\contentsline {section}{\numberline {D.8}Quelques remarques}{118}
+\contentsline {section}{\numberline {A.7}Session de travail type}{104}
+\contentsline {chapter}{\chapternumberline {B}Utilisation de ESS et S-Plus sous Windows}{107}
+\contentsline {section}{\numberline {B.1}Tout dans Emacs}{107}
+\contentsline {section}{\numberline {B.2}Combinaison Emacs et S-Plus GUI}{108}
+\contentsline {chapter}{\chapternumberline {C}G\'en\'erateurs de nombres al\'eatoires}{109}
+\contentsline {section}{\numberline {C.1}G\'en\'erateurs de nombres al\'eatoires}{109}
+\contentsline {section}{\numberline {C.2}Fonctions de simulation de variables al\'eatoires}{109}
+\contentsline {section}{\numberline {C.3}Exercices}{111}
+\contentsline {chapter}{\chapternumberline {D}Planification d'une simulation en S}{113}
+\contentsline {section}{\numberline {D.1}Introduction}{113}
+\contentsline {section}{\numberline {D.2}Premi\`ere approche: avec une boucle}{114}
+\contentsline {section}{\numberline {D.3}Seconde approche: avec \texttt {sapply}}{114}
+\contentsline {section}{\numberline {D.4}Variante de la seconde approche}{117}
+\contentsline {section}{\numberline {D.5}Comparaison des temps de calcul}{119}
+\contentsline {section}{\numberline {D.6}Gestion des fichiers}{119}
+\contentsline {section}{\numberline {D.7}Ex\'ecution en lot}{120}
+\contentsline {section}{\numberline {D.8}Quelques remarques}{120}
 \select@language {english}
-\contentsline {appendix}{\chapternumberline {E}GNU Free Documentation License}{121}
-\contentsline {section}{\numberline {E.1}APPLICABILITY AND DEFINITIONS}{121}
-\contentsline {section}{\numberline {E.2}VERBATIM COPYING}{123}
-\contentsline {section}{\numberline {E.3}COPYING IN QUANTITY}{123}
-\contentsline {section}{\numberline {E.4}MODIFICATIONS}{124}
-\contentsline {section}{\numberline {E.5}COMBINING DOCUMENTS}{126}
-\contentsline {section}{\numberline {E.6}COLLECTIONS OF DOCUMENTS}{126}
-\contentsline {section}{\numberline {E.7}AGGREGATION WITH INDEPENDENT WORKS}{127}
-\contentsline {section}{\numberline {E.8}TRANSLATION}{127}
-\contentsline {section}{\numberline {E.9}TERMINATION}{127}
-\contentsline {section}{\numberline {E.10}FUTURE REVISIONS OF THIS LICENSE}{128}
-\contentsline {section}{ADDENDUM: How to use this License for your documents}{128}
+\contentsline {chapter}{\chapternumberline {E}GNU Free Documentation License}{123}
+\contentsline {section}{\numberline {E.1}APPLICABILITY AND DEFINITIONS}{123}
+\contentsline {section}{\numberline {E.2}VERBATIM COPYING}{125}
+\contentsline {section}{\numberline {E.3}COPYING IN QUANTITY}{125}
+\contentsline {section}{\numberline {E.4}MODIFICATIONS}{126}
+\contentsline {section}{\numberline {E.5}COMBINING DOCUMENTS}{128}
+\contentsline {section}{\numberline {E.6}COLLECTIONS OF DOCUMENTS}{128}
+\contentsline {section}{\numberline {E.7}AGGREGATION WITH INDEPENDENT WORKS}{129}
+\contentsline {section}{\numberline {E.8}TRANSLATION}{129}
+\contentsline {section}{\numberline {E.9}TERMINATION}{129}
+\contentsline {section}{\numberline {E.10}FUTURE REVISIONS OF THIS LICENSE}{130}
+\contentsline {section}{ADDENDUM: How to use this License for your documents}{130}
 \select@language {francais}
-\contentsline {chapter}{R\'eponses des exercices}{129}
-\contentsline {chapter}{Bibliographie}{139}
-\contentsline {chapter}{Index}{141}
+\contentsline {chapter}{R\'eponses des exercices}{131}
+\contentsline {chapter}{Bibliographie}{141}
+\contentsline {chapter}{Index}{143}

@@ -1146,123 +1146,133 @@
 \indexentry{Emacs!M-y@\texttt  {M-y}}{103}
 \indexentry{Emacs|)}{103}
 \indexentry{ESS|(}{103}
+\indexentry{ESS!C-c C-e@\texttt  {C-c C-e}}{104}
+\indexentry{ESS!M-h@\texttt  {M-h}}{104}
+\indexentry{ESS!C-c C-o@\texttt  {C-c C-o}}{104}
+\indexentry{ESS!C-c C-v@\texttt  {C-c C-v}}{104}
+\indexentry{ESS!C-c C-q@\texttt  {C-c C-q}}{104}
 \indexentry{ESS!C-c C-n@\texttt  {C-c C-n}}{104}
 \indexentry{ESS!C-c C-r@\texttt  {C-c C-r}}{104}
 \indexentry{ESS!C-c C-f@\texttt  {C-c C-f}}{104}
 \indexentry{ESS!C-c C-l@\texttt  {C-c C-l}}{104}
 \indexentry{ESS!C-c C-v@\texttt  {C-c C-v}}{104}
 \indexentry{ESS!C-c C-s@\texttt  {C-c C-s}}{104}
-\indexentry{ESS!C-c C-e@\texttt  {C-c C-e}}{104}
-\indexentry{ESS!M-h@\texttt  {M-h}}{104}
-\indexentry{ESS!C-c C-o@\texttt  {C-c C-o}}{104}
-\indexentry{ESS!C-c C-v@\texttt  {C-c C-v}}{104}
-\indexentry{ESS!C-c C-q@\texttt  {C-c C-q}}{104}
 \indexentry{ESS|)}{104}
-\indexentry{Emacs!et S-Plus|(}{105}
-\indexentry{Emacs!et S-Plus|)}{106}
-\indexentry{simulation!nombres uniformes}{107}
-\indexentry{runif@\texttt  {runif}|textbf}{107}
-\indexentry{set.seed@\texttt  {set.seed}|textbf}{107}
-\indexentry{Random.seed@\code{.Random.seed}}{107}
-\indexentry{simulation!variables al\'eatoires}{107}
-\indexentry{distribution!b\^eta}{108}
-\indexentry{distribution!binomiale}{108}
-\indexentry{distribution!binomiale n\'egative}{108}
-\indexentry{distribution!Cauchy}{108}
-\indexentry{distribution!exponentielle}{108}
-\indexentry{distribution!F}{108}
-\indexentry{distribution!gamma}{108}
-\indexentry{distribution!geometrique@g\'eom\'etrique}{108}
-\indexentry{distribution!hyperg\'eom\'etrique}{108}
-\indexentry{distribution!khi carr\'e}{108}
-\indexentry{distribution!logistique}{108}
-\indexentry{distribution!log-normale}{108}
-\indexentry{distribution!normale}{108}
-\indexentry{distribution!Poisson}{108}
-\indexentry{distribution!t}{108}
-\indexentry{distribution!uniforme}{108}
-\indexentry{distribution!Weibull}{108}
-\indexentry{distribution!Wilcoxon}{108}
-\indexentry{sample@\texttt  {sample}|textbf}{109}
-\indexentry{distribution!log-normale}{109}
-\indexentry{distribution!m\'elange Poisson/gamma}{109}
-\indexentry{plot@\texttt  {plot}}{109}
-\indexentry{table@\texttt  {table}}{109}
-\indexentry{distribution!m\'elange discret}{109}
-\indexentry{simulation!planification|(}{111}
-\indexentry{boucle}{112}
-\indexentry{for@\texttt  {for}}{112}
-\indexentry{lapply@\texttt  {lapply}}{112}
-\indexentry{sapply@\texttt  {sapply}}{112}
-\indexentry{lapply@\texttt  {lapply}}{112}
-\indexentry{sapply@\texttt  {sapply}}{112}
-\indexentry{...@\texttt  {...}}{112}
-\indexentry{sapply@\texttt  {sapply}}{112}
-\indexentry{matrix@\texttt  {matrix}}{113}
-\indexentry{nrow@\texttt  {nrow}}{113}
-\indexentry{ncol@\texttt  {ncol}}{113}
-\indexentry{rownames@\texttt  {rownames}}{113}
-\indexentry{for@\texttt  {for}}{113}
-\indexentry{runif@\texttt  {runif}}{113}
-\indexentry{mean@\texttt  {mean}}{113}
-\indexentry{median@\texttt  {median}}{113}
-\indexentry{mean@\texttt  {mean}}{113}
-\indexentry{range@\texttt  {range}}{113}
-\indexentry{rowMeans@\texttt  {rowMeans}}{113}
-\indexentry{apply@\texttt  {apply}}{113}
-\indexentry{var@\texttt  {var}}{113}
-\indexentry{function@\texttt  {function}}{114}
-\indexentry{matrix@\texttt  {matrix}}{114}
-\indexentry{nrow@\texttt  {nrow}}{114}
-\indexentry{ncol@\texttt  {ncol}}{114}
-\indexentry{rownames@\texttt  {rownames}}{114}
+\indexentry{Emacs!C-x C-f@\texttt  {C-x C-f}}{105}
+\indexentry{Emacs!C-x o@\texttt  {C-x o}}{105}
+\indexentry{ESS!C-c C-e@\texttt  {C-c C-e}}{105}
+\indexentry{ESS!C-c C-o@\texttt  {C-c C-o}}{105}
+\indexentry{ESS!C-c C-n@\texttt  {C-c C-n}}{105}
+\indexentry{ESS!C-c C-r@\texttt  {C-c C-r}}{105}
+\indexentry{ESS!C-c C-f@\texttt  {C-c C-f}}{105}
+\indexentry{Emacs!C-x C-s@\texttt  {C-x C-s}}{105}
+\indexentry{Emacs!C-x C-s@\texttt  {C-x C-s}}{105}
+\indexentry{ESS!C-c C-q@\texttt  {C-c C-q}}{105}
+\indexentry{Emacs!et S-Plus|(}{107}
+\indexentry{Emacs!et S-Plus|)}{108}
+\indexentry{simulation!nombres uniformes}{109}
+\indexentry{runif@\texttt  {runif}|textbf}{109}
+\indexentry{set.seed@\texttt  {set.seed}|textbf}{109}
+\indexentry{Random.seed@\code{.Random.seed}}{109}
+\indexentry{simulation!variables al\'eatoires}{109}
+\indexentry{distribution!b\^eta}{110}
+\indexentry{distribution!binomiale}{110}
+\indexentry{distribution!binomiale n\'egative}{110}
+\indexentry{distribution!Cauchy}{110}
+\indexentry{distribution!exponentielle}{110}
+\indexentry{distribution!F}{110}
+\indexentry{distribution!gamma}{110}
+\indexentry{distribution!geometrique@g\'eom\'etrique}{110}
+\indexentry{distribution!hyperg\'eom\'etrique}{110}
+\indexentry{distribution!khi carr\'e}{110}
+\indexentry{distribution!logistique}{110}
+\indexentry{distribution!log-normale}{110}
+\indexentry{distribution!normale}{110}
+\indexentry{distribution!Poisson}{110}
+\indexentry{distribution!t}{110}
+\indexentry{distribution!uniforme}{110}
+\indexentry{distribution!Weibull}{110}
+\indexentry{distribution!Wilcoxon}{110}
+\indexentry{sample@\texttt  {sample}|textbf}{111}
+\indexentry{distribution!log-normale}{111}
+\indexentry{distribution!m\'elange Poisson/gamma}{111}
+\indexentry{plot@\texttt  {plot}}{111}
+\indexentry{table@\texttt  {table}}{111}
+\indexentry{distribution!m\'elange discret}{111}
+\indexentry{simulation!planification|(}{113}
+\indexentry{boucle}{114}
 \indexentry{for@\texttt  {for}}{114}
-\indexentry{runif@\texttt  {runif}}{114}
-\indexentry{mean@\texttt  {mean}}{114}
-\indexentry{median@\texttt  {median}}{114}
-\indexentry{mean@\texttt  {mean}}{114}
-\indexentry{range@\texttt  {range}}{114}
-\indexentry{list@\texttt  {list}}{114}
-\indexentry{rowMeans@\texttt  {rowMeans}}{114}
-\indexentry{apply@\texttt  {apply}}{114}
-\indexentry{var@\texttt  {var}}{114}
-\indexentry{function@\texttt  {function}}{114}
-\indexentry{runif@\texttt  {runif}}{114}
-\indexentry{mean@\texttt  {mean}}{114}
-\indexentry{median@\texttt  {median}}{114}
-\indexentry{mean@\texttt  {mean}}{114}
-\indexentry{range@\texttt  {range}}{114}
-\indexentry{function@\texttt  {function}}{115}
-\indexentry{sapply@\texttt  {sapply}}{115}
-\indexentry{list@\texttt  {list}}{115}
+\indexentry{lapply@\texttt  {lapply}}{114}
+\indexentry{sapply@\texttt  {sapply}}{114}
+\indexentry{lapply@\texttt  {lapply}}{114}
+\indexentry{sapply@\texttt  {sapply}}{114}
+\indexentry{...@\texttt  {...}}{114}
+\indexentry{sapply@\texttt  {sapply}}{114}
+\indexentry{matrix@\texttt  {matrix}}{115}
+\indexentry{nrow@\texttt  {nrow}}{115}
+\indexentry{ncol@\texttt  {ncol}}{115}
+\indexentry{rownames@\texttt  {rownames}}{115}
+\indexentry{for@\texttt  {for}}{115}
+\indexentry{runif@\texttt  {runif}}{115}
+\indexentry{mean@\texttt  {mean}}{115}
+\indexentry{median@\texttt  {median}}{115}
+\indexentry{mean@\texttt  {mean}}{115}
+\indexentry{range@\texttt  {range}}{115}
 \indexentry{rowMeans@\texttt  {rowMeans}}{115}
 \indexentry{apply@\texttt  {apply}}{115}
 \indexentry{var@\texttt  {var}}{115}
-\indexentry{replicate@\texttt  {replicate}}{115}
+\indexentry{function@\texttt  {function}}{116}
+\indexentry{matrix@\texttt  {matrix}}{116}
+\indexentry{nrow@\texttt  {nrow}}{116}
+\indexentry{ncol@\texttt  {ncol}}{116}
+\indexentry{rownames@\texttt  {rownames}}{116}
+\indexentry{for@\texttt  {for}}{116}
+\indexentry{runif@\texttt  {runif}}{116}
+\indexentry{mean@\texttt  {mean}}{116}
+\indexentry{median@\texttt  {median}}{116}
+\indexentry{mean@\texttt  {mean}}{116}
+\indexentry{range@\texttt  {range}}{116}
+\indexentry{list@\texttt  {list}}{116}
+\indexentry{rowMeans@\texttt  {rowMeans}}{116}
+\indexentry{apply@\texttt  {apply}}{116}
+\indexentry{var@\texttt  {var}}{116}
 \indexentry{function@\texttt  {function}}{116}
 \indexentry{runif@\texttt  {runif}}{116}
 \indexentry{mean@\texttt  {mean}}{116}
 \indexentry{median@\texttt  {median}}{116}
 \indexentry{mean@\texttt  {mean}}{116}
 \indexentry{range@\texttt  {range}}{116}
-\indexentry{function@\texttt  {function}}{116}
-\indexentry{replicate@\texttt  {replicate}}{116}
-\indexentry{list@\texttt  {list}}{116}
-\indexentry{rowMeans@\texttt  {rowMeans}}{116}
-\indexentry{apply@\texttt  {apply}}{116}
-\indexentry{var@\texttt  {var}}{116}
-\indexentry{replicate@\texttt  {replicate}}{116}
-\indexentry{system.time@\texttt  {system.time}}{117}
-\indexentry{sys.time@\texttt  {sys.time}}{117}
-\indexentry{system.time@\texttt  {system.time}}{117}
-\indexentry{source@\texttt  {source}}{117}
-\indexentry{rownames@\texttt  {rownames}}{118}
-\indexentry{row.names@\texttt  {row.names}}{118}
-\indexentry{dimnames@\texttt  {dimnames}}{118}
-\indexentry{rowVars@\texttt  {rowVars}}{118}
-\indexentry{colVars@\texttt  {colVars}}{118}
-\indexentry{simulation!planification|)}{119}
-\indexentry{sapply@\texttt  {sapply}}{134}
-\indexentry{[[@\texttt  {[[}}{136}
-\indexentry{ecdf@\texttt  {ecdf}}{137}
-\indexentry{ecdf@\texttt  {ecdf}}{137}
+\indexentry{function@\texttt  {function}}{117}
+\indexentry{sapply@\texttt  {sapply}}{117}
+\indexentry{list@\texttt  {list}}{117}
+\indexentry{rowMeans@\texttt  {rowMeans}}{117}
+\indexentry{apply@\texttt  {apply}}{117}
+\indexentry{var@\texttt  {var}}{117}
+\indexentry{replicate@\texttt  {replicate}}{117}
+\indexentry{function@\texttt  {function}}{118}
+\indexentry{runif@\texttt  {runif}}{118}
+\indexentry{mean@\texttt  {mean}}{118}
+\indexentry{median@\texttt  {median}}{118}
+\indexentry{mean@\texttt  {mean}}{118}
+\indexentry{range@\texttt  {range}}{118}
+\indexentry{function@\texttt  {function}}{118}
+\indexentry{replicate@\texttt  {replicate}}{118}
+\indexentry{list@\texttt  {list}}{118}
+\indexentry{rowMeans@\texttt  {rowMeans}}{118}
+\indexentry{apply@\texttt  {apply}}{118}
+\indexentry{var@\texttt  {var}}{118}
+\indexentry{replicate@\texttt  {replicate}}{118}
+\indexentry{system.time@\texttt  {system.time}}{119}
+\indexentry{sys.time@\texttt  {sys.time}}{119}
+\indexentry{system.time@\texttt  {system.time}}{119}
+\indexentry{source@\texttt  {source}}{119}
+\indexentry{rownames@\texttt  {rownames}}{120}
+\indexentry{row.names@\texttt  {row.names}}{120}
+\indexentry{dimnames@\texttt  {dimnames}}{120}
+\indexentry{rowVars@\texttt  {rowVars}}{120}
+\indexentry{colVars@\texttt  {colVars}}{120}
+\indexentry{simulation!planification|)}{121}
+\indexentry{sapply@\texttt  {sapply}}{136}
+\indexentry{[[@\texttt  {[[}}{138}
+\indexentry{ecdf@\texttt  {ecdf}}{139}
+\indexentry{ecdf@\texttt  {ecdf}}{139}

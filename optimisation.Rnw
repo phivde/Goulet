@@ -380,6 +380,7 @@ uniroot(function(x) g(x, X, w, 140E6) - x, c(50000, 80000))
 
 
 \begin{exercice}
+  \label{exercice:optimisation:optim}
   Les fonctions de densité de probabilité et de répartition de la
   distribution de Pareto sont données à l'exercice
   \ref{avance}.\ref{exercice:avance:pareto}. Calculer les estimateurs
