@@ -66,30 +66,30 @@ Lorsque \code{X} est une matrice, \fonction{apply} sert principalement
 \end{Sinput}
 \begin{Soutput}
      [,1] [,2] [,3] [,4]
-[1,]   54   33   30   17
-[2,]    3   46   95   83
-[3,]   47    6   56   58
-[4,]   18   22   50   36
-[5,]   41   41   77   31
+[1,]   36   13   57   56
+[2,]    3   43   96   50
+[3,]   79   69    9   37
+[4,]   78   77   66   62
+[5,]   98   76   75   77
 \end{Soutput}
 \begin{Sinput}
 > apply(m, 1, var)
 \end{Sinput}
 \begin{Soutput}
-[1]  235.0000 1718.9167  590.9167  211.6667
-[5]  409.0000
+[1]  429.66667 1452.66667 1014.33333   63.58333
+[5]  121.66667
 \end{Soutput}
 \begin{Sinput}
 > apply(m, 2, min)
 \end{Sinput}
 \begin{Soutput}
-[1]  3  6 30 17
+[1]  3 13  9 37
 \end{Soutput}
 \begin{Sinput}
 > apply(m, 1, mean, trim = 0.2)
 \end{Sinput}
 \begin{Soutput}
-[1] 33.50 56.75 41.75 31.50 47.50
+[1] 40.50 48.00 48.50 70.75 81.50
 \end{Soutput}
 \end{Schunk}
 \end{itemize}
@@ -109,7 +109,7 @@ ou un tableau.
 > apply(arr, 3, det)
 \end{Sinput}
 \begin{Soutput}
-[1]  1178800 16153716 14298240 20093933  6934743
+[1]  1380461 -3496782 13788920 16677294  1612931
 \end{Soutput}
 \end{Schunk}
 \end{itemize}
@@ -137,32 +137,32 @@ l'occurence. Leur syntaxe est similaire:
 \end{Sinput}
 \begin{Soutput}
 [[1]]
-[1] 18 58 96 22 10
+[1] 59 41 89 68 93
 
 [[2]]
-[1] 42  2 75 24 81 93
+[1]  20  36 100   5  70  72
 
 [[3]]
-[1]  32   2 100  64  80  15  84
+[1] 42 97 81  8 47 37 45
 
 [[4]]
-[1] 97 25 32 52 11 34 74 46
+[1] 32 92 23 28 57 70 38 98
 \end{Soutput}
 \begin{Sinput}
 > lapply(v, mean)
 \end{Sinput}
 \begin{Soutput}
 [[1]]
-[1] 40.8
+[1] 70
 
 [[2]]
-[1] 52.83333
+[1] 50.5
 
 [[3]]
-[1] 53.85714
+[1] 51
 
 [[4]]
-[1] 46.375
+[1] 54.75
 \end{Soutput}
 \end{Schunk}
 \item La fonction \fonction{sapply} est similaire à \fonction{lapply},
@@ -173,7 +173,7 @@ l'occurence. Leur syntaxe est similaire:
 > sapply(v, mean)
 \end{Sinput}
 \begin{Soutput}
-[1] 40.80000 52.83333 53.85714 46.37500
+[1] 70.00 50.50 51.00 54.75
 \end{Soutput}
 \end{Schunk}
 \item Si le résultat de chaque application de la fonction est un
@@ -185,24 +185,24 @@ l'occurence. Leur syntaxe est similaire:
 \end{Sinput}
 \begin{Soutput}
 [[1]]
-[1] 20 18 66  6 97
+[1] 31 25 70 71  8
 
 [[2]]
-[1]  5 87 68  7 18
+[1] 41 52 75 55 49
 
 [[3]]
-[1] 11  2 84 70 89
+[1] 51 50 84 99 57
 \end{Soutput}
 \begin{Sinput}
 > sapply(v, sort)
 \end{Sinput}
 \begin{Soutput}
      [,1] [,2] [,3]
-[1,]    6    5    2
-[2,]   18    7   11
-[3,]   20   18   70
-[4,]   66   68   84
-[5,]   97   87   89
+[1,]    8   41   50
+[2,]   25   49   51
+[3,]   31   52   57
+[4,]   70   55   84
+[5,]   71   75   99
 \end{Soutput}
 \end{Schunk}
 \item Dans un grand nombre de cas, il est possible de remplacer les
@@ -601,14 +601,13 @@ $num.police
 [1] 1001
 
 $franchise
-[1] 500
+[1] 1000
 
 $nb.acc
-[1] 1 2 1 2 0 1
+[1] 0 1 1 1 1 0 0
 
 $montants
-[1]  1233.7867   754.0062  5341.2330  1638.7506
-[5] 14444.6491  2016.8539  7176.3796
+[1] 13514.827  6342.391  2625.154  3144.954
 \end{Soutput}
 \begin{Sinput}
 > x[[2]]
@@ -621,13 +620,13 @@ $franchise
 [1] 250
 
 $nb.acc
-[1] 2 0 3 1 6 3 0
+[1] 1 1 2 1 1 4 0 4 0
 
 $montants
- [1]  5449.3392  2850.1634  4710.4497  7307.5198
- [5]  3049.5136  1773.3971 12556.5939  2141.2826
- [9]   823.0804  5384.6596  8123.8746  1814.9773
-[13]  2133.6178 24039.2302 18158.8161
+ [1]  8918.7893  3946.7955  1316.5921  4167.6740
+ [5]  2336.5803  1626.6854   724.2224   306.8059
+ [9]  1221.1222  1375.7443  8918.5898  2001.8985
+[13] 10918.5891 28078.4441
 \end{Soutput}
 \end{Schunk}
   Ainsi, \code{x[[i]]} contient les informations relatives à l'assuré

@@ -750,529 +750,529 @@
 \indexentry{distribution!Pareto}{67}
 \indexentry{paste@\texttt  {paste}}{67}
 \indexentry{hist@\texttt  {hist}}{67}
-\indexentry{package@\texttt{MASS}}{71}
-\indexentry{uniroot@\texttt  {uniroot}|textbf}{72}
-\indexentry{racine!d'une fonction}{72}
-\indexentry{fonction!racine}{72}
-\indexentry{polyroot@\texttt  {polyroot}|textbf}{72}
-\indexentry{racine!d'un polyn\^ome}{72}
-\indexentry{optimize@\texttt  {optimize}|textbf}{73}
-\indexentry{maximum!local}{73}
-\indexentry{fonction!maximum local}{73}
-\indexentry{minimum!local}{73}
-\indexentry{fonction!minimum local}{73}
-\indexentry{ms@\texttt  {ms}|textbf}{73}
-\indexentry{minimum!d'une somme}{73}
-\indexentry{vraisemblance}{73}
-\indexentry{formule}{73}
-\indexentry{data frame}{73}
-\indexentry{nlmin@\texttt  {nlmin}|textbf}{74}
-\indexentry{minimum!fonction non   lin\'eaire}{74}
-\indexentry{fonction!minimum}{74}
-\indexentry{nlminb@\texttt  {nlminb}|textbf}{74}
-\indexentry{nlm@\texttt  {nlm}|textbf}{75}
-\indexentry{minimum!fonction non   lin\'eaire}{75}
-\indexentry{fonction!minimum}{75}
+\indexentry{package!MASS@\texttt{MASS}}{69}
+\indexentry{uniroot@\texttt  {uniroot}|textbf}{70}
+\indexentry{racine!d'une fonction}{70}
+\indexentry{fonction!racine}{70}
+\indexentry{polyroot@\texttt  {polyroot}|textbf}{70}
+\indexentry{racine!d'un polyn\^ome}{70}
+\indexentry{optimize@\texttt  {optimize}|textbf}{71}
+\indexentry{maximum!local}{71}
+\indexentry{fonction!maximum local}{71}
+\indexentry{minimum!local}{71}
+\indexentry{fonction!minimum local}{71}
+\indexentry{ms@\texttt  {ms}|textbf}{71}
+\indexentry{minimum!d'une somme}{71}
+\indexentry{vraisemblance}{71}
+\indexentry{formule}{71}
+\indexentry{data frame}{71}
+\indexentry{nlmin@\texttt  {nlmin}|textbf}{72}
+\indexentry{minimum!fonction non   lin\'eaire}{72}
+\indexentry{fonction!minimum}{72}
+\indexentry{nlminb@\texttt  {nlminb}|textbf}{72}
+\indexentry{nlm@\texttt  {nlm}|textbf}{73}
+\indexentry{minimum!fonction non   lin\'eaire}{73}
+\indexentry{fonction!minimum}{73}
+\indexentry{nlmin@\texttt  {nlmin}}{73}
+\indexentry{optim@\texttt  {optim}|textbf}{73}
+\indexentry{fonction!optimisation}{73}
+\indexentry{package!MASS@\texttt{MASS}}{73}
+\indexentry{dgamma@\texttt  {dgamma}}{74}
+\indexentry{vraisemblance}{74}
+\indexentry{fitdistr@\texttt  {fitdistr}}{74}
+\indexentry{package!MASS@\texttt{MASS}}{74}
+\indexentry{uniroot@\texttt  {uniroot}}{74}
+\indexentry{function@\texttt  {function}}{74}
+\indexentry{lower@\texttt  {lower}}{74}
+\indexentry{upper@\texttt  {upper}}{74}
+\indexentry{polyroot@\texttt  {polyroot}}{74}
+\indexentry{Re@\texttt  {Re}}{74}
+\indexentry{polyroot@\texttt  {polyroot}}{74}
+\indexentry{Im@\texttt  {Im}}{74}
+\indexentry{polyroot@\texttt  {polyroot}}{74}
+\indexentry{function@\texttt  {function}}{75}
+\indexentry{dbeta@\texttt  {dbeta}}{75}
+\indexentry{optimize@\texttt  {optimize}}{75}
+\indexentry{lower@\texttt  {lower}}{75}
+\indexentry{upper@\texttt  {upper}}{75}
+\indexentry{rgamma@\texttt  {rgamma}}{75}
+\indexentry{ms@\texttt  {ms}}{75}
+\indexentry{log@\texttt  {log}}{75}
+\indexentry{dgamma@\texttt  {dgamma}}{75}
+\indexentry{data@\texttt  {data}}{75}
+\indexentry{start@\texttt  {start}}{75}
+\indexentry{list@\texttt  {list}}{75}
+\indexentry{function@\texttt  {function}}{75}
+\indexentry{sum@\texttt  {sum}}{75}
+\indexentry{log@\texttt  {log}}{75}
+\indexentry{dgamma@\texttt  {dgamma}}{75}
 \indexentry{nlmin@\texttt  {nlmin}}{75}
-\indexentry{optim@\texttt  {optim}|textbf}{75}
-\indexentry{fonction!optimisation}{75}
-\indexentry{package@\texttt{MASS}}{75}
-\indexentry{dgamma@\texttt  {dgamma}}{76}
-\indexentry{vraisemblance}{76}
-\indexentry{fitdistr@\texttt  {fitdistr}}{76}
-\indexentry{package@\texttt{MASS}}{76}
-\indexentry{uniroot@\texttt  {uniroot}}{76}
-\indexentry{function@\texttt  {function}}{76}
-\indexentry{lower@\texttt  {lower}}{76}
-\indexentry{upper@\texttt  {upper}}{76}
-\indexentry{polyroot@\texttt  {polyroot}}{76}
-\indexentry{Re@\texttt  {Re}}{76}
-\indexentry{polyroot@\texttt  {polyroot}}{76}
-\indexentry{Im@\texttt  {Im}}{76}
-\indexentry{polyroot@\texttt  {polyroot}}{76}
-\indexentry{function@\texttt  {function}}{77}
-\indexentry{dbeta@\texttt  {dbeta}}{77}
-\indexentry{optimize@\texttt  {optimize}}{77}
-\indexentry{lower@\texttt  {lower}}{77}
-\indexentry{upper@\texttt  {upper}}{77}
-\indexentry{rgamma@\texttt  {rgamma}}{77}
-\indexentry{ms@\texttt  {ms}}{77}
-\indexentry{log@\texttt  {log}}{77}
-\indexentry{dgamma@\texttt  {dgamma}}{77}
-\indexentry{data@\texttt  {data}}{77}
-\indexentry{start@\texttt  {start}}{77}
-\indexentry{list@\texttt  {list}}{77}
-\indexentry{function@\texttt  {function}}{77}
-\indexentry{sum@\texttt  {sum}}{77}
-\indexentry{log@\texttt  {log}}{77}
-\indexentry{dgamma@\texttt  {dgamma}}{77}
-\indexentry{nlmin@\texttt  {nlmin}}{77}
-\indexentry{nlm@\texttt  {nlm}}{77}
-\indexentry{library@\texttt  {library}}{77}
-\indexentry{optim@\texttt  {optim}}{77}
-\indexentry{regression@r\'egression|(}{79}
-\indexentry{regression@r\'egression!importation de donn\'ees}{79}
-\indexentry{data frame}{79}
-\indexentry{read.table@\texttt  {read.table}|textbf}{79}
-\indexentry{data.frame@\texttt  {data.frame}}{80}
-\indexentry{as.data.frame@\texttt  {as.data.frame}}{80}
-\indexentry{read.table@\texttt  {read.table}}{80}
-\indexentry{cbind@\texttt  {cbind}}{80}
-\indexentry{rbind@\texttt  {rbind}}{80}
-\indexentry{names@\texttt  {names}}{80}
-\indexentry{colnames@\texttt  {colnames}}{80}
-\indexentry{row.names@\texttt  {row.names}}{80}
-\indexentry{rownames@\texttt  {rownames}}{80}
-\indexentry{attach@\texttt  {attach}}{80}
-\indexentry{detach@\texttt  {detach}}{80}
-\indexentry{lm@\texttt  {lm}}{80}
-\indexentry{add1@\texttt  {add1}}{80}
-\indexentry{addterm@\texttt  {addterm}}{80}
-\indexentry{drop1@\texttt  {drop1}}{80}
-\indexentry{dropterm@\texttt  {dropterm}}{80}
-\indexentry{step@\texttt  {step}}{80}
-\indexentry{stepAIC@\texttt  {stepAIC}}{80}
-\indexentry{summary@\texttt  {summary}}{80}
-\indexentry{anova@\texttt  {anova}}{80}
-\indexentry{coef@\texttt  {coef}}{80}
-\indexentry{coefficients@\texttt  {coefficients}}{80}
-\indexentry{confint@\texttt  {confint}}{80}
-\indexentry{residuals@\texttt  {residuals}}{80}
-\indexentry{fitted@\texttt  {fitted}}{80}
-\indexentry{deviance@\texttt  {deviance}}{80}
-\indexentry{df.residual@\texttt  {df.residual}}{80}
-\indexentry{update@\texttt  {update}}{80}
-\indexentry{predict@\texttt  {predict}}{80}
-\indexentry{plot@\texttt  {plot}}{80}
-\indexentry{abline@\texttt  {abline}}{80}
-\indexentry{matplot@\texttt  {matplot}}{80}
-\indexentry{matlines@\texttt  {matlines}}{80}
-\indexentry{package@\texttt{MASS}}{80}
-\indexentry{regression@r\'egression!formules}{81}
-\indexentry{formule|textbf}{81}
-\indexentry{+@\texttt  {+}}{81}
-\indexentry{-@\texttt  {-}}{81}
-\indexentry{regression@r\'egression!mod\'elisation}{81}
-\indexentry{plot@\texttt  {plot}}{81}
-\indexentry{formula@\texttt  {formula} (classe)}{82}
-\indexentry{lm@\texttt  {lm}|textbf}{82}
+\indexentry{nlm@\texttt  {nlm}}{75}
+\indexentry{library@\texttt  {library}}{75}
+\indexentry{optim@\texttt  {optim}}{75}
+\indexentry{regression@r\'egression|(}{77}
+\indexentry{regression@r\'egression!importation de donn\'ees}{77}
+\indexentry{data frame}{77}
+\indexentry{read.table@\texttt  {read.table}|textbf}{77}
+\indexentry{data.frame@\texttt  {data.frame}}{78}
+\indexentry{as.data.frame@\texttt  {as.data.frame}}{78}
+\indexentry{read.table@\texttt  {read.table}}{78}
+\indexentry{cbind@\texttt  {cbind}}{78}
+\indexentry{rbind@\texttt  {rbind}}{78}
+\indexentry{names@\texttt  {names}}{78}
+\indexentry{colnames@\texttt  {colnames}}{78}
+\indexentry{row.names@\texttt  {row.names}}{78}
+\indexentry{rownames@\texttt  {rownames}}{78}
+\indexentry{attach@\texttt  {attach}}{78}
+\indexentry{detach@\texttt  {detach}}{78}
+\indexentry{lm@\texttt  {lm}}{78}
+\indexentry{add1@\texttt  {add1}}{78}
+\indexentry{addterm@\texttt  {addterm}}{78}
+\indexentry{drop1@\texttt  {drop1}}{78}
+\indexentry{dropterm@\texttt  {dropterm}}{78}
+\indexentry{step@\texttt  {step}}{78}
+\indexentry{stepAIC@\texttt  {stepAIC}}{78}
+\indexentry{summary@\texttt  {summary}}{78}
+\indexentry{anova@\texttt  {anova}}{78}
+\indexentry{coef@\texttt  {coef}}{78}
+\indexentry{coefficients@\texttt  {coefficients}}{78}
+\indexentry{confint@\texttt  {confint}}{78}
+\indexentry{residuals@\texttt  {residuals}}{78}
+\indexentry{fitted@\texttt  {fitted}}{78}
+\indexentry{deviance@\texttt  {deviance}}{78}
+\indexentry{df.residual@\texttt  {df.residual}}{78}
+\indexentry{update@\texttt  {update}}{78}
+\indexentry{predict@\texttt  {predict}}{78}
+\indexentry{plot@\texttt  {plot}}{78}
+\indexentry{abline@\texttt  {abline}}{78}
+\indexentry{matplot@\texttt  {matplot}}{78}
+\indexentry{matlines@\texttt  {matlines}}{78}
+\indexentry{package!MASS@\texttt{MASS}}{78}
+\indexentry{regression@r\'egression!formules}{79}
+\indexentry{formule|textbf}{79}
+\indexentry{+@\texttt  {+}}{79}
+\indexentry{-@\texttt  {-}}{79}
+\indexentry{regression@r\'egression!mod\'elisation}{79}
+\indexentry{plot@\texttt  {plot}}{79}
+\indexentry{formula@\texttt  {formula} (classe)}{80}
+\indexentry{lm@\texttt  {lm}|textbf}{80}
+\indexentry{lm@\texttt  {lm} (classe)}{80}
+\indexentry{lm@\texttt  {lm}}{81}
+\indexentry{lm@\texttt  {lm} (classe)}{81}
+\indexentry{coef@\texttt  {coef}}{81}
+\indexentry{coefficients@\texttt  {coefficients}}{81}
+\indexentry{fitted@\texttt  {fitted}}{81}
+\indexentry{residuals@\texttt  {residuals}}{81}
+\indexentry{deviance@\texttt  {deviance}}{81}
+\indexentry{df.residual@\texttt  {df.residual}}{81}
+\indexentry{summary@\texttt  {summary}}{81}
+\indexentry{confint@\texttt  {confint}|textbf}{81}
+\indexentry{anova@\texttt  {anova}}{81}
+\indexentry{abline@\texttt  {abline}}{82}
+\indexentry{regression@r\'egression!diagnostics}{82}
+\indexentry{summary@\texttt  {summary}}{82}
+\indexentry{anova@\texttt  {anova}}{82}
+\indexentry{plot@\texttt  {plot}}{82}
 \indexentry{lm@\texttt  {lm} (classe)}{82}
-\indexentry{lm@\texttt  {lm}}{83}
-\indexentry{lm@\texttt  {lm} (classe)}{83}
-\indexentry{coef@\texttt  {coef}}{83}
-\indexentry{coefficients@\texttt  {coefficients}}{83}
-\indexentry{fitted@\texttt  {fitted}}{83}
-\indexentry{residuals@\texttt  {residuals}}{83}
-\indexentry{deviance@\texttt  {deviance}}{83}
-\indexentry{df.residual@\texttt  {df.residual}}{83}
-\indexentry{summary@\texttt  {summary}}{83}
-\indexentry{confint@\texttt  {confint}|textbf}{83}
-\indexentry{anova@\texttt  {anova}}{83}
-\indexentry{abline@\texttt  {abline}}{84}
-\indexentry{regression@r\'egression!diagnostics}{84}
-\indexentry{summary@\texttt  {summary}}{84}
-\indexentry{anova@\texttt  {anova}}{84}
+\indexentry{plot.lm@\texttt  {plot.lm}}{82}
+\indexentry{regression@r\'egression!pr\'evision}{82}
+\indexentry{update@\texttt  {update}}{82}
+\indexentry{predict@\texttt  {predict}}{82}
+\indexentry{predict@\texttt  {predict}}{82}
+\indexentry{predict@\texttt  {predict}}{82}
+\indexentry{fitted@\texttt  {fitted}}{82}
+\indexentry{predict@\texttt  {predict}}{82}
+\indexentry{newdata@\texttt  {newdata}}{82}
+\indexentry{predict@\texttt  {predict}}{82}
+\indexentry{ci.fit@\texttt  {ci.fit}}{82}
+\indexentry{pi.fit@\texttt  {pi.fit}}{82}
+\indexentry{predict@\texttt  {predict}}{83}
+\indexentry{conf.level@\texttt  {conf.level}}{83}
+\indexentry{predict@\texttt  {predict}}{83}
+\indexentry{predict@\texttt  {predict}}{83}
+\indexentry{interval@\texttt  {interval}}{83}
+\indexentry{level@\texttt  {level}}{83}
+\indexentry{matlines@\texttt  {matlines}}{83}
+\indexentry{matplot@\texttt  {matplot}}{83}
+\indexentry{regression@r\'egression|)}{83}
+\indexentry{data@\texttt  {data}}{83}
+\indexentry{mode@\texttt  {mode}}{83}
+\indexentry{class@\texttt  {class}}{83}
+\indexentry{names@\texttt  {names}}{84}
+\indexentry{colnames@\texttt  {colnames}}{84}
+\indexentry{row.names@\texttt  {row.names}}{84}
+\indexentry{rownames@\texttt  {rownames}}{84}
 \indexentry{plot@\texttt  {plot}}{84}
-\indexentry{lm@\texttt  {lm} (classe)}{84}
-\indexentry{plot.lm@\texttt  {plot.lm}}{84}
-\indexentry{regression@r\'egression!pr\'evision}{84}
-\indexentry{update@\texttt  {update}}{84}
-\indexentry{predict@\texttt  {predict}}{84}
-\indexentry{predict@\texttt  {predict}}{84}
-\indexentry{predict@\texttt  {predict}}{84}
-\indexentry{fitted@\texttt  {fitted}}{84}
-\indexentry{predict@\texttt  {predict}}{84}
-\indexentry{newdata@\texttt  {newdata}}{84}
-\indexentry{predict@\texttt  {predict}}{84}
-\indexentry{ci.fit@\texttt  {ci.fit}}{84}
-\indexentry{pi.fit@\texttt  {pi.fit}}{84}
-\indexentry{predict@\texttt  {predict}}{85}
-\indexentry{conf.level@\texttt  {conf.level}}{85}
-\indexentry{predict@\texttt  {predict}}{85}
-\indexentry{predict@\texttt  {predict}}{85}
-\indexentry{interval@\texttt  {interval}}{85}
-\indexentry{level@\texttt  {level}}{85}
-\indexentry{matlines@\texttt  {matlines}}{85}
-\indexentry{matplot@\texttt  {matplot}}{85}
-\indexentry{regression@r\'egression|)}{85}
+\indexentry{data@\texttt  {data}}{84}
+\indexentry{attach@\texttt  {attach}}{84}
+\indexentry{plot@\texttt  {plot}}{84}
+\indexentry{lm@\texttt  {lm}}{84}
+\indexentry{data@\texttt  {data}}{84}
+\indexentry{class@\texttt  {class}}{84}
+\indexentry{summary@\texttt  {summary}}{84}
+\indexentry{attach@\texttt  {attach}}{84}
+\indexentry{sum@\texttt  {sum}}{84}
+\indexentry{residuals@\texttt  {residuals}}{84}
+\indexentry{sum@\texttt  {sum}}{84}
+\indexentry{mean@\texttt  {mean}}{84}
+\indexentry{deviance@\texttt  {deviance}}{84}
+\indexentry{sum@\texttt  {sum}}{84}
+\indexentry{mean@\texttt  {mean}}{84}
+\indexentry{detach@\texttt  {detach}}{84}
+\indexentry{anova@\texttt  {anova}}{85}
+\indexentry{abline@\texttt  {abline}}{85}
+\indexentry{update@\texttt  {update}}{85}
+\indexentry{update@\texttt  {update}}{85}
+\indexentry{lm@\texttt  {lm}}{85}
 \indexentry{data@\texttt  {data}}{85}
-\indexentry{mode@\texttt  {mode}}{85}
-\indexentry{class@\texttt  {class}}{85}
-\indexentry{names@\texttt  {names}}{86}
-\indexentry{colnames@\texttt  {colnames}}{86}
-\indexentry{row.names@\texttt  {row.names}}{86}
-\indexentry{rownames@\texttt  {rownames}}{86}
-\indexentry{plot@\texttt  {plot}}{86}
-\indexentry{data@\texttt  {data}}{86}
+\indexentry{predict@\texttt  {predict}}{85}
+\indexentry{predict@\texttt  {predict}}{85}
+\indexentry{predict@\texttt  {predict}}{85}
+\indexentry{predict@\texttt  {predict}}{85}
 \indexentry{attach@\texttt  {attach}}{86}
+\indexentry{predict@\texttt  {predict}}{86}
+\indexentry{predict@\texttt  {predict}}{86}
+\indexentry{predict@\texttt  {predict}}{86}
+\indexentry{matlines@\texttt  {matlines}}{86}
+\indexentry{sort@\texttt  {sort}}{86}
+\indexentry{order@\texttt  {order}}{86}
+\indexentry{col@\texttt  {col}}{86}
+\indexentry{matlines@\texttt  {matlines}}{86}
+\indexentry{sort@\texttt  {sort}}{86}
+\indexentry{order@\texttt  {order}}{86}
+\indexentry{col@\texttt  {col}}{86}
+\indexentry{matlines@\texttt  {matlines}}{86}
+\indexentry{sort@\texttt  {sort}}{86}
+\indexentry{order@\texttt  {order}}{86}
+\indexentry{col@\texttt  {col}}{86}
+\indexentry{matlines@\texttt  {matlines}}{86}
+\indexentry{sort@\texttt  {sort}}{86}
+\indexentry{order@\texttt  {order}}{86}
+\indexentry{col@\texttt  {col}}{86}
+\indexentry{cbind@\texttt  {cbind}}{86}
 \indexentry{plot@\texttt  {plot}}{86}
-\indexentry{lm@\texttt  {lm}}{86}
-\indexentry{data@\texttt  {data}}{86}
-\indexentry{class@\texttt  {class}}{86}
-\indexentry{summary@\texttt  {summary}}{86}
-\indexentry{attach@\texttt  {attach}}{86}
-\indexentry{sum@\texttt  {sum}}{86}
-\indexentry{residuals@\texttt  {residuals}}{86}
-\indexentry{sum@\texttt  {sum}}{86}
-\indexentry{mean@\texttt  {mean}}{86}
-\indexentry{deviance@\texttt  {deviance}}{86}
-\indexentry{sum@\texttt  {sum}}{86}
-\indexentry{mean@\texttt  {mean}}{86}
-\indexentry{detach@\texttt  {detach}}{86}
-\indexentry{anova@\texttt  {anova}}{87}
-\indexentry{abline@\texttt  {abline}}{87}
-\indexentry{update@\texttt  {update}}{87}
-\indexentry{update@\texttt  {update}}{87}
-\indexentry{lm@\texttt  {lm}}{87}
-\indexentry{data@\texttt  {data}}{87}
-\indexentry{predict@\texttt  {predict}}{87}
-\indexentry{predict@\texttt  {predict}}{87}
-\indexentry{predict@\texttt  {predict}}{87}
-\indexentry{predict@\texttt  {predict}}{87}
-\indexentry{attach@\texttt  {attach}}{88}
-\indexentry{predict@\texttt  {predict}}{88}
-\indexentry{predict@\texttt  {predict}}{88}
-\indexentry{predict@\texttt  {predict}}{88}
-\indexentry{matlines@\texttt  {matlines}}{88}
-\indexentry{sort@\texttt  {sort}}{88}
-\indexentry{order@\texttt  {order}}{88}
-\indexentry{col@\texttt  {col}}{88}
-\indexentry{matlines@\texttt  {matlines}}{88}
-\indexentry{sort@\texttt  {sort}}{88}
-\indexentry{order@\texttt  {order}}{88}
-\indexentry{col@\texttt  {col}}{88}
-\indexentry{matlines@\texttt  {matlines}}{88}
-\indexentry{sort@\texttt  {sort}}{88}
-\indexentry{order@\texttt  {order}}{88}
-\indexentry{col@\texttt  {col}}{88}
-\indexentry{matlines@\texttt  {matlines}}{88}
-\indexentry{sort@\texttt  {sort}}{88}
-\indexentry{order@\texttt  {order}}{88}
-\indexentry{col@\texttt  {col}}{88}
-\indexentry{cbind@\texttt  {cbind}}{88}
-\indexentry{plot@\texttt  {plot}}{88}
-\indexentry{range@\texttt  {range}}{88}
-\indexentry{range@\texttt  {range}}{88}
-\indexentry{matlines@\texttt  {matlines}}{88}
-\indexentry{sort@\texttt  {sort}}{88}
-\indexentry{order@\texttt  {order}}{88}
-\indexentry{col@\texttt  {col}}{88}
-\indexentry{cbind@\texttt  {cbind}}{88}
-\indexentry{matplot@\texttt  {matplot}}{88}
-\indexentry{sort@\texttt  {sort}}{88}
-\indexentry{order@\texttt  {order}}{88}
-\indexentry{rep@\texttt  {rep}}{88}
-\indexentry{rep@\texttt  {rep}}{89}
-\indexentry{col@\texttt  {col}}{89}
+\indexentry{range@\texttt  {range}}{86}
+\indexentry{range@\texttt  {range}}{86}
+\indexentry{matlines@\texttt  {matlines}}{86}
+\indexentry{sort@\texttt  {sort}}{86}
+\indexentry{order@\texttt  {order}}{86}
+\indexentry{col@\texttt  {col}}{86}
+\indexentry{cbind@\texttt  {cbind}}{86}
+\indexentry{matplot@\texttt  {matplot}}{86}
+\indexentry{sort@\texttt  {sort}}{86}
+\indexentry{order@\texttt  {order}}{86}
+\indexentry{rep@\texttt  {rep}}{86}
+\indexentry{rep@\texttt  {rep}}{87}
+\indexentry{col@\texttt  {col}}{87}
+\indexentry{read.table@\texttt  {read.table}}{87}
+\indexentry{summary@\texttt  {summary}}{87}
+\indexentry{series@s\'eries chronologiques|(}{89}
+\indexentry{series@s\'eries chronologiques|seealso{processus}}{89}
+\indexentry{package!MASS@\texttt{MASS}}{89}
+\indexentry{arima@\texttt  {arima}}{89}
+\indexentry{predict@\texttt  {predict}}{89}
+\indexentry{Arima@\texttt  {Arima} (classe)}{89}
+\indexentry{series@s\'eries chronologiques!importation de donn\'ees}{89}
+\indexentry{scan@\texttt  {scan}|textbf}{89}
 \indexentry{read.table@\texttt  {read.table}}{89}
-\indexentry{summary@\texttt  {summary}}{89}
-\indexentry{series@s\'eries chronologiques|(}{91}
-\indexentry{series@s\'eries chronologiques|seealso{processus}}{91}
-\indexentry{package@\texttt{MASS}}{91}
-\indexentry{arima@\texttt  {arima}}{91}
-\indexentry{predict@\texttt  {predict}}{91}
-\indexentry{Arima@\texttt  {Arima} (classe)}{91}
-\indexentry{series@s\'eries chronologiques!importation de donn\'ees}{91}
-\indexentry{scan@\texttt  {scan}|textbf}{91}
-\indexentry{read.table@\texttt  {read.table}}{91}
-\indexentry{ts@\texttt  {ts}}{92}
-\indexentry{rts@\texttt  {rts}}{92}
-\indexentry{cts@\texttt  {cts}}{92}
-\indexentry{its@\texttt  {its}}{92}
-\indexentry{time@\texttt  {time}}{92}
-\indexentry{start@\texttt  {start}}{92}
-\indexentry{end@\texttt  {end}}{92}
-\indexentry{frequency@\texttt  {frequency}}{92}
-\indexentry{cycle@\texttt  {cycle}}{92}
-\indexentry{window@\texttt  {window}}{92}
-\indexentry{diff@\texttt  {diff}}{92}
-\indexentry{filter@\texttt  {filter}}{92}
-\indexentry{stl@\texttt  {stl}}{92}
-\indexentry{ts.plot@\texttt  {ts.plot}}{92}
-\indexentry{plot@\texttt  {plot}}{92}
-\indexentry{acf@\texttt  {acf}}{92}
-\indexentry{pacf@\texttt  {pacf}}{92}
-\indexentry{ar@\texttt  {ar}}{92}
+\indexentry{ts@\texttt  {ts}}{90}
+\indexentry{rts@\texttt  {rts}}{90}
+\indexentry{cts@\texttt  {cts}}{90}
+\indexentry{its@\texttt  {its}}{90}
+\indexentry{time@\texttt  {time}}{90}
+\indexentry{start@\texttt  {start}}{90}
+\indexentry{end@\texttt  {end}}{90}
+\indexentry{frequency@\texttt  {frequency}}{90}
+\indexentry{cycle@\texttt  {cycle}}{90}
+\indexentry{window@\texttt  {window}}{90}
+\indexentry{diff@\texttt  {diff}}{90}
+\indexentry{filter@\texttt  {filter}}{90}
+\indexentry{stl@\texttt  {stl}}{90}
+\indexentry{ts.plot@\texttt  {ts.plot}}{90}
+\indexentry{plot@\texttt  {plot}}{90}
+\indexentry{acf@\texttt  {acf}}{90}
+\indexentry{pacf@\texttt  {pacf}}{90}
+\indexentry{ar@\texttt  {ar}}{90}
+\indexentry{arima@\texttt  {arima}}{90}
+\indexentry{arima.mle@\texttt  {arima.mle}}{90}
+\indexentry{ARMAacf@\texttt  {ARMAacf}}{90}
+\indexentry{ARMAtoMA@\texttt  {ARMAtoMA}}{90}
+\indexentry{tsdiag@\texttt  {tsdiag}}{90}
+\indexentry{predict@\texttt  {predict}}{90}
+\indexentry{arima.forecast@\texttt  {arima.forecast}}{90}
+\indexentry{arima.sim@\texttt  {arima.sim}}{90}
+\indexentry{series@s\'eries chronologiques!cr\'eation}{90}
+\indexentry{ts@\texttt  {ts}|textbf}{90}
+\indexentry{rts@\texttt  {rts}}{90}
+\indexentry{cts@\texttt  {cts}}{90}
+\indexentry{its@\texttt  {its}}{90}
+\indexentry{timeSeries@\texttt  {timeSeries} (classe)}{90}
+\indexentry{signalSeries@\texttt  {signalSeries} (classe)}{90}
+\indexentry{window@\texttt  {window}|textbf}{90}
+\indexentry{series@s\'eries chronologiques!identification}{91}
+\indexentry{corr\'elogramme}{91}
+\indexentry{ts.plot@\texttt  {ts.plot}}{91}
+\indexentry{plot@\texttt  {plot}}{91}
+\indexentry{acf@\texttt  {acf}|textbf}{91}
+\indexentry{autocovariance}{91}
+\indexentry{autocorr\'elation}{91}
+\indexentry{autocorr\'elation!partielle}{91}
+\indexentry{pacf@\texttt  {pacf}|textbf}{91}
+\indexentry{series@s\'eries chronologiques!mod\'elisation}{91}
+\indexentry{processus!ARMA}{91}
+\indexentry{series@s\'eries chronologiques!param\'etrisation}{91}
+\indexentry{processus!ARMA!param\'etrisation}{91}
+\indexentry{package!MASS@\texttt{MASS}}{91}
+\indexentry{arima.mle@\texttt  {arima.mle}}{91}
+\indexentry{arima.sim@\texttt  {arima.sim}}{91}
+\indexentry{processus!ARIMA}{91}
+\indexentry{ar@\texttt  {ar}|textbf}{91}
+\indexentry{arima@\texttt  {arima}|textbf}{91}
+\indexentry{order@\texttt  {order}}{92}
+\indexentry{processus!SARIMA}{92}
 \indexentry{arima@\texttt  {arima}}{92}
-\indexentry{arima.mle@\texttt  {arima.mle}}{92}
-\indexentry{ARMAacf@\texttt  {ARMAacf}}{92}
-\indexentry{ARMAtoMA@\texttt  {ARMAtoMA}}{92}
+\indexentry{seasonal@\texttt  {seasonal}}{92}
+\indexentry{ARMAacf@\texttt  {ARMAacf}|textbf}{92}
+\indexentry{autocorr\'elation}{92}
+\indexentry{autocorr\'elation!partielle}{92}
+\indexentry{ARMAtoMA@\texttt  {ARMAtoMA}|textbf}{92}
+\indexentry{processus!ARMA!inversion}{92}
+\indexentry{series@s\'eries chronologiques!diagnostics}{92}
+\indexentry{tsdiag@\texttt  {tsdiag}|textbf}{92}
+\indexentry{package!MASS@\texttt{MASS}}{92}
+\indexentry{corr\'elogramme}{92}
+\indexentry{Ljung--Box}{92}
+\indexentry{portmanteau}{92}
 \indexentry{tsdiag@\texttt  {tsdiag}}{92}
-\indexentry{predict@\texttt  {predict}}{92}
-\indexentry{arima.forecast@\texttt  {arima.forecast}}{92}
-\indexentry{arima.sim@\texttt  {arima.sim}}{92}
-\indexentry{series@s\'eries chronologiques!cr\'eation}{92}
-\indexentry{ts@\texttt  {ts}|textbf}{92}
-\indexentry{rts@\texttt  {rts}}{92}
-\indexentry{cts@\texttt  {cts}}{92}
-\indexentry{its@\texttt  {its}}{92}
-\indexentry{timeSeries@\texttt  {timeSeries} (classe)}{92}
-\indexentry{signalSeries@\texttt  {signalSeries} (classe)}{92}
-\indexentry{window@\texttt  {window}|textbf}{92}
-\indexentry{series@s\'eries chronologiques!identification}{93}
-\indexentry{corr\'elogramme}{93}
-\indexentry{ts.plot@\texttt  {ts.plot}}{93}
-\indexentry{plot@\texttt  {plot}}{93}
-\indexentry{acf@\texttt  {acf}|textbf}{93}
-\indexentry{autocovariance}{93}
-\indexentry{autocorr\'elation}{93}
-\indexentry{autocorr\'elation!partielle}{93}
-\indexentry{pacf@\texttt  {pacf}|textbf}{93}
-\indexentry{series@s\'eries chronologiques!mod\'elisation}{93}
-\indexentry{processus!ARMA}{93}
-\indexentry{series@s\'eries chronologiques!param\'etrisation}{93}
-\indexentry{processus!ARMA!param\'etrisation}{93}
-\indexentry{package@\texttt{MASS}}{93}
-\indexentry{arima.mle@\texttt  {arima.mle}}{93}
+\indexentry{series@s\'eries chronologiques!pr\'evision}{93}
+\indexentry{arima.forecast@\texttt  {arima.forecast}}{93}
+\indexentry{package!MASS@\texttt{MASS}}{93}
+\indexentry{predict@\texttt  {predict}}{93}
+\indexentry{Arima@\texttt  {Arima} (classe)}{93}
+\indexentry{arima@\texttt  {arima}}{93}
+\indexentry{predict@\texttt  {predict}}{93}
+\indexentry{predict@\texttt  {predict}}{93}
+\indexentry{predict@\texttt  {predict}}{93}
+\indexentry{ts@\texttt  {ts} (classe)}{93}
+\indexentry{rts@\texttt  {rts}}{93}
+\indexentry{cts@\texttt  {cts}}{93}
+\indexentry{series@s\'eries chronologiques!simulation}{93}
+\indexentry{arima.sim@\texttt  {arima.sim}|textbf}{93}
+\indexentry{model@\texttt  {model}}{93}
 \indexentry{arima.sim@\texttt  {arima.sim}}{93}
-\indexentry{processus!ARIMA}{93}
-\indexentry{ar@\texttt  {ar}|textbf}{93}
-\indexentry{arima@\texttt  {arima}|textbf}{93}
-\indexentry{order@\texttt  {order}}{94}
-\indexentry{processus!SARIMA}{94}
-\indexentry{arima@\texttt  {arima}}{94}
-\indexentry{seasonal@\texttt  {seasonal}}{94}
-\indexentry{ARMAacf@\texttt  {ARMAacf}|textbf}{94}
-\indexentry{autocorr\'elation}{94}
-\indexentry{autocorr\'elation!partielle}{94}
-\indexentry{ARMAtoMA@\texttt  {ARMAtoMA}|textbf}{94}
-\indexentry{processus!ARMA!inversion}{94}
-\indexentry{series@s\'eries chronologiques!diagnostics}{94}
-\indexentry{tsdiag@\texttt  {tsdiag}|textbf}{94}
-\indexentry{package@\texttt{MASS}}{94}
-\indexentry{corr\'elogramme}{94}
-\indexentry{Ljung--Box}{94}
-\indexentry{portmanteau}{94}
-\indexentry{tsdiag@\texttt  {tsdiag}}{94}
-\indexentry{series@s\'eries chronologiques!pr\'evision}{95}
-\indexentry{arima.forecast@\texttt  {arima.forecast}}{95}
-\indexentry{package@\texttt{MASS}}{95}
-\indexentry{predict@\texttt  {predict}}{95}
-\indexentry{Arima@\texttt  {Arima} (classe)}{95}
+\indexentry{arima.sim@\texttt  {arima.sim}}{93}
+\indexentry{series@s\'eries chronologiques|)}{93}
+\indexentry{scan@\texttt  {scan}}{94}
+\indexentry{scan@\texttt  {scan}}{94}
+\indexentry{scan@\texttt  {scan}}{94}
+\indexentry{scan@\texttt  {scan}}{94}
+\indexentry{ts@\texttt  {ts}}{94}
+\indexentry{start@\texttt  {start}}{94}
+\indexentry{frequency@\texttt  {frequency}}{94}
+\indexentry{mode@\texttt  {mode}}{94}
+\indexentry{class@\texttt  {class}}{94}
+\indexentry{ts@\texttt  {ts}}{94}
+\indexentry{start@\texttt  {start}}{94}
+\indexentry{window@\texttt  {window}}{94}
+\indexentry{start@\texttt  {start}}{94}
+\indexentry{end@\texttt  {end}}{94}
+\indexentry{ts.plot@\texttt  {ts.plot}}{94}
+\indexentry{plot@\texttt  {plot}}{94}
+\indexentry{ts.plot@\texttt  {ts.plot}}{95}
+\indexentry{plot@\texttt  {plot}}{95}
+\indexentry{acf@\texttt  {acf}}{95}
+\indexentry{acf@\texttt  {acf}}{95}
+\indexentry{plot@\texttt  {plot}}{95}
+\indexentry{ar@\texttt  {ar}}{95}
 \indexentry{arima@\texttt  {arima}}{95}
-\indexentry{predict@\texttt  {predict}}{95}
-\indexentry{predict@\texttt  {predict}}{95}
-\indexentry{predict@\texttt  {predict}}{95}
-\indexentry{ts@\texttt  {ts} (classe)}{95}
-\indexentry{rts@\texttt  {rts}}{95}
-\indexentry{cts@\texttt  {cts}}{95}
-\indexentry{series@s\'eries chronologiques!simulation}{95}
-\indexentry{arima.sim@\texttt  {arima.sim}|textbf}{95}
-\indexentry{model@\texttt  {model}}{95}
-\indexentry{arima.sim@\texttt  {arima.sim}}{95}
-\indexentry{arima.sim@\texttt  {arima.sim}}{95}
-\indexentry{series@s\'eries chronologiques|)}{95}
-\indexentry{scan@\texttt  {scan}}{96}
-\indexentry{scan@\texttt  {scan}}{96}
-\indexentry{scan@\texttt  {scan}}{96}
-\indexentry{scan@\texttt  {scan}}{96}
-\indexentry{ts@\texttt  {ts}}{96}
-\indexentry{start@\texttt  {start}}{96}
-\indexentry{frequency@\texttt  {frequency}}{96}
-\indexentry{mode@\texttt  {mode}}{96}
-\indexentry{class@\texttt  {class}}{96}
-\indexentry{ts@\texttt  {ts}}{96}
-\indexentry{start@\texttt  {start}}{96}
-\indexentry{window@\texttt  {window}}{96}
-\indexentry{start@\texttt  {start}}{96}
-\indexentry{end@\texttt  {end}}{96}
+\indexentry{order@\texttt  {order}}{95}
+\indexentry{arima@\texttt  {arima}}{95}
+\indexentry{order@\texttt  {order}}{95}
+\indexentry{seasonal@\texttt  {seasonal}}{95}
+\indexentry{ar@\texttt  {ar}}{95}
+\indexentry{ar@\texttt  {ar}}{95}
+\indexentry{predict@\texttt  {predict}}{96}
 \indexentry{ts.plot@\texttt  {ts.plot}}{96}
-\indexentry{plot@\texttt  {plot}}{96}
-\indexentry{ts.plot@\texttt  {ts.plot}}{97}
-\indexentry{plot@\texttt  {plot}}{97}
-\indexentry{acf@\texttt  {acf}}{97}
-\indexentry{acf@\texttt  {acf}}{97}
-\indexentry{plot@\texttt  {plot}}{97}
-\indexentry{ar@\texttt  {ar}}{97}
-\indexentry{arima@\texttt  {arima}}{97}
-\indexentry{order@\texttt  {order}}{97}
-\indexentry{arima@\texttt  {arima}}{97}
-\indexentry{order@\texttt  {order}}{97}
-\indexentry{seasonal@\texttt  {seasonal}}{97}
-\indexentry{ar@\texttt  {ar}}{97}
-\indexentry{ar@\texttt  {ar}}{97}
-\indexentry{predict@\texttt  {predict}}{98}
+\indexentry{se\unhbox \voidb@x \kern \z@ @\texttt  {se\unhbox \voidb@x \kern \z@ }}{96}
+\indexentry{se\unhbox \voidb@x \kern \z@ @\texttt  {se\unhbox \voidb@x \kern \z@ }}{96}
+\indexentry{col@\texttt  {col}}{96}
+\indexentry{arima.sim@\texttt  {arima.sim}}{96}
+\indexentry{model@\texttt  {model}}{96}
+\indexentry{list@\texttt  {list}}{96}
+\indexentry{ar@\texttt  {ar}}{96}
+\indexentry{arima.sim@\texttt  {arima.sim}}{96}
+\indexentry{model@\texttt  {model}}{96}
+\indexentry{list@\texttt  {list}}{96}
+\indexentry{ar@\texttt  {ar}}{96}
+\indexentry{order@\texttt  {order}}{96}
+\indexentry{sd@\texttt  {sd}}{96}
+\indexentry{package!MASS@\texttt{MASS}}{97}
+\indexentry{mfrow@\texttt  {mfrow}}{97}
+\indexentry{mfcol@\texttt  {mfcol}}{97}
+\indexentry{par@\texttt  {par}}{97}
+\indexentry{par@\texttt  {par}}{97}
+\indexentry{package!MASS@\texttt{MASS}}{98}
+\indexentry{ar@\texttt  {ar}}{98}
+\indexentry{arima@\texttt  {arima}}{98}
+\indexentry{tsdiag@\texttt  {tsdiag}}{98}
 \indexentry{ts.plot@\texttt  {ts.plot}}{98}
-\indexentry{se\unhbox \voidb@x \kern \z@ @\texttt  {se\unhbox \voidb@x \kern \z@ }}{98}
-\indexentry{se\unhbox \voidb@x \kern \z@ @\texttt  {se\unhbox \voidb@x \kern \z@ }}{98}
-\indexentry{col@\texttt  {col}}{98}
-\indexentry{arima.sim@\texttt  {arima.sim}}{98}
-\indexentry{model@\texttt  {model}}{98}
-\indexentry{list@\texttt  {list}}{98}
-\indexentry{ar@\texttt  {ar}}{98}
-\indexentry{arima.sim@\texttt  {arima.sim}}{98}
-\indexentry{model@\texttt  {model}}{98}
-\indexentry{list@\texttt  {list}}{98}
-\indexentry{ar@\texttt  {ar}}{98}
-\indexentry{order@\texttt  {order}}{98}
-\indexentry{sd@\texttt  {sd}}{98}
-\indexentry{package@\texttt{MASS}}{99}
-\indexentry{mfrow@\texttt  {mfrow}}{99}
-\indexentry{mfcol@\texttt  {mfcol}}{99}
-\indexentry{par@\texttt  {par}}{99}
-\indexentry{par@\texttt  {par}}{99}
-\indexentry{package@\texttt{MASS}}{100}
-\indexentry{ar@\texttt  {ar}}{100}
-\indexentry{arima@\texttt  {arima}}{100}
-\indexentry{tsdiag@\texttt  {tsdiag}}{100}
-\indexentry{ts.plot@\texttt  {ts.plot}}{100}
-\indexentry{Emacs|(}{101}
-\indexentry{Emacs!configuration}{101}
-\indexentry{Emacs!nouveau fichier}{102}
-\indexentry{Emacs!C-x C-f@\texttt  {C-x C-f}}{102}
-\indexentry{Emacs!C-x C-s@\texttt  {C-x C-s}}{102}
-\indexentry{Emacs!sauvegarder}{102}
-\indexentry{Emacs!C-x C-w@\texttt  {C-x C-w}}{102}
-\indexentry{Emacs!sauvegarder sous}{102}
-\indexentry{Emacs!C-x k@\texttt  {C-x k}}{102}
-\indexentry{Emacs!C-x C-c@\texttt  {C-x C-c}}{102}
-\indexentry{Emacs!C-g@\texttt  {C-g}}{103}
-\indexentry{Emacs!C-\_@\texttt  {C-\_}}{103}
-\indexentry{Emacs!C-x u@\texttt  {C-x u}}{103}
-\indexentry{Emacs!C-s@\texttt  {C-s}}{103}
-\indexentry{Emacs!C-r@\texttt  {C-r}}{103}
-\indexentry{Emacs!M-\%@\texttt  {M-\%}}{103}
-\indexentry{Emacs!rechercher et remplacer}{103}
-\indexentry{Emacs!C-x b@\texttt  {C-x b}}{103}
-\indexentry{Emacs!C-x 2@\texttt  {C-x 2}}{103}
-\indexentry{Emacs!C-x 1@\texttt  {C-x 1}}{103}
-\indexentry{Emacs!C-x 0@\texttt  {C-x 0}}{103}
+\indexentry{Emacs|(}{99}
+\indexentry{Emacs!configuration}{99}
+\indexentry{Emacs!nouveau fichier}{100}
+\indexentry{Emacs!C-x C-f@\texttt  {C-x C-f}}{100}
+\indexentry{Emacs!C-x C-s@\texttt  {C-x C-s}}{100}
+\indexentry{Emacs!sauvegarder}{100}
+\indexentry{Emacs!C-x C-w@\texttt  {C-x C-w}}{100}
+\indexentry{Emacs!sauvegarder sous}{100}
+\indexentry{Emacs!C-x k@\texttt  {C-x k}}{100}
+\indexentry{Emacs!C-x C-c@\texttt  {C-x C-c}}{100}
+\indexentry{Emacs!C-g@\texttt  {C-g}}{101}
+\indexentry{Emacs!C-\_@\texttt  {C-\_}}{101}
+\indexentry{Emacs!C-x u@\texttt  {C-x u}}{101}
+\indexentry{Emacs!C-s@\texttt  {C-s}}{101}
+\indexentry{Emacs!C-r@\texttt  {C-r}}{101}
+\indexentry{Emacs!M-\%@\texttt  {M-\%}}{101}
+\indexentry{Emacs!rechercher et remplacer}{101}
+\indexentry{Emacs!C-x b@\texttt  {C-x b}}{101}
+\indexentry{Emacs!C-x 2@\texttt  {C-x 2}}{101}
+\indexentry{Emacs!C-x 1@\texttt  {C-x 1}}{101}
+\indexentry{Emacs!C-x 0@\texttt  {C-x 0}}{101}
+\indexentry{Emacs!C-x o@\texttt  {C-x o}}{101}
+\indexentry{Emacs!s\'election}{101}
+\indexentry{Emacs!C-SPC@\texttt  {C-SPC}}{101}
+\indexentry{Emacs!C-w@\texttt  {C-w}}{101}
+\indexentry{Emacs!M-w@\texttt  {M-w}}{101}
+\indexentry{Emacs!C-y@\texttt  {C-y}}{101}
+\indexentry{Emacs!M-y@\texttt  {M-y}}{101}
+\indexentry{Emacs|)}{101}
+\indexentry{ESS|(}{101}
+\indexentry{ESS!C-c C-e@\texttt  {C-c C-e}}{102}
+\indexentry{ESS!M-h@\texttt  {M-h}}{102}
+\indexentry{ESS!C-c C-o@\texttt  {C-c C-o}}{102}
+\indexentry{ESS!C-c C-v@\texttt  {C-c C-v}}{102}
+\indexentry{ESS!C-c C-q@\texttt  {C-c C-q}}{102}
+\indexentry{ESS!C-c C-n@\texttt  {C-c C-n}}{102}
+\indexentry{ESS!C-c C-r@\texttt  {C-c C-r}}{102}
+\indexentry{ESS!C-c C-f@\texttt  {C-c C-f}}{102}
+\indexentry{ESS!C-c C-l@\texttt  {C-c C-l}}{102}
+\indexentry{ESS!C-c C-v@\texttt  {C-c C-v}}{102}
+\indexentry{ESS!C-c C-s@\texttt  {C-c C-s}}{102}
+\indexentry{ESS|)}{102}
+\indexentry{Emacs!C-x C-f@\texttt  {C-x C-f}}{103}
 \indexentry{Emacs!C-x o@\texttt  {C-x o}}{103}
-\indexentry{Emacs!s\'election}{103}
-\indexentry{Emacs!C-SPC@\texttt  {C-SPC}}{103}
-\indexentry{Emacs!C-w@\texttt  {C-w}}{103}
-\indexentry{Emacs!M-w@\texttt  {M-w}}{103}
-\indexentry{Emacs!C-y@\texttt  {C-y}}{103}
-\indexentry{Emacs!M-y@\texttt  {M-y}}{103}
-\indexentry{Emacs|)}{103}
-\indexentry{ESS|(}{103}
-\indexentry{ESS!C-c C-e@\texttt  {C-c C-e}}{104}
-\indexentry{ESS!M-h@\texttt  {M-h}}{104}
-\indexentry{ESS!C-c C-o@\texttt  {C-c C-o}}{104}
-\indexentry{ESS!C-c C-v@\texttt  {C-c C-v}}{104}
-\indexentry{ESS!C-c C-q@\texttt  {C-c C-q}}{104}
-\indexentry{ESS!C-c C-n@\texttt  {C-c C-n}}{104}
-\indexentry{ESS!C-c C-r@\texttt  {C-c C-r}}{104}
-\indexentry{ESS!C-c C-f@\texttt  {C-c C-f}}{104}
-\indexentry{ESS!C-c C-l@\texttt  {C-c C-l}}{104}
-\indexentry{ESS!C-c C-v@\texttt  {C-c C-v}}{104}
-\indexentry{ESS!C-c C-s@\texttt  {C-c C-s}}{104}
-\indexentry{ESS|)}{104}
-\indexentry{Emacs!C-x C-f@\texttt  {C-x C-f}}{105}
-\indexentry{Emacs!C-x o@\texttt  {C-x o}}{105}
-\indexentry{ESS!C-c C-e@\texttt  {C-c C-e}}{105}
-\indexentry{ESS!C-c C-o@\texttt  {C-c C-o}}{105}
-\indexentry{ESS!C-c C-n@\texttt  {C-c C-n}}{105}
-\indexentry{ESS!C-c C-r@\texttt  {C-c C-r}}{105}
-\indexentry{ESS!C-c C-f@\texttt  {C-c C-f}}{105}
-\indexentry{Emacs!C-x C-s@\texttt  {C-x C-s}}{105}
-\indexentry{Emacs!C-x C-s@\texttt  {C-x C-s}}{105}
-\indexentry{ESS!C-c C-q@\texttt  {C-c C-q}}{105}
-\indexentry{Emacs!et S-Plus|(}{107}
-\indexentry{Emacs!et S-Plus|)}{108}
-\indexentry{simulation!nombres uniformes}{109}
-\indexentry{runif@\texttt  {runif}|textbf}{109}
-\indexentry{set.seed@\texttt  {set.seed}|textbf}{109}
-\indexentry{Random.seed@\code{.Random.seed}}{109}
-\indexentry{simulation!variables al\'eatoires}{109}
-\indexentry{distribution!b\^eta}{110}
-\indexentry{distribution!binomiale}{110}
-\indexentry{distribution!binomiale n\'egative}{110}
-\indexentry{distribution!Cauchy}{110}
-\indexentry{distribution!exponentielle}{110}
-\indexentry{distribution!F}{110}
-\indexentry{distribution!gamma}{110}
-\indexentry{distribution!geometrique@g\'eom\'etrique}{110}
-\indexentry{distribution!hyperg\'eom\'etrique}{110}
-\indexentry{distribution!khi carr\'e}{110}
-\indexentry{distribution!logistique}{110}
-\indexentry{distribution!log-normale}{110}
-\indexentry{distribution!normale}{110}
-\indexentry{distribution!Poisson}{110}
-\indexentry{distribution!t}{110}
-\indexentry{distribution!uniforme}{110}
-\indexentry{distribution!Weibull}{110}
-\indexentry{distribution!Wilcoxon}{110}
-\indexentry{sample@\texttt  {sample}|textbf}{111}
-\indexentry{distribution!log-normale}{111}
-\indexentry{distribution!m\'elange Poisson/gamma}{111}
-\indexentry{plot@\texttt  {plot}}{111}
-\indexentry{table@\texttt  {table}}{111}
-\indexentry{distribution!m\'elange discret}{111}
-\indexentry{simulation!planification|(}{113}
-\indexentry{boucle}{114}
+\indexentry{ESS!C-c C-e@\texttt  {C-c C-e}}{103}
+\indexentry{ESS!C-c C-o@\texttt  {C-c C-o}}{103}
+\indexentry{ESS!C-c C-n@\texttt  {C-c C-n}}{103}
+\indexentry{ESS!C-c C-r@\texttt  {C-c C-r}}{103}
+\indexentry{ESS!C-c C-f@\texttt  {C-c C-f}}{103}
+\indexentry{Emacs!C-x C-s@\texttt  {C-x C-s}}{103}
+\indexentry{Emacs!C-x C-s@\texttt  {C-x C-s}}{103}
+\indexentry{ESS!C-c C-q@\texttt  {C-c C-q}}{103}
+\indexentry{Emacs!et S-Plus|(}{105}
+\indexentry{Emacs!et S-Plus|)}{106}
+\indexentry{simulation!nombres uniformes}{107}
+\indexentry{runif@\texttt  {runif}|textbf}{107}
+\indexentry{set.seed@\texttt  {set.seed}|textbf}{107}
+\indexentry{Random.seed@\code{.Random.seed}}{107}
+\indexentry{simulation!variables al\'eatoires}{107}
+\indexentry{distribution!b\^eta}{108}
+\indexentry{distribution!binomiale}{108}
+\indexentry{distribution!binomiale n\'egative}{108}
+\indexentry{distribution!Cauchy}{108}
+\indexentry{distribution!exponentielle}{108}
+\indexentry{distribution!F}{108}
+\indexentry{distribution!gamma}{108}
+\indexentry{distribution!geometrique@g\'eom\'etrique}{108}
+\indexentry{distribution!hyperg\'eom\'etrique}{108}
+\indexentry{distribution!khi carr\'e}{108}
+\indexentry{distribution!logistique}{108}
+\indexentry{distribution!log-normale}{108}
+\indexentry{distribution!normale}{108}
+\indexentry{distribution!Poisson}{108}
+\indexentry{distribution!t}{108}
+\indexentry{distribution!uniforme}{108}
+\indexentry{distribution!Weibull}{108}
+\indexentry{distribution!Wilcoxon}{108}
+\indexentry{sample@\texttt  {sample}|textbf}{109}
+\indexentry{distribution!log-normale}{109}
+\indexentry{distribution!m\'elange Poisson/gamma}{109}
+\indexentry{plot@\texttt  {plot}}{109}
+\indexentry{table@\texttt  {table}}{109}
+\indexentry{distribution!m\'elange discret}{109}
+\indexentry{simulation!planification|(}{111}
+\indexentry{boucle}{112}
+\indexentry{for@\texttt  {for}}{112}
+\indexentry{lapply@\texttt  {lapply}}{112}
+\indexentry{sapply@\texttt  {sapply}}{112}
+\indexentry{lapply@\texttt  {lapply}}{112}
+\indexentry{sapply@\texttt  {sapply}}{112}
+\indexentry{...@\texttt  {...}}{112}
+\indexentry{sapply@\texttt  {sapply}}{112}
+\indexentry{matrix@\texttt  {matrix}}{113}
+\indexentry{nrow@\texttt  {nrow}}{113}
+\indexentry{ncol@\texttt  {ncol}}{113}
+\indexentry{rownames@\texttt  {rownames}}{113}
+\indexentry{for@\texttt  {for}}{113}
+\indexentry{runif@\texttt  {runif}}{113}
+\indexentry{mean@\texttt  {mean}}{113}
+\indexentry{median@\texttt  {median}}{113}
+\indexentry{mean@\texttt  {mean}}{113}
+\indexentry{range@\texttt  {range}}{113}
+\indexentry{rowMeans@\texttt  {rowMeans}}{113}
+\indexentry{apply@\texttt  {apply}}{113}
+\indexentry{var@\texttt  {var}}{113}
+\indexentry{function@\texttt  {function}}{114}
+\indexentry{matrix@\texttt  {matrix}}{114}
+\indexentry{nrow@\texttt  {nrow}}{114}
+\indexentry{ncol@\texttt  {ncol}}{114}
+\indexentry{rownames@\texttt  {rownames}}{114}
 \indexentry{for@\texttt  {for}}{114}
-\indexentry{lapply@\texttt  {lapply}}{114}
-\indexentry{sapply@\texttt  {sapply}}{114}
-\indexentry{lapply@\texttt  {lapply}}{114}
-\indexentry{sapply@\texttt  {sapply}}{114}
-\indexentry{...@\texttt  {...}}{114}
-\indexentry{sapply@\texttt  {sapply}}{114}
-\indexentry{matrix@\texttt  {matrix}}{115}
-\indexentry{nrow@\texttt  {nrow}}{115}
-\indexentry{ncol@\texttt  {ncol}}{115}
-\indexentry{rownames@\texttt  {rownames}}{115}
-\indexentry{for@\texttt  {for}}{115}
-\indexentry{runif@\texttt  {runif}}{115}
-\indexentry{mean@\texttt  {mean}}{115}
-\indexentry{median@\texttt  {median}}{115}
-\indexentry{mean@\texttt  {mean}}{115}
-\indexentry{range@\texttt  {range}}{115}
+\indexentry{runif@\texttt  {runif}}{114}
+\indexentry{mean@\texttt  {mean}}{114}
+\indexentry{median@\texttt  {median}}{114}
+\indexentry{mean@\texttt  {mean}}{114}
+\indexentry{range@\texttt  {range}}{114}
+\indexentry{list@\texttt  {list}}{114}
+\indexentry{rowMeans@\texttt  {rowMeans}}{114}
+\indexentry{apply@\texttt  {apply}}{114}
+\indexentry{var@\texttt  {var}}{114}
+\indexentry{function@\texttt  {function}}{114}
+\indexentry{runif@\texttt  {runif}}{114}
+\indexentry{mean@\texttt  {mean}}{114}
+\indexentry{median@\texttt  {median}}{114}
+\indexentry{mean@\texttt  {mean}}{114}
+\indexentry{range@\texttt  {range}}{114}
+\indexentry{function@\texttt  {function}}{115}
+\indexentry{sapply@\texttt  {sapply}}{115}
+\indexentry{list@\texttt  {list}}{115}
 \indexentry{rowMeans@\texttt  {rowMeans}}{115}
 \indexentry{apply@\texttt  {apply}}{115}
 \indexentry{var@\texttt  {var}}{115}
+\indexentry{replicate@\texttt  {replicate}}{115}
 \indexentry{function@\texttt  {function}}{116}
-\indexentry{matrix@\texttt  {matrix}}{116}
-\indexentry{nrow@\texttt  {nrow}}{116}
-\indexentry{ncol@\texttt  {ncol}}{116}
-\indexentry{rownames@\texttt  {rownames}}{116}
-\indexentry{for@\texttt  {for}}{116}
 \indexentry{runif@\texttt  {runif}}{116}
 \indexentry{mean@\texttt  {mean}}{116}
 \indexentry{median@\texttt  {median}}{116}
 \indexentry{mean@\texttt  {mean}}{116}
 \indexentry{range@\texttt  {range}}{116}
+\indexentry{function@\texttt  {function}}{116}
+\indexentry{replicate@\texttt  {replicate}}{116}
 \indexentry{list@\texttt  {list}}{116}
 \indexentry{rowMeans@\texttt  {rowMeans}}{116}
 \indexentry{apply@\texttt  {apply}}{116}
 \indexentry{var@\texttt  {var}}{116}
-\indexentry{function@\texttt  {function}}{116}
-\indexentry{runif@\texttt  {runif}}{116}
-\indexentry{mean@\texttt  {mean}}{116}
-\indexentry{median@\texttt  {median}}{116}
-\indexentry{mean@\texttt  {mean}}{116}
-\indexentry{range@\texttt  {range}}{116}
-\indexentry{function@\texttt  {function}}{117}
-\indexentry{sapply@\texttt  {sapply}}{117}
-\indexentry{list@\texttt  {list}}{117}
-\indexentry{rowMeans@\texttt  {rowMeans}}{117}
-\indexentry{apply@\texttt  {apply}}{117}
-\indexentry{var@\texttt  {var}}{117}
-\indexentry{replicate@\texttt  {replicate}}{117}
-\indexentry{function@\texttt  {function}}{118}
-\indexentry{runif@\texttt  {runif}}{118}
-\indexentry{mean@\texttt  {mean}}{118}
-\indexentry{median@\texttt  {median}}{118}
-\indexentry{mean@\texttt  {mean}}{118}
-\indexentry{range@\texttt  {range}}{118}
-\indexentry{function@\texttt  {function}}{118}
-\indexentry{replicate@\texttt  {replicate}}{118}
-\indexentry{list@\texttt  {list}}{118}
-\indexentry{rowMeans@\texttt  {rowMeans}}{118}
-\indexentry{apply@\texttt  {apply}}{118}
-\indexentry{var@\texttt  {var}}{118}
-\indexentry{replicate@\texttt  {replicate}}{118}
-\indexentry{system.time@\texttt  {system.time}}{119}
-\indexentry{sys.time@\texttt  {sys.time}}{119}
-\indexentry{system.time@\texttt  {system.time}}{119}
-\indexentry{source@\texttt  {source}}{119}
-\indexentry{rownames@\texttt  {rownames}}{120}
-\indexentry{row.names@\texttt  {row.names}}{120}
-\indexentry{dimnames@\texttt  {dimnames}}{120}
-\indexentry{rowVars@\texttt  {rowVars}}{120}
-\indexentry{colVars@\texttt  {colVars}}{120}
-\indexentry{simulation!planification|)}{121}
-\indexentry{sapply@\texttt  {sapply}}{136}
-\indexentry{[[@\texttt  {[[}}{138}
-\indexentry{ecdf@\texttt  {ecdf}}{139}
-\indexentry{ecdf@\texttt  {ecdf}}{139}
+\indexentry{replicate@\texttt  {replicate}}{116}
+\indexentry{system.time@\texttt  {system.time}}{117}
+\indexentry{sys.time@\texttt  {sys.time}}{117}
+\indexentry{system.time@\texttt  {system.time}}{117}
+\indexentry{source@\texttt  {source}}{117}
+\indexentry{rownames@\texttt  {rownames}}{118}
+\indexentry{row.names@\texttt  {row.names}}{118}
+\indexentry{dimnames@\texttt  {dimnames}}{118}
+\indexentry{rowVars@\texttt  {rowVars}}{118}
+\indexentry{colVars@\texttt  {colVars}}{118}
+\indexentry{simulation!planification|)}{119}
+\indexentry{sapply@\texttt  {sapply}}{134}
+\indexentry{[[@\texttt  {[[}}{136}
+\indexentry{ecdf@\texttt  {ecdf}}{137}
+\indexentry{ecdf@\texttt  {ecdf}}{137}

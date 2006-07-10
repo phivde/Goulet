@@ -1,22 +1,45 @@
-\begin{thebibliography}{xx}
+\begin{thebibliography}{4}
+\ProvideTextCommand{\guillemotleft}{OT1}{%
+  \leavevmode\raise .27ex\hbox{$\scriptscriptstyle\ll$}}
+\ProvideTextCommand{\guillemotright}{OT1}{%
+  \leavevmode\raise .27ex\hbox{$\scriptscriptstyle\gg$}}
+\newcommand{\enquote}[1]{\guillemotleft#1\guillemotright}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\bibnamefont}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+\providecommand{\selectlanguage}[1]{\relax}
+\input{babelbst.tex}
+\newcommand{\Capitalize}[1]{\uppercase{#1}}
+\newcommand{\capitalize}[1]{\expandafter\Capitalize#1}
 
-\harvarditem[Cameron et al.]{Cameron, Elliott, Loy, Raymond \&
-  Rosenblatt}{2004}{LearningEmacs}
-Cameron, D., Elliott, J., Loy, M., Raymond, E.~S. \& Rosenblatt, B.  (2004),
-  {\em Leaning {GNU} {E}macs}, third edn, O'Reilly.
+\bibitem[{Cameron \bbletal{}(2004)Cameron, Elliott, Loy, Raymond \bbland{}
+  Rosenblatt}]{LearningEmacs}
+\bibnamefont{Cameron}, D., J.~\bibnamefont{Elliott}, M.~\bibnamefont{Loy},
+  E.~S. \bibnamefont{Raymond} \bbland{} B.~\bibnamefont{Rosenblatt}. 2004,
+  {\selectlanguage{english}\emph{Leaning {GNU} {E}macs}}, \bblthirdo{}
+  \bbledn{}, O'Reilly, Sebastopol, CA, ISBN 0-596-00648-9.
 
-\harvarditem[Venables \& Ripley]{Venables \& Ripley}{2000}{Sprogramming}
-Venables, W.~N. \& Ripley, B.~D.  (2000), {\em {S} programming}, Springer, New
-  York.
+\bibitem[{Venables \bbland{} Ripley(2000)}]{Sprogramming}
+\bibnamefont{Venables}, W.~N. \bbland{} B.~D. \bibnamefont{Ripley}. 2000,
+  {\selectlanguage{english}\emph{{S} programming}}, Springer, New York, ISBN
+  0-387-98966-8.
 
-\harvarditem[Venables \& Ripley]{Venables \& Ripley}{2002}{MASS}
-Venables, W.~N. \& Ripley, B.~D.  (2002), {\em Modern applied statistics with
-  {S}}, fourth edn, Springer, New York.
+\bibitem[{Venables \bbland{} Ripley(2002)}]{MASS}
+\bibnamefont{Venables}, W.~N. \bbland{} B.~D. \bibnamefont{Ripley}. 2002,
+  {\selectlanguage{english}\emph{Modern applied statistics with {S}}},
+  \bblfourtho{} \bbledn{}, Springer, New York, ISBN 0-387-95457-0.
 
-\harvarditem[Venables et al.]{Venables, Smith \& the {R Development Core
-  Team}}{2005}{Rintro}
-Venables, W.~N., Smith, D.~M. \& the {R Development Core Team}  (2005), {\em An
-  introduction to {R}: A language and environment for statistical computing}, R
-  Foundation for Statistical Computing, Vienna, Austria.
+\bibitem[{Venables \bbletal{}(2005)Venables, Smith \bbland{} the {R Development
+  Core Team}}]{Rintro}
+\bibnamefont{Venables}, W.~N., D.~M. \bibnamefont{Smith} \bbland{}
+  \bibnamefont{the {R Development Core Team}}. 2005,
+  {\selectlanguage{english}\emph{An introduction to {R}: A language and
+  environment for statistical computing}}, R Foundation for Statistical
+  Computing, Vienna, Austria. \urlprefix\url{http://www.r-project.org}.
 
 \end{thebibliography}

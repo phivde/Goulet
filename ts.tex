@@ -13,7 +13,7 @@ modélisation, prévision et simulation de séries.
 À \Splus certains égards, cependant, les fonctions dans la
 distribution S-Plus de base sont mal intégrées au langage. Nous
 utiliserons donc les fonctions du package
-\texttt{MASS}\index{package@\texttt{MASS}} de \cite{MASS}, auquel on a
+\texttt{MASS}\index{package!MASS@\texttt{MASS}} de \cite{MASS}, auquel on a
 déjà fait référence à la section \ref{optimisation:MASS}. Rappelons
 que pour accéder aux fonctions du package, il suffit de le charger en
 mémoire avec la commande
@@ -169,7 +169,7 @@ paramétrisation%
 \index{series@séries chronologiques!paramétrisation}%
 \index{processus!ARMA!paramétrisation} %
 retenue dans les fonctions du package
-\texttt{MASS}\index{package@\texttt{MASS}} (\code{arima}, entre
+\texttt{MASS}\index{package!MASS@\texttt{MASS}} (\code{arima}, entre
 autres) ainsi que dans \textsf{R}, mais pas dans S-Plus.
 
 \begin{rem}
@@ -245,7 +245,7 @@ calculs.
 \label{ts:diagnostics}
 
 La fonction \Fonction{tsdiag} du package
-\texttt{MASS}\index{package@\texttt{MASS}} permet de juger rapidement
+\texttt{MASS}\index{package!MASS@\texttt{MASS}} permet de juger rapidement
 de la qualité d'ajustement d'un modèle. La fonction crée trois
 graphiques: la série des résidus $\{Z_t\}$, le
 corrélogramme\index{corrélogramme} de cette même série et un graphique
@@ -271,7 +271,7 @@ La prévision de modèles ARIMA repose sur la fonction
 \fonction{arima.forecast} dans la distribution de base de S-Plus \Splus.
 
 De manière plus élégante, le package
-\texttt{MASS}\index{package@\texttt{MASS}} fournit une nouvelle
+\texttt{MASS}\index{package!MASS@\texttt{MASS}} fournit une nouvelle
 méthode à la fonction générique \fonction{predict} pour les objets de
 classe \classe{Arima} (créés par la fonction \fonction{arima}).  Les
 prévisions sont donc calculées exactement comme en régression, outre
@@ -353,7 +353,7 @@ Utiliser pour ce faire les commandes suivantes (\textsf{R} \R seulement):
 \end{Sinput}
 \end{Schunk}
 
-Le package \texttt{MASS}\index{package@\texttt{MASS}} contient également
+Le package \texttt{MASS}\index{package!MASS@\texttt{MASS}} contient également
 de nombreux ensembles de données. Pour obtenir la liste des fonctions
 et des données du package, faire
 \begin{Schunk}
@@ -466,7 +466,7 @@ graphiques se retrouveront donc l'un au-dessus de l'autre.
 
 \begin{exercice}
   Ajuster un modèle autorégressif pur aux données \texttt{lh} du
-  package \texttt{MASS}\index{package@\texttt{MASS}} à l'aide de la
+  package \texttt{MASS}\index{package!MASS@\texttt{MASS}} à l'aide de la
   fonction \fonction{ar}.
 \end{exercice}
 

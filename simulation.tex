@@ -152,12 +152,12 @@ figure \ref{fig:boucle}, sans les commentaires. On a alors:
 \end{Sinput}
 \begin{Soutput}
 $biais
-     Moyenne      Mediane   Mi-etendue 
-1.544109e-04 8.259181e-05 9.461955e-05 
+      Moyenne       Mediane    Mi-etendue 
+-1.038891e-04 -1.244879e-04 -1.706436e-06 
 
 $variances
      Moyenne      Mediane   Mi-etendue 
-8.274645e-04 2.420766e-03 4.799883e-05 
+8.356727e-04 2.426740e-03 4.764232e-05 
 \end{Soutput}
 \end{Schunk}
 
@@ -211,14 +211,10 @@ fun1 <- function(i, size, a, b)
 > sapply(1:4, fun1, size = 10, a = -0.5, b = 0.5)
 \end{Sinput}
 \begin{Soutput}
-                   [,1]        [,2]         [,3]
-Moyenne    -0.009050612 -0.18045795 -0.005573472
-Mediane    -0.023214453 -0.29474525 -0.015951460
-Mi-etendue -0.027885151 -0.03705596 -0.002689286
-                  [,4]
-Moyenne    -0.08354421
-Mediane    -0.28099295
-Mi-etendue  0.01804147
+                  [,1]       [,2]        [,3]      [,4]
+Moyenne    -0.01307255 -0.2333385 -0.05123486 0.2035111
+Mediane    -0.08434367 -0.2626293 -0.11521059 0.2356300
+Mi-etendue  0.10859106 -0.1329516  0.03049428 0.1342814
 \end{Soutput}
 \end{Schunk}
 
@@ -255,11 +251,11 @@ simul2 <- function(nsimul, size, theta)
 \begin{Soutput}
 $biais
      Moyenne      Mediane   Mi-etendue 
-1.777698e-04 1.461156e-05 1.013551e-04 
+1.125087e-04 2.658985e-04 4.299878e-05 
 
 $variances
      Moyenne      Mediane   Mi-etendue 
-8.373507e-04 2.445200e-03 4.783119e-05 
+0.0008310916 0.0024445899 0.0000503219 
 \end{Soutput}
 \end{Schunk}
 
@@ -288,11 +284,11 @@ On a alors
 \begin{Soutput}
 $biais
       Moyenne       Mediane    Mi-etendue 
--8.022200e-05 -4.698536e-04  7.155081e-05 
+ 9.813584e-06 -2.908762e-05 -7.936208e-06 
 
 $variances
      Moyenne      Mediane   Mi-etendue 
-8.244527e-04 2.407576e-03 4.880371e-05 
+8.348888e-04 2.458212e-03 4.786719e-05 
 \end{Soutput}
 \end{Schunk}
 
