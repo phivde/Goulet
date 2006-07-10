@@ -7,16 +7,17 @@
 
 S-Plus et \textsf{R} offrent toutes les fonctions nécessaires pour
 faire l'analyse complète de séries chronologiques: création et
-manipulation d'objets de classe «série chronologique», identification,
-modélisation, prévision et simulation de séries.
+manipulation d'objets de classe «série chronologique», identification
+et définition d'un modèle, estimation des paramètres, calcul de
+prévisions et simulation de séries.
 
 À \Splus certains égards, cependant, les fonctions dans la
 distribution S-Plus de base sont mal intégrées au langage. Nous
 utiliserons donc les fonctions du package
-\texttt{MASS}\index{package!MASS@\texttt{MASS}} de \cite{MASS}, auquel on a
-déjà fait référence à la section \ref{optimisation:MASS}. Rappelons
-que pour accéder aux fonctions du package, il suffit de le charger en
-mémoire avec la commande
+\texttt{MASS}\index{package!MASS@\texttt{MASS}} de \cite{MASS}, déjà cité à
+la section \ref{optimisation:MASS}. Rappelons que pour accéder aux
+fonctions du package, il suffit de le charger en mémoire avec la
+commande
 \begin{Schunk}
 \begin{Sinput}
 > library(MASS)
@@ -60,7 +61,7 @@ séries multivariées; voir \citet[chapitre 14]{MASS}.
         & \fonction{acf} \\
         & \fonction{pacf}\tnote{1} \\
       \midrule
-      Modélisation
+      Estimation
         & \fonction{ar} \\
         & \fonction{arima} \\
         & \fonction{arima.mle}\tnote{2} \\
@@ -70,7 +71,7 @@ séries multivariées; voir \citet[chapitre 14]{MASS}.
       Diagnostics
         & \fonction{tsdiag} \\
       \midrule
-      Prévision
+      Calcul de prévisions
         & \fonction{predict} \\
         & \fonction{arima.forecast}\tnote{2} \\
       \midrule
@@ -111,13 +112,14 @@ représentant le début d'un commentaire avec l'argument
 \index{series@séries chronologiques!création}
 \label{ts:creation}
 
-La façon la plus simple de créer des séries chronologiques est avec la
-fonction \Fonction{ts}. Les fonctions \fonction{rts} (séries
-régulières), \fonction{cts} (séries avec dates) et \fonction{its}
-(séries irrégulières) sont plus récentes et parfois nécessaires.
-S-Plus propose également les classes \Splus \classe{timeSeries} et
-\classe{signalSeries} (et les fonctions du même nom pour créer les
-objets), mais celles-ci n'ajoutent pas de fonctionnalité nouvelle.
+La façon la plus simple de créer des séries chronologiques est
+d'utiliser la fonction \Fonction{ts}. Les fonctions \fonction{rts}
+(séries régulières), \fonction{cts} (séries avec dates) et
+\fonction{its} (séries irrégulières) sont plus récentes et parfois
+nécessaires.  S-Plus propose également les classes \Splus
+\classe{timeSeries} et \classe{signalSeries} (et les fonctions du même
+nom pour créer les objets), mais celles-ci n'ajoutent pas de
+fonctionnalité nouvelle.
 
 La fonction \Fonction{window} permet d'extraire un sous-ensemble d'une
 série chronologique en spécifiant des dates de début et de fin plutôt
@@ -142,20 +144,19 @@ partielle\index{autocorrélation!partielle} $\hat{\phi}_{hh}$ selon la
 valeur de son argument \code{type} (spécifier \code{covariance},
 \code{correlation} et \code{partial}, respectivement). Par défaut,
 \code{acf} trace le corrélogramme de la série. Si l'on souhaite
-obtenir les valeurs de la fonction d'autocorrélation sans un
-graphique, ajouter l'option \code{plot = FALSE} dans l'appel de la
-fonction.
+obtenir les valeurs de la fonction d'autocorrélation sans graphique,
+ajouter l'option \code{plot = FALSE} dans l'appel de la fonction.
 
 Dans \R \textsf{R}, la fonction d'autocorrélation partielle s'obtient
 plus directement avec la fonction \Fonction{pacf}.
 
 
-\section{Modélisation}
-\index{series@séries chronologiques!modélisation}
+\section{estimation}
+\index{series@séries chronologiques!estimation}
 \label{ts:modelisation}
 
-Un processus ARMA\index{processus!ARMA} d'ordre $(p, q)$
-est définit comme la solution $\{X_t\}$ des équations
+Un processus ARMA\index{processus!ARMA} d'ordre $(p, q)$ est défini
+comme la solution $\{X_t\}$ des équations
 \begin{displaymath}
   \phi(B) X_t  = \theta(B) Z_t, \quad t = 0, \pm 1, \pm 2, \dots
 \end{displaymath}
@@ -250,7 +251,7 @@ de la qualité d'ajustement d'un modèle. La fonction crée trois
 graphiques: la série des résidus $\{Z_t\}$, le
 corrélogramme\index{corrélogramme} de cette même série et un graphique
 de la valeur $p$ de la statistique de Ljung--Box pour des valeurs de
-$H = 1, 2, \dots$. La statistique de Ljung--Box\index{Ljung--Box} est
+$H = 1, 2, \dots$ La statistique de Ljung--Box\index{Ljung--Box} est
 simplement une version améliorée de la statistique du test
 portmanteau\index{portmanteau}:
 \begin{displaymath}
@@ -263,8 +264,8 @@ Le corrélogramme généré par \fonction{tsdiag} devrait donc ressembler
 ne rejette pas l'hypothèse de bruit blanc).
 
 
-\section{Prévisions}
-\index{series@séries chronologiques!prévision}
+\section{Calcul de prévisions}
+\index{series@séries chronologiques!prévisions}
 \label{ts:previsions}
 
 La prévision de modèles ARIMA repose sur la fonction
@@ -295,9 +296,9 @@ La simulation de séries chronologiques ARIMA est très simple avec la
 fonction \Fonction{arima.sim}. Il suffit de savoir comment spécifier
 le modèle à simuler. L'argument \argument{model} de la fonction
 \code{arima.sim} est une liste comportant un ou plusieurs des éléments
-\code{ar}, \code{ma} et \code{order}. Le premier de ces éléments
-est le vecteur des paramètres $\phi_1, \dots, \phi_p$, le second le
-vecteur des paramètres $\theta_1, \dots, \theta_q$ et le troisième le
+\code{ar}, \code{ma} et \code{order}. Le premier de ces éléments est
+le vecteur des paramètres $\phi_1, \dots, \phi_p$; le second, le
+vecteur des paramètres $\theta_1, \dots, \theta_q$; le troisième, le
 vecteur $(p, d, q)$ --- utilisé seulement si $d > 0$.
 
 Par défaut, le bruit blanc est généré avec une loi normale centrée
@@ -375,8 +376,8 @@ divisera la «page» en deux lignes et une colonne. Les deux prochains
 graphiques se retrouveront donc l'un au-dessus de l'autre.
 
 \begin{exercice}
-  Exécuter  chacune des commandes \fonction{par} ci-dessous. Après
-  chacune, exécuter les commandes suivantes pour constater l'effet de
+  Exécuter les commandes \fonction{par} ci-dessous. Après chacune,
+  exécuter les commandes suivantes pour constater l'effet de
   \code{par} sur le périphérique graphique:
 \begin{Schunk}
 \begin{Sinput}
@@ -481,12 +482,12 @@ graphiques se retrouveront donc l'un au-dessus de l'autre.
   \item Tracer les graphiques suivants sur un même périphérique: la
     série, le corrélogramme et la fonction d'autocorrélation partielle
     empirique.
-  \item Ajuster un modèle ARMA$(1, 1)$ aux données simulées en (a) en
-    estimant les paramètres à l'aide de la fonction \fonction{arima}.
-    Les estimateurs devraient être près des valeurs utilisées lors de
-    la simulation.
-  \item Vérifier la qualité de l'ajustement du modèle en (c) à l'aide
-    de la fonction \fonction{tsdiag}.
+  \item Ajuster un modèle ARMA$(1, 1)$ aux données simulées au point
+    a) en estimant les paramètres à l'aide de la fonction
+    \fonction{arima}.  Les estimateurs devraient être près des valeurs
+    utilisées lors de la simulation.
+  \item Vérifier la qualité de l'ajustement du modèle obtenu en c) à
+    l'aide de la fonction \fonction{tsdiag}.
   \item Prévoir les 12 prochaines valeurs du processus. Tracer un
     graphique de la série originale et des prévisions en fournissant
     les deux séries en argument à la fonction \fonction{ts.plot}.

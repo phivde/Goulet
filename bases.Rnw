@@ -13,8 +13,8 @@ comme langage de programmation.
 \section{Commandes S}
 \label{bases:commandes}
 
-Toute commande S est soit une \emph{affectation}\index{affectation},
-soit une \emph{expression}\index{expression}.
+Toute commande S est soit une \emph{expression}\index{expression},
+soit une \emph{affectation}\index{affectation}.
 \begin{itemize}
 \item Normalement, une expression est immédiatement évaluée et le
   résultat est affiché à l'écran:
@@ -224,7 +224,7 @@ manquantes.
 \item Toute opération impliquant une donnée \code{NA} a comme
   résultat \code{NA}.
 \item Certaines fonctions (\fonction{sum}, \fonction{mean}, par
-  exemple), ont par conséquent un argument \Argument{na.rm} qui,
+  exemple) ont par conséquent un argument \Argument{na.rm} qui,
   lorsque \code{TRUE}, élimine les données manquantes avant de
   faire un calcul.
 \item La fonction \Fonction{is.na} permet de tester si les éléments
@@ -265,11 +265,11 @@ v <- c(1, 2, 5)
 names(v) <- c("a", "b", "c")
 v
 @
-\item Les fonctions de base pour créer des vecteurs sont
+\item Les fonctions de base pour créer des vecteurs sont:
   \begin{itemize}
-  \item \Fonction{c} (concaténation)
-  \item \Fonction{numeric} (vecteur de mode \mode{numeric})
-  \item \Fonction{logical} (vecteur de mode \mode{logical})
+  \item \Fonction{c} (concaténation);
+  \item \Fonction{numeric} (vecteur de mode \mode{numeric});
+  \item \Fonction{logical} (vecteur de mode \mode{logical});
   \item \Fonction{character} (vecteur de mode \mode{character}).
   \end{itemize}
 \item L'indiçage dans un vecteur se fait avec \fonction{[\ ]}. On
@@ -305,9 +305,10 @@ stockée sous forme de vecteur.
 matrix(1:6, nrow=2, ncol=3)
 matrix(1:6, nrow=2, ncol=3, byrow=TRUE)
 @
-\item On extrait les éléments d'une matrice en précisant leurs
-  positions sous la forme (ligne, colonne) dans la matrice, ou encore
-  leurs positions dans le vecteur sous-jacent.
+\item L'indiçage \index{indiçage!matrice} d'une matrice se fait
+  également avec \fonction{[\ ]}. On extrait les éléments en précisant
+  leurs positions sous la forme (ligne, colonne) dans la matrice, ou
+  encore leurs positions dans le vecteur sous-jacent.
 <<echo=TRUE>>=
 ( m <- matrix(c(40, 80, 45, 21, 55, 32), nrow=2, ncol=3) )
 m[1, 2]
@@ -364,7 +365,7 @@ davantage sur les \emph{data frames}\Index{data frame}.
 \begin{itemize}
 \item Un \emph{data frame} est une liste de classe \classe{data.frame}
   dont tous les éléments sont de la même longueur.
-\item Généralement représenté sous forme d'un tableau à deux
+\item Généralement représenté sous la forme d'un tableau à deux
   dimensions (visuellement similaire à une matrice). Chaque élément de
   la liste sous-jacente correspond à une colonne.
 \item On peut donc obtenir les étiquettes des colonnes avec la fonction
@@ -396,11 +397,11 @@ de programmation.
 
 L'indiçage des vecteurs\Index{indiçage!vecteur} et
 matrices\Index{indiçage!matrice} a déjà été brièvement présenté aux
-sections \ref{bases:vecteurs} et \ref{bases:matrices}. Cette section
-contient plus de détails sur cette procédure des plus communes lors de
-l'utilisation du langage S. On se concentre toutefois sur le
+sections \ref{bases:vecteurs} et \ref{bases:matrices}. La présente
+section contient plus de détails sur cette procédure des plus communes
+lors de l'utilisation du langage S. On se concentre toutefois sur le
 traitement des vecteurs. Se référer également à \citet[section
-2.3]{MASS} pour de plus amples détails.
+2.3]{MASS} pour de plus amples renseignements.
 
 Il existe quatre façons d'indicer un vecteur dans le langage S. Dans
 tous les cas, l'indiçage se fait à l'intérieur de crochets \Fonction{[\ ]}.

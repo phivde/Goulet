@@ -4,7 +4,7 @@
 
 Avant d'utiliser pour quelque tâche de simulation moindrement
 importante un générateur de nombres aléatoires inclus dans un
-logiciel, il importe de s'assurer de la qualité de celui-ci. On
+logiciel, il importe de s'assurer de la qualité de cet outil. On
 trouvera en général relativement facilement de l'information dans
 Internet.
 
@@ -42,21 +42,21 @@ plus amples détails.
 \index{simulation!variables aléatoires}
 \label{rng:va}
 
-Les caractéristiques de plusieurs lois de probabilité sont directement
-accessibles dans S-Plus et \textsf{R} par un large éventail de
-fonctions. La logique règne dans les noms de fonctions: pour chaque
-racine \code{\textit{loi}}, il existe quatre fonctions différentes:
+Un large éventail de fonctions donne directement accès aux
+caractéristiques de plusieurs lois de probabilité dans S-Plus et
+\textsf{R}. Pour chaque racine \code{\textit{loi}}, il existe quatre
+fonctions différentes :
 \begin{enumerate}
 \item \code{d\textit{loi}} calcule la fonction de densité de
-  probabilité (lois continues) ou la fonction de masse de probabilité
-  (lois discrètes);
+  probabilité (loi continue) ou la fonction de masse de probabilité
+  (loi discrète);
 \item \code{p\textit{loi}} calcule la fonction de répartition;
 \item \code{q\textit{loi}} calcule la fonction de quantile;
 \item \code{r\textit{loi}} simule des observations de cette loi.
 \end{enumerate}
 
 Les différentes lois de probabilité disponibles dans S-Plus et
-\textsf{R}, leur racine et le nom de leurs paramètres sont rassemblées
+\textsf{R}, leur racine et le nom de leurs paramètres sont rassemblés
 au tableau \ref{tab:rng:lois}
 
 \begin{table}
@@ -106,7 +106,8 @@ au tableau \ref{tab:rng:lois}
     Wilcoxon & \texttt{wilcox} & \texttt{m}, \texttt{n} \\
     \bottomrule
   \end{tabular}
-  \caption{Lois de probabilité pour lesquelles existent des fonctions dans S-Plus et \textsf{R}}
+  \caption{Lois de probabilité pour lesquelles il existe des fonctions
+    dans S-Plus et \textsf{R}}
   \label{tab:rng:lois}
 \end{table}
 
@@ -122,7 +123,7 @@ et même un vecteur de paramètres. Par exemple,
 [1] 0.06131324 0.01831564 0.11259903
 \end{Soutput}
 \end{Schunk}
-retourne la probabilité que des lois de Poisson de paramètre 1, 4, et
+retourne la probabilité que des lois de Poisson de paramètre 1, 4 et
 10 prennent les valeurs 3, 0 et 8, respectivement.
 
 Le premier argument des fonctions de simulation est la quantité de
@@ -132,7 +133,7 @@ nom\-bres aléatoires désirée.  Ainsi,
 > rpois(3, lambda = c(1, 4, 10))
 \end{Sinput}
 \begin{Soutput}
-[1] 0 4 9
+[1] 0 3 8
 \end{Soutput}
 \end{Schunk}
 retourne trois nombres aléatoires issus de distributions de Poisson
@@ -163,7 +164,7 @@ avec remise.
 \begin{exercice}
   La loi log-normale\index{distribution!log-normale} est obtenue par
   transformation de la loi normale: si la distribution de la variable
-  alatoire $X$ est une normale de paramètres $\mu$ et $\sigma^2$,
+  aléatoire $X$ est une normale de paramètres $\mu$ et $\sigma^2$,
   alors la distribution de $e^X$ est une log-normale. Simuler
   \nombre{1000} observations d'une loi log-normale de paramètres $\mu
   = \ln 5000 - \frac{1}{2}$ et $\sigma^2 = 1$, puis tracer

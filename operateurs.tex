@@ -3,10 +3,10 @@
 
 
 Ce chapitre présente les principaux opérateurs arithmétiques,
-fonctions mathématiques et structures de contrôles offertes par le S.
+fonctions mathématiques et structures de contrôle offerts par le S.
 La liste est évidemment loin d'être exhaustive, surtout étant donné
 l'évolution rapide du langage. Un des meilleurs endroits pour
-connaître de nouvelles fonctions demeure la section \texttt{See Also}
+découvrir de nouvelles fonctions demeure la section \texttt{See Also}
 des rubriques d'aide, qui offre des hyperliens vers des fonctions
 apparentées au sujet de la rubrique.
 
@@ -69,7 +69,7 @@ L'unité de base en S est le vecteur\index{vecteur}.
 \end{Soutput}
 \end{Schunk}
 \item Sinon, le plus court vecteur est recyclé un nombre fractionnaire
-  de fois, mais comme cela est rarement souhaité et provient
+  de fois, mais comme ce résultat est rarement souhaité et provient
   généralement d'une erreur de programmation, un avertissement est
   affiché:
 \begin{Schunk}
@@ -123,26 +123,25 @@ contient une liste plus complète.
 \index{fonction!appel}
 \label{operateurs:appelfonctions}
 
-Ou comment spécifier les arguments d'une fonction interne ou
-personnelle.
+Il existe certaines règles quant à la façon de spécifier les arguments
+d'une fonction interne ou personnelle.
 
 \begin{itemize}
 \item Il n'y a pas de limite pratique quant au nombre d'arguments que
   peut avoir une fonction.
-\item Les arguments d'une fonction peuvent être spécifiés dans
+\item Les arguments d'une fonction peuvent être spécifiés selon
   l'ordre établi dans la définition de la fonction.
 \item Cependant, il est beaucoup plus prudent et \emph{fortement
     recommandé} de spécifier les arguments par leur nom, surtout après
   les deux ou trois premiers arguments.
-\item L'ordre des arguments étant important, il est nécessaire de les
-  nommer s'ils ne sont pas appelés dans l'ordre.
+\item L'ordre des arguments est important; il est donc nécessaire de
+  les nommer s'ils ne sont pas appelés dans l'ordre.
 \item Certains arguments ont une valeur par défaut qui sera utilisée
   si l'argument n'est pas spécifié dans l'appel de la fonction.
 \end{itemize}
 
-\subsection{Exemple}
-
-La définition de la fonction \texttt{matrix} est la suivante:
+Par exemple, la définition de la fonction \texttt{matrix} est la
+suivante:
 \begin{verbatim}
    matrix(data=NA, nrow=1, ncol=1, byrow=FALSE,
           dimnames=NULL)
@@ -190,8 +189,8 @@ La section 3.6 de \citet{MASS} contient de plus amples détails.
 
 Le langage S compte un très grand nombre de fonctions internes. La
 terminologie du système de classement de ces fonctions et la façon de
-les charger en mémoire diffèrent quelque peu entre S-Plus et
-\textsf{R}.
+les charger en mémoire diffèrent quelque peu selon que l'on utilise
+S-Plus ou \textsf{R}.
 
 Dans S-Plus, \Splus les fonctions sont classées dans des
 \emph{sections} d'une bibliothèque\index{bibliothèque}
@@ -209,10 +208,10 @@ qui économise l'espace mémoire et accélère le démarrage.  En revanche,
 on a plus souvent recours à la fonction \texttt{library} pour charger
 de nouveaux packages.
 
-Nous utiliserons dorénavant la terminologie de \textsf{R} pour référer
-à un élément de la bibliothèque.
+Nous utiliserons dorénavant la terminologie de \textsf{R} pour
+désigner un élément de la bibliothèque.
 
-Cette section présente quelques unes seulement des nombreuses
+Cette section présente quelques-unes seulement des nombreuses
 fonctions disponibles dans S-Plus et \textsf{R}. On s'y concentre sur
 les fonctions de base les plus souvent utilisées pour programmer en S
 et pour manipuler des données.
@@ -374,15 +373,15 @@ détails sur leur utilisation.
 
 \begin{struclist}
 \item[\fbox{if (\emph{condition}) \emph{branche.vrai} else
-    \emph{branche.faux}}]
-  \rule{0em}{2.5ex}%
+    \emph{branche.faux}}] \rule{0em}{2.5ex}%
   \Indexfonction{if}%
   \Indexfonction{else}%
-  \sloppy Si \code{\emph{condition}} est vraie, \code{\emph{branche.vrai}} est
-  exécutée, et \code{\emph{branche.faux}} sinon. Dans le cas où l'une
-  ou l'autre de \code{\emph{branche.vrai}} ou
-  \code{\emph{branche.faux}} comporte plus d'une expression, grouper
-  celles-ci dans des accolades \verb={ }=.
+  \sloppy Si \code{\emph{condition}} est vraie,
+  \code{\emph{branche.vrai}} est exécutée, sinon ce sera
+  \code{\emph{branche.faux}}. Dans le cas où l'une ou l'autre de
+  \code{\emph{branche.vrai}} ou \code{\emph{branche.faux}} comporte
+  plus d'une expression, grouper celles-ci dans des accolades
+  \verb={ }=.
 \item[\fbox{ifelse(\emph{condition}, \emph{expression.vrai},
     \emph{expression.faux})}]
   \rule{0em}{2.5ex}%
@@ -397,7 +396,7 @@ détails sur leur utilisation.
       action.2}, ...)}]
   \rule{0em}{2.5ex}%
   \Indexfonction{switch}%
-  Utilisé plutôt rarement.
+  Structure utilisée plutôt rarement.
 \end{struclist}
 
 \subsection{Boucles}
@@ -405,7 +404,7 @@ détails sur leur utilisation.
 Les boucles\index{boucle} sont et doivent être utilisées avec
 parcimonie en S, car elles sont généralement inefficaces
 (particulièrement avec S-Plus).  Dans la majeure partie des cas, il
-est possible de vectoriser les calcul pour éviter les boucles
+est possible de vectoriser les calculs pour éviter les boucles
 explicites, ou encore de s'en remettre aux fonctions \fonction{apply},
 \fonction{lapply} et \fonction{sapply} (section \ref{avance:apply})
 pour faire les boucles de manière plus efficace.
@@ -418,7 +417,7 @@ pour faire les boucles de manière plus efficace.
   de \code{\emph{variable}} contenue dans \code{\emph{suite}}.  Encore
   ici, on groupera les expressions dans des accolades \verb={ }=. À
   noter que \code{\emph{suite}} n'a pas à être composée de nombres
-  consécutifs, ni même par ailleurs de nombres.
+  consécutifs, ni même de nombres, en fait.
 \item[\fbox{while (\emph{condition}) \emph{expression}}]
   \rule{0em}{2.5ex}%
   \Indexfonction{while}%
@@ -760,9 +759,8 @@ pour faire les boucles de manière plus efficace.
     matrice.
   \item Calculer la moyenne des éléments de chacunes des colonnes de
     la matrice.
-  \item Calculer la valeur maximale prise par les éléments de la
-    sous-matrice formée par les trois premières lignes et les trois
-    premières colonnes.
+  \item Calculer la valeur maximale de la sous-matrice formée par les
+    trois premières lignes et les trois premières colonnes.
   \item Extraire toutes les lignes de la matrice dont la moyenne des
     éléments est supérieure à 7.
   \end{enumerate}
@@ -820,7 +818,7 @@ pour faire les boucles de manière plus efficace.
 \end{Sinput}
 \end{Schunk}
   Extraire de ce vecteur les records du monde seulement, c'est-à-dire
-  la première fois que chaque temps est survenu.
+  la première fois que chaque temps a été réalisé.
   \begin{rep}
 \begin{Schunk}
 \begin{Sinput}

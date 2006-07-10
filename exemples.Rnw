@@ -19,9 +19,9 @@ probabilités.
 \index{valeur présente}
 \label{exemples:vp}
 
-Un prêt est remboursé par une série de cinq paiements, le premier dans
-un an. Trouver le montant du prêt pour chacune des hypothèses
-ci-dessous.
+Un prêt est remboursé par une série de cinq paiements, le premier
+étant dû dans un an. Trouver le montant du prêt pour chacune des
+hypothèses ci-dessous.
 \begin{enumerate}[(a)]
 \item Paiement annuel de \nombre{1000}, taux d'intérêt de 6~\% effectif
   annuellement.
@@ -57,9 +57,9 @@ ci-dessous.
 <<1(b)>>=
 sum(c(500, 800, 900, 750, 1000) * (1 + 0.06)^(-(1:5)))
 @
-\item Avec différents paiements annuels et différents taux d'intérêt,
-  il faut employer la formule \eqref{eq:vp}. Le produit des taux
-  d'intérêts est obtenu avec la fonction \fonction{cumprod}.
+\item Avec différents paiements annuels et des taux d'intérêt
+  différents, il faut employer la formule \eqref{eq:vp}. Le produit
+  des taux d'intérêt est obtenu avec la fonction \fonction{cumprod}.
 <<1(c)>>=
 sum(c(500, 800, 900, 750, 1000) / cumprod(1 + c(0.05, 0.06, 0.055, 0.065, 0.07)))
 @
@@ -151,7 +151,7 @@ exp(-lambda) * sum((lambda^x / factorial(x)))
 La loi gamma\index{distribution!gamma} est fréquemment utilisée pour
 la modélisation d'événements ne pouvant prendre que des valeurs
 positives et pour lesquels les petites valeurs sont plus fréquentes
-que les grandes. Par exemple, la loi gamma est parfois utilisée en
+que les grandes. Par exemple, on utilise parfois la loi gamma en
 sciences actuarielles pour la modélisation des montants de sinistres.
 Nous utiliserons la paramétrisation où la fonction de densité de
 probabilité est
@@ -202,9 +202,9 @@ pgamma(x, alpha)
 1 - exp(-x) * sum(x^(-1 + (j <- 1:alpha))/gamma(j))
 @
 
-  \item Ici, la valeur de $\alpha$ demeure fixe, mais on doit calculer
-    la valeur de la fonction de répartition en plusieurs points en une
-    seule expression. C'est un travail pour la fonction
+  \item Ici, la valeur de $\alpha$ demeure fixe, mais on doit calculer,
+    en une seule expression, la valeur de la fonction de répartition en
+    plusieurs points. C'est un travail pour la fonction
     \fonction{outer}.
 <<3(b)>>=
 x <- 2:10
@@ -250,7 +250,7 @@ que
   la procédure au moins une fois, le choix logique pour la structure
   de contrôle à utiliser dans cette procédure itérative est
   \fonction{repeat}. Nous verrons au chapitre \ref{fonctions} comment
-  faire une fonction à partir de ce code.
+  créer une fonction à partir de ce code.
 <<4>>=
 i <- 0.05
 repeat
@@ -448,12 +448,12 @@ sum(pmts * v^k)
 \end{exercice}
 
 \begin{exercice}
-  \index{valeur présente}
-  Calculer la valeur présente de la séquence de paiements définie à
-  l'exercice \ref{exemples}.\ref{exercice:exemples:serie} en supposant
-  que le taux d'intérêt d'actualisation alterne successivement entre
-  5~\% et 8~\% à chaque année, c'est-à-dire que le taux d'intérêt est
-  5~\%, 8~\%, 5~\%, 8~\%, etc.
+  \index{valeur présente} Calculer la valeur présente de la séquence
+  de paiements définie à l'exercice
+  \ref{exemples}.\ref{exercice:exemples:serie} en supposant que le
+  taux d'intérêt d'actualisation alterne successivement entre 5~\% et
+  8~\% chaque année, c'est-à-dire que le taux d'intérêt est de 5~\%,
+  8~\%, 5~\%, 8~\%, etc.
   \begin{rep}
 <<echo=TRUE,eval=FALSE>>=
 v <- cumprod(1/(1 + rep(c(0.05, 0.08), 5)))

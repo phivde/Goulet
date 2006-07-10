@@ -48,13 +48,14 @@ L'offre en fonctions d'optimisation est un des domaines où S-Plus et
 commune avec le package \texttt{MASS}\index{package!MASS@\texttt{MASS}}.
 
 Le package \texttt{MASS} \citep{MASS} contient plusieurs fonctions
-utiles et de grande qualité.  Les auteurs de ces fonctions contribuent
-activement au développement de \textsf{R} et de S-Plus et, tel que
-mentionné au chapitre \ref{presentation}, leurs livres sur le langage
-S \citep{Sprogramming,MASS} constituent des références de choix.
+aussi utiles que de grande qualité.  Les auteurs de ces fonctions
+contribuent activement au développement de \textsf{R} et de S-Plus et,
+comme il est mentionné au chapitre~\ref{presentation}, leurs livres
+sur le langage S \citep{Sprogramming,MASS} constituent des références
+de choix.
 
-Le package \texttt{MASS} est distribué autant avec S-Plus (depuis au
-moins la version 6.1) que \textsf{R}.  On peut aussi le télécharger
+Le package \texttt{MASS} est distribué avec S-Plus (depuis au moins la
+version 6.1) comme avec \textsf{R}.  On peut aussi le télécharger
 gratuitement depuis l'URL
 \begin{quote}
   \url{http://www.stats.ox.ac.uk/pub/MASS4/Software.html}
@@ -69,8 +70,9 @@ library(MASS)
 \section{Fonctions d'optimisation disponibles}
 \label{optimisation:fonctions}
 
-Les fonctions d'optimisation disponibles dans S-Plus et \textsf{R}
-sont les suivantes.
+Ce qui suit est une description des fonctions d'optimisation
+disponibles dans S-Plus et \textsf{R}. Un exemple illustre la plupart
+d'entre elles.
 
 \medskip
 
@@ -134,21 +136,22 @@ optimize(dbeta, interval = c(0, 1), maximum = TRUE, shape1 = 3, shape2 = 2)
 \subsection{\code{ms}}
 \label{optimisation:ms}
 
-La \Splus fonction \Fonction{ms}, minimise une
-somme\index{minimum!d'une somme}. C'est une des principales fonction
+La \Splus fonction \Fonction{ms} minimise une
+somme\index{minimum!d'une somme}. C'est une des principales fonctions
 d'optimisation de S-Plus. Elles est utile, par exemple, pour minimiser
 la valeur négative d'une fonction de
 log-vraisemblance\index{vraisemblance}, $-l(\theta) = - \sum_{i=1}^n
 \ln f(x_i; \theta)$.  Son utilisation est toutefois compliquée par
-l'usage de formules\index{formule} (voir la section
-\ref{regression:formules}) et de \emph{data frames}\index{data frame}
-(section \ref{bases:dataframes}).
+l'usage de formules\index{formule} et de \emph{data frames}\index{data
+  frame} (voir les sections \ref{regression:formules} et
+\ref{bases:dataframes}, respectivement).
 \begin{ex}
   \label{ex:optimisation:ms}
   Calculer les estimateurs du maximum de vraisemblance des paramètres
   $\alpha$ et $\lambda$ de la distribution gamma dont la densité est
   donnée à l'équation \eqref{eq:exemples:gamma:fdp} à la page
   \pageref{eq:exemples:gamma:fdp} à partir de l'échantillon aléatoire
+  suivant:
 <<echo=TRUE>>=
 x
 @
@@ -212,14 +215,6 @@ $conv.type:
 %$
 \end{sol}
 
-\subsection{\code{nlminb}}
-\Indexfonction{nlminb}
-\label{optimisation:nlminb}
-
-Minimisation \Splus d'une fonction non linéaire avec des bornes
-inférieure et/ou supérieure pour les paramètres (S-Plus seulement).
-
-
 \subsection{\code{nlm}}
 \label{optimisation:nlm}
 
@@ -243,15 +238,24 @@ nlm(f, c(1, 1), x=x)
 @
 \end{sol}
 
+\subsection{\code{nlminb}}
+\Indexfonction{nlminb}
+\label{optimisation:nlminb}
+
+Minimisation d'une fonction non linéaire avec des bornes inférieure
+et/ou supérieure pour les paramètres. (Disponible dans \textsf{R}
+depuis la version 2.2.0.)
+
+
 \subsection{\code{optim}}
 \label{optimisation:optim}
 
-La fonction \Fonction{optim}\index{fonction!optimisation} est un outil
-d'optimisation tout usage, souvent utilisée par d'autres fonctions.
-Elle permet, selon l'algorithme utilisé, de fixer des seuils minimum
-et/ou maximum aux paramètres à optimiser.  Dans S-Plus, il faut
-charger la section \texttt{MASS}\index{package!MASS@\texttt{MASS}} de la
-bibliothèque.
+Outil d'optimisation tout usage, la fonction
+\Fonction{optim}\index{fonction!optimisation} est souvent utilisée par
+d'autres fonctions.  Elle permet, selon l'algorithme choisi, de fixer
+des seuils minimum et/ou maximum aux paramètres à optimiser.  Dans
+S-Plus, il faut charger la section
+\texttt{MASS}\index{package!MASS@\texttt{MASS}} de la bibliothèque.
 \begin{ex}
   Répéter l'exemple \ref{ex:optimisation:ms} à l'aide de
   \code{optim}.
@@ -264,19 +268,18 @@ optim(c(1, 1), f, x=x)
 @
 \end{sol}
 
-\begin{rem}
-  L'option \R \code{log = TRUE} de la fonction \fonction{dgamma} (et
-  de toutes les autres fonctions de densité) permet de calculer plus
-  précisément le logarithme de la densité.  Cette option n'est
-  disponible que dans \textsf{R}.
-\end{rem}
-
-\begin{rem}
-  L'estimation par le maximum de vraisemblance\index{vraisemblance}
-  est beaucoup simplifiée par l'utilisation de la fonction
-  \fonction{fitdistr} du package
-  \texttt{MASS}\index{package!MASS@\texttt{MASS}}.
-\end{rem}
+\begin{rems}
+  \begin{enumerate}
+  \item L'option \R \code{log = TRUE} de la fonction \fonction{dgamma}
+    (et de toutes les autres fonctions de densité) permet de calculer
+    plus précisément le logarithme de la densité.  Cette option n'est
+    disponible que dans \textsf{R}.
+  \item L'estimation par le maximum de
+    vraisemblance\index{vraisemblance} est de beaucoup simplifiée par
+    l'utilisation de la fonction \fonction{fitdistr} du package
+    \texttt{MASS}\index{package!MASS@\texttt{MASS}}.
+  \end{enumerate}
+\end{rems}
 
 
 \section{Exemples}
@@ -310,10 +313,13 @@ optim(c(1, 1), f, x=x)
 f <- function(x) x^3 - 2 * x^2 - 5
 uniroot(f, lower=1, upper=4)
 @
-\item
+\item Comme un simple graphique le démontre, il y a deux racines dans
+  l'intervalle.
 <<echo=TRUE,eval=FALSE>>=
 f <- function(x) x^3 + 3 * x^2 - 1
-uniroot(f, lower=-4, upper=-1)
+curve(f, xlim = c(-4, 0))
+uniroot(f, lower = -4, upper = -1)
+uniroot(f, lower = -1, upper = 0)
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
@@ -347,8 +353,8 @@ uniroot(f, lower=0, upper=1)
   \end{align*}
   et $X_1, \dots, X_n$, $w_1, \dots, w_n$ et $s^2$ sont des données.
   Calculer la valeur de $\hat{a}$ si $s^2 = \nombre{140 000 000}$ et
-  que les valeurs de $X_i$ et $w_i$ sont telles que données dans le
-  tableau ci-dessous.
+  que les valeurs de $X_i$ et $w_i$ sont telles qu'elles apparaissent
+  dans le tableau ci-dessous.
   \begin{center}
     \begin{tabular}{crrrrr}
       \toprule

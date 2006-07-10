@@ -46,22 +46,22 @@ résultat.
   \Fonction{return} pour retourner un résultat, mais cela est rarement
   nécessaire.
 \item Lorsqu'une fonction doit retourner plusieurs résultats, il est
-  en général préférable de le faire dans une liste nommée.
+  en général préférable d'avoir recours à une liste nommée.
 \end{itemize}
 
 
 \section{Variables locales et globales}
 \label{fonctions:variables}
 
-Comme dans la majorité des langages de programmation, les concepts de
-variable locale et de variable globale existent en S.
+Comme la majorité des langages de programmation, le S contient
+comporte les concepts de variable locale et de variable globale.
 
 \begin{itemize}
 \item Toute variable définie dans une fonction est
-  locale\index{variable!locale} à cette fonction, c'est-à-dire
+  locale\index{variable!locale} à cette fonction, c'est-à-dire qu'elle:
   \begin{itemize}
-  \item qu'elle n'apparaît pas dans l'espace de travail;
-  \item qu'elle n'écrase pas une variable du même nom dans l'espace de
+  \item n'apparaît pas dans l'espace de travail;
+  \item n'écrase pas une variable du même nom dans l'espace de
     travail.
   \end{itemize}
 \item Il est possible de définir une variable\index{variable!globale}
@@ -79,8 +79,8 @@ variable locale et de variable globale existent en S.
 \label{fonctions:exemple}
 
 Le code développé pour l'exemple de point fixe\index{point fixe} de la
-section \ref{exemples:pointfixe} peut être intégré dans une fonction
-tel que montré à la figure \ref{fig:fp}.
+section \ref{exemples:pointfixe} peut être intégré dans une fonction;
+voir la figure \ref{fig:fp}.
 
 \begin{figure}
   \centering
@@ -121,7 +121,7 @@ fp <- function(k, n, start=0.05, TOL=1E-10)
 
 \begin{itemize}
 \item Le nom de la fonction est \code{fp}.
-\item La fonction compte cinq arguments: \code{k}, \code{n},
+\item La fonction compte quatre arguments: \code{k}, \code{n},
   \code{start} et \code{TOL}.
 \item Les deux derniers arguments ont des valeurs par défaut de $0,05$
   et $10^{-10}$, respectivement.
@@ -160,11 +160,11 @@ outer(x, y, function(x, y) x * y^2)
 \index{fonction!débogage}
 \label{fonctions:debogage}
 
-Nous n'abordons ici que les techniques les plus simples et naïves.
+Nous n'abordons ici que les techniques les plus simples.
 \begin{itemize}
-\item Les simples erreurs de syntaxe sont les plus fréquentes (en
-  particulier l'oubli de virgules). Lors de la définition d'une
-  fonction, une vérification de la syntaxe est effectuée.
+\item Les erreurs de syntaxe sont les plus fréquentes (en particulier
+  l'oubli de virgules). Lors de la définition d'une fonction, une
+  vérification de la syntaxe est effectuée par l'interpréteur S.
 \item Lorsqu'une fonction ne retourne pas le résultat attendu, placer
   des commandes \fonction{print} à l'intérieur de la fonction, de
   façon à pouvoir suivre les valeurs prises par les différentes
@@ -188,8 +188,9 @@ repeat
   passées en arguments à une fonction existent dans l'espace de
   travail, puis à exécuter successivement les lignes de la fonction
   avec \ess{C-c C-n}. Les interfaces graphiques de S-Plus et
-  \textsf{R} ne permettent pas une telle procédure puisque la fenêtre
-  d'édition de fonctions bloque l'accès à l'interface de commande.
+  \textsf{R} empêchent d'avoir recours à une telle procédure puisque
+  la fenêtre d'édition de fonctions bloque l'accès à l'interface de
+  commande.
 \end{itemize}
 
 
@@ -197,10 +198,10 @@ repeat
 \index{style}
 \label{fonctions:style}
 
-Si tous s'entendent que l'adoption qu'un style propre et uniforme
+Si tous conviennent que l'adoption d'un style propre et uniforme
 favorise le développement et la lecture de code, il existe plusieurs
 chapelles dans le monde des programmeurs quant à la «bonne façon» de
-présenter et, surtout, d'indenter du code informatique.
+présenter et, surtout, d'indenter le code informatique.
 
 Par exemple, Emacs\index{Emacs} reconnaît et supporte les styles de
 codage suivants, entre autres:
@@ -263,8 +264,8 @@ for (i in 1:10)
 \begin{itemize}
 \item Pour des raisons générales de lisibilité et de popularité, le
   style C$++$, avec les accolades sur leurs propres lignes et une
-  indentation de quatre (4) espaces est considéré standard en
-  programmation en S.
+  indentation de quatre (4) espaces est considéré comme standard pour
+  la programmation en S.
 \item Pour utiliser ce style dans Emacs\index{Emacs}, faire
 \begin{verbatim}
     M-x ess-set-style RET C++ RET
@@ -357,10 +358,10 @@ matrix2 <- function(data=NA, nrow=1, ncol=1,
     data
 }
 \end{verbatim}
-    La seconde solution n'a pas recours à la transposée. Si l'on doit
-    remplir la matrice par ligne, l'idée consiste à réordonner les
-    éléments du vecteur \code{data} en utilisant la formule obtenue
-    à l'exercice \ref{operateurs}.\ref{exercice:operateurs:ijk}.
+    La seconde solution n'a pas recours à la transposée. Pour remplir
+    la matrice par ligne, il suffit de réordonner les éléments du
+    vecteur \code{data} en utilisant la formule obtenue à l'exercice
+    \ref{operateurs}.\ref{exercice:operateurs:ijk}.
 \begin{verbatim}
 matrix2 <- function(data=NA, nrow=1, ncol=1,
                     bycol=FALSE, dimnames=NULL)
@@ -605,12 +606,13 @@ pas le produit matriciel.")
   \item un vecteur contenant la pondération de chacune des
     évaluations.
   \end{inparaenum}
-  Un collègue a composé la fonction \code{notes.finales} ci-dessous
-  afin de calculer la note finale de chacun des étudiants.  Votre
-  collègue vous mentionne toutefois que sa fonction est plutôt lente
-  et inefficace pour de grands groupes d'étudiants.  Vous décidez donc
-  de modifier la fonction afin d'en réduire le nombre d'opérations et
-  qu'elle n'utilise aucune boucle.
+  Un de vos collègues a composé la fonction \code{notes.finales}
+  ci-dessous afin de faire le calcul de la note finale pour chacun de
+  ses étudiants.  Votre collègue vous mentionne toutefois que sa
+  fonction est plutôt lente et inefficace pour de grands groupes
+  d'étudiants.  Vous décidez donc de modifier la fonction afin d'en
+  réduire le nombre d'opérations et faire en sorte qu'elle n'utilise
+  aucune boucle.
 \begin{verbatim}
 notes.finales <- function(notes, p)
 {
@@ -721,9 +723,9 @@ non trouvé
   \begin{enumerate}
   \item Expliquer pour quelle raison la fonction se comporte ainsi.
   \item Appliquer les corrections nécessaires à la fonction pour que
-    celle-ci puisse calculer les bonnes valeurs. (Les erreurs ne sont
-    pas contenues dans les mathématiques de la fonction.) \emph{Astuce}:
-    tirer profit du moteur d'indentation de Emacs.
+    celle-ci puisse calculer les bonnes valeurs. (Les erreurs ne se
+    trouvent pas dans les mathématiques de la fonction.)
+    \emph{Astuce}: tirer profit du moteur d'indentation de Emacs.
   \end{enumerate}
   \begin{rep}
 \begin{verbatim}

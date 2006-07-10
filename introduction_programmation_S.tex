@@ -41,6 +41,7 @@
   \newtheorem{ex}{Exemple}[chapter]
   \theoremstyle{remark}
   \newtheorem*{rem}{Remarque}
+  \newtheorem*{rems}{Remarques}
   \theoremstyle{definition}
   \newtheorem*{astuce}{Astuce}
   \newenvironment{sol}{\begin{proof}[Solution]}{\end{proof}}
@@ -56,14 +57,14 @@
         \settowidth{\labelwidth}{\bfseries \thechapter.\arabic{exercice}}
         \setlength{\leftmargin}{\labelwidth}
         \addtolength{\leftmargin}{\labelsep}
-        \setdefaultenum{(a)}{(i)}{}{}}\item}
+        \setdefaultenum{a)}{i)}{}{}}\item}
     {\end{list}}
   \renewenvironment{reponse}[1]{%
     \begin{list}{\bfseries #1}{%
         \settowidth{\labelwidth}{#1}
         \setlength{\leftmargin}{\labelwidth}
         \addtolength{\leftmargin}{\labelsep}
-        \setdefaultenum{(a)}{(i)}{}{}}\item}
+        \setdefaultenum{a)}{i)}{}{}}\item}
     {\end{list}}
   \renewcommand{\reponseparams}{{\thechapter.\theexercice}}
 
@@ -156,7 +157,7 @@
 \include{pagetitre}
 
 \pagestyle{companion}
-\include{preface}
+\include{introduction}
 \tableofcontents*
 
 \mainmatter

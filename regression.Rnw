@@ -8,25 +8,26 @@ options(width=52)
 
 Comme tous les grands logiciels statistiques --- et même plusieurs
 calculatrices scientifiques --- S-Plus et \textsf{R} comportent des
-fonctions pour calculer les coefficients d'une régression simple ou
-multiple. Les outils disponibles vont toutefois bien au-delà de ce
-calcul relativement simple. Par l'entremise de quelques fonctions
-génériques simples à utiliser, il est ainsi possible de générer
-différents graphiques relatifs à la régression, de calculer le tableau
-ANOVA de celle-ci et d'en extraire les informations principales, de
+fonctions permettant de calculer les coefficients d'une régression
+simple ou multiple. Les outils disponibles vont toutefois bien au-delà
+de ce calcul relativement simple. Ainsi, par l'entremise de quelques
+fonctions génériques simples à utiliser, il est possible de générer
+différents graphiques relatifs à la régression, d'en calculer le
+tableau ANOVA et d'en extraire les informations principales, de
 calculer des prévisions ainsi que des intervalles de confiance. Bref,
 l'analyse complète d'un ensemble de données tient en quelques lignes
 de code; il suffit de connaître les fonctions à utiliser.
 
-Le but de ce chapitre consiste à présenter les principales fonctions
---- dont la liste se trouve au tableau \ref{tab:regression:fonctions}
---- utiles lors de l'analyse de données et la modélisation par
-régression.  Il n'a cependant aucune prétention d'exhaustivité.
-Consulter l'aide en ligne de S-Plus ou \textsf{R}, ainsi que
-\citet{MASS} pour de plus amples détails.
+Ce chapitre présente les principales fonctions --- dont la liste se
+trouve au tableau \ref{tab:regression:fonctions} --- utiles lors de
+l'analyse de données et la modélisation par régression.  Il n'a
+cependant aucune prétention d'exhaustivité.  Consulter l'aide en ligne
+de S-Plus ou \textsf{R}, ainsi que \citet{MASS} pour de plus amples
+détails.
 
-À noter que l'on souligne les menues différences entre S-Plus et
-\textsf{R}, mais que les exemples ont été exécutés en \textsf{R}.
+À noter que l'on souligne les menues différences qui existent entre
+S-Plus et \textsf{R}, mais que les exemples ont été exécutés en
+\textsf{R}.
 
 \begin{table}[htbp]
   \centering
@@ -62,7 +63,7 @@ Consulter l'aide en ligne de S-Plus ou \textsf{R}, ainsi que
         & \fonction{deviance} \\
         & \fonction{df.residual}\tnote{1} \\
       \midrule
-      Mise à jour et prévision
+      Mise à jour et prévisions
         & \fonction{update} \\
         & \fonction{predict} \\
       \midrule
@@ -88,7 +89,7 @@ Consulter l'aide en ligne de S-Plus ou \textsf{R}, ainsi que
 \index{regression@régression!importation de données}
 \label{regression:importation}
 
-La modélisation statistique en S --- comme, par exemple, l'analyse de
+La modélisation statistique en S --- par exemple, l'analyse de
 régression --- repose souvent sur l'utilisation de \emph{data
   frames}\index{data frame} pour le stockage des données. On se
 référera à la section \ref{bases:dataframes} pour une présentation
@@ -117,10 +118,11 @@ arguments de \code{read.table} les plus souvent utilisés sont:
 \label{regression:formules}
 
 Lorsque l'on fait une régression, il faut informer S-Plus ou
-\textsf{R} des variables que l'on entend inclure dans celle-ci et de
-quelle façon. La convention utilisée dans le langage S est celle dite
-des «formules»\Index{formule}. Le tableau \ref{tab:formules} présente
-quelques exemples de formulation de modèles linéaires simples en S.
+\textsf{R} des variables que l'on entend inclure dans celle-ci et
+leurs relations entre elles. La convention utilisée dans le langage S
+est celle dite des «formules»\Index{formule}. Le tableau
+\ref{tab:formules} présente quelques exemples de formulation de
+modèles linéaires simples en S.
 
 \begin{table}
   \centering
@@ -146,7 +148,7 @@ quelques exemples de formulation de modèles linéaires simples en S.
 \end{table}
 
 Pour une utilisation de base des fonctions de régression, la
-connaissance les règles suivantes suffit.
+connaissance des règles suivantes suffit.
 \begin{enumerate}
 \item Les opérateurs \code{+} et \code{-} prennent une nouvelle
   signification dans les formules: \fonction{+} signifie «inclusion»
@@ -175,8 +177,9 @@ habituellement à représenter celles-ci graphiquement.
 
 La fonction \fonction{plot} est une fonction générique comportant des
 méthodes pour un grand nombre de classes d'objets différentes.
-Puisqu'une méthode existe pour les objets de classe \classe{formula},
-on peut tracer un graphique de \code{y1} en fonction de \code{x1} avec
+Puisqu'il existe une méthode pour les objets de classe
+\classe{formula}, on peut tracer un graphique de \code{y1} en fonction
+de \code{x1} avec
 \begin{Sinput}
 > plot(y1 ~ x1, data=anscombe)
 \end{Sinput}
@@ -210,9 +213,9 @@ terme d'erreur.
 C'est avec la fonction \Fonction{lm} (pour \emph{linear model}) que
 l'on calcule les estimateurs des coefficients de la régression
 $\beta_0$ et $\beta_1$. De façon simplifiée, cette fonction prend en
-arguments une formule et un \emph{data frame} dans lequel se trouvent
-les données relatives aux termes de celle-ci. La fonction \code{lm}
-retourne un objet de classe \classe{lm} pour laquelle il existe de
+arguments une formule et un \emph{data frame} comprenant les données
+relatives aux termes de la formule. La fonction \code{lm} retourne un
+objet de classe \classe{lm}, classe pour laquelle il existe de
 nombreuses méthodes.
 <<echo=TRUE>>=
 ( fit <- lm(y1 ~ x1, data=anscombe) )
@@ -283,15 +286,15 @@ d'une régression.  Consulter la rubrique d'aide de la fonction
 \fonction{plot.lm} pour plus de détails.
 
 
-\section{Mise à jour des résultats et prévision}
-\index{regression@régression!prévision}
+\section{Mise à jour des résultats et prévisions}
+\index{regression@régression!prévisions}
 \label{regression:prevision}
 
 Il peut arriver que, une fois la modélisation d'un ensemble de données
-effectuée, il soit nécessaire d'ajouter ou de modifier une ou
-plusieurs données ou variables. Plutôt que de reprendre toute la
-modélisation avec la fonction \code{lm}, il peut alors s'avérer plus
-simple et élégant d'utiliser la fonction \fonction{update}.
+effectuée, l'on doive ajouter ou modifier une ou plusieurs données ou
+variables. Plutôt que de reprendre toute la modélisation avec la
+fonction \code{lm}, il peut alors s'avérer plus simple et élégant
+d'utiliser la fonction \fonction{update}:
 <<echo=TRUE>>=
 update(fit, ~ . + x4)
 @
@@ -310,36 +313,36 @@ valeurs de la variable indépendante, on spécifiera celles-ci par le
 biais d'un \emph{data frame} passé à \fonction{predict} avec l'option
 \argument{newdata}.
 
-Le calcul des intervalles de confiance et de prévision diffère entre
-S-Plus et \textsf{R}. Dans \Splus S-Plus, les intervalles de confiance
-en chaque point seront calculés par \fonction{predict} avec l'option
-\code{ci.fit = T}\indexargument{ci.fit}, alors que les intervalles de
-prévision le sont avec \texttt{pi.fit = T}\indexargument{pi.fit}. Il
-est par conséquent possible de calculer en un seul appel à
-\fonction{predict} les deux types d'intervalles. Le niveau de
-confiance est spécifié avec l'option \argument{conf.level} ($0,95$ par
-défaut).
+S-Plus et \textsf{R} diffèrent quant au calcul des intervalles de
+confiance et de prévision. Dans \Splus S-Plus, les intervalles de
+confiance en chaque point seront calculés par \fonction{predict} avec
+l'option \code{ci.fit = T}\indexargument{ci.fit} alors que les
+intervalles de prévision le sont avec \texttt{pi.fit =
+  T}\indexargument{pi.fit}. Il est par conséquent possible de calculer
+en un seul appel à \fonction{predict} les deux types d'intervalles. Le
+niveau de confiance est spécifié avec l'option \argument{conf.level}
+($0,95$ par défaut).
 
 Si un ou plusieurs intervalles de confiance sont calculés, le résultat
 de \fonction{predict} est une liste nommée dont les éléments sont
-\verb=$fit=, \verb=$ci.fit= et \verb=$pi.fit= (et ce peu importe le
+\verb=$fit=, \verb=$ci.fit= et \verb=$pi.fit= (et ce, peu importe le
 nom de l'objet contenant le modèle linéaire).
 
 Dans \R \textsf{R}, il n'est pas possible de calculer les deux types
 d'intervalles en un seul appel à \fonction{predict}. Pour calculer les
-intervalles de confiance, on utilisera l'option
-\verb!interval="confidence"!\indexargument{interval}, alors que pour
-les intervalles de prévision on utilise \verb!interval="prediction"!.
-Le niveau de confiance est déterminé avec l'option \argument{level}. Le
-résultat est une matrice de trois colonnes dont la première contient
-les prévisions et les deux autres les bornes inférieures
-(\code{lwr}) et supérieures (\code{upr}) des intervalles de
-confiance.
+intervalles de confiance, on utilisera l'option %
+\verb!interval = "confidence"!\indexargument{interval} %
+alors que pour les intervalles de prévision on utilise %
+\verb!interval = "prediction"!. %
+Le niveau de confiance est déterminé avec l'option \argument{level}.
+Le résultat est une matrice de trois colonnes dont la première
+contient les prévisions et les deux autres les bornes inférieures
+(\code{lwr}) et supérieures (\code{upr}) des intervalles de confiance.
 
-Les limites des intervalles de confiance peuvent être ajoutées au
-graphique des données avec les fonctions \fonction{matlines} ou
-\fonction{matplot} \R (\textsf{R} seulement). Consulter les rubriques
-d'aide et les exemples pour de plus amples détails.
+On ajoute les limites des intervalles de confiance au graphique des
+données avec les fonctions \fonction{matlines} ou \fonction{matplot}
+\R (\textsf{R} seulement).  Consulter les rubriques d'aide et les
+exemples pour de plus amples détails.
 
 \index{regression@régression|)}
 

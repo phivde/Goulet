@@ -8,7 +8,7 @@ options(width=52)
 Ce chapitre traite de divers concepts et fonctions un peu plus avancés
 du langage S. Le lecteur intéressé à approfondir ses connaissances de
 ce langage pourra consulter \citet{Sprogramming}, en particulier les
-chapitre 3 et 4.
+chapitres 3 et 4.
 
 
 \section{L'argument `\code{...}'}
@@ -26,9 +26,9 @@ dont `\Argument{...}' est le nom.
   ni modifié par la fonction.
 \item Il est généralement simplement passé tel quel à une autre
   fonction.
-\item Voir les définitions des fonctions \fonction{apply},
-  \fonction{lapply} et \fonction{sapply}, ci-dessous, pour des
-  exemples.
+\item Pour des exemples, voir les définitions des fonctions
+  \fonction{apply}, \fonction{lapply} et \fonction{sapply},
+  ci-dessous.
 \end{itemize}
 
 
@@ -61,7 +61,7 @@ Lorsque \code{X} est une matrice, \fonction{apply} sert principalement
 \begin{itemize}
 \item Utiliser la fonction \fonction{apply} plutôt que des boucles
   puisque celle-ci est plus efficace.
-\item Considérer les exemples suivants.
+\item Considérer les exemples suivants:
 <<echo=TRUE>>=
 ( m <- matrix(sample(1:100, 20, rep=TRUE), 5, 4) )
 apply(m, 1, var)             # variance par ligne
@@ -92,7 +92,7 @@ apply(arr, 3, det)
 Les fonctions \Fonction{lapply} et \Fonction{sapply} sont similaires à
 la fonction \fonction{apply} en ce qu'elles permettent d'appliquer une
 fonction aux éléments d'une structure --- le vecteur ou la liste en
-l'occurence. Leur syntaxe est similaire:
+l'occurrence. Leur syntaxe est similaire:
 \begin{center}
   \code{lapply(X, FUN, ...)} \\
   \code{sapply(X, FUN, ...)}
@@ -175,7 +175,7 @@ replicate(10000, fun(...))
 \section{Classes et fonctions génériques}
 \label{avance:classes}
 
-Tous les objets dans le langage S ont une classe. La classe est
+Dans le langage S, tous les objets ont une classe. La classe est
 parfois implicite ou dérivée du mode de l'objet (consulter la rubrique
 d'aide de \fonction{class} pour de plus amples détails).
 
@@ -189,7 +189,7 @@ d'aide de \fonction{class} pour de plus amples détails).
   à chaque classe qu'elle reconnaît et, généralement, une méthode
   \code{default} pour les autres objets. La liste des méthodes
   existant pour une fonction générique s'obtient avec
-  \Fonction{methods}:
+  la fonction \Fonction{methods}:
 <<echo=TRUE>>=
 methods(plot)
 @
@@ -202,7 +202,7 @@ methods(plot)
   objet à la ligne de commande pour voir son contenu, c'est la
   fonction générique \fonction{print} qui est appelée. On peut donc
   complètement modifier la représentation à l'écran du contenu d'un
-  objet est créant une nouvelle classe et une nouvelle méthode pour la
+  objet en créant une nouvelle classe et une nouvelle méthode pour la
   fonction \code{print}.
 \end{itemize}
 
@@ -299,11 +299,11 @@ sum(Xijk * wijk)/sum(wijk)
 \begin{exercice}
   Générer les suites de nombres suivantes à l'aide d'une expression S.
   (Évidemment, il faut trouver un moyen de générer les suites sans
-  simplement concaténer les différentes sous suites.)
+  simplement concaténer les différentes sous-suites.)
   \begin{enumerate}
   \item $0, 0, 1, 0, 1, 2, \dots, 0, 1, 2, 3, \dots, 10$.
-  \item $10, 9, 8, \dots, 2, 1, 10, 9, 8, \dots 3, 2, \dots, 10, 9, 10$
-  \item $10, 9, 8, \dots, 2, 1, 9, 8, \dots, 2, 1, \dots, 2, 1, 1$
+  \item $10, 9, 8, \dots, 2, 1, 10, 9, 8, \dots 3, 2, \dots, 10, 9, 10$.
+  \item $10, 9, 8, \dots, 2, 1, 9, 8, \dots, 2, 1, \dots, 2, 1, 1$.
   \end{enumerate}
   \begin{rep}
     \begin{enumerate}

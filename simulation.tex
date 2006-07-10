@@ -8,11 +8,11 @@
 \label{simulation:intro}
 
 La simulation est de plus en plus utilisée pour résoudre des problèmes
-complexes. Il existe de multiples façons de réaliser la mise en {\oe}uvre
-informatique d'une simulation, mais certaines sont plus efficaces que
-d'autres.  Ce document passe en revue diverses façons de faire des
-simulations avec S-Plus et \textsf{R}. On procédera à l'aide d'un
-exemple simple de nature statistique.
+complexes. Il existe de multiples façons de réaliser la mise en
+{\oe}uvre informatique d'une simulation, mais certaines sont plus
+efficaces que d'autres.  Ce document passe en revue diverses façons de
+faire des simulations avec S-Plus et \textsf{R} à l'aide d'un exemple
+simple de nature statistique.
 
 Soit $X_1, \dots, X_n$ un échantillon aléatoire tiré d'une population
 distribuée selon une loi uniforme sur l'intervalle $(\theta -
@@ -39,18 +39,18 @@ estimateurs suivants du paramètre inconnu $\theta$:
   \end{displaymath}
 \end{enumerate}
 
-On veut vérifier par simulation deux choses: que les trois estimateurs
-sont bel et bien sans biais, et lequel a la plus faible variance. Pour
-ce faire, on doit d'abord simuler un grand nombre $N$ d'échantillons
-aléatoires de taille $n$ d'une distribution $U(\theta - \frac{1}{2},
-\theta + \frac{1}{2})$ pour une valeur de $\theta$ choisie. Pour
-chaque échantillon, on calculera ensuite les trois estimateurs
-ci-dessus, puis la moyenne et la variance, par type d'estimateur, de
-tous les estimateurs obtenus. Si la moyenne des $N$ estimateurs
-$\hat{\theta}_i$, $i = 1, 2, 3$ est près de $\theta$, alors on pourra
-conclure que $\hat{\theta}_i$ est sans biais. De même, on déterminera
-lequel des trois estimateurs a la plus faible variance selon le
-classement des variances empiriques.
+À l'aide de la simulation on veut, d'une part, vérifier si les trois
+estimateurs sont bel et bien sans biais et, d'autre part, déterminer
+lequel a la plus faible variance. Pour ce faire, on doit d'abord
+simuler un grand nombre $N$ d'échantillons aléatoires de taille $n$
+d'une distribution $U(\theta - \frac{1}{2}, \theta + \frac{1}{2})$
+pour une valeur de $\theta$ choisie. Pour chaque échantillon, on
+calculera ensuite les trois estimateurs ci-dessus, puis la moyenne et
+la variance, par type d'estimateur, de tous les estimateurs obtenus.
+Si la moyenne des $N$ estimateurs $\hat{\theta}_i$, $i = 1, 2, 3$ est
+près de $\theta$, alors on pourra conclure que $\hat{\theta}_i$ est
+sans biais. De même, on déterminera lequel des trois estimateurs a la
+plus faible variance selon le classement des variances empiriques.
 
 
 
@@ -92,7 +92,7 @@ b <- theta + 0.5           # borne supérieure de l'uniforme
 x <- matrix(0, nrow=3, ncol=nsimul)
 rownames(x) <- c("Moyenne", "Mediane", "Mi-etendue")
 
-### Simulation comme tel.
+### Simulation comme telle.
 for (i in 1:nsimul)
 {
     u <- runif(size, a, b)
@@ -153,11 +153,11 @@ figure \ref{fig:boucle}, sans les commentaires. On a alors:
 \begin{Soutput}
 $biais
       Moyenne       Mediane    Mi-etendue 
--1.038891e-04 -1.244879e-04 -1.706436e-06 
+ 4.067055e-04  6.074806e-04 -6.295365e-05 
 
 $variances
      Moyenne      Mediane   Mi-etendue 
-8.356727e-04 2.426740e-03 4.764232e-05 
+8.384350e-04 2.436228e-03 4.812775e-05 
 \end{Soutput}
 \end{Schunk}
 
@@ -176,12 +176,12 @@ la liste ou du vecteur \texttt{x} et retournent les résultats sous
 forme de liste (\fonction{lapply}) ou, lorsque c'est possible, de
 vecteur ou de matrice (\fonction{sapply}). Il est important de noter
 que les valeurs successives de \code{x} seront passées comme
-\emph{premier} argument à la fonction \code{FUN}. Les autres
-arguments de \code{FUN}, s'il y a lieu, sont spécifiés dans le champ
-`\argument{...}'.
+\emph{premier} argument à la fonction \code{FUN}. Le cas échéant, les
+autres arguments de \code{FUN} sont spécifiés dans le
+champ~`\argument{...}'.
 
 Pour pouvoir utiliser ces fonctions dans le cadre d'une simulation
-telle que celle dont il est question ici, il s'agit de définir une
+comme celle dont il est question ici, il s'agit de définir une
 fonction qui fera tous les calculs pour une simulation, puis de la
 passer à \fonction{sapply} pour obtenir les résultats de $N$
 simulations. La figure \ref{fig:fun1} présente une première version
@@ -211,10 +211,10 @@ fun1 <- function(i, size, a, b)
 > sapply(1:4, fun1, size = 10, a = -0.5, b = 0.5)
 \end{Sinput}
 \begin{Soutput}
-                  [,1]       [,2]        [,3]      [,4]
-Moyenne    -0.01307255 -0.2333385 -0.05123486 0.2035111
-Mediane    -0.08434367 -0.2626293 -0.11521059 0.2356300
-Mi-etendue  0.10859106 -0.1329516  0.03049428 0.1342814
+                   [,1]          [,2]        [,3]      [,4]
+Moyenne     0.053791370 -0.0621231376 -0.01328870 0.1545880
+Mediane     0.137352108 -0.1115397780 -0.06042433 0.2528814
+Mi-etendue -0.007453277  0.0002247883  0.04237688 0.1174229
 \end{Soutput}
 \end{Schunk}
 
@@ -251,11 +251,11 @@ simul2 <- function(nsimul, size, theta)
 \begin{Soutput}
 $biais
      Moyenne      Mediane   Mi-etendue 
-1.125087e-04 2.658985e-04 4.299878e-05 
+3.172877e-04 2.759724e-04 3.247261e-05 
 
 $variances
      Moyenne      Mediane   Mi-etendue 
-0.0008310916 0.0024445899 0.0000503219 
+8.029618e-04 2.390275e-03 4.881379e-05 
 \end{Soutput}
 \end{Schunk}
 
@@ -266,15 +266,15 @@ approche.
 \section{Variante de la seconde approche}
 \label{simulation:replicate}
 
-Une chose manque d'élégance dans la seconde approche: le fait de
-devoir inclure un argument factice dans la fonction \code{fun1}.  La
+Une chose manque d'élégance dans la seconde approche: l'obligation
+d'inclure un argument factice dans la fonction \code{fun1}.  La
 fonction \R \fonction{replicate} (section \ref{avance:replicate}),
-disponible dans \textsf{R} seulement, permet d'éviter cela: cette
-fonction exécutera un nombre donné de fois une expression quelconque.
-Les fonctions \code{fun2} et \code{simul3} des figures \ref{fig:fun2}
-et \ref{fig:simul3}, respectivement, sont des versions légèrement
-modifiées de \code{fun1} et \code{simul2} pour utilisation avec
-\fonction{replicate}.
+disponible dans \textsf{R} seulement, permet toutefois de passer outre
+cette contrainte. En effet, cette fonction exécute un nombre donné de
+fois une expression quelconque.  Les fonctions \code{fun2} et
+\code{simul3} des figures \ref{fig:fun2} et \ref{fig:simul3},
+respectivement, sont des versions légèrement modifiées de \code{fun1}
+et \code{simul2} pour utilisation avec \fonction{replicate}.
 
 On a alors
 \begin{Schunk}
@@ -284,11 +284,11 @@ On a alors
 \begin{Soutput}
 $biais
       Moyenne       Mediane    Mi-etendue 
- 9.813584e-06 -2.908762e-05 -7.936208e-06 
+-3.101468e-04 -2.104813e-04 -3.392078e-05 
 
 $variances
      Moyenne      Mediane   Mi-etendue 
-8.348888e-04 2.458212e-03 4.786719e-05 
+8.202952e-04 2.420604e-03 4.830223e-05 
 \end{Soutput}
 \end{Schunk}
 
@@ -363,8 +363,8 @@ sont \texttt{NA}.
 \end{Schunk}
 
 Les différences, petites ici, peuvent être plus importantes lors de
-grosses simulations et davantage favoriser l'utilisation de la fonction
-\code{replicate}.
+grosses simulations et favoriser d'autant plus l'utilisation de la
+fonction \code{replicate}.
 
 
 \section{Gestion des fichiers}
@@ -376,7 +376,7 @@ de script. Pour un plus gros projet, cependant, il vaut souvent mieux
 avoir recours à plusieurs fichiers différents. Le présent auteur
 utilise pour sa part un fichier par fonction.
 
-Pour des fins d'illustrations, supposons que l'on utilise l'approche
+À des fins d'illustration, supposons que l'on utilise l'approche
 de la section \ref{simulation:replicate} avec la fonction
 \code{replicate} en \textsf{R} et que le code des fonctions
 \code{fun2} et \code{simul3} est sauvegardé dans des fichiers
@@ -425,10 +425,9 @@ Avec \textsf{R}, la syntaxe est plutôt
 \begin{verbatim}
 C:\> R CMD BATCH go.R
 \end{verbatim}
-et les résultats se trouveront par défaut dans le fichier
-\texttt{go.Rout}. Si l'exécutable de \textsf{R} n'est pas trouvé par
-Windows, il faut spécifier le chemin d'accès complet, comme par
-exemple:
+et les résultats seront placés par défaut dans le fichier
+\texttt{go.Rout}. Si Windows ne trouve pas l'exécutable de \textsf{R},
+il faut spécifier le chemin d'accès complet, par exemple:
 \begin{verbatim}
 C:\> "c:\program files\R\R-2.2.0\bin\R" CMD BATCH go.R
 \end{verbatim}
