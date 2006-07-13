@@ -157,7 +157,7 @@ Dans \R \textsf{R}, la fonction d'autocorrélation partielle s'obtient
 plus directement avec la fonction \Fonction{pacf}.
 
 
-\section{estimation}
+\section{Estimation}
 \index{series@séries chronologiques!estimation}
 \label{ts:modelisation}
 
