@@ -21,11 +21,24 @@
   \usecolortheme{sidebartab}
   \usefonttheme{professionalfonts}
   \setbeamercovered{transparent}
+  \AtBeginPart[]
+  {
+    \begin{frame}
+      \partpage
+    \end{frame}
+  }
   \AtBeginSection[]
   {
     \begin{frame}
       \frametitle{Sommaire}
-      \tableofcontents[currentsection]
+      \tableofcontents[sectionstyle=show/shaded,subsectionstyle=hide/hide]
+    \end{frame}
+  }
+  \AtBeginSubsection[]
+  {
+    \begin{frame}
+      \frametitle{Sommaire}
+      \tableofcontents[sectionstyle=show/hide,subsectionstyle=show/shaded/hide]
     \end{frame}
   }
 
@@ -72,6 +85,7 @@
   \newcommand{\ess}[1]{\code{#1}}
 
 %  \includeonlylecture{cours 1}
+%  \includeonly{presentation_slides,bases_slides}
   
 \begin{document}
 
@@ -87,8 +101,8 @@
 %%% CHAPITRES
 %%% 
 
-\renewcommand{\partname}{Chapitre}
-\renewcommand{\insertromanpartnumber}{\arabic{part}}
+%\renewcommand{\partname}{Chapitre}
+%\renewcommand{\insertromanpartnumber}{\arabic{part}}
 
 %% COURS 1: Présentation.
 \lecture{Présentation}{cours 1}
