@@ -2,7 +2,7 @@
 \label{avance}
 
 <<echo=FALSE>>=
-options(width=52)
+options(width = 52)
 @
 
 Ce chapitre traite de divers concepts et fonctions un peu plus avancés
@@ -63,10 +63,10 @@ Lorsque \code{X} est une matrice, \fonction{apply} sert principalement
   puisque celle-ci est plus efficace.
 \item Considérer les exemples suivants:
 <<echo=TRUE>>=
-( m <- matrix(sample(1:100, 20, rep=TRUE), 5, 4) )
+( m <- matrix(sample(1:100, 20, rep = TRUE), 5, 4) )
 apply(m, 1, var)             # variance par ligne
 apply(m, 2, min)             # minimum par colonne
-apply(m, 1, mean, trim=0.2)  # moyenne tronquée par ligne
+apply(m, 1, mean, trim = 0.2)  # moyenne tronquée par ligne
 @
 \end{itemize}
 
@@ -79,7 +79,7 @@ ou un tableau.
 \item Déterminants des cinq sous-matrices $4 \times 4$ d'un tableau $4
   \times 4 \times 5$:
 <<echo=TRUE>>=
-arr <- array(sample(1:100, 80, rep=TRUE), c(4, 4, 5))
+arr <- array(sample(1:100, 80, rep = TRUE), c(4, 4, 5))
 apply(arr, 3, det)
 @
 \end{itemize}
@@ -102,7 +102,7 @@ l'occurrence. Leur syntaxe est similaire:
   tous les éléments d'un vecteur ou d'une liste \code{X} et retourne
   le résultat sous forme de liste.
 <<echo=TRUE>>=
-( v <- lapply(5:8, sample, x=1:100) )
+( v <- lapply(5:8, sample, x = 1:100) )
 lapply(v, mean)
 @
 \item La fonction \fonction{sapply} est similaire à \fonction{lapply},
@@ -115,7 +115,7 @@ sapply(v, mean)
   vecteur, alors \fonction{sapply} retourne une matrice, remplie comme
   toujours par colonne.
 <<echo=TRUE>>=
-( v <- lapply(rep(5, 3), sample, x=1:100) )
+( v <- lapply(rep(5, 3), sample, x = 1:100) )
 sapply(v, sort)
 @
 \item Dans un grand nombre de cas, il est possible de remplacer les
@@ -225,22 +225,22 @@ methods(plot)
   \ref{exemples}, on a calculé la moyenne pondérée d'un vecteur
   d'observations
   \begin{displaymath}
-    X_w = \sum_{i=1}^n \frac{w_i}{w_\pt}\, X_i,
+    X_w = \sum_{i = 1}^n \frac{w_i}{w_\pt}\, X_i,
   \end{displaymath}
-  où $w_\pt = \sum_{i=1}^n w_i$. Si l'on a plutôt une matrice $n
+  où $w_\pt = \sum_{i = 1}^n w_i$. Si l'on a plutôt une matrice $n
   \times p$ d'observations $X_{ij}$, on peut définir les moyennes
   pondérées
   \begin{align*}
     X_{iw}
-    &= \sum_{j=1}^p \frac{w_{ij}}{w_{i\pt}}\, X_{ij}, \quad
-    w_{i\pt} = \sum_{j=1}^p w_{ij} \\
+    &= \sum_{j = 1}^p \frac{w_{ij}}{w_{i\pt}}\, X_{ij}, \quad
+    w_{i\pt} = \sum_{j = 1}^p w_{ij} \\
     X_{wj}
-    &= \sum_{i=1}^n \frac{w_{ij}}{w_{\pt j}}\, X_{ij}, \quad
-    w_{\pt j} = \sum_{i=1}^n w_{ij} \\
+    &= \sum_{i = 1}^n \frac{w_{ij}}{w_{\pt j}}\, X_{ij}, \quad
+    w_{\pt j} = \sum_{i = 1}^n w_{ij} \\
     \intertext{et}
     X_{ww}
-    &= \sum_{i=1}^n \sum_{j=1}^p \frac{w_{ij}}{w_{\pt\pt}}\, X_{ij}, \quad
-    w_{\pt\pt} = \sum_{i=1}^n \sum_{j=1}^p w_{ij}.
+    &= \sum_{i = 1}^n \sum_{j=1}^p \frac{w_{ij}}{w_{\pt\pt}}\, X_{ij}, \quad
+    w_{\pt\pt} = \sum_{i = 1}^n \sum_{j = 1}^p w_{ij}.
   \end{align*}
   De même, on peut définir des moyennes pondérées calculées à partir
   d'un tableau de données $X_{ijk}$ de dimensions $n \times p \times
@@ -309,15 +309,15 @@ sum(Xijk * wijk)/sum(wijk)
     \begin{enumerate}
 \item
 <<echo=TRUE,eval=FALSE>>=
-unlist(lapply(0:10, seq, from=0))
+unlist(lapply(0:10, seq, from = 0))
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
-unlist(lapply(1:10, seq, from=10))
+unlist(lapply(1:10, seq, from = 10))
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
-unlist(lapply(10:1, seq, to=1))
+unlist(lapply(10:1, seq, to = 1))
 @
     \end{enumerate}
   \end{rep}
@@ -352,7 +352,7 @@ rpareto <- function(n, alpha, lambda)
   \item On vous donne l'exemple suivant d'utilisation de la fonction
     \fonction{paste}:
 <<echo=TRUE,eval=TRUE>>=
-paste("a", 1:5, sep="")
+paste("a", 1:5, sep = "")
 @
     Nommer les éléments de la liste créée en (a)
     \code{echantillon1}, ..., \code{echantillon5}.
@@ -372,11 +372,11 @@ paste("a", 1:5, sep="")
     \begin{enumerate}
 \item
 <<echo=TRUE,eval=FALSE>>=
-ea <- lapply(seq(100, 300, by=50), rpareto, alpha=2, lambda=5000)
+ea <- lapply(seq(100, 300, by = 50), rpareto, alpha = 2, lambda = 5000)
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
-names(ea) <- paste("echantillon", 1:5, sep="")
+names(ea) <- paste("echantillon", 1:5, sep = "")
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
@@ -385,7 +385,7 @@ sapply(ea, mean)
 \item
 <<echo=TRUE,eval=FALSE>>=
 lapply(ea, function(x) sort(ppareto(x, 2, 5000)))
-lapply(lapply(ea, sort), ppareto, alpha=2, lambda=5000)
+lapply(lapply(ea, sort), ppareto, alpha = 2, lambda = 5000)
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
@@ -410,15 +410,15 @@ rpareto <- function(n, alpha, lambda)
 genere.assures <- function(nb.assures)
 {
     tous.assures <- as.list(numeric(nb.assures))
-    franchise <- sample(c(250, 500, 1000), nb.assures, replace=TRUE)
-    moyennes <- sample(c(0.85, 1, 1.67), nb.assures, replace=TRUE)
-    nb.annees <- sample(3:10, nb.assures, replace=TRUE)
+    franchise <- sample(c(250, 500, 1000), nb.assures, replace = TRUE)
+    moyennes <- sample(c(0.85, 1, 1.67), nb.assures, replace = TRUE)
+    nb.annees <- sample(3:10, nb.assures, replace = TRUE)
     for (i in 1:nb.assures)
     {
         nb.sinistres <- rpois(nb.annees[i], moyennes[i])
         montants <- rpareto(sum(nb.sinistres), 2, 5000) + franchise[i]
-        tous.assures[[i]] <- list(num.police=1000+i, franchise=franchise[i],
-                                  nb.acc=nb.sinistres, montants=montants)
+        tous.assures[[i]] <- list(num.police = 1000+i, franchise = franchise[i],
+                                  nb.acc = nb.sinistres, montants = montants)
     }
     tous.assures
 }
