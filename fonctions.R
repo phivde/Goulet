@@ -2,7 +2,7 @@
 ### l'algorithme du point fixe pour trouver le taux d'intérêt
 ### tel que a_angle{n} = k pour 'n' et 'k' donnés. Cette mise
 ### en oeuvre est peu générale puisqu'il faudrait modifier la
-### fonction à chaque fois que l'on change la fonction f(x)
+### fonction chaque fois que l'on change la fonction f(x)
 ### dont on cherche le point fixe.
 fp1 <- function(k, n, start=0.05, TOL=1E-10)
 {
@@ -85,7 +85,7 @@ fp3(f, 0.05, echo=TRUE)    # avec résultats intermédiaires
 fp3(function(x) 3^(-x), start=0.5) # avec une fonction anonyme
 
 ### La suite de Fibonacci (et son lien avec le nombre d'or) a
-### été remise au goût du jour par le best seller «Code Da
+### été remise au goût du jour par le bestseller «Code Da
 ### Vinci». Les valeurs de la suite de Fibonacci sont données
 ### par la fonction suivante:
 ###
@@ -134,9 +134,9 @@ sys.time(fib2(10000))      # S-Plus seulement
 system.time(fib1(10000))   # R seulement
 system.time(fib2(10000))   # R seulement
 
-### Second exemple basé sur le suite de Fibonacci: une
+### Second exemple basé sur la suite de Fibonacci: une
 ### fonction pour calculer non pas les 'n' premières valeurs
-### de la suite, mais uniquement la 'n'ieme valeur.
+### de la suite, mais uniquement la 'n'ième valeur.
 ###
 ### Mais il y a un mais: la fonction 'fib3' est truffée
 ### d'erreurs (de syntaxe, d'algorithmique, de conception). À
