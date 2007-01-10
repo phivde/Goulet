@@ -1,5 +1,5 @@
-### On répète simplement les exemples présentés dans le
-### chapitre.
+### Les exemples présentés dans le chapitre sont repris ici et
+### commentés
 
 ###
 ### FONCTION 'uniroot'
@@ -7,7 +7,7 @@
 
 ## Solution de l'équation x - 2^(-x) = 0 dans l'intervalle
 ## [0, 1]
-uniroot(function(x) x - 2^(-x), lower=0, upper=1)
+uniroot(function(x) x - 2^(-x), lower = 0, upper = 1)
 
 ###
 ### FONCTION 'polyroot'
@@ -26,9 +26,9 @@ Im(polyroot(c(-10, 0, 4, 1)))  # parties imaginaires
 ###
 
 ## Maximum local de la densité d'une loi bêta dans
-## l'intervalle [0, 1].
+## l'intervalle (0, 1).
 f <- function(x) dbeta(x, 3, 2)
-optimize(f, lower=0, upper=1, maximum=TRUE)
+optimize(f, lower = 0, upper = 1, maximum = TRUE)
 
 ###
 ### FONCTION 'ms'
@@ -38,9 +38,9 @@ optimize(f, lower=0, upper=1, maximum=TRUE)
 ## doit être spécifiée sous forme de formule et les données se
 ## trouver dans un data frame. Utile pour minimiser une
 ## fonction de log-vraisemblance.
-x <- rgamma(10, shape=5, rate=2)
-ms(~-log(dgamma(x, a, l)), data=as.data.frame(x),
-   start=list(a=1, l=1))   # S-Plus seulement
+x <- rgamma(10, shape = 5, rate = 2)
+ms(~-log(dgamma(x, a, l)), data = as.data.frame(x),
+   start = list(a = 1, l = 1)) # S-Plus seulement
 
 ###
 ### FONCTION 'nlmin'
@@ -59,14 +59,14 @@ nlmin(f, c(1, 1))          # S-Plus seulement
 ###
 
 ## Équivalent dans R de la fonction 'nlmin' de S-Plus.
-nlm(f, c(1, 1), x=x)       # R seulement
+nlm(f, c(1, 1), x = x)     # R seulement
 
 ###
 ### FONCTION 'optim'
 ###
 
 ## La fonction 'optim' est très puissante, mais requiert aussi
-## une bonne dose de prudence pour bien l'utiliser. Dans
-## S-Plus, il faut charger la section MASS de la bibliothèque.
+## une bonne dose de prudence. Dans S-Plus, il faut charger la
+## section MASS de la bibliothèque.
 library(MASS)              # S-Plus seulement
-optim(c(1, 1), f, x=x)     # même exemple que ci-dessus
+optim(c(1, 1), f, x = x)   # même exemple que ci-dessus
