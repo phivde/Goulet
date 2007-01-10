@@ -37,10 +37,11 @@ b
   valeur à une variable, puisqu'il ne fonctionne que dans certaines
   situations seulement.
 \item Dans S-Plus (mais plus dans \textsf{R} depuis la version 1.8.0),
-  on peut également affecter avec le caractère «\fonction{\_}», mais cet
-  emploi est fortement découragé puisqu'il rend le code difficile à
-  lire. Dans le mode ESS de Emacs, taper ce caractère génère carrément
-  \verb*| <- |.
+  on peut également affecter avec le caractère «\fonction{\_}», mais
+  cet emploi est fortement découragé puisqu'il rend le code difficile
+  à lire. Dans le mode ESS de Emacs, taper ce caractère hors d'une
+  chaîne de caractères génère carrément \verb*| <- | (appuyer deux
+  fois successives sur «_» pour obtenir le caractère).
 \end{itemize}
 
 \begin{astuce}
@@ -60,8 +61,8 @@ b
 
 Les caractères permis pour les noms d'objets sont les lettres a--z,
 A--Z, les chiffres 0--9 et le point «.». Le caractère \R «\code{\_}»
-est maintenant permis dans \textsf{R}, mais son utilisation est
-découragée.
+est maintenant permis dans \textsf{R}, mais son utilisation n'est pas
+encouragée.
 
 \begin{itemize}
 \item Les noms d'objets ne peuvent commencer par un chiffre.
@@ -280,8 +281,8 @@ v
 v[3]
 v["c"]
 @
-  La section \ref{bases:indicage} traite plus en détail de l'indiçage de
-  vecteurs et matrices.
+  La section \ref{bases:indicage} traite plus en détail de l'indiçage des
+  vecteurs et des matrices.
 \end{itemize}
 
 
