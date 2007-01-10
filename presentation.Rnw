@@ -44,28 +44,6 @@ S-Plus et \textsf{R} constituent tous deux des environnements intégrés
 de manipulation de données, de calcul et de préparation de graphiques.
 
 
-\section{Où trouver de la documentation}
-\label{presentation:doc}
-
-S-Plus est livré avec quatre livres (disponibles en format PDF depuis
-le menu \texttt{Help} de l'interface graphique), mais aucun ne s'avère
-vraiment utile pour apprendre le langage S.
-
-Plusieurs livres --- en versions papier ou électronique, gratuits ou
-non --- ont été publiés sur S-Plus et \textsf{R}. On trouvera des
-listes exhaustives dans les sites de Insightful et du projet
-\textsf{R}:
-\begin{itemize}
-\item \url{http://www.insightful.com/support/splusbooks.asp}
-\item \url{http://www.r-project.org} (dans la section
-  \texttt{Documentation}).
-\end{itemize}
-
-De plus, les ouvrages de \citet{Sprogramming,MASS} constituent des
-références sur le langage S devenues au cours des dernières années des
-standards \emph{de facto}.
-
-
 \section{Interfaces pour S-Plus et \textsf{R}}
 \label{presentation:interfaces}
 
@@ -78,7 +56,7 @@ avant tout des applications en ligne de commande (\texttt{sqpe.exe} et
   permettant d'utiliser le logiciel sans trop connaître le langage de
   programmation.
 \item \textsf{R} dispose également d'une interface graphique
-  rudimentaire sous Windows et Mac OS.
+  rudimentaire sous Windows et Mac OS~X.
 \item L'édition sérieuse de code S bénéficie cependant grandement d'un
   bon éditeur de texte.
 \item À la question 6.2 de la foire aux questions (FAQ) de \textsf{R},
@@ -87,7 +65,8 @@ avant tout des applications en ligne de commande (\texttt{sqpe.exe} et
   partageons cet avis, aussi ce document supposera-t-il que S-Plus ou
   \textsf{R} sont utilisés à l'intérieur de GNU Emacs avec le mode
   ESS\index{ESS}.
-\item Autre option: WinEdt (partagiciel) avec l'ajout R-WinEdt.
+\item Autres options: Tinn-R, WinEdt (partagiciel) avec l'ajout
+  R-WinEdt.
 \end{itemize}
 
 
@@ -95,9 +74,7 @@ avant tout des applications en ligne de commande (\texttt{sqpe.exe} et
 \label{presentation:emacs}
 
 Il n'existe pas de procédure d'installation similaire aux autres
-applications Windows pour Emacs.  L'installation n'en demeure pas
-moins très simple: il suffit de décompresser un ensemble de fichiers
-au bon endroit.
+applications Windows pour la version officielle de GNU Emacs.
 
 \begin{itemize}
 \item Pour une installation simplifiée de Emacs et ESS, consulter le
@@ -105,8 +82,11 @@ au bon endroit.
   \begin{quote}
     \url{http://vgoulet.act.ulaval.ca/pub/emacs/}
   \end{quote}
-  On y trouve une version modifiée de GNU Emacs et des instructions
-  d'installation détaillées.
+  On y trouve une version modifiée de GNU Emacs pour Windows et des
+  instructions d'installation détaillées.
+\item Les utilsateurs de Mac OS~X devraient installer Aquamacs
+  (\url{http://aquamacs.org}), une version de GNU Emacs bien intégrée
+  à OS~X et contenant déjà ESS.
 \item L'annexe \ref{ess} présente les plus importantes commandes à
   connaître pour utiliser Emacs et le mode ESS.
 \end{itemize}
@@ -246,6 +226,28 @@ d'utilisation. Leur consultation est tout à fait essentielle.
 \item Entre autres, la touche \texttt{l} permet d'exécuter ligne par
   ligne les exemples se trouvant à la fin de chaque rubrique d'aide.
 \end{itemize}
+
+
+\section{Où trouver de la documentation}
+\label{presentation:doc}
+
+S-Plus est livré avec quatre livres (disponibles en format PDF depuis
+le menu \texttt{Help} de l'interface graphique), mais aucun ne s'avère
+vraiment utile pour apprendre le langage S.
+
+Plusieurs livres --- en versions papier ou électronique, gratuits ou
+non --- ont été publiés sur S-Plus et \textsf{R}. On trouvera des
+listes exhaustives dans les sites de Insightful et du projet
+\textsf{R}:
+\begin{itemize}
+\item \url{http://www.insightful.com/support/splusbooks.asp}
+\item \url{http://www.r-project.org} (dans la section
+  \texttt{Documentation}).
+\end{itemize}
+
+De plus, les ouvrages de \citet{Sprogramming,MASS} constituent des
+références sur le langage S devenues au cours des dernières années des
+standards \emph{de facto}.
 
 
 \section{Exemples}

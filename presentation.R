@@ -61,7 +61,10 @@ m %*% m               # produit de m avec elle-même
 m %*% solve(m)        # produit de m avec son inverse
 round(m %*% solve(m)) # l'arrondi donne la matrice identité
 
-### Liste des objects dans l'espace de travail.
+### Consulter la rubrique d'aide de la fonction 'solve'.
+?solve
+
+### Liste des objets dans l'espace de travail.
 ls()
 
 ### Nettoyage.
