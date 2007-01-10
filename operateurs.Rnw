@@ -2,7 +2,7 @@
 \label{operateurs}
 
 <<echo=FALSE>>=
-options(width=52)
+options(width = 52)
 @
 
 Ce chapitre présente les principaux opérateurs arithmétiques,
@@ -116,8 +116,8 @@ d'une fonction interne ou personnelle.
 Par exemple, la définition de la fonction \texttt{matrix} est la
 suivante:
 \begin{verbatim}
-   matrix(data=NA, nrow=1, ncol=1, byrow=FALSE,
-          dimnames=NULL)
+   matrix(data = NA, nrow = 1, ncol = 1, byrow = FALSE,
+          dimnames = NULL)
 \end{verbatim}
 \begin{itemize}
   \sloppy
@@ -135,8 +135,8 @@ matrix()
 \item Appel plus élaboré utilisant tous les arguments. Le premier
   argument est rarement nommé.
 <<echo=TRUE>>=
-matrix(1:6, nrow=2, ncol=3, byrow=TRUE,
-       dimnames=list(c("Gauche", "Droit"),
+matrix(1:6, nrow = 2, ncol = 3, byrow = TRUE,
+       dimnames = list(c("Gauche", "Droit"),
        c("Rouge", "Vert", "Bleu")))
 @
 \end{itemize}
@@ -190,10 +190,11 @@ et pour manipuler des données.
   ordre croissant ou décroissant
 \item[\Fonction{rev}] renverser\index{renverser un vecteur} un vecteur
 \item[\Fonction{head}] extraction\index{extraction!premières valeurs}
-  des $n$ premières valeurs (\textsf{R} seulement)
-  \index{extraction|seealso{indiçage}}
+  des $n$ premières valeurs ou suppression des $n$ dernières
+  (\textsf{R} seulement) \index{extraction|seealso{indiçage}}
 \item[\Fonction{tail}] extraction\index{extraction!dernières valeurs}
-  des $n$ dernières valeurs (\textsf{R} seulement)
+  des $n$ dernières valeurs ou suppression des $n$ premières
+  (\textsf{R} seulement)
 \item[\Fonction{unique}] extraction des éléments
   différents\index{extraction!elements différents@éléments différents}
   d'un vecteur
@@ -419,7 +420,7 @@ cat(rep(c(0, 6), 3))
 @
   \item
 <<>>=
-cat(seq(1, 10, by=3))
+cat(seq(1, 10, by = 3))
 @
   \item
 <<>>=
@@ -435,14 +436,14 @@ cat(rep(1:3, 3:1))
 @
   \item
 <<>>=
-cat(seq(1, 10, length=3))
+cat(seq(1, 10, length = 3))
 @
   \item
 <<>>=
-cat(rep(1:3, rep(4,3)))
+cat(rep(1:3, rep(4, 3)))
 @
   \end{enumerate}
-  \SweaveOpts{echo=TRUE,eval=FALSE}
+  \SweaveOpts{echo=TRUE, eval=FALSE}
   \begin{rep}
     \begin{enumerate}
 \item
@@ -451,7 +452,7 @@ rep(c(0, 6), 3)
 @
 \item
 <<>>=
-seq(1, 10, by=3)
+seq(1, 10, by = 3)
 @
 \item
 <<>>=
@@ -467,7 +468,7 @@ rep(1:3, 3:1)
 @
 \item
 <<>>=
-seq(1, 10, length=3)
+seq(1, 10, length = 3)
 @
 \item
 <<>>=
@@ -497,7 +498,7 @@ cat(rep(-2:2, 2))
 @
   \item
 <<>>=
-cat(rep(-2:2, each=2))
+cat(rep(-2:2, each = 2))
 @
   \item
 <<>>=
@@ -521,7 +522,7 @@ rep(-2:2, 2)
 @
 \item
 <<>>=
-rep(-2:2, each=2)
+rep(-2:2, each = 2)
 @
 \item
 <<>>=

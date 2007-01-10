@@ -53,10 +53,10 @@ a[(!x %% 2) + 1]
 ## toutes équivalentes. On remarquera, entre autres, comment
 ## les arguments sont spécifiés (par nom ou par position).
 matrix(1:12, 3, 4)
-matrix(1:12, ncol=4, nrow=3)
-matrix(nrow=3, ncol=4, data=1:12)
-matrix(nrow=3, ncol=4, byrow=FALSE, 1:12)
-matrix(nrow=3, ncol=4, 1:12, FALSE)
+matrix(1:12, ncol = 4, nrow = 3)
+matrix(nrow = 3, ncol = 4, data = 1:12)
+matrix(nrow = 3, ncol = 4, byrow = FALSE, 1:12)
+matrix(nrow = 3, ncol = 4, 1:12, FALSE)
 
 ###
 ### QUELQUES FONCTIONS UTILES
@@ -66,46 +66,50 @@ matrix(nrow=3, ncol=4, 1:12, FALSE)
 a <- c(50, 30, 10, 20, 60, 30, 20, 40)  # vecteur non ordonné
 
 ## Séquences de nombres.
-seq(from=1, to=10)       # équivalent à 1:10
-seq(-10, 10, length=50)  # incrément déterminé automatiquement
-seq(-2, by=0.5, along=a) # même longueur que 'a'
+seq(from = 1, to = 10)     # équivalent à 1:10
+seq(-10, 10, length = 50)  # incrément automatique
+seq(-2, by = 0.5, along = a) # même longueur que 'a'
 
 ## Répétition de nombres ou de vecteurs complets.
-rep(1, 10)               # utilisation de base
-rep(a, 2)                # répéter un vecteur
-rep(a, times=2, each=4)  # possible de combiner les arguments
-rep(a, times=1:8)        # nombre de répétitions différent
-                         # pour chaque élément de 'a'
+rep(1, 10)                 # utilisation de base
+rep(a, 2)                  # répéter un vecteur
+rep(a, times = 2, each = 4) # combinaison des arguments
+rep(a, times = 1:8)        # nombre de répétitions différent
+                           # pour chaque élément de 'a'
 
 ## Classement en ordre croissant ou décroissant.
-sort(a)                  # classement en ordre croissant
-sort(a, decr=TRUE)       # classement en ordre décroissant
+sort(a)                    # classement en ordre croissant
+sort(a, decr = TRUE)       # classement en ordre décroissant
 sort(c("abc", "B", "Aunt", "Jemima")) # chaînes de caractères
-sort(c(TRUE, FALSE))     # FALSE vient avant TRUE
+sort(c(TRUE, FALSE))       # FALSE vient avant TRUE
 
 ## La fonction 'order' retourne la position, dans le vecteur
-## donné en argument, du premier élément dans l'ordre
+## donné en argument, du premier élément selon l'ordre
 ## croissant, puis du deuxième, etc. Autrement dit, on obtient
 ## l'ordre dans lequel il faut extraire les données du vecteur
 ## pour les obtenir en ordre croissant.
-order(a)                  # regarder dans le blanc des yeux
-a[order(a)]               # équivalent à 'sort(a)'
+order(a)                   # regarder dans le blanc des yeux
+a[order(a)]                # équivalent à 'sort(a)'
 
 ## Rang des éléments d'un vecteur dans l'ordre croissant.
-rank(a)                   # rang des élément de 'a'
+rank(a)                    # rang des élément de 'a'
 
 ## Renverser l'ordre d'un vecteur.
 rev(a)
 
 ## --- R ---
 head(a, 3)                 # trois premiers éléments de 'a'
+head(a, -2)                # tous sauf les deux derniers
 tail(a, 3)                 # trois derniers éléments de 'a'
+tail(a, -2)                # tous sauf les deux premiers
 ## ---------
 
 ## Équivalents S-Plus
 a[1:3]                     # trois premiers éléments de 'a'
+a[1:(length(a) - 2)]       # tous sauf les deux derniers
 a[(length(a)-2):length(a)] # trois derniers éléments de 'a'
 rev(rev(a)[1:3])           # avec petits vecteurs seulement
+a[3:length(a)]             # tous sauf les deux premiers
 
 ## Seulement les éléments différents d'un vecteur.
 unique(a)
@@ -133,7 +137,7 @@ sum(a)                     # somme des éléments de 'a'
 prod(a)                    # produit des éléments de 'a'
 diff(a)                    # a[2] - a[1], a[3] - a[2], etc.
 mean(a)                    # moyenne des éléments de 'a'
-mean(a, trim=0.125)        # moyenne tronquée
+mean(a, trim = 0.125)      # moyenne tronquée
 var(a)                     # variance (sans biais)
 (length(a) - 1)/length(a) * var(a) # variance biaisée
 sd(a)                      # écart type
@@ -146,7 +150,7 @@ quantile(a)                # quantiles empiriques
 quantile(a, 1:10/10)       # on peut spécifier les quantiles
 summary(a)                 # plusieurs des résultats ci-dessus
 
-## SOMMAIRES CUMULATIFS ET COMPARAISONS ÉLÉMENTS PAR ÉLÉMENT
+## SOMMAIRES CUMULATIFS ET COMPARAISONS ÉLÉMENT PAR ÉLÉMENT
 ( a <- sample(1:20, 6) )
 ( b <- sample(1:20, 6) )
 cumsum(a)                  # somme cumulative de 'a'
@@ -158,7 +162,7 @@ pmin(a, b)                 # minimum élément par élément
 pmax(a, b)                 # maximum élément par élément
 
 ## OPÉRATIONS SUR LES MATRICES
-( A <- sample(1:10, 16, replace=TRUE) ) # avec remise
+( A <- sample(1:10, 16, replace = TRUE) ) # avec remise
 dim(A) <- c(4, 4)          # conversion en une matrice 4 x 4
 b <- c(10, 5, 3, 1)        # un vecteur quelconque
 A                          # la matrice 'A'
@@ -172,8 +176,8 @@ diag(4)                    # matrice identité 4 x 4
 ( A <- cbind(A, b) )       # matrice 4 x 5
 nrow(A)                    # nombre de lignes de 'A'
 ncol(A)                    # nombre de colonnes de 'A'
-rowSums(A)                 # sommes ligne par ligne
-colSums(A)                 # sommes colonne par colonne
+rowSums(A)                 # sommes par ligne
+colSums(A)                 # sommes par colonne
 apply(A, 1, sum)           # équivalent à 'rowSums(A)'
 apply(A, 2, sum)           # équivalent à 'colSums(A)'
 apply(A, 1, prod)          # produit par ligne avec 'apply'
@@ -191,15 +195,15 @@ outer(a, b, pmax)          # idem
 ### STRUCTURES DE CONTRÔLE
 ###
 
-## Pour illustrer les structures de contrôle, on fait un petit
-## exemple tout à fait artificiel: un vecteur est rempli des
-## nombres de 1 à 100, sauf les multiples de 10. Ces derniers
-## sont affichés à l'écran.
+## Pour illustrer les structures de contrôle, on a recours à
+## un petit exemple tout à fait artificiel: un vecteur est
+## rempli des nombres de 1 à 100, à l'exception des multiples
+## de 10. Ces derniers sont affichés à l'écran.
 ##
 ## À noter qu'il est possible --- et plus efficace --- de
 ## créer le vecteur sans avoir recours à des boucles.
 (1:100)[-((1:10) * 10)]    # sans boucle!
-rep(1:9, 10) + rep(0:9*10, each=9) # une autre façon!
+rep(1:9, 10) + rep(0:9*10, each = 9) # une autre façon!
 
 ## Bon, l'exemple proprement dit...
 x <- numeric(0)            # initialisation du contenant 'x'
@@ -229,7 +233,7 @@ x
 
 ## On peut refaire l'exemple avec une boucle 'while', mais
 ## cette structure n'est pas naturelle ici puisque l'on sait
-## d'avance que nous devrons faire la boucle exactement 100
+## d'avance qu'il faudra faire la boucle exactement 100
 ## fois. Le 'while' est plutôt utilisé lorsque le nombre de
 ## répétitions est inconnu. De plus, une boucle 'while' n'est
 ## pas nécessairement exécutée puisque le critère d'arrêt est
@@ -249,11 +253,11 @@ x
 
 ## La remarque faite au sujet de la boucle 'while' s'applique
 ## aussi à la boucle 'repeat'. Par contre, le critère d'arrêt
-## de la boucle 'repeat' étant évalué à la fin de la boucle,
-## la boucle est exécutée au moins une fois. S'il faut faire
-## un tour de passe passe pour s'assurer qu'une boucle 'while'
-## est exécutée au moins une fois, c'est qu'il faut utiliser
-## 'repeat'...
+## de la boucle 'repeat' étant évalué à la toute fin, la
+## boucle est exécutée au moins une fois. S'il faut faire un
+## tour de passe-passe pour s'assurer qu'une boucle 'while'
+## est exécutée au moins une fois, c'est qu'il vaut mieux
+## utiliser 'repeat'...
 x <- numeric(0)
 j <- 0
 i <- 1
