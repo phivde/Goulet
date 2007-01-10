@@ -13,7 +13,7 @@ L'auteur du présent ouvrage donne accès à une version simple à
 installer et augmentée de quelques ajouts de la plus récente version
 de GNU Emacs pour Windows.  Consulter le site Internet
 \begin{quote}
-  \url{http://vgoulet.act.ulaval.ca/ressources/#Emacs}
+  \url{http://vgoulet.act.ulaval.ca/emacs/}
 \end{quote}
 
 Cette annexe passe en revue les quelques commandes essentielles à
@@ -174,7 +174,7 @@ Le mode ESS (\emph{Emacs Speaks Statistics}) permet d'interagir avec
 des logiciels statistiques (S-Plus, \textsf{R}, SAS, etc.) depuis
 Emacs. Ce mode est installé dans la version modifiée de GNU Emacs
 distribuée dans le site Internet
-\url{http://vgoulet.act.ulaval.ca/pub/emacs/}
+\url{http://vgoulet.act.ulaval.ca/emacs/}
 
 \begin{itemize}
 \item Voir le fichier
@@ -226,6 +226,23 @@ distribuée dans le site Internet
     (\texttt{ess-display-help-on-object})
   \item[\ess{C-c C-s}] changer de processus (utile si l'on a plus
     d'un processus S actif)
+  \end{ttscript}
+\item Raccourcis clavier utiles lors de la consultation des rubriques
+  d'aide:
+  \begin{ttscript}{m, m}
+    \raggedright
+  \item[h] ouvrir une nouvelle rubrique d'aide, par défaut pour le mot
+    se trouvant sous le curseur (\texttt{ess-display-help-on-object})
+  \item[n, p] aller à la section suivante (\texttt{n}) ou précédente
+    (\texttt{p}) de la rubrique (\texttt{ess-skip-to-next-section},
+    \texttt{ess-skip-to-previous-section})
+  \item[l] évaluer la ligne sous le curseur; pratique pour exécuter
+    les exemples (\texttt{ess-eval-line-and-step})
+  \item[r] évaluer la région sélectionnée (\texttt{ess-eval-region})
+  \item[q] retourner au processus ESS en laissant la rubrique d'aide
+    visible (\texttt{ess-switch-to-end-of-ESS})
+  \item[x] fermer la rubrique d'aide et retourner au processus ESS
+    (\texttt{ess-kill-buffer-and-go})
   \end{ttscript}
 \end{itemize}
 \index{ESS|)}
