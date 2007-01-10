@@ -2,7 +2,7 @@
 \label{exemples}
 
 <<echo=FALSE>>=
-options(width=50)
+options(width = 50)
 @
 
 Ce chapitre propose de faire le point sur les concepts étudiés jusqu'à
@@ -37,14 +37,14 @@ hypothèses ci-dessous.
   $P_1, P_2, \dots, P_n$ à la fin des années $1, 2, \dots, n$ est
   \begin{equation}
     \label{eq:vp}
-    \sum_{j=1}^n \prod_{k=1}^j (1 + i_k)^{-1} P_j,
+    \sum_{j = 1}^n \prod_{k = 1}^j (1 + i_k)^{-1} P_j,
   \end{equation}
   où $i_k$ est le taux d'intérêt effectif annuellement durant l'année
   $k$. Lorsque le taux d'intérêt est constant au cours des $n$ années,
   cette formule se simplifie en
   \begin{equation}
     \label{eq:vp2}
-    \sum_{j=1}^n (1 + i)^{-j} P_j.
+    \sum_{j = 1}^n (1 + i)^{-j} P_j.
   \end{equation}
   \begin{enumerate}[(a)]
   \item Un seul paiement annuel, un seul taux d'intérêt. On utilise la
@@ -105,7 +105,7 @@ choose(n, x) * p^x * (1 - p)^rev(x)
     On vérifie les réponses obtenues avec la fonction interne
     \fonction{dbinom}.
 <<2(b)-2>>=
-dbinom(x, n, prob=0.8)
+dbinom(x, n, prob = 0.8)
 @
     On vérifie enfin que les probabilités somment à 1.
 <<2(b)-3>>=
@@ -169,7 +169,7 @@ loi gamma de paramètre $\alpha$ entier et $\lambda = 1$ peut être
 obtenue à partir de la formule
 \begin{equation}
   \label{eq:exemples:gamma:fr}
-  F(x; \alpha, 1) = 1 - e^{-x} \sum_{j=0}^{\alpha-1} \frac{x^j}{j!}.
+  F(x; \alpha, 1) = 1 - e^{-x} \sum_{j = 0}^{\alpha-1} \frac{x^j}{j!}.
 \end{equation}
 
 \begin{enumerate}[(a)]
@@ -298,9 +298,9 @@ sum(P / cumprod(1 + i))
   et un vecteur de poids correspondants $\mat{w} = (w_1, \dots, w_n)$,
   calculer la moyenne pondérée des observations,
   \begin{displaymath}
-    \sum_{i=1}^n \frac{w_i}{w_\pt} x_i,
+    \sum_{i = 1}^n \frac{w_i}{w_\pt} x_i,
   \end{displaymath}
-  où $w_\pt = \sum_{i=1}^n w_i$. Tester l'expression avec les vecteurs
+  où $w_\pt = \sum_{i = 1}^n w_i$. Tester l'expression avec les vecteurs
   de données
   \begin{align*}
     \mat{x}
@@ -338,7 +338,7 @@ sum(x * w)/sum(w)
   Calculer la fonction de répartition en $x = 5$ d'une loi de
   Poisson avec paramètre $\lambda = 2$, qui est donnée par
   \begin{displaymath}
-    \sum_{k=0}^5 \frac{2^k e^{-2}}{k!},
+    \sum_{k = 0}^5 \frac{2^k e^{-2}}{k!},
   \end{displaymath}
   où $k! = 1 \cdot 2 \cdots k$.
   \begin{rep}
@@ -401,7 +401,7 @@ i <- 0.06
   \begin{rep}
 <<echo=TRUE,eval=FALSE>>=
 n <- 1:10
-i <- seq(0.05, 0.1, by=0.01)
+i <- seq(0.05, 0.1, by = 0.01)
 (1 - outer((1 + i), -n, "^"))/i
 @
 ou
@@ -419,7 +419,7 @@ apply(outer(1/(1+i), n, "^"), 1, cumsum)
   annuellement en début d'année pendant 10 ans si le taux
   d'actualisation est de 6~\%. Cette valeur présente est donnée par
   \begin{displaymath}
-    I\ddot{a}_{\angl{10}}=\sum_{k=1}^{10}kv^{k-1},
+    I\ddot{a}_{\angl{10}} = \sum_{k = 1}^{10}kv^{k-1},
   \end{displaymath}
   toujours avec $v = (1 + i)^{-1}$.
   \begin{rep}
