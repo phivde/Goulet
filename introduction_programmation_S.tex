@@ -3,17 +3,20 @@
   \usepackage[T1]{fontenc}
   \usepackage[english,francais]{babel}
   \usepackage{vgmath,actu,amsmath,amsthm,icomma,url,natbib}
-  \usepackage{palatino,mathpazo}
+  \usepackage{lucidabr,palatino,mathpazo}
   \usepackage{textcomp,fourier-orns,mathabx}
   \usepackage[noae]{Sweave}
+  \usepackage{graphicx,color}
+  \usepackage[absolute]{textpos}
   \usepackage{threeparttable,paralist,expdlist}
   \usepackage{listings,answers}
 
   %%% Page titre
-  \title{\HUGE Introduction à la programmation en S}
+  \title{\HUGE \textbf{Introduction} \\ à la \\ \textbf{programmation}
+    \\ en \\ \textbf{S}}
   \author{\huge Vincent Goulet \\[3mm]
     \large \textit{École d'actuariat, Université Laval}}
-  \date{\Large Version 1.0}
+  \date{\Large Première édition révisée}
   \newcommand{\ISBN}{2-9809136-0-X}
 
   %%% Commandes pour notes marginales
@@ -142,7 +145,7 @@
   \newcommand{\ess}[1]{\code{#1}\indexess{#1}}
   \makeindex
 
-%  \includeonly{presentation}
+  \includeonly{pagetitre}
 
 \begin{document}
 
@@ -168,14 +171,12 @@
 \include{fonctions}
 \include{avance}
 \include{optimisation}
-\include{regression}
-\include{ts}
+\include{rng}
+\include{simulation}
 
 \appendix
 \include{ess}
 \include{s-plus_windows}
-\include{rng}
-\include{simulation}
 \include{fdl}
 \include{reponses}
 
