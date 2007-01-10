@@ -9,11 +9,16 @@
 ( a <- 1:4 )
 length(a)
 
-## La longueur d'une chaîne de caractères est 1...
+## Une chaîne de caractères ne compte que pour un seul
+## élément.
 ( a <- "foobar" )
 length(a)
 
-## ... à moins que l'objet ne compte plusieurs chaînes de
+## Pour obtenir la longueur de la chaîne, il faut utiliser
+## nchar().
+nchar(a)
+
+## Un objet peut néanmoins contenir plusieurs chaînes de
 ## caractères.
 ( a <- c("f", "o", "o", "b", "a", "r") )
 length(a)
@@ -44,11 +49,11 @@ plot(x)                    # graphique pour les séries
 ## Attribut 'dim'. Si l'attribut 'dim' compte deux valeurs,
 ## l'objet est traité comme une matrice. S'il en compte plus
 ## de deux, l'objet est traité comme un tableau (array).
-a <- matrix(1:12, nrow=3, ncol=4) # matrice 3 x 4
+a <- matrix(1:12, nrow = 3, ncol = 4) # matrice 3 x 4
 dim(a)                     # vecteur de deux éléments
 length(dim(a))             # nombre de dimensions de 'a'
 class(a)                   # objet considéré comme une matrice
-length(a)                  # à l'interne, 'a' est un vecteur
+length(a)                  # à l'interne 'a' est un vecteur
 
 a <- array(1:24, c(2, 3, 4))  # tableau 2 x 3 x 4
 dim(a)                     # vecteur de 3 éléments
@@ -58,7 +63,7 @@ length(a)                  # à l'interne, 'a' est un vecteur
 
 ## Attribut 'dimnames'. Permet d'assigner des étiquettes (ou
 ## noms) aux dimensions d'une matrice ou d'un tableau.
-( a <- matrix(1:12, nrow=3) ) # matrice 3 x 4
+( a <- matrix(1:12, nrow = 3) ) # matrice 3 x 4
 dimnames(a)                # pas d'étiquettes par défaut
 letters                    # objet prédéfini
 LETTERS                    # idem
@@ -76,21 +81,21 @@ names(a) <- c("Rouge", "Vert", "Bleu", "Jaune")
                            # attribution d'étiquettes
 a                          # joli
 names(a)                   # extraction des étiquettes
-( a <- c("Rouge"=1, "Vert"=2, "Bleu"=3, "Jaune"=4) )
+( a <- c("Rouge" = 1, "Vert" = 2, "Bleu" = 3, "Jaune" = 4) )
                            # autre façon de faire
 names(a)                   # même résultat
 
 ## L'OBJET SPÉCIAL 'NA'
 a <- c(65, NA, 72, 88)     # traité comme une valeur
 mean(a)                    # tout calcul donne NA...
-mean(a, na.rm=TRUE)        # ... à moins d'éliminer les NA
+mean(a, na.rm = TRUE)      # ... à moins d'éliminer les NA
                            # avant de faire le calcul
 
 ## L'OBJET SPECIAL 'NULL'
 mode(NULL)                 # le mode de 'NULL' est NULL
 length(NULL)               # longueur nulle
 a <- c(NULL, NULL)         # s'utilise comme un objet normal
-a; length(a); mode(a)      # mais résulte toujours en le vide
+a; length(a); mode(a)      # mais donne toujours le vide
 
 ###
 ### VECTEURS
@@ -111,10 +116,10 @@ a[-2]                      # élimination d'un élément
 ## Si l'on mélange dans un même vecteur des objets de mode
 ## différents, il y a conversion automatique vers le mode pour
 ## lequel il y a le moins de perte d'information.
-c(5, TRUE, FALSE)          # conversion au mode 'numeric'
-c(5, "z")                  # conversion au mode 'character'
-c(TRUE, "z")               # conversion au mode 'character'
-c(5, TRUE, "z")            # conversion au mode 'character'
+c(5, TRUE, FALSE)          # conversion en mode 'numeric'
+c(5, "z")                  # conversion en mode 'character'
+c(TRUE, "z")               # conversion en mode 'character'
+c(5, TRUE, "z")            # conversion en mode 'character'
 
 ###
 ### MATRICES ET TABLEAUX
@@ -122,7 +127,7 @@ c(5, TRUE, "z")            # conversion au mode 'character'
 
 ## Deux façons de créer des matrices: à l'aide de la fonction
 ## 'matrix', ou en ajoutant un attribut 'dim' à un vecteur.
-( a <- matrix(1:12, nrow=3, ncol=4) ) # avec 'matrix'
+( a <- matrix(1:12, nrow = 3, ncol = 4) ) # avec 'matrix'
 class(a); length(a); dim(a)# vecteur à deux dimensions
 
 a <- 1:12                  # vecteur simple
@@ -134,7 +139,7 @@ a[7]                       # ... est le 7e élément du vecteur
 a[1,]                      # première ligne
 a[,2]                      # deuxième colonne
 
-matrix(1:12, nrow=3, byrow=TRUE) # remplir par ligne
+matrix(1:12, nrow = 3, byrow = TRUE) # remplir par ligne
 
 ## On procède exactement de la même façons avec les tableaux,
 ## sauf que le nombre de dimensions est plus élevé. Attention:
@@ -168,10 +173,10 @@ cbind(1:3)                 # un vecteur colonne
 
 ## La liste est l'objet le plus général en S puisqu'il peut
 ## contenir des objets de n'importe quel mode et longueur.
-( a <- list(joueur=c("V", "C", "C", "M", "A"),
-            score=c(10, 12, 11, 8, 15),
-            expert=c(FALSE, TRUE, FALSE, TRUE, TRUE),
-            bidon=2) )
+( a <- list(joueur = c("V", "C", "C", "M", "A"),
+            score = c(10, 12, 11, 8, 15),
+            expert = c(FALSE, TRUE, FALSE, TRUE, TRUE),
+            bidon = 2) )
 mode(a)                    # mode 'list'
 length(a)                  # quatre éléments
 
@@ -187,8 +192,8 @@ length(a[1])               # ... d'un seul élément
 a[[2]][1]                  # 1er élément du 2e élément
 
 ## Les éléments d'une liste étant généralement nommés (c'est
-## une bonne habitude à prendre!), il est généralement plus
-## simple et sûr d'extraire les éléments d'une liste par leur
+## une bonne habitude à prendre!), il est souvent plus simple
+## et sûr d'extraire les éléments d'une liste par leur
 ## étiquette.
 a$joueur                   # équivalent à a[[1]]
 a$score[1]                 # équivalent à a[[2]][1]
@@ -198,7 +203,7 @@ a[["expert"]]              # aussi valide, mais peu usité
 a[[5]] <- matrix(1, 2, 2)  # ... une matrice...
 a[[6]] <- list(20:25, TRUE)# ... une autre liste...
 a[[7]] <- seq              # ... même le code d'une fonction!
-a                          # eh ben
+a                          # eh ben!
 a[[6]][[1]][3]             # de quel élément s'agit-il?
 
 ## Il est parfois utile de convertir une liste en un simple
@@ -207,7 +212,7 @@ a[[6]][[1]][3]             # de quel élément s'agit-il?
 ## qu'un vecteur, on s'en souviendra).
 a <- a[1:6]                # éliminer la fonction
 unlist(a)                  # remarquer la conversion
-unlist(a, use.names=FALSE) # éliminer les étiquettes
+unlist(a, use.names = FALSE) # éliminer les étiquettes
 
 ###
 ### DATA FRAMES
@@ -216,25 +221,25 @@ unlist(a, use.names=FALSE) # éliminer les étiquettes
 ## Un data frame est une liste dont les éléments sont tous
 ## de même longueur. Il comporte un attribut 'dim', ce qui
 ## fait qu'il est représenté comme une matrice.
-( dframe <- data.frame(Noms=c("Pierre", "Jean", "Jacques"),
-                       Age=c(42, 34, 19),
-                       Fumeur=c(TRUE, TRUE, FALSE)) )
+( dframe <- data.frame(Noms = c("Pierre", "Jean", "Jacques"),
+                       Age = c(42, 34, 19),
+                       Fumeur = c(TRUE, TRUE, FALSE)) )
 mode(dframe)               # un data frame est une liste...
 dim(dframe)                # ... avec un attribut 'dim'
 class(dframe)              # ... et de classe 'data.frame'
 
-## Lorsque l'on doit travailler longtemps avec les
-## différentes colonnes d'un data frame, il est pratique de
-## pouvoir y accéder directement sans devoir toujours
-## indicer. La fonction 'attach' permet de rendre les
-## colonnes individuelles visibles.  Une fois terminé,
+## Lorsque l'on doit travailler longtemps avec les différentes
+## colonnes d'un data frame, il est pratique de pouvoir y
+## accéder directement sans devoir toujours indicer. La
+## fonction 'attach' permet de rendre les colonnes
+## individuelles visibles.  Une fois le travail terminé,
 ## 'detach' masque les colonnes.
-exists("Noms")
-attach(dframe)
-exists("Noms")
-Noms
-detach(dframe)
-exists("Noms")
+exists("Noms")             # variable n'existe pas
+attach(dframe)             # rendre les colonnes visibles
+exists("Noms")             # variable existe
+Noms                       # colonne accessible
+detach(dframe)             # masquer les colonnes
+exists("Noms")             # variable n'existe plus
 
 ###
 ### INDIÇAGE
@@ -245,7 +250,7 @@ exists("Noms")
 ## existent aussi pour les matrices, tableaux et listes. On
 ## crée d'abord un vecteur quelconque formé de vingt nombres
 ## aléatoires entre 1 et 100 avec répétitions possibles.
-( x <- sample(1:100, 20, replace=TRUE) )
+( x <- sample(1:100, 20, replace = TRUE) )
 
 ## On ajoute des étiquettes aux éléments du vecteur à partir
 ## de la variable interne 'letters'.
