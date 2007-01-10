@@ -1,8 +1,8 @@
 \chapter{Fonctions définies par l'usager}
 \label{fonctions}
 
-<<echo=FALSE>>=
-options(width=52)
+<<echo=FALSE>> =
+options(width = 52)
 @
 
 La possibilité pour l'usager de définir facilement et rapidement de
@@ -86,7 +86,7 @@ voir la figure \ref{fig:fp}.
   \centering
   \begin{framed}
 \begin{lstlisting}
-fp <- function(k, n, start=0.05, TOL=1E-10)
+fp <- function(k, n, start = 0.05, TOL = 1E-10)
 {
     ## Fonction pour trouver par la méthode du point
     ## fixe le taux d'intérêt auquel une série de 'n'
@@ -305,15 +305,15 @@ for (i in 1:10)
   d'un échantillon $X_1, \dots, X_n$ est
   \begin{align*}
     S^2_{n-1}
-    &= \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar{X})^2, \\
+    &= \frac{1}{n-1} \sum_{i = 1}^n (X_i - \bar{X})^2, \\
     \intertext{alors que l'estimateur biaisé est}
     S^2_n
-    &= \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2,
+    &= \frac{1}{n} \sum_{i = 1}^n (X_i - \bar{X})^2,
   \end{align*}
   où $\bar{X} = n^{-1}(X_1 + \dots + X_n)$.
   \begin{rep}
 \begin{verbatim}
-variance <- function(x, biased=FALSE)
+variance <- function(x, biased = FALSE)
 {
     if (biased)
     {
@@ -341,10 +341,10 @@ variance <- function(x, biased=FALSE)
     \code{data} est compatible avec le nombre de lignes et de
     colonnes de la matrice demandée.
 \begin{verbatim}
-matrix2 <- function(data=NA, nrow=1, ncol=1,
-                    bycol=FALSE, dimnames=NULL)
+matrix2 <- function(data = NA, nrow = 1, ncol = 1,
+                    bycol = FALSE, dimnames = NULL)
 {
-    data <- rep(data, length=nrow * ncol)
+    data <- rep(data, length = nrow * ncol)
 
     if (bycol)
         dim(data) <- c(nrow, ncol)
@@ -363,15 +363,15 @@ matrix2 <- function(data=NA, nrow=1, ncol=1,
     vecteur \code{data} en utilisant la formule obtenue à l'exercice
     \ref{operateurs}.\ref{exercice:operateurs:ijk}.
 \begin{verbatim}
-matrix2 <- function(data=NA, nrow=1, ncol=1,
-                    bycol=FALSE, dimnames=NULL)
+matrix2 <- function(data = NA, nrow = 1, ncol = 1,
+                    bycol = FALSE, dimnames = NULL)
 {
-    data <- rep(data, length=nrow * ncol)
+    data <- rep(data, length = nrow * ncol)
 
     if (!bycol)
     {
         i <- 1:nrow
-        j <- rep(1:ncol, each=nrow)
+        j <- rep(1:ncol, each = nrow)
         data <- data[(i - 1)*ncol + j]
     }
     dim(data) <- c(nrow, ncol)
@@ -415,7 +415,7 @@ phi <- function(x)
   Supposer, pour le moment, que $x \geq 0$. L'évaluation numérique de
   l'intégrale ci-dessus peut se faire avec l'identité
   \begin{displaymath}
-    \Phi(x) = \frac{1}{2} + \phi(x) \sum_{n=0}^\infty
+    \Phi(x) = \frac{1}{2} + \phi(x) \sum_{n = 0}^\infty
     \frac{x^{2n + 1}}{1 \cdot 3 \cdot 5 \cdots (2n + 1)},
     \quad x \geq 0.
   \end{displaymath}
@@ -536,8 +536,8 @@ prod.mat <- function(mat1, mat2)
 {
     if (ncol(mat1) == nrow(mat2))
     {
-        res <- matrix(0, nrow=nrow(mat1),
-                      ncol=ncol(mat2))
+        res <- matrix(0, nrow = nrow(mat1),
+                      ncol = ncol(mat2))
         for (i in 1:nrow(mat1))
         {
             for (j in 1:ncol(mat2))
@@ -558,8 +558,8 @@ prod.mat<-function(mat1, mat2)
 {
     if (ncol(mat1) == nrow(mat2))
     {
-        res <- matrix(0, nrow=nrow(mat1),
-                      ncol=ncol(mat2))
+        res <- matrix(0, nrow = nrow(mat1),
+                      ncol = ncol(mat2))
         for (i in 1:nrow(mat1))
             res[i,] <- colSums(mat1[i,] * mat2)
         res
@@ -663,16 +663,16 @@ param <- function(moyenne, variance, loi)
     if (loi == "normale")
         param1 <- moyenne
         param2 <- sqrt(variance)
-        return(list(mean=param1, sd=param2))
+        return(list(mean = param1, sd = param2))
     if (loi == "gamma")
         param2 <- moyenne/variance
         param1 <- moyenne * param2
-        return(list(shape=param1, scale=param2))
+        return(list(shape = param1, scale = param2))
     if (loi == "pareto")
         cte <- variance/moyenne^2
         param1 <- 2 * cte/(cte-1)
         param2 <- moyenne * (param1 - 1)
-        return(list(alpha=param1, lambda=param2))
+        return(list(alpha = param1, lambda = param2))
     stop("La loi doit etre une de \"normale\",
 \"gamma\" ou \"pareto\"")
 }
@@ -686,16 +686,16 @@ param <- function(moyenne, variance, loi)
     if (loi == "normale")
         param1 <- moyenne
         param2 <- sqrt(variance)
-        return(list(mean=param1, sd=param2))
+        return(list(mean = param1, sd = param2))
     if (loi == "gamma")
         param2 <- moyenne/variance
         param1 <- moyenne * param2
-        return(list(shape=param1, scale=param2))
+        return(list(shape = param1, scale = param2))
     if (loi == "pareto")
         cte <- variance/moyenne^2
         param1 <- 2 * cte/(cte-1)
         param2 <- moyenne * (param1 - 1)
-        return(list(alpha=param1, lambda=param2))
+        return(list(alpha = param1, lambda = param2))
     stop("La loi doit etre une de \"normale\", \"gamma\" ou \"pareto\"")
 }
 @
@@ -736,20 +736,20 @@ param <- function (moyenne, variance, loi)
     {
         param1 <- moyenne
         param2 <- sqrt(variance)
-        return(list(mean=param1, sd=param2))
+        return(list(mean = param1, sd = param2))
     }
     if (loi == "gamma")
     {
         param2 <- moyenne/variance
         param1 <- moyenne * param2
-        return(list(shape=param1, scale=param2))
+        return(list(shape = param1, scale = param2))
     }
     if (loi == "pareto")
     {
         cte <- variance/moyenne^2
         param1 <- 2 * cte/(cte-1)
         param2 <- moyenne * (param1 - 1)
-        return(list(alpha=param1, lambda=param2))
+        return(list(alpha = param1, lambda = param2))
     }
     stop("La loi doit etre une de \"normale\",
 \"gamma\" ou \"pareto\"")
