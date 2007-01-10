@@ -3,7 +3,7 @@
 \label{simulation}
 
 <<echo=FALSE>>=
-options(width=60)
+options(width = 60)
 @
 
 <<echo=FALSE>>=
@@ -13,7 +13,7 @@ simul1 <- function(nb.simul, size, theta)
     a <- theta - 0.5
     b <- theta + 0.5
 
-    x <- matrix(0, nrow=3, ncol=nb.simul)
+    x <- matrix(0, nrow = 3, ncol = nb.simul)
     rownames(x) <- c("Moyenne", "Mediane", "Mi-etendue")
 
     for (i in 1:nb.simul)
@@ -24,13 +24,13 @@ simul1 <- function(nb.simul, size, theta)
         x[3, i] <- mean(range(u))
     }
 
-    list(biais=rowMeans(x) - theta, variances=apply(x, 1, var))
+    list(biais = rowMeans(x) - theta, variances = apply(x, 1, var))
 }
 
 fun1 <- function(i, size, a, b)
 {
     u <- runif(size, a, b)
-    c(Moyenne=mean(u), Mediane=median(u), "Mi-etendue"=mean(range(u)))
+    c(Moyenne = mean(u), Mediane = median(u), "Mi-etendue" = mean(range(u)))
 }
 
 simul2 <- function(nb.simul, size, theta)
@@ -40,13 +40,13 @@ simul2 <- function(nb.simul, size, theta)
 
     x <- sapply(1:nb.simul, fun1, size, a, b)
 
-    list(biais=rowMeans(x) - theta, variances=apply(x, 1, var))
+    list(biais = rowMeans(x) - theta, variances = apply(x, 1, var))
 }
 
 fun2 <- function(size, a, b)
 {
     u <- runif(size, a, b)
-    c(Moyenne=mean(u), Mediane=median(u), "Mi-etendue"=mean(range(u)))
+    c(Moyenne = mean(u), Mediane = median(u), "Mi-etendue" = mean(range(u)))
 }
 
 simul3 <- function(nb.simul, size, theta)
@@ -56,7 +56,7 @@ simul3 <- function(nb.simul, size, theta)
 
     x <- replicate(nb.simul, fun2(size, a, b))
 
-    list(biais=rowMeans(x) - theta, variances=apply(x, 1, var))
+    list(biais = rowMeans(x) - theta, variances = apply(x, 1, var))
 }
 @
 
@@ -77,7 +77,7 @@ estimateurs suivants du paramètre inconnu $\theta$:
 \begin{enumerate}
 \item la moyenne arithmétique
   \begin{displaymath}
-    \hat{\theta}_1 = \frac{1}{n} \sum_{i=1}^n X_i\,;
+    \hat{\theta}_1 = \frac{1}{n} \sum_{i = 1}^n X_i\,;
   \end{displaymath}
 \item la médiane empirique
   \begin{displaymath}
@@ -145,7 +145,7 @@ b <- theta + 0.5           # borne supérieure de l'uniforme
 ### stockées les valeurs des estimateurs. On donne également
 ### des noms aux lignes de la matrice afin de facilement
 ### identifier les estimateurs.
-x <- matrix(0, nrow=3, ncol=nsimul)
+x <- matrix(0, nrow = 3, ncol = nsimul)
 rownames(x) <- c("Moyenne", "Mediane", "Mi-etendue")
 
 ### Simulation comme telle.
@@ -176,7 +176,7 @@ simul1 <- function(nsimul, size, theta)
     a <- theta - 0.5
     b <- theta + 0.5
 
-    x <- matrix(0, nrow=3, ncol=nsimul)
+    x <- matrix(0, nrow = 3, ncol = nsimul)
     rownames(x) <- c("Moyenne","Mediane","Mi-etendue")
 
     for (i in 1:nsimul)
@@ -187,8 +187,8 @@ simul1 <- function(nsimul, size, theta)
         x[3, i] <- mean(range(u))
     }
 
-    list(biais=rowMeans(x) - theta,
-         variances=apply(x, 1, var))
+    list(biais = rowMeans(x) - theta,
+         variances = apply(x, 1, var))
 }
 \end{lstlisting}
   \end{framed}
@@ -241,9 +241,9 @@ petit nombre (4) de simulations:
 fun1 <- function(i, size, a, b)
 {
     u <- runif(size, a, b)
-    c(Moyenne=mean(u),
-      Mediane=median(u),
-      "Mi-etendue"=mean(range(u)))
+    c(Moyenne = mean(u),
+      Mediane = median(u),
+      "Mi-etendue" = mean(range(u)))
 }
 \end{lstlisting}
   \end{framed}
@@ -252,7 +252,7 @@ fun1 <- function(i, size, a, b)
 \end{figure}
 
 <<echo=TRUE>>=
-sapply(1:4, fun1, size=10, a=-0.5, b=0.5)
+sapply(1:4, fun1, size = 10, a = -0.5, b = 0.5)
 @
 
 On remarque donc que les résultats de chaque simulation se trouvent
@@ -272,8 +272,8 @@ simul2 <- function(nsimul, size, theta)
 
     x <- sapply(1:nsimul, fun1, size, a, b)
 
-    list(biais=rowMeans(x) - theta,
-         variances=apply(x, 1, var))
+    list(biais = rowMeans(x) - theta,
+         variances = apply(x, 1, var))
 }
 \end{lstlisting}
   \end{framed}
@@ -314,9 +314,9 @@ simul3(10000, 100, 0)
 fun2 <- function(size, a, b)
 {
     u <- runif(size, a, b)
-    c(Moyenne=mean(u),
-      Mediane=median(u),
-      "Mi-etendue"=mean(range(u)))
+    c(Moyenne = mean(u),
+      Mediane = median(u),
+      "Mi-etendue" = mean(range(u)))
 }
 \end{lstlisting}
   \end{framed}
@@ -335,8 +335,8 @@ simul3 <- function(nsimul, size, theta)
 
     x <- replicate(nsimul, fun2(size, a, b))
 
-    list(biais=rowMeans(x) - theta,
-         variances=apply(x, 1, var))
+    list(biais = rowMeans(x) - theta,
+         variances = apply(x, 1, var))
 }
 \end{lstlisting}
   \end{framed}
@@ -444,7 +444,7 @@ et les résultats seront placés par défaut dans le fichier
 \texttt{go.Rout}. Si Windows ne trouve pas l'exécutable de \textsf{R},
 il faut spécifier le chemin d'accès complet, par exemple:
 \begin{verbatim}
-C:\> "c:\program files\R\R-2.2.0\bin\R" CMD BATCH go.R
+C:\> "c:\program files\R\R-2.4.1\bin\R" CMD BATCH go.R
 \end{verbatim}
 
 Depuis la version 6.2, S-Plus sous Windows contient un outil BATCH dans
