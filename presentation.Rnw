@@ -80,7 +80,7 @@ applications Windows pour la version officielle de GNU Emacs.
 \item Pour une installation simplifiée de Emacs et ESS, consulter le
   site Internet
   \begin{quote}
-    \url{http://vgoulet.act.ulaval.ca/pub/emacs/}
+    \url{http://vgoulet.act.ulaval.ca/emacs/}
   \end{quote}
   On y trouve une version modifiée de GNU Emacs pour Windows et des
   instructions d'installation détaillées.
