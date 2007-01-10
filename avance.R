@@ -4,8 +4,8 @@
 
 ## Création d'une matrice et d'un tableau à trois dimensions
 ## pour les exemples.
-m <- matrix(sample(1:100, 20), nrow=4, ncol=5)
-a <- array(sample(1:100, 60), dim=3:5)
+m <- matrix(sample(1:100, 20), nrow = 4, ncol = 5)
+a <- array(sample(1:100, 60), dim = 3:5)
 
 ## Les fonctions 'rowSums', 'colSums', 'rowMeans' et
 ## 'colMeans' sont des raccourcis pour des utilisations
@@ -23,7 +23,7 @@ apply(m, 2, prod)          # produit par colonne
 ## L'argument '...' de 'apply' permet de passer des arguments
 ## à la fonction FUN.
 m[sample(1:20, 5)] <- NA   # ajout de données manquantes
-apply(m, 1, var, na.rm=TRUE) # variance par ligne sans NA
+apply(m, 1, var, na.rm = TRUE) # variance par ligne sans NA
 
 ## Lorsque 'apply' est utilisée sur un tableau, son résultat
 ## est de dimensions dim(X)[MARGIN].
@@ -61,12 +61,12 @@ fun <- function(liste)
 ## On peut maintenant calculer la moyenne pondérée de
 ## plusieurs ensembles de données réunis dans une liste
 ## itérée.
-( a <- list(list(donnees=1:7,
-                 poids=(5:11)/56),
-            list(donnees=sample(1:100, 12),
-                 poids=1:12),
-            list(donnees=c(1, 4, 0, 2, 2),
-                 poids=c(12, 3, 17, 6, 2))) )
+( a <- list(list(donnees = 1:7,
+                 poids = (5:11)/56),
+            list(donnees = sample(1:100, 12),
+                 poids = 1:12),
+            list(donnees = c(1, 4, 0, 2, 2),
+                 poids = c(12, 3, 17, 6, 2))) )
 sapply(a, fun)
 
 ###
@@ -74,7 +74,7 @@ sapply(a, fun)
 ###
 
 ## Création de quatre échantillons aléatoires de taille 12.
-a <- lapply(rep(12, 4), sample, x=1:100)
+a <- lapply(rep(12, 4), sample, x = 1:100)
 
 ## Moyennes tronquées à 0, 10, 20 et 30%, respectivement, de
 ## ces quatre échantillons aléatoires.
@@ -86,8 +86,8 @@ mapply(mean, a, 0:3/10)
 
 ## La fonction 'replicate' va répéter un certain nombre de
 ## fois une expression quelconque. Le principal avantage de
-## 'replicate' par rapport à 'sapply' est qu'on n'a pas à se
-## soucier des arguments à passer à une fonction.
+## 'replicate' sur 'sapply' est qu'on n'a pas à se soucier des
+## arguments à passer à une fonction.
 ##
 ## Par exemple, on veut simuler dix échantillons aléatoires
 ## indépendants de longueur 12. On peut utiliser 'sapply',
@@ -107,7 +107,7 @@ replicate(10, sample(1:100, 12))
 ##
 ## On définit d'abord une fonction pour faire une simulation.
 fun <- function(n, mean, sd)
-    mean(rnorm(n, mean=mean, sd=sd))
+    mean(rnorm(n, mean = mean, sd = sd))
 
 ## Avec 'replicate', on fait un grand nombre de simulations.
 res <- replicate(10000, fun(100, 0, 1)) # 10000 simulations
@@ -145,14 +145,14 @@ methods(print)
 ## Essai de la nouvelle méthode sur un scalaire.
 x <- 4
 class(x)                   # classe par défaut
-x                          # méthode par défault
+x                          # méthode par défaut
 class(x) <- "toto"         # objet de classe 'toto'
 x                          # méthode pour cette classe
 
 ## Essai de la nouvelle méthode sur un vecteur.
 x <- 1:5
 class(x)                   # classe par défaut
-x                          # méthode par défault
+x                          # méthode par défaut
 class(x) <- "toto"         # objet de classe 'toto'
 x                          # méthode pour cette classe
 
