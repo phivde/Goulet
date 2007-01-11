@@ -106,8 +106,8 @@ fichier
 \begin{itemize}
 \item Pour créer un nouveau fichier, ouvrir un fichier n'existant
   pas.\index{Emacs!nouveau fichier}
-\item Principales commandes d'édition avec, entre parenthèses, le nom
-  de la commande correspondant au raccourci clavier:
+\item Principaux raccourcis clavier d'édition avec, entre parenthèses,
+  le nom de la commande Emacs correspondante:
   \begin{ttscript}{C-x C-w}
     \raggedright
   \item[\emacs{C-x C-f}] ouvrir un fichier (\texttt{find-file})
@@ -172,9 +172,10 @@ La sélection de texte fonctionne différemment du standard Windows.
 
 Le mode ESS (\emph{Emacs Speaks Statistics}) permet d'interagir avec
 des logiciels statistiques (S-Plus, \textsf{R}, SAS, etc.) depuis
-Emacs. Ce mode est installé dans la version modifiée de GNU Emacs
-distribuée dans le site Internet
-\url{http://vgoulet.act.ulaval.ca/emacs/}
+Emacs. Ce mode est installé dans la version modifiée de GNU Emacs pour
+Windows distribuée dans le site Internet
+\url{http://vgoulet.act.ulaval.ca/emacs/}, ainsi que dans Aquamacs
+pour Mac OS~X (\url{http://aquamacs.org}).
 
 \begin{itemize}
 \item Voir le fichier
@@ -182,67 +183,114 @@ distribuée dans le site Internet
     \texttt{.../emacs-21.x/site-lisp/ess/doc/html/index.html}
   \end{quote}
   pour la documentation complète.
-\item Deux modes mineurs: \texttt{ESS} pour les fichiers de script
-  (code source) et \texttt{iESS} pour l'invite de commande.
-\item Une fois installé, le mode mineur \texttt{ESS} s'active
-  automatiquement en éditant des fichiers avec l'extension \texttt{.S}
-  ou \texttt{.R}.
-\item Pour démarrer un processus S et activer le mode mineur
-  \texttt{iESS}, entrer l'une des commandes \texttt{S}, \texttt{Sqpe}
-  ou \texttt{R} dans l'invite de commande de Emacs (voir aussi
-  l'annexe \ref{s-plus_windows}). Par exemple, pour démarrer un
-  processus \textsf{R} à l'intérieur même de Emacs, on fera
+\item Deux modes mineurs: \texttt{iESS} pour l'invite de commande et
+  \texttt{ESS} pour les fichiers de script (code source).
+\end{itemize}
+
+
+\subsection{Interaction avec l'invite de commande}
+\label{ess:invite}
+
+Pour démarrer un processus S et activer le mode mineur \texttt{iESS},
+entrer l'une des commandes \texttt{S}, \texttt{Sqpe} ou \texttt{R}
+dans l'invite de commande de Emacs (voir aussi l'annexe
+\ref{s-plus_windows}). 
+
+\begin{itemize}
+\item Par exemple, pour démarrer un processus \textsf{R} à l'intérieur
+  même de Emacs, on fera
   \begin{quote}
     \ttfamily M-x R RET
   \end{quote}
-\item Commandes les plus fréquemment employées à la ligne de commande
-  (mode \texttt{iESS}):
+\item Raccourcis clavier les plus utiles à la ligne de commande (mode
+  \texttt{iESS}):
   \begin{ttscript}{C-c C-c}
     \raggedright
-  \item[\ess{C-c C-e}] replacer la dernière ligne au bas de la
-    fenêtre (\texttt{comint-show-maximum-output})
+  \item[\ess{C-c C-e}] replacer la dernière ligne au bas de la fenêtre
+    (\texttt{comint-show-maximum-output})
   \item[\ess{M-h}] sélectionner le résultat de la dernière commande
     (\texttt{mark-paragraph})
   \item[\ess{C-c C-o}] effacer le résultat de la dernière commande
     (\texttt{comint-delete-output})
   \item[\ess{C-c C-v}] aide sur une commande S
     (\texttt{ess-display-help-on-object})
-  \item[\ess{C-c C-q}] terminer le processus S
-    (\texttt{ess-quit})
+  \item[\ess{C-c C-q}] terminer le processus S (\texttt{ess-quit})
   \end{ttscript}
-\item Commandes les plus fréquemment employées lors de l'édition d'un
+\end{itemize}
+
+
+\subsection{Manipulation des fichiers de script}
+\label{ess:script}
+
+Une fois ESS installé, le mode mineur \texttt{ESS} s'active
+automatiquement en éditant des fichiers avec l'extension \texttt{.S}
+ou \texttt{.R}.
+
+\begin{itemize}
+\item Raccourcis clavier les plus utiles lors de l'édition d'un
   fichier de script (mode \texttt{ESS}):
   \begin{ttscript}{C-c C-c}
     \raggedright
-  \item[\ess{C-c C-n}] évalue la ligne sous le curseur dans le
-    processus S (\texttt{ess-eval-line-and-step})
-  \item[\ess{C-c C-r}] évalue la région sélectionnée dans le
+  \item[\ess{C-c C-n}] évaluer la ligne sous le curseur dans le
+    processus S, puis déplacer le curseur à la prochaine ligne de
+    commande (\texttt{ess-eval-line-and-step})
+  \item[\ess{C-c C-j}] évaluer la ligne sous le curseur dans le
+    processus S sans déplacer le curseur (\texttt{ess-eval-line})
+  \item[\ess{C-c C-r}] évaluer la région sélectionnée dans le
     processus S (\texttt{ess-eval-region})
-  \item[\ess{C-c C-f}] évalue le code de la fonction courante dans
+  \item[\ess{C-c C-f}] évaluer le code de la fonction courante dans
     le processus S (\texttt{ess-eval-function})
-  \item[\ess{C-c C-l}] évalue le code du fichier courant dans le
+  \item[\ess{C-c C-l}] évaluer le code du fichier courant dans le
     processus S (\texttt{ess-load-file})
   \item[\ess{C-c C-v}] aide sur une commande S
     (\texttt{ess-display-help-on-object})
   \item[\ess{C-c C-s}] changer de processus (utile si l'on a plus
     d'un processus S actif)
   \end{ttscript}
+\end{itemize}
+
+
+\subsection{Consultation des rubriques d'aide}
+\label{ess:aide}
+
+Il y a quelques avantages à consulter les rubriques d'aide de
+\textsf{R} ou S-Plus à l'intérieur même de Emacs plutôt que dans
+l'interface d'aide de Windows ou Mac OS.
+
+\begin{itemize}
+\item Afin \R de s'assurer que les rubriques d'aide de \textsf{R}
+  seront affichées dans Emacs, modifier l'option \code{chmhelp} ainsi:
+<<echo=TRUE, eval=FALSE>>=
+options(chmhelp = FALSE)
+@
+  Pour que cette commande s'exécute automatiquement à chaque lancement
+  de \textsf{R}, entrer la commande dans un fichier nommé
+  \code{.Rprofile} sauvegardé dans le dossier mentionné dans le
+  résultat de la commande
+<<echo=TRUE, eval=FALSE>>=
+Sys.getenv("R_USER")
+@
+
+  Pour plus de détails sur les options de démarrage, consulter la
+  rubrique d'aide de \fonction{Startup}.
 \item Raccourcis clavier utiles lors de la consultation des rubriques
   d'aide:
   \begin{ttscript}{m, m}
     \raggedright
-  \item[h] ouvrir une nouvelle rubrique d'aide, par défaut pour le mot
+  \item[\ess{h}] ouvrir une nouvelle rubrique d'aide, par défaut pour le mot
     se trouvant sous le curseur (\texttt{ess-display-help-on-object})
-  \item[n, p] aller à la section suivante (\texttt{n}) ou précédente
-    (\texttt{p}) de la rubrique (\texttt{ess-skip-to-next-section},
+  \item[\ess{n}, \ess{p}] aller à la section suivante (\texttt{n}) ou
+    précédente (\texttt{p}) de la rubrique
+    (\texttt{ess-skip-to-next-section},
     \texttt{ess-skip-to-previous-section})
-  \item[l] évaluer la ligne sous le curseur; pratique pour exécuter
-    les exemples (\texttt{ess-eval-line-and-step})
-  \item[r] évaluer la région sélectionnée (\texttt{ess-eval-region})
-  \item[q] retourner au processus ESS en laissant la rubrique d'aide
-    visible (\texttt{ess-switch-to-end-of-ESS})
-  \item[x] fermer la rubrique d'aide et retourner au processus ESS
-    (\texttt{ess-kill-buffer-and-go})
+  \item[\ess{l}] évaluer la ligne sous le curseur; pratique pour
+    exécuter les exemples (\texttt{ess-eval-line-and-step})
+  \item[\ess{r}] évaluer la région sélectionnée
+    (\texttt{ess-eval-region})
+  \item[\ess{q}] retourner au processus ESS en laissant la rubrique
+    d'aide visible (\texttt{ess-switch-to-end-of-ESS})
+  \item[\ess{x}] fermer la rubrique d'aide et retourner au processus
+    ESS (\texttt{ess-kill-buffer-and-go})
   \end{ttscript}
 \end{itemize}
 \index{ESS|)}
@@ -252,7 +300,7 @@ distribuée dans le site Internet
 \label{ess:session_travail}
 
 On décrit, dans cette section, les différentes étapes et principaux
-raccourcis claviers d'une session de travail type avec S-Plus ou
+raccourcis clavier d'une session de travail type avec S-Plus ou
 \textsf{R}, Emacs et ESS.
 
 \begin{enumerate}
