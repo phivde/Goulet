@@ -88,7 +88,7 @@ applications Windows pour la version officielle de GNU Emacs.
   (\url{http://aquamacs.org}), une version de GNU Emacs bien intégrée
   à OS~X et contenant déjà ESS.
 \item L'annexe \ref{ess} présente les plus importantes commandes à
-  connaître pour utiliser Emacs et le mode ESS.
+  connaître pour utiliser efficacement Emacs et le mode ESS.
 \end{itemize}
 
 
@@ -213,18 +213,14 @@ d'utilisation. Leur consultation est tout à fait essentielle.
 \begin{itemize}
 \item Pour consulter la rubrique d'aide de la fonction \code{foo},
   on peut entrer à la ligne de commande
-\begin{Schunk}
-\begin{Sinput}
-> ?foo
-\end{Sinput}
-\end{Schunk}
+<<echo=TRUE, eval=FALSE>>=
+?foo
+@
 \item Dans Emacs, \code{C-c C-v foo RET}\indexess{C-c C-v} ouvrira la
   rubrique d'aide de la fonction \code{foo} dans un nouveau
   \emph{buffer}.
 \item Plusieurs touches de raccourcis facilitent la consultation des
-  rubriques d'aide (voir la carte de référence ESS).
-\item Entre autres, la touche \texttt{l} permet d'exécuter ligne par
-  ligne les exemples se trouvant à la fin de chaque rubrique d'aide.
+  rubriques d'aide; voir la section \ref{ess:aide}.
 \end{itemize}
 
 
