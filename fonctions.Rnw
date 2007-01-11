@@ -1,7 +1,7 @@
 \chapter{Fonctions définies par l'usager}
 \label{fonctions}
 
-<<echo=FALSE>> =
+<<echo=FALSE>>=
 options(width = 52)
 @
 
