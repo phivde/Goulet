@@ -1,22 +1,51 @@
-\newlength{\gauche}
-\newlength{\droite}
+%%% Police de caractère pour la page titre
+\renewcommand{\sfdefault}{hls}
 
-\calccentering{\unitlength}
-\addtolength{\gauche}{\unitlength}
-\addtolength{\gauche}{-1.5cm}
-\addtolength{\droite}{\unitlength}
-\addtolength{\droite}{1.5cm}
-\begin{adjustwidth*}{\gauche}{-\droite}
-  \centering
+%%% Marge de gauche (1/3 de la page)
+\newlength{\gauche}
+\addtolength{\gauche}{72mm}
+\addtolength{\gauche}{-\spinemargin}
+
+%%% Épaisseur de la bande sur la page titre
+\newlength{\ruleheight}
+\setlength{\ruleheight}{7.75mm}
+  
+%%% Définition de la bande
+\definecolor{gray}{gray}{0.4}
+\textblockorigin{0mm}{279mm}
+\newcommand{\banderecto}{%
+  \begin{textblock*}{71.5mm}[0,1](0mm,-46.5mm)
+    \textblockcolor{black} \rule{0mm}{\ruleheight}
+  \end{textblock*}
+  \begin{textblock*}{144mm}[0,1](72mm,-46.5mm)
+    \textblockcolor{gray} \rule{0mm}{\ruleheight}
+  \end{textblock*}}
+\newcommand{\bandeverso}{%
+  \begin{textblock*}{144mm}[0,1](0mm,-46.5mm)
+    \textblockcolor{gray} \rule{0mm}{\ruleheight}
+  \end{textblock*}
+  \begin{textblock*}{71.5mm}[0,1](144.5mm,-46.5mm)
+    \textblockcolor{black} \rule{0mm}{\ruleheight}
+  \end{textblock*}}
+
+%%% Titre
+\begin{adjustwidth*}{\gauche}{-15mm}
+  \sffamily
   \vspace*{2cm}
-  \thetitle \\
+  \thetitle
 \end{adjustwidth*}
+
+%%% Affichage de la bande
+\banderecto
 \cleardoublepage
 
-\begin{adjustwidth*}{\gauche}{-\droite}
-  \centering
+%%% Page de garde
+\begin{adjustwidth*}{\gauche}{-15mm}
+  \sffamily
+  \raggedright
   \vspace*{2cm}
   \thetitle \\
+  \bfseries
   \vspace*{3cm}
   \theauthor \\
   \vspace*{\fill}
@@ -24,34 +53,36 @@
 \end{adjustwidth*}
 \clearpage
 
+%%% Page de notices
 \begingroup
 \begin{adjustwidth*}{\unitlength}{-\unitlength}
   \footnotesize 
   \setlength{\parindent}{0pt}
   \setlength{\parskip}{\baselineskip}
   
-  \textcopyright{} 2006 Vincent Goulet \\
+  \textcopyright{} 2007 Vincent Goulet \\
 
   Il est permis de copier, distribuer et/ou modifier ce document selon
-  les termes de la GNU Free Documentation License, Version 1.2 ou
-  toute version subséquente publiée par la Free Software Foundation;
-  avec aucune section inaltérable (\emph{Invariant Sections}), aucun
-  texte de couverture avant (\emph{Front-Cover Texts}), et aucun texte
-  de couverture arrière (\emph{Back-Cover Texts}). Une copie de la
-  licence est incluse dans l'annexe \ref{fdl}.
+  les termes de la \emph{GNU Free Documentation License}, version 1.2
+  ou toute version subséquente publiée par la Free Software
+  Foundation; avec aucune section inaltérable (\emph{Invariant
+    Sections}), aucun texte de couverture avant (\emph{Front-Cover
+    Texts}), et aucun texte de couverture arrière (\emph{Back-Cover
+    Texts}). Une copie de la licence est incluse à l'annexe
+  \ref{fdl}.
 
-  \begin{center}
-    \begin{tabular}{ll}
-      Version 1.0:  & 12 janvier 2006 \\
-      Version 0.99: & 29 novembre 2005 \\
-      Version 0.9:  & 9 novembre 2005 \\
-      Version 0.8:  & 16 septembre 2005 \\
-    \end{tabular}
-  \end{center}
+  \textbf{Historique de publication} \\
+  \begin{tabbing}
+    Septembre 2005:\quad\= Première version préliminaire \\
+    Novembre 2005:      \> Seconde et troisième versions préliminaires \\
+    Janvier 2006:       \> Première édition \\
+    Janvier 2007:       \> Seconde édition \\
+  \end{tabbing}
 
+  \textbf{Code source} \\
   Le code source {\LaTeX} de ce document est disponible à l'adresse
   \begin{quote}
-    \url{http://vgoulet.act.ulaval.ca/pub/intro_S/}
+    \url{http://vgoulet.act.ulaval.ca/intro_S/}
   \end{quote}
   ou en communiquant directement avec l'auteur.
 
@@ -62,10 +93,14 @@
   \vspace{1cm}
 
   ISBN \ISBN \\
-  Dépôt légal -- Bibliothèque nationale du Québec, 2006 \\
-  Dépôt légal -- Bibliothèque et Archives Canada, 2006
+  Dépôt légal -- Bibliothèque nationale du Québec, 2007 \\
+  Dépôt légal -- Bibliothèque et Archives Canada, 2007
 \end{adjustwidth*}
 \endgroup
+
+%%% Retour à la police normale
+\renewcommand{\sfdefault}{phv}
+
 \clearpage
 
 %%% Local Variables: 

@@ -9,16 +9,22 @@ dans le cadre d'applications statistiques spécifiques. Le présent
 ouvrage se concentre plutôt sur l'apprentissage du langage de
 programmation sous-jacent aux diverses fonctions statistiques, le S.
 
-Le texte qui suit est la somme de notes et d'exercices de différents
-cours donnés par l'auteur à l'École d'actuariat de l'Université Laval
-depuis septembre 2003. Les six premiers chapitres, qui constituent le
-c{\oe}ur du document, proviennent d'une partie d'un cours où l'accent
-est mis sur l'apprentissage d'un (deuxième) langage de programmation
-par des étudiants de premier cycle en sciences actuarielles. Les
-applications numériques et statistiques de S-Plus et \textsf{R}
-viennent plus tard dans le cursus universitaire et c'est alors que les
-concepts des chapitres \ref{optimisation}, \ref{regression} et
-\ref{ts} sont étudiés.
+Cette seconde édition est principalement une réorganisation du contenu
+de la première édition. Les chapitres sur la régression linéaire et
+les séries chronologiques ont été éliminés et les annexes C et D
+ont été déplacées dans le corps du document. Nous avons également
+corrigé plusieurs coquilles suite à la révision effectuée par
+Mme~Mireille Côté.
+
+Le texte est la somme de notes et d'exercices de cours donnés par
+l'auteur à l'École d'actuariat de l'Université Laval. Les six premiers
+chapitres, qui constituent le c{\oe}ur du document, proviennent d'une
+partie d'un cours où l'accent est mis sur l'apprentissage d'un
+(deuxième) langage de programmation par des étudiants de premier cycle
+en sciences actuarielles. Les applications numériques et statistiques
+de S-Plus et \textsf{R} présentées aux chapitres \ref{optimisation},
+\ref{rng} et \ref{simulation} sont étudiées plus tard dans le cursus
+universitaire.
 
 Les cours d'introduction au langage S sont donnés à raison de une
 heure par semaine de cours magistral suivie de deux heures en
@@ -34,7 +40,7 @@ partie intégrante de l'apprentissage du langage S.
 Le texte des sections d'exemples est disponible en format électronique
 dans le site Internet
 \begin{quote}
-  \url{http://vgoulet.act.ulaval.ca/pub/intro_S}
+  \url{http://vgoulet.act.ulaval.ca/intro_S}
 \end{quote}
 
 Certains exemples et exercices trahissent le premier public de ce
@@ -44,17 +50,15 @@ contextes actuariels demeurent néanmoins peu nombreux et ne devraient
 généralement pas dérouter le lecteur pour qui ces notions sont moins
 familières.
 
-Les chapitres \ref{optimisation} (fonctions d'optimisation),
-\ref{regression} (régression linéaire) et \ref{ts} (séries
-chronologiques) sont structurés de manière plus classique, notamment
-parce que le texte y est en prose. Ces chapitres comportent néanmoins
-des sections d'exemples.
+Les chapitres \ref{optimisation} (fonctions d'optimisation), \ref{rng}
+(générateurs de nombres aléatoires) et \ref{simulation} (planification
+d'une simulation en S) sont structurés de manière plus classique,
+notamment parce que le texte y est en prose.
 
 Le texte prend parti en faveur de l'utilisation de GNU Emacs et du
 mode ESS pour l'édition de code S.  Les annexes contiennent de
 l'information sur l'utilisation de S-Plus et \textsf{R} avec cet
-éditeur. On y traite également des générateurs de nombres aléatoires
-et de la planification d'une étude de simulation en S.
+éditeur.
 
 Dans la mesure du possible, cet ouvrage tâche de présenter les
 environnements S-Plus et \textsf{R} en parallèle, en soulignant leurs
@@ -67,13 +71,13 @@ l'auteur pour \textsf{R}, les divers extraits de code ont généralement
 À moins d'erreurs et d'omissions (que les lecteurs sont invités à nous
 faire connaître), les informations données à propos de S-Plus sont
 exactes pour les versions 6.1 (Linux et Windows), 6.2 Student Edition
-(Windows) et 7.0 (Linux et Windows). Pour \textsf{R}, la version 2.3.1
+(Windows) et 7.0 (Linux et Windows). Pour \textsf{R}, la version 2.4.1
 (Linux et Windows), soit la plus récente lors de la rédaction, a été
 utilisée comme référence.
 
 On notera enfin que cet ouvrage n'a aucune prétention d'exhaustivité.
-C'est d'ailleurs pourquoi ce qui explique les nombreux renvois au
-livre de \cite{MASS}, plus complet.
+C'est ce qui explique les nombreux renvois au livre de \cite{MASS},
+plus complet.
 
 L'auteur tient à remercier M.~Mathieu Boudreault pour sa collaboration
 dans la rédaction des exercices.
@@ -81,7 +85,7 @@ dans la rédaction des exercices.
 \begin{flushright}
   \itshape
   Vincent Goulet \url{<vincent.goulet@act.ulaval.ca>} \\
-  Québec, novembre 2005
+  Québec, janvier 2007
 \end{flushright}
 
 

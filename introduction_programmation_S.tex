@@ -12,11 +12,15 @@
   \usepackage{listings,answers}
 
   %%% Page titre
-  \title{\HUGE \textbf{Introduction} \\ à la \\ \textbf{programmation}
-    \\ en \\ \textbf{S}}
+  \title{\HUGE 
+    \fontseries{ub}\selectfont Introduction \\ 
+    \fontseries{m}\selectfont  à la \\
+    \fontseries{ub}\selectfont programmation \\ 
+    \fontseries{m}\selectfont  en \\ 
+    \fontseries{ub}\selectfont S}
   \author{\huge Vincent Goulet \\[3mm]
     \large \textit{École d'actuariat, Université Laval}}
-  \date{\Large Première édition révisée}
+  \date{\Large Seconde édition}
   \newcommand{\ISBN}{2-9809136-0-X}
 
   %%% Commandes pour notes marginales
@@ -92,9 +96,9 @@
   %%% Paramètres pour les sections de code source
   \lstloadlanguages{R}
   \lstdefinelanguage{Renhanced}[]{R}{%
-    morekeywords={acf,ar,arima,arima.sim,colMeans,colSums,is.na,is.null,%
-      mapply,ms,na.rm,nlmin,replicate,row.names,rowMeans,rowSums,seasonal,%
-      sys.time,system.time,ts.plot,which.max,which.min},
+    morekeywords={colMeans,colSums,head,is.na,is.null,mapply,ms,na.rm,%
+      nlmin,replicate,row.names,rowMeans,rowSums,sys.time,system.time,%
+      tail,which.max,which.min},
     deletekeywords={c},
     alsoletter={.\%},%
     alsoother={:_\$}}
@@ -145,7 +149,7 @@
   \newcommand{\ess}[1]{\code{#1}\indexess{#1}}
   \makeindex
 
-  \includeonly{pagetitre}
+%  \includeonly{pagetitre}
 
 \begin{document}
 

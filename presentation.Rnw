@@ -65,8 +65,8 @@ avant tout des applications en ligne de commande (\texttt{sqpe.exe} et
   partageons cet avis, aussi ce document supposera-t-il que S-Plus ou
   \textsf{R} sont utilisés à l'intérieur de GNU Emacs avec le mode
   ESS\index{ESS}.
-\item Autres options: Tinn-R, WinEdt (partagiciel) avec l'ajout
-  R-WinEdt.
+\item Autres options: Tinn-R (libre), WinEdt (partagiciel) avec
+  l'ajout R-WinEdt.
 \end{itemize}
 
 
@@ -113,9 +113,10 @@ M-x Sqpe RET
 \end{verbatim}
   Consulter l'annexe \ref{s-plus_windows} pour de plus amples
   détails.
+\newpage
 \item Pour quitter, deux options sont disponibles:
   \begin{enumerate}
-  \item Taper \fonction{q()} à la ligne de commande.
+  \item Taper \code{q()}\indexfonction{q} à la ligne de commande.
   \item Dans Emacs, faire \ess{C-c C-q}. ESS va alors s'occuper de
     fermer le processus S ainsi que tous les \emph{buffers} associés à
     ce processus.
@@ -213,9 +214,11 @@ d'utilisation. Leur consultation est tout à fait essentielle.
 \begin{itemize}
 \item Pour consulter la rubrique d'aide de la fonction \code{foo},
   on peut entrer à la ligne de commande
-<<echo=TRUE, eval=FALSE>>=
-?foo
-@
+\begin{Schunk}
+\begin{Sinput}
+> ?foo
+\end{Sinput}
+\end{Schunk}
 \item Dans Emacs, \code{C-c C-v foo RET}\indexess{C-c C-v} ouvrira la
   rubrique d'aide de la fonction \code{foo} dans un nouveau
   \emph{buffer}.

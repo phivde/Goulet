@@ -41,7 +41,7 @@ b
   cet emploi est fortement découragé puisqu'il rend le code difficile
   à lire. Dans le mode ESS de Emacs, taper ce caractère hors d'une
   chaîne de caractères génère carrément \verb*| <- | (appuyer deux
-  fois successives sur «_» pour obtenir le caractère).
+  fois successives sur «\_» pour obtenir le caractère).
 \end{itemize}
 
 \begin{astuce}

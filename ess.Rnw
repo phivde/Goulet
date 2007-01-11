@@ -96,10 +96,9 @@ Il n'est pas vain de lire le tutoriel de Emacs, que l'on démarre avec
 \end{quote}
   
 Pour une liste plus exhaustive des commandes Emacs les plus
-importantes, consulter la \emph{GNU Emacs Reference Card}, dans le
-fichier
+importantes, consulter la \emph{GNU Emacs Reference Card} à l'adresse
 \begin{quote}
-  \url{.../emacs-21.x/etc/refcard.ps}
+  \url{http://refcards.com/refcards/gnu-emacs/}
 \end{quote}
 
 \enlargethispage{5mm}
@@ -117,11 +116,13 @@ fichier
     (\texttt{write-file})\index{Emacs!sauvegarder sous}
   \item[\emacs{C-x k}] fermer un fichier (\texttt{kill-buffer})
   \item[\emacs{C-x C-c}] quitter Emacs
-    (\texttt{save-buffers-kill-emacs}) \\[\baselineskip]
+    (\texttt{save-buffers-kill-emacs}) 
+    \\[\baselineskip]
   \item[\emacs{C-g}] bouton de panique: quitter!
     (\texttt{keyboard-quit})
   \item[\emacs{C-\_}] annuler (pratiquement illimité); aussi
-    \emacs{C-x u} (\texttt{undo}) \\[\baselineskip]
+    \emacs{C-x u} (\texttt{undo}) 
+    \\[\baselineskip]
   \item[\emacs{C-s}] recherche incrémentale avant
     (\texttt{isearch-forward})
   \item[\emacs{C-r}] Recherche incrémentale arrière
@@ -178,11 +179,11 @@ Windows distribuée dans le site Internet
 pour Mac OS~X (\url{http://aquamacs.org}).
 
 \begin{itemize}
-\item Voir le fichier
+\item La documentation complète est disponible dans le site Internet
+  du projet ESS:
   \begin{quote}
-    \texttt{.../emacs-21.x/site-lisp/ess/doc/html/index.html}
+    \url{http://ess.r-project.org/}
   \end{quote}
-  pour la documentation complète.
 \item Deux modes mineurs: \texttt{iESS} pour l'invite de commande et
   \texttt{ESS} pour les fichiers de script (code source).
 \end{itemize}
