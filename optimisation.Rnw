@@ -142,9 +142,8 @@ d'optimisation de S-Plus. Elles est utile, par exemple, pour minimiser
 la valeur négative d'une fonction de
 log-vraisemblance\index{vraisemblance}, $-l(\theta) = - \sum_{i=1}^n
 \ln f(x_i; \theta)$.  Son utilisation est toutefois compliquée par
-l'usage de formules\index{formule} et de \emph{data frames}\index{data
-  frame} (voir les sections \ref{regression:formules} et
-\ref{bases:dataframes}, respectivement).
+l'usage de formules et de \emph{data frames}\index{data
+  frame}.
 \begin{ex}
   \label{ex:optimisation:ms}
   Calculer les estimateurs du maximum de vraisemblance des paramètres
