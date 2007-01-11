@@ -1,10 +1,10 @@
-\part{GNU EMACS ET ESS: LA BASE}
+\section{GNU Emacs et ESS: la base}
 
 \begin{frame}
   \partpage
 \end{frame}
 
-\section{GNU Emacs}
+\subsection{GNU Emacs}
 
 \begin{frame}
   \frametitle{Qu'est-ce que Emacs?}
@@ -107,10 +107,10 @@
       \texttt{C-h t}
     \end{quote}
   \item Pour une liste plus exhaustive des commandes Emacs les plus
-    importantes, consulter la \emph{GNU Emacs Reference Card}, dans le
-    fichier
+    importantes, consulter la \emph{GNU Emacs Reference Card} à
+    l'adresse
     \begin{quote}
-      \url{.../emacs-21.x/etc/refcard.ps}
+      \url{http://refcards.com/refcards/gnu-emacs/}
     \end{quote}
   \end{itemize}
 \end{frame}
@@ -196,7 +196,7 @@
 \end{frame}
 
 
-\section{Mode ESS}
+\subsection{Mode ESS}
 
 \begin{frame}
   \frametitle{\emph{Emacs Speaks Statistics}}
@@ -206,9 +206,9 @@
 
   \begin{itemize}
   \item Voir
-    \begin{center}
-      \url{http://ess.r-project.org/Manual/ess.html}
-    \end{center}
+    \begin{quote}
+      \url{http://ess.r-project.org/}
+    \end{quote}
     pour la documentation complète.
   \item Deux modes mineurs: \texttt{ESS} pour les fichiers de script
     (code source) et \texttt{iESS} pour l'invite de commande.
@@ -239,8 +239,8 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Commandes les plus utiles à la ligne de commande (mode
-    \texttt{iESS})}
+  \frametitle{Raccourcis clavier les plus utiles à la ligne de
+    commande (mode \texttt{iESS})}
   
   \begin{ttscript}{C-c C-c}
     \raggedright
@@ -257,18 +257,19 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Commandes les plus utiles lors de l'édition d'un fichier
-    de script (mode \texttt{ESS})}
+  \frametitle{Raccourcis clavier les plus utiles lors de l'édition
+    d'un fichier de script (mode \texttt{ESS})}
   
   \begin{ttscript}{C-c C-c}
     \raggedright
-  \item[\ess{C-c C-n}] évalue la ligne sous le curseur dans le
-    processus S (\texttt{ess-eval-line-and-step})
-  \item[\ess{C-c C-r}] évalue la région sélectionnée dans le
+  \item[\ess{C-c C-n}] évaluer la ligne sous le curseur dans le
+    processus S, puis déplacer le curseur à la prochaine ligne de
+    commande (\texttt{ess-eval-line-and-step})
+  \item[\ess{C-c C-r}] évaluer la région sélectionnée dans le
     processus S (\texttt{ess-eval-region})
-  \item[\ess{C-c C-f}] évalue le code de la fonction courante dans
+  \item[\ess{C-c C-f}] évaluer le code de la fonction courante dans
     le processus S (\texttt{ess-eval-function})
-  \item[\ess{C-c C-l}] évalue le code du fichier courant dans le
+  \item[\ess{C-c C-l}] évaluer le code du fichier courant dans le
     processus S (\texttt{ess-load-file})
   \item[\ess{C-c C-v}] aide sur une commande S
     (\texttt{ess-display-help-on-object})
@@ -277,7 +278,48 @@
   \end{ttscript}
 \end{frame}
 
+\begin{frame}[fragile=singleslide]
+  \frametitle{Consultation des rubriques d'aide}
+  
+  \begin{itemize}
+  \item Quelques avantages à lire les rubriques d'aide dans Emacs.
+  \item Modifier l'option \textsf{R} \code{chmhelp} ainsi:
+\begin{Sinput}
+> options(chmhelp = FALSE)
+\end{Sinput}
+  \item Pour que la commande s'exécute automatiquement à chaque
+  lancement de \textsf{R}, entrer la commande dans un fichier nommé
+  \code{.Rprofile} sauvegardé dans le dossier mentionné dans le
+  résultat de
+\begin{Sinput}
+> Sys.getenv("R_USER")  
+\end{Sinput}
+  \item Consulter aussi la rubrique d'aide de \code{Startup}.
+  \end{itemize}
+\end{frame}
 
+\begin{frame}
+  \frametitle{Raccourcis clavier utiles lors de la consultation des
+    rubriques d'aide}
+
+  \begin{ttscript}{m, m}
+    \raggedright
+  \item[\ess{h}] ouvrir une nouvelle rubrique d'aide, par défaut pour le mot
+    se trouvant sous le curseur (\texttt{ess-display-help-on-object})
+  \item[\ess{n}, \ess{p}] aller à la section suivante (\texttt{n}) ou
+    précédente (\texttt{p}) de la rubrique
+    (\texttt{ess-skip-to-next-section},
+    \texttt{ess-skip-to-previous-section})
+  \item[\ess{l}] évaluer la ligne sous le curseur; pratique pour
+    exécuter les exemples (\texttt{ess-eval-line-and-step})
+  \item[\ess{r}] évaluer la région sélectionnée
+    (\texttt{ess-eval-region})
+  \item[\ess{q}] retourner au processus ESS en laissant la rubrique
+    d'aide visible (\texttt{ess-switch-to-end-of-ESS})
+  \item[\ess{x}] fermer la rubrique d'aide et retourner au processus
+    ESS (\texttt{ess-kill-buffer-and-go})
+  \end{ttscript}
+\end{frame}
 
 %%% Local Variables: 
 %%% mode: latex
