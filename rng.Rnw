@@ -152,7 +152,7 @@ avec remise.
 \label{rng:exercices}
 
 \Opensolutionfile{reponses}[reponses-rng]
-\Writetofile{reponses}{\protect\section*{Annexe \protect\ref{rng}}}
+\Writetofile{reponses}{\protect\section*{Chapitre \protect\ref{rng}}}
 
 \begin{exercice}
   La loi log-normale\index{distribution!log-normale} est obtenue par
