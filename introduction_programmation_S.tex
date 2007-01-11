@@ -21,7 +21,7 @@
   \author{\huge Vincent Goulet \\[3mm]
     \large \textit{École d'actuariat, Université Laval}}
   \date{\Large Seconde édition}
-  \newcommand{\ISBN}{2-9809136-0-X}
+  \newcommand{\ISBN}{978-2-9809136-7-9}
 
   %%% Commandes pour notes marginales
   \newcommand{\R}{\marginpar[\hfill \sffamily R]{\sffamily R}}
@@ -194,8 +194,15 @@
 \cleartoverso
 
 \pagestyle{empty}
-\vspace*{\fill}\hfill
-\large\ttfamily ISBN \ISBN
+\pagestyle{empty}
+\renewcommand{\ttdefault}{hlst}
+
+\bandeverso
+\begin{textblock*}{71mm}(145mm, -40mm)
+  \large\ttfamily\raggedright
+  \textblockcolor{}
+  ISBN \\ \ISBN
+\end{textblock*}
 
 \end{document}
 
