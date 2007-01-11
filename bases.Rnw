@@ -442,6 +442,8 @@ x[c("Bleu", "Jaune")]
 \lstinputlisting{bases.R}
 
 
+\vspace{\fill}
+
 \section{Exercices}
 \label{bases:exercices}
 
@@ -536,7 +538,9 @@ obs[-c(6, 10, 12)]
     \end{enumerate}
   \end{rep}
 \end{exercice}
+\vspace{\fill}
 
+\newpage
 \begin{exercice}
   \index{indiçage!matrice}
   Soit \code{mat} une matrice $10 \times 7$ obtenue aléatoirement avec
