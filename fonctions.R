@@ -4,7 +4,7 @@
 ### en oeuvre est peu générale puisqu'il faudrait modifier la
 ### fonction chaque fois que l'on change la fonction f(x)
 ### dont on cherche le point fixe.
-fp1 <- function(k, n, start=0.05, TOL=1E-10)
+fp1 <- function(k, n, start = 0.05, TOL = 1E-10)
 {
     i <- start
     repeat
@@ -30,7 +30,7 @@ start                      # dans l'espace de travail
 ### la fonction un argument 'echo' qui, lorsque TRUE, fera
 ### en sorte d'afficher à l'écran les valeurs successives
 ### de 'x'.
-fp2 <- function(FUN, start, echo=FALSE, TOL=1E-10)
+fp2 <- function(FUN, start, echo = FALSE, TOL = 1E-10)
 {
     x <- start
     repeat
@@ -50,8 +50,8 @@ fp2 <- function(FUN, start, echo=FALSE, TOL=1E-10)
 
 f <- function(i) (1 - (1+i)^(-10))/7.2 # définition de f(x)
 fp2(f, 0.05)               # solution
-fp2(f, 0.05, echo=TRUE)    # avec résultats intermédiaires
-fp2(function(x) 3^(-x), start=0.5) # avec une fonction anonyme
+fp2(f, 0.05, echo = TRUE)  # avec résultats intermédiaires
+fp2(function(x) 3^(-x), start = 0.5) # avec une fonction anonyme
 
 ### Troisième exemple: amélioration mineure à la fonction
 ### 'fp2'. Puisque la valeur de 'echo' ne change pas pendant
@@ -60,7 +60,7 @@ fp2(function(x) 3^(-x), start=0.5) # avec une fonction anonyme
 ### élégante consiste à utiliser un outil avancé du langage S:
 ### les expressions. On se contentera d'une illustration ici,
 ### sans entrer dans les détails.
-fp3 <- function(FUN, start, echo=FALSE, TOL=1E-10)
+fp3 <- function(FUN, start, echo = FALSE, TOL = 1E-10)
 {
     x <- start
 
@@ -81,8 +81,8 @@ fp3 <- function(FUN, start, echo=FALSE, TOL=1E-10)
     x
 }
 
-fp3(f, 0.05, echo=TRUE)    # avec résultats intermédiaires
-fp3(function(x) 3^(-x), start=0.5) # avec une fonction anonyme
+fp3(f, 0.05, echo = TRUE)    # avec résultats intermédiaires
+fp3(function(x) 3^(-x), start = 0.5) # avec une fonction anonyme
 
 ### La suite de Fibonacci (et son lien avec le nombre d'or) a
 ### été remise au goût du jour par le bestseller «Code Da
