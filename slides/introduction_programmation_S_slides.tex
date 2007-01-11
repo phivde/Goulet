@@ -21,12 +21,6 @@
   \usecolortheme{sidebartab}
   \usefonttheme{professionalfonts}
   \setbeamercovered{transparent}
-  \AtBeginPart[]
-  {
-    \begin{frame}
-      \partpage
-    \end{frame}
-  }
   \AtBeginSection[]
   {
     \begin{frame}
@@ -41,12 +35,6 @@
       \tableofcontents[sectionstyle=show/hide,subsectionstyle=show/shaded/hide]
     \end{frame}
   }
-
-  %%% Sections non numérotées dans la table des matières
-  \setbeamertemplate{section in toc}{%
-    \leavevmode\leftskip=1.75ex\llap{%
-      \usebeamercolor[bg]{subsection number projected}%
-      \vrule width1.25ex height1.25ex\kern1ex}\inserttocsection\par}
 
   %%% Épaisseur de la ligne pour biffer du texte (ulem)
   \renewcommand{\ULthickness}{1pt}
@@ -101,9 +89,6 @@
 %%% CHAPITRES
 %%% 
 
-%\renewcommand{\partname}{Chapitre}
-%\renewcommand{\insertromanpartnumber}{\arabic{part}}
-
 %% COURS 1: Présentation.
 \lecture{Présentation}{cours 1}
 \include{presentation_slides}
@@ -124,19 +109,6 @@
 \lecture{Fonctions}{cours 4}
 \include{fonctions_slides}
 \include{avance_slides}
-
-
-%%%
-%%% ANNEXES
-%%%
-
-%% Utiliser un autre compteur pour les annexe, autrement les sections
-%% de l'annexe A sont mélangées avec celles du chapitre 1, etc.
-\newcounter{annexe}
-\setcounter{annexe}{\value{part}}
-\addtocounter{annexe}{-6}
-\renewcommand{\partname}{Annexe}
-\renewcommand{\insertromanpartnumber}{\stepcounter{annexe}\Alph{annexe}}
 
 %% LAB 1: présentation de Emacs et ESS.
 \lecture{Emacs et ESS}{lab 1}

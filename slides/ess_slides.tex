@@ -1,9 +1,5 @@
 \section{GNU Emacs et ESS: la base}
 
-\begin{frame}
-  \partpage
-\end{frame}
-
 \subsection{GNU Emacs}
 
 \begin{frame}
@@ -123,14 +119,11 @@
     nom de la commande correspondant au raccourci clavier:
     \begin{ttscript}{C-x C-w}
       \raggedright
-    \item[\emacs{C-x C-f}] ouvrir un fichier (\texttt{find-file})
+    \item[\emacs{C-x C-f}] ouvrir un fichier
     \item[\emacs{C-x C-s}] sauvegarder
-      (\texttt{save-buffer})\index{Emacs!sauvegarder}
     \item[\emacs{C-x C-w}] sauvegarder sous
-      (\texttt{write-file})\index{Emacs!sauvegarder sous}
-    \item[\emacs{C-x k}] fermer un fichier (\texttt{kill-buffer}).
+    \item[\emacs{C-x k}] fermer un fichier
     \item[\emacs{C-x C-c}] quitter Emacs
-      (\texttt{save-buffers-kill-emacs})
     \end{ttscript}
   \end{itemize}
 \end{frame}
@@ -140,15 +133,12 @@
   \item[]
     \begin{ttscript}{C-x C-w}
     \item[\emacs{C-g}] bouton de panique: quitter!
-      (\texttt{keyboard-quit})
     \item[\emacs{C-\_}] annuler (pratiquement illimité); aussi
-      \emacs{C-x u} (\texttt{undo}) \\[\baselineskip]
+      \emacs{C-x u}
+      \\[\baselineskip]
     \item[\emacs{C-s}] recherche incrémentale avant
-      (\texttt{isearch-forward})
     \item[\emacs{C-r}] Recherche incrémentale arrière
-      (\texttt{isearch-backward})
     \item[\emacs{M-\%}] rechercher et remplacer
-      (\texttt{query-replace})\index{Emacs!rechercher et remplacer}
     \end{ttscript}
   \end{itemize}
 \end{frame}
@@ -159,15 +149,11 @@
   \item[]
     \begin{ttscript}{C-x C-w}
     \item[\emacs{C-x b}] changer de \emph{buffer}
-      (\texttt{switch-buffer})
     \item[\emacs{C-x 2}] séparer l'écran en deux fenêtres
-      (\texttt{split-window-vertically})
     \item[\emacs{C-x 1}] conserver uniquement la fenêtre courante
-      (\texttt{delete-other-windows})
     \item[\emacs{C-x 0}] fermer la fenêtre courante
-      (\texttt{delete-window})
     \item[\emacs{C-x o}] aller vers une autre fenêtre lorsqu'il y en a
-      plus d'une (\texttt{other-window})
+      plus d'une
     \end{ttscript}
   \end{itemize}
 \end{frame}
@@ -182,12 +168,11 @@
     \begin{ttscript}{C-SPC}
       \raggedright
     \item[\emacs{C-SPC}] débute la sélection
-      (\texttt{set-mark-command})
-    \item[\emacs{C-w}] couper la sélection (\texttt{kill-region})
-    \item[\emacs{M-w}] copier la sélection (\texttt{kill-ring-save})
-    \item[\emacs{C-y}] coller (\texttt{yank})
+    \item[\emacs{C-w}] couper la sélection
+    \item[\emacs{M-w}] copier la sélection
+    \item[\emacs{C-y}] coller
     \item[\emacs{M-y}] remplacer le dernier texte collé par la
-      sélection précédente (\texttt{yank-pop})
+      sélection précédente
     \end{ttscript}
   \item<2-> Il existe quelques extensions de Emacs permettant d'utiliser
     les raccourcis clavier usuels de Windows (\texttt{C-c},
@@ -245,14 +230,11 @@
   \begin{ttscript}{C-c C-c}
     \raggedright
   \item[\ess{C-c C-e}] replacer la dernière ligne au bas de la
-    fenêtre (\texttt{comint-show-maximum-output})
+    fenêtre
   \item[\ess{M-h}] sélectionner le résultat de la dernière commande
-    (\texttt{mark-paragraph})
   \item[\ess{C-c C-o}] effacer le résultat de la dernière commande
-    (\texttt{comint-delete-output})
   \item[\ess{C-c C-v}] aide sur une commande S
-    (\texttt{ess-display-help-on-object})
-  \item[\ess{C-c C-q}] terminer le processus S (\texttt{ess-quit})
+  \item[\ess{C-c C-q}] terminer le processus S
   \end{ttscript}
 \end{frame}
 
@@ -264,15 +246,14 @@
     \raggedright
   \item[\ess{C-c C-n}] évaluer la ligne sous le curseur dans le
     processus S, puis déplacer le curseur à la prochaine ligne de
-    commande (\texttt{ess-eval-line-and-step})
+    commande
   \item[\ess{C-c C-r}] évaluer la région sélectionnée dans le
-    processus S (\texttt{ess-eval-region})
+    processus S
   \item[\ess{C-c C-f}] évaluer le code de la fonction courante dans
-    le processus S (\texttt{ess-eval-function})
+    le processus S
   \item[\ess{C-c C-l}] évaluer le code du fichier courant dans le
-    processus S (\texttt{ess-load-file})
+    processus S
   \item[\ess{C-c C-v}] aide sur une commande S
-    (\texttt{ess-display-help-on-object})
   \item[\ess{C-c C-s}] changer de processus (utile si l'on a plus
     d'un processus S actif)
   \end{ttscript}
@@ -305,19 +286,16 @@
   \begin{ttscript}{m, m}
     \raggedright
   \item[\ess{h}] ouvrir une nouvelle rubrique d'aide, par défaut pour le mot
-    se trouvant sous le curseur (\texttt{ess-display-help-on-object})
+    se trouvant sous le curseur
   \item[\ess{n}, \ess{p}] aller à la section suivante (\texttt{n}) ou
     précédente (\texttt{p}) de la rubrique
-    (\texttt{ess-skip-to-next-section},
-    \texttt{ess-skip-to-previous-section})
   \item[\ess{l}] évaluer la ligne sous le curseur; pratique pour
-    exécuter les exemples (\texttt{ess-eval-line-and-step})
+    exécuter les exemples
   \item[\ess{r}] évaluer la région sélectionnée
-    (\texttt{ess-eval-region})
   \item[\ess{q}] retourner au processus ESS en laissant la rubrique
-    d'aide visible (\texttt{ess-switch-to-end-of-ESS})
+    d'aide visible
   \item[\ess{x}] fermer la rubrique d'aide et retourner au processus
-    ESS (\texttt{ess-kill-buffer-and-go})
+    ESS 
   \end{ttscript}
 \end{frame}
 
