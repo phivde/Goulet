@@ -32,7 +32,7 @@ Emacs est le logiciel étendard du projet GNU («\emph{GNU is not
 \item Distribué sous la GNU \emph{General Public License} (GPL),
   donc gratuit, ou «libre».
 \item Le nom provient de «\emph{Editing MACroS}».
-\item La première version de Emacs a été écrite par Richard M.\ 
+\item La première version de Emacs a été écrite par Richard M.\
   Stallman, président de la FSF.
 \end{itemize}
 
@@ -94,7 +94,7 @@ Il n'est pas vain de lire le tutoriel de Emacs, que l'on démarre avec
 \begin{quote}
   \texttt{C-h t}
 \end{quote}
-  
+
 Pour une liste plus exhaustive des commandes Emacs les plus
 importantes, consulter la \emph{GNU Emacs Reference Card} à l'adresse
 \begin{quote}
@@ -116,12 +116,12 @@ importantes, consulter la \emph{GNU Emacs Reference Card} à l'adresse
     (\texttt{write-file})\index{Emacs!sauvegarder sous}
   \item[\emacs{C-x k}] fermer un fichier (\texttt{kill-buffer})
   \item[\emacs{C-x C-c}] quitter Emacs
-    (\texttt{save-buffers-kill-emacs}) 
+    (\texttt{save-buffers-kill-emacs})
     \\[\baselineskip]
   \item[\emacs{C-g}] bouton de panique: quitter!
     (\texttt{keyboard-quit})
   \item[\emacs{C-\_}] annuler (pratiquement illimité); aussi
-    \emacs{C-x u} (\texttt{undo}) 
+    \emacs{C-x u} (\texttt{undo})
     \\[\baselineskip]
   \item[\emacs{C-s}] recherche incrémentale avant
     (\texttt{isearch-forward})
@@ -145,7 +145,7 @@ importantes, consulter la \emph{GNU Emacs Reference Card} à l'adresse
 
 
 \section{Sélection de texte}
-\index{Emacs!sélection}  
+\index{Emacs!sélection}
 \label{ess:selection}
 
 La sélection de texte fonctionne différemment du standard Windows.
@@ -195,7 +195,7 @@ pour Mac OS~X (\url{http://aquamacs.org}).
 Pour démarrer un processus S et activer le mode mineur \texttt{iESS},
 entrer l'une des commandes \texttt{S}, \texttt{Sqpe} ou \texttt{R}
 dans l'invite de commande de Emacs (voir aussi l'annexe
-\ref{s-plus_windows}). 
+\ref{s-plus_windows}).
 
 \begin{itemize}
 \item Par exemple, pour démarrer un processus \textsf{R} à l'intérieur
@@ -207,6 +207,9 @@ dans l'invite de commande de Emacs (voir aussi l'annexe
   \texttt{iESS}):
   \begin{ttscript}{C-c C-c}
     \raggedright
+  \item[\ess{M-p}, \ess{M-n}] navigation dans l'historique des
+    commandes (\texttt{previous-matching-history-from-input},
+    \texttt{next-matching-history-from-input})
   \item[\ess{C-c C-e}] replacer la dernière ligne au bas de la fenêtre
     (\texttt{comint-show-maximum-output})
   \item[\ess{M-h}] sélectionner le résultat de la dernière commande
@@ -362,7 +365,7 @@ raccourcis clavier d'une session de travail type avec S-Plus ou
 \end{enumerate}
 
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "introduction_programmation_S"
-%%% End: 
+%%% End:
