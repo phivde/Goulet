@@ -164,8 +164,8 @@ le plus court in: 1:10 + c(2, 4, 6)
   Définition de la fonction \texttt{matrix}:
 
 \begin{semiverbatim}
-    matrix({\color{red}data=NA}, {\color{blue}nrow=1}, {\color{magenta}ncol=1},
-           {\color{orange}byrow=FALSE}, {\color{brown}dimnames=NULL})
+    matrix({\color{red}data = NA}, {\color{blue}nrow = 1}, {\color{magenta}ncol = 1},
+           {\color{orange}byrow = FALSE}, {\color{brown}dimnames = NULL})
 \end{semiverbatim}
   \pause
 
@@ -190,19 +190,18 @@ le plus court in: 1:10 + c(2, 4, 6)
   \begin{itemize}
   \item Appel plus élaboré utilisant tous les arguments. Le premier
     argument est rarement nommé.
-\begin{Schunk}
-\begin{Sinput}
-> matrix(1:6, nrow = 2, ncol = 3, 
-+  byrow = TRUE, 
-+  dimnames = list(c("Gauche", "Droit"), 
-+    c("Rouge", "Vert", "Bleu")))
-\end{Sinput}
+\begin{semiverbatim}
+\itshape
+> matrix({\color{red}1{:}6}, {\color{blue}nrow = 2}, {\color{magenta}ncol = 3},
++  {\color{orange}byrow = TRUE},
++  {\color{brown}dimnames = list(c("Gauche", "Droit"), 
++    c("Rouge", "Vert", "Bleu")))})
+\end{semiverbatim}
 \begin{Soutput}
        Rouge Vert Bleu
 Gauche     1    2    3
 Droit      4    5    6
 \end{Soutput}
-\end{Schunk}
   \end{itemize}
 \end{frame}
 
@@ -226,7 +225,7 @@ Droit      4    5    6
   \end{itemize}
 \end{frame}
 
-\subsection{Manipulation de vecteurs}
+%\subsubsection{Manipulation de vecteurs}
 
 \begin{frame}
   \frametitle{Manipulation de vecteurs}
@@ -257,7 +256,7 @@ Droit      4    5    6
   \end{ttscript}
 \end{frame}
 
-\subsection{Recherche d'éléments dans un vecteur}
+%\subsubsection{Recherche d'éléments dans un vecteur}
 
 \begin{frame}
   \frametitle{Recherche d'éléments dans un vecteur}
@@ -275,7 +274,7 @@ Droit      4    5    6
   \end{ttscript}
 \end{frame}
 
-\subsection{Arrondi}
+%\subsubsection{Arrondi}
 
 \begin{frame}
   \frametitle{Arrondi}
@@ -291,20 +290,20 @@ Droit      4    5    6
   \end{ttscript}
 \end{frame}
 
-\subsection{Sommaires et statistiques descriptives}
+%\subsubsection{Sommaires et statistiques descriptives}
 
 \begin{frame}
   \frametitle{Sommaires et statistiques descriptives}
   \begin{ttscript}{sum, prod}
   \item[\Fonction{sum}, \Fonction{prod}] somme\index{somme} et
-    produit\index{produit} des éléments d'un vecteur
+    produit\index{produit} des éléments
   \item[\Fonction{diff}] différences\index{différences} entre les
-    éléments d'un vecteur
+    éléments
   \item[\Fonction{mean}] moyenne
     arithmétique\index{moyenne!arithmétique} et moyenne
     tronquée\index{moyenne!tronquée}
   \item[\Fonction{var}, \Fonction{sd}] variance\index{variance} et
-    écart type\index{ecart type@écart type} (versions sans biais)
+    écart type\index{ecart type@écart type} (sans biais)
   \item[\Fonction{min}, \Fonction{max}] minimum\index{minimum!d'un
       vecteur} et maximum\index{maximum!d'un vecteur} d'un vecteur
   \item[\Fonction{range}] vecteur contenant le minimum et le maximum
@@ -315,7 +314,7 @@ Droit      4    5    6
   \end{ttscript}
 \end{frame}
 
-\subsection{Sommaires cumulatifs et comparaisons élément par élément}
+%\subsubsection{Sommaires cumulatifs et comparaisons élément par élément}
 
 \begin{frame}
   \frametitle{Sommaires cumulatifs et comparaisons élément par
@@ -334,7 +333,7 @@ Droit      4    5    6
   \end{ttscript}
 \end{frame}
 
-\subsection{Opérations sur les matrices}
+%\subsubsection{Opérations sur les matrices}
 
 \begin{frame}
   \frametitle{Opérations sur les matrices}
@@ -372,7 +371,7 @@ Droit      4    5    6
   \end{ttscript}
 \end{frame}
 
-\subsection{Produit extérieur}
+%\subsubsection{Produit extérieur}
 
 \begin{frame}
   \frametitle{Produit extérieur}
@@ -427,8 +426,10 @@ Droit      4    5    6
     \code{\emph{branche.faux}} comporte plus d'une expression, les
     grouper dans des accolades $\{~\}$.
   \end{block}
+\end{frame}
 
-  \begin{block}<2>{\code{ifelse(\emph{condition}, \emph{expression.vrai},
+\begin{frame}
+  \begin{block}{\code{ifelse(\emph{condition}, \emph{expression.vrai},
       \emph{expression.faux})}}
     Fonction vectorisée qui remplace chaque élément \code{TRUE} du
     vecteur \code{\emph{condition}} par l'élément correspondant de

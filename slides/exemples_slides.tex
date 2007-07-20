@@ -9,7 +9,7 @@
     Un prêt est remboursé par une série de cinq paiements, le premier
     dans un an. Trouver le montant du prêt pour chacune des hypothèses
     ci-dessous.
-    \begin{enumerate}[(a)]
+    \begin{enumerate}[a)]
     \item Paiement annuel de \nombre{1000}, taux d'intérêt de 6~\%
       effectif annuellement.
     \item Paiements annuels de 500, 800, 900, 750 et \nombre{1000},
@@ -32,7 +32,7 @@
 
 \begin{frame}[fragile]
   \NoAutoSpaceBeforeFDP
-  \begin{proof}[(a) Un seul paiement annuel, un seul taux d'intérêt]
+  \begin{proof}[a) Un seul paiement annuel, un seul taux d'intérêt]
     Cas spécial
     \begin{displaymath}
       \color{orange}P \color{blue} \sum_{j=1}^n \color{red}(1 + i)^{-j}
@@ -51,7 +51,7 @@
 
 \begin{frame}[fragile]
   \NoAutoSpaceBeforeFDP
-  \begin{proof}[(b) Différents paiements annuels, un seul taux d'intérêt]
+  \begin{proof}[b) Différents paiements annuels, un seul taux d'intérêt]
     On a, cette fois,
     \begin{displaymath}
       \color{blue} \sum_{j=1}^n \color{red}(1 + i)^{-j} \color{orange}P_j 
@@ -70,7 +70,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-  \begin{proof}[(c) Différents paiements annuels, différents taux d'intérêt]
+  \begin{proof}[c) Différents paiements annuels, différents taux d'intérêt]
     On doit utiliser la formule générale
     \begin{displaymath}
       \color{blue}\sum_{j=1}^n 
@@ -101,7 +101,7 @@
     lois de probabilité ci-dessous. Vérifier que la somme des
     probabilités est bien égale à 1.
 
-    \begin{enumerate}[(a)]
+    \begin{enumerate}[a)]
     \item Binomiale
       \begin{displaymath}
         f(x) = \binom{n}{x} p^x (1 - p)^{n - x}, \quad x = 0, \dots, n.
@@ -118,7 +118,7 @@
 \begin{frame}[fragile]
   \frametitle{Solution}
 
-  \begin{proof}[(a) Binomiale$(10,\, 0,8)$]
+  \begin{proof}[a) Binomiale$(10,\, 0,8)$]
 \begin{Schunk}
 \begin{Sinput}
 > n <- 10
@@ -146,7 +146,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-  \begin{proof}[(b) Poisson$(5)$]
+  \begin{proof}[b) Poisson$(5)$]
     On calcule les probabilités en $x = 0, 1, \dots, 10$ seulement.
 \begin{Schunk}
 \begin{Sinput}
@@ -207,7 +207,7 @@
       F(x; \alpha, 1) = 1 - e^{-x} \sum_{j=0}^{\alpha-1} \frac{x^j}{j!}.
     \end{displaymath}
 
-    \begin{enumerate}[(a)]
+    \begin{enumerate}[a)]
     \item Évaluer $F(4; 5, 1)$.
     \item Évaluer $F(x; 5, 1)$ pour $x = 2, 3, \dots, 10$ en une seule
       expression.
@@ -218,7 +218,7 @@
 \begin{frame}[fragile]
   \frametitle{Solution}
 
-  \begin{proof}[(a) Une seule valeur de $x$, paramètre $\alpha$ fixe]
+  \begin{proof}[a) Une seule valeur de $x$, paramètre $\alpha$ fixe]
 \begin{Schunk}
 \begin{Sinput}
 > alpha <- 5
@@ -264,7 +264,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-  \begin{proof}[(b) Plusieurs valeurs de $x$, paramètre $\alpha$ fixe]
+  \begin{proof}[b) Plusieurs valeurs de $x$, paramètre $\alpha$ fixe]
     C'est un travail pour la fonction \fonction{outer}.
 \begin{Schunk}
 \begin{Sinput}
