@@ -472,7 +472,7 @@ x[c("Bleu", "Jaune")]
     \begin{enumerate}
 \item
 <<echo=TRUE,eval=FALSE>>=
-list(1:5, data=matrix(1:6, 2, 3), numeric(3), test=logical(4))
+x <- list(1:5, data = matrix(1:6, 2, 3), numeric(3), test = logical(4))
 @
 \item
 <<echo=TRUE,eval=FALSE>>=

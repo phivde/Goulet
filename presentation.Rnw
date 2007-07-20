@@ -278,7 +278,7 @@ standards \emph{de facto}.
 \begin{exercice}
   Lire le chapitre 1 de \cite{MASS} et exécuter les commandes de
   l'exemple de session de travail de la section 1.3. Bien que
-  davantage orienté vers les application statistiques que vers la
+  davantage orienté vers les applications statistiques que vers la
   programmation, cet exemple démontre quelques-unes des possibilités
   du langage S.
 \end{exercice}

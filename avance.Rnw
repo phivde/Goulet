@@ -15,7 +15,7 @@ chapitres 3 et 4.
 \label{avance:dots}
 
 La mention `\code{...}' apparaît dans la définition de plusieurs
-fonction en S. Il ne faut pas voir là de la paresse de la part des
+fonctions en S. Il ne faut pas voir là de la paresse de la part des
 rédacteurs des rubriques d'aide, mais bel et bien un argument formel
 dont `\Argument{...}' est le nom.
 \begin{itemize}
