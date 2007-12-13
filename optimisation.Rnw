@@ -6,36 +6,36 @@ options(width=52)
 @
 
 <<echo=FALSE>>=
-### Échantillon aléatoire d'une Gamma(5, 2) pour avoir les mêmes
+### Ã‰chantillon alÃ©atoire d'une Gamma(5, 2) pour avoir les mÃªmes
 ### chiffres dans S-Plus et R.
 x <- c(2.2557923, 2.6291918, 2.1579953, 5.2925777, 0.8625360,
        0.6744605, 1.5091443, 1.0829637, 2.5340812, 1.9135480)
 @
 
-Les méthodes de bissection, du point fixe, de Newton--Raphson et
-consorts permettent de résoudre des équations à une variable de la
-forme $f(x) = 0$ ou $g(x) = x$. Il existe également des versions de
-ces méthodes pour les systèmes à plusieurs variables de la forme
+Les mÃ©thodes de bissection, du point fixe, de Newton--Raphson et
+consorts permettent de rÃ©soudre des Ã©quations Ã  une variable de la
+forme $f(x) = 0$ ou $g(x) = x$. Il existe Ã©galement des versions de
+ces mÃ©thodes pour les systÃ¨mes Ã  plusieurs variables de la forme
 \begin{align*}
   f_1(x_1, x_2, x_3) &= 0 \\
   f_2(x_1, x_2, x_3) &= 0 \\
   f_3(x_1, x_2, x_3) &= 0.
 \end{align*}
 
-De tels systèmes d'équations surviennent plus souvent qu'autrement
+De tels systÃ¨mes d'Ã©quations surviennent plus souvent qu'autrement
 lors de l'optimisation d'une fonction. Par exemple, en recherchant le
-maximum ou le minimum d'une fonction $f(x, y)$, on souhaitera résoudre
-le système d'équations
+maximum ou le minimum d'une fonction $f(x, y)$, on souhaitera rÃ©soudre
+le systÃ¨me d'Ã©quations
 \begin{align*}
   \frac{\partial}{\partial x}\, f(x, y) &= 0 \\
   \frac{\partial}{\partial y}\, f(x, y) &= 0.
 \end{align*}
 
-En statistique, les fonctions d'optimisation sont fréquemment
-employées pour calculer numériquement des estimateurs du maximum de
+En statistique, les fonctions d'optimisation sont frÃ©quemment
+employÃ©es pour calculer numÃ©riquement des estimateurs du maximum de
 vraisemblance.
 
-La grande majorité des suites logicielles de calcul comportent des
+La grande majoritÃ© des suites logicielles de calcul comportent des
 outils d'optimisation de fonctions. Ce chapitre passe en revue les
 fonctions disponibles dans S-Plus et \textsf{R}.
 
@@ -43,25 +43,25 @@ fonctions disponibles dans S-Plus et \textsf{R}.
 \section{Le package \texttt{MASS}}
 \label{optimisation:MASS}
 
-L'offre en fonctions d'optimisation est un des domaines où S-Plus et
-\textsf{R} diffèrent passablement. Il existe toutefois une option
+L'offre en fonctions d'optimisation est un des domaines oÃ¹ S-Plus et
+\textsf{R} diffÃ¨rent passablement. Il existe toutefois une option
 commune avec le package \texttt{MASS}\index{package!MASS@\texttt{MASS}}.
 
 Le package \texttt{MASS} \citep{MASS} contient plusieurs fonctions
-aussi utiles que de grande qualité.  Les auteurs de ces fonctions
-contribuent activement au développement de \textsf{R} et de S-Plus et,
-comme il est mentionné au chapitre~\ref{presentation}, leurs livres
-sur le langage S \citep{Sprogramming,MASS} constituent des références
+aussi utiles que de grande qualitÃ©.  Les auteurs de ces fonctions
+contribuent activement au dÃ©veloppement de \textsf{R} et de S-Plus et,
+comme il est mentionnÃ© au chapitre~\ref{presentation}, leurs livres
+sur le langage S \citep{Sprogramming,MASS} constituent des rÃ©fÃ©rences
 de choix.
 
-Le package \texttt{MASS} est distribué avec S-Plus (depuis au moins la
-version 6.1) comme avec \textsf{R}.  On peut aussi le télécharger
+Le package \texttt{MASS} est distribuÃ© avec S-Plus (depuis au moins la
+version 6.1) comme avec \textsf{R}.  On peut aussi le tÃ©lÃ©charger
 gratuitement depuis l'URL
 \begin{quote}
   \url{http://www.stats.ox.ac.uk/pub/MASS4/Software.html}
 \end{quote}
-Pour accéder aux fonctions du package, il suffit de le charger en
-mémoire avec la commande
+Pour accÃ©der aux fonctions du package, il suffit de le charger en
+mÃ©moire avec la commande
 <<echo=TRUE,eval=FALSE>>=
 library(MASS)
 @
@@ -82,7 +82,7 @@ d'entre elles.
 La fonction \Fonction{uniroot} recherche la
 racine\index{racine!d'une fonction}\index{fonction!racine} d'une fonction
 \code{f} entre les points \code{lower} et \code{upper}. C'est la
-fonction de base pour trouver la solution (unique) de l'équation $f(x)
+fonction de base pour trouver la solution (unique) de l'Ã©quation $f(x)
 = 0$.
 \begin{ex}
   Trouver la racine de la fonction $f(x) = x - 2^{-x}$ dans
@@ -99,11 +99,11 @@ uniroot(function(x) x - 2^(-x), lower=0, upper=1)
 \label{optimisation:polyroot}
 
 La fonction \Fonction{polyroot} calcule toutes les
-racines\index{racine!d'un polynôme} (complexes) du polynôme $\sum_{i=0}^n
+racines\index{racine!d'un polynÃ´me} (complexes) du polynÃ´me $\sum_{i=0}^n
 a_i x^i$.  Le premier argument est le vecteur des coefficients $a_0,
 a_1, \dots, a_n$, dans cet ordre.
 \begin{ex}
-  Trouver les racines du polynôme $x^3 + 4x^2 - 10$.
+  Trouver les racines du polynÃ´me $x^3 + 4x^2 - 10$.
 \end{ex}
 \begin{sol}
   \mbox{}
@@ -120,13 +120,13 @@ maximum\index{maximum!local}\index{fonction!maximum local} ou
 minimum\index{minimum!local}\index{fonction!minimum local} local d'une
 fonction \code{f} entre les points \code{lower} et \code{upper}.
 \begin{ex}
-  Trouver l'extremum de la fonction de densité de la loi bêta de
-  paramètres $\alpha = 3$ et $\beta = 2$.
+  Trouver l'extremum de la fonction de densitÃ© de la loi bÃªta de
+  paramÃ¨tres $\alpha = 3$ et $\beta = 2$.
 \end{ex}
 \begin{sol}
-  La loi bêta étant définie dans $[0, 1]$, on sait que l'extremum se
+  La loi bÃªta Ã©tant dÃ©finie dans $[0, 1]$, on sait que l'extremum se
   trouve dans cet intervalle. On utilise l'argument \code{...} de
-  \texttt{optimize} pour passer les paramètres de la loi bêta à
+  \texttt{optimize} pour passer les paramÃ¨tres de la loi bÃªta Ã 
   \texttt{dbeta()}.
 <<echo=TRUE>>=
 optimize(dbeta, interval = c(0, 1), maximum = TRUE, shape1 = 3, shape2 = 2)
@@ -139,25 +139,25 @@ optimize(dbeta, interval = c(0, 1), maximum = TRUE, shape1 = 3, shape2 = 2)
 La \Splus fonction \Fonction{ms} minimise une
 somme\index{minimum!d'une somme}. C'est une des principales fonctions
 d'optimisation de S-Plus. Elles est utile, par exemple, pour minimiser
-la valeur négative d'une fonction de
+la valeur nÃ©gative d'une fonction de
 log-vraisemblance\index{vraisemblance}, $-l(\theta) = - \sum_{i=1}^n
-\ln f(x_i; \theta)$.  Son utilisation est toutefois compliquée par
+\ln f(x_i; \theta)$.  Son utilisation est toutefois compliquÃ©e par
 l'usage de formules et de \emph{data frames}\index{data
   frame}.
 \begin{ex}
   \label{ex:optimisation:ms}
-  Calculer les estimateurs du maximum de vraisemblance des paramètres
-  $\alpha$ et $\lambda$ de la distribution gamma dont la densité est
-  donnée à l'équation \eqref{eq:exemples:gamma:fdp} à la page
-  \pageref{eq:exemples:gamma:fdp} à partir de l'échantillon aléatoire
+  Calculer les estimateurs du maximum de vraisemblance des paramÃ¨tres
+  $\alpha$ et $\lambda$ de la distribution gamma dont la densitÃ© est
+  donnÃ©e Ã  l'Ã©quation \eqref{eq:exemples:gamma:fdp} Ã  la page
+  \pageref{eq:exemples:gamma:fdp} Ã  partir de l'Ã©chantillon alÃ©atoire
   suivant:
 <<echo=TRUE>>=
 x
 @
 \end{ex}
 \begin{sol}
-  On cherche à minimiser $-l(\alpha, \lambda) = -\sum_{i=1}^n \ln
-  f(x_i; \alpha, \lambda)$, donc l'argument de \code{ms} doit être
+  On cherche Ã  minimiser $-l(\alpha, \lambda) = -\sum_{i=1}^n \ln
+  f(x_i; \alpha, \lambda)$, donc l'argument de \code{ms} doit Ãªtre
   $- \ln f(x_i; \alpha, \lambda)$.
 \begin{Schunk}
 \begin{Sinput}
@@ -182,19 +182,19 @@ as.data.frame(x), start = list(         a = 1, l = 1))
 \subsection{\code{nlmin}}
 \label{optimisation:nlmin}
 
-La fonction \Fonction{nlmin}, \Splus propre à S-Plus, minimise une
-fonction non linéaire\index{minimum!fonction non
-  linéaire}\index{fonction!minimum}.  La fonction que \code{nlmin}
+La fonction \Fonction{nlmin}, \Splus propre Ã  S-Plus, minimise une
+fonction non linÃ©aire\index{minimum!fonction non
+  linÃ©aire}\index{fonction!minimum}.  La fonction que \code{nlmin}
 minimisera ne peut avoir qu'un seul argument, soit le vecteur des
-paramètres à trouver.
+paramÃ¨tres Ã  trouver.
 \begin{ex}
-  Répéter l'exemple \ref{ex:optimisation:ms} à l'aide de
+  RÃ©pÃ©ter l'exemple \ref{ex:optimisation:ms} Ã  l'aide de
   \code{nlmin} dans S-Plus.
 \end{ex}
 \begin{sol}
   Il faut cette fois passer en argument la fonction $-l(\alpha,
   \lambda)$. Le second argument, \code{c(1, 1)}, contient des
-  valeurs de départ.
+  valeurs de dÃ©part.
 \begin{Schunk}
 \begin{Sinput}
 > f <- function(p) -sum(log(dgamma(x, p[1], p[2])))
@@ -217,20 +217,20 @@ $conv.type:
 \subsection{\code{nlm}}
 \label{optimisation:nlm}
 
-La fonction \Fonction{nlm}, \R propre à \textsf{R}, minimise aussi une
-fonction non linéaire\index{minimum!fonction non
-  linéaire}\index{fonction!minimum}.  La principale différence entre
+La fonction \Fonction{nlm}, \R propre Ã  \textsf{R}, minimise aussi une
+fonction non linÃ©aire\index{minimum!fonction non
+  linÃ©aire}\index{fonction!minimum}.  La principale diffÃ©rence entre
 la fonction \fonction{nlmin} de S-Plus et \code{nlm} est que cette
-dernière peut passer des arguments à la fonction à minimiser, ce qui
+derniÃ¨re peut passer des arguments Ã  la fonction Ã  minimiser, ce qui
 en facilite l'utilisation.
 \begin{ex}
   \label{ex:optimisation:nlm}
-  Répéter l'exemple \ref{ex:optimisation:ms} à l'aide de
+  RÃ©pÃ©ter l'exemple \ref{ex:optimisation:ms} Ã  l'aide de
   \code{nlm} dans \textsf{R}.
 \end{ex}
 \begin{sol}
-  Remarquer comment on peut passer le vecteur de données à la fonction
-  de log-vraisemblance à optimiser.
+  Remarquer comment on peut passer le vecteur de donnÃ©es Ã  la fonction
+  de log-vraisemblance Ã  optimiser.
 <<echo=TRUE>>=
 f <- function(p, x) -sum(dgamma(x, p[1], p[2], log=TRUE))
 nlm(f, c(1, 1), x=x)
@@ -241,8 +241,8 @@ nlm(f, c(1, 1), x=x)
 \Indexfonction{nlminb}
 \label{optimisation:nlminb}
 
-Minimisation d'une fonction non linéaire avec des bornes inférieure
-et/ou supérieure pour les paramètres. (Disponible dans \textsf{R}
+Minimisation d'une fonction non linÃ©aire avec des bornes infÃ©rieure
+et/ou supÃ©rieure pour les paramÃ¨tres. (Disponible dans \textsf{R}
 depuis la version 2.2.0.)
 
 
@@ -250,17 +250,17 @@ depuis la version 2.2.0.)
 \label{optimisation:optim}
 
 Outil d'optimisation tout usage, la fonction
-\Fonction{optim}\index{fonction!optimisation} est souvent utilisée par
+\Fonction{optim}\index{fonction!optimisation} est souvent utilisÃ©e par
 d'autres fonctions.  Elle permet, selon l'algorithme choisi, de fixer
-des seuils minimum et/ou maximum aux paramètres à optimiser.  Dans
+des seuils minimum et/ou maximum aux paramÃ¨tres Ã  optimiser.  Dans
 S-Plus, il faut charger la section
-\texttt{MASS}\index{package!MASS@\texttt{MASS}} de la bibliothèque.
+\texttt{MASS}\index{package!MASS@\texttt{MASS}} de la bibliothÃ¨que.
 \begin{ex}
-  Répéter l'exemple \ref{ex:optimisation:ms} à l'aide de
+  RÃ©pÃ©ter l'exemple \ref{ex:optimisation:ms} Ã  l'aide de
   \code{optim}.
 \end{ex}
 \begin{sol}
-  En réutilisant la fonction \code{f} définie dans la solution de
+  En rÃ©utilisant la fonction \code{f} dÃ©finie dans la solution de
   l'exemple \ref{ex:optimisation:nlm}:
 <<echo=TRUE>>=
 optim(c(1, 1), f, x=x)
@@ -271,11 +271,11 @@ optim(c(1, 1), f, x=x)
   \mbox{}
   \begin{enumerate}
   \item L'option \R \code{log = TRUE} de la fonction \fonction{dgamma}
-    (et de toutes les autres fonctions de densité) permet de calculer
-    plus précisément le logarithme de la densité.  Cette option n'est
+    (et de toutes les autres fonctions de densitÃ©) permet de calculer
+    plus prÃ©cisÃ©ment le logarithme de la densitÃ©.  Cette option n'est
     disponible que dans \textsf{R}.
   \item L'estimation par le maximum de
-    vraisemblance\index{vraisemblance} est de beaucoup simplifiée par
+    vraisemblance\index{vraisemblance} est de beaucoup simplifiÃ©e par
     l'utilisation de la fonction \fonction{fitdistr} du package
     \texttt{MASS}\index{package!MASS@\texttt{MASS}}.
   \end{enumerate}
@@ -285,7 +285,7 @@ optim(c(1, 1), f, x=x)
 \section{Exemples}
 \label{optimisation:exemples}
 
-\lstinputlisting{optimisation.R}
+\lstinputlisting[firstline=3]{optimisation.R}
 
 
 
@@ -297,8 +297,8 @@ optim(c(1, 1), f, x=x)
 
 
 \begin{exercice}
-  Trouver la solution des équations suivantes à l'aide des fonctions S
-  appropriées.
+  Trouver la solution des Ã©quations suivantes Ã  l'aide des fonctions S
+  appropriÃ©es.
   \begin{enumerate}
   \item $x^3 - 2 x^2 - 5 = 0$ pour $1 \leq x \leq 4$
   \item $x^3 + 3 x^2 - 1 = 0$ pour $-4 \leq x \leq 0$
@@ -313,7 +313,7 @@ optim(c(1, 1), f, x=x)
 f <- function(x) x^3 - 2 * x^2 - 5
 uniroot(f, lower=1, upper=4)
 @
-\item Comme un simple graphique le démontre, il y a deux racines dans
+\item Comme un simple graphique le dÃ©montre, il y a deux racines dans
   l'intervalle.
 <<echo=TRUE,eval=FALSE>>=
 f <- function(x) x^3 + 3 * x^2 - 1
@@ -341,17 +341,17 @@ uniroot(f, lower=0, upper=1)
 \end{exercice}
 
 \begin{exercice}
-  En théorie de la crédibilité, l'estimateur d'un paramètre $a$ est
-  donné sous forme de point fixe
+  En thÃ©orie de la crÃ©dibilitÃ©, l'estimateur d'un paramÃ¨tre $a$ est
+  donnÃ© sous forme de point fixe
   \begin{displaymath}
     \hat{a} = \frac{1}{n - 1} \sum_{i=1}^n z_i (X_i - \bar{X}_z)^2,
   \end{displaymath}
-  où
+  oÃ¹
   \begin{align*}
     z_i &= \frac{\hat{a} w_i}{\hat{a} w_i + s^2} \\
     \bar{X}_z &= \sum_{i=1}^n \frac{z_i}{z_\pt} X_i
   \end{align*}
-  et $X_1, \dots, X_n$, $w_1, \dots, w_n$ et $s^2$ sont des données.
+  et $X_1, \dots, X_n$, $w_1, \dots, w_n$ et $s^2$ sont des donnÃ©es.
   Calculer la valeur de $\hat{a}$ si $s^2 = \nombre{140 000 000}$ et
   que les valeurs de $X_i$ et $w_i$ sont telles qu'elles apparaissent
   dans le tableau ci-dessous.
@@ -387,11 +387,11 @@ uniroot(function(x) g(x, X, w, 140E6) - x, c(50000, 80000))
 
 \begin{exercice}
   \label{exercice:optimisation:optim}
-  Les fonctions de densité de probabilité et de répartition de la
-  distribution de Pareto sont données à l'exercice
+  Les fonctions de densitÃ© de probabilitÃ© et de rÃ©partition de la
+  distribution de Pareto sont donnÃ©es Ã  l'exercice
   \ref{avance}.\ref{exercice:avance:pareto}. Calculer les estimateurs
-  du maximum de vraisemblance des paramètres de la Pareto à partir d'un
-  échantillon aléatoire obtenu par simulation avec la commande
+  du maximum de vraisemblance des paramÃ¨tres de la Pareto Ã  partir d'un
+  Ã©chantillon alÃ©atoire obtenu par simulation avec la commande
 <<echo=TRUE,eval=FALSE>>=
 x <- lambda * (runif(100)^(-1/alpha) - 1)
 @
@@ -425,4 +425,5 @@ exp(optim(c(log(2), log(1000)), f, x=x)$par)
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "introduction_programmation_S"
+%%% coding: utf-8
 %%% End:

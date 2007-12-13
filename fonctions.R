@@ -1,3 +1,5 @@
+## Emacs: -*- coding: latin-1; fill-column: 62; comment-column: 27; -*-
+
 ### Premier exemple de fonction: la mise en oeuvre de
 ### l'algorithme du point fixe pour trouver le taux d'intérêt
 ### tel que a_angle{n} = k pour 'n' et 'k' donnés. Cette mise

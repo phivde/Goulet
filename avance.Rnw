@@ -1,12 +1,12 @@
-\chapter{Concepts avancés}
+\chapter{Concepts avancÃ©s}
 \label{avance}
 
 <<echo=FALSE>>=
 options(width = 52)
 @
 
-Ce chapitre traite de divers concepts et fonctions un peu plus avancés
-du langage S. Le lecteur intéressé à approfondir ses connaissances de
+Ce chapitre traite de divers concepts et fonctions un peu plus avancÃ©s
+du langage S. Le lecteur intÃ©ressÃ© Ã  approfondir ses connaissances de
 ce langage pourra consulter \citet{Sprogramming}, en particulier les
 chapitres 3 et 4.
 
@@ -14,19 +14,19 @@ chapitres 3 et 4.
 \section{L'argument `\code{...}'}
 \label{avance:dots}
 
-La mention `\code{...}' apparaît dans la définition de plusieurs
-fonctions en S. Il ne faut pas voir là de la paresse de la part des
-rédacteurs des rubriques d'aide, mais bel et bien un argument formel
+La mention `\code{...}' apparaÃ®t dans la dÃ©finition de plusieurs
+fonctions en S. Il ne faut pas voir lÃ  de la paresse de la part des
+rÃ©dacteurs des rubriques d'aide, mais bel et bien un argument formel
 dont `\Argument{...}' est le nom.
 \begin{itemize}
 \item Cet argument signifie qu'une fonction peut accepter un ou
   plusieurs autres arguments autres que ceux faisant partie de sa
-  définition.
+  dÃ©finition.
 \item Le contenu de l'argument `\code{...}' n'est ni pris en compte,
-  ni modifié par la fonction.
-\item Il est généralement simplement passé tel quel à une autre
+  ni modifiÃ© par la fonction.
+\item Il est gÃ©nÃ©ralement simplement passÃ© tel quel Ã  une autre
   fonction.
-\item Pour des exemples, voir les définitions des fonctions
+\item Pour des exemples, voir les dÃ©finitions des fonctions
   \fonction{apply}, \fonction{lapply} et \fonction{sapply},
   ci-dessous.
 \end{itemize}
@@ -35,48 +35,48 @@ dont `\Argument{...}' est le nom.
 \section{Fonction \code{apply}}
 \label{avance:apply}
 
-La fonction \Fonction{apply} sert à appliquer une fonction quelconque
-sur une partie d'une matrice\index{matrice} ou, plus généralement,
+La fonction \Fonction{apply} sert Ã  appliquer une fonction quelconque
+sur une partie d'une matrice\index{matrice} ou, plus gÃ©nÃ©ralement,
 d'un tableau\index{tableau}. La syntaxe de la fonction est la
 suivante:
 \begin{center}
   \code{apply(X, MARGIN, FUN, ...)},
 \end{center}
-où
+oÃ¹
 \begin{itemize}
 \item \code{X} est une matrice ou un tableau (\emph{array});
 \item \code{MARGIN} est un vecteur d'entiers contenant la ou les
   dimensions de la matrice ou du tableau sur lesquelles la fonction
   doit s'appliquer;
-\item \code{FUN} est la fonction à appliquer;
-\item `\code{...}' est un ensemble d'arguments supplémentaires,
-  séparés par des virgules, à passer à la fonction \code{FUN}.
+\item \code{FUN} est la fonction Ã  appliquer;
+\item `\code{...}' est un ensemble d'arguments supplÃ©mentaires,
+  sÃ©parÃ©s par des virgules, Ã  passer Ã  la fonction \code{FUN}.
 \end{itemize}
 
 Lorsque \code{X} est une matrice, \fonction{apply} sert principalement
-à calculer des sommaires par ligne (dimension 1) ou par colonne
+Ã  calculer des sommaires par ligne (dimension 1) ou par colonne
 (dimension 2) autres que la somme ou la moyenne (puisque les fonctions
 \fonction{rowSums}, \fonction{colSums}, \fonction{rowMeans} et
 \fonction{colMeans} existent pour ce faire).
 \begin{itemize}
-\item Utiliser la fonction \fonction{apply} plutôt que des boucles
+\item Utiliser la fonction \fonction{apply} plutÃ´t que des boucles
   puisque celle-ci est plus efficace.
-\item Considérer les exemples suivants:
+\item ConsidÃ©rer les exemples suivants:
 <<echo=TRUE>>=
 ( m <- matrix(sample(1:100, 20, rep = TRUE), 5, 4) )
 apply(m, 1, var)             # variance par ligne
 apply(m, 2, min)             # minimum par colonne
-apply(m, 1, mean, trim = 0.2)  # moyenne tronquée par ligne
+apply(m, 1, mean, trim = 0.2)  # moyenne tronquÃ©e par ligne
 @
 \end{itemize}
 
 Puisqu'il n'existe pas de fonctions internes pour effectuer des
 sommaires sur des tableaux, il faut toujours utiliser la fonction
 \fonction{apply}. Si \code{X} est un tableau de plus de deux
-dimensions, alors l'argument passé à \code{FUN} peut être une matrice
+dimensions, alors l'argument passÃ© Ã  \code{FUN} peut Ãªtre une matrice
 ou un tableau.
 \begin{itemize}
-\item Déterminants des cinq sous-matrices $4 \times 4$ d'un tableau $4
+\item DÃ©terminants des cinq sous-matrices $4 \times 4$ d'un tableau $4
   \times 4 \times 5$:
 <<echo=TRUE>>=
 arr <- array(sample(1:100, 80, rep = TRUE), c(4, 4, 5))
@@ -89,29 +89,29 @@ apply(arr, 3, det)
 \section{Fonctions \code{lapply} et \code{sapply}}
 \label{avance:lapply}
 
-Les fonctions \Fonction{lapply} et \Fonction{sapply} sont similaires à
+Les fonctions \Fonction{lapply} et \Fonction{sapply} sont similaires Ã 
 la fonction \fonction{apply} en ce qu'elles permettent d'appliquer une
-fonction aux éléments d'une structure --- le vecteur ou la liste en
+fonction aux Ã©lÃ©ments d'une structure --- le vecteur ou la liste en
 l'occurrence. Leur syntaxe est similaire:
 \begin{center}
   \code{lapply(X, FUN, ...)} \\
   \code{sapply(X, FUN, ...)}
 \end{center}
 \begin{itemize}
-\item La fonction \fonction{lapply} applique une fonction \code{FUN} à
-  tous les éléments d'un vecteur ou d'une liste \code{X} et retourne
-  le résultat sous forme de liste.
+\item La fonction \fonction{lapply} applique une fonction \code{FUN} Ã 
+  tous les Ã©lÃ©ments d'un vecteur ou d'une liste \code{X} et retourne
+  le rÃ©sultat sous forme de liste.
 <<echo=TRUE>>=
 ( v <- lapply(5:8, sample, x = 1:100) )
 lapply(v, mean)
 @
-\item La fonction \fonction{sapply} est similaire à \fonction{lapply},
-  sauf que le résultat est retourné sous forme de vecteur, si
+\item La fonction \fonction{sapply} est similaire Ã  \fonction{lapply},
+  sauf que le rÃ©sultat est retournÃ© sous forme de vecteur, si
   possible.
 <<echo=TRUE>>=
 sapply(v, mean)
 @
-\item Si le résultat de chaque application de la fonction est un
+\item Si le rÃ©sultat de chaque application de la fonction est un
   vecteur, alors \fonction{sapply} retourne une matrice, remplie comme
   toujours par colonne.
 <<echo=TRUE>>=
@@ -134,9 +134,9 @@ La fonction \Fonction{mapply} est une version multidimensionnelle de
   \code{mapply(FUN, ...)}
 \end{center}
 \begin{itemize}
-\item Le résultat de \code{mapply} est l'application de la fonction
-  \code{FUN} aux premiers éléments de tous les arguments contenus dans
-  `\code{...}', puis à tous les seconds éléments, et ainsi de suite.
+\item Le rÃ©sultat de \code{mapply} est l'application de la fonction
+  \code{FUN} aux premiers Ã©lÃ©ments de tous les arguments contenus dans
+  `\code{...}', puis Ã  tous les seconds Ã©lÃ©ments, et ainsi de suite.
 \item Ainsi, si \code{v} et \code{w} sont des vecteurs,
   \code{mapply(FUN, v, w)} retourne sous forme de liste, de vecteur
   ou de matrice, selon le cas, \code{FUN(v[1], w[1])}, \code{FUN(v[2],
@@ -144,7 +144,7 @@ La fonction \Fonction{mapply} est une version multidimensionnelle de
 <<echo=TRUE>>=
 mapply(rep, 1:4, 4:1)
 @
-\item Les éléments de `\code{...}' sont recyclés au besoin.
+\item Les Ã©lÃ©ments de `\code{...}' sont recyclÃ©s au besoin.
 <<echo=TRUE>>=
 mapply(seq, 1:6, 6:8)
 @
@@ -154,55 +154,55 @@ mapply(seq, 1:6, 6:8)
 \section{Fonction \code{replicate}}
 \label{avance:replicate}
 
-La fonction \Fonction{replicate}, propre à \textsf{R}, \R est une
+La fonction \Fonction{replicate}, propre Ã  \textsf{R}, \R est une
 fonction enveloppante de \fonction{sapply} simplifiant la syntaxe pour
-l'exécution répétée d'une expression.
+l'exÃ©cution rÃ©pÃ©tÃ©e d'une expression.
 
 \begin{itemize}
-\item Son usage est particulièrement indiqué pour les simulations.
+\item Son usage est particuliÃ¨rement indiquÃ© pour les simulations.
   Ainsi, on peut construire une fonction \code{fun} qui fait tous
-  les calculs d'une simulation, puis obtenir les résultats pour,
+  les calculs d'une simulation, puis obtenir les rÃ©sultats pour,
   disons, \nombre{10000} simulations avec
 <<eval=FALSE>>=
 replicate(10000, fun(...))
 @
-\item L'annexe \ref{simulation} présente en détail différentes
-  stratégies --- dont l'utilisation de \code{replicate} --- pour
-  la réalisation d'études de simulation en S.
+\item L'annexe \ref{simulation} prÃ©sente en dÃ©tail diffÃ©rentes
+  stratÃ©gies --- dont l'utilisation de \code{replicate} --- pour
+  la rÃ©alisation d'Ã©tudes de simulation en S.
 \end{itemize}
 
 
-\section{Classes et fonctions génériques}
+\section{Classes et fonctions gÃ©nÃ©riques}
 \label{avance:classes}
 
 Dans le langage S, tous les objets ont une classe. La classe est
-parfois implicite ou dérivée du mode de l'objet (consulter la rubrique
-d'aide de \fonction{class} pour de plus amples détails).
+parfois implicite ou dÃ©rivÃ©e du mode de l'objet (consulter la rubrique
+d'aide de \fonction{class} pour de plus amples dÃ©tails).
 
 \begin{itemize}
 \item Certaines fonctions, dites fonctions
-  \emph{génériques}\index{fonction!générique}, se comportent
-  différemment selon la classe de l'objet donné en argument. Les
-  fonctions génériques les plus fréquemment employées sont
+  \emph{gÃ©nÃ©riques}\index{fonction!gÃ©nÃ©rique}, se comportent
+  diffÃ©remment selon la classe de l'objet donnÃ© en argument. Les
+  fonctions gÃ©nÃ©riques les plus frÃ©quemment employÃ©es sont
   \fonction{print}, \fonction{plot} et \fonction{summary}.
-\item Une fonction générique possède une \emph{méthode} correspondant
-  à chaque classe qu'elle reconnaît et, généralement, une méthode
-  \code{default} pour les autres objets. La liste des méthodes
-  existant pour une fonction générique s'obtient avec
+\item Une fonction gÃ©nÃ©rique possÃ¨de une \emph{mÃ©thode} correspondant
+  Ã  chaque classe qu'elle reconnaÃ®t et, gÃ©nÃ©ralement, une mÃ©thode
+  \code{default} pour les autres objets. La liste des mÃ©thodes
+  existant pour une fonction gÃ©nÃ©rique s'obtient avec
   la fonction \Fonction{methods}:
 <<echo=TRUE>>=
 methods(plot)
 @
-\item À chaque méthode \code{methode} d'une fonction générique
+\item Ã€ chaque mÃ©thode \code{methode} d'une fonction gÃ©nÃ©rique
   \code{fun} correspond une fonction \code{fun.methode}. C'est donc la
-  rubrique d'aide de cette dernière fonction qu'il faut consulter au
-  besoin, et non celle de la fonction générique, qui contient en
-  général peu d'informations.
-\item Il est intéressant de savoir que lorsque l'on tape le nom d'un
-  objet à la ligne de commande pour voir son contenu, c'est la
-  fonction générique \fonction{print} qui est appelée. On peut donc
-  complètement modifier la représentation à l'écran du contenu d'un
-  objet en créant une nouvelle classe et une nouvelle méthode pour la
+  rubrique d'aide de cette derniÃ¨re fonction qu'il faut consulter au
+  besoin, et non celle de la fonction gÃ©nÃ©rique, qui contient en
+  gÃ©nÃ©ral peu d'informations.
+\item Il est intÃ©ressant de savoir que lorsque l'on tape le nom d'un
+  objet Ã  la ligne de commande pour voir son contenu, c'est la
+  fonction gÃ©nÃ©rique \fonction{print} qui est appelÃ©e. On peut donc
+  complÃ¨tement modifier la reprÃ©sentation Ã  l'Ã©cran du contenu d'un
+  objet en crÃ©ant une nouvelle classe et une nouvelle mÃ©thode pour la
   fonction \code{print}.
 \end{itemize}
 
@@ -210,7 +210,7 @@ methods(plot)
 \section{Exemples}
 \label{avance:exemples}
 
-\lstinputlisting{avance.R}
+\lstinputlisting[firstline=3]{avance.R}
 
 
 \section{Exercices}
@@ -220,16 +220,16 @@ methods(plot)
 \Writetofile{reponses}{\protect\section*{Chapitre \protect\ref{avance}}}
 
 \begin{exercice}
-  \index{moyenne!pondérée}
-  À l'exercice \ref{exercice:exemples:moyennes} du chapitre
-  \ref{exemples}, on a calculé la moyenne pondérée d'un vecteur
+  \index{moyenne!pondÃ©rÃ©e}
+  Ã€ l'exercice \ref{exercice:exemples:moyennes} du chapitre
+  \ref{exemples}, on a calculÃ© la moyenne pondÃ©rÃ©e d'un vecteur
   d'observations
   \begin{displaymath}
     X_w = \sum_{i = 1}^n \frac{w_i}{w_\pt}\, X_i,
   \end{displaymath}
-  où $w_\pt = \sum_{i = 1}^n w_i$. Si l'on a plutôt une matrice $n
-  \times p$ d'observations $X_{ij}$, on peut définir les moyennes
-  pondérées
+  oÃ¹ $w_\pt = \sum_{i = 1}^n w_i$. Si l'on a plutÃ´t une matrice $n
+  \times p$ d'observations $X_{ij}$, on peut dÃ©finir les moyennes
+  pondÃ©rÃ©es
   \begin{align*}
     X_{iw}
     &= \sum_{j = 1}^p \frac{w_{ij}}{w_{i\pt}}\, X_{ij}, \quad
@@ -242,27 +242,27 @@ methods(plot)
     &= \sum_{i = 1}^n \sum_{j=1}^p \frac{w_{ij}}{w_{\pt\pt}}\, X_{ij}, \quad
     w_{\pt\pt} = \sum_{i = 1}^n \sum_{j = 1}^p w_{ij}.
   \end{align*}
-  De même, on peut définir des moyennes pondérées calculées à partir
-  d'un tableau de données $X_{ijk}$ de dimensions $n \times p \times
-  r$ dont la notation suit la même logique que ci-dessus. Écrire des
-  expressions S pour calculer, sans boucle, les moyennes pondérées
+  De mÃªme, on peut dÃ©finir des moyennes pondÃ©rÃ©es calculÃ©es Ã  partir
+  d'un tableau de donnÃ©es $X_{ijk}$ de dimensions $n \times p \times
+  r$ dont la notation suit la mÃªme logique que ci-dessus. Ã‰crire des
+  expressions S pour calculer, sans boucle, les moyennes pondÃ©rÃ©es
   suivantes.
   \begin{enumerate}
-  \item $X_{iw}$ en supposant une matrice de données $n \times p$.
-  \item $X_{wj}$ en supposant une matrice de données $n \times p$.
-  \item $X_{ww}$ en supposant une matrice de données $n \times p$.
-  \item $X_{ijw}$ en supposant un tableau de données $n \times p
+  \item $X_{iw}$ en supposant une matrice de donnÃ©es $n \times p$.
+  \item $X_{wj}$ en supposant une matrice de donnÃ©es $n \times p$.
+  \item $X_{ww}$ en supposant une matrice de donnÃ©es $n \times p$.
+  \item $X_{ijw}$ en supposant un tableau de donnÃ©es $n \times p
     \times r$.
-  \item $X_{iww}$ en supposant un tableau de données $n \times p
+  \item $X_{iww}$ en supposant un tableau de donnÃ©es $n \times p
     \times r$.
-  \item $X_{wjw}$ en supposant un tableau de données $n \times p
+  \item $X_{wjw}$ en supposant un tableau de donnÃ©es $n \times p
     \times r$.
-  \item $X_{www}$ en supposant un tableau de données $n \times p
+  \item $X_{www}$ en supposant un tableau de donnÃ©es $n \times p
     \times r$.
   \end{enumerate}
   \begin{rep}
     Soit \code{Xij} et \code{wij} des matrices, et \code{Xijk}
-    et \code{wijk} des tableaux à trois dimensions.
+    et \code{wijk} des tableaux Ã  trois dimensions.
     \begin{enumerate}
 \item
 <<echo=TRUE,eval=FALSE>>=
@@ -297,9 +297,9 @@ sum(Xijk * wijk)/sum(wijk)
 \end{exercice}
 
 \begin{exercice}
-  Générer les suites de nombres suivantes à l'aide d'une expression S.
-  (Évidemment, il faut trouver un moyen de générer les suites sans
-  simplement concaténer les différentes sous-suites.)
+  GÃ©nÃ©rer les suites de nombres suivantes Ã  l'aide d'une expression S.
+  (Ã‰videmment, il faut trouver un moyen de gÃ©nÃ©rer les suites sans
+  simplement concatÃ©ner les diffÃ©rentes sous-suites.)
   \begin{enumerate}
   \item $0, 0, 1, 0, 1, 2, \dots, 0, 1, 2, 3, \dots, 10$.
   \item $10, 9, 8, \dots, 2, 1, 10, 9, 8, \dots 3, 2, \dots, 10, 9, 10$.
@@ -326,8 +326,8 @@ unlist(lapply(10:1, seq, to = 1))
 \begin{exercice}
   \index{distribution!Pareto}
   \label{exercice:avance:pareto}
-  La fonction de densité de probabilité et la fonction de répartition
-  de la loi de Pareto de paramètres $\alpha$ et $\lambda$ sont,
+  La fonction de densitÃ© de probabilitÃ© et la fonction de rÃ©partition
+  de la loi de Pareto de paramÃ¨tres $\alpha$ et $\lambda$ sont,
   respectivement,
   \begin{align*}
     f(x)
@@ -336,37 +336,37 @@ unlist(lapply(10:1, seq, to = 1))
     F(x)
     &= 1 - \left( \frac{\lambda}{x + \lambda} \right)^\alpha.
   \end{align*}
-  La fonction suivante simule un échantillon aléatoire de taille $n$
-  issu d'une distribution de Pareto de paramètres $\alpha$ et
+  La fonction suivante simule un Ã©chantillon alÃ©atoire de taille $n$
+  issu d'une distribution de Pareto de paramÃ¨tres $\alpha$ et
   $\lambda$:
 \begin{verbatim}
 rpareto <- function(n, alpha, lambda)
     lambda * (runif(n)^(-1/alpha) - 1)
 \end{verbatim}
   \begin{enumerate}
-  \item Écrire une expression S permettant de simuler, en utilisant la
-    fonction \code{rpareto} ci-dessus, cinq échantillons aléatoires
+  \item Ã‰crire une expression S permettant de simuler, en utilisant la
+    fonction \code{rpareto} ci-dessus, cinq Ã©chantillons alÃ©atoires
     de tailles 100, 150, 200, 250 et 300 d'une loi de Pareto avec
-    $\alpha = 2$ et $\lambda = \nombre{5000}$. Les échantillons
-    aléatoires devraient être stockés dans une liste.
+    $\alpha = 2$ et $\lambda = \nombre{5000}$. Les Ã©chantillons
+    alÃ©atoires devraient Ãªtre stockÃ©s dans une liste.
   \item On vous donne l'exemple suivant d'utilisation de la fonction
     \fonction{paste}:
 <<echo=TRUE,eval=TRUE>>=
 paste("a", 1:5, sep = "")
 @
-    Nommer les éléments de la liste créée en (a)
+    Nommer les Ã©lÃ©ments de la liste crÃ©Ã©e en (a)
     \code{echantillon1}, ..., \code{echantillon5}.
-  \item Calculer la moyenne de chacun des échantillons aléatoires
-    obtenus en (a). Retourner le résultat dans un vecteur.
-  \item Évaluer la fonction de répartition de la loi de Pareto$(2,
-    \nombre{5000})$ en chacune des valeurs de chacun des échantillons
-    aléatoires obtenus en (a). Retourner les valeurs de la fonction de
-    répartition en ordre croissant.
-  \item Faire l'histogramme des données du cinquième échantillon
-    aléatoire à l'aide de la fonction \fonction{hist}.
-  \item Ajouter \nombre{1000} à toutes les valeurs de tous les
-    échantillons simulés en (a), ceci afin d'obtenir des observations
-    d'une distribution de Pareto \emph{translatée}.
+  \item Calculer la moyenne de chacun des Ã©chantillons alÃ©atoires
+    obtenus en (a). Retourner le rÃ©sultat dans un vecteur.
+  \item Ã‰valuer la fonction de rÃ©partition de la loi de Pareto$(2,
+    \nombre{5000})$ en chacune des valeurs de chacun des Ã©chantillons
+    alÃ©atoires obtenus en (a). Retourner les valeurs de la fonction de
+    rÃ©partition en ordre croissant.
+  \item Faire l'histogramme des donnÃ©es du cinquiÃ¨me Ã©chantillon
+    alÃ©atoire Ã  l'aide de la fonction \fonction{hist}.
+  \item Ajouter \nombre{1000} Ã  toutes les valeurs de tous les
+    Ã©chantillons simulÃ©s en (a), ceci afin d'obtenir des observations
+    d'une distribution de Pareto \emph{translatÃ©e}.
   \end{enumerate}
   \begin{rep}
     \begin{enumerate}
@@ -400,8 +400,8 @@ lapply(ea, "+", 1000)
 \end{exercice}
 
 \begin{exercice}
-  Une base de données contenant toutes les informations sur les
-  assurés est stockée dans une liste de la façon suivante:
+  Une base de donnÃ©es contenant toutes les informations sur les
+  assurÃ©s est stockÃ©e dans une liste de la faÃ§on suivante:
 <<echo=FALSE>>=
 rpareto <- function(n, alpha, lambda)
 {
@@ -428,23 +428,23 @@ x <- genere.assures(100)
 x[[1]]
 x[[2]]
 @
-  Ainsi, \code{x[[i]]} contient les informations relatives à l'assuré
-  $i$. Sans utiliser de boucles, écrire une expression ou une fonction S
-  qui permettra de calculer les quantités suivantes.
+  Ainsi, \code{x[[i]]} contient les informations relatives Ã  l'assurÃ©
+  $i$. Sans utiliser de boucles, Ã©crire une expression ou une fonction S
+  qui permettra de calculer les quantitÃ©s suivantes.
   \begin{enumerate}
   \item La franchise moyenne dans le portefeuille.
-  \item Le nombre annuel moyen de réclamations par assuré.
-  \item Le nombre total de réclamations dans le portefeuille.
+  \item Le nombre annuel moyen de rÃ©clamations par assurÃ©.
+  \item Le nombre total de rÃ©clamations dans le portefeuille.
   \item Le montant moyen par accident dans le portefeuille.
-  \item Le nombre d'assurés n'ayant eu aucune réclamation.
-  \item Le nombre d'assurés ayant eu une seule réclamation dans leur
-    première année.
+  \item Le nombre d'assurÃ©s n'ayant eu aucune rÃ©clamation.
+  \item Le nombre d'assurÃ©s ayant eu une seule rÃ©clamation dans leur
+    premiÃ¨re annÃ©e.
   \item La variance du nombre total de sinistres.
-  \item La variance du nombre de sinistres pour chaque assuré.
-  \item La probabilité empirique qu'une réclamation soit inférieure à
+  \item La variance du nombre de sinistres pour chaque assurÃ©.
+  \item La probabilitÃ© empirique qu'une rÃ©clamation soit infÃ©rieure Ã 
     $x$ (un scalaire) dans le portefeuille.
-  \item La probabilité empirique qu'une réclamation soit inférieure
-    à $\mat{x}$ (un vecteur) dans le portefeuille.
+  \item La probabilitÃ© empirique qu'une rÃ©clamation soit infÃ©rieure
+    Ã  $\mat{x}$ (un vecteur) dans le portefeuille.
   \end{enumerate}
   \begin{rep}
     \begin{enumerate}
@@ -452,9 +452,9 @@ x[[2]]
 <<echo=TRUE,eval=FALSE>>=
 mean(sapply(x, function(liste) liste$franchise))
 @
-Les crochets utilisés pour l'indiçage constituent en fait un
-opérateur dont le «nom» est \fonction{[[}. On peut donc utiliser cet
-opérateur dans la fonction \code{sapply}:
+Les crochets utilisÃ©s pour l'indiÃ§age constituent en fait un
+opÃ©rateur dont le Â«nomÂ» est \fonction{[[}. On peut donc utiliser cet
+opÃ©rateur dans la fonction \code{sapply}:
 <<echo=TRUE,eval=FALSE>>=
 mean(sapply(x, "[[", "franchise"))
 @
@@ -496,7 +496,7 @@ y <- unlist(lapply(x, "[[", "montants"))
 sum(y <= x)/length(y)
 @
 La fonction \fonction{ecdf} retourne une fonction permettant
-de calculer la fonction de répartition empirique en tout point:
+de calculer la fonction de rÃ©partition empirique en tout point:
 <<echo=TRUE,eval=FALSE>>=
 ecdf(unlist(lapply(x, "[[", "montants")))(x)
 @
@@ -505,7 +505,7 @@ ecdf(unlist(lapply(x, "[[", "montants")))(x)
 y <- unlist(lapply(x, "[[", "montants"))
 colSums(outer(y, x, "<="))/length(y)
 @
-La fonction retournée par \fonction{ecdf} accepte un vecteur
+La fonction retournÃ©e par \fonction{ecdf} accepte un vecteur
 de points en argument:
 <<echo=TRUE,eval=FALSE>>=
 ecdf(unlist(lapply(x, "[[", "montants")))(x)
@@ -520,4 +520,5 @@ ecdf(unlist(lapply(x, "[[", "montants")))(x)
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "introduction_programmation_S"
+%%% coding: utf-8
 %%% End:

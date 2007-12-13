@@ -1,3 +1,5 @@
+## Emacs: -*- coding: latin-1; fill-column: 62; comment-column: 27; -*-
+
 ###
 ### LES OBJETS S
 ###

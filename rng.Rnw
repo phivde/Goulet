@@ -1,78 +1,78 @@
-\chapter{Générateurs de nombres aléatoires}
+\chapter{GÃ©nÃ©rateurs de nombres alÃ©atoires}
 \label{rng}
 
 <<echo=FALSE>>=
 options(width=50)
 @
 
-Avant d'utiliser pour quelque tâche de simulation moindrement
-importante un générateur de nombres aléatoires inclus dans un
-logiciel, il importe de s'assurer de la qualité de cet outil. On
-trouvera en général relativement facilement de l'information dans
+Avant d'utiliser pour quelque tÃ¢che de simulation moindrement
+importante un gÃ©nÃ©rateur de nombres alÃ©atoires inclus dans un
+logiciel, il importe de s'assurer de la qualitÃ© de cet outil. On
+trouvera en gÃ©nÃ©ral relativement facilement de l'information dans
 Internet.
 
-On présente ici, sans entrer dans les détails, les générateurs de
-nombres uniformes utilisés dans S-Plus et \textsf{R} ainsi que la
-liste des différentes fonctions de simulation de variables aléatoires.
+On prÃ©sente ici, sans entrer dans les dÃ©tails, les gÃ©nÃ©rateurs de
+nombres uniformes utilisÃ©s dans S-Plus et \textsf{R} ainsi que la
+liste des diffÃ©rentes fonctions de simulation de variables alÃ©atoires.
 
 
-\section{Générateurs de nombres aléatoires}
+\section{GÃ©nÃ©rateurs de nombres alÃ©atoires}
 \index{simulation!nombres uniformes}
 \label{rng:generateurs}
 
 On obtient des nombres uniformes sur un intervalle quelconque (par
-défaut $[0, 1]$) avec la fonction \Fonction{runif} dans S-Plus et
-\textsf{R}. L'amorce du générateur aléatoire est déterminée avec la
+dÃ©faut $[0, 1]$) avec la fonction \Fonction{runif} dans S-Plus et
+\textsf{R}. L'amorce du gÃ©nÃ©rateur alÃ©atoire est dÃ©terminÃ©e avec la
 fonction \Fonction{set.seed}.
 
-Dans S-Plus, \Splus le générateur utilisé est une version modifiée de
-\emph{Super Duper}. Sa période est $2^{30} \times \nombre{4292868097}
+Dans S-Plus, \Splus le gÃ©nÃ©rateur utilisÃ© est une version modifiÃ©e de
+\emph{Super Duper}. Sa pÃ©riode est $2^{30} \times \nombre{4292868097}
 \approx 4,6 \times 10^{18}$.
 
-Dans \textsf{R}, \R on a la possibilité de choisir entre six
-générateurs de nombres aléatoires différents, ou encore de spécifier
-son propre générateur. Par défaut, \textsf{R} utilise le générateur
-Marsenne--Twister, considéré comme le plus avancé au moment d'écrire
-ces lignes.  La période de ce générateur est $2^{\nombre{19937}} - 1$,
+Dans \textsf{R}, \R on a la possibilitÃ© de choisir entre six
+gÃ©nÃ©rateurs de nombres alÃ©atoires diffÃ©rents, ou encore de spÃ©cifier
+son propre gÃ©nÃ©rateur. Par dÃ©faut, \textsf{R} utilise le gÃ©nÃ©rateur
+Marsenne--Twister, considÃ©rÃ© comme le plus avancÃ© au moment d'Ã©crire
+ces lignes.  La pÃ©riode de ce gÃ©nÃ©rateur est $2^{\nombre{19937}} - 1$,
 rien de moins!
 
 Consulter les rubriques d'aide des fonctions \code{.Random.seed}
 \index{Random.seed@\code{.Random.seed}} et \code{set.seed} pour de
-plus amples détails.
+plus amples dÃ©tails.
 
 
-\section{Fonctions de simulation de variables aléatoires}
-\index{simulation!variables aléatoires}
+\section{Fonctions de simulation de variables alÃ©atoires}
+\index{simulation!variables alÃ©atoires}
 \label{rng:va}
 
-Un large éventail de fonctions donne directement accès aux
-caractéristiques de plusieurs lois de probabilité dans S-Plus et
+Un large Ã©ventail de fonctions donne directement accÃ¨s aux
+caractÃ©ristiques de plusieurs lois de probabilitÃ© dans S-Plus et
 \textsf{R}. Pour chaque racine \code{\textit{loi}}, il existe quatre
-fonctions différentes :
+fonctions diffÃ©rentes :
 \begin{enumerate}
-\item \code{d\textit{loi}} calcule la fonction de densité de
-  probabilité (loi continue) ou la fonction de masse de probabilité
-  (loi discrète);
-\item \code{p\textit{loi}} calcule la fonction de répartition;
+\item \code{d\textit{loi}} calcule la fonction de densitÃ© de
+  probabilitÃ© (loi continue) ou la fonction de masse de probabilitÃ©
+  (loi discrÃ¨te);
+\item \code{p\textit{loi}} calcule la fonction de rÃ©partition;
 \item \code{q\textit{loi}} calcule la fonction de quantile;
 \item \code{r\textit{loi}} simule des observations de cette loi.
 \end{enumerate}
 
-Les différentes lois de probabilité disponibles dans S-Plus et
-\textsf{R}, leur racine et le nom de leurs paramètres sont rassemblés
+Les diffÃ©rentes lois de probabilitÃ© disponibles dans S-Plus et
+\textsf{R}, leur racine et le nom de leurs paramÃ¨tres sont rassemblÃ©s
 au tableau \ref{tab:rng:lois}
 
 \begin{table}
-  \index{distribution!bêta}
+  \index{distribution!bÃªta}
   \index{distribution!binomiale}
-  \index{distribution!binomiale négative}
+  \index{distribution!binomiale nÃ©gative}
   \index{distribution!Cauchy}
   \index{distribution!exponentielle}
   \index{distribution!F}
   \index{distribution!gamma}
-  \index{distribution!geometrique@géométrique}
-  \index{distribution!hypergéométrique}
-  \index{distribution!khi carré}
+  \index{distribution!geometrique@gÃ©omÃ©trique}
+  \index{distribution!hypergÃ©omÃ©trique}
+  \index{distribution!khi carrÃ©}
   \index{distribution!logistique}
   \index{distribution!log-normale}
   \index{distribution!normale}
@@ -84,21 +84,21 @@ au tableau \ref{tab:rng:lois}
   \centering
   \begin{tabular}{lll}
     \toprule
-    Loi de probabilité & Racine dans S & Noms des paramètres \\
+    Loi de probabilitÃ© & Racine dans S & Noms des paramÃ¨tres \\
     \midrule
-    Bêta & \texttt{beta} & \texttt{shape1}, \texttt{shape2} \\
+    BÃªta & \texttt{beta} & \texttt{shape1}, \texttt{shape2} \\
     Binomiale & \texttt{binom} & \texttt{size}, \texttt{prob} \\
-    Binomiale négative & \texttt{nbinom} & \texttt{size},
+    Binomiale nÃ©gative & \texttt{nbinom} & \texttt{size},
     \texttt{prob} ou \texttt{mu} \\
     Cauchy & \texttt{cauchy} & \texttt{location}, \texttt{scale} \\
     Exponentielle & \texttt{exp} & \texttt{rate} \\
     \emph{F} (Fisher) & \texttt{f} & \texttt{df1}, \texttt{df2} \\
     Gamma & \texttt{gamma} & \texttt{shape}, \texttt{rate} ou
     \texttt{scale} \\
-    Géométrique & \texttt{geom} & \texttt{prob} \\
-    Hypergéométrique & \texttt{hyper} & \texttt{m}, \texttt{n},
+    GÃ©omÃ©trique & \texttt{geom} & \texttt{prob} \\
+    HypergÃ©omÃ©trique & \texttt{hyper} & \texttt{m}, \texttt{n},
     \texttt{k} \\
-    Khi carré & \texttt{chisq} & \texttt{df} \\
+    Khi carrÃ© & \texttt{chisq} & \texttt{df} \\
     Logistique & \texttt{logis} & \texttt{location}, \texttt{scale} \\
     Log-normale & \texttt{lnorm} & \texttt{meanlog}, \texttt{sdlog} \\
     Normale & \texttt{norm} & \texttt{mean}, \texttt{sd} \\
@@ -109,43 +109,43 @@ au tableau \ref{tab:rng:lois}
     Wilcoxon & \texttt{wilcox} & \texttt{m}, \texttt{n} \\
     \bottomrule
   \end{tabular}
-  \caption{Lois de probabilité pour lesquelles il existe des fonctions
+  \caption{Lois de probabilitÃ© pour lesquelles il existe des fonctions
     dans S-Plus et \textsf{R}}
   \label{tab:rng:lois}
 \end{table}
 
 Toutes les fonctions du tableau \ref{tab:rng:lois} sont vectorielles,
-c'est-à-dire qu'elles acceptent en argument un vecteur de points où la
-fonction (de densité, de répartition ou de quantile) doit être évaluée
-et même un vecteur de paramètres. Par exemple,
+c'est-Ã -dire qu'elles acceptent en argument un vecteur de points oÃ¹ la
+fonction (de densitÃ©, de rÃ©partition ou de quantile) doit Ãªtre Ã©valuÃ©e
+et mÃªme un vecteur de paramÃ¨tres. Par exemple,
 <<echo=TRUE>>=
 dpois(c(3, 0, 8), lambda=c(1, 4, 10))
 @
-retourne la probabilité que des lois de Poisson de paramètre 1, 4 et
+retourne la probabilitÃ© que des lois de Poisson de paramÃ¨tre 1, 4 et
 10 prennent les valeurs 3, 0 et 8, respectivement.
 
-Le premier argument des fonctions de simulation est la quantité de
-nom\-bres aléatoires désirée.  Ainsi,
+Le premier argument des fonctions de simulation est la quantitÃ© de
+nom\-bres alÃ©atoires dÃ©sirÃ©e.  Ainsi,
 <<echo=TRUE>>=
 rpois(3, lambda=c(1, 4, 10))
 @
-retourne trois nombres aléatoires issus de distributions de Poisson
-de paramètre 1, 4 et 10, respectivement.  Évidemment, passer un
+retourne trois nombres alÃ©atoires issus de distributions de Poisson
+de paramÃ¨tre 1, 4 et 10, respectivement.  Ã‰videmment, passer un
 vecteur comme premier argument n'a pas tellement de sens, mais, si
-c'est fait, S retournera une quantité de nombres aléatoires égale à la
-\emph{longueur} du vecteur (sans égard aux valeurs contenues dans le
+c'est fait, S retournera une quantitÃ© de nombres alÃ©atoires Ã©gale Ã  la
+\emph{longueur} du vecteur (sans Ã©gard aux valeurs contenues dans le
 vecteur).
 
 La fonction \Fonction{sample} permet de simuler des nombres d'une
-distribution discrète quelconque. Sa syntaxe est
+distribution discrÃ¨te quelconque. Sa syntaxe est
 \begin{center}
   \code{sample(x, size, replace = FALSE, prob = NULL)},
 \end{center}
-où \code{x} est un vecteur des valeurs possibles de l'échantillon à
-simuler (le support de la distribution), \code{size} est la quantité
-de nombres à simuler et \code{prob} est un vecteur de probabilités
-associées à chaque valeur de \code{x} (\code{1/length(x)} par défaut).
-Enfin, si \code{replace} est \code{TRUE}, l'échantillonnage se fait
+oÃ¹ \code{x} est un vecteur des valeurs possibles de l'Ã©chantillon Ã 
+simuler (le support de la distribution), \code{size} est la quantitÃ©
+de nombres Ã  simuler et \code{prob} est un vecteur de probabilitÃ©s
+associÃ©es Ã  chaque valeur de \code{x} (\code{1/length(x)} par dÃ©faut).
+Enfin, si \code{replace} est \code{TRUE}, l'Ã©chantillonnage se fait
 avec remise.
 
 \section{Exercices}
@@ -157,11 +157,11 @@ avec remise.
 \begin{exercice}
   La loi log-normale\index{distribution!log-normale} est obtenue par
   transformation de la loi normale: si la distribution de la variable
-  aléatoire $X$ est une normale de paramètres $\mu$ et $\sigma^2$,
+  alÃ©atoire $X$ est une normale de paramÃ¨tres $\mu$ et $\sigma^2$,
   alors la distribution de $e^X$ est une log-normale. Simuler
-  \nombre{1000} observations d'une loi log-normale de paramètres $\mu
+  \nombre{1000} observations d'une loi log-normale de paramÃ¨tres $\mu
   = \ln 5000 - \frac{1}{2}$ et $\sigma^2 = 1$, puis tracer
-  l'histogramme de l'échantillon aléatoire obtenu.
+  l'histogramme de l'Ã©chantillon alÃ©atoire obtenu.
   \begin{rep}
 <<echo=TRUE,eval=FALSE>>=
 x <- rlnorm(1000, meanlog=log(5000)-0.5, sdlog=1)
@@ -171,13 +171,13 @@ hist(x)
 \end{exercice}
 
 \begin{exercice}
-  Simuler \nombre{10000} observations d'un mélange continu
-  Poisson/gamma\index{distribution!mélange Poisson/gamma} où les
-  paramètres de la loi gamma sont $\alpha = 5$ et $\lambda = 4$, puis
-  tracer la distribution de fréquence de l'échantillon aléatoire
-  obtenu à l'aide des fonctions \fonction{plot} et \fonction{table}.
-  Superposer à ce graphique la fonction de probabilité d'une binomiale
-  négative de paramètres $r = 5$ et $\theta = 0,8$.
+  Simuler \nombre{10000} observations d'un mÃ©lange continu
+  Poisson/gamma\index{distribution!mÃ©lange Poisson/gamma} oÃ¹ les
+  paramÃ¨tres de la loi gamma sont $\alpha = 5$ et $\lambda = 4$, puis
+  tracer la distribution de frÃ©quence de l'Ã©chantillon alÃ©atoire
+  obtenu Ã  l'aide des fonctions \fonction{plot} et \fonction{table}.
+  Superposer Ã  ce graphique la fonction de probabilitÃ© d'une binomiale
+  nÃ©gative de paramÃ¨tres $r = 5$ et $\theta = 0,8$.
   \begin{rep}
 <<echo=TRUE,eval=FALSE>>=
 x <- rpois(10000, lambda = rgamma(10000, shape = 5, rate = 4))
@@ -191,12 +191,12 @@ points(xx, px/length(x), pch = 16)
 \end{exercice}
 
 \begin{exercice}
-  Simuler \nombre{10000} observations d'un mélange
-  discret\index{distribution!mélange discret} de deux distributions
-  log-normales, l'une de paramètres $(\mu=3,5, \sigma^2=0,6)$ et
-  l'autre de paramètres $(\mu=4,6, \sigma^2=0,3)$.  Utiliser un
-  paramètre de mélange $p = 0,55$. Tracer ensuite l'histogramme de
-  l'échantillon aléatoire obtenu.
+  Simuler \nombre{10000} observations d'un mÃ©lange
+  discret\index{distribution!mÃ©lange discret} de deux distributions
+  log-normales, l'une de paramÃ¨tres $(\mu=3,5, \sigma^2=0,6)$ et
+  l'autre de paramÃ¨tres $(\mu=4,6, \sigma^2=0,3)$.  Utiliser un
+  paramÃ¨tre de mÃ©lange $p = 0,55$. Tracer ensuite l'histogramme de
+  l'Ã©chantillon alÃ©atoire obtenu.
   \begin{rep}
 <<echo=TRUE,eval=FALSE>>=
 w <- rbinom(1, 10000, 0.55)
@@ -211,4 +211,5 @@ hist(x)
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "introduction_programation_S"
+%%% coding: utf-8
 %%% End:

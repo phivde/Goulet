@@ -7,7 +7,7 @@ options(width = 60)
 @
 
 <<echo=FALSE>>=
-### Définition de toutes les fonctions nécessaires en R
+### DÃ©finition de toutes les fonctions nÃ©cessaires en R
 simul1 <- function(nb.simul, size, theta)
 {
     a <- theta - 0.5
@@ -63,23 +63,23 @@ simul3 <- function(nb.simul, size, theta)
 \section{Introduction}
 \label{simulation:intro}
 
-La simulation est de plus en plus utilisée pour résoudre des problèmes
-complexes. Il existe de multiples façons de réaliser la mise en
+La simulation est de plus en plus utilisÃ©e pour rÃ©soudre des problÃ¨mes
+complexes. Il existe de multiples faÃ§ons de rÃ©aliser la mise en
 {\oe}uvre informatique d'une simulation, mais certaines sont plus
-efficaces que d'autres.  Ce document passe en revue diverses façons de
-faire des simulations avec S-Plus et \textsf{R} à l'aide d'un exemple
+efficaces que d'autres.  Ce document passe en revue diverses faÃ§ons de
+faire des simulations avec S-Plus et \textsf{R} Ã  l'aide d'un exemple
 simple de nature statistique.
 
-Soit $X_1, \dots, X_n$ un échantillon aléatoire tiré d'une population
-distribuée selon une loi uniforme sur l'intervalle $(\theta -
-\frac{1}{2}, \theta + \frac{1}{2})$. On considère les trois
-estimateurs suivants du paramètre inconnu $\theta$:
+Soit $X_1, \dots, X_n$ un Ã©chantillon alÃ©atoire tirÃ© d'une population
+distribuÃ©e selon une loi uniforme sur l'intervalle $(\theta -
+\frac{1}{2}, \theta + \frac{1}{2})$. On considÃ¨re les trois
+estimateurs suivants du paramÃ¨tre inconnu $\theta$:
 \begin{enumerate}
-\item la moyenne arithmétique
+\item la moyenne arithmÃ©tique
   \begin{displaymath}
     \hat{\theta}_1 = \frac{1}{n} \sum_{i = 1}^n X_i\,;
   \end{displaymath}
-\item la médiane empirique
+\item la mÃ©diane empirique
   \begin{displaymath}
     \hat{\theta}_2 =
     \begin{cases}
@@ -87,62 +87,62 @@ estimateurs suivants du paramètre inconnu $\theta$:
       \frac{1}{2}(X_{(\frac{n}{2})} + X_{(\frac{n}{2} + 1)}), & \text{$n$ pair},
     \end{cases}
   \end{displaymath}
-  où $X_{(k)}$ est la $k$\ieme{} statistique d'ordre de l'échantillon
-  aléatoire;
-\item la mi-étendue
+  oÃ¹ $X_{(k)}$ est la $k$\ieme{} statistique d'ordre de l'Ã©chantillon
+  alÃ©atoire;
+\item la mi-Ã©tendue
   \begin{displaymath}
     \hat{\theta}_3 = \frac{X_{(1)} + X_{(n)}}{2}.
   \end{displaymath}
 \end{enumerate}
 
-À l'aide de la simulation on veut, d'une part, vérifier si les trois
-estimateurs sont bel et bien sans biais et, d'autre part, déterminer
+Ã€ l'aide de la simulation on veut, d'une part, vÃ©rifier si les trois
+estimateurs sont bel et bien sans biais et, d'autre part, dÃ©terminer
 lequel a la plus faible variance. Pour ce faire, on doit d'abord
-simuler un grand nombre $N$ d'échantillons aléatoires de taille $n$
+simuler un grand nombre $N$ d'Ã©chantillons alÃ©atoires de taille $n$
 d'une distribution $U(\theta - \frac{1}{2}, \theta + \frac{1}{2})$
-pour une valeur de $\theta$ choisie. Pour chaque échantillon, on
+pour une valeur de $\theta$ choisie. Pour chaque Ã©chantillon, on
 calculera ensuite les trois estimateurs ci-dessus, puis la moyenne et
 la variance, par type d'estimateur, de tous les estimateurs obtenus.
 Si la moyenne des $N$ estimateurs $\hat{\theta}_i$, $i = 1, 2, 3$ est
-près de $\theta$, alors on pourra conclure que $\hat{\theta}_i$ est
-sans biais. De même, on déterminera lequel des trois estimateurs a la
+prÃ¨s de $\theta$, alors on pourra conclure que $\hat{\theta}_i$ est
+sans biais. De mÃªme, on dÃ©terminera lequel des trois estimateurs a la
 plus faible variance selon le classement des variances empiriques.
 
 
 
-\section{Première approche: avec une boucle}
+\section{PremiÃ¨re approche: avec une boucle}
 \index{boucle}
 \label{simulation:boucle}
 
-La façon la plus intuitive de mettre en {\oe}uvre cette étude de
-simulation en S consiste à utiliser une boucle \fonction{for}. Avec
-cette approche, il est nécessaire d'initialiser une matrice de 3
-lignes et $N$ colonnes (ou l'inverse) dans laquelle seront stockées
+La faÃ§on la plus intuitive de mettre en {\oe}uvre cette Ã©tude de
+simulation en S consiste Ã  utiliser une boucle \fonction{for}. Avec
+cette approche, il est nÃ©cessaire d'initialiser une matrice de 3
+lignes et $N$ colonnes (ou l'inverse) dans laquelle seront stockÃ©es
 les valeurs des trois estimateurs pour chaque simulation. Une fois la
-matrice remplie dans la boucle, il ne reste plus qu'à calculer la
-moyenne et la variance par ligne pour obtenir les résultats souhaités.
+matrice remplie dans la boucle, il ne reste plus qu'Ã  calculer la
+moyenne et la variance par ligne pour obtenir les rÃ©sultats souhaitÃ©s.
 
-La figure \ref{fig:boucle} présente un exemple de code adéquat pour
-réaliser la simulation à l'aide d'une boucle.
+La figure \ref{fig:boucle} prÃ©sente un exemple de code adÃ©quat pour
+rÃ©aliser la simulation Ã  l'aide d'une boucle.
 
 \begin{figure}
   \centering
   \begin{framed}
 \begin{lstlisting}
-### Bonne habitude à prendre: stocker les constantes dans
-### des variables faciles à modifier au lieu de les écrire
+### Bonne habitude Ã  prendre: stocker les constantes dans
+### des variables faciles Ã  modifier au lieu de les Ã©crire
 ### explicitement dans le code.
-size <- 100                # taille de chaque échantillon
+size <- 100                # taille de chaque Ã©chantillon
 nsimul <- 10000            # nombre de simulations
-theta <- 0                 # la valeur du paramètre
+theta <- 0                 # la valeur du paramÃ¨tre
 
-### Les lignes ci-dessous éviteront de faire deux additions
+### Les lignes ci-dessous Ã©viteront de faire deux additions
 ### 'nsimul' fois.
-a <- theta - 0.5           # borne inférieure de l'uniforme
-b <- theta + 0.5           # borne supérieure de l'uniforme
+a <- theta - 0.5           # borne infÃ©rieure de l'uniforme
+b <- theta + 0.5           # borne supÃ©rieure de l'uniforme
 
 ### Initialisation de la matrice dans laquelle seront
-### stockées les valeurs des estimateurs. On donne également
+### stockÃ©es les valeurs des estimateurs. On donne Ã©galement
 ### des noms aux lignes de la matrice afin de facilement
 ### identifier les estimateurs.
 x <- matrix(0, nrow = 3, ncol = nsimul)
@@ -153,13 +153,13 @@ for (i in 1:nsimul)
 {
     u <- runif(size, a, b)
     x[1, i] <- mean(u)     # moyenne
-    x[2, i] <- median(u)   # médiane
-    x[3, i] <- mean(range(u)) # mi-étendue
+    x[2, i] <- median(u)   # mÃ©diane
+    x[3, i] <- mean(range(u)) # mi-Ã©tendue
 }
 
 ### On peut maintenant calculer la moyenne et la variance
 ### par ligne.
-rowMeans(x) - theta        # vérification du biais
+rowMeans(x) - theta        # vÃ©rification du biais
 apply(x, 1, var)           # comparaison des variances
 \end{lstlisting}
   \end{framed}
@@ -192,12 +192,12 @@ simul1 <- function(nsimul, size, theta)
 }
 \end{lstlisting}
   \end{framed}
-  \caption{Définition de la fonction \texttt{simul1}}
+  \caption{DÃ©finition de la fonction \texttt{simul1}}
   \label{fig:simul1}
 \end{figure}
 
-Si l'on souhaite pouvoir exécuter le code de la figure
-\ref{fig:boucle} facilement à l'aide d'une seule expression, il suffit
+Si l'on souhaite pouvoir exÃ©cuter le code de la figure
+\ref{fig:boucle} facilement Ã  l'aide d'une seule expression, il suffit
 de placer l'ensemble du code dans une fonction. La fonction
 \code{simul1} de la figure \ref{fig:simul1} reprend le code de la
 figure \ref{fig:boucle}, sans les commentaires. On a alors:
@@ -210,28 +210,28 @@ simul1(10000, 100, 0)
 \label{simulation:sapply}
 
 On le sait, les boucles sont inefficaces en S --- tout
-particulièrement dans S-Plus. Il est en général plus efficace de
-déléguer les boucles aux fonctions \fonction{lapply} et
+particuliÃ¨rement dans S-Plus. Il est en gÃ©nÃ©ral plus efficace de
+dÃ©lÃ©guer les boucles aux fonctions \fonction{lapply} et
 \fonction{sapply} (section \ref{avance:lapply}), dont la syntaxe est
 \begin{center}
   \code{lapply(x, FUN, ...)} \quad et \quad \code{sapply(x, FUN, ...)}.
 \end{center}
-Celles-ci appliquent la fonction \texttt{FUN} à tous les éléments de
-la liste ou du vecteur \texttt{x} et retournent les résultats sous
+Celles-ci appliquent la fonction \texttt{FUN} Ã  tous les Ã©lÃ©ments de
+la liste ou du vecteur \texttt{x} et retournent les rÃ©sultats sous
 forme de liste (\fonction{lapply}) ou, lorsque c'est possible, de
 vecteur ou de matrice (\fonction{sapply}). Il est important de noter
-que les valeurs successives de \code{x} seront passées comme
-\emph{premier} argument à la fonction \code{FUN}. Le cas échéant, les
-autres arguments de \code{FUN} sont spécifiés dans le
+que les valeurs successives de \code{x} seront passÃ©es comme
+\emph{premier} argument Ã  la fonction \code{FUN}. Le cas Ã©chÃ©ant, les
+autres arguments de \code{FUN} sont spÃ©cifiÃ©s dans le
 champ~`\argument{...}'.
 
 Pour pouvoir utiliser ces fonctions dans le cadre d'une simulation
-comme celle dont il est question ici, il s'agit de définir une
+comme celle dont il est question ici, il s'agit de dÃ©finir une
 fonction qui fera tous les calculs pour une simulation, puis de la
-passer à \fonction{sapply} pour obtenir les résultats de $N$
-simulations. La figure \ref{fig:fun1} présente une première version
+passer Ã  \fonction{sapply} pour obtenir les rÃ©sultats de $N$
+simulations. La figure \ref{fig:fun1} prÃ©sente une premiÃ¨re version
 d'une telle fonction. On remarquera que l'argument \code{i} ne joue
-aucun rôle dans la fonction.  Voici un exemple d'utilisation pour un
+aucun rÃ´le dans la fonction.  Voici un exemple d'utilisation pour un
 petit nombre (4) de simulations:
 
 \begin{figure}[tbp]
@@ -247,7 +247,7 @@ fun1 <- function(i, size, a, b)
 }
 \end{lstlisting}
   \end{framed}
-  \caption{Définition de la fonction \texttt{fun1}}
+  \caption{DÃ©finition de la fonction \texttt{fun1}}
   \label{fig:fun1}
 \end{figure}
 
@@ -255,11 +255,11 @@ fun1 <- function(i, size, a, b)
 sapply(1:4, fun1, size = 10, a = -0.5, b = 0.5)
 @
 
-On remarque donc que les résultats de chaque simulation se trouvent
+On remarque donc que les rÃ©sultats de chaque simulation se trouvent
 dans les colonnes de la matrice obtenue avec \code{sapply}.
 
-Pour compléter l'analyse, on englobe le tout dans une fonction
-\code{simul2}, dont le code se trouve à la figure \ref{fig:simul2}:
+Pour complÃ©ter l'analyse, on englobe le tout dans une fonction
+\code{simul2}, dont le code se trouve Ã  la figure \ref{fig:simul2}:
 
 \begin{figure}[tbp]
   \centering
@@ -277,7 +277,7 @@ simul2 <- function(nsimul, size, theta)
 }
 \end{lstlisting}
   \end{framed}
-  \caption{Définition de la fonction \texttt{simul2}}
+  \caption{DÃ©finition de la fonction \texttt{simul2}}
   \label{fig:simul2}
 \end{figure}
 
@@ -285,21 +285,21 @@ simul2 <- function(nsimul, size, theta)
 simul2(10000, 100, 0)
 @
 
-Il est généralement plus facile de déboguer le code avec cette
+Il est gÃ©nÃ©ralement plus facile de dÃ©boguer le code avec cette
 approche.
 
 
 \section{Variante de la seconde approche}
 \label{simulation:replicate}
 
-Une chose manque d'élégance dans la seconde approche: l'obligation
+Une chose manque d'Ã©lÃ©gance dans la seconde approche: l'obligation
 d'inclure un argument factice dans la fonction \code{fun1}.  La
 fonction \R \fonction{replicate} (section \ref{avance:replicate}),
 disponible dans \textsf{R} seulement, permet toutefois de passer outre
-cette contrainte. En effet, cette fonction exécute un nombre donné de
+cette contrainte. En effet, cette fonction exÃ©cute un nombre donnÃ© de
 fois une expression quelconque.  Les fonctions \code{fun2} et
 \code{simul3} des figures \ref{fig:fun2} et \ref{fig:simul3},
-respectivement, sont des versions légèrement modifiées de \code{fun1}
+respectivement, sont des versions lÃ©gÃ¨rement modifiÃ©es de \code{fun1}
 et \code{simul2} pour utilisation avec \fonction{replicate}.
 
 On a alors
@@ -320,7 +320,7 @@ fun2 <- function(size, a, b)
 }
 \end{lstlisting}
   \end{framed}
-  \caption{Définition de la fonction \texttt{fun2}}
+  \caption{DÃ©finition de la fonction \texttt{fun2}}
   \label{fig:fun2}
 \end{figure}
 
@@ -340,7 +340,7 @@ simul3 <- function(nsimul, size, theta)
 }
 \end{lstlisting}
   \end{framed}
-  \caption{Définition de la fonction \texttt{simul3}}
+  \caption{DÃ©finition de la fonction \texttt{simul3}}
   \label{fig:simul3}
 \end{figure}
 
@@ -348,12 +348,12 @@ simul3 <- function(nsimul, size, theta)
 \section{Comparaison des temps de calcul}
 \label{simulation:temps}
 
-A-t-on gagné quoi que ce soit en termes de temps de calcul d'une
-approche à l'autre? La fonction \fonction{system.time} de \textsf{R}
+A-t-on gagnÃ© quoi que ce soit en termes de temps de calcul d'une
+approche Ã  l'autre? La fonction \fonction{system.time} de \textsf{R}
 (ou \fonction{sys.time} de S-Plus) permet de mesurer le temps requis
-pour l'exécution d'une expression.  Le premier résultat de
-\fonction{system.time} est le temps CPU utilisé et le troisième, le
-temps total écoulé. Sous Windows, les quatrième et cinquième résultats
+pour l'exÃ©cution d'une expression.  Le premier rÃ©sultat de
+\fonction{system.time} est le temps CPU utilisÃ© et le troisiÃ¨me, le
+temps total Ã©coulÃ©. Sous Windows, les quatriÃ¨me et cinquiÃ¨me rÃ©sultats
 sont \texttt{NA}.
 
 \begin{Schunk}
@@ -377,7 +377,7 @@ sont \texttt{NA}.
 \end{Soutput}
 \end{Schunk}
 
-Les différences, petites ici, peuvent être plus importantes lors de
+Les diffÃ©rences, petites ici, peuvent Ãªtre plus importantes lors de
 grosses simulations et favoriser d'autant plus l'utilisation de la
 fonction \code{replicate}.
 
@@ -385,20 +385,20 @@ fonction \code{replicate}.
 \section{Gestion des fichiers}
 \label{simulation:fichiers}
 
-Pour un petit projet comme celui utilisé en exemple ici, il est simple
+Pour un petit projet comme celui utilisÃ© en exemple ici, il est simple
 et pratique de placer tout le code informatique dans un seul fichier
 de script. Pour un plus gros projet, cependant, il vaut souvent mieux
-avoir recours à plusieurs fichiers différents. Le présent auteur
+avoir recours Ã  plusieurs fichiers diffÃ©rents. Le prÃ©sent auteur
 utilise pour sa part un fichier par fonction.
 
-À des fins d'illustration, supposons que l'on utilise l'approche
+Ã€ des fins d'illustration, supposons que l'on utilise l'approche
 de la section \ref{simulation:replicate} avec la fonction
 \code{replicate} en \textsf{R} et que le code des fonctions
-\code{fun2} et \code{simul3} est sauvegardé dans des fichiers
-\code{fun2.R} et \code{simul3.R}, respectivement. Si l'on crée un
+\code{fun2} et \code{simul3} est sauvegardÃ© dans des fichiers
+\code{fun2.R} et \code{simul3.R}, respectivement. Si l'on crÃ©e un
 autre fichier, \texttt{go.R}, ne contenant que des expressions
 \fonction{source} pour lire les autres fichiers, il est alors possible
-de démarrer des simulations en exécutant ce seul fichier. Dans notre
+de dÃ©marrer des simulations en exÃ©cutant ce seul fichier. Dans notre
 exemple, le fichier \texttt{go.R} contiendrait les lignes suivantes:
 \begin{verbatim}
 source("fun2.R")
@@ -409,73 +409,73 @@ Une simple commande
 \begin{Sinput}
 > source("go.R")
 \end{Sinput}
-exécutera alors une simulation complète.
+exÃ©cutera alors une simulation complÃ¨te.
 
 
-\section{Exécution en lot}
+\section{ExÃ©cution en lot}
 \label{simulation:batch}
 
 
-On peut accélérer le traitement d'une simulation en l'exécutant en lot
+On peut accÃ©lÃ©rer le traitement d'une simulation en l'exÃ©cutant en lot
 --- ou mode \emph{batch} --- et ce, avec S-Plus comme avec \textsf{R}.
-Dans ce mode, aucune interface graphique n'est démarrée et tous les
-résultats sont redirigés vers un fichier pour consultation ultérieure.
-Pour les simulations demandant un long temps de calcul, c'est très
+Dans ce mode, aucune interface graphique n'est dÃ©marrÃ©e et tous les
+rÃ©sultats sont redirigÃ©s vers un fichier pour consultation ultÃ©rieure.
+Pour les simulations demandant un long temps de calcul, c'est trÃ¨s
 pratique.
 
-Pour exécuter S-Plus ou \textsf{R} en lot sous Windows, ouvrir une
-invite de commande (dans le menu Accessoires du menu Démarrer) puis se
-déplacer (à l'aide de la commande \texttt{cd}) dans le dossier où sont
-sauvegardés les fichiers de script. Avec S-Plus, il faut par la suite
-exécuter la commande suivante:
+Pour exÃ©cuter S-Plus ou \textsf{R} en lot sous Windows, ouvrir une
+invite de commande (dans le menu Accessoires du menu DÃ©marrer) puis se
+dÃ©placer (Ã  l'aide de la commande \texttt{cd}) dans le dossier oÃ¹ sont
+sauvegardÃ©s les fichiers de script. Avec S-Plus, il faut par la suite
+exÃ©cuter la commande suivante:
 \begin{verbatim}
 C:\> Splus /BATCH go.S go.Sout
 \end{verbatim}
-Le troisième élément de cette commande est le nom du fichier de script
-contenant les expressions à exécuter et le quatrième, le nom du
-fichier dans lequel seront sauvegardés les résultats. Ils peuvent
-évidemment être différents de ceux ci-dessus.
+Le troisiÃ¨me Ã©lÃ©ment de cette commande est le nom du fichier de script
+contenant les expressions Ã  exÃ©cuter et le quatriÃ¨me, le nom du
+fichier dans lequel seront sauvegardÃ©s les rÃ©sultats. Ils peuvent
+Ã©videmment Ãªtre diffÃ©rents de ceux ci-dessus.
 
-Avec \textsf{R}, la syntaxe est plutôt
+Avec \textsf{R}, la syntaxe est plutÃ´t
 \begin{verbatim}
 C:\> R CMD BATCH go.R
 \end{verbatim}
-et les résultats seront placés par défaut dans le fichier
-\texttt{go.Rout}. Si Windows ne trouve pas l'exécutable de \textsf{R},
-il faut spécifier le chemin d'accès complet, par exemple:
+et les rÃ©sultats seront placÃ©s par dÃ©faut dans le fichier
+\texttt{go.Rout}. Si Windows ne trouve pas l'exÃ©cutable de \textsf{R},
+il faut spÃ©cifier le chemin d'accÃ¨s complet, par exemple:
 \begin{verbatim}
 C:\> "c:\program files\R\R-2.4.1\bin\R" CMD BATCH go.R
 \end{verbatim}
 
 Depuis la version 6.2, S-Plus sous Windows contient un outil BATCH dans
-le dossier S-Plus du menu Démarrer facilitant l'utilisation en lot. Il
-suffit de remplir les champs appropriés dans la boîte de dialogue.
+le dossier S-Plus du menu DÃ©marrer facilitant l'utilisation en lot. Il
+suffit de remplir les champs appropriÃ©s dans la boÃ®te de dialogue.
 
 
 \section{Quelques remarques}
 \label{simulation:rem}
 
 \begin{enumerate}
-\item La \Splus fonction \fonction{rownames} utilisée dans la figure
+\item La \Splus fonction \fonction{rownames} utilisÃ©e dans la figure
   \ref{fig:boucle} existe seulement dans \textsf{R}. Dans S-Plus, on
-  utilisera plutôt \fonction{row.names} ou \fonction{dimnames}.
+  utilisera plutÃ´t \fonction{row.names} ou \fonction{dimnames}.
 
 \item Dans \Splus S-Plus, on peut calculer la variance par ligne ou
   par colonne d'une matrice avec les fonctions \fonction{rowVars} et
   \fonction{colVars}.
 
-\item Le nombre de simulations, $N$, et la taille de l'échantillon,
-  $n$, ont tous deux un impact sur la qualité des résultats, mais de
-  manière différente. Quand $n$ augmente, la précision des estimateurs
+\item Le nombre de simulations, $N$, et la taille de l'Ã©chantillon,
+  $n$, ont tous deux un impact sur la qualitÃ© des rÃ©sultats, mais de
+  maniÃ¨re diffÃ©rente. Quand $n$ augmente, la prÃ©cision des estimateurs
   augmente. Ainsi, dans l'exemple ci-dessus, le biais et la variance
   des estimateurs de $\theta$ seront plus faibles. D'autre part,
   l'augmentation du nombre de simulations diminue l'impact des
-  échantillons aléatoires individuels et, de ce fait, améliore la
-  fiabilité des conclusions de l'étude.
+  Ã©chantillons alÃ©atoires individuels et, de ce fait, amÃ©liore la
+  fiabilitÃ© des conclusions de l'Ã©tude.
 
-\item Conclusion de l'étude de simulation sur le biais et la variance
+\item Conclusion de l'Ã©tude de simulation sur le biais et la variance
   des trois estimateurs de la moyenne d'une loi uniforme: les trois
-  estimateurs sont sans biais et la mi-étendue a la plus faible
+  estimateurs sont sans biais et la mi-Ã©tendue a la plus faible
   variance. On peut d'ailleurs prouver que, pour $n$ impair,
   \begin{align*}
     \var{\hat{\theta}_1} &= \frac{1}{12 n} \\
@@ -494,4 +494,5 @@ suffit de remplir les champs appropriés dans la boîte de dialogue.
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "introduction_programation_S"
+%%% coding: utf-8
 %%% End:

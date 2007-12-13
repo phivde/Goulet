@@ -1,5 +1,5 @@
 \documentclass[letterpaper,10pt]{memoir}
-  \usepackage[latin1]{inputenc}
+  \usepackage[utf8]{inputenc}
   \usepackage[T1]{fontenc}
   \usepackage[english,francais]{babel}
   \usepackage{vgmath,actu,amsmath,amsthm,icomma,url,natbib}
@@ -12,15 +12,15 @@
   \usepackage{listings,answers}
 
   %%% Page titre
-  \title{\HUGE 
-    \fontseries{ub}\selectfont Introduction \\ 
-    \fontseries{m}\selectfont  à la \\
-    \fontseries{ub}\selectfont programmation \\ 
-    \fontseries{m}\selectfont  en \\ 
+  \title{\HUGE
+    \fontseries{ub}\selectfont Introduction \\
+    \fontseries{m}\selectfont  Ã  la \\
+    \fontseries{ub}\selectfont programmation \\
+    \fontseries{m}\selectfont  en \\
     \fontseries{ub}\selectfont S}
   \author{\huge Vincent Goulet \\[3mm]
-    \large \textit{École d'actuariat, Université Laval}}
-  \date{\Large Seconde édition}
+    \large \textit{Ã‰cole d'actuariat, UniversitÃ© Laval}}
+  \date{\Large Seconde Ã©dition}
   \newcommand{\ISBN}{978-2-9809136-7-9}
 
   %%% Commandes pour notes marginales
@@ -31,15 +31,15 @@
   \setlength{\marginparsep}{7mm}
   \setlength{\marginparwidth}{13mm}
 
-  %%% Style des entêtes de chapitres
+  %%% Style des entÃªtes de chapitres
   \chapterstyle{hangnum}
 
-  %%% Styles des entêtes et pieds de page
+  %%% Styles des entÃªtes et pieds de page
   \setlength{\headwidth}{\textwidth}
   \addtolength{\headwidth}{\marginparsep}
   \addtolength{\headwidth}{\marginparwidth}
 
-  %%% Numéroter les sous-sections
+  %%% NumÃ©roter les sous-sections
   \maxsecnumdepth{subsection}
   \setsecnumdepth{subsection}
 
@@ -53,8 +53,8 @@
   \newtheorem*{astuce}{Astuce}
   \newenvironment{sol}{\begin{proof}[Solution]}{\end{proof}}
 
-  %%% Environnements pour les exercices et réponses. On utilise
-  %%% \thechapter plutôt que \arabic{chapter} pour la numérotation des
+  %%% Environnements pour les exercices et rÃ©ponses. On utilise
+  %%% \thechapter plutÃ´t que \arabic{chapter} pour la numÃ©rotation des
   %%% exercices dans les annexes.
   \Newassociation{rep}{reponse}{reponses}
   \newcounter{exercice}[chapter]
@@ -87,13 +87,13 @@
         \renewcommand{\makelabel}[1]{##1\hfill}}}
     {\end{list}}
 
-  %%% Environnement pour les listes de structures de contrôle
+  %%% Environnement pour les listes de structures de contrÃ´le
   \newenvironment{struclist}{%
     \begin{description}[\breaklabel\setlabelstyle{\mdseries\ttfamily}%
       \setleftmargin{\parindent}]}
     {\end{description}}
 
-  %%% Paramètres pour les sections de code source
+  %%% ParamÃ¨tres pour les sections de code source
   \lstloadlanguages{R}
   \lstdefinelanguage{Renhanced}[]{R}{%
     morekeywords={colMeans,colSums,head,is.na,is.null,mapply,ms,na.rm,%
@@ -102,12 +102,14 @@
     deletekeywords={c},
     alsoletter={.\%},%
     alsoother={:_\$}}
-  \lstset{language=Renhanced,extendedchars=true,
+  \lstset{language=Renhanced,
+    extendedchars=true,
+    inputencoding=latin1,
     basicstyle=\small\ttfamily,
     commentstyle=\textsl,
     keywordstyle=\mdseries,
     showstringspaces=false,
-    index=[1][keywords], 
+    index=[1][keywords],
     indexstyle=\indexfonction}
 
   %%% Styles pour les noms de fonctions, code, etc.
@@ -115,8 +117,8 @@
 
   %%% Index
   \renewcommand{\preindexhook}{%
-    Les numéros de page en caractères gras indiquent les pages où les
-    concepts sont introduits, définis ou expliqués.\vskip\onelineskip}
+    Les numÃ©ros de page en caractÃ¨res gras indiquent les pages oÃ¹ les
+    concepts sont introduits, dÃ©finis ou expliquÃ©s.\vskip\onelineskip}
   \newcommand{\Index}[1]{\index{#1|textbf}}
   \newcommand{\indexargument}[1]{\index{#1@\code{#1}}}
   \newcommand{\Indexargument}[1]{\Index{#1@\code{#1}}}
@@ -129,7 +131,7 @@
   \newcommand{\indexmode}[1]{\index{#1@\code{#1} (mode)}}
   \newcommand{\Indexmode}[1]{\Index{#1@\code{#1} (mode)}}
   \newcommand{\indexobjet}[1]{\index{#1@\code{#1}}}
-  \newcommand{\Indexobjet}[1]{\Index{#1@\code{#1}}} 
+  \newcommand{\Indexobjet}[1]{\Index{#1@\code{#1}}}
   \newcommand{\indexemacs}[1]{\index{Emacs!#1@\texttt{#1}}}
   \newcommand{\indexess}[1]{\index{ESS!#1@\texttt{#1}}}
 
@@ -206,7 +208,8 @@
 
 \end{document}
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: t
-%%% End: 
+%%% coding: utf-8
+%%% End:
