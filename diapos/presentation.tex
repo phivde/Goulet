@@ -1,0 +1,231 @@
+\section{Présentation du langage S}
+
+
+\subsection{Le langage S}
+
+\begin{frame}
+  \frametitle{Un langage pour «programmer avec des données»}
+
+  \begin{itemize}
+  \item Développé chez Bell Laboratories
+  \item Langage de programmation complet et autonome
+  \item Inspiré de plusieurs langages, dont l'APL et le Lisp:
+    \begin{itemize}
+    \item interprété (et non compilé)
+    \item sans déclaration obligatoire des variables
+    \item basé sur la notion de vecteur
+    \item particulièrement puissant pour les applications
+      mathématiques et statistiques (et donc actuarielles)
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+\subsection{Les moteurs S}
+
+\begin{frame}
+  \frametitle{Deux «moteurs» ou dialectes du langage S}
+
+  \begin{itemize}
+  \item Jusqu'à récemment, le plus connu était S-PLUS de Insightful
+    Corporation, maintenant S$+$ de Timbco Software
+  \item Le leader est maintenant \textsf{R}, ou GNU S, est une version
+    libre (\emph{Open Source}) «\emph{not unlike S}»
+  \item Environnements intégrés de manipulation de données, de calcul
+    et de préparation de graphiques
+  \end{itemize}
+\end{frame}
+
+
+\subsection[Interfaces]{Interfaces pour S-Plus et R}
+
+\begin{frame}
+  \frametitle{D'abord des applications en ligne de commande}
+
+  \begin{itemize}
+  \item S$+$ possède une interface graphique élaborée qui permet
+    d'utiliser le logiciel sans trop connaître le langage de
+    programmation
+  \item \textsf{R} dispose également d'une interface graphique sous
+    Windows et Mac OS
+  \item L'édition sérieuse de code S bénéficie cependant grandement
+    d'un bon éditeur de texte
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+  \item Question 6.2 de la foire aux questions (FAQ) de
+    \textsf{R}: «Devrais-je utiliser \textsf{R} à l'intérieur de
+    Emacs?»
+  \item Réponse: «Oui, tout à fait»
+  \item Nous apprendrons à utiliser \textsf{R} à l'intérieur de GNU
+    Emacs avec le mode ESS
+  \item Plusieurs autres options disponibles: choisissez celle que
+    vous préférez
+  \end{itemize}
+\end{frame}
+
+
+\subsection[Emacs et ESS]{Installation de Emacs avec ESS}
+
+\begin{frame}
+  \frametitle{Installation de Emacs avec ESS}
+
+  \begin{itemize}
+  \item Pour une installation simplifiée de GNU Emacs et ESS,
+    consulter le site Internet
+    \begin{center}
+      \url{http://vgoulet.act.ulaval.ca/emacs/}
+    \end{center}
+  \item Voir l'annexe A du document d'accompagnement pour les plus
+    importantes commandes
+  \end{itemize}
+\end{frame}
+
+
+\subsection[Démarrer et quitter]{Démarrer et quitter R}
+
+\begin{frame}
+  \frametitle{Démarrer et quitter R}
+
+  \begin{itemize}
+  \item Pour démarrer \textsf{R} \R à l'intérieur de Emacs:
+
+    \texttt{M-x R RET}
+
+    puis spécifier un dossier de travail
+  \item Une console \textsf{R} est ouverte dans un \emph{buffer} nommé
+    \texttt{*R*}
+  \item Pour quitter, deux options:
+    \begin{enumerate}
+    \item taper \fonction{q()} à la ligne de commande
+    \item dans Emacs, faire \ess{C-c C-q}
+    \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+
+\subsection{Stratégies de travail}
+
+\begin{frame}
+  \frametitle{Deux grandes façons de travailler avec \textsf{R}}
+
+  \begin{enumerate}
+  \item Le code est virtuel et les objets sont réels
+  \item Le code est réel et les objets sont virtuels
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Code virtuel, objets réels}
+
+  \begin{itemize}
+  \item C'est l'approche qu'encouragent les interfaces graphiques,
+    mais aussi la moins pratique à long terme
+  \item On entre des expressions directement à la ligne de commande
+    pour les évaluer immédiatement
+  \item Les objets créés au cours d'une session de travail sont
+    sauvegardés
+  \item Par contre, le code utilisé pour créer ces objets est perdu
+    lorsque l'on quitte \textsf{R}, à moins de sauvegarder celui-ci
+    dans des fichiers
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Code réel, objets virtuels}
+
+  \begin{itemize}
+  \item C'est l'approche que nous favoriserons
+  \item Le travail se fait essentiellement dans des fichiers de script
+    (de simples fichiers de texte) dans lesquels sont sauvegardées les
+    expressions (parfois complexes!) et le code des fonctions
+    personnelles
+  \item Les objets sont créés au besoin en exécutant le code
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Emacs permet un travail efficace}
+  \begin{itemize}
+  \item Démarrer un processus \textsf{R} et spécifier le dossier de
+    travail
+  \item Ouvrir un fichier de script avec \ess{C-x C-f} (pour créer un
+    nouveau fichier, ouvrir un fichier qui n'existe pas)
+  \item Positionner le curseur sur une expression et faire \ess{C-c
+      C-n} pour l'évaluer
+  \item Le résultat apparaît dans le \emph{buffer} \texttt{*R*}
+  \end{itemize}
+\end{frame}
+
+
+\subsection[Gestion des projets]{Gestion des projets ou environnements de
+  travail}
+
+\begin{frame}
+  \frametitle{Gestion des projets ou environnements de travail}
+
+  \begin{itemize}[<+->]
+  \item \textsf{R} travaille dans un dossier et non avec des fichiers
+    individuels
+  \item Dans \textsf{R}, \R les objets créés sont conservés en mémoire
+    \begin{itemize}
+    \item sauvegardés en quittant l'application, ou
+    \item avec la commande \fonction{save.image()}
+    \end{itemize}
+  \item L'environnement de travail (\emph{workspace}) est sauvegardé
+    dans le fichier \texttt{.RData} dans le dossier de travail
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Comment déterminer le dossier de travail}
+  \begin{itemize}
+  \item Avec Emacs et ESS on doit spécifier le dossier de travail à
+    chaque fois que l'on démarre un processus R
+  \item Les interfaces graphiques permettent également de spécifier le
+    dossier de travail au lancement de l'application
+  \end{itemize}
+\end{frame}
+
+
+\subsection{Consulter l'aide en ligne}
+
+\begin{frame}[fragile]
+  \frametitle{La première source d'aide}
+
+  \begin{itemize}
+  \item Rubriques d'aide contiennent une foule d'informations ainsi
+    que des exemples d'utilisation
+  \item Leur consultation est tout à fait essentielle
+  \item Pour consulter la rubrique d'aide de la fonction \code{foo},
+    on peut entrer à la ligne de commande
+\begin{Sinput}
+> ?foo
+\end{Sinput}
+  \item Dans Emacs, \code{C-c C-v foo RET} ouvrira
+    la rubrique d'aide de la fonction \code{foo} dans un nouveau
+    \emph{buffer}
+  \end{itemize}
+\end{frame}
+
+\subsection[Documentation]{Où trouver de la documentation}
+
+\begin{frame}
+  \frametitle{Plusieurs ressources disponibles}
+
+  \begin{itemize}
+  \item S$+$ est livré avec quatre livres, mais aucun ne s'avère
+    vraiment utile pour apprendre le langage S
+  \item Plusieurs livres --- en versions papier ou électronique,
+    gratuits ou non --- ont été publiés sur S$+$ et/ou \textsf{R}
+  \item Liste exhaustive dans le site du projet \textsf{R}
+  \end{itemize}
+\end{frame}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "introduction_programmation_S_diapos"
+%%% End:
