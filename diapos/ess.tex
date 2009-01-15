@@ -5,91 +5,79 @@
 \begin{frame}
   \frametitle{Qu'est-ce que Emacs?}
   \begin{itemize}
-  \item Emacs est l'Éditeur de texte des éditeurs de texte.
-  \item D'abord et avant tout un éditeur pour programmeurs (avec des
-    modes spéciaux pour une multitude de langages différents).
-  \item Également un environnement idéal pour travailler sur des
-    documents \LaTeX, interagir avec \textsf{R}, S-Plus, SAS ou SQL,
-    ou même pour lire son courrier électronique.
+  \item Emacs est l'Éditeur de texte des éditeurs de texte
+  \item Éditeur pour programmeurs avec des modes spéciaux pour une
+    multitude de langages différents
+  \item Environnement idéal pour travailler sur des documents \LaTeX,
+    interagir avec \textsf{R}, S$+$, SAS ou SQL, ou même pour lire son
+    courrier électronique
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Mise en contexte}
-
-  Emacs est le logiciel étendard du projet GNU («\emph{GNU is not
-    Unix}»), dont le principal commanditaire est la \emph{Free
-    Software Foundation}.
-
   \begin{itemize}
+  \item Logiciel phare du projet GNU («\emph{GNU is not Unix}»), dont
+    le principal commanditaire est la \emph{Free Software Foundation}
   \item Distribué sous la GNU \emph{General Public License} (GPL),
-    donc gratuit, ou «libre».
-  \item Le nom provient de «\emph{Editing MACroS}».
-  \item La première version de Emacs a été écrite par Richard M.\
-    Stallman, président de la FSF.
+    donc gratuit, ou «libre»
+  \item Nom provient de «\emph{Editing MACroS}»
+  \item Première version écrite par Richard M.~Stallman, président de
+    la FSF
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Configuration de l'éditeur}
-
-  Une des grandes forces de Emacs est d'être configurable à l'envi.
-
   \begin{itemize}
-  \item Depuis la version 21, le menu \texttt{Customize} rend la
-    configuration aisée.
-  \item Une grande part de la configuration provient du fichier
-    \texttt{.emacs}:
-    \begin{itemize}
-    \item nommé \texttt{.emacs} sous Linux et Unix, Windows 2000 et
-      Windows XP;
-    \item sous Windows 95/98/Me, utiliser plutôt \texttt{\_emacs}.
-    \end{itemize}
+  \item Emacs est configurable à l'envi
+  \item Configuration relativement aisée depuis le menu
+    \texttt{Customize}
+  \item Configuration personnelle dans le fichier \texttt{.emacs}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{\emph{Emacs-ismes} et \emph{Unix-ismes}}
-
   \begin{itemize}
-  \item Un \emph{buffer} contient un fichier ouvert
-    («\emph{visited}»).  Équivalent d'une fenêtre dans Windows.
-  \item Le \emph{minibuffer} est la région au bas de l'écran Emacs où
-    l'on entre des commandes et reçoit de l'information de Emacs.
-  \item La ligne de mode («\emph{mode line}») est le séparateur
+  \item Un \alert{buffer} contient un fichier ouvert
+    («\emph{visited}»)
+  \item Le \alert{minibuffer} est la région au bas de la fenêtre où
+    l'on entre des commandes et reçoit de l'information de Emacs
+  \item La ligne de mode («\alert{mode line}») est le séparateur
     horizontal contenant diverses informations sur le fichier ouvert
-    et l'état de Emacs.
+    et l'état de Emacs
   \end{itemize}
 \end{frame}
 
 \begin{frame}
+  \frametitle{Commandes}
   \begin{itemize}
   \item Toutes les fonctionnalités de Emacs correspondent à une
-    commande pouvant être tapée dans le \emph{minibuffer}.
-    \texttt{M-x} démarre l'interpréteur (ou invite) de commandes.
+    commande pouvant être tapée dans le \emph{minibuffer}
+  \item \texttt{M-x} démarre l'interpréteur (ou invite) de commandes
   \item Dans les définitions de raccourcis claviers:
-    \begin{itemize}[<+(1)->]
-    \item \texttt{C} est la touche \texttt{Ctrl} (\texttt{Control});
-    \item \texttt{M} est la touche \texttt{Meta}, qui correspond à la
-      touche \texttt{Alt} de gauche sur un PC;
-    \item \texttt{ESC} est la touche \texttt{Échap} (\texttt{Esc}) et
-      est équivalente à \texttt{Meta};
-    \item \texttt{SPC} est la barre d'espacement;
-    \item \texttt{RET} est la touche Entrée.
+    \begin{itemize}
+    \item \texttt{C} est \texttt{Ctrl} (\texttt{Control})
+    \item \texttt{M} est \texttt{Meta} (\texttt{Alt} sur un PC, option
+      ou commande sur un Mac)
+    \item \texttt{ESC} est \texttt{Échap} et est équivalente à
+      \texttt{Meta}
+    \item \texttt{SPC} est la barre d'espacement
+    \item \texttt{RET} est la touche Entrée
     \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-  \begin{itemize}[<+->]
-  \item Le caractère \verb=~= représente le dossier vers lequel pointe
-    la variable d'environnement \texttt{\$HOME} (Unix) ou
-    \texttt{\%HOME\%} (Windows).
-  \item La barre oblique (\texttt{/}) est utilisée pour séparer les
-    dossiers dans les chemins d'accès aux fichiers, même sous Windows.
-  \item En général, il est possible d'appuyer sur \texttt{TAB} dans le
+  \begin{itemize}
+  \item Caractère \verb=~= représente le dossier \texttt{\$HOME}
+    (Unix) ou \texttt{\%HOME\%} (Windows)
+  \item Barre oblique (\texttt{/}) utilisée pour séparer les dossiers
+    dans les chemins d'accès aux fichiers
+  \item En général possible d'appuyer sur \texttt{TAB} dans le
     \emph{minibuffer} pour compléter les noms de fichiers ou de
-    commandes.
+    commandes
   \end{itemize}
 \end{frame}
 
@@ -97,14 +85,11 @@
   \frametitle{Commandes d'édition de base}
 
   \begin{itemize}
-  \item Il n'est pas vain de lire le tutoriel de Emacs, que l'on
-    démarre avec
+  \item Lire le tutoriel de Emacs, que l'on démarre avec
     \begin{itemize}
     \item[] \texttt{C-h t}
     \end{itemize}
-  \item Pour une liste plus exhaustive des commandes Emacs les plus
-    importantes, consulter la \emph{GNU Emacs Reference Card} à
-    l'adresse
+  \item Voir aussi la \emph{GNU Emacs Reference Card} à l'adresse
     \begin{itemize}
     \item[] \url{http://refcards.com/refcards/gnu-emacs/}
     \end{itemize}
@@ -113,9 +98,9 @@
 
 \begin{frame}
   \begin{itemize}
-  \item<1-> Pour créer un nouveau fichier, ouvrir un fichier n'existant
-    pas.\index{Emacs!nouveau fichier}
-  \item<2-> Principales commandes d'édition:
+  \item Pour créer un nouveau fichier, ouvrir un fichier qui n'existe
+    pas
+  \item Principales commandes d'édition:
     \begin{ttscript}{C-x C-w}
       \raggedright
     \item[\emacs{C-x C-f}] ouvrir un fichier
@@ -159,11 +144,8 @@
 
 \begin{frame}
   \frametitle{Sélection de texte}
-
-  La sélection de texte fonctionne différemment du standard Windows.
-
   \begin{itemize}
-  \item<1-> Les raccourcis clavier standards sous Emacs sont:
+  \item Raccourcis clavier standards sous Emacs:
     \begin{ttscript}{C-SPC}
       \raggedright
     \item[\emacs{C-SPC}] débute la sélection
@@ -173,9 +155,8 @@
     \item[\emacs{M-y}] remplacer le dernier texte collé par la
       sélection précédente
     \end{ttscript}
-  \item<2-> Il existe quelques extensions de Emacs permettant d'utiliser
-    les raccourcis clavier usuels de Windows (\texttt{C-c},
-    \texttt{C-x}, \texttt{C-v}).
+  \item Des extensions permettent d'utiliser les raccourcis usuels
+    (\texttt{C-c}, \texttt{C-x}, \texttt{C-v})
   \end{itemize}
 \end{frame}
 
@@ -184,48 +165,32 @@
 
 \begin{frame}
   \frametitle{\emph{Emacs Speaks Statistics}}
-
-  Mode pour interagir avec des logiciels statistiques (S-Plus,
-  \textsf{R}, SAS, etc.) depuis Emacs.
-
   \begin{itemize}
   \item Voir
     \begin{itemize}
     \item[] \url{http://ess.r-project.org/}
     \end{itemize}
-    pour la documentation complète.
+    pour la documentation complète
   \item Deux modes mineurs: \texttt{ESS} pour les fichiers de script
-    (code source) et \texttt{iESS} pour l'invite de commande.
-  \item Une fois installé, le mode mineur \texttt{ESS} s'active
-    automatiquement en éditant des fichiers avec l'extension
-    \texttt{.S} ou \texttt{.R}.
+    (code source) et \texttt{iESS} pour l'invite de commande
+  \item Le mode mineur \texttt{ESS} s'active automatiquement en
+    éditant des fichiers \texttt{.S} ou \texttt{.R}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Démarrer un processus S}
 
+  Pour démarrer un processus \textsf{R} à l'intérieur de Emacs:
   \begin{itemize}
-  \item Pour démarrer un processus S et activer le mode mineur
-    \texttt{iESS}, entrer l'une des commandes
-    \begin{itemize}
-    \item \texttt{S}
-    \item \texttt{Sqpe} ou
-    \item \texttt{R}
-    \end{itemize}
-    dans l'invite de commande de Emacs
-  \item Par exemple, pour démarrer un processus \textsf{R} à
-    l'intérieur de Emacs:
-    \begin{itemize}
-    \item[] \ttfamily M-x R RET
-    \end{itemize}
+  \item[] \ttfamily M-x R RET
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Raccourcis clavier les plus utiles à la ligne de
     commande (mode \texttt{iESS})}
-  
+
   \begin{ttscript}{C-c C-c}
     \raggedright
   \item[\ess{C-c C-e}] replacer la dernière ligne au bas de la
@@ -240,7 +205,7 @@
 \begin{frame}
   \frametitle{Raccourcis clavier les plus utiles lors de l'édition
     d'un fichier de script (mode \texttt{ESS})}
-  
+
   \begin{ttscript}{C-c C-c}
     \raggedright
   \item[\ess{C-c C-n}] évaluer la ligne sous le curseur dans le
@@ -256,26 +221,6 @@
   \item[\ess{C-c C-s}] changer de processus (utile si l'on a plus
     d'un processus S actif)
   \end{ttscript}
-\end{frame}
-
-\begin{frame}[fragile=singleslide]
-  \frametitle{Consultation des rubriques d'aide}
-  
-  \begin{itemize}
-  \item Quelques avantages à lire les rubriques d'aide dans Emacs.
-  \item Modifier l'option \textsf{R} \code{chmhelp} ainsi:
-\begin{Sinput}
-> options(chmhelp = FALSE)
-\end{Sinput}
-  \item Pour que la commande s'exécute automatiquement à chaque
-  lancement de \textsf{R}, entrer la commande dans un fichier nommé
-  \code{.Rprofile} sauvegardé dans le dossier mentionné dans le
-  résultat de
-\begin{Sinput}
-> Sys.getenv("R_USER")  
-\end{Sinput}
-  \item Consulter aussi la rubrique d'aide de \code{Startup}.
-  \end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -294,11 +239,11 @@
   \item[\ess{q}] retourner au processus ESS en laissant la rubrique
     d'aide visible
   \item[\ess{x}] fermer la rubrique d'aide et retourner au processus
-    ESS 
+    ESS
   \end{ttscript}
 \end{frame}
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "introduction_programmation_S_slides"
-%%% End: 
+%%% TeX-master: "introduction_programmation_S_diapos"
+%%% End:
