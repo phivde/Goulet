@@ -1,0 +1,689 @@
+\section{Bases du langage S}
+
+\subsection{Commandes S}
+
+\begin{frame}[fragile]
+  \frametitle{Affectations et expressions}
+
+  \begin{itemize}
+  \item Toute commande S est soit une \alert{affectation}, soit une
+    \alert{expression}
+  \item Une expression est immédiatement évaluée et le résultat est
+    affiché à l'écran:
+\begin{Schunk}
+\begin{Sinput}
+> 2 + 3
+\end{Sinput}
+\begin{Soutput}
+[1] 5
+\end{Soutput}
+\begin{Sinput}
+> pi
+\end{Sinput}
+\begin{Soutput}
+[1] 3.141593
+\end{Soutput}
+\begin{Sinput}
+> cos(pi/4)
+\end{Sinput}
+\begin{Soutput}
+[1] 0.7071068
+\end{Soutput}
+\end{Schunk}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Affectations et expressions}
+
+  \begin{itemize}
+  \item Lors d'une affectation, une expression est évaluée, mais le
+    résultat est stocké dans un objet (variable) et rien n'est affiché
+    à l'écran
+  \item Le symbole d'affectation est \Fonction{<-} (ou
+    \Fonction{->})
+\begin{Schunk}
+\begin{Sinput}
+> a <- 5
+> a
+\end{Sinput}
+\begin{Soutput}
+[1] 5
+\end{Soutput}
+\begin{Sinput}
+> b <- a
+> b
+\end{Sinput}
+\begin{Soutput}
+[1] 5
+\end{Soutput}
+\end{Schunk}
+  \item Éviter d'utiliser \code{=}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+  \begin{block}{Astuce}
+    \begin{itemize}
+    \item Dans le mode ESS de Emacs, la touche \verb|_| génère
+      \verb*| <- |
+    \item Appuyer deux fois pour obtenir le caractère \verb|_|
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+  \begin{block}{Astuce}
+    \begin{itemize}
+    \item Pour affecter le résultat d'un calcul \alert{et} voir le
+      résultat, placer l'affectation entre
+      parenthèses
+    \item L'opération d'affectation devient alors une nouvelle
+      expression:
+\begin{Schunk}
+\begin{Sinput}
+> (a <- 2 + 3)
+\end{Sinput}
+\begin{Soutput}
+[1] 5
+\end{Soutput}
+\end{Schunk}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+\subsection{Conventions pour les noms d'objets}
+
+\begin{frame}
+  \frametitle{Caractères permis dans les noms d'objets}
+
+  \begin{itemize}
+  \item Les lettres a--z, A--Z
+  \item Les chiffres 0--9
+  \item Le point «.»
+  \item «\code{\_}» est maintenant permis dans \textsf{R}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Règles pour les noms d'objets}
+  \begin{itemize}
+  \item Les noms d'objets ne peuvent commencer par un chiffre
+  \item Le S est sensible à la casse: \code{foo}, \code{Foo} et
+    \code{FOO} sont trois objets distincts
+  \item Moyen simple d'éviter des erreurs liées à la casse: employer
+    seulement des lettres minuscules
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Noms déjà utilisés et réservés}
+  \begin{itemize}
+  \item Éviter d'utiliser les noms
+    \begin{center}
+      \code{c}, \code{q}, \code{t}, \code{C}, \code{D}, \code{I},
+      \code{diff}, \code{length}, \code{mean}, \code{pi},
+      \code{range}, \code{var}
+    \end{center}
+  \item Noms réservés:
+    \begin{center}
+      \code{Inf}, \code{NA}, \code{NaN},
+      \code{NULL}, \code{TRUE}, \code{FALSE} \\
+      \code{break}, \code{else}, \code{for}, \code{function},
+      \code{if}, \code{in}, \code{next}, \code{repeat}, \code{return},
+      \code{while}
+    \end{center}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+  \frametitle{\texttt{TRUE} et \texttt{FALSE}}
+  \begin{itemize}
+  \item Les variables \code{T} et \code{F} prennent par défaut les
+    valeurs \code{TRUE} et \code{FALSE}, mais peuvent être
+    réaffectées:
+\begin{Schunk}
+\begin{Sinput}
+> T
+\end{Sinput}
+\begin{Soutput}
+[1] TRUE
+\end{Soutput}
+\end{Schunk}
+\begin{Schunk}
+\begin{Sinput}
+> TRUE <- 3
+\end{Sinput}
+\end{Schunk}
+\begin{Schunk}
+\begin{Soutput}
+Erreur dans TRUE <- 3 : membre gauche de
+l'assignation (do_set) incorrect
+\end{Soutput}
+\end{Schunk}
+\begin{Schunk}
+\begin{Sinput}
+> (T <- 3)
+\end{Sinput}
+\begin{Soutput}
+[1] 3
+\end{Soutput}
+\end{Schunk}
+  \end{itemize}
+\end{frame}
+
+\subsection{Les objets S}
+
+\begin{frame}
+  \frametitle{Tout est un objet}
+
+  \begin{itemize}
+  \item Tout dans le langage S est un objet, même les fonctions et les
+    opérateurs
+  \item Les objets possèdent au minimum un \alert{mode} et une
+    \alert{longueur}
+  \item Certains objets sont également dotés d'un ou plusieurs
+    \alert{attributs}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Modes et types de données}
+
+  \begin{itemize}
+  \item Prescrit ce qu'un objet peut contenir
+  \item Obtenu avec la fonction \Fonction{mode}:
+\begin{Schunk}
+\begin{Sinput}
+> v <- c(1, 2, 5, 9)
+> mode(v)
+\end{Sinput}
+\begin{Soutput}
+[1] "numeric"
+\end{Soutput}
+\end{Schunk}
+  \item Principaux modes:
+  \end{itemize}
+  \begin{center}
+    \begin{tabular}{ll}
+      \toprule
+      \Mode{numeric}   & nombres réels \\
+      \Mode{complex}   & nombres complexes \\
+      \Mode{logical}   & valeurs booléennes (vrai/faux) \\
+      \Mode{character} & chaînes de caractères \\
+      \Mode{function}  & fonction \\
+      \Mode{list}      & données quelconques \\
+      \Mode{expression} & expressions non évaluées \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Longueur}
+  \begin{itemize}
+  \item Égale au nombre d'éléments que contient un objet
+  \item Obtenue avec la fonction \code{length}:
+\begin{Schunk}
+\begin{Sinput}
+> length(v)
+\end{Sinput}
+\begin{Soutput}
+[1] 4
+\end{Soutput}
+\end{Schunk}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Longueur (suite)}
+  \begin{itemize}
+  \item Longueur d'une chaîne de caractères est toujours 1
+  \item Un objet de mode \code{character} peut contenir plusieurs
+    chaînes de caractères:
+\begin{Schunk}
+\begin{Sinput}
+> v <- "actuariat"
+> length(v)
+\end{Sinput}
+\begin{Soutput}
+[1] 1
+\end{Soutput}
+\begin{Sinput}
+> v <- c("a", "c", "t", "u", "a", "r",
++     "i", "a", "t")
+> length(v)
+\end{Sinput}
+\begin{Soutput}
+[1] 9
+\end{Soutput}
+\end{Schunk}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Longueur (suite)}
+  \begin{itemize}
+  \item La longueur d'un objet peut être 0
+  \item Contenant vide:
+\begin{Schunk}
+\begin{Sinput}
+> v <- numeric(0)
+> length(v)
+\end{Sinput}
+\begin{Soutput}
+[1] 0
+\end{Soutput}
+\end{Schunk}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{L'objet spécial \code{NULL}}
+  \begin{itemize}
+  \item \Objet{NULL} représente «rien», ou le vide
+  \item Son mode est \Mode{NULL}
+  \item Sa longueur est 0
+  \item Différent d'un objet vide:
+    \begin{itemize}
+    \item un objet de longueur 0 est un contenant vide
+    \item \code{NULL} est «pas de contenant»
+    \end{itemize}
+  \item Fonction \Fonction{is.null} pour tester si un objet est
+    \code{NULL}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{L'objet spécial \code{NA}}
+  \begin{itemize}
+  \item Utilisé pour représenter les données manquantes ou l'absence
+    de données
+  \item Son mode est \Mode{logical}
+  \item \alert{Toute} opération impliquant \code{NA} a comme résultat
+    \code{NA}
+  \item Certaines fonctions (par ex.\ \fonction{sum}, \fonction{mean})
+    peuvent éliminer les données manquantes avant de faire un calcul
+  \item Fonction \Fonction{is.na} pour tester si un objet est
+    \code{NA}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Valeurs spéciales IEEE~754}
+  \begin{itemize}
+  \item \code{Inf}: $+\infty$
+  \item \code{-Inf}: $-\infty$
+  \item \code{NaN}: $\frac{0}{0}$, $\infty - \infty$, \dots
+  \item Fonctions \code{is.finite}, \code{is.infinite}, \code{is.nan}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Attributs}
+  \begin{itemize}
+  \item Éléments d'information liés à un objet
+  \item Principaux attributs
+  \end{itemize}
+  \begin{center}
+    \begin{tabular}{lp{0.6\textwidth}}
+      \toprule
+      \Attribut{class}    &
+      affecte le comportement d'un objet \\
+      \Attribut{dim}      &
+      dimensions\index{dimension} des matrices et tableaux \\
+      \Attribut{dimnames} &
+      étiquettes\index{etiquette@étiquette} des dimensions des matrices
+      et tableaux \\
+      \Attribut{names}    &
+      étiquettes des éléments d'un objet \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\subsection{Vecteurs}
+
+\begin{frame}[fragile]
+  \frametitle{En S, tout est un vecteur}
+
+  \begin{itemize}
+  \item Dans un vecteur simple (\emph{atomic}), tous les éléments sont
+    du même mode
+  \item Possible (et souvent souhaitable) de donner une étiquette aux
+    éléments d'un vecteur:
+\begin{Schunk}
+\begin{Sinput}
+> (v <- c(a = 1, b = 2, c = 5))
+\end{Sinput}
+\begin{Soutput}
+a b c
+1 2 5
+\end{Soutput}
+\begin{Sinput}
+> v <- c(1, 2, 5)
+> names(v) <- c("a", "b", "c")
+> v
+\end{Sinput}
+\begin{Soutput}
+a b c
+1 2 5
+\end{Soutput}
+\end{Schunk}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fonctions de base pour créer des vecteurs}
+  \begin{itemize}
+  \item \Fonction{c} (concaténation)
+  \item \Fonction{numeric} (vecteur de mode \Mode{numeric})
+  \item \Fonction{logical} (vecteur de mode \Mode{logical})
+  \item \Fonction{character} (vecteur de mode \Mode{character}).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Indiçage}
+  \begin{itemize}
+  \item Se fait avec \fonction{[\ ]}
+  \item Extraction d'un élément par
+    \begin{itemize}
+    \item sa position
+    \item son étiquette (plus sûr)
+    \end{itemize}
+\begin{Schunk}
+\begin{Sinput}
+> v[3]
+\end{Sinput}
+\begin{Soutput}
+c
+5
+\end{Soutput}
+\begin{Sinput}
+> v["c"]
+\end{Sinput}
+\begin{Soutput}
+c
+5
+\end{Soutput}
+\end{Schunk}
+  \end{itemize}
+\end{frame}
+
+\subsection{Matrices et tableaux}
+
+\begin{frame}
+  \frametitle{Une matrice est un vecteur}
+  \begin{itemize}
+  \item Les matrices et tableaux sont des vecteurs dotés d'un attribut
+    \attribut{dim}
+  \item À l'interne, une matrice est donc stockée sous forme de
+    vecteur
+  \item Fonction de base pour créer des matrices est
+    \Fonction{matrix}
+  \item Fonction de base pour créer des tableaux est \Fonction{array}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+  \frametitle{Remplissage d'une matrice}
+  \begin{itemize}
+  \item \alert{Important}: les matrices et tableaux sont remplis en
+    faisant d'abord varier la première dimension, puis la seconde,
+    etc.
+\begin{Schunk}
+\begin{Sinput}
+> matrix(1:6, nrow = 2, ncol = 3)
+\end{Sinput}
+\begin{Soutput}
+     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6
+\end{Soutput}
+\end{Schunk}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Remplissage des tableaux}
+  \begin{minipage}{45mm}
+    \setlength{\unitlength}{5mm}
+    \begin{picture}(9,7)
+      \footnotesize
+      \put(0,0){\framebox(5,4)[tl]{}}
+      \multiput(1,4)(1,1){3}{\line(0,1){1}}
+      \multiput(1,5)(1,1){3}{\line(1,0){5}}
+      \multiput(6,5)(1,1){3}{\line(0,-1){4}}
+      \multiput(6,1)(1,1){3}{\line(-1,0){1}}
+      \put(0.5,3.5){\circle{0.7}}\put(0.51,3.51){\makebox(0,0){1}}
+      \put(0.5,3){\vector(0,-1){2.5}}
+      \put(1.5,3.5){\circle{0.7}}\put(1.51,3.51){\makebox(0,0){2}}
+      \put(2,3.5){\vector(1,0){2.5}}
+      \put(6.3,0.3){\circle{0.7}}\put(6.31,0.31){\makebox(0,0){3}}
+      \put(6.7,0.7){\vector(1,1){1.3}}
+    \end{picture}
+  \end{minipage}
+  \begin{minipage}{52.5mm}
+    \setlength{\unitlength}{3.5mm}
+    \begin{picture}(15,12)
+      \put(0,0){\framebox(5,4)[tl]{}}
+      \multiput(1,4)(1,1){3}{\line(0,1){1}}
+      \multiput(1,5)(1,1){3}{\line(1,0){5}}
+      \multiput(6,5)(1,1){3}{\line(0,-1){4}}
+      \multiput(6,1)(1,1){3}{\line(-1,0){1}} \put(6,7){\line(0,1){2}}
+      \put(6,9){\line(1,0){5}} \put(11,9){\line(0,-1){4}}
+      \put(11,5){\line(-1,0){3}} \multiput(7,9)(1,1){3}{\line(0,1){1}}
+      \multiput(7,10)(1,1){3}{\line(1,0){5}}
+      \multiput(12,10)(1,1){3}{\line(0,-1){4}}
+      \multiput(12,6)(1,1){3}{\line(-1,0){1}}
+      \put(0.5,3.5){\circle{0.9}}\put(0.51,3.51){\makebox(0,0){\scriptsize
+          1}} \put(0.5,2.9){\vector(0,-1){2.4}}
+      \put(1.5,3.5){\circle{0.9}}\put(1.51,3.51){\makebox(0,0){\scriptsize
+          2}} \put(2.1,3.5){\vector(1,0){2.4}}
+      \put(6.3,0.3){\circle{0.9}}\put(6.31,0.31){\makebox(0,0){\scriptsize
+          3}} \put(6.7,0.7){\vector(1,1){1.3}}
+      \put(7.3,0.3){\circle{0.9}}\put(7.31,0.31){\makebox(0,0){\scriptsize
+          4}} \put(7.7,0.7){\vector(1,1){6.3}}
+    \end{picture}
+  \end{minipage}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+  \frametitle{Indiçage d'une matrice}
+  \begin{itemize}
+  \item Extraction d'une éléments par sa position (ligne, colonne)
+    dans la matrice, ou encore par sa position dans le vecteur
+    sous-jacent
+\begin{Schunk}
+\begin{Sinput}
+> (m <- matrix(c(40, 80, 45, 21, 55, 32),
++     nrow = 2))
+\end{Sinput}
+\begin{Soutput}
+     [,1] [,2] [,3]
+[1,]   40   45   55
+[2,]   80   21   32
+\end{Soutput}
+\begin{Sinput}
+> m[1, 2]
+\end{Sinput}
+\begin{Soutput}
+[1] 45
+\end{Soutput}
+\begin{Sinput}
+> m[3]
+\end{Sinput}
+\begin{Soutput}
+[1] 45
+\end{Soutput}
+\end{Schunk}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+  \frametitle{Fusion verticale de matrices}
+
+  \begin{itemize}
+  \item Fonction \Fonction{rbind} permet de fusionner verticalement
+    deux matrices (ou plus) ayant le même nombre de colonnes
+\begin{Schunk}
+\begin{Sinput}
+> n <- matrix(1:9, nrow = 3)
+> rbind(m, n)
+\end{Sinput}
+\begin{Soutput}
+     [,1] [,2] [,3]
+[1,]   40   45   55
+[2,]   80   21   32
+[3,]    1    4    7
+[4,]    2    5    8
+[5,]    3    6    9
+\end{Soutput}
+\end{Schunk}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+  \frametitle{Fusion horizontale de matrices}
+
+  \begin{itemize}
+  \item Fonction \Fonction{cbind} permet de fusionner horizontalement
+    deux matrices (ou plus) ayant le même nombre de lignes
+\begin{Schunk}
+\begin{Sinput}
+> n <- matrix(1:4, nrow = 2)
+> cbind(m, n)
+\end{Sinput}
+\begin{Soutput}
+     [,1] [,2] [,3] [,4] [,5]
+[1,]   40   45   55    1    3
+[2,]   80   21   32    2    4
+\end{Soutput}
+\end{Schunk}
+  \end{itemize}
+\end{frame}
+
+\subsection{Listes}
+
+\begin{frame}
+  \frametitle{Un vecteur très général}
+  \begin{itemize}
+  \item Vecteur spécial dont les éléments peuvent être de n'importe
+    quel mode
+  \item Permet d'emboîter des listes $\Rightarrow$ objet
+    \emph{récursif}
+  \item Fonction de base pour créer des listes est \Fonction{list}
+  \item Conseil: nommer les éléments d'une liste!
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Indiçage d'une liste}
+  \begin{itemize}
+  \item Simples crochets \fonction{[\ ]} retournent une liste
+  \item Doubles crochets \fonction{[[\ ]]} retournent l'élément seul
+  \item Par l'étiquette avec \code{liste\$element}
+  \end{itemize}
+\end{frame}
+
+\subsection{Data frames}
+
+\begin{frame}
+  \frametitle{Un peu d'une liste et d'une matrice}
+  \begin{itemize}
+  \item Liste de classe \classe{data.frame} dont tous les éléments
+    sont de la même longueur
+  \item Visuellement identique à une matrice
+  \item Plus général qu'une matrice: les colonnes peuvent être de
+    modes différents
+  \item Fonctions \Fonction{data.frame} ou \Fonction{as.data.frame}
+  \end{itemize}
+\end{frame}
+
+
+\subsection{Indiçage}
+
+\begin{frame}[fragile=singleslide]
+  \frametitle{1. Avec un vecteur d'entiers positifs}
+  Éléments se trouvant aux positions correspondant aux entiers sont
+  extraits, dans l'ordre:
+\begin{Schunk}
+\begin{Sinput}
+> letters[c(1:3, 22, 5)]
+\end{Sinput}
+\begin{Soutput}
+[1] "a" "b" "c" "v" "e"
+\end{Soutput}
+\end{Schunk}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+  \frametitle{2. Avec un vecteur d'entiers négatifs}
+  Éléments se trouvant aux positions correspondant aux entiers
+  négatifs sont \alert{éliminés}:
+\begin{Schunk}
+\begin{Sinput}
+> letters[c(-(1:3), -5, -22)]
+\end{Sinput}
+\begin{Soutput}
+ [1] "d" "f" "g" "h" "i" "j" "k" "l" "m"
+[10] "n" "o" "p" "q" "r" "s" "t" "u" "w"
+[19] "x" "y" "z"
+\end{Soutput}
+\end{Schunk}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+  \frametitle{3. Avec un vecteur booléen}
+  \begin{itemize}
+  \item Vecteur d'indiçage doit être de la même longueur que le
+    vecteur indicé
+  \item Éléments correspondant à \code{TRUE} sont \alert{extraits},
+    ceux correspondant \code{FALSE} sont \alert{éliminés}:
+\begin{Schunk}
+\begin{Sinput}
+> letters > "f" & letters < "q"
+\end{Sinput}
+\begin{Soutput}
+ [1] FALSE FALSE FALSE FALSE FALSE FALSE
+ [7]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+[13]  TRUE  TRUE  TRUE  TRUE FALSE FALSE
+[19] FALSE FALSE FALSE FALSE FALSE FALSE
+[25] FALSE FALSE
+\end{Soutput}
+\begin{Sinput}
+> letters[letters > "f" & letters < "q"]
+\end{Sinput}
+\begin{Soutput}
+ [1] "g" "h" "i" "j" "k" "l" "m" "n" "o"
+[10] "p"
+\end{Soutput}
+\end{Schunk}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+  \frametitle{4. Avec une chaîne de caractères}
+  \begin{itemize}
+  \item À condition que les éléments soient nommés:
+\begin{Schunk}
+\begin{Sinput}
+> x <- c(Rouge = 2, Bleu = 4, Vert = 9,
++ Jaune = -5)
+> x[c("Bleu", "Jaune")]
+\end{Sinput}
+\begin{Soutput}
+ Bleu Jaune
+    4    -5
+\end{Soutput}
+\end{Schunk}
+  \end{itemize}
+\end{frame}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "introduction_programmation_S_diapos"
+%%% End:
