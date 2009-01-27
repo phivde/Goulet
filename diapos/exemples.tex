@@ -7,26 +7,25 @@
 
   \begin{block}{Énoncé}
     Un prêt est remboursé par une série de cinq paiements, le premier
-    dans un an. Trouver le montant du prêt pour chacune des hypothèses
-    ci-dessous.
+    dans un an. Trouver le montant du prêt pour\dots
     \begin{enumerate}[a)]
     \item Paiement annuel de \nombre{1000}, taux d'intérêt de 6~\%
-      effectif annuellement.
+      effectif annuellement
     \item Paiements annuels de 500, 800, 900, 750 et \nombre{1000},
-      taux d'intérêt de 6~\% effectif annuellement.
+      taux d'intérêt de 6~\% effectif annuellement
     \item Paiements annuels de 500, 800, 900, 750 et \nombre{1000},
       taux d'intérêt de 5~\%, 6~\%, 5,5~\%, 6,5~\% et 7~\% effectifs
-      annuellement.
+      annuellement
     \end{enumerate}
   \end{block}
 \end{frame}
 
 \begin{frame}
   \frametitle{Solution}
-  De manière générale, la valeur présente d'une série de paiements
-  $P_1, P_2, \dots, P_n$ à la fin des années $1, 2, \dots, n$ est
+  Formule générale pour la valeur présente d'une série de paiements
+  $P_1, P_2, \dots, P_n$ à la fin des années $1, 2, \dots, n$:
   \begin{displaymath}
-    \sum_{j=1}^n \prod_{k=1}^j (1 + i_k)^{-1} P_j,
+    \sum_{j=1}^n \prod_{k=1}^j (1 + i_k)^{-1} P_j
   \end{displaymath}
 \end{frame}
 
@@ -54,7 +53,7 @@
   \begin{proof}[b) Différents paiements annuels, un seul taux d'intérêt]
     On a, cette fois,
     \begin{displaymath}
-      \color{blue} \sum_{j=1}^n \color{red}(1 + i)^{-j} \color{orange}P_j 
+      \color{blue} \sum_{j=1}^n \color{red}(1 + i)^{-j} \color{orange}P_j
     \end{displaymath}
     En S:
     \pause
@@ -73,8 +72,8 @@
   \begin{proof}[c) Différents paiements annuels, différents taux d'intérêt]
     On doit utiliser la formule générale
     \begin{displaymath}
-      \color{blue}\sum_{j=1}^n 
-      \color{red} \prod_{k=1}^j (1 + i_k)^{-1} 
+      \color{blue}\sum_{j=1}^n
+      \color{red} \prod_{k=1}^j (1 + i_k)^{-1}
       \color{orange} P_j
     \end{displaymath}
     En S:
@@ -104,13 +103,13 @@
     \begin{enumerate}[a)]
     \item Binomiale
       \begin{displaymath}
-        f(x) = \binom{n}{x} p^x (1 - p)^{n - x}, \quad x = 0, \dots, n.
+        f(x) = \binom{n}{x} p^x (1 - p)^{n - x}, \quad x = 0, \dots, n
       \end{displaymath}
     \item Poisson
       \begin{displaymath}
         f(x) = \frac{\lambda^x e^{-\lambda}}{x!}, \quad x = 0, 1, \dots,
       \end{displaymath}
-      où $x! = x(x - 1) \cdots 2 \cdot 1$.
+      où $x! = x(x - 1) \cdots 2 \cdot 1$
     \end{enumerate}
   \end{block}
 \end{frame}
@@ -146,7 +145,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-  \begin{proof}[b) Poisson$(5)$]
+  \begin{proof}[b) Poisson(5)]
     On calcule les probabilités en $x = 0, 1, \dots, 10$ seulement.
 \begin{Schunk}
 \begin{Sinput}
@@ -180,11 +179,7 @@
 \begin{frame}
   \frametitle{Fonction de répartition de la loi gamma}
 
-  La loi gamma est fréquemment utilisée pour la modélisation
-  d'événements ne pouvant prendre que des valeurs positives et pour
-  lesquels les petites valeurs sont plus fréquentes que les grandes.
-
-  Nous utiliserons la paramétrisation où la fonction de densité de
+  Nous utilisons la paramétrisation où la fonction de densité de
   probabilité est
   \begin{displaymath}
     f(x) = \frac{\lambda^\alpha}{\Gamma(\alpha)}\, x^{\alpha-1}
@@ -193,24 +188,21 @@
   où
   \begin{displaymath}
     \Gamma(n) = \int_0^\infty x^{n - 1} e^{-x}\, dx
-    = (n - 1) \Gamma(n - 1).
+    = (n - 1) \Gamma(n - 1)
   \end{displaymath}
 \end{frame}
 
 \begin{frame}
   \begin{block}{Énoncé}
-    Il n'existe pas de formule explicite de la fonction de répartition
-    de la loi gamma. 
-
-    Néanmoins, pour $\alpha$ entier et $\lambda = 1$ on a
+    Pour $\alpha$ entier et $\lambda = 1$ on a
     \begin{displaymath}
       F(x; \alpha, 1) = 1 - e^{-x} \sum_{j=0}^{\alpha-1} \frac{x^j}{j!}.
     \end{displaymath}
 
     \begin{enumerate}[a)]
-    \item Évaluer $F(4; 5, 1)$.
+    \item Évaluer $F(4; 5, 1)$
     \item Évaluer $F(x; 5, 1)$ pour $x = 2, 3, \dots, 10$ en une seule
-      expression.
+      expression
     \end{enumerate}
   \end{block}
 \end{frame}
@@ -245,12 +237,7 @@
 
 \begin{frame}[fragile]
   \begin{alertblock}{Astuce}
-    On peut aussi éviter de générer essentiellement la même suite de
-    nombres à deux reprises en ayant recours à une variable
-    intermédiaire. 
-
-    L'affectation et le calcul final peuvent se faire dans une
-    seule expression.
+    On peut éviter de générer la même suite de nombres à deux reprises:
 \begin{Schunk}
 \begin{Sinput}
 > 1 - exp(-x) * sum(x^(-1 + (j <- 1:alpha))/
@@ -269,7 +256,7 @@
 \begin{Schunk}
 \begin{Sinput}
 > x <- 2:10
-> 1 - exp(-x) * 
+> 1 - exp(-x) *
 + colSums(
 +   t( outer(x, 0:(alpha - 1), "^") )
 +   /gamma(1:alpha)
@@ -290,19 +277,20 @@
 \begin{frame}
   \frametitle{Algorithme du point fixe}
 
-  \begin{itemize}[<+->]
+  \begin{itemize}
   \item Problème classique: trouver la racine d'une fonction $g$,
-    c'est-à-dire le point $x$ où $g(x) = 0$.
+    c'est-à-dire le point $x$ où $g(x) = 0$
   \item Souvent possible de reformuler le problème de façon à plutôt
-    chercher le point $x$ où $f(x) = x$.
-  \item Solution appelée \alert{point fixe}.
+    chercher le point $x$ où $f(x) = x$
+  \item Solution appelée \alert{point fixe}
   \item L'algorithme du calcul numérique du point fixe d'une fonction
     $f(x)$ est très simple:
+    \pause
     \begin{enumerate}
-    \item choisir une valeur de départ $x_0$;
-    \item calculer $x_n = f(x_{n-1})$;
+    \item choisir une valeur de départ $x_0$;=
+    \item calculer $x_n = f(x_{n - 1})$
     \item répéter l'étape 2 jusqu'à ce que $|x_n - x_{n-1}| < \varepsilon$
-      ou $|x_n - x_{n-1}|/|{x_{n-1}}| < \varepsilon$.
+      ou $|x_n - x_{n-1}|/|{x_{n-1}}| < \varepsilon$
     \end{enumerate}
   \end{itemize}
 \end{frame}
@@ -312,7 +300,7 @@
     Trouver, à l'aide de la méthode du point fixe, la valeur de $i$
     telle que
     \begin{displaymath}
-      a_{\angl{10}} = \frac{1 - (1 + i)^{-10}}{i} = 8,21.
+      a_{\angl{10}} = \frac{1 - (1 + i)^{-10}}{i} = 8,21
     \end{displaymath}
   \end{block}
 \end{frame}
@@ -324,13 +312,13 @@
     \begin{itemize}[<+->]
     \item On doit résoudre
       \begin{displaymath}
-        \frac{1 - (1 + i)^{-10}}{8,21} = i.
+        \frac{1 - (1 + i)^{-10}}{8,21} = i
       \end{displaymath}
     \item Nous ignorons combien de fois la procédure itérative devra
-      être répétée.
-    \item Il faut exécuter la procédure au moins une fois.
+      être répétée
+    \item Il faut exécuter la procédure au moins une fois
     \item La structure de contrôle à utiliser dans cette procédure
-      itérative est donc \fonction{\alert{repeat}}.
+      itérative est donc \fonction{\alert{repeat}}
     \end{itemize}
   \end{block}
 \end{frame}
@@ -343,7 +331,7 @@
 > repeat {
 +     it <- i
 +     i <- (1 - (1 + it)^(-10))/8.21
-+     if (abs(i - it)/it < 1e-10) 
++     if (abs(i - it)/it < 1e-10)
 +         break
 + }
 > i
@@ -363,7 +351,7 @@
 \end{Schunk}
   \end{proof}
 \end{frame}
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "introduction_programmation_S_slides"
-%%% End: 
+%%% TeX-master: "introduction_programmation_S_diapos"
+%%% End:

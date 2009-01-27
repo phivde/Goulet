@@ -72,8 +72,7 @@
   \newcommand{\emacs}[1]{\code{#1}}
   \newcommand{\ess}[1]{\code{#1}}
 
-%  \includeonlylecture{cours 3}
-%  \includeonly{presentation_slides,bases_slides}
+%  \includeonly{exemples}
 
 \begin{document}
 
@@ -90,28 +89,22 @@
 %%%
 
 %% COURS 1: Présentation.
-\lecture{Présentation}{cours 1}
 \include{presentation}
 
 %% COURS 2: Bases
-\lecture{Bases}{cours 2}        % hiver 2006: section Indiçage au lab 2
-\include{bases}
+\include{bases}                 % Indiçage au lab 2
 
-%% COURS 3: Opérateurs
-\lecture{Opérateurs}{cours 3}   % hiver 2006: fait au lab 2
-\include{operateurs}
+%% LAB 2: Opérateurs
+\include{operateurs}            % Structures de contrôle au cours 3
 
-%% LAB 3: Exemples résolus.
-\lecture{Exemples}{lab 3}       % hiver 2006: fait au cours 3
-\include{exemples_slides}
+%% COURS 3: Exemples résolus
+\include{exemples}              % hiver 2006: fait au cours 3
 
 %% COURS 4: Fonctions et Concepts avancés
-\lecture{Fonctions}{cours 4}
 \include{fonctions_slides}
 \include{avance_slides}
 
 %% LAB 1: présentation de Emacs et ESS.
-\lecture{Emacs et ESS}{lab 1}
 \include{ess}
 
 \end{document}
