@@ -11,12 +11,11 @@
   \end{center}
   où
   \begin{itemize}
-  \item \code{fun} est le nom de la fonction;
-  \item \code{\itshape arguments} est la liste des arguments, séparés
-    par des virgules;
-  \item \code{\itshape expression} constitue le corps de la fonction,
-    soit une liste d'expressions groupées entre accolades (nécessaires
-    s'il y a plus d'une expression seulement).
+  \item \code{fun}: nom de la fonction
+  \item \code{\itshape arguments}: liste des arguments, séparés par
+    des virgules
+  \item \code{\itshape expression}: corps de la fonction,
+    suite d'expressions groupées entre accolades
   \end{itemize}
 \end{frame}
 
@@ -25,14 +24,14 @@
 \begin{frame}
   \frametitle{Retourner des résultats}
 
-  \begin{itemize}[<+->]
-  \item Une fonction retourne tout simplement le résultat de la
-    \alert{dernière expression} du corps de la fonction.
+  \begin{itemize}
+  \item Une fonction retourne le résultat de la \alert{dernière
+      expression} du corps
   \item Éviter que la dernière expression soit une affectation: la
     fonction ne retournera rien!
-  \item Autre possibilité: utiliser explicitement la fonction
-    \Fonction{\alert{return}}. Rarement nécessaire.
-  \item Utiliser une liste nommée pour retourner plusieurs résultats.
+  \item Parfois nécessaire d'utiliser explicitement
+    \Fonction{\alert{return}}
+  \item Utiliser une liste nommée pour retourner plusieurs résultats
   \end{itemize}
 \end{frame}
 
@@ -41,23 +40,20 @@
 \begin{frame}[fragile]
   \frametitle{Variables locales et globales}
 
-  Les concepts de variable locale et de variable globale existent
-  aussi en S.
-
   \begin{itemize}
   \item<+-> Toute variable définie dans une fonction est locale à cette
     fonction, c'est-à-dire
     \begin{itemize}
-    \item<+-> qu'elle n'apparaît pas dans l'espace de travail;
-    \item<+-> qu'elle n'écrase pas une variable du même nom dans l'espace
-      de travail.
+    \item<+-> n'apparaît pas dans l'espace de travail
+    \item<+-> n'écrase pas une variable du même nom dans l'espace
+      de travail
     \end{itemize}
-  \item<+| only@-+> On peut définir une variable dans l'espace de
-    travail depuis une fonction avec l'opérateur $<<-$.
-  \item<only@+-> \sout{On peut définir une variable dans l'espace de
-      travail depuis une fonction avec l'opérateur $<<-$.}
-  \item<+-> Une fonction définie à l'intérieur d'une autre fonction sera
-    locale à celle-ci. Pratique!
+  \item<+| only@-+> Possible de définir une variable dans l'espace de
+    travail depuis une fonction avec l'opérateur $<<-$
+  \item<only@+-> \sout{Possible de définir une variable dans l'espace de
+      travail depuis une fonction avec l'opérateur $<<-$}
+  \item<+-> Fonction définie à l'intérieur d'une autre fonction locale
+    à celle-ci
   \end{itemize}
 \end{frame}
 
@@ -66,7 +62,7 @@
 
 \begin{frame}[fragile]
   \frametitle{Fonction à partir du code de point fixe}
-  
+
 \begin{semiverbatim}
 \alert<2>{fp} <- function(\alert<3>{k}, \alert<3>{n}, \alert<3>{start=\alert<4>{0.05}}, \alert<3>{TOL=\alert<4>{1E-10}})
 \{
@@ -86,25 +82,24 @@
 
 \subsection{Fonctions anonymes}
 
-
 \begin{frame}
   \frametitle{Fonctions anonymes}
 
   \begin{itemize}
   \item Parfois utile de définir une fonction sans lui attribuer un
     nom
-  \item C'est une \alert{fonction anonyme}.
+  \item C'est une \alert{fonction anonyme}
   \item En général pour des fonctions courtes utilisées dans une autre
-    fonction.
+    fonction
   \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
   \frametitle{Un exemple}
-  
+
   \begin{itemize}[<+->]
   \item Calculer la valeur de $x y^2$ pour toutes les combinaisons de
-    $x$ et $y$ stockées dans des vecteurs du même nom
+    $x$ et $y$
   \item Avec \fonction{outer}:
   \begin{Schunk}
 \begin{Sinput}
@@ -124,10 +119,8 @@
 \end{frame}
 
 \begin{frame}[fragile]
-  \begin{itemize}[<+->]
-  \item La fonction \code{f} ne sert à rien ultérieurement.
-  \item Utiliser simplement une fonction anonyme à l'intérieur de
-    \fonction{outer}:
+  \begin{itemize}
+  \item Avec une fonction anonyme:
 \begin{Schunk}
 \begin{Sinput}
 > outer(x, y, function(x, y) x * y^2)
@@ -196,7 +189,7 @@ repeat
 
 \begin{frame}[fragile=singleslide]
   \frametitle{Styles reconnus par Emacs}
-  
+
   \small
   \begin{center}
     \begin{minipage}[t]{9cm}
@@ -212,7 +205,7 @@ for (i in 1:10)
       \end{minipage}
     \end{minipage}
     \vspace{\baselineskip}
-    
+
     \begin{minipage}[t]{9cm}
       K\&R (1TBS)
       \hfill
@@ -225,7 +218,7 @@ for (i in 1:10){
       \end{minipage}
     \end{minipage}
     \vspace{\baselineskip}
-    
+
     \begin{minipage}[t]{9cm}
       Whitesmith
       \hfill
@@ -239,7 +232,7 @@ for (i in 1:10)
       \end{minipage}
     \end{minipage}
     \vspace{\baselineskip}
-    
+
     \begin{minipage}[t]{9cm}
       GNU
       \hfill
@@ -269,7 +262,7 @@ for (i in 1:10)
   \end{itemize}
 \end{frame}
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "introduction_programmation_S_slides"
-%%% End: 
+%%% TeX-master: "introduction_programmation_S_diapos"
+%%% End:

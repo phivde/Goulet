@@ -5,16 +5,16 @@
 \begin{frame}
   \frametitle{Pas un signe de paresse des rédacteurs}
 
-  \begin{itemize}[<+->]
+  \begin{itemize}
   \item `\code{...}' est un argument formel dont `\code{...}' est le
-    nom.
-  \item Signifie qu'une fonction peut accepter un ou plusieurs autres
-    arguments autres que ceux faisant partie de sa définition.
-  \item Contenu de `\code{...}' n'est ni pris en compte, ni modifié
-    par la fonction.
-  \item Généralement simplement passé tel quel à une autre fonction.
-  \item Voir les définitions des fonctions \fonction{apply},
-    \fonction{lapply} et \fonction{sapply} pour des exemples.
+    nom
+  \item Fonction accepte un ou plusieurs arguments autres que ceux
+    faisant partie de sa définition
+  \item Contenu de `\code{...}'  ni pris en compte, ni modifié par la
+    fonction
+  \item Passé tel quel à une autre fonction
+  \item Exemples: \fonction{apply}, \fonction{lapply},
+    \fonction{sapply}
   \end{itemize}
 \end{frame}
 
@@ -24,32 +24,31 @@
 \begin{frame}
   \frametitle{Sommaires généraux pour matrices et tableaux}
 
-  La fonction \Fonction{apply} sert à appliquer une fonction
-  quelconque sur une partie d'une matrice\index{matrice} ou, plus
-  généralement, d'un tableau\index{tableau}.
+  \Fonction{apply} applique une fonction quelconque sur une partie
+  d'une matrice ou d'un tableau
   \pause
   \begin{center}
-    \code{apply(X, MARGIN, FUN, ...)},
+    \code{apply(X, MARGIN, FUN, ...)}
   \end{center}
   où
   \begin{itemize}
-  \item \code{X} est une matrice ou un tableau;
-  \item \code{MARGIN} est un vecteur d'entiers contenant la ou les
-    dimensions de la matrice ou du tableau sur lesquelles la fonction
-    doit s'appliquer;
-  \item \code{FUN} est la fonction à appliquer;
-  \item `\code{...}' est un ensemble d'arguments supplémentaires,
-    séparés par des virgules, à passer à la fonction \code{FUN}.
+  \item \code{X}:  matrice ou tableau
+  \item \code{MARGIN}: vecteur de la ou des dimensions sur lesquelles
+    la fonction doit s'appliquer
+  \item \code{FUN}: fonction à appliquer
+  \item `\code{...}': arguments supplémentaires, séparés par des
+    virgules, à passer à \code{FUN}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \begin{itemize}[<+->]
+  \frametitle{Utilisation}
+
+  \begin{itemize}
   \item Principalement pour calculer des sommaires par ligne
     (dimension 1) ou par colonne (dimension 2) autres que la somme et
-    la moyenne.
+    la moyenne
   \item Utiliser la fonction \fonction{apply} plutôt que des boucles
-    puisque celle-ci est plus efficace.
   \end{itemize}
 \end{frame}
 
@@ -95,9 +94,6 @@
 \begin{frame}[fragile]
   \frametitle{Exemple avec un tableau}
 
-  Si \code{X} est un tableau de plus de deux dimensions, alors
-  l'argument passé à \code{FUN} peut être une matrice ou un tableau.
-
 \begin{Schunk}
 \begin{Sinput}
 > dim(arr)
@@ -122,10 +118,9 @@
   \frametitle{Les \code{apply} des vecteurs et des listes}
 
   \begin{itemize}
-  \item Les fonctions \Fonction{lapply} et \Fonction{sapply}
-    permettent d'appliquer une fonction aux éléments d'un vecteur ou
-    d'une liste.
-  \item  Syntaxe similaire:
+  \item \Fonction{lapply} et \Fonction{sapply} appliquent
+    une fonction aux éléments d'un vecteur ou d'une liste
+  \item  Syntaxe similaire à \fonction{apply}:
     \begin{center}
       \code{lapply(X, FUN, ...)} \\
       \code{sapply(X, FUN, ...)}
@@ -136,18 +131,17 @@
 \begin{frame}
   \frametitle{Des fonctions très utiles}
 
-  \begin{itemize}[<+->]
-  \item \fonction{lapply} applique une fonction \code{FUN} à tous les
-    éléments d'un vecteur ou d'une liste \code{X} et retourne le
-    résultat sous forme de liste.
+  \begin{itemize}
+  \item \fonction{lapply} applique \code{FUN} à tous les éléments d'un
+    vecteur ou d'une liste \code{X} et retourne le résultat sous forme
+    de liste
   \item \fonction{sapply} est similaire, sauf que le résultat est
-    retourné sous forme de vecteur, si possible.
+    retourné sous forme de vecteur, si possible
   \item Si le résultat de chaque application de la fonction est un
     vecteur, \fonction{sapply} retourne une matrice, remplie comme
-    toujours par colonne.
-  \item Dans un grand nombre de cas, il est possible de remplacer les
-    boucles \fonction{for} par l'utilisation de \fonction{lapply} ou
-    \fonction{sapply}.
+    toujours par colonne
+  \item Souvent possible de remplacer les boucles \fonction{for} par
+    l'utilisation de \fonction{lapply} ou \fonction{sapply}
   \end{itemize}
 \end{frame}
 
@@ -164,7 +158,7 @@
     \end{center}
   \item Le résultat est l'application de \code{FUN} aux premiers
     éléments de tous les arguments contenus dans `\code{...}', puis à
-    tous les seconds éléments, et ainsi de suite.
+    tous les seconds éléments, et ainsi de suite
   \item Ainsi, si \code{v} et \code{w} sont des vecteurs,
     \begin{center}
       \code{mapply(FUN, v, w)}
@@ -231,12 +225,10 @@
 \begin{frame}[fragile]
   \frametitle{Une fonction pour la simulation}
 
-  \begin{itemize}[<+->]
-  \item Fonction enveloppante de \fonction{sapply} propre à
-    \textsf{R}.
+  \begin{itemize}
   \item Simplifie la syntaxe pour l'exécution répétée d'une
-    expression.
-  \item Usage particulièrement indiqué pour les simulations.
+    expression
+  \item Particulièrement indiqué pour les simulations
   \item Si la fonction \code{fun} fait tous les calculs d'une
     simulation, on obtient les résultats pour \nombre{10000}
     simulations avec
@@ -245,7 +237,7 @@
 > replicate(10000, fun(...))
 \end{Sinput}
 \end{Schunk}
-  \item Voir l'annexe D du document d'accompagnement.
+  \item Voir l'annexe D du document d'accompagnement
   \end{itemize}
 \end{frame}
 
@@ -255,18 +247,16 @@
 \begin{frame}
   \frametitle{Quelques notions de programmation OO}
   
-  \begin{itemize}[<+->]
-  \item Tous les objets dans le langage S ont une classe.
-  \item La classe est parfois implicite ou dérivée du mode de l'objet
-    (consulter la rubrique d'aide de \fonction{class} pour de plus
-    amples détails).
-  \item Certaines fonctions \alert{génériques} se comportent
-    différemment selon la classe de l'objet donné en argument.
-  \item Les fonctions génériques les plus fréquemment employées
-    sont \fonction{print}, \fonction{plot} et \fonction{summary}.
+  \begin{itemize}
+  \item Tous les objets dans le langage S ont une classe
+  \item Classe parfois implicite ou dérivée du mode de l'objet
+  \item Fonctions \alert{génériques} se comportent différemment selon
+    la classe de l'objet donné en argument
+  \item Fonctions génériques les plus fréquemment employées:
+    \fonction{print}, \fonction{plot}, \fonction{summary}
   \item Une fonction générique possède une \alert{méthode}
-    correspondant à chaque classe qu'elle reconnaît.
-  \item Sinon, une méthode \code{default} pour les autres objets. 
+    correspondant à chaque classe qu'elle reconnaît
+  \item Sinon, une méthode \code{default} pour les autres objets
   \end{itemize}
 \end{frame}
 
@@ -297,9 +287,9 @@
 \begin{frame}
   \begin{itemize}
   \item À chaque méthode \code{methode} d'une fonction générique
-    \code{fun} correspond une fonction \code{fun.methode}.
+    \code{fun} correspond une fonction \code{fun.methode}
   \item Consulter cette rubrique d'aide et non celle de la fonction
-    générique, qui contient en général peu d'informations.
+    générique, qui contient en général peu d'informations
   \end{itemize}
 \end{frame}
 
@@ -317,5 +307,5 @@
 
 %%% Local Variables: 
 %%% mode: latex
-%%% TeX-master: "introduction_programmation_S_slides"
+%%% TeX-master: "introduction_programmation_S_diapos"
 %%% End: 

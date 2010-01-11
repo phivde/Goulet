@@ -11,15 +11,18 @@
   \usepackage[normalem]{ulem}
 
   %%% Titre
-  \title{Introduction à la programmation en S}
+  \title{Introduction à la \\ programmation en S}
   \author{Vincent Goulet}
   \institute{École d'actuariat \\ Université Laval}
   \date{}
 
   %%% Paramètres de beamer
-  \usetheme[hideallsubsections]{Berkeley}
-  \usecolortheme{sidebartab}
-  \usefonttheme{professionalfonts}
+  \usetheme[hideallsubsections]{Rochester}
+  \usecolortheme{dove}
+  \usefonttheme{structurebold}
+  % \usetheme[hideallsubsections]{Berkeley}
+  % \usecolortheme{sidebartab}
+  % \usefonttheme{professionalfonts}
   \setbeamercovered{transparent}
   \AtBeginSection[]
   {
@@ -72,7 +75,7 @@
   \newcommand{\emacs}[1]{\code{#1}}
   \newcommand{\ess}[1]{\code{#1}}
 
-%  \includeonly{exemples}
+%  \includeonly{avance}
 
 \begin{document}
 
@@ -98,11 +101,11 @@
 \include{operateurs}            % Structures de contrôle au cours 3
 
 %% COURS 3: Exemples résolus
-\include{exemples}              % hiver 2006: fait au cours 3
+\include{exemples}              % Exemple du point fixe au lab 3
 
 %% COURS 4: Fonctions et Concepts avancés
-\include{fonctions_slides}
-\include{avance_slides}
+\include{fonctions}
+\include{avance}
 
 %% LAB 1: présentation de Emacs et ESS.
 \include{ess}
