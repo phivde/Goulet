@@ -2,7 +2,8 @@
   \usepackage[T1]{fontenc}
   \usepackage[latin1]{inputenc}
   \usepackage[francais]{babel}
-  \usepackage{arev}
+  \usepackage[scaled=0.9]{helvet}
+  \usepackage[sc]{mathpazo}
   \usepackage{icomma}
   \usepackage{vgmath,actu,amsmath,amsthm,url}
   \usepackage{textcomp,fourier-orns,mathabx}
@@ -11,9 +12,9 @@
   \usepackage[normalem]{ulem}
 
   %%% Titre
-  \title{Introduction à la \\ programmation en S}
+  \title{Introduction à la programmation en S}
   \author{Vincent Goulet}
-  \institute{École d'actuariat \\ Université Laval}
+  \institute{}
   \date{}
 
   %%% Paramètres de beamer
@@ -75,7 +76,7 @@
   \newcommand{\emacs}[1]{\code{#1}}
   \newcommand{\ess}[1]{\code{#1}}
 
-%  \includeonly{avance}
+%  \includeonly{fonctions,avance}
 
 \begin{document}
 
@@ -83,6 +84,9 @@
 %%% PAGE TITRE
 %%%
 \begin{frame}
+  \vspace{-10mm}
+  \includegraphics[height=15mm,keepaspectratio=true]{entete}
+  \vspace{5mm}
   \titlepage
 \end{frame}
 

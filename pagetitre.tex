@@ -1,25 +1,36 @@
 %%% Police de caractère pour la page titre
-\renewcommand{\sfdefault}{hls}
+%\renewcommand{\sfdefault}{Minion-LF} % MyriadPro
+\sffamily
 
 %%% Marge de gauche (1/3 de la page)
 \newlength{\gauche}
 \addtolength{\gauche}{72mm}
 \addtolength{\gauche}{-\spinemargin}
 
-%%% �paisseur de la bande sur la page titre
+%%% Épaisseur de la bande sur la page titre
 \newlength{\ruleheight}
-\setlength{\ruleheight}{7.75mm}
+\setlength{\ruleheight}{279mm}
+
+\definecolor{spine}{rgb}{0,0,0.3}
+\definecolor{cover}{rgb}{0,0.3,0.3}
 
 %%% Définition de la bande
-\definecolor{gray}{gray}{0.4}
-\textblockorigin{0mm}{279mm}
+\definecolor{gray}{gray}{0.6}
+%\textblockorigin{0mm}{279mm}
 \newcommand{\banderecto}{%
-  \begin{textblock*}{71.5mm}[0,1](0mm,-46.5mm)
-    \textblockcolor{black} \rule{0mm}{\ruleheight}
+  \begin{textblock*}{60mm}[0,1](0mm,0mm)
+    \textblockcolor{spine} \rule{0mm}{\ruleheight}
   \end{textblock*}
   \begin{textblock*}{144mm}[0,1](72mm,-46.5mm)
-    \textblockcolor{gray} \rule{0mm}{\ruleheight}
+    \textblockcolor{white} \rule{0mm}{\ruleheight}
   \end{textblock*}}
+% \newcommand{\banderecto}{%
+%   \begin{textblock*}{71.5mm}[0,1](0mm,-46.5mm)
+%     \textblockcolor{black} \rule{0mm}{\ruleheight}
+%   \end{textblock*}
+%   \begin{textblock*}{144mm}[0,1](72mm,-46.5mm)
+%     \textblockcolor{gray} \rule{0mm}{\ruleheight}
+%   \end{textblock*}}
 \newcommand{\bandeverso}{%
   \begin{textblock*}{144mm}[0,1](0mm,-46.5mm)
     \textblockcolor{gray} \rule{0mm}{\ruleheight}
@@ -29,14 +40,26 @@
   \end{textblock*}}
 
 %%% Titre
-\begin{adjustwidth*}{\gauche}{-15mm}
+\begin{textblock*}{60mm}(0mm,0mm)
+  \textblockcolor{spine} \rule{0mm}{279mm}
+\end{textblock*}
+\begin{textblock*}{156mm}(60mm,0mm)
+  \textblockcolor{cover} \rule{0mm}{279mm}
+\end{textblock*}
+\begin{textblock*}{136mm}(70mm,10mm)
+  \textblockcolor{cover}
   \sffamily
-  \vspace*{2cm}
-  \thetitle
-\end{adjustwidth*}
+  %\vspace*{2cm}
+  \HUGE
+    \fontseries{b}\selectfont Introduction
+    \fontseries{m}\selectfont  à la \\[0mm]
+    \fontseries{b}\selectfont programmation
+    \fontseries{m}\selectfont  en \\
+    \fontseries{b}\selectfont R
+\end{textblock*}
 
 %%% Affichage de la bande
-\banderecto
+%\banderecto
 \cleardoublepage
 
 %%% Page de garde
@@ -44,7 +67,7 @@
   \sffamily
   \raggedright
   \vspace*{2cm}
-  \thetitle \\
+  %\thetitle \\
   \bfseries
   \vspace*{3cm}
   \theauthor \\
@@ -99,7 +122,8 @@
 \endgroup
 
 %%% Retour à la police normale
-\renewcommand{\sfdefault}{phv}
+%\renewcommand{\sfdefault}{phv}
+\rmfamily
 
 \clearpage
 

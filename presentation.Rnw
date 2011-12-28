@@ -1,16 +1,51 @@
-\chapter{Présentation du langage S}
+\chapter{Présentation du langage R}
 \label{presentation}
 
 <<echo=FALSE>>=
 options(width=52)
 @
 
-\section{Le langage S}
-\label{presentation:langage}
+\section{Bref historique}
+\label{presentation:historique}
 
-Le S est un langage pour «programmer avec des données» développé chez
-Bell Laboratories (anciennement propriété de AT\&T, maintenant de
-Lucent Technologies).
+À l'origine fut le S, un langage pour «programmer avec des données»
+développé chez Bell Laboratories à partir du milieu des années 1970
+par une équipe de chercheurs menée par John~M.\ Chambers. Au fil du
+temps, le S a connu diverses versions communément identifiées par la
+couleur du livre dans lequel la nouvelle incarnation était présentée:
+...
+
+Dès la fin des années 1980 et pendant près de vingt ans, le S a
+principalement été popularisé par une mise en {\oe}uvre commerciale
+nommée S-PLUS. En 2008, Lucent Technologies a vendu le langage S à
+Insightful Corporation, ce qui a effectivement stoppé le développement
+du langage par ses auteurs originaux. Aujourd'hui, le S est
+commercialisé de manière relativement confidentielle sous le nom S$+$
+par Tibco Software.
+
+Ce qui a fortement contribué à la perte d'influence de S-PLUS, c'est
+une nouvelle mise en {\oe}uvre du langage développée au milieu des
+années 1990. Inspirés à la fois par le S et par Scheme (un dérivé du
+Lisp), Ross Ihaka et Robert Gentleman proposent un langage pour
+l'analyse de données et les graphiques qu'ils nomment {\R}
+\citep{Ihaka:R:1996}. À la suggestion de Martin Maechler de l'ETH de
+Zurich, les auteurs décident d'intégrer leur nouveau langage au projet
+GNU (\url{www.gnu.org}), faisant de {\R} un logiciel libre.
+
+Ainsi disponible gratuitement et ouvert aux contributions de tous,
+{\R} gagne rapidement en popularité là même où S-PLUS avait acquis ses
+lettres de noblesse, soit dans les milieux académiques. De pâle copie
+«\emph{not unlike S}», {\R} devient un concurrent sérieux à S-PLUS,
+puis le surpasse lorsque les efforts de développement se rangent
+massivement derrière le projet libre. D'ailleurs John~M.\ Chambers
+travaille aujourd'hui pour le projet {\R}.
+
+
+\section{Description sommaire de R}
+\label{presentation:description}
+
+
+Le S est
 
 \begin{itemize}
 \item Ce n'est pas seulement un «autre» environnement statistique
@@ -37,7 +72,7 @@ Il existe quelques «moteurs» ou dialectes du langage S.
   Insightful Corporation (Bell Labs octroie à Insightful la licence
   exclusive de son système S).
 \item \textsf{R}, ou GNU S, est une version libre (\emph{Open Source})
-  «\emph{not unlike S}».
+  .
 \end{itemize}
 
 S-Plus et \textsf{R} constituent tous deux des environnements intégrés

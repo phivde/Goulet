@@ -1,30 +1,45 @@
-\documentclass[letterpaper,10pt]{memoir}
+\documentclass[letterpaper,11pt]{memoir}
   \usepackage[utf8]{inputenc}
-  \usepackage[T1]{fontenc}
+  \usepackage{fourier}                 % texte en Utopia
+  \usepackage[scaled=0.85]{beramono}   % code en Bera
+  \renewcommand{\sfdefault}{Myriad-LF} % titres en MyriadPro
+  \usepackage{natbib,url}
   \usepackage[english,francais]{babel}
-  \usepackage{vgmath,actu,amsmath,amsthm,icomma,url,natbib}
-  \usepackage{lucidabr,palatino,mathpazo}
-  \usepackage{textcomp,fourier-orns,mathabx}
+  \usepackage[autolanguage]{numprint}
+  \usepackage{vgmath,actu,amsmath,amsthm,icomma}
   \usepackage[noae]{Sweave}
-  \usepackage{graphicx,color}
-  \usepackage[absolute]{textpos}
+  \usepackage{textcomp,graphicx,color}
+  \usepackage[absolute,showboxes]{textpos}
   \usepackage{threeparttable,paralist,expdlist}
   \usepackage{listings,answers}
 
+  %%% Hyperliens
+  % \usepackage{hyperref}
+  % \definecolor{link}{rgb}{0,0,0.3}
+  % \hypersetup{
+  %   pdftex,
+  %   colorlinks,%
+  %   citecolor=link,%
+  %   filecolor=link,%
+  %   linkcolor=link,%
+  %   urlcolor=link}
+
   %%% Page titre
   \title{\HUGE
-    \fontseries{ub}\selectfont Introduction \\
+    \fontseries{b}\selectfont Introduction
     \fontseries{m}\selectfont  à la \\
-    \fontseries{ub}\selectfont programmation \\
+    \fontseries{b}\selectfont programmation
     \fontseries{m}\selectfont  en \\
-    \fontseries{ub}\selectfont S}
+    \fontseries{b}\selectfont\scalefont{15} R}
   \author{\huge Vincent Goulet \\[3mm]
-    \large \textit{École d'actuariat, Université Laval}}
+    \large École d'actuariat, Université Laval}
   \date{\Large Seconde édition}
   \newcommand{\ISBN}{978-2-9809136-7-9}
 
+  %%% Commande pour le nom du langage R
+  \newcommand{\R}{\textsf{R}}
+
   %%% Commandes pour notes marginales
-  \newcommand{\R}{\marginpar[\hfill \sffamily R]{\sffamily R}}
   \newcommand{\Splus}{\marginpar[\hfill S$+$]{S$+$}}
   \newcommand{\warning}{\marginpar[\hfill\LARGE\danger]%
     {\LARGE\danger}}
@@ -73,7 +88,7 @@
         \addtolength{\leftmargin}{\labelsep}
         \setdefaultenum{a)}{i)}{}{}}\item}
     {\end{list}}
-  \renewcommand{\reponseparams}{{\thechapter.\theexercice}}
+  %\renewcommand{\reponseparams}{{\thechapter.\theexercice}}
 
   %%% Environnement pour les listes de commandes
   \newenvironment{ttscript}[1]{%
@@ -106,7 +121,7 @@
     extendedchars=true,
     inputencoding=latin1,
     basicstyle=\small\ttfamily,
-    commentstyle=\textsl,
+    commentstyle=\color{red}\slshape,
     keywordstyle=\mdseries,
     showstringspaces=false,
     index=[1][keywords],
@@ -151,11 +166,11 @@
   \newcommand{\ess}[1]{\code{#1}\indexess{#1}}
   \makeindex
 
-%  \includeonly{pagetitre}
+  \includeonly{presentation}
 
 \begin{document}
 
-\renewcommand{\FrenchLabelItem}{\small$\sqbullet$}
+\renewcommand{\FrenchLabelItem}{>}
 \renewcommand{\labelitemii}{\textendash}
 
 \shortcites{Rintro}
@@ -187,7 +202,7 @@
 \include{reponses}
 
 \bibliographystyle{francais}
-\bibliography{stat,informatique}
+\bibliography{r,stat,informatique}
 
 \cleardoublepage
 \printindex
@@ -199,7 +214,7 @@
 \pagestyle{empty}
 \renewcommand{\ttdefault}{hlst}
 
-\bandeverso
+%\bandeverso
 \begin{textblock*}{71mm}(145mm, -40mm)
   \large\ttfamily\raggedright
   \textblockcolor{}

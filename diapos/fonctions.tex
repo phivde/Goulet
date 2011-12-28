@@ -64,9 +64,9 @@
   \frametitle{Fonction à partir du code de point fixe}
 
 \begin{semiverbatim}
-\alert<2>{fp} <- function(\alert<3>{k}, \alert<3>{n}, \alert<3>{start=\alert<4>{0.05}}, \alert<3>{TOL=\alert<4>{1E-10}})
+{\color<2>{orange}fp} <- function({\color<3>{orange}k}, {\color<3>{orange}n}, {\color<3>{orange}start = {\color<4>{orange}0.05}}, {\color<3>{orange}TOL = {\color<4>{orange}1E-10}})
 \{
-    \alert<5>{i <- start
+    {\color<5>{orange}i <- start
     repeat
     \{
         it <- i
@@ -74,7 +74,7 @@
         if (abs(i - it)/it < TOL)
             break
     \}
-    \alert<6>{i}  # ou return(i)}
+    {\color<6>{orange}i}}
 \}
 \end{semiverbatim}
 \end{frame}
@@ -143,14 +143,21 @@
 
   \begin{itemize}[<+->]
   \item Simples erreurs de syntaxe sont les plus fréquentes (en
-    particulier l'oubli de virgules).
+    particulier l'oubli de virgules)
   \item Vérification de la syntaxe lors de la définition d'une
-    fonction.
-  \item Lorsqu'une fonction ne retourne pas le résultat attendu,
-    placer des commandes \fonction{\alert{print}} à l'intérieur de la
-    fonction.
-  \item Permet de déterminer les valeurs des variables dans le
-    déroulement de la fonction.
+    fonction
+  \item Première approche:
+    \begin{enumerate}[<3->]
+    \item placer des commandes \fonction{\alert{print}} à l'intérieur
+      de la fonction
+    \item exécuter la fonction normalement
+    \end{enumerate}
+  \item Deuxième approche:
+    \begin{enumerate}[<4->]
+    \item définir toutes les variables passées en arguments dans
+      l'espace de travail
+    \item exécuter les lignes de la fonction une à une
+    \end{enumerate}
   \end{itemize}
 \end{frame}
 
@@ -171,96 +178,96 @@ repeat
   \end{exampleblock}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Avec Emacs et le mode ESS}
+% \begin{frame}
+%   \frametitle{Avec Emacs et le mode ESS}
 
-  \begin{itemize}[<+->]
-  \item S'assurer que toutes les variables passées en arguments à une
-    fonction existent dans l'espace de travail.
-  \item Exécuter successivement les lignes de la fonction avec
-    \ess{C-c C-n}.
-  \item Impossible avec les interfaces graphiques car la fenêtre
-    d'édition de fonctions bloque l'accès à l'interface de commande.
-  \end{itemize}
-\end{frame}
+%   \begin{itemize}[<+->]
+%   \item S'assurer que toutes les variables passées en arguments à une
+%     fonction existent dans l'espace de travail.
+%   \item Exécuter successivement les lignes de la fonction avec
+%     \ess{C-c C-n}.
+%   \item Impossible avec les interfaces graphiques car la fenêtre
+%     d'édition de fonctions bloque l'accès à l'interface de commande.
+%   \end{itemize}
+% \end{frame}
 
 
-\subsection{Styles de codage}
+% \subsection{Styles de codage}
 
-\begin{frame}[fragile=singleslide]
-  \frametitle{Styles reconnus par Emacs}
+% \begin{frame}[fragile=singleslide]
+%   \frametitle{Styles reconnus par Emacs}
 
-  \small
-  \begin{center}
-    \begin{minipage}[t]{9cm}
-      C++/Stroustrup
-      \hfill
-      \begin{minipage}[t]{5cm}
-\begin{verbatim}
-for (i in 1:10)
-{
-    expression
-}
-\end{verbatim}
-      \end{minipage}
-    \end{minipage}
-    \vspace{\baselineskip}
+%   \small
+%   \begin{center}
+%     \begin{minipage}[t]{9cm}
+%       C++/Stroustrup
+%       \hfill
+%       \begin{minipage}[t]{5cm}
+% \begin{verbatim}
+% for (i in 1:10)
+% {
+%     expression
+% }
+% \end{verbatim}
+%       \end{minipage}
+%     \end{minipage}
+%     \vspace{\baselineskip}
 
-    \begin{minipage}[t]{9cm}
-      K\&R (1TBS)
-      \hfill
-      \begin{minipage}[t]{5cm}
-\begin{verbatim}
-for (i in 1:10){
-     expression
-}
-\end{verbatim}
-      \end{minipage}
-    \end{minipage}
-    \vspace{\baselineskip}
+%     \begin{minipage}[t]{9cm}
+%       K\&R (1TBS)
+%       \hfill
+%       \begin{minipage}[t]{5cm}
+% \begin{verbatim}
+% for (i in 1:10){
+%      expression
+% }
+% \end{verbatim}
+%       \end{minipage}
+%     \end{minipage}
+%     \vspace{\baselineskip}
 
-    \begin{minipage}[t]{9cm}
-      Whitesmith
-      \hfill
-      \begin{minipage}[t]{5cm}
-\begin{verbatim}
-for (i in 1:10)
-     {
-     expression
-     }
-\end{verbatim}
-      \end{minipage}
-    \end{minipage}
-    \vspace{\baselineskip}
+%     \begin{minipage}[t]{9cm}
+%       Whitesmith
+%       \hfill
+%       \begin{minipage}[t]{5cm}
+% \begin{verbatim}
+% for (i in 1:10)
+%      {
+%      expression
+%      }
+% \end{verbatim}
+%       \end{minipage}
+%     \end{minipage}
+%     \vspace{\baselineskip}
 
-    \begin{minipage}[t]{9cm}
-      GNU
-      \hfill
-      \begin{minipage}[t]{5cm}
-\begin{verbatim}
-for (i in 1:10)
-  {
-    expression
-  }
-\end{verbatim}
-      \end{minipage}
-    \end{minipage}
-  \end{center}
-\end{frame}
+%     \begin{minipage}[t]{9cm}
+%       GNU
+%       \hfill
+%       \begin{minipage}[t]{5cm}
+% \begin{verbatim}
+% for (i in 1:10)
+%   {
+%     expression
+%   }
+% \end{verbatim}
+%       \end{minipage}
+%     \end{minipage}
+%   \end{center}
+% \end{frame}
 
-\begin{frame}[fragile]
-  \frametitle{Standard pour la programmation en S}
+% \begin{frame}[fragile]
+%   \frametitle{Standard pour la programmation en S}
 
-  \begin{itemize}
-  \item Style C$++$, avec les accolades sur leurs propres lignes.
-  \item Une indentation de quatre (4) espaces.
-  \item<2-> Pour utiliser ce style dans Emacs\index{Emacs}, faire
-\begin{verbatim}
-    M-x ess-set-style RET C++ RET
-\end{verbatim}
-    une fois qu'un fichier de script est ouvert.
-  \end{itemize}
-\end{frame}
+%   \begin{itemize}
+%   \item Style C$++$, avec les accolades sur leurs propres lignes.
+%   \item Une indentation de quatre (4) espaces.
+%   \item<2-> Pour utiliser ce style dans Emacs\index{Emacs}, faire
+% \begin{verbatim}
+%     M-x ess-set-style RET C++ RET
+% \end{verbatim}
+%     une fois qu'un fichier de script est ouvert.
+%   \end{itemize}
+% \end{frame}
 
 %%% Local Variables:
 %%% mode: latex
