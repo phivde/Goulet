@@ -5,283 +5,393 @@
 options(width=52)
 @
 
+\begin{framed}
+  Objectifs
+  \begin{itemize}
+  \item faire ceci
+  \item faire cela
+  \end{itemize}
+\end{framed}
+
 \section{Bref historique}
 \label{presentation:historique}
 
-À l'origine fut le S, un langage pour «programmer avec des données»
-développé chez Bell Laboratories à partir du milieu des années 1970
-par une équipe de chercheurs menée par John~M.\ Chambers. Au fil du
-temps, le S a connu diverses versions communément identifiées par la
-couleur du livre dans lequel la nouvelle incarnation était présentée:
-...
+À l'origine fut le S\index{S}, un langage pour «programmer avec des
+données» développé chez Bell Laboratories à partir du milieu des
+années 1970 par une équipe de chercheurs menée par John~M.\ Chambers.
+Au fil du temps, le S a connu quatre principales versions communément
+identifiées par la couleur du livre dans lequel elles étaient
+présentées: %
+version «originale» \citep[\emph{Brown
+  Book;}][]{Chambers:brownbook:1984}, %
+version 2 \citep[\emph{Blue Book;}][]{Chambers:bluebook:1988}, %
+version 3 \citep[\emph{White Book;}][]{Chambers:whitebook:1992} et %
+version 4 \citep[\emph{Green Book;}][]{Chambers:greenbook:1998}; %
+voir aussi \cite{Chambers:evolution} et \cite{Becker:historyS:1994}
+pour plus de détails.
 
 Dès la fin des années 1980 et pendant près de vingt ans, le S a
 principalement été popularisé par une mise en {\oe}uvre commerciale
-nommée S-PLUS. En 2008, Lucent Technologies a vendu le langage S à
-Insightful Corporation, ce qui a effectivement stoppé le développement
-du langage par ses auteurs originaux. Aujourd'hui, le S est
-commercialisé de manière relativement confidentielle sous le nom S$+$
-par Tibco Software.
+nommée S-PLUS\index{S-PLUS}. En 2008, Lucent Technologies a vendu le
+langage S à Insightful Corporation, ce qui a effectivement stoppé le
+développement du langage par ses auteurs originaux. Aujourd'hui, le S
+est commercialisé de manière relativement confidentielle sous le nom
+Spotfire S$+$\index{S$+$} par TIBCO Software.
 
 Ce qui a fortement contribué à la perte d'influence de S-PLUS, c'est
 une nouvelle mise en {\oe}uvre du langage développée au milieu des
-années 1990. Inspirés à la fois par le S et par Scheme (un dérivé du
-Lisp), Ross Ihaka et Robert Gentleman proposent un langage pour
-l'analyse de données et les graphiques qu'ils nomment {\R}
-\citep{Ihaka:R:1996}. À la suggestion de Martin Maechler de l'ETH de
-Zurich, les auteurs décident d'intégrer leur nouveau langage au projet
-GNU (\url{www.gnu.org}), faisant de {\R} un logiciel libre.
+années 1990. Inspirés à la fois par le S\index{S} et par
+Scheme\index{Scheme} (un dérivé du Lisp), Ross Ihaka et Robert
+Gentleman proposent un langage pour l'analyse de données et les
+graphiques qu'ils nomment R \citep{Ihaka:R:1996}. À la suggestion
+de Martin Maechler de l'ETH de Zurich, les auteurs décident d'intégrer
+leur nouveau langage au projet GNU\footnote{%
+  \url{http://www.gnu.org}}, %
+faisant de R un logiciel libre.
 
 Ainsi disponible gratuitement et ouvert aux contributions de tous,
-{\R} gagne rapidement en popularité là même où S-PLUS avait acquis ses
-lettres de noblesse, soit dans les milieux académiques. De pâle copie
-«\emph{not unlike S}», {\R} devient un concurrent sérieux à S-PLUS,
-puis le surpasse lorsque les efforts de développement se rangent
-massivement derrière le projet libre. D'ailleurs John~M.\ Chambers
-travaille aujourd'hui pour le projet {\R}.
+R gagne rapidement en popularité là même où S-PLUS avait acquis ses
+lettres de noblesse, soit dans les milieux académiques. De simple
+dérivé «\emph{not unlike S}», R devient un concurrent sérieux à
+S-PLUS, puis le surpasse lorsque les efforts de développement se
+rangent massivement derrière le projet libre. D'ailleurs John Chambers
+place aujourd'hui ses efforts de réflexion et de développement dans le
+projet R \citep{Chambers:R:2008}.
 
 
 \section{Description sommaire de R}
 \label{presentation:description}
 
+R est un environnement intégré de manipulation de données, de
+calcul et de préparation de graphiques. Toutefois, ce n'est pas
+seulement un «autre» environnement statistique (comme SPSS ou SAS, par
+exemple), mais aussi un langage de programmation complet et autonome.
 
-Le S est
+Tel que mentionné précédemment, le R est un langage principalement
+inspiré du S et de Scheme\index{Scheme} \citep{Sussman:scheme:1996}.
+Le S\index{S} était à son tour inspiré de plusieurs langages, dont
+l'APL (autrefois un langage très prisé par les actuaires) et le Lisp.
+Comme tous ces langages, le R est
+\emph{interprété}\index{interprété (langage)}, c'est-à-dire qu'il
+requiert un autre programme --- l'\emph{interprète} --- pour que ses
+commandes soient exécutées. Par opposition, les programmes de langages
+\emph{compilés}\index{compilé (langage)}, comme le C ou le C++, sont
+d'abord convertis en code machine par le compilateur puis directement
+exécutés par l'ordinateur.
 
+Le programme que l'on lance lorsque l'on exécute R est en fait
+l'interprète. Celui-ci attend que l'on lui soumette des commandes dans
+le langage R, commandes qu'il exécutera immédiatement, une à une et
+en séquence.
+
+Par analogie, Excel est certes un logiciel de manipulation de données,
+de mise en forme et de préparation de graphiques, mais c'est aussi au
+sens large un langage de programmation interprété. On utilise le
+langage de programmation lorsque l'on entre des commandes dans une
+cellule d'une feuille de calcul. L'interprète exécute les commandes et
+affiche les résultats dans la cellule.
+
+Le R est un langage particulièrement puissant pour les applications
+mathématiques et statistiques (et donc actuarielles) puisque
+précisément développé dans ce but. Parmi ses caractéristiques
+particulièrement intéressantes, on note:
 \begin{itemize}
-\item Ce n'est pas seulement un «autre» environnement statistique
-  (comme SPSS ou SAS, par exemple), mais bien un langage de
-  programmation complet et autonome.
-\item Inspiré de plusieurs langages, dont l'APL et le Lisp, le S est:
-  \begin{itemize}
-  \item interprété (et non compilé);
-  \item sans déclaration obligatoire des variables;
-  \item basé sur la notion de vecteur;
-  \item particulièrement puissant pour les applications mathématiques
-    et statistiques (et donc actuarielles).
-  \end{itemize}
+\item langage basé sur la notion de vecteur, ce qui simplifie les
+  calculs mathématiques et réduit considérablement le recours aux
+  structures itératives (boucles);
+\item pas de typage ni de déclaration obligatoire des variables;
+\item programmes généralement courts, en général quelques lignes de
+  code seulement;
+\item temps de développement très court.
 \end{itemize}
 
 
-\section{Les moteurs S}
-\label{presentation:moteurs}
 
-Il existe quelques «moteurs» ou dialectes du langage S.
-
-\begin{itemize}
-\item Le plus connu est S-Plus, un logiciel commercial de
-  Insightful Corporation (Bell Labs octroie à Insightful la licence
-  exclusive de son système S).
-\item \textsf{R}, ou GNU S, est une version libre (\emph{Open Source})
-  .
-\end{itemize}
-
-S-Plus et \textsf{R} constituent tous deux des environnements intégrés
-de manipulation de données, de calcul et de préparation de graphiques.
-
-
-\section{Interfaces pour S-Plus et \textsf{R}}
+\section{Interfaces}
 \label{presentation:interfaces}
 
-Provenant du monde Unix, tant S-Plus que \textsf{R} sont d'abord et
-avant tout des applications en ligne de commande (\texttt{sqpe.exe} et
-\texttt{rterm.exe} sous Windows).
+R est d'abord et avant tout une application n'offrant qu'une invite de
+commande du type de celle présentée à la
+figure~\ref{fig:presentation:console}. En soi, cela n'est pas si
+différent d'un tableur tel que Excel: la zone d'entrée de texte dans
+une cellule n'est rien d'autre qu'une invite de commande\footnote{%
+  Merci à Markus Gesmann pour cette observation.}, par ailleurs aux
+capacités d'édition plutôt réduites.
+
+\begin{figure}
+  \centering
+  \includegraphics{console-screenshot}
+  \caption{Fenêtre de la console sous Mac OS~X au démarrage de R}
+  \label{fig:presentation:console}
+\end{figure}
 
 \begin{itemize}
-\item S-Plus possède toutefois une interface graphique élaborée
-  permettant d'utiliser le logiciel sans trop connaître le langage de
-  programmation.
-\item \textsf{R} dispose également d'une interface graphique
-  rudimentaire sous Windows et Mac OS~X.
-\item L'édition sérieuse de code S bénéficie cependant grandement d'un
-  bon éditeur de texte.
-\item À la question 6.2 de la foire aux questions (FAQ) de \textsf{R},
-  «Devrais-je utiliser \textsf{R} à l'intérieur de
-  Emacs?»\index{Emacs}, la réponse est: «Oui, absolument.» Nous
-  partageons cet avis, aussi ce document supposera-t-il que S-Plus ou
-  \textsf{R} sont utilisés à l'intérieur de GNU Emacs avec le mode
-  ESS\index{ESS}.
-\item Autres options: Tinn-R (libre), WinEdt (partagiciel) avec
-  l'ajout R-WinEdt.
-\end{itemize}
-
-
-\section{Installation de Emacs avec ESS}
-\label{presentation:emacs}
-
-Il n'existe pas de procédure d'installation similaire aux autres
-applications Windows pour la version officielle de GNU Emacs.
-
-\begin{itemize}
-\item Pour une installation simplifiée de Emacs et ESS, consulter le
-  site Internet
-  \begin{quote}
-    \url{http://vgoulet.act.ulaval.ca/emacs/}
-  \end{quote}
-  On y trouve une version modifiée de GNU Emacs pour Windows et des
-  instructions d'installation détaillées.
-\item Les utilsateurs de Mac OS~X devraient installer Aquamacs
-  (\url{http://aquamacs.org}), une version de GNU Emacs bien intégrée
-  à OS~X et contenant déjà ESS.
-\item L'annexe \ref{ess} présente les plus importantes commandes à
-  connaître pour utiliser efficacement Emacs et le mode ESS.
-\end{itemize}
-
-
-\section{Démarrer et quitter S-Plus ou \textsf{R}}
-\label{presentation:demarrer}
-
-On suppose ici que S-Plus ou R sont utilisés à l'intérieur de Emacs.
-
-\begin{itemize}
-\item Pour démarrer \textsf{R} \R à l'intérieur de Emacs:
-\begin{verbatim}
-M-x R RET
-\end{verbatim}
-  puis spécifier un dossier de travail (voir la section
-  \ref{presentation:workspace}). Une console \textsf{R} est ouverte
-  dans une fenêtre (\emph{buffer} dans la terminologie de Emacs)
-  nommée \texttt{*R*}.
-\item Pour démarrer S-Plus sous Windows, \Splus la procédure est
-  similaire, sauf que la commande à utiliser est
-\begin{verbatim}
-M-x Sqpe RET
-\end{verbatim}
-  Consulter l'annexe \ref{s-plus_windows} pour de plus amples
-  détails.
-\newpage
-\item Pour quitter, deux options sont disponibles:
-  \begin{enumerate}
-  \item Taper \code{q()}\indexfonction{q} à la ligne de commande.
-  \item Dans Emacs, faire \ess{C-c C-q}. ESS va alors s'occuper de
-    fermer le processus S ainsi que tous les \emph{buffers} associés à
-    ce processus.
-  \end{enumerate}
+\item Sous Unix et Linux, R n'est accessible que depuis la ligne de
+  commande du système d'exploitation (terminal). Aucune interface
+  graphique n'est offerte avec la distribution de base de R.
+\item Sous Windows, une interface graphique plutôt rudimentaire est
+  disponible. Elle facilite certaines opérations tel que
+  l'installation de packages externes, mais elle offre autrement peu
+  de fonctionnalités additionnelles pour l'édition de code R.
+\item L'interface graphique de R sous Mac OS~X est la plus élaborée.
+  Outre la console présentée à la
+  figure~\ref{fig:presentation:console}, l'application \code{R.app}
+  comporte de nombreuses fonctionnalités, dont un éditeur de code
+  assez complet.
 \end{itemize}
 
 
 \section{Stratégies de travail}
 \label{presentation:strategies}
 
-Il existe principalement deux façons de travailler avec S-Plus et
-\textsf{R}.
+Dans la mesure où R se présente essentiellement sous forme d'une
+invite de commande, il existe deux grandes stratégies de travail avec
+cet environnement statistique.
+
 \begin{enumerate}
-\item Le code est virtuel et les objets sont réels. C'est l'approche
-  qu'encouragent les interfaces graphiques, mais c'est aussi la moins
-  pratique à long terme. On entre des expressions directement à la
-  ligne de commande pour les évaluer immédiatement.
+\item On entre des expressions à la ligne de commande pour les évaluer
+  immédiatement:
 <<echo=TRUE>>=
 2 + 3
--2 * 7
-exp(1)
-log(exp(1))
 @
-  Les objets créés au cours d'une session de travail sont sauvegardés.
-  Par contre, à moins d'avoir été sauvegardé dans un fichier, le code
-  utilisé pour créer ces objets est perdu lorsque l'on quitte S-Plus
-  ou \textsf{R}.
-\item Le code est réel et les objets sont virtuels. C'est l'approche
-  que nous favorisons. Le travail se fait essentiellement dans des
-  fichiers de script (de simples fichiers de texte) dans lesquels sont
-  sauvegardées les expressions (parfois complexes!) et le code des
-  fonctions personnelles. Les objets sont créés au besoin en exécutant
-  le code. Emacs permet ici de passer efficacement des fichiers de
-  script à l'exécution du code:
-  \begin{enumerate}[i)]
-  \item démarrer un processus S-Plus (\texttt{M-x Sqpe}) ou
-    \textsf{R} (\texttt{M-x R}) et spécifier le dossier de travail;
-  \item ouvrir un fichier de script avec \ess{C-x C-f}. Pour créer un
-    nouveau fichier, ouvrir un fichier inexistant;
-  \item positionner le curseur sur une expression et faire \ess{C-c
-      C-n} pour l'évaluer;
-  \item le résultat apparaît dans le \emph{buffer} \texttt{*S+6*} ou
-    \texttt{*R*}.
-  \end{enumerate}
+  On peut également créer des objets contenant le résultat d'un
+  calcul. Ces objets sont stockés dans la mémoire de l'ordinateur:
+<<echo=TRUE>>=
+x <- exp(2)
+x
+@
+  Lorsque la session de travail est terminée, on sauvegarde une image
+  de la mémoire sur le disque dur de l'ordinateur afin de pouvoir
+  conserver les objets pour une future séance de
+  travail\indexfonction{save.image}:
+<<eval=FALSE>>=
+save.image()
+@ %
+  Par défaut, l'image est sauvegardée dans un fichier nommé
+  \code{.RData} dans le dossier de travail actif (voir la
+  section~\ref{presentation:workspace}) et cette image est
+  automatiquement chargée en mémoire au prochain lancement de
+  R, tel qu'indiqué à la fin du message d'accueil:
+\begin{verbatim}
+[Sauvegarde de la session précédente restaurée]
+\end{verbatim}
+
+  Cette approche, dite de «code virtuel et objets réels» a un gros
+  inconvénient: le code utilisé pour créer les objets n'est pas
+  sauvegardé entre les sessions de travail. Or, celui-ci est souvent
+  bien plus compliqué que l'exemple ci-dessus. De plus, sans accès au
+  code qui a servi à créer l'objet \code{x}, comment savoir ce que la
+  valeur \Sexpr{format(x, dec = ",")} représente au juste?
+
+\item L'approche dite de «code réel et objets virtuels» considère que
+  ce qu'il importe de conserver d'une session de travail à l'autre
+  n'est pas tant les objets que le code qui a servi à les créer.
+  Ainsi, on sauvegardera dans ce que l'on nommera des \emph{fichiers
+    de script} nos expressions R et le code de nos fonctions
+  personnelles. Par convention, on donne aux fichiers de script un nom
+  se terminant avec l'extension \code{.R}.
+
+  Avec cette approche, les objets sont créés au besoin en exécutant le
+  code des fichiers de script. Comment? Simplement en copiant le code
+  du fichier de script et en le collant dans l'invite de commande de
+  R. La figure~\ref{fig:presentation:script} illustre schématiquement
+  ce que le programmeur R a constamment sous les yeux: d'un côté son
+  fichier de script et, de l'autre, l'invite de commande R dans
+  laquelle son code a été exécuté.
+
+  La méthode d'apprentissage préconisée dans cet ouvrage suppose que
+  le lecteur utilisera cette seconde approche d'interaction avec R.
 \end{enumerate}
 
+\begin{figure}
+  \centering
+  \lstinputlisting[language={},frame=single]{script.R}
+  \lstinputlisting[language={},firstline=2,frame=single]{script.Rout}
+  \caption{Fichier de script (en haut) et invite de commande R dans
+    laquelle les expressions R ont été exécutées (en bas). Les lignes
+    débutant par \code{\#} dans le fichier de script sont des
+    commentaires ignorés par l'interprète de commandes.}
+  \label{fig:presentation:script}
+\end{figure}
 
-\section{Gestion des projets ou environnements de travail}
-\label{presentation:workspace}
 
-S-Plus et \textsf{R} ont une manière différente mais tout aussi
-particulière de sauvegarder les objets créés au cours d'une session de
-travail.
+\section{Éditeurs de texte}
+\label{presentation:editeurs}
+
+Dans la mesure où l'on a recours à des fichiers de script tel
+qu'expliqué à la section précédente, l'édition de code R bénéficie
+grandement d'un bon éditeur de texte pour programmeur. Dans certains
+cas, l'éditeur peut même réduire l'opération de copier-coller à un
+simple raccourci clavier.
 \begin{itemize}
-\item Tous deux doivent travailler dans un dossier et non avec des
-  fichiers individuels.
-\item Dans S-Plus, \Splus tout objet créé au cours d'une session de
-  travail est sauvegardé de façon permanente sur le disque dur dans le
-  sous-dossier \texttt{\_\_Data} du dossier de travail.
-\item Dans \textsf{R}, \R les objets créés sont conservés en mémoire
-  jusqu'à ce que l'on quitte l'application ou que l'on enregistre le
-  travail avec la commande \fonction{save.image()}. L'environnement de
-  travail (\emph{workspace}) est alors sauvegardé dans le fichier
-  \texttt{.RData} du dossier de travail.
+\item Un éditeur de texte est différent d'un traitement de texte en ce
+  qu'il s'agit d'un logiciel destiné à la création, l'édition et la
+  sauvegarde de fichiers textes purs, c'est-à-dire dépourvus
+  d'information de présentation et de mise en forme. Les applications
+  Bloc-notes sous Windows ou TextEdit sous OS~X sont deux exemples
+  d'éditeurs de texte simples.
+\item Un éditeur de texte pour programmeur saura en plus reconnaître
+  la syntaxe d'un langage de programmation et assister à sa mise en
+  forme: indentation automatique du code, coloration syntaxique,
+  manipulation d'objets, etc.
 \end{itemize}
 
-Le dossier de travail est déterminé au lancement de l'application.
+Le lecteur peut utiliser l'éditeur de texte de son choix pour
+l'édition de code R. Certains éditeurs offrent simplement plus de
+fonctionnalités que d'autres.
 \begin{itemize}
-\item Avec Emacs et ESS, on doit spécifier le dossier de travail
-  chaque fois que l'on démarre un processus S-Plus ou R.
-\item Les interfaces graphiques permettent également de spécifier le
-  dossier de travail.
+\item GNU Emacs\index{Emacs} est un très ancien, mais aussi très
+  puissant éditeur pour programmeur. À la question 6.2 de la foire aux
+  questions de R \citep{R-FAQ}, «Devrais-je utiliser R à l'intérieur
+  de Emacs?»\index{Emacs}, la réponse est: «Oui, absolument.»
+
+  En effet, combiné avec le mode ESS\index{ESS} (\emph{Emacs Speaks
+    Statistics}), Emacs offre un environnement de développement aussi
+  riche qu'efficace. Entre autres fonctionnalités uniques à Emacs, le
+  fichier de script et l'invite de commandes R sont regroupés dans la
+  même fenêtre, comme on peut le voir à la
+  figure~\ref{fig:presentation:emacs}.
+
+  \begin{figure}[t]
+    \centering
+    \includegraphics{emacs-screenshot}
+    \caption{Fenêtre de GNU Emacs sous OS~X en mode d'édition de code
+      R. Dans la partie du haut, on retrouve le fichier de script de
+      la figure~\ref{fig:presentation:script} et dans la partie du
+      bas, l'invite de commandes R.}
+    \label{fig:presentation:emacs}
+  \end{figure}
+
+  Logiciel porte étendard du mouvement libre, Emacs est disponible
+  gratuitement et à l'identique sur toutes les plateformes supportées
+  par R, dont Windows, OS~X et Linux.
+\item Le présent auteur distribue des versions de GNU Emacs pour
+  Windows et OS~X simples à installer et livrées avec le mode ESS et
+  quelques autres extensions. Consulter le site
+  \url{http://vgoulet.act.ulaval.ca/emacs/}.
+\item Il existe plusieurs autres options plus faciles à apprivoiser
+  que Emacs pour éditer du code R. Nous recommandons:
   \begin{itemize}
-    \sloppy
-  \item Dans \Splus l'interface graphique de S-Plus, choisir
-    \texttt{General Settings} dans le menu \texttt{Options}, puis
-    l'onglet \texttt{Startup}. Cocher la case \texttt{Prompt for
-      project folder}.  Consulter également le chapitre 13 du guide de
-    l'utilisateur de S-Plus.
-  \item Dans \R l'interface graphique de \textsf{R}, le plus simple
-    consiste à changer le dossier de travail à partir du menu
-    \texttt{Fichier|Changer le répertoire courant...} Consulter aussi
-    la \emph{R for Windows FAQ}.
+  \item sous Windows, l'éditeur Notepad++\index{Notepad++}
+    muni de l'extension NppToR \citep{NppToR}, tous deux des
+    logiciels libres;
+  \item toujours sous Windows, le partagiciel
+    WinEdt\index{WinEdt} muni de l'extension libre
+    R-WinEdt \citep{RWinEdt};
+  \item sous OS~X, tout simplement l'éditeur de texte très complet
+    intégré à l'application \code{R.app}, ou alors l'éditeur de texte
+    commercial TextMate (essai gratuit de 30 jours);
+  \item sous Linux, Vim et Kate semblent les choix les plus populaires
+    après Emacs dans la communauté R.
   \end{itemize}
 \end{itemize}
+
+
+
+\section{Anatomie d'une session de travail}
+\label{presentation:session}
+
+Dans ses grandes lignes, toute session de travail R se réduit aux
+étapes ci-dessous.
+\begin{enumerate}
+\item Ouvrir un fichier de script existant ou en créer un nouveau à
+  l'aide de l'éditeur de texte de son choix.
+\item Démarrer une session R en cliquant sur l'icône de l'application
+  si l'on utilise une interface graphique, ou alors en suivant la
+  procédure expliquée à l'annexe~\ref{ess} si l'on utilise GNU~Emacs.
+\item Au cours de la phase de développement, on fera généralement de
+  nombreux aller-retours la ligne de commande où l'on testera des
+  commandes et le fichier de script où l'on consignera le code R que
+  l'on souhaite sauvegarder et les commentaires qui nous permettront
+  de s'y retrouver plus tard.
+\item Sauvegarder son fichier de script et quitter l'éditeur.
+\item Si nécessaire --- et c'est rarement le cas --- sauvegarder
+  l'image mémoire de la session R avec
+  \code{save.image()}\indexfonction{save.image}. En fait, on ne voudra
+  sauvegarder nos objets R que lorsque ceux-ci sont très longs à créer
+  comme, par exemple, les résultats d'une simulation.
+\item Quitter R en tapant \code{q()}\indexfonction{q} à la ligne de
+  commande ou en fermant l'interface graphique par la procédure
+  usuelle. Encore ici, la manière de procéder est quelque peu
+  différente dans GNU~Emacs; voir l'annexe~\ref{ess}.
+\end{enumerate}
+Évidemment, les étapes 1 et 2 sont interchageables, tout comme les
+étapes 4, 5 et 6.
+
+
+\section{Répertoire de travail}
+\index{Répertoire de travail|(}
+\index{Dossier de travail|see{répertoire de travail}}
+\label{presentation:workspace}
+
+Le répertoire de travail (\emph{workspace}) de R est le dossier par
+défaut dans lequel le logiciel
+\begin{inparaenum}[1)]
+\item va rechercher des fichiers de script ou de données; et
+\item va sauvegarder l'image mémoire dans le fichier \code{.RData}.
+\end{inparaenum}
+Le dossier de travail est déterminé au lancement de R.
+\begin{itemize}
+\item Les interfaces graphiques démarrent avec un répertoire de
+  travail par défaut. Pour le changer, utiliser l'entrée appropriée
+  dans le menu \texttt{Fichier} (Windows) ou \texttt{Divers} (Mac
+  OS~X). Consulter aussi les foires aux questions spécifiques aux
+  interfaces graphiques \citep{Rw-FAQ,RMacOSX-FAQ} pour des détails
+  additionnels sur la gestion des répertoires de travail.
+\item Avec GNU~Emacs, la situation est un peu plus simple puisque l'on
+  doit spécifier un répertoire de travail chaque fois que l'on démarre
+  un processus R.
+\end{itemize}
+\index{Répertoire de travail|)}
+
 
 
 \section{Consulter l'aide en ligne}
 \label{presentation:aide}
 
-Les rubriques d'aide des diverses fonctions disponibles dans S-Plus et
-\textsf{R} contiennent une foule d'informations ainsi que des exemples
+Les rubriques d'aide des diverses fonctions disponibles dans R
+contiennent une foule d'informations ainsi que des exemples
 d'utilisation. Leur consultation est tout à fait essentielle.
 
 \begin{itemize}
-\item Pour consulter la rubrique d'aide de la fonction \code{foo},
-  on peut entrer à la ligne de commande
+\item Pour consulter la rubrique d'aide de la fonction \code{foo}, on
+  peut entrer à la ligne de commande
 \begin{Schunk}
 \begin{Sinput}
 > ?foo
 \end{Sinput}
 \end{Schunk}
-\item Dans Emacs, \code{C-c C-v foo RET}\indexess{C-c C-v} ouvrira la
-  rubrique d'aide de la fonction \code{foo} dans un nouveau
-  \emph{buffer}.
-\item Plusieurs touches de raccourcis facilitent la consultation des
-  rubriques d'aide; voir la section \ref{ess:aide}.
+  ou
+\begin{Schunk}
+\begin{Sinput}
+> help(foo)
+\end{Sinput}
+\end{Schunk}
 \end{itemize}
+
 
 
 \section{Où trouver de la documentation}
 \label{presentation:doc}
 
-S-Plus est livré avec quatre livres (disponibles en format PDF depuis
-le menu \texttt{Help} de l'interface graphique), mais aucun ne s'avère
-vraiment utile pour apprendre le langage S.
+La documentation officielle de R se compose de six guides accessibles
+depuis le menu \texttt{Aide} des interfaces graphiques ou encore en
+ligne dans le site du projet R\footnote{%
+  \url{http://www.r-project.org}}, %
+Pour le débutant, seuls \emph{An Introduction to R} et, possiblement,
+\emph{R Data Import/Export} peuvent s'avérer des ressources utiles à
+court terme.
 
 Plusieurs livres --- en versions papier ou électronique, gratuits ou
-non --- ont été publiés sur S-Plus et \textsf{R}. On trouvera des
-listes exhaustives dans les sites de Insightful et du projet
-\textsf{R}:
-\begin{itemize}
-\item \url{http://www.insightful.com/support/splusbooks.asp}
-\item \url{http://www.r-project.org} (dans la section
-  \texttt{Documentation}).
-\end{itemize}
+non --- ont été publiés sur R. On en trouvera une liste exhaustive
+dans la section Documentation du site du projet R.
 
-De plus, les ouvrages de \citet{Sprogramming,MASS} constituent des
-références sur le langage S devenues au cours des dernières années des
-standards \emph{de facto}.
+Depuis plusieurs années maintenant, les ouvrages de
+\citet{Venables:s:2000,MASS} demeurent des références standards
+\emph{de facto} sur les langages S et R. Plus récent,
+\cite{Braun:Rprogramming:2007} participe du même effort que le présent
+ouvrage en se concentrant sur la programmation en R plutôt que sur ses
+applications statistiques.
 
 
 \section{Exemples}
@@ -294,7 +404,7 @@ standards \emph{de facto}.
 \label{presentation:exercices}
 
 \begin{exercice}
-  Démarrer un processus S-Plus ou \textsf{R} à l'intérieur de Emacs.
+  Démarrer un processus S-Plus ou R à l'intérieur de Emacs.
 \end{exercice}
 
 \begin{exercice}

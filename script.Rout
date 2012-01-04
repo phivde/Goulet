@@ -1,0 +1,24 @@
+
+R version 2.14.0 (2011-10-31)
+Copyright (C) 2011 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: x86_64-apple-darwin9.8.0/x86_64 (64-bit)
+
+[...]
+
+> ## Fichier de script simple contenant des expressions R pour
+> ## faire des calculs et créer des objets.
+> 2 + 3
+[1] 5
+>
+> ## Probabilité d'une loi de Poisson(10)
+> x <- 7
+> 10^x * exp(-10) / factorial(x)
+[1] 0.09007923
+>
+> ## Petite fonction qui fait un calcul trivial
+> f <- function(x) x^2
+>
+> ## Évaluation de la fonction
+> f(2)
+[1] 4

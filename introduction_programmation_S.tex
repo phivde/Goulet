@@ -10,8 +10,9 @@
   \usepackage[noae]{Sweave}
   \usepackage{textcomp,graphicx,color}
   \usepackage[absolute,showboxes]{textpos}
+  \usepackage[alwaysadjust]{paralist}
   \usepackage{threeparttable,paralist,expdlist}
-  \usepackage{listings,answers}
+  \usepackage{listingsutf8,answers}
 
   %%% Hyperliens
   % \usepackage{hyperref}
@@ -46,6 +47,12 @@
   \setlength{\marginparsep}{7mm}
   \setlength{\marginparwidth}{13mm}
 
+  %%% Options de babel
+  \frenchbsetup{CompactItemize=false,%
+    ThinSpaceInFrenchNumbers=true}
+  \addto\captionsfrench{\def\figurename{{\scshape Fig.}}}
+  \addto\captionsfrench{\def\tablename{{\scshape Tab.}}}
+
   %%% Style des entêtes de chapitres
   \chapterstyle{hangnum}
 
@@ -67,6 +74,13 @@
   \theoremstyle{definition}
   \newtheorem*{astuce}{Astuce}
   \newenvironment{sol}{\begin{proof}[Solution]}{\end{proof}}
+
+  %%% Modification des environnements de Sweave
+  \DefineVerbatimEnvironment{Sinput}{Verbatim}{xleftmargin=\parindent}
+  \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=\parindent}
+  \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=\parindent}
+  \fvset{listparameters={\setlength{\topsep}{0pt}}}
+  \renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
 
   %%% Environnements pour les exercices et réponses. On utilise
   %%% \thechapter plutôt que \arabic{chapter} pour la numérotation des
@@ -119,7 +133,7 @@
     alsoother={:_\$}}
   \lstset{language=Renhanced,
     extendedchars=true,
-    inputencoding=latin1,
+    inputencoding=utf8/latin1,
     basicstyle=\small\ttfamily,
     commentstyle=\color{red}\slshape,
     keywordstyle=\mdseries,
