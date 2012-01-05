@@ -8,23 +8,17 @@
   \usepackage[autolanguage]{numprint}
   \usepackage{vgmath,actu,amsmath,amsthm,icomma}
   \usepackage[noae]{Sweave}
-  \usepackage{textcomp,graphicx,color}
-  \usepackage{MnSymbol,applekeys}      % symboles spéciaux
-  \usepackage[]{textpos}
   \usepackage[alwaysadjust]{paralist}
-  \usepackage{threeparttable,paralist,expdlist}
+  \usepackage{textpos}
+  \usepackage{graphicx,color}
+  \usepackage{MnSymbol,applekeys}      % symboles spéciaux
+  %\usepackage{threeparttable,expdlist}
   \usepackage{listingsutf8,answers}
 
   %%% Hyperliens
-  % \usepackage{hyperref}
-  % \definecolor{link}{rgb}{0,0,0.3}
-  % \hypersetup{
-  %   pdftex,
-  %   colorlinks,%
-  %   citecolor=link,%
-  %   filecolor=link,%
-  %   linkcolor=link,%
-  %   urlcolor=link}
+  \usepackage{hyperref}
+  \definecolor{link}{rgb}{0,0,0.3}
+  \hypersetup{colorlinks,allcolors=link}
 
   %%% ============
   %%%  Page titre
@@ -82,7 +76,9 @@
 
   %% Options de babel
   \frenchbsetup{CompactItemize=false,%
-    ThinSpaceInFrenchNumbers=true}
+    ThinSpaceInFrenchNumbers=true,
+    ItemLabeli=$\filledtriangleright$,
+    ItemLabelii=\textendash}
   \addto\captionsfrench{\def\figurename{{\scshape Fig.}}}
   \addto\captionsfrench{\def\tablename{{\scshape Tab.}}}
 
@@ -123,6 +119,7 @@
         \addtolength{\leftmargin}{\labelsep}
         \setdefaultenum{a)}{i)}{}{}}\item}
     {\end{list}}
+  % \newenvironment{reponse}[1]{%
   \renewenvironment{reponse}[1]{%
     \begin{list}{\bfseries #1}{%
         \settowidth{\labelwidth}{#1}
@@ -219,19 +216,14 @@
   \newcommand{\ess}[1]{\code{#1}\indexess{#1}}
   \makeindex
 
-  \includeonly{presentation,emacs+ess}
+%  \includeonly{presentation,emacs+ess}
 
 \begin{document}
-
-%% Redéfinition de la puce dans les listes. Doit être fait ici à cause
-%% de babel. Le symbole provient de MnSymbol.
-\renewcommand{\FrenchLabelItem}{$\filledtriangleright$}
-\renewcommand{\labelitemii}{\textendash}
 
 \frontmatter
 
 \pagestyle{empty}
-\include{pagetitre}
+%\include{pagetitre}
 
 \pagestyle{companion}
 
@@ -240,19 +232,19 @@
 
 \mainmatter
 \include{presentation}
-\include{bases}
-\include{operateurs}
-\include{exemples}
-\include{fonctions}
-\include{avance}
-\include{optimisation}
-\include{rng}
-\include{simulation}
+% \include{bases}
+% \include{operateurs}
+% \include{exemples}
+% \include{fonctions}
+% \include{avance}
+% \include{optimisation}
+% \include{rng}
+% \include{simulation}
 
 \appendix
 \include{emacs+ess}
 \include{fdl}
-\include{reponses}
+% \include{reponses}
 
 \bibliographystyle{francais}
 \bibliography{r,stat,informatique}
