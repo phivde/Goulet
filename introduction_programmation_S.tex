@@ -26,7 +26,9 @@
   %   linkcolor=link,%
   %   urlcolor=link}
 
-  %%% Page titre
+  %%% ============
+  %%%  Page titre
+  %%% ============
   \title{\HUGE
     \fontseries{b}\selectfont Introduction
     \fontseries{m}\selectfont  à la \\
@@ -38,35 +40,37 @@
   \date{\Large Seconde édition}
   \newcommand{\ISBN}{978-2-9809136-7-9}
 
-  %%% Commande pour le nom du langage R
-  \newcommand{\R}{\textsf{R}}
-
   %%% Commandes pour notes marginales
   \newcommand{\Splus}{\marginpar[\hfill S$+$]{S$+$}}
   \newcommand{\warning}{\marginpar[\hfill\LARGE\danger]%
     {\LARGE\danger}}
+
+
+  %%% ===================
+  %%%  STYLE DU DOCUMENT
+  %%% ===================
+
+  %% Titres des chapitres
+  \chapterstyle{hangnum}
+  \renewcommand{\chaptitlefont}{\normalfont\Huge\sffamily\bfseries\raggedright}
+
+  %% Marges, entêtes et pieds de page
   \setlength{\marginparsep}{7mm}
   \setlength{\marginparwidth}{13mm}
-
-  %%% Options de babel
-  \frenchbsetup{CompactItemize=false,%
-    ThinSpaceInFrenchNumbers=true}
-  \addto\captionsfrench{\def\figurename{{\scshape Fig.}}}
-  \addto\captionsfrench{\def\tablename{{\scshape Tab.}}}
-
-  %%% Style des entêtes de chapitres
-  \chapterstyle{hangnum}
-
-  %%% Styles des entêtes et pieds de page
   \setlength{\headwidth}{\textwidth}
   \addtolength{\headwidth}{\marginparsep}
   \addtolength{\headwidth}{\marginparwidth}
 
-  %%% Numéroter les sous-sections
+  %% Titres des sections et sous-sections
+  \setsecheadstyle{\normalfont\Large\sffamily\bfseries\raggedright}
+  \setsubsecheadstyle{\normalfont\large\sffamily\bfseries\raggedright}
   \maxsecnumdepth{subsection}
   \setsecnumdepth{subsection}
 
-  %%% Styles pour les environnements d'exemples et al.
+  %% Noms de fonctions, code, etc.
+  \newcommand{\code}[1]{\texttt{#1}}
+
+  %% Environnements d'exemples et al.
   \theoremstyle{plain}
   \newtheorem{ex}{Exemple}[chapter]
   \theoremstyle{remark}
@@ -76,16 +80,39 @@
   \newtheorem*{astuce}{Astuce}
   \newenvironment{sol}{\begin{proof}[Solution]}{\end{proof}}
 
-  %%% Modification des environnements de Sweave
+  %% Options de babel
+  \frenchbsetup{CompactItemize=false,%
+    ThinSpaceInFrenchNumbers=true}
+  \addto\captionsfrench{\def\figurename{{\scshape Fig.}}}
+  \addto\captionsfrench{\def\tablename{{\scshape Tab.}}}
+
+  %%% =========================
+  %%%  Nouveaux environnements
+  %%% =========================
+
+  %% Listes d'objectifs au début des chapitres
+  \definecolor{shadecolor}{gray}{0}
+  \newenvironment{objectifs}{%
+    \noindent
+    \begin{framed}
+      \vspace{-1.33\baselineskip}
+      \begin{shaded}
+        \noindent\sffamily\bfseries\textcolor{white}{Objectifs du chapitre}
+      \end{shaded}
+      \vspace{-0.6\baselineskip}
+      \begin{compactitem}
+        \small}
+      {\end{compactitem}
+    \end{framed}}
+
+  %% Environnements de Sweave
   \DefineVerbatimEnvironment{Sinput}{Verbatim}{xleftmargin=\parindent}
   \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=\parindent}
   \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=\parindent}
   \fvset{listparameters={\setlength{\topsep}{0pt}}}
   \renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
 
-  %%% Environnements pour les exercices et réponses. On utilise
-  %%% \thechapter plutôt que \arabic{chapter} pour la numérotation des
-  %%% exercices dans les annexes.
+  %% Exercices et réponses
   \Newassociation{rep}{reponse}{reponses}
   \newcounter{exercice}[chapter]
   \newenvironment{exercice}{%
@@ -103,9 +130,8 @@
         \addtolength{\leftmargin}{\labelsep}
         \setdefaultenum{a)}{i)}{}{}}\item}
     {\end{list}}
-  %\renewcommand{\reponseparams}{{\thechapter.\theexercice}}
 
-  %%% Environnement pour les listes de commandes
+  %% Listes de commandes
   \newenvironment{ttscript}[1]{%
     \begin{list}{}{%
         \setlength{\labelsep}{1.5ex}
@@ -117,13 +143,13 @@
         \renewcommand{\makelabel}[1]{##1\hfill}}}
     {\end{list}}
 
-  %%% Environnement pour les listes de structures de contrôle
+  %%% Listes de structures de contrôle
   \newenvironment{struclist}{%
     \begin{description}[\breaklabel\setlabelstyle{\mdseries\ttfamily}%
       \setleftmargin{\parindent}]}
     {\end{description}}
 
-  %%% Environnement pour les remarques importantes
+  %%% Remarques importantes
   \newenvironment{important}{%
     \begin{framed}%
       \noindent
@@ -134,7 +160,9 @@
       {\end{minipage}%
     \end{framed}}
 
-  %%% Paramètres pour les sections de code source
+  %%% =============================================
+  %%%  Paramètres pour les sections de code source
+  %%% =============================================
   \lstloadlanguages{R}
   \lstdefinelanguage{Renhanced}[]{R}{%
     morekeywords={colMeans,colSums,head,is.na,is.null,mapply,ms,na.rm,%
@@ -153,10 +181,9 @@
     index=[1][keywords],
     indexstyle=\indexfonction}
 
-  %%% Styles pour les noms de fonctions, code, etc.
-  \newcommand{\code}[1]{\texttt{#1}}
-
-  %%% Index
+  %%% =======
+  %%%  Index
+  %%% =======
   \renewcommand{\preindexhook}{%
     Les numéros de page en caractères gras indiquent les pages où les
     concepts sont introduits, définis ou expliqués.\vskip\onelineskip}
@@ -201,14 +228,13 @@
 \renewcommand{\FrenchLabelItem}{$\filledtriangleright$}
 \renewcommand{\labelitemii}{\textendash}
 
-\shortcites{Rintro}
-
 \frontmatter
 
 \pagestyle{empty}
 \include{pagetitre}
 
 \pagestyle{companion}
+
 \include{introduction}
 \tableofcontents*
 

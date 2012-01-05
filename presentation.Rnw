@@ -5,13 +5,19 @@
 options(width=52)
 @
 
-\begin{framed}
-  Objectifs
-  \begin{itemize}
-  \item faire ceci
-  \item faire cela
-  \end{itemize}
-\end{framed}
+
+\begin{objectifs}
+\item Comprendre ce qu’est un langage de programmation interprété.
+\item Connaître la provenance du langage R et les principes ayant
+  guidé son développement.
+\item Mettre en place sur son poste de travail un environnement de
+  développement en R.
+\item Savoir démarrer une session R et exécuter des commandes simples.
+\item Comprendre l’utilité des fichiers de script R et savoir les
+  utiliser de manière interactive.
+\item Savoir créer, modifier et sauvegarder ses propres fichiers de
+  script R.
+\end{objectifs}
 
 \section{Bref historique}
 \label{presentation:historique}
@@ -155,14 +161,15 @@ cet environnement statistique.
 2 + 3
 @
   On peut également créer des objets contenant le résultat d'un
-  calcul. Ces objets sont stockés dans la mémoire de l'ordinateur:
+  calcul. Ces objets sont stockés en mémoire dans l'espace de travail
+  de R:
 <<echo=TRUE>>=
 x <- exp(2)
 x
 @
   Lorsque la session de travail est terminée, on sauvegarde une image
-  de la mémoire sur le disque dur de l'ordinateur afin de pouvoir
-  conserver les objets pour une future séance de
+  de l'espace de travail sur le disque dur de l'ordinateur afin de
+  pouvoir conserver les objets pour une future séance de
   travail\indexfonction{save.image}:
 <<eval=FALSE>>=
 save.image()
@@ -262,15 +269,18 @@ fonctionnalités que d'autres.
     \label{fig:presentation:emacs}
   \end{figure}
 
-  Logiciel porte étendard du mouvement libre, Emacs est disponible
-  gratuitement et à l'identique sur toutes les plateformes supportées
-  par R, dont Windows, OS~X et Linux.
-\item Le présent auteur distribue des versions de GNU Emacs pour
-  Windows et OS~X simples à installer et livrées avec le mode ESS et
-  quelques autres extensions. Consulter le site
-  \url{http://vgoulet.act.ulaval.ca/emacs/}.
-\item Il existe plusieurs autres options plus faciles à apprivoiser
-  que Emacs pour éditer du code R. Nous recommandons:
+  Emblême du logiciel libre, Emacs est disponible gratuitement et à
+  l'identique sur toutes les plateformes supportées par R, dont
+  Windows, OS~X et Linux.
+\item Consulter l'annexe~\ref{emacs+ess} pour en savoir plus sur
+  GNU~Emacs et apprendre les commandes essentielles pour y faire ses
+  premiers pas.
+\item Malgré tous ses avantages (ou à cause de ceux-ci), Emacs est un
+  logiciel difficile à apprivoiser, surtout pour les personnes moins à
+  l'aise avec l'informatique.
+\item Il existe plusieurs autres options que Emacs pour éditer
+  efficacement du code R --- et le Bloc-notes de Windows n'en fait
+  \emph{pas} partie! Nous recommandons plutôt:
   \begin{itemize}
   \item sous Windows, l'éditeur Notepad++\index{Notepad++}
     muni de l'extension NppToR \citep{NppToR}, tous deux des
@@ -291,14 +301,15 @@ fonctionnalités que d'autres.
 \section{Anatomie d'une session de travail}
 \label{presentation:session}
 
-Dans ses grandes lignes, toute session de travail R se réduit aux
+Dans ses grandes lignes, toute session de travail avec R se réduit aux
 étapes ci-dessous.
 \begin{enumerate}
 \item Ouvrir un fichier de script existant ou en créer un nouveau à
   l'aide de l'éditeur de texte de son choix.
 \item Démarrer une session R en cliquant sur l'icône de l'application
   si l'on utilise une interface graphique, ou alors en suivant la
-  procédure expliquée à l'annexe~\ref{ess} si l'on utilise GNU~Emacs.
+  procédure expliquée à l'annexe~\ref{emacs+ess} si l'on utilise
+  GNU~Emacs.
 \item Au cours de la phase de développement, on fera généralement de
   nombreux aller-retours la ligne de commande où l'on testera des
   commandes et le fichier de script où l'on consignera le code R que
@@ -306,29 +317,30 @@ Dans ses grandes lignes, toute session de travail R se réduit aux
   de s'y retrouver plus tard.
 \item Sauvegarder son fichier de script et quitter l'éditeur.
 \item Si nécessaire --- et c'est rarement le cas --- sauvegarder
-  l'image mémoire de la session R avec
+  l'espace de travail de la session R avec
   \code{save.image()}\indexfonction{save.image}. En fait, on ne voudra
   sauvegarder nos objets R que lorsque ceux-ci sont très longs à créer
   comme, par exemple, les résultats d'une simulation.
 \item Quitter R en tapant \code{q()}\indexfonction{q} à la ligne de
   commande ou en fermant l'interface graphique par la procédure
   usuelle. Encore ici, la manière de procéder est quelque peu
-  différente dans GNU~Emacs; voir l'annexe~\ref{ess}.
+  différente dans GNU~Emacs; voir l'annexe~\ref{emacs+ess}.
 \end{enumerate}
-Évidemment, les étapes 1 et 2 sont interchageables, tout comme les
+Évidemment, les étapes 1 et 2 sont interchangeables, tout comme les
 étapes 4, 5 et 6.
 
 
 \section{Répertoire de travail}
-\index{Répertoire de travail|(}
-\index{Dossier de travail|see{répertoire de travail}}
+\index{répertoire de travail|(}
+\index{dossier de travail|see{répertoire de travail}}
 \label{presentation:workspace}
 
 Le répertoire de travail (\emph{workspace}) de R est le dossier par
 défaut dans lequel le logiciel
 \begin{inparaenum}[1)]
 \item va rechercher des fichiers de script ou de données; et
-\item va sauvegarder l'image mémoire dans le fichier \code{.RData}.
+\item va sauvegarder l'espace de travail dans le fichier
+  \code{.RData}.
 \end{inparaenum}
 Le dossier de travail est déterminé au lancement de R.
 \begin{itemize}
@@ -340,7 +352,7 @@ Le dossier de travail est déterminé au lancement de R.
   additionnels sur la gestion des répertoires de travail.
 \item Avec GNU~Emacs, la situation est un peu plus simple puisque l'on
   doit spécifier un répertoire de travail chaque fois que l'on démarre
-  un processus R.
+  un processus R; voir l'annexe~\ref{emacs+ess}.
 \end{itemize}
 \index{Répertoire de travail|)}
 
@@ -404,28 +416,41 @@ applications statistiques.
 \label{presentation:exercices}
 
 \begin{exercice}
-  Démarrer un processus S-Plus ou R à l'intérieur de Emacs.
+  Démarrer une session R et entrer une à une les expressions
+  ci-dessous à la ligne de commande. Observer les résultats.
+<<eval=FALSE>>=
+ls()
+pi
+(v <- c(1, 5, 8))
+v * 2
+x <- v + c(2, 1, 7)
+x
+ls()
+q()
+@
 \end{exercice}
 
 \begin{exercice}
-  Exécuter un à un les exemples de la section précédente. Une version
-  électronique du code de cette section est disponible dans le site
-  mentionné dans la préface.
+  Ouvrir dans un éditeur de texte le fichier de script contenant le
+  code de la section précédente. Exécuter le code ligne par ligne et
+  observer les résultats. Repéter l'exercice avec un ou deux autres
+  éditeurs de texte afin de les comparer et de vous permettre d'en
+  choisir un pour la suite.
 \end{exercice}
 
 \begin{exercice}
   Consulter les rubriques d'aide d'une ou plusieurs des fonctions
   rencontrées lors de l'exercice précédent. Observer d'abord comment
-  les ru\-bri\-ques d'aide sont structurées --- elles sont toutes
-  identiques --- puis exécuter quelques lignes d'exemples.
+  les rubriques d'aide sont structurées --- elles sont toutes
+  identiques --- puis exécuter quelques expressions tirées des sections
+  d'exemples.
 \end{exercice}
 
 \begin{exercice}
-  Lire le chapitre 1 de \cite{MASS} et exécuter les commandes de
-  l'exemple de session de travail de la section 1.3. Bien que
-  davantage orienté vers les applications statistiques que vers la
-  programmation, cet exemple démontre quelques-unes des possibilités
-  du langage S.
+  Exécuter le code de l'exemple de session de travail R que l'on
+  trouve à l'annexe~A de \citet{R-intro}. En plus d'aider à se
+  familiariser avec R, cet exercice permet de découvrir les
+  fonctionnalités du logiciel en tant qu'outil statistique.
 \end{exercice}
 
 %%% Local Variables:
