@@ -1,369 +1,464 @@
 \chapter{GNU Emacs et ESS: la base}
-\index{Emacs|(}
-\label{ess}
+\label{emacs+ess}
 
-Emacs est l'Éditeur de texte des éditeurs de texte. Bien que
-d'abord et avant tout un éditeur pour programmeurs (avec des modes
-spéciaux pour une multitude de langages différents), c'est également
-un environnement idéal pour travailler sur des documents \LaTeX,
-interagir avec \textsf{R}, S-Plus, SAS ou SQL, ou même pour lire son
-courrier électronique.
+Emacs est l'Éditeur de texte des éditeurs de texte. Conçu à l'origine
+comme un éditeur pour les programmeurs (avec des modes spéciaux pour
+une multitude de langages différents), Emacs est devenu au fil du
+temps un environnement logiciel en soi dans lequel on peut réaliser
+une foule de tâches différentes: rédiger des documents \LaTeX,
+interagir avec R, SAS ou un logiciel de base de données, consulter son
+courrier électronique, gérer son calendrier ou même jouer à Tetris!
 
-L'auteur du présent ouvrage donne accès à une version simple à
-installer et augmentée de quelques ajouts de la plus récente version
-de GNU Emacs pour Windows.  Consulter le site Internet
+Cette annexe passe en revue les quelques commandes essentielles à
+connaître pour commencer à travailler avec GNU Emacs et le mode ESS.
+L'ouvrage de \cite{Cameron:Emacs:2004} constitue une excellente
+référence pour l'apprentissage plus poussé de l'éditeur.
+
+
+\section{Mise en contexte}
+\label{emacs+ess:contexte}
+
+Emacs est le logiciel étendard du projet GNU («\emph{GNU is not
+  Unix}»), dont le principal commanditaire est la \emph{Free Software
+  Foundation} (FSF) à l'origine de tout le mouvement du logiciel
+libre.
+\begin{itemize}
+\item Richard M.\ Stallman, président de la FSF et grand apôtre du
+  libre, a écrit la première version de Emacs et il continue à ce jour
+  à contribuer au projet.
+\item Les origines de Emacs remontent au début des années 1980, une
+  époque où les interfaces graphiques n'existaient pas, le parc
+  informatique était beaucoup plus hétérogène qu'aujourd'hui (les
+  claviers n'étaient pas les mêmes d'une marque d'ordinateur à une
+  autre) et les modes de communication entre les ordinateurs
+  demeuraient rudimentaires.
+\item L'âge vénérable de Emacs transparaît à plusieurs endroits,
+  notamment dans la terminologie inhabituelle, les raccourcis
+  clavier qui ne correspondent pas aux standards d'aujourd'hui ou la
+  manipulation des fenêtres qui ne se fait pas avec une souris.
+\end{itemize}
+
+Emacs s'adapte à différentes tâches par l'entremise de \emph{modes}
+qui modifient son comportement ou lui ajoutent des fonctionnalités.
+L'un de ces modes est ESS (\emph{Emacs Speaks Statistics}).
+\begin{itemize}
+\item ESS permet d'interagir avec des logiciels statistiques (en
+  particulier R, S+ et SAS) directement depuis Emacs.
+\item Quelques-uns des développeurs de ESS sont aussi des développeurs
+  de R, dont la grande compatibilité entre les deux logiciels.
+\item Lorsque ESS est installé, le mode est activé automatiquement en
+  ouvrant dans Emacs un fichier dont le nom se termine par l'extension
+  \code{.R}.
+\end{itemize}
+
+
+\section{Installation}
+\label{emacs+ess:installation}
+
+GNU Emacs et le mode ESS sont normalement livrés d'office avec toutes
+les distributions Linux. Pour les environnements Windows et Mac OS~X,
+le plus simple consiste à télécharger et installer les distributions
+préparées par le présent auteur. Consulter le site
 \begin{quote}
   \url{http://vgoulet.act.ulaval.ca/emacs/}
 \end{quote}
 
-Cette annexe passe en revue les quelques commandes essentielles à
-con\-naître pour commencer à travailler avec GNU Emacs et le mode ESS.
-L'ouvrage de \cite{LearningEmacs} constitue une excellente référence
-pour l'apprentissage plus poussé de l'éditeur.
 
+\section{Description sommaire}
+\label{emacs+ess:description}
 
-\section{Mise en contexte}
+Au lancement, Emacs affiche un écran d'information contenant des liens
+vers différentes ressources. Cet écran disparaît dès que l'on appuie
+sur une touche. La fenêtre Emacs se divise en quatre zone principales
+(voir la figure~\ref{fig:ess:emacswindow}):
+\begin{enumerate}
+\item tout au haut de la fenêtre (ou de l'écran sous OS~X), on trouve
+  l'habituelle barre de menu dont le contenu change selon le mode dans
+  lequel se trouve Emacs;
+\item l'essentiel de la fenêtre set à afficher un \emph{buffer}, soit
+  le contenu d'un fichier ouvert ou l'invite de commande d'un
+  programme externe;
+\item la ligne de mode est le séparateur horizontal contenant diverses
+  informations sur le fichier ouvert et l'état de Emacs;
+\item le \emph{minibuffer} est la région au bas de la fenêtre où l'on
+  entre des commandes et reçoit de l'information de Emacs.
+\end{enumerate}
+Il est possible de séparer la fenêtre Emacs en sous-fenêtres pour
+afficher plusieurs \emph{buffers} à la fois. Il y a alors une ligne de
+mode pour chaque \emph{buffer}.
 
-Emacs est le logiciel étendard du projet GNU («\emph{GNU is not
-  Unix}»), dont le principal commanditaire est la \emph{Free Software
-  Foundation}.
+\begin{figure}[t]
+  %% Capture d'écran
+  \includegraphics{emacswindow-screenshot}
 
-\begin{itemize}
-\item Distribué sous la GNU \emph{General Public License} (GPL),
-  donc gratuit, ou «libre».
-\item Le nom provient de «\emph{Editing MACroS}».
-\item La première version de Emacs a été écrite par Richard M.\
-  Stallman, président de la FSF.
-\end{itemize}
+  %% Identification du minibuffer
+  \begin{textblock}{0.35}(7.5,-0.2)
+    \LARGE$\rightlsquigarrow$
+  \end{textblock}
+  \begin{textblock}{1.75}(7.85,-0.2)
+    \small \emph{Minibuffer}
+  \end{textblock}
 
-\section{Configuration de l'éditeur}
-\index{Emacs!configuration}
+  %% Identification de la barre de menu
+  \begin{textblock}{0.35}(7.5,-6.7)
+    \LARGE$\rightlsquigarrow$
+  \end{textblock}
+  \begin{textblock}{1.75}(7.85,-6.7)
+    \small Barre de menu
+  \end{textblock}
 
-Une des grandes forces de Emacs est d'être configurable à l'envi.
+  %% Identification du buffer
+  \begin{textblock}{0.35}(7.5,-3.5)
+    \LARGE$\rightlsquigarrow$
+  \end{textblock}
+  \begin{textblock}{1.75}(7.85,-3.5)
+    \small \emph{Buffer}
+  \end{textblock}
 
-\begin{itemize}
-\item Depuis la version 21, le menu \texttt{Customize} rend la
-  configuration aisée.
-\item Une grande part de la configuration provient du fichier
-  \texttt{.emacs}:
-  \begin{itemize}
-  \item nommé \texttt{.emacs} sous Linux et Unix, Windows 2000 et
-    Windows XP;
-  \item sous Windows 95/98/Me, utiliser plutôt \texttt{\_emacs}.
-  \end{itemize}
-\end{itemize}
+  %% Identification de la mode line
+  \begin{textblock}{0.35}(7.5,-0.4)
+    \LARGE$\rightlsquigarrow$
+  \end{textblock}
+  \begin{textblock}{1.75}(7.85,-0.4)
+    \small Ligne de mode
+  \end{textblock}
+
+  %% Identification du minibuffer
+  \begin{textblock}{0.35}(7.5,-0.2)
+    \LARGE$\rightlsquigarrow$
+  \end{textblock}
+  \begin{textblock}{1.75}(7.85,-0.2)
+    \small \emph{Minibuffer}
+  \end{textblock}
+  \caption{Fenêtre GNU~Emacs et ses différentes parties au lancement
+    de l'application sous Mac OS~X. Sous Windows et Linux, la barre de
+    menu se trouve à l'intérieur de la fenêtre.}
+  \label{fig:ess:emacswindow}
+\end{figure}
 
 
 \section{\emph{Emacs-ismes} et \emph{Unix-ismes}}
+\label{emacs+ess:ismes}
+
+Emacs a sa propre terminologie qu'il vaut mieux connaître lorsque l'on
+consulte la documentation. De plus, l'éditeur fait siennes certaines
+conventions du monde Unix et qui sont moins usitées sur les
+plateformes Windows et OS~X.
 
 \begin{itemize}
-\item Un \emph{buffer} contient un fichier ouvert («\emph{visited}»).
-  Équivalent à une fenêtre dans Windows.
-\item Le \emph{minibuffer} est la région au bas de l'écran Emacs où
-  l'on entre des commandes et reçoit de l'information de Emacs.
-\item La ligne de mode («\emph{mode line}») est le séparateur
-  horizontal contenant diverses informations sur le fichier ouvert et
-  l'état de Emacs.
-\item Toutes les fonctionnalités de Emacs correspondent à une commande
-  pouvant être tapée dans le \emph{minibuffer}.  \texttt{M-x} démarre
-  l'invite de commande.
 \item Dans les définitions de raccourcis claviers:
   \begin{itemize}
-  \item \texttt{C} est la touche \texttt{Ctrl} (\texttt{Control});
-  \item \texttt{M} est la touche \texttt{Meta}, qui correspond à la
-    touche \texttt{Alt} de gauche sur un PC;
-  \item \texttt{ESC} est la touche \texttt{Échap} (\texttt{Esc}) et
-    est équivalente à \texttt{Meta};
-  \item \texttt{SPC} est la barre d'espacement;
-  \item \texttt{RET} est la touche Entrée.
+  \item \code{C} est la touche \code{Contrôle} (\ctlkey);
+  \item \code{M} est la touche \code{Meta}, qui correspond à la touche
+    \code{Alt} de gauche sur un PC ou la touche \code{Option}
+    (\optkey) sur un Mac (toutefois, voir l'encadré à la page
+    suivante);
+  \item \code{ESC} est la touche \code{Échap} (\esckey) et
+    est équivalente à \code{Meta};
+  \item \code{SPC} est la barre d'espacement;
+  \item \code{RET} est la touche \code{Entrée} (\returnkey).
   \end{itemize}
-\item Le caractère \verb=~= représente le dossier vers lequel pointe
-  la variable d'environnement \texttt{\$HOME} (Unix) ou
-  \texttt{\%HOME\%} (Windows).
-\item La barre oblique (\texttt{/}) est utilisée pour séparer les
+\item Toutes les fonctionnalités de Emacs correspondent à une commande
+  pouvant être tapée dans le \emph{minibuffer}. \code{M-x} démarre
+  l'invite de commande.
+\item Le caractère \,\verb=~=\, représente le dossier vers lequel
+  pointe la variable d'environnement \code{\$HOME} (Linux, OS~X) ou
+  \code{\%HOME\%} (Windows). C'est le dossier par défaut de Emacs.
+\item La barre oblique (\code{/}) est utilisée pour séparer les
   dossiers dans les chemins d'accès aux fichiers, même sous Windows.
-\item En général, il est possible d'appuyer sur \texttt{TAB} dans le
+\item En général, il est possible d'appuyer sur \code{TAB} dans le
   \emph{minibuffer} pour compléter les noms de fichiers ou de
   commandes.
 \end{itemize}
 
+\begin{figure}[t]
+  \begin{framed}
+    \begin{minipage}{0.1\linewidth}
+      \raisebox{-1.5em}[0em][0em]{\HUGE\applekey}
+    \end{minipage}
+    \begin{minipage}[t]{0.85\linewidth}
+      \small
+      Par défaut sous Mac OS~X, la touche \code{Meta} est assignée à
+      \code{Option} (\optkey). Sur les claviers français, cela empêche
+      d'accéder à certains caractères spéciaux tels que [, ], \{ ou
+      \}.
 
-\section{Commandes d'édition de base}
+      Une solution consiste à plutôt assigner la touche \code{Meta} à
+      \code{Commande} (\cmdkey). Cela bloque alors l'accès à certains
+      raccourcis Mac, mais la situation est moins critique ainsi.
 
-Il n'est pas vain de lire le tutoriel de Emacs, que l'on démarre avec
-\begin{quote}
-  \texttt{C-h t}
-\end{quote}
-
-Pour une liste plus exhaustive des commandes Emacs les plus
-importantes, consulter la \emph{GNU Emacs Reference Card} à l'adresse
-\begin{quote}
-  \url{http://refcards.com/refcards/gnu-emacs/}
-\end{quote}
-
-\enlargethispage{5mm}
-\begin{itemize}
-\item Pour créer un nouveau fichier, ouvrir un fichier n'existant
-  pas.\index{Emacs!nouveau fichier}
-\item Principaux raccourcis clavier d'édition avec, entre parenthèses,
-  le nom de la commande Emacs correspondante:
-  \begin{ttscript}{C-x C-w}
-    \raggedright
-  \item[\emacs{C-x C-f}] ouvrir un fichier (\texttt{find-file})
-  \item[\emacs{C-x C-s}] sauvegarder
-    (\texttt{save-buffer})\index{Emacs!sauvegarder}
-  \item[\emacs{C-x C-w}] sauvegarder sous
-    (\texttt{write-file})\index{Emacs!sauvegarder sous}
-  \item[\emacs{C-x k}] fermer un fichier (\texttt{kill-buffer})
-  \item[\emacs{C-x C-c}] quitter Emacs
-    (\texttt{save-buffers-kill-emacs})
-    \\[\baselineskip]
-  \item[\emacs{C-g}] bouton de panique: quitter!
-    (\texttt{keyboard-quit})
-  \item[\emacs{C-\_}] annuler (pratiquement illimité); aussi
-    \emacs{C-x u} (\texttt{undo})
-    \\[\baselineskip]
-  \item[\emacs{C-s}] recherche incrémentale avant
-    (\texttt{isearch-forward})
-  \item[\emacs{C-r}] Recherche incrémentale arrière
-    (\texttt{isearch-backward})
-  \item[\emacs{M-\%}] rechercher et remplacer
-    (\texttt{query-replace})\index{Emacs!rechercher et remplacer}
-    \\[\baselineskip]
-  \item[\emacs{C-x b}] changer de \emph{buffer}
-    (\texttt{switch-buffer})
-  \item[\emacs{C-x 2}] séparer l'écran en deux fenêtres
-    (\texttt{split-window-vertically})
-  \item[\emacs{C-x 1}] conserver uniquement la fenêtre courante
-    (\texttt{delete-other-windows})
-  \item[\emacs{C-x 0}] fermer la fenêtre courante
-    (\texttt{delete-window})
-  \item[\emacs{C-x o}] aller vers une autre fenêtre lorsqu'il y en a
-    plus d'une (\texttt{other-window})
-  \end{ttscript}
-\end{itemize}
+      Pour assigner la touche \code{Meta} à \code{Commande} (\cmdkey),
+      il suffit d'insérer les lignes suivantes dans son fichier de
+      configuration \code{.emacs} (voir la
+      section~\ref{emacs+ess:configuration}):
+\begin{verbatim}
+;;; ====================================
+;;;  Assigner la touche Meta à Commande
+;;; ====================================
+(setq-default ns-command-modifier 'meta) ; Commande est Meta
+(setq-default ns-option-modifier 'none)	 ; Option est Option
+\end{verbatim}
+    \end{minipage}
+  \end{framed}
+\end{figure}
 
 
-\section{Sélection de texte}
+
+\section{Commandes de base}
+\label{emacs+ess:commandes}
+
+Emacs comporte une pléthore de commandes, il serait donc futile de
+tenter d'en faire une liste exhaustive ici. Nous nous contenterons de
+mentionner les commandes les plus importantes regroupées par tâche.
+
+Pour débuter, il est utile de suivre le Tour guidé de Emacs\footnote{%
+  \url{http://www.gnu.org/software/emacs/tour/} ou cliquer sur le lien
+  dans l'écran d'accueil.} %
+et de lire le tutoriel de Emacs, que l'on démarre avec \code{C-h t}.
+
+\subsection{Les essentielles}
+\label{emacs+ess:commandes:essentielles}
+
+\begin{ttscript}{M-x}
+\item[\emacs{M-x}] démarrer l'invite de commande
+\item[\emacs{C-g}] bouton de panique: annuler, quitter! Presser plus
+  d'une fois au besoin.
+\end{ttscript}
+
+\subsection{Manipulation de fichiers}
+\label{emacs+ess:commandes:fichiers}
+
+Entre parenthèses, le nom de la commande Emacs correspondante. On peut
+entrer cette commande dans le \emph{minibuffer} au lieu d'utiliser le
+raccourci clavier.
+
+\begin{important}
+  On remarquera qu'il n'existe pas de commande «nouveau fichier» dans
+  Emacs. Pour créer un nouveau fichier, il suffit d'ouvrir un fichier
+  n'existant pas.\index{Emacs!nouveau fichier}
+\end{important}
+
+\begin{ttscript}{C-x C-w}
+  \raggedright
+\item[\emacs{C-x C-f}] ouvrir un fichier (\code{find-file})
+\item[\emacs{C-x C-s}] sauvegarder
+  (\code{save-buffer})\index{Emacs!sauvegarder}
+\item[\emacs{C-x C-w}] sauvegarder sous
+  (\code{write-file})\index{Emacs!sauvegarder sous}
+\item[\emacs{C-x k}] fermer un fichier (\code{kill-buffer})
+  \\[\baselineskip]
+\item[\emacs{C-\_}] annuler (pratiquement illimité); aussi
+  \emacs{C-x u} (\code{undo})
+  \\[\baselineskip]
+\item[\emacs{C-s}] recherche incrémentale avant
+  (\code{isearch-forward})
+\item[\emacs{C-r}] Recherche incrémentale arrière
+  (\code{isearch-backward})
+\item[\emacs{M-\%}] rechercher et remplacer
+  (\code{query-replace})\index{Emacs!rechercher et remplacer}
+\end{ttscript}
+
+\subsection{Sélection de texte, copier, coller, couper}
 \index{Emacs!sélection}
-\label{ess:selection}
+\label{emacs+ess:commandes:selection}
 
-La sélection de texte fonctionne différemment du standard Windows.
-
-\begin{itemize}
-\item Les raccourcis clavier standards sous Emacs sont:
-  \begin{ttscript}{C-SPC}
-    \raggedright
-  \item[\emacs{C-SPC}] débute la sélection (\texttt{set-mark-command})
-  \item[\emacs{C-w}] couper la sélection (\texttt{kill-region})
-  \item[\emacs{M-w}] copier la sélection (\texttt{kill-ring-save})
-  \item[\emacs{C-y}] coller (\texttt{yank})
-  \item[\emacs{M-y}] remplacer le dernier texte collé par la
-    sélection précédente (\texttt{yank-pop})
-  \end{ttscript}
-\item Il existe quelques extensions de Emacs permettant d'utiliser les
-  raccourcis clavier usuels de Windows (\texttt{C-c}, \texttt{C-x},
-  \texttt{C-v}); voir
-  \url{http://www.emacswiki.org/cgi-bin/wiki/CuaMode}.
-\end{itemize}
-\index{Emacs|)}
-
-\section{Mode ESS}
-\index{ESS|(}
-
-Le mode ESS (\emph{Emacs Speaks Statistics}) permet d'interagir avec
-des logiciels statistiques (S-Plus, \textsf{R}, SAS, etc.) depuis
-Emacs. Ce mode est installé dans la version modifiée de GNU Emacs pour
-Windows distribuée dans le site Internet
-\url{http://vgoulet.act.ulaval.ca/emacs/}, ainsi que dans Aquamacs
-pour Mac OS~X (\url{http://aquamacs.org}).
+\begin{ttscript}{C-x C-w}
+  \raggedright
+\item[\emacs{C-SPC}] débute la sélection (\code{set-mark-command})
+\item[\emacs{C-w}] couper la sélection (\code{kill-region})
+\item[\emacs{M-w}] copier la sélection (\code{kill-ring-save})
+\item[\emacs{C-y}] coller (\code{yank})
+\item[\emacs{M-y}] remplacer le dernier texte collé par la
+  sélection précédente (\code{yank-pop})
+\end{ttscript}
 
 \begin{itemize}
-\item La documentation complète est disponible dans le site Internet
-  du projet ESS:
-  \begin{quote}
-    \url{http://ess.r-project.org/}
-  \end{quote}
-\item Deux modes mineurs: \texttt{iESS} pour l'invite de commande et
-  \texttt{ESS} pour les fichiers de script (code source).
+\item Il est possible d'utiliser les raccourcis clavier usuels de
+  Windows (\code{C-c}, \code{C-x}, \code{C-v}) et OS~X
+  (\cmdkey\,\code{C}, \cmdkey\,\code{X}, \cmdkey\,\code{V}) en
+  activant le mode CUA dans le menu \code{Options}.
+\item On peut copier-coller directement avec la souris dans Windows en
+  sélectionnant du texte puis en appuyant sur le bouton central (ou la
+  molette) à l'endroit souhaité pour y copier le texte.
 \end{itemize}
 
 
-\subsection{Interaction avec l'invite de commande}
-\label{ess:invite}
+\subsection{Manipulation de fenêtres}
+\label{emacs+ess:commandes:fenetres}
 
-Pour démarrer un processus S et activer le mode mineur \texttt{iESS},
-entrer l'une des commandes \texttt{S}, \texttt{Sqpe} ou \texttt{R}
-dans l'invite de commande de Emacs (voir aussi l'annexe
-\ref{s-plus_windows}).
+\begin{ttscript}{C-x C-w}
+\item[\emacs{C-x b}] changer de \emph{buffer}
+  (\code{switch-buffer})
+\item[\emacs{C-x 2}] séparer l'écran en deux fenêtres
+  (\code{split-window-vertically})
+\item[\emacs{C-x 1}] conserver uniquement la fenêtre courante
+  (\code{delete-other-windows})
+\item[\emacs{C-x 0}] fermer la fenêtre courante
+  (\code{delete-window})
+\item[\emacs{C-x o}] aller vers une autre fenêtre lorsqu'il y en a
+  plus d'une (\code{other-window})
+\end{ttscript}
 
-\begin{itemize}
-\item Par exemple, pour démarrer un processus \textsf{R} à l'intérieur
-  même de Emacs, on fera
-  \begin{quote}
-    \ttfamily M-x R RET
-  \end{quote}
-\item Raccourcis clavier les plus utiles à la ligne de commande (mode
-  \texttt{iESS}):
-  \begin{ttscript}{C-c C-c}
-    \raggedright
-  \item[\ess{M-p}, \ess{M-n}] navigation dans l'historique des
-    commandes (\texttt{previous-matching-history-from-input},
-    \texttt{next-matching-history-from-input})
-  \item[\ess{C-c C-e}] replacer la dernière ligne au bas de la fenêtre
-    (\texttt{comint-show-maximum-output})
-  \item[\ess{M-h}] sélectionner le résultat de la dernière commande
-    (\texttt{mark-paragraph})
-  \item[\ess{C-c C-o}] effacer le résultat de la dernière commande
-    (\texttt{comint-delete-output})
-  \item[\ess{C-c C-v}] aide sur une commande S
-    (\texttt{ess-display-help-on-object})
-  \item[\ess{C-c C-q}] terminer le processus S (\texttt{ess-quit})
-  \end{ttscript}
-\end{itemize}
+\subsection{Manipulation de fichiers de script dans le mode ESS}
+\label{emacs+ess:commandes:script}
 
+\begin{ttscript}{C-x C-w}
+  \raggedright
+\item[\ess{C-c C-n}] évaluer la ligne sous le curseur dans le
+  processus R, puis déplacer le curseur à la prochaine expression
+  (\code{ess-eval-line-and-step})
+\item[\ess{C-c C-r}] évaluer la région sélectionnée dans le processus
+  R (\code{ess-eval-region})
+\item[\ess{C-c C-f}] évaluer le code de la fonction courante dans
+  le processus R (\code{ess-eval-function})
+\item[\ess{C-c C-l}] évaluer le code du fichier courant en entier dans
+  le processus R (\code{ess-load-file})
+\item[\ess{C-c C-v}] aide sur une commande R
+  (\code{ess-display-help-on-object})
+\end{ttscript}
 
-\subsection{Manipulation des fichiers de script}
-\label{ess:script}
+\subsection{Interaction avec l'invite de commande R}
+\label{emacs+ess:commandes:invite}
 
-Une fois ESS installé, le mode mineur \texttt{ESS} s'active
-automatiquement en éditant des fichiers avec l'extension \texttt{.S}
-ou \texttt{.R}.
+\begin{ttscript}{C-x C-w}
+  \raggedright
+\item[\ess{M-p}, \ess{M-n}] navigation dans l'historique des
+  commandes (\code{previous-matching-history-from-input},
+  \code{next-matching-history-from-input})
+\item[\ess{C-c C-e}] replacer la dernière ligne au bas de la fenêtre
+  (\code{comint-show-maximum-output})
+\item[\ess{M-h}] sélectionner le résultat de la dernière commande
+  (\code{mark-paragraph})
+\item[\ess{C-c C-o}] effacer le résultat de la dernière commande
+  (\code{comint-delete-output})
+\item[\ess{C-c C-v}] aide sur une commande R
+  (\code{ess-display-help-on-object})
+\item[\ess{C-c C-q}] terminer le processus R (\code{ess-quit})
+\end{ttscript}
 
-\begin{itemize}
-\item Raccourcis clavier les plus utiles lors de l'édition d'un
-  fichier de script (mode \texttt{ESS}):
-  \begin{ttscript}{C-c C-c}
-    \raggedright
-  \item[\ess{C-c C-n}] évaluer la ligne sous le curseur dans le
-    processus S, puis déplacer le curseur à la prochaine ligne de
-    commande (\texttt{ess-eval-line-and-step})
-  \item[\ess{C-c C-j}] évaluer la ligne sous le curseur dans le
-    processus S sans déplacer le curseur (\texttt{ess-eval-line})
-  \item[\ess{C-c C-r}] évaluer la région sélectionnée dans le
-    processus S (\texttt{ess-eval-region})
-  \item[\ess{C-c C-f}] évaluer le code de la fonction courante dans
-    le processus S (\texttt{ess-eval-function})
-  \item[\ess{C-c C-l}] évaluer le code du fichier courant dans le
-    processus S (\texttt{ess-load-file})
-  \item[\ess{C-c C-v}] aide sur une commande S
-    (\texttt{ess-display-help-on-object})
-  \item[\ess{C-c C-s}] changer de processus (utile si l'on a plus
-    d'un processus S actif)
-  \end{ttscript}
-\end{itemize}
+\subsection{Consultation des rubriques d'aide de R}
+\label{emacs+ess:commandes:aide}
 
-
-\subsection{Consultation des rubriques d'aide}
-\label{ess:aide}
-
-Il y a quelques avantages à consulter les rubriques d'aide de
-\textsf{R} ou S-Plus à l'intérieur même de Emacs plutôt que dans
-l'interface d'aide de Windows ou Mac OS.
-
-\begin{itemize}
-\item Afin \R de s'assurer que les rubriques d'aide de \textsf{R}
-  seront affichées dans Emacs, modifier l'option \code{chmhelp} ainsi:
-<<echo=TRUE, eval=FALSE>>=
-options(chmhelp = FALSE)
-@
-  Pour que cette commande s'exécute automatiquement à chaque lancement
-  de \textsf{R}, entrer la commande dans un fichier nommé
-  \code{.Rprofile} sauvegardé dans le dossier mentionné dans le
-  résultat de la commande
-<<echo=TRUE, eval=FALSE>>=
-Sys.getenv("R_USER")
-@
-
-  Pour plus de détails sur les options de démarrage, consulter la
-  rubrique d'aide de \fonction{Startup}.
-\item Raccourcis clavier utiles lors de la consultation des rubriques
-  d'aide:
-  \begin{ttscript}{m, m}
-    \raggedright
-  \item[\ess{h}] ouvrir une nouvelle rubrique d'aide, par défaut pour le mot
-    se trouvant sous le curseur (\texttt{ess-display-help-on-object})
-  \item[\ess{n}, \ess{p}] aller à la section suivante (\texttt{n}) ou
-    précédente (\texttt{p}) de la rubrique
-    (\texttt{ess-skip-to-next-section},
-    \texttt{ess-skip-to-previous-section})
-  \item[\ess{l}] évaluer la ligne sous le curseur; pratique pour
-    exécuter les exemples (\texttt{ess-eval-line-and-step})
-  \item[\ess{r}] évaluer la région sélectionnée
-    (\texttt{ess-eval-region})
-  \item[\ess{q}] retourner au processus ESS en laissant la rubrique
-    d'aide visible (\texttt{ess-switch-to-end-of-ESS})
-  \item[\ess{x}] fermer la rubrique d'aide et retourner au processus
-    ESS (\texttt{ess-kill-buffer-and-go})
-  \end{ttscript}
-\end{itemize}
-\index{ESS|)}
+\begin{ttscript}{m, m}
+  \raggedright
+\item[\ess{h}] ouvrir une nouvelle rubrique d'aide, par défaut pour le
+  mot se trouvant sous le curseur (\code{ess-display-help-on-object})
+\item[\ess{n}, \ess{p}] aller à la section suivante (\code{n}) ou
+  précédente (\code{p}) de la rubrique
+  (\code{ess-skip-to-next-section},
+  \code{ess-skip-to-previous-section})
+\item[\ess{l}] évaluer la ligne sous le curseur; pratique pour
+  exécuter les exemples (\code{ess-eval-line-and-step})
+\item[\ess{r}] évaluer la région sélectionnée (\code{ess-eval-region})
+\item[\ess{q}] retourner au processus ESS en laissant la rubrique
+  d'aide visible (\code{ess-switch-to-end-of-ESS})
+\item[\ess{x}] fermer la rubrique d'aide et retourner au processus ESS
+  (\code{ess-kill-buffer-and-go})
+\end{ttscript}
 
 
-\section{Session de travail type}
-\label{ess:session_travail}
 
-On décrit, dans cette section, les différentes étapes et principaux
-raccourcis clavier d'une session de travail type avec S-Plus ou
-\textsf{R}, Emacs et ESS.
+\section{Anatomie d'une session de travail (bis)}
+\label{emacs+ess:session}
+
+On reprend ici les étapes d'une session de travail type présentées à
+la section \ref{presentation:session}, mais en expliquant comment
+compléter chacune dans Emacs avec le mode ESS.
 
 \begin{enumerate}
-\item Déterminer le dossier de travail et le créer au besoin.
-  Normalement, le dossier de travail pour S-Plus ou \textsf{R} sera le
-  même que celui où les fichiers de script sont sauvegardés. Si l'on
-  prévoit sauvegarder des objets S, il est important de choisir un
-  nouveau dossier pour le projet.
-\item Lancer Emacs et démarrer un processus S dans le dossier de
-  travail déterminé ci-dessus.
-  \begin{itemize}
-  \item \code{M-x R RET} ou \code{M-x Sqpe RET}
-  \end{itemize}
-\item Ouvrir un fichier de script dans lequel on sauvegardera le code
-  source.
-  \begin{itemize}
-  \item \emacs{C-x C-f} pour ouvrir un fichier existant ou un nouveau
-    fichier.
-  \end{itemize}
+\item Lancer Emacs et ouvrir un fichier de script avec
+  \begin{quote}
+    \code{C-x C-f}
+  \end{quote}
+  ou avec le menu
+  \begin{quote}
+    \code{File|Open file...}
+  \end{quote}
+  En spécifiant un nom de fichier qui n'existe pas déjà, on se trouve
+  à créer un nouveau fichier de script. S'assurer de terminer le nom
+  des nouveaux fichiers par \code{.R} pour que Emacs reconnaisse
+  automatiquement qu'il s'agit de fichiers de script R.
+\item Démarrer un processus R à l'intérieur même de Emacs avec
+  \begin{quote}
+    \code{M-x R }\returnkey
+  \end{quote}
+  Emacs demandera alors de spécifier de répertoire de travail
+  (\emph{starting data directory}). Accepter la valeur par défaut, par
+  exemple
+  \begin{quote}
+    \verb=~/ =\returnkey
+  \end{quote}
+  ou indiquer un autre dossier. Un éventuel message de Emacs à l'effet
+  que le fichier \code{.Rhistory} n'a pas été trouvé est sans
+  conséquence et peut être ignoré.
 \item Composer le code. Lors de cette étape, on se déplacera souvent
   du fichier de script à la ligne de commande afin d'essayer diverses
   expressions. On exécutera également des parties seulement du code se
-  trouvant dans le fichier de script.
-  \begin{itemize}
-  \item \emacs{C-x o} pour se déplacer de la fenêtre de script à la
-    ligne de commande et vice-versa.
-  \item \ess{C-c C-e} pour replacer le curseur à la ligne de commande
-    et au bas de la fenêtre.
-  \item \ess{C-c C-o} pour effacer le résultat de la dernière
-    commande, surtout s'il est très long.
-  \item \ess{C-c C-n} pour exécuter une ligne du fichier de script.
-  \item \ess{C-c C-r} pour exécuter une région du fichier de script
-    (voir la section \ref{ess:selection} pour sélectionner une région).
-  \item \ess{C-c C-f} pour définir une fonction.
-  \end{itemize}
-\item Sauvegarder le fichier de script. Les quatrième et cinquième
-  caractères de la ligne de mode changent de \verb|**| à \verb|--|.
-  \begin{itemize}
-  \item \emacs{C-x C-s} pour sauvegarder le fichier de script.
-  \end{itemize}
-\item Il est également possible de sauvegarder le texte de la session
-  interactive (la ligne de commande). Il est recommandé de nommer de
-  telles transcriptions de la session de travail avec une extension
-  \texttt{.St} ou \texttt{.Rt}. En effet, ESS possède un mode spécial
-  pour les transcriptions. Consulter à cet effet le chapitre 5 de la
-  documentation de ESS.
-  \begin{itemize}
-  \item \emacs{C-x C-s} pour sauvegarder le texte de la session.
-  \end{itemize}
-\item Quitter le processus S. Utiliser la commande ESS pour ce faire
-  puisque ESS se chargera de fermer tous les fichiers associés au
-  processus S. À moins qu'il ne contienne des objets importants,
-  l'espace de travail \R en \textsf{R} n'est habituellement pas
-  sauvegardé.
-  \begin{itemize}
-  \item \ess{C-c C-q} pour quitter le processus S.
-  \end{itemize}
+  trouvant dans le fichier de script. Les commandes les plus utilisées
+  sont alors
+  \begin{quote}
+    \emacs{C-x o } pour se déplacer d'une fenêtre à l'autre; \\
+    \ess{C-c C-n } pour exécuter une ligne du fichier de script; \\
+    \ess{C-c C-e } pour replacer la ligne de commande au bas de la
+    fenêtre.
+  \end{quote}
+\item Sauvegarder le fichier de script:
+  \begin{quote}
+    \emacs{C-x C-s}
+  \end{quote}
+  Les quatrième et cinquième caractères de la ligne de mode changent
+  de \,\verb|**|\, à \,\verb|--|.
+\item Sauvegarder si désiré l'espace de travail de R avec
+  \code{save.image()}\indexfonction{save.image}. On le répète, cela
+  n'est habituellement pas nécessaire à moins que l'espace de travail
+  ne contienne des objets importants ou longs à recréer.
+\item Quitter le processus R avec
+  \begin{quote}
+    \ess{C-c C-q}
+  \end{quote}
+  Cette commande ESS se chargera de fermer tous les fichiers associés
+  au processus R. On peut ensuite quitter Emacs en fermant
+  l'application de la manière usuelle.
 \end{enumerate}
 
+
+
+\section{Configuration de l'éditeur}
+\index{Emacs!configuration}
+\label{emacs+ess:configuration}
+
+Une des grandes forces de Emacs est qu'à peu près chacune de ses
+facettes est configurable: couleurs, polices de caractère, raccourcis
+clavier, etc.
+
+\begin{itemize}
+\item Un utilisateur place ses commandes de configuration dans un
+  fichier nommé \code{.emacs} (le point est important!) que Emacs lit
+  au démarrage.
+\item Le fichier \code{.emacs} doit se trouver dans le dossier
+  \,\verb=~/=, c'est-à-dire dans le dossier de départ de l'utilisateur
+  sous Linux et OS~X, et dans le dossier référencé par la variable
+  d'environnement \code{\%HOME\%} sous Windows.
+\end{itemize}
+
+
+\section{Aide et documentation}
+\label{emacs+ess:aide}
+
+Emacs possède son propre système d'aide très exhaustif, mais dont la
+navigation est peu intuitive selon les standards d'aujourd'hui.
+Consulter le menu \code{Help}.
+
+Autrement, on trouvera les manuels de Emacs et de ESS en divers
+formats dans les sites respectifs des deux projets:
+\begin{quote}
+  \url{http://www.gnu.org/software/emacs} \\
+  \url{http://ess.r-project.org}
+\end{quote}
+
+Enfin, si le désespoir vous prend au cours d'une séance de codage
+intensive, vous pouvez toujours consulter le psychothérapeute Emacs.
+On le trouve, bien entendu, dans le menu \code{Help}!
 
 %%% Local Variables:
 %%% mode: latex

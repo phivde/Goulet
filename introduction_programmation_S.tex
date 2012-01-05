@@ -1,7 +1,7 @@
 \documentclass[letterpaper,11pt]{memoir}
   \usepackage[utf8]{inputenc}
   \usepackage{fourier}                 % texte en Utopia
-  \usepackage[scaled=0.85]{beramono}   % code en Bera
+  \usepackage[scaled=0.82]{beramono}   % code en Bera
   \renewcommand{\sfdefault}{Myriad-LF} % titres en MyriadPro
   \usepackage{natbib,url}
   \usepackage[english,francais]{babel}
@@ -9,7 +9,8 @@
   \usepackage{vgmath,actu,amsmath,amsthm,icomma}
   \usepackage[noae]{Sweave}
   \usepackage{textcomp,graphicx,color}
-  \usepackage[absolute,showboxes]{textpos}
+  \usepackage{MnSymbol,applekeys}      % symboles spéciaux
+  \usepackage[]{textpos}
   \usepackage[alwaysadjust]{paralist}
   \usepackage{threeparttable,paralist,expdlist}
   \usepackage{listingsutf8,answers}
@@ -122,6 +123,17 @@
       \setleftmargin{\parindent}]}
     {\end{description}}
 
+  %%% Environnement pour les remarques importantes
+  \newenvironment{important}{%
+    \begin{framed}%
+      \noindent
+      \begin{minipage}{0.1\linewidth}
+        \raisebox{-0.5em}[0em][0em]{\LARGE\danger}
+      \end{minipage}
+      \begin{minipage}[t]{0.85\linewidth}}
+      {\end{minipage}%
+    \end{framed}}
+
   %%% Paramètres pour les sections de code source
   \lstloadlanguages{R}
   \lstdefinelanguage{Renhanced}[]{R}{%
@@ -180,11 +192,13 @@
   \newcommand{\ess}[1]{\code{#1}\indexess{#1}}
   \makeindex
 
-  \includeonly{presentation}
+  \includeonly{presentation,ess}
 
 \begin{document}
 
-\renewcommand{\FrenchLabelItem}{>}
+%% Redéfinition de la puce dans les listes. Doit être fait ici à cause
+%% de babel. Le symbole provient de MnSymbol.
+\renewcommand{\FrenchLabelItem}{$\filledtriangleright$}
 \renewcommand{\labelitemii}{\textendash}
 
 \shortcites{Rintro}
