@@ -1,20 +1,42 @@
-\chapter{Bases du langage S}
+\chapter{Bases du langage R}
 \label{bases}
 
 <<echo=FALSE>>=
 options(width=52)
 @
 
-Ce chapitre présente les bases du langage S, soit les notions
-d'expression et d'affectation, la description d'un objet S et les
-manières de créer les objets les plus usuels lorsque le S est utilisé
-comme langage de programmation.
+\begin{objectifs}
+\item Connaître la syntaxe et la sémantique du langage R.
+\item Comprendre la notion d’objet et connaître les principaux types
+  de données dans R.
+\item Comprendre et savoir tirer profit de l’arithmétique vectorielle
+  de R.
+\item Comprendre la différence entre les divers modes d’objets R (en
+  particulier \code{numeric}, \code{character} et \code{logical}) et
+  la conversion automatique de l’un à l’autre.
+\item Comprendre la différence entre un vecteur, une matrice, un
+  tableau, une liste et un \emph{data frame} et savoir créer ces
+  divers types d’objets.
+\item Savoir extraire des données d’un objet ou y affecter de
+  nouvelles valeurs à l’aide des diverses méthodes d’indiçage.
+\end{objectifs}
 
-\section{Commandes S}
+Avant de pouvoir utiliser un langage de programmation, il faut en
+connaître la syntaxe et la sémantique, du moins dans leurs grandes
+lignes. C'est dans cet esprit que ce chapitre introduit des notions de
+base du langage R telles que l'expression, l'affectation et l'objet.
+Le concept de vecteur se trouvant au c{\oe}ur du langage, le chapitre
+fait une large place à la création et à la manipulation des vecteurs
+et autres types d'objets de stockage couramment employés en
+programmation en R.
+
+\section{Commandes R}
 \label{bases:commandes}
 
-Toute commande S est soit une \emph{expression}\index{expression},
-soit une \emph{affectation}\index{affectation}.
+Tel que vu au chapitre précédent, l'utilisateur de R interagit avec
+l'interprète R en entrant des commandes à l'invite de commande. Toute
+commande R est soit une \emph{expression}\index{expression}, soit une
+\emph{affectation}\index{affectation}.
 \begin{itemize}
 \item Normalement, une expression est immédiatement évaluée et le
   résultat est affiché à l'écran:
@@ -25,161 +47,245 @@ cos(pi/4)
 @
 \item Lors d'une affectation, une expression est évaluée, mais le
   résultat est stocké dans un objet (variable) et rien n'est affiché à
-  l'écran. Le symbole d'affectation est \Fonction{<-} (ou
-  \Fonction{->}).
+  l'écran. Le symbole d'affectation est \Fonction{<-}, c'est-à-dire
+  les deux caractères \verb|<| et \verb|-| placés obligatoirement l'un
+  à la suite de l'autre:
 <<echo=TRUE>>=
 a <- 5
 a
 b <- a
 b
 @
+\item Pour affecter le résultat d'un calcul dans un objet et
+  simultanément afficher ce résultat, il suffit de placer
+  l'affectation entre parenthèses pour ainsi créer une nouvelle
+  expression\footnote{%
+    En fait, cela devient un appel à l'opérateur \code{"("} qui ne
+    fait que retourner son argument.}:
+<<echo=TRUE>>=
+(a <- 2 + 3)
+@
+\item Le symbole d'affectation inversé \fonction{->} existe aussi,
+  mais il est rarement utilisé.
 \item Éviter d'utiliser l'opérateur \fonction{=} pour affecter une
-  valeur à une variable, puisqu'il ne fonctionne que dans certaines
-  situations seulement.
-\item Dans S-Plus (mais plus dans \textsf{R} depuis la version 1.8.0),
-  on peut également affecter avec le caractère «\fonction{\_}», mais
-  cet emploi est fortement découragé puisqu'il rend le code difficile
-  à lire. Dans le mode ESS de Emacs, taper ce caractère hors d'une
-  chaîne de caractères génère carrément \verb*| <- | (appuyer deux
-  fois successives sur «\_» pour obtenir le caractère).
+  valeur à une variable puisque cette pratique est susceptible
+  d'engendrer de la confusion avec les constructions \code{nom =
+    valeur} dans les appels de fonction.
 \end{itemize}
 
 \begin{astuce}
-  Il arrive fréquemment que l'on souhaite affecter le résultat d'un
-  calcul dans un objet et en même temps voir ce résultat. Pour ce
-  faire, placer l'affectation entre parenthèses (l'opération
-  d'affectation devient alors une nouvelle expression):
-<<echo=TRUE>>=
-( a <- 2 + 3 )
-@
+  Dans les anciennes versions de S et R, l'on pouvait affecter avec le
+  caractère de soulignement «\code{\_}». C'est emploi n'est plus
+  permis, mais la pratique subsiste dans le mode ESS de Emacs. Ainsi,
+  taper le caractère «\code{\_}» hors d'une chaîne de caractères dans
+  Emacs génère automatiquement \verb*| <- |. Si l'on souhaite
+  véritablement obtenir le caractère de soulignement, appuyer deux
+  fois successives sur «\_».
 \end{astuce}
+
+Que ce soit dans les fichiers de script ou à la ligne de commande, on
+sépare les commandes R les unes des autres par un
+\index{;@\code{;}}point-virgule ou par un retour à la ligne.
+\begin{itemize}
+\item On considère généralement comme une mauvaise pratique d'employer
+  les deux, c'est-à-dire de placer des points-virgules à la fin de
+  chaque ligne de code, surtout dans les fichiers de script.
+\item Le point-virgule peut être utile pour séparer deux courtes
+  expressions ou plus sur une même ligne:
+<<echo=TRUE>>=
+a <- 5; a + 2
+@
+  C'est le seul emploi du point-virgule que l'on rencontrera dans cet
+  ouvrage.
+\end{itemize}
+
+On peut regrouper plusieurs commandes en une seule expression en les
+entourant d'accolades \Fonction{\{~\}}.
+\begin{itemize}
+\item Le résultat du regroupement est la valeur de la dernière commande:
+<<echo=TRUE>>=
+{
+    a <- 2 + 3
+    b <- a
+    b
+}
+@
+\item Par conséquent, si le regroupement se termine par une
+  assignation, aucune valeur n'est retournée ni affichée à l'écran:
+<<echo=TRUE>>=
+{
+    a <- 2 + 3
+    b <- a
+}
+@
+\item Les règles ci-dessus joueront un rôle important dans la
+  composition de fonctions; voir le chapitre \ref{fonctions}.
+\item Comme on peut le voir ci-dessus, lorsqu'une commande n'est pas
+  complète à la fin de la ligne, l'invite de commande de R change de
+  \verb*|> | à \verb*|+ | pour nous inciter à compléter notre commande.
+\end{itemize}
+
+
 
 
 \section{Conventions pour les noms d'objets}
 \index{noms d'objets!conventions}
 \label{bases:noms}
 
-Les caractères permis pour les noms d'objets sont les lettres a--z,
-A--Z, les chiffres 0--9 et le point «.». Le caractère \R «\code{\_}»
-est maintenant permis dans \textsf{R}, mais son utilisation n'est pas
-encouragée.
+Les caractères permis pour les noms d'objets sont les lettres
+minuscules a--z et majuscules A--Z, les chiffres 0--9, le point «.» et
+le caractère de soulignement «\_». Selon l'environnement linguistique
+de l'ordinateur, il peut être permis d'utiliser des lettres
+accentuées, mais cette pratique est fortement découragée puisqu'elle
+risque de nuire à la portabilité du code.
 
 \begin{itemize}
-\item Les noms d'objets ne peuvent commencer par un chiffre.
-\item Le S est sensible à la casse, ce qui signifie que \code{foo},
+\item Les noms d'objets ne peuvent commencer par un chiffre. S'ils
+  commencent par un point, le second caractère ne peut être un
+  chiffre.
+\item Le R est sensible à la casse, ce qui signifie que \code{foo},
   \code{Foo} et \code{FOO} sont trois objets distincts. Un moyen
   simple d'éviter des erreurs liées à la casse consiste à n'employer
   que des lettres minuscules.
 \item Certains noms sont utilisés par le système, aussi vaut-il mieux
   éviter de les utiliser. En particulier, éviter d'utiliser
-  \begin{center}
+  \begin{quote}
     \code{c}, \code{q}, \code{t}, \code{C}, \code{D},
     \code{I}, \code{diff}, \code{length}, \code{mean},
     \code{pi}, \code{range}, \code{var}.
-  \end{center}
+  \end{quote}
 \item \index{noms d'objets!réservés} Certains mots sont réservés pour
   le système et il est interdit de les utiliser comme nom d'objet. Les
   mots réservés sont:
-  \begin{center}
-    \code{Inf}, \code{NA}, \code{NaN},
-    \code{NULL} \\
-    \code{break}, \code{else},
-    \code{for}, \code{function}, \code{if}, \code{in},
-    \code{next}, \code{repeat}, \code{return}, \code{while}.
-  \end{center}
-\item Dans S-Plus 6.1 et plus, \Splus
-  \code{T}\index{T@\code{T}|see{\code{TRUE}}} et \objet{TRUE} (vrai),
-  ainsi que \code{F}\index{F@\code{F}|see{\code{FALSE}}} et
-  \objet{FALSE} (faux) sont également des noms réservés.
-\item Dans \textsf{R}, \R les noms \code{TRUE} et \code{FALSE}
-  sont également réservés. Les variables \code{T} et \code{F}
-  prennent par défaut les valeurs \code{TRUE} et \code{FALSE},
-  respectivement, mais peuvent être réaffectées.
+  \begin{quote}
+    \code{break}, \code{else}, \code{for}, \code{function}, \code{if},
+    \code{in}, \code{next}, \code{repeat}, \code{return}, \code{while}, \\
+    \code{TRUE}, \code{FALSE}, \\
+    \code{Inf}, \code{NA}, \code{NaN}, \code{NULL}, \\
+    \verb|NA_integer_|, \verb|NA_real_|, \verb|NA_complex_|,
+    \verb|NA_character_|, \\
+    \code{\dots}, \code{..1}, \code{..2}, etc.
+  \end{quote}
+\item Les variables \code{T}\index{T@\code{T}|see{\code{TRUE}}} et
+  \code{F}\index{F@\code{F}|see{\code{FALSE}}} prennent par défaut les
+  valeurs \objet{TRUE} et \objet{FALSE}, respectivement, mais peuvent
+  être réaffectées:
 <<echo=TRUE>>=
 T
 @
-<<echo=TRUE,eval=FALSE>>=
+<<echo=TRUE, eval=FALSE>>=
 TRUE <- 3
 @
-\begin{Schunk}
-\begin{Soutput}
-Erreur dans TRUE <- 3 : membre gauche de
-l'assignation (do_set) incorrect
-\end{Soutput}
-\end{Schunk}
+<<echo=FALSE, eval=TRUE>>=
+msg <- try(TRUE <- 3)
+cat(msg)
+@
 <<echo=TRUE>>=
 ( T <- 3 )
 @
 <<echo=FALSE>>=
 rm(T)
 @
+\item Nous recommandons de toujours écrire les valeurs booléennes
+  \code{TRUE} et \code{FALSE} au long pour éviter des bogues
+  difficiles à détecter.
 \end{itemize}
 
 
-\section{Les objets S}
+\section{Les objets R}
 \label{bases:objets}
 
-Tout dans le langage S est un objet, même les fonctions et les
-opérateurs. Les objets possèdent au minimum un \emph{mode} et une
-\emph{longueur}.
+Tout dans le langage R est un objet: les variables contenant des
+données, les fonctions, les opérateurs, même le symbole représentant
+le nom d'un objet est lui-même un objet. Les objets possèdent au
+minimum un \emph{mode} et une \emph{longueur} et certains peuvent
+être dotés d'un ou plusieurs \emph{attributs}
 
 \begin{itemize}
-\item Le mode d'un objet est obtenu avec la fonction \Fonction{mode}.
+\item Le mode d'un objet est obtenu avec la fonction \Fonction{mode}:
 <<echo=TRUE>>=
 v <- c(1, 2, 5, 9)
 mode(v)
 @
 \item La longueur d'un objet est obtenue avec la fonction
-  \Fonction{length}.
+  \Fonction{length}:
 <<eco=TRUE>>=
 length(v)
 @
-\item Certains objets sont également dotés d'un ou plusieurs
-  \emph{attributs}.
 \end{itemize}
 
 
 \subsection{Modes et types de données}
+\label{bases:objets:mode}
 
 Le mode\Index{mode} prescrit ce qu'un objet peut contenir. À ce titre,
-un objet ne peut avoir qu'un seul mode. Le tableau \ref{tab:modes}
-contient la liste des modes disponibles en S. À chacun de ces modes
-correspond une fonction du même nom servant à créer un objet de ce
-mode.
+un objet ne peut avoir qu'un seul mode. Le tableau
+\ref{tab:bases:modes} contient la liste des principaux modes
+disponibles en R. À chacun de ces modes correspond une fonction du
+même nom servant à créer un objet de ce mode.
 
 \begin{table}
   \centering
   \begin{tabular}{ll}
     \toprule
-    \Mode{numeric}   & nombres réels \\
-    \Mode{complex}   & nombres complexes \\
-    \Mode{logical}   & valeurs booléennes (vrai/faux) \\
-    \Mode{character} & chaînes de caractères \\
-    \Mode{function}  & fonction \\
-    \Mode{list}      & données quelconques \\
+    Mode              & Contenu de l'objet \\
+    \midrule
+    \Mode{numeric}    & nombres réels \\
+    \Mode{complex}    & nombres complexes \\
+    \Mode{logical}    & valeurs booléennes (vrai/faux) \\
+    \Mode{character}  & chaînes de caractères \\
+    \Mode{function}   & fonction \\
+    \Mode{list}       & données quelconques \\
+    \Mode{expression} & expressions non évaluées \\
     \bottomrule
   \end{tabular}
   \caption{Modes disponibles et contenus correspondants}
-  \label{tab:modes}
+  \label{tab:bases:modes}
 \end{table}
 
+\begin{itemize}
+\item Les objets de mode \code{"numeric"}, \code{"complex"},
+  \code{"logical"} et \code{"character"} sont des objets
+  \emph{simples} (\emph{atomic} en anglais) qui ne peuvent contenir
+  que des données d'un seul type.
+\item En revanche, les objets de mode \code{"list"} ou
+  \code{"expression"} sont des objets \emph{récursifs} qui peuvent
+  contenir d'autres objets. Par exemple, une liste peut contenir une
+  ou plusieurs autres listes; voir la section~\ref{bases:listes} pour
+  plus de détails.
+\item La fonction \Fonction{typeof} permet d'obtenir une description
+  plus précise de la représentation interne d'un objet (c'est-à-dire
+  au niveau de la mise en {\oe}uvre en C). Le mode et le type d'un
+  objet sont souvent identiques.
+\end{itemize}
+
+
 \subsection{Longueur}
+\label{bases:objets:longueur}
 
 La longueur\Index{longueur} d'un objet est égale au nombre d'éléments
 qu'il contient.
 
 \begin{itemize}
-\item La longueur d'une chaîne de caractères est toujours 1. Un
-  objet de mode \code{character} doit contenir plusieurs chaînes
-  de caractères pour que sa longueur soit supérieure à 1.
+\item La longueur, au sens R du terme, d'une chaîne de caractères est
+  toujours 1. Un objet de mode \code{character} doit contenir
+  plusieurs chaînes de caractères pour que sa longueur soit supérieure
+  à 1:
 <<echo=TRUE>>=
-v <- "actuariat"
-length(v)
-v <- c("a", "c", "t", "u", "a", "r", "i", "a", "t")
-length(v)
+v1 <- "actuariat"
+length(v1)
+v2 <- c("a", "c", "t", "u", "a", "r", "i", "a", "t")
+length(v2)
+@
+\item On obtient le nombre de caractères dans un chaîne avec la
+  fonction \Fonction{nchar}:
+<<echo=TRUE>>=
+nchar(v1)
+nchar(v2)
 @
 \item Un objet peut être de longueur 0 et doit alors être interprété
-  comme un contenant vide\index{vide|see{\code{NULL}}}.
+  comme un contenant qui existe, mais qui est
+  vide\index{vide|see{\code{NULL}}}:
 <<echo=TRUE>>=
 v <- numeric(0)
 length(v)
@@ -187,7 +293,72 @@ length(v)
 \end{itemize}
 
 
+\subsection{L'objet spécial \code{NULL}}
+\label{bases:objets:NULL}
+
+L'objet spécial \Objet{NULL} représente «rien», ou le vide.
+
+\begin{itemize}
+\item Son mode est \Mode{NULL}.
+\item Sa longueur est 0.
+\item Toutefois différent d'un objet vide:
+  \begin{itemize}
+  \item un objet de longueur 0 est un contenant vide;
+  \item \code{NULL} est «pas de contenant».
+  \end{itemize}
+\item La fonction \Fonction{is.null} teste si un objet est \code{NULL}
+  ou non.
+\end{itemize}
+
+
+\subsection{Valeurs manquantes, indéterminées et infinies}
+\label{bases:objets:NA}
+
+Dans les applications statistiques, il est souvent utile de pouvoir
+représenter des données manquantes. Dans R, l'objet spécial \Objet{NA}
+remplit ce rôle.
+
+\begin{itemize}
+\item Par défaut, le mode de \code{NA} est \mode{logical}, mais
+  \code{NA} ne peut être considéré ni comme \code{TRUE}, ni comme
+  \code{FALSE}.
+\item Toute opération impliquant une donnée \code{NA} a comme
+  résultat \code{NA}.
+\item Certaines fonctions (\fonction{sum}, \fonction{mean}, par
+  exemple) ont par conséquent un argument \Argument{na.rm} qui,
+  lorsque \code{TRUE}, élimine les données manquantes avant de
+  faire un calcul.
+\item La valeur \code{NA} n'est égale à aucune autre, pas même
+  elle-même (selon la règle ci-dessus, le résultat de la comparaison
+  est \code{NA}):
+<<echo=TRUE>>=
+NA == NA
+@
+\item Par conséquent, pour tester si les éléments d'un objet sont
+  \code{NA} ou non il faut utiliser la fonction \Fonction{is.na}:
+<<echo=TRUE>>=
+is.na(NA)
+@
+\end{itemize}
+
+La norme IEEE~754 régissant la représentation interne des nombres dans
+un ordinateur \citep{IEEE:754} prévoit les valeurs mathématiques
+spéciales $+\infty$ et $-\infty$ ainsi que les formes indéterminées du
+type $\frac{0}{0}$ ou $\inf - \inf$. R dispose d'objets spéciaux pour
+représenter ces valeurs.
+\begin{itemize}
+\item \Objet{Inf} représente $+\infty$.
+\item \Objet{-Inf} représente $-\infty$.
+\item \Objet{NaN} (\emph{Not a Number}) représente une forme
+  indéterminée.
+\item Ces valeurs sont testées avec les fonctions
+  \Fonction{is.infinite}, \Fonction{is.finite} et
+  \Fonction{is.nan}.
+\end{itemize}
+
+
 \subsection{Attributs}
+\label{bases:objets:attributs}
 
 Les attributs\Index{attribut} d'un objet sont des éléments
 d'information additionnels liés à cet objet. La liste des attributs
@@ -214,58 +385,47 @@ même nom servant à extraire l'attribut correspondant d'un objet.
   \label{tab:attributs}
 \end{table}
 
-
-\subsection{L'objet spécial \code{NA}}
-
-\Objet{NA} est fréquemment utilisé pour représenter les données
-manquantes.
-
 \begin{itemize}
-\item Son mode est \mode{logical}.
-\item Toute opération impliquant une donnée \code{NA} a comme
-  résultat \code{NA}.
-\item Certaines fonctions (\fonction{sum}, \fonction{mean}, par
-  exemple) ont par conséquent un argument \Argument{na.rm} qui,
-  lorsque \code{TRUE}, élimine les données manquantes avant de
-  faire un calcul.
-\item La fonction \Fonction{is.na} permet de tester si les éléments
-  d'un objet sont \code{NA} ou non.
+\item Plus généralement, la fonction \Fonction{attributes} permet
+  d'extraire ou de modifier la liste des attributs d'un objet. On peut
+  aussi travailler sur un seul attribut à la fois avec la fonction
+  \Fonction{attr}.
+\item On peut ajouter à peu près ce que l'on veut à la liste des
+  attributs d'un objet. Par exemple, on pourrait vouloir attacher au
+  résultat d'un calcul la méthode de calcul utilisée:
+<<echo=TRUE>>=
+x <- 3
+attr(x, "methode") <- "au pif"
+attributes(x)
+@
+\item Extraire un attribut qui n'existe pas retourne
+  \objet{NULL}:
+<<echo=TRUE>>=
+dim(x)
+@
+\item
+À l'inverse, donner à un attribut la valeur \code{NULL} efface cet attribut:
+<<echo=TRUE>>=
+attr(x, "methode") <- NULL
+attributes(x)
+@
 \end{itemize}
 
-\subsection{L'objet spécial \code{NULL}}
-
-\Objet{NULL} représente «rien», ou le vide.
-
-\begin{itemize}
-\item Son mode est \Mode{NULL}.
-\item Sa longueur est 0.
-\item Différent d'un objet vide:
-  \begin{itemize}
-  \item un objet de longueur 0 est un contenant vide;
-  \item \code{NULL} est «pas de contenant».
-  \end{itemize}
-\item La fonction \Fonction{is.null} teste si un objet est \code{NULL}
-  ou non.
-\end{itemize}
 
 
 \section{Vecteurs}
 \label{bases:vecteurs}
 
-En S, à peu de choses près, \emph{tout} est un vecteur\index{vecteur}.
-(Il n'y a pas de notion de scalaire.)
+En R, à toutes fins pratiques, \emph{tout} est un
+vecteur\index{vecteur}. Contrairement à certains autres langages de
+programmation, il n'y a pas de notion de scalaire en R; un scalaire
+est simplement un vecteur de longueur 1. Comme nous le verrons au
+chapitre~\ref{operateurs}, le vecteur est l'unité de base dans les
+calculs.
 
 \begin{itemize}
-\item Dans un vecteur simple, tous les éléments doivent être du
-  même mode.
-\item Il est possible (et souvent souhaitable) de donner une étiquette
-  à chacun des éléments d'un vecteur.
-<<echo=TRUE>>=
-( v <- c(a=1, b=2, c=5) )
-v <- c(1, 2, 5)
-names(v) <- c("a", "b", "c")
-v
-@
+\item Dans un vecteur simple, tous les éléments doivent être du même
+  mode. Nous nous restreignons à ce type de vecteurs pour le moment.
 \item Les fonctions de base pour créer des vecteurs sont:
   \begin{itemize}
   \item \Fonction{c} (concaténation);
@@ -273,7 +433,16 @@ v
   \item \Fonction{logical} (vecteur de mode \mode{logical});
   \item \Fonction{character} (vecteur de mode \mode{character}).
   \end{itemize}
-\item L'indiçage dans un vecteur se fait avec \fonction{[\ ]}. On
+\item Il est possible (et souvent souhaitable) de donner une étiquette
+  à chacun des éléments d'un vecteur.
+<<echo=TRUE>>=
+(v <- c(a = 1, b = 2, c = 5) )
+v <- c(1, 2, 5)
+names(v) <- c("a", "b", "c")
+v
+@
+  Ces étiquettes font alors partie des attributs du vecteur.
+\item L'indiçage dans un vecteur se fait avec \fonction{[~]}. On
   peut extraire un élément d'un vecteur par sa position ou par son
   étiquette, si elle existe (auquel cas cette approche est beaucoup
   plus sûre).
@@ -289,42 +458,157 @@ v["c"]
 \section{Matrices et tableaux}
 \label{bases:matrices}
 
-Une matrice\index{matrice} ou, de façon plus générale, un
-tableau\index{tableau} (\emph{array}) n'est rien d'autre qu'un vecteur
-doté d'un attribut \attribut{dim}. À l'interne, une matrice est donc
-stockée sous forme de vecteur.
+Le R étant un langage spécialisé pour les calculs mathématiques, il
+supporte tout naturellement et de manière intuitive --- à une
+exception près, comme nous le verrons --- les matrices et, plus
+généralement, les tableaux à plusieurs dimensions (\emph{arrays}).
+
+Les matrices et tableaux ne sont rien d'autre que des vecteurs dotés
+d'un attribut \attribut{dim}. Ces objets sont donc stockés, et peuvent
+être manipulés, exactement comme des vecteurs simples.
 
 \begin{itemize}
+\item Une matrice est un vecteur avec un attribut \attribut{dim} de
+  longueur 2. Cela change implicitement la classe de l'objet pour
+  \indexclasse{matrix}\code{"matrix"} et, de ce fait, le mode
+  d'affichage de l'objet ainsi que son interaction avec plusieurs
+  opérateurs et fonctions.
 \item La fonction de base pour créer des matrices est
-  \Fonction{matrix}.
-\item La fonction de base pour créer des tableaux est
-  \Fonction{array}.
-\item \emph{Important}: \warning les matrices et tableaux sont remplis
-  en faisant d'abord varier la première dimension, puis la seconde,
-  etc. Pour les matrices, cela revient à remplir par colonne.
+  \Fonction{matrix}:
 <<echo=TRUE>>=
-matrix(1:6, nrow=2, ncol=3)
-matrix(1:6, nrow=2, ncol=3, byrow=TRUE)
+matrix(1:6, nrow = 2, ncol = 3)
+matrix(1:6, nrow = 2, ncol = 3, byrow = TRUE)
 @
-\item L'indiçage \index{indiçage!matrice} d'une matrice se fait
-  également avec \fonction{[\ ]}. On extrait les éléments en précisant
-  leurs positions sous la forme (ligne, colonne) dans la matrice, ou
-  encore leurs positions dans le vecteur sous-jacent.
+\item La généralisation d'une matrice à plus de deux dimensions est un
+  tableau. Le nombre de dimensions du tableau est toujours égal à la
+  longueur de l'attribut \attribut{dim}. La classe implicite d'un
+  tableau est \indexclasse{array}\code{"array"}.
+\item La fonction de base pour créer des tableaux est
+  \Fonction{array}:
 <<echo=TRUE>>=
-( m <- matrix(c(40, 80, 45, 21, 55, 32), nrow=2, ncol=3) )
+array(1:24, dim = c(3, 4, 2))
+@ %
+\end{itemize}
+
+\begin{important}
+  On remarquera ci-dessus que les matrices et tableaux sont remplis en
+  faisant d'abord varier la première dimension, puis la seconde, etc.
+  Pour les matrices, cela revient à remplir par colonne. Cette
+  convention, héritée du Fortran, est quelque peu contre-intuitive.
+
+  La fonction \code{matrix} a un argument \argument{byrow} qui permet
+  d'inverser l'ordre de remplissage, mais il vaut mieux s'habituer à
+  la convention de R que d'essayer constamment de la contourner.
+\end{important}
+
+L'ordre de remplissage inhabituel des tableaux rend leur manipulation
+difficile si on ne les visualise pas correctement. Imaginons un
+tableau de dimensions $3 \times 4 \times 5$.
+\begin{itemize}
+\item Il faut voir le tableau comme cinq matrices $3 \times 4$
+  (remplies par colonne!) les unes \emph{derrière} les autres.
+\item Autrement dit, le tableau est un prisme rectangulaire haut de 3
+  unités, large de 4 et profond de 5.
+\item Si l'on ajoute une quatrième dimension, cela revient à aligner
+  des prismes les uns derrière les autres, et ainsi de suite.
+\end{itemize}
+La figure~\ref{fig:bases:tableaux} fournit une représentation schématique
+des tableaux à trois et quatre dimensions.
+
+\begin{figure}[t]
+  \centering
+  \hspace*{\fill}
+  \begin{minipage}[b]{0.4\linewidth}
+    \setlength{\unitlength}{5mm}
+    \begin{picture}(9,7)
+      \ttfamily
+      \put(0,0){\framebox(5,4)[tl]{}}
+      \multiput(1,4)(1,1){3}{\line(0,1){1}}
+      \multiput(1,5)(1,1){3}{\line(1,0){5}}
+      \multiput(6,5)(1,1){3}{\line(0,-1){4}}
+      \multiput(6,1)(1,1){3}{\line(-1,0){1}}
+      \put(0.5,3.5){\circle{0.6}}\put(0.51,3.51){\makebox(0,0){\footnotesize 1}}
+      \put(0.5,3){\vector(0,-1){2.5}}
+      \put(1.5,3.5){\circle{0.6}}\put(1.51,3.51){\makebox(0,0){\footnotesize 2}}
+      \put(2,3.5){\vector(1,0){2.5}}
+      \put(6.3,0.3){\circle{0.6}}\put(6.31,0.31){\makebox(0,0){\footnotesize 3}}
+      \put(6.7,0.7){\vector(1,1){1.3}}
+    \end{picture}
+    \subcaption{trois dimensions}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\linewidth}
+    \setlength{\unitlength}{5mm}
+    \setlength{\unitlength}{3.5mm}
+    \begin{picture}(14,12)
+      \ttfamily
+      \put(0,0){\framebox(5,4)[tl]{}}
+      \multiput(1,4)(1,1){3}{\line(0,1){1}}
+      \multiput(1,5)(1,1){3}{\line(1,0){5}}
+      \multiput(6,5)(1,1){3}{\line(0,-1){4}}
+      \multiput(6,1)(1,1){3}{\line(-1,0){1}}
+      \put(6,7){\line(0,1){2}}
+      \put(6,9){\line(1,0){5}}
+      \put(11,9){\line(0,-1){4}}
+      \put(11,5){\line(-1,0){3}}
+      \multiput(7,9)(1,1){3}{\line(0,1){1}}
+      \multiput(7,10)(1,1){3}{\line(1,0){5}}
+      \multiput(12,10)(1,1){3}{\line(0,-1){4}}
+      \multiput(12,6)(1,1){3}{\line(-1,0){1}}
+      \put(0.5,3.5){\circle{0.8}}\put(0.51,3.51){\makebox(0,0){\scriptsize 1}}
+      \put(0.5,2.9){\vector(0,-1){2.4}}
+      \put(1.5,3.5){\circle{0.8}}\put(1.51,3.51){\makebox(0,0){\scriptsize 2}}
+      \put(2.1,3.5){\vector(1,0){2.4}}
+      \put(6.3,0.3){\circle{0.8}}\put(6.31,0.31){\makebox(0,0){\scriptsize 3}}
+      \put(6.7,0.7){\vector(1,1){1.3}}
+      \put(7.3,0.3){\circle{0.8}}\put(7.31,0.31){\makebox(0,0){\scriptsize 4}}
+      \put(7.7,0.7){\vector(1,1){6.3}}
+    \end{picture}}
+    \subcaption{quatre dimensions}
+  \end{minipage}
+  \caption{Représentation schématique de tableaux. Les chiffres encerclés
+    identifient l'ordre de remplissage.}
+  \label{fig:bases:tableaux}
+\end{figure}
+
+Comme pour les vecteurs, l'indiçage\index{indiçage!matrice} des
+matrices et tableaux se fait avec \fonction{[~]}.
+\begin{itemize}
+\item On extrait un élément d'une matrice en précisant ses positions
+  dans chaque dimension de celle-ci, séparées par des virgules:
+<<echo=TRUE>>=
+(m <- matrix(c(40, 80, 45, 21, 55, 32), nrow = 2, ncol = 3))
 m[1, 2]
+@
+\item On peut aussi ne donner que la position de l'élément dans le
+  vecteur sous-jacent:
+<<echo=TRUE>>=
 m[3]
 @
+\item Lorsqu'une dimension est omise dans les crochets, tous les
+  éléments de cette dimension sont extraits:
+<<echo=TRUE>>=
+m[2, ]
+@
+\item Les idées sont les mêmes pour les tableaux.
+\item Pour le reste, les règles d'indiçage de vecteurs exposées à la
+  section~\ref{bases:indicage} s'appliquent à chaque position de
+  l'indice d'une matrice ou d'un tableau.
+\end{itemize}
+
+Des fonctions permettent de fusionner des matrices et des tableaux
+ayant au moins une dimension identique.
+\begin{itemize}
 \item La fonction \Fonction{rbind} permet de fusionner verticalement
   deux matrices (ou plus) ayant le même nombre de colonnes.
 <<echo=TRUE>>=
-n <- matrix(1:9, nrow=3)
+n <- matrix(1:9, nrow = 3)
 rbind(m, n)
 @
 \item La fonction \Fonction{cbind} permet de fusionner horizontalement
   deux matrices (ou plus) ayant le même nombre de lignes.
 <<echo=TRUE>>=
-n <- matrix(1:4, nrow=2)
+n <- matrix(1:4, nrow = 2)
 cbind(m, n)
 @
 \end{itemize}
@@ -333,63 +617,96 @@ cbind(m, n)
 \section{Listes}
 \label{bases:listes}
 
-Une liste\index{liste} est un type de vecteur spécial dont les
-éléments peuvent être de n'importe quel mode, y compris le mode
-\mode{list} (ce qui permet d'emboîter des listes).
+La liste\index{liste} est le mode de stockage le plus général et
+polyvalent du langage R. Il s'agit d'un type de vecteur spécial dont
+les éléments peuvent être de n'importe quel mode, y compris le mode
+\mode{list}. Cela permet donc d'emboîter des listes, d'où le
+qualificatif \emph{récursif} pour ce type d'objet.
 
 \begin{itemize}
-\item La fonction de base pour créer des listes est \Fonction{list}.
-\item Il est généralement préférable de nommer les éléments d'une
-  liste. Il est en effet plus simple et sûr d'extraire les éléments
-  par leur étiquette.
-\item L'extraction\Index{indiçage!liste} des éléments d'une liste peut
-  se faire de deux façons:
-  \begin{enumerate}
-  \item avec des doubles crochets \fonction{[[\ ]]};
-  \item par leur étiquette avec \code{nom.liste\$etiquette.element}.
-  \end{enumerate}
+\item La fonction de base pour créer des listes est \Fonction{list}:
+<<echo=TRUE>>=
+(x <- list(size = c(1, 5, 2), user = "Joe", new = TRUE))
+@ %
+  Dans l'exemple ci-dessus, le premier élément de la liste est de mode
+  \code{"numeric"}, le second de mode \code{"character"} et le troisième
+  de mode \code{"logical"}.
+\item Nous recommandons de nommer les éléments d'une liste. En effet,
+  les listes contiennent souvent des données de divers type et il peut
+  s'avérer difficile d'identifier les éléments s'ils ne sont pas nommés.
+  De plus, comme nous le verrons ci-dessous, il est très simple
+  d'extraire les éléments d'une liste par leur étiquette.
+\item La liste demeure un vecteur. On peut donc
+  l'indicer\Index{indiçage!liste} avec l'opérateur \fonction{[~]}.
+  Cependant, cela retourne une liste contenant le ou les éléments
+  indicés. C'est rarement ce que l'on souhaite.
+\item Pour indicer un élément d'une liste et n'obtenir que cet
+  élément, et non une liste contenant l'élément, il faut utiliser
+  l'opérateur d'indiçage \Fonction{[[~]]}. Comparer
+<<echo=TRUE>>=
+x[1]
+@ %
+  et
+<<echo=TRUE>>=
+x[[1]]
+@
+\item Évidemment, on ne peut extraire qu'un seul élément à la fois
+  avec les crochets doubles \fonction{[[~]]}.
+\item Petite subtilité peu employée: si l'indice utilisé dans
+  \fonction{[[~]]} est un vecteur, il est utilisé récursivement pour
+  indicer la liste. Ainsi, cela sélectionnera la composante de la liste
+  correspondant au premier élément du vecteur, puis l'élément de la
+  composante correspondant au second élément du vecteur, et ainsi de
+  suite. Cryptique.
+\item Une autre --- et, en fait, la meilleure --- façon d'indicer un
+  seul élément d'une liste est par le biais de l'opérateur
+  \Fonction{\$}, avec une construction de la forme
+  \code{x\$etiquette}:
+<<echo=TRUE>>=
+x$size
+@ %$
 \item La fonction \Fonction{unlist} convertit une liste en un vecteur
-  simple. Attention, cette fonction peut être destructrice si la
-  structure de la liste est importante.
+  simple. Elle est surtout utile pour concaténer les éléments d'une
+  liste lorsque ceux-ci sont des scalaires. Attention, cette fonction
+  peut être destructrice si la structure interne de la liste est
+  importante.
 \end{itemize}
 
 
 \section{\emph{Data frames}}
 \label{bases:dataframes}
 
-Les vecteurs, matrices, tableaux (\emph{arrays}) et listes sont les
-types d'objets les plus fréquemment utilisés en S pour la
-programmation de fonctions personnelles ou la simulation. L'analyse de
-données --- la régression linéaire, par exemple --- repose toutefois
-davantage sur les \emph{data frames}\Index{data frame}.
+Les vecteurs, les matrices, les tableaux et les listes sont les types
+d'objets les plus fréquemment utilisés en programmation en R.
+Toutefois, un grand nombre de procédures statistiques --- pensons à la
+régression linéaire, par exemple --- repose davantage sur les
+\emph{data frames}\Index{data frame} pour le stockage des données.
 
 \begin{itemize}
-\item Un \emph{data frame} est une liste de classe \classe{data.frame}
-  dont tous les éléments sont de la même longueur.
-\item Généralement représenté sous la forme d'un tableau à deux
-  dimensions (visuellement similaire à une matrice). Chaque élément de
-  la liste sous-jacente correspond à une colonne.
-\item On peut donc obtenir les étiquettes des colonnes avec la fonction
-  \fonction{names} (ou \fonction{colnames} \R dans \textsf{R}).  Les
-  étiquettes des lignes sont quant à elles obtenues avec
-  \fonction{row.names} (ou \fonction{rownames} dans \textsf{R}).
-\item Plus général qu'une matrice puisque les colonnes peuvent être de
-  modes différents (\mode{numeric}, \mode{complex}, \mode{character}
-  ou \mode{logical}).
-\item Peut être indicé à la fois comme une liste et comme une matrice.
-\item Créé avec la fonction \Fonction{data.frame} ou
-  \Fonction{as.data.frame} (pour convertir une matrice en \emph{data
-    frame}, par exemple).
+\item Un \emph{data frame} est une liste de classe
+  \indexclasse{data.frame}\code{"data.frame"} dont tous les éléments
+  sont de la même longueur (ou comptent le même nombre de lignes si
+  les éléments sont des matrices).
+\item Il est généralement représenté sous la forme d'un tableau à deux
+  dimensions. Chaque élément de la liste sous-jacente correspond à une
+  colonne.
+\item Bien que visuellement similaire à une matrice un \emph{data
+    frame} est plus général puisque les colonnes peuvent être de modes
+  différents; pensons à un tableau avec des noms (mode
+  \code{character}) dans une colonne et des notes (mode
+  \code{numeric}) dans une autre.
+\item On crée un \emph{data frame} avec la fonction
+  \Fonction{data.frame} ou encore avec \Fonction{as.data.frame}, pour
+  convertir un autre type d'objet en \emph{data frame}.
+\item Le \emph{data frame} peut être indicé à la fois comme une liste
+  et comme une matrice.
 \item Les fonctions \fonction{rbind} et \fonction{cbind} peuvent être
-  utilisées pour ajouter des lignes ou des colonnes, respectivement.
+  utilisées pour ajouter des lignes ou des colonnes à un \emph{data
+    frame}.
 \item On peut rendre les colonnes d'un \emph{data frame} (ou d'une
   liste) visibles dans l'espace de travail avec la fonction
   \Fonction{attach}, puis les masquer avec \Fonction{detach}.
 \end{itemize}
-
-Ce type d'objet est moins important lors de l'apprentissage du langage
-de programmation.
-
 
 
 
@@ -400,39 +717,59 @@ L'indiçage des vecteurs\Index{indiçage!vecteur} et
 matrices\Index{indiçage!matrice} a déjà été brièvement présenté aux
 sections \ref{bases:vecteurs} et \ref{bases:matrices}. La présente
 section contient plus de détails sur cette procédure des plus communes
-lors de l'utilisation du langage S. On se concentre toutefois sur le
-traitement des vecteurs. Se référer également à \citet[section
-2.3]{MASS} pour de plus amples renseignements.
+lors de l'utilisation du langage R. On se concentre toutefois sur le
+traitement des vecteurs.
 
-Il existe quatre façons d'indicer un vecteur dans le langage S. Dans
-tous les cas, l'indiçage se fait à l'intérieur de crochets \Fonction{[\ ]}.
+L'indiçage sert principalement à deux choses: extraire des éléments
+d'un objet avec la construction \code{x[i]} ou les remplacer avec la
+construction \verb|x[i] <- y|.
+\begin{itemize}
+\item Il est utile de savoir que ces opérations sont en fait traduites
+  par l'interprète R en des appels à des fonctions nommées
+  \Fonction{[} et \Fonction{[<-}, dans l'ordre.
+\item De même, les opérations d'extraction et de remplacement d'un
+  élément d'une liste de la forme \verb|x$etiquette| et
+  \verb|x$etiquette <- y| correspondent à des appels aux fonctions
+  \fonction{\$} et \fonction{\$<-}.
+\end{itemize}
+
+Il existe quatre façons d'indicer un vecteur dans le langage R. Dans
+tous les cas, l'indiçage se fait à l'intérieur de crochets
+\Fonction{[~]}.
 \begin{enumerate}
 \item Avec un vecteur d'entiers positifs. Les éléments se trouvant aux
   positions correspondant aux entiers sont extraits du vecteur, dans
-  l'ordre. C'est la technique la plus courante.
+  l'ordre. C'est la technique la plus courante:
 <<echo=TRUE>>=
-letters[c(1:3, 22, 5)]
+x <- c(A = 2, B = 4, C = -1, D = -5, E = 8)
+x[c(1, 3)]
 @
 \item Avec un vecteur d'entiers négatifs. Les éléments se trouvant aux
   positions correspondant aux entiers négatifs sont alors
-  \emph{éliminés} du vecteur.
+  \emph{éliminés} du vecteur:
 <<echo=TRUE>>=
-letters[c(-(1:3), -5, -22)]
+x[c(-2, -3)]
 @
 \item Avec un vecteur booléen. Le vecteur d'indiçage doit alors être
   de la même longueur que le vecteur indicé. Les éléments
   correspondant à une valeur \code{TRUE} sont extraits du vecteur,
-  alors que ceux correspondant à \code{FALSE} sont éliminés.
+  alors que ceux correspondant à \code{FALSE} sont éliminés:
 <<echo=TRUE>>=
-letters > "f" & letters < "q"
-letters[letters > "f" & letters < "q"]
+x > 0
+x[x > 0]
 @
-\item Avec une chaîne de caractères. Utile pour extraire les éléments
-  d'un vecteur à condition que ceux-ci soient nommés.
+\item Avec un vecteur de chaînes de caractères. Utile pour extraire
+  les éléments d'un vecteur à condition que ceux-ci soient nommés:
 <<echo=TRUE>>=
-x <- c("Rouge"=2, "Bleu"=4, "Vert"=9, "Jaune"=-5)
-x[c("Bleu", "Jaune")]
+x[c("B", "D")]
 @
+\item L'indice est laissé vide. Tous les éléments du vecteur sont
+  alors sélectionnés:
+<<echo=TRUE>>=
+x[]
+@ %
+  Remarquer que cela est différent d'indicer avec un vecteur vide (de
+  type \code{numeric(0)}); cette opération retourne un vecteur vide.
 \end{enumerate}
 
 
@@ -452,7 +789,7 @@ x[c("Bleu", "Jaune")]
 
 \begin{exercice}
   \begin{enumerate}
-  \item Écrire une expression S pour créer la liste suivante:
+  \item Écrire une expression R pour créer la liste suivante:
 <<echo=FALSE>>=
 ( x <- list(1:5, data=matrix(1:6, 2, 3), numeric(3), test=logical(4)) )
 @
@@ -510,7 +847,7 @@ obs <- sample(1:20, 20, replace=TRUE)
 obs
 @
   \end{center}
-  Écrire une expression S permettant d'extraire les éléments suivants.
+  Écrire une expression R permettant d'extraire les éléments suivants.
   \begin{enumerate}
   \item Le deuxième élément de l'échantillon.
   \item Les cinq premiers éléments de l'échantillon.
@@ -547,7 +884,7 @@ obs[-c(6, 10, 12)]
 <<echo=TRUE,eval=FALSE>>=
 ( mat <- matrix(sample(1:100, 70), 7, 10) )
 @
-  Écrire une expression S permettant d'obtenir les éléments demandés
+  Écrire une expression R permettant d'obtenir les éléments demandés
   ci-dessous.
   \begin{enumerate}
   \item L'élément $(4, 3)$ de la matrice.

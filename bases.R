@@ -1,97 +1,136 @@
-## Emacs: -*- coding: latin-1; fill-column: 62; comment-column: 27; -*-
+## Emacs: -*- coding: utf-8; fill-column: 62; comment-column: 27; -*-
 
 ###
-### LES OBJETS S
+### COMMANDES R
 ###
+
+## Les expressions entr√©es √† la ligne de commande sont
+## imm√©diatement √©valu√©es et le r√©sultat est affich√© √†
+## l'√©cran, comme avec une grosse calculatrice.
+1                          # une constante
+(2 + 3 * 5)/7              # priorit√© des op√©rations
+3^5                        # puissance
+exp(3)                     # fonction exponentielle
+sin(pi/2) + cos(pi/2)      # fonctions trigonom√©triques
+gamma(5)                   # fonction gamma
+
+## Lorsqu'une expression est syntaxiquement incompl√®te,
+## l'invite de commande change de '> ' √† '+ '.
+2 -                        # expression incompl√®te
+5 *                        # toujours incompl√®te
+3                          # compl√©t√©e
+
+## Taper le nom d'un objet affiche son contenu. Pour une
+## fonction, c'est son code source qui est affich√©.
+pi                         # constante num√©rique int√©gr√©e
+letters                    # cha√Æne de caract√®res int√©gr√©e
+LETTERS                    # version en majuscules
+matrix                     # fonction
+
+## Ne pas utiliser '=' pour l'affectation. Les op√©rateurs
+## d'affectation standard en R sont '<-' et '->'.
+x <- 5                     # affecter 5 √† l'objet 'x'
+5 -> x                     # idem, mais peu usit√©
+x                          # voir le contenu
+(x <- 5)                   # affecter et afficher
+y <- x                     # affecter la valeur de 'x' √† 'y'
+x <- y <- 5                # idem, en une seule expression
+y                          # 5
+x <- 0                     # changer la valeur de 'x'...
+y                          # ... ne change pas celle de 'y'
+
+## Pour regrouper plusieurs expressions en une seule commande,
+## il faut soit les s√©parer par un point-virgule ';', soit les
+## regrouper √† l'int√©rieur d'accolades { } et les s√©parer par
+## des retours √† la ligne.
+x <- 5; y <- 2; x + y      # compact; √©viter dans les scripts
+x <- 5;                    # √©viter les ';' superflus
+{                          # d√©but d'un groupe
+    x <- 5                 # premi√®re expression du groupe
+    y <- 2                 # seconde expression du groupe
+    x + y                  # r√©sultat du groupe
+}                          # fin du groupe et r√©sultat
+{x <- 5; y <- 2; x + y}    # valide, mais redondant
+
+###
+### NOMS D'OBJETS
+###
+
+## Quelques exemples de noms valides et invalides.
+foo <- 5                   # valide
+foo.123 <- 5               # valide
+foo_123 <- 5               # valide
+123foo <- 5                # invalide; commence par un chiffre
+.foo <- 5                  # valide
+.123foo <- 5               # invalide; point suivi d'un chiffre
+
+## Liste des objets dans l'espace de travail. Les objets dont
+## le nom commence par un point sont consid√©r√©s cach√©s.
+ls()                       # l'objet '.foo' n'est pas affich√©
+ls(all.names = TRUE)       # objets cach√©s aussi affich√©s
+
+## R est sensible √† la casse
+foo <- 1
+Foo
+FOO
+
+###
+### LES OBJETS R
+###
+
+## MODES ET TYPES DE DONN√âES
+
+## Le mode d'un objet d√©termine ce qu'il peut contenir. Les
+## vecteurs simples ("atomic") contiennent des donn√©es d'un
+## seul type.
+mode(c(1, 4.1, pi))        # nombres r√©els
+mode(c(2, 1 + 5i))         # nombres complexes
+mode(c(TRUE, FALSE, TRUE)) # valeurs bool√©ennes
+mode("foobar")             # cha√Ænes de caract√®res
+
+## Si l'on m√©lange dans un m√™me vecteur des objets de mode
+## diff√©rents, il y a conversion automatique vers le mode pour
+## lequel il y a le moins de perte d'information, c'est-√†-dire
+## vers le mode qui permet le mieux de retrouver la valeur
+## originale des √©l√©ments.
+c(5, TRUE, FALSE)          # conversion en mode 'numeric'
+c(5, "z")                  # conversion en mode 'character'
+c(TRUE, "z")               # conversion en mode 'character'
+c(5, TRUE, "z")            # conversion en mode 'character'
+
+## La plupart des autres types d'objets sont r√©cursifs. Voici
+## quelques autres modes.
+mode(seq)                  # une fonction
+mode(list(5, "foo", TRUE)) # une liste
+mode(expression(x <- 5))   # une expression non √©valu√©e
 
 ## LONGUEUR
 
-## La longueur d'un vecteur est Ègale au nombre d'ÈlÈments
+## La longueur d'un vecteur est √©gale au nombre d'√©l√©ments
 ## dans le vecteur.
-( a <- 1:4 )
+(a <- 1:4)
 length(a)
 
-## Une chaÓne de caractËres ne compte que pour un seul
-## ÈlÈment.
-( a <- "foobar" )
+## Une cha√Æne de caract√®res ne compte que pour un seul
+## √©l√©ment.
+(a <- "foobar")
 length(a)
 
-## Pour obtenir la longueur de la chaÓne, il faut utiliser
+## Pour obtenir la longueur de la cha√Æne, il faut utiliser
 ## nchar().
 nchar(a)
 
-## Un objet peut nÈanmoins contenir plusieurs chaÓnes de
-## caractËres.
-( a <- c("f", "o", "o", "b", "a", "r") )
+## Un objet peut n√©anmoins contenir plusieurs cha√Ænes de
+## caract√®res.
+(a <- c("f", "o", "o", "b", "a", "r"))
 length(a)
 
-## La longueur peut Ítre 0, auquel cas on a un objet vide,
+## La longueur peut √™tre 0, auquel cas on a un objet vide,
 ## mais qui existe.
-( a <- numeric(0) )
-length(a)                  # l'objet 'a' existe...
-a[1] <- 1                  # on peut donc affecter sa premiËre
-                           # valeur
-b[1] <- 1                  # opÈration impossible, l'objet 'b'
-                           # n'existe pas
-
-## ATTRIBUTS
-
-## Attribut 'class'. Selon la classe d'un objet, certaines
-## fonctions (dites ´fonctions gÈnÈriquesª) vont se comporter
-## diffÈremment.
-x <- sample(1:100, 10)     # Èchantillon alÈatoire de 10
-                           # nombres entre 1 et 100
-class(x)                   # classe de l'objet
-plot(x)                    # graphique pour cette classe
-class(x) <- "ts"           # 'x' est maintenant une sÈrie
-                           # chronologique
-plot(x)                    # graphique pour les sÈries
-                           # chronologiques
-
-## Attribut 'dim'. Si l'attribut 'dim' compte deux valeurs,
-## l'objet est traitÈ comme une matrice. S'il en compte plus
-## de deux, l'objet est traitÈ comme un tableau (array).
-a <- matrix(1:12, nrow = 3, ncol = 4) # matrice 3 x 4
-dim(a)                     # vecteur de deux ÈlÈments
-length(dim(a))             # nombre de dimensions de 'a'
-class(a)                   # objet considÈrÈ comme une matrice
-length(a)                  # ‡ l'interne 'a' est un vecteur
-
-a <- array(1:24, c(2, 3, 4))  # tableau 2 x 3 x 4
-dim(a)                     # vecteur de 3 ÈlÈments
-length(dim(a))             # nombre de dimensions de 'a'
-class(a)                   # objet considÈrÈ comme un tableau
-length(a)                  # ‡ l'interne, 'a' est un vecteur
-
-## Attribut 'dimnames'. Permet d'assigner des Ètiquettes (ou
-## noms) aux dimensions d'une matrice ou d'un tableau.
-( a <- matrix(1:12, nrow = 3) ) # matrice 3 x 4
-dimnames(a)                # pas d'Ètiquettes par dÈfaut
-letters                    # objet prÈdÈfini
-LETTERS                    # idem
-dimnames(a) <- list(letters[1:3], LETTERS[1:4])
-                           # 'dimnames' est une liste de
-                           # deux ÈlÈments
-a                          # joli
-dimnames(a)                # noms stockÈs dans une liste
-
-## Attributs 'names'. Similaire ‡ 'dimnames', mais pour les
-## ÈlÈments d'un vecteur ou d'une liste.
-( a <- 1:4 )               # vecteur de quatre ÈlÈments
-names(a)                   # pas d'Ètiquettes par dÈfaut
-names(a) <- c("Rouge", "Vert", "Bleu", "Jaune")
-                           # attribution d'Ètiquettes
-a                          # joli
-names(a)                   # extraction des Ètiquettes
-( a <- c("Rouge" = 1, "Vert" = 2, "Bleu" = 3, "Jaune" = 4) )
-                           # autre faÁon de faire
-names(a)                   # mÍme rÈsultat
-
-## L'OBJET SP…CIAL 'NA'
-a <- c(65, NA, 72, 88)     # traitÈ comme une valeur
-mean(a)                    # tout calcul donne NA...
-mean(a, na.rm = TRUE)      # ... ‡ moins d'Èliminer les NA
-                           # avant de faire le calcul
+(x <- numeric(0))          # cr√©ation du contenant
+length(x)                  # l'objet 'x' existe...
+x[1] <- 1                  # possible, 'x' existe
+X[1] <- 1                  # impossible, 'X' n'existe pas
 
 ## L'OBJET SPECIAL 'NULL'
 mode(NULL)                 # le mode de 'NULL' est NULL
@@ -99,130 +138,223 @@ length(NULL)               # longueur nulle
 a <- c(NULL, NULL)         # s'utilise comme un objet normal
 a; length(a); mode(a)      # mais donne toujours le vide
 
+## L'OBJET SP√âCIAL 'NA'
+a <- c(65, NA, 72, 88)     # trait√© comme une valeur
+a + 2                      # tout calcul avec 'NA' donne NA
+mean(a)                    # voil√† qui est pire
+mean(a, na.rm = TRUE)      # √©liminer les 'NA' avant le calcul
+is.na(a)                   # tester si les donn√©es sont 'NA'
+
+## VALEURS INFINIES ET IND√âTERMIN√âES
+1/0                        # +infini
+-1/0                       # -infini
+0/0                        # ind√©termination
+a <- c(65, Inf, NaN, 88)   # s'utilisent comme des valeurs
+is.finite(a)               # quels sont les nombres r√©els?
+is.nan(a)                  # lesquels ne sont ¬´pas un nombre¬ª?
+
+## ATTRIBUTS
+
+## Les objets peuvent √™tre dot√©s d'un ou plusieurs attributs.
+data(cars)                 # jeu de donn√©es int√©gr√©
+attributes(cars)           # liste de tous les attributs
+attr(cars, "class")        # extraction d'un seul attribut
+
+## Attribut 'class'. Selon la classe d'un objet, certaines
+## fonctions (dites ¬´fonctions g√©n√©riques¬ª) vont se comporter
+## diff√©remment.
+x <- sample(1:100, 10)     # √©chantillon al√©atoire de 10
+                           # nombres entre 1 et 100
+class(x)                   # classe de l'objet
+plot(x)                    # graphique pour cette classe
+class(x) <- "ts"           # 'x' est maintenant une s√©rie
+                           # chronologique
+plot(x)                    # graphique pour les s√©ries
+                           # chronologiques
+class(x) <- NULL; x        # suppression de l'attribut 'class'
+
+## Attribut 'dim'. Si l'attribut 'dim' compte deux valeurs,
+## l'objet est trait√© comme une matrice. S'il en compte plus
+## de deux, l'objet est trait√© comme un tableau (array).
+x <- 1:24                  # un vecteur
+dim(x) <- c(4, 6)          # ajoute un attribut 'dim'
+x                          # l'objet est une matrice
+dim(x) <- c(4, 2, 3)       # change les dimensions
+x                          # l'objet est maintenant un tableau
+
+## Attribut 'dimnames'. Permet d'assigner des √©tiquettes (ou
+## noms) aux dimensions d'une matrice ou d'un tableau.
+dimnames(x) <- list(1:4, c("a", "b"), c("A", "B", "C"))
+dimnames(x)                # remarquer la conversion
+x                          # affichage avec √©tiquettes
+attributes(x)              # tous les attributs de 'x'
+attributes(x) <- NULL; x   # supprimer les attributs
+
+## Attributs 'names'. Similaire √† 'dimnames', mais pour les
+## √©l√©ments d'un vecteur ou d'une liste.
+names(x) <- letters[1:24]  # attribution d'√©tiquettes
+x                          # identification facilit√©e
+
 ###
 ### VECTEURS
 ###
-a <- c(-1, 2, 8, 10)       # crÈation d'un vecteur
-names(a) <- letters[1:length(a)] # attribution d'Ètiquettes
-a[1]                       # extraction par position
-a["c"]                     # extraction par Ètiquette
-a[-2]                      # Èlimination d'un ÈlÈment
 
-## Les fonctions 'numeric', 'logical' et 'character'
-## consistuent la maniËre ´officielleª d'initialiser des
-## contenants vides.
-( a <- numeric(10) )       # vecteur initialisÈ avec des 0
-( a <- logical(10) )       # vecteur initialisÈ avec des FALSE
-( a <- character(10) )     # vecteur initialisÈ avec ""
+## La fonction de base pour cr√©er des vecteurs est 'c'. Il
+## peut s'av√©rer utile de donner des √©tiquettes aux √©l√©ments
+## d'un vecteur.
+x <- c(a = -1, b = 2, c = 8, d = 10) # cr√©ation d'un vecteur
+names(x)                             # extraire les √©tiquettes
+names(x) <- letters[1:length(x)]     # changer les √©tiquettes
+x[1]                       # extraction par position
+x["c"]                     # extraction par √©tiquette
+x[-2]                      # √©limination d'un √©l√©ment
 
-## Si l'on mÈlange dans un mÍme vecteur des objets de mode
-## diffÈrents, il y a conversion automatique vers le mode pour
-## lequel il y a le moins de perte d'information.
-c(5, TRUE, FALSE)          # conversion en mode 'numeric'
-c(5, "z")                  # conversion en mode 'character'
-c(TRUE, "z")               # conversion en mode 'character'
-c(5, TRUE, "z")            # conversion en mode 'character'
+## La fonction 'vector' sert √† initialiser des vecteurs avec
+## des valeurs pr√©d√©termin√©es. Elle compte deux arguments: le
+## mode du vecteur et sa longueur. Les fonctions 'numeric',
+## 'logical', 'complex' et 'character' constituent des
+## raccourcis pour des appels √† 'vector'.
+vector("numeric", 5)       # vecteur initialis√© avec 0
+numeric(5)                 # √©quivalent
+numeric                    # en effet, voici la fonction
+logical(5)                 # initialis√© avec FALSE
+complex(5)                 # initialis√© avec 0 + 0i
+character(5)               # initialis√© avec cha√Ænes vides
 
 ###
 ### MATRICES ET TABLEAUX
 ###
 
-## Deux faÁons de crÈer des matrices: ‡ l'aide de la fonction
-## 'matrix', ou en ajoutant un attribut 'dim' ‡ un vecteur.
-( a <- matrix(1:12, nrow = 3, ncol = 4) ) # avec 'matrix'
-class(a); length(a); dim(a)# vecteur ‡ deux dimensions
+## Une matrice est un vecteur avec un attribut 'dim' de
+## longueur 2 une classe implicite "matrix". La mani√®re
+## naturelle de cr√©er une matrice est avec la fonction
+## 'matrix'.
+(x <- matrix(1:12, nrow = 3, ncol = 4)) # cr√©er la matrice
+length(x)                  # 'x' est un vecteur...
+dim(x)                     # ... avec un attribut 'dim'...
+class(x)                   # ... et classe implicite "matrix"
 
-a <- 1:12                  # vecteur simple
-dim(a) <- c(3, 4)          # ajout d'un attribut 'dim'
-class(a); length(a); dim(a)# mÍme rÈsultat!
+## Une mani√®re moins naturelle mais √©quivalente --- et parfois
+## plus pratique --- de cr√©er une matrice consiste √† ajouter
+## un attribut 'dim' √† un vecteur.
+x <- 1:12                  # vecteur simple
+dim(x) <- c(3, 4)          # ajout d'un attribut 'dim'
+x; class(x)                # 'x' est une matrice!
 
-a[1, 3]                    # l'ÈlÈment en position (1, 3)...
-a[7]                       # ... est le 7e ÈlÈment du vecteur
-a[1,]                      # premiËre ligne
-a[,2]                      # deuxiËme colonne
+## Les matrices sont remplies par colonne par d√©faut. Utiliser
+## l'option 'byrow' pour remplir par ligne.
+matrix(1:12, nrow = 3, byrow = TRUE)
 
-matrix(1:12, nrow = 3, byrow = TRUE) # remplir par ligne
-
-## On procËde exactement de la mÍme faÁons avec les tableaux,
-## sauf que le nombre de dimensions est plus ÈlevÈ. Attention:
-## les tableaux sont remplis de la premiËre ‡ la derniËre
-## dimension, dans l'ordre.
-( a <- array(1:60, 3:5) )  # tableau 3 x 4 x 5
-class(a); length(a); dim(a)# vecteur ‡ trois dimensions
-a[1, 3, 2]                 # l'ÈlÈment (1, 3, 2)...
-a[19]                      # ... est le 19e ÈlÈment du vecteur
+## Indicer la matrice ou le vecteur sous-jacent est
+## √©quivalent. Utiliser l'approche la plus simple selon le
+## contexte.
+x[1, 3]                    # l'√©l√©ment en position (1, 3)...
+x[7]                       # ... est le 7e √©l√©ment du vecteur
+x[1, ]                     # premi√®re ligne
+x[, 2]                     # deuxi√®me colonne
+nrow(x)                    # nombre de lignes
+dim(x)[1]                  # idem
+ncol(x)                    # nombre de colonnes
+dim(x)[2]                  # idem
 
 ## Fusion de matrices et vecteurs.
-a <- matrix(1:12, 3, 4)    # 'a' est une matrice 3 x 4
-b <- matrix(1:8, 2, 4)     # 'b' est une matrice 2 x 4
-c <- matrix(1:6, 3, 2)     # 'c' est une matrice 3 x 2
-rbind(a, 1:4)              # ajout d'une ligne ‡ 'a'
-rbind(a, b)                # fusion verticale de 'a' et 'b'
-cbind(a, 1:3)              # ajout d'une colonne ‡ 'a'
-cbind(a, c)                # concatÈnation de 'a' et 'c'
-rbind(a, c)                # dimensions incompatibles
-cbind(a, b)                # dimensions incompatibles
+x <- matrix(1:12, 3, 4)    # 'x' est une matrice 3 x 4
+y <- matrix(1:8, 2, 4)     # 'y' est une matrice 2 x 4
+z <- matrix(1:6, 3, 2)     # 'z' est une matrice 3 x 2
+rbind(x, 1:4)              # ajout d'une ligne √† 'x'
+rbind(x, y)                # fusion verticale de 'x' et 'y'
+cbind(x, 1:3)              # ajout d'une colonne √† 'x'
+cbind(x, z)                # concat√©nation de 'x' et 'z'
+rbind(x, z)                # dimensions incompatibles
+cbind(x, y)                # dimensions incompatibles
 
-## Les vecteurs ligne et colonne sont rarement nÈcessaires. On
-## peut les crÈer avec les fonctions 'rbind' et 'cbind',
+## Les vecteurs ligne et colonne sont rarement n√©cessaires. On
+## peut les cr√©er avec les fonctions 'rbind' et 'cbind',
 ## respectivement.
 rbind(1:3)                 # un vecteur ligne
 cbind(1:3)                 # un vecteur colonne
+
+## Un tableau (array) est un vecteur avec un attribut 'dim' de
+## longueur sup√©rieure √† 2 et une classe implicite "array".
+## Quant au reste, la manipulation des tableaux est en tous
+## points identique √† celle des matrices. Ne pas oublier:
+## les tableaux sont remplis de la premi√®re dimension √† la
+## derni√®re!
+x <- array(1:60, 3:5)      # tableau 3 x 4 x 5
+length(x)                  # 'x' est un vecteur...
+dim(x)                     # ... avec un attribut 'dim'...
+class(x)                   # ... une classe implicite "array"
+x[1, 3, 2]                 # l'√©l√©ment en position (1, 3, 2)...
+x[19]                      # ... est l'√©l√©ment 19 du vecteur
+
+## Le tableau ci-dessus est un prisme rectangulaire 3 unit√©s
+## de haut, 4 de large et 5 de profond. Indicer ce prisme avec
+## un seul indice √©quivaut √† en extraire des ¬´tranches¬ª, alors
+## qu'utiliser deux indices √©quivaut √† en tirer des ¬´carottes¬ª
+## (au sens g√©ologique du terme). Il est laiss√© en exercice de
+## g√©n√©raliser √† plus de dimensions...
+x                          # les cinq matrices
+x[, , 1]                   # tranches de haut en bas
+x[, 1, ]                   # tranches d'avant √† l'arri√®re
+x[1, , ]                   # tranches de gauche √† droite
+x[, 1, 1]                  # carotte de haut en bas
+x[1, 1, ]                  # carotte d'avant √† l'arri√®re
+x[1, , 1]                  # carotte de gauche √† droite
 
 ###
 ### LISTES
 ###
 
-## La liste est l'objet le plus gÈnÈral en S puisqu'il peut
+## La liste est l'objet le plus g√©n√©ral en R puisqu'il peut
 ## contenir des objets de n'importe quel mode et longueur.
 ( a <- list(joueur = c("V", "C", "C", "M", "A"),
             score = c(10, 12, 11, 8, 15),
             expert = c(FALSE, TRUE, FALSE, TRUE, TRUE),
             bidon = 2) )
 mode(a)                    # mode 'list'
-length(a)                  # quatre ÈlÈments
+length(a)                  # quatre √©l√©ments
 
-## Pour extraire un ÈlÈment d'une liste, il faut utiliser les
+## Pour extraire un √©l√©ment d'une liste, il faut utiliser les
 ## doubles crochets [[ ]]. Les simples crochets [ ]
 ## fonctionnent aussi, mais retournent une sous liste -- ce
 ## qui est rarement ce que l'on souhaite.
-a[[1]]                     # premier ÈlÈment de la liste...
+a[[1]]                     # premier √©l√©ment de la liste...
 mode(a[[1]])               # ... un vecteur
-a[1]                       # aussi le premier ÈlÈment...
+a[1]                       # aussi le premier √©l√©ment...
 mode(a[1])                 # ... mais une sous liste...
-length(a[1])               # ... d'un seul ÈlÈment
-a[[2]][1]                  # 1er ÈlÈment du 2e ÈlÈment
+length(a[1])               # ... d'un seul √©l√©ment
+a[[2]][1]                  # 1er √©l√©ment du 2e √©l√©ment
 
-## Les ÈlÈments d'une liste Ètant gÈnÈralement nommÈs (c'est
-## une bonne habitude ‡ prendre!), il est souvent plus simple
-## et s˚r d'extraire les ÈlÈments d'une liste par leur
-## Ètiquette.
-a$joueur                   # Èquivalent ‡ a[[1]]
-a$score[1]                 # Èquivalent ‡ a[[2]][1]
-a[["expert"]]              # aussi valide, mais peu usitÈ
+## Les √©l√©ments d'une liste √©tant g√©n√©ralement nomm√©s (c'est
+## une bonne habitude √† prendre!), il est souvent plus simple
+## et s√ªr d'extraire les √©l√©ments d'une liste par leur
+## √©tiquette.
+a$joueur                   # √©quivalent √† a[[1]]
+a$score[1]                 # √©quivalent √† a[[2]][1]
+a[["expert"]]              # aussi valide, mais peu usit√©
 
 ## Une liste peut contenir n'importe quoi...
 a[[5]] <- matrix(1, 2, 2)  # ... une matrice...
 a[[6]] <- list(20:25, TRUE)# ... une autre liste...
-a[[7]] <- seq              # ... mÍme le code d'une fonction!
+a[[7]] <- seq              # ... m√™me le code d'une fonction!
 a                          # eh ben!
-a[[6]][[1]][3]             # de quel ÈlÈment s'agit-il?
+a[[6]][[1]][3]             # de quel √©l√©ment s'agit-il?
 
 ## Il est parfois utile de convertir une liste en un simple
-## vecteur. Les ÈlÈments de la liste sont alors ´dÈroulÈsª, y
+## vecteur. Les √©l√©ments de la liste sont alors ¬´d√©roul√©s¬ª, y
 ## compris la matrice en position 5 (qui n'est rien d'autre
 ## qu'un vecteur, on s'en souviendra).
-a <- a[1:6]                # Èliminer la fonction
+a <- a[1:6]                # √©liminer la fonction
 unlist(a)                  # remarquer la conversion
-unlist(a, use.names = FALSE) # Èliminer les Ètiquettes
+unlist(a, use.names = FALSE) # √©liminer les √©tiquettes
 
 ###
 ### DATA FRAMES
 ###
 
-## Un data frame est une liste dont les ÈlÈments sont tous
-## de mÍme longueur. Il comporte un attribut 'dim', ce qui
-## fait qu'il est reprÈsentÈ comme une matrice.
+## Un data frame est une liste dont les √©l√©ments sont tous
+## de m√™me longueur. Il comporte un attribut 'dim', ce qui
+## fait qu'il est repr√©sent√© comme une matrice.
 ( dframe <- data.frame(Noms = c("Pierre", "Jean", "Jacques"),
                        Age = c(42, 34, 19),
                        Fumeur = c(TRUE, TRUE, FALSE)) )
@@ -230,11 +362,11 @@ mode(dframe)               # un data frame est une liste...
 dim(dframe)                # ... avec un attribut 'dim'
 class(dframe)              # ... et de classe 'data.frame'
 
-## Lorsque l'on doit travailler longtemps avec les diffÈrentes
+## Lorsque l'on doit travailler longtemps avec les diff√©rentes
 ## colonnes d'un data frame, il est pratique de pouvoir y
-## accÈder directement sans devoir toujours indicer. La
+## acc√©der directement sans devoir toujours indicer. La
 ## fonction 'attach' permet de rendre les colonnes
-## individuelles visibles.  Une fois le travail terminÈ,
+## individuelles visibles.  Une fois le travail termin√©,
 ## 'detach' masque les colonnes.
 exists("Noms")             # variable n'existe pas
 attach(dframe)             # rendre les colonnes visibles
@@ -244,29 +376,29 @@ detach(dframe)             # masquer les colonnes
 exists("Noms")             # variable n'existe plus
 
 ###
-### INDI«AGE
+### INDI√áAGE
 ###
 
-## Les opÈrations suivantes illustrent les diffÈrentes
-## techniques d'indiÁage d'un vecteur. Les mÍmes techniques
+## Les op√©rations suivantes illustrent les diff√©rentes
+## techniques d'indi√ßage d'un vecteur. Les m√™mes techniques
 ## existent aussi pour les matrices, tableaux et listes. On
-## crÈe d'abord un vecteur quelconque formÈ de vingt nombres
-## alÈatoires entre 1 et 100 avec rÈpÈtitions possibles.
+## cr√©e d'abord un vecteur quelconque form√© de vingt nombres
+## al√©atoires entre 1 et 100 avec r√©p√©titions possibles.
 ( x <- sample(1:100, 20, replace = TRUE) )
 
-## On ajoute des Ètiquettes aux ÈlÈments du vecteur ‡ partir
+## On ajoute des √©tiquettes aux √©l√©ments du vecteur √† partir
 ## de la variable interne 'letters'.
 names(x) <- letters[1:20]
 
-## On gÈnËre ensuite cinq nombres alÈatoires entre 1 et 20
-## (sans rÈpÈtitions).
+## On g√©n√®re ensuite cinq nombres al√©atoires entre 1 et 20
+## (sans r√©p√©titions).
 ( y <- sample(1:20, 5) )
 
-## Toutes les techniques d'indiÁage peuvent aussi servir ‡
-## affecter de nouvelles valeurs ‡ une partie d'un
-## vecteur. Ici, les ÈlÈments de 'x' correspondant aux
-## positions dans le vecteur 'y' sont remplacÈs par des
-## donnÈes manquantes.
+## Toutes les techniques d'indi√ßage peuvent aussi servir √†
+## affecter de nouvelles valeurs √† une partie d'un
+## vecteur. Ici, les √©l√©ments de 'x' correspondant aux
+## positions dans le vecteur 'y' sont remplac√©s par des
+## donn√©es manquantes.
 x[y] <- NA
 x
 
@@ -274,11 +406,11 @@ x
 ## ou non.
 is.na(x)
 
-## …limination des donnÈes manquantes.
+## √âlimination des donn√©es manquantes.
 ( x <- x[!is.na(x)] )
 
-## Tout le vecteur 'x' sauf les trois premiers ÈlÈments.
+## Tout le vecteur 'x' sauf les trois premiers √©l√©ments.
 x[-(1:3)]
 
-## Extraction par chaÓne de caractËres.
+## Extraction par cha√Æne de caract√®res.
 x[c("a", "k", "t")]

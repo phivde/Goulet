@@ -15,9 +15,17 @@
   %\usepackage{threeparttable,expdlist}
   \usepackage{listingsutf8,answers}
 
+  %%% ==========
+  %%%  Couleurs
+  %%% ==========
+  \definecolor{comments}{rgb}{0.7,0,0}
+  \definecolor{shadecolor}{gray}{0}
+  \definecolor{link}{rgb}{0,0,0.3}
+
+  \newsubfloat{figure}
+
   %%% Hyperliens
   \usepackage{hyperref}
-  \definecolor{link}{rgb}{0,0,0.3}
   \hypersetup{colorlinks,allcolors=link}
 
   %%% ============
@@ -87,7 +95,6 @@
   %%% =========================
 
   %% Listes d'objectifs au début des chapitres
-  \definecolor{shadecolor}{gray}{0}
   \newenvironment{objectifs}{%
     \noindent
     \begin{framed}
@@ -172,7 +179,7 @@
     extendedchars=true,
     inputencoding=utf8/latin1,
     basicstyle=\small\ttfamily,
-    commentstyle=\color{red}\slshape,
+    commentstyle=\color{comments}\slshape,
     keywordstyle=\mdseries,
     showstringspaces=false,
     index=[1][keywords],
@@ -216,7 +223,7 @@
   \newcommand{\ess}[1]{\code{#1}\indexess{#1}}
   \makeindex
 
-%  \includeonly{presentation,emacs+ess}
+  \includeonly{bases}
 
 \begin{document}
 
@@ -232,7 +239,7 @@
 
 \mainmatter
 \include{presentation}
-% \include{bases}
+\include{bases}
 % \include{operateurs}
 % \include{exemples}
 % \include{fonctions}

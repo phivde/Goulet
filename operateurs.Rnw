@@ -5,6 +5,21 @@
 options(width = 52)
 @
 
+\begin{objectifs}
+\item Savoir faire l’appel d’une fonction dans R; comprendre comment
+  les arguments sont passés à la fonction et le traitement des valeurs
+  par défaut.
+\item Connaître et savoir utiliser les opérateurs R les plus courants,
+  notamment pour le traitement des vecteurs, le calcul de sommaires et
+  la manipulation des matrices et tableaux
+\item Savoir utiliser la fonction if() pour l’exécution conditionnelle
+  de commandes R.
+\item Distinguer la construction if() … else de la fonction ifelse().
+\item Savoir faire des boucles en R.
+\item Savoir choisir entre les opérateurs for(), while et repeat lors
+  de la construction d’une boucle R.
+\end{objectifs}
+
 Ce chapitre présente les principaux opérateurs arithmétiques,
 fonctions mathématiques et structures de contrôle offerts par le S.
 La liste est évidemment loin d'être exhaustive, surtout étant donné
