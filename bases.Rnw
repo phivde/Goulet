@@ -181,7 +181,7 @@ msg <- try(TRUE <- 3)
 cat(msg)
 @
 <<echo=TRUE>>=
-( T <- 3 )
+(T <- 3)
 @
 <<echo=FALSE>>=
 rm(T)
@@ -209,7 +209,7 @@ mode(v)
 @
 \item La longueur d'un objet est obtenue avec la fonction
   \Fonction{length}:
-<<eco=TRUE>>=
+<<echo=TRUE>>=
 length(v)
 @
 \end{itemize}
@@ -436,7 +436,7 @@ calculs.
 \item Il est possible (et souvent souhaitable) de donner une étiquette
   à chacun des éléments d'un vecteur.
 <<echo=TRUE>>=
-(v <- c(a = 1, b = 2, c = 5) )
+(v <- c(a = 1, b = 2, c = 5))
 v <- c(1, 2, 5)
 names(v) <- c("a", "b", "c")
 v
@@ -493,8 +493,9 @@ array(1:24, dim = c(3, 4, 2))
 \begin{important}
   On remarquera ci-dessus que les matrices et tableaux sont remplis en
   faisant d'abord varier la première dimension, puis la seconde, etc.
-  Pour les matrices, cela revient à remplir par colonne. Cette
-  convention, héritée du Fortran, est quelque peu contre-intuitive.
+  Pour les matrices, cela revient à remplir par colonne. On conviendra
+  que cette convention, héritée du Fortran, n'est pas des plus
+  intuitives.
 
   La fonction \code{matrix} a un argument \argument{byrow} qui permet
   d'inverser l'ordre de remplissage, mais il vaut mieux s'habituer à
@@ -563,7 +564,7 @@ des tableaux à trois et quatre dimensions.
       \put(6.7,0.7){\vector(1,1){1.3}}
       \put(7.3,0.3){\circle{0.8}}\put(7.31,0.31){\makebox(0,0){\scriptsize 4}}
       \put(7.7,0.7){\vector(1,1){6.3}}
-    \end{picture}}
+    \end{picture}
     \subcaption{quatre dimensions}
   \end{minipage}
   \caption{Représentation schématique de tableaux. Les chiffres encerclés
@@ -621,7 +622,7 @@ La liste\index{liste} est le mode de stockage le plus général et
 polyvalent du langage R. Il s'agit d'un type de vecteur spécial dont
 les éléments peuvent être de n'importe quel mode, y compris le mode
 \mode{list}. Cela permet donc d'emboîter des listes, d'où le
-qualificatif \emph{récursif} pour ce type d'objet.
+qualificatif de \emph{récursif} pour ce type d'objet.
 
 \begin{itemize}
 \item La fonction de base pour créer des listes est \Fonction{list}:
@@ -652,16 +653,15 @@ x[[1]]
 @
 \item Évidemment, on ne peut extraire qu'un seul élément à la fois
   avec les crochets doubles \fonction{[[~]]}.
-\item Petite subtilité peu employée: si l'indice utilisé dans
-  \fonction{[[~]]} est un vecteur, il est utilisé récursivement pour
-  indicer la liste. Ainsi, cela sélectionnera la composante de la liste
-  correspondant au premier élément du vecteur, puis l'élément de la
-  composante correspondant au second élément du vecteur, et ainsi de
-  suite. Cryptique.
+\item Petite subtilité peu employée, mais élégante. Si l'indice
+  utilisé dans \fonction{[[~]]} est un vecteur, il est utilisé
+  récursivement pour indicer la liste: cela sélectionnera la
+  composante de la liste correspondant au premier élément du vecteur,
+  puis l'élément de la composante correspondant au second élément du
+  vecteur, et ainsi de suite.
 \item Une autre --- et, en fait, la meilleure --- façon d'indicer un
   seul élément d'une liste est par le biais de l'opérateur
-  \Fonction{\$}, avec une construction de la forme
-  \code{x\$etiquette}:
+  \Fonction{\$}, avec une construction \code{x\$etiquette}:
 <<echo=TRUE>>=
 x$size
 @ %$
@@ -696,8 +696,8 @@ régression linéaire, par exemple --- repose davantage sur les
   \code{character}) dans une colonne et des notes (mode
   \code{numeric}) dans une autre.
 \item On crée un \emph{data frame} avec la fonction
-  \Fonction{data.frame} ou encore avec \Fonction{as.data.frame}, pour
-  convertir un autre type d'objet en \emph{data frame}.
+  \Fonction{data.frame} ou, pour convertir un autre type d'objet en
+  \emph{data frame}, avec \Fonction{as.data.frame}.
 \item Le \emph{data frame} peut être indicé à la fois comme une liste
   et comme une matrice.
 \item Les fonctions \fonction{rbind} et \fonction{cbind} peuvent être
@@ -768,8 +768,8 @@ x[c("B", "D")]
 <<echo=TRUE>>=
 x[]
 @ %
-  Remarquer que cela est différent d'indicer avec un vecteur vide (de
-  type \code{numeric(0)}); cette opération retourne un vecteur vide.
+  Remarquer que cela est différent d'indicer avec un vecteur vide; cette
+  opération retourne un vecteur vide.
 \end{enumerate}
 
 
@@ -791,8 +791,11 @@ x[]
   \begin{enumerate}
   \item Écrire une expression R pour créer la liste suivante:
 <<echo=FALSE>>=
-( x <- list(1:5, data=matrix(1:6, 2, 3), numeric(3), test=logical(4)) )
+x <- list(1:5, data=matrix(1:6, 2, 3), numeric(3), test=logical(4))
 @
+<<echo=TRUE>>=
+x
+@ %
   \item \index{etiquette@étiquette} Extraire les étiquettes de la
     liste.
   \item \index{mode} \index{longueur} Trouver le mode et la longueur
@@ -805,30 +808,31 @@ x[]
     \verb|3:8|.
   \end{enumerate}
   \begin{rep}
-    Soit \code{x} le nom de la liste.
     \begin{enumerate}
-\item
+    \item Il y a plusieurs façons de créer les troisième et quatrième
+      éléments de la liste. Le plus simple consiste à utiliser
+      \code{numeric()} et \code{logical()}:
 <<echo=TRUE,eval=FALSE>>=
 x <- list(1:5, data = matrix(1:6, 2, 3), numeric(3), test = logical(4))
 @
-\item
+    \item
 <<echo=TRUE,eval=FALSE>>=
 names(x)
 @
-\item
+    \item
 <<echo=TRUE,eval=FALSE>>=
 mode(x$test)
 length(x$test)
 @
-\item
+    \item
 <<echo=TRUE,eval=FALSE>>=
 dim(x$data)
 @
-\item
+    \item
 <<echo=TRUE,eval=FALSE>>=
 x[[2]][c(2, 3)]
 @
-\item
+    \item
 <<echo=TRUE,eval=FALSE>>=
 x[[3]] <- 3:8
 @
@@ -838,13 +842,13 @@ x[[3]] <- 3:8
 
 \begin{exercice}
   \index{indiçage!vecteur}
-  Soit \code{obs} un vecteur contenant les valeurs suivantes:
+  Soit \code{x} un vecteur contenant les valeurs suivantes d'un échantillon:
   \begin{center}
 <<echo=FALSE>>=
-obs <- sample(1:20, 20, replace=TRUE)
+x <- sample(1:20, 20, replace = TRUE)
 @
 <<echo=TRUE>>=
-obs
+x
 @
   \end{center}
   Écrire une expression R permettant d'extraire les éléments suivants.
@@ -858,19 +862,19 @@ obs
     \begin{enumerate}
 \item
 <<echo=TRUE,eval=FALSE>>=
-obs[2]
+x[2]
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
-obs[1:5]
+x[1:5]
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
-obs[obs > 14]
+x[x > 14]
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
-obs[-c(6, 10, 12)]
+x[-c(6, 10, 12)]
 @
     \end{enumerate}
   \end{rep}
@@ -880,37 +884,35 @@ obs[-c(6, 10, 12)]
 \newpage
 \begin{exercice}
   \index{indiçage!matrice}
-  Soit \code{mat} une matrice $10 \times 7$ obtenue aléatoirement avec
+  Soit \code{x} une matrice $10 \times 7$ obtenue aléatoirement avec
 <<echo=TRUE,eval=FALSE>>=
-( mat <- matrix(sample(1:100, 70), 7, 10) )
+x <- matrix(sample(1:100, 70), 7, 10)
 @
-  Écrire une expression R permettant d'obtenir les éléments demandés
-  ci-dessous.
+  Écrire des expressions R permettant d'obtenir les éléments de la
+  matrice demandés ci-dessous.
   \begin{enumerate}
-  \item L'élément $(4, 3)$ de la matrice.
-  \item Le contenu de la sixième ligne de la matrice.
-  \item Les première et quatrième colonnes de la matrice
-    (simultanément).
-  \item Les lignes de la matrice dont le premier élément est
-    supérieur à 50.
+  \item L'élément $(4, 3)$.
+  \item Le contenu de la sixième ligne.
+  \item Les première et quatrième colonnes (simultanément).
+  \item Les lignes dont le premier élément est supérieur à 50.
   \end{enumerate}
   \begin{rep}
     \begin{enumerate}
 \item
 <<echo=TRUE,eval=FALSE>>=
-mat[4, 3]
+x[4, 3]
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
-mat[6,]
+x[6, ]
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
-mat[,c(1, 4)]
+x[, c(1, 4)]
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
-mat[mat[,1] > 50,]
+x[x[, 1] > 50, ]
 @
     \end{enumerate}
   \end{rep}

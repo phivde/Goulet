@@ -108,22 +108,22 @@ mode(expression(x <- 5))   # une expression non évaluée
 
 ## La longueur d'un vecteur est égale au nombre d'éléments
 ## dans le vecteur.
-(a <- 1:4)
-length(a)
+(x <- 1:4)
+length(x)
 
 ## Une chaîne de caractères ne compte que pour un seul
 ## élément.
-(a <- "foobar")
-length(a)
+(x <- "foobar")
+length(x)
 
 ## Pour obtenir la longueur de la chaîne, il faut utiliser
 ## nchar().
-nchar(a)
+nchar(x)
 
 ## Un objet peut néanmoins contenir plusieurs chaînes de
 ## caractères.
-(a <- c("f", "o", "o", "b", "a", "r"))
-length(a)
+(x <- c("f", "o", "o", "b", "a", "r"))
+length(x)
 
 ## La longueur peut être 0, auquel cas on a un objet vide,
 ## mais qui existe.
@@ -135,23 +135,23 @@ X[1] <- 1                  # impossible, 'X' n'existe pas
 ## L'OBJET SPECIAL 'NULL'
 mode(NULL)                 # le mode de 'NULL' est NULL
 length(NULL)               # longueur nulle
-a <- c(NULL, NULL)         # s'utilise comme un objet normal
-a; length(a); mode(a)      # mais donne toujours le vide
+x <- c(NULL, NULL)         # s'utilise comme un objet normal
+x; length(x); mode(x)      # mais donne toujours le vide
 
 ## L'OBJET SPÉCIAL 'NA'
-a <- c(65, NA, 72, 88)     # traité comme une valeur
-a + 2                      # tout calcul avec 'NA' donne NA
-mean(a)                    # voilà qui est pire
-mean(a, na.rm = TRUE)      # éliminer les 'NA' avant le calcul
-is.na(a)                   # tester si les données sont 'NA'
+x <- c(65, NA, 72, 88)     # traité comme une valeur
+x + 2                      # tout calcul avec 'NA' donne NA
+mean(x)                    # voilà qui est pire
+mean(x, na.rm = TRUE)      # éliminer les 'NA' avant le calcul
+is.na(x)                   # tester si les données sont 'NA'
 
 ## VALEURS INFINIES ET INDÉTERMINÉES
 1/0                        # +infini
 -1/0                       # -infini
 0/0                        # indétermination
-a <- c(65, Inf, NaN, 88)   # s'utilisent comme des valeurs
-is.finite(a)               # quels sont les nombres réels?
-is.nan(a)                  # lesquels ne sont «pas un nombre»?
+x <- c(65, Inf, NaN, 88)   # s'utilisent comme des valeurs
+is.finite(x)               # quels sont les nombres réels?
+is.nan(x)                  # lesquels ne sont «pas un nombre»?
 
 ## ATTRIBUTS
 
@@ -214,7 +214,7 @@ x[-2]                      # élimination d'un élément
 ## mode du vecteur et sa longueur. Les fonctions 'numeric',
 ## 'logical', 'complex' et 'character' constituent des
 ## raccourcis pour des appels à 'vector'.
-vector("numeric", 5)       # vecteur initialisé avec 0
+vector("numeric", 5)       # vecteur initialisé avec des 0
 numeric(5)                 # équivalent
 numeric                    # en effet, voici la fonction
 logical(5)                 # initialisé avec FALSE
@@ -305,74 +305,99 @@ x[1, , 1]                  # carotte de gauche à droite
 ### LISTES
 ###
 
-## La liste est l'objet le plus général en R puisqu'il peut
-## contenir des objets de n'importe quel mode et longueur.
-( a <- list(joueur = c("V", "C", "C", "M", "A"),
-            score = c(10, 12, 11, 8, 15),
-            expert = c(FALSE, TRUE, FALSE, TRUE, TRUE),
-            bidon = 2) )
-mode(a)                    # mode 'list'
-length(a)                  # quatre éléments
+## La liste est l'objet le plus général en R. C'est un objet
+## récursif qui peut contenir des objets de n'importe quel
+## mode et longueur.
+(x <- list(joueur = c("V", "C", "C", "M", "A"),
+           score = c(10, 12, 11, 8, 15),
+           expert = c(FALSE, TRUE, FALSE, TRUE, TRUE),
+           niveau = 2))
+is.vector(x)               # vecteur...
+length(x)                  # ... de quatre éléments...
+mode(x)                    # ... de mode "list"
+is.recursive(x)            # objet récursif
+
+## Comme tout autre vecteur, une liste peut être concaténée
+## avec un autre vecteur avec la fonction 'c'.
+y <- list(TRUE, 1:5)       # liste de deux éléments
+c(x, y)                    # liste de six éléments
+
+## Pour initialiser une liste d'une longueur déterminée, mais
+## dont chaque élément est vide, uitliser la fonction
+## 'vector'.
+vector("list", 5)          # liste de NULL
 
 ## Pour extraire un élément d'une liste, il faut utiliser les
 ## doubles crochets [[ ]]. Les simples crochets [ ]
 ## fonctionnent aussi, mais retournent une sous liste -- ce
 ## qui est rarement ce que l'on souhaite.
-a[[1]]                     # premier élément de la liste...
-mode(a[[1]])               # ... un vecteur
-a[1]                       # aussi le premier élément...
-mode(a[1])                 # ... mais une sous liste...
-length(a[1])               # ... d'un seul élément
-a[[2]][1]                  # 1er élément du 2e élément
+x[[1]]                     # premier élément de la liste...
+mode(x[[1]])               # ... un vecteur
+x[1]                       # aussi le premier élément...
+mode(x[1])                 # ... mais une sous liste...
+length(x[1])               # ... d'un seul élément
+x[[2]][1]                  # 1er élément du 2e élément
+x[[c(2, 1)]]               # idem, par indiçage récursif
 
 ## Les éléments d'une liste étant généralement nommés (c'est
 ## une bonne habitude à prendre!), il est souvent plus simple
 ## et sûr d'extraire les éléments d'une liste par leur
 ## étiquette.
-a$joueur                   # équivalent à a[[1]]
-a$score[1]                 # équivalent à a[[2]][1]
-a[["expert"]]              # aussi valide, mais peu usité
+x$joueur                   # équivalent à a[[1]]
+x$score[1]                 # équivalent à a[[c(2, 1)]]
+x[["expert"]]              # aussi valide, mais peu usité
+x$level <- 1               # aussi pour l'affectation
 
 ## Une liste peut contenir n'importe quoi...
-a[[5]] <- matrix(1, 2, 2)  # ... une matrice...
-a[[6]] <- list(20:25, TRUE)# ... une autre liste...
-a[[7]] <- seq              # ... même le code d'une fonction!
-a                          # eh ben!
-a[[6]][[1]][3]             # de quel élément s'agit-il?
+x[[5]] <- matrix(1, 2, 2)  # ... une matrice...
+x[[6]] <- list(20:25, TRUE)# ... une autre liste...
+x[[7]] <- seq              # ... même le code d'une fonction!
+x                          # eh ben!
+x[[c(6, 1, 3)]]            # de quel élément s'agit-il?
+
+## Pour supprimer un élément d'une liste, lui assigner la
+## valeur 'NULL'.
+x[[7]] <- NULL; length(x)  # suppression du 7e élément
 
 ## Il est parfois utile de convertir une liste en un simple
 ## vecteur. Les éléments de la liste sont alors «déroulés», y
 ## compris la matrice en position 5 (qui n'est rien d'autre
 ## qu'un vecteur, on s'en souviendra).
-a <- a[1:6]                # éliminer la fonction
-unlist(a)                  # remarquer la conversion
-unlist(a, use.names = FALSE) # éliminer les étiquettes
+unlist(x)                    # remarquer la conversion
+unlist(x, recursive = FALSE) # ne pas appliquer aux sous-listes
+unlist(x, use.names = FALSE) # éliminer les étiquettes
 
 ###
 ### DATA FRAMES
 ###
 
-## Un data frame est une liste dont les éléments sont tous
-## de même longueur. Il comporte un attribut 'dim', ce qui
-## fait qu'il est représenté comme une matrice.
-( dframe <- data.frame(Noms = c("Pierre", "Jean", "Jacques"),
-                       Age = c(42, 34, 19),
-                       Fumeur = c(TRUE, TRUE, FALSE)) )
-mode(dframe)               # un data frame est une liste...
-dim(dframe)                # ... avec un attribut 'dim'
-class(dframe)              # ... et de classe 'data.frame'
+## Un data frame est une liste dont les éléments sont tous de
+## même longueur. Il comporte un attribut 'dim', ce qui fait
+## qu'il est représenté comme une matrice. Cependant, les
+## colonnes peuvent être de modes différents.
+(DF <- data.frame(Noms = c("Pierre", "Jean", "Jacques"),
+                  Age = c(42, 34, 19),
+                  Fumeur = c(TRUE, TRUE, FALSE)))
+mode(DF)                   # un data frame est une liste...
+class(DF)                  # ... de classe 'data.frame'
+dim(DF)                    # dimensions implicites
+names(DF)                  # titres des colonnes
+row.names(DF)              # titres des lignes (implicites)
+DF[1, ]                    # première ligne
+DF[, 1]                    # première colonne
+DF$Name                    # idem, mais plus simple
 
 ## Lorsque l'on doit travailler longtemps avec les différentes
 ## colonnes d'un data frame, il est pratique de pouvoir y
 ## accéder directement sans devoir toujours indicer. La
 ## fonction 'attach' permet de rendre les colonnes
-## individuelles visibles.  Une fois le travail terminé,
-## 'detach' masque les colonnes.
+## individuelles visibles dans l'espace de travail. Une fois
+## le travail terminé, 'detach' masque les colonnes.
 exists("Noms")             # variable n'existe pas
-attach(dframe)             # rendre les colonnes visibles
+attach(DF)                 # rendre les colonnes visibles
 exists("Noms")             # variable existe
 Noms                       # colonne accessible
-detach(dframe)             # masquer les colonnes
+detach(DF)                 # masquer les colonnes
 exists("Noms")             # variable n'existe plus
 
 ###
@@ -380,11 +405,15 @@ exists("Noms")             # variable n'existe plus
 ###
 
 ## Les opérations suivantes illustrent les différentes
-## techniques d'indiçage d'un vecteur. Les mêmes techniques
-## existent aussi pour les matrices, tableaux et listes. On
-## crée d'abord un vecteur quelconque formé de vingt nombres
-## aléatoires entre 1 et 100 avec répétitions possibles.
-( x <- sample(1:100, 20, replace = TRUE) )
+## techniques d'indiçage d'un vecteur pour l'extraction et
+## l'affectation, c'est-à-dire que l'on utilise à la fois la
+## fonction '[' et la fonction '[<-'. Les mêmes techniques
+## existent aussi pour les matrices, tableaux et listes.
+##
+## On crée d'abord un vecteur quelconque formé de vingt
+## nombres aléatoires entre 1 et 100 avec répétitions
+## possibles.
+(x <- sample(1:100, 20, replace = TRUE))
 
 ## On ajoute des étiquettes aux éléments du vecteur à partir
 ## de la variable interne 'letters'.
@@ -392,25 +421,64 @@ names(x) <- letters[1:20]
 
 ## On génère ensuite cinq nombres aléatoires entre 1 et 20
 ## (sans répétitions).
-( y <- sample(1:20, 5) )
+(y <- sample(1:20, 5))
 
-## Toutes les techniques d'indiçage peuvent aussi servir à
-## affecter de nouvelles valeurs à une partie d'un
-## vecteur. Ici, les éléments de 'x' correspondant aux
-## positions dans le vecteur 'y' sont remplacés par des
-## données manquantes.
+## On remplace maintenant les éléments de 'x' correspondant
+## aux positions dans le vecteur 'y' par des données
+## manquantes.
 x[y] <- NA
 x
 
-## La fonction 'is.na' permet de tester si une valeur est NA
-## ou non.
-is.na(x)
+## Les cinq méthodes d'indiçage de base.
+x[1:10]                    # avec des entiers positifs
+"["(x, 1:10)               # idem, avec la fonction '['
+x[-(1:3)]                  # avec des entiers négatifs
+x[x < 10]                  # avec un vecteur booléen
+x[c("a", "k", "t")]        # par étiquettes
+x[]                        # aucun indice...
+x[numeric(0)]              # ... différent d'indice vide
 
-## Élimination des données manquantes.
-( x <- x[!is.na(x)] )
+## Il arrive souvent de vouloir indicer spécifiquement les
+## données manquantes d'un vecteur (pour les éliminer ou les
+## remplacer par une autre valeur, par exemple). Pour ce
+## faire, on utilise la fonction 'is.na' et l'indiçage par un
+## vecteur booléen. (Note: l'opérateur '!' ci-dessous est la
+## négation logique.)
+is.na(x)                   # positions des données manquantes
+x[!is.na(x)]               # suppression des données manquantes
+x[is.na(x)] <- 0; x        # remplace les NA par des 0
+"[<-"(x, is.na(x), 0)      # idem, mais très peu usité
 
-## Tout le vecteur 'x' sauf les trois premiers éléments.
-x[-(1:3)]
+## On laisse tomber les étiquettes de l'objet.
+names(x) <- NULL
 
-## Extraction par chaîne de caractères.
-x[c("a", "k", "t")]
+## Quelques cas spéciaux d'indiçage.
+length(x)                  # un rappel
+x[1:25]                    # allonge le vecteur avec des NA
+x[25] <- 10; x             # remplis les trous avec des NA
+x[0]                       # n'extraie rien
+x[0] <- 1; x               # n'affecte rien
+x[c(0, 1, 2)]              # le 0 est ignoré
+x[c(1, NA, 5)]             # indices NA retourne NA
+x[2.6]                     # fractions tronquées vers 0
+
+## On laisse tomber les 5 derniers éléments et on convertit le
+## vecteur en une matrice 4 x 5.
+x <- x[1:20]               # ou x[-(21:25)]
+dim(x) <- c(4, 5); x       # ajouter un attribut 'dim'
+
+## Dans l'indiçage des matrices et tableaux, l'indice de
+## chaque dimension obéit aux mêmes règles que ci-dessus. On
+## peut aussi indicer une matrice (ou un tableau) avec une
+## matrice. Si les exemples ci-dessous ne permettent pas d'en
+## comprendre le fonctionnement, consulter la rubrique d'aide
+## de la fonction '[' (ou de 'Extract').
+x[1, 2]                    # élément en position (1, 2)
+x[1, -2]                   # 1ère rangée sans 2e colonne
+x[c(1, 3), ]               # 1ère et 3e rangées
+x[-1, ]                    # supprimer 1ère rangée
+x[, -2]                    # supprimer 2e colonne
+x[x[, 1] > 10, ]           # lignes avec 1er élément > 10
+x[rbind(c(1, 1), c(2, 2))] # éléments x[1, 1] et x[2, 2]
+x[cbind(1:4, 1:4)]         # éléments x[i, i] (diagonale)
+diag(x)                    # idem et plus explicite
