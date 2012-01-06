@@ -370,6 +370,8 @@ même nom servant à extraire l'attribut correspondant d'un objet.
   \centering
   \begin{tabular}{ll}
     \toprule
+    Attribut            & Utilisation \\
+    \midrule
     \Attribut{class}    &
     affecte le comportement d'un objet \\
     \Attribut{dim}      &
@@ -381,7 +383,7 @@ même nom servant à extraire l'attribut correspondant d'un objet.
     étiquettes des éléments d'un objet \\
     \bottomrule
   \end{tabular}
-  \caption{Attributs les plus usuels d'un objet et leur effet}
+  \caption{Attributs les plus usuels d'un objet}
   \label{tab:attributs}
 \end{table}
 
@@ -461,7 +463,7 @@ v["c"]
 Le R étant un langage spécialisé pour les calculs mathématiques, il
 supporte tout naturellement et de manière intuitive --- à une
 exception près, comme nous le verrons --- les matrices et, plus
-généralement, les tableaux à plusieurs dimensions (\emph{arrays}).
+généralement, les tableaux à plusieurs dimensions.
 
 Les matrices et tableaux ne sont rien d'autre que des vecteurs dotés
 d'un attribut \attribut{dim}. Ces objets sont donc stockés, et peuvent
@@ -480,9 +482,9 @@ matrix(1:6, nrow = 2, ncol = 3)
 matrix(1:6, nrow = 2, ncol = 3, byrow = TRUE)
 @
 \item La généralisation d'une matrice à plus de deux dimensions est un
-  tableau. Le nombre de dimensions du tableau est toujours égal à la
-  longueur de l'attribut \attribut{dim}. La classe implicite d'un
-  tableau est \indexclasse{array}\code{"array"}.
+  tableau (\emph{array}). Le nombre de dimensions du tableau est
+  toujours égal à la longueur de l'attribut \attribut{dim}. La classe
+  implicite d'un tableau est \indexclasse{array}\code{"array"}.
 \item La fonction de base pour créer des tableaux est
   \Fonction{array}:
 <<echo=TRUE>>=
