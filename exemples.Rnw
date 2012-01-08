@@ -7,6 +7,13 @@ options(width = 50)
 
 \SweaveOpts{keep.source = TRUE}
 
+\begin{objectifs}
+\item Mettre en pratique les connaissances acquises dans les chapitres
+  précédents.
+\item Savoir tirer profit de l’arithmétique vectorielle de R pour
+  effectuer des calculs complexes sans boucles.
+\end{objectifs}
+
 Ce chapitre propose de faire le point sur les concepts étudiés jusqu'à
 maintenant par le biais de quelques exemples résolus. On y met
 particulièrement en évidence les avantages de l'approche vectorielle
