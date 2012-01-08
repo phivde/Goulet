@@ -12,6 +12,8 @@ options(width = 50)
   précédents.
 \item Savoir tirer profit de l’arithmétique vectorielle de R pour
   effectuer des calculs complexes sans boucles.
+\item Utiliser l’initialisation de vecteurs et leur indiçage de
+  manière à réduire le temps de calcul.
 \end{objectifs}
 
 Ce chapitre propose de faire le point sur les concepts étudiés jusqu'à
