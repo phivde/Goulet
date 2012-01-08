@@ -1,59 +1,129 @@
-## Emacs: -*- coding: latin-1; fill-column: 62; comment-column: 27; -*-
+## Emacs: -*- coding: utf-8; fill-column: 62; comment-column: 27; -*-
 
 ###
-### OP…RATEURS
+### OP√âRATIONS ARITHM√âTIQUES
 ###
 
-## Seuls les opÈrateurs %%, %/% et logiques sont illustrÈs
-## ici. PremiËrement, l'opÈrateur modulo retourne le reste
+## L'arithm√©tique vectorielle caract√©ristique du langage R
+## rend tr√®s simple et intuitif de faire des op√©rations
+## math√©matiques courantes. L√† o√π plusieurs langages de
+## programmation exigent des boucles, R fait le calcul
+## directement. En effet, les r√®gles de l'arithm√©tique en R
+## sont globalement les m√™mes qu'en alg√®bre vectorielle et
+## matricielle.
+5 * c(2, 3, 8, 10)         # multiplication par une constante
+c(2, 6, 8) + c(1, 4, 9)    # addition de deux vecteurs
+c(0, 3, -1, 4)^2           # √©l√©vation √† une puissance
+
+## Dans les r√®gles de l'arithm√©tique vectorielle, les
+## longueurs des vecteurs doivent toujours concorder. R permet
+## plus de flexibilit√© en recyclant les vecteurs les plus
+## courts dans une op√©ration. Il n'y a donc √† peu pr√®s jamais
+## d'erreurs de longueur en R! C'est une arme √† deux
+## tranchants: le recyclage des vecteurs facilite le codage,
+## mais peut aussi r√©sulter en des r√©ponses compl√®tement
+## erron√©es sans que le syst√®me ne d√©tecte d'erreur.
+8 + 1:10                   # 8 est recycl√© 10 fois
+c(2, 5) * 1:10             # c(2, 5) est recycl√© 5 fois
+c(-2, 3, -1, 4)^1:4        # quatre puissances diff√©rentes
+
+## On se rappelle que les matrices (et les tableaux) sont des
+## vecteurs. Les r√®gles ci-dessus s'appliquent donc aussi aux
+## matrices, ce qui r√©sulte en des op√©rateurs qui ne sont pas
+## d√©finis en alg√®bre lin√©aire usuelle.
+(x <- matrix(1:4, 2))       # matrice 2 x 2
+(y <- matric(3:6, 2))       # autre matrice 2 x 2
+5 * x                       # multiplication par une constante
+x + y                       # addition matricielle
+x * y                       # produit *√©l√©ment par √©l√©ment*
+x %*% y                     # produit matriciel
+x / y                       # division *√©l√©ment par √©l√©ment*
+x * c(2, 3)                 # produit par colonne
+
+###
+### OP√âRATEURS
+###
+
+## Seuls les op√©rateurs %%, %/% et logiques sont illustr√©s
+## ici. Premi√®rement, l'op√©rateur modulo retourne le reste
 ## d'une division.
-5 %% 1:5
-10 %% 1:15
+5 %% 2                     # 5/2 = 2 reste 1
+5 %% 1:5                   # remarquer la p√©riodicit√©
+10 %% 1:15                 # x %% y = x si x < y
 
 ## Le modulo est pratique dans les boucles, par exemple pour
-## afficher un rÈsultat ‡ toutes les n itÈrations seulement.
+## afficher un r√©sultat √† toutes les n it√©rations seulement.
 for (i in 1:50)
 {
-    ## Affiche la valeur du compteur toutes les 5 itÈrations.
+    ## Affiche la valeur du compteur toutes les 5 it√©rations.
     if (0 == i %% 5)
         print(i)
 }
 
-## La division entiËre retourne la partie entiËre de la
+## La division enti√®re retourne la partie enti√®re de la
 ## division d'un nombre par un autre.
 5 %/% 1:5
 10 %/% 1:15
 
-## Dans les opÈrations logiques impliquant les opÈrateurs &, |
-## et !, le nombre zÈro est traitÈ comme FALSE et tous les
-## autres nombres comme TRUE.
+## Le ET logique est vrai seulement lorsque les deux
+## expressions sont vraies.
+c(TRUE, TRUE, FALSE) & c(TRUE, FALSE, FALSE)
+
+## Le OU logique est faux seulement lorsque les deux
+## expressions sont fausses.
+c(TRUE, TRUE, FALSE) | c(TRUE, FALSE, FALSE)
+
+## La n√©gation logique transforme les vrais en faux et vice
+## versa.
+! c(TRUE, FALSE, FALSE, TRUE)
+
+## On peut utiliser les op√©rateurs logiques &, | et !
+## directement avec des nombres. Dans ce cas, le nombre z√©ro
+## est trait√© comme FALSE et tous les autres nombres comme
+## TRUE.
 0:5 & 5:0
 0:5 | 5:0
 !0:5
 
-## L'exemple de boucle ci-dessus peut donc Ítre lÈgËrement
-## modifiÈ.
+## Ainsi, dans une expression conditionnelle, inutile de
+## v√©rifier si, par exemple, un nombre est √©gal √† z√©ro. On
+## peut utiliser le nombre directement et sauver des
+## op√©rations de comparaison qui peuvent devenir co√ªteuses en
+## temps de calcul.
+x <- 1                     # valeur quelconque
+if (x != 0) x + 1          # TRUE pour tout x != 0
+if (x) x + 1               # tout √† fait √©quivalent!
+
+## L'exemple de boucle ci-dessus peut donc √™tre l√©g√®rement
+## modifi√©.
 for (i in 1:50)
 {
-    ## Affiche la valeur du compteur toutes les 5 itÈrations.
+    ## Affiche la valeur du compteur toutes les 5 it√©rations.
     if (!i %% 5)
         print (i)
 }
 
-## Dans les calculs numÈriques, TRUE vaut 1 et FALSE vaut 0.
+## Dans les calculs num√©riques, TRUE vaut 1 et FALSE vaut 0.
 a <- c("Impair", "Pair")
 x <- c(2, 3, 6, 8, 9, 11, 12)
 x %% 2
 (!x %% 2) + 1
 a[(!x %% 2) + 1]
 
+## Un mot en terminant sur l'op√©rateur '=='. C'est l'op√©rateur
+## √† utiliser pour v√©rifier si deux valeurs sont √©gales, et
+## non '='. C'est l√† une erreur commune --- et qui peut √™tre
+## difficile √† d√©tecter --- lorsque l'on programme en R.
+5 = 2                      # erreur de syntaxe
+5 == 2                     # comparaison
+
 ###
 ### APPELS DE FONCTIONS
 ###
 
 ## Les invocations de la fonction 'matrix' ci-dessous sont
-## toutes Èquivalentes. On remarquera, entre autres, comment
-## les arguments sont spÈcifiÈs (par nom ou par position).
+## toutes √©quivalentes. On remarquera, entre autres, comment
+## les arguments sont sp√©cifi√©s (par nom ou par position).
 matrix(1:12, 3, 4)
 matrix(1:12, ncol = 4, nrow = 3)
 matrix(nrow = 3, ncol = 4, data = 1:12)
@@ -65,147 +135,146 @@ matrix(nrow = 3, ncol = 4, 1:12, FALSE)
 ###
 
 ## MANIPULATION DE VECTEURS
-a <- c(50, 30, 10, 20, 60, 30, 20, 40)  # vecteur non ordonnÈ
+x <- c(50, 30, 10, 20, 60, 30, 20, 40)  # vecteur non ordonn√©
 
-## SÈquences de nombres.
-seq(from = 1, to = 10)     # Èquivalent ‡ 1:10
-seq(-10, 10, length = 50)  # incrÈment automatique
-seq(-2, by = 0.5, along = a) # mÍme longueur que 'a'
+## S√©quences de nombres.
+seq(from = 1, to = 10)       # √©quivalent √† 1:10
+seq(-10, 10, length = 50)    # incr√©ment automatique
+seq(-2, by = 0.5, along = x) # m√™me longueur que 'x'
 
-## RÈpÈtition de nombres ou de vecteurs complets.
-rep(1, 10)                 # utilisation de base
-rep(a, 2)                  # rÈpÈter un vecteur
-rep(a, times = 2, each = 4) # combinaison des arguments
-rep(a, times = 1:8)        # nombre de rÈpÈtitions diffÈrent
-                           # pour chaque ÈlÈment de 'a'
+## R√©p√©tition de nombres ou de vecteurs complets.
+rep(1, 10)                  # utilisation de base
+rep(x, 2)                   # r√©p√©ter un vecteur
+rep(x, times = 2, each = 4) # combinaison des arguments
+rep(x, times = 1:8)         # nombre de r√©p√©titions diff√©rent
+                            # pour chaque √©l√©ment de 'x'
 
-## Classement en ordre croissant ou dÈcroissant.
-sort(a)                    # classement en ordre croissant
-sort(a, decr = TRUE)       # classement en ordre dÈcroissant
-sort(c("abc", "B", "Aunt", "Jemima")) # chaÓnes de caractËres
+## Classement en ordre croissant ou d√©croissant.
+sort(x)                    # classement en ordre croissant
+sort(x, decr = TRUE)       # classement en ordre d√©croissant
+sort(c("abc", "B", "Aunt", "Jemima")) # cha√Ænes de caract√®res
 sort(c(TRUE, FALSE))       # FALSE vient avant TRUE
 
 ## La fonction 'order' retourne la position, dans le vecteur
-## donnÈ en argument, du premier ÈlÈment selon l'ordre
-## croissant, puis du deuxiËme, etc. Autrement dit, on obtient
-## l'ordre dans lequel il faut extraire les donnÈes du vecteur
+## donn√© en argument, du premier √©l√©ment selon l'ordre
+## croissant, puis du deuxi√®me, etc. Autrement dit, on obtient
+## l'ordre dans lequel il faut extraire les donn√©es du vecteur
 ## pour les obtenir en ordre croissant.
-order(a)                   # regarder dans le blanc des yeux
-a[order(a)]                # Èquivalent ‡ 'sort(a)'
+order(x)                   # regarder dans le blanc des yeux
+x[order(x)]                # √©quivalent √† 'sort(x)'
 
-## Rang des ÈlÈments d'un vecteur dans l'ordre croissant.
-rank(a)                    # rang des ÈlÈment de 'a'
+## Rang des √©l√©ments d'un vecteur dans l'ordre croissant.
+rank(x)                    # rang des √©l√©ment de 'x'
 
 ## Renverser l'ordre d'un vecteur.
-rev(a)
+rev(x)
 
-## --- R ---
-head(a, 3)                 # trois premiers ÈlÈments de 'a'
-head(a, -2)                # tous sauf les deux derniers
-tail(a, 3)                 # trois derniers ÈlÈments de 'a'
-tail(a, -2)                # tous sauf les deux premiers
-## ---------
+## Extraction ou suppression en t√™te ou en queue de vecteur.
+head(x, 3)                 # trois premiers √©l√©ments
+head(x, -2)                # tous sauf les deux derniers
+tail(x, 3)                 # trois derniers √©l√©ments
+tail(x, -2)                # tous sauf les deux premiers
 
-## …quivalents S-Plus
-a[1:3]                     # trois premiers ÈlÈments de 'a'
-a[1:(length(a) - 2)]       # tous sauf les deux derniers
-a[(length(a)-2):length(a)] # trois derniers ÈlÈments de 'a'
-rev(rev(a)[1:3])           # avec petits vecteurs seulement
-a[3:length(a)]             # tous sauf les deux premiers
+## Expressions √©quivalentes sans 'head' et 'tail'
+x[1:3]                     # trois premiers √©l√©ments
+x[1:(length(x) - 2)]       # tous sauf les deux derniers
+x[(length(x)-2):length(x)] # trois derniers √©l√©ments
+rev(rev(x)[1:3])           # avec petits vecteurs seulement
+x[c(-1, -2)]               # tous sauf les deux premiers
 
-## Seulement les ÈlÈments diffÈrents d'un vecteur.
-unique(a)
+## Seulement les √©l√©ments diff√©rents d'un vecteur.
+unique(x)
 
-## RECHERCHE D'…L…MENTS DANS UN VECTEUR
-which(a >= 30)             # positions des ÈlÈments >= 30
-which.min(a)               # position du minimum
-which.max(a)               # position du maximum
-match(20, a)               # position du premier 20 dans 'a'
-match(c(20, 30), a)        # aussi pour plusieurs valeurs
-60 %in% a                  # 60 appartient ‡ 'a'
-70 %in% a                  # 70 n'appartient pas ‡ 'a'
+## RECHERCHE D'√âL√âMENTS DANS UN VECTEUR
+which(x >= 30)             # positions des √©l√©ments >= 30
+which.min(x)               # position du minimum
+which.max(x)               # position du maximum
+match(20, x)               # position du premier 20 dans 'x'
+match(c(20, 30), x)        # aussi pour plusieurs valeurs
+60 %in% x                  # 60 appartient √† 'x'
+70 %in% x                  # 70 n'appartient pas √† 'x'
 
 ## ARRONDI
-( a <- c(-21.2, -pi, -1.5, -0.2, 0, 0.2, 1.7823, 315) )
-round(a)                   # arrondi ‡ l'entier
-round(a, 2)                # arrondi ‡ la seconde dÈcimale
-round(a, -1)               # arrondi aux dizaines
-ceiling(a)                 # plus petit entier supÈrieur
-floor(a)                   # plus grand entier infÈrieur
-trunc(a)                   # troncature des dÈcimales
+(x <- c(-21.2, -pi, -1.5, -0.2, 0, 0.2, 1.7823, 315))
+round(x)                   # arrondi √† l'entier
+round(x, 2)                # arrondi √† la seconde d√©cimale
+round(x, -1)               # arrondi aux dizaines
+ceiling(x)                 # plus petit entier sup√©rieur
+floor(x)                   # plus grand entier inf√©rieur
+trunc(x)                   # troncature des d√©cimales
 
 ## SOMMAIRES ET STATISTIQUES DESCRIPTIVES
-sum(a)                     # somme des ÈlÈments de 'a'
-prod(a)                    # produit des ÈlÈments de 'a'
-diff(a)                    # a[2] - a[1], a[3] - a[2], etc.
-mean(a)                    # moyenne des ÈlÈments de 'a'
-mean(a, trim = 0.125)      # moyenne tronquÈe
-var(a)                     # variance (sans biais)
-(length(a) - 1)/length(a) * var(a) # variance biaisÈe
-sd(a)                      # Ècart type
-max(a)                     # maximum
-min(a)                     # minimum
-range(a)                   # c(min(a), max(a))
-diff(range(a))             # Ètendue de 'a'
-median(a)                  # mÈdiane (50e quantile) empirique
-quantile(a)                # quantiles empiriques
-quantile(a, 1:10/10)       # on peut spÈcifier les quantiles
-summary(a)                 # plusieurs des rÈsultats ci-dessus
+sum(x)                     # somme des √©l√©ments
+prod(x)                    # produit des √©l√©ments
+diff(x)                    # x[2] - x[1], x[3] - x[2], etc.
+mean(x)                    # moyenne des √©l√©ments
+mean(x, trim = 0.125)      # moyenne sans minimum et maximum
+var(x)                     # variance (sans biais)
+(length(x) - 1)/length(x) * var(x) # variance biais√©e
+sd(x)                      # √©cart type
+max(x)                     # maximum
+min(x)                     # minimum
+range(x)                   # c(min(x), max(x))
+diff(range(x))             # √©tendue de 'x'
+median(x)                  # m√©diane (50e quantile) empirique
+quantile(x)                # quantiles empiriques
+quantile(x, 1:10/10)       # on peut sp√©cifier les quantiles
+summary(x)                 # plusieurs des r√©sultats ci-dessus
 
-## SOMMAIRES CUMULATIFS ET COMPARAISONS …L…MENT PAR …L…MENT
-( a <- sample(1:20, 6) )
-( b <- sample(1:20, 6) )
-cumsum(a)                  # somme cumulative de 'a'
-cumprod(b)                 # produit cumulatif de 'b'
-rev(cumprod(rev(b)))       # produit cumulatif renversÈ
-cummin(a)                  # minimum cumulatif
-cummax(b)                  # maximum cumulatif
-pmin(a, b)                 # minimum ÈlÈment par ÈlÈment
-pmax(a, b)                 # maximum ÈlÈment par ÈlÈment
+## SOMMAIRES CUMULATIFS ET COMPARAISONS √âL√âMENT PAR √âL√âMENT
+(x <- sample(1:20, 6))
+(y <- sample(1:20, 6))
+cumsum(x)                  # somme cumulative de 'x'
+cumprod(y)                 # produit cumulatif de 'y'
+rev(cumprod(rev(y)))       # produit cumulatif renvers√©
+cummin(x)                  # minimum cumulatif
+cummax(y)                  # maximum cumulatif
+pmin(x, y)                 # minimum √©l√©ment par √©l√©ment
+pmax(x, y)                 # maximum √©l√©ment par √©l√©ment
 
-## OP…RATIONS SUR LES MATRICES
-( A <- sample(1:10, 16, replace = TRUE) ) # avec remise
+## OP√âRATIONS SUR LES MATRICES
+(A <- sample(1:10, 16, replace = TRUE)) # avec remise
 dim(A) <- c(4, 4)          # conversion en une matrice 4 x 4
 b <- c(10, 5, 3, 1)        # un vecteur quelconque
 A                          # la matrice 'A'
-t(A)                       # sa transposÈe
+t(A)                       # sa transpos√©e
 solve(A)                   # son inverse
 solve(A, b)                # la solution de Ax = b
-A %*% solve(A, b)          # vÈrification de la rÈponse
+A %*% solve(A, b)          # v√©rification de la r√©ponse
 diag(A)                    # extraction de la diagonale de 'A'
-diag(b)                    # matrice diagonale formÈe avec 'b'
-diag(4)                    # matrice identitÈ 4 x 4
-( A <- cbind(A, b) )       # matrice 4 x 5
+diag(b)                    # matrice diagonale form√©e avec 'b'
+diag(4)                    # matrice identit√© 4 x 4
+(A <- cbind(A, b))         # matrice 4 x 5
 nrow(A)                    # nombre de lignes de 'A'
 ncol(A)                    # nombre de colonnes de 'A'
 rowSums(A)                 # sommes par ligne
 colSums(A)                 # sommes par colonne
-apply(A, 1, sum)           # Èquivalent ‡ 'rowSums(A)'
-apply(A, 2, sum)           # Èquivalent ‡ 'colSums(A)'
+apply(A, 1, sum)           # √©quivalent √† 'rowSums(A)'
+apply(A, 2, sum)           # √©quivalent √† 'colSums(A)'
 apply(A, 1, prod)          # produit par ligne avec 'apply'
 
-## PRODUIT EXT…RIEUR
-a <- c(1, 2, 4, 7, 10, 12)
-b <- c(2, 3, 6, 7, 9, 11)
-outer(a, b)                # produit extÈrieur
-a %o% b                    # Èquivalent plus court
-outer(a, b, "+")           # ´somme extÈrieureª
-outer(a, b, "<=")          # toutes les comparaisons possibles
-outer(a, b, pmax)          # idem
+## PRODUIT EXT√âRIEUR
+x <- c(1, 2, 4, 7, 10, 12)
+y <- c(2, 3, 6, 7, 9, 11)
+outer(x, y)                # produit ext√©rieur
+x %o% y                    # √©quivalent plus court
+outer(x, y, "+")           # ¬´somme ext√©rieure¬ª
+outer(x, y, "<=")          # toutes les comparaisons possibles
+outer(x, y, pmax)          # idem
 
 ###
-### STRUCTURES DE CONTR‘LE
+### STRUCTURES DE CONTR√îLE
 ###
 
-## Pour illustrer les structures de contrÙle, on a recours ‡
-## un petit exemple tout ‡ fait artificiel: un vecteur est
-## rempli des nombres de 1 ‡ 100, ‡ l'exception des multiples
-## de 10. Ces derniers sont affichÈs ‡ l'Ècran.
+## Pour illustrer les structures de contr√¥le, on a recours √†
+## un petit exemple tout √† fait artificiel: un vecteur est
+## rempli des nombres de 1 √† 100, √† l'exception des multiples
+## de 10. Ces derniers sont affich√©s √† l'√©cran.
 ##
-## ¿ noter qu'il est possible --- et plus efficace --- de
-## crÈer le vecteur sans avoir recours ‡ des boucles.
-(1:100)[-((1:10) * 10)]    # sans boucle!
-rep(1:9, 10) + rep(0:9*10, each = 9) # une autre faÁon!
+## √Ä noter qu'il est possible --- et plus efficace --- de
+## cr√©er le vecteur sans avoir recours √† des boucles.
+(1:100)[-((1:10) * 10)]              # sans boucle!
+rep(1:9, 10) + rep(0:9*10, each = 9) # une autre fa√ßon!
 
 ## Bon, l'exemple proprement dit...
 x <- numeric(0)            # initialisation du contenant 'x'
@@ -215,13 +284,13 @@ for (i in 1:100)
     if (i %% 10)           # si i n'est pas un multiple de 10
         x[j <- j + 1] <- i # stocker sa valeur dans 'x'
     else                   # sinon
-        print(i)           # afficher la valeur ‡ l'Ècran
+        print(i)           # afficher la valeur √† l'√©cran
 }
-x                          # vÈrification
+x                          # v√©rification
 
-## MÍme chose que ci-dessus, mais sans le compteur 'j' et les
+## M√™me chose que ci-dessus, mais sans le compteur 'j' et les
 ## valeurs manquantes aux positions 10, 20, ..., 100 sont
-## ÈliminÈes ‡ la sortie de la boucle.
+## √©limin√©es √† la sortie de la boucle.
 x <- numeric(0)
 for (i in 1:100)
 {
@@ -236,30 +305,30 @@ x
 ## On peut refaire l'exemple avec une boucle 'while', mais
 ## cette structure n'est pas naturelle ici puisque l'on sait
 ## d'avance qu'il faudra faire la boucle exactement 100
-## fois. Le 'while' est plutÙt utilisÈ lorsque le nombre de
-## rÈpÈtitions est inconnu. De plus, une boucle 'while' n'est
-## pas nÈcessairement exÈcutÈe puisque le critËre d'arrÍt est
-## ÈvaluÈ dËs l'entrÈe dans la boucle.
+## fois. Le 'while' est plut√¥t utilis√© lorsque le nombre de
+## r√©p√©titions est inconnu. De plus, une boucle 'while' n'est
+## pas n√©cessairement ex√©cut√©e puisque le crit√®re d'arr√™t est
+## √©valu√© d√®s l'entr√©e dans la boucle.
 x <- numeric(0)
 j <- 0
-i <- 1                     # pour entrer dans la boucle
+i <- 1                     # pour entrer dans la boucle [*]
 while (i <= 100)
 {
     if (i %% 10)
         x[j <- j + 1] <- i
     else
         print(i)
-    i <- i + 1             # incrÈmenter le compteur!
+    i <- i + 1             # incr√©menter le compteur!
 }
 x
 
 ## La remarque faite au sujet de la boucle 'while' s'applique
-## aussi ‡ la boucle 'repeat'. Par contre, le critËre d'arrÍt
-## de la boucle 'repeat' Ètant ÈvaluÈ ‡ la toute fin, la
-## boucle est exÈcutÈe au moins une fois. S'il faut faire un
-## tour de passe-passe pour s'assurer qu'une boucle 'while'
-## est exÈcutÈe au moins une fois, c'est qu'il vaut mieux
-## utiliser 'repeat'...
+## aussi √† la boucle 'repeat'. Par contre, le crit√®re d'arr√™t
+## de la boucle 'repeat' √©tant √©valu√© √† la toute fin, la
+## boucle est ex√©cut√©e au moins une fois. S'il faut faire la
+## manoeuvre marqu√©e [*] ci-dessus pour s'assurer qu'une
+## boucle 'while' est ex√©cut√©e au moins une fois... c'est
+## qu'il faut utiliser 'repeat'.
 x <- numeric(0)
 j <- 0
 i <- 1
@@ -269,7 +338,23 @@ repeat
         x[j <- j + 1] <- i
     else
         print(i)
-    if (100 < (i <- i + 1)) # incrÈment et critËre d'arrÍt
+    if (100 < (i <- i + 1)) # incr√©ment et crit√®re d'arr√™t
         break
 }
 x
+
+###
+### FONCTIONS ADDITIONNELLES
+###
+
+## La fonction 'search' retourne la liste des environnements
+## dans lesquels R va chercher un objet (en particulier une
+## fonction). '.GlobalEnv' est l'environnement de travail.
+search()
+
+## Liste de tous les packages install√©s sur votre syst√®me.
+library()
+
+## Chargement du package 'MASS', qui contient plusieurs
+## fonctions statistiques tr√®s utiles.
+library("MASS")

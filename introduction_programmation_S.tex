@@ -13,7 +13,9 @@
   \usepackage{graphicx,color}
   \usepackage{MnSymbol,applekeys}      % symboles spéciaux
   %\usepackage{threeparttable,expdlist}
+  \usepackage{expdlist}
   \usepackage{listingsutf8,answers}
+  \usepackage{parallel}
 
   %%%  Couleurs
   \definecolor{comments}{rgb}{0.7,0,0}
@@ -135,13 +137,25 @@
   \newenvironment{ttscript}[1]{%
     \begin{list}{}{%
         \setlength{\labelsep}{1.5ex}
-        \settowidth{\labelwidth}{\code{#1}}
+        \settowidth{\labelwidth}{\fbox{\code{#1}}}
         \setlength{\leftmargin}{\labelwidth}
         \addtolength{\leftmargin}{\labelsep}
         \setlength{\parsep}{0.5ex plus0.2ex minus0.2ex}
         \setlength{\itemsep}{0.3ex}
-        \renewcommand{\makelabel}[1]{##1\hfill}}}
+        \renewcommand{\makelabel}[1]{\fbox{##1}\hfill}}}
     {\end{list}}
+
+  %% Chapitre Opérateurs: environnements pour placer côte à côte des
+  %% définitions de fonctions (utilisant ttscript ci-dessus) et un
+  %% petit exemple.
+  \newenvironment{operateur}[1]{%
+    \noindent
+    \begin{minipage}[t]{0.65\linewidth}
+      \begin{ttscript}{#1}}
+    {\end{ttscript}\end{minipage}\hfill}
+  \newenvironment{miniexemple}{%
+    \begin{minipage}[t]{0.3\linewidth}}
+    {\end{minipage}}
 
   %%% Listes de structures de contrôle
   \newenvironment{struclist}{%
@@ -225,7 +239,7 @@
   %%% Style de la bibliographie
   \bibliographystyle{francais}
 
-  \includeonly{bases}
+%  \includeonly{operateurs}
 
 \begin{document}
 
@@ -242,7 +256,7 @@
 \mainmatter
 \include{presentation}
 \include{bases}
-% \include{operateurs}
+\include{operateurs}
 % \include{exemples}
 % \include{fonctions}
 % \include{avance}
