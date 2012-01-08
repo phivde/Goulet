@@ -79,7 +79,7 @@ sum(c(500, 800, 900, 750, 1000) /
 \end{enumerate}
 
 
-\section{Fonctions de probabilité}
+\section{Fonctions de masse de probabilité}
 \label{exemples:fp}
 
 On doit calculer toutes ou la majeure partie des probabilités de deux
@@ -289,6 +289,71 @@ i
 @ %
 Nous verrons au chapitre \ref{fonctions} comment créer une fonction à
 partir de ce code.
+
+
+\section{Suite de Fibonacci}
+\label{exemples:fibonacci}
+
+La suite de Fibonacci est une suite de nombres entiers très connue.
+Les deux premiers termes de la suite sont $0$ et $1$ et tous les
+autres sont la somme des deux termes précédents. Mathématiquement, les
+valeurs de la suite de Fibonacci sont données par la fonction
+\begin{align*}
+  f(0) &= 0 \\
+  f(1) &= 1 \\
+  f(n) & = f(n - 1) + f(n - 2), \quad n \geq 2.
+\end{align*}
+Le quotient de deux termes successifs converge vers $(1 +
+\sqrt{5})/2$, le nombre d'or.
+
+On veut calculer les $n > 2$ premiers termes de la suite de Fibonacci.
+Ce problème étant intrinsèquement récursif, nous devons utiliser une
+boucle.
+
+Voici une première solution pour $n = 10$:
+<<5-a>>=
+n <- 10
+x <- c(0, 1)
+for (i in 3:n) x[i] <- x[i - 1] + x[i - 2]
+x
+@
+
+La procédure ci-dessus a un gros défaut: la taille de l'objet \code{x}
+est constamment augmentée pour stocker une nouvelle valeur de la
+suite. Tentons une analogie alimentaire pour cette manière de
+procéder. Pour ranger des biscuits frais sortis du four, on prend un
+premier biscuit et on le range dans un plat ne pouvant contenir qu'un
+seul biscuit. Arrivé au second biscuit, on constate que le contenant
+n'est pas assez grand, alors on sort un plat pouvant contenir deux
+biscuits, on change le premier biscuit de plat et on y range aussi le
+second biscuit. Arrivé au troisième biscuit, le petit manège
+recommence, et ainsi de suite jusqu'à ce que le plateau de biscuit
+soit épuisé.
+
+C'est exactement ce qui se passe dans la mémoire de l'ordinateur avec
+la procédure ci-dessus, l'odeur des bons biscuits chauds en moins. En
+effet, le système doit constamment allouer de la nouvelle mémoire et
+déplacer les termes déjà sauvegardés au fur et à mesure que le vecteur
+\code{x} grandit. On aura compris qu'une telle façon de faire est à
+éviter absolument lorsque c'est possible --- et ça l'est la plupart du
+temps.
+
+Quand on sait quelle sera la longueur d'un objet, comme c'est le cas
+dans cet exemple, il vaut mieux créer un contenant vide de la bonne
+longueur et le remplir par la suite. Cela nous donne une autre façon
+de calculer la suite de Fibonacci:
+<<5-b>>=
+n <- 10
+x <- numeric(n)      # contenant créé
+x[2] <- 1            # x[1] vaut déjà 0
+for (i in 3:n) x[i] <- x[i - 1] + x[i - 2]
+x
+@
+
+Dans les exemples du chapitre~\ref{fonctions}, nous composeront des
+fonctions avec ces deux exemples et nous comparerons les temps de
+calcul pour $n$ grand.
+
 
 
 \section{Exercices}
