@@ -109,8 +109,8 @@ expressions R.
     \verb|!|\Index{"!@\code{"!}}  & négation logique \\
     \Fonction{\&}\, \Fonction{\&\&} & «et» logique \\
     \Fonction{|}\, \Fonction{||}    & «ou» logique \\
-    \fonction{->}\, \verb|->>| & assignation \\
-    \fonction{<-}\, \verb|<<-| & assignation \\
+    \fonction{->}\, \verb|->>|\index{->>@\verb=->>=|textbf} & assignation \\
+    \fonction{<-}\, \verb|<<-|\index{<<-@\verb=<<-=|textbf} & assignation \\
     \bottomrule
   \end{tabular}
   \caption{Principaux opérateurs du langage R, en ordre décroissant
