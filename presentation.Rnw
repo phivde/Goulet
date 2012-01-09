@@ -352,7 +352,6 @@ Le dossier de travail est déterminé au lancement de R.
   doit spécifier un répertoire de travail chaque fois que l'on démarre
   un processus R; voir l'annexe~\ref{emacs+ess}.
 \end{itemize}
-\index{Répertoire de travail|)}
 
 
 
