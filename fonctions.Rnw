@@ -5,29 +5,43 @@
 options(width = 52)
 @
 
+\begin{objectifs}
+\item Savoir définir une fonction R, ses divers arguments et, le cas
+  échéant, les valeurs par défaut de ceux-ci.
+\item Être en mesure de déboguer une fonction R.
+\item Adopter un style de codage correspondant à la pratique en R.
+\end{objectifs}
+
 La possibilité pour l'usager de définir facilement et rapidement de
 nouvelles fonctions --- et donc des extensions au langage --- est une
-des grandes forces du S.
+des grandes forces de R. Les fonctions personnelles définies dans
+l'espace de travail ou dans un package sont traitées par le système
+exactement comme les fonction internes.
+
+Ce court chapitre passe en revue la syntaxe et les règles pour créer
+des fonctions dans R. On discute également brièvement de débogage et
+de style de codage.
 
 
 \section{Définition d'une fonction}
 \index{fonction!définie par l'usager}
 \label{fonctions:definition}
 
-On définit une nouvelle fonction de la manière suivante:
-\begin{center}
+On définit une nouvelle fonction avec la syntaxe suivante:
+\begin{quote}
   \Indexfonction{function}
   \code{fun <- function(\emph{arguments}) \emph{expression}}
-\end{center}
+\end{quote}
 où
 \begin{itemize}
 \item \code{fun} est le nom de la fonction (les règles pour les noms
-  de fonctions étant les mêmes que pour tout autre objet);
+  de fonctions étant les mêmes que celles présentées à la
+  section~\ref{bases:noms} pour tout autre objet);
 \item \code{\itshape arguments} est la liste des arguments, séparés
   par des virgules;
 \item \code{\itshape expression} constitue le corps de la fonction,
-  soit une liste d'expressions groupées entre accolades (nécessaires
-  s'il y a plus d'une expression seulement).
+  soit une expression ou un groupe d'expressions réunies par des
+  accolades.
 \end{itemize}
 
 
@@ -36,15 +50,21 @@ où
 \label{fonctions:resultats}
 
 La plupart des fonctions sont écrites dans le but de retourner un
-résultat.
+résultat. Or, les règles d'interprétation d'un groupe d'expressions
+présentées à la section~\ref{bases:commandes} s'appliquent ici au
+corps de la fonction.
 \begin{itemize}
 \item Une fonction retourne tout simplement le résultat de la
   \emph{dernière expression} du corps de la fonction.
 \item On évitera donc que la dernière expression soit une affectation,
-  car la fonction ne retournera alors rien.
-\item On peut également utiliser explicitement la fonction
-  \Fonction{return} pour retourner un résultat, mais cela est rarement
-  nécessaire.
+  car la fonction ne retournera alors rien et on ne pourra utiliser
+  une construction de la forme \code{x <- f()} pour affecter le
+  résultat de la fonction à une variable.
+\item Si on doit retourner un résultat sans être à la dernière ligne
+  de la fonction (à l'intérieur d'un bloc conditionnel, par exemple),
+  on utilise la fonction \Fonction{return}. \emph{L'utilisation de
+    \code{\emph{return}} à la toute fin d'une fonction est tout à fait
+    inutile et considérée comme du mauvais style en R.}
 \item Lorsqu'une fonction doit retourner plusieurs résultats, il est
   en général préférable d'avoir recours à une liste nommée.
 \end{itemize}
@@ -53,12 +73,13 @@ résultat.
 \section{Variables locales et globales}
 \label{fonctions:variables}
 
-Comme la majorité des langages de programmation, le S contient
-comporte les concepts de variable locale et de variable globale.
+Comme la majorité des langages de programmation, R comporte des
+concepts de variable locale et de variable globale.
 
 \begin{itemize}
 \item Toute variable définie dans une fonction est
-  locale\index{variable!locale} à cette fonction, c'est-à-dire qu'elle:
+  locale\index{variable!locale} à cette fonction, c'est-à-dire
+  qu'elle:
   \begin{itemize}
   \item n'apparaît pas dans l'espace de travail;
   \item n'écrase pas une variable du même nom dans l'espace de
@@ -74,23 +95,29 @@ comporte les concepts de variable locale et de variable globale.
   définie.
 \end{itemize}
 
+Le lecteur intéressé à en savoir plus pourra consulter les sections de
+la documentation de R portant sur la portée lexicale (\emph{lexical
+  scoping}). C'est un sujet important et intéressant, mais
+malheureusement trop avancé pour ce document d'introduction à la
+programmation en R.
+
 
 \section{Exemple de fonction}
 \label{fonctions:exemple}
 
 Le code développé pour l'exemple de point fixe\index{point fixe} de la
 section \ref{exemples:pointfixe} peut être intégré dans une fonction;
-voir la figure \ref{fig:fp}.
+voir la figure \ref{fig:fonctions:fp}.
 
-\begin{figure}
+\begin{figure}[t]
   \centering
   \begin{framed}
-\begin{lstlisting}
+\begin{verbatim}
 fp <- function(k, n, start = 0.05, TOL = 1E-10)
 {
     ## Fonction pour trouver par la méthode du point
-    ## fixe le taux d'intérêt auquel une série de 'n'
-    ## paiements vaut 'k'.
+    ## fixe le taux d'intérêt pour lequel une série de
+    ## 'n' paiements vaut 'k'.
     ##
     ## ARGUMENTS
     ##
@@ -111,12 +138,12 @@ fp <- function(k, n, start = 0.05, TOL = 1E-10)
         if (abs(i - it)/it < TOL)
             break
     }
-    i  # ou return(i)
+    i
 }
-\end{lstlisting}
+\end{verbatim}
   \end{framed}
   \caption{Exemple de fonction de point fixe}
-  \label{fig:fp}
+  \label{fig:fonctions:fp}
 \end{figure}
 
 \begin{itemize}
@@ -126,9 +153,6 @@ fp <- function(k, n, start = 0.05, TOL = 1E-10)
 \item Les deux derniers arguments ont des valeurs par défaut de $0,05$
   et $10^{-10}$, respectivement.
 \item La fonction retourne la valeur de la variable \code{i}.
-\item Avec Emacs\index{Emacs} et le mode ESS\index{ESS}, positionner
-  le curseur à l'intérieur de la fonction et soumettre le code d'une
-  fonction à un processus S-Plus ou \textsf{R} avec \ess{C-c C-f}.
 \end{itemize}
 
 
@@ -148,23 +172,44 @@ x <- 1:3; y <- 4:6
 f <- function(x, y) x * y^2
 outer(x, y, f)
 @
+
 Cependant, si la fonction \code{f} ne sert à rien ultérieurement, on
-peut simplement utiliser une fonction anonyme à l'intérieur de
-\fonction{outer}:
+peut se contenter de passer l'objet fonction à \fonction{outer} sans
+jamais lui attribuer un nom:
 <<echo=TRUE>>=
 outer(x, y, function(x, y) x * y^2)
 @
+On a alors utilisé dans \code{outer} une fonction anonyme.
 
 
 \section{Débogage de fonctions}
 \index{fonction!débogage}
 \label{fonctions:debogage}
 
-Nous n'abordons ici que les techniques les plus simples.
+Il est assez rare d'arriver à écrire un bout de code sans bogue du
+premier coup. Par conséquent, qui dit programmation dit séances de
+débogage.
+
+Les techniques de débogages les plus simples et naïves sont parfois
+les plus efficaces et certainement les plus faciles à apprendre. Loin
+d'un traité sur le débogage de code R, nous offrons seulement ici
+quelques trucs que nous utilisons régulièrement.
 \begin{itemize}
 \item Les erreurs de syntaxe sont les plus fréquentes (en particulier
   l'oubli de virgules). Lors de la définition d'une fonction, une
-  vérification de la syntaxe est effectuée par l'interpréteur S.
+  vérification de la syntaxe est effectuée par l'interprète R.
+  Attention, cependant: une erreur peut prendre sa source plusieurs
+  lignes avant celle que l'interprète pointe comme faisant problème.
+\item Les messages d'erreur de l'interprète ne sont pas toujours d'un
+  grand secours\dots tant que l'on n'a pas appris à les reconnaître.
+  Un exemple de message d'erreur fréquemment rencontré:
+  \begin{quote}
+    \code{valeur manquante là où TRUE / FALSE est requis}
+  \end{quote}
+  Cela provient généralement d'une commande \fonction{if} dont
+  l'argument vaut \objet{NA} plutôt que \objet{TRUE} ou \objet{FALSE}.
+  La raison: des valeurs manquantes se sont faufilées dans les
+  calculs à notre insu.
 \item Lorsqu'une fonction ne retourne pas le résultat attendu, placer
   des commandes \fonction{print} à l'intérieur de la fonction, de
   façon à pouvoir suivre les valeurs prises par les différentes
@@ -183,14 +228,12 @@ repeat
         break
 }
 \end{verbatim}
-\item Avec Emacs\index{Emacs} et le mode ESS\index{ESS}, la principale
-  technique de débogage consiste à s'assurer que toutes les variables
-  passées en arguments à une fonction existent dans l'espace de
-  travail, puis à exécuter successivement les lignes de la fonction
-  avec \ess{C-c C-n}. Les interfaces graphiques de S-Plus et
-  \textsf{R} empêchent d'avoir recours à une telle procédure puisque
-  la fenêtre d'édition de fonctions bloque l'accès à l'interface de
-  commande.
+\item Quand ce qui précède ne fonctionne pas, ne reste souvent qu'à
+  exécuter manuellement la fonction. Pour ce faire, définir dans
+  l'espace de travail tous les arguments de la fonction, puis exécuter
+  le corps de la fonction ligne par ligne. La vérification du résultat
+  de chaque ligne permet généralement de retrouver la ou les
+  expressions qui causent problème.
 \end{itemize}
 
 
@@ -265,20 +308,13 @@ for (i in 1:10)
 \item Pour des raisons générales de lisibilité et de popularité, le
   style C$++$, avec les accolades sur leurs propres lignes et une
   indentation de quatre (4) espaces est considéré comme standard pour
-  la programmation en S.
-\item Pour utiliser ce style dans Emacs\index{Emacs}, faire
-\begin{verbatim}
-    M-x ess-set-style RET C++ RET
-\end{verbatim}
-  une fois qu'un fichier de script est ouvert.
-\item Pour éviter de devoir répéter cette commande à chaque session de
-  travail, créer ou éditer le fichier de configuration \texttt{.emacs}
-  dans le dossier vers lequel pointe la variable d'environnement
-  \texttt{HOME} et y placer les lignes suivantes:
-\begin{verbatim}
-(add-hook 'ess-mode-hook
-          (lambda () (ess-set-style 'C++)))
-\end{verbatim}
+  la programmation en R.
+\item La version de GNU~Emacs distribuée par l'auteur est déjà
+  configurée pour utiliser ce style de codage.
+\item Consulter la documentation de votre éditeur de texte pour savoir
+  si vous pouvez configurer le niveau d'indentation. La plupart des
+  bons éditeurs pour programmeurs le permettent.
+\item Surtout, éviter de ne pas du tout indenter le code.
 \end{itemize}
 
 
@@ -444,8 +480,7 @@ Phi <- function(x)
   des valeurs de $x$ négatives. Lorsque $x < 0$, $\Phi(x) = 1 -
   \Phi(-x)$. La solution simple consiste à utiliser une structure de
   contrôle \code{if ...  else}, mais les curieux chercheront à s'en
-  passer. Les plus ambitieux regarderont même du côté de la fonction
-  \fonction{Recall} \cite[page 49]{Sprogramming}.
+  passer.
   \begin{rep}
     Première solution utilisant une fonction interne et une structure
     de contrôle \code{if ... else}.
@@ -464,23 +499,9 @@ Phi <- function(x)
         fun(x)
 }
 \end{verbatim}
-    Seconde solution récursive, c'est-à-dire que si $x < 0$, la
-    fonction s'appelle elle-même avec un argument positif.
-\begin{verbatim}
-Phi <- function(x)
-{
-    if (x < 0)
-        1 - Recall(-x)
-    else
-    {
-        n <- 1 + 2 * 0:50
-        0.5 + phi(x) * sum(x^n / cumprod(n))
-    }
-}
-\end{verbatim}
-    Troisième solution sans structure de contrôle \code{if ...
-      else}. Rappelons que dans des calculs algébriques,
-    \code{FALSE} vaut 0 et \code{TRUE} vaut 1.
+    Seconde solution sans structure de contrôle \code{if ... else}.
+    Rappelons que dans des calculs algébriques, \code{FALSE} vaut 0 et
+    \code{TRUE} vaut 1.
 \begin{verbatim}
 Phi <- function(x)
 {
@@ -600,7 +621,7 @@ pas le produit matriciel.")
   \index{matrice}
   Vous devez calculer la note finale d'un groupe d'étudiants à partir
   de deux informations:
-  \begin{inparaenum}[(1)]
+  \begin{inparaenum}[1)]
   \item une matrice contenant la note sur 100 de chacun des étudiants
     à chacune des évaluations, et
   \item un vecteur contenant la pondération de chacune des
@@ -608,11 +629,10 @@ pas le produit matriciel.")
   \end{inparaenum}
   Un de vos collègues a composé la fonction \code{notes.finales}
   ci-dessous afin de faire le calcul de la note finale pour chacun de
-  ses étudiants.  Votre collègue vous mentionne toutefois que sa
+  ses étudiants. Votre collègue vous mentionne toutefois que sa
   fonction est plutôt lente et inefficace pour de grands groupes
-  d'étudiants.  Vous décidez donc de modifier la fonction afin d'en
-  réduire le nombre d'opérations et faire en sorte qu'elle n'utilise
-  aucune boucle.
+  d'étudiants. Modifiez la fonction afin d'en réduire le nombre
+  d'opérations et faire en sorte qu'elle n'utilise aucune boucle.
 \begin{verbatim}
 notes.finales <- function(notes, p)
 {
@@ -630,6 +650,7 @@ notes.finales <- function(notes, p)
 }
 \end{verbatim}
   \begin{rep}
+    Le calcul à faire n'est qu'un simple produit matriciel, donc:
 \begin{verbatim}
 notes.finales <- function(notes, p) notes %*% p
 \end{verbatim}
@@ -722,10 +743,11 @@ non trouvé
 \end{Schunk}
   \begin{enumerate}
   \item Expliquer pour quelle raison la fonction se comporte ainsi.
-  \item Appliquer les corrections nécessaires à la fonction pour que
+  \item Appliquer les correctifs nécessaires à la fonction pour que
     celle-ci puisse calculer les bonnes valeurs. (Les erreurs ne se
     trouvent pas dans les mathématiques de la fonction.)
-    \emph{Astuce}: tirer profit du moteur d'indentation de Emacs.
+    \emph{Astuce}: tirer profit du moteur d'indentation de votre
+    éditeur de texte pour programmeur.
   \end{enumerate}
   \begin{rep}
 \begin{verbatim}
