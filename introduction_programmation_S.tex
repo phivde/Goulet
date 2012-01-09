@@ -12,10 +12,9 @@
   \usepackage{textpos}
   \usepackage{graphicx,color}
   \usepackage{MnSymbol,applekeys}      % symboles spéciaux
-  %\usepackage{threeparttable,expdlist}
+  %\usepackage{threeparttable}
   \usepackage{expdlist}
   \usepackage{listingsutf8,answers}
-  \usepackage{parallel}
 
   %%%  Couleurs
   \definecolor{comments}{rgb}{0.7,0,0}
@@ -123,7 +122,6 @@
         \addtolength{\leftmargin}{\labelsep}
         \setdefaultenum{a)}{i)}{}{}}\item}
     {\end{list}}
-  % \newenvironment{reponse}[1]{%
   \renewenvironment{reponse}[1]{%
     \begin{list}{\bfseries #1}{%
         \settowidth{\labelwidth}{#1}
@@ -131,6 +129,7 @@
         \addtolength{\leftmargin}{\labelsep}
         \setdefaultenum{a)}{i)}{}{}}\item}
     {\end{list}}
+  \renewcommand{\reponseparams}{{\thechapter.\theexercice}}
 
   %% Listes de commandes
   \newenvironment{ttscript}[1]{%
@@ -238,7 +237,7 @@
   %%% Style de la bibliographie
   \bibliographystyle{francais}
 
-  \includeonly{exemples,fonctions}
+%  \includeonly{avance}
 
 \begin{document}
 
@@ -258,15 +257,16 @@
 \include{operateurs}
 \include{exemples}
 \include{fonctions}
-% \include{avance}
+\include{avance}
 % \include{optimisation}
 % \include{rng}
 % \include{simulation}
 
 \appendix
 \include{emacs+ess}
+\include{packages}
 \include{fdl}
-% \include{reponses}
+\include{reponses}
 
 \bibliography{r,stat,informatique}
 
