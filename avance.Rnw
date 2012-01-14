@@ -271,7 +271,12 @@ methods(plot)
 \label{avance:exercices}
 
 \Opensolutionfile{reponses}[reponses-avance]
-\Writetofile{reponses}{\protect\section*{Chapitre \protect\ref{avance}}}
+
+\begin{Filesave}{reponses}
+\section*{Chapitre \ref{avance}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref{avance}}
+
+\end{Filesave}
 
 \begin{exercice}
   \index{moyenne!pondérée} À l'exercice

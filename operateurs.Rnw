@@ -660,7 +660,12 @@ bibliothèque personnelle et installer des packages externes.
 \label{operateurs:exercices}
 
 \Opensolutionfile{reponses}[reponses-operateurs]
-\Writetofile{reponses}{\protect\section*{Chapitre \protect\ref{operateurs}}}
+
+\begin{Filesave}{reponses}
+\section*{Chapitre \ref{operateurs}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref{operateurs}}
+
+\end{Filesave}
 
 \SweaveOpts{echo=FALSE,term=FALSE}
 \begin{exercice}

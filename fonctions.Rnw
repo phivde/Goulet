@@ -328,7 +328,12 @@ for (i in 1:10)
 \label{fonctions:exercices}
 
 \Opensolutionfile{reponses}[reponses-fonctions]
-\Writetofile{reponses}{\protect\section*{Chapitre \protect\ref{fonctions}}}
+
+\begin{Filesave}{reponses}
+\section*{Chapitre \ref{fonctions}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref{fonctions}}
+
+\end{Filesave}
 
 \begin{exercice}
   La fonctions \texttt{var} calcule l'estimateur sans biais de la

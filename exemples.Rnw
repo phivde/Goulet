@@ -362,7 +362,12 @@ calcul pour $n$ grand.
 \label{exemples:exercices}
 
 \Opensolutionfile{reponses}[reponses-exemples]
-\Writetofile{reponses}{\protect\section*{Chapitre \protect\ref{exemples}}}
+
+\begin{Filesave}{reponses}
+\section*{Chapitre \ref{exemples}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref{exemples}}
+
+\end{Filesave}
 
 Dans chacun des exercices ci-dessous, écrire une expression R pour
 faire le calcul demandé. Parce qu'elles ne sont pas nécessaires, il

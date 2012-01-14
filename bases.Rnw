@@ -787,7 +787,12 @@ x[]
 \label{bases:exercices}
 
 \Opensolutionfile{reponses}[reponses-bases]
-\Writetofile{reponses}{\protect\section*{Chapitre \protect\ref{bases}}}
+
+\begin{Filesave}{reponses}
+\section*{Chapitre \ref{bases}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref{bases}}
+
+\end{Filesave}
 
 \begin{exercice}
   \begin{enumerate}
