@@ -424,6 +424,6 @@ exp(optim(c(log(2), log(1000)), f, x=x)$par)
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "introduction_programmation_S"
+%%% TeX-master: "introduction_programmation_r"
 %%% coding: utf-8
 %%% End:

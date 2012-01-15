@@ -789,6 +789,6 @@ param <- function (moyenne, variance, loi)
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "introduction_programmation_S"
+%%% TeX-master: "introduction_programmation_r"
 %%% coding: utf-8
 %%% End:
