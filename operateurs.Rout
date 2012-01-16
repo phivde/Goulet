@@ -1,0 +1,750 @@
+
+R version 2.14.1 (2011-12-22)
+Copyright (C) 2011 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: x86_64-apple-darwin9.8.0/x86_64 (64-bit)
+
+R est un logiciel libre livré sans AUCUNE GARANTIE.
+Vous pouvez le redistribuer sous certaines conditions.
+Tapez 'license()' ou 'licence()' pour plus de détails.
+
+R est un projet collaboratif avec de nombreux contributeurs.
+Tapez 'contributors()' pour plus d'information et
+'citation()' pour la façon de le citer dans les publications.
+
+Tapez 'demo()' pour des démonstrations, 'help()' pour l'aide
+en ligne ou 'help.start()' pour obtenir l'aide au format HTML.
+Tapez 'q()' pour quitter R.
+
+> .help.ESS <- help
+> options(STERM='iESS', editor='emacsclient')
+> ## Emacs: -*- coding: utf-8; fill-column: 62; comment-column: 27; -*-
+>
+> ###
+> ### OPÉRATIONS ARITHMÉTIQUES
+> ###
+>
+> ## L'arithmétique vectorielle caractéristique du langage R
+> ## rend très simple et intuitif de faire des opérations
+> ## mathématiques courantes. Là où plusieurs langages de
+> ## programmation exigent des boucles, R fait le calcul
+> ## directement. En effet, les règles de l'arithmétique en R
+> ## sont globalement les mêmes qu'en algèbre vectorielle et
+> ## matricielle.
+> 5 * c(2, 3, 8, 10)         # multiplication par une constante
+[1] 10 15 40 50
+> c(2, 6, 8) + c(1, 4, 9)    # addition de deux vecteurs
+[1]  3 10 17
+> c(0, 3, -1, 4)^2           # élévation à une puissance
+[1]  0  9  1 16
+>
+> ## Dans les règles de l'arithmétique vectorielle, les
+> ## longueurs des vecteurs doivent toujours concorder. R permet
+> ## plus de flexibilité en recyclant les vecteurs les plus
+> ## courts dans une opération. Il n'y a donc à peu près jamais
+> ## d'erreurs de longueur en R! C'est une arme à deux
+> ## tranchants: le recyclage des vecteurs facilite le codage,
+> ## mais peut aussi résulter en des réponses complètement
+> ## erronées sans que le système ne détecte d'erreur.
+> 8 + 1:10                   # 8 est recyclé 10 fois
+ [1]  9 10 11 12 13 14 15 16 17 18
+> c(2, 5) * 1:10             # c(2, 5) est recyclé 5 fois
+ [1]  2 10  6 20 10 30 14 40 18 50
+> c(-2, 3, -1, 4)^1:4        # quatre puissances différentes
+[1] -2 -1  0  1  2  3  4
+Message d'avis :
+In c(-2, 3, -1, 4)^1:4 :
+  l'expression numérique a 4 éléments : seul le premier est utilisé
+>
+> ## On se rappelle que les matrices (et les tableaux) sont des
+> ## vecteurs. Les règles ci-dessus s'appliquent donc aussi aux
+> ## matrices, ce qui résulte en des opérateurs qui ne sont pas
+> ## définis en algèbre linéaire usuelle.
+> (x <- matrix(1:4, 2))       # matrice 2 x 2
+     [,1] [,2]
+[1,]    1    3
+[2,]    2    4
+> (y <- matrix(3:6, 2))       # autre matrice 2 x 2
+     [,1] [,2]
+[1,]    3    5
+[2,]    4    6
+> 5 * x                       # multiplication par une constante
+     [,1] [,2]
+[1,]    5   15
+[2,]   10   20
+> x + y                       # addition matricielle
+     [,1] [,2]
+[1,]    4    8
+[2,]    6   10
+> x * y                       # produit *élément par élément*
+     [,1] [,2]
+[1,]    3   15
+[2,]    8   24
+> x %*% y                     # produit matriciel
+     [,1] [,2]
+[1,]   15   23
+[2,]   22   34
+> x / y                       # division *élément par élément*
+          [,1]      [,2]
+[1,] 0.3333333 0.6000000
+[2,] 0.5000000 0.6666667
+> x * c(2, 3)                 # produit par colonne
+     [,1] [,2]
+[1,]    2    6
+[2,]    6   12
+>
+> ###
+> ### OPÉRATEURS
+> ###
+>
+> ## Seuls les opérateurs %%, %/% et logiques sont illustrés
+> ## ici. Premièrement, l'opérateur modulo retourne le reste
+> ## d'une division.
+> 5 %% 2                     # 5/2 = 2 reste 1
+[1] 1
+> 5 %% 1:5                   # remarquer la périodicité
+[1] 0 1 2 1 0
+> 10 %% 1:15                 # x %% y = x si x < y
+ [1]  0  0  1  2  0  4  3  2  1  0 10 10 10 10 10
+>
+> ## Le modulo est pratique dans les boucles, par exemple pour
+> ## afficher un résultat à toutes les n itérations seulement.
+> for (i in 1:50)
++ {
++     ## Affiche la valeur du compteur toutes les 5 itérations.
++     if (0 == i %% 5)
++         print(i)
++ }
+[1] 5
+[1] 10
+[1] 15
+[1] 20
+[1] 25
+[1] 30
+[1] 35
+[1] 40
+[1] 45
+[1] 50
+>
+> ## La division entière retourne la partie entière de la
+> ## division d'un nombre par un autre.
+> 5 %/% 1:5
+[1] 5 2 1 1 1
+> 10 %/% 1:15
+ [1] 10  5  3  2  2  1  1  1  1  1  0  0  0  0  0
+>
+> ## Le ET logique est vrai seulement lorsque les deux
+> ## expressions sont vraies.
+> c(TRUE, TRUE, FALSE) & c(TRUE, FALSE, FALSE)
+[1]  TRUE FALSE FALSE
+>
+> ## Le OU logique est faux seulement lorsque les deux
+> ## expressions sont fausses.
+> c(TRUE, TRUE, FALSE) | c(TRUE, FALSE, FALSE)
+[1]  TRUE  TRUE FALSE
+>
+> ## La négation logique transforme les vrais en faux et vice
+> ## versa.
+> ! c(TRUE, FALSE, FALSE, TRUE)
+[1] FALSE  TRUE  TRUE FALSE
+>
+> ## On peut utiliser les opérateurs logiques &, | et !
+> ## directement avec des nombres. Dans ce cas, le nombre zéro
+> ## est traité comme FALSE et tous les autres nombres comme
+> ## TRUE.
+> 0:5 & 5:0
+[1] FALSE  TRUE  TRUE  TRUE  TRUE FALSE
+> 0:5 | 5:0
+[1] TRUE TRUE TRUE TRUE TRUE TRUE
+> !0:5
+[1]  TRUE FALSE FALSE FALSE FALSE FALSE
+>
+> ## Ainsi, dans une expression conditionnelle, inutile de
+> ## vérifier si, par exemple, un nombre est égal à zéro. On
+> ## peut utiliser le nombre directement et sauver des
+> ## opérations de comparaison qui peuvent devenir coûteuses en
+> ## temps de calcul.
+> x <- 1                     # valeur quelconque
+> if (x != 0) x + 1          # TRUE pour tout x != 0
+[1] 2
+> if (x) x + 1               # tout à fait équivalent!
+[1] 2
+>
+> ## L'exemple de boucle ci-dessus peut donc être légèrement
+> ## modifié.
+> for (i in 1:50)
++ {
++     ## Affiche la valeur du compteur toutes les 5 itérations.
++     if (!i %% 5)
++         print (i)
++ }
+[1] 5
+[1] 10
+[1] 15
+[1] 20
+[1] 25
+[1] 30
+[1] 35
+[1] 40
+[1] 45
+[1] 50
+>
+> ## Dans les calculs numériques, TRUE vaut 1 et FALSE vaut 0.
+> a <- c("Impair", "Pair")
+> x <- c(2, 3, 6, 8, 9, 11, 12)
+> x %% 2
+[1] 0 1 0 0 1 1 0
+> (!x %% 2) + 1
+[1] 2 1 2 2 1 1 2
+> a[(!x %% 2) + 1]
+[1] "Pair"   "Impair" "Pair"   "Pair"   "Impair" "Impair" "Pair"
+>
+> ## Un mot en terminant sur l'opérateur '=='. C'est l'opérateur
+> ## à utiliser pour vérifier si deux valeurs sont égales, et
+> ## non '='. C'est là une erreur commune --- et qui peut être
+> ## difficile à détecter --- lorsque l'on programme en R.
+> 5 = 2                      # erreur de syntaxe
+Erreur dans 5 = 2 : membre gauche de l'assignation (do_set) incorrect
+> 5 == 2                     # comparaison
+[1] FALSE
+>
+> ###
+> ### APPELS DE FONCTIONS
+> ###
+>
+> ## Les invocations de la fonction 'matrix' ci-dessous sont
+> ## toutes équivalentes. On remarquera, entre autres, comment
+> ## les arguments sont spécifiés (par nom ou par position).
+> matrix(1:12, 3, 4)
+     [,1] [,2] [,3] [,4]
+[1,]    1    4    7   10
+[2,]    2    5    8   11
+[3,]    3    6    9   12
+> matrix(1:12, ncol = 4, nrow = 3)
+     [,1] [,2] [,3] [,4]
+[1,]    1    4    7   10
+[2,]    2    5    8   11
+[3,]    3    6    9   12
+> matrix(nrow = 3, ncol = 4, data = 1:12)
+     [,1] [,2] [,3] [,4]
+[1,]    1    4    7   10
+[2,]    2    5    8   11
+[3,]    3    6    9   12
+> matrix(nrow = 3, ncol = 4, byrow = FALSE, 1:12)
+     [,1] [,2] [,3] [,4]
+[1,]    1    4    7   10
+[2,]    2    5    8   11
+[3,]    3    6    9   12
+> matrix(nrow = 3, ncol = 4, 1:12, FALSE)
+     [,1] [,2] [,3] [,4]
+[1,]    1    4    7   10
+[2,]    2    5    8   11
+[3,]    3    6    9   12
+>
+> ###
+> ### QUELQUES FONCTIONS UTILES
+> ###
+>
+> ## MANIPULATION DE VECTEURS
+> x <- c(50, 30, 10, 20, 60, 30, 20, 40)  # vecteur non ordonné
+>
+> ## Séquences de nombres.
+> seq(from = 1, to = 10)       # équivalent à 1:10
+ [1]  1  2  3  4  5  6  7  8  9 10
+> seq(-10, 10, length = 50)    # incrément automatique
+ [1] -10.0000000  -9.5918367  -9.1836735  -8.7755102  -8.3673469  -7.9591837
+ [7]  -7.5510204  -7.1428571  -6.7346939  -6.3265306  -5.9183673  -5.5102041
+[13]  -5.1020408  -4.6938776  -4.2857143  -3.8775510  -3.4693878  -3.0612245
+[19]  -2.6530612  -2.2448980  -1.8367347  -1.4285714  -1.0204082  -0.6122449
+[25]  -0.2040816   0.2040816   0.6122449   1.0204082   1.4285714   1.8367347
+[31]   2.2448980   2.6530612   3.0612245   3.4693878   3.8775510   4.2857143
+[37]   4.6938776   5.1020408   5.5102041   5.9183673   6.3265306   6.7346939
+[43]   7.1428571   7.5510204   7.9591837   8.3673469   8.7755102   9.1836735
+[49]   9.5918367  10.0000000
+> seq(-2, by = 0.5, along = x) # même longueur que 'x'
+[1] -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5
+>
+> ## Répétition de nombres ou de vecteurs complets.
+> rep(1, 10)                  # utilisation de base
+ [1] 1 1 1 1 1 1 1 1 1 1
+> rep(x, 2)                   # répéter un vecteur
+ [1] 50 30 10 20 60 30 20 40 50 30 10 20 60 30 20 40
+> rep(x, times = 2, each = 4) # combinaison des arguments
+ [1] 50 50 50 50 30 30 30 30 10 10 10 10 20 20 20 20 60 60 60 60 30 30 30 30 20
+[26] 20 20 20 40 40 40 40 50 50 50 50 30 30 30 30 10 10 10 10 20 20 20 20 60 60
+[51] 60 60 30 30 30 30 20 20 20 20 40 40 40 40
+> rep(x, times = 1:8)         # nombre de répétitions différent
+ [1] 50 30 30 10 10 10 20 20 20 20 60 60 60 60 60 30 30 30 30 30 30 20 20 20 20
+[26] 20 20 20 40 40 40 40 40 40 40 40
+>                             # pour chaque élément de 'x'
+>
+> ## Classement en ordre croissant ou décroissant.
+> sort(x)                    # classement en ordre croissant
+[1] 10 20 20 30 30 40 50 60
+> sort(x, decr = TRUE)       # classement en ordre décroissant
+[1] 60 50 40 30 30 20 20 10
+> sort(c("abc", "B", "Aunt", "Jemima")) # chaînes de caractères
+[1] "abc"    "Aunt"   "B"      "Jemima"
+> sort(c(TRUE, FALSE))       # FALSE vient avant TRUE
+[1] FALSE  TRUE
+>
+> ## La fonction 'order' retourne la position, dans le vecteur
+> ## donné en argument, du premier élément selon l'ordre
+> ## croissant, puis du deuxième, etc. Autrement dit, on obtient
+> ## l'ordre dans lequel il faut extraire les données du vecteur
+> ## pour les obtenir en ordre croissant.
+> order(x)                   # regarder dans le blanc des yeux
+[1] 3 4 7 2 6 8 1 5
+> x[order(x)]                # équivalent à 'sort(x)'
+[1] 10 20 20 30 30 40 50 60
+>
+> ## Rang des éléments d'un vecteur dans l'ordre croissant.
+> rank(x)                    # rang des élément de 'x'
+[1] 7.0 4.5 1.0 2.5 8.0 4.5 2.5 6.0
+>
+> ## Renverser l'ordre d'un vecteur.
+> rev(x)
+[1] 40 20 30 60 20 10 30 50
+>
+> ## Extraction ou suppression en tête ou en queue de vecteur.
+> head(x, 3)                 # trois premiers éléments
+[1] 50 30 10
+> head(x, -2)                # tous sauf les deux derniers
+[1] 50 30 10 20 60 30
+> tail(x, 3)                 # trois derniers éléments
+[1] 30 20 40
+> tail(x, -2)                # tous sauf les deux premiers
+[1] 10 20 60 30 20 40
+>
+> ## Expressions équivalentes sans 'head' et 'tail'
+> x[1:3]                     # trois premiers éléments
+[1] 50 30 10
+> x[1:(length(x) - 2)]       # tous sauf les deux derniers
+[1] 50 30 10 20 60 30
+> x[(length(x)-2):length(x)] # trois derniers éléments
+[1] 30 20 40
+> rev(rev(x)[1:3])           # avec petits vecteurs seulement
+[1] 30 20 40
+> x[c(-1, -2)]               # tous sauf les deux premiers
+[1] 10 20 60 30 20 40
+>
+> ## Seulement les éléments différents d'un vecteur.
+> unique(x)
+[1] 50 30 10 20 60 40
+>
+> ## RECHERCHE D'ÉLÉMENTS DANS UN VECTEUR
+> which(x >= 30)             # positions des éléments >= 30
+[1] 1 2 5 6 8
+> which.min(x)               # position du minimum
+[1] 3
+> which.max(x)               # position du maximum
+[1] 5
+> match(20, x)               # position du premier 20 dans 'x'
+[1] 4
+> match(c(20, 30), x)        # aussi pour plusieurs valeurs
+[1] 4 2
+> 60 %in% x                  # 60 appartient à 'x'
+[1] TRUE
+> 70 %in% x                  # 70 n'appartient pas à 'x'
+[1] FALSE
+>
+> ## ARRONDI
+> (x <- c(-21.2, -pi, -1.5, -0.2, 0, 0.2, 1.7823, 315))
+[1] -21.200000  -3.141593  -1.500000  -0.200000   0.000000   0.200000   1.782300
+[8] 315.000000
+> round(x)                   # arrondi à l'entier
+[1] -21  -3  -2   0   0   0   2 315
+> round(x, 2)                # arrondi à la seconde décimale
+[1] -21.20  -3.14  -1.50  -0.20   0.00   0.20   1.78 315.00
+> round(x, -1)               # arrondi aux dizaines
+[1] -20   0   0   0   0   0   0 320
+> ceiling(x)                 # plus petit entier supérieur
+[1] -21  -3  -1   0   0   1   2 315
+> floor(x)                   # plus grand entier inférieur
+[1] -22  -4  -2  -1   0   0   1 315
+> trunc(x)                   # troncature des décimales
+[1] -21  -3  -1   0   0   0   1 315
+>
+> ## SOMMAIRES ET STATISTIQUES DESCRIPTIVES
+> sum(x)                     # somme des éléments
+[1] 290.9407
+> prod(x)                    # produit des éléments
+[1] 0
+> diff(x)                    # x[2] - x[1], x[3] - x[2], etc.
+[1]  18.058407   1.641593   1.300000   0.200000   0.200000   1.582300 313.217700
+> mean(x)                    # moyenne des éléments
+[1] 36.36759
+> mean(x, trim = 0.125)      # moyenne sans minimum et maximum
+[1] -0.4765488
+> var(x)                     # variance (sans biais)
+[1] 12729.86
+> (length(x) - 1)/length(x) * var(x) # variance biaisée
+[1] 11138.63
+> sd(x)                      # écart type
+[1] 112.8267
+> max(x)                     # maximum
+[1] 315
+> min(x)                     # minimum
+[1] -21.2
+> range(x)                   # c(min(x), max(x))
+[1] -21.2 315.0
+> diff(range(x))             # étendue de 'x'
+[1] 336.2
+> median(x)                  # médiane (50e quantile) empirique
+[1] -0.1
+> quantile(x)                # quantiles empiriques
+        0%        25%        50%        75%       100%
+-21.200000  -1.910398  -0.100000   0.595575 315.000000
+> quantile(x, 1:10/10)       # on peut spécifier les quantiles
+       10%        20%        30%        40%        50%        60%        70%
+ -8.559115  -2.484956  -1.370000  -0.460000  -0.100000   0.040000   0.180000
+       80%        90%       100%
+  1.149380  95.747610 315.000000
+> summary(x)                 # plusieurs des résultats ci-dessus
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max.
+-21.2000  -1.9100  -0.1000  36.3700   0.5956 315.0000
+>
+> ## SOMMAIRES CUMULATIFS ET COMPARAISONS ÉLÉMENT PAR ÉLÉMENT
+> (x <- sample(1:20, 6))
+[1]  8  7 18  9 10 12
+> (y <- sample(1:20, 6))
+[1]  5 10 14  9  2 16
+> cumsum(x)                  # somme cumulative de 'x'
+[1]  8 15 33 42 52 64
+> cumprod(y)                 # produit cumulatif de 'y'
+[1]      5     50    700   6300  12600 201600
+> rev(cumprod(rev(y)))       # produit cumulatif renversé
+[1] 201600  40320   4032    288     32     16
+> cummin(x)                  # minimum cumulatif
+[1] 8 7 7 7 7 7
+> cummax(y)                  # maximum cumulatif
+[1]  5 10 14 14 14 16
+> pmin(x, y)                 # minimum élément par élément
+[1]  5  7 14  9  2 12
+> pmax(x, y)                 # maximum élément par élément
+[1]  8 10 18  9 10 16
+>
+> ## OPÉRATIONS SUR LES MATRICES
+> (A <- sample(1:10, 16, replace = TRUE)) # avec remise
+ [1] 9 8 7 9 4 2 7 8 7 5 2 4 1 4 6 5
+> dim(A) <- c(4, 4)          # conversion en une matrice 4 x 4
+> b <- c(10, 5, 3, 1)        # un vecteur quelconque
+> A                          # la matrice 'A'
+     [,1] [,2] [,3] [,4]
+[1,]    9    4    7    1
+[2,]    8    2    5    4
+[3,]    7    7    2    6
+[4,]    9    8    4    5
+> t(A)                       # sa transposée
+     [,1] [,2] [,3] [,4]
+[1,]    9    8    7    9
+[2,]    4    2    7    8
+[3,]    7    5    2    4
+[4,]    1    4    6    5
+> solve(A)                   # son inverse
+           [,1]       [,2]      [,3] [,4]
+[1,] -3.2692308  1.8076923 -6.076923  6.5
+[2,]  0.8846154 -0.6538462  1.538462 -1.5
+[3,]  3.6153846 -1.8461538  6.461538 -7.0
+[4,]  1.5769231 -0.7307692  3.307692 -3.5
+> solve(A, b)                # la solution de Ax = b
+[1] -35.384615   8.692308  39.307692  18.538462
+> A %*% solve(A, b)          # vérification de la réponse
+     [,1]
+[1,]   10
+[2,]    5
+[3,]    3
+[4,]    1
+> diag(A)                    # extraction de la diagonale de 'A'
+[1] 9 2 2 5
+> diag(b)                    # matrice diagonale formée avec 'b'
+     [,1] [,2] [,3] [,4]
+[1,]   10    0    0    0
+[2,]    0    5    0    0
+[3,]    0    0    3    0
+[4,]    0    0    0    1
+> diag(4)                    # matrice identité 4 x 4
+     [,1] [,2] [,3] [,4]
+[1,]    1    0    0    0
+[2,]    0    1    0    0
+[3,]    0    0    1    0
+[4,]    0    0    0    1
+> (A <- cbind(A, b))         # matrice 4 x 5
+              b
+[1,] 9 4 7 1 10
+[2,] 8 2 5 4  5
+[3,] 7 7 2 6  3
+[4,] 9 8 4 5  1
+> nrow(A)                    # nombre de lignes de 'A'
+[1] 4
+> ncol(A)                    # nombre de colonnes de 'A'
+[1] 5
+> rowSums(A)                 # sommes par ligne
+[1] 31 24 25 27
+> colSums(A)                 # sommes par colonne
+             b
+33 21 18 16 19
+> apply(A, 1, sum)           # équivalent à 'rowSums(A)'
+[1] 31 24 25 27
+> apply(A, 2, sum)           # équivalent à 'colSums(A)'
+             b
+33 21 18 16 19
+> apply(A, 1, prod)          # produit par ligne avec 'apply'
+[1] 2520 1600 1764 1440
+>
+> ## PRODUIT EXTÉRIEUR
+> x <- c(1, 2, 4, 7, 10, 12)
+> y <- c(2, 3, 6, 7, 9, 11)
+> outer(x, y)                # produit extérieur
+     [,1] [,2] [,3] [,4] [,5] [,6]
+[1,]    2    3    6    7    9   11
+[2,]    4    6   12   14   18   22
+[3,]    8   12   24   28   36   44
+[4,]   14   21   42   49   63   77
+[5,]   20   30   60   70   90  110
+[6,]   24   36   72   84  108  132
+> x %o% y                    # équivalent plus court
+     [,1] [,2] [,3] [,4] [,5] [,6]
+[1,]    2    3    6    7    9   11
+[2,]    4    6   12   14   18   22
+[3,]    8   12   24   28   36   44
+[4,]   14   21   42   49   63   77
+[5,]   20   30   60   70   90  110
+[6,]   24   36   72   84  108  132
+> outer(x, y, "+")           # «somme extérieure»
+     [,1] [,2] [,3] [,4] [,5] [,6]
+[1,]    3    4    7    8   10   12
+[2,]    4    5    8    9   11   13
+[3,]    6    7   10   11   13   15
+[4,]    9   10   13   14   16   18
+[5,]   12   13   16   17   19   21
+[6,]   14   15   18   19   21   23
+> outer(x, y, "<=")          # toutes les comparaisons possibles
+      [,1]  [,2]  [,3]  [,4]  [,5]  [,6]
+[1,]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+[2,]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+[3,] FALSE FALSE  TRUE  TRUE  TRUE  TRUE
+[4,] FALSE FALSE FALSE  TRUE  TRUE  TRUE
+[5,] FALSE FALSE FALSE FALSE FALSE  TRUE
+[6,] FALSE FALSE FALSE FALSE FALSE FALSE
+> outer(x, y, pmax)          # idem
+     [,1] [,2] [,3] [,4] [,5] [,6]
+[1,]    2    3    6    7    9   11
+[2,]    2    3    6    7    9   11
+[3,]    4    4    6    7    9   11
+[4,]    7    7    7    7    9   11
+[5,]   10   10   10   10   10   11
+[6,]   12   12   12   12   12   12
+>
+> ###
+> ### STRUCTURES DE CONTRÔLE
+> ###
+>
+> ## Pour illustrer les structures de contrôle, on a recours à
+> ## un petit exemple tout à fait artificiel: un vecteur est
+> ## rempli des nombres de 1 à 100, à l'exception des multiples
+> ## de 10. Ces derniers sont affichés à l'écran.
+> ##
+> ## À noter qu'il est possible --- et plus efficace --- de
+> ## créer le vecteur sans avoir recours à des boucles.
+> (1:100)[-((1:10) * 10)]              # sans boucle!
+ [1]  1  2  3  4  5  6  7  8  9 11 12 13 14 15 16 17 18 19 21 22 23 24 25 26 27
+[26] 28 29 31 32 33 34 35 36 37 38 39 41 42 43 44 45 46 47 48 49 51 52 53 54 55
+[51] 56 57 58 59 61 62 63 64 65 66 67 68 69 71 72 73 74 75 76 77 78 79 81 82 83
+[76] 84 85 86 87 88 89 91 92 93 94 95 96 97 98 99
+> rep(1:9, 10) + rep(0:9*10, each = 9) # une autre façon!
+ [1]  1  2  3  4  5  6  7  8  9 11 12 13 14 15 16 17 18 19 21 22 23 24 25 26 27
+[26] 28 29 31 32 33 34 35 36 37 38 39 41 42 43 44 45 46 47 48 49 51 52 53 54 55
+[51] 56 57 58 59 61 62 63 64 65 66 67 68 69 71 72 73 74 75 76 77 78 79 81 82 83
+[76] 84 85 86 87 88 89 91 92 93 94 95 96 97 98 99
+>
+> ## Bon, l'exemple proprement dit...
+> x <- numeric(0)            # initialisation du contenant 'x'
+> j <- 0                     # compteur pour la boucle
+> for (i in 1:100)
++ {
++     if (i %% 10)           # si i n'est pas un multiple de 10
++         x[j <- j + 1] <- i # stocker sa valeur dans 'x'
++     else                   # sinon
++         print(i)           # afficher la valeur à l'écran
++ }
+[1] 10
+[1] 20
+[1] 30
+[1] 40
+[1] 50
+[1] 60
+[1] 70
+[1] 80
+[1] 90
+[1] 100
+> x                          # vérification
+ [1]  1  2  3  4  5  6  7  8  9 11 12 13 14 15 16 17 18 19 21 22 23 24 25 26 27
+[26] 28 29 31 32 33 34 35 36 37 38 39 41 42 43 44 45 46 47 48 49 51 52 53 54 55
+[51] 56 57 58 59 61 62 63 64 65 66 67 68 69 71 72 73 74 75 76 77 78 79 81 82 83
+[76] 84 85 86 87 88 89 91 92 93 94 95 96 97 98 99
+>
+> ## Même chose que ci-dessus, mais sans le compteur 'j' et les
+> ## valeurs manquantes aux positions 10, 20, ..., 100 sont
+> ## éliminées à la sortie de la boucle.
+> x <- numeric(0)
+> for (i in 1:100)
++ {
++     if (i %% 10)
++         x[i] <- i
++     else
++         print(i)
++ }
+[1] 10
+[1] 20
+[1] 30
+[1] 40
+[1] 50
+[1] 60
+[1] 70
+[1] 80
+[1] 90
+[1] 100
+> x <- x[!is.na(x)]
+> x
+ [1]  1  2  3  4  5  6  7  8  9 11 12 13 14 15 16 17 18 19 21 22 23 24 25 26 27
+[26] 28 29 31 32 33 34 35 36 37 38 39 41 42 43 44 45 46 47 48 49 51 52 53 54 55
+[51] 56 57 58 59 61 62 63 64 65 66 67 68 69 71 72 73 74 75 76 77 78 79 81 82 83
+[76] 84 85 86 87 88 89 91 92 93 94 95 96 97 98 99
+>
+> ## On peut refaire l'exemple avec une boucle 'while', mais
+> ## cette structure n'est pas naturelle ici puisque l'on sait
+> ## d'avance qu'il faudra faire la boucle exactement 100
+> ## fois. Le 'while' est plutôt utilisé lorsque le nombre de
+> ## répétitions est inconnu. De plus, une boucle 'while' n'est
+> ## pas nécessairement exécutée puisque le critère d'arrêt est
+> ## évalué dès l'entrée dans la boucle.
+> x <- numeric(0)
+> j <- 0
+> i <- 1                     # pour entrer dans la boucle [*]
+> while (i <= 100)
++ {
++     if (i %% 10)
++         x[j <- j + 1] <- i
++     else
++         print(i)
++     i <- i + 1             # incrémenter le compteur!
++ }
+[1] 10
+[1] 20
+[1] 30
+[1] 40
+[1] 50
+[1] 60
+[1] 70
+[1] 80
+[1] 90
+[1] 100
+> x
+ [1]  1  2  3  4  5  6  7  8  9 11 12 13 14 15 16 17 18 19 21 22 23 24 25 26 27
+[26] 28 29 31 32 33 34 35 36 37 38 39 41 42 43 44 45 46 47 48 49 51 52 53 54 55
+[51] 56 57 58 59 61 62 63 64 65 66 67 68 69 71 72 73 74 75 76 77 78 79 81 82 83
+[76] 84 85 86 87 88 89 91 92 93 94 95 96 97 98 99
+>
+> ## La remarque faite au sujet de la boucle 'while' s'applique
+> ## aussi à la boucle 'repeat'. Par contre, le critère d'arrêt
+> ## de la boucle 'repeat' étant évalué à la toute fin, la
+> ## boucle est exécutée au moins une fois. S'il faut faire la
+> ## manoeuvre marquée [*] ci-dessus pour s'assurer qu'une
+> ## boucle 'while' est exécutée au moins une fois... c'est
+> ## qu'il faut utiliser 'repeat'.
+> x <- numeric(0)
+> j <- 0
+> i <- 1
+> repeat
++ {
++     if (i %% 10)
++         x[j <- j + 1] <- i
++     else
++         print(i)
++     if (100 < (i <- i + 1)) # incrément et critère d'arrêt
++         break
++ }
+[1] 10
+[1] 20
+[1] 30
+[1] 40
+[1] 50
+[1] 60
+[1] 70
+[1] 80
+[1] 90
+[1] 100
+> x
+ [1]  1  2  3  4  5  6  7  8  9 11 12 13 14 15 16 17 18 19 21 22 23 24 25 26 27
+[26] 28 29 31 32 33 34 35 36 37 38 39 41 42 43 44 45 46 47 48 49 51 52 53 54 55
+[51] 56 57 58 59 61 62 63 64 65 66 67 68 69 71 72 73 74 75 76 77 78 79 81 82 83
+[76] 84 85 86 87 88 89 91 92 93 94 95 96 97 98 99
+>
+> ###
+> ### FONCTIONS ADDITIONNELLES
+> ###
+>
+> ## La fonction 'search' retourne la liste des environnements
+> ## dans lesquels R va chercher un objet (en particulier une
+> ## fonction). '.GlobalEnv' est l'environnement de travail.
+> search()
+[1] ".GlobalEnv"        "package:stats"     "package:graphics"
+[4] "package:grDevices" "package:utils"     "package:datasets"
+[7] "package:methods"   "Autoloads"         "package:base"
+>
+> ## Liste de tous les packages installés sur votre système.
+> library()
+Packages dans la bibliothèque ‘/Users/vincent/Library/R/library’ :
+
+actuar                  Actuarial functions
+expm                    Matrix exponential
+misc3d                  Miscellaneous 3D Plots
+scatterplot3d           3D Scatter Plot
+
+Packages dans la bibliothèque ‘/Library/Frameworks/R.framework/Versions/2.14/Resources/library’ :
+
+base                    The R Base Package
+boot                    Bootstrap Functions (originally by Angelo Canty
+                        for S)
+class                   Functions for Classification
+cluster                 Cluster Analysis Extended Rousseeuw et al.
+codetools               Code Analysis Tools for R
+compiler                The R Compiler Package
+datasets                The R Datasets Package
+foreign                 Read Data Stored by Minitab, S, SAS, SPSS,
+                        Stata, Systat, dBase, ...
+graphics                The R Graphics Package
+grDevices               The R Graphics Devices and Support for Colours
+                        and Fonts
+grid                    The Grid Graphics Package
+KernSmooth              Functions for kernel smoothing for Wand & Jones
+                        (1995)
+lattice                 Lattice Graphics
+MASS                    Support Functions and Datasets for Venables and
+                        Ripley's MASS
+Matrix                  Sparse and Dense Matrix Classes and Methods
+methods                 Formal Methods and Classes
+mgcv                    GAMs with GCV/AIC/REML smoothness estimation
+                        and GAMMs by PQL
+nlme                    Linear and Nonlinear Mixed Effects Models
+nnet                    Feed-forward Neural Networks and Multinomial
+                        Log-Linear Models
+parallel                Support for Parallel computation in R
+rpart                   Recursive Partitioning
+spatial                 Functions for Kriging and Point Pattern
+                        Analysis
+splines                 Regression Spline Functions and Classes
+stats                   The R Stats Package
+stats4                  Statistical Functions using S4 Classes
+survival                Survival analysis, including penalised
+                        likelihood.
+tcltk                   Tcl/Tk Interface
+tools                   Tools for Package Development
+utils                   The R Utils Package
+
+>
+> ## Chargement du package 'MASS', qui contient plusieurs
+> ## fonctions statistiques très utiles.
+> library("MASS")
+>

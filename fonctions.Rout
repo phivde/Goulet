@@ -1,0 +1,333 @@
+
+R version 2.14.1 (2011-12-22)
+Copyright (C) 2011 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: x86_64-apple-darwin9.8.0/x86_64 (64-bit)
+
+R est un logiciel libre livré sans AUCUNE GARANTIE.
+Vous pouvez le redistribuer sous certaines conditions.
+Tapez 'license()' ou 'licence()' pour plus de détails.
+
+R est un projet collaboratif avec de nombreux contributeurs.
+Tapez 'contributors()' pour plus d'information et
+'citation()' pour la façon de le citer dans les publications.
+
+Tapez 'demo()' pour des démonstrations, 'help()' pour l'aide
+en ligne ou 'help.start()' pour obtenir l'aide au format HTML.
+Tapez 'q()' pour quitter R.
+
+> .help.ESS <- help
+> options(STERM='iESS', editor='emacsclient')
+> ## Emacs: -*- coding: utf-8; fill-column: 62; comment-column: 27; -*-
+>
+> ### POINT FIXE
+>
+> ## Comme premier exemple de fonction, on réalise une mise en
+> ## oeuvre de l'algorithme du point fixe pour trouver le taux
+> ## d'intérêt tel que a_angle{n} = k pour 'n' et 'k' donnés.
+> ## Cette mise en oeuvre est peu générale puisqu'il faudrait
+> ## modifier la fonction chaque fois que l'on change la
+> ## fonction f(x) dont on cherche le point fixe.
+> fp1 <- function(k, n, start = 0.05, TOL = 1E-10)
++ {
++     i <- start
++     repeat
++     {
++         it <- i
++         i <- (1 - (1 + it)^(-n))/k
++         if (abs(i - it)/it < TOL)
++             break
++     }
++     i
++ }
+>
+> fp1(7.2, 10)               # valeur de départ par défaut
+[1] 0.06466837
+> fp1(7.2, 10, 0.06)         # valeur de départ spécifiée
+[1] 0.06466837
+> i                          # les variables n'existent pas...
+Erreur : objet 'i' introuvable
+> start                      # ... dans l'espace de travail
+function (x, ...)
+UseMethod("start")
+<bytecode: 0x1032f61c8>
+<environment: namespace:stats>
+>
+> ## Généralisation de la fonction 'fp1': la fonction f(x) dont
+> ## on cherche le point fixe (c'est-à-dire la valeur de 'x'
+> ## tel que f(x) = x) est passée en argument. On peut faire
+> ## ça? Bien sûr, puisqu'une fonction est un objet comme un
+> ## autre en R. On ajoute également à la fonction un argument
+> ## 'echo' qui, lorsque TRUE, fera en sorte d'afficher à
+> ## l'écran les valeurs successives de 'x'.
+> ##
+> ## Ci-dessous, il est implicite que le premier argument, FUN,
+> ## est une fonction.
+> fp2 <- function(FUN, start, echo = FALSE, TOL = 1E-10)
++ {
++     x <- start
++     repeat
++     {
++         xt <- x
++
++         if (echo)       # inutile de faire 'if (echo == TRUE)'
++             print(xt)
++
++         x <- FUN(xt)    # appel de la fonction
++
++         if (abs(x - xt)/xt < TOL)
++             break
++     }
++     x
++ }
+>
+> f <- function(i) (1 - (1+i)^(-10))/7.2 # définition de f(x)
+> fp2(f, 0.05)               # solution
+[1] 0.06466837
+> fp2(f, 0.05, echo = TRUE)  # avec résultats intermédiaires
+[1] 0.05
+[1] 0.05362316
+[1] 0.05651029
+[1] 0.05873396
+[1] 0.06040165
+[1] 0.06162731
+[1] 0.06251469
+[1] 0.06315015
+[1] 0.06360164
+[1] 0.06392061
+[1] 0.06414507
+[1] 0.06430258
+[1] 0.06441289
+[1] 0.06449003
+[1] 0.06454393
+[1] 0.06458157
+[1] 0.06460783
+[1] 0.06462615
+[1] 0.06463893
+[1] 0.06464785
+[1] 0.06465406
+[1] 0.06465839
+[1] 0.06466142
+[1] 0.06466352
+[1] 0.06466499
+[1] 0.06466601
+[1] 0.06466673
+[1] 0.06466723
+[1] 0.06466757
+[1] 0.06466781
+[1] 0.06466798
+[1] 0.0646681
+[1] 0.06466818
+[1] 0.06466824
+[1] 0.06466828
+[1] 0.06466831
+[1] 0.06466833
+[1] 0.06466834
+[1] 0.06466835
+[1] 0.06466836
+[1] 0.06466836
+[1] 0.06466836
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+> fp2(function(x) 3^(-x), start = 0.5) # avec fonction anonyme
+[1] 0.5478086
+>
+> ## Amélioration mineure à la fonction 'fp2': puisque la
+> ## valeur de 'echo' ne change pas pendant l'exécution de la
+> ## fonction, on peut éviter de refaire le test à chaque
+> ## itération de la boucle. Une solution élégante consiste à
+> ## utiliser un outil avancé du langage R: les expressions.
+> ##
+> ## L'objet créé par la fonction 'expression' est une
+> ## expression non encore évaluée (comme si on n'avait pas
+> ## appuyé sur Entrée à la fin de la ligne). On peut ensuite
+> ## évaluer l'expression (appuyer sur Entrée) avec 'exec'.
+> fp3 <- function(FUN, start, echo = FALSE, TOL = 1E-10)
++ {
++     x <- start
++
++     ## Choisir l'expression à exécuter plus loin
++     if (echo)
++         expr <- expression(print(xt <- x))
++     else
++         expr <- expression(xt <- x)
++
++     repeat
++     {
++         eval(expr)         # évaluer l'expression
++
++         x <- FUN(xt)       # appel de la fonction
++
++         if (abs(x - xt)/xt < TOL)
++             break
++     }
++     x
++ }
+>
+> fp3(f, 0.05, echo = TRUE)  # avec résultats intermédiaires
+[1] 0.05
+[1] 0.05362316
+[1] 0.05651029
+[1] 0.05873396
+[1] 0.06040165
+[1] 0.06162731
+[1] 0.06251469
+[1] 0.06315015
+[1] 0.06360164
+[1] 0.06392061
+[1] 0.06414507
+[1] 0.06430258
+[1] 0.06441289
+[1] 0.06449003
+[1] 0.06454393
+[1] 0.06458157
+[1] 0.06460783
+[1] 0.06462615
+[1] 0.06463893
+[1] 0.06464785
+[1] 0.06465406
+[1] 0.06465839
+[1] 0.06466142
+[1] 0.06466352
+[1] 0.06466499
+[1] 0.06466601
+[1] 0.06466673
+[1] 0.06466723
+[1] 0.06466757
+[1] 0.06466781
+[1] 0.06466798
+[1] 0.0646681
+[1] 0.06466818
+[1] 0.06466824
+[1] 0.06466828
+[1] 0.06466831
+[1] 0.06466833
+[1] 0.06466834
+[1] 0.06466835
+[1] 0.06466836
+[1] 0.06466836
+[1] 0.06466836
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+[1] 0.06466837
+> fp3(function(x) 3^(-x), start = 0.5) # avec une fonction anonyme
+[1] 0.5478086
+>
+> ### SUITE DE FIBONACCI
+>
+> ## On a présenté au chapitre 4 deux manières différentes de
+> ## pour calculer les 'n' premières valeurs de la suite de
+> ## Fibonacci. On crée d'abord des fonctions à partir de ce
+> ## code. Avantage d'avoir des fonctions: elles sont valides
+> ## pour tout 'n' > 2.
+> ##
+> ## D'abord la version inefficace.
+> fib1 <- function(n)
++ {
++     res <- c(0, 1)
++     for (i in 3:n)
++         res[i] <- res[i - 1] + res[i - 2]
++     res
++ }
+> fib1(10)
+ [1]  0  1  1  2  3  5  8 13 21 34
+> fib1(20)
+ [1]    0    1    1    2    3    5    8   13   21   34   55   89  144  233  377
+[16]  610  987 1597 2584 4181
+>
+> ## Puis la version supposéement plus efficace.
+> fib2 <- function(n)
++ {
++     res <- numeric(n)      # contenant créé
++     res[2] <- 1            # res[1] vaut déjà 0
++     for (i in 3:n)
++         res[i] <- res[i - 1] + res[i - 2]
++     res
++ }
+> fib2(5)
+[1] 0 1 1 2 3
+> fib2(20)
+ [1]    0    1    1    2    3    5    8   13   21   34   55   89  144  233  377
+[16]  610  987 1597 2584 4181
+>
+> ## A-t-on vraiment gagné en efficacité? Comparons le temps
+> ## requis pour générer une longue suite de Fibonacci avec les
+> ## deux fonctions.
+> system.time(fib1(10000))   # version inefficace
+utilisateur     système      écoulé
+      0.282       0.009       0.291
+> system.time(fib2(10000))   # version efficace
+utilisateur     système      écoulé
+       0.04        0.00        0.04
+>
+> ## Variation sur un même thème: une fonction pour calculer non
+> ## pas les 'n' premières valeurs de la suite de Fibonacci,
+> ## mais uniquement la 'n'ième valeur.
+> ##
+> ## Mais il y a un mais: la fonction 'fib3' est truffée
+> ## d'erreurs (de syntaxe, d'algorithmique, de conception). À
+> ## vous de trouver les bogues. (Afin de préserver cet
+> ## exemple, copier le code erroné plus bas ou dans un autre
+> ## fichier avant d'y faire les corrections.)
+> fib3 <- function(nb)
++ {
++     x <- 0
++     x1 _ 0
+Erreur : entrée inattendu(e) dans :
+"    x <- 0
+    x1 _"
+>     x2 <- 1
+>     while (n > 0))
+Erreur : ')' inattendu(e) dans "    while (n > 0))"
+> x <- x1 + x2
+Erreur : objet 'x1' introuvable
+> x2 <- x1
+Erreur : objet 'x1' introuvable
+> x1 <- x
+Erreur : objet 'x' introuvable
+> n <- n - 1
+Erreur : objet 'n' introuvable
+> }
+Erreur : '}' inattendu(e) dans "}"
+> fib3(1)                    # devrait donner 0
+Erreur : impossible de trouver la fonction "fib3"
+> fib3(2)                    # devrait donner 1
+Erreur : impossible de trouver la fonction "fib3"
+> fib3(5)                    # devrait donner 3
+Erreur : impossible de trouver la fonction "fib3"
+> fib3(10)                   # devrait donner 34
+Erreur : impossible de trouver la fonction "fib3"
+> fib3(20)                   # devrait donner 4181
+Erreur : impossible de trouver la fonction "fib3"
+>
