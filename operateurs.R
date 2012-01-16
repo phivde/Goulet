@@ -32,7 +32,7 @@ c(-2, 3, -1, 4)^1:4        # quatre puissances différentes
 ## matrices, ce qui résulte en des opérateurs qui ne sont pas
 ## définis en algèbre linéaire usuelle.
 (x <- matrix(1:4, 2))       # matrice 2 x 2
-(y <- matric(3:6, 2))       # autre matrice 2 x 2
+(y <- matrix(3:6, 2))       # autre matrice 2 x 2
 5 * x                       # multiplication par une constante
 x + y                       # addition matricielle
 x * y                       # produit *élément par élément*
