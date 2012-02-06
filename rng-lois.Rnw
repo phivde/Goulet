@@ -13,8 +13,8 @@ racine \code{\textit{loi}}, il existe quatre fonctions différentes :
 Les différentes lois de probabilité disponibles dans le système R de
 base, leur racine et le nom de leurs paramètres sont rassemblés au
 tableau \ref{tab:rng:lois}. Des packages fournissent des fonctions
-pour d'autres lois dont, entre autres, \cite{actuar} et
-\cite{SuppDists}.
+pour d'autres lois dont, entre autres, \pkg{actuar} \citep{actuar} et
+\pkg{SuppDists} \citep{Rpackage:SuppDists}.
 
 \begin{table}
   \index{distribution!bêta}
@@ -40,27 +40,27 @@ pour d'autres lois dont, entre autres, \cite{actuar} et
     \toprule
     Loi de probabilité & Racine dans R & Noms des paramètres \\
     \midrule
-    Bêta & \texttt{beta} & \texttt{shape1}, \texttt{shape2} \\
-    Binomiale & \texttt{binom} & \texttt{size}, \texttt{prob} \\
-    Binomiale négative & \texttt{nbinom} & \texttt{size},
-    \texttt{prob} ou \texttt{mu} \\
-    Cauchy & \texttt{cauchy} & \texttt{location}, \texttt{scale} \\
-    Exponentielle & \texttt{exp} & \texttt{rate} \\
-    \emph{F} (Fisher) & \texttt{f} & \texttt{df1}, \texttt{df2} \\
-    Gamma & \texttt{gamma} & \texttt{shape}, \texttt{rate} ou
-    \texttt{scale} \\
-    Géométrique & \texttt{geom} & \texttt{prob} \\
-    Hypergéométrique & \texttt{hyper} & \texttt{m}, \texttt{n},
-    \texttt{k} \\
-    Khi carré & \texttt{chisq} & \texttt{df} \\
-    Logistique & \texttt{logis} & \texttt{location}, \texttt{scale} \\
-    Log-normale & \texttt{lnorm} & \texttt{meanlog}, \texttt{sdlog} \\
-    Normale & \texttt{norm} & \texttt{mean}, \texttt{sd} \\
-    Poisson & \texttt{pois} & \texttt{lambda} \\
-    \emph{t} (Student) & \texttt{t} & \texttt{df} \\
-    Uniforme & \texttt{unif} & \texttt{min}, \texttt{max} \\
-    Weibull & \texttt{weibull} & \texttt{shape}, \texttt{scale} \\
-    Wilcoxon & \texttt{wilcox} & \texttt{m}, \texttt{n} \\
+    Bêta & \code{beta} & \code{shape1}, \code{shape2} \\
+    Binomiale & \code{binom} & \code{size}, \code{prob} \\
+    Binomiale négative & \code{nbinom} & \code{size},
+    \code{prob} ou \code{mu} \\
+    Cauchy & \code{cauchy} & \code{location}, \code{scale} \\
+    Exponentielle & \code{exp} & \code{rate} \\
+    \emph{F} (Fisher) & \code{f} & \code{df1}, \code{df2} \\
+    Gamma & \code{gamma} & \code{shape}, \code{rate} ou
+    \code{scale} \\
+    Géométrique & \code{geom} & \code{prob} \\
+    Hypergéométrique & \code{hyper} & \code{m}, \code{n},
+    \code{k} \\
+    Khi carré & \code{chisq} & \code{df} \\
+    Logistique & \code{logis} & \code{location}, \code{scale} \\
+    Log-normale & \code{lnorm} & \code{meanlog}, \code{sdlog} \\
+    Normale & \code{norm} & \code{mean}, \code{sd} \\
+    Poisson & \code{pois} & \code{lambda} \\
+    \emph{t} (Student) & \code{t} & \code{df} \\
+    Uniforme & \code{unif} & \code{min}, \code{max} \\
+    Weibull & \code{weibull} & \code{shape}, \code{scale} \\
+    Wilcoxon & \code{wilcox} & \code{m}, \code{n} \\
     \bottomrule
   \end{tabular}
   \caption{Lois de probabilité pour lesquelles il existe des fonctions
