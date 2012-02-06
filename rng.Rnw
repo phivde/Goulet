@@ -37,14 +37,22 @@ Consulter les rubriques d'aide des fonctions \code{.Random.seed}
 plus amples détails.
 
 
-\section{Fonctions de simulation de variables aléatoires}
+\section{Fonctions de simulation de variables aléatoires non
+  uniformes}
 \index{simulation!variables aléatoires}
 \label{rng:va}
 
-%% Le contenu des cette section est conservé dans un fichier à part
+%% Le contenu de cette section est conservé dans un fichier à part
 %% pour pouvoir être inclus dans les notes du cours de méthodes
 %% numériques.
 \input{rng-lois}
+
+\section{Exemples}
+\label{rng:exemples}
+
+\lstinputlisting[firstline=3]{rng.R}
+
+\vspace{\fill}
 
 \section{Exercices}
 \label{rng:exercices}
