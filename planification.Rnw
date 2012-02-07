@@ -1,4 +1,5 @@
-\chapter{Planification d'une simulation en S}
+\chapter[Planification d'une simulation en R]{%
+  Planification d'une simulation \\ en R}
 \index{simulation!planification|(}
 \label{planification}
 
@@ -63,17 +64,15 @@ simul3 <- function(nb.simul, size, theta)
 \section{Introduction}
 \label{planification:intro}
 
-La simulation est de plus en plus utilisée pour résoudre des problèmes
-complexes. Il existe de multiples façons de réaliser la mise en
-{\oe}uvre informatique d'une simulation, mais certaines sont plus
-efficaces que d'autres. Ce document passe en revue diverses façons de
-faire des simulations avec R à l'aide d'un exemple simple de nature
-statistique.
+Il existe de multiples façons de réaliser la mise en {\oe}uvre
+informatique d'une simulation, mais certaines sont plus efficaces que
+d'autres. Ce document passe en revue diverses façons de faire des
+simulations avec R à l'aide d'un exemple simple de nature statistique.
 
 Soit $X_1, \dots, X_n$ un échantillon aléatoire tiré d'une population
 distribuée selon une loi uniforme sur l'intervalle $(\theta -
-\frac{1}{2}, \theta + \frac{1}{2})$. On considère les trois
-estimateurs suivants du paramètre inconnu $\theta$:
+\frac{1}{2}, \theta + \frac{1}{2})$. On considère trois
+estimateurs sans biais du paramètre inconnu $\theta$:
 \begin{enumerate}
 \item la moyenne arithmétique
   \begin{displaymath}
@@ -87,7 +86,7 @@ estimateurs suivants du paramètre inconnu $\theta$:
       \frac{1}{2}(X_{(\frac{n}{2})} + X_{(\frac{n}{2} + 1)}), & \text{$n$ pair},
     \end{cases}
   \end{displaymath}
-  où $X_{(k)}$ est la $k$\ieme{} statistique d'ordre de l'échantillon
+  où $X_{(k)}$ est la $k${\ieme} statistique d'ordre de l'échantillon
   aléatoire;
 \item la mi-étendue
   \begin{displaymath}
@@ -124,13 +123,13 @@ les valeurs des trois estimateurs pour chaque simulation. Une fois la
 matrice remplie dans la boucle, il ne reste plus qu'à calculer la
 moyenne et la variance par ligne pour obtenir les résultats souhaités.
 
-La figure \ref{fig:planification:boucle} présente un exemple de code
+La figure~\ref{fig:planification:boucle} présente un exemple de code
 adéquat pour réaliser la simulation à l'aide d'une boucle.
 
-\begin{figure}
+\begin{figure}[tp]
   \centering
   \begin{framed}
-\begin{lstlisting}
+\begin{verbatim}
 ## Bonne habitude à prendre: stocker les constantes dans
 ## des variables faciles à modifier au lieu de les écrire
 ## explicitement dans le code.
@@ -154,55 +153,53 @@ rownames(x) <- c("Moyenne", "Mediane", "Mi-etendue")
 for (i in 1:nsimul)
 {
     u <- runif(size, a, b)
-    x[1, i] <- mean(u)     # moyenne
-    x[2, i] <- median(u)   # médiane
-    x[3, i] <- mean(range(u)) # mi-étendue
+    x[, i] <- c(mean(u),   # moyenne
+                median(u)  # médiane
+                mean(range(u))) # mi-étendue
 }
 
 ## On peut maintenant calculer la moyenne et la variance
 ## par ligne.
 rowMeans(x) - theta        # vérification du biais
 apply(x, 1, var)           # comparaison des variances
-\end{lstlisting}
+\end{verbatim}
   \end{framed}
   \caption{Code pour la simulation utilisant une boucle \code{for}}
   \label{fig:planification:boucle}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
   \centering
   \begin{framed}
-\begin{lstlisting}
+\begin{verbatim}
 simul1 <- function(nsimul, size, theta)
 {
     a <- theta - 0.5
     b <- theta + 0.5
 
     x <- matrix(0, nrow = 3, ncol = nsimul)
-    rownames(x) <- c("Moyenne","Mediane","Mi-etendue")
+    rownames(x) <- c("Moyenne", "Mediane", "Mi-etendue")
 
     for (i in 1:nsimul)
     {
         u <- runif(size, a, b)
-        x[1, i] <- mean(u)
-        x[2, i] <- median(u)
-        x[3, i] <- mean(range(u))
+        x[, i] <- c(mean(u), median(u), mean(range(u)))
     }
 
     list(biais = rowMeans(x) - theta,
          variances = apply(x, 1, var))
 }
-\end{lstlisting}
+\end{verbatim}
   \end{framed}
   \caption{Définition de la fonction \code{simul1}}
   \label{fig:planification:simul1}
 \end{figure}
 
-Si l'on souhaite pouvoir exécuter le code de la figure
-\ref{fig:planification:boucle} facilement à l'aide d'une seule
+Si l'on souhaite pouvoir exécuter le code de la
+figure~\ref{fig:planification:boucle} facilement à l'aide d'une seule
 expression, il suffit de placer l'ensemble du code dans une fonction.
-La fonction \code{simul1} de la figure \ref{fig:planification:simul1}
-reprend le code de la figure \ref{fig:planification:boucle}, sans les
+La fonction \code{simul1} de la figure~\ref{fig:planification:simul1}
+reprend le code de la figure~\ref{fig:planification:boucle}, sans les
 commentaires. On a alors:
 
 <<echo=TRUE>>=
@@ -214,32 +211,33 @@ simul1(10000, 100, 0)
 
 On le sait, les boucles sont inefficaces en R. Il est en général plus
 efficace de déléguer les boucles aux fonctions \fonction{lapply} et
-\fonction{sapply}, dont la syntaxe est
-\begin{center}
-  \code{lapply(x, FUN, ...)} \quad et \quad \code{sapply(x, FUN, ...)}.
-\end{center}
-Celles-ci appliquent la fonction \code{FUN} à tous les éléments de
-la liste ou du vecteur \code{x} et retournent les résultats sous
-forme de liste (\fonction{lapply}) ou, lorsque c'est possible, de
-vecteur ou de matrice (\fonction{sapply}). Il est important de noter
-que les valeurs successives de \code{x} seront passées comme
-\emph{premier} argument à la fonction \code{FUN}. Le cas échéant, les
-autres arguments de \code{FUN} sont spécifiés dans le
-champ~`\argument{...}'.
+\fonction{sapply} (section~\ref{avance:lapply}). On rappelle que la
+syntaxe de ces fonctions est
+\begin{quote}
+  \code{lapply(x, FUN, ...)} \\
+  \code{sapply(x, FUN, ...)}
+\end{quote}
+Ces fonctions appliquent la fonction \code{FUN} à tous les éléments de
+la liste ou du vecteur \code{x} et retournent les résultats sous forme
+de liste (\fonction{lapply}) ou, lorsque c'est possible, de vecteur ou
+de matrice (\fonction{sapply}). Il est important de noter que les
+valeurs successives de \code{x} seront passées comme \emph{premier}
+argument à la fonction \code{FUN}. Le cas échéant, les autres
+arguments de \code{FUN} sont spécifiés dans le champ~`\argument{...}'.
 
 Pour pouvoir utiliser ces fonctions dans le cadre d'une simulation
 comme celle dont il est question ici, il s'agit de définir une
 fonction qui fera tous les calculs pour une simulation, puis de la
 passer à \fonction{sapply} pour obtenir les résultats de $N$
-simulations. La figure \ref{fig:planification:fun1} présente une première
-version d'une telle fonction. On remarquera que l'argument \code{i} ne
-joue aucun rôle dans la fonction. Voici un exemple d'utilisation pour
-un petit nombre (4) de simulations:
+simulations. La figure~\ref{fig:planification:lapply} présente une
+première version d'une telle fonction. On remarquera que l'argument
+\code{i} ne joue aucun rôle dans la fonction. Voici un exemple
+d'utilisation pour un petit nombre de simulations (4):
 
-\begin{figure}[tbp]
+\begin{figure}
   \centering
   \begin{framed}
-\begin{lstlisting}
+\begin{verbatim}
 fun1 <- function(i, size, a, b)
 {
     u <- runif(size, a, b)
@@ -247,27 +245,7 @@ fun1 <- function(i, size, a, b)
       Mediane = median(u),
       "Mi-etendue" = mean(range(u)))
 }
-\end{lstlisting}
-  \end{framed}
-  \caption{Définition de la fonction \code{fun1}}
-  \label{fig:planification:fun1}
-\end{figure}
 
-<<echo=TRUE>>=
-sapply(1:4, fun1, size = 10, a = -0.5, b = 0.5)
-@
-
-On remarque donc que les résultats de chaque simulation se trouvent
-dans les colonnes de la matrice obtenue avec \code{sapply}.
-
-Pour compléter l'analyse, on englobe le tout dans une fonction
-\code{simul2}, dont le code se trouve à la figure
-\ref{fig:planification:simul2}:
-
-\begin{figure}[tbp]
-  \centering
-  \begin{framed}
-\begin{lstlisting}
 simul2 <- function(nsimul, size, theta)
 {
     a <- theta - 0.5
@@ -278,18 +256,29 @@ simul2 <- function(nsimul, size, theta)
     list(biais = rowMeans(x) - theta,
          variances = apply(x, 1, var))
 }
-\end{lstlisting}
+\end{verbatim}
   \end{framed}
-  \caption{Définition de la fonction \code{simul2}}
-  \label{fig:planification:simul2}
+  \caption{Définitions des fonction \code{fun1} et \code{simul2}}
+  \label{fig:planification:lapply}
 \end{figure}
 
+<<echo=TRUE>>=
+sapply(1:4, fun1, size = 10, a = -0.5, b = 0.5)
+@
+
+On remarque donc que les résultats de chaque simulation se trouvent
+dans les colonnes de la matrice obtenue avec \code{sapply}.
+
+Pour compléter l'analyse, on englobe le tout dans une fonction
+\code{simul2}, dont le code se trouve à la
+figure~\ref{fig:planification:lapply}:
 <<echo=TRUE>>=
 simul2(10000, 100, 0)
 @
 
 Il est généralement plus facile de déboguer le code avec cette
-approche.
+approche puisque l'on peut rapidement circonscrire un éventuel
+problème à \code{fun1} ou \code{simul2}.
 
 
 \section{Variante de la seconde approche}
@@ -297,22 +286,22 @@ approche.
 
 Une chose manque d'élégance dans la seconde approche: l'obligation
 d'inclure un argument factice dans la fonction \code{fun1}. La
-fonction R \fonction{replicate} permet toutefois de passer outre cette
-contrainte. En effet, cette fonction exécute un nombre donné de fois
-une expression quelconque. Les fonctions \code{fun2} et \code{simul3}
-des figures \ref{fig:planification:fun2} et \ref{fig:planification:simul3},
-respectivement, sont des versions légèrement modifiées de \code{fun1}
-et \code{simul2} pour utilisation avec \fonction{replicate}.
+fonction \fonction{replicate} (section \ref{avance:replicate}) permet
+toutefois de passer outre cette contrainte. En effet, cette fonction
+exécute un nombre donné de fois une expression quelconque.
 
-On a alors
+Les fonctions \code{fun2} et \code{simul3} de la
+figure~\ref{fig:planification:replicate} sont des versions légèrement
+modifiées de \code{fun1} et \code{simul2} pour utilisation avec
+\fonction{replicate}. On a alors
 <<echo=TRUE>>=
 simul3(10000, 100, 0)
 @
 
-\begin{figure}[tbp]
+\begin{figure}
   \centering
   \begin{framed}
-\begin{lstlisting}
+\begin{verbatim}
 fun2 <- function(size, a, b)
 {
     u <- runif(size, a, b)
@@ -320,16 +309,7 @@ fun2 <- function(size, a, b)
       Mediane = median(u),
       "Mi-etendue" = mean(range(u)))
 }
-\end{lstlisting}
-  \end{framed}
-  \caption{Définition de la fonction \code{fun2}}
-  \label{fig:planification:fun2}
-\end{figure}
 
-\begin{figure}[tbp]
-  \centering
-  \begin{framed}
-\begin{lstlisting}
 simul3 <- function(nsimul, size, theta)
 {
     a <- theta - 0.5
@@ -340,32 +320,12 @@ simul3 <- function(nsimul, size, theta)
     list(biais = rowMeans(x) - theta,
          variances = apply(x, 1, var))
 }
-\end{lstlisting}
+\end{verbatim}
   \end{framed}
-  \caption{Définition de la fonction \code{simul3}}
-  \label{fig:planification:simul3}
+  \caption{Définitions des fonction \code{fun2} et \code{simul3}}
+  \label{fig:planification:replicate}
 \end{figure}
 
-
-\section{Comparaison des temps de calcul}
-\label{planification:temps}
-
-A-t-on gagné quoi que ce soit en termes de temps de calcul d'une
-approche à l'autre? La fonction \fonction{system.time} permet de
-mesurer le temps requis pour l'exécution d'une expression. Le premier
-résultat de \fonction{system.time} est le temps CPU utilisé et le
-troisième, le temps total écoulé. Sous Windows, les quatrième et
-cinquième résultats sont \code{NA}.
-
-<<echo=TRUE>>=
-system.time(simul1(10000, 100, 0))
-system.time(simul2(10000, 100, 0))
-system.time(simul3(10000, 100, 0))
-@
-
-Les différences, petites ici, peuvent être plus importantes lors de
-grosses simulations et favoriser d'autant plus l'utilisation de la
-fonction \code{replicate}.
 
 
 \section{Gestion des fichiers}
@@ -377,20 +337,20 @@ de script. Pour un plus gros projet, cependant, il vaut souvent mieux
 avoir recours à plusieurs fichiers différents. Le présent auteur
 utilise pour sa part un fichier par fonction.
 
-À des fins d'illustration, supposons que l'on utilise l'approche
-de la section~\ref{planification:replicate} avec la fonction
-\code{replicate} en R et que le code des fonctions
-\code{fun2} et \code{simul3} est sauvegardé dans des fichiers
-\code{fun2.R} et \code{simul3.R}, respectivement. Si l'on crée un
-autre fichier, \code{go.R}, ne contenant que des expressions
-\fonction{source} pour lire les autres fichiers, il est alors possible
-de démarrer des simulations en exécutant ce seul fichier. Dans notre
-exemple, le fichier \code{go.R} contiendrait les lignes suivantes:
-\begin{verbatim}
-source("fun2.R")
-source("simul3.R")
-simul3(10000, 100, 0)
-\end{verbatim}
+À des fins d'illustration, supposons que l'on utilise l'approche de la
+section~\ref{planification:replicate} avec la fonction
+\code{replicate} et que le code des fonctions \code{fun2} et
+\code{simul3} est sauvegardé dans des fichiers \code{fun2.R} et
+\code{simul3.R}, dans l'ordre. Si l'on crée un autre fichier, disons
+\code{go.R}, ne contenant que des expressions \fonction{source} pour
+lire les autres fichiers, il est alors possible de démarrer des
+simulations en exécutant ce seul fichier. Dans notre exemple, le
+fichier \code{go.R} contiendrait les lignes suivantes:
+\begin{quote}
+  \code{source("fun2.R")} \\
+  \code{source("simul3.R")} \\
+  \code{simul3(10000, 100, 0)}
+\end{quote}
 Une simple commande
 <<echo=TRUE, eval=FALSE>>=
 source("go.R")
@@ -444,17 +404,16 @@ la variance des trois estimateurs de la moyenne d'une loi uniforme
 sont les suivantes: les trois estimateurs sont sans biais et la
 mi-étendue a la plus faible variance. En effet, on peut démontrer
 mathématiquement que, pour $n$ impair,
-  \begin{align*}
-    \var{\hat{\theta}_1} &= \frac{1}{12 n} \\
-    \var{\hat{\theta}_2} &= \frac{1}{4n + 2} \\
-    \var{\hat{\theta}_3} &= \frac{1}{2(n + 1)(n + 2)}
-  \end{align*}
-  et donc
-  \begin{displaymath}
-    \var{\hat{\theta}_3} \leq \var{\hat{\theta}_1} \leq \var{\hat{\theta}_2}
-  \end{displaymath}
-  pour tout $n \geq 2$.
-\end{enumerate}
+\begin{align*}
+  \var{\hat{\theta}_1} &= \frac{1}{12 n} \\
+  \var{\hat{\theta}_2} &= \frac{1}{4n + 2} \\
+  \var{\hat{\theta}_3} &= \frac{1}{2(n + 1)(n + 2)}
+\end{align*}
+et donc
+\begin{displaymath}
+  \var{\hat{\theta}_3} \leq \var{\hat{\theta}_1} \leq \var{\hat{\theta}_2}
+\end{displaymath}
+pour tout $n \geq 2$.
 
 \index{simulation!planification|)}
 
