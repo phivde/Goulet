@@ -9,14 +9,14 @@
 # Further adjustments Vincent Goulet
 # April 2008
 
-MASTER = introduction_programmation_S.pdf
+MASTER = introduction_programmation_r.pdf
 
 # The master document depends on all TeX files
 RNWFILES = $(wildcard *.Rnw)
 TEXFILES = $(wildcard *.tex)
 
 # The work horses
-SWEAVE = R CMD SWEAVE
+SWEAVE = R CMD SWEAVE --encoding="utf-8"
 TEXI2DVI = texi2dvi -b --pdf
 RM = rm -rf
 

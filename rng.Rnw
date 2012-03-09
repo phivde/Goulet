@@ -5,6 +5,10 @@
 options(width=50)
 @
 
+\begin{objectifs}
+\item
+\end{objectifs}
+
 Avant d'utiliser pour quelque tâche de simulation moindrement
 importante un générateur de nombres aléatoires inclus dans un
 logiciel, il importe de s'assurer de la qualité de cet outil. On
