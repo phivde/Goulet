@@ -1,0 +1,110 @@
+\documentclass[letterpaper,11pt]{memoir}
+  \usepackage[utf8]{inputenc}
+  \renewcommand{\sfdefault}{Myriad-LF} % titres en MyriadPro
+  \usepackage[english,francais]{babel}
+  \usepackage[absolute]{textpos}
+  \usepackage{graphicx}
+
+\begin{document}
+
+\frontmatter
+
+\pagestyle{empty}
+
+\textblockorigin{0mm}{0mm}
+\setlength{\parindent}{0mm}
+
+\begin{textblock*}{216mm}(0mm,0mm)
+  \includegraphics{harfang2.jpg} \\
+\end{textblock*}
+
+\begin{textblock*}{10mm}(0mm,0mm)
+  \rule{10mm}{279mm} \\
+\end{textblock*}
+
+\begin{adjustwidth*}{-12mm}{-72mm}
+  \sffamily\color{white}
+  \raggedright
+  \vspace*{115mm}
+  \fontseries{b}\fontsize{42}{42}\selectfont
+  Introduction
+  \fontseries{m}\fontsize{42}{42}\selectfont
+  à la \\
+  \fontseries{b}\fontsize{42}{42}\selectfont
+  programmation
+  \fontseries{m}\fontsize{42}{42}\selectfont
+  en
+  \fontseries{b}\fontsize{42}{42}\selectfont
+  R \\
+  \vspace*{20mm}
+  \fontseries{m}\fontsize{24}{36}\selectfont
+  Vincent Goulet
+\end{adjustwidth*}
+
+\newpage
+
+\begin{textblock*}{216mm}(0mm,0mm)
+  \rule{216mm}{10mm} \\
+\end{textblock*}
+
+\begin{textblock*}{216mm}(0mm,70mm)
+  \rule{216mm}{3pt} \\
+  \includegraphics{harfang2.jpg} \\[-\baselineskip]
+  \rule{216mm}{3pt} \\
+\end{textblock*}
+% \begin{textblock*}{216mm}(0mm,0mm)
+%   \rule{216mm}{70mm}
+% \end{textblock*}
+
+\begin{adjustwidth*}{-12mm}{-30mm}
+  \sffamily
+  \raggedright
+  \vspace*{-17mm}
+  \fontseries{b}\fontsize{42}{42}\selectfont
+  Introduction
+  \fontseries{m}\fontsize{42}{42}\selectfont
+  à la \\
+  \fontseries{b}\fontsize{42}{42}\selectfont
+  programmation
+  \fontseries{m}\fontsize{42}{42}\selectfont
+  en
+  \fontseries{b}\fontsize{42}{42}\selectfont
+  R \\
+  \vspace*{160mm}
+  \fontseries{m}\fontsize{28}{36}\selectfont
+  Vincent Goulet
+\end{adjustwidth*}
+
+% \begin{textblock*}{216mm}[0,1](0mm,279mm)
+%   \rule{216mm}{10mm} \\
+% \end{textblock*}
+
+\newpage
+
+\begin{textblock*}{216mm}(0mm,0mm)
+  \includegraphics[height=279mm,keepaspectratio=true]{harfang.jpg} \\
+\end{textblock*}
+
+\begin{adjustwidth*}{-12mm}{-30mm}
+  \sffamily
+  \raggedright
+  \vspace*{-17mm}
+  \rule{\linewidth}{2pt}
+  \fontseries{b}\fontsize{42}{42}\selectfont
+  Introduction
+  à la \\
+  programmation
+  en
+  R \\[-10pt]
+  \rule{\linewidth}{2pt}
+  \vspace*{32mm}
+  \fontseries{m}\fontsize{24}{36}\selectfont
+  Vincent Goulet
+\end{adjustwidth*}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

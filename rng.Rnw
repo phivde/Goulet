@@ -6,7 +6,14 @@ options(width=50)
 @
 
 \begin{objectifs}
-\item
+\item Savoir générer des nombres aléatoires uniformes avec la fonction
+  \code{runif}.
+\item Savoir générer des nombres aléatoires non uniformes provenant de
+  lois de probabilité discrètes et continues.
+\item Savoir générer des nombres aléatoires provenant d'une
+  distribution discrète quelconque.
+\item Savoir tirer profit de la nature vectorielle des fonctions de
+  simulation de R.
 \end{objectifs}
 
 Avant d'utiliser pour quelque tâche de simulation moindrement
@@ -24,21 +31,23 @@ fonctions de simulation de variables aléatoires.
 \index{simulation!nombres uniformes}
 \label{rng:generateurs}
 
-On obtient des nombres uniformes sur un intervalle quelconque (par
-défaut $(0, 1)$) avec la fonction \Fonction{runif}. L'amorce du
-générateur aléatoire est déterminée avec la fonction
-\Fonction{set.seed}.
+On obtient des nombres uniformes sur un intervalle quelconque avec la
+fonction \code{runif} dans R. La fonction \code{set.seed} permet de
+spécifier la valeur de l'amorce du générateur aléatoire, ce qui est
+utile si on veut répéter une simulation absolument à l'identique.
 
-Dans R, \R on a la possibilité de choisir entre six
-générateurs de nombres aléatoires différents, ou encore de spécifier
-son propre générateur. Par défaut, R utilise le générateur
-Marsenne--Twister, considéré comme le plus avancé au moment d'écrire
-ces lignes.  La période de ce générateur est $2^{\nombre{19937}} - 1$,
-rien de moins!
+R offre la possibilité de choisir entre plusieurs générateurs de
+nombres aléatoires différents, ou encore de spécifier son propre
+générateur. Par défaut, R utilise le générateur Marsenne--Twister,
+considéré comme le plus avancé en ce moment. La période de ce
+générateur est $2^{\nombre{19937}} - 1$ (rien de moins!) et la
+distribution des nombres est uniforme dans 623 dimensions consécutives
+sur toute la période.
 
-Consulter les rubriques d'aide des fonctions \code{.Random.seed}
-\index{Random.seed@\code{.Random.seed}} et \code{set.seed} pour de
-plus amples détails.
+Pour de plus amples détails et les dernières informations sur les
+générateurs disponibles et la procédure de réglage de l'amorce,
+consulter les rubriques d'aide des fonctions \code{.Random.seed} et
+\code{set.seed}.
 
 
 \section{Fonctions de simulation de variables aléatoires non
