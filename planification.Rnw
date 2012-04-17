@@ -61,13 +61,13 @@ simul3 <- function(nb.simul, size, theta)
 }
 @
 
-\section{Introduction}
-\label{planification:intro}
-
 Il existe de multiples façons de réaliser la mise en {\oe}uvre
 informatique d'une simulation, mais certaines sont plus efficaces que
-d'autres. Ce document passe en revue diverses façons de faire des
+d'autres. Cette annexe passe en revue diverses façons de faire des
 simulations avec R à l'aide d'un exemple simple de nature statistique.
+
+\section{Contexte}
+\label{planification:contexte}
 
 Soit $X_1, \dots, X_n$ un échantillon aléatoire tiré d'une population
 distribuée selon une loi uniforme sur l'intervalle $(\theta -

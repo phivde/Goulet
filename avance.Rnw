@@ -142,9 +142,9 @@ l'occurrence. Leur syntaxe est similaire:
 @ %
   Le premier argument de la fonction \fonction{sample} est \code{x}.
   Dans l'expression ci-dessus, cet argument est passé à
-  \fonction{sample} via `\code{...}'. Par conséquent, les
+  la fonction via l'argument `\code{...}'. Par conséquent, les
   valeurs successives de \verb|5:8| servent comme deuxième argument à
-  \fonction{sample}, soit la taille de l'échantillon.
+  la fonction \fonction{sample}, soit la taille de l'échantillon.
 \item On peut ensuite calculer la moyenne de chacun des vecteurs
   obtenus ci-dessus, toujours sans faire de boucle:
 <<echo=TRUE>>=
@@ -220,9 +220,9 @@ d'une expression.
 <<eval=FALSE>>=
 replicate(10000, fun(...))
 @
-% \item L'annexe \ref{simulation} présente en détail différentes
-%   stratégies --- dont l'utilisation de \code{replicate} --- pour
-%   la réalisation d'études de simulation en S.
+\item L'annexe \ref{planification} présente en détail différentes
+  stratégies --- dont l'utilisation de \code{replicate} --- pour
+  la réalisation d'études de simulation en R.
 \end{itemize}
 
 

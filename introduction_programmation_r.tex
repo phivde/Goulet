@@ -8,13 +8,15 @@
   \usepackage[autolanguage]{numprint}
   \usepackage{vgmath,actu,amsmath,amsthm,icomma}
   \usepackage[noae]{Sweave}
-  \usepackage[alwaysadjust]{paralist}
+  \usepackage{paralist}
+  \usepackage[shortlabels]{enumitem}
   \usepackage{textpos}
   \usepackage{graphicx,color}
   \usepackage{MnSymbol,applekeys}      % symboles spéciaux
   %\usepackage{threeparttable}
   \usepackage{expdlist}
   \usepackage{listingsutf8,answers}
+  \usepackage{pdfpages}
 
   %%%  Couleurs
   \definecolor{comments}{rgb}{0.7,0,0}
@@ -28,22 +30,16 @@
   %%% ============
   %%%  Page titre
   %%% ============
-  \title{\HUGE
-    \fontseries{b}\selectfont Introduction
-    \fontseries{m}\selectfont  à la \\
-    \fontseries{b}\selectfont programmation
-    \fontseries{m}\selectfont  en \\
-    \fontseries{b}\selectfont\scalefont{15} R}
-  \author{\huge Vincent Goulet \\[3mm]
-    \large École d'actuariat, Université Laval}
-  \date{\Large Seconde édition}
-  \newcommand{\ISBN}{978-2-9809136-7-9}
-
-  %%% Commandes pour notes marginales
-  \newcommand{\Splus}{\marginpar[\hfill S$+$]{S$+$}}
-  \newcommand{\warning}{\marginpar[\hfill\LARGE\danger]%
-    {\LARGE\danger}}
-
+  \title{%
+    \fontseries{b}\fontsize{42}{42}\selectfont Introduction à la \\
+                                               programmation en R}
+  \author{%
+    \fontseries{m}\fontsize{24}{24}\selectfont Vincent Goulet \\
+    \fontseries{m}\fontsize{16}{24}\selectfont École d'actuariat,
+                                               Université Laval}
+  \date{%
+    \fontseries{m}\fontsize{16}{18}\selectfont Troisième édition}
+  \newcommand{\ISBN}{978-2-9811416-2-0}
 
   %%% ===================
   %%%  STYLE DU DOCUMENT
@@ -65,6 +61,12 @@
   \setsubsecheadstyle{\normalfont\large\sffamily\bfseries\raggedright}
   \maxsecnumdepth{subsection}
   \setsecnumdepth{subsection}
+
+  %% Listes. Paramétrage avec enumitem.
+  \setenumerate{leftmargin=*,align=left}
+  \setenumerate[2]{label=\alph*)}
+  \setenumerate[3]{label=\roman*),align=right}
+  \setitemize{leftmargin=*,align=left}
 
   %% Noms de fonctions, code, etc.
   \newcommand{\code}[1]{\texttt{#1}}
@@ -100,9 +102,9 @@
         \noindent\sffamily\bfseries\textcolor{white}{Objectifs du chapitre}
       \end{shaded}
       \vspace{-0.6\baselineskip}
-      \begin{compactitem}
+      \begin{itemize}[nolistsep]
         \small}
-      {\end{compactitem}
+      {\end{itemize}
     \end{framed}}
 
   %% Environnements de Sweave
@@ -121,15 +123,15 @@
         \settowidth{\labelwidth}{\bfseries \thechapter.\arabic{exercice}}
         \setlength{\leftmargin}{\labelwidth}
         \addtolength{\leftmargin}{\labelsep}
-        \setdefaultenum{a)}{i)}{}{}}\item}
+        \setenumerate[1]{leftmargin=*,label=\alph*),widest=a}
+        \setenumerate[2]{leftmargin=*,label=\roman*)}}
+      \item}
     {\end{list}}
   \renewenvironment{reponse}[1]{%
-    \begin{list}{\bfseries #1}{%
-        \settowidth{\labelwidth}{#1}
-        \setlength{\leftmargin}{\labelwidth}
-        \addtolength{\leftmargin}{\labelsep}
-        \setdefaultenum{a)}{i)}{}{}}\item}
-    {\end{list}}
+    \begin{enumerate}[label=#1,font=\bfseries]
+      \setenumerate[2]{leftmargin=*,labelsep=0em}
+      \item}
+    {\end{enumerate}}
   \renewcommand{\reponseparams}{{\thechapter.\theexercice}}
 
   %% Listes de commandes
@@ -197,10 +199,11 @@
   %%% =======
   %%%  Index
   %%% =======
+  \newcommand{\bfhyperpage}[1]{\textbf{\hyperpage{#1}}}
   \renewcommand{\preindexhook}{%
     Les numéros de page en caractères gras indiquent les pages où les
     concepts sont introduits, définis ou expliqués.\vskip\onelineskip}
-  \newcommand{\Index}[1]{\index{#1|textbf}}
+  \newcommand{\Index}[1]{\index{#1|bfhyperpage}}
   \newcommand{\indexargument}[1]{\index{#1@\code{#1}}}
   \newcommand{\Indexargument}[1]{\Index{#1@\code{#1}}}
   \newcommand{\indexattribut}[1]{\index{#1@\code{#1} (attribut)}}
@@ -238,14 +241,26 @@
   %%% Style de la bibliographie
   \bibliographystyle{francais}
 
-  \includeonly{notices}
+%  \includeonly{presentation}
 
 \begin{document}
 
 \frontmatter
 
+%% Page couverture avant. Il faut modifier la largeur des graphiques
+%% puisque Sweave la règle à 0.8\textwidth.
+\setkeys{Gin}{width=\paperwidth}
+\includepdf[pages=1]{couvertures}
+\setkeys{Gin}{width=0.8\textwidth}
+\cleardoublepage
+
 \pagestyle{empty}
+
+\include{pagegarde}
+\clearpage
+
 \include{notices}
+\clearpage
 
 \pagestyle{companion}
 
@@ -266,10 +281,9 @@
 \include{emacs+ess}
 \include{planification}
 \include{packages}
-\include{fdl}
 \include{reponses}
 
-\bibliography{r,stat,informatique}
+\bibliography{r,stat,informatique,vg}
 
 \cleardoublepage
 \printindex
@@ -277,8 +291,9 @@
 \cleardoublepage
 \cleartoverso
 
-\pagestyle{empty}
-\include{arriere}
+%% Page couverture arrière.
+\setkeys{Gin}{width=\paperwidth}
+\includepdf[pages=2]{couvertures}
 
 \end{document}
 

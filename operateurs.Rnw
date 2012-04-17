@@ -857,7 +857,7 @@ cumprod(1:10)
 \item
 <<>>=
 x[1:5]
-head(x, 5) # R seulement
+head(x, 5)
 @
 \item
 <<>>=
@@ -866,13 +866,13 @@ max(x)
 \item
 <<>>=
 mean(x[1:5])
-mean(head(x, 5)) # R seulement
+mean(head(x, 5))
 @
 \item
 <<>>=
 mean(x[16:20])
-mean(x[(length(x)-4):length(x)])  # plus général
-mean(tail(x, 5))                      # R seulement
+mean(x[(length(x) - 4):length(x)])  # plus général
+mean(tail(x, 5))                    # plus lisible!
 @
     \end{enumerate}
   \end{rep}

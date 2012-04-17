@@ -217,7 +217,7 @@ pgamma(x, alpha)
 \item Évaluer $F(x; 5, 1)$ pour $x = 2, 3, \dots, 10$ en une seule
   expression.
 
-  Cet exercice est est beaucoup plus compliqué qu'il n'y paraît au
+  Cet exercice est beaucoup plus compliqué qu'il n'y paraît au
   premier abord. Ici, la valeur de $\alpha$ demeure fixe, mais on doit
   calculer, en une seule expression, la valeur de la fonction de
   répartition en plusieurs points. Or, cela exige de faire d'un coup

@@ -60,12 +60,13 @@ consulter les rubriques d'aide des fonctions \code{.Random.seed} et
 %% numériques.
 \input{rng-lois}
 
+\newpage
+
 \section{Exemples}
 \label{rng:exemples}
 
 \lstinputlisting[firstline=3]{rng.R}
 
-\vspace{\fill}
 
 \section{Exercices}
 \label{rng:exercices}

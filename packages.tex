@@ -13,11 +13,11 @@ l'installation et l'administration de packages externes.
 Les instructions ci-dessous sont centrées autour de la création d'une
 bibliothèque personnelle où seront installés les packages R
 téléchargés de CRAN. Il est fortement recommandé de créer une telle
-bibliothèque. Cela permet d'éviter d'éventuels problèmes d'accès en
-écriture dans la bibliothèque principale et de conserver les packages
-intacts lors des mises à jour de R. Nous montrons également comment
-spécifier le site miroir de CRAN pour éviter d'avoir à le répéter à
-chaque installation de package.
+bibliothèque. Cela permet d'éviter les problèmes d'accès en écriture
+dans la bibliothèque principale et de conserver les packages intacts
+lors des mises à jour de R. Nous montrons également comment spécifier
+le site miroir de CRAN pour éviter d'avoir à le répéter à chaque
+installation de package.
 \begin{enumerate}
 \item Identifier le dossier de départ de l'utilisateur. En cas
   d'incertitude, examiner la valeur de la variable d'environnement
@@ -26,9 +26,11 @@ chaque installation de package.
     créée par l'assistant d'installation de Emacs lorsqu'elle n'existe
     pas déjà.}, %
   depuis R avec la commande
+\begin{Schunk}
 \begin{Sinput}
 > Sys.getenv("HOME")
 \end{Sinput}
+\end{Schunk}
   ou, pour les utilisateurs de Emacs, directement depuis l'éditeur avec
 \begin{verbatim}
 M-x getenv RET HOME RET
@@ -69,15 +71,19 @@ Après un redémarrage de R, la bibliothèque personnelle aura préséance
 sur la bibliothèque principale et il ne sera plus nécessaire de
 préciser le site miroir de CRAN lors de l'installation de packages.
 Ainsi, la simple commande
+\begin{Schunk}
 \begin{Sinput}
 > install.packages("actuar")
 \end{Sinput}
+\end{Schunk}
 téléchargera le package de fonctions actuarielles \textbf{actuar}
 depuis le miroir canadien de CRAN et l'installera dans le dossier
 \verb=~/R/library=. Pour charger le package en mémoire, on fera
+\begin{Schunk}
 \begin{Sinput}
 > library("actuar")
 \end{Sinput}
+\end{Schunk}
 
 On peut arriver au même résultat sans utiliser les fichiers de
 configuration \code{.Renviron} et \code{.Rprofile}. Il faut cependant
