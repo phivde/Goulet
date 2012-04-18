@@ -102,10 +102,9 @@ particulièrement intéressantes, on note:
 \begin{itemize}
 \item langage basé sur la notion de vecteur, ce qui simplifie les
   calculs mathématiques et réduit considérablement le recours aux
-  structures itératives (boucles);
+  structures itératives (boucles \code{for}, \code{while}, etc.);
 \item pas de typage ni de déclaration obligatoire des variables;
-\item programmes généralement courts, en général quelques lignes de
-  code seulement;
+\item programmes courts, en général quelques lignes de code seulement;
 \item temps de développement très court.
 \end{itemize}
 
@@ -252,9 +251,9 @@ fonctionnalités que d'autres.
 
   En effet, combiné avec le mode ESS\index{ESS} (\emph{Emacs Speaks
     Statistics}), Emacs offre un environnement de développement aussi
-  riche qu'efficace. Entre autres fonctionnalités uniques à Emacs, le
-  fichier de script et l'invite de commandes R sont regroupés dans la
-  même fenêtre, comme on peut le voir à la
+  riche qu'efficace. Entre autres fonctionnalités uniques à cet
+  éditeur, le fichier de script et l'invite de commandes R sont
+  regroupés dans la même fenêtre, comme on peut le voir à la
   figure~\ref{fig:presentation:emacs}.
 
   \begin{figure}[t]
@@ -281,7 +280,7 @@ fonctionnalités que d'autres.
   \emph{pas} partie! Nous recommandons plutôt:
   \begin{itemize}
   \item sous Windows, l'éditeur Notepad++\index{Notepad++}
-    muni de l'extension NppToR \citep{NppToR}, tous deux des
+    additionné de l'extension NppToR \citep{NppToR}, tous deux des
     logiciels libres;
   \item toujours sous Windows, le partagiciel
     WinEdt\index{WinEdt} muni de l'extension libre
