@@ -8,10 +8,9 @@ options(width=52)
 \begin{objectifs}
 \item Connaître la syntaxe et la sémantique du langage R.
 \item Comprendre la notion d’objet et connaître les principaux types
-  de données dans R.
-\item Comprendre et savoir tirer profit de l’arithmétique vectorielle
-  de R.
-\item Comprendre la différence entre les divers modes d’objets R (en
+  de données disponibles dans R.
+\item Comprendre et savoir tirer profit de l’arithmétique vectorielle.
+\item Comprendre la différence entre les divers modes d’objets (en
   particulier \code{numeric}, \code{character} et \code{logical}) et
   la conversion automatique de l’un à l’autre.
 \item Comprendre la différence entre un vecteur, une matrice, un
@@ -87,7 +86,7 @@ Que ce soit dans les fichiers de script ou à la ligne de commande, on
 sépare les commandes R les unes des autres par un
 \index{;@\code{;}}point-virgule ou par un retour à la ligne.
 \begin{itemize}
-\item On considère généralement comme une mauvaise pratique d'employer
+\item On considère généralement comme du mauvais style d'employer
   les deux, c'est-à-dire de placer des points-virgules à la fin de
   chaque ligne de code, surtout dans les fichiers de script.
 \item Le point-virgule peut être utile pour séparer deux courtes
@@ -147,16 +146,16 @@ risque de nuire à la portabilité du code.
   \code{Foo} et \code{FOO} sont trois objets distincts. Un moyen
   simple d'éviter des erreurs liées à la casse consiste à n'employer
   que des lettres minuscules.
-\item Certains noms sont utilisés par le système, aussi vaut-il mieux
+\item Certains noms sont utilisés par le système R, aussi vaut-il mieux
   éviter de les utiliser. En particulier, éviter d'utiliser
   \begin{quote}
     \code{c}, \code{q}, \code{t}, \code{C}, \code{D},
     \code{I}, \code{diff}, \code{length}, \code{mean},
     \code{pi}, \code{range}, \code{var}.
   \end{quote}
-\item \index{noms d'objets!réservés} Certains mots sont réservés pour
-  le système et il est interdit de les utiliser comme nom d'objet. Les
-  mots réservés sont:
+\item \index{noms d'objets!réservés} Certains mots sont réservés et il
+  est interdit de les utiliser comme nom d'objet. Les mots réservés
+  pour le système sont:
   \begin{quote}
     \code{break}, \code{else}, \code{for}, \code{function}, \code{if},
     \code{in}, \code{next}, \code{repeat}, \code{return}, \code{while}, \\
@@ -635,10 +634,10 @@ qualificatif de \emph{récursif} pour ce type d'objet.
   \code{"numeric"}, le second de mode \code{"character"} et le troisième
   de mode \code{"logical"}.
 \item Nous recommandons de nommer les éléments d'une liste. En effet,
-  les listes contiennent souvent des données de divers type et il peut
-  s'avérer difficile d'identifier les éléments s'ils ne sont pas nommés.
-  De plus, comme nous le verrons ci-dessous, il est très simple
-  d'extraire les éléments d'une liste par leur étiquette.
+  les listes contiennent souvent des données de types différents et il
+  peut s'avérer difficile d'identifier les éléments s'ils ne sont pas
+  nommés. De plus, comme nous le verrons ci-dessous, il est très
+  simple d'extraire les éléments d'une liste par leur étiquette.
 \item La liste demeure un vecteur. On peut donc
   l'indicer\Index{indiçage!liste} avec l'opérateur \fonction{[~]}.
   Cependant, cela retourne une liste contenant le ou les éléments

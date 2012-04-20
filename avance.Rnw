@@ -22,7 +22,7 @@ nous avons fait référence à quelques reprises dans les chapitres
 précédents. Ce sont des fonctions d'une grande importance en R.
 
 
-\section{L'argument `\code{...}'}
+\section{Argument `\code{...}'}
 \label{avance:dots}
 
 La mention `\code{...}' apparaît dans la définition de plusieurs
@@ -127,7 +127,12 @@ l'occurrence. Leur syntaxe est similaire:
   tous les éléments d'un vecteur ou d'une liste \code{X} et retourne
   le résultat sous forme de liste. Le résultat est donc:
   \begin{quote}
-    \code{list(FUN(X[[1]], ...), FUN(X[[2]], ...), FUN(X[[3]], ...), ...)}
+\begin{verbatim}
+list(FUN(X[[1]], ...),
+     FUN(X[[2]], ...),
+     FUN(X[[3]], ...),
+     ...)
+\end{verbatim}
   \end{quote}
 \item Les éléments de \code{X} sont passés comme à la fonction
   \code{FUN} sans être nommés. Les règles habituelles d'évaluation
@@ -221,8 +226,8 @@ d'une expression.
 replicate(10000, fun(...))
 @
 \item L'annexe \ref{planification} présente en détail différentes
-  stratégies --- dont l'utilisation de \code{replicate} --- pour
-  la réalisation d'études de simulation en R.
+  stratégies --- dont l'utilisation de la fonction \code{replicate}
+  --- pour la réalisation d'études de simulation en R.
 \end{itemize}
 
 
@@ -234,11 +239,11 @@ parfois implicite ou dérivée du mode de l'objet (consulter la rubrique
 d'aide de \fonction{class} pour de plus amples détails).
 
 \begin{itemize}
-\item Certaines fonctions, dites
-  \emph{génériques}\index{fonction!générique}, se comportent
-  différemment selon la classe de l'objet donné en argument. Les
-  fonctions génériques les plus fréquemment employées sont
-  \fonction{print}, \fonction{plot} et \fonction{summary}.
+\item Certaines fonctions, dites \emph{fonctions
+    génériques}\index{fonction!générique}, se comportent différemment
+  selon la classe de l'objet donné en argument. Les fonctions
+  génériques les plus fréquemment employées sont \fonction{print},
+  \fonction{plot} et \fonction{summary}.
 \item Une fonction générique possède une \emph{méthode} correspondant
   à chaque classe qu'elle reconnaît et, généralement, une méthode
   \code{default} pour les autres objets. La liste des méthodes
@@ -402,8 +407,8 @@ rpareto <- function(n, alpha, lambda)
     lambda * (runif(n)^(-1/alpha) - 1)
 \end{verbatim}
   \begin{enumerate}
-  \item Écrire une expression R permettant de simuler, en utilisant la
-    fonction \code{rpareto} ci-dessus, cinq échantillons aléatoires de
+  \item Écrire une expression R utilisant la fonction \code{rpareto}
+    ci-dessus qui permet de simuler cinq échantillons aléatoires de
     tailles 100, 150, 200, 250 et 300 d'une loi de Pareto avec $\alpha
     = 2$ et $\lambda = \nombre{5000}$. Les échantillons aléatoires
     devraient être stockés dans une liste.

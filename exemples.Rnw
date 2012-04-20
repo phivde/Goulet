@@ -446,10 +446,11 @@ exp(-lambda) * sum(lambda^(0:x)/gamma(1 + 0:x))
 
 \begin{exercice}
   \begin{enumerate}
+    \sloppy
   \item Calculer l'espérance d'une variable aléatoire $X$ dont le
-    support est $x = 1, 10, 100, ..., \nombre{1000000}$ et les
-    probabilités correspondantes sont $\frac{1}{28}, \frac{2}{28},
-    ..., \frac{7}{28}$, dans l'ordre.
+    support est $x = 1, 10, 100, \dots, \nombre{1000000}$ et les
+    probabilités correspondantes sont $\frac{1}{28},
+    \frac{2}{28}, \dots, \frac{7}{28}$, dans l'ordre.
   \item Calculer la variance de la variable aléatoire $X$ définie en
     a).
   \end{enumerate}

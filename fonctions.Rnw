@@ -201,15 +201,16 @@ quelques trucs que nous utilisons régulièrement.
   Attention, cependant: une erreur peut prendre sa source plusieurs
   lignes avant celle que l'interprète pointe comme faisant problème.
 \item Les messages d'erreur de l'interprète ne sont pas toujours d'un
-  grand secours\dots tant que l'on n'a pas appris à les reconnaître.
+  grand secours{\dots} tant que l'on n'a pas appris à les reconnaître.
   Un exemple de message d'erreur fréquemment rencontré:
   \begin{quote}
     \code{valeur manquante là où TRUE / FALSE est requis}
   \end{quote}
-  Cela provient généralement d'une commande \fonction{if} dont
+  Cette erreur provient généralement d'une commande \fonction{if} dont
   l'argument vaut \objet{NA} plutôt que \objet{TRUE} ou \objet{FALSE}.
   La raison: des valeurs manquantes se sont faufilées dans les
-  calculs à notre insu.
+  calculs à notre insu jusqu'à l'instructions \fonction{if}, qui
+  n'accepte que des valeurs booléennes en arguement.
 \item Lorsqu'une fonction ne retourne pas le résultat attendu, placer
   des commandes \fonction{print} à l'intérieur de la fonction, de
   façon à pouvoir suivre les valeurs prises par les différentes
@@ -627,10 +628,9 @@ pas le produit matriciel.")
   Vous devez calculer la note finale d'un groupe d'étudiants à partir
   de deux informations:
   \begin{inparaenum}[1)]
-  \item une matrice contenant la note sur 100 de chacun des étudiants
-    à chacune des évaluations, et
-  \item un vecteur contenant la pondération de chacune des
-    évaluations.
+  \item une matrice contenant la note sur 100 des étudiants à chacune
+    des évaluations, et
+  \item un vecteur contenant la pondération des évaluations.
   \end{inparaenum}
   Un de vos collègues a composé la fonction \code{notes.finales}
   ci-dessous afin de faire le calcul de la note finale pour chacun de

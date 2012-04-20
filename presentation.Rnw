@@ -232,7 +232,7 @@ simple raccourci clavier.
   qu'il s'agit d'un logiciel destiné à la création, l'édition et la
   sauvegarde de fichiers textes purs, c'est-à-dire dépourvus
   d'information de présentation et de mise en forme. Les applications
-  Bloc-notes sous Windows ou TextEdit sous OS~X sont deux exemples
+  Bloc-notes sous Windows ou TextEdit sous Mac OS~X sont deux exemples
   d'éditeurs de texte simples.
 \item Un éditeur de texte pour programmeur saura en plus reconnaître
   la syntaxe d'un langage de programmation et assister à sa mise en
@@ -328,7 +328,7 @@ Dans ses grandes lignes, toute session de travail avec R se réduit aux
 
 
 \section{Répertoire de travail}
-\index{répertoire de travail|(}
+\index{repertoire@répertoire de travail|(}
 \index{dossier de travail|see{répertoire de travail}}
 \label{presentation:workspace}
 

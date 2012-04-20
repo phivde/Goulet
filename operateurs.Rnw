@@ -183,10 +183,10 @@ matrix(1:6, nrow = 2, ncol = 3, byrow = TRUE,
 \section{Quelques fonctions utiles}
 \label{operateurs:fonctionsutiles}
 
-Le langage R compte un très grand nombre (quelques milliers!) de
-fonctions internes. Cette section en présente quelques-unes seulement,
-les fonctions de base les plus souvent utilisées pour programmer en R
-et pour manipuler des données.
+Le langage R compte un très grand nombre (des milliers!) de fonctions
+internes. Cette section en présente quelques-unes seulement, les
+fonctions de base les plus souvent utilisées pour programmer en R et
+pour manipuler des données.
 
 Pour chaque fonction présentée dans les sections suivantes, on fournit
 un ou deux exemples d'utilisation. Ces exemples sont souvent loin de
@@ -328,7 +328,7 @@ floor(x)
 ceiling(x)
 @
 
-\item[\Fonction{trunc}] troncature vers zéro de l'argument; différent de
+\item[\Fonction{trunc}] troncature vers zéro; différent de
   \texttt{floor} pour les nombres négatifs
 <<echo=TRUE>>=
 trunc(x)
@@ -478,19 +478,27 @@ t(x)
 <<echo=TRUE>>=
 det(x)
 @
-\item[\Fonction{solve}] avec un seul argument (une matrice carrée):
-  inverse\index{matrice!inverse} d'une matrice; avec deux arguments
-  (une matrice carrée et un vecteur): solution du système d'équations
-  linéaires $\mat{A} \mat{x} = \mat{b}$
+\item[\Fonction{solve}]
+  \begin{inparaenum}[1)]
+  \item avec un seul argument (une matrice carrée):
+    inverse\index{matrice!inverse} d'une matrice;
+  \item avec deux arguments (une matrice carrée et un vecteur):
+    solution du système d'équations linéaires $\mat{A} \mat{x} =
+    \mat{b}$
+  \end{inparaenum}
+
 <<echo=TRUE>>=
 solve(x)
 solve(x, c(1, 2))
 @
-\item[\Fonction{diag}] avec une matrice en argument: diagonale de la
-  matrice; avec un vecteur en argument: matrice
-  diagonale\index{matrice!diagonale} formée avec le vecteur; avec un
-  scalaire $p$ en argument: matrice identité\index{matrice!identité}
-  $p \times p$
+\item[\Fonction{diag}]
+  \begin{inparaenum}[1)]
+  \item avec une matrice en argument: diagonale de la matrice;
+  \item avec un vecteur en argument: matrice
+    diagonale\index{matrice!diagonale} formée avec le vecteur;
+  \item avec un scalaire $p$ en argument: matrice
+    identité\index{matrice!identité} $p \times p$
+  \end{inparaenum}
 <<echo=TRUE>>=
 diag(x)
 @
@@ -933,12 +941,13 @@ mat[rowMeans(mat) > 7,]
 
 \begin{exercice}
   On vous donne la liste et la date des 31 meilleurs temps enregistrés
-  au 100~mètres homme entre 1964 et 2005:
+  au 100 mètres homme entre 1964 et 2005:
 <<echo=TRUE>>=
-temps <- c(10.06, 10.03, 10.02,  9.95, 10.04, 10.07, 10.08, 10.05,
-           9.98, 10.09, 10.01, 10.00,  9.97,  9.93,  9.96,  9.99,
-           9.92,  9.94,  9.90,  9.86,  9.88,  9.87,  9.85,  9.91,
-           9.84,  9.89,  9.79,  9.80,  9.82,  9.78,  9.77)
+temps <- c(10.06, 10.03, 10.02,  9.95, 10.04, 10.07, 10.08,
+           10.05, 9.98, 10.09, 10.01, 10.00,  9.97,  9.93,
+           9.96,  9.99, 9.92,  9.94,  9.90,  9.86,  9.88,
+           9.87,  9.85,  9.91, 9.84,  9.89,  9.79,  9.80,
+           9.82,  9.78,  9.77)
 names(temps) <- c("1964-10-15", "1968-06-20", "1968-10-13",
                   "1968-10-14", "1968-10-14", "1968-10-14",
                   "1968-10-14", "1975-08-20", "1977-08-11",

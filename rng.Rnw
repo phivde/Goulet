@@ -72,7 +72,12 @@ consulter les rubriques d'aide des fonctions \code{.Random.seed} et
 \label{rng:exercices}
 
 \Opensolutionfile{reponses}[reponses-rng]
-\Writetofile{reponses}{\protect\section*{Chapitre \protect\ref{rng}}}
+
+\begin{Filesave}{reponses}
+\section*{Chapitre \ref{rng}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref{rng}}
+
+\end{Filesave}
 
 \begin{exercice}
   La loi log-normale\index{distribution!log-normale} est obtenue par

@@ -85,8 +85,12 @@ consulter la \emph{CRAN Task View} consacrée à l'optimisation:
 \label{optimisation:exercices}
 
 \Opensolutionfile{reponses}[reponses-optimisation]
-\Writetofile{reponses}{\protect\section*{Chapitre \protect\ref{optimisation}}}
 
+\begin{Filesave}{reponses}
+\section*{Chapitre \ref{optimisation}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref{optimisation}}
+
+\end{Filesave}
 
 \begin{exercice}
   Trouver la solution des équations suivantes à l'aide des fonctions R
@@ -197,7 +201,9 @@ f <- function(par, x) -sum(log(dpareto(x, par[1], par[2])))
 optim(c(1, 1000), f, x = x)
 @
     ou, en utilisant le truc du logarithme des paramètres expliqué
-    dans les exemples pour éviter les soucis de convergence:
+    dans le code informatique de la
+    section~\ref{optimisation:exemples} pour éviter les soucis
+    de convergence:
 <<echo=TRUE,eval=FALSE>>=
 dpareto <- function(x, logAlpha, logLambda)
 {

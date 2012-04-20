@@ -275,7 +275,6 @@ figure~\ref{fig:planification:lapply}:
 <<echo=TRUE>>=
 simul2(10000, 100, 0)
 @
-
 Il est généralement plus facile de déboguer le code avec cette
 approche puisque l'on peut rapidement circonscrire un éventuel
 problème à \code{fun1} ou \code{simul2}.
@@ -361,11 +360,12 @@ exécutera alors une simulation complète.
 \section{Exécution en lot}
 \label{planification:batch}
 
-Les utilisateurs plus avancés pourront vouloir exécuter R en lot
-(\emph{batch}) pour accélérer le traitement d'une simulation. Dans ce
-mode, aucune interface graphique n'est démarrée et tous les résultats
-sont redirigés vers un fichier pour consultation ultérieure. Pour les
-simulations demandant un long temps de calcul, c'est très pratique.
+Les utilisateurs plus avancés pourront vouloir exécuter leur
+simulation R en lot (\emph{batch}) pour en accélérer le traitement.
+Dans ce mode, aucune interface graphique n'est démarrée et tous les
+résultats sont redirigés vers un fichier pour consultation ultérieure.
+Pour les simulations demandant un long temps de calcul, c'est très
+pratique.
 
 On exécute R en lot depuis la ligne de commande (Invite de commande
 sous Windows, Terminal sous OS~X ou Linux). Une fois placé dans le
