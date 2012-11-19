@@ -45,7 +45,7 @@ L'un de ces modes est ESS (\emph{Emacs Speaks Statistics}).
 \item ESS permet d'interagir avec des logiciels statistiques (en
   particulier R, S+ et SAS) directement depuis Emacs.
 \item Quelques-uns des développeurs de ESS sont aussi des développeurs
-  de R, dont la grande compatibilité entre les deux logiciels.
+  de R, d'où la grande compatibilité entre les deux logiciels.
 \item Lorsque ESS est installé, le mode est activé automatiquement en
   ouvrant dans Emacs un fichier dont le nom se termine par l'extension
   \code{.R}.
@@ -75,7 +75,7 @@ sur une touche. La fenêtre Emacs se divise en quatre zone principales
 \item tout au haut de la fenêtre (ou de l'écran sous OS~X), on trouve
   l'habituelle barre de menu dont le contenu change selon le mode dans
   lequel se trouve Emacs;
-\item l'essentiel de la fenêtre set à afficher un \emph{buffer}, soit
+\item l'essentiel de la fenêtre sert à afficher un \emph{buffer}, soit
   le contenu d'un fichier ouvert ou l'invite de commande d'un
   programme externe;
 \item la ligne de mode est le séparateur horizontal contenant diverses
@@ -302,8 +302,29 @@ raccourci clavier.
 \subsection{Manipulation de fichiers de script dans le mode ESS}
 \label{emacs+ess:commandes:script}
 
+Dans les versions récentes de ESS (à partir de 12.09 environ), la
+manipulation des fichiers de script a été passablement simplifiée par
+l'introduction de fonctions «intelligentes» qui s'adaptent à la
+situation. Les deux principales commandes à connaître sont les
+suivantes:
+
 \begin{ttscript}{C-x C-w}
   \raggedright
+\item[\ess{C-RET}] évaluer dans le processus R la ligne sous le
+  curseur ou la région sélectionnée, puis déplacer le curseur à la
+  prochaine expression (\code{ess-eval-region-or-line-and-step})
+\item[\ess{C-c C-c}] évaluer dans le processus R la région sélectionnée, la
+  fonction ou le paragraphe dans lequel se trouve le curseur, puis
+  déplacer le curseur à la prochaine expression
+  (\code{ess-eval-region-or-function-or-paragraph-and-step})
+\end{ttscript}
+Quelques autres fonctions utiles:
+\begin{ttscript}{C-x C-w}
+  \raggedright
+\item[\ess{C-c C-v}] aide sur une commande R
+  (\code{ess-display-help-on-object})
+\item[\ess{C-c C-l}] évaluer le code du fichier courant en entier dans
+  le processus R (\code{ess-load-file})
 \item[\ess{C-c C-n}] évaluer la ligne sous le curseur dans le
   processus R, puis déplacer le curseur à la prochaine expression
   (\code{ess-eval-line-and-step})
@@ -311,10 +332,6 @@ raccourci clavier.
   R (\code{ess-eval-region})
 \item[\ess{C-c C-f}] évaluer le code de la fonction courante dans
   le processus R (\code{ess-eval-function})
-\item[\ess{C-c C-l}] évaluer le code du fichier courant en entier dans
-  le processus R (\code{ess-load-file})
-\item[\ess{C-c C-v}] aide sur une commande R
-  (\code{ess-display-help-on-object})
 \end{ttscript}
 
 \subsection{Interaction avec l'invite de commande R}
@@ -341,15 +358,21 @@ raccourci clavier.
 
 \begin{ttscript}{m, m}
   \raggedright
-\item[\ess{h}] ouvrir une nouvelle rubrique d'aide, par défaut pour le
-  mot se trouvant sous le curseur (\code{ess-display-help-on-object})
 \item[\ess{n}, \ess{p}] aller à la section suivante (\code{n}) ou
   précédente (\code{p}) de la rubrique
   (\code{ess-skip-to-next-section},
   \code{ess-skip-to-previous-section})
+\item[\ess{s a}] aller à la section de la liste des arguments \emph{(Arguments)}
+\item[\ess{s D}] aller à la section des détails sur la fonction \emph{(Details)}
+\item[\ess{s v}] aller à la section sur la valeur retournée par la
+  fonction \emph{(Value)}
+\item[\ess{s s}] aller à la section des fonctions apparentée \emph{(See Also)}
+\item[\ess{s e}] aller à la section des exemples \emph{(Examples)}
 \item[\ess{l}] évaluer la ligne sous le curseur; pratique pour
   exécuter les exemples (\code{ess-eval-line-and-step})
 \item[\ess{r}] évaluer la région sélectionnée (\code{ess-eval-region})
+\item[\ess{h}] ouvrir une nouvelle rubrique d'aide, par défaut pour le
+  mot se trouvant sous le curseur (\code{ess-display-help-on-object})
 \item[\ess{q}] retourner au processus ESS en laissant la rubrique
   d'aide visible (\code{ess-switch-to-end-of-ESS})
 \item[\ess{x}] fermer la rubrique d'aide et retourner au processus ESS
@@ -397,9 +420,10 @@ compléter chacune dans Emacs avec le mode ESS.
   trouvant dans le fichier de script. Les commandes les plus utilisées
   sont alors
   \begin{quote}
-    \emacs{C-x o } pour se déplacer d'une fenêtre à l'autre; \\
-    \ess{C-c C-n } pour exécuter une ligne du fichier de script; \\
-    \ess{C-c C-e } pour replacer la ligne de commande au bas de la
+    \ess{C-RET}\ pour exécuter une ligne du fichier de script; \\
+    \ess{C-c C-c}\ pour exécuter un paragraphe du fichier de script; \\
+    \emacs{C-x o}\ pour se déplacer d'une fenêtre à l'autre; \\
+    \ess{C-c C-e}\ pour replacer la ligne de commande au bas de la
     fenêtre.
   \end{quote}
 \item Sauvegarder le fichier de script:
