@@ -6,14 +6,13 @@ options(width = 52)
 @
 
 \begin{objectifs}
-\item Savoir passer des valeurs à une fonction via l’argument `\code{...}’.
-\item Savoir effectuer des sommaires sur des tableaux à l’aide de la
-  fonction \code{apply}.
-\item Savoir réduire des listes avec les fonctions \code{lapply},
-  \code{sapply} et \code{mapply}; connaître les différences entre ces
-  fonctions.
-\item Comprendre comment la classe d’un objet peut modifier le
-  traitement qu’en feront les fonctions génériques.
+\item Passer des valeurs à une fonction via l'argument `\code{...}’.
+\item Effectuer des sommaires sur des tableaux à l'aide de la fonction
+  \code{apply}.
+\item Réduire des listes avec les fonctions \code{lapply},
+  \code{sapply} et \code{mapply}; comparer l'effet de ces fonctions.
+\item Concevoir comment la classe d'un objet peut modifier le
+  traitement qu'en feront les fonctions génériques.
 \end{objectifs}
 
 Ce chapitre traite de divers concepts et fonctions un peu plus avancés

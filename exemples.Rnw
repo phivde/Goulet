@@ -10,9 +10,9 @@ options(width = 50)
 \begin{objectifs}
 \item Mettre en pratique les connaissances acquises dans les chapitres
   précédents.
-\item Savoir tirer profit de l’arithmétique vectorielle de R pour
+\item Tirer profit de l'arithmétique vectorielle de R pour
   effectuer des calculs complexes sans boucles.
-\item Utiliser l’initialisation de vecteurs et leur indiçage de
+\item Utiliser l'initialisation de vecteurs et leur indiçage de
   manière à réduire le temps de calcul.
 \end{objectifs}
 

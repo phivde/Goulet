@@ -6,21 +6,21 @@ options(width = 52)
 @
 
 \begin{objectifs}
-\item Connaître les règles de l'arithmétique vectorielle
-  caractéristique du langage R.
-\item Savoir faire l’appel d’une fonction dans R; comprendre comment
-  les arguments sont passés à la fonction et le traitement des valeurs
-  par défaut.
-\item Connaître et savoir utiliser les opérateurs R les plus courants,
-  notamment pour le traitement des vecteurs, le calcul de sommaires et
-  la manipulation des matrices et tableaux
-\item Savoir utiliser la fonction \code{if} pour l’exécution
-  conditionnelle de commandes R.
+\item Tirer profit de l'arithmétique vectorielle caractéristique du
+  langage R dans les calculs.
+\item Utiliser les opérateurs R les plus courants, notamment pour le
+  traitement des vecteurs, le calcul de sommaires et la manipulation
+  des matrices et tableaux.
+\item Faire l'appel d’une fonction dans R; concevoir comment les
+  arguments sont passés à la fonction et le traitement des valeurs par
+  défaut.
+\item Utiliser la fonction \code{if} pour l'exécution conditionnelle
+  de commandes R.
 \item Distinguer la construction \code{if() ... else} de la fonction
   \code{ifelse}.
-\item Savoir faire des boucles en R.
-\item Savoir choisir entre les opérateurs \code{for}, \code{while} et
-  \texttt{repeat} lors de la construction d’une boucle R.
+\item Faire des boucles en R.
+\item Choisir entre les opérateurs \code{for}, \code{while} et
+  \texttt{repeat} lors de la construction d'une boucle R.
 \end{objectifs}
 
 Ce chapitre présente les principaux opérateurs arithmétiques,

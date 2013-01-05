@@ -6,10 +6,11 @@ options(width = 52)
 @
 
 \begin{objectifs}
-\item Savoir définir une fonction R, ses divers arguments et, le cas
+\item Définir une fonction R, ses divers arguments et, le cas
   échéant, les valeurs par défaut de ceux-ci.
-\item Être en mesure de déboguer une fonction R.
-\item Adopter un style de codage correspondant à la pratique en R.
+\item Déboguer une fonction R.
+\item Adopter un style de codage correspondant à la pratique reconnue
+  en R.
 \end{objectifs}
 
 La possibilité pour l'usager de définir facilement et rapidement de

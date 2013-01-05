@@ -6,18 +6,15 @@ options(width=52)
 @
 
 \begin{objectifs}
-\item Connaître la syntaxe et la sémantique du langage R.
-\item Comprendre la notion d’objet et connaître les principaux types
-  de données disponibles dans R.
-\item Comprendre et savoir tirer profit de l’arithmétique vectorielle.
-\item Comprendre la différence entre les divers modes d’objets (en
-  particulier \code{numeric}, \code{character} et \code{logical}) et
-  la conversion automatique de l’un à l’autre.
-\item Comprendre la différence entre un vecteur, une matrice, un
-  tableau, une liste et un \emph{data frame} et savoir créer ces
-  divers types d’objets.
-\item Savoir extraire des données d’un objet ou y affecter de
-  nouvelles valeurs à l’aide des diverses méthodes d’indiçage.
+\item Écrire et interpréter la syntaxe et la sémantique du langage R.
+\item Identifier les principaux types de données disponibles dans R.
+\item Utiliser les divers modes d'objets (en particulier
+  \code{numeric}, \code{character} et \code{logical}) et la conversion
+  automatique de l'un à l'autre.
+\item Créer et manipuler des vecteurs, matrices, tableaux, listes et
+  \emph{data frames}.
+\item Extraire des données d'un objet ou y affecter de
+  nouvelles valeurs à l'aide des diverses méthodes d'indiçage.
 \end{objectifs}
 
 Avant de pouvoir utiliser un langage de programmation, il faut en

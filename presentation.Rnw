@@ -5,16 +5,15 @@
 options(width=52)
 @
 
-
 \begin{objectifs}
+\item Comprendre ce qu'est un langage de programmation interprété.
 \item Connaître la provenance du langage R et les principes ayant
   guidé son développement.
-\item Comprendre ce qu’est un langage de programmation interprété.
-\item Savoir démarrer une session R et exécuter des commandes simples.
-\item Comprendre l’utilité des fichiers de script R et savoir les
-  utiliser de manière interactive.
-\item Savoir créer, modifier et sauvegarder ses propres fichiers de
-  script R.
+\item Mettre en place sur son poste de travail un environnement de
+  développement en R.
+\item Démarrer une session R et exécuter des commandes simples.
+\item Utiliser des fichiers de script R de manière interactive.
+\item Créer, modifier et sauvegarder ses propres fichiers de script R.
 \end{objectifs}
 
 \section{Bref historique}
