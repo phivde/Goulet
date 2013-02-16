@@ -139,8 +139,10 @@ x <- c(50, 30, 10, 20, 60, 30, 20, 40)  # vecteur non ordonné
 
 ## Séquences de nombres.
 seq(from = 1, to = 10)       # équivalent à 1:10
+seq_len(10)                  # plus rapide que 'seq'
 seq(-10, 10, length = 50)    # incrément automatique
 seq(-2, by = 0.5, along = x) # même longueur que 'x'
+seq_along(x)                 # plus rapide que 'seq'
 
 ## Répétition de nombres ou de vecteurs complets.
 rep(1, 10)                  # utilisation de base

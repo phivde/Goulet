@@ -461,9 +461,10 @@ supporte tout naturellement et de manière intuitive --- à une
 exception près, comme nous le verrons --- les matrices et, plus
 généralement, les tableaux à plusieurs dimensions.
 
-Les matrices et tableaux ne sont rien d'autre que des vecteurs dotés
-d'un attribut \attribut{dim}. Ces objets sont donc stockés, et peuvent
-être manipulés, exactement comme des vecteurs simples.
+Les \capsule{matrices et tableaux} ne sont rien d'autre que des
+vecteurs dotés d'un attribut \attribut{dim}. Ces objets sont donc
+stockés, et peuvent être manipulés, exactement comme des vecteurs
+simples.
 
 \begin{itemize}
 \item Une matrice est un vecteur avec un attribut \attribut{dim} de

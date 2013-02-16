@@ -65,10 +65,11 @@ projet R \citep{Chambers:R:2008}.
 \section{Description sommaire de R}
 \label{presentation:description}
 
-R est un environnement intégré de manipulation de données, de
-calcul et de préparation de graphiques. Toutefois, ce n'est pas
-seulement un «autre» environnement statistique (comme SPSS ou SAS, par
-exemple), mais aussi un langage de programmation complet et autonome.
+\ul{R}\marginpar{\video} est un environnement intégré de manipulation
+de données, de calcul et de préparation de graphiques. Toutefois, ce
+n'est pas seulement un «autre» environnement statistique (comme SPSS
+ou SAS, par exemple), mais aussi un langage de programmation complet
+et autonome.
 
 Tel que mentionné précédemment, le R est un langage principalement
 inspiré du S et de Scheme\index{Scheme} \citep{Sussman:scheme:1996}.

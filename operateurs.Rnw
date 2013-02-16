@@ -202,11 +202,17 @@ connaître toutes les options des fonctions.
 %%% plus compacts.
 \fvset{listparameters={\setlength{\topsep}{-0.5ex}}}
 \renewenvironment{Schunk}{\setlength{\topskip}{-\parskip}}{}
-\begin{ttscript}{unique}
+\begin{ttscript}{uniques}
 \item[\Fonction{seq}] génération de suites de nombres\index{suite de
     nombres}
 <<echo=TRUE>>=
 seq(1, 9, by = 2)
+@
+\item[\Fonction{\protect seq\_len}] version plus rapide de \code{seq} pour
+  générer la suite des nombres de 1 à la valeur de
+  l'argument\index{suite de nombres}
+<<echo=TRUE>>=
+seq_len(10)
 @
 \item[\Fonction{rep}] répétition\index{repetition@répétition de valeurs} de
   valeurs ou de vecteurs
@@ -218,13 +224,15 @@ rep(2, 10)
 <<echo=TRUE>>=
 sort(c(4, -1, 2, 6))
 @
-\item[\Fonction{order}] ordre d'extraction des éléments d'un vecteur
-  pour les placer en ordre croissant ou décroissant
-<<echo=TRUE>>=
-order(c(4, -1, 2, 6))
-@
 \item[\Fonction{rank}] rang\index{rang} des éléments d'un vecteur dans
   l'ordre croissant ou décroissant
+<<echo=TRUE>>=
+rank(c(4, -1, 2, 6))
+@
+\item[\code{\ul{order}}] \Indexfonction{order}
+  ordre\index{ordre}\marginpar{\video} d'extraction des
+  éléments d'un vecteur pour les placer en ordre croissant ou
+  décroissant
 <<echo=TRUE>>=
 order(c(4, -1, 2, 6))
 @
@@ -510,10 +518,11 @@ diag(x)
 \subsection{Produit extérieur}
 \index{produit!extérieur}
 
-Le produit extérieur n'est pas la fonction la plus intuitive à
-utiliser, mais s'avère extrêmement utile pour faire plusieurs
-opérations en un seul appel de fonction tout en évitant les boucles.
-La syntaxe de la fonction \Fonction{outer} est
+La \ul{fonction \texttt{outer}}\marginpar{\video}\Indexfonction{outer}
+calcule le produit extérieur entre deux vecteurs. Ce n'est pas la
+fonction la plus intuitive à utiliser, mais elle s'avère extrêmement
+utile pour faire plusieurs opérations en une seule expression tout en
+évitant les boucles. La syntaxe \fonction{outer} est
 \begin{quote}
   \code{outer(X, Y, FUN)}
 \end{quote}
