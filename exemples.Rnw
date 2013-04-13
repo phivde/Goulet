@@ -329,11 +329,12 @@ seul biscuit. Arrivé au second biscuit, on constate que le contenant
 n'est pas assez grand, alors on sort un plat pouvant contenir deux
 biscuits, on change le premier biscuit de plat et on y range aussi le
 second biscuit. Arrivé au troisième biscuit, le petit manège
-recommence, et ainsi de suite jusqu'à ce que le plateau de biscuit
-soit épuisé.
+recommence, et ainsi de suite jusqu'à ce que le plateau de biscuits
+soit épuisé. C'est ce que nous nommerons, non sans un sourire en coin,
+le Syndrôme de la plaque à biscuits{\texttrademark}.
 
-C'est exactement ce qui se passe dans la mémoire de l'ordinateur avec
-la procédure ci-dessus, l'odeur des bons biscuits chauds en moins. En
+Le petit manège décrit ci-dessus se reproduit à l'identique dans la
+mémoire de l'ordinateur, l'odeur des bons biscuits chauds en moins. En
 effet, le système doit constamment allouer de la nouvelle mémoire et
 déplacer les termes déjà sauvegardés au fur et à mesure que le vecteur
 \code{x} grandit. On aura compris qu'une telle façon de faire est à
