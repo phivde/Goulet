@@ -102,7 +102,8 @@ fp3(function(x) 3^(-x), start = 0.5) # avec une fonction anonyme
 ## code. Avantage d'avoir des fonctions: elles sont valides
 ## pour tout 'n' > 2.
 ##
-## D'abord la version inefficace.
+## D'abord la version inefficace parce qu'elle souffre du
+## Syndrôme de la plaque à biscuits décrit au chapitre 4.
 fib1 <- function(n)
 {
     res <- c(0, 1)
@@ -113,7 +114,9 @@ fib1 <- function(n)
 fib1(10)
 fib1(20)
 
-## Puis la version supposéement plus efficace.
+## Puis la version qui devrait s'avérer plus efficace parce
+## que l'on initialise d'entrée de jeu un contenant de la
+## bonne longueur qu'on remplit par la suite.
 fib2 <- function(n)
 {
     res <- numeric(n)      # contenant créé
@@ -129,7 +132,7 @@ fib2(20)
 ## requis pour générer une longue suite de Fibonacci avec les
 ## deux fonctions.
 system.time(fib1(10000))   # version inefficace
-system.time(fib2(10000))   # version efficace
+system.time(fib2(10000))   # version efficace, ~5x plus rapide
 
 ## Variation sur un même thème: une fonction pour calculer non
 ## pas les 'n' premières valeurs de la suite de Fibonacci,
