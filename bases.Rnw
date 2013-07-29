@@ -115,7 +115,7 @@ entourant d'accolades \Fonction{\{~\}}.
 }
 @
 \item Les règles ci-dessus joueront un rôle important dans la
-  composition de fonctions; voir le chapitre \ref{fonctions}.
+  composition de fonctions; voir le \autoref{fonctions}.
 \item Comme on peut le voir ci-dessus, lorsqu'une commande n'est pas
   complète à la fin de la ligne, l'invite de commande de R change de
   \verb*|> | à \verb*|+ | pour nous inciter à compléter notre commande.
@@ -215,8 +215,7 @@ length(v)
 \label{bases:objets:mode}
 
 Le mode\Index{mode} prescrit ce qu'un objet peut contenir. À ce titre,
-un objet ne peut avoir qu'un seul mode. Le tableau
-\ref{tab:bases:modes} contient la liste des principaux modes
+un objet ne peut avoir qu'un seul mode. Le \autoref{tab:bases:modes} contient la liste des principaux modes
 disponibles en R. À chacun de ces modes correspond une fonction du
 même nom servant à créer un objet de ce mode.
 
@@ -247,7 +246,7 @@ même nom servant à créer un objet de ce mode.
 \item En revanche, les objets de mode \code{"list"} ou
   \code{"expression"} sont des objets \emph{récursifs} qui peuvent
   contenir d'autres objets. Par exemple, une liste peut contenir une
-  ou plusieurs autres listes; voir la section~\ref{bases:listes} pour
+  ou plusieurs autres listes; voir la \autoref{bases:listes} pour
   plus de détails.
 \item La fonction \Fonction{typeof} permet d'obtenir une description
   plus précise de la représentation interne d'un objet (c'est-à-dire
@@ -358,8 +357,7 @@ représenter ces valeurs.
 
 Les attributs\Index{attribut} d'un objet sont des éléments
 d'information additionnels liés à cet objet. La liste des attributs
-les plus fréquemment rencontrés se trouve au tableau
-\ref{tab:attributs}. Pour chaque attribut, il existe une fonction du
+les plus fréquemment rencontrés se trouve au \autoref{tab:attributs}. Pour chaque attribut, il existe une fonction du
 même nom servant à extraire l'attribut correspondant d'un objet.
 
 \begin{table}
@@ -418,7 +416,7 @@ En R, à toutes fins pratiques, \emph{tout} est un
 vecteur\index{vecteur}. Contrairement à certains autres langages de
 programmation, il n'y a pas de notion de scalaire en R; un scalaire
 est simplement un vecteur de longueur 1. Comme nous le verrons au
-chapitre~\ref{operateurs}, le vecteur est l'unité de base dans les
+\autoref{operateurs}, le vecteur est l'unité de base dans les
 calculs.
 
 \begin{itemize}
@@ -448,7 +446,7 @@ v
 v[3]
 v["c"]
 @
-  La section \ref{bases:indicage} traite plus en détail de l'indiçage des
+  La \autoref{bases:indicage} traite plus en détail de l'indiçage des
   vecteurs et des matrices.
 \end{itemize}
 
@@ -512,7 +510,7 @@ tableau de dimensions $3 \times 4 \times 5$.
 \item Si l'on ajoute une quatrième dimension, cela revient à aligner
   des prismes les uns derrière les autres, et ainsi de suite.
 \end{itemize}
-La figure~\ref{fig:bases:tableaux} fournit une représentation schématique
+La \autoref{fig:bases:tableaux} fournit une représentation schématique
 des tableaux à trois et quatre dimensions.
 
 \begin{figure}[t]
@@ -592,7 +590,7 @@ m[2, ]
 @
 \item Les idées sont les mêmes pour les tableaux.
 \item Pour le reste, les règles d'indiçage de vecteurs exposées à la
-  section~\ref{bases:indicage} s'appliquent à chaque position de
+  \autoref{bases:indicage} s'appliquent à chaque position de
   l'indice d'une matrice ou d'un tableau.
 \end{itemize}
 
@@ -786,7 +784,7 @@ x[]
 \Opensolutionfile{reponses}[reponses-bases]
 
 \begin{Filesave}{reponses}
-\section*{Chapitre \ref{bases}}
+\section*{Chapitre \ref*{bases}}
 \addcontentsline{toc}{section}{Chapitre \protect\ref{bases}}
 
 \end{Filesave}

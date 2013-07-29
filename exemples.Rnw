@@ -289,7 +289,7 @@ i
 <<4-2>>=
 (1 - (1 + i)^(-10))/i
 @ %
-Nous verrons au chapitre \ref{fonctions} comment créer une fonction à
+Nous verrons au \autoref{fonctions} comment créer une fonction à
 partir de ce code.
 
 
@@ -353,7 +353,7 @@ for (i in 3:n) x[i] <- x[i - 1] + x[i - 2]
 x
 @
 
-Dans les exemples du chapitre~\ref{fonctions}, nous composeront des
+Dans les exemples du \autoref{fonctions}, nous composeront des
 fonctions avec ces deux exemples et nous comparerons les temps de
 calcul pour $n$ grand.
 
@@ -365,7 +365,7 @@ calcul pour $n$ grand.
 \Opensolutionfile{reponses}[reponses-exemples]
 
 \begin{Filesave}{reponses}
-\section*{Chapitre \ref{exemples}}
+\section*{Chapitre \ref*{exemples}}
 \addcontentsline{toc}{section}{Chapitre \protect\ref{exemples}}
 
 \end{Filesave}
@@ -419,8 +419,7 @@ sum(x * w)/sum(w)
   \begin{equation*}
     \frac{n}{\D \frac{1}{x_1} + \dots + \frac{1}{x_n}}.
   \end{equation*}
-  Tester l'expression avec les valeurs de l'exercice
-  \ref{exemples}.\ref{exercice:exemples:moyennes}.
+  Tester l'expression avec les valeurs de l'\autoref{exercice:exemples:moyennes}.
   \begin{rep}
 <<echo=TRUE,eval=FALSE>>=
 1/mean(1/x)
@@ -545,8 +544,7 @@ sum(pmts * v^k)
 
 \begin{exercice}
   \index{valeur présente} Calculer la valeur présente de la séquence
-  de paiements définie à l'exercice
-  \ref{exemples}.\ref{exercice:exemples:serie} en supposant que le
+  de paiements définie à l'\autoref{exercice:exemples:serie} en supposant que le
   taux d'intérêt d'actualisation alterne successivement entre 5~\% et
   8~\% chaque année, c'est-à-dire que le taux d'intérêt est de 5~\%,
   8~\%, 5~\%, 8~\%, etc.

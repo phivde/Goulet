@@ -225,7 +225,7 @@ d'une expression.
 <<eval=FALSE>>=
 replicate(10000, fun(...))
 @
-\item L'annexe \ref{planification} présente en détail différentes
+\item L'\autoref{planification} présente en détail différentes
   stratégies --- dont l'utilisation de la fonction \code{replicate}
   --- pour la réalisation d'études de simulation en R.
 \end{itemize}
@@ -278,15 +278,14 @@ methods(plot)
 \Opensolutionfile{reponses}[reponses-avance]
 
 \begin{Filesave}{reponses}
-\section*{Chapitre \ref{avance}}
+\section*{Chapitre \ref*{avance}}
 \addcontentsline{toc}{section}{Chapitre \protect\ref{avance}}
 
 \end{Filesave}
 
 \begin{exercice}
-  \index{moyenne!pondérée} À l'exercice
-  \ref{exemples}.\ref{exercice:exemples:moyennes}, on a calculé la
-  moyenne pondérée d'un vecteur d'observations
+  \index{moyenne!pondérée} À l'\autoref{exercice:exemples:moyennes},
+  on a calculé la moyenne pondérée d'un vecteur d'observations
   \begin{displaymath}
     X_w = \sum_{i = 1}^n \frac{w_i}{w_\pt}\, X_i,
   \end{displaymath}

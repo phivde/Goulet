@@ -123,7 +123,7 @@ les valeurs des trois estimateurs pour chaque simulation. Une fois la
 matrice remplie dans la boucle, il ne reste plus qu'à calculer la
 moyenne et la variance par ligne pour obtenir les résultats souhaités.
 
-La figure~\ref{fig:planification:boucle} présente un exemple de code
+La \autoref{fig:planification:boucle} présente un exemple de code
 adéquat pour réaliser la simulation à l'aide d'une boucle.
 
 \begin{figure}[tp]
@@ -196,10 +196,10 @@ simul1 <- function(nsimul, size, theta)
 \end{figure}
 
 Si l'on souhaite pouvoir exécuter le code de la
-figure~\ref{fig:planification:boucle} facilement à l'aide d'une seule
+\autoref{fig:planification:boucle} facilement à l'aide d'une seule
 expression, il suffit de placer l'ensemble du code dans une fonction.
-La fonction \code{simul1} de la figure~\ref{fig:planification:simul1}
-reprend le code de la figure~\ref{fig:planification:boucle}, sans les
+La fonction \code{simul1} de la \autoref{fig:planification:simul1}
+reprend le code de la \autoref{fig:planification:boucle}, sans les
 commentaires. On a alors:
 
 <<echo=TRUE>>=
@@ -211,7 +211,7 @@ simul1(10000, 100, 0)
 
 On le sait, les boucles sont inefficaces en R. Il est en général plus
 efficace de déléguer les boucles aux fonctions \fonction{lapply} et
-\fonction{sapply} (section~\ref{avance:lapply}). On rappelle que la
+\fonction{sapply} (section \ref*{avance:lapply}). On rappelle que la
 syntaxe de ces fonctions est
 \begin{quote}
   \code{lapply(x, FUN, ...)} \\
@@ -229,7 +229,7 @@ Pour pouvoir utiliser ces fonctions dans le cadre d'une simulation
 comme celle dont il est question ici, il s'agit de définir une
 fonction qui fera tous les calculs pour une simulation, puis de la
 passer à \fonction{sapply} pour obtenir les résultats de $N$
-simulations. La figure~\ref{fig:planification:lapply} présente une
+simulations. La \autoref{fig:planification:lapply} présente une
 première version d'une telle fonction. On remarquera que l'argument
 \code{i} ne joue aucun rôle dans la fonction. Voici un exemple
 d'utilisation pour un petit nombre de simulations (4):
@@ -271,7 +271,7 @@ dans les colonnes de la matrice obtenue avec \code{sapply}.
 
 Pour compléter l'analyse, on englobe le tout dans une fonction
 \code{simul2}, dont le code se trouve à la
-figure~\ref{fig:planification:lapply}:
+\autoref{fig:planification:lapply}:
 <<echo=TRUE>>=
 simul2(10000, 100, 0)
 @
@@ -285,12 +285,12 @@ problème à \code{fun1} ou \code{simul2}.
 
 Une chose manque d'élégance dans la seconde approche: l'obligation
 d'inclure un argument factice dans la fonction \code{fun1}. La
-fonction \fonction{replicate} (section \ref{avance:replicate}) permet
+fonction \fonction{replicate} (section \ref*{avance:replicate}) permet
 toutefois de passer outre cette contrainte. En effet, cette fonction
 exécute un nombre donné de fois une expression quelconque.
 
 Les fonctions \code{fun2} et \code{simul3} de la
-figure~\ref{fig:planification:replicate} sont des versions légèrement
+\autoref{fig:planification:replicate} sont des versions légèrement
 modifiées de \code{fun1} et \code{simul2} pour utilisation avec
 \fonction{replicate}. On a alors
 <<echo=TRUE>>=
@@ -337,7 +337,7 @@ avoir recours à plusieurs fichiers différents. Le présent auteur
 utilise pour sa part un fichier par fonction.
 
 À des fins d'illustration, supposons que l'on utilise l'approche de la
-section~\ref{planification:replicate} avec la fonction
+\autoref{planification:replicate} avec la fonction
 \code{replicate} et que le code des fonctions \code{fun2} et
 \code{simul3} est sauvegardé dans des fichiers \code{fun2.R} et
 \code{simul3.R}, dans l'ordre. Si l'on crée un autre fichier, disons

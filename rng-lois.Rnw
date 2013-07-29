@@ -12,7 +12,7 @@ racine \code{\textit{loi}}, il existe quatre fonctions différentes :
 
 Les différentes lois de probabilité disponibles dans le système R de
 base, leur racine et le nom de leurs paramètres sont rassemblés au
-tableau \ref{tab:rng:lois}. Des packages fournissent des fonctions
+\autoref{tab:rng:lois}. Des packages fournissent des fonctions
 pour d'autres lois dont, entre autres, \pkg{actuar} \citep{actuar} et
 \pkg{SuppDists} \citep{Rpackage:SuppDists}.
 
@@ -68,7 +68,7 @@ pour d'autres lois dont, entre autres, \pkg{actuar} \citep{actuar} et
   \label{tab:rng:lois}
 \end{table}
 
-Toutes les fonctions du tableau \ref{tab:rng:lois} sont vectorielles,
+Toutes les fonctions du \autoref{tab:rng:lois} sont vectorielles,
 c'est-à-dire qu'elles acceptent en argument un vecteur de points où la
 fonction (de densité, de répartition ou de quantile) doit être évaluée
 et même un vecteur de paramètres. Par exemple,

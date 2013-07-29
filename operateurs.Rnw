@@ -81,7 +81,7 @@ taille d'un objet plus court
 \section{Opérateurs}
 \label{operateurs:operateurs}
 
-Le tableau~\ref{tab:operateurs:operateurs} présente les opérateurs
+Le \autoref{tab:operateurs:operateurs} présente les opérateurs
 mathématiques et logiques les plus fréquemment employés, en ordre
 décroissant de priorité des opérations. Le tableau contient également
 les opérateurs d'assignation et d'extraction présentés au chapitre
@@ -129,13 +129,13 @@ et non \verb|4 ^ 3|, alors que \verb|1 - 1 - 1| vaut \verb|-1|, et non
 \index{fonction!appel}
 \label{operateurs:appelfonctions}
 
-Les opérateurs du tableau~\ref{tab:operateurs:operateurs} constituent
+Les opérateurs du \autoref{tab:operateurs:operateurs} constituent
 des raccourcis utiles pour accéder aux fonctions les plus courantes de
 R. Pour toutes les autres, il faut appeler la fonction directement.
 Cette section passe en revue les règles d'appels d'une fonction et la
 façon de spécifier les arguments, qu'il s'agisse d'une fonction
 interne de R ou d'une fonction personnelle (voir le
-chapitre~\ref{fonctions}).
+\autoref{fonctions}).
 
 \begin{itemize}
 \item Il n'y a pas de limite pratique quant au nombre d'arguments que
@@ -191,7 +191,7 @@ pour manipuler des données.
 Pour chaque fonction présentée dans les sections suivantes, on fournit
 un ou deux exemples d'utilisation. Ces exemples sont souvent loin de
 courvrir toutes les utilisations possibles d'une fonction. La
-section~\ref{operateurs:exemples} fournit des exemples additionnels,
+\autoref{operateurs:exemples} fournit des exemples additionnels,
 mais il est recommandé de consulter les diverses rubriques d'aide pour
 connaître toutes les options des fonctions.
 
@@ -466,7 +466,7 @@ nrow(x); ncol(x)
   sommes\index{matrice!sommes par ligne} par ligne et par
   colonne\index{matrice!somme par colonne}, respectivement, des
   éléments d'une matrice; voir aussi la fonction \texttt{apply} à la
-  section \ref{avance:apply}
+  \autoref{avance:apply}
 <<echo=TRUE>>=
 rowSums(x)
 @
@@ -474,7 +474,7 @@ rowSums(x)
   moyennes\index{matrice!moyennes par ligne} par ligne et par
   colonne\index{matrice!moyennes par colonne}, respectivement, des
   éléments d'une matrice; voir aussi la fonction \texttt{apply} à la
-  section \ref{avance:apply}
+  \autoref{avance:apply}
 <<echo=TRUE>>=
 colMeans(x)
 @
@@ -556,7 +556,7 @@ déterminer le flux d'exécution d'un programme: choix entre des blocs
 de code, répétition de commandes ou sortie forcée.
 
 On se contente, ici, de mentionner les structures de contrôle
-disponibles en R. Se reporter à la section~\ref{operateurs:exemples}
+disponibles en R. Se reporter à la \autoref{operateurs:exemples}
 pour des exemples d'utilisation.
 
 \subsection{Exécution conditionnelle}
@@ -599,7 +599,7 @@ parcimonie en R, car elles sont généralement inefficaces. Dans la
 majeure partie des cas, il est possible de vectoriser les calculs pour
 éviter les boucles explicites, ou encore de s'en remettre aux
 fonctions \fonction{outer}, \fonction{apply}, \fonction{lapply}
-\fonction{sapply} et \fonction{mapply} (section \ref{avance:apply})
+\fonction{sapply} et \fonction{mapply} (\autoref{avance:apply})
 pour réaliser les boucles de manière plus efficace.
 
 \begin{struclist}
@@ -663,7 +663,7 @@ cesse de croître.
 
 Le système R rend simple de télécharger et d'installer de nouveaux
 packages avec la fonction \Fonction{install.packages}.
-L'annexe~\ref{packages} explique plus en détails comment gérer sa
+L'\autoref{packages} explique plus en détails comment gérer sa
 bibliothèque personnelle et installer des packages externes.
 
 
@@ -679,7 +679,7 @@ bibliothèque personnelle et installer des packages externes.
 \Opensolutionfile{reponses}[reponses-operateurs]
 
 \begin{Filesave}{reponses}
-\section*{Chapitre \ref{operateurs}}
+\section*{Chapitre \ref*{operateurs}}
 \addcontentsline{toc}{section}{Chapitre \protect\ref{operateurs}}
 
 \end{Filesave}

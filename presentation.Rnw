@@ -115,7 +115,7 @@ particulièrement intéressantes, on note:
 
 R est d'abord et avant tout une application n'offrant qu'une invite de
 commande du type de celle présentée à la
-figure~\ref{fig:presentation:console}. En soi, cela n'est pas si
+\autoref{fig:presentation:console}. En soi, cela n'est pas si
 différent d'un tableur tel que Excel: la zone d'entrée de texte dans
 une cellule n'est rien d'autre qu'une invite de commande\footnote{%
   Merci à Markus Gesmann pour cette observation.}, par ailleurs aux
@@ -138,7 +138,7 @@ capacités d'édition plutôt réduites.
   de fonctionnalités additionnelles pour l'édition de code R.
 \item L'interface graphique de R sous Mac OS~X est la plus élaborée.
   Outre la console présentée à la
-  figure~\ref{fig:presentation:console}, l'application \code{R.app}
+  \autoref{fig:presentation:console}, l'application \code{R.app}
   comporte de nombreuses fonctionnalités, dont un éditeur de code
   assez complet.
 \end{itemize}
@@ -173,7 +173,7 @@ save.image()
 @ %
   Par défaut, l'image est sauvegardée dans un fichier nommé
   \code{.RData} dans le dossier de travail actif (voir la
-  section~\ref{presentation:workspace}) et cette image est
+  \autoref{presentation:workspace}) et cette image est
   automatiquement chargée en mémoire au prochain lancement de
   R, tel qu'indiqué à la fin du message d'accueil:
 \begin{verbatim}
@@ -198,7 +198,7 @@ save.image()
   Avec cette approche, les objets sont créés au besoin en exécutant le
   code des fichiers de script. Comment? Simplement en copiant le code
   du fichier de script et en le collant dans l'invite de commande de
-  R. La figure~\ref{fig:presentation:script} illustre schématiquement
+  R. La \autoref{fig:presentation:script} illustre schématiquement
   ce que le programmeur R a constamment sous les yeux: d'un côté son
   fichier de script et, de l'autre, l'invite de commande R dans
   laquelle son code a été exécuté.
@@ -254,14 +254,14 @@ fonctionnalités que d'autres.
   riche qu'efficace. Entre autres fonctionnalités uniques à cet
   éditeur, le fichier de script et l'invite de commandes R sont
   regroupés dans la même fenêtre, comme on peut le voir à la
-  figure~\ref{fig:presentation:emacs}.
+  \autoref{fig:presentation:emacs}.
 
   \begin{figure}[t]
     \centering
     \includegraphics{emacs-screenshot}
     \caption{Fenêtre de GNU Emacs sous OS~X en mode d'édition de code
       R. Dans la partie du haut, on retrouve le fichier de script de
-      la figure~\ref{fig:presentation:script} et dans la partie du
+      la \autoref{fig:presentation:script} et dans la partie du
       bas, l'invite de commandes R.}
     \label{fig:presentation:emacs}
   \end{figure}
@@ -269,7 +269,7 @@ fonctionnalités que d'autres.
   Emblême du logiciel libre, Emacs est disponible gratuitement et à
   l'identique sur toutes les plateformes supportées par R, dont
   Windows, OS~X et Linux.
-\item Consulter l'annexe~\ref{emacs+ess} pour en savoir plus sur
+\item Consulter l'\autoref{emacs+ess} pour en savoir plus sur
   GNU~Emacs et apprendre les commandes essentielles pour y faire ses
   premiers pas.
 \item Malgré tous ses avantages (ou à cause de ceux-ci), Emacs est un
@@ -305,7 +305,7 @@ Dans ses grandes lignes, toute session de travail avec R se réduit aux
   l'aide de l'éditeur de texte de son choix.
 \item Démarrer une session R en cliquant sur l'icône de l'application
   si l'on utilise une interface graphique, ou alors en suivant la
-  procédure expliquée à l'annexe~\ref{emacs+ess} si l'on utilise
+  procédure expliquée à l'\autoref{emacs+ess} si l'on utilise
   GNU~Emacs.
 \item Au cours de la phase de développement, on fera généralement de
   nombreux aller-retours la ligne de commande où l'on testera des
@@ -321,7 +321,7 @@ Dans ses grandes lignes, toute session de travail avec R se réduit aux
 \item Quitter R en tapant \code{q()}\indexfonction{q} à la ligne de
   commande ou en fermant l'interface graphique par la procédure
   usuelle. Encore ici, la manière de procéder est quelque peu
-  différente dans GNU~Emacs; voir l'annexe~\ref{emacs+ess}.
+  différente dans GNU~Emacs; voir l'\autoref{emacs+ess}.
 \end{enumerate}
 Évidemment, les étapes 1 et 2 sont interchangeables, tout comme les
 étapes 4, 5 et 6.
@@ -349,7 +349,7 @@ Le dossier de travail est déterminé au lancement de R.
   additionnels sur la gestion des répertoires de travail.
 \item Avec GNU~Emacs, la situation est un peu plus simple puisque l'on
   doit spécifier un répertoire de travail chaque fois que l'on démarre
-  un processus R; voir l'annexe~\ref{emacs+ess}.
+  un processus R; voir l'\autoref{emacs+ess}.
 \end{itemize}
 
 

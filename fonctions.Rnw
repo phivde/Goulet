@@ -37,7 +37,7 @@ où
 \begin{itemize}
 \item \code{fun} est le nom de la fonction (les règles pour les noms
   de fonctions étant les mêmes que celles présentées à la
-  section~\ref{bases:noms} pour tout autre objet);
+  \autoref{bases:noms} pour tout autre objet);
 \item \code{\itshape arguments} est la liste des arguments, séparés
   par des virgules;
 \item \code{\itshape expression} constitue le corps de la fonction,
@@ -52,7 +52,7 @@ où
 
 La plupart des fonctions sont écrites dans le but de retourner un
 résultat. Or, les règles d'interprétation d'un groupe d'expressions
-présentées à la section~\ref{bases:commandes} s'appliquent ici au
+présentées à la \autoref{bases:commandes} s'appliquent ici au
 corps de la fonction.
 \begin{itemize}
 \item Une fonction retourne tout simplement le résultat de la
@@ -107,8 +107,8 @@ programmation en R.
 \label{fonctions:exemple}
 
 Le code développé pour l'exemple de point fixe\index{point fixe} de la
-section \ref{exemples:pointfixe} peut être intégré dans une fonction;
-voir la figure \ref{fig:fonctions:fp}.
+\autoref{exemples:pointfixe} peut être intégré dans une fonction;
+voir la \autoref{fig:fonctions:fp}.
 
 \begin{figure}[t]
   \centering
@@ -332,7 +332,7 @@ for (i in 1:10)
 \Opensolutionfile{reponses}[reponses-fonctions]
 
 \begin{Filesave}{reponses}
-\section*{Chapitre \ref{fonctions}}
+\section*{Chapitre \ref*{fonctions}}
 \addcontentsline{toc}{section}{Chapitre \protect\ref{fonctions}}
 
 \end{Filesave}
@@ -403,8 +403,8 @@ matrix2 <- function(data = NA, nrow = 1, ncol = 1,
 \end{verbatim}
     La seconde solution n'a pas recours à la transposée. Pour remplir
     la matrice par ligne, il suffit de réordonner les éléments du
-    vecteur \code{data} en utilisant la formule obtenue à l'exercice
-    \ref{operateurs}.\ref{exercice:operateurs:ijk}.
+    vecteur \code{data} en utilisant la formule obtenue à
+    l'\autoref{exercice:operateurs:ijk}.
 \begin{verbatim}
 matrix2 <- function(data = NA, nrow = 1, ncol = 1,
                     bycol = FALSE, dimnames = NULL)
@@ -462,11 +462,11 @@ phi <- function(x)
     \frac{x^{2n + 1}}{1 \cdot 3 \cdot 5 \cdots (2n + 1)},
     \quad x \geq 0.
   \end{displaymath}
-  Utiliser la fonction \code{phi} de l'exercice
-  \ref{fonctions}.\ref{exercice:fonctions:phi} et tronquer la somme
-  infinie à une grande valeur, 50 par exemple. La fonction ne doit pas
-  utiliser de boucles, mais peut ne prendre qu'une seule valeur de $x$
-  à la fois.  Comparer les résultats avec ceux de la fonction
+  Utiliser la fonction \code{phi} de
+  l'\autoref{exercice:fonctions:phi} et tronquer la somme infinie à
+  une grande valeur, 50 par exemple. La fonction ne doit pas utiliser
+  de boucles, mais peut ne prendre qu'une seule valeur de $x$ à la
+  fois. Comparer les résultats avec ceux de la fonction
   \fonction{pnorm}.
   \begin{rep}
 \begin{verbatim}
@@ -482,12 +482,11 @@ Phi <- function(x)
 \begin{exercice}
   \index{distribution!normale}
   \label{exercice:fonctions:Phi2}
-  Modifier la fonction \code{Phi} de l'exercice
-  \ref{fonctions}.\ref{exercice:fonctions:Phi} afin qu'elle admette
-  des valeurs de $x$ négatives. Lorsque $x < 0$, $\Phi(x) = 1 -
-  \Phi(-x)$. La solution simple consiste à utiliser une structure de
-  contrôle \code{if ...  else}, mais les curieux chercheront à s'en
-  passer.
+  Modifier la fonction \code{Phi} de
+  l'\autoref{exercice:fonctions:Phi} afin qu'elle admette des valeurs
+  de $x$ négatives. Lorsque $x < 0$, $\Phi(x) = 1 - \Phi(-x)$. La
+  solution simple consiste à utiliser une structure de contrôle
+  \code{if ... else}, mais les curieux chercheront à s'en passer.
   \begin{rep}
     Première solution utilisant une fonction interne et une structure
     de contrôle \code{if ... else}.
@@ -523,11 +522,10 @@ Phi <- function(x)
 \end{exercice}
 
 \begin{exercice}
-  \index{distribution!normale}
-  Généraliser maintenant la fonction de l'exercice
-  \ref{fonctions}.\ref{exercice:fonctions:Phi2} pour qu'elle prenne
-  en argument un vecteur de valeurs de $x$. Ne pas utiliser de boucle.
-  Comparer les résultats avec ceux de la fonction \fonction{pnorm}.
+  \index{distribution!normale} Généraliser maintenant la fonction de
+  l'\autoref{exercice:fonctions:Phi2} pour qu'elle prenne en argument
+  un vecteur de valeurs de $x$. Ne pas utiliser de boucle. Comparer
+  les résultats avec ceux de la fonction \fonction{pnorm}.
   \begin{rep}
 \begin{verbatim}
 Phi <- function(x)
