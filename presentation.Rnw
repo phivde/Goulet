@@ -185,7 +185,7 @@ save.image()
   sauvegardé entre les sessions de travail. Or, celui-ci est souvent
   bien plus compliqué que l'exemple ci-dessus. De plus, sans accès au
   code qui a servi à créer l'objet \code{x}, comment savoir ce que la
-  valeur \Sexpr{format(x, dec = ",")} représente au juste?
+  valeur \code{\Sexpr{format(x, dec = ".")}} représente au juste?
 
 \item L'approche dite de «code réel et objets virtuels» considère que
   ce qu'il importe de conserver d'une session de travail à l'autre

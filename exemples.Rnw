@@ -417,7 +417,7 @@ sum(x * w)/sum(w)
   Soit un vecteur d'observations $\mat{x} = (x_1, \dots, x_n)$.
   Calculer la moyenne harmonique de ce vecteur, définie comme
   \begin{equation*}
-    \frac{n}{\D \frac{1}{x_1} + \dots + \frac{1}{x_n}}.
+    \frac{n}{\dfrac{1}{x_1} + \dots + \frac{1}{x_n}}.
   \end{equation*}
   Tester l'expression avec les valeurs de l'\autoref{exercice:exemples:moyennes}.
   \begin{rep}
