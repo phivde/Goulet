@@ -781,11 +781,11 @@ x[]
 \section{Exercices}
 \label{bases:exercices}
 
-\Opensolutionfile{reponses}[reponses-bases]
+\Opensolutionfile{solutions}[solutions-bases]
 
-\begin{Filesave}{reponses}
+\begin{Filesave}{solutions}
 \section*{Chapitre \ref*{bases}}
-\addcontentsline{toc}{section}{Chapitre \protect\ref{bases}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{bases}}
 
 \end{Filesave}
 
@@ -809,7 +809,7 @@ x
   \item Remplacer le troisième élément de la liste par le vecteur
     \verb|3:8|.
   \end{enumerate}
-  \begin{rep}
+  \begin{sol}
     \begin{enumerate}
     \item Il y a plusieurs façons de créer les troisième et quatrième
       éléments de la liste. Le plus simple consiste à utiliser
@@ -840,7 +840,7 @@ x[[2]][c(2, 3)]
 x[[3]] <- 3:8
 @
     \end{enumerate}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -861,7 +861,7 @@ x
   \item Les éléments strictement supérieurs à 14.
   \item Tous les éléments sauf les éléments en positions 6, 10 et 12.
   \end{enumerate}
-  \begin{rep}
+  \begin{sol}
     \begin{enumerate}
 \item
 <<echo=TRUE,eval=FALSE>>=
@@ -880,7 +880,7 @@ x[x > 14]
 x[-c(6, 10, 12)]
 @
     \end{enumerate}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 \vspace{\fill}
 
@@ -899,7 +899,7 @@ x <- matrix(sample(1:100, 70), 7, 10)
   \item Les première et quatrième colonnes (simultanément).
   \item Les lignes dont le premier élément est supérieur à 50.
   \end{enumerate}
-  \begin{rep}
+  \begin{sol}
     \begin{enumerate}
 \item
 <<echo=TRUE,eval=FALSE>>=
@@ -918,13 +918,13 @@ x[, c(1, 4)]
 x[x[, 1] > 50, ]
 @
     \end{enumerate}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
-\Closesolutionfile{reponses}
+\Closesolutionfile{solutions}
 
 %%% Local Variables:
-%%% mode: latex
+%%% mode: noweb
 %%% TeX-master: "introduction_programmation_r"
 %%% coding: utf-8
 %%% End:

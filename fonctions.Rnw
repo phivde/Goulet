@@ -329,11 +329,11 @@ for (i in 1:10)
 \section{Exercices}
 \label{fonctions:exercices}
 
-\Opensolutionfile{reponses}[reponses-fonctions]
+\Opensolutionfile{solutions}[solutions-fonctions]
 
-\begin{Filesave}{reponses}
+\begin{Filesave}{solutions}
 \section*{Chapitre \ref*{fonctions}}
-\addcontentsline{toc}{section}{Chapitre \protect\ref{fonctions}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{fonctions}}
 
 \end{Filesave}
 
@@ -354,7 +354,7 @@ for (i in 1:10)
     &= \frac{1}{n} \sum_{i = 1}^n (X_i - \bar{X})^2,
   \end{align*}
   où $\bar{X} = n^{-1}(X_1 + \dots + X_n)$.
-  \begin{rep}
+  \begin{sol}
 \begin{verbatim}
 variance <- function(x, biased = FALSE)
 {
@@ -367,7 +367,7 @@ variance <- function(x, biased = FALSE)
         var(x)
 }
 \end{verbatim}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -378,7 +378,7 @@ variance <- function(x, biased = FALSE)
   de la fonction \code{matrix2} seront les mêmes que ceux de
   \code{matrix}, sauf que l'argument \code{byrow} sera remplacé
   par \code{bycol}.
-  \begin{rep}
+  \begin{sol}
     Une première solution utilise la transposée. La première
     expression de la fonction s'assure que la longueur de
     \code{data} est compatible avec le nombre de lignes et de
@@ -422,7 +422,7 @@ matrix2 <- function(data = NA, nrow = 1, ncol = 1,
     data
 }
 \end{verbatim}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -436,14 +436,14 @@ matrix2 <- function(data = NA, nrow = 1, ncol = 1,
   \end{displaymath}
   La fonction devrait prendre en argument un vecteur de valeurs de
   $x$. Comparer les résultats avec ceux de la fonction \fonction{dnorm}.
-  \begin{rep}
+  \begin{sol}
 \begin{verbatim}
 phi <- function(x)
 {
     exp(-x^2/2) / sqrt(2 * pi)
 }
 \end{verbatim}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -468,7 +468,7 @@ phi <- function(x)
   de boucles, mais peut ne prendre qu'une seule valeur de $x$ à la
   fois. Comparer les résultats avec ceux de la fonction
   \fonction{pnorm}.
-  \begin{rep}
+  \begin{sol}
 \begin{verbatim}
 Phi <- function(x)
 {
@@ -476,7 +476,7 @@ Phi <- function(x)
     0.5 + phi(x) * sum(x^n / cumprod(n))
 }
 \end{verbatim}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -487,7 +487,7 @@ Phi <- function(x)
   de $x$ négatives. Lorsque $x < 0$, $\Phi(x) = 1 - \Phi(-x)$. La
   solution simple consiste à utiliser une structure de contrôle
   \code{if ... else}, mais les curieux chercheront à s'en passer.
-  \begin{rep}
+  \begin{sol}
     Première solution utilisant une fonction interne et une structure
     de contrôle \code{if ... else}.
 \begin{verbatim}
@@ -518,7 +518,7 @@ Phi <- function(x)
                       sum(x^n / cumprod(n)))
 }
 \end{verbatim}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -526,7 +526,7 @@ Phi <- function(x)
   l'\autoref{exercice:fonctions:Phi2} pour qu'elle prenne en argument
   un vecteur de valeurs de $x$. Ne pas utiliser de boucle. Comparer
   les résultats avec ceux de la fonction \fonction{pnorm}.
-  \begin{rep}
+  \begin{sol}
 \begin{verbatim}
 Phi <- function(x)
 {
@@ -535,7 +535,7 @@ Phi <- function(x)
                            cumprod(n))
 }
 \end{verbatim}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -554,7 +554,7 @@ Phi <- function(x)
     seule boucle.
   \end{enumerate}
   Dans chaque cas, comparer le résultat avec l'opérateur \code{\%*\%}.
-  \begin{rep}
+  \begin{sol}
     \begin{enumerate}
     \item
 \begin{verbatim}
@@ -619,7 +619,7 @@ prod.mat<-function(mat1, mat2)
 pas le produit matriciel.")
 }
 \end{verbatim}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -653,12 +653,12 @@ notes.finales <- function(notes, p)
     final
 }
 \end{verbatim}
-  \begin{rep}
+  \begin{sol}
     Le calcul à faire n'est qu'un simple produit matriciel, donc:
 \begin{verbatim}
 notes.finales <- function(notes, p) notes %*% p
 \end{verbatim}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -753,7 +753,7 @@ non trouvé
     \emph{Astuce}: tirer profit du moteur d'indentation de votre
     éditeur de texte pour programmeur.
   \end{enumerate}
-  \begin{rep}
+  \begin{sol}
 \begin{verbatim}
 param <- function (moyenne, variance, loi)
 {
@@ -781,13 +781,13 @@ param <- function (moyenne, variance, loi)
 \"gamma\" ou \"pareto\"")
 }
 \end{verbatim}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
-\Closesolutionfile{reponses}
+\Closesolutionfile{solutions}
 
 %%% Local Variables:
-%%% mode: latex
+%%% mode: noweb
 %%% TeX-master: "introduction_programmation_r"
 %%% coding: utf-8
 %%% End:

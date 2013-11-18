@@ -676,11 +676,11 @@ bibliothèque personnelle et installer des packages externes.
 \section{Exercices}
 \label{operateurs:exercices}
 
-\Opensolutionfile{reponses}[reponses-operateurs]
+\Opensolutionfile{solutions}[solutions-operateurs]
 
-\begin{Filesave}{reponses}
+\begin{Filesave}{solutions}
 \section*{Chapitre \ref*{operateurs}}
-\addcontentsline{toc}{section}{Chapitre \protect\ref{operateurs}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{operateurs}}
 
 \end{Filesave}
 
@@ -719,7 +719,7 @@ cat(rep(1:3, rep(4, 3)))
 @
   \end{enumerate}
   \SweaveOpts{echo=TRUE, eval=FALSE}
-  \begin{rep}
+  \begin{sol}
     \begin{enumerate}
 \item
 <<>>=
@@ -750,7 +750,7 @@ seq(1, 10, length = 3)
 rep(1:3, rep(4,3))
 @
     \end{enumerate}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \SweaveOpts{echo=FALSE,eval=TRUE,term=FALSE}
@@ -781,7 +781,7 @@ cat(10 * 1:10)
 @
   \end{enumerate}
   \SweaveOpts{echo=TRUE,eval=FALSE}
-  \begin{rep}
+  \begin{sol}
     \begin{enumerate}
 \item
 <<>>=
@@ -804,7 +804,7 @@ rep(-2:2, each = 2)
 10 * 1:10
 @
     \end{enumerate}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -816,7 +816,7 @@ rep(-2:2, each = 2)
   \item \fonction{rowMeans}
   \item \fonction{colMeans}
   \end{enumerate}
-  \begin{rep}
+  \begin{sol}
     Soit \code{mat} une matrice.
     \begin{enumerate}
 \item
@@ -836,26 +836,26 @@ apply(mat, 1, mean)
 apply(mat, 2, mean)
 @
     \end{enumerate}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
   Sans utiliser les fonctions \fonction{factorial},
   \fonction{lfactorial}, \fonction{gamma} ou \fonction{lgamma},
   générer la séquence 1!, 2!, ..., 10!
-  \begin{rep}
+  \begin{sol}
 <<>>=
 cumprod(1:10)
 @
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
   Trouver une relation entre \code{x}, \code{y}, \code{x \%\% y}
   (modulo) et \code{x \%/\% y} (division entière), où \code{y != 0}.
-  \begin{rep}
+  \begin{sol}
     \verb|x == (x %% y) + y * (x %/% y)|
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 %\enlargethispage{10mm}
@@ -869,7 +869,7 @@ cumprod(1:10)
   \item La moyenne des cinq premiers éléments de l'échantillon.
   \item La moyenne des cinq derniers éléments de l'échantillon.
   \end{enumerate}
-  \begin{rep}
+  \begin{sol}
     \begin{enumerate}
 \item
 <<>>=
@@ -892,7 +892,7 @@ mean(x[(length(x) - 4):length(x)])  # plus général
 mean(tail(x, 5))                    # plus lisible!
 @
     \end{enumerate}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -904,12 +904,12 @@ mean(tail(x, 5))                    # plus lisible!
   \item Répéter la partie a) pour l'élément $(i, j, k)$ d'un
     tableau\index{tableau} $I \times J \times K$.
   \end{enumerate}
-  \begin{rep}
+  \begin{sol}
     \begin{enumerate}
     \item \verb|(j - 1)*I + i|
     \item \verb|((k - 1)*J + j - 1)*I + i|
     \end{enumerate}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -926,7 +926,7 @@ mean(tail(x, 5))                    # plus lisible!
   \item Extraire toutes les lignes de la matrice dont la moyenne des
     éléments est supérieure à 7.
   \end{enumerate}
-  \begin{rep}
+  \begin{sol}
     \begin{enumerate}
 \item
 <<>>=
@@ -945,7 +945,7 @@ max(mat[1:3, 1:3])
 mat[rowMeans(mat) > 7,]
 @
     \end{enumerate}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -971,17 +971,17 @@ names(temps) <- c("1964-10-15", "1968-06-20", "1968-10-13",
 @
   Extraire de ce vecteur les records du monde seulement, c'est-à-dire
   la première fois que chaque temps a été réalisé.
-  \begin{rep}
+  \begin{sol}
 <<>>=
 temps[match(unique(cummin(temps)), temps)]
 @
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
-\Closesolutionfile{reponses}
+\Closesolutionfile{solutions}
 
 %%% Local Variables:
-%%% mode: latex
+%%% mode: noweb
 %%% TeX-master: "introduction_programmation_r"
 %%% coding: utf-8
 %%% End:

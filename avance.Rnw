@@ -275,11 +275,11 @@ methods(plot)
 \section{Exercices}
 \label{avance:exercices}
 
-\Opensolutionfile{reponses}[reponses-avance]
+\Opensolutionfile{solutions}[solutions-avance]
 
-\begin{Filesave}{reponses}
+\begin{Filesave}{solutions}
 \section*{Chapitre \ref*{avance}}
-\addcontentsline{toc}{section}{Chapitre \protect\ref{avance}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{avance}}
 
 \end{Filesave}
 
@@ -322,7 +322,7 @@ methods(plot)
   \item $X_{www}$ en supposant un tableau de données $n \times p
     \times r$.
   \end{enumerate}
-  \begin{rep}
+  \begin{sol}
     Soit \code{Xij} et \code{wij} des matrices, et \code{Xijk}
     et \code{wijk} des tableaux à trois dimensions.
     \begin{enumerate}
@@ -355,7 +355,7 @@ apply(Xijk * wijk, 2, sum)/apply(wijk, 2, sum)
 sum(Xijk * wijk)/sum(wijk)
 @
     \end{enumerate}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -367,7 +367,7 @@ sum(Xijk * wijk)/sum(wijk)
   \item $10, 9, 8, \dots, 2, 1, 10, 9, 8, \dots 3, 2, \dots, 10, 9, 10$.
   \item $10, 9, 8, \dots, 2, 1, 9, 8, \dots, 2, 1, \dots, 2, 1, 1$.
   \end{enumerate}
-  \begin{rep}
+  \begin{sol}
     \begin{enumerate}
 \item
 <<echo=TRUE,eval=FALSE>>=
@@ -382,7 +382,7 @@ unlist(lapply(1:10, seq, from = 10))
 unlist(lapply(10:1, seq, to = 1))
 @
     \end{enumerate}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -430,7 +430,7 @@ paste("a", 1:5, sep = "")
     échantillons simulés en a), ceci afin d'obtenir des observations
     d'une distribution de Pareto \emph{translatée}.
   \end{enumerate}
-  \begin{rep}
+  \begin{sol}
     \begin{enumerate}
 \item
 <<echo=TRUE,eval=FALSE>>=
@@ -458,7 +458,7 @@ hist(ea$sample5)
 lapply(ea, "+", 1000)
 @
     \end{enumerate}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -508,7 +508,7 @@ x[[2]]
   \item La probabilité empirique qu'une réclamation soit inférieure
     à $\mat{x}$ (un vecteur) dans le portefeuille.
   \end{enumerate}
-  \begin{rep}
+  \begin{sol}
     \begin{enumerate}
 \item
 <<echo=TRUE,eval=FALSE>>=
@@ -573,14 +573,13 @@ de points en argument:
 ecdf(unlist(lapply(x, "[[", "montants")))(x)
 @
     \end{enumerate}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
-\Closesolutionfile{reponses}
-
+\Closesolutionfile{solutions}
 
 %%% Local Variables:
-%%% mode: latex
+%%% mode: noweb
 %%% TeX-master: "introduction_programmation_r"
 %%% coding: utf-8
 %%% End:

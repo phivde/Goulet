@@ -362,11 +362,11 @@ calcul pour $n$ grand.
 \section{Exercices}
 \label{exemples:exercices}
 
-\Opensolutionfile{reponses}[reponses-exemples]
+\Opensolutionfile{solutions}[solutions-exemples]
 
-\begin{Filesave}{reponses}
+\begin{Filesave}{solutions}
 \section*{Chapitre \ref*{exemples}}
-\addcontentsline{toc}{section}{Chapitre \protect\ref{exemples}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{exemples}}
 
 \end{Filesave}
 
@@ -379,11 +379,11 @@ est interdit d'utiliser des boucles\index{boucle}.
   Calculer la valeur présente d'une série de paiements fournie dans un
   vecteur \code{P} en utilisant les taux d'intérêt annuels d'un
   vecteur \code{i}.
-  \begin{rep}
+  \begin{sol}
 <<echo=TRUE,eval=FALSE>>=
 sum(P / cumprod(1 + i))
 @
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -403,13 +403,13 @@ sum(P / cumprod(1 + i))
     \intertext{et} \mat{w}
     &= (0,15,\; 0,04,\; 0,05,\; 0,06,\; 0,17,\; 0,16,\; 0,11,\; 0,09).
   \end{align*}
-  \begin{rep}
+  \begin{sol}
 <<echo=TRUE,eval=FALSE>>=
 x <- c(7, 13, 3, 8, 12, 12, 20, 11)
 w <- c(0.15, 0.04, 0.05, 0.06, 0.17, 0.16, 0.11, 0.09)
 sum(x * w)/sum(w)
 @
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -420,11 +420,11 @@ sum(x * w)/sum(w)
     \frac{n}{\dfrac{1}{x_1} + \dots + \frac{1}{x_n}}.
   \end{equation*}
   Tester l'expression avec les valeurs de l'\autoref{exercice:exemples:moyennes}.
-  \begin{rep}
+  \begin{sol}
 <<echo=TRUE,eval=FALSE>>=
 1/mean(1/x)
 @
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -435,13 +435,13 @@ sum(x * w)/sum(w)
     \sum_{k = 0}^5 \frac{2^k e^{-2}}{k!},
   \end{equation*}
   où $k! = 1 \cdot 2 \cdots k$.
-  \begin{rep}
+  \begin{sol}
 <<echo=TRUE,eval=FALSE>>=
 lambda <- 2
 x <- 5
 exp(-lambda) * sum(lambda^(0:x)/gamma(1 + 0:x))
 @
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -454,7 +454,7 @@ exp(-lambda) * sum(lambda^(0:x)/gamma(1 + 0:x))
   \item Calculer la variance de la variable aléatoire $X$ définie en
     a).
   \end{enumerate}
-  \begin{rep}
+  \begin{sol}
     \begin{enumerate}
 \item
 <<echo=TRUE,eval=FALSE>>=
@@ -466,18 +466,18 @@ probs <- (1:7)/28
 sum(x^2 * probs) - (sum(x * probs))^2
 @
     \end{enumerate}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
   Calculer le taux d'intérêt nominal composé quatre fois par année,
   $i^{(4)}$, équivalent à un taux de $i = 6~\%$ effectif annuellement.
-  \begin{rep}
+  \begin{sol}
 <<echo=TRUE,eval=FALSE>>=
 i <- 0.06
 4 * ((1 + i)^0.25 - 1)
 @
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -493,7 +493,7 @@ i <- 0.06
   sans boucle, un tableau des valeurs présentes de séries de $n = 1,
   2, \dots, 10$ paiements à chacun des taux d'intérêt effectifs
   annuellement $i = 0,05, 0,06, \dots, 0,10$.
-  \begin{rep}
+  \begin{sol}
 <<echo=TRUE,eval=FALSE>>=
 n <- 1:10
 i <- seq(0.05, 0.1, by = 0.01)
@@ -505,7 +505,7 @@ n <- 1:10
 i <- (5:10)/100
 apply(outer(1/(1+i), n, "^"), 1, cumsum)
 @
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -517,13 +517,13 @@ apply(outer(1/(1+i), n, "^"), 1, cumsum)
     I\ddot{a}_{\angl{10}} = \sum_{k = 1}^{10}kv^{k-1},
   \end{equation*}
   toujours avec $v = (1 + i)^{-1}$.
-  \begin{rep}
+  \begin{sol}
 <<echo=TRUE,eval=FALSE>>=
 v <- 1/1.06
 k <- 1:10
 sum(k * v^(k - 1))
 @
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -532,14 +532,14 @@ sum(k * v^(k - 1))
   Calculer la valeur présente de la séquence de paiements 1, 2, 2, 3,
   3, 3, 4, 4, 4, 4 si les paiements sont effectués en fin d'année et
   que le taux d'actualisation est de 7~\%.
-  \begin{rep}
+  \begin{sol}
 <<echo=TRUE,eval=FALSE>>=
 pmts <- rep(1:4, 1:4)
 v <- 1/1.07
 k <- 1:10
 sum(pmts * v^k)
 @
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -548,19 +548,19 @@ sum(pmts * v^k)
   taux d'intérêt d'actualisation alterne successivement entre 5~\% et
   8~\% chaque année, c'est-à-dire que le taux d'intérêt est de 5~\%,
   8~\%, 5~\%, 8~\%, etc.
-  \begin{rep}
+  \begin{sol}
 <<echo=TRUE,eval=FALSE>>=
 v <- cumprod(1/(1 + rep(c(0.05, 0.08), 5)))
 pmts <- rep(1:4, 1:4)
 sum(pmts * v)
 @
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
-\Closesolutionfile{reponses}
+\Closesolutionfile{solutions}
 
 %%% Local Variables:
-%%% mode: latex
+%%% mode: noweb
 %%% TeX-master: "introduction_programmation_r"
 %%% coding: utf-8
 %%% End:
