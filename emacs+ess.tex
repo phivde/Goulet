@@ -143,8 +143,7 @@ sur les plateformes Windows et OS~X.
   \item \code{C} est la touche \code{Contrôle} (\ctlkey);
   \item \code{M} est la touche \code{Meta}, qui correspond à la touche
     \code{Alt} de gauche sur un PC ou la touche \code{Option}
-    (\optkey) sur un Mac (toutefois, voir l'encadré à la page
-    suivante);
+    (\optkey) sur un Mac (toutefois, voir l'encadré ci-dessus);
   \item \code{ESC} est la touche \code{Échap} (\esckey) et
     est équivalente à \code{Meta};
   \item \code{SPC} est la barre d'espacement;
@@ -179,16 +178,18 @@ sur les plateformes Windows et OS~X.
       \code{Commande} (\cmdkey). Cela bloque alors l'accès à certains
       raccourcis Mac, mais la situation est moins critique ainsi.
 
-      Pour assigner la touche \code{Meta} à \code{Commande} (\cmdkey),
-      il suffit d'insérer les lignes suivantes dans son fichier de
-      configuration \code{.emacs} (voir la
+      Pour assigner la touche \code{Meta} à \code{Commande} (\cmdkey)
+      et laisser la touche \code{Option} (\optkey) jouer son rôle
+      usuel, il suffit d'insérer les lignes suivantes dans son fichier
+      de configuration \code{.emacs} (voir la
       \autoref{emacs+ess:configuration}):
 \begin{verbatim}
 ;;; ====================================
 ;;;  Assigner la touche Meta à Commande
+;;;  et laisser Option être Option
 ;;; ====================================
-(setq-default ns-command-modifier 'meta) ; Commande est Meta
-(setq-default ns-option-modifier 'none)	 ; Option est Option
+(setq-default ns-command-modifier 'meta)
+(setq-default ns-option-modifier 'none)
 \end{verbatim}
     \end{minipage}
   \end{framed}

@@ -47,7 +47,7 @@ c(1, 2, 3) + c(4, 5, 6)
 \item Si les vecteurs impliqués dans une expression arithmétique ne
   sont pas de la même longueur, les plus courts sont \emph{recyclés}
   de façon à correspondre au plus long vecteur.  Cette règle est
-  particulièrement apparente avec les vecteurs de longueur 1:
+  particulièrement apparente avec les vecteurs de longueur $1$:
 <<echo=TRUE>>=
 1:10 + 2
 1:10 + rep(2, 10)
@@ -91,14 +91,14 @@ expressions R.
 \begin{table}
   \centering
   \renewcommand{\arraystretch}{1.1}
-  \begin{tabular}{lp{7cm}}
+  \begin{tabular}{lp{8cm}}
     \toprule
     Opérateur     & Fonction \\
     \midrule
     \fonction{\$} & extraction d'une liste \\ %$
-    \Fonction{\^} & puissance \\
+    \verb|^|\index{\string^@\verb=^=|bfhyperpage} & puissance \\
     \Fonction{-}  & changement de signe \\
-    \verb|:|\index{:@\verb=:=}  & génération de suites \\
+    {\NoAutoSpacing\verb|:|}\index{:@\NoAutoSpacing\verb=:=}  & génération de suites \\
     \Fonction{\%*\%}\, \Fonction{\%\%}\, \Fonction{\%/\%} & produit
     matriciel, modulo, division entière \\
     \Fonction{*}\, \Fonction{/} & multiplication, division \\
@@ -109,8 +109,8 @@ expressions R.
     \verb|!|\Index{"!@\code{"!}}  & négation logique \\
     \Fonction{\&}\, \Fonction{\&\&} & «et» logique \\
     \Fonction{|}\, \Fonction{||}    & «ou» logique \\
-    \fonction{->}\, \verb|->>|\index{->>@\verb=->>=|textbf} & assignation \\
-    \fonction{<-}\, \verb|<<-|\index{<<-@\verb=<<-=|textbf} & assignation \\
+    \fonction{->}\, \verb|->>|\index{->>@\verb=->>=|bfhyperpage} & assignation \\
+    \fonction{<-}\, \verb|<<-|\index{<<-@\verb=<<-=|bfhyperpage} & assignation \\
     \bottomrule
   \end{tabular}
   \caption{Principaux opérateurs du langage R, en ordre décroissant
@@ -118,11 +118,11 @@ expressions R.
   \label{tab:operateurs:operateurs}
 \end{table}
 
-Les opérateurs de puissance (\fonction{\^}) et d'assignation à gauche
-(\fonction{<-}, \verb|<<-|) sont évalués de droite à gauche; tous les
-autres de gauche à droite. Ainsi, \verb|2 ^ 2 ^ 3| est \verb|2 ^ 8|,
-et non \verb|4 ^ 3|, alors que \verb|1 - 1 - 1| vaut \verb|-1|, et non
-\verb|1|.
+Les opérateurs de puissance (\verb|^|\index{\string^@\verb=^=}) et
+d'assignation à gauche (\fonction{<-}, \verb|<<-|) sont évalués de
+droite à gauche; tous les autres de gauche à droite. Ainsi,
+\verb|2 ^ 2 ^ 3| est \verb|2 ^ 8|, et non \verb|4 ^ 3|, alors que
+\verb|1 - 1 - 1| vaut \verb|-1|, et non \verb|1|.
 
 
 \section{Appels de fonctions}
@@ -209,7 +209,7 @@ connaître toutes les options des fonctions.
 seq(1, 9, by = 2)
 @
 \item[\Fonction{\protect seq\_len}] version plus rapide de \code{seq} pour
-  générer la suite des nombres de 1 à la valeur de
+  générer la suite des nombres de $1$ à la valeur de
   l'argument\index{suite de nombres}
 <<echo=TRUE>>=
 seq_len(10)
@@ -320,7 +320,7 @@ x
 \renewenvironment{Schunk}{\setlength{\topskip}{-\parskip}}{}
 \begin{ttscript}{ceiling}
 \item[\Fonction{round}] arrondi\index{arrondi} à un nombre défini de
-  décimales (par défaut 0)
+  décimales (par défaut $0$)
 <<echo=TRUE>>=
 round(x)
 round(x, 3)
@@ -756,7 +756,7 @@ rep(1:3, rep(4,3))
 \SweaveOpts{echo=FALSE,eval=TRUE,term=FALSE}
 \begin{exercice}
   Générer les suites de nombres suivantes à l'aide des fonctions
-  \verb=:=\index{:@\verb=:=} et \texttt{rep} seulement, donc sans
+  {\NoAutoSpacing\verb=:=}\index{:@\verb=:=} et \texttt{rep} seulement, donc sans
   utiliser la fonction \fonction{seq}.
   \begin{enumerate}
   \item
@@ -842,7 +842,7 @@ apply(mat, 2, mean)
 \begin{exercice}
   Sans utiliser les fonctions \fonction{factorial},
   \fonction{lfactorial}, \fonction{gamma} ou \fonction{lgamma},
-  générer la séquence 1!, 2!, ..., 10!
+  générer la séquence $1!, 2!, \dots, 10!$.
   \begin{sol}
 <<>>=
 cumprod(1:10)
@@ -924,7 +924,7 @@ mean(tail(x, 5))                    # plus lisible!
   \item Calculer la valeur maximale de la sous-matrice formée par les
     trois premières lignes et les trois premières colonnes.
   \item Extraire toutes les lignes de la matrice dont la moyenne des
-    éléments est supérieure à 7.
+    éléments est supérieure à $7$.
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}

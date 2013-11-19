@@ -333,7 +333,7 @@ Dans ses grandes lignes, toute session de travail avec R se réduit aux
 \label{presentation:workspace}
 
 Le répertoire de travail (\emph{workspace}) de R est le dossier par
-défaut dans lequel le logiciel
+défaut dans lequel le logiciel:
 \begin{inparaenum}[1)]
 \item va rechercher des fichiers de script ou de données; et
 \item va sauvegarder l'espace de travail dans le fichier
@@ -357,9 +357,9 @@ Le dossier de travail est déterminé au lancement de R.
 \section{Consulter l'aide en ligne}
 \label{presentation:aide}
 
-Les rubriques d'aide des diverses fonctions disponibles dans R
-contiennent une foule d'informations ainsi que des exemples
-d'utilisation. Leur consultation est tout à fait essentielle.
+Les rubriques d'aide des diverses fonctions de R contiennent une foule
+d'informations ainsi que des exemples d'utilisation. Leur consultation
+est tout à fait essentielle.
 
 \begin{itemize}
 \item Pour consulter la rubrique d'aide de la fonction \code{foo}, on
@@ -385,7 +385,7 @@ d'utilisation. Leur consultation est tout à fait essentielle.
 La documentation officielle de R se compose de six guides accessibles
 depuis le menu \texttt{Aide} des interfaces graphiques ou encore en
 ligne dans le site du projet R\footnote{%
-  \url{http://www.r-project.org}}, %
+  \url{http://www.r-project.org}}. %
 Pour le débutant, seuls \emph{An Introduction to R} et, possiblement,
 \emph{R Data Import/Export} peuvent s'avérer des ressources utiles à
 court terme.

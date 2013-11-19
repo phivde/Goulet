@@ -88,7 +88,7 @@ concepts de variable locale et de variable globale.
   \end{itemize}
 \item Il est possible de définir une variable\index{variable!globale}
   dans l'espace de travail depuis une fonction avec l'opérateur
-  d'affectation \verb|<<-|\index{<<-@\verb=<<-=|textbf}. Il est très
+  d'affectation \verb|<<-|\index{<<-@\verb=<<-=}. Il est très
   rare --- et généralement non recommandé --- de devoir recourir à de
   telles variables globales.
 \item On peut définir une fonction à l'intérieur d'une autre fonction.
@@ -308,7 +308,7 @@ for (i in 1:10)
 
 \begin{itemize}
 \item Pour des raisons générales de lisibilité et de popularité, le
-  style C$++$, avec les accolades sur leurs propres lignes et une
+  style C++, avec les accolades sur leurs propres lignes et une
   indentation de quatre (4) espaces est considéré comme standard pour
   la programmation en R.
 \item La version de GNU~Emacs distribuée par l'auteur est déjà
@@ -464,7 +464,7 @@ phi <- function(x)
   \end{displaymath}
   Utiliser la fonction \code{phi} de
   l'\autoref{exercice:fonctions:phi} et tronquer la somme infinie à
-  une grande valeur, 50 par exemple. La fonction ne doit pas utiliser
+  une grande valeur, $50$ par exemple. La fonction ne doit pas utiliser
   de boucles, mais peut ne prendre qu'une seule valeur de $x$ à la
   fois. Comparer les résultats avec ceux de la fonction
   \fonction{pnorm}.
@@ -627,7 +627,7 @@ pas le produit matriciel.")
   Vous devez calculer la note finale d'un groupe d'étudiants à partir
   de deux informations:
   \begin{inparaenum}[1)]
-  \item une matrice contenant la note sur 100 des étudiants à chacune
+  \item une matrice contenant la note sur $100$ des étudiants à chacune
     des évaluations, et
   \item un vecteur contenant la pondération des évaluations.
   \end{inparaenum}

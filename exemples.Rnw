@@ -26,11 +26,11 @@ connaissances de base en mathématiques financières et en théorie des
 probabilités.
 
 
-\section{Calcul de valeurs présentes}
-\index{valeur présente}
+\section{Calcul de valeurs actuelles}
+\index{valeur actuelle}
 \label{exemples:vp}
 
-De manière générale, la valeur présente d'une série de paiements $P_1,
+De manière générale, la valeur actuelle d'une série de paiements $P_1,
 P_2, \dots, P_n$ à la fin des années $1, 2, \dots, n$ est
 \begin{equation}
   \label{eq:vp}
@@ -48,8 +48,8 @@ Un prêt est remboursé par une série de cinq paiements, le premier
 étant dû dans un an. On doit trouver le montant du prêt pour chacune
 des hypothèses ci-dessous.
 \begin{enumerate}[a)]
-\item Paiement annuel de \nombre{1000}, taux d'intérêt de 6~\% effectif
-  annuellement.
+\item Paiement annuel de $\nombre{1000}$, taux d'intérêt de $6~\%$
+  effectif annuellement.
 
   Avec un paiement annuel et un taux d'intérêt constants, on utilise
   la formule \eqref{eq:vp2} avec $P_j = P = \nombre{1000}$:
@@ -58,8 +58,8 @@ des hypothèses ci-dessous.
 @ %
   Remarquer comme l'expression R se lit exactement comme la formule
   mathématique.
-\item Paiements annuels de 500, 800, 900, 750 et \nombre{1000}, taux
-  d'intérêt de 6~\% effectif annuellement.
+\item Paiements annuels de $500$, $800$, $900$, $750$ et $\nombre{1000}$, taux
+  d'intérêt de $6~\%$ effectif annuellement.
 
   Les paiements annuels sont différents, mais le taux d'intérêt est
   toujours le même. La formule \eqref{eq:vp2} s'applique donc directement:
@@ -67,8 +67,8 @@ des hypothèses ci-dessous.
 sum(c(500, 800, 900, 750, 1000) * (1 + 0.06)^(-(1:5)))
 @
 
-\item Paiements annuels de 500, 800, 900, 750 et \nombre{1000}, taux
-  d'intérêt de 5~\%, 6~\%, 5,5~\%, 6,5~\% et 7~\% effectifs
+\item Paiements annuels de $500$, $800$, $900$, $750$ et $\nombre{1000}$, taux
+  d'intérêt de $5~\%$, $6~\%$, $5,5~\%$, $6,5~\%$ et $7~\%$ effectifs
   annuellement.
 
   Avec différents paiements annuels et des taux d'intérêt différents,
@@ -86,7 +86,7 @@ sum(c(500, 800, 900, 750, 1000) /
 
 On doit calculer toutes ou la majeure partie des probabilités de deux
 lois de probabilité, puis vérifier que la somme des probabilités est
-bien égale à 1.
+bien égale à $1$.
 
 Cet exemple est quelque peu artificiel dans la mesure où il existe
 dans R des fonctions internes pour calculer les principales
@@ -115,7 +115,7 @@ choose(n, x) * p^x * (1 - p)^rev(x)
 <<2(b)-2>>=
 dbinom(x, n, prob = 0.8)
 @
-    On vérifie enfin que les probabilités somment à 1:
+    On vérifie enfin que les probabilités somment à $1$:
 <<2(b)-3>>=
 sum(choose(n, x) * p^x * (1 - p)^rev(x))
 @
@@ -149,7 +149,7 @@ exp(-lambda) * (lambda^x / factorial(x))
 <<2(b)-2>>=
 dpois(x, lambda)
 @
-  Pour vérifier que les probabilités somment à 1, il faudra d'abord
+  Pour vérifier que les probabilités somment à $1$, il faudra d'abord
   tronquer le support infini de la Poisson à une «grande» valeur.
   Ici, $200$ est suffisamment éloigné de la moyenne de la
   distribution, $5$. Remarquer que le produit par $e^{-\lambda}$
@@ -264,8 +264,8 @@ $i$ telle que
 \begin{equation*}
   a_{\angl{10}} = \frac{1 - (1 + i)^{-10}}{i} = 8,21,
 \end{equation*}
-c'est à dire le taux de rendement d'une série de 10 versements de 1
-pour laquelle on a payé un montant de 8,21.
+c'est à dire le taux de rendement d'une série de $10$ versements de $1$
+pour laquelle on a payé un montant de $8,21$.
 
 Puisque, d'une part, nous ignorons combien de fois la procédure
 itérative devra être répétée et que, d'autre part, il faut exécuter la
@@ -375,8 +375,8 @@ faire le calcul demandé. Parce qu'elles ne sont pas nécessaires, il
 est interdit d'utiliser des boucles\index{boucle}.
 
 \begin{exercice}
-  \index{valeur présente}
-  Calculer la valeur présente d'une série de paiements fournie dans un
+  \index{valeur actuelle}
+  Calculer la valeur actuelle d'une série de paiements fournie dans un
   vecteur \code{P} en utilisant les taux d'intérêt annuels d'un
   vecteur \code{i}.
   \begin{sol}
@@ -417,7 +417,7 @@ sum(x * w)/sum(w)
   Soit un vecteur d'observations $\mat{x} = (x_1, \dots, x_n)$.
   Calculer la moyenne harmonique de ce vecteur, définie comme
   \begin{equation*}
-    \frac{n}{\dfrac{1}{x_1} + \dots + \frac{1}{x_n}}.
+    \frac{n}{\dfrac{1}{x_1} + \dots + \dfrac{1}{x_n}}.
   \end{equation*}
   Tester l'expression avec les valeurs de l'\autoref{exercice:exemples:moyennes}.
   \begin{sol}
@@ -481,8 +481,8 @@ i <- 0.06
 \end{exercice}
 
 \begin{exercice}
-  \index{valeur présente}
-  La valeur présente d'une série de $n$ paiements de fin d'année à un
+  \index{valeur actuelle}
+  La valeur actuelle d'une série de $n$ paiements de fin d'année à un
   taux d'intérêt $i$ effectif annuellement est
   \begin{equation*}
     a_\angln
@@ -490,7 +490,7 @@ i <- 0.06
     = \frac{1 - v^n}{i},
   \end{equation*}
   où $v = (1 + i)^{-1}$. Calculer en une seule expression, toujours
-  sans boucle, un tableau des valeurs présentes de séries de $n = 1,
+  sans boucle, un tableau des valeurs actuelles de séries de $n = 1,
   2, \dots, 10$ paiements à chacun des taux d'intérêt effectifs
   annuellement $i = 0,05, 0,06, \dots, 0,10$.
   \begin{sol}
@@ -509,10 +509,10 @@ apply(outer(1/(1+i), n, "^"), 1, cumsum)
 \end{exercice}
 
 \begin{exercice}
-  \index{valeur présente}
-  Calculer la valeur présente d'une annuité croissante de 1~\$ payable
-  annuellement en début d'année pendant 10 ans si le taux
-  d'actualisation est de 6~\%. Cette valeur présente est donnée par
+  \index{valeur actuelle}
+  Calculer la valeur actuelle d'une annuité croissante de $1$~\$ payable
+  annuellement en début d'année pendant dix ans si le taux
+  d'actualisation est de $6~\%$. Cette valeur actuelle est donnée par
   \begin{equation*}
     I\ddot{a}_{\angl{10}} = \sum_{k = 1}^{10}kv^{k-1},
   \end{equation*}
@@ -527,11 +527,12 @@ sum(k * v^(k - 1))
 \end{exercice}
 
 \begin{exercice}
-  \index{valeur présente}
+  \index{valeur actuelle}
   \label{exercice:exemples:serie}
-  Calculer la valeur présente de la séquence de paiements 1, 2, 2, 3,
-  3, 3, 4, 4, 4, 4 si les paiements sont effectués en fin d'année et
-  que le taux d'actualisation est de 7~\%.
+  Calculer la valeur actuelle de la suite de paiements $1$, $2$,
+  $2$, $3$, $3$, $3$, $4$, $4$, $4$, $4$ si les paiements sont
+  effectués en fin d'année et que le taux d'actualisation est de
+  $7~\%$.
   \begin{sol}
 <<echo=TRUE,eval=FALSE>>=
 pmts <- rep(1:4, 1:4)
@@ -543,11 +544,12 @@ sum(pmts * v^k)
 \end{exercice}
 
 \begin{exercice}
-  \index{valeur présente} Calculer la valeur présente de la séquence
-  de paiements définie à l'\autoref{exercice:exemples:serie} en supposant que le
-  taux d'intérêt d'actualisation alterne successivement entre 5~\% et
-  8~\% chaque année, c'est-à-dire que le taux d'intérêt est de 5~\%,
-  8~\%, 5~\%, 8~\%, etc.
+  \index{valeur actuelle}
+  Calculer la valeur actuelle de la suite de paiements de
+  l'\autoref{exercice:exemples:serie} en supposant que le taux
+  d'intérêt d'actualisation alterne successivement entre $5~\%$ et
+  $8~\%$ chaque année, c'est-à-dire que le taux d'intérêt est de
+  $5~\%$, $8~\%$, $5~\%$, $8~\%$, etc.
   \begin{sol}
 <<echo=TRUE,eval=FALSE>>=
 v <- cumprod(1/(1 + rep(c(0.05, 0.08), 5)))

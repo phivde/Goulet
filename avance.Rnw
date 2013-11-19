@@ -64,8 +64,8 @@ où
 \end{itemize}
 
 Lorsque \code{X} est une matrice, \fonction{apply} sert principalement
-à calculer des sommaires par ligne (dimension 1) ou par colonne
-(dimension 2) autres que la somme ou la moyenne (puisque les fonctions
+à calculer des sommaires par ligne (dimension $1$) ou par colonne
+(dimension $2$) autres que la somme ou la moyenne (puisque les fonctions
 \fonction{rowSums}, \fonction{colSums}, \fonction{rowMeans} et
 \fonction{colMeans} existent pour ce faire).
 \begin{itemize}
@@ -90,9 +90,9 @@ sommaires sur des tableaux, il faut toujours utiliser la fonction
 \item Si \code{X} est un tableau de plus de deux dimensions, alors
   l'argument passé à \code{FUN} peut être une matrice ou un tableau.
 \item Lorsque \code{X} est un tableau à trois dimensions et que
-  \code{MARGIN} est de longueur 1, cela équivaut à appliquer la
+  \code{MARGIN} est de longueur $1$, cela équivaut à appliquer la
   fonction \code{FUN} sur des «tranches» (des matrices) de \code{X}.
-  Si \code{MARGIN} est de longueur 2, on applique \code{FUN} sur des
+  Si \code{MARGIN} est de longueur $2$, on applique \code{FUN} sur des
   «carottes» (des vecteurs) tirées de \code{X}.
 \item Truc mnémotechnique: la ou les dimensions absentes de
   \code{MARGIN} sont celles qui disparaissent après le passage de
@@ -140,7 +140,7 @@ list(FUN(X[[1]], ...),
   \code{FUN} à moins que des arguments nommés dans `\code{...}' aient
   préséance.
 \item Par exemple, on crée une liste formée de quatre vecteurs
-  aléatoires de taille 5, 6, 7 et 8.
+  aléatoires de taille $5$, $6$, $7$ et $8$:
 <<echo=TRUE>>=
 (x <- lapply(5:8, sample, x = 1:10))
 @ %
@@ -408,9 +408,9 @@ rpareto <- function(n, alpha, lambda)
   \begin{enumerate}
   \item Écrire une expression R utilisant la fonction \code{rpareto}
     ci-dessus qui permet de simuler cinq échantillons aléatoires de
-    tailles 100, 150, 200, 250 et 300 d'une loi de Pareto avec $\alpha
-    = 2$ et $\lambda = \nombre{5000}$. Les échantillons aléatoires
-    devraient être stockés dans une liste.
+    tailles $100$, $150$, $200$, $250$ et $300$ d'une loi de Pareto
+    avec $\alpha = 2$ et $\lambda = \nombre{5000}$. Les échantillons
+    aléatoires devraient être stockés dans une liste.
   \item On vous donne l'exemple suivant d'utilisation de la fonction
     \fonction{paste}:
 <<echo=TRUE,eval=TRUE>>=
@@ -426,7 +426,7 @@ paste("a", 1:5, sep = "")
     répartition en ordre croissant.
   \item Faire l'histogramme des données du cinquième échantillon
     aléatoire avec la fonction \fonction{hist}.
-  \item Ajouter \nombre{1000} à toutes les valeurs de tous les
+  \item Ajouter $\nombre{1000}$ à toutes les valeurs de tous les
     échantillons simulés en a), ceci afin d'obtenir des observations
     d'une distribution de Pareto \emph{translatée}.
   \end{enumerate}

@@ -17,11 +17,11 @@ options(width=52)
   nouvelles valeurs à l'aide des diverses méthodes d'indiçage.
 \end{objectifs}
 
-Avant de pouvoir utiliser un langage de programmation, il faut en
-connaître la syntaxe et la sémantique, du moins dans leurs grandes
-lignes. C'est dans cet esprit que ce chapitre introduit des notions de
-base du langage R telles que l'expression, l'affectation et l'objet.
-Le concept de vecteur se trouvant au c{\oe}ur du langage, le chapitre
+Pour utiliser un langage de programmation, il faut en connaître la
+syntaxe et la sémantique, du moins dans leurs grandes lignes. C'est
+dans cet esprit que ce chapitre introduit des notions de base du
+langage R telles que l'expression, l'affectation et l'objet. Le
+concept de vecteur se trouvant au c{\oe}ur du langage, le chapitre
 fait une large place à la création et à la manipulation des vecteurs
 et autres types d'objets de stockage couramment employés en
 programmation en R.
@@ -63,7 +63,7 @@ b
 @
 \item Le symbole d'affectation inversé \fonction{->} existe aussi,
   mais il est rarement utilisé.
-\item Éviter d'utiliser l'opérateur \fonction{=} pour affecter une
+\item Éviter d'utiliser l'opérateur \,\fonction{=}\, pour affecter une
   valeur à une variable puisque cette pratique est susceptible
   d'engendrer de la confusion avec les constructions \code{nom =
     valeur} dans les appels de fonction.
@@ -71,12 +71,12 @@ b
 
 \begin{astuce}
   Dans les anciennes versions de S et R, l'on pouvait affecter avec le
-  caractère de soulignement «\code{\_}». C'est emploi n'est plus
-  permis, mais la pratique subsiste dans le mode ESS de Emacs. Ainsi,
-  taper le caractère «\code{\_}» hors d'une chaîne de caractères dans
-  Emacs génère automatiquement \verb*| <- |. Si l'on souhaite
-  véritablement obtenir le caractère de soulignement, appuyer deux
-  fois successives sur «\_».
+  caractère de soulignement «\code{\_}». Cet emploi n'est plus permis,
+  mais la pratique subsiste dans le mode ESS de Emacs. Ainsi, taper le
+  caractère «\code{\_}» hors d'une chaîne de caractères dans Emacs
+  génère automatiquement \verb*| <- |. Si l'on souhaite véritablement
+  obtenir le caractère de soulignement, il suffit d'appuyer deux fois
+  successives sur «\_».
 \end{astuce}
 
 Que ce soit dans les fichiers de script ou à la ligne de commande, on
@@ -160,14 +160,17 @@ risque de nuire à la portabilité du code.
     \code{Inf}, \code{NA}, \code{NaN}, \code{NULL}, \\
     \verb|NA_integer_|, \verb|NA_real_|, \verb|NA_complex_|,
     \verb|NA_character_|, \\
-    \code{\dots}, \code{..1}, \code{..2}, etc.
+    \code{...}, \code{..1}, \code{..2}, etc.
   \end{quote}
+  Oui, `\code{...}' (\emph{point-point-point}) est véritablement un nom
+  d'objet dans R! Son usage est expliqué à la \autoref{avance:dots}.
 \item Les variables \code{T}\index{T@\code{T}|see{\code{TRUE}}} et
   \code{F}\index{F@\code{F}|see{\code{FALSE}}} prennent par défaut les
   valeurs \objet{TRUE} et \objet{FALSE}, respectivement, mais peuvent
   être réaffectées:
 <<echo=TRUE>>=
 T
+F
 @
 <<echo=TRUE, eval=FALSE>>=
 TRUE <- 3
@@ -215,9 +218,10 @@ length(v)
 \label{bases:objets:mode}
 
 Le mode\Index{mode} prescrit ce qu'un objet peut contenir. À ce titre,
-un objet ne peut avoir qu'un seul mode. Le \autoref{tab:bases:modes} contient la liste des principaux modes
-disponibles en R. À chacun de ces modes correspond une fonction du
-même nom servant à créer un objet de ce mode.
+un objet ne peut avoir qu'un seul mode. Le \autoref{tab:bases:modes}
+contient la liste des principaux modes disponibles en R. À chacun de
+ces modes correspond une fonction du même nom servant à créer un objet
+de ce mode.
 
 \begin{table}
   \centering
@@ -263,22 +267,22 @@ qu'il contient.
 
 \begin{itemize}
 \item La longueur, au sens R du terme, d'une chaîne de caractères est
-  toujours 1. Un objet de mode \code{character} doit contenir
+  toujours $1$. Un objet de mode \code{character} doit contenir
   plusieurs chaînes de caractères pour que sa longueur soit supérieure
-  à 1:
+  à $1$:
 <<echo=TRUE>>=
 v1 <- "actuariat"
 length(v1)
 v2 <- c("a", "c", "t", "u", "a", "r", "i", "a", "t")
 length(v2)
 @
-\item On obtient le nombre de caractères dans un chaîne avec la
-  fonction \Fonction{nchar}:
+\item Il faut utiliser la fonction \Fonction{nchar} pour obtenir le
+  nombre de caractères dans une chaîne:
 <<echo=TRUE>>=
 nchar(v1)
 nchar(v2)
 @
-\item Un objet peut être de longueur 0 et doit alors être interprété
+\item Un objet peut être de longueur $0$ et doit alors être interprété
   comme un contenant qui existe, mais qui est
   vide\index{vide|see{\code{NULL}}}:
 <<echo=TRUE>>=
@@ -295,10 +299,10 @@ L'objet spécial \Objet{NULL} représente «rien», ou le vide.
 
 \begin{itemize}
 \item Son mode est \Mode{NULL}.
-\item Sa longueur est 0.
+\item Sa longueur est $0$.
 \item Toutefois différent d'un objet vide:
   \begin{itemize}
-  \item un objet de longueur 0 est un contenant vide;
+  \item un objet de longueur $0$ est un contenant vide;
   \item \code{NULL} est «pas de contenant».
   \end{itemize}
 \item La fonction \Fonction{is.null} teste si un objet est \code{NULL}
@@ -339,7 +343,7 @@ is.na(NA)
 La norme IEEE~754 régissant la représentation interne des nombres dans
 un ordinateur \citep{IEEE:754} prévoit les valeurs mathématiques
 spéciales $+\infty$ et $-\infty$ ainsi que les formes indéterminées du
-type $\frac{0}{0}$ ou $\inf - \inf$. R dispose d'objets spéciaux pour
+type $\frac{0}{0}$ ou $\infty - \infty$. R dispose d'objets spéciaux pour
 représenter ces valeurs.
 \begin{itemize}
 \item \Objet{Inf} représente $+\infty$.
@@ -357,8 +361,9 @@ représenter ces valeurs.
 
 Les attributs\Index{attribut} d'un objet sont des éléments
 d'information additionnels liés à cet objet. La liste des attributs
-les plus fréquemment rencontrés se trouve au \autoref{tab:attributs}. Pour chaque attribut, il existe une fonction du
-même nom servant à extraire l'attribut correspondant d'un objet.
+les plus fréquemment rencontrés se trouve au \autoref{tab:attributs}.
+Pour chaque attribut, il existe une fonction du même nom servant à
+extraire l'attribut correspondant d'un objet.
 
 \begin{table}
   \centering
@@ -415,7 +420,7 @@ attributes(x)
 En R, à toutes fins pratiques, \emph{tout} est un
 vecteur\index{vecteur}. Contrairement à certains autres langages de
 programmation, il n'y a pas de notion de scalaire en R; un scalaire
-est simplement un vecteur de longueur 1. Comme nous le verrons au
+est simplement un vecteur de longueur $1$. Comme nous le verrons au
 \autoref{operateurs}, le vecteur est l'unité de base dans les
 calculs.
 
@@ -438,10 +443,10 @@ names(v) <- c("a", "b", "c")
 v
 @
   Ces étiquettes font alors partie des attributs du vecteur.
-\item L'indiçage dans un vecteur se fait avec \fonction{[~]}. On
-  peut extraire un élément d'un vecteur par sa position ou par son
-  étiquette, si elle existe (auquel cas cette approche est beaucoup
-  plus sûre).
+\item L'indiçage dans un vecteur se fait avec les crochets
+  \fonction{[~]}. On peut extraire un élément d'un vecteur par sa
+  position ou par son étiquette, si elle existe (auquel cas cette
+  approche est beaucoup plus sûre).
 <<echo=TRUE>>=
 v[3]
 v["c"]
@@ -466,7 +471,7 @@ simples.
 
 \begin{itemize}
 \item Une matrice est un vecteur avec un attribut \attribut{dim} de
-  longueur 2. Cela change implicitement la classe de l'objet pour
+  longueur $2$. Cela change implicitement la classe de l'objet pour
   \indexclasse{matrix}\code{"matrix"} et, de ce fait, le mode
   d'affichage de l'objet ainsi que son interaction avec plusieurs
   opérateurs et fonctions.
@@ -495,8 +500,9 @@ array(1:24, dim = c(3, 4, 2))
   intuitives.
 
   La fonction \code{matrix} a un argument \argument{byrow} qui permet
-  d'inverser l'ordre de remplissage, mais il vaut mieux s'habituer à
-  la convention de R que d'essayer constamment de la contourner.
+  d'inverser l'ordre de remplissage. Cependant, il vaut mieux
+  s'habituer à la convention de R que d'essayer constamment de la
+  contourner.
 \end{important}
 
 L'ordre de remplissage inhabituel des tableaux rend leur manipulation
@@ -505,8 +511,8 @@ tableau de dimensions $3 \times 4 \times 5$.
 \begin{itemize}
 \item Il faut voir le tableau comme cinq matrices $3 \times 4$
   (remplies par colonne!) les unes \emph{derrière} les autres.
-\item Autrement dit, le tableau est un prisme rectangulaire haut de 3
-  unités, large de 4 et profond de 5.
+\item Autrement dit, le tableau est un prisme rectangulaire haut de $3$
+  unités, large de $4$ et profond de $5$.
 \item Si l'on ajoute une quatrième dimension, cela revient à aligner
   des prismes les uns derrière les autres, et ainsi de suite.
 \end{itemize}
@@ -570,7 +576,7 @@ des tableaux à trois et quatre dimensions.
 \end{figure}
 
 Comme pour les vecteurs, l'indiçage\index{indiçage!matrice} des
-matrices et tableaux se fait avec \fonction{[~]}.
+matrices et tableaux se fait avec les crochets \fonction{[~]}.
 \begin{itemize}
 \item On extrait un élément d'une matrice en précisant ses positions
   dans chaque dimension de celle-ci, séparées par des virgules:
@@ -626,7 +632,7 @@ qualificatif de \emph{récursif} pour ce type d'objet.
 <<echo=TRUE>>=
 (x <- list(size = c(1, 5, 2), user = "Joe", new = TRUE))
 @ %
-  Dans l'exemple ci-dessus, le premier élément de la liste est de mode
+  Ci-dessus, le premier élément de la liste est de mode
   \code{"numeric"}, le second de mode \code{"character"} et le troisième
   de mode \code{"logical"}.
 \item Nous recommandons de nommer les éléments d'une liste. En effet,
@@ -656,9 +662,9 @@ x[[1]]
   composante de la liste correspondant au premier élément du vecteur,
   puis l'élément de la composante correspondant au second élément du
   vecteur, et ainsi de suite.
-\item Une autre --- et, en fait, la meilleure --- façon d'indicer un
-  seul élément d'une liste est par le biais de l'opérateur
-  \Fonction{\$}, avec une construction \code{x\$etiquette}:
+\item Une autre --- la meilleure, en fait --- façon d'indicer un seul
+  élément d'une liste est par le biais de l'opérateur \Fonction{\$},
+  avec une construction \code{x\$etiquette}:
 <<echo=TRUE>>=
 x$size
 @ %$
@@ -717,9 +723,12 @@ section contient plus de détails sur cette procédure des plus communes
 lors de l'utilisation du langage R. On se concentre toutefois sur le
 traitement des vecteurs.
 
-L'indiçage sert principalement à deux choses: extraire des éléments
-d'un objet avec la construction \code{x[i]} ou les remplacer avec la
-construction \verb|x[i] <- y|.
+L'indiçage sert principalement à deux choses:
+\begin{inparaenum}[1)]
+\item extraire des éléments d'un objet avec la construction
+  \code{x[i]};
+\item les remplacer avec la construction \verb|x[i] <- y|.
+\end{inparaenum}
 \begin{itemize}
 \item Il est utile de savoir que ces opérations sont en fait traduites
   par l'interprète R en des appels à des fonctions nommées
@@ -858,8 +867,8 @@ x
   \begin{enumerate}
   \item Le deuxième élément de l'échantillon.
   \item Les cinq premiers éléments de l'échantillon.
-  \item Les éléments strictement supérieurs à 14.
-  \item Tous les éléments sauf les éléments en positions 6, 10 et 12.
+  \item Les éléments strictement supérieurs à $14$.
+  \item Tous les éléments sauf les éléments en positions $6$, $10$ et $12$.
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
@@ -897,7 +906,7 @@ x <- matrix(sample(1:100, 70), 7, 10)
   \item L'élément $(4, 3)$.
   \item Le contenu de la sixième ligne.
   \item Les première et quatrième colonnes (simultanément).
-  \item Les lignes dont le premier élément est supérieur à 50.
+  \item Les lignes dont le premier élément est supérieur à $50$.
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
