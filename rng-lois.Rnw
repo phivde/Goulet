@@ -75,8 +75,8 @@ et même un vecteur de paramètres. Par exemple,
 <<echo=TRUE>>=
 dpois(c(3, 0, 8), lambda = c(1, 4, 10))
 @
-retourne la probabilité que des lois de Poisson de paramètre 1, 4 et
-10 prennent les valeurs 3, 0 et 8, dans l'ordre.
+retourne la probabilité que des lois de Poisson de paramètre $1$, $4$ et
+$10$ prennent les valeurs $3$, $0$ et $8$, dans l'ordre.
 
 Le premier argument des fonctions de simulation est la quantité de
 nombres aléatoires désirée. Ainsi,
@@ -84,7 +84,7 @@ nombres aléatoires désirée. Ainsi,
 rpois(3, lambda = c(1, 4, 10))
 @
 retourne trois nombres aléatoires issus de distributions de Poisson
-de paramètre 1, 4 et 10, respectivement.  Évidemment, passer un
+de paramètre $1$, $4$ et $10$, respectivement.  Évidemment, passer un
 vecteur comme premier argument n'a pas tellement de sens, mais, si
 c'est fait, R retournera une quantité de nombres aléatoires égale à la
 \emph{longueur} du vecteur (sans égard aux valeurs contenues dans le
