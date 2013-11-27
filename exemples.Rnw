@@ -30,8 +30,8 @@ probabilités.
 \index{valeur actuelle}
 \label{exemples:vp}
 
-De manière générale, la valeur actuelle d'une série de paiements $P_1,
-P_2, \dots, P_n$ à la fin des années $1, 2, \dots, n$ est
+La valeur actuelle d'une série de paiements $P_1, P_2, \dots, P_n$ à
+la fin des années $1, 2, \dots, n$ est
 \begin{equation}
   \label{eq:vp}
   \sum_{j = 1}^n \prod_{k = 1}^j (1 + i_k)^{-1} P_j,

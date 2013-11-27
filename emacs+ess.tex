@@ -33,9 +33,9 @@ libre.
   autre) et les modes de communication entre les ordinateurs
   demeuraient rudimentaires.
 \item L'âge vénérable de Emacs transparaît à plusieurs endroits,
-  notamment dans la terminologie inhabituelle, les raccourcis
-  clavier qui ne correspondent pas aux standards d'aujourd'hui ou la
-  manipulation des fenêtres qui ne se fait pas avec une souris.
+  notamment dans la terminologie inhabituelle, les raccourcis clavier
+  non conformes aux standards d'aujourd'hui ou la manipulation des
+  fenêtres qui ne se fait pas avec une souris.
 \end{itemize}
 
 Emacs s'adapte à différentes tâches par l'entremise de \emph{modes}
@@ -163,12 +163,7 @@ sur les plateformes Windows et OS~X.
 \end{itemize}
 
 \begin{figure}[t]
-  \begin{framed}
-    \begin{minipage}{0.1\linewidth}
-      \raisebox{-1.5em}[0em][0em]{\HUGE\applekey}
-    \end{minipage}
-    \begin{minipage}[t]{0.85\linewidth}
-      \small
+  \begin{osx}
       Par défaut sous Mac OS~X, la touche \code{Meta} est assignée à
       \code{Option} (\optkey). Sur les claviers français, cela empêche
       d'accéder à certains caractères spéciaux tels que [, ], \{ ou
@@ -191,8 +186,7 @@ sur les plateformes Windows et OS~X.
 (setq-default ns-command-modifier 'meta)
 (setq-default ns-option-modifier 'none)
 \end{verbatim}
-    \end{minipage}
-  \end{framed}
+  \end{osx}
 \end{figure}
 
 

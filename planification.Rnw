@@ -1,7 +1,7 @@
 \chapter[Planification d'une simulation en R]{%
   Planification d'une simulation \\ en R}
 \index{simulation!planification|(}
-\label{planification}
+\label{planification} %|
 
 <<echo=FALSE>>=
 options(width = 60)
@@ -117,7 +117,7 @@ selon le classement des variances empiriques.
 
 La façon la plus intuitive de mettre en {\oe}uvre cette étude de
 simulation en R consiste à utiliser une boucle \fonction{for}. Avec
-cette approche, il est nécessaire d'initialiser une matrice de 3
+cette approche, il est nécessaire d'initialiser une matrice de $3$
 lignes et $N$ colonnes (ou l'inverse) dans laquelle seront stockées
 les valeurs des trois estimateurs pour chaque simulation. Une fois la
 matrice remplie dans la boucle, il ne reste plus qu'à calculer la
