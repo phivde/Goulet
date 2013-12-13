@@ -147,7 +147,9 @@ sur les plateformes Windows et OS~X.
   \item \code{ESC} est la touche \code{Échap} (\esckey) et
     est équivalente à \code{Meta};
   \item \code{SPC} est la barre d'espacement;
-  \item \code{RET} est la touche \code{Entrée} (\returnkey).
+  \item \code{DEL} est la touche \code{Retour arrière} (\delkey) ---
+    \emph{et non la touche} \code{Supprimer}.
+  \item \code{RET} est la touche \code{Entrée} (\returnkey);
   \end{itemize}
 \item Toutes les fonctionnalités de Emacs correspondent à une commande
   pouvant être tapée dans le \emph{minibuffer}. \code{M-x} démarre
@@ -164,20 +166,19 @@ sur les plateformes Windows et OS~X.
 
 \begin{figure}[t]
   \begin{osx}
-      Par défaut sous Mac OS~X, la touche \code{Meta} est assignée à
-      \code{Option} (\optkey). Sur les claviers français, cela empêche
-      d'accéder à certains caractères spéciaux tels que [, ], \{ ou
-      \}.
+    Par défaut sous Mac OS~X, la touche \code{Meta} est assignée à
+    \code{Option} (\optkey). Sur les claviers français, cela empêche
+    d'accéder à certains caractères spéciaux tels que [, ], \{ ou \}.
 
-      Une solution consiste à plutôt assigner la touche \code{Meta} à
-      \code{Commande} (\cmdkey). Cela bloque alors l'accès à certains
-      raccourcis Mac, mais la situation est moins critique ainsi.
+    Une solution consiste à plutôt assigner la touche \code{Meta} à
+    \code{Commande} (\cmdkey). Cela bloque alors l'accès à certains
+    raccourcis Mac, mais la situation est moins critique ainsi.
 
-      Pour assigner la touche \code{Meta} à \code{Commande} (\cmdkey)
-      et laisser la touche \code{Option} (\optkey) jouer son rôle
-      usuel, il suffit d'insérer les lignes suivantes dans son fichier
-      de configuration \code{.emacs} (voir la
-      \autoref{emacs+ess:configuration}):
+    Pour assigner la touche \code{Meta} à \code{Commande} (\cmdkey) et
+    laisser la touche \code{Option} (\optkey) jouer son rôle usuel, il
+    suffit d'insérer les lignes suivantes dans son fichier de
+    configuration \code{.emacs} (voir la
+    \autoref{emacs+ess:configuration}):
 \begin{verbatim}
 ;;; ====================================
 ;;;  Assigner la touche Meta à Commande
@@ -244,6 +245,38 @@ raccourci clavier.
 \item[\emacs{M-\%}] rechercher et remplacer
   (\code{query-replace})\index{Emacs!rechercher et remplacer}
 \end{ttscript}
+
+
+\subsection{Déplacements simples du curseur}
+\index{Emacs!déplacement}
+\label{emacs+ess:commandes:deplacement}
+
+\begin{ttscript}{C-DEL | C-w}
+  \raggedright
+\item[\emacs{C-b} | \emacs{C-f}] déplacer d'un caractère vers l'arrière~|~l'avant
+  (\code{backward-char} | \code{forward-char})
+\item[\emacs{C-a} | \emacs{C-e}] aller au début~|~fin de la ligne
+  (\code{move-beginning-of-line} | \code{move-end-of-line})
+\item[\emacs{C-p} | \emacs{C-n}] aller à la ligne précédente~|~suivante
+  (\code{previous-line} | \code{next-line})
+\item[\emacs{M-<} | \emacs{M->}] aller au début~|~fin du fichier
+  (\code{beginning-of-buffer} | \code{end-of-buffer}) \\[\baselineskip]
+\item[\emacs{DEL} | \emacs{C-d}] effacer le caractère à
+  gauche~|~droite du curseur (\code{delete-backward-char} | \code{delete-char})
+\item[\emacs{M-DEL} | \emacs{M-d}] effacer le mot à gauche~|~droite
+  du curseur (\code{backward-kill-word} | \code{kill-word})
+\item[\emacs{C-k}] supprimer jusqu'à la fin de la ligne (\code{kill-line})
+\end{ttscript}
+
+\begin{figure}[h]
+  \begin{osx}
+    Plusieurs des raccourcis clavier de Emacs composés avec la touche
+    \code{Contrôle} (\ctlkey) sont valides sous Mac OS~X. Par exemple,
+    \ctlkey\,\code{A} et \ctlkey\,\code{E} déplacent le curseur au
+    début et à la fin de la ligne dans les champs texte.
+  \end{osx}
+\end{figure}
+
 
 \subsection{Sélection de texte, copier, coller, couper}
 \index{Emacs!sélection}
@@ -324,10 +357,10 @@ Quelques autres fonctions utiles:
 \subsection{Interaction avec l'invite de commande R}
 \label{emacs+ess:commandes:invite}
 
-\begin{ttscript}{C-x C-w}
+\begin{ttscript}{C-x | C-w}
   \raggedright
-\item[\ess{M-p}, \ess{M-n}] navigation dans l'historique des
-  commandes (\code{previous-matching-history-from-input},
+\item[\ess{M-p} | \ess{M-n}] commande précédente~|~suivante
+  dans l'historique (\code{previous-matching-history-from-input},
   \code{next-matching-history-from-input})
 \item[\ess{C-c C-e}] replacer la dernière ligne au bas de la fenêtre
   (\code{comint-show-maximum-output})
@@ -345,10 +378,9 @@ Quelques autres fonctions utiles:
 
 \begin{ttscript}{m, m}
   \raggedright
-\item[\ess{n}, \ess{p}] aller à la section suivante (\code{n}) ou
-  précédente (\code{p}) de la rubrique
-  (\code{ess-skip-to-next-section},
-  \code{ess-skip-to-previous-section})
+\item[\ess{p} | \ess{n}] aller à la section précédente~|~suivante de
+  la rubrique (\code{ess-skip-to-previous-section} |
+  \code{ess-skip-to-next-section})
 \item[\ess{s a}] aller à la section de la liste des arguments \emph{(Arguments)}
 \item[\ess{s D}] aller à la section des détails sur la fonction \emph{(Details)}
 \item[\ess{s v}] aller à la section sur la valeur retournée par la
