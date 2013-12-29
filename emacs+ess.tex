@@ -1,19 +1,27 @@
 \chapter{GNU Emacs et ESS: la base}
 \label{emacs+ess}
 
-Emacs est l'Éditeur de texte des éditeurs de texte. Conçu à l'origine
-comme un éditeur pour les programmeurs (avec des modes spéciaux pour
-une multitude de langages différents), Emacs est devenu au fil du
-temps un environnement logiciel en soi dans lequel on peut réaliser
-une foule de tâches différentes: rédiger des documents \LaTeX,
-interagir avec R, SAS ou un logiciel de base de données, consulter son
-courrier électronique, gérer son calendrier ou même jouer à Tetris!
+Emacs est l'Éditeur de texte des éditeurs de texte. À l'origine un
+éditeur pour les programmeurs (avec des modes spéciaux pour une
+multitude de langages différents), Emacs est devenu au fil du temps un
+environnement logiciel en soi dans lequel on peut réaliser une foule
+de tâches différentes: rédiger des documents \LaTeX, interagir avec R,
+SAS ou un logiciel de base de données, consulter son courrier
+électronique, gérer son calendrier ou même jouer à Tetris!
 
 Cette annexe passe en revue les quelques commandes essentielles à
 connaître pour commencer à travailler avec GNU Emacs et le mode ESS.
 L'ouvrage de \cite{Cameron:Emacs:2004} constitue une excellente
 référence pour l'apprentissage plus poussé de l'éditeur.
 
+\setkeys{Gin}{width=370pt} % 1/2 la largeur de l'image insérée
+\begin{figure}[t]
+  \centering
+  \includegraphics{emacs.png} \\
+  \footnotesize\sffamily\flushleft\vspace{-\baselineskip}%
+  Tiré de \href{http://xkcd.com/378/}{XKCD.com}
+\end{figure}
+\setkeys{Gin}{width=0.8\textwidth}
 
 \section{Mise en contexte}
 \label{emacs+ess:contexte}
@@ -133,9 +141,9 @@ mode pour chaque \emph{buffer}.
 \label{emacs+ess:ismes}
 
 Emacs possède sa propre terminologie qu'il vaut mieux connaître
-lorsque l'on consulte la documentation. De plus, l'éditeur fait
-siennes certaines conventions du monde Unix et qui sont moins usitées
-sur les plateformes Windows et OS~X.
+lorsque l'on consulte la documentation. De plus, l'éditeur utilise des
+conventions du monde Unix qui sont moins usitées sur les plateformes
+Windows et OS~X.
 
 \begin{itemize}
 \item Dans les définitions de raccourcis claviers:
@@ -475,9 +483,8 @@ facettes est configurable: couleurs, polices de caractère, raccourcis
 clavier, etc.
 
 \begin{itemize}
-\item Un utilisateur place ses commandes de configuration dans un
-  fichier nommé \code{.emacs} (le point est important!) que Emacs lit
-  au démarrage.
+\item Les commandes de configuration sont réunies dans un fichier nommé
+  \code{.emacs} (le point est important!) que Emacs lit au démarrage.
 \item Le fichier \code{.emacs} doit se trouver dans le dossier
   \,\verb=~/=, c'est-à-dire dans le dossier de départ de l'utilisateur
   sous Linux et OS~X, et dans le dossier référencé par la variable

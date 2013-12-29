@@ -21,9 +21,8 @@ maintenant par le biais de quelques exemples résolus. On y met
 particulièrement en évidence les avantages de l'approche vectorielle
 du langage R.
 
-La compréhension du contexte de ces exemples requiert quelques
-connaissances de base en mathématiques financières et en théorie des
-probabilités.
+Les exemples font appel à quelques connaissances de base en
+mathématiques financières et en théorie des probabilités.
 
 
 \section{Calcul de valeurs actuelles}
@@ -205,7 +204,7 @@ x <- 4
 <<3(a)-2>>=
 pgamma(x, alpha)
 @
-    On peut aussi éviter de générer essentiellement la même suite de
+    On peut éviter de générer essentiellement la même suite de
     nombres à deux reprises en ayant recours à une variable
     intermédiaire. Au risque de rendre le code un peu moins lisible (mais
     plus compact!), l'affectation et le calcul final peuvent même se faire
@@ -331,7 +330,7 @@ biscuits, on change le premier biscuit de plat et on y range aussi le
 second biscuit. Arrivé au troisième biscuit, le petit manège
 recommence, et ainsi de suite jusqu'à ce que le plateau de biscuits
 soit épuisé. C'est ce que nous nommerons, non sans un sourire en coin,
-le Syndrôme de la plaque à biscuits{\texttrademark}.
+le Syndrôme de la plaque à biscuits{\texttrademark}\index{Syndrôme de la plaque à biscuits}\index{biscuits|see{Syndrôme}}.
 
 Le petit manège décrit ci-dessus se reproduit à l'identique dans la
 mémoire de l'ordinateur, l'odeur des bons biscuits chauds en moins. En

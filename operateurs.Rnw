@@ -522,7 +522,7 @@ La \ul{fonction \texttt{outer}}\marginpar{\video}\Indexfonction{outer}
 calcule le produit extérieur entre deux vecteurs. Ce n'est pas la
 fonction la plus intuitive à utiliser, mais elle s'avère extrêmement
 utile pour faire plusieurs opérations en une seule expression tout en
-évitant les boucles. La syntaxe \fonction{outer} est
+évitant les boucles. La syntaxe de \fonction{outer} est:
 \begin{quote}
   \code{outer(X, Y, FUN)}
 \end{quote}

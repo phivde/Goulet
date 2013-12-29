@@ -723,13 +723,13 @@ section contient plus de détails sur cette procédure des plus communes
 lors de l'utilisation du langage R. On se concentre toutefois sur le
 traitement des vecteurs.
 
-L'indiçage sert principalement à deux choses:
-\begin{inparaenum}[1)]
-\item extraire des éléments d'un objet avec la construction
-  \code{x[i]};
-\item les remplacer avec la construction \verb|x[i] <- y|.
-\end{inparaenum}
 \begin{itemize}
+\item L'indiçage sert principalement à deux choses:
+  \begin{inparaenum}[1)]
+  \item extraire des éléments d'un objet avec la construction
+    \code{x[i]};
+  \item les remplacer avec la construction \verb|x[i] <- y|.
+  \end{inparaenum}
 \item Il est utile de savoir que ces opérations sont en fait traduites
   par l'interprète R en des appels à des fonctions nommées
   \Fonction{[} et \Fonction{[<-}, dans l'ordre.

@@ -83,6 +83,10 @@ commandes soient exécutées. Par opposition, les programmes de langages
 d'abord convertis en code machine par le compilateur puis directement
 exécutés par l'ordinateur.
 
+Cela signifie donc que lorsque l'on programme en R, il n'est pas
+possible de plaider l'attente de la fin de la phase de compilation
+pour perdre son temps au travail. Désolé!
+
 Le programme que l'on lance lorsque l'on exécute R est en fait
 l'interprète. Celui-ci attend que l'on lui soumette des commandes dans
 le langage R, commandes qu'il exécutera immédiatement, une à une et

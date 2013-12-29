@@ -30,7 +30,7 @@ rédacteurs des rubriques d'aide, mais bel et bien un argument formel
 dont `\Argument{...}' est le nom.
 \begin{itemize}
 \item Cet argument signifie qu'une fonction peut accepter un ou
-  plusieurs autres arguments autres que ceux faisant partie de sa
+  plusieurs arguments autres que ceux faisant partie de sa
   définition.
 \item Le contenu de l'argument `\code{...}' n'est ni pris en compte,
   ni modifié par la fonction. Il est généralement simplement passé tel
@@ -146,7 +146,7 @@ list(FUN(X[[1]], ...),
 @ %
   Le premier argument de la fonction \fonction{sample} est \code{x}.
   Dans l'expression ci-dessus, cet argument est passé à
-  la fonction via l'argument `\code{...}'. Par conséquent, les
+  la fonction via l'argument `\code{...}' de \code{lapply}. Par conséquent, les
   valeurs successives de \verb|5:8| servent comme deuxième argument à
   la fonction \fonction{sample}, soit la taille de l'échantillon.
 \item On peut ensuite calculer la moyenne de chacun des vecteurs
