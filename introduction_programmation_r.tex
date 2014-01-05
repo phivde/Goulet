@@ -1,48 +1,80 @@
 \documentclass[letterpaper,11pt]{memoir}
-  \usepackage[utf8]{inputenc}
-  \usepackage{fourier}                 % texte en Utopia
-  \usepackage[scaled=0.82]{beramono}   % code en Bera
-  \renewcommand{\sfdefault}{Myriad-LF} % titres en MyriadPro
   \usepackage{natbib,url}
   \usepackage[english,francais]{babel}
   \usepackage[autolanguage]{numprint}
-  \usepackage{vgmath,actu,amsmath,amsthm,icomma}
+  \usepackage{actuarialangle,amsmath,amsthm,icomma}
   \usepackage[noae]{Sweave}
   \usepackage{paralist}
   \usepackage[shortlabels]{enumitem}
   \usepackage{textpos}
-  \usepackage{graphicx,color}
-  \usepackage{MnSymbol,applekeys}      % symboles spéciaux
-  \usepackage{expdlist}
-  \usepackage{listingsutf8,answers}
+  \usepackage{graphicx,soulutf8}
+  \usepackage{manfnt}                  % \mantriangleright (puce)
+  \usepackage{marvosym}                % \Forward et \ForwardToEnd
+  \usepackage{metalogo}                % \XeLaTeX logo
+  \usepackage{applekeys}               % touches Mac
+  \usepackage{wasysym}                 % \leadsto
+  \usepackage{answers,listings}
   \usepackage{pdfpages}
-
-  %%%  Couleurs
-  \definecolor{comments}{rgb}{0.7,0,0}
-  \definecolor{shadecolor}{gray}{0}
-  \definecolor{link}{rgb}{0,0,0.3}
-
-  %%% Hyperliens
-  \usepackage{hyperref}
-  \hypersetup{colorlinks,allcolors=link}
 
   %%% ============
   %%%  Page titre
   %%% ============
   \title{%
-    \fontseries{b}\fontsize{42}{42}\selectfont Introduction à la \\
-                                               programmation en R}
+    \bfseries\fontsize{42}{42}\selectfont Introduction à la \\
+                                          programmation en R}
   \author{%
-    \fontseries{m}\fontsize{24}{24}\selectfont Vincent Goulet \\
-    \fontseries{m}\fontsize{16}{24}\selectfont École d'actuariat,
-                                               Université Laval}
+    \mdseries\fontsize{24}{24}\selectfont Vincent Goulet \\
+    \mdseries\fontsize{16}{24}\selectfont École d'actuariat,
+                                          Université Laval}
   \date{%
-    \fontseries{m}\fontsize{16}{18}\selectfont Troisième édition}
-  \newcommand{\ISBN}{978-2-9811416-2-0}
+    \mdseries\fontsize{16}{18}\selectfont Troisième édition}
+  \newcommand{\ISBN}{978-2-9811416-x-x}
 
   %%% ===================
-  %%%  STYLE DU DOCUMENT
+  %%%  Style du document
   %%% ===================
+
+  %% Polices de caractères
+  \usepackage{fontspec}
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX}
+  \setmainfont[Scale=0.92,Numbers=OldStyle]{Lucida Bright OT}
+  \setmathfont[Scale=0.92]{Lucida Bright Math OT}
+  \setsansfont[Scale=1.0,Numbers=OldStyle]{Myriad Pro}
+  \setmonofont[Scale=0.88]{Bitstream Vera Sans Mono}
+  \newfontfamily\fullcaps[Letters=Uppercase,Numbers=Uppercase]{Myriad Pro}
+  \usepackage{microtype}
+
+  %% Couleurs
+  \usepackage{xcolor}
+  \definecolor{comments}{rgb}{0.7,0,0}
+  \definecolor{shadecolor}{gray}{0}
+  \definecolor{link}{rgb}{0,0.4,0.6}   % ~RoyalBlue de dvips
+  \definecolor{url}{rgb}{0.6,0,0}      % rouge-brun
+  \definecolor{citation}{rgb}{0,0.5,0} % vert foncé
+
+  %% Hyperliens
+  \usepackage{hyperref}
+  \hypersetup{colorlinks, linktocpage,
+    urlcolor=url, linkcolor=link, citecolor=citation,
+    bookmarksopen, bookmarksnumbered, bookmarksdepth=subsubsection,
+    pdfauthor={Vincent Goulet}}
+  \renewcommand{\appendixautorefname}{annexe}
+  \renewcommand{\figureautorefname}{figure}
+  \newcommand{\subfigureautorefname}{figure}
+  \renewcommand{\tableautorefname}{tableau}
+  \newcommand{\subtableautorefname}{tableau}
+  \newcommand{\thmautorefname}{théorème}
+  \newcommand{\exempleautorefname}{exemple}
+  \newcommand{\definitionautorefname}{définition}
+  \newcommand{\algorithmeautorefname}{algorithme}
+  \newcommand{\exerciceautorefname}{exercice}
+
+  %% Table des matières (inspirée de classicthesis.sty)
+  \renewcommand{\cftchapterleader}{\hspace{1.5em}}
+  \renewcommand{\cftchapterafterpnum}{\cftparfillskip}
+  \renewcommand{\cftsectionleader}{\hspace{1.5em}}
+  \renewcommand{\cftsectionafterpnum}{\cftparfillskip}
 
   %% Titres des chapitres
   \chapterstyle{hangnum}
@@ -62,28 +94,15 @@
   \setsecnumdepth{subsection}
 
   %% Listes. Paramétrage avec enumitem.
-  \setenumerate{leftmargin=*,align=left}
-  \setenumerate[2]{label=\alph*)}
-  \setenumerate[3]{label=\roman*),align=right}
-  \setitemize{leftmargin=*,align=left}
-
-  %% Noms de fonctions, code, etc.
-  \newcommand{\code}[1]{\texttt{#1}}
-  \newcommand{\pkg}[1]{\textbf{#1}} % utilisé dans la bibliographie
-
-  %% Environnements d'exemples et al.
-  \theoremstyle{plain}
-  \newtheorem{ex}{Exemple}[chapter]
-  \theoremstyle{remark}
-  \newtheorem*{rem}{Remarque}
-  \newtheorem*{rems}{Remarques}
-  \theoremstyle{definition}
-  \newtheorem*{astuce}{Astuce}
+  \setlist[enumerate]{leftmargin=*,align=left}
+  \setlist[enumerate,2]{label=\alph*),labelsep=*,leftmargin=1.5em}
+  \setlist[enumerate,3]{label=\roman*),labelsep=*,leftmargin=1.5em,align=right}
+  \setlist[itemize]{leftmargin=*,align=left}
 
   %% Options de babel
   \frenchbsetup{CompactItemize=false,%
     ThinSpaceInFrenchNumbers=true,
-    ItemLabeli=$\filledtriangleright$,
+    ItemLabeli=\mantriangleright,
     ItemLabelii=\textendash}
   \addto\captionsfrench{\def\figurename{{\scshape Fig.}}}
   \addto\captionsfrench{\def\tablename{{\scshape Tab.}}}
@@ -91,6 +110,17 @@
   %%% =========================
   %%%  Nouveaux environnements
   %%% =========================
+
+  %% Environnements d'exemples et al.
+  \theoremstyle{plain}
+  \newtheorem{ex}{Exemple}[chapter]
+
+  \theoremstyle{remark}
+  \newtheorem*{rem}{Remarque}
+  \newtheorem*{rems}{Remarques}
+
+  \theoremstyle{definition}
+  \newtheorem*{astuce}{Astuce}
 
   %% Listes d'objectifs au début des chapitres
   \newenvironment{objectifs}{%
@@ -101,8 +131,8 @@
         \noindent\sffamily\bfseries\textcolor{white}{Objectifs du chapitre}
       \end{shaded}
       \vspace{-0.6\baselineskip}
-      \begin{itemize}[nolistsep]
-        \small}
+      \begin{itemize}[nosep]
+        \small\sffamily}
       {\end{itemize}
     \end{framed}}
 
@@ -116,22 +146,54 @@
   %% Exercices et réponses
   \Newassociation{rep}{reponse}{reponses}
   \newcounter{exercice}[chapter]
+  \renewcommand{\theexercice}{\thechapter.\arabic{exercice}}
   \newenvironment{exercice}{%
-    \begin{list}{\bfseries \thechapter.\arabic{exercice}}{%
+    \begin{list}{}{%
         \refstepcounter{exercice}
+        \hypertarget{ex:\theexercice}{}
+        \Writetofile{solutions}{\protect\hypertarget{sol:\theexercice}{}}
+        \renewcommand{\makelabel}{%
+          \bfseries\protect\hyperlink{sol:\theexercice}{\theexercice}}
         \settowidth{\labelwidth}{\bfseries \thechapter.\arabic{exercice}}
         \setlength{\leftmargin}{\labelwidth}
         \addtolength{\leftmargin}{\labelsep}
-        \setenumerate[1]{leftmargin=*,label=\alph*),widest=a}
-        \setenumerate[2]{leftmargin=*,label=\roman*)}}
+        \setlist[enumerate,1]{label=\alph*),labelsep=*,leftmargin=1.5em}
+        \setlist[enumerate,2]{label=\roman*),labelsep=0.5em,align=right}}
       \item}
     {\end{list}}
   \renewenvironment{reponse}[1]{%
-    \begin{enumerate}[label=#1,font=\bfseries]
-      \setenumerate[2]{leftmargin=*,labelsep=0em}
+    \begin{list}{}{%
+        \renewcommand{\makelabel}{%
+          \bfseries\protect\hyperlink{ex:#1}{#1}}
+        \settowidth{\labelwidth}{\bfseries #1}
+        \setlength{\leftmargin}{\labelwidth}
+        \addtolength{\leftmargin}{\labelsep}
+        \setlist[enumerate,1]{label=\alph*),labelsep=*,leftmargin=1.5em}
+        \setlist[enumerate,2]{label=\roman*),labelsep=0.5em,align=right}}
       \item}
-    {\end{enumerate}}
-  \renewcommand{\reponseparams}{{\thechapter.\theexercice}}
+    {\end{list}}
+
+  %% Remarques importantes
+  \newenvironment{important}{%
+    \begin{framed}%
+      \noindent
+      \begin{minipage}{0.1\linewidth}
+        \raisebox{-22pt}[0em][0em]{\bfseries\fontsize{40}{22}\selectfont !}
+      \end{minipage}
+      \begin{minipage}[t]{0.88\linewidth}}
+      {\end{minipage}%
+    \end{framed}}
+
+  %% Remarques spécifiques OS X
+  \newenvironment{osx}{%
+    \begin{framed}%
+      \noindent
+      \begin{minipage}{0.1\linewidth}
+        \raisebox{-1.5em}[0em][0em]{\HUGE\applekey}
+      \end{minipage}
+      \begin{minipage}[t]{0.88\linewidth}}
+      {\end{minipage}%
+    \end{framed}}
 
   %% Listes de commandes
   \newenvironment{ttscript}[1]{%
@@ -142,7 +204,7 @@
         \addtolength{\leftmargin}{\labelsep}
         \setlength{\parsep}{0.5ex plus0.2ex minus0.2ex}
         \setlength{\itemsep}{0.3ex}
-        \renewcommand{\makelabel}[1]{\fbox{##1}\hfill}}}
+        \renewcommand{\makelabel}[1]{\fbox{\vphantom{|}##1}\hfill}}}
     {\end{list}}
 
   %% Chapitre Opérateurs: environnements pour placer côte à côte des
@@ -163,20 +225,41 @@
       \setleftmargin{\parindent}]}
     {\end{description}}
 
-  %%% Remarques importantes
-  \newenvironment{important}{%
-    \begin{framed}%
-      \noindent
-      \begin{minipage}{0.1\linewidth}
-        \raisebox{-0.5em}[0em][0em]{\LARGE\danger}
-      \end{minipage}
-      \begin{minipage}[t]{0.85\linewidth}}
-      {\end{minipage}%
-    \end{framed}}
+  %%% =====================
+  %%%  Nouvelles commandes
+  %%% =====================
 
-  %%% =============================================
-  %%%  Paramètres pour les sections de code source
-  %%% =============================================
+  %% Noms de fonctions, code, etc.
+  \newcommand{\code}[1]{\texttt{#1}}
+  \newcommand{\pkg}[1]{\textbf{#1}}
+
+  %% Indications de capsule vidéo
+  \setul{1.5pt}{0.7pt}
+  \newcommand{\video}{%
+    $\mathrel{\vcenter{\offinterlineskip%
+        \bfseries\fontsize{32}{32}\selectfont
+        \hbox{$\bigcirc$}%
+        \fontsize{22}{22}\selectfont\vskip-18.2pt\hskip8.8pt
+        \hbox{\Forward}}}$}
+  \newcommand{\capsule}[1]{\marginpar{\video}\ul{#1}}
+
+  %% Raccourcis usuels vg
+  \newcommand{\pt}{{\scriptscriptstyle \Sigma}}
+  \newcommand{\abs}[1]{\lvert #1 \rvert}
+  \newcommand{\norme}[1]{\lVert #1 \rVert}
+  \newcommand{\mat}[1]{\mathbf{#1}}
+  \newcommand{\diag}{\operatorname{diag}}
+  \newcommand{\Esp}[1]{E\! \left[ #1 \right]}
+  \newcommand{\esp}[1]{E [ #1 ]}
+  \newcommand{\Var}[1]{\operatorname{Var}\! \left[ #1 \right]}
+  \newcommand{\var}[1]{\operatorname{Var} [ #1 ]}
+  \newcommand{\Prob}[1]{\operatorname{Pr}\! \left[ #1 \right]}
+  \newcommand{\prob}[1]{\operatorname{Pr} [ #1 ]}
+  % \newcommand{\R}{\mathbb{R}}   % ensemble des réels
+
+  %%% =========================
+  %%%  Sections de code source
+  %%% =========================
   \lstloadlanguages{R}
   \lstdefinelanguage{Renhanced}[]{R}{%
     morekeywords={colMeans,colSums,head,is.na,is.null,mapply,ms,na.rm,%
@@ -233,6 +316,10 @@
   \newcommand{\emacs}[1]{\code{#1}\indexemacs{#1}}
   \newcommand{\ess}[1]{\code{#1}\indexess{#1}}
   \makeindex
+
+  %%% =======
+  %%%  Varia
+  %%% =======
 
   %%% Sous-figures
   \newsubfloat{figure}
