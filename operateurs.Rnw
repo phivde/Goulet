@@ -106,9 +106,10 @@ expressions R.
     \Fonction{<}\, \Fonction{<=}\, \Fonction{==}\, \Fonction{>=}\,
     \Fonction{>}\, \verb|!=|\Index{"!=@\code{"!=}} & plus petit, plus petit ou égal, égal,
     plus grand ou égal, plus grand, différent de \\
-    \verb|!|\Index{"!@\code{"!}}  & négation logique \\
+    \verb=!=\Index{"!@\code{"!}}  & négation logique \\
     \Fonction{\&}\, \Fonction{\&\&} & «et» logique \\
-    \Fonction{|}\, \Fonction{||}    & «ou» logique \\
+    \code{\textbar}\Index{{"|}@\code{\textbar}},
+    \code{\textbar\textbar}\Index{{"|"|}@\code{\textbar\textbar}}    & «ou» logique \\
     \fonction{->}\, \verb|->>|\index{->>@\verb=->>=|bfhyperpage} & assignation \\
     \fonction{<-}\, \verb|<<-|\index{<<-@\verb=<<-=|bfhyperpage} & assignation \\
     \bottomrule
@@ -229,13 +230,15 @@ sort(c(4, -1, 2, 6))
 <<echo=TRUE>>=
 rank(c(4, -1, 2, 6))
 @
-\item[\code{\ul{order}}] \Indexfonction{order}
-  ordre\index{ordre}\marginpar{\video} d'extraction des
+\item[\href{http://youtu.be/order}{\Fonction{order}}]
+  ordre\index{ordre}\capsule{http://youtu.be/order}{} d'extraction des
   éléments d'un vecteur pour les placer en ordre croissant ou
   décroissant
 <<echo=TRUE>>=
 order(c(4, -1, 2, 6))
 @
+
+
 \item[\Fonction{rev}] renverser\index{renverser un vecteur} un vecteur
 <<echo=TRUE>>=
 rev(1:10)
@@ -518,7 +521,9 @@ diag(x)
 \subsection{Produit extérieur}
 \index{produit!extérieur}
 
-La \ul{fonction \texttt{outer}}\marginpar{\video}\Indexfonction{outer}
+La %
+\capsule{http://youtu.be/outer}{fonction \code{outer}}%
+\Indexfonction{outer} %
 calcule le produit extérieur entre deux vecteurs. Ce n'est pas la
 fonction la plus intuitive à utiliser, mais elle s'avère extrêmement
 utile pour faire plusieurs opérations en une seule expression tout en
@@ -533,6 +538,7 @@ par défaut) entre chacun des éléments de \code{X} et chacun des
   \code{FUN(X[i], Y[j])}
 \end{quote}
 pour toutes les valeurs des indices \code{i} et \code{j}.
+
 \begin{itemize}
 \item La dimension du résultat est par conséquent \code{c(dim(X),
     dim(Y))}.

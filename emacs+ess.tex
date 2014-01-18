@@ -276,7 +276,7 @@ raccourci clavier.
 \item[\emacs{C-k}] supprimer jusqu'à la fin de la ligne (\code{kill-line})
 \end{ttscript}
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \begin{osx}
     Plusieurs des raccourcis clavier de Emacs composés avec la touche
     \code{Contrôle} (\ctlkey) sont valides sous Mac OS~X. Par exemple,
@@ -411,9 +411,10 @@ Quelques autres fonctions utiles:
 \section{Anatomie d'une session de travail (bis)}
 \label{emacs+ess:session}
 
-On reprend ici les étapes d'une \capsule{session de travail} type
-présentées à la \autoref{presentation:session}, mais en expliquant
-comment compléter chacune dans Emacs avec le mode ESS.
+On reprend ici l'idée de la \autoref{presentation:session}, mais en
+présentant cette fois les étapes d'une %
+\capsule{http://youtu.be/xiNnHegDau8}{session de travail avec Emacs et
+  le mode ESS}.
 
 \begin{enumerate}
 \item Lancer Emacs et ouvrir un fichier de script avec
@@ -483,8 +484,11 @@ facettes est configurable: couleurs, polices de caractère, raccourcis
 clavier, etc.
 
 \begin{itemize}
-\item Les commandes de configuration sont réunies dans un fichier nommé
-  \code{.emacs} (le point est important!) que Emacs lit au démarrage.
+\item On modifie le comportement et l'apparence de l'éditeur par le
+  biais de commandes réunies dans un %
+  \capsule{http://youtu.be/IsyQn7d2Ao0}{fichier de configuration} %
+  nommé \code{.emacs} (le point est important!) que Emacs lit au
+  démarrage.
 \item Le fichier \code{.emacs} doit se trouver dans le dossier
   \,\verb=~/=, c'est-à-dire dans le dossier de départ de l'utilisateur
   sous Linux et OS~X, et dans le dossier référencé par la variable

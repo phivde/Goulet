@@ -7,8 +7,10 @@ système ou d'en ajouter de nouvelles. Les packages sont normalement
 installés depuis le site \emph{Comprehensive R Archive Network} (CRAN;
 \url{http://cran.r-project.org}).
 
-Cette annexe explique comment \capsule{configurer R} pour faciliter
-l'installation et l'administration de packages externes.
+Cette annexe explique comment configurer R pour faciliter l'%
+\capsule{http://youtu.be/DL48oi2RKjM}{installation et l'administration
+  de packages} %
+externes.
 
 Les instructions ci-dessous sont centrées autour de la création d'une
 bibliothèque personnelle où seront installés les packages R
@@ -38,7 +40,9 @@ M-x getenv RET HOME RET
   Nous référerons à ce dossier par le symbole \verb=~=.
 \item Créer un dossier qui servira de bibliothèque de packages
   personnelle. Dans la suite, nous utiliserons \verb=~/R/library=.
-\item Dans un fichier nommé \verb=~/.Renviron= (donc situé dans le
+\item La configuration de R se fait à l'aide simples fichiers texte,
+  comme pour GNU~Emacs; voir la \autoref{emacs+ess:configuration}.
+  Ainsi, dans un fichier nommé \verb=~/.Renviron= (donc situé dans le
   dossier de départ), enregistrer la ligne suivante:
 \begin{verbatim}
 R_LIBS_USER="~/R/library
@@ -69,8 +73,8 @@ R.
 
 Après un redémarrage de R, la bibliothèque personnelle aura préséance
 sur la bibliothèque principale et il ne sera plus nécessaire de
-préciser le site miroir de CRAN lors de l'\capsule{installation de
-  packages}. Ainsi, la simple commande
+préciser le site miroir de CRAN lors de l'installation de packages.
+Ainsi, la simple commande
 \begin{Schunk}
 \begin{Sinput}
 > install.packages("actuar")

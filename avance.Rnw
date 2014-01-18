@@ -45,7 +45,9 @@ dont `\Argument{...}' est le nom.
 \section{Fonction \code{apply}}
 \label{avance:apply}
 
-La \ul{fonction \texttt{apply}}\marginpar{\video}\Indexfonction{apply}
+La %
+\capsule{http://youtu.be/apply}{fonction \texttt{apply}}%
+\Indexfonction{apply} %
 sert à appliquer une fonction quelconque sur une partie d'une
 matrice\index{matrice} ou, plus généralement, d'un
 tableau\index{tableau}. La syntaxe de la fonction est la suivante:

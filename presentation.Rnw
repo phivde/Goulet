@@ -65,11 +65,11 @@ projet R \citep{Chambers:R:2008}.
 \section{Description sommaire de R}
 \label{presentation:description}
 
-\ul{R}\marginpar{\video} est un environnement intégré de manipulation
-de données, de calcul et de préparation de graphiques. Toutefois, ce
-n'est pas seulement un «autre» environnement statistique (comme SPSS
-ou SAS, par exemple), mais aussi un langage de programmation complet
-et autonome.
+\capsule{http://youtu.be/presentation}{R} est un environnement intégré
+de manipulation de données, de calcul et de préparation de graphiques.
+Toutefois, ce n'est pas seulement un «autre» environnement statistique
+(comme SPSS ou SAS, par exemple), mais aussi un langage de
+programmation complet et autonome.
 
 Tel que mentionné précédemment, le R est un langage principalement
 inspiré du S et de Scheme\index{Scheme} \citep{Sussman:scheme:1996}.
@@ -355,6 +355,7 @@ Le dossier de travail est déterminé au lancement de R.
   doit spécifier un répertoire de travail chaque fois que l'on démarre
   un processus R; voir l'\autoref{emacs+ess}.
 \end{itemize}
+\index{repertoire@répertoire de travail|)}
 
 
 
