@@ -9,6 +9,17 @@
 # Further adjustments Vincent Goulet
 # April 2008
 
+# Correspondances url des capsules sur YouTube.
+#
+#  TITRE ABRÉGÉ  	  CHAPITRE	ACT-2002			INTRO R
+#  Présentation		  presentation	http://youtu.be/LTOOBBGDuek	http://youtu.be/PSQIKSKw_ys
+#  Indiçage		  bases		http://youtu.be/sMd1IyTg-ic	http://youtu.be/cQUjdwgTyz4
+#  Fonction order	  operateurs	http://youtu.be/pPLxbuEZmkA	http://youtu.be/uC-zkzwsCVY
+#  Fonction outer	  operateurs	http://youtu.be/Ht04UiHnU_0	http://youtu.be/cyPUAnieWHw
+#  Fonction apply	  avance	http://youtu.be/EN-a8bTefNk	http://youtu.be/8UQN6RRnsFA
+#  Anatomie		  emacs+ess	http://youtu.be/xiNnHegDau8	http://youtu.be/KtmFDm2AKM4
+#  Fichiers configuration emacs+ess	http://youtu.be/IsyQn7d2Ao0	http://youtu.be/jdtjBBkfhO0
+#  Installation packages  packages	http://youtu.be/DL48oi2RKjM	http://youtu.be/mL6iNzjHMKE
 MASTER = introduction_programmation_r.pdf
 
 # The master document depends on all TeX files
@@ -29,6 +40,29 @@ tex: $(RNWFILES:.Rnw=.tex)
 	$(SWEAVE) '$<'
 
 $(MASTER): $(RNWFILES) $(TEXFILES)
+	sed -E -i "" \
+	    -e "s:youtu.be/(presentation|LTOOBBGDuek):youtu.be/PSQIKSKw_ys:" \
+	    presentation.tex
+	sed -E -i "" \
+	    -e "s:youtu.be/(indicage|sMd1IyTg-ic):youtu.be/cQUjdwgTyz4:" \
+	    bases.tex
+	sed -E -i "" \
+	    -e "s:youtu.be/(order|pPLxbuEZmkA):youtu.be/uC-zkzwsCVY:" \
+	    -e "s:youtu.be/(outer|Ht04UiHnU_0):youtu.be/cyPUAnieWHw:" \
+	    operateurs.tex
+	sed -E -i "" \
+	    -e "s:youtu.be/(apply|EN-a8bTefNk):youtu.be/8UQN6RRnsFA:" \
+	    avance.tex
+	sed -E -i "" \
+	    -e "s:youtu.be/(anatomie|xiNnHegDau8):youtu.be/KtmFDm2AKM4:" \
+	    -e "s:youtu.be/(configuration|IsyQn7d2Ao0):youtu.be/jdtjBBkfhO0:" \
+	    emacs+ess.tex
+	sed -E -i "" \
+	    -e "s:youtu.be/(packages|DL48oi2RKjM):youtu.be/mL6iNzjHMKE:" \
+	    packages.tex
+	sed -i "" \
+	    -e "s:youtu.be/(anatomie|xiNnHegDau8):youtu.be/KtmFDm2AKM4:" \
+	    emacs+ess.tex
 	$(TEXI2DVI) $(MASTER:.pdf=.tex)
 
 clean:

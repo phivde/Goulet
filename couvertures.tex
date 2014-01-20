@@ -1,9 +1,8 @@
 \documentclass[letterpaper,11pt]{memoir}
-  \usepackage[utf8]{inputenc}
-  \renewcommand{\sfdefault}{Myriad-LF} % titres en MyriadPro
-  \usepackage[english,francais]{babel}
   \usepackage[absolute]{textpos}
-  \usepackage{graphicx,amsmath,vgmath,fourier}
+  \usepackage{fontspec,graphicx}
+
+  \setsansfont[Scale=1.0,Numbers=OldStyle]{Myriad Pro}
 
 \begin{document}
 
@@ -18,33 +17,22 @@
   \includegraphics[height=11in,keepaspectratio=true]{harfang.jpg} \\
 \end{textblock*}
 
-\begin{textblock*}{176mm}(20mm,30mm)
+\begin{textblock*}{176mm}(20mm,35mm)
   \sffamily
-  \fontseries{b}\fontsize{42}{42}\selectfont
-  \rule{\linewidth}{0.5pt}
+  \bfseries\fontsize{42}{42}\selectfont
+  %\rule{\linewidth}{0.5pt}
   Introduction à la \\
-  programmation en R \\[-19pt]
-  \rule{\linewidth}{0.5pt}
+  programmation en R
+  %\rule{\linewidth}{0.5pt}
 \end{textblock*}
 
-\begin{textblock*}{176mm}(20mm,80mm)
+\begin{textblock*}{176mm}(20mm,75mm)
   \sffamily
-  \fontseries{m}\fontsize{24}{24}\selectfont
+  \fontsize{24}{24}\selectfont
   Vincent Goulet
 \end{textblock*}
 
 \mbox{}
-% \begin{adjustwidth*}{-14.2mm}{-30mm}
-%   \sffamily
-%   \raggedright
-%   \vspace*{-15mm}
-%   \fontseries{b}\fontsize{42}{42}\selectfont
-%   Introduction à la \\
-%   programmation en R \\[-12pt]
-%   \vspace*{32mm}
-%   \fontseries{m}\fontsize{24}{36}\selectfont
-%   Vincent Goulet
-% \end{adjustwidth*}
 
 \newpage
 
@@ -60,5 +48,6 @@
 
 %%% Local Variables:
 %%% mode: latex
+%%% TeX-engine: xetex
 %%% TeX-master: t
 %%% End:

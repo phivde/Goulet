@@ -1,19 +1,19 @@
-## Emacs: -*- coding: latin-1; fill-column: 62; comment-column: 27; -*-
+## Emacs: -*- coding: utf-8; fill-column: 62; comment-column: 27; -*-
 
 ###
 ### FONCTION 'uniroot'
 ###
 
 ## La fonction 'uniroot' recherche la racine d'une fonction
-## 'f' dans un intervalle spécifié soit comme une paire de
+## 'f' dans un intervalle spÃ©cifiÃ© soit comme une paire de
 ## valeurs dans un argument 'interval', soit via des arguments
 ## 'lower' et 'upper'.
 ##
-## On calcule la solution de l'équation x - 2^(-x) = 0 dans
+## On calcule la solution de l'Ã©quation x - 2^(-x) = 0 dans
 ## l'intervalle [0, 1].
 f <- function(x) x - 2^(-x)      # fonction
 uniroot(f, c(0, 1))              # appel simple
-uniroot(f, lower = 0, upper = 1) # équivalent
+uniroot(f, lower = 0, upper = 1) # Ã©quivalent
 
 ## On peut aussi utiliser 'uniroot' avec une fonction anonyme.
 uniroot(function(x) x - 2^(-x), lower = 0, upper = 1)
@@ -22,21 +22,21 @@ uniroot(function(x) x - 2^(-x), lower = 0, upper = 1)
 ### FONCTION 'optimize'
 ###
 
-## On cherche le maximum local de la densité d'une loi bêta
-## dans l'intervalle (0, 1), son domaine de définition. (Ce
-## problème est facile à résoudre explicitement.)
+## On cherche le maximum local de la densitÃ© d'une loi bÃªta
+## dans l'intervalle (0, 1), son domaine de dÃ©finition. (Ce
+## problÃ¨me est facile Ã  rÃ©soudre explicitement.)
 ##
-## Les arguments de 'optimize' sont essentiellement les mêmes
+## Les arguments de 'optimize' sont essentiellement les mÃªmes
 ## que ceux de 'uniroot'. Ici, on utilise aussi l'argument
-## '...' pour passer les paramètres de la loi bêta à 'dbeta'.
+## '...' pour passer les paramÃ¨tres de la loi bÃªta Ã  'dbeta'.
 ##
-## Par défaut, la fonction recherche un minimum. Il faut donc
-## lui indiquer de rechercher plutôt un maximum.
+## Par dÃ©faut, la fonction recherche un minimum. Il faut donc
+## lui indiquer de rechercher plutÃ´t un maximum.
 optimize(dbeta, interval = c(0, 1), maximum = TRUE,
          shape1 = 3, shape2 = 2)
 
-## On pourrait aussi avoir recours à une fonction auxiliaire.
-## Moins élégant et moins flexible.
+## On pourrait aussi avoir recours Ã  une fonction auxiliaire.
+## Moins Ã©lÃ©gant et moins flexible.
 f <- function(x) dbeta(x, 3, 2)
 optimize(f, lower = 0, upper = 1, maximum = TRUE)
 
@@ -46,107 +46,112 @@ optimize(f, lower = 0, upper = 1, maximum = TRUE)
 
 ## Pour la suite, nous allons donner des exemples
 ## d'utilisation des fonctions d'optimisation dans un contexte
-## d'estimation des paramètres d'une loi gamma par la méthode
+## d'estimation des paramÃ¨tres d'une loi gamma par la mÃ©thode
 ## du maximum de vraisemblance.
 ##
-## On commence par se donner un échantillon aléatoire de la
-## loi. Évidemment, pour ce faire nous devons connaître les
-## paramètres de la loi. C'est un exemple fictif.
-set.seed(1)                # toujours le même échantillon
+## On commence par se donner un Ã©chantillon alÃ©atoire de la
+## loi. Ã‰videmment, pour ce faire nous devons connaÃ®tre les
+## paramÃ¨tres de la loi. C'est un exemple fictif.
+set.seed(1)                # toujours le mÃªme Ã©chantillon
 x <- rgamma(10, 5, 2)
 
-## Les estimateurs du maximum de vraisemblance des paramètres
+## Les estimateurs du maximum de vraisemblance des paramÃ¨tres
 ## 'shape' et 'rate' de la loi gamma sont les valeurs qui
 ## maximisent la fonction de vraisemblance
 ##
 ##     prod(dgamma(x, shape, rate))
 ##
-## ou, de manière équivalente, qui minimisent la fonction de
-## log-vraisemblance négative
+## ou, de maniÃ¨re Ã©quivalente, qui minimisent la fonction de
+## log-vraisemblance nÃ©gative
 ##
 ##     -sum(log(dgamma(x, shape, rate))).
 ##
 ## On remarquera au passage que les fonctions de calcul de
-## densités de lois de probabilité dans R ont un argument
+## densitÃ©s de lois de probabilitÃ© dans R ont un argument
 ## 'log' qui, lorsque TRUE, retourne la valeur du logarithme
-## (naturel) de la densité de manière plus précise qu'en
-## prenant le logarithme après coup. Ainsi, pour faire le
-## calcul ci-dessus, on optera plutôt, pour l'expression
+## (naturel) de la densitÃ© de maniÃ¨re plus prÃ©cise qu'en
+## prenant le logarithme aprÃ¨s coup. Ainsi, pour faire le
+## calcul ci-dessus, on optera plutÃ´t, pour l'expression
 ##
 ##     -sum(dgamma(x, shape, rate, log = TRUE))
 ##
-## La fonction 'nlm' suppose que la fonction à optimiser
-## passée en premier argument a elle-même comme premier
-## argument le vecteur 'p' des paramètres à optimiser. Le
+## La fonction 'nlm' suppose que la fonction Ã  optimiser
+## passÃ©e en premier argument a elle-mÃªme comme premier
+## argument le vecteur 'p' des paramÃ¨tres Ã  optimiser. Le
 ## second argument de 'nlm' est un vecteur de valeurs de
-## départ, une pour chaque paramètre.
+## dÃ©part, une pour chaque paramÃ¨tre.
 ##
 ## Ainsi, pour trouver les estimateurs du maximum de
-## vraisemblance avec la fonction 'nlm' pour l'échantillon
-## ci-dessus, on doit d'abord définir une fonction auxiliaire
+## vraisemblance avec la fonction 'nlm' pour l'Ã©chantillon
+## ci-dessus, on doit d'abord dÃ©finir une fonction auxiliaire
 ## conforme aux attentes de 'nlm' pour calculer la fonction de
-## log-vraisemblance (à un signe près).
+## log-vraisemblance (Ã  un signe prÃ¨s).
 f <- function(p, x) -sum(dgamma(x, p[1], p[2], log = TRUE))
 
 ## L'appel de 'nlm' est ensuite tout simple. Remarquer comment
-## on passe notre échantillon aléatoire (contenu dans l'objet
-## 'x') comme second argument à 'f' via l'argument '...' de
+## on passe notre Ã©chantillon alÃ©atoire (contenu dans l'objet
+## 'x') comme second argument Ã  'f' via l'argument '...' de
 ## 'nlm'. Le fait que l'argument de 'f' et l'objet contenant
-## les valeurs portent le même nom est sans importance. R sait
-## faire la différence entre l'un et l'autre.
+## les valeurs portent le mÃªme nom est sans importance. R sait
+## faire la diffÃ©rence entre l'un et l'autre.
 nlm(f, c(1, 1), x = x)
 
-## L'optimisation ci-dessus a généré des avertissements? C'est
-## parce que la fonction d'optimisation s'est égarée dans les
-## valeurs négatives, alors que les paramètres d'une gamma
-## sont strictement positifs. Cela arrive souvent.
+## === ASTUCE RIPLEY ===
+## L'optimisation ci-dessus a gÃ©nÃ©rÃ© des avertissements? C'est
+## parce que la fonction d'optimisation s'est Ã©garÃ©e dans les
+## valeurs nÃ©gatives, alors que les paramÃ¨tres d'une gamma
+## sont strictement positifs. Cela arrive souvent en pratique
+## et cela peut faire complÃ¨tement dÃ©railler la procÃ©dure
+## d'optimisation (c'est-Ã -dire: pas de convergence).
 ##
-## On peut pallier à ce problème avec le truc suivant: plutôt
-## que d'estimer les paramètres eux-mêmes, on estime leurs
-## logarithmes. Ceux-ci demeurent alors valides sur tout l'axe
-## des réels.
+## L'Astuce Ripley consiste Ã  pallier Ã  ce problÃ¨me en
+## estimant plutÃ´t les logarithmes des paramÃ¨tres. Pour ce
+## faire, il s'agit de rÃ©Ã©crire la log-vraisemblance comme une
+## fonction du logarithme des paramÃ¨tres, mais de la calculer
+## avec les vÃ©ritables paramÃ¨tres.
 f2 <- function(logp, x)
 {
-    p <- exp(logp)         # retour aux paramètres originaux
+    p <- exp(logp)         # retour aux paramÃ¨tres originaux
     -sum(dgamma(x, p[1], p[2], log = TRUE))
 }
 nlm(f2, c(0, 0), x = x)
 
 ## Les valeurs obtenues ci-dessus sont toutefois les
-## estimateurs des logarithmes des paramètres de la loi gamma.
-## On retrouve les estiamteurs des paramètres en prenant
-## l'exponentielle des réponses.
+## estimateurs des logarithmes des paramÃ¨tres de la loi gamma.
+## On retrouve les estiamteurs des paramÃ¨tres en prenant
+## l'exponentielle des rÃ©ponses.
 exp(nlm(f2, c(0, 0), x = x)$estimate)
+## ====================
 
 ###
 ### FONCTION 'nlminb'
 ###
 
-## L'utilisation de la fonction 'nlminb' peut s'avérer
-## intéressante dans notre contexte puisque l'on sait que les
-## paramètres d'une loi gamma sont strictement positifs.
+## L'utilisation de la fonction 'nlminb' peut s'avÃ©rer
+## intÃ©ressante dans notre contexte puisque l'on sait que les
+## paramÃ¨tres d'une loi gamma sont strictement positifs.
 nlminb(c(1, 1), f, x = x, lower = 0, upper = Inf)
 
 ###
 ### FONCTION 'optim'
 ###
 
-## La fonction 'optim' est très puissante, mais requiert aussi
+## La fonction 'optim' est trÃ¨s puissante, mais requiert aussi
 ## une bonne dose de prudence. Ses principaux arguments sont:
 ##
 ##  par: un vecteur contenant les valeurs initiales des
-##       paramètres;
-##   fn: la fonction à minimiser. Le premier argument de fn
-##       doit être le vecteur des paramètres.
+##       paramÃ¨tres;
+##   fn: la fonction Ã  minimiser. Le premier argument de fn
+##       doit Ãªtre le vecteur des paramÃ¨tres.
 ##
-## Comme pour les autres fonctions étudiées ci-dessus, on peut
-## passer des arguments à 'fn' (les données, par exemple) par
+## Comme pour les autres fonctions Ã©tudiÃ©es ci-dessus, on peut
+## passer des arguments Ã  'fn' (les donnÃ©es, par exemple) par
 ## le biais de l'argument '...' de 'optim'.
 optim(c(1, 1), f, x = x)
 
 ## L'estimation par le maximum de
 ##    vraisemblance\index{vraisemblance} est de beaucoup
-##    simplifiée par l'utilisation de la fonction
+##    simplifiÃ©e par l'utilisation de la fonction
 ##    \fonction{fitdistr} du package
 ##    \texttt{MASS}\index{package!MASS@\texttt{MASS}}.
 
@@ -154,10 +159,10 @@ optim(c(1, 1), f, x = x)
 ### FONCTION 'polyroot'
 ###
 
-## Racines du polynôme x^3 + 4 x^2 - 10. Les réponses sont
-## données sous forme de nombre complexe. Utiliser les
-## fonctions 'Re' et 'Im' pour extraire les parties réelles et
+## Racines du polynÃ´me x^3 + 4 x^2 - 10. Les rÃ©ponses sont
+## donnÃ©es sous forme de nombre complexe. Utiliser les
+## fonctions 'Re' et 'Im' pour extraire les parties rÃ©elles et
 ## imaginaires des nombres, respectivement.
 polyroot(c(-10, 0, 4, 1))     # racines
-Re(polyroot(c(-10, 0, 4, 1))) # parties réelles
+Re(polyroot(c(-10, 0, 4, 1))) # parties rÃ©elles
 Im(polyroot(c(-10, 0, 4, 1))) # parties imaginaires

@@ -9,7 +9,7 @@ options(width=52)
 \item Connaître et savoir utiliser les différentes fonctions de calcul
   de racines de R.
 \item Connaître et savoir utiliser les différentes fonctions
-  d’optimisation de R.
+  d'optimisation de R.
 \item Savoir reformuler un problème d'optimisation en base
   logarithmique pour éviter les difficultés numériques.
 \end{objectifs}
@@ -44,7 +44,7 @@ La grande majorité des suites logicielles de calcul comportent des
 outils d'optimisation de fonctions. Ce chapitre passe en revue les
 fonctions disponibles dans R. Comme pour les chapitres précédents, des
 exemples d'utilisation de chacune des fonctions se trouvent dans le
-code informatique de la section~\ref{optimisation:exemples}.
+code informatique de la \autoref{optimisation:exemples}.
 
 
 \section{Fonctions d'optimisation et de calcul de racines}
@@ -61,6 +61,52 @@ utilisés. Consulter les rubriques d'aide pour les détails.
 %% pour pouvoir être inclus dans les notes du cours de méthodes
 %% numériques.
 \input{optimisation-fonctions}
+
+
+\section{Astuce Ripley}
+\label{sec:resolution:astuce}
+
+Brian Ripley --- un important développeur de R --- a publié le truc
+suivant dans les forums de discussion de R. Puisqu'il est très utile,
+nous nous permettons de le disséminer.
+
+Une application statistique fréquente de l'optimisation est la
+maximisation numérique d'une fonction de vraisemblance ou, plus
+communément, la minimisation de la log-vraisemblance négative
+\begin{equation*}
+  -l(\theta) = - \sum_{i = 1}^n \ln f(x_i; \theta).
+\end{equation*}
+Les fonctions d'optimisation sont d'ailleurs illustrées dans ce
+contexte dans le code informatique de la
+\autoref{optimisation:exemples}.
+
+Plusieurs lois de probabilité ont des paramètres strictement positifs.
+Or, en pratique, il n'est pas rare que les fonctions d'optimisation
+s'égarent dans les valeurs négatives des paramètres. La fonction de
+densité n'étant pas définie, la log-vraisemblance vaut alors
+\code{NaN} et cela peut faire complètement dérailler la procédure
+d'optimisation ou, à tout le moins, susciter des doutes sur la
+validité de la réponse.
+
+Afin de pallier à ce problème, l'Astuce Ripley{\texttrademark} propose
+d'estimer non pas les paramètres de la loi eux-mêmes, mais plutôt
+leurs logarithmes. Si l'on définit $\tilde{\theta} = \ln \theta$,
+alors on peut écrire la fonction de log-vraisemblance ci-dessus sous
+la forme
+\begin{equation*}
+  -l(\tilde{\theta}) = - \sum_{i = 1}^n \ln f(x_i; e^{\tilde{\theta}}).
+\end{equation*}
+Dès lors, $\tilde{\theta}$ (qui peut représenter un ou plusieurs
+paramètres) demeure valide sur tout l'axe des réels, ce qui permet
+d'éviter bien des soucis de nature numérique lors de la minimisation
+de $-l(\tilde{\theta})$.
+
+Évidemment, le résultat de l'optimisation est l'estimateur du maximum
+de vraisemblance de $\tilde{\theta}$. Il faudra donc veiller à faire
+la transformation inverse pour retrouver l'estimateur de $\theta$.
+
+L'utilisation de l'astuce est illustrée à la
+\autoref{optimisation:exemples}.
 
 
 \section{Pour en savoir plus}
@@ -84,11 +130,11 @@ consulter la \emph{CRAN Task View} consacrée à l'optimisation:
 \section{Exercices}
 \label{optimisation:exercices}
 
-\Opensolutionfile{reponses}[reponses-optimisation]
+\Opensolutionfile{solutions}[solutions-optimisation]
 
-\begin{Filesave}{reponses}
-\section*{Chapitre \ref{optimisation}}
-\addcontentsline{toc}{section}{Chapitre \protect\ref{optimisation}}
+\begin{Filesave}{solutions}
+\section*{Chapitre \ref*{optimisation}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{optimisation}}
 
 \end{Filesave}
 
@@ -102,7 +148,7 @@ consulter la \emph{CRAN Task View} consacrée à l'optimisation:
   \item $e^x + 2^{-x} + 2 \cos x - 6 = 0$ pour $1 \leq x \leq 2$
   \item $e^x - x^2 + 3x - 2 = 0$ pour $0 \leq x \leq 1$
   \end{enumerate}
-  \begin{rep}
+  \begin{sol}
     \begin{enumerate}
 \item
 <<echo=TRUE,eval=FALSE>>=
@@ -133,7 +179,7 @@ f <- function(x) exp(x) - x^2 + 3 * x - 2
 uniroot(f, lower = 0, upper = 1)
 @
     \end{enumerate}
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
@@ -165,7 +211,7 @@ uniroot(f, lower = 0, upper = 1)
       \bottomrule
     \end{tabular}
   \end{center}
-  \begin{rep}
+  \begin{sol}
 <<echo=TRUE,eval=FALSE>>=
 X <- c(2061, 1511, 1806, 1353, 1600)
 w <- c(100155, 19895, 13735, 4152, 36110)
@@ -177,21 +223,21 @@ g <- function(a, X, w, s2)
 }
 uniroot(function(x) g(x, X, w, 140E6) - x, c(50000, 80000))
 @
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
 \begin{exercice}
   \label{exercice:optimisation:optim}
   Les fonctions de densité de probabilité et de répartition de la
-  distribution de Pareto sont données à l'exercice
-  \ref{avance}.\ref{exercice:avance:pareto}. Calculer les estimateurs
-  du maximum de vraisemblance des paramètres de la Pareto à partir d'un
+  distribution de Pareto sont données à
+  l'\autoref{exercice:avance:pareto}. Calculer les estimateurs du
+  maximum de vraisemblance des paramètres de la Pareto à partir d'un
   échantillon aléatoire obtenu par simulation avec la commande
 <<echo=TRUE,eval=FALSE>>=
 x <- lambda * (runif(100)^(-1/alpha) - 1)
 @
   pour des valeurs de \code{alpha} et \code{lambda} choisies.
-  \begin{rep}
+  \begin{sol}
 <<echo=TRUE,eval=FALSE>>=
 dpareto <- function(x, alpha, lambda)
 {
@@ -201,9 +247,8 @@ f <- function(par, x) -sum(log(dpareto(x, par[1], par[2])))
 optim(c(1, 1000), f, x = x)
 @
     ou, en utilisant le truc du logarithme des paramètres expliqué
-    dans le code informatique de la
-    section~\ref{optimisation:exemples} pour éviter les soucis
-    de convergence:
+    dans le code informatique de la \autoref{optimisation:exemples}
+    pour éviter les soucis de convergence:
 <<echo=TRUE,eval=FALSE>>=
 dpareto <- function(x, logAlpha, logLambda)
 {
@@ -214,10 +259,10 @@ dpareto <- function(x, logAlpha, logLambda)
 optim(c(log(2), log(1000)), f, x = x)
 exp(optim(c(log(2), log(1000)), f, x = x)$par)
 @
-  \end{rep}
+  \end{sol}
 \end{exercice}
 
-\Closesolutionfile{reponses}
+\Closesolutionfile{solutions}
 
 %%% Local Variables:
 %%% mode: latex

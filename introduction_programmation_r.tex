@@ -7,9 +7,8 @@
   \usepackage{paralist}
   \usepackage[shortlabels]{enumitem}
   \usepackage{textpos}
-  \usepackage{graphicx,soulutf8}
+  \usepackage{graphicx}
   \usepackage{manfnt}                  % \mantriangleright (puce)
-  \usepackage{marvosym}                % \Forward et \ForwardToEnd
   \usepackage{metalogo}                % \XeLaTeX logo
   \usepackage{applekeys}               % touches Mac
   \usepackage{wasysym}                 % \leadsto
@@ -19,16 +18,17 @@
   %%% ============
   %%%  Page titre
   %%% ============
+  \renewcommand{\year}{2014}
   \title{%
     \bfseries\fontsize{42}{42}\selectfont Introduction à la \\
                                           programmation en R}
   \author{%
-    \mdseries\fontsize{24}{24}\selectfont Vincent Goulet \\
-    \mdseries\fontsize{16}{24}\selectfont École d'actuariat,
+    \mdseries\fontsize{20}{30}\selectfont Vincent Goulet \\
+    \mdseries\fontsize{14}{18}\selectfont École d'actuariat,
                                           Université Laval}
   \date{%
-    \mdseries\fontsize{16}{18}\selectfont Troisième édition}
-  \newcommand{\ISBN}{978-2-9811416-x-x}
+    \mdseries\fontsize{14}{18}\selectfont Quatrième édition}
+  \newcommand{\ISBN}{978-2-9811416-3-7}
 
   %%% ===================
   %%%  Style du document
@@ -144,7 +144,7 @@
   \renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
 
   %% Exercices et réponses
-  \Newassociation{rep}{reponse}{reponses}
+  \Newassociation{sol}{solution}{solutions}
   \newcounter{exercice}[chapter]
   \renewcommand{\theexercice}{\thechapter.\arabic{exercice}}
   \newenvironment{exercice}{%
@@ -161,7 +161,7 @@
         \setlist[enumerate,2]{label=\roman*),labelsep=0.5em,align=right}}
       \item}
     {\end{list}}
-  \renewenvironment{reponse}[1]{%
+  \renewenvironment{solution}[1]{%
     \begin{list}{}{%
         \renewcommand{\makelabel}{%
           \bfseries\protect\hyperlink{ex:#1}{#1}}
@@ -221,8 +221,7 @@
 
   %%% Listes de structures de contrôle
   \newenvironment{struclist}{%
-    \begin{description}[\breaklabel\setlabelstyle{\mdseries\ttfamily}%
-      \setleftmargin{\parindent}]}
+    \begin{description}[style=nextline,font=\mdseries\ttfamily]}
     {\end{description}}
 
   %%% =====================
@@ -234,28 +233,15 @@
   \newcommand{\pkg}[1]{\textbf{#1}}
 
   %% Indications de capsule vidéo
-  \setul{1.5pt}{0.7pt}
   \newcommand{\video}{%
-    $\mathrel{\vcenter{\offinterlineskip%
-        \bfseries\fontsize{32}{32}\selectfont
-        \hbox{$\bigcirc$}%
-        \fontsize{22}{22}\selectfont\vskip-18.2pt\hskip8.8pt
-        \hbox{\Forward}}}$}
-  \newcommand{\capsule}[1]{\marginpar{\video}\ul{#1}}
+    \includegraphics[height=22pt,keepaspectratio]{YouTubeArrow3}}
+  \newcommand{\capsule}[2]{\href{#1}{#2}\marginpar{%
+      \href{#1}{\XeTeXLinkBox{\raisebox{-14pt}[0em][0em]{\video}}}}}
 
   %% Raccourcis usuels vg
   \newcommand{\pt}{{\scriptscriptstyle \Sigma}}
-  \newcommand{\abs}[1]{\lvert #1 \rvert}
-  \newcommand{\norme}[1]{\lVert #1 \rVert}
   \newcommand{\mat}[1]{\mathbf{#1}}
-  \newcommand{\diag}{\operatorname{diag}}
-  \newcommand{\Esp}[1]{E\! \left[ #1 \right]}
-  \newcommand{\esp}[1]{E [ #1 ]}
-  \newcommand{\Var}[1]{\operatorname{Var}\! \left[ #1 \right]}
   \newcommand{\var}[1]{\operatorname{Var} [ #1 ]}
-  \newcommand{\Prob}[1]{\operatorname{Pr}\! \left[ #1 \right]}
-  \newcommand{\prob}[1]{\operatorname{Pr} [ #1 ]}
-  % \newcommand{\R}{\mathbb{R}}   % ensemble des réels
 
   %%% =========================
   %%%  Sections de code source
@@ -352,9 +338,23 @@
 
 \include{introduction}
 \tableofcontents*
-\enlargethispage{8mm}           % sinon ligne Index seule sur une page
+
+%% Vignette tirée de xkcd.com
+\cleartoverso
+\thispagestyle{empty}
+\begin{vplace}[0.45]
+  \centering
+  \setkeys{Gin}{width=\textwidth}
+  \begin{minipage}{351pt}
+    \includegraphics{compiling.png} \\
+    \footnotesize\sffamily%
+    Tiré de \href{http://xkcd.com/303/}{XKCD.com}
+  \end{minipage}
+  \setkeys{Gin}{width=0.8\textwidth}
+\end{vplace}
 
 \mainmatter
+
 \include{presentation}
 \include{bases}
 \include{operateurs}
@@ -375,7 +375,10 @@
 \cleardoublepage
 \printindex
 
-\cleardoublepage
+\cleartoverso
+
+\input{colophon}
+
 \cleartoverso
 
 %% Page couverture arrière.
@@ -386,6 +389,7 @@
 
 %%% Local Variables:
 %%% mode: latex
+%%% TeX-engine: xetex
 %%% TeX-master: t
 %%% coding: utf-8
 %%% End:
