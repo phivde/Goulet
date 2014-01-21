@@ -45,7 +45,7 @@ M-x getenv RET HOME RET
   Ainsi, dans un fichier nommé \verb=~/.Renviron= (donc situé dans le
   dossier de départ), enregistrer la ligne suivante:
 \begin{verbatim}
-R_LIBS_USER="~/R/library
+R_LIBS_USER="~/R/library"
 \end{verbatim}
   Au besoin, remplacer le chemin \verb=~/R/library= par celui du
   dossier créé à l'étape précédente. Utiliser la barre oblique avant
@@ -58,11 +58,17 @@ options(repos = "http://cran.ca.r-project.org")
   Si désiré, remplacer la valeur de l'option \code{repos} par l'URL
   d'un autre site miroir de CRAN.
 
-  Les utilisateurs de GNU~Emacs voudront ajouter une autre option. Le
-  code à entrer dans le fichier \verb=~/.Rprofile= sera plutôt
+  Les utilisateurs de GNU~Emacs voudront ajouter une ou deux autres
+  options. Sous Windows, le code à entrer dans le fichier
+  \verb=~/.Rprofile= sera plutôt
 \begin{verbatim}
 options(repos = "http://cran.ca.r-project.org",
         menu.graphics = FALSE)
+\end{verbatim}
+  Sous OS~X:
+\begin{verbatim}
+options(repos = "http://cran.ca.r-project.org",
+        menu.graphics = FALSE, device = "quartz")
 \end{verbatim}
 \end{enumerate}
 Consulter la rubriques d'aide de \code{Startup} pour les détails sur
