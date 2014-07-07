@@ -787,7 +787,6 @@ param <- function (moyenne, variance, loi)
 \Closesolutionfile{solutions}
 
 %%% Local Variables:
-%%% mode: noweb
 %%% TeX-master: "introduction_programmation_r"
 %%% coding: utf-8
 %%% End:

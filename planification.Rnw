@@ -418,7 +418,6 @@ pour tout $n \geq 2$.
 \index{simulation!planification|)}
 
 %%% Local Variables:
-%%% mode: latex
 %%% TeX-master: "introduction_programation_r"
 %%% coding: utf-8
 %%% End:

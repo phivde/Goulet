@@ -455,7 +455,6 @@ q()
 \end{exercice}
 
 %%% Local Variables:
-%%% mode: noweb
 %%% TeX-master: "introduction_programmation_r"
 %%% coding: utf-8
 %%% End:
