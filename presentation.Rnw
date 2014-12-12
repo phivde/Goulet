@@ -223,7 +223,7 @@ save.image()
 \end{figure}
 
 
-\section{Éditeurs de texte}
+\section{Éditeurs de texte et environnements intégrés}
 \label{presentation:editeurs}
 
 Dans la mesure où l'on a recours à des fichiers de script tel
@@ -273,27 +273,30 @@ fonctionnalités que d'autres.
   Emblême du logiciel libre, Emacs est disponible gratuitement et à
   l'identique sur toutes les plateformes supportées par R, dont
   Windows, OS~X et Linux.
-\item Consulter l'\autoref{emacs+ess} pour en savoir plus sur
-  GNU~Emacs et apprendre les commandes essentielles pour y faire ses
-  premiers pas.
+
+  Consulter l'\autoref{emacs+ess} pour en savoir plus sur GNU~Emacs et
+  apprendre les commandes essentielles pour y faire ses premiers pas.
 \item Malgré tous ses avantages (ou à cause de ceux-ci), Emacs est un
   logiciel difficile à apprivoiser, surtout pour les personnes moins à
   l'aise avec l'informatique.
-\item Il existe plusieurs autres options que Emacs pour éditer
-  efficacement du code R --- et le Bloc-notes de Windows n'en fait
-  \emph{pas} partie! Nous recommandons plutôt:
+\item RStudio\index{RStudio} est un environnement de développement
+  intégré (IDE) créé spécifiquement pour travailler avec R. Il permet
+  de consulter dans une interface conviviale ses fichiers de script,
+  la ligne de commande R, les rubriques d'aide, les graphiques, etc.
+  RStudio est disponible sur les plateformes Windows, OS~X et Linux.
+\item Il existe plusieurs autres options pour éditer efficacement du
+  code R --- et le Bloc-notes de Windows n'en fait \emph{pas} partie!
+  Nous recommandons plutôt:
   \begin{itemize}
-  \item sous Windows, l'éditeur Notepad++\index{Notepad++}
-    additionné de l'extension NppToR \citep{NppToR}, tous deux des
-    logiciels libres;
-  \item toujours sous Windows, le partagiciel
-    WinEdt\index{WinEdt} muni de l'extension libre
-    R-WinEdt \citep{RWinEdt};
+  \item sous Windows, l'éditeur Notepad++\index{Notepad++} additionné
+    de l'extension NppToR \citep{NppToR}, tous deux des logiciels
+    libres, ou le partagiciel WinEdt\index{WinEdt} muni de l'extension
+    libre R-WinEdt \citep{RWinEdt};
   \item sous OS~X, tout simplement l'éditeur de texte très complet
     intégré à l'application \code{R.app}, ou alors l'éditeur de texte
     commercial TextMate (essai gratuit de 30 jours);
   \item sous Linux, Vim et Kate semblent les choix les plus populaires
-    après Emacs dans la communauté R.
+    après Emacs et RStudio dans la communauté R.
   \end{itemize}
 \end{itemize}
 
@@ -302,20 +305,22 @@ fonctionnalités que d'autres.
 \section{Anatomie d'une session de travail}
 \label{presentation:session}
 
-Dans ses grandes lignes, toute session de travail avec R se réduit aux
+Dans ses grandes lignes, une session de travail avec R réunit les
 étapes ci-dessous.
 \begin{enumerate}
 \item Ouvrir un fichier de script existant ou en créer un nouveau à
   l'aide de l'éditeur de texte de son choix.
 \item Démarrer une session R en cliquant sur l'icône de l'application
   si l'on utilise une interface graphique, ou alors en suivant la
-  procédure expliquée à l'\autoref{emacs+ess} si l'on utilise
+  procédure appropriée pour travailler avec son éditeur de texte.
+  L'\autoref{emacs+ess} explique la procédure à suivre si l'on utilise
   GNU~Emacs.
-\item Au cours de la phase de développement, on fera généralement de
-  nombreux aller-retours la ligne de commande où l'on testera des
-  commandes et le fichier de script où l'on consignera le code R que
-  l'on souhaite sauvegarder et les commentaires qui nous permettront
-  de s'y retrouver plus tard.
+\item Bâtir graduellement un fichier de script en y consignant le code
+  R que l'on souhaite sauvegarder et les commentaires qui permettront
+  de s'y retrouver plus tard. Tester les commandes à la ligne de
+  commande. Au cours de la phase de développement, on fera
+  généralement de nombreux aller-retours entre la ligne de commande et
+  le fichier de script.
 \item Sauvegarder son fichier de script et quitter l'éditeur.
 \item Si nécessaire --- et c'est rarement le cas --- sauvegarder
   l'espace de travail de la session R avec
