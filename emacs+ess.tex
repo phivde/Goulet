@@ -67,8 +67,8 @@ L'un de ces modes est ESS (\emph{Emacs Speaks Statistics}).
 
 GNU Emacs et le mode ESS sont normalement livrés d'office avec toutes
 les distributions Linux. Pour les environnements Windows et Mac OS~X,
-le plus simple consiste à télécharger et installer les distributions
-préparées par le présent auteur. Consulter le site
+le plus simple consiste à installer les distributions préparées par le
+présent auteur. Consulter le site
 \begin{quote}
   \url{http://vgoulet.act.ulaval.ca/emacs/}
 \end{quote}
@@ -153,7 +153,8 @@ Windows et OS~X.
   \item \code{C} est la touche \code{Contrôle} (\ctlkey);
   \item \code{M} est la touche \code{Meta}, qui correspond à la touche
     \code{Alt} de gauche sur un PC ou la touche \code{Option}
-    (\optkey) sur un Mac (toutefois, voir l'encadré ci-dessus);
+    (\optkey) sur un Mac (toutefois, voir l'encadré à la
+    \autopageref{fig:ess:meta});
   \item \code{ESC} est la touche \code{Échap} (\esckey) et
     est équivalente à \code{Meta};
   \item \code{SPC} est la barre d'espacement;
@@ -198,6 +199,7 @@ Windows et OS~X.
 (setq-default ns-option-modifier 'none)
 \end{verbatim}
   \end{osx}
+  \label{fig:ess:meta}
 \end{figure}
 
 
@@ -209,10 +211,10 @@ Emacs comporte une pléthore de commandes, il serait donc futile de
 tenter d'en faire une liste exhaustive ici. Nous nous contenterons de
 mentionner les commandes les plus importantes regroupées par tâche.
 
-Pour débuter, il est utile de suivre le Tour guidé de Emacs\footnote{%
-  \url{http://www.gnu.org/software/emacs/tour/} ou cliquer sur le lien
-  dans l'écran d'accueil.} %
-et de lire le tutoriel de Emacs, que l'on démarre avec \code{C-h t}.
+% Pour débuter, il est utile de suivre le Tour guidé de Emacs\footnote{%
+%   \url{http://www.gnu.org/software/emacs/tour/} ou cliquer sur le lien
+%   dans l'écran d'accueil.} %
+% et de lire le tutoriel de Emacs, que l'on démarre avec \code{C-h t}.
 
 \subsection{Les essentielles}
 \label{emacs+ess:commandes:essentielles}
@@ -428,8 +430,8 @@ en expliquant comment compléter chacune dans Emacs avec le mode ESS.
   \end{quote}
   En spécifiant un nom de fichier qui n'existe pas déjà, on se trouve
   à créer un nouveau fichier de script. S'assurer de terminer le nom
-  des nouveaux fichiers par \code{.R} pour que Emacs reconnaisse
-  automatiquement qu'il s'agit de fichiers de script R.
+  du nouveau fichier par \code{.R} pour que Emacs reconnaisse
+  automatiquement qu'il s'agit d'un fichier de script R.
 \item Démarrer un processus R à l'intérieur même de Emacs avec
   \begin{quote}
     \code{M-x R }\returnkey
