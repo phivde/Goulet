@@ -654,7 +654,7 @@ x[1]
 <<echo=TRUE>>=
 x[[1]]
 @
-\item Évidemment, on ne peut extraire qu'un seul élément à la fois
+  Évidemment, on ne peut extraire qu'un seul élément à la fois
   avec les crochets doubles \fonction{[[~]]}.
 \item Petite subtilité peu employée, mais élégante. Si l'indice
   utilisé dans \fonction{[[~]]} est un vecteur, il est utilisé
@@ -663,8 +663,7 @@ x[[1]]
   puis l'élément de la composante correspondant au second élément du
   vecteur, et ainsi de suite.
 \item Une autre --- la meilleure, en fait --- façon d'indicer un seul
-  élément d'une liste est par le biais de l'opérateur \Fonction{\$},
-  avec une construction \code{x\$etiquette}:
+  élément d'une liste est par son étiquette avec l'opérateur \Fonction{\$}:
 <<echo=TRUE>>=
 x$size
 @ %$
@@ -725,11 +724,9 @@ traitement des vecteurs.
 
 \begin{itemize}
 \item L'indiçage sert principalement à deux choses:
-  \begin{inparaenum}[1)]
-  \item extraire des éléments d'un objet avec la construction
-    \code{x[i]};
-  \item les remplacer avec la construction \verb|x[i] <- y|.
-  \end{inparaenum}
+  soit extraire des éléments d'un objet avec la construction
+  \code{x[i]},
+  ou les remplacer avec la construction \verb|x[i] <- y|.
 \item Il est utile de savoir que ces opérations sont en fait traduites
   par l'interprète R en des appels à des fonctions nommées
   \Fonction{[} et \Fonction{[<-}, dans l'ordre.
