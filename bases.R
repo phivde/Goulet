@@ -455,7 +455,7 @@ names(x) <- NULL
 ## Quelques cas spéciaux d'indiçage.
 length(x)                  # un rappel
 x[1:25]                    # allonge le vecteur avec des NA
-x[25] <- 10; x             # remplis les trous avec des NA
+x[25] <- 10; x             # remplit les trous avec des NA
 x[0]                       # n'extraie rien
 x[0] <- 1; x               # n'affecte rien
 x[c(0, 1, 2)]              # le 0 est ignoré
