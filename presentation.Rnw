@@ -337,7 +337,7 @@ Dans ses grandes lignes, une session de travail avec R réunit les
 
 
 \section{Répertoire de travail}
-\index{repertoire@répertoire de travail|(}
+\index{repertoire@répertoire de travail}
 \index{dossier de travail|see{répertoire de travail}}
 \label{presentation:workspace}
 
@@ -360,7 +360,6 @@ Le dossier de travail est déterminé au lancement de R.
   doit spécifier un répertoire de travail chaque fois que l'on démarre
   un processus R; voir l'\autoref{emacs+ess}.
 \end{itemize}
-\index{repertoire@répertoire de travail|)}
 
 
 

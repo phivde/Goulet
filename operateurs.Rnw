@@ -439,7 +439,7 @@ cummin(x); cummax(x)
   en parallèle, c'est-à-dire élément par élément entre deux vecteurs
   ou plus
 <<echo=TRUE>>=
-pmin(x, c(16, 23,  4, 12,  3))
+pmin(x, 12)
 pmax(x, c(16, 23,  4, 12,  3))
 @
 \end{ttscript}
@@ -562,8 +562,8 @@ déterminer le flux d'exécution d'un programme: choix entre des blocs
 de code, répétition de commandes ou sortie forcée.
 
 On se contente, ici, de mentionner les structures de contrôle
-disponibles en R. Se reporter à la \autoref{operateurs:exemples}
-pour des exemples d'utilisation.
+disponibles en R. La \autoref{operateurs:exemples} fournit des
+exemples d'utilisation.
 
 \subsection{Exécution conditionnelle}
 
@@ -577,7 +577,7 @@ pour des exemples d'utilisation.
   \code{\emph{branche.vrai}} est exécutée, sinon ce sera
   \code{\emph{branche.faux}}. Dans le cas où l'une ou l'autre de
   \code{\emph{branche.vrai}} ou \code{\emph{branche.faux}} comporte
-  plus d'une expression, grouper celles-ci dans des accolades
+  plus d'une expression, regrouper celles-ci dans des accolades
   \verb={ }=.
 \item[\fbox{ifelse(\emph{condition}, \emph{expression.vrai},
     \emph{expression.faux})}] %
@@ -664,10 +664,10 @@ ajouter des fonctionnalités au système par le biais de packages
 externes. Dès les débuts de R, les développeurs et utilisateurs ont
 mis sur pied le dépôt central de packages \emph{Comprehensive R
   Archive Network} (CRAN; \url{http://cran.r-project.org}). Ce site
-compte aujourd'hui plusieurs centaines d'extensions et le nombre ne
+compte aujourd'hui des milliers d'extensions et le nombre ne
 cesse de croître.
 
-Le système R rend simple de télécharger et d'installer de nouveaux
+Le système R rend simple le téléchargement et l'installation de nouveaux
 packages avec la fonction \Fonction{install.packages}.
 L'\autoref{packages} explique plus en détails comment gérer sa
 bibliothèque personnelle et installer des packages externes.

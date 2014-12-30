@@ -56,7 +56,9 @@ des hypothèses ci-dessous.
 1000 * sum((1 + 0.06)^(-(1:5)))
 @ %
   Remarquer comme l'expression R se lit exactement comme la formule
-  mathématique.
+  mathématique. De plus, le terme constant $\nombre{1000}$ est sorti de
+  la somme pour réduire le nombre de multiplications de cinq à une
+  seule.
 \item Paiements annuels de $500$, $800$, $900$, $750$ et $\nombre{1000}$, taux
   d'intérêt de $6~\%$ effectif annuellement.
 
@@ -71,8 +73,9 @@ sum(c(500, 800, 900, 750, 1000) * (1 + 0.06)^(-(1:5)))
   annuellement.
 
   Avec différents paiements annuels et des taux d'intérêt différents,
-  il faut employer la formule \eqref{eq:vp}. Le produit cumulatif des
-  taux d'intérêt est obtenu avec la fonction \fonction{cumprod}:
+  il faut employer la formule \eqref{eq:vp}. On obtient le résultat
+  voulu sans aucune boucle en réalisant le produit cumulatif des
+  taux d'intérêt avec la fonction \fonction{cumprod}:
 <<1(c)>>=
 sum(c(500, 800, 900, 750, 1000) /
     cumprod(1 + c(0.05, 0.06, 0.055, 0.065, 0.07)))
@@ -83,7 +86,7 @@ sum(c(500, 800, 900, 750, 1000) /
 \section{Fonctions de masse de probabilité}
 \label{exemples:fp}
 
-On doit calculer toutes ou la majeure partie des probabilités de deux
+On souhaite calculer toutes ou la majeure partie des probabilités de deux
 lois de probabilité, puis vérifier que la somme des probabilités est
 bien égale à $1$.
 
@@ -150,12 +153,12 @@ dpois(x, lambda)
 @
   Pour vérifier que les probabilités somment à $1$, il faudra d'abord
   tronquer le support infini de la Poisson à une «grande» valeur.
-  Ici, $200$ est suffisamment éloigné de la moyenne de la
+  Ici, $170$ est suffisamment éloigné de la moyenne de la
   distribution, $5$. Remarquer que le produit par $e^{-\lambda}$
   est placé à l'extérieur de la somme pour ainsi faire un seul
-  produit plutôt que $201$.
+  produit plutôt que $171$.
 <<2(b)-3>>=
-x <- 0:200
+x <- 0:170
 exp(-lambda) * sum((lambda^x / factorial(x)))
 @
 \end{enumerate}
@@ -164,8 +167,8 @@ exp(-lambda) * sum((lambda^x / factorial(x)))
 \section{Fonction de répartition de la loi gamma}
 \label{exemples:gamma}
 
-La loi gamma\index{distribution!gamma} est fréquemment utilisée pour
-la modélisation d'événements ne pouvant prendre que des valeurs
+La loi gamma\index{distribution!gamma} est fréquemment employée pour
+modéliser des événements ne pouvant prendre que des valeurs
 positives et pour lesquels les petites valeurs sont plus fréquentes
 que les grandes. Par exemple, on utilise parfois la loi gamma en
 sciences actuarielles pour la modélisation des montants de sinistres.
@@ -330,11 +333,11 @@ biscuits, on change le premier biscuit de plat et on y range aussi le
 second biscuit. Arrivé au troisième biscuit, le petit manège
 recommence, et ainsi de suite jusqu'à ce que le plateau de biscuits
 soit épuisé. C'est ce que nous nommerons, non sans un sourire en coin,
-le Syndrôme de la plaque à biscuits{\texttrademark}\index{Syndrôme de la plaque à biscuits}\index{biscuits|see{Syndrôme}}.
+le Syndrôme de la plaque à biscuits{\texttrademark}\index{syndrome@Syndrôme de la plaque à biscuits}\index{biscuits|see{Syndrôme de la plaque à biscuits}}.
 
-Le petit manège décrit ci-dessus se reproduit à l'identique dans la
+Le manège décrit ci-dessus se reproduit à l'identique dans la
 mémoire de l'ordinateur, l'odeur des bons biscuits chauds en moins. En
-effet, le système doit constamment allouer de la nouvelle mémoire et
+effet, l'ordinateur doit constamment allouer de la nouvelle mémoire et
 déplacer les termes déjà sauvegardés au fur et à mesure que le vecteur
 \code{x} grandit. On aura compris qu'une telle façon de faire est à
 éviter absolument lorsque c'est possible --- et ça l'est la plupart du

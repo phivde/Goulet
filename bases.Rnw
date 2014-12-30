@@ -589,8 +589,9 @@ m[1, 2]
 <<echo=TRUE>>=
 m[3]
 @
-\item Lorsqu'une dimension est omise dans les crochets, tous les
-  éléments de cette dimension sont extraits:
+\item \label{pg:bases:indicage_matrice} Lorsqu'une dimension est omise
+  dans les crochets, tous les éléments de cette dimension sont
+  extraits:
 <<echo=TRUE>>=
 m[2, ]
 @
@@ -736,7 +737,7 @@ traitement des vecteurs.
   \fonction{\$} et \fonction{\$<-}.
 \end{itemize}
 
-Il existe quatre façons d'indicer un vecteur dans le langage R. Dans
+Il existe cinq façons d'indicer un vecteur dans le langage R. Dans
 tous les cas, l'indiçage se fait à l'intérieur de crochets
 \Fonction{[~]}.
 \begin{enumerate}
@@ -771,8 +772,11 @@ x[c("B", "D")]
 <<echo=TRUE>>=
 x[]
 @ %
-  Remarquer que cela est différent d'indicer avec un vecteur vide; cette
-  opération retourne un vecteur vide.
+  Cette méthode est essentiellement utilisée avec les matrices et
+  tableaux pour sélectionner tous les éléments d'une dimension (voir
+  l'exemple à la \autopageref{pg:bases:indicage_matrice}).
+  Laisser l'indice vide est différent d'indicer avec un vecteur vide;
+  cette dernière opération retourne un vecteur vide.
 \end{enumerate}
 
 
