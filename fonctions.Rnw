@@ -17,7 +17,7 @@ La possibilité pour l'usager de définir facilement et rapidement de
 nouvelles fonctions --- et donc des extensions au langage --- est une
 des grandes forces de R. Les fonctions personnelles définies dans
 l'espace de travail ou dans un package sont traitées par le système
-exactement comme les fonction internes.
+exactement comme les fonctions internes.
 
 Ce court chapitre passe en revue la syntaxe et les règles pour créer
 des fonctions dans R. On discute également brièvement de débogage et
@@ -151,9 +151,11 @@ fp <- function(k, n, start = 0.05, TOL = 1E-10)
 \item Le nom de la fonction est \code{fp}.
 \item La fonction compte quatre arguments: \code{k}, \code{n},
   \code{start} et \code{TOL}.
-\item Les deux derniers arguments ont des valeurs par défaut de $0,05$
-  et $10^{-10}$, respectivement.
-\item La fonction retourne la valeur de la variable \code{i}.
+\item Les deux derniers arguments ont respectivement des valeurs par
+  défaut de $0,05$ et $10^{-10}$.
+\item La fonction retourne la valeur de la variable \code{i} puisque
+  l'on évalue celle-ci à la dernière ligne (ou expression) de la
+  fonction.
 \end{itemize}
 
 
@@ -200,7 +202,7 @@ quelques trucs que nous utilisons régulièrement.
   l'oubli de virgules). Lors de la définition d'une fonction, une
   vérification de la syntaxe est effectuée par l'interprète R.
   Attention, cependant: une erreur peut prendre sa source plusieurs
-  lignes avant celle que l'interprète pointe comme faisant problème.
+  lignes avant celle que l'interprète pointe comme causant problème.
 \item Les messages d'erreur de l'interprète ne sont pas toujours d'un
   grand secours{\dots} tant que l'on n'a pas appris à les reconnaître.
   Un exemple de message d'erreur fréquemment rencontré:
@@ -210,8 +212,9 @@ quelques trucs que nous utilisons régulièrement.
   Cette erreur provient généralement d'une commande \fonction{if} dont
   l'argument vaut \objet{NA} plutôt que \objet{TRUE} ou \objet{FALSE}.
   La raison: des valeurs manquantes se sont faufilées dans les
-  calculs à notre insu jusqu'à l'instructions \fonction{if}, qui
-  n'accepte que des valeurs booléennes en arguement.
+  calculs à notre insu jusqu'à l'instruction \fonction{if}, faisant en
+  sorte que l'argument de \fonction{if} vaut \code{NA} alors qu'il ne
+  peut être que booléen.
 \item Lorsqu'une fonction ne retourne pas le résultat attendu, placer
   des commandes \fonction{print} à l'intérieur de la fonction, de
   façon à pouvoir suivre les valeurs prises par les différentes
@@ -219,7 +222,7 @@ quelques trucs que nous utilisons régulièrement.
 
   Par exemple, la modification suivante à la boucle de la fonction
   \code{fp} permet d'afficher les valeurs successives de la variable
-  \code{i} et de détecter une procédure itérative divergente:
+  \code{i} et de détecter, par exemple, une procédure itérative divergente:
 \begin{verbatim}
 repeat
 {
@@ -311,10 +314,10 @@ for (i in 1:10)
   style C++, avec les accolades sur leurs propres lignes et une
   indentation de quatre (4) espaces est considéré comme standard pour
   la programmation en R.
-\item La version de GNU~Emacs distribuée par l'auteur est déjà
-  configurée pour utiliser ce style de codage.
+% \item La version de GNU~Emacs distribuée par l'auteur est déjà
+%   configurée pour utiliser ce style de codage.
 \item Consulter la documentation de votre éditeur de texte pour savoir
-  si vous pouvez configurer le niveau d'indentation. La plupart des
+  s'il est possible de configurer le niveau d'indentation. La plupart des
   bons éditeurs pour programmeurs le permettent.
 \item Surtout, éviter de ne pas du tout indenter le code.
 \end{itemize}
