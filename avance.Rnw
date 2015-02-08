@@ -401,11 +401,11 @@ unlist(lapply(10:1, seq, to = 1))
     &= 1 - \left( \frac{\lambda}{x + \lambda} \right)^\alpha.
   \end{align*}
   La fonction suivante simule un échantillon aléatoire de taille $n$
-  issu d'une distribution de Pareto de paramètres $\alpha$ et
-  $\lambda$:
+  issu d'une distribution de Pareto de paramètres $\alpha = \text{\texttt{shape}}$ et
+  $\lambda = \text{\texttt{scale}}$:
 \begin{verbatim}
-rpareto <- function(n, alpha, lambda)
-    lambda * (runif(n)^(-1/alpha) - 1)
+rpareto <- function(n, shape, scale)
+    scale * (runif(n)^(-1/shape) - 1)
 \end{verbatim}
   \begin{enumerate}
   \item Écrire une expression R utilisant la fonction \code{rpareto}
@@ -436,28 +436,28 @@ paste("a", 1:5, sep = "")
     \begin{enumerate}
 \item
 <<echo=TRUE,eval=FALSE>>=
-ea <- lapply(seq(100, 300, by = 50), rpareto, alpha = 2, lambda = 5000)
+x <- lapply(seq(100, 300, by = 50), rpareto, shape = 2, scale = 5000)
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
-names(ea) <- paste("sample", 1:5, sep = "")
+names(x) <- paste("sample", 1:5, sep = "")
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
-sapply(ea, mean)
+sapply(x, mean)
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
-lapply(ea, function(x) sort(ppareto(x, 2, 5000)))
-lapply(lapply(ea, sort), ppareto, alpha = 2, lambda = 5000)
+lapply(x, function(x) sort(ppareto(x, 2, 5000)))
+lapply(lapply(x, sort), ppareto, shape = 2, scale = 5000)
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
-hist(ea$sample5)
+hist(x$sample5)
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
-lapply(ea, "+", 1000)
+lapply(x, "+", 1000)
 @
     \end{enumerate}
   \end{sol}
