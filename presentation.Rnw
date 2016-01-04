@@ -133,9 +133,6 @@ capacités d'édition plutôt réduites.
 \end{figure}
 
 \begin{itemize}
-\item Sous Unix et Linux, R n'est accessible que depuis la ligne de
-  commande du système d'exploitation (terminal). Aucune interface
-  graphique n'est offerte avec la distribution de base de R.
 \item Sous Windows, une interface graphique plutôt rudimentaire est
   disponible. Elle facilite certaines opérations tel que
   l'installation de packages externes, mais elle offre autrement peu
@@ -145,7 +142,15 @@ capacités d'édition plutôt réduites.
   \autoref{fig:presentation:console}, l'application \code{R.app}
   comporte de nombreuses fonctionnalités, dont un éditeur de code
   assez complet.
+\item Sous Unix et Linux, R n'est accessible que depuis la ligne de
+  commande du système d'exploitation (terminal). Aucune interface
+  graphique n'est offerte avec la distribution de base de R.
 \end{itemize}
+
+Peu importe la plateforme utilisée --- quoique dans une moindre mesure
+sous OS~X --- nous recommandons d'interagir avec R par le biais d'un
+éditeur de texte pour programmeur ou d'un environnement de
+développement intégré; voir la \autoref{presentation:editeurs}.
 
 
 \section{Stratégies de travail}
@@ -174,7 +179,7 @@ x
   travail\indexfonction{save.image}:
 <<eval=FALSE>>=
 save.image()
-@ %
+@
   Par défaut, l'image est sauvegardée dans un fichier nommé
   \code{.RData} dans le dossier de travail actif (voir la
   \autoref{presentation:workspace}) et cette image est
@@ -255,10 +260,10 @@ save.image()
 \label{presentation:editeurs}
 
 Dans la mesure où l'on a recours à des fichiers de script tel
-qu'expliqué à la section précédente, l'édition de code R bénéficie
-grandement d'un bon éditeur de texte pour programmeur. Dans certains
-cas, l'éditeur peut même réduire l'opération de copier-coller à un
-simple raccourci clavier.
+qu'expliqué à la section précédente, l'édition de code R est rendue
+beaucoup plus aisée avec un bon éditeur de texte pour programmeur ou
+un environnement de développement intégré (\emph{integrated
+  development environment}, IDE).
 \begin{itemize}
 \item Un éditeur de texte est différent d'un traitement de texte en ce
   qu'il s'agit d'un logiciel destiné à la création, l'édition et la
@@ -268,18 +273,21 @@ simple raccourci clavier.
   d'éditeurs de texte simples.
 \item Un éditeur de texte pour programmeur saura en plus reconnaître
   la syntaxe d'un langage de programmation et assister à sa mise en
-  forme: indentation automatique du code, coloration syntaxique,
+  forme: indentation automatique du code, marquage des mots-clés,
   manipulation d'objets, etc.
+\item Un éditeur compatible avec R réduira, entre autres, l'opération
+  de copier-coller à un simple raccourci clavier.
 \end{itemize}
 
-Le lecteur peut utiliser l'éditeur de texte de son choix pour
-l'édition de code R. Certains éditeurs offrent simplement plus de
-fonctionnalités que d'autres.
+Le lecteur peut utiliser le logiciel de son choix pour l'édition de
+code R. Certains offrent simplement plus de fonctionnalités
+que d'autres.
 \begin{itemize}
-\item GNU Emacs\index{Emacs} est un très ancien, mais aussi très
-  puissant éditeur pour programmeur. À la question 6.2 de la foire aux
-  questions de R \citep{R-FAQ}, «Devrais-je utiliser R à l'intérieur
-  de Emacs?»\index{Emacs}, la réponse est: «Oui, absolument.»
+\item Dans la catégorie des éditeurs de texte, nous recommandons le
+  vénérable et très puissant éditeur pour programmeur
+  GNU~Emacs\index{Emacs}. À la question~6.2 de la foire aux questions
+  de R \citep{R-FAQ}, «Devrais-je utiliser R à l'intérieur de
+  Emacs?»\index{Emacs}, la réponse est: «Oui, absolument.»
 
   En effet, combiné avec le mode ESS\index{ESS} (\emph{Emacs Speaks
     Statistics}), Emacs offre un environnement de développement aussi
@@ -307,9 +315,26 @@ fonctionnalités que d'autres.
 \item Emacs est toutefois un logiciel difficile à apprivoiser, surtout
   pour les personnes moins à l'aise avec l'informatique.
 \item RStudio\index{RStudio} est un environnement de développement
-  intégré (IDE) créé spécifiquement pour travailler avec R. Il permet
-  de consulter dans une interface conviviale ses fichiers de script,
-  la ligne de commande R, les rubriques d'aide, les graphiques, etc.
+  intégré (IDE) créé spécifiquement pour travailler avec R. Sa
+  popularité connaît une progression foudroyante depuis 2014. Il
+  permet de consulter dans une interface conviviale ses fichiers de
+  script, la ligne de commande R, les rubriques d'aide, les
+  graphiques, etc.; voir la \autoref{fig:presentation:rstudio}.
+
+  \begin{figure}[t]
+    \centering
+    \includegraphics{rstudio-screenshot}
+    \caption{Fenêtre de RStudio sous OS~X dans sa configuration par
+      défaut. Dans la partie de gauche, on retrouve en haut le fichier
+      de script de la \autoref{fig:presentation:script} et, en bas,
+      l'invite de commandes R. Dans la partie de droite, la fenêtre du
+      haut dresse la liste des objets de l'environnement (vide, ici)
+      et la fenêtre du bas offre une interface pour charger des
+      paquetages (la liste peut différer d'un poste de travail à un
+      autre).}
+    \label{fig:presentation:rstudio}
+  \end{figure}
+
   RStudio est disponible sur les plateformes Windows, OS~X et Linux.
 \item Il existe plusieurs autres options pour éditer efficacement du
   code R --- et le Bloc-notes de Windows n'en fait \emph{pas} partie!
@@ -323,7 +348,7 @@ fonctionnalités que d'autres.
     intégré à l'application \code{R.app}, ou alors l'éditeur de texte
     commercial TextMate (essai gratuit de 30 jours);
   \item sous Linux, Vim et Kate semblent les choix les plus populaires
-    après Emacs et RStudio dans la communauté R.
+    dans la communauté R, après Emacs et RStudio.
   \end{itemize}
 \end{itemize}
 
@@ -335,20 +360,20 @@ fonctionnalités que d'autres.
 Dans ses grandes lignes, une session de travail avec R réunit les
 étapes ci-dessous.
 \begin{enumerate}
+\item Démarrer une session R en cliquant sur l'icône de l'application
+  si l'on utilise une interface graphique ou RStudio, ou alors en
+  suivant la procédure appropriée pour travailler avec son éditeur de
+  texte.
 \item Ouvrir un fichier de script existant ou en créer un nouveau à
   l'aide de l'éditeur de texte de son choix.
-\item Démarrer une session R en cliquant sur l'icône de l'application
-  si l'on utilise une interface graphique, ou alors en suivant la
-  procédure appropriée pour travailler avec son éditeur de texte.
-  L'\autoref{emacs+ess} explique la procédure à suivre si l'on utilise
-  GNU~Emacs.
 \item Bâtir graduellement un fichier de script en y consignant le code
   R que l'on souhaite sauvegarder et les commentaires qui permettront
   de s'y retrouver plus tard. Tester les commandes à la ligne de
   commande. Au cours de la phase de développement, on fera
   généralement de nombreux aller-retours entre la ligne de commande et
   le fichier de script.
-\item Sauvegarder son fichier de script et quitter l'éditeur.
+\item Sauvegarder son fichier de script et quitter l'éditeur ou
+  l'environnement de développement.
 \item Si nécessaire --- et c'est rarement le cas --- sauvegarder
   l'espace de travail de la session R avec
   \code{save.image()}\indexfonction{save.image}. En fait, on ne voudra
@@ -359,8 +384,10 @@ Dans ses grandes lignes, une session de travail avec R réunit les
   usuelle. Encore ici, la manière de procéder est quelque peu
   différente dans GNU~Emacs; voir l'\autoref{emacs+ess}.
 \end{enumerate}
-Évidemment, les étapes 1 et 2 sont interchangeables, tout comme les
-étapes 4, 5 et 6.
+Les étapes 1 et 2 sont interchangeables, tout comme les étapes 4, 5 et
+6. L'\autoref{emacs+ess} explique plus en détails la procédure à
+suivre lorsque l'on utilise GNU~Emacs. L'\autoref{rstudio} fait de
+même lorsque l'on utilise l'environnement intégré RStudio.
 
 
 \section{Répertoire de travail}
@@ -377,12 +404,14 @@ défaut dans lequel le logiciel:
 \end{inparaenum}
 Le dossier de travail est déterminé au lancement de R.
 \begin{itemize}
-\item Les interfaces graphiques démarrent avec un répertoire de
+\item Les interfaces graphiques de R démarrent avec un répertoire de
   travail par défaut. Pour le changer, utiliser l'entrée appropriée
   dans le menu \texttt{Fichier} (Windows) ou \texttt{Divers} (Mac
   OS~X). Consulter aussi les foires aux questions spécifiques aux
   interfaces graphiques \citep{Rw-FAQ,RMacOSX-FAQ} pour des détails
   additionnels sur la gestion des répertoires de travail.
+\item Dans RStudio, on change le répertoire de travail via le menu
+  \texttt{Session}.
 \item Avec GNU~Emacs, la situation est un peu plus simple puisque l'on
   doit spécifier un répertoire de travail chaque fois que l'on démarre
   un processus R; voir l'\autoref{emacs+ess}.
