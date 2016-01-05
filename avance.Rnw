@@ -102,11 +102,11 @@ sommaires sur des tableaux, il faut toujours utiliser la fonction
 \item Considérer les exemples suivants:
 <<echo=TRUE>>=
 (x <- array(sample(1:10, 80, rep = TRUE), c(3, 3, 4)))
-apply(x, 3, det)       # déterminants des quatre matrices 3 x 3
-apply(x, 1, sum)       # sommes des trois tranches horizontales
-apply(x, c(1, 2), sum) # sommes des neuf carottes horizontales
-apply(x, c(1, 3), sum) # sommes des 12 carottes transversales
-apply(x, c(2, 3), sum) # sommes des 12 carottes verticales
+apply(x, 3, det)       # déterminants des matrices 3 x 3
+apply(x, 1, sum)       # sommes des tranches horizontales
+apply(x, c(1, 2), sum) # sommes des carottes horizontales
+apply(x, c(1, 3), sum) # sommes des carottes transversales
+apply(x, c(2, 3), sum) # sommes des carottes verticales
 @
 \end{itemize}
 
@@ -342,7 +342,8 @@ sum(Xij * wij)/sum(wij)
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
-apply(Xijk * wijk, c(1, 2), sum)/apply(wijk, c(1, 2), sum)
+apply(Xijk * wijk, c(1, 2), sum) /
+    apply(wijk, c(1, 2), sum)
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
@@ -436,7 +437,8 @@ paste("a", 1:5, sep = "")
     \begin{enumerate}
 \item
 <<echo=TRUE,eval=FALSE>>=
-x <- lapply(seq(100, 300, by = 50), rpareto, shape = 2, scale = 5000)
+x <- lapply(seq(100, 300, by = 50), rpareto,
+            shape = 2, scale = 5000)
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
@@ -449,7 +451,8 @@ sapply(x, mean)
 \item
 <<echo=TRUE,eval=FALSE>>=
 lapply(x, function(x) sort(ppareto(x, 2, 5000)))
-lapply(lapply(x, sort), ppareto, shape = 2, scale = 5000)
+lapply(lapply(x, sort), ppareto,
+       shape = 2, scale = 5000)
 @
 \item
 <<echo=TRUE,eval=FALSE>>=

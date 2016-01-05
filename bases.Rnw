@@ -172,13 +172,15 @@ risque de nuire à la portabilité du code.
 T
 F
 @
-<<echo=TRUE, eval=FALSE>>=
-TRUE <- 3
-@
-<<echo=FALSE, eval=TRUE>>=
-msg <- try(TRUE <- 3)
-cat(msg)
-@
+\begin{Schunk}
+\begin{Sinput}
+> TRUE <- 3
+\end{Sinput}
+\begin{Soutput}
+Error in TRUE <- 3 : membre gauche de l'assignation (do_set)
+incorrect
+\end{Soutput}
+\end{Schunk}
 <<echo=TRUE>>=
 (T <- 3)
 @
@@ -292,7 +294,7 @@ length(v)
 \end{itemize}
 
 
-\subsection{L'objet spécial \code{NULL}}
+\subsection{Objet spécial \code{NULL}}
 \label{bases:objets:NULL}
 
 L'objet spécial \Objet{NULL} représente «rien», ou le vide.
@@ -581,7 +583,8 @@ matrices et tableaux se fait avec les crochets \fonction{[~]}.
 \item On extrait un élément d'une matrice en précisant ses positions
   dans chaque dimension de celle-ci, séparées par des virgules:
 <<echo=TRUE>>=
-(m <- matrix(c(40, 80, 45, 21, 55, 32), nrow = 2, ncol = 3))
+(m <- matrix(c(40, 80, 45, 21, 55, 32),
+             nrow = 2, ncol = 3))
 m[1, 2]
 @
 \item On peut aussi ne donner que la position de l'élément dans le
@@ -855,7 +858,7 @@ x[[3]] <- 3:8
 
 \begin{exercice}
   \index{indiçage!vecteur}
-  Soit \code{x} un vecteur contenant les valeurs suivantes d'un échantillon:
+  Soit \code{x} un vecteur contenant les valeurs d'un échantillon:
   \begin{center}
 <<echo=FALSE>>=
 x <- sample(1:20, 20, replace = TRUE)
@@ -892,9 +895,8 @@ x[-c(6, 10, 12)]
     \end{enumerate}
   \end{sol}
 \end{exercice}
-\vspace{\fill}
+%\vspace{\fill}
 
-\newpage
 \begin{exercice}
   \index{indiçage!matrice}
   Soit \code{x} une matrice $10 \times 7$ obtenue aléatoirement avec

@@ -202,7 +202,6 @@ connaître toutes les options des fonctions.
 %%% Modification des environnements de code pour rendre les exemples
 %%% plus compacts.
 \fvset{listparameters={\setlength{\topsep}{-0.5ex}}}
-\renewenvironment{Schunk}{\setlength{\topskip}{-\parskip}}{}
 \begin{ttscript}{uniques}
 \item[\Fonction{seq}] génération de suites de nombres\index{suite de
     nombres}
@@ -263,8 +262,7 @@ unique(c(2, 4, 2, 5, 9, 5, 0))
 @
 \end{ttscript}
 
-\fvset{listparameters={\setlength{\topsep}{0pt}}}
-\renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
+\fvset{listparameters={\setlength{\topsep}{\normalsep}}}
 
 
 \subsection{Recherche d'éléments dans un vecteur}
@@ -277,8 +275,7 @@ x <- c(4, -1, 2, -3, 6)
 x
 @
 
-\fvset{listparameters={\setlength{\topsep}{-0.5ex}}}
-\renewenvironment{Schunk}{\setlength{\topskip}{-\parskip}}{}
+\fvset{listparameters={\setlength{\topsep}{\compactsep}}}
 \begin{ttscript}{which.max}
 \item[\Fonction{which}] positions des valeurs \texttt{TRUE} dans un vecteur
   booléen
@@ -305,8 +302,7 @@ match(2, x)
 -1:2 %in% x
 @
 \end{ttscript}
-\fvset{listparameters={\setlength{\topsep}{0pt}}}
-\renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
+\fvset{listparameters={\setlength{\topsep}{\normalsep}}}
 
 
 \subsection{Arrondi}
@@ -319,8 +315,7 @@ x <- c(-3.68, -2/3, pi, 1/3, 2.52)
 x
 @
 
-\fvset{listparameters={\setlength{\topsep}{-0.5ex}}}
-\renewenvironment{Schunk}{\setlength{\topskip}{-\parskip}}{}
+\fvset{listparameters={\setlength{\topsep}{\compactsep}}}
 \begin{ttscript}{ceiling}
 \item[\Fonction{round}] arrondi\index{arrondi} à un nombre défini de
   décimales (par défaut $0$)
@@ -345,8 +340,7 @@ ceiling(x)
 trunc(x)
 @
 \end{ttscript}
-\fvset{listparameters={\setlength{\topsep}{0pt}}}
-\renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
+\fvset{listparameters={\setlength{\topsep}{\normalsep}}}
 
 
 \subsection{Sommaires et statistiques descriptives}
@@ -359,8 +353,7 @@ x <- c(14, 17, 7, 9, 3, 4, 25, 21, 24, 11)
 x
 @
 
-\fvset{listparameters={\setlength{\topsep}{-0.5ex}}}
-\renewenvironment{Schunk}{\setlength{\topskip}{-\parskip}}{}
+\fvset{listparameters={\setlength{\topsep}{\compactsep}}}
 \begin{ttscript}{sum, prod}
 \item[\Fonction{sum}, \Fonction{prod}] somme\index{somme} et
   produit\index{produit} des éléments d'un vecteur
@@ -406,8 +399,7 @@ quantile(x)
 summary(x)
 @
 \end{ttscript}
-\fvset{listparameters={\setlength{\topsep}{0pt}}}
-\renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
+\fvset{listparameters={\setlength{\topsep}{\normalsep}}}
 
 \subsection{Sommaires cumulatifs et comparaisons élément par élément}
 
@@ -419,8 +411,7 @@ x <- c(14, 17, 7, 9, 3)
 x
 @
 
-\fvset{listparameters={\setlength{\topsep}{-0.5ex}}}
-\renewenvironment{Schunk}{\setlength{\topskip}{-\parskip}}{}
+\fvset{listparameters={\setlength{\topsep}{\compactsep}}}
 \begin{ttscript}{cumsum, cumprod}
 \item[\Fonction{cumsum}, \Fonction{cumprod}]
   somme\index{somme!cumulative} et produit\index{produit!cumulatif}
@@ -443,8 +434,7 @@ pmin(x, 12)
 pmax(x, c(16, 23,  4, 12,  3))
 @
 \end{ttscript}
-\fvset{listparameters={\setlength{\topsep}{0pt}}}
-\renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
+\fvset{listparameters={\setlength{\topsep}{\normalsep}}}
 
 
 \subsection{Opérations sur les matrices}
@@ -457,8 +447,7 @@ x <- matrix(c(2, 1, 4, 3), 2)
 x
 @
 
-\fvset{listparameters={\setlength{\topsep}{-0.5ex}}}
-\renewenvironment{Schunk}{\setlength{\topskip}{-\parskip}}{}
+\fvset{listparameters={\setlength{\topsep}{\compactsep}}}
 \begin{ttscript}{rowMeans, colMeans}
 \item[\Fonction{nrow}, \Fonction{ncol}] nombre de lignes et de
   colonnes d'une matrice
@@ -514,8 +503,7 @@ solve(x, c(1, 2))
 diag(x)
 @
 \end{ttscript}
-\fvset{listparameters={\setlength{\topsep}{0pt}}}
-\renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
+\fvset{listparameters={\setlength{\topsep}{\normalsep}}}
 
 
 \subsection{Produit extérieur}
@@ -956,30 +944,30 @@ mat[rowMeans(mat) > 7,]
 
 \begin{exercice}
   On vous donne la liste et la date des 31 meilleurs temps enregistrés
-  au 100 mètres homme entre 1964 et 2005:
+  au 100~mètres homme entre 1964 et 2005:
 <<echo=TRUE>>=
-temps <- c(10.06, 10.03, 10.02,  9.95, 10.04, 10.07, 10.08,
-           10.05, 9.98, 10.09, 10.01, 10.00,  9.97,  9.93,
-           9.96,  9.99, 9.92,  9.94,  9.90,  9.86,  9.88,
-           9.87,  9.85,  9.91, 9.84,  9.89,  9.79,  9.80,
-           9.82,  9.78,  9.77)
-names(temps) <- c("1964-10-15", "1968-06-20", "1968-10-13",
-                  "1968-10-14", "1968-10-14", "1968-10-14",
-                  "1968-10-14", "1975-08-20", "1977-08-11",
-                  "1978-07-30", "1979-09-04", "1981-05-16",
-                  "1983-05-14", "1983-07-03", "1984-05-05",
-                  "1984-05-06", "1988-09-24", "1989-06-16",
-                  "1991-06-14", "1991-08-25", "1991-08-25",
-                  "1993-08-15", "1994-07-06", "1994-08-23",
-                  "1996-07-27", "1996-07-27", "1999-06-16",
-                  "1999-08-22", "2001-08-05", "2002-09-14",
-                  "2005-06-14")
+tps <- c(10.06, 10.03, 10.02,  9.95, 10.04, 10.07, 10.08,
+         10.05,  9.98, 10.09, 10.01, 10.00,  9.97,  9.93,
+          9.96,  9.99,  9.92,  9.94,  9.90,  9.86,  9.88,
+          9.87,  9.85,  9.91,  9.84,  9.89,  9.79,  9.80,
+          9.82,  9.78,  9.77)
+names(tps) <- c("1964-10-15", "1968-06-20", "1968-10-13",
+                "1968-10-14", "1968-10-14", "1968-10-14",
+                "1968-10-14", "1975-08-20", "1977-08-11",
+                "1978-07-30", "1979-09-04", "1981-05-16",
+                "1983-05-14", "1983-07-03", "1984-05-05",
+                "1984-05-06", "1988-09-24", "1989-06-16",
+                "1991-06-14", "1991-08-25", "1991-08-25",
+                "1993-08-15", "1994-07-06", "1994-08-23",
+                "1996-07-27", "1996-07-27", "1999-06-16",
+                "1999-08-22", "2001-08-05", "2002-09-14",
+                "2005-06-14")
 @
   Extraire de ce vecteur les records du monde seulement, c'est-à-dire
   la première fois que chaque temps a été réalisé.
   \begin{sol}
 <<>>=
-temps[match(unique(cummin(temps)), temps)]
+tps[match(unique(cummin(tps)), tps)]
 @
   \end{sol}
 \end{exercice}

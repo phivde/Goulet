@@ -185,9 +185,11 @@ save.image()
   \autoref{presentation:workspace}) et cette image est
   automatiquement chargée en mémoire au prochain lancement de
   R, tel qu'indiqué à la fin du message d'accueil:
+  \begin{Schunk}
 \begin{verbatim}
 [Sauvegarde de la session précédente restaurée]
 \end{verbatim}
+  \end{Schunk}
 
   Cette approche, dite de «code virtuel et objets réels» a un gros
   inconvénient: le code utilisé pour créer les objets n'est pas
@@ -298,7 +300,7 @@ que d'autres.
 
   \begin{figure}[t]
     \centering
-    \includegraphics{emacs-screenshot}
+    \includegraphics[width=0.9\textwidth]{emacs-screenshot}
     \caption{Fenêtre de GNU Emacs sous OS~X en mode d'édition de code
       R. Dans la partie du haut, on retrouve le fichier de script de
       la \autoref{fig:presentation:script} et dans la partie du
@@ -323,15 +325,12 @@ que d'autres.
 
   \begin{figure}[t]
     \centering
-    \includegraphics{rstudio-screenshot}
+    \includegraphics[width=0.9\textwidth]{rstudio-screenshot}
     \caption{Fenêtre de RStudio sous OS~X dans sa configuration par
-      défaut. Dans la partie de gauche, on retrouve en haut le fichier
-      de script de la \autoref{fig:presentation:script} et, en bas,
-      l'invite de commandes R. Dans la partie de droite, la fenêtre du
-      haut dresse la liste des objets de l'environnement (vide, ici)
-      et la fenêtre du bas offre une interface pour charger des
-      paquetages (la liste peut différer d'un poste de travail à un
-      autre).}
+      défaut. Dans le sens des aiguilles d'une montre, on y retrouve:
+      le fichier de script de la \autoref{fig:presentation:script}; la
+      liste des objets de l'environnement (vide, ici); une interface
+      pour charger des packages; l'invite de commandes R.}
     \label{fig:presentation:rstudio}
   \end{figure}
 

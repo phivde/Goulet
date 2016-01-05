@@ -223,6 +223,7 @@ quelques trucs que nous utilisons régulièrement.
   Par exemple, la modification suivante à la boucle de la fonction
   \code{fp} permet d'afficher les valeurs successives de la variable
   \code{i} et de détecter, par exemple, une procédure itérative divergente:
+  \begin{Schunk}
 \begin{verbatim}
 repeat
 {
@@ -233,6 +234,7 @@ repeat
         break
 }
 \end{verbatim}
+  \end{Schunk}
 \item Quand ce qui précède ne fonctionne pas, ne reste souvent qu'à
   exécuter manuellement la fonction. Pour ce faire, définir dans
   l'espace de travail tous les arguments de la fonction, puis exécuter
@@ -358,6 +360,7 @@ for (i in 1:10)
   \end{align*}
   où $\bar{X} = n^{-1}(X_1 + \dots + X_n)$.
   \begin{sol}
+    \begin{Schunk}
 \begin{verbatim}
 variance <- function(x, biased = FALSE)
 {
@@ -370,6 +373,7 @@ variance <- function(x, biased = FALSE)
         var(x)
 }
 \end{verbatim}
+    \end{Schunk}
   \end{sol}
 \end{exercice}
 
@@ -386,6 +390,7 @@ variance <- function(x, biased = FALSE)
     expression de la fonction s'assure que la longueur de
     \code{data} est compatible avec le nombre de lignes et de
     colonnes de la matrice demandée.
+    \begin{Schunk}
 \begin{verbatim}
 matrix2 <- function(data = NA, nrow = 1, ncol = 1,
                     bycol = FALSE, dimnames = NULL)
@@ -404,10 +409,12 @@ matrix2 <- function(data = NA, nrow = 1, ncol = 1,
     data
 }
 \end{verbatim}
+    \end{Schunk}
     La seconde solution n'a pas recours à la transposée. Pour remplir
     la matrice par ligne, il suffit de réordonner les éléments du
     vecteur \code{data} en utilisant la formule obtenue à
     l'\autoref{exercice:operateurs:ijk}.
+    \begin{Schunk}
 \begin{verbatim}
 matrix2 <- function(data = NA, nrow = 1, ncol = 1,
                     bycol = FALSE, dimnames = NULL)
@@ -425,6 +432,7 @@ matrix2 <- function(data = NA, nrow = 1, ncol = 1,
     data
 }
 \end{verbatim}
+    \end{Schunk}
   \end{sol}
 \end{exercice}
 
@@ -440,12 +448,14 @@ matrix2 <- function(data = NA, nrow = 1, ncol = 1,
   La fonction devrait prendre en argument un vecteur de valeurs de
   $x$. Comparer les résultats avec ceux de la fonction \fonction{dnorm}.
   \begin{sol}
+    \begin{Schunk}
 \begin{verbatim}
 phi <- function(x)
 {
     exp(-x^2/2) / sqrt(2 * pi)
 }
 \end{verbatim}
+    \end{Schunk}
   \end{sol}
 \end{exercice}
 
@@ -472,6 +482,7 @@ phi <- function(x)
   fois. Comparer les résultats avec ceux de la fonction
   \fonction{pnorm}.
   \begin{sol}
+    \begin{Schunk}
 \begin{verbatim}
 Phi <- function(x)
 {
@@ -479,6 +490,7 @@ Phi <- function(x)
     0.5 + phi(x) * sum(x^n / cumprod(n))
 }
 \end{verbatim}
+    \end{Schunk}
   \end{sol}
 \end{exercice}
 
@@ -491,8 +503,9 @@ Phi <- function(x)
   solution simple consiste à utiliser une structure de contrôle
   \code{if ... else}, mais les curieux chercheront à s'en passer.
   \begin{sol}
-    Première solution utilisant une fonction interne et une structure
+    La première solution utilise une fonction interne et une structure
     de contrôle \code{if ... else}.
+    \begin{Schunk}
 \begin{verbatim}
 Phi <- function(x)
 {
@@ -508,9 +521,11 @@ Phi <- function(x)
         fun(x)
 }
 \end{verbatim}
+    \end{Schunk}
     Seconde solution sans structure de contrôle \code{if ... else}.
-    Rappelons que dans des calculs algébriques, \code{FALSE} vaut 0 et
-    \code{TRUE} vaut 1.
+    Rappelons que dans des calculs algébriques, \code{FALSE} vaut $0$ et
+    \code{TRUE} vaut $1$.
+    \begin{Schunk}
 \begin{verbatim}
 Phi <- function(x)
 {
@@ -521,6 +536,7 @@ Phi <- function(x)
                       sum(x^n / cumprod(n)))
 }
 \end{verbatim}
+    \end{Schunk}
   \end{sol}
 \end{exercice}
 
@@ -530,6 +546,7 @@ Phi <- function(x)
   un vecteur de valeurs de $x$. Ne pas utiliser de boucle. Comparer
   les résultats avec ceux de la fonction \fonction{pnorm}.
   \begin{sol}
+    \begin{Schunk}
 \begin{verbatim}
 Phi <- function(x)
 {
@@ -538,6 +555,7 @@ Phi <- function(x)
                            cumprod(n))
 }
 \end{verbatim}
+    \end{Schunk}
   \end{sol}
 \end{exercice}
 
@@ -560,6 +578,7 @@ Phi <- function(x)
   \begin{sol}
     \begin{enumerate}
     \item
+      \begin{Schunk}
 \begin{verbatim}
 prod.mat <- function(mat1, mat2)
 {
@@ -581,7 +600,9 @@ prod.mat <- function(mat1, mat2)
 permettent pas le produit matriciel.")
 }
 \end{verbatim}
+      \end{Schunk}
     \item
+      \begin{Schunk}
 \begin{verbatim}
 prod.mat<-function(mat1, mat2)
 {
@@ -598,9 +619,11 @@ prod.mat<-function(mat1, mat2)
 permettent pas le produit matriciel.")
 }
 \end{verbatim}
+      \end{Schunk}
     \end{enumerate}
     Solutions bonus: deux façons de faire équivalentes qui cachent la
     boucle dans un \fonction{sapply}.
+    \begin{Schunk}
 \begin{verbatim}
 prod.mat<-function(mat1, mat2)
 {
@@ -622,6 +645,7 @@ prod.mat<-function(mat1, mat2)
 pas le produit matriciel.")
 }
 \end{verbatim}
+    \end{Schunk}
   \end{sol}
 \end{exercice}
 
@@ -640,6 +664,7 @@ pas le produit matriciel.")
   fonction est plutôt lente et inefficace pour de grands groupes
   d'étudiants. Modifiez la fonction afin d'en réduire le nombre
   d'opérations et faire en sorte qu'elle n'utilise aucune boucle.
+  \begin{Schunk}
 \begin{verbatim}
 notes.finales <- function(notes, p)
 {
@@ -656,17 +681,21 @@ notes.finales <- function(notes, p)
     final
 }
 \end{verbatim}
+  \end{Schunk}
   \begin{sol}
     Le calcul à faire n'est qu'un simple produit matriciel, donc:
+    \begin{Schunk}
 \begin{verbatim}
 notes.finales <- function(notes, p) notes %*% p
 \end{verbatim}
+    \end{Schunk}
   \end{sol}
 \end{exercice}
 
 \begin{exercice}
   Trouver les erreurs qui empêchent la définition de la fonction
   ci-dessous.
+  \begin{Schunk}
 \begin{verbatim}
 AnnuiteFinPeriode <- function(n, i)
 {{
@@ -675,6 +704,7 @@ AnnuiteFinPeriode <- function(n, i)
     sum(ValPresChaquepmt)
 }
 \end{verbatim}
+  \end{Schunk}
 \end{exercice}
 
 \begin{exercice}
@@ -684,6 +714,7 @@ AnnuiteFinPeriode <- function(n, i)
   La fonction ci-dessous calcule la valeur des paramètres d'une loi
   normale, gamma ou Pareto à partir de la moyenne et de la variance,
   qui sont connues par l'utilisateur.
+  \begin{Schunk}
 \begin{verbatim}
 param <- function(moyenne, variance, loi)
 {
@@ -705,6 +736,7 @@ param <- function(moyenne, variance, loi)
 \"gamma\" ou \"pareto\"")
 }
 \end{verbatim}
+  \end{Schunk}
   L'utilisation de la fonction pour diverses lois donne les résultats
   suivants:
 <<echo=FALSE>>=
@@ -757,6 +789,7 @@ non trouvé
     éditeur de texte pour programmeur.
   \end{enumerate}
   \begin{sol}
+    \begin{Schunk}
 \begin{verbatim}
 param <- function (moyenne, variance, loi)
 {
@@ -784,6 +817,7 @@ param <- function (moyenne, variance, loi)
 \"gamma\" ou \"pareto\"")
 }
 \end{verbatim}
+    \end{Schunk}
   \end{sol}
 \end{exercice}
 
