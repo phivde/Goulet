@@ -762,22 +762,22 @@ param <- function(moyenne, variance, loi)
 <<echo=TRUE>>=
 param(2, 4, "normale")
 @
-<<eval=FALSE>>=
-param(50, 7500, "gamma")
-@
 \begin{Schunk}
+\begin{Sinput}
+> param(50, 7500, "gamma")
+\end{Sinput}
 \begin{Soutput}
 Erreur dans param(50, 7500, "gamma") : Objet "param1"
-non trouvé
+introuvable
 \end{Soutput}
 \end{Schunk}
-<<eval=FALSE>>=
-param(50, 7500, "pareto")
-@
 \begin{Schunk}
+\begin{Sinput}
+> param(50, 7500, "pareto")
+\end{Sinput}
 \begin{Soutput}
 Erreur dans param(50, 7500, "pareto") : Objet "param1"
-non trouvé
+introuvable
 \end{Soutput}
 \end{Schunk}
   \begin{enumerate}
