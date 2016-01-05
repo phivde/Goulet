@@ -201,7 +201,7 @@ connaître toutes les options des fonctions.
 
 %%% Modification des environnements de code pour rendre les exemples
 %%% plus compacts.
-\fvset{listparameters={\setlength{\topsep}{-0.5ex}}}
+\fvset{listparameters={\setlength{\topsep}{\compactsep}}}
 \begin{ttscript}{uniques}
 \item[\Fonction{seq}] génération de suites de nombres\index{suite de
     nombres}
