@@ -32,6 +32,13 @@ des rubriques d'aide, qui offre des hyperliens vers des fonctions
 apparentées au sujet de la rubrique.
 
 
+\begin{prob-enonce}
+  On s'intéresse à la somme des résultats du lancer de deux dés. Le
+  premier dé compte 8 faces et le deuxième, 6. On souhaite calculer la
+  moyenne des résultats de la somme supérieurs à 7.
+\end{prob-enonce}
+
+
 \section{Opérations arithmétiques}
 \label{operateurs:operations}
 
@@ -76,6 +83,13 @@ taille d'un objet plus court
 \end{Soutput}
 \end{Schunk}
 \end{itemize}
+
+
+\begin{prob-astuce}
+  Grâce à la propriété d'opération élément par élément de R, il
+  devrait être possible --- en fait, il est souhaitable --- de
+  résoudre le problème sans avoir recours à des boucles.
+\end{prob-astuce}
 
 
 \section{Opérateurs}
@@ -401,6 +415,13 @@ summary(x)
 \end{ttscript}
 \fvset{listparameters={\setlength{\topsep}{\normalsep}}}
 
+
+\begin{prob-astuce}
+  La fonction \fonction{mean} permettra de calculer la moyenne des
+  résultats supérieurs à 7.
+\end{prob-astuce}
+
+
 \subsection{Sommaires cumulatifs et comparaisons élément par élément}
 
 Les fonctions de cette sous-section sont toutes illustrées avec le vecteur
@@ -519,7 +540,7 @@ utile pour faire plusieurs opérations en une seule expression tout en
 \begin{quote}
   \code{outer(X, Y, FUN)}
 \end{quote}
-Le résultat est l'application la fonction \code{FUN} (\fonction{prod}
+Le résultat est l'application la fonction \code{FUN} (\fonction{"*"}
 par défaut) entre chacun des éléments de \code{X} et chacun des
 éléments de \code{Y}, autrement dit
 \begin{quote}
@@ -536,10 +557,25 @@ pour toutes les valeurs des indices \code{i} et \code{j}.
 <<echo=TRUE>>=
 outer(c(1, 2, 5), c(2, 3, 6))
 @
+\item Lorsque \code{FUN} est un opérateur arithmétique du
+  \autoref{tab:operateurs:operateurs}, on place le symbole entre
+  guillemets: \code{"*"}, \code{"+"}, \code{"<="}, etc.
 \item L'opérateur \Fonction{\%o\%} est un raccourci de \code{outer(X,
-    Y, prod)}.
+    Y, "*")}.
 \end{itemize}
 
+
+\begin{prob-astuce}
+  Nous avons trouvé ici la fonction clé pour résoudre notre problème
+  sans faire de boucles. La fonction \fonction{outer} permet de
+  calculer facilement tous les résultats possibles de la somme de deux
+  dés:
+<<echo=TRUE>>=
+x <- 1:8         # résultats possibles du premier dé
+y <- 1:6         # résultats possibles du second dé
+outer(x, y, "+") # sommes de toutes les combinaisons
+@
+\end{prob-astuce}
 
 
 \section{Structures de contrôle}
@@ -643,7 +679,7 @@ les fonctions les plus fréquemment utilisées. On peut voir la liste
 des packages déjà en mémoire avec\Indexfonction{search}
 <<echo=TRUE>>=
 search()
-@ %
+@
 et le contenu de toute la bibliothèque avec la fonction
 \Fonction{library} (résultat non montré ici).
 
@@ -660,6 +696,38 @@ packages avec la fonction \Fonction{install.packages}.
 L'\autoref{packages} explique plus en détails comment gérer sa
 bibliothèque personnelle et installer des packages externes.
 
+
+\begin{prob-solution}
+  Nous savons déjà que l'expression
+<<echo=FALSE>>=
+x <- 1:8; y <- 1:6
+@
+<<echo=TRUE>>=
+m <- outer(x, y, "+")
+@
+  calcule tous les résultats de la somme du lancer des deux dés. Il
+  faut maintenant extraire de cette matrice les résultats supérieurs à
+  7 et en faire la moyenne.
+
+  Par la propriété d'opération élément par élément, la comparaison
+<<echo=TRUE>>=
+m > 7
+@
+  retourne une matrice booléenne de la même dimension que \code{m}.
+  Pour extraire les résultats de \code{m} supérieurs à 7, il suffit
+  d'indicer \code{m}  avec la matrice booléenne ci-dessus:
+<<echo=TRUE>>=
+m[m > 7]
+@
+  Le résultat recherché est donc
+<<echo=TRUE>>=
+mean(m[m > 7])
+@
+  Le tout peut s'écrire en une seule expression ainsi:
+<<echo=TRUE>>=
+mean((m <- outer(x, y, "+"))[m > 7])
+@
+\end{prob-solution}
 
 \section{Exemples}
 \label{operateurs:exemples}
