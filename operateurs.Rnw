@@ -676,12 +676,12 @@ de fonctions et de jeux de données apparentés nommés
 française de R a choisi de conserver tel quel). On démarrage, R charge
 automatiquement quelques packages de la bibliothèque, ceux contenant
 les fonctions les plus fréquemment utilisées. On peut voir la liste
-des packages déjà en mémoire avec\Indexfonction{search}
+des packages déjà en mémoire avec la fonction \Fonction{search} et le
+contenu de toute la bibliothèque avec la fonction \Fonction{library}
+(résultat non montré ici):
 <<echo=TRUE>>=
 search()
 @
-et le contenu de toute la bibliothèque avec la fonction
-\Fonction{library} (résultat non montré ici).
 
 Une des grandes forces de R est la facilité avec laquelle on peut
 ajouter des fonctionnalités au système par le biais de packages
