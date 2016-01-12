@@ -1,4 +1,5 @@
 \chapter{GNU Emacs et ESS: la base}
+\index{Emacs|(}
 \label{emacs+ess}
 
 Emacs est l'Éditeur de texte des éditeurs de texte. À l'origine un
@@ -220,8 +221,8 @@ mentionner les commandes les plus importantes regroupées par tâche.
 \label{emacs+ess:commandes:essentielles}
 
 \begin{ttscript}{M-x}
-\item[\emacs{M-x}] démarrer l'invite de commande
-\item[\emacs{C-g}] bouton de panique: annuler, quitter! Presser plus
+\item[\code{M-x}] démarrer l'invite de commande
+\item[\code{C-g}] bouton de panique: annuler, quitter! Presser plus
   d'une fois au besoin.
 \end{ttscript}
 
@@ -240,44 +241,44 @@ raccourci clavier.
 
 \begin{ttscript}{C-x C-w}
   \raggedright
-\item[\emacs{C-x C-f}] ouvrir un fichier (\code{find-file})
-\item[\emacs{C-x C-s}] sauvegarder
+\item[\code{C-x C-f}] ouvrir un fichier (\code{find-file})
+\item[\code{C-x C-s}] sauvegarder
   (\code{save-buffer})\index{Emacs!sauvegarder}
-\item[\emacs{C-x C-w}] sauvegarder sous
+\item[\code{C-x C-w}] sauvegarder sous
   (\code{write-file})\index{Emacs!sauvegarder sous}
-\item[\emacs{C-x k}] fermer un fichier (\code{kill-buffer})
+\item[\code{C-x k}] fermer un fichier (\code{kill-buffer})
   \\[\baselineskip]
-\item[\emacs{C-\_}] annuler (pratiquement illimité); aussi
-  \emacs{C-x u} (\code{undo})
+\item[\code{C-\_}] annuler (pratiquement illimité); aussi
+  \code{C-x u} (\code{undo})
   \\[\baselineskip]
-\item[\emacs{C-s}] recherche incrémentale avant
+\item[\code{C-s}] recherche incrémentale avant
   (\code{isearch-forward})
-\item[\emacs{C-r}] Recherche incrémentale arrière
+\item[\code{C-r}] Recherche incrémentale arrière
   (\code{isearch-backward})
-\item[\emacs{M-\%}] rechercher et remplacer
+\item[\code{M-\%}] rechercher et remplacer
   (\code{query-replace})\index{Emacs!rechercher et remplacer}
 \end{ttscript}
 
 
 \subsection{Déplacements simples du curseur}
-\index{Emacs!déplacement}
+\index{Emacs!déplacement du curseur}
 \label{emacs+ess:commandes:deplacement}
 
 \begin{ttscript}{C-DEL | C-w}
   \raggedright
-\item[\emacs{C-b} | \emacs{C-f}] déplacer d'un caractère vers l'arrière~|~l'avant
+\item[\code{C-b} | \code{C-f}] déplacer d'un caractère vers l'arrière~|~l'avant
   (\code{backward-char} | \code{forward-char})
-\item[\emacs{C-a} | \emacs{C-e}] aller au début~|~fin de la ligne
+\item[\code{C-a} | \code{C-e}] aller au début~|~fin de la ligne
   (\code{move-beginning-of-line} | \code{move-end-of-line})
-\item[\emacs{C-p} | \emacs{C-n}] aller à la ligne précédente~|~suivante
+\item[\code{C-p} | \code{C-n}] aller à la ligne précédente~|~suivante
   (\code{previous-line} | \code{next-line})
-\item[\emacs{M-<} | \emacs{M->}] aller au début~|~fin du fichier
+\item[\code{M-<} | \code{M->}] aller au début~|~fin du fichier
   (\code{beginning-of-buffer} | \code{end-of-buffer}) \\[\baselineskip]
-\item[\emacs{DEL} | \emacs{C-d}] effacer le caractère à
+\item[\code{DEL} | \code{C-d}] effacer le caractère à
   gauche~|~droite du curseur (\code{delete-backward-char} | \code{delete-char})
-\item[\emacs{M-DEL} | \emacs{M-d}] effacer le mot à gauche~|~droite
+\item[\code{M-DEL} | \code{M-d}] effacer le mot à gauche~|~droite
   du curseur (\code{backward-kill-word} | \code{kill-word})
-\item[\emacs{C-k}] supprimer jusqu'à la fin de la ligne (\code{kill-line})
+\item[\code{C-k}] supprimer jusqu'à la fin de la ligne (\code{kill-line})
 \end{ttscript}
 
 \begin{figure}[ht]
@@ -296,11 +297,11 @@ raccourci clavier.
 
 \begin{ttscript}{C-x C-w}
   \raggedright
-\item[\emacs{C-SPC}] débute la sélection (\code{set-mark-command})
-\item[\emacs{C-w}] couper la sélection (\code{kill-region})
-\item[\emacs{M-w}] copier la sélection (\code{kill-ring-save})
-\item[\emacs{C-y}] coller (\code{yank})
-\item[\emacs{M-y}] remplacer le dernier texte collé par la
+\item[\code{C-SPC}] débute la sélection (\code{set-mark-command})
+\item[\code{C-w}] couper la sélection (\code{kill-region})
+\item[\code{M-w}] copier la sélection (\code{kill-ring-save})
+\item[\code{C-y}] coller (\code{yank})
+\item[\code{M-y}] remplacer le dernier texte collé par la
   sélection précédente (\code{yank-pop})
 \end{ttscript}
 
@@ -319,19 +320,20 @@ raccourci clavier.
 \label{emacs+ess:commandes:fenetres}
 
 \begin{ttscript}{C-x C-w}
-\item[\emacs{C-x b}] changer de \emph{buffer}
+\item[\code{C-x b}] changer de \emph{buffer}
   (\code{switch-buffer})
-\item[\emacs{C-x 2}] séparer l'écran en deux fenêtres
+\item[\code{C-x 2}] séparer l'écran en deux fenêtres
   (\code{split-window-vertically})
-\item[\emacs{C-x 1}] conserver uniquement la fenêtre courante
+\item[\code{C-x 1}] conserver uniquement la fenêtre courante
   (\code{delete-other-windows})
-\item[\emacs{C-x 0}] fermer la fenêtre courante
+\item[\code{C-x 0}] fermer la fenêtre courante
   (\code{delete-window})
-\item[\emacs{C-x o}] aller vers une autre fenêtre lorsqu'il y en a
+\item[\code{C-x o}] aller vers une autre fenêtre lorsqu'il y en a
   plus d'une (\code{other-window})
 \end{ttscript}
 
 \subsection{Manipulation de fichiers de script dans le mode ESS}
+\index{Emacs!mode ESS|(}
 \label{emacs+ess:commandes:script}
 
 Le mode ESS dispose de fonctions «intelligentes» qui facilitent
@@ -339,10 +341,10 @@ grandement la manipulation des fichiers de script. Les deux
 principales commandes à connaître sont les suivantes:
 \begin{ttscript}{C-x C-w}
   \raggedright
-\item[\ess{C-RET}] évaluer dans le processus R la ligne sous le
+\item[\code{C-RET}] évaluer dans le processus R la ligne sous le
   curseur ou la région sélectionnée, puis déplacer le curseur à la
   prochaine expression (\code{ess-eval-region-or-line-and-step})
-\item[\ess{C-c C-c}] évaluer dans le processus R la région
+\item[\code{C-c C-c}] évaluer dans le processus R la région
   sélectionnée, la fonction ou le paragraphe (tout bloc entre deux
   lignes blanches) dans lequel se trouve le curseur, puis déplacer le
   curseur à la prochaine expression
@@ -351,13 +353,13 @@ principales commandes à connaître sont les suivantes:
 Les quelques autres fonctions utiles sont:
 \begin{ttscript}{C-x C-w}
   \raggedright
-\item[\ess{C-c C-z}] déplacer le curseur vers le processus R
+\item[\code{C-c C-z}] déplacer le curseur vers le processus R
   (\code{ess-switch-to-inferior-or-script-buffer})
-\item[\ess{C-c C-f}] évaluer le code de la fonction courante dans
+\item[\code{C-c C-f}] évaluer le code de la fonction courante dans
   le processus R (\code{ess-eval-function})
-\item[\ess{C-c C-l}] évaluer le code du fichier courant en entier dans
+\item[\code{C-c C-l}] évaluer le code du fichier courant en entier dans
   le processus R (\code{ess-load-file})
-\item[\ess{C-c C-v}] aide sur une commande R
+\item[\code{C-c C-v}] aide sur une commande R
   (\code{ess-display-help-on-object})
 \end{ttscript}
 
@@ -366,18 +368,18 @@ Les quelques autres fonctions utiles sont:
 
 \begin{ttscript}{M-p |M-n}
   \raggedright
-\item[\ess{M-p} | \ess{M-n}] commande précédente~|~suivante
+\item[\code{M-p} | \code{M-n}] commande précédente~|~suivante
   dans l'historique (\code{previous-matching-history-from-input},
   \code{next-matching-history-from-input})
-\item[\ess{C-c C-z}] déplacer le curseur vers le fichier de script
+\item[\code{C-c C-z}] déplacer le curseur vers le fichier de script
   courant (\code{ess-switch-to-inferior-or-script-buffer})
-\item[\ess{M-h}] sélectionner le résultat de la dernière commande
+\item[\code{M-h}] sélectionner le résultat de la dernière commande
   (\code{mark-paragraph})
-\item[\ess{C-c C-o}] effacer le résultat de la dernière commande
+\item[\code{C-c C-o}] effacer le résultat de la dernière commande
   (\code{comint-delete-output})
-\item[\ess{C-c C-v}] aide sur une commande R
+\item[\code{C-c C-v}] aide sur une commande R
   (\code{ess-display-help-on-object})
-\item[\ess{C-c C-q}] terminer le processus R (\code{ess-quit})
+\item[\code{C-c C-q}] terminer le processus R (\code{ess-quit})
 \end{ttscript}
 
 \subsection{Consultation des rubriques d'aide de R}
@@ -385,23 +387,23 @@ Les quelques autres fonctions utiles sont:
 
 \begin{ttscript}{m, m}
   \raggedright
-\item[\ess{p} | \ess{n}] aller à la section précédente~|~suivante de
+\item[\code{p} | \code{n}] aller à la section précédente~|~suivante de
   la rubrique (\code{ess-skip-to-previous-section} |
   \code{ess-skip-to-next-section})
-\item[\ess{s a}] aller à la section de la liste des arguments \emph{(Arguments)}
-\item[\ess{s D}] aller à la section des détails sur la fonction \emph{(Details)}
-\item[\ess{s v}] aller à la section sur la valeur retournée par la
+\item[\code{s a}] aller à la section de la liste des arguments \emph{(Arguments)}
+\item[\code{s D}] aller à la section des détails sur la fonction \emph{(Details)}
+\item[\code{s v}] aller à la section sur la valeur retournée par la
   fonction \emph{(Value)}
-\item[\ess{s s}] aller à la section des fonctions apparentée \emph{(See Also)}
-\item[\ess{s e}] aller à la section des exemples \emph{(Examples)}
-\item[\ess{l}] évaluer la ligne sous le curseur; pratique pour
+\item[\code{s s}] aller à la section des fonctions apparentée \emph{(See Also)}
+\item[\code{s e}] aller à la section des exemples \emph{(Examples)}
+\item[\code{l}] évaluer la ligne sous le curseur; pratique pour
   exécuter les exemples (\code{ess-eval-line-and-step})
-\item[\ess{r}] évaluer la région sélectionnée (\code{ess-eval-region})
-\item[\ess{h}] ouvrir une nouvelle rubrique d'aide, par défaut pour le
+\item[\code{r}] évaluer la région sélectionnée (\code{ess-eval-region})
+\item[\code{h}] ouvrir une nouvelle rubrique d'aide, par défaut pour le
   mot se trouvant sous le curseur (\code{ess-display-help-on-object})
-\item[\ess{q}] retourner au processus ESS en laissant la rubrique
+\item[\code{q}] retourner au processus ESS en laissant la rubrique
   d'aide visible (\code{ess-switch-to-end-of-ESS})
-\item[\ess{x}] fermer la rubrique d'aide et retourner au processus ESS
+\item[\code{x}] fermer la rubrique d'aide et retourner au processus ESS
   (\code{ess-kill-buffer-and-go})
 \end{ttscript}
 
@@ -417,7 +419,7 @@ en expliquant comment compléter chacune dans Emacs avec le mode ESS.
 \begin{enumerate}
 \item Lancer Emacs et ouvrir un fichier de script avec
   \begin{quote}
-    \emacs{C-x C-f}
+    \code{C-x C-f}
   \end{quote}
   ou avec le menu
   \begin{quote}
@@ -448,17 +450,17 @@ en expliquant comment compléter chacune dans Emacs avec le mode ESS.
   \begin{quote}
     \begin{ttscript}{C-c C-z}
       \renewcommand{\makelabel}[1]{#1\hfill}
-    \item[\ess{C-RET}] pour exécuter une ligne du fichier de script ou la
+    \item[\code{C-RET}] pour exécuter une ligne du fichier de script ou la
       région sélectionnée;
-    \item[\ess{C-c C-c}] pour exécuter un paragraphe du fichier de
+    \item[\code{C-c C-c}] pour exécuter un paragraphe du fichier de
       script;
-    \item[\ess{C-c C-z}] pour se déplacer entre le fichier de script et
+    \item[\code{C-c C-z}] pour se déplacer entre le fichier de script et
       la ligne de commande R.
     \end{ttscript}
   \end{quote}
 \item Sauvegarder le fichier de script:
   \begin{quote}
-    \emacs{C-x C-s}
+    \code{C-x C-s}
   \end{quote}
   Les quatrième et cinquième caractères de la ligne de mode changent
   de \,\verb|**|\, à \,\verb|--|.
@@ -468,17 +470,17 @@ en expliquant comment compléter chacune dans Emacs avec le mode ESS.
   contienne des objets importants ou longs à recréer.
 \item Quitter le processus R avec
   \begin{quote}
-    \ess{C-c C-q}
+    \code{C-c C-q}
   \end{quote}
   Cette commande ESS se chargera de fermer tous les fichiers associés
   au processus R. On peut ensuite quitter Emacs en fermant
   l'application de la manière usuelle.
 \end{enumerate}
+\index{Emacs!mode ESS|)}
 
 
 
 \section{Configuration de l'éditeur}
-\index{Emacs!configuration}
 \label{emacs+ess:configuration}
 
 Une des grandes forces de Emacs est qu'à peu près chacune de ses
@@ -514,6 +516,8 @@ formats dans les sites respectifs des deux projets:
 Enfin, si le désespoir vous prend au cours d'une séance de codage
 intensive, vous pouvez toujours consulter le psychothérapeute Emacs.
 On le trouve, bien entendu, dans le menu \code{Help}!
+
+\index{Emacs|)}
 
 %%% Local Variables:
 %%% mode: latex

@@ -1,4 +1,5 @@
 \chapter{RStudio: une introduction}
+\index{rstudio|(}
 \label{rstudio}
 
 Un environnement de développement intégré (\emph{integrated
@@ -45,6 +46,7 @@ source n'est pas visible; voir la \autoref{fig:rstudio:rstudiowindow}.
 Dans le sens des aiguilles d'une montre en partant en haut à gauche,
 on trouve:
 \begin{enumerate}
+  \index{RStudio!sous-fenêtres}
 \item la sous-fenêtre d'édition de code source, avec un onglet par
   fichier de script;
 \item le navigateur d'environnement de travail ou d'historique des
@@ -104,6 +106,7 @@ la fenêtre jusqu'à ce qu'un fichier de script soit ouvert.
 
 
 \section{Projets}
+\index{RStudio!projets}
 \label{rstudio:projets}
 
 Il est possible d'utiliser RStudio un peu comme un simple éditeur de
@@ -161,20 +164,21 @@ jeux ci-dessous, séparés par le symbole $\bullet$.
 
 \begin{ttscript}{Ctrl-Shift-S $\bullet$ \cmdkey\shiftkey S}
   \raggedright
-\item[\rstudio{Alt+-} $\bullet$ \rstudio{\optkey\,-}] insérer le
+  \index{RStudio!symbole d'assignation}
+\item[\code{Alt+-} $\bullet$ \code{\optkey\,-}] insérer le
   symbole d'assignation \verb*| <- |
-\item[\rstudio{Ctrl+Retour} $\bullet$ \rstudio{\cmdkey\,\returnkey}]
+\item[\code{Ctrl+Retour} $\bullet$ \code{\cmdkey\,\returnkey}]
   évaluer dans le processus R la ligne sous le curseur ou la région
   sélectionnée, puis déplacer le curseur à la prochaine expression
-\item[\rstudio{Ctrl+Shift+S} $\bullet$ \rstudio{\shiftkey\,\cmdkey\,S}]
+\item[\code{Ctrl+Shift+S} $\bullet$ \code{\shiftkey\,\cmdkey\,S}]
   évaluer le code du fichier courant en entier dans le processus R
-\item[\rstudio{Ctrl+Alt+B} $\bullet$ \rstudio{\optkey\,\cmdkey\,B}]
+\item[\code{Ctrl+Alt+B} $\bullet$ \code{\optkey\,\cmdkey\,B}]
   évaluer dans le processus R le code source du début du fichier
   jusqu'à la ligne sous le curseur
-\item[\rstudio{Ctrl+Alt+E} $\bullet$ \rstudio{\optkey\,\cmdkey\,E}]
+\item[\code{Ctrl+Alt+E} $\bullet$ \code{\optkey\,\cmdkey\,E}]
   évaluer dans le processus R le code source de la ligne sous le curseur
   jusqu'à la fin du fichier
-\item[\rstudio{Ctrl+Alt+F} $\bullet$ \rstudio{\optkey\,\cmdkey\,F}]
+\item[\code{Ctrl+Alt+F} $\bullet$ \code{\optkey\,\cmdkey\,F}]
   évaluer le code de la fonction courante dans le processus R
 \end{ttscript}
 
@@ -189,6 +193,7 @@ sont particulièrement utiles.
 \end{ttscript}
 
 \begin{figure}[t]
+  \index{RStudio!symbole d'assignation}
   \begin{osx}
     Le très pratique raccourci clavier {\optkey\,-} servant à insérer
     le symbole d'assignation ne fonctionne pas avec le clavier
@@ -224,7 +229,7 @@ expliquant comment compléter chacune dans RStudio.
 \begin{enumerate}
 \item Lancer RStudio et ouvrir soit un nouveau fichier de script avec
   \begin{quote}
-    \rstudio{Ctrl+Shift+N} $\bullet$ \rstudio{\shiftkey\,\cmdkey\,N}
+    \code{Ctrl+Shift+N} $\bullet$ \code{\shiftkey\,\cmdkey\,N}
   \end{quote}
   ou avec le menu
   \begin{quote}
@@ -232,7 +237,7 @@ expliquant comment compléter chacune dans RStudio.
   \end{quote}
   soit un fichier de script existant avec
   \begin{quote}
-    \rstudio{Ctrl+O} $\bullet$ \rstudio{\cmdkey\,O}
+    \code{Ctrl+O} $\bullet$ \code{\cmdkey\,O}
   \end{quote}
   ou
   \begin{quote}
@@ -252,17 +257,17 @@ expliquant comment compléter chacune dans RStudio.
   \begin{quote}
     \begin{ttscript}{Ctrl+2 $\bullet$ \cmdkey}
       \renewcommand{\makelabel}[1]{#1\hfill}
-    \item[\rstudio{Ctrl+Retour} $\bullet$ \rstudio{\cmdkey\,\returnkey}] pour
+    \item[\code{Ctrl+Retour} $\bullet$ \code{\cmdkey\,\returnkey}] pour
       exécuter une ligne ou une région sélectionnée du fichier de script;
-    \item[\rstudio{Ctrl+1} $\bullet$ \rstudio{\cmdkey\,1}] pour
+    \item[\code{Ctrl+1} $\bullet$ \code{\cmdkey\,1}] pour
       déplacer le curseur vers la sous-fenêtre d'édition de script;
-    \item [\rstudio{Ctrl+2} $\bullet$ \rstudio{\cmdkey\,2}] pour
+    \item [\code{Ctrl+2} $\bullet$ \code{\cmdkey\,2}] pour
       déplacer le curseur vers la console R.
     \end{ttscript}
   \end{quote}
 \item Sauvegarder le fichier de script:
   \begin{quote}
-    \rstudio{Ctrl+S} $\bullet$ \rstudio{\cmdkey\,S}
+    \code{Ctrl+S} $\bullet$ \code{\cmdkey\,S}
   \end{quote}
   (S'il s'agit d'un nouveau fichier, s'assurer de terminer son nom par
   \code{.R}.) Le nom du fichier dans l'onglet de la sous-fenêtre passe
@@ -305,6 +310,7 @@ expliquant comment compléter chacune dans RStudio.
 
 
 \section{Configuration de l'éditeur}
+\index{RStudio!configuration}
 \label{rstudio:configuration}
 
 Il est possible de configurer plusieurs facettes de RStudio à partir
@@ -343,6 +349,8 @@ La documentation de RStudio se trouve entièrement en ligne. On y
 accède par le menu \code{Help}. L'onglet \code{Help} du navigateur de
 fichiers (sous-fenêtre en bas à droite) offre également une interface
 unifiée pour accéder à l'aide de R et à celle de RStudio.
+
+\index{rstudio|)}
 
 %%% Local Variables:
 %%% mode: latex
