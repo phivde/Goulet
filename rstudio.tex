@@ -11,18 +11,14 @@ contrôle de versions, de gestion des projets et de navigation dans le
 code source.\footnote{%
   À ce compte, GNU~Emacs constitue un environnement de développement
   intégré. Seulement, nous avons davantage insisté sur ses
-  fonctionnalités d'éditeur de texte dans ce document.} %
+  fonctionnalités d'éditeur de texte dans le présent document.} %
 
-Offert au public depuis 2011, RStudio est le premier environnement
-conçu spécifiquement pour l'analyse de données et le développement de
+Offert au public depuis 2011, RStudio est un IDE convivial conçu
+spécifiquement pour l'analyse de données et le développement de
 packages avec R. Il est produit par RStudio~Inc.\ et est offert en
 version libre ou commerciale, pour une exécution locale
-(\emph{desktop}) ou pour un exécution sur un serveur via un navigateur
-web.
-
-RStudio occupe aujourd'hui sans conteste la position de tête des
-environnements de développement R en matière de convivialité, et ce,
-tant pour les débutants que pour les utilisateurs avancés.
+(\emph{desktop}) ou pour une exécution sur un serveur via un
+navigateur web.
 
 
 \section{Installation}
@@ -42,14 +38,15 @@ depuis le site
 
 La fenêtre de RStudio se divise toujours en quatre
 sous-fenêtres\footnote{%
-  Les sous-fenêtres sont appelées en anglais \emph{panes} dans
+  Les sous-fenêtres sont appelées \emph{panes} (en anglais) dans
   l'application.} %
 --- sauf au lancement, alors que la sous-fenêtre d'édition de code
 source n'est pas visible; voir la \autoref{fig:rstudio:rstudiowindow}.
 Dans le sens des aiguilles d'une montre en partant en haut à gauche,
 on trouve:
 \begin{enumerate}
-\item la sous-fenêtre d'édition de code source;
+\item la sous-fenêtre d'édition de code source, avec un onglet par
+  fichier de script;
 \item le navigateur d'environnement de travail ou d'historique des
   commandes, selon l'onglet sélectionné;
 \item le navigateur de fichiers du projet, de packages, de graphiques,
@@ -57,12 +54,7 @@ on trouve:
 \item la console --- ou ligne de commande --- R.
 \end{enumerate}
 Au lancement de l'application, la console R occupe toute la gauche de
-la fenêtre jusqu'à ce qu'un fichier de code source soit ouvert.
-
-La position des sous-fenêtres dans la grille ne peut être modifiée.
-Par contre, chaque sous-fenêtre peut être redimensionnée. De plus, les
-onglets des deux navigateurs sont modifiables dans les préférences de
-l'application.
+la fenêtre jusqu'à ce qu'un fichier de script soit ouvert.
 
 \begin{figure}[t]
   %% Capture d'écran et espace additionnel sous l'image
@@ -92,15 +84,27 @@ l'application.
   \begin{textblock}{2.2}(7.95,-1.9)
     \footnotesize\sffamily\raggedright Navigateur de fichiers, packages, graphiques, etc.
   \end{textblock}
-  \caption{Fenêtre de RStudio et ses différentes parties au lancement
-    de l'application sous Mac OS~X. Sous Windows et Linux, la barre de
-    menu se trouve à l'intérieur de la fenêtre.}
+  \caption{Fenêtre de RStudio et trois de ses sous-fenêtres au
+    lancement de l'application sous OS~X. Sous Windows et Linux, la
+    fenêtre comporte également une barre de menu.}
   \label{fig:rstudio:rstudiowindow}
 \end{figure}
 
+\begin{itemize}
+\item Il ne peut y avoir qu'un seul processus R (affiché dans la
+  console) actif par fenêtre RStudio. Pour utiliser plusieurs
+  processus R simultanément, il faut démarrer autant de copies de
+  RStudio.
+\item La position des sous-fenêtres dans la grille ne peut être
+  modifiée. Par contre, chaque sous-fenêtre peut être redimensionnée.
+\item On peut modifier la liste des onglets affichés dans les deux
+  navigateurs dans les préférences de l'application; voir la
+  \autoref{rstudio:configuration}.
+\end{itemize}
+
 
 \section{Projets}
-\label{sec:rstudio:projets}
+\label{rstudio:projets}
 
 Il est possible d'utiliser RStudio un peu comme un simple éditeur de
 texte.
@@ -108,13 +112,13 @@ texte.
 \item On ouvre les fichiers de scripts un à un, soit à partir du menu
   \code{File|Open file...}, soit à partir de l'onglet \code{Files} du
   navigateur de fichiers.
-\item Une seule session R est alors active.
 \item Lorsque nécessaire, on change le répertoire de travail de R à
   partir du menu \code{Session}.
 \end{itemize}
 
-La véritable puissance de RStudio pour l'organisation de son travail
-réside cependant dans l'utilisation de \emph{projets}.
+Pour faciliter l'organisation de son travail, l'ouverture des fichiers
+de script et le lancement d'un processus R dans le bon répertoire de
+travail, RStudio propose la notion de \emph{projet}.
 \begin{itemize}
 \item Un projet RStudio est associé à un répertoire de travail de R
   (\autoref{presentation:workspace}).
@@ -127,44 +131,33 @@ réside cependant dans l'utilisation de \emph{projets}.
   visé un fichier avec une extension \code{.Rproj} contenant diverses
   informations en lien avec le projet. De plus, le projet est
   immédiatement chargé dans RStudio.
-\item L'ouverture d'un projet entraîne également le lancement d'une
-  \emph{nouvelle} session R ayant comme répertoire de travail le
-  dossier du projet, le chargement du fichier \code{.RData} (le cas
-  échéant) et l'ouverture de tous les fichiers de scripts qui étaient
-  ouverts lors de la dernière séance de travail.
-\item Il est possible de travailler sur plusieurs projets en même
-  temps.
+\item L'ouverture d'un projet entraîne le lancement d'une session R
+  ayant comme répertoire de travail le dossier du projet; le
+  chargement du fichier \code{.RData} (le cas échéant); l'ouverture de
+  tous les fichiers de scripts qui étaient ouverts lors de la dernière
+  séance de travail.
 \item Chaque projet dispose de ses propres réglages. On accède à
   ceux-ci via la commande \code{Project Options...} du menu
   \code{Project} de la barre d'outils.
 \end{itemize}
 
-On peut se donner cette règle de fonctionnement: si un projet, un
-travail, un cours mérite son propre dossier sur son poste de travail,
-alors l'environnement R afférant mérite son projet dans RStudio.
-
 On trouvera plus d'information sur les projets dans l'aide en ligne
 de RStudio.
 
-\begin{important}
-  L'utilisation de projets constitue la manière la plus simple et la
-  plus intuitive de démarrer plusieurs sessions R dans RStudio avec
-  chacune son propre répertoire de travail. Leur utilisation est donc
-  fortement recommandée.
-\end{important}
 
 
 \section{Commandes de base}
 \label{rstudio:commandes}
 
-L'interface de RStudio étant conforme aux standards des applications
-modernes, nous ne soulignons ici que les commandes particulièrement
-utiles pour la manipulation des fichiers de script. On accède
-rapidement à la liste des commandes les plus utiles via le menu
-\code{Help} de l'application.
+Comme l'interface de RStudio respecte les standards modernes, nous ne
+soulignons ici que les commandes particulièrement utiles pour la
+manipulation des fichiers de script. On accède rapidement à la liste
+des commandes les plus utiles via le menu \code{Help} de
+l'application.
 
-On fournit ci-dessous les raccourcis clavier d'abord sous Windows et
-Linux, puis sous OS~X.
+Les raccourcis clavier sous, d'une part, Windows et Linux et sous,
+d'autre part, OS~X légèrement différents. Nous fournissons les deux
+jeux ci-dessous, séparés par le symbole $\bullet$.
 
 \begin{ttscript}{Ctrl-Shift-S $\bullet$ \cmdkey\shiftkey S}
   \raggedright
@@ -203,7 +196,8 @@ sont particulièrement utiles.
     insérer le symbole \textbar.
 
     Au moment d'écrire ces lignes, RStudio ne permet pas de réaffecter
-    la commande d'insertion du symbole d'assignation à une autre combinaison de touches.
+    la commande d'insertion du symbole d'assignation à une autre
+    combinaison de touches.
 
     Une solution de rechange consiste à utiliser une disposition de
     clavier anglaise pour travailler dans RStudio.
@@ -212,76 +206,143 @@ sont particulièrement utiles.
     sélectionner l'option Clavier. Dans l'onglet Méthodes de saisie,
     installer un nouveau clavier Anglais. Cocher l'option «Afficher le
     menu de saisie dans la barre des menus» pour pouvoir rapidement et
-    facilement changer de clavier.
+    facilement passer d'un type de clavier à un autre.
   \end{osx}
   \label{fig:rstudio:assignation}
 \end{figure}
 
 
-\section{Anatomie d'une session de travail (bis)}
+\section{Anatomie d'une session de travail (ter)}
 \label{rstudio:session}
 
-On reprend ici les étapes d'une \capsule{http://youtu.be/xiNnHegDau8}{session de
-  travail} type présentées à la \autoref{presentation:session}, mais
-en expliquant comment compléter chacune dans RStudio.
+On reprend ici les étapes d'une %
+%\capsule{http://youtu.be/xiNnHegDau8}{session de travail} %
+session de travail %
+type présentées à la \autoref{presentation:session}, mais en
+expliquant comment compléter chacune dans RStudio.
 
 \begin{enumerate}
-\item Lancer l'application RStudio.
-\item
-\item Démarrer un processus R à l'intérieur même de Emacs avec
+\item Lancer RStudio et ouvrir soit un nouveau fichier de script avec
   \begin{quote}
-    \code{M-x R }\returnkey
+    \rstudio{Ctrl+Shift+N} $\bullet$ \rstudio{\shiftkey\,\cmdkey\,N}
   \end{quote}
-  Emacs demandera alors de spécifier de répertoire de travail
-  (\emph{starting data directory}). Accepter la valeur par défaut, par
-  exemple
+  ou avec le menu
   \begin{quote}
-    \verb=~/ =\returnkey
+    \code{File|New File|R Script...},
   \end{quote}
-  ou indiquer un autre dossier. Un éventuel message de Emacs à l'effet
-  que le fichier \code{.Rhistory} n'a pas été trouvé est sans
-  conséquence et peut être ignoré.
-\item Composer le code. Lors de cette étape, on se déplacera souvent
-  du fichier de script à la ligne de commande afin d'essayer diverses
-  expressions. On exécutera également des parties seulement du code se
-  trouvant dans le fichier de script. Les commandes les plus utilisées
-  sont alors
+  soit un fichier de script existant avec
   \begin{quote}
-    \ess{C-RET}\ pour exécuter une ligne du fichier de script; \\
-    \ess{C-c C-c}\ pour exécuter un paragraphe du fichier de script; \\
-    \emacs{C-x o}\ pour se déplacer d'une fenêtre à l'autre; \\
-    \ess{C-c C-e}\ pour replacer la ligne de commande au bas de la
-    fenêtre.
+    \rstudio{Ctrl+O} $\bullet$ \rstudio{\cmdkey\,O}
+  \end{quote}
+  ou
+  \begin{quote}
+    \code{File|Open File...}
+  \end{quote}
+\item C'est une bonne pratique de faire du dossier où se trouve son ou
+  ses fichiers de scripts le répertoire de travail de R. Il suffit de
+  sélectionner le menu
+  \begin{quote}
+    \code{Session|Set Working Directory|To Source File Location}
+  \end{quote}
+\item Composer le code. Lors de cette étape de programmation, on se
+  déplacera souvent du fichier de script à la ligne de commande afin
+  d'essayer diverses expressions. On exécutera également des parties
+  seulement du code se trouvant dans le fichier de script. Les
+  commandes les plus utilisées sont alors
+  \begin{quote}
+    \begin{ttscript}{Ctrl+2 $\bullet$ \cmdkey}
+      \renewcommand{\makelabel}[1]{#1\hfill}
+    \item[\rstudio{Ctrl+Retour} $\bullet$ \rstudio{\cmdkey\,\returnkey}] pour
+      exécuter une ligne ou une région sélectionnée du fichier de script;
+    \item[\rstudio{Ctrl+1} $\bullet$ \rstudio{\cmdkey\,1}] pour
+      déplacer le curseur vers la sous-fenêtre d'édition de script;
+    \item [\rstudio{Ctrl+2} $\bullet$ \rstudio{\cmdkey\,2}] pour
+      déplacer le curseur vers la console R.
+    \end{ttscript}
   \end{quote}
 \item Sauvegarder le fichier de script:
   \begin{quote}
-    \emacs{C-x C-s}
+    \rstudio{Ctrl+S} $\bullet$ \rstudio{\cmdkey\,S}
   \end{quote}
-  Les quatrième et cinquième caractères de la ligne de mode changent
-  de \,\verb|**|\, à \,\verb|--|.
+  (S'il s'agit d'un nouveau fichier, s'assurer de terminer son nom par
+  \code{.R}.) Le nom du fichier dans l'onglet de la sous-fenêtre passe
+  du rouge au noir.
 \item Sauvegarder si désiré l'espace de travail de R avec
-  \code{save.image()}\indexfonction{save.image}. On le répète, cela
-  n'est habituellement pas nécessaire à moins que l'espace de travail
-  ne contienne des objets importants ou longs à recréer.
-\item Quitter le processus R avec
-  \begin{quote}
-    \ess{C-c C-q}
-  \end{quote}
-  Cette commande ESS se chargera de fermer tous les fichiers associés
-  au processus R. On peut ensuite quitter Emacs en fermant
-  l'application de la manière usuelle.
+  \code{save.image()}\indexfonction{save.image}. Cela n'est
+  habituellement pas nécessaire à moins que l'espace de travail ne
+  contienne des objets importants ou longs à recréer.
+\item Quitter RStudio de la manière usuelle. Par défaut, RStudio
+  devrait demander si l'on souhaite sauvegarder l'espace de travail de
+  R. Nous suggérons de ne pas le faire.
+
+  La \autoref{rstudio:configuration} explique comment configurer
+  RStudio afin d'éviter de se faire poser la question à chaque
+  fermeture de l'application.
 \end{enumerate}
 
+%% texte inutilisé mais conservé au cas où...
+% \begin{enumerate}
+% \item Créer d'abord un projet dans RStudio tel que décrit à la
+%   \autoref{rstudio:projets}.
+% \item Lancer l'application RStudio et ouvrir un projet avec la
+%   commande \code{Open Project...} du menu \code{Project} à l'extrémité
+%   droite de la barre d'outils ou à partir du menu
+%   \begin{quote}
+%     \code{File|Open Project...}
+%   \end{quote}
+%   L'ouverture du projet entraîne le démarrage d'un nouveau processus R
+%   et l'ouverture des fichiers de script associés au projet lors de la
+%   dernière séance de travail.
+% \item Quitter RStudio avec la commande \code{Close Project}
+%   du menu \code{Project} à l'extrémité droite de la barre d'outils ou
+%   à partir du menu
+%   \begin{quote}
+%     \code{File|Close Project}
+%   \end{quote}
+%   RStudio se chargera de sauvegarder tous les fichiers de scripts
+%   ouverts ainsi que le processus R [...]
+% \end{enumerate}
 
 
 \section{Configuration de l'éditeur}
 \label{rstudio:configuration}
 
+Il est possible de configurer plusieurs facettes de RStudio à partir
+d'une interface familière.
+\begin{itemize}
+\item On accède aux options de configuration par le menu
+  \begin{quote}
+    \code{Tools|Global Options...}
+  \end{quote}
+  sous Windows et Linux et par le menu standard
+  \begin{quote}
+    \code{RStudio|Preferences} (\code{\cmdkey\,,})
+  \end{quote}
+  sous OS~X.
+\item Nous suggérons de régler l'option \code{Save workspace to .RData
+    on exit} à \code{Never} dans les options de configuration
+  générales; voir la \autoref{fig:rstudio:rstudiopreferences}. Avec ce
+  réglage, l'espace de travail de R ne sera pas sauvegardé à la
+  fermeture de RStudio.
+\end{itemize}
+
+\begin{figure}
+  \centering
+  \includegraphics{rstudiopreferences-screenshot}
+  \caption{Réglage suggéré de RStudio (encadré en jaune) faisant en
+    sorte que l'espace de travail de R n'est jamais sauvegardé au
+    moment de quitter l'application}
+  \label{fig:rstudio:rstudiopreferences}
+\end{figure}
 
 
 \section{Aide et documentation}
 \label{rstudio:aide}
 
+La documentation de RStudio se trouve entièrement en ligne. On y
+accède par le menu \code{Help}. L'onglet \code{Help} du navigateur de
+fichiers (sous-fenêtre en bas à droite) offre également une interface
+unifiée pour accéder à l'aide de R et à celle de RStudio.
 
 %%% Local Variables:
 %%% mode: latex
