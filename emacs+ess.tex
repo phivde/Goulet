@@ -66,7 +66,7 @@ L'un de ces modes est ESS (\emph{Emacs Speaks Statistics}).
 \label{emacs+ess:installation}
 
 GNU Emacs et le mode ESS sont normalement livrés d'office avec toutes
-les distributions Linux. Pour les environnements Windows et Mac OS~X,
+les distributions Linux. Pour les environnements Windows et OS~X,
 le plus simple consiste à installer les distributions préparées par le
 présent auteur. Consulter le site
 \begin{quote}
@@ -133,7 +133,7 @@ mode pour chaque \emph{buffer}.
     \footnotesize\sffamily \emph{Minibuffer}
   \end{textblock}
   \caption{Fenêtre GNU~Emacs et ses différentes parties au lancement
-    de l'application sous Mac OS~X. Sous Windows et Linux, la barre de
+    de l'application sous OS~X. Sous Windows et Linux, la barre de
     menu se trouve à l'intérieur de la fenêtre.}
   \label{fig:ess:emacswindow}
 \end{figure}
@@ -177,7 +177,7 @@ Windows et OS~X.
 
 \begin{figure}[t]
   \begin{osx}
-    Par défaut sous Mac OS~X, la touche \code{Meta} est assignée à
+    Par défaut sous OS~X, la touche \code{Meta} est assignée à
     \code{Option} (\optkey). Sur les claviers français, cela empêche
     d'accéder à certains caractères spéciaux tels que [, ], \{ ou \}.
 
@@ -283,7 +283,7 @@ raccourci clavier.
 \begin{figure}[ht]
   \begin{osx}
     Plusieurs des raccourcis clavier de Emacs composés avec la touche
-    \code{Contrôle} (\ctlkey) sont valides sous Mac OS~X. Par exemple,
+    \code{Contrôle} (\ctlkey) sont valides sous OS~X. Par exemple,
     \ctlkey\,\code{A} et \ctlkey\,\code{E} déplacent le curseur au
     début et à la fin de la ligne dans les champs texte.
   \end{osx}
@@ -334,48 +334,43 @@ raccourci clavier.
 \subsection{Manipulation de fichiers de script dans le mode ESS}
 \label{emacs+ess:commandes:script}
 
-Dans les versions récentes de ESS (à partir de 12.09 environ), la
-manipulation des fichiers de script a été passablement simplifiée par
-l'introduction de fonctions «intelligentes» qui s'adaptent à la
-situation. Les deux principales commandes à connaître sont les
-suivantes:
-
+Le mode ESS dispose de fonctions «intelligentes» qui facilitent
+grandement la manipulation des fichiers de script. Les deux
+principales commandes à connaître sont les suivantes:
 \begin{ttscript}{C-x C-w}
   \raggedright
 \item[\ess{C-RET}] évaluer dans le processus R la ligne sous le
   curseur ou la région sélectionnée, puis déplacer le curseur à la
   prochaine expression (\code{ess-eval-region-or-line-and-step})
-\item[\ess{C-c C-c}] évaluer dans le processus R la région sélectionnée, la
-  fonction ou le paragraphe dans lequel se trouve le curseur, puis
-  déplacer le curseur à la prochaine expression
+\item[\ess{C-c C-c}] évaluer dans le processus R la région
+  sélectionnée, la fonction ou le paragraphe (tout bloc entre deux
+  lignes blanches) dans lequel se trouve le curseur, puis déplacer le
+  curseur à la prochaine expression
   (\code{ess-eval-region-or-function-or-paragraph-and-step})
 \end{ttscript}
-Quelques autres fonctions utiles:
+Les quelques autres fonctions utiles sont:
 \begin{ttscript}{C-x C-w}
   \raggedright
-\item[\ess{C-c C-v}] aide sur une commande R
-  (\code{ess-display-help-on-object})
-\item[\ess{C-c C-l}] évaluer le code du fichier courant en entier dans
-  le processus R (\code{ess-load-file})
-\item[\ess{C-c C-n}] évaluer la ligne sous le curseur dans le
-  processus R, puis déplacer le curseur à la prochaine expression
-  (\code{ess-eval-line-and-step})
-\item[\ess{C-c C-r}] évaluer la région sélectionnée dans le processus
-  R (\code{ess-eval-region})
+\item[\ess{C-c C-z}] déplacer le curseur vers le processus R
+  (\code{ess-switch-to-inferior-or-script-buffer})
 \item[\ess{C-c C-f}] évaluer le code de la fonction courante dans
   le processus R (\code{ess-eval-function})
+\item[\ess{C-c C-l}] évaluer le code du fichier courant en entier dans
+  le processus R (\code{ess-load-file})
+\item[\ess{C-c C-v}] aide sur une commande R
+  (\code{ess-display-help-on-object})
 \end{ttscript}
 
 \subsection{Interaction avec l'invite de commande R}
 \label{emacs+ess:commandes:invite}
 
-\begin{ttscript}{C-x | C-w}
+\begin{ttscript}{M-p |M-n}
   \raggedright
 \item[\ess{M-p} | \ess{M-n}] commande précédente~|~suivante
   dans l'historique (\code{previous-matching-history-from-input},
   \code{next-matching-history-from-input})
-\item[\ess{C-c C-e}] replacer la dernière ligne au bas de la fenêtre
-  (\code{comint-show-maximum-output})
+\item[\ess{C-c C-z}] déplacer le curseur vers le fichier de script
+  courant (\code{ess-switch-to-inferior-or-script-buffer})
 \item[\ess{M-h}] sélectionner le résultat de la dernière commande
   (\code{mark-paragraph})
 \item[\ess{C-c C-o}] effacer le résultat de la dernière commande
@@ -422,11 +417,11 @@ en expliquant comment compléter chacune dans Emacs avec le mode ESS.
 \begin{enumerate}
 \item Lancer Emacs et ouvrir un fichier de script avec
   \begin{quote}
-    \code{C-x C-f}
+    \emacs{C-x C-f}
   \end{quote}
   ou avec le menu
   \begin{quote}
-    \code{File|Open file...}
+    \code{File|Open File...}
   \end{quote}
   En spécifiant un nom de fichier qui n'existe pas déjà, on se trouve
   à créer un nouveau fichier de script. S'assurer de terminer le nom
@@ -449,13 +444,17 @@ en expliquant comment compléter chacune dans Emacs avec le mode ESS.
   du fichier de script à la ligne de commande afin d'essayer diverses
   expressions. On exécutera également des parties seulement du code se
   trouvant dans le fichier de script. Les commandes les plus utilisées
-  sont alors
+  sont alors:
   \begin{quote}
-    \ess{C-RET}\ pour exécuter une ligne du fichier de script; \\
-    \ess{C-c C-c}\ pour exécuter un paragraphe du fichier de script; \\
-    \emacs{C-x o}\ pour se déplacer d'une fenêtre à l'autre; \\
-    \ess{C-c C-e}\ pour replacer la ligne de commande au bas de la
-    fenêtre.
+    \begin{ttscript}{C-c C-z}
+      \renewcommand{\makelabel}[1]{#1\hfill}
+    \item[\ess{C-RET}] pour exécuter une ligne du fichier de script ou la
+      région sélectionnée;
+    \item[\ess{C-c C-c}] pour exécuter un paragraphe du fichier de
+      script;
+    \item[\ess{C-c C-z}] pour se déplacer entre le fichier de script et
+      la ligne de commande R.
+    \end{ttscript}
   \end{quote}
 \item Sauvegarder le fichier de script:
   \begin{quote}
@@ -464,9 +463,9 @@ en expliquant comment compléter chacune dans Emacs avec le mode ESS.
   Les quatrième et cinquième caractères de la ligne de mode changent
   de \,\verb|**|\, à \,\verb|--|.
 \item Sauvegarder si désiré l'espace de travail de R avec
-  \code{save.image()}\indexfonction{save.image}. On le répète, cela
-  n'est habituellement pas nécessaire à moins que l'espace de travail
-  ne contienne des objets importants ou longs à recréer.
+  \code{save.image()}\indexfonction{save.image}. Cela n'est
+  habituellement pas nécessaire à moins que l'espace de travail ne
+  contienne des objets importants ou longs à recréer.
 \item Quitter le processus R avec
   \begin{quote}
     \ess{C-c C-q}
