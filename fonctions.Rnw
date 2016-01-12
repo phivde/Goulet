@@ -24,6 +24,84 @@ des fonctions dans R. On discute également brièvement de débogage et
 de style de codage.
 
 
+\begin{prob-enonce}
+  Stock Ticker est un jeu canadien datant de 1937 dans lequel on
+  brasse une série de dés pour simuler les mouvements boursiers et les
+  dividendes de 6 titres financiers.
+
+  Pour les fins de cet exercice, nous nous intéresserons qu'aux
+  mouvements boursiers, et ce, pour un seul titre --- nous ignorerons
+  donc le versement de dividendes.
+
+  La valeur du titre est établie à partir de la valeur au tour de jeu
+  précédente et du résultat du lancer de deux dés.
+  \begin{enumerate}
+  \item Un premier dé à trois faces détermine la direction du mouvement
+    boursier: hausse, baisse ou nul.
+  \item Un second dé à trois faces détermine l'amplitude de la hausse
+    ou de la baisse, le cas échéant. Les valeurs possibles sont $5$,
+    $10$ et $20$.
+  \end{enumerate}
+  La valeur de départ du titre est $100$.
+
+  Par exemple, si les résultats des dés au premier tour de jeu sont
+  «baisse» et $20$, la valeur du titre après ce tour sera 80. Si, au
+  tour suivant, les résultats des dés sont «nul» et «5», la valeur du
+  titre demeurera de $80$.
+
+  On fournit les résultats de 10 lancers des dés:
+<<echo=FALSE, eval=TRUE>>=
+n <- 10
+set.seed(123456)
+x <- data.frame(direction = sample(c("hausse", "nul", "baisse"), n, TRUE),
+                amplitude = sample(c(5, 10, 20), n, TRUE))
+@
+<<echo=TRUE>>=
+x
+@
+
+  Écrire une fonction \code{valeurs()} servant à calculer les valeurs
+  successives du titre. La fonction prend en arguments un \emph{data
+    frame} \code{x} contenant les résultats des lancers des dés, comme
+  ci-dessus, ainsi que \code{start}, la valeur de départ du titre
+  ($100$ par défaut). La fonction retourne un vecteur contenant les
+  valeurs  successives du titre.
+
+  Par exemple, avec les données ci-dessus, on obtiendrait:
+
+<<label=calculervaleurs, echo=FALSE, eval=TRUE>>=
+valeurs <- function(x, start = 100)
+{
+    ## Création d'un vecteur pour les résultats. La valeur de départ
+    ## est placée au début du vecteur pour faire la boucle. Elle sera
+    ## supprimée à la fin.
+    res <- c(start, numeric(nrow(x)))
+
+    ## Conversion des valeurs de la première colonne des données de
+    ## ("hausse", "nul", "baisse") en (1, 0, -1).
+    d <- (x[, 1] == "hausse") - (x[, 1] == "baisse")
+
+    ## Calcul des valeurs successives du titre.
+    for(i in seq(length(res) - 1))
+        res[i + 1] <- res[i] + d[i] * x[i, 2]
+
+    ## Résultats sans la valeur de départ
+    res[-1]
+}
+@
+<<echo=TRUE>>=
+valeurs(x)              # start = 100 par défaut
+@
+\end{prob-enonce}
+
+\begin{prob-astuce}
+  Le calcul de la valeur du titre étant récursif, l'utilisation d'une
+  boucle est ici inévitable. Comme le nombre de répétition est connu
+  d'avance (le nombre de valeurs à calculer correspond au nombre de
+  lancers de dés), une boucle \code{for()} serait le choix approprié.
+\end{prob-astuce}
+
+
 \section{Définition d'une fonction}
 \index{fonction!définie par l'usager}
 \label{fonctions:definition}
@@ -69,6 +147,7 @@ corps de la fonction.
 \item Lorsqu'une fonction doit retourner plusieurs résultats, il est
   en général préférable d'avoir recours à une liste nommée.
 \end{itemize}
+
 
 
 \section{Variables locales et globales}
@@ -158,6 +237,14 @@ fp <- function(k, n, start = 0.05, TOL = 1E-10)
   fonction.
 \end{itemize}
 
+\begin{prob-astuce}
+  La définition de la fonction devra inclure \code{start = 100}
+  comme deuxième argument afin de spécifier que:
+  \begin{enumerate}[i)]
+  \item \code{start} est un argument de la fonction;
+  \item la valeur par défaut de l'argument est $100$.
+  \end{enumerate}
+\end{prob-astuce}
 
 
 \section{Fonctions anonymes}
@@ -323,6 +410,47 @@ for (i in 1:10)
   bons éditeurs pour programmeurs le permettent.
 \item Surtout, éviter de ne pas du tout indenter le code.
 \end{itemize}
+
+\begin{prob-solution}
+  Il existe bien évidemment une multitude de solutions valides. Celle
+  que nous proposons ci-dessous repose sur deux idées principales:
+  \begin{enumerate}
+  \item le vecteur créé pour accueillir les résultats contient la
+    valeur de départ en première position afin d'éviter de traiter la
+    première boucle comme une exception; cette valeur de départ est
+    supprimée du vecteur au moment de retourner les résultats;
+  \item les étiquettes de mouvement du titre sont rapidement
+    converties en valeur numériques qui permettent de calculer les
+    valeurs successives du titre.
+  \end{enumerate}
+  Ensemble, ces deux stratégies permettent d'en arriver à une fonction
+  compacte et efficace.
+
+  On remarquera également que la création d'un contenant pour les
+  résultats permet d'éviter le Syndrôme de la plaque à
+  biscuits{\texttrademark}.
+
+\begin{verbatim}
+valeurs <- function(x, start = 100)
+{
+    ## Création d'un vecteur pour les résultats. La valeur de
+    ## départ est placée au début du vecteur pour faire la
+    ## boucle. Elle sera supprimée à la fin.
+    res <- c(start, numeric(nrow(x)))
+
+    ## Conversion des valeurs de la première colonne des
+    ## données de ("hausse", "nul", "baisse") en (1, 0, -1).
+    d <- (x[, 1] == "hausse") - (x[, 1] == "baisse")
+
+    ## Calcul des valeurs successives du titre.
+    for(i in seq(length(res) - 1))
+        res[i + 1] <- res[i] + d[i] * x[i, 2]
+
+    ## Résultats sans la valeur de départ
+    res[-1]
+}
+\end{verbatim}
+\end{prob-solution}
 
 
 \section{Exemples}

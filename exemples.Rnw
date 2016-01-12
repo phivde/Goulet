@@ -24,6 +24,27 @@ du langage R.
 Les exemples font appel à quelques connaissances de base en
 mathématiques financières et en théorie des probabilités.
 
+\begin{prob-enonce}
+  On modélise la distance atteinte par le lancer du poids d'un adulte
+  à l'aide d'une variable aléatoire
+  $X \sim \text{Pareto}(\alpha = 20, \lambda = 75)$. On rappelle que la
+  fonction de répartition de cette loi est:
+  \begin{equation*}
+    F_X(x)= 1 - \left(\frac{\lambda}{\lambda + x}\right)^\alpha.
+  \end{equation*}
+
+  En compétition, les juges inscrivent un résultat seulement
+  si le lancer dépasse la distance $d$. La probabilité qu'un
+  lancer dépasse la distance $e^d$ sachant que ce lancer
+  a dépassé la distance $d$ est de $0,75$. Calculer la
+  constante $d$ pour laquelle la relation précédente est
+  vraie, autrement dit la valeur de $d$ tel que
+  \begin{equation}
+    \label{eq:exemples:enonce}
+    \Pr[X > e^d|X > d] = 0,75.
+  \end{equation}
+\end{prob-enonce}
+
 
 \section{Calcul de valeurs actuelles}
 \index{valeur actuelle}
@@ -54,7 +75,7 @@ des hypothèses ci-dessous.
   la formule \eqref{eq:vp2} avec $P_j = P = \nombre{1000}$:
 <<1(a)>>=
 1000 * sum((1 + 0.06)^(-(1:5)))
-@ %
+@
   Remarquer comme l'expression R se lit exactement comme la formule
   mathématique. De plus, le terme constant $\nombre{1000}$ est sorti de
   la somme pour réduire le nombre de multiplications de cinq à une
@@ -233,13 +254,30 @@ x <- 2:10
     Vérification avec la fonction interne \fonction{pgamma}:
 <<3(a)-2>>=
 pgamma(x, alpha)
-@ %
+@
   \indexfonction{colSums} %
   Il est laissé en exercice de déterminer pourquoi la transposée est
   nécessaire dans l'expression ci-dessus. Exécuter l'expression étape
   par étape, de l'intérieur vers l'extérieur, pour mieux comprendre
   comment on arrive à faire le calcul en \eqref{eq:exemples:gamma:fr}.
 \end{enumerate}
+
+\begin{prob-astuce}
+  Simplifions déjà l'équation à résoudre. On a
+  \begin{align*}
+    \Pr[X > e^d|X > d]
+    &= \frac{\Pr[X > e^d \cap X > d]}{\Pr[X > d]} \\
+    &= \frac{\Pr[X > e^d]}{\Pr[X > d]} \\
+    &= \frac{[\lambda/(\lambda + e^d]^\alpha}{%
+      [\lambda/(\lambda + d)]^\alpha} \\
+    &= \left(\frac{\lambda + d}{\lambda + e^d}\right)^\alpha.
+  \end{align*}
+  On cherche donc à résoudre pour $d$ l'équation
+  \begin{equation*}
+    \left(\frac{\lambda + d}{\lambda + e^d}\right)^\alpha = 0,75.
+  \end{equation*}
+  Celle-ci n'admet pas de solution explicite.
+\end{prob-astuce}
 
 
 \section{Algorithme du point fixe}
@@ -290,9 +328,28 @@ i
   Vérification:
 <<4-2>>=
 (1 - (1 + i)^(-10))/i
-@ %
+@
 Nous verrons au \autoref{fonctions} comment créer une fonction à
 partir de ce code.
+
+\begin{prob-astuce}
+  L'algorithme du point fixe peut nous permettre de résoudre
+  numériquement l'équation
+  \begin{equation*}
+    \left(\frac{\lambda + d}{\lambda + e^d}\right)^\alpha = 0,75.
+  \end{equation*}
+  Pour utiliser l'algorithme, il faut réécrire l'équation sous une
+  forme où l'inconnue $d$ se trouve de part et d'autre de l'égalité. En
+  isolant, pour des raisons numériques, le $d$ se trouvant au
+  dénominateur de l'équation ci-dessus, on obtient:
+  \begin{equation*}
+    d = \log
+    \left[
+      \lambda(1 - 0,75^{1/\alpha}) + d
+    \right] -
+    \frac{\log 0,75}{\alpha}.
+  \end{equation*}
+\end{prob-astuce}
 
 
 \section{Suite de Fibonacci}
@@ -349,16 +406,57 @@ longueur et le remplir par la suite. Cela nous donne une autre façon
 de calculer la suite de Fibonacci:
 <<5-b>>=
 n <- 10
-x <- numeric(n)      # contenant créé
+x <- numeric(n)      # création du contenant
 x[2] <- 1            # x[1] vaut déjà 0
 for (i in 3:n) x[i] <- x[i - 1] + x[i - 2]
 x
 @
 
-Dans les exemples du \autoref{fonctions}, nous composeront des
-fonctions avec ces deux exemples et nous comparerons les temps de
-calcul pour $n$ grand.
+Dans le code informatique du \autoref{fonctions}, nous
+composerons des fonctions avec ces deux solutions et nous comparerons
+les temps de calcul pour $n$ grand.
 
+\begin{prob-solution}
+  On résoud le problème par la méthode du point fixe en procédant de
+  la même façon qu'à la \autoref{exemples:pointfixe}. On prend
+  toutefois soin de modifier la deuxième ligne à
+  l'intérieur de la boucle \fonction{repeat}:
+<<echo=TRUE>>=
+p <- 0.75
+alpha <- 20
+lambda <- 75
+
+d <- 2
+
+repeat
+{
+    dt <- d
+    d <- log(lambda * (1 - p^(1/alpha)) + d) -
+        log(p)/alpha
+    if (abs(d - dt)/dt < 1E-10)
+        break
+}
+
+d
+@
+
+  Vérifions que l'équation de départ \eqref{eq:exemples:enonce}
+  est vraie:
+<<echo=TRUE>>=
+((lambda + d) / (lambda + exp(d)))^alpha
+@
+
+  Le package \pkg{actuar} fournit une fonction
+  \code{ppareto} pour calculer la fonction de répartition de la loi de
+  Pareto. (Consulter l'\autoref{packages} pour installer le package à
+  partir du site CRAN.) La fonction permet de vérifier directement
+  l'équation de départ:
+<<echo=TRUE>>=
+library(actuar)
+ppareto(exp(d), alpha, lambda, lower.tail = FALSE) /
+    ppareto(d, alpha, lambda, lower.tail = FALSE)
+@
+\end{prob-solution}
 
 
 \section{Exercices}

@@ -26,6 +26,45 @@ fait une large place à la création et à la manipulation des vecteurs
 et autres types d'objets de stockage couramment employés en
 programmation en R.
 
+\begin{prob-enonce}
+  Une ligue de hockey compte huit équipes. Le classement de la ligue
+  est disponible quotidiennement dans le journal dans le format
+  habituel:
+  \begin{center}
+    \begin{tabular}{lrrrrr}
+      \toprule
+      Équipe & MJ & V & D & DP & PTS \\
+      \midrule
+      Washington  & 55 & 36 & 16 & 3 & 75 \\
+      Dallas      & 56 & 32 & 19 & 5 & 69 \\
+      Chicago     & 57 & 30 & 21 & 6 & 66 \\
+      Los Angeles & 58 & 30 & 22 & 6 & 66 \\
+      St-Louis    & 56 & 25 & 19 & 12 & 62 \\
+      Détroit     & 57 & 25 & 21 & 11 & 61 \\
+      Montréal    & 56 & 22 & 27 & 7 & 51 \\
+      Boston      & 57 & 40 & 15 & 2 & 82 \\
+      \bottomrule
+    \end{tabular}
+    \footnotesize%
+    \textbf{Légende;} MJ -- matchs joués; V -- victoires; D --
+    défaites; DP: défaites en prolongation; PTS -- points
+  \end{center}
+  Afin d'effectuer différentes analyses statistiques, on désire
+  intégrer ces données dans un espace de travail R. On doit donc
+  déterminer le type d'objet R approprié pour stocker le classement de
+  la ligue.
+
+  Ensuite, on souhaite extraire les valeurs suivantes de l'objet
+  précédemment créé.
+  \begin{enumerate}[a)]
+  \item Le nombre d'équipes de la ligue.
+  \item La fiche complète de l'équipe de Montréal.
+  \item La fiche complète de l'équipe à la septième position du
+    classement.
+  \end{enumerate}
+\end{prob-enonce}
+
+
 \section{Commandes R}
 \label{bases:commandes}
 
@@ -457,6 +496,14 @@ v["c"]
   vecteurs et des matrices.
 \end{itemize}
 
+\begin{prob-astuce}
+  Dans un vecteur simple, tous les éléments doivent être du même mode.
+  Or, les informations du classement de la ligue comportent à la fois
+  des chaînes de caractères et des nombres. De plus, le classement se
+  présente sous forme d'un tableau à deux dimensions, alors qu'un
+  vecteur n'en compte qu'une seule. Le vecteur simple n'est donc pas
+  le type d'objet approprié pour stocker le classement de la ligue.
+\end{prob-astuce}
 
 \section{Matrices et tableaux}
 \label{bases:matrices}
@@ -621,6 +668,14 @@ cbind(m, n)
 @
 \end{itemize}
 
+\begin{prob-astuce}
+  Une matrice convient bien pour stocker un tableau de données.
+  Toutefois, puisque la matrice est en fait un vecteur avec un
+  attribut \code{dim} de longueur $2$, tous les éléments doivent être
+  du même mode, comme c'était le cas avec les vecteurs simples.
+  Impossible dans ce cas d'y stocker le nom des équipes. La matrice
+  n'est toujours pas le type d'objet approprié.
+\end{prob-astuce}
 
 \section{Listes}
 \label{bases:listes}
@@ -670,13 +725,41 @@ x[[1]]
   élément d'une liste est par son étiquette avec l'opérateur \Fonction{\$}:
 <<echo=TRUE>>=
 x$size
-@ %$
+@
 \item La fonction \Fonction{unlist} convertit une liste en un vecteur
   simple. Elle est surtout utile pour concaténer les éléments d'une
   liste lorsque ceux-ci sont des scalaires. Attention, cette fonction
   peut être destructrice si la structure interne de la liste est
   importante.
 \end{itemize}
+
+\label{bases:astuce3}
+\begin{prob-astuce}
+  La liste permettrait de stocker à la fois le nom des équipes et
+  leurs statistiques puisqu'elle peut contenir des objets de mode
+  différent.
+
+  On crée d'abord des vecteurs simples contenant les données de chaque
+  colonne du classement des équipes.
+<<echo=TRUE>>=
+Equipe <- c("Washington", "Dallas", "Chicago", "Los Angeles",
+            "St-Louis", "Détroit", "Montréal", "Boston")
+MJ  <- c(55, 56, 57, 58, 56, 57, 56, 57)
+V   <- c(36, 32, 30, 30, 25, 25, 22, 40)
+D   <- c(16, 19, 21, 22, 19, 21, 27, 15)
+DP  <- c( 3,  5,  6,  6, 12, 11,  7,  2)
+PTS <- c(75, 69, 66, 66, 62, 61, 51, 82)
+@
+  On les combine ensuite sous forme de liste nommée.
+<<echo=TRUE>>=
+list(Equipe = Equipe, MJ = MJ, V = V, D = D, DP = DP, PTS = PTS)
+@
+  On constate que R ne présente pas le contenu de la liste sous
+  forme d'un tableau. Ce n'est donc pas le type d'objet le mieux
+  approprié pour stocker un classement. En fait, la liste est un mode
+  de stockage \emph{trop} général pour le type de données dont nous
+  disposons.
+\end{prob-astuce}
 
 
 \section{\emph{Data frames}}
@@ -714,6 +797,13 @@ régression linéaire, par exemple --- repose davantage sur les
   \Fonction{attach}, puis les masquer avec \Fonction{detach}.
 \end{itemize}
 
+\begin{prob-astuce}
+  L'élément distinctif entre un \emph{data frame} et une liste
+  générale, c'est que tous les éléments du premier doivent être de la
+  même longueur. Nous avons donc ici le type d'objet tout désigné pour
+  stocker des données de modes différents, mais qui se présentent sous
+  forme de tableau à deux dimensions.
+\end{prob-astuce}
 
 
 \section{Indiçage}
@@ -774,13 +864,62 @@ x[c("B", "D")]
   alors sélectionnés:
 <<echo=TRUE>>=
 x[]
-@ %
+@
   Cette méthode est essentiellement utilisée avec les matrices et
   tableaux pour sélectionner tous les éléments d'une dimension (voir
   l'exemple à la \autopageref{pg:bases:indicage_matrice}).
   Laisser l'indice vide est différent d'indicer avec un vecteur vide;
   cette dernière opération retourne un vecteur vide.
 \end{enumerate}
+
+\begin{prob-solution}
+  Nous avons déjà créé à l'Astuce de la \autopageref{bases:astuce3}
+  des vecteurs contenant les données des différentes colonnes du
+  classement de la ligue.
+<<echo=TRUE>>=
+Equipe
+MJ
+V
+D
+DP
+PTS
+@
+
+  On crée l'objet \code{classement} qui contiendra le classement de la
+  ligue avec la fonction \code{data.frame}. Celle-ci prend en
+  arguments les différents vecteurs de données.
+<<echo=TRUE>>=
+(classement <- data.frame(Equipe, MJ, V, D,  DP, PTS))
+@
+
+  On répond ensuite aux questions de traitement des données.
+  \begin{enumerate}[a)]
+  \item Le nombre d'équipes dans la ligue correspond au nombre de
+    lignes de l'objet:
+<<echo=TRUE>>=
+dim(classement)[1]
+@
+    ou, comme nous le verrons dans le code informatique de la section
+    suivante,
+<<echo=TRUE>>=
+nrow(classement)
+@
+  \item Pour extraire la fiche complète de l'équipe de Montréal, il
+    suffit d'extraire cette ligne du tableau de données:
+<<echo=TRUE>>=
+### indiçage par vecteur booléen
+classement[classement$Equipe=="Montréal", ]
+
+### extraction par une fonction pratique et élégante
+subset(classement, Equipe == "Montréal")
+@
+  \item Pour extraire la fiche complète de l'équipe à la septième
+    position du classement, on peut indicer le tableau par position:
+<<echo=TRUE>>=
+classement[7, ]
+@
+  \end{enumerate}
+\end{prob-solution}
 
 
 \section{Exemples}
