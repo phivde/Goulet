@@ -291,11 +291,11 @@ que d'autres.
   de R \citep{R-FAQ}, «Devrais-je utiliser R à l'intérieur de
   Emacs?»\index{Emacs}, la réponse est: «Oui, absolument.»
 
-  En effet, combiné avec le mode ESS\index{ESS} (\emph{Emacs Speaks
-    Statistics}), Emacs offre un environnement de développement aussi
-  riche qu'efficace. Entre autres fonctionnalités uniques à cet
-  éditeur, le fichier de script et l'invite de commandes R sont
-  regroupés dans la même fenêtre, comme on peut le voir à la
+  En effet, combiné avec le mode ESS\index{Emacs!mode ESS}
+  (\emph{Emacs Speaks Statistics}), Emacs offre un environnement de
+  développement aussi riche qu'efficace. Entre autres fonctionnalités
+  uniques à cet éditeur, le fichier de script et l'invite de commandes
+  R sont regroupés dans la même fenêtre, comme on peut le voir à la
   \autoref{fig:presentation:emacs}.
 
   \begin{figure}[t]
