@@ -29,26 +29,8 @@ programmation en R.
 \begin{prob-enonce}
   Une ligue de hockey compte huit équipes. Le classement de la ligue
   est disponible quotidiennement dans le journal dans le format
-  habituel:
-  \begin{center}
-    \begin{tabular}{lrrrrr}
-      \toprule
-      Équipe & MJ & V & D & DP & PTS \\
-      \midrule
-      Washington  & 55 & 36 & 16 & 3 & 75 \\
-      Dallas      & 56 & 32 & 19 & 5 & 69 \\
-      Chicago     & 57 & 30 & 21 & 6 & 66 \\
-      Los Angeles & 58 & 30 & 22 & 6 & 66 \\
-      St-Louis    & 56 & 25 & 19 & 12 & 62 \\
-      Détroit     & 57 & 25 & 21 & 11 & 61 \\
-      Montréal    & 56 & 22 & 27 & 7 & 51 \\
-      Boston      & 57 & 40 & 15 & 2 & 82 \\
-      \bottomrule
-    \end{tabular}
-    \footnotesize%
-    \textbf{Légende;} MJ -- matchs joués; V -- victoires; D --
-    défaites; DP: défaites en prolongation; PTS -- points
-  \end{center}
+  habituel; voir le \autoref{tab:bases:classement}.
+
   Afin d'effectuer différentes analyses statistiques, on désire
   intégrer ces données dans un espace de travail R. On doit donc
   déterminer le type d'objet R approprié pour stocker le classement de
@@ -63,6 +45,32 @@ programmation en R.
     classement.
   \end{enumerate}
 \end{prob-enonce}
+
+%% Les floats ne peuvent se trouver à l'intérieur d'un environnement
+%% de framed.sty utilisé par prob-enonce.
+\begin{table}
+  \centering
+  \begin{tabular}{lrrrrr}
+    \toprule
+    Équipe & MJ & V & D & DP & PTS \\
+    \midrule
+    Washington  & 55 & 36 & 16 & 3 & 75 \\
+    Dallas      & 56 & 32 & 19 & 5 & 69 \\
+    Chicago     & 57 & 30 & 21 & 6 & 66 \\
+    Los Angeles & 58 & 30 & 22 & 6 & 66 \\
+    St-Louis    & 56 & 25 & 19 & 12 & 62 \\
+    Détroit     & 57 & 25 & 21 & 11 & 61 \\
+    Montréal    & 56 & 22 & 27 & 7 & 51 \\
+    Boston      & 57 & 40 & 15 & 2 & 82 \\
+    \bottomrule
+  \end{tabular} \\
+  \footnotesize%
+  \textbf{Légende:} MJ -- matchs joués; V -- victoires; D -- défaites; \\
+    DP: défaites en prolongation; PTS -- points
+  \caption{Classement de la ligue de hockey pour le problème à
+    résoudre du chapitre}
+  \label{tab:bases:classement}
+\end{table}
 
 
 \section{Commandes R}
@@ -108,15 +116,18 @@ b
     valeur} dans les appels de fonction.
 \end{itemize}
 
-\begin{astuce}
-  Dans les anciennes versions de S et R, l'on pouvait affecter avec le
-  caractère de soulignement «\code{\_}». Cet emploi n'est plus permis,
-  mais la pratique subsiste dans le mode ESS de Emacs. Ainsi, taper le
-  caractère «\code{\_}» hors d'une chaîne de caractères dans Emacs
-  génère automatiquement \verb*| <- |. Si l'on souhaite véritablement
-  obtenir le caractère de soulignement, il suffit d'appuyer deux fois
-  successives sur «\_».
-\end{astuce}
+\begin{figure}[t]
+  \begin{information}
+    Dans les anciennes versions de S et R, l'on pouvait affecter avec
+    le caractère de soulignement «\code{\_}». Cet emploi n'est plus
+    permis, mais la pratique subsiste dans le mode ESS de Emacs.
+
+    Ainsi, taper le caractère «\code{\_}» hors d'une chaîne de
+    caractères dans Emacs génère automatiquement \verb*| <- |. Si l'on
+    souhaite véritablement obtenir le caractère de soulignement, il
+    suffit d'appuyer deux fois successives sur «\_».
+  \end{information}
+\end{figure}
 
 Que ce soit dans les fichiers de script ou à la ligne de commande, on
 sépare les commandes R les unes des autres par un
@@ -216,8 +227,8 @@ F
 > TRUE <- 3
 \end{Sinput}
 \begin{Soutput}
-Error in TRUE <- 3 : membre gauche de l'assignation (do_set)
-incorrect
+Error in TRUE <- 3 : membre gauche de l'assignation
+(do_set) incorrect
 \end{Soutput}
 \end{Schunk}
 <<echo=TRUE>>=
@@ -538,7 +549,7 @@ matrix(1:6, nrow = 2, ncol = 3, byrow = TRUE)
   \Fonction{array}:
 <<echo=TRUE>>=
 array(1:24, dim = c(3, 4, 2))
-@ %
+@
 \end{itemize}
 
 \begin{important}
@@ -627,7 +638,7 @@ des tableaux à trois et quatre dimensions.
 Comme pour les vecteurs, l'indiçage\index{indiçage!matrice} des
 matrices et tableaux se fait avec les crochets \fonction{[~]}.
 \begin{itemize}
-\item On extrait un élément d'une matrice en précisant ses positions
+\item On extrait un élément d'une matrice en précisant sa position
   dans chaque dimension de celle-ci, séparées par des virgules:
 <<echo=TRUE>>=
 (m <- matrix(c(40, 80, 45, 21, 55, 32),
@@ -733,7 +744,8 @@ x$size
   importante.
 \end{itemize}
 
-\label{bases:astuce3}
+\begin{table}[p]
+  \label{bases:astuce3}
 \begin{prob-astuce}
   La liste permettrait de stocker à la fois le nom des équipes et
   leurs statistiques puisqu'elle peut contenir des objets de mode
@@ -742,8 +754,9 @@ x$size
   On crée d'abord des vecteurs simples contenant les données de chaque
   colonne du classement des équipes.
 <<echo=TRUE>>=
-Equipe <- c("Washington", "Dallas", "Chicago", "Los Angeles",
-            "St-Louis", "Détroit", "Montréal", "Boston")
+Equipe <- c("Washington", "Dallas", "Chicago",
+            "Los Angeles", "St-Louis", "Détroit",
+            "Montréal", "Boston")
 MJ  <- c(55, 56, 57, 58, 56, 57, 56, 57)
 V   <- c(36, 32, 30, 30, 25, 25, 22, 40)
 D   <- c(16, 19, 21, 22, 19, 21, 27, 15)
@@ -752,7 +765,8 @@ PTS <- c(75, 69, 66, 66, 62, 61, 51, 82)
 @
   On les combine ensuite sous forme de liste nommée.
 <<echo=TRUE>>=
-list(Equipe = Equipe, MJ = MJ, V = V, D = D, DP = DP, PTS = PTS)
+list(Equipe = Equipe, MJ = MJ, V = V, D = D,
+     DP = DP, PTS = PTS)
 @
   On constate que R ne présente pas le contenu de la liste sous
   forme d'un tableau. Ce n'est donc pas le type d'objet le mieux
@@ -760,6 +774,7 @@ list(Equipe = Equipe, MJ = MJ, V = V, D = D, DP = DP, PTS = PTS)
   de stockage \emph{trop} général pour le type de données dont nous
   disposons.
 \end{prob-astuce}
+\end{table}
 
 
 \section{\emph{Data frames}}
@@ -800,9 +815,10 @@ régression linéaire, par exemple --- repose davantage sur les
 \begin{prob-astuce}
   L'élément distinctif entre un \emph{data frame} et une liste
   générale, c'est que tous les éléments du premier doivent être de la
-  même longueur. Nous avons donc ici le type d'objet tout désigné pour
-  stocker des données de modes différents, mais qui se présentent sous
-  forme de tableau à deux dimensions.
+  même longueur et que, par conséquent, R les dispose en colonnes.
+  Nous avons donc ici le type d'objet tout désigné pour stocker des
+  données de modes différents, mais qui se présentent sous forme de
+  tableau à deux dimensions.
 \end{prob-astuce}
 
 
@@ -907,10 +923,10 @@ nrow(classement)
   \item Pour extraire la fiche complète de l'équipe de Montréal, il
     suffit d'extraire cette ligne du tableau de données:
 <<echo=TRUE>>=
-### indiçage par vecteur booléen
+## indiçage par vecteur booléen
 classement[classement$Equipe=="Montréal", ]
 
-### extraction par une fonction pratique et élégante
+## extraction par une fonction pratique et élégante
 subset(classement, Equipe == "Montréal")
 @
   \item Pour extraire la fiche complète de l'équipe à la septième

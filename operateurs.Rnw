@@ -136,7 +136,7 @@ expressions R.
 Les opérateurs de puissance (\verb|^|\index{\string^@\verb=^=}) et
 d'assignation à gauche (\fonction{<-}, \verb|<<-|) sont évalués de
 droite à gauche; tous les autres de gauche à droite. Ainsi,
-\verb|2 ^ 2 ^ 3| est \verb|2 ^ 8|, et non \verb|4 ^ 3|, alors que
+\verb|2^2^3| est \verb|2^8|, et non \verb|4^3|, alors que
 \verb|1 - 1 - 1| vaut \verb|-1|, et non \verb|1|.
 
 
@@ -448,8 +448,7 @@ cummin(x); cummax(x)
 @
 \item[\Fonction{pmin}, \Fonction{pmax}]
   minimum\index{minimum!parallèle} et maximum\index{maximum!parallèle}
-  en parallèle, c'est-à-dire élément par élément entre deux vecteurs
-  ou plus
+  élément par élément (en parallèle) entre deux vecteurs ou plus
 <<echo=TRUE>>=
 pmin(x, 12)
 pmax(x, c(16, 23,  4, 12,  3))
@@ -723,7 +722,8 @@ m[m > 7]
 <<echo=TRUE>>=
 mean(m[m > 7])
 @
-  Le tout peut s'écrire en une seule expression ainsi:
+  Le tout peut s'écrire en une seule expression --- quelque peu
+  alambiquée --- ainsi:
 <<echo=TRUE>>=
 mean((m <- outer(x, y, "+"))[m > 7])
 @

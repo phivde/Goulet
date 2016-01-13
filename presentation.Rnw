@@ -128,7 +128,7 @@ capacités d'édition plutôt réduites.
 \begin{figure}
   \centering
   \includegraphics{console-screenshot}
-  \caption{Fenêtre de la console sous Mac OS~X au démarrage de R}
+  \caption{Fenêtre de la console sous OS~X au démarrage de R}
   \label{fig:presentation:console}
 \end{figure}
 
@@ -221,8 +221,12 @@ save.image()
 
 \begin{figure}
   \centering
-  \lstinputlisting[language={},frame=single]{script.R}
-  \lstinputlisting[language={},firstline=2,frame=single]{script.Rout}
+  \begin{framed}
+  \lstinputlisting[language={}]{script.R}
+  \end{framed}
+  \begin{framed}
+  \lstinputlisting[language={},firstline=2]{script.Rout}
+  \end{framed}
   \caption{Fichier de script (en haut) et invite de commande R dans
     laquelle les expressions R ont été exécutées (en bas). Les lignes
     débutant par \code{\#} dans le fichier de script sont des
@@ -271,7 +275,7 @@ un environnement de développement intégré (\emph{integrated
   qu'il s'agit d'un logiciel destiné à la création, l'édition et la
   sauvegarde de fichiers textes purs, c'est-à-dire dépourvus
   d'information de présentation et de mise en forme. Les applications
-  Bloc-notes sous Windows ou TextEdit sous Mac OS~X sont deux exemples
+  Bloc-notes sous Windows ou TextEdit sous OS~X sont deux exemples
   d'éditeurs de texte simples.
 \item Un éditeur de texte pour programmeur saura en plus reconnaître
   la syntaxe d'un langage de programmation et assister à sa mise en
@@ -314,6 +318,7 @@ que d'autres.
 
   Consulter l'\autoref{emacs+ess} pour en savoir plus sur GNU~Emacs et
   apprendre les commandes essentielles pour y faire ses premiers pas.
+  \enlargethispage{5mm}
 \item Emacs est toutefois un logiciel difficile à apprivoiser, surtout
   pour les personnes moins à l'aise avec l'informatique.
 \item RStudio\index{RStudio} est un environnement de développement
@@ -343,6 +348,7 @@ que d'autres.
     de l'extension NppToR \citep{NppToR}, tous deux des logiciels
     libres, ou le partagiciel WinEdt\index{WinEdt} muni de l'extension
     libre R-WinEdt \citep{RWinEdt};
+    \enlargethispage{5mm}
   \item sous OS~X, tout simplement l'éditeur de texte très complet
     intégré à l'application \code{R.app}, ou alors l'éditeur de texte
     commercial TextMate (essai gratuit de 30 jours);
@@ -405,10 +411,10 @@ Le répertoire de travail est déterminé au lancement de R.
 \begin{itemize}
 \item Les interfaces graphiques de R démarrent avec un répertoire de
   travail par défaut. Pour le changer, utiliser l'entrée appropriée
-  dans le menu \texttt{Fichier} (Windows) ou \texttt{Divers} (Mac
-  OS~X). Consulter aussi les foires aux questions spécifiques aux
-  interfaces graphiques \citep{Rw-FAQ,RMacOSX-FAQ} pour des détails
-  additionnels sur la gestion des répertoires de travail.
+  dans le menu \texttt{Fichier} (Windows) ou \texttt{Divers} (OS~X).
+  Consulter aussi les foires aux questions spécifiques aux interfaces
+  graphiques \citep{Rw-FAQ,RMacOSX-FAQ} pour des détails additionnels
+  sur la gestion des répertoires de travail.
 \item Dans RStudio, on change le répertoire de travail via le menu
   \code{Session}.
 \item Avec GNU~Emacs, la situation est un peu plus simple puisque l'on

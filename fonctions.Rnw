@@ -27,14 +27,14 @@ de style de codage.
 \begin{prob-enonce}
   Stock Ticker est un jeu canadien datant de 1937 dans lequel on
   brasse une série de dés pour simuler les mouvements boursiers et les
-  dividendes de 6 titres financiers.
+  dividendes de six titres financiers.
 
-  Pour les fins de cet exercice, nous nous intéresserons qu'aux
+  Pour les fins de cet exercice, nous ne nous intéresserons qu'aux
   mouvements boursiers, et ce, pour un seul titre --- nous ignorerons
-  donc le versement de dividendes.
+  donc le versement des dividendes.
 
   La valeur du titre est établie à partir de la valeur au tour de jeu
-  précédente et du résultat du lancer de deux dés.
+  précédent et du résultat du lancer de deux dés.
   \begin{enumerate}
   \item Un premier dé à trois faces détermine la direction du mouvement
     boursier: hausse, baisse ou nul.
@@ -45,11 +45,12 @@ de style de codage.
   La valeur de départ du titre est $100$.
 
   Par exemple, si les résultats des dés au premier tour de jeu sont
-  «baisse» et $20$, la valeur du titre après ce tour sera 80. Si, au
-  tour suivant, les résultats des dés sont «nul» et «5», la valeur du
+  «baisse» et $20$, la valeur du titre après ce tour sera $80$. Si, au
+  tour suivant, les résultats des dés sont «nul» et «$5$», la valeur du
   titre demeurera de $80$.
 
-  On fournit les résultats de 10 lancers des dés:
+  On fournit les résultats de 10 lancers des dés sous forme de
+  \emph{data frame}:
 <<echo=FALSE, eval=TRUE>>=
 n <- 10
 set.seed(123456)
@@ -61,15 +62,16 @@ x
 @
 
   Écrire une fonction \code{valeurs()} servant à calculer les valeurs
-  successives du titre. La fonction prend en arguments un \emph{data
-    frame} \code{x} contenant les résultats des lancers des dés, comme
-  ci-dessus, ainsi que \code{start}, la valeur de départ du titre
-  ($100$ par défaut). La fonction retourne un vecteur contenant les
-  valeurs  successives du titre.
+  successives du titre.
+
+  La fonction prend en arguments \code{x}, un \emph{data frame}
+  contenant les résultats des lancers des dés, ainsi que \code{start},
+  la valeur de départ du titre ($100$ par défaut). La fonction
+  retourne un vecteur contenant les valeurs successives du titre.
 
   Par exemple, avec les données ci-dessus, on obtiendrait:
 
-<<label=calculervaleurs, echo=FALSE, eval=TRUE>>=
+<<echo=FALSE, eval=TRUE>>=
 valeurs <- function(x, start = 100)
 {
     ## Création d'un vecteur pour les résultats. La valeur de départ
@@ -413,7 +415,8 @@ for (i in 1:10)
 
 \begin{prob-solution}
   Il existe bien évidemment une multitude de solutions valides. Celle
-  que nous proposons ci-dessous repose sur deux idées principales:
+  que nous proposons à la \autoref{fig:operateurs:valeurs} repose sur
+  deux idées principales:
   \begin{enumerate}
   \item le vecteur créé pour accueillir les résultats contient la
     valeur de départ en première position afin d'éviter de traiter la
@@ -429,17 +432,21 @@ for (i in 1:10)
   On remarquera également que la création d'un contenant pour les
   résultats permet d'éviter le Syndrôme de la plaque à
   biscuits{\texttrademark}.
+\end{prob-solution}
 
+\begin{figure}
+  \begin{framed}
 \begin{verbatim}
 valeurs <- function(x, start = 100)
 {
-    ## Création d'un vecteur pour les résultats. La valeur de
-    ## départ est placée au début du vecteur pour faire la
-    ## boucle. Elle sera supprimée à la fin.
+    ## Création d'un vecteur pour les résultats. La valeur
+    ## de départ est placée au début du vecteur pour faire
+    ## la boucle. Elle sera supprimée à la fin.
     res <- c(start, numeric(nrow(x)))
 
-    ## Conversion des valeurs de la première colonne des
-    ## données de ("hausse", "nul", "baisse") en (1, 0, -1).
+    ## Conversion des étiquettes ("hausse", "nul",
+    ## "baisse") de la première colonne des données en
+    ## valeurs numériques (1, 0, -1).
     d <- (x[, 1] == "hausse") - (x[, 1] == "baisse")
 
     ## Calcul des valeurs successives du titre.
@@ -450,8 +457,10 @@ valeurs <- function(x, start = 100)
     res[-1]
 }
 \end{verbatim}
-\end{prob-solution}
-
+  \end{framed}
+  \caption{Fonction \code{valeurs} solution du problème du chapitre }
+  \label{fig:operateurs:valeurs}
+\end{figure}
 
 \section{Exemples}
 \label{fonctions:exemples}

@@ -20,6 +20,60 @@ du langage R, dont les fonctions de la famille \code{apply} auxquelles
 nous avons fait référence à quelques reprises dans les chapitres
 précédents. Ce sont des fonctions d'une grande importance en R.
 
+\begin{prob-enonce}
+  Soit la fonction
+  \begin{equation*}
+  g(x)=
+  \begin{cases}
+      2x, & x \leq 5\\
+      0,  & \text{ailleurs}.
+  \end{cases}
+  \end{equation*}
+
+  On essaie d'en faire une mise en œuvre en R:
+<<echo=TRUE>>=
+g <- function(x)
+{
+    if (x <= 5)
+        2 * x
+    else
+        0
+}
+@
+
+  On évalue $g(1)$. On devrait obtenir $2 \times 1 = 2$ (cas $x \leq 5$).
+<<echo=TRUE>>=
+g(1)
+@
+
+  On évalue $g(10)$. On devrait obtenir $0$ (cas $x > 5$).
+<<echo=TRUE>>=
+g(10)
+@
+
+  On désire maintenant évaluer la fonction à tous les entiers de
+  $1$ à $10$, inclusivement. On devrait obtenir $(2, 4, 6, 8, 10, 0,
+  0, 0, 0, 0)$.
+\begin{Schunk}
+\begin{Sinput}
+> g(1:10)
+\end{Sinput}
+\begin{Soutput}
+ [1]  2  4  6  8 10 12 14 16 18 20
+Warning message:
+In if (x <= 5) 2 * x else 0 :
+  la condition a une longueur > 1 et seul le premier
+  élément est utilisé
+\end{Soutput}
+\end{Schunk}
+
+  Que se passe-t-il? Les résultats sont erronés et le message
+  d'avertissement nous indique que seulement la première valeur a été
+  utilisée pour évaluer la condition. La fonction \code{g} évalue donc
+  correctement son argument seulement lorsqu'il s'agit d'un vecteur de
+  longueur 1. En d'autres termes, la fonction n'est pas
+  \emph{vectorielle}.
+\end{prob-enonce}
 
 \section{Argument `\code{...}'}
 \label{avance:dots}
@@ -145,7 +199,7 @@ list(FUN(X[[1]], ...),
   aléatoires de taille $5$, $6$, $7$ et $8$:
 <<echo=TRUE>>=
 (x <- lapply(5:8, sample, x = 1:10))
-@ %
+@
   Le premier argument de la fonction \fonction{sample} est \code{x}.
   Dans l'expression ci-dessus, cet argument est passé à
   la fonction via l'argument `\code{...}' de \code{lapply}. Par conséquent, les
@@ -184,6 +238,15 @@ sapply(x, sort)
   \fonction{sapply}. On ne saurait donc trop insister sur l'importance
   de ces fonctions.
 \end{important}
+
+\begin{prob-astuce}
+  La fonction \fonction{sapply} permet de vectoriser une fonction R
+  qui n'est pas vectorielle. On peut procéder de deux façons: en
+  utilisant la fonction non vectorielle dans une application de
+  \code{sapply()} ou en vectorisant la fonction à y ajoutant un appel
+  à \code{sapply}.
+\end{prob-astuce}
+
 
 \section{Fonction \code{mapply}}
 \label{avance:mapply}
@@ -266,6 +329,86 @@ methods(plot)
   objet en créant une nouvelle classe et une nouvelle méthode pour la
   fonction \code{print}.
 \end{itemize}
+
+
+\begin{prob-solution}
+  Débutons par expliquer ce qui cloche avec notre fonction \code{g} de
+  départ:
+<<echo=TRUE>>=
+g
+@
+
+   Il s'avère que la structure de contrôle \code{if} n'est \emph{pas}
+   une fonction vectorielle. Elle n'accepte qu'une seule valeur. De la
+   rubrique d'aide:
+\begin{verbatim}
+cond: A length-one logical vector that is not ‘NA’.
+      Conditions of length greater than one are accepted
+      with a warning, but only the first element is used.
+\end{verbatim}
+
+  Par conséquent, lorsque l'argument de la fonction \code{g} est
+  \code{1:10}, l'exécution de la fonction est la suivante:
+  \begin{enumerate}[i)]
+  \item l'argument \code{x} vaut \code{1:10};
+  \item la condition \code{if (x <= 5)} n'est évaluée que pour la première
+    valeur de \code{x};
+  \item puisque \code{x[1] <= 5},  c'est l'expression vectorielle \code{2 * x} qui
+    est évaluée;
+  \item le résultat de la fonction est \code{2 * x}.
+  \end{enumerate}
+
+  Tel qu'indiqué précédemment, la fonction \code{sapply} peut rendre
+  vectorielle une fonction ou une expression qui ne le sont pas. Ici,
+  la solution la plus simple à court terme serait:
+<<echo=TRUE>>=
+sapply(1:10, g)
+@
+
+  Une solution plus complète consisterait à transformer la fonction
+  \code{g} pour la rendre vectorielle avec la fonction \code{sapply}:
+<<echo=TRUE>>=
+g2 <- function(x)
+{
+    h <- function(x)
+    {
+        if (x <= 5)
+            2 * x
+        else
+            0
+    }
+    sapply(x, h)
+}
+g2(1:10)
+@
+
+  Attention, toutefois, cette solution n'est pas une panacée.
+
+  Par exemple, dans ce cas bien précis où la fonction $g$ est une
+  fonction en branches, une autre solution fait appel à la fonction
+  \fonction{ifelse}:
+<<echo=TRUE>>=
+g3 <- function(x)
+    ifelse (x <= 5, 2 * x, 0)
+g3(1:10)
+@
+
+  Pour le problème sous étude, on peut faire encore beaucoup mieux
+  en tirant directement profit de l'approche vectorielle de R. Par une
+  judicieuse utilisation des valeurs booléennes, il est possible
+  d'éliminer complètement la condition \code{if}:
+<<echo=TRUE>>=
+g4 <- function(x)
+    2 * x * (x <= 5)
+g4(1:10)
+@
+
+  On préférera, dans l'ordre, les fonctions \code{g4},
+  \code{g3} (la fonction \fonction{ifelse} est lente, mais néanmoins
+  plus rapide que \fonction{sapply}), \code{g2} et
+  l'approche combinant \code{sapply} et la fonction \code{g} de
+  départ.
+\end{prob-solution}
 
 
 \section{Exemples}
