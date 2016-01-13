@@ -1,4 +1,5 @@
 \chapter{Installation de packages dans R}
+\index{package!installation|(}
 \label{packages}
 
 Un package R est un ensemble cohérent de fonctions, de jeux de données
@@ -13,13 +14,13 @@ Cette annexe explique comment configurer R pour faciliter l'%
 externes.
 
 Les instructions ci-dessous se basent sur la création d'une
-bibliothèque personnelle où seront installés les packages R
-téléchargés de CRAN. Il est fortement recommandé de créer une telle
-bibliothèque. Cela permet d'éviter les éventuels problèmes d'accès en écriture
-dans la bibliothèque principale et de conserver les packages intacts
-lors des mises à jour de R. On montre également comment spécifier
-le site miroir de CRAN pour éviter d'avoir à le répéter à chaque
-installation de package.
+bibliothèque personnelle\index{package!bibliothèque personnelle} où
+seront installés les packages R téléchargés de CRAN. Il est fortement
+recommandé de créer une telle bibliothèque. Cela permet d'éviter les
+éventuels problèmes d'accès en écriture dans la bibliothèque
+principale et de conserver les packages intacts lors des mises à jour
+de R. On montre également comment spécifier le site miroir de CRAN
+pour éviter d'avoir à le répéter à chaque installation de package.
 \begin{enumerate}
 \item Identifier le dossier de départ de l'utilisateur. En cas
   d'incertitude, examiner la valeur de la variable d'environnement
@@ -105,6 +106,8 @@ recourir aux arguments \code{lib} et \code{repos} de la fonction
 \code{install.packages} et à l'argument \code{lib.loc} de la fonction
 \code{library}. Consulter les rubriques d'aide de ces deux fonctions
 pour de plus amples informations.
+
+\index{package!installation|)}
 
 %%% Local Variables:
 %%% mode: latex

@@ -725,7 +725,7 @@ x[1]
 x[[1]]
 @
   Évidemment, on ne peut extraire qu'un seul élément à la fois
-  avec les crochets doubles \fonction{[[~]]}.
+  avec les crochets doubles \code{[[~]]}.
 \item Petite subtilité peu employée, mais élégante. Si l'indice
   utilisé dans \fonction{[[~]]} est un vecteur, il est utilisé
   récursivement pour indicer la liste: cela sélectionnera la
@@ -784,7 +784,7 @@ Les vecteurs, les matrices, les tableaux et les listes sont les types
 d'objets les plus fréquemment utilisés en programmation en R.
 Toutefois, un grand nombre de procédures statistiques --- pensons à la
 régression linéaire, par exemple --- repose davantage sur les
-\emph{data frames}\Index{data frame} pour le stockage des données.
+\emph{data frames} pour le stockage des données.
 
 \begin{itemize}
 \item Un \emph{data frame} est une liste de classe

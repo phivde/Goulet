@@ -100,7 +100,7 @@ dont `\Argument{...}' est le nom.
 \label{avance:apply}
 
 La %
-\capsule{http://youtu.be/apply}{fonction \texttt{apply}}%
+\capsule{http://youtu.be/apply}{fonction \code{apply}}%
 \Indexfonction{apply} %
 sert à appliquer une fonction quelconque sur une partie d'une
 matrice\index{matrice} ou, plus généralement, d'un
