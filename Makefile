@@ -6,8 +6,8 @@
 #
 # Rouben Rostmaian, minor adjustments for Rnw Nicholas Lewin-koh
 # September 2002                              March 2005
-# Further adjustments Vincent Goulet
-# April 2008
+# Additions Vincent Goulet
+# January 2016
 
 # Correspondances url des capsules sur YouTube.
 #
@@ -20,15 +20,21 @@
 #  Anatomie		  emacs+ess	http://youtu.be/xiNnHegDau8	http://youtu.be/KtmFDm2AKM4
 #  Fichiers configuration emacs+ess	http://youtu.be/IsyQn7d2Ao0	http://youtu.be/jdtjBBkfhO0
 #  Installation packages  packages	http://youtu.be/DL48oi2RKjM	http://youtu.be/mL6iNzjHMKE
+
 MASTER = introduction_programmation_r.pdf
+CODE = code-partie_1.zip
+SORTIES = code-partie_1-sorties.zip
 
 # The master document depends on all TeX files
 RNWFILES = $(wildcard *.Rnw)
 TEXFILES = $(wildcard *.tex)
+RFILES   = presentation.R bases.R operateurs.R fonctions.R avance.R
+ROUTFILES := $(RFILES:.R=.Rout)
 
 # The work horses
 SWEAVE = R CMD SWEAVE --encoding="utf-8"
-TEXI2DVI = LATEX=xelatex texi2dvi -b
+TEXI2DVI = LATEX=xelatex TEXINDY=makeindex texi2dvi -b
+RBATCH = R CMD BATCH --no-timing
 RM = rm -rf
 
 .PHONY: tex pdf clean
@@ -38,8 +44,6 @@ tex: $(RNWFILES:.Rnw=.tex)
 
 %.tex: %.Rnw
 	$(SWEAVE) '$<'
-
-$(MASTER): $(RNWFILES) $(TEXFILES)
 	sed -E -i "" \
 	    -e "s:youtu.be/(presentation|LTOOBBGDuek):youtu.be/PSQIKSKw_ys:" \
 	    presentation.tex
@@ -63,7 +67,18 @@ $(MASTER): $(RNWFILES) $(TEXFILES)
 	sed -i "" \
 	    -e "s:youtu.be/(anatomie|xiNnHegDau8):youtu.be/KtmFDm2AKM4:" \
 	    emacs+ess.tex
+
+$(MASTER): $(RNWFILES) $(RFILES) $(TEXFILES)
 	$(TEXI2DVI) $(MASTER:.pdf=.tex)
+
+%.Rout: %.R
+	echo "options(error=expression(NULL))" | cat - $< > $<.tmp
+	$(RBATCH) $<.tmp $@
+	$(RM) $<.tmp
+
+zip: $(RFILES) $(ROUTFILES)
+	zip -j $(CODE) ${RFILES}
+	zip -j $(SORTIES) ${ROUTFILES}
 
 clean:
 	$(RM) $(RNWFILES:.Rnw=.tex) \
