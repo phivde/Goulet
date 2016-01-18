@@ -1,9 +1,10 @@
-\documentclass[letterpaper,11pt]{memoir}
+\documentclass[letterpaper,11pt,x11names,english,french]{memoir}
   \usepackage{natbib,url}
-  \usepackage[english,francais]{babel}
+  \usepackage{babel}
   \usepackage[autolanguage]{numprint}
-  \usepackage{actuarialangle,amsmath,amsthm,icomma}
+  \usepackage{actuarialangle,amsmath,amsthm}
   \usepackage[noae]{Sweave}
+  \usepackage{framed}                  % env. snugshade*, oframed
   \usepackage{paralist}
   \usepackage[shortlabels]{enumitem}
   \usepackage{textpos}
@@ -11,25 +12,28 @@
   \usepackage{manfnt}                  % \mantriangleright (puce)
   \usepackage{metalogo}                % \XeLaTeX logo
   \usepackage{applekeys}               % touches Mac
-  \usepackage{fontawesome}             % \faExclamationSign, \faYouTubePlay
-  \usepackage{wasysym}                 % \leadsto
-  \usepackage{answers,listings}
-  \usepackage{pdfpages}
+  \usepackage{fontawesome}             % icônes \fa*
+  \usepackage{answers}                 % exercices et solutions
+  \usepackage{listings}                % code informatique
+  \usepackage{pdfpages}                % couvertures
 
   %%% ============
   %%%  Page titre
   %%% ============
-  \renewcommand{\year}{2014}
+  \renewcommand{\year}{2016}
   \title{%
     \bfseries\fontsize{42}{42}\selectfont Introduction à la \\
                                           programmation en R}
   \author{%
-    \mdseries\fontsize{20}{30}\selectfont Vincent Goulet \\
+    \mdseries\fontsize{20}{20}\selectfont Vincent Goulet \\
     \mdseries\fontsize{14}{18}\selectfont École d'actuariat,
-                                          Université Laval}
+                                          Université Laval \\
+                                          \vspace*{10mm}
+    \mdseries\fontsize{14}{18}\selectfont Avec la collaboration de \\
+    \mdseries\fontsize{20}{22}\selectfont Laurent Caron}
   \date{%
-    \mdseries\fontsize{14}{18}\selectfont Quatrième édition}
-  \newcommand{\ISBN}{978-2-9811416-3-7}
+    \mdseries\fontsize{14}{18}\selectfont Cinquième édition}
+  \newcommand{\ISBN}{}
 
   %%% ===================
   %%%  Style du document
@@ -38,25 +42,23 @@
   %% Polices de caractères
   \usepackage{fontspec}
   \usepackage{unicode-math}
-  \defaultfontfeatures{Ligatures=TeX}
-  \setmainfont[Scale=0.92,Numbers=OldStyle]{Lucida Bright OT}
-  \setmathfont[Scale=0.92]{Lucida Bright Math OT}
+  \defaultfontfeatures{Scale=0.92}
+  \setmainfont[Ligatures=TeX,Numbers=OldStyle]{Lucida Bright OT}
+  \setmathfont{Lucida Bright Math OT}
+  \setmonofont{Lucida Grande Mono DK}
   \setsansfont[Scale=1.0,Numbers=OldStyle]{Myriad Pro}
-  \setmonofont[Scale=0.88]{Bitstream Vera Sans Mono}
   \newfontfamily\fullcaps[Letters=Uppercase,Numbers=Uppercase]{Myriad Pro}
-  \usepackage{microtype}
-
-  %% Définition de nouveaux symboles de la police Font Awesome pas
-  %% encore définis dans le package fontawesome
-  \def\faYouTubePlay{{\FA \symbol{"F16A}}}
+  \usepackage[babel=true]{microtype}
+  \usepackage{icomma}
 
   %% Couleurs
   \usepackage{xcolor}
-  \definecolor{comments}{rgb}{0.7,0,0}
-  \definecolor{shadecolor}{gray}{0}
-  \definecolor{link}{rgb}{0,0.4,0.6}   % ~RoyalBlue de dvips
-  \definecolor{url}{rgb}{0.6,0,0}      % rouge-brun
-  \definecolor{citation}{rgb}{0,0.5,0} % vert foncé
+  \definecolor{comments}{rgb}{0.7,0,0}           % commentaires
+  \definecolor{link}{rgb}{0,0.4,0.6}             % liens internes
+  \definecolor{url}{rgb}{0.6,0,0}                % liens externes
+  \definecolor{citation}{rgb}{0,0.5,0}           % citations
+  \definecolor{codebg}{named}{LightYellow1}      % fond code R
+  \definecolor{prob}{named}{orange}              % encadrés «problème»
 
   %% Hyperliens
   \usepackage{hyperref}
@@ -64,16 +66,22 @@
     urlcolor=url, linkcolor=link, citecolor=citation,
     bookmarksopen, bookmarksnumbered, bookmarksdepth=subsubsection,
     pdfauthor={Vincent Goulet}}
-  \renewcommand{\appendixautorefname}{annexe}
-  \renewcommand{\figureautorefname}{figure}
-  \newcommand{\subfigureautorefname}{figure}
-  \renewcommand{\tableautorefname}{tableau}
-  \newcommand{\subtableautorefname}{tableau}
-  \newcommand{\thmautorefname}{théorème}
-  \newcommand{\exempleautorefname}{exemple}
-  \newcommand{\definitionautorefname}{définition}
-  \newcommand{\algorithmeautorefname}{algorithme}
-  \newcommand{\exerciceautorefname}{exercice}
+  \setlength{\XeTeXLinkMargin}{1pt}
+
+  %% Étiquettes de \autoref (redéfinitions compatibles avec babel).
+  %% Attention! Les % à la fin des lignes sont importants sinon des
+  %% blancs apparaissent dès que la commande \selectlanguage est
+  %% utilisée... comme dans la bibliographie, par exemple.
+  \addto\extrasfrench{%
+    \def\appendixautorefname{annexe}%
+    \def\figureautorefname{figure}%
+    \def\exempleautorefname{exemple}%
+    \def\exerciceautorefname{exercice}%
+    \def\subfigureautorefname{figure}%
+    \def\subsectionautorefname{section}%
+    \def\subtableautorefname{tableau}%
+    \def\tableautorefname{tableau}%
+  }
 
   %% Table des matières (inspirée de classicthesis.sty)
   \renewcommand{\cftchapterleader}{\hspace{1.5em}}
@@ -112,41 +120,96 @@
   \addto\captionsfrench{\def\figurename{{\scshape Fig.}}}
   \addto\captionsfrench{\def\tablename{{\scshape Tab.}}}
 
+  %%%  Sections de code source
+  %%% =========================
+  \lstloadlanguages{R}
+  \lstdefinelanguage{Renhanced}[]{R}{%
+    morekeywords={colMeans,colSums,head,is.na,is.null,mapply,ms,na.rm,%
+      nlmin,replicate,row.names,rowMeans,rowSums,sys.time,system.time,%
+      tail,which.max,which.min},
+    deletekeywords={c,start},
+    alsoletter={.\%},%
+    alsoother={:_\$}}
+  \lstset{language=Renhanced,
+    extendedchars=true,
+    basicstyle=\small\ttfamily\NoAutoSpacing,
+    commentstyle=\color{comments}\slshape,
+    keywordstyle=\mdseries,
+    showstringspaces=false,
+    index=[1][keywords],
+    indexstyle=\indexfonction}
+
   %%% =========================
   %%%  Nouveaux environnements
   %%% =========================
 
   %% Environnements d'exemples et al.
-  \theoremstyle{plain}
-  \newtheorem{ex}{Exemple}[chapter]
-
   \theoremstyle{remark}
   \newtheorem*{rem}{Remarque}
   \newtheorem*{rems}{Remarques}
 
-  \theoremstyle{definition}
-  \newtheorem*{astuce}{Astuce}
+  %% Redéfinition de l'environnement titled-frame de framed.sty avec
+  %% deux modifications: épaisseur des filets réduite de 2pt à 1pt;
+  %% "(suite)" plutôt que "(cont)" dans la barre de titre
+  %% lorsque l'encadré se poursuit après un saut de page.
+  \renewenvironment{titled-frame}[1]{%
+    \def\FrameCommand{\fboxsep8pt\fboxrule1pt
+      \TitleBarFrame{\textbf{#1}}}%
+    \def\FirstFrameCommand{\fboxsep8pt\fboxrule1pt
+      \TitleBarFrame[$\blacktriangleright$]{\textbf{#1}}}%
+    \def\MidFrameCommand{\fboxsep8pt\fboxrule1pt
+      \TitleBarFrame[$\blacktriangleright$]{\textbf{#1\ (suite)}}}%
+    \def\LastFrameCommand{\fboxsep8pt\fboxrule1pt
+      \TitleBarFrame{\textbf{#1\ (suite)}}}%
+    \MakeFramed{\advance\hsize-16pt \FrameRestore}}%
+  {\endMakeFramed}
 
-  %% Listes d'objectifs au début des chapitres
+  %% Encadré générique avec titre basé sur titled-frame, ci-dessus.
+  %% Sert pour les listes d'objectifs et les encadrés reliés aux
+  %% problèmes (mises en situation) dans les chapitres. Arguments:
+  %% couleur du cadre (optionnel; noir par défaut) et titre de la
+  %% boîte (obligatoire).
+  \newenvironment{emphbox}[2][black]{%
+    \colorlet{TFFrameColor}{#1}%
+    \colorlet{TFTitleColor}{white}%
+    \begin{titled-frame}{\sffamily #2}%
+      \setlength{\parindent}{0pt}}%
+    {\end{titled-frame}}
+
+  %% Liste d'objectifs au début des chapitres
   \newenvironment{objectifs}{%
-    \noindent
-    \begin{framed}
-      \vspace{-1.33\baselineskip}
-      \begin{shaded}
-        \noindent\sffamily\bfseries\textcolor{white}{Objectifs du chapitre}
-      \end{shaded}
-      \vspace{-0.6\baselineskip}
+    \begin{emphbox}{\rule[-7pt]{0pt}{20pt} Objectifs du chapitre}
       \begin{itemize}[nosep]
-        \small\sffamily}
-      {\end{itemize}
-    \end{framed}}
+        \small\sffamily}%
+      {\end{itemize}\end{emphbox}}
 
-  %% Environnements de Sweave
-  \DefineVerbatimEnvironment{Sinput}{Verbatim}{xleftmargin=\parindent}
-  \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=\parindent}
-  \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=\parindent}
+  %% Problèmes (mises en situation) des chapitres: énoncé au début du
+  %% chapitre; astuces en cours de chapitre; solution à la fin
+  %% du chapitre.
+  \newenvironment{prob-enonce}{%
+    \begin{emphbox}[prob]{{\normalfont\faCogs}\; Énoncé du problème}}%
+    {\end{emphbox}}
+  \newenvironment{prob-astuce}{%
+    \begin{emphbox}[prob]{{\normalfont\faBolt}\; Astuce}}%
+    {\end{emphbox}}
+  \newenvironment{prob-solution}{%
+    \begin{emphbox}[prob]{{\normalfont\faLightbulbO}\; Solution du problème}}%
+    {\end{emphbox}}
+
+  %% Environnements de Sweave. Les environnements Sinput et Soutput
+  %% utilisent Verbatim (de fancyvrb). On les réinitialise pour
+  %% enlever la configuration par défaut de Sweave, puis on réduit
+  %% l'écart entre les blocs Sinput et Soutput. L'environnement Schunk
+  %% est complètement redéfini à partir de snugshade* (de framed) pour
+  %% insérer un fond de couleur derrière les blocs de code source.
+  \DefineVerbatimEnvironment{Sinput}{Verbatim}{}
+  \DefineVerbatimEnvironment{Soutput}{Verbatim}{}
   \fvset{listparameters={\setlength{\topsep}{0pt}}}
-  \renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
+  \renewenvironment{Schunk}{%
+    \setlength{\topsep}{0pt}
+    \colorlet{shadecolor}{codebg}
+    \begin{snugshade*}}%
+    {\end{snugshade*}}
 
   %% Exercices et réponses
   \Newassociation{sol}{solution}{solutions}
@@ -178,27 +241,33 @@
       \item}
     {\end{list}}
 
-  %% Remarques importantes
-  \newenvironment{important}{%
+  %% Encadré générique pour les remarques importantes et autres
+  %% comportant une icône sur la gauche. Argument: symbole à
+  %% placer sur la gauche (obligatoire).
+  \newenvironment{infobox}[1]{%
+    \setlength{\FrameRule}{1pt}
     \begin{framed}%
       \noindent
       \begin{minipage}{0.1\linewidth}
-        \raisebox{-1.5em}[0em][0em]{\HUGE\faExclamationSign}
+        \raisebox{-1.5em}[0em][0em]{\HUGE#1}
       \end{minipage}
-      \begin{minipage}[t]{0.88\linewidth}}
-      {\end{minipage}%
-    \end{framed}}
+      \begin{minipage}[t]{0.88\linewidth}}%
+      {\end{minipage}\end{framed}}
+
+  %% Remarques importantes
+  \newenvironment{important}{%
+    \begin{infobox}{\faExclamationCircle}}%
+    {\end{infobox}}
+
+  %% Informations
+  \newenvironment{information}{%
+    \begin{infobox}{\faInfoCircle}}%
+    {\end{infobox}}
 
   %% Remarques spécifiques OS X
   \newenvironment{osx}{%
-    \begin{framed}%
-      \noindent
-      \begin{minipage}{0.1\linewidth}
-        \raisebox{-1.5em}[0em][0em]{\HUGE\applekey}
-      \end{minipage}
-      \begin{minipage}[t]{0.88\linewidth}}
-      {\end{minipage}%
-    \end{framed}}
+    \begin{infobox}{\faApple}}%
+    {\end{infobox}}
 
   %% Listes de commandes
   \newenvironment{ttscript}[1]{%
@@ -212,17 +281,10 @@
         \renewcommand{\makelabel}[1]{\fbox{\vphantom{|}##1}\hfill}}}
     {\end{list}}
 
-  %% Chapitre Opérateurs: environnements pour placer côte à côte des
-  %% définitions de fonctions (utilisant ttscript ci-dessus) et un
-  %% petit exemple.
-  \newenvironment{operateur}[1]{%
-    \noindent
-    \begin{minipage}[t]{0.65\linewidth}
-      \begin{ttscript}{#1}}
-    {\end{ttscript}\end{minipage}\hfill}
-  \newenvironment{miniexemple}{%
-    \begin{minipage}[t]{0.3\linewidth}}
-    {\end{minipage}}
+  %%% Chapitre Opérateurs: l'espacement entre les expressions R et
+  %%% leur sortie est réduit pour les exemples de fonctions.
+  \newlength{\compactsep} \setlength{\compactsep}{-0.5ex}
+  \newlength{\normalsep}  \setlength{\normalsep}{\topsep}
 
   %%% Listes de structures de contrôle
   \newenvironment{struclist}{%
@@ -239,33 +301,26 @@
 
   %% Indications de capsule vidéo
   \newcommand{\capsule}[2]{\href{#1}{#2}\marginpar{%
-      \href{#1}{\raisebox{-0.5em}[0em][0em]{\HUGE\faYouTubePlay}}}}
+      \href{#1}{\raisebox{-0.5em}[0em][0em]{\HUGE\faYoutubePlay}}}}
+
+  %% «Boutons» de la page de notices
+  \newcommand{\downloadbutton}{%
+    \setlength{\fboxrule}{0.8pt}%
+    \framebox[40mm][l]{%
+      \rule[-5pt]{0mm}{16pt}%
+      \makebox[7mm]{\raisebox{-2.5pt}{\LARGE\faDownload}}\;%
+      {\sffamily Télécharger}}}
+  \newcommand{\browsebutton}{%
+    \setlength{\fboxrule}{0.8pt}%
+    \framebox[40mm][l]{%
+      \rule[-5pt]{0mm}{16pt}%
+      \makebox[7mm]{\raisebox{-3pt}{\LARGE\faExternalLink}}\;%
+      {\sffamily Accéder au dépôt}}}
 
   %% Raccourcis usuels vg
   \newcommand{\pt}{{\scriptscriptstyle \Sigma}}
   \newcommand{\mat}[1]{\mathbf{#1}}
   \newcommand{\var}[1]{\operatorname{Var} [ #1 ]}
-
-  %%% =========================
-  %%%  Sections de code source
-  %%% =========================
-  \lstloadlanguages{R}
-  \lstdefinelanguage{Renhanced}[]{R}{%
-    morekeywords={colMeans,colSums,head,is.na,is.null,mapply,ms,na.rm,%
-      nlmin,replicate,row.names,rowMeans,rowSums,sys.time,system.time,%
-      tail,which.max,which.min},
-    deletekeywords={c},
-    alsoletter={.\%},%
-    alsoother={:_\$}}
-  \lstset{language=Renhanced,
-    extendedchars=true,
-    inputencoding=utf8/latin1,
-    basicstyle=\small\ttfamily,
-    commentstyle=\color{comments}\slshape,
-    keywordstyle=\mdseries,
-    showstringspaces=false,
-    index=[1][keywords],
-    indexstyle=\indexfonction}
 
   %%% =======
   %%%  Index
@@ -287,8 +342,6 @@
   \newcommand{\Indexmode}[1]{\Index{#1@\code{#1} (mode)}}
   \newcommand{\indexobjet}[1]{\index{#1@\code{#1}}}
   \newcommand{\Indexobjet}[1]{\Index{#1@\code{#1}}}
-  \newcommand{\indexemacs}[1]{\index{Emacs!#1@\texttt{#1}}}
-  \newcommand{\indexess}[1]{\index{ESS!#1@\texttt{#1}}}
 
   \newcommand{\attribut}[1]{\code{#1}\indexattribut{#1}}
   \newcommand{\Attribut}[1]{\code{#1}\Indexattribut{#1}}
@@ -302,8 +355,6 @@
   \newcommand{\Mode}[1]{\code{#1}\Indexmode{#1}}
   \newcommand{\objet}[1]{\code{#1}\indexobjet{#1}}
   \newcommand{\Objet}[1]{\code{#1}\Indexobjet{#1}}
-  \newcommand{\emacs}[1]{\code{#1}\indexemacs{#1}}
-  \newcommand{\ess}[1]{\code{#1}\indexess{#1}}
   \makeindex
 
   %%% =======
@@ -318,12 +369,14 @@
 
   %% Aide pour la césure
   \hyphenation{%
-    puis-que
+    con-naî-tre
     con-sole
     cons-tante
-    nom-bre
     con-tenu
-    con-naî-tre}
+    con-trôle
+    nom-bre
+    puis-que
+  }
 
 %  \includeonly{introduction}
 
