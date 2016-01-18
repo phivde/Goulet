@@ -385,7 +385,7 @@ names(DF)                  # titres des colonnes
 row.names(DF)              # titres des lignes (implicites)
 DF[1, ]                    # première ligne
 DF[, 1]                    # première colonne
-DF$Name                    # idem, mais plus simple
+DF$Noms                    # idem, mais plus simple
 
 ## Lorsque l'on doit travailler longtemps avec les différentes
 ## colonnes d'un data frame, il est pratique de pouvoir y
