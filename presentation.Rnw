@@ -65,7 +65,7 @@ projet R \citep{Chambers:R:2008}.
 \section{Description sommaire de R}
 \label{presentation:description}
 
-\capsule{http://youtu.be/presentation}{R} est un environnement intégré
+\capsule{https://youtu.be/presentation}{R} est un environnement intégré
 de manipulation de données, de calcul et de préparation de graphiques.
 Toutefois, ce n'est pas seulement un «autre» environnement statistique
 (comme SPSS ou SAS, par exemple), mais aussi un langage de

@@ -524,7 +524,7 @@ supporte tout naturellement et de manière intuitive --- à une
 exception près, comme nous le verrons --- les matrices et, plus
 généralement, les tableaux à plusieurs dimensions.
 
-Les \capsule{http://youtu.be/indicage}{matrices et tableaux} ne sont
+Les \capsule{https://youtu.be/indicage}{matrices et tableaux} ne sont
 rien d'autre que des vecteurs dotés d'un attribut \attribut{dim}. Ces
 objets sont donc stockés, et peuvent être manipulés, exactement comme
 des vecteurs simples.

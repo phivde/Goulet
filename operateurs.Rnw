@@ -243,8 +243,8 @@ sort(c(4, -1, 2, 6))
 <<echo=TRUE>>=
 rank(c(4, -1, 2, 6))
 @
-\item[\href{http://youtu.be/order}{\Fonction{order}}]
-  ordre\index{ordre}\capsule{http://youtu.be/order}{} d'extraction des
+\item[\href{https://youtu.be/order}{\Fonction{order}}]
+  ordre\index{ordre}\capsule{https://youtu.be/order}{} d'extraction des
   éléments d'un vecteur pour les placer en ordre croissant ou
   décroissant
 <<echo=TRUE>>=
@@ -530,7 +530,7 @@ diag(x)
 \index{produit!extérieur}
 
 La %
-\capsule{http://youtu.be/outer}{fonction \code{outer}}%
+\capsule{https://youtu.be/outer}{fonction \code{outer}}%
 \Indexfonction{outer} %
 calcule le produit extérieur entre deux vecteurs. Ce n'est pas la
 fonction la plus intuitive à utiliser, mais elle s'avère extrêmement
