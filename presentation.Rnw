@@ -481,7 +481,7 @@ applications statistiques.
 \section{Exercices}
 \label{presentation:exercices}
 
-\begin{exercice}
+\begin{exercice}[nosol]
   Démarrer une session R et entrer une à une les expressions
   ci-dessous à la ligne de commande. Observer les résultats.
 <<eval=FALSE>>=
@@ -496,7 +496,7 @@ q()
 @
 \end{exercice}
 
-\begin{exercice}
+\begin{exercice}[nosol]
   Ouvrir dans un éditeur de texte le fichier de script contenant le
   code de la section précédente. Exécuter le code ligne par ligne et
   observer les résultats. Repéter l'exercice avec un ou deux autres
@@ -504,7 +504,7 @@ q()
   choisir un pour la suite.
 \end{exercice}
 
-\begin{exercice}
+\begin{exercice}[nosol]
   Consulter les rubriques d'aide d'une ou plusieurs des fonctions
   rencontrées lors de l'exercice précédent. Observer d'abord comment
   les rubriques d'aide sont structurées --- elles sont toutes
@@ -512,7 +512,7 @@ q()
   d'exemples.
 \end{exercice}
 
-\begin{exercice}
+\begin{exercice}[nosol]
   Exécuter le code de l'exemple de session de travail R que l'on
   trouve à l'annexe~A de \citet{R-intro}. En plus d'aider à se
   familiariser avec R, cet exercice permet de découvrir les

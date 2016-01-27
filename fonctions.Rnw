@@ -829,7 +829,7 @@ notes.finales <- function(notes, p) notes %*% p
   \end{sol}
 \end{exercice}
 
-\begin{exercice}
+\begin{exercice}[nosol]
   Trouver les erreurs qui empêchent la définition de la fonction
   ci-dessous.
   \begin{Schunk}
