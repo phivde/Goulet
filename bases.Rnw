@@ -61,7 +61,6 @@ programmation en R.
     St-Louis    & 56 & 25 & 19 & 12 & 62 \\
     Détroit     & 57 & 25 & 21 & 11 & 61 \\
     Montréal    & 56 & 22 & 27 & 7 & 51 \\
-    Boston      & 57 & 40 & 15 & 2 & 82 \\
     \bottomrule
   \end{tabular} \\
   \footnotesize%
