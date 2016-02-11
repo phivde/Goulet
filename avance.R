@@ -60,9 +60,9 @@ sum(x[, 1, 1])         # équivalent pour la première somme
 ###
 
 ## La fonction 'lapply' applique une fonction à tous les
-## éléments d'une liste et retourne une liste, peu importe les
-## dimensions des résultats. La fonction 'sapply' retourne un
-## vecteur ou une matrice, si possible.
+## éléments d'un vecteur ou d'une liste et retourne une liste,
+## peu importe les dimensions des résultats. La fonction
+## 'sapply' retourne un vecteur ou une matrice, si possible.
 ##
 ## Somme «interne» des éléments d'une liste.
 (x <- list(1:10, c(-2, 5, 6), matrix(3, 4, 5)))
@@ -78,8 +78,8 @@ unlist(lapply(1:10, seq))  # le résultat est un vecteur
 ## Soit une fonction calculant la moyenne pondérée d'un
 ## vecteur. Cette fonction prend en argument une liste de deux
 ## éléments: 'donnees' et 'poids'.
-fun <- function(liste)
-    sum(liste$donnees * liste$poids)/sum(liste$poids)
+fun <- function(x)
+    sum(x$donnees * x$poids)/sum(x$poids)
 
 ## On peut maintenant calculer la moyenne pondérée de
 ## plusieurs ensembles de données réunis dans une liste
@@ -91,6 +91,98 @@ fun <- function(liste)
            list(donnees = c(1, 4, 0, 2, 2),
                 poids = c(12, 3, 17, 6, 2))))
 sapply(x, fun)             # aucune boucle explicite!
+
+###
+### EXEMPLES ADDITIONNELS SUR L'UTILISATION DE L'ARGUMENT
+### '...' AVEC 'lapply' ET 'sapply'
+###
+
+## Aux fins des exemples ci-dessous, on crée d'abord une liste
+## formée de nombres aléatoires. Cette expression fait usage
+## de l'argument '...' de 'lapply'. Pouvez-vous la décoder?
+## Nous y reviendrons plus loin, ce qui compte pour le moment
+## c'est simplement de l'exécuter.
+x <- lapply(c(8, 12, 10, 9), sample, x = 1:10, replace = TRUE)
+
+## Soit maintenant une fonction qui calcule la moyenne
+## arithmétique des données d'un vecteur 'x' supérieures à une
+## valeur 'y'. On remarquera que cette fonction n'est pas
+## vectorielle pour 'y', c'est-à-dire qu'elle n'est valide que
+## lorsque 'y' est un vecteur de longueur 1.
+fun <- function(x, y) mean(x[x > y])
+
+## Pour effectuer ce calcul sur chaque élément de la liste
+## 'x', nous pouvons utiliser 'sapply' plutôt que 'lapply',
+## car chaque résultat est de longueur 1. Cependant, il faut
+## passer la valeur de 'y' à la fonction 'fun'. C'est là
+## qu'entre en jeu l'argument '...' de 'sapply'.
+sapply(x, fun, 7)          # moyennes des données > 7
+
+## Les fonctions 'lapply' et 'sapply' passent tout à tour les
+## éléments de leur premier argument comme *premier* argument
+## à la fonction, sans le nommer explicitement. L'expression
+## ci-dessus est donc équivalente à
+##
+##   c(fun(x[[1]], 7), ..., fun(x[[4]], 7)
+##
+## Que se passe-t-il si l'on souhaite passer les valeurs à un
+## argument de la fonction autre que le premier? Par exemple,
+## supposons que l'ordre des arguments de la fonction 'fun'
+## ci-dessus est inversé.
+fun <- function(y, x) mean(x[x > y])
+
+## Les règles d'appariement des arguments des fonctions en R
+## font en sorte que lorsque les arguments sont nommés dans
+## l'appel de fonction, leur ordre n'a pas d'importance. Par
+## conséquent, un appel de la forme
+##
+##   fun(x, y = 7)
+##
+## est tout à fait équivalent à fun(7, x). Pour effectuer les calculs
+##
+##   c(fun(x[[1]], y = 7), ..., fun(x[[4]], y = 7)
+##
+## avec la liste définie plus haut, il s'agit de nommer
+## l'argument 'y' dans '...' de 'sapply'.
+sapply(x, y = 7)
+
+## Décodons maintenant l'expression
+##
+##   lapply(c(8, 12, 10, 9), sample, x = 1:10, replace = TRUE)
+##
+## qui a servi à créer la liste. La définition de la fonction
+## 'sample' est la suivante:
+##
+##   sample(x, size, replace = FALSE, prob = NULL)
+##
+## L'appel à 'lapply' est équivalent à
+##
+##   list(sample(8, x = 1:10, replace = TRUE),
+##        ...,
+##        sample(9, x = 1:10, replace = TRUE))
+##
+## Toujours selon les règles d'appariement des arguments, on
+## voit que les valeurs 8, 12, 10, 9 seront attribuées à
+## l'argument 'size', soit la taille de l'échantillon.
+## L'expression crée donc une liste comprenant quatre
+## échantillons aléatoires de tailles différentes des nombres
+## de 1 à 10 pigés avec remise.
+##
+## Une expression équivalente, quoique moins élégante, aurait
+## recours à une fonction anonyme pour replacer les arguments
+## de 'sample' dans l'ordre voulu.
+lapply(c(8, 12, 10, 9),
+       function(x) sample(1:10, x, replace = TRUE))
+
+## La fonction 'sapply' est aussi très utile pour vectoriser
+## une fonction qui n'est pas vectorielle. Supposons que l'on
+## veut généraliser la fonction 'fun' pour qu'elle accepte un
+## vecteur de seuils 'y'.
+fun <- function(x, y)
+    sapply(y, function(y) mean(x[x > y]))
+
+## Utilisation sur la liste 'x' avec trois seuils.
+sapply(x, fun, y = c(3, 5, 7))
 
 ###
 ### FONCTION 'mapply'
