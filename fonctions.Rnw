@@ -775,8 +775,8 @@ pas le produit matriciel.")
 prod.mat<-function(mat1, mat2)
 {
     if (ncol(mat1) == nrow(mat2))
-        t(sapply(1:ncol(mat2),
-                 function(j) colSums(t(mat1) * mat2[,j])))
+        sapply(1:ncol(mat2),
+               function(j) colSums(t(mat1) * mat2[,j]))
     else
         stop("Les dimensions des matrices ne permettent
 pas le produit matriciel.")
