@@ -51,6 +51,8 @@ tex: $(RNWFILES:.Rnw=.tex)
 
 %.tex: %.Rnw
 	$(SWEAVE) '$<'
+
+$(MASTER): $(RNWFILES) $(RFILES) $(TEXFILES)
 	sed -E -i "" \
 	    -e "s:youtu.be/(presentation|fs0LHQ7sDpI):youtu.be/PSQIKSKw_ys:" \
 	    presentation.tex
@@ -71,11 +73,9 @@ tex: $(RNWFILES:.Rnw=.tex)
 	sed -E -i "" \
 	    -e "s:youtu.be/(packages|DL48oi2RKjM):youtu.be/mL6iNzjHMKE:" \
 	    packages.tex
-
-$(MASTER): $(RNWFILES) $(RFILES) $(TEXFILES)
 	$(TEXI2DVI) $(MASTER:.pdf=.tex)
 
-zip: $(RFILES) $(ROUTFILES)
+zip: $(RFILES)
 	zip -j $(CODE) ${RFILES}
 
 clean:
