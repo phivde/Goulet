@@ -1,4 +1,4 @@
-# Les cibles de cette Makefile sont: tex, links, pdf, zip et clean.
+# Les cibles de cette Makefile sont: tex, pdf, zip et clean.
 #
 # La cible par défaut est "pdf".
 #
@@ -37,7 +37,6 @@ SORTIES = code-partie_1-sorties.zip
 RNWFILES = $(wildcard *.Rnw)
 TEXFILES = $(wildcard *.tex)
 RFILES   = presentation.R bases.R operateurs.R fonctions.R avance.R optimisation.R rng.R
-ROUTFILES := $(RFILES:.R=.Rout)
 
 # Outils de travail
 SWEAVE = R CMD SWEAVE --encoding="utf-8"
@@ -45,15 +44,13 @@ TEXI2DVI = LATEX=xelatex TEXINDY=makeindex texi2dvi -b
 RBATCH = R CMD BATCH --no-timing
 RM = rm -rf
 
-.PHONY: tex links pdf zip clean
+.PHONY: tex pdf zip clean
 
 pdf: $(MASTER)
-tex: $(RNWFILES:.Rnw=.tex) links
+tex: $(RNWFILES:.Rnw=.tex)
 
 %.tex: %.Rnw
 	$(SWEAVE) '$<'
-
-links:
 	sed -E -i "" \
 	    -e "s:youtu.be/(presentation|fs0LHQ7sDpI):youtu.be/PSQIKSKw_ys:" \
 	    presentation.tex
@@ -78,14 +75,8 @@ links:
 $(MASTER): $(RNWFILES) $(RFILES) $(TEXFILES)
 	$(TEXI2DVI) $(MASTER:.pdf=.tex)
 
-%.Rout: %.R
-	echo "options(error=expression(NULL))" | cat - $< > $<.tmp
-	$(RBATCH) $<.tmp $@
-	$(RM) $<.tmp
-
 zip: $(RFILES) $(ROUTFILES)
 	zip -j $(CODE) ${RFILES}
-	zip -j $(SORTIES) ${ROUTFILES}
 
 clean:
 	$(RM) $(RNWFILES:.Rnw=.tex) \
