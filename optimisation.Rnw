@@ -14,9 +14,6 @@ options(width=52)
   logarithmique pour éviter les difficultés numériques.
 \end{objectifs}
 
-\section{Contexte}
-\label{optimisation:contexte}
-
 Les méthodes de bissection, du point fixe, de Newton--Raphson et
 consorts permettent de résoudre des équations à une variable de la
 forme $f(x) = 0$ ou $g(x) = x$. Il existe également des versions de
