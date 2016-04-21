@@ -33,7 +33,7 @@
     \mdseries\fontsize{20}{22}\selectfont Laurent Caron}
   \date{%
     \mdseries\fontsize{14}{18}\selectfont Cinquième édition}
-  \newcommand{\ISBN}{}
+  \newcommand{\ISBN}{978-2-9811416-6-8}
 
   %%% ===================
   %%%  Style du document
@@ -116,10 +116,12 @@
   \frenchbsetup{CompactItemize=false,%
     ThinSpaceInFrenchNumbers=true,
     ItemLabeli=\mantriangleright,
-    ItemLabelii=\textendash}
+    ItemLabelii=\textendash,
+    og=«, fg=»}
   \addto\captionsfrench{\def\figurename{{\scshape Fig.}}}
   \addto\captionsfrench{\def\tablename{{\scshape Tab.}}}
 
+  %%% =========================
   %%%  Sections de code source
   %%% =========================
   \lstloadlanguages{R}
@@ -215,20 +217,22 @@
   \Newassociation{sol}{solution}{solutions}
   \newcounter{exercice}[chapter]
   \renewcommand{\theexercice}{\thechapter.\arabic{exercice}}
-  \newenvironment{exercice}{%
+  \newenvironment{exercice}[1][]{%
     \begin{list}{}{%
         \refstepcounter{exercice}
-        \hypertarget{ex:\theexercice}{}
-        \Writetofile{solutions}{\protect\hypertarget{sol:\theexercice}{}}
-        \renewcommand{\makelabel}{%
-          \bfseries\protect\hyperlink{sol:\theexercice}{\theexercice}}
-        \settowidth{\labelwidth}{\bfseries \thechapter.\arabic{exercice}}
+        \ifthenelse{\equal{#1}{nosol}}{%
+          \renewcommand{\makelabel}{\bfseries\theexercice}}{%
+          \hypertarget{ex:\theexercice}{}
+          \Writetofile{solutions}{\protect\hypertarget{sol:\theexercice}{}}
+          \renewcommand{\makelabel}{%
+            \bfseries\protect\hyperlink{sol:\theexercice}{\theexercice}}}
+        \settowidth{\labelwidth}{\bfseries\theexercice}
         \setlength{\leftmargin}{\labelwidth}
         \addtolength{\leftmargin}{\labelsep}
         \setlist[enumerate,1]{label=\alph*),labelsep=*,leftmargin=1.5em}
         \setlist[enumerate,2]{label=\roman*),labelsep=0.5em,align=right}}
-      \item}
-    {\end{list}}
+      \item}%
+      {\end{list}}
   \renewenvironment{solution}[1]{%
     \begin{list}{}{%
         \renewcommand{\makelabel}{%
@@ -431,6 +435,7 @@
 
 \appendix
 \include{emacs+ess}
+\include{rstudio}
 \include{planification}
 \include{packages}
 \include{reponses}
@@ -447,8 +452,11 @@
 \cleartoverso
 
 %% Page couverture arrière.
-\setkeys{Gin}{width=\paperwidth}
-\includepdf[pages=2]{couvertures}
+\AddToShipoutPictureFG*{%
+  \AtStockLowerLeft{%
+    \raisebox{10mm}{%
+      \hspace{5mm}\includegraphics[height=25mm,keepaspectratio=true]{codebarre_\ISBN}}}}
+\includepdf[pages=2,width=\paperwidth]{couvertures}
 
 \end{document}
 
