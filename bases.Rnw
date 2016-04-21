@@ -124,7 +124,7 @@ b
     Ainsi, taper le caractère «\code{\_}» hors d'une chaîne de
     caractères dans Emacs génère automatiquement \verb*| <- |. Si l'on
     souhaite véritablement obtenir le caractère de soulignement, il
-    suffit d'appuyer deux fois successives sur «\_».
+    suffit d'appuyer deux fois successives sur «\code{\_}».
   \end{information}
 \end{figure}
 
