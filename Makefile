@@ -29,8 +29,7 @@
 
 # Document maître et archives
 MASTER = introduction_programmation_r.pdf
-CODE = code-partie_1.zip
-SORTIES = code-partie_1-sorties.zip
+CODE = Goulet_introduction_programmation_R.zip
 
 # Le document maître dépend de tous les fichiers .tex et des fichiers
 # .R mentionnés
