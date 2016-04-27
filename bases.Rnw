@@ -54,13 +54,14 @@ programmation en R.
     \toprule
     Équipe & MJ & V & D & DP & PTS \\
     \midrule
-    Washington  & 55 & 36 & 16 & 3 & 75 \\
-    Dallas      & 56 & 32 & 19 & 5 & 69 \\
-    Chicago     & 57 & 30 & 21 & 6 & 66 \\
-    Los Angeles & 58 & 30 & 22 & 6 & 66 \\
+    Washington  & 55 & 36 & 16 &  3 & 75 \\
+    Dallas      & 56 & 32 & 19 &  5 & 69 \\
+    Chicago     & 57 & 30 & 21 &  6 & 66 \\
+    Los Angeles & 58 & 30 & 22 &  6 & 66 \\
     St-Louis    & 56 & 25 & 19 & 12 & 62 \\
     Détroit     & 57 & 25 & 21 & 11 & 61 \\
-    Montréal    & 56 & 22 & 27 & 7 & 51 \\
+    Montréal    & 56 & 22 & 27 &  7 & 51 \\
+    Boston      & 57 & 24 & 31 &  2 & 50 \\
     \bottomrule
   \end{tabular} \\
   \footnotesize%
@@ -757,10 +758,10 @@ Equipe <- c("Washington", "Dallas", "Chicago",
             "Los Angeles", "St-Louis", "Détroit",
             "Montréal", "Boston")
 MJ  <- c(55, 56, 57, 58, 56, 57, 56, 57)
-V   <- c(36, 32, 30, 30, 25, 25, 22, 40)
-D   <- c(16, 19, 21, 22, 19, 21, 27, 15)
+V   <- c(36, 32, 30, 30, 25, 25, 22, 24)
+D   <- c(16, 19, 21, 22, 19, 21, 27, 31)
 DP  <- c( 3,  5,  6,  6, 12, 11,  7,  2)
-PTS <- c(75, 69, 66, 66, 62, 61, 51, 82)
+PTS <- c(75, 69, 66, 66, 62, 61, 51, 50)
 @
   On les combine ensuite sous forme de liste nommée.
 <<echo=TRUE>>=
@@ -923,7 +924,7 @@ nrow(classement)
     suffit d'extraire cette ligne du tableau de données:
 <<echo=TRUE>>=
 ## indiçage par vecteur booléen
-classement[classement$Equipe=="Montréal", ]
+classement[classement$Equipe == "Montréal", ]
 
 ## extraction par une fonction pratique et élégante
 subset(classement, Equipe == "Montréal")
