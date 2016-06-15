@@ -128,7 +128,7 @@ capacités d'édition plutôt réduites.
 \begin{figure}
   \centering
   \includegraphics{console-screenshot}
-  \caption{Fenêtre de la console sous OS~X au démarrage de R}
+  \caption{Fenêtre de la console sous macOS au démarrage de R}
   \label{fig:presentation:console}
 \end{figure}
 
@@ -137,7 +137,7 @@ capacités d'édition plutôt réduites.
   disponible. Elle facilite certaines opérations tel que
   l'installation de packages externes, mais elle offre autrement peu
   de fonctionnalités additionnelles pour l'édition de code R.
-\item L'interface graphique de R sous Mac OS~X est la plus élaborée.
+\item L'interface graphique de R sous macOS est la plus élaborée.
   Outre la console présentée à la
   \autoref{fig:presentation:console}, l'application \code{R.app}
   comporte de nombreuses fonctionnalités, dont un éditeur de code
@@ -148,7 +148,7 @@ capacités d'édition plutôt réduites.
 \end{itemize}
 
 Peu importe la plateforme utilisée --- quoique dans une moindre mesure
-sous OS~X --- nous recommandons d'interagir avec R par le biais d'un
+sous macOS --- nous recommandons d'interagir avec R par le biais d'un
 éditeur de texte pour programmeur ou d'un environnement de
 développement intégré; voir la \autoref{presentation:editeurs}.
 
@@ -275,7 +275,7 @@ un environnement de développement intégré (\emph{integrated
   qu'il s'agit d'un logiciel destiné à la création, l'édition et la
   sauvegarde de fichiers textes purs, c'est-à-dire dépourvus
   d'information de présentation et de mise en forme. Les applications
-  Bloc-notes sous Windows ou TextEdit sous OS~X sont deux exemples
+  Bloc-notes sous Windows ou TextEdit sous macOS sont deux exemples
   d'éditeurs de texte simples.
 \item Un éditeur de texte pour programmeur saura en plus reconnaître
   la syntaxe d'un langage de programmation et assister à sa mise en
@@ -305,7 +305,7 @@ que d'autres.
   \begin{figure}[t]
     \centering
     \includegraphics[width=0.9\textwidth]{emacs-screenshot}
-    \caption{Fenêtre de GNU Emacs sous OS~X en mode d'édition de code
+    \caption{Fenêtre de GNU Emacs sous macOS en mode d'édition de code
       R. Dans la partie du haut, on retrouve le fichier de script de
       la \autoref{fig:presentation:script} et dans la partie du
       bas, l'invite de commandes R.}
@@ -314,7 +314,7 @@ que d'autres.
 
   Emblême du logiciel libre, Emacs est disponible gratuitement et à
   l'identique sur toutes les plateformes supportées par R, dont
-  Windows, OS~X et Linux.
+  Windows, macOS et Linux.
 
   Consulter l'\autoref{emacs+ess} pour en savoir plus sur GNU~Emacs et
   apprendre les commandes essentielles pour y faire ses premiers pas.
@@ -331,7 +331,7 @@ que d'autres.
   \begin{figure}[t]
     \centering
     \includegraphics[width=0.9\textwidth]{rstudio-screenshot}
-    \caption{Fenêtre de RStudio sous OS~X dans sa configuration par
+    \caption{Fenêtre de RStudio sous macOS dans sa configuration par
       défaut. Dans le sens des aiguilles d'une montre, on y retrouve:
       le fichier de script de la \autoref{fig:presentation:script}; la
       liste des objets de l'environnement (vide, ici); une interface
@@ -339,7 +339,7 @@ que d'autres.
     \label{fig:presentation:rstudio}
   \end{figure}
 
-  RStudio est disponible sur les plateformes Windows, OS~X et Linux.
+  RStudio est disponible sur les plateformes Windows, macOS et Linux.
 \item Il existe plusieurs autres options pour éditer efficacement du
   code R --- et le Bloc-notes de Windows n'en fait \emph{pas} partie!
   Nous recommandons plutôt:
@@ -349,7 +349,7 @@ que d'autres.
     libres, ou le partagiciel WinEdt\index{WinEdt} muni de l'extension
     libre R-WinEdt \citep{RWinEdt};
     \enlargethispage{5mm}
-  \item sous OS~X, tout simplement l'éditeur de texte très complet
+  \item sous macOS, tout simplement l'éditeur de texte très complet
     intégré à l'application \code{R.app}, ou alors l'éditeur de texte
     commercial TextMate (essai gratuit de 30 jours);
   \item sous Linux, Vim et Kate semblent les choix les plus populaires
@@ -411,7 +411,7 @@ Le répertoire de travail est déterminé au lancement de R.
 \begin{itemize}
 \item Les interfaces graphiques de R démarrent avec un répertoire de
   travail par défaut. Pour le changer, utiliser l'entrée appropriée
-  dans le menu \texttt{Fichier} (Windows) ou \texttt{Divers} (OS~X).
+  dans le menu \texttt{Fichier} (Windows) ou \texttt{Divers} (macOS).
   Consulter aussi les foires aux questions spécifiques aux interfaces
   graphiques \citep{Rw-FAQ,RMacOSX-FAQ} pour des détails additionnels
   sur la gestion des répertoires de travail.

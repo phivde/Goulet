@@ -67,7 +67,7 @@ L'un de ces modes est ESS (\emph{Emacs Speaks Statistics}).
 \label{emacs+ess:installation}
 
 GNU Emacs et le mode ESS sont normalement livrés d'office avec toutes
-les distributions Linux. Pour les environnements Windows et OS~X,
+les distributions Linux. Pour les environnements Windows et macOS,
 le plus simple consiste à installer les distributions préparées par le
 présent auteur. Consulter le site
 \begin{quote}
@@ -83,7 +83,7 @@ vers différentes ressources. Cet écran disparaît dès que l'on appuie
 sur une touche. La fenêtre Emacs se divise en quatre zone principales
 (voir la \autoref{fig:ess:emacswindow}):
 \begin{enumerate}
-\item tout au haut de la fenêtre (ou de l'écran sous OS~X), on trouve
+\item tout au haut de la fenêtre (ou de l'écran sous macOS), on trouve
   l'habituelle barre de menu dont le contenu change selon le mode dans
   lequel se trouve Emacs;
 \item l'essentiel de la fenêtre sert à afficher un \emph{buffer}, soit
@@ -134,7 +134,7 @@ mode pour chaque \emph{buffer}.
     \footnotesize\sffamily \emph{Minibuffer}
   \end{textblock}
   \caption{Fenêtre GNU~Emacs et ses différentes parties au lancement
-    de l'application sous OS~X. Sous Windows et Linux, la barre de
+    de l'application sous macOS. Sous Windows et Linux, la barre de
     menu se trouve à l'intérieur de la fenêtre.}
   \label{fig:ess:emacswindow}
 \end{figure}
@@ -146,7 +146,7 @@ mode pour chaque \emph{buffer}.
 Emacs possède sa propre terminologie qu'il vaut mieux connaître
 lorsque l'on consulte la documentation. De plus, l'éditeur utilise des
 conventions du monde Unix qui sont moins usitées sur les plateformes
-Windows et OS~X.
+Windows et macOS.
 
 \begin{itemize}
 \item Dans les définitions de raccourcis claviers:
@@ -167,7 +167,7 @@ Windows et OS~X.
   pouvant être tapée dans le \emph{minibuffer}. \code{M-x} démarre
   l'invite de commande.
 \item Le caractère \,\verb=~=\, représente le dossier vers lequel
-  pointe la variable d'environnement \code{\$HOME} (Linux, OS~X) ou
+  pointe la variable d'environnement \code{\$HOME} (Linux, macOS) ou
   \code{\%HOME\%} (Windows). C'est le dossier par défaut de Emacs.
 \item La barre oblique (\code{/}) est utilisée pour séparer les
   dossiers dans les chemins d'accès aux fichiers, même sous Windows.
@@ -178,7 +178,7 @@ Windows et OS~X.
 
 \begin{figure}[t]
   \begin{osx}
-    Par défaut sous OS~X, la touche \code{Meta} est assignée à
+    Par défaut sous macOS, la touche \code{Meta} est assignée à
     \code{Option} (\optkey). Sur les claviers français, cela empêche
     d'accéder à certains caractères spéciaux tels que [, ], \{ ou \}.
 
@@ -285,7 +285,7 @@ raccourci clavier.
 \begin{figure}[ht]
   \begin{osx}
     Plusieurs des raccourcis clavier de Emacs composés avec la touche
-    \code{Contrôle} (\ctlkey) sont valides sous OS~X. Par exemple,
+    \code{Contrôle} (\ctlkey) sont valides sous macOS. Par exemple,
     \ctlkey\,\code{A} et \ctlkey\,\code{E} déplacent le curseur au
     début et à la fin de la ligne dans les champs texte.
   \end{osx}
@@ -308,7 +308,7 @@ raccourci clavier.
 
 \begin{itemize}
 \item Il est possible d'utiliser les raccourcis clavier usuels de
-  Windows (\code{C-c}, \code{C-x}, \code{C-v}) et OS~X
+  Windows (\code{C-c}, \code{C-x}, \code{C-v}) et macOS
   (\cmdkey\,\code{C}, \cmdkey\,\code{X}, \cmdkey\,\code{V}) en
   activant le mode CUA dans le menu \code{Options}.
 \item On peut copier-coller directement avec la souris dans Windows en
@@ -495,7 +495,7 @@ clavier, etc.
   Emacs lit au démarrage.
 \item Le fichier \code{.emacs} doit se trouver dans le dossier
   \,\verb=~/=, c'est-à-dire dans le dossier de départ de l'utilisateur
-  sous Linux et OS~X, et dans le dossier référencé par la variable
+  sous Linux et macOS, et dans le dossier référencé par la variable
   d'environnement \code{\%HOME\%} sous Windows.
 \end{itemize}
 

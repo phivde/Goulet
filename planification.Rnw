@@ -368,7 +368,7 @@ Pour les simulations demandant un long temps de calcul, c'est très
 pratique.
 
 On exécute R en lot depuis la ligne de commande (Invite de commande
-sous Windows, Terminal sous OS~X ou Linux). Une fois placé dans le
+sous Windows, Terminal sous macOS ou Linux). Une fois placé dans le
 répertoire contenant les fichiers de script, il suffit d'entrer à la
 ligne de commande
 \begin{quote}
