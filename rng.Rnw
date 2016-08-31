@@ -1,4 +1,4 @@
-\chapter{Générateurs de nombres aléatoires}
+\chapter{Génération de nombres aléatoires}
 \label{rng}
 
 <<echo=FALSE>>=
@@ -27,7 +27,7 @@ nombres uniformes utilisés dans R ainsi que la liste des différentes
 fonctions de simulation de variables aléatoires.
 
 
-\section{Générateurs de nombres aléatoires}
+\section{Générateurs de nombres aléatoires uniformes}
 \index{simulation!nombres uniformes}
 \label{rng:generateurs}
 
@@ -50,7 +50,7 @@ consulter les rubriques d'aide des fonctions \code{.Random.seed} et
 \code{set.seed}.
 
 
-\section{Fonctions de simulation de variables aléatoires non
+\section{Simulation de variables aléatoires non
   uniformes}
 \index{simulation!variables aléatoires}
 \label{rng:va}
@@ -135,6 +135,6 @@ hist(x)
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "introduction_programation_S"
+%%% TeX-master: "introduction_programation_r"
 %%% coding: utf-8
 %%% End:
