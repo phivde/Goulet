@@ -25,7 +25,7 @@ c(0, 3, -1, 4)^2           # élévation à une puissance
 ## erronées sans que le système ne détecte d'erreur.
 8 + 1:10                   # 8 est recyclé 10 fois
 c(2, 5) * 1:10             # c(2, 5) est recyclé 5 fois
-c(-2, 3, -1, 4)^1:4        # quatre puissances différentes
+c(-2, 3, -1, 4)^(1:4)      # quatre puissances différentes
 
 ## On se rappelle que les matrices (et les tableaux) sont des
 ## vecteurs. Les règles ci-dessus s'appliquent donc aussi aux
