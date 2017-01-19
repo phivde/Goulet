@@ -1,13 +1,9 @@
-===
-=== INTRODUCTION À LA PROGRAMMATION EN R
-===
-=== par Vincent Goulet
-=== avec la collaboration de Laurent Caron
-===
+#
+# INTRODUCTION À LA PROGRAMMATION EN R
+#
 
 
-Cinquième édition (2016)
-========================
+## Cinquième édition (2016)
 
 ISBN 978-2-9811416-6-8
 
@@ -21,8 +17,7 @@ ISBN 978-2-9811416-6-8
   au code source des exemples. Le document PDF se «tient» donc seul.
 
 
-Quatrième édition (2014)
-========================
+## Quatrième édition (2014)
 
 ISBN 978-2-9811416-3-7
 
@@ -32,8 +27,7 @@ ISBN 978-2-9811416-3-7
   conditions 4.0 International de Creative Commons.
 
 
-Troisième édition (2012)
-========================
+## Troisième édition (2012)
 
 ISBN 978-2-9811416-2-0
 
@@ -49,8 +43,7 @@ ISBN 978-2-9811416-2-0
   Canada de Creative Commons.
 
 
-Seconde édition révisée (2007)
-==============================
+## Seconde édition révisée (2007)
 
 ISBN 978-2-9809136-7-9.
 
@@ -61,8 +54,7 @@ ISBN 978-2-9809136-7-9.
 - Encodage des fichiers `.tex` et `.Rnw` en UTF-8.
 
 
-Seconde édition (2007)
-======================
+## Seconde édition (2007)
 
 ISBN 978-2-9809136-7-9.
 
@@ -74,8 +66,7 @@ ISBN 978-2-9809136-7-9.
 - Mise à jour des fichiers de script pour la version 2.4.1 de R.
 
 
-Première version officielle (2006)
-==================================
+## Première version officielle (2006)
 
 ISBN 2-9809136-0-X.
 
@@ -83,8 +74,7 @@ ISBN 2-9809136-0-X.
 - Diverses corrections mineures.
 
 
-Version 0.99
-============
+## Version 0.99
 
 - Changement de licence en faveur de la GNU Free Documentation
   License (annexe E).
@@ -95,8 +85,7 @@ Version 0.99
 - Diverses corrections mineures.
 
 
-Version 0.9
-===========
+## Version 0.9
 
 - Ajout d'un index.
 - Ajout de sections (et de fichiers) d'exemples pour les chapitres 7,
@@ -105,8 +94,7 @@ Version 0.9
 - Diverses corrections mineures.
 
 
-Version 0.8
-===========
+## Version 0.8
 
 Première version. Neuf chapitres et quatre annexes:
 
