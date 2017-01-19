@@ -8,14 +8,14 @@ programmation sous-jacent aux fonctionnalités statistiques.
 # Contenu du dépôt
 
 Le dépôt contient tous les fichiers nécessaires pour composer le
-document avec XeLaTeX. Ceci requiert toutefois les polices de
-caractères suivantes:
+document avec XeLaTeX, à l'exception des polices de caractères
+suivantes:
 
-  Lucida Bright OT
-  Lucida Bright Math
-  Lucida Grande Mono DK
-  Adobe Myriad Pro
-  Font Awesome
+> Lucida Bright OT  
+> Lucida Bright Math  
+> Lucida Grande Mono DK  
+> Adobe Myriad Pro  
+> Font Awesome  
 
 Les trois polices Lucida sont payantes et distribuées par le TeX Users
 Group: https://tug.org/lucida. La police Myriad Pro est livrée avec
@@ -35,7 +35,8 @@ pour compiler le document. Le fichier `Makefile` fournit les recettes
 suivantes:
 
 - `pdf` change les liens dans les fichiers si nécessaire, traite tous
-les fichiers `.Rnw` avec Sweave et lance la compilation avec XeLaTeX;
+  les fichiers `.Rnw` avec Sweave et lance la compilation avec
+  XeLaTeX;
 
 - `zip` crée l'archive contenant le code source des sections d'exemples.
 
