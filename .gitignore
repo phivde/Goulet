@@ -1,0 +1,15 @@
+*.aux
+*.log
+*.blg
+*.bbl
+*.out
+*.ilg
+*.idx
+*.ind
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+auto/
+auto/*
