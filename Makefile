@@ -22,8 +22,8 @@
 
 
 ## Document maître et archives
-MASTER = introduction_programmation_r.pdf
-CODE = Goulet_introduction_programmation_R.zip
+MASTER = introduction-programmation-r.pdf
+CODE = introduction-programmation-r-exemples.zip
 
 ## Numéro de version et numéro ISBN extraits du fichier maître
 YEAR = $(shell grep "newcommand{\\\\year" ${MASTER:.pdf=.tex} \
