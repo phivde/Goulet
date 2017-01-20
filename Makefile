@@ -18,17 +18,6 @@
 ## Ce fichier fait partie du projet Introduction à la programmation en R
 ## http://github.com/vigou3/introduction-programmation-r
 
-## Correspondances url des capsules sur YouTube.
-#
-#  TITRE ABRÉGÉ  	  CHAPITRE	ACT-2002			INTRO R
-#  Présentation		  presentation	https://youtu.be/fs0LHQ7sDpI	https://youtu.be/PSQIKSKw_ys
-#  Indiçage		  bases		https://youtu.be/sMd1IyTg-ic	https://youtu.be/cQUjdwgTyz4
-#  Fonction order	  operateurs	https://youtu.be/pPLxbuEZmkA	https://youtu.be/uC-zkzwsCVY
-#  Fonction outer	  operateurs	https://youtu.be/Ht04UiHnU_0	https://youtu.be/cyPUAnieWHw
-#  Fonction apply	  avance	https://youtu.be/EN-a8bTefNk	https://youtu.be/8UQN6RRnsFA
-#  Anatomie		  emacs+ess	https://youtu.be/xiNnHegDau8	https://youtu.be/KtmFDm2AKM4
-#  Fichiers configuration emacs+ess	https://youtu.be/IsyQn7d2Ao0	https://youtu.be/jdtjBBkfhO0
-#  Installation packages  packages	https://youtu.be/DL48oi2RKjM	https://youtu.be/mL6iNzjHMKE
 
 ## Document maître et archives
 MASTER = introduction_programmation_r.pdf
@@ -67,6 +56,10 @@ SWEAVE = R CMD SWEAVE --encoding="utf-8"
 TEXI2DVI = LATEX=xelatex TEXINDY=makeindex texi2dvi -b
 RBATCH = R CMD BATCH --no-timing
 RM = rm -rf
+
+## Dépôt GitHub et authentification
+REPOSURL=https://api.github.com/repos/vigou3/introduction-programmation-r
+OAUTHTOKEN=$(shell cat ~/.github/token)
 
 
 all: pdf zip release
@@ -120,18 +113,17 @@ create-release :
 	@echo ----- Creating release on GitHub...
 	if [ -e relnotes.in ]; then rm relnotes.in; fi
 	git commit -a -m "Édition ${VERSION}" && git push
-	@echo '{"tag_name": "ed${VERSION}",' > relnotes.in
-	@awk '/^# Historique/ {state=1; next} \
-              (state==1) && /^## /{state=2; \
-	                           out=$$2; \
-	                           for(i=3;i<= NF;i++){out=out" "$$i}; \
-	                           printf "\"name\": \"%s\",\n\"body\": \"\n",out; \
-	                           next} \
-	      (state==2) && /^## /{state=3; printf "\"\n"; next} \
-	      state == 2 {print}' README.md >> relnotes.in
+	@echo '{"tag_name": "edition-${VERSION}",' > relnotes.in
+	@awk '/^# Historique/ { state=1; next } \
+              (state==1) && /^## / { state=2; out=$$2; \
+	                             for(i=3;i<= NF;i++){out=out" "$$i}; \
+	                             printf "\"name\": \"%s\",\n\"body\": \"\n",out; \
+	                             next } \
+	      (state==2) && /^## / { state=3; printf "\"\n"; next } \
+	      state==2 { print }' README.md >> relnotes.in
 	@echo '"draft": false, "prerelease": false}' >> relnotes.in
-#	curl --data @relnotes.in ${REPOSURL}/releases?access_token=${OAUTHTOKEN}
-#	rm relnotes.in
+	curl --data @relnotes.in ${REPOSURL}/releases?access_token=${OAUTHTOKEN}
+	rm relnotes.in
 	@echo ----- Done creating the release
 
 upload :
@@ -163,3 +155,16 @@ clean:
 	*-[0-9][0-9][0-9].eps \
 	*-[0-9][0-9][0-9].pdf \
 	*.aux *.log  *.blg *.bbl *.out *.rel *~ Rplots.ps
+
+
+### Pour référence: correspondances url des capsules sur YouTube.
+##
+##  TITRE ABRÉGÉ  	CHAPITRE	ACT-2002			INTRO R
+##  Présentation	presentation	https://youtu.be/fs0LHQ7sDpI	https://youtu.be/PSQIKSKw_ys
+##  Indiçage		bases		https://youtu.be/sMd1IyTg-ic	https://youtu.be/cQUjdwgTyz4
+##  Fonction order	operateurs	https://youtu.be/pPLxbuEZmkA	https://youtu.be/uC-zkzwsCVY
+##  Fonction outer	operateurs	https://youtu.be/Ht04UiHnU_0	https://youtu.be/cyPUAnieWHw
+##  Fonction apply	avance		https://youtu.be/EN-a8bTefNk	https://youtu.be/8UQN6RRnsFA
+##  Anatomie		emacs+ess	https://youtu.be/xiNnHegDau8	https://youtu.be/KtmFDm2AKM4
+##  Fichiers config	emacs+ess	https://youtu.be/IsyQn7d2Ao0	https://youtu.be/jdtjBBkfhO0
+##  Installation pkg	packages	https://youtu.be/DL48oi2RKjM	https://youtu.be/mL6iNzjHMKE
