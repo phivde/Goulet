@@ -6,7 +6,8 @@
 ## Sweave, place les bonnes URL vers les vidéos dans le code source et
 ## compile le document maître avec XeLaTeX.
 ##
-## 'make zip' crée l'archive contenant le code source des sections d'exemples.
+## 'make zip' crée l'archive contenant le code source des sections
+## d'exemples.
 ##
 ## 'make release' crée une nouvelle version dans GitHub, téléverse les
 ## fichiers PDF et .zip et modifie les liens de la page web.
@@ -115,12 +116,12 @@ create-release :
 	if [ -e relnotes.in ]; then rm relnotes.in; fi
 	git commit -a -m "Édition ${VERSION}" && git push
 	@echo '{"tag_name": "edition-${VERSION}",' > relnotes.in
-	@awk '/^# Historique/ { state=1; next } \
-              (state==1) && /^## / { state=2; out=$$2; \
+	@awk '/^## Historique/ { state=1; next } \
+              (state==1) && /^### / { state=2; out=$$2; \
 	                             for(i=3;i<= NF;i++){out=out" "$$i}; \
 	                             printf "\"name\": \"%s\",\n\"body\": \"\n",out; \
 	                             next } \
-	      (state==2) && /^## / { state=3; printf "\"\n"; next } \
+	      (state==2) && /^### / { state=3; printf "\"\n"; next } \
 	      state==2 { print }' README.md >> relnotes.in
 	@echo '"draft": false, "prerelease": false}' >> relnotes.in
 	curl --data @relnotes.in ${REPOSURL}/releases?access_token=${OAUTHTOKEN}

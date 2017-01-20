@@ -1,11 +1,16 @@
-# Présentation
+# Introduction à la programmation en R
+
+> Consulter la
+> [page du projet](https://vigou3.github.io/introduction-programmation-r)
+> pour de l'information plus détaillée sur le document et pour
+> télécharger la plus récente version officielle.
 
 *Introduction à la programmation en R* est un ouvrage de référence qui
 se concentre sur l'apprentissage de R en tant que langage de
 programmation sous-jacent aux fonctionnalités statistiques.
 
 
-# Contenu du dépôt
+## Contenu du dépôt
 
 Le dépôt contient tous les fichiers nécessaires pour composer le
 document avec XeLaTeX, à l'exception des polices de caractères
@@ -25,7 +30,7 @@ TrueType pour éviter que les symboles ne soient redimensionnés à
 l'écran ou à l'impression.
 
 
-# Composition du document
+## Composition du document
 
 La majorité des fichiers sources sont partagés avec un
 [autre projet](http://libre.act.ulaval.ca/ACT-2002/Notes\%20de\%20cours/),
@@ -48,9 +53,9 @@ Question d'éviter les publications accidentelles, `make all` est
 équivalent à `make pdf`.
 
 
-# Historique des versions
+## Historique des versions
 
-## Cinquième édition (2016)
+### Cinquième édition (2016)
 
 ISBN 978-2-9811416-6-8
 
@@ -63,7 +68,7 @@ ISBN 978-2-9811416-6-8
 - Ajout d'hyperliens dans la page des notices pour accéder directement
   au code source des exemples. Le document PDF se «tient» donc seul.
 
-## Quatrième édition (2014)
+### Quatrième édition (2014)
 
 ISBN 978-2-9811416-3-7
 
@@ -72,7 +77,7 @@ ISBN 978-2-9811416-3-7
 - Publication sous le contrat Attribution-Partage dans les mêmes
   conditions 4.0 International de Creative Commons.
 
-## Troisième édition (2012)
+### Troisième édition (2012)
 
 ISBN 978-2-9811416-2-0
 
@@ -87,7 +92,7 @@ ISBN 978-2-9811416-2-0
 - Publication sous le contrat Paternité-Partage à l’identique 2.5
   Canada de Creative Commons.
 
-## Seconde édition révisée (2007)
+### Seconde édition révisée (2007)
 
 ISBN 978-2-9809136-7-9.
 
@@ -97,7 +102,7 @@ ISBN 978-2-9809136-7-9.
   avec la ligne de commande ESS.
 - Encodage des fichiers `.tex` et `.Rnw` en UTF-8.
 
-## Seconde édition (2007)
+### Seconde édition (2007)
 
 ISBN 978-2-9809136-7-9.
 
@@ -108,14 +113,14 @@ ISBN 978-2-9809136-7-9.
   chapitres 8 et 9).
 - Mise à jour des fichiers de script pour la version 2.4.1 de R.
 
-## Première version officielle (2006)
+### Première version officielle (2006)
 
 ISBN 2-9809136-0-X.
 
 - Ajout d'un quatrième de couverture.
 - Diverses corrections mineures.
 
-## Version 0.99
+### Version 0.99
 
 - Changement de licence en faveur de la GNU Free Documentation
   License (annexe E).
@@ -125,7 +130,7 @@ ISBN 2-9809136-0-X.
   R (chapitre 7).
 - Diverses corrections mineures.
 
-## Version 0.9
+### Version 0.9
 
 - Ajout d'un index.
 - Ajout de sections (et de fichiers) d'exemples pour les chapitres 7,
@@ -133,7 +138,7 @@ ISBN 2-9809136-0-X.
 - Ajout d'une section sur la fonction `mapply` dans le chapitre 6.
 - Diverses corrections mineures.
 
-## Version 0.8
+### Version 0.8
 
 Première version. Neuf chapitres et quatre annexes:
 
