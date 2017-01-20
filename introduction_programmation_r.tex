@@ -17,10 +17,17 @@
   \usepackage{listings}                % code informatique
   \usepackage{pdfpages}                % couvertures
 
+  %%% =============================
+  %%%  Informations sur la version
+  %%% =============================
+  \renewcommand{\year}{2016}
+  \newcommand{\ednum}{05}
+  \newcommand{\edstr}{Cinquième édition révisée}
+  \newcommand{\ISBN}{978-2-9811416-6-8}
+
   %%% ============
   %%%  Page titre
   %%% ============
-  \renewcommand{\year}{2016}
   \title{%
     \bfseries\fontsize{42}{42}\selectfont Introduction à la \\
                                           programmation en R}
@@ -32,8 +39,7 @@
     \mdseries\fontsize{14}{18}\selectfont Avec la collaboration de \\
     \mdseries\fontsize{20}{22}\selectfont Laurent Caron}
   \date{%
-    \mdseries\fontsize{14}{18}\selectfont Cinquième édition}
-  \newcommand{\ISBN}{978-2-9811416-6-8}
+    \mdseries\fontsize{14}{18}\selectfont \edstr}
 
   %%% ===================
   %%%  Style du document
@@ -318,8 +324,8 @@
     \setlength{\fboxrule}{0.8pt}%
     \framebox[40mm][l]{%
       \rule[-5pt]{0mm}{16pt}%
-      \makebox[7mm]{\raisebox{-3pt}{\LARGE\faExternalLink}}\;%
-      {\sffamily Accéder au dépôt}}}
+      \makebox[7mm]{\raisebox{-3pt}{\LARGE\faGithub}}\;%
+      {\sffamily Voir sur GitHub}}}
 
   %% Raccourcis usuels vg
   \newcommand{\pt}{{\scriptscriptstyle \Sigma}}
