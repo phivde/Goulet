@@ -11,7 +11,8 @@
 ## 'make release' crée une nouvelle version dans GitHub, téléverse les
 ## fichiers PDF et .zip et modifie les liens de la page web.
 ##
-## 'make all' exécute les trois étapes ci-dessus.
+## 'make all' est équivalent à 'make pdf' question d'éviter les
+## publications accidentelles.
 ##
 ## Auteur: Vincent Goulet
 ##
@@ -62,7 +63,7 @@ REPOSURL=https://api.github.com/repos/vigou3/introduction-programmation-r
 OAUTHTOKEN=$(shell cat ~/.github/token)
 
 
-all: pdf zip release
+all: pdf
 
 release: create-release upload publish
 
