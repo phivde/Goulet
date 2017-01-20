@@ -1091,6 +1091,8 @@ x[x[, 1] > 50, ]
 \Closesolutionfile{solutions}
 
 %%% Local Variables:
-%%% TeX-master: "introduction_programmation_r"
+%%% mode: latex
+%%% TeX-engine: xetex
+%%% TeX-master: "introduction-programmation-r"
 %%% coding: utf-8
 %%% End:

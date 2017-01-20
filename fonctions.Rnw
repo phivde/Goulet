@@ -961,6 +961,8 @@ param <- function (moyenne, variance, loi)
 \Closesolutionfile{solutions}
 
 %%% Local Variables:
-%%% TeX-master: "introduction_programmation_r"
+%%% mode: latex
+%%% TeX-engine: xetex
+%%% TeX-master: "introduction-programmation-r"
 %%% coding: utf-8
 %%% End:

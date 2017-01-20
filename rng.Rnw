@@ -135,6 +135,7 @@ hist(x)
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "introduction_programation_r"
+%%% TeX-engine: xetex
+%%% TeX-master: "introduction-programmation-r"
 %%% coding: utf-8
 %%% End:
