@@ -115,14 +115,14 @@ create-release :
 	@echo ----- Creating release on GitHub...
 	if [ -e relnotes.in ]; then rm relnotes.in; fi
 	git commit -a -m "Édition ${VERSION}" && git push
-	awk 'BEGIN { print "{\"tag_name\": \"edition-${VERSION}\"," } \
+	awk 'BEGIN { ORS=" "; print "{\"tag_name\": \"edition-${VERSION}\"," } \
 	      /^$$/ { next } \
 	      /^## Historique/ { state=0; next } \
               (state==0) && /^### / { state=1; out=$$2; \
-	                             for(i=3;i<= NF;i++){out=out" "$$i}; \
-	                             printf "\"name\": \"%s\",\n\"body\": \"",out; \
+	                             for(i=3;i<=NF;i++){out=out" "$$i}; \
+	                             printf "\"name\": \"%s\", \"body\": \"", out; \
 	                             next } \
-	      (state==1) && /^### / { state=2; printf "\",\n"; next } \
+	      (state==1) && /^### / { state=2; print "\","; next } \
 	      state==1 { printf "%s\\n", $$0 } \
 	      END { print "\"draft\": false, \"prerelease\": false}" }' \
 	      README.md >> relnotes.in
