@@ -60,7 +60,8 @@ RBATCH = R CMD BATCH --no-timing
 RM = rm -rf
 
 ## Dépôt GitHub et authentification
-REPOSURL=https://api.github.com/repos/vigou3/introduction-programmation-r
+#REPOSURL=https://api.github.com/repos/vigou3/introduction-programmation-r
+REPOSURL=https://api.github.com/repos/vigou3/test
 OAUTHTOKEN=$(shell cat ~/.github/token)
 
 
@@ -136,16 +137,18 @@ upload :
 	 			  | awk -F '[ {]' '/^  \"upload_url\"/ \
 	                                    { print substr($$4, 2, length) }'))
 	@echo ${upload_url}
-	@echo ----- Uploading the disk image to GitHub...
+	@echo ----- Uploading PDF and archive to GitHub...
 	curl -H 'Content-Type: application/zip' \
 	     -H 'Authorization: token ${OAUTHTOKEN}' \
-	     --upload-file ${DISTNAME}.dmg \
-             -s -i "${upload_url}?&name=${DISTNAME}.dmg"
-	@echo ----- Done uploading the disk image
+	     --upload-file ${MASTER} \
+             -i "${upload_url}?&name=${MASTER}" \
+	     --upload-file ${CODE} \
+             -i "${upload_url}?&name=${CODE}" -s
+	@echo ----- Done uploading files
 
 publish :
 	@echo ----- Publishing the web page...
-	${MAKE} -C docs
+	VERSION=${VERSION} ${MAKE} -C docs
 	@echo ----- Done publishing
 
 test:
