@@ -60,8 +60,7 @@ RBATCH = R CMD BATCH --no-timing
 RM = rm -rf
 
 ## Dépôt GitHub et authentification
-#REPOSURL=https://api.github.com/repos/vigou3/introduction-programmation-r
-REPOSURL=https://api.github.com/repos/vigou3/test
+REPOSURL=https://api.github.com/repos/vigou3/introduction-programmation-r
 OAUTHTOKEN=$(shell cat ~/.github/token)
 
 
@@ -134,9 +133,8 @@ create-release :
 upload :
 	@echo ----- Getting upload URL from GitHub...
 	$(eval upload_url=$(shell curl -s ${REPOSURL}/releases/latest \
-	 			  | grep "^  \"upload_url\""  \
-	 			  | cut -d \" -f 4            \
-	 			  | cut -d { -f 1))
+	 			  | awk -F '[ {]' '/^  \"upload_url\"/ \
+	                                    { print substr($$4, 2, length) }'))
 	@echo ${upload_url}
 	@echo ----- Uploading the disk image to GitHub...
 	curl -H 'Content-Type: application/zip' \
