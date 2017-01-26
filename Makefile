@@ -143,7 +143,6 @@ publish :
 	sed -e 's/<VERSION>/${VERSION}/g' \
 	    -e 's/<VERSIONSTR>/${VERSIONSTR}/' \
 	    -e 's/<ISBN>/${ISBN}/' \
-	    -e 's/<CODE>/${CODE}/' \
 	    index.md.in > index.md && \
 	sed -e 's/<VERSION>/${VERSION}/g' \
 	    -e 's/<MASTER>/${MASTER}/' \

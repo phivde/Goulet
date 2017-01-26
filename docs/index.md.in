@@ -26,13 +26,13 @@ l'[Université Laval](http://www.ulaval.ca).
 ## Plus récente version
 
 <VERSIONSTR>, ISBN <ISBN> 
-([nouveautés]({{ site.github.repository_url }}/releases/tag/edition-<VERSION>/))
 
 ## Code des sections d'exemples
 
-Le code R des sections d'exemples est disponible 
-[ici]({{ site.github.repository_url }}/download/edition-<VERSION>/<CODE>) ou 
-encore en suivant le lien direct fourni au début du document.
+Consulter les [notes de mise à jour]({{ site.github.repository_url
+}}/releases/tag/edition-<VERSION>) pour télécharger le code R des
+sections d'exemples ou suivre simplement le lien direct fourni au
+début du document.
 
 
 # Quelques caractéristiques
