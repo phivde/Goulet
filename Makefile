@@ -32,6 +32,8 @@ YEAR = $(shell grep "newcommand{\\\\year" ${MASTER:.pdf=.tex} \
 	| cut -d } -f 2 | tr -d {)
 VERSION = $(shell grep "newcommand{\\\\ednum" ${MASTER:.pdf=.tex} \
 	| cut -d } -f 2 | tr -d {)
+VERSIONSTR = $(shell grep "newcommand{\\\\edstr" ${MASTER:.pdf=.tex} \
+	| cut -d } -f 2 | tr -d {)
 ISBN = $(shell grep "newcommand{\\\\ISBN" ${MASTER:.pdf=.tex} \
 	| cut -d } -f 2 | tr -d {)
 
@@ -138,6 +140,17 @@ upload :
 
 publish :
 	@echo ----- Publishing the web page...
+	cd docs && \
+	sed -e 's/<VERSION>/${VERSION}/g' \
+	    -e 's/<VERSIONSTR>/${VERSIONSTR}/' \
+	    -e 's/<CODE>/${CODE}/' \
+	    index.md.in > index.md && \
+	sed -e 's/<VERSION>/${VERSION}/g' \
+	    -e 's/<MASTER>/${MASTER}/' \
+	    _layouts/default.html.in > _layouts/default.html
+	git commit -a -m "Mise à jour de la page web pour l'édition ${VERSION}" && \
+	git push
+
 	VERSION=${VERSION} ${MAKE} -C docs
 	@echo ----- Done publishing
 
