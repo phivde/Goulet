@@ -74,13 +74,13 @@ OAUTHTOKEN = $(shell cat ~/.github/token)
 
 all: pdf
 
+.PHONY: tex pdf zip release create-release upload publish clean
+
 pdf: $(MASTER)
 
 tex: $(RNWFILES:.Rnw=.tex)
 
 release: create-release upload publish
-
-.PHONY: tex pdf zip release create-release upload publish clean
 
 %.tex: %.Rnw
 	$(SWEAVE) '$<'
