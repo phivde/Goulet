@@ -1,0 +1,21 @@
+## Liste des url des vidéos explicatives des chaînes YouTube de
+## ACT-2002 et de IntroR.
+##
+## FICHIER:    fichier source dans lequel se trouve une référence
+## NOM ABRÉGÉ: nom canonique donné à l'origine à la vidéo
+## ACT-2002:   url pour le cours ACT-2002
+## INTRO R:    url pour le document public
+##
+## Ce fichier fait partie du projet Introduction à la programmation en R
+## http://github.com/vigou3/introduction-programmation-r
+
+##  FICHIER	  NOM ABRÉGÉ	 ACT-2002			INTRO R
+presentation.tex  presentation	 https://youtu.be/fs0LHQ7sDpI	https://youtu.be/PSQIKSKw_ys
+bases.tex	  indicage	 https://youtu.be/sMd1IyTg-ic	https://youtu.be/cQUjdwgTyz4
+operateurs.tex	  order		 https://youtu.be/pPLxbuEZmkA	https://youtu.be/uC-zkzwsCVY
+operateurs.tex	  outer		 https://youtu.be/Ht04UiHnU_0	https://youtu.be/cyPUAnieWHw
+avance.tex	  apply		 https://youtu.be/EN-a8bTefNk	https://youtu.be/8UQN6RRnsFA
+emacs+ess.tex	  anatomie	 https://youtu.be/xiNnHegDau8	https://youtu.be/KtmFDm2AKM4
+emacs+ess.tex	  configuration	 https://youtu.be/IsyQn7d2Ao0	https://youtu.be/jdtjBBkfhO0
+packages.tex	  packages	 https://youtu.be/DL48oi2RKjM	https://youtu.be/mL6iNzjHMKE
+test.tex	  order		 https://youtu.be/aaaaaaaaaaa	https://youtu.be/bbbbbbbbbbb
