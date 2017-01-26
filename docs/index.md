@@ -17,9 +17,7 @@ En revanche, le lecteur est appelé à lire et à exécuter le code
 informatique se trouvant dans les sections d'exemples à la fin de
 chacun des chapitres. Ce code et les commentaires qui l'accompagnent
 reviennent sur l'essentiel des concepts du chapitre et les
-complémentent souvent. Nous considérons l'exercice d'«étude active»
-consistant à exécuter du code et à voir ses effet comme essentielle à
-l'apprentissage du langage R.
+complémentent souvent. 
 
 L'ouvrage se base sur des notes de cours et des exercices utilisés à
 l'[École d'actuariat](http://www.act.ulaval.ca) de
@@ -27,12 +25,13 @@ l'[Université Laval](http://www.ulaval.ca).
 
 ## Plus récente version
 
-Cinquième édition révisée ([Nouveautés]({{ site.github.repository_url }}/releases/tag/edition-5a/))
+Cinquième édition révisée, ISBN 978-2-9811416-6-8 
+([nouveautés]({{ site.github.repository_url }}/releases/tag/edition-5a/))
 
 ## Code des sections d'exemples
 
-Le code R des sections d'exemples est disponible [ici]({{
-site.github.repository_url }}/download/edition-5a/introduction-programmation-r-exemples.zip)) ou
+Le code R des sections d'exemples est disponible 
+[ici]({{ site.github.repository_url }}/download/edition-5a/introduction-programmation-r-exemples.zip) ou 
 encore en suivant le lien direct fourni au début du document.
 
 
@@ -79,6 +78,6 @@ Introduction
 A\. GNU Emacs et ESS: la base  
 B\. RStudio: une introduction  
 C\. Planification d'une simulation en R  
-D.\ Installation de packages dans R  
+D\. Installation de packages dans R  
 Bibliographie  
 Index
