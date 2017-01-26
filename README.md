@@ -61,7 +61,7 @@ Question d'éviter les publications accidentelles, `make all` est
 ISBN 978-2-9811416-6-8 (inchangé)
 
 - Le code source du projet est maintenant hébergé sur
-  [Github](https://github.com/vigou3/introduction-programmation-r).
+  [GitHub](https://github.com/vigou3/introduction-programmation-r).
   Sont modifiés en conséquence: les liens vers le code source
   et vers le code des sections d'exemples; un paragraphe de
   l'introduction.
