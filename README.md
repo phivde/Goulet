@@ -6,8 +6,9 @@
 > télécharger la plus récente version officielle.
 
 *Introduction à la programmation en R* est un ouvrage de référence qui
-se concentre sur l'apprentissage de R en tant que langage de
-programmation sous-jacent aux fonctionnalités statistiques.
+se concentre non pas tant sur sur les fonctionnalités statistiques de
+R, mais plutôt sur l'apprentissage du langage de programmation, plutôt
+que sur les fonctionnalités statistiques.
 
 
 ## Contenu du dépôt
@@ -35,9 +36,9 @@ l'écran ou à l'impression.
 La majorité des fichiers sources sont partagés avec un
 [autre projet](http://libre.act.ulaval.ca/ACT-2002/Notes\%20de\%20cours/),
 aussi faut-il s'assurer que les liens vers les vidéos explicatives
-pointent vers la bonne chaîne YouTube. Par conséquent, utiliser `make`
-pour compiler le document. Le fichier `Makefile` fournit les recettes
-principales suivantes:
+pointent vers la bonne chaîne YouTube (voir le fichier `URL.in`). Par
+conséquent, utiliser `make` pour compiler le document. Le fichier
+`Makefile` fournit les recettes principales suivantes:
 
 - `pdf` crée les fichiers `.tex` à partir des fichiers `.Rnw` avec
   Sweave, place les bonnes URL vers les vidéos dans le code source et
@@ -54,6 +55,17 @@ Question d'éviter les publications accidentelles, `make all` est
 
 
 ## Historique des versions
+
+### Cinquième édition révisée (2017)
+
+ISBN 978-2-9811416-6-8 (inchangé)
+
+- Le code source du projet est maintenant hébergé sur
+  [Github](https://github.com/vigou3/introduction-programmation-r).
+  Ont donc été modifiés en conséquence: les liens vers le code source
+  et vers le code des section d'exemples; un paragraphe de
+  l'introduction.
+
 
 ### Cinquième édition (2016)
 
