@@ -26,13 +26,13 @@ l'[Université Laval](http://www.ulaval.ca).
 ## Plus récente version
 
 Cinquième édition révisée, ISBN 978-2-9811416-6-8 
-([nouveautés]({{ site.github.repository_url }}/releases/tag/edition-5a/))
 
 ## Code des sections d'exemples
 
-Le code R des sections d'exemples est disponible 
-[ici]({{ site.github.repository_url }}/download/edition-5a/introduction-programmation-r-exemples.zip) ou 
-encore en suivant le lien direct fourni au début du document.
+Consulter les [notes de mise à jour]({{ site.github.repository_url
+}}/releases/tag/edition-5a) pour télécharger le code R des
+sections d'exemples ou suivre simplement le lien direct fourni au
+début du document.
 
 
 # Quelques caractéristiques
