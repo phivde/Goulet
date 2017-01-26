@@ -62,8 +62,8 @@ ISBN 978-2-9811416-6-8 (inchangé)
 
 - Le code source du projet est maintenant hébergé sur
   [Github](https://github.com/vigou3/introduction-programmation-r).
-  Ont donc été modifiés en conséquence: les liens vers le code source
-  et vers le code des section d'exemples; un paragraphe de
+  Sont modifiés en conséquence: les liens vers le code source
+  et vers le code des sections d'exemples; un paragraphe de
   l'introduction.
 
 
