@@ -21,9 +21,11 @@
 ## http://github.com/vigou3/introduction-programmation-r
 
 
-## Document maître et archives
+## Document maître, archive et fichier contenant les URL vers les
+## vidéos explicatives dans la châine YouTube
 MASTER = introduction-programmation-r.pdf
 CODE = introduction-programmation-r-exemples.zip
+URL = URL.in
 
 ## Numéro de version et numéro ISBN extraits du fichier maître
 YEAR = $(shell grep "newcommand{\\\\year" ${MASTER:.pdf=.tex} \
@@ -53,6 +55,10 @@ RFILES = \
 	optimisation.R \
 	rng.R
 
+## Liste des fichiers dans lesquels il y a des url vers des vidéos à traiter
+## (liste extraite du fichier ${URL})
+URLFILES = $(shell awk '/^[^\#]/ && !seen[$$1]++ { print $$1 }' ${URL})
+
 ## Outils de travail
 SWEAVE = R CMD SWEAVE --encoding="utf-8"
 TEXI2DVI = LATEX=xelatex TEXINDY=makeindex texi2dvi -b
@@ -61,52 +67,36 @@ RM = rm -rf
 
 ## Dépôt GitHub et authentification
 #REPOSURL=https://api.github.com/repos/vigou3/introduction-programmation-r
-REPOSURL=https://api.github.com/repos/vigou3/test
-OAUTHTOKEN=$(shell cat ~/.github/token)
+REPOSURL = https://api.github.com/repos/vigou3/test
+OAUTHTOKEN = $(shell cat ~/.github/token)
 
 
 all: pdf
+
+pdf: $(MASTER)
+
+tex: $(RNWFILES:.Rnw=.tex)
 
 release: create-release upload publish
 
 .PHONY: tex pdf zip release create-release upload publish clean
 
-pdf: tex $(MASTER)
-
-tex: $(RNWFILES:.Rnw=.tex)
-
 %.tex: %.Rnw
 	$(SWEAVE) '$<'
-	if [ "$@" == "presentation.tex" ]; then \
-	  sed -E -i "" \
-	      -e "s:youtu.be/(presentation|fs0LHQ7sDpI):youtu.be/PSQIKSKw_ys:" $@; \
-	fi
-	if [ "$@" == "bases.tex" ]; then \
-	  sed -E -i "" \
-	      -e "s:youtu.be/(indicage|sMd1IyTg-ic):youtu.be/cQUjdwgTyz4:" $@; \
-	fi
-	if [ "$@" == "operateurs.tex" ]; then \
-	  sed -E -i "" \
-	      -e "s:youtu.be/(order|pPLxbuEZmkA):youtu.be/uC-zkzwsCVY:" \
-	      -e "s:youtu.be/(outer|Ht04UiHnU_0):youtu.be/cyPUAnieWHw:" $@; \
-	fi
-	if [ "$@" == "avance.tex" ]; then \
-	  sed -E -i "" \
-	      -e "s:youtu.be/(apply|EN-a8bTefNk):youtu.be/8UQN6RRnsFA:" $@; \
-	fi
 
-$(MASTER): $(MASTER:.pdf=.tex) $(RNWFILES) $(RFILES) $(TEXFILES)
-	case $? in \
-	"emacs+ess.tex") \
-	  sed -E -i "" \
-	      -e "s:youtu.be/(anatomie|xiNnHegDau8):youtu.be/KtmFDm2AKM4:" \
-	      -e "s:youtu.be/(configuration|IsyQn7d2Ao0):youtu.be/jdtjBBkfhO0:" emacs+ess.tex \
-	  ;; \
-	"packages.tex") \
-	  sed -E -i "" \
-	      -e "s:youtu.be/(packages|DL48oi2RKjM):youtu.be/mL6iNzjHMKE:" packages.tex \
-	  ;; \
-	esac
+$(MASTER): $(MASTER:.pdf=.tex) $(RNWFILES:.Rnw=.tex) $(TEXFILES) $(RFILES)
+	for file in $(filter ${URLFILES},$?); do \
+	  if [ -e tmpfile.tex ]; then rm tmpfile.tex; fi ; \
+	  awk -v pattern=$$file \
+	      'NR==FNR && /^[^#]/ && $$1 ~ pattern \
+	       { a[NR] = sprintf("youtu.be\/(%s|%s)", $$2, substr($$3,18,11)); \
+	         b[NR] = sprintf("youtu.be/%s", substr($$4,18,11)); \
+	         next }  \
+	       NR>FNR \
+	       { for (i in a) gsub(a[i], b[i]); print }' \
+	    ${URL} $$file > tmpfile.tex ; \
+	  mv tmpfile.tex $$file; \
+	done
 	$(TEXI2DVI) $(MASTER:.pdf=.tex)
 
 zip: $(RFILES)
@@ -151,26 +141,9 @@ publish :
 	VERSION=${VERSION} ${MAKE} -C docs
 	@echo ----- Done publishing
 
-test:
-	@echo ${YEAR}
-	@echo ${VERSION}
-	@echo ${ISBN}
-
 clean:
 	$(RM) $(RNWFILES:.Rnw=.tex) \
-	*-[0-9][0-9][0-9].eps \
-	*-[0-9][0-9][0-9].pdf \
-	*.aux *.log  *.blg *.bbl *.out *.rel *~ Rplots.ps
+	      *-[0-9][0-9][0-9].pdf \
+	      *.aux *.log  *.blg *.bbl *.out *.rel *~ Rplots.ps
 
 
-### Pour référence: correspondances url des capsules sur YouTube.
-##
-##  TITRE ABRÉGÉ  	CHAPITRE	ACT-2002			INTRO R
-##  Présentation	presentation	https://youtu.be/fs0LHQ7sDpI	https://youtu.be/PSQIKSKw_ys
-##  Indiçage		bases		https://youtu.be/sMd1IyTg-ic	https://youtu.be/cQUjdwgTyz4
-##  Fonction order	operateurs	https://youtu.be/pPLxbuEZmkA	https://youtu.be/uC-zkzwsCVY
-##  Fonction outer	operateurs	https://youtu.be/Ht04UiHnU_0	https://youtu.be/cyPUAnieWHw
-##  Fonction apply	avance		https://youtu.be/EN-a8bTefNk	https://youtu.be/8UQN6RRnsFA
-##  Anatomie		emacs+ess	https://youtu.be/xiNnHegDau8	https://youtu.be/KtmFDm2AKM4
-##  Fichiers config	emacs+ess	https://youtu.be/IsyQn7d2Ao0	https://youtu.be/jdtjBBkfhO0
-##  Installation pkg	packages	https://youtu.be/DL48oi2RKjM	https://youtu.be/mL6iNzjHMKE
