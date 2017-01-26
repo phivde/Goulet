@@ -68,8 +68,7 @@ RBATCH = R CMD BATCH --no-timing
 RM = rm -rf
 
 ## Dépôt GitHub et authentification
-#REPOSURL=https://api.github.com/repos/vigou3/introduction-programmation-r
-REPOSURL = https://api.github.com/repos/vigou3/test
+REPOSURL = https://api.github.com/repos/vigou3/introduction-programmation-r
 OAUTHTOKEN = $(shell cat ~/.github/token)
 
 
@@ -143,6 +142,7 @@ publish :
 	cd docs && \
 	sed -e 's/<VERSION>/${VERSION}/g' \
 	    -e 's/<VERSIONSTR>/${VERSIONSTR}/' \
+	    -e 's/<ISBN>/${ISBN}/' \
 	    -e 's/<CODE>/${CODE}/' \
 	    index.md.in > index.md && \
 	sed -e 's/<VERSION>/${VERSION}/g' \
@@ -150,8 +150,6 @@ publish :
 	    _layouts/default.html.in > _layouts/default.html
 	git commit -a -m "Mise à jour de la page web pour l'édition ${VERSION}" && \
 	git push
-
-	VERSION=${VERSION} ${MAKE} -C docs
 	@echo ----- Done publishing
 
 clean:
