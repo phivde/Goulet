@@ -10,7 +10,6 @@ se concentre non pas tant sur sur les fonctionnalités statistiques de
 R, mais plutôt sur l'apprentissage du langage de programmation, plutôt
 que sur les fonctionnalités statistiques.
 
-
 ## Contenu du dépôt
 
 Le dépôt contient tous les fichiers nécessaires pour composer le
@@ -29,7 +28,6 @@ Acrobat Reader. La police Font Awesome est disponible gratuitement
 dans le site http://fontawesome.io. Prendre soin d'utiliser la version
 TrueType pour éviter que les symboles ne soient redimensionnés à
 l'écran ou à l'impression.
-
 
 ## Composition du document
 
@@ -53,7 +51,6 @@ conséquent, utiliser `make` pour compiler le document. Le fichier
 Question d'éviter les publications accidentelles, `make all` est
 équivalent à `make pdf`.
 
-
 ## Historique des versions
 
 ### Cinquième édition révisée (2017)
@@ -65,7 +62,6 @@ ISBN 978-2-9811416-6-8 (inchangé)
   Sont modifiés en conséquence: les liens vers le code source
   et vers le code des sections d'exemples; un paragraphe de
   l'introduction.
-
 
 ### Cinquième édition (2016)
 
