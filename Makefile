@@ -86,15 +86,16 @@ release: create-release upload publish
 	$(SWEAVE) '$<'
 
 $(MASTER): $(MASTER:.pdf=.tex) $(RNWFILES:.Rnw=.tex) $(TEXFILES) $(RFILES)
-	for file in $(filter ${URLFILES},$?); do \
-	  if [ -e tmpfile.tex ]; then rm tmpfile.tex; fi ; \
+	for file in $(filter ${URLFILES},$?) ; \
+	do \
+	  if [ -e tmpfile.tex ]; then rm tmpfile.tex ; fi ; \
 	  awk -v pattern=$$file \
-	      'NR==FNR && /^[^#]/ && $$1 ~ pattern \
-	       { a[NR] = sprintf("youtu.be\/(%s|%s)", $$2, substr($$3,18,11)); \
-	         b[NR] = sprintf("youtu.be/%s", substr($$4,18,11)); \
-	         next }  \
-	       NR>FNR \
-	       { for (i in a) gsub(a[i], b[i]); print }' \
+	    'NR == FNR && /^[^#]/ && $$1 ~ pattern { \
+	       a[NR] = sprintf("youtu.be\/(%s|%s)", $$2, substr($$3,18,11)); \
+	       b[NR] = sprintf("youtu.be/%s", substr($$4,18,11)); \
+	       next }  \
+	     NR>FNR { \
+	       for (i in a) gsub(a[i], b[i]); print }' \
 	    ${URL} $$file > tmpfile.tex ; \
 	  mv tmpfile.tex $$file; \
 	done
@@ -106,6 +107,7 @@ zip: $(RFILES)
 create-release :
 	@echo ----- Creating release on GitHub...
 	if [ -e relnotes.in ]; then rm relnotes.in; fi
+	touch relnotes.in
 	git commit -a -m "Édition ${VERSION}" && git push
 	awk 'BEGIN { ORS=" "; print "{\"tag_name\": \"edition-${VERSION}\"," } \
 	      /^$$/ { next } \
