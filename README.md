@@ -1,9 +1,9 @@
-# Introduction à la programmation en R
-
 > Consulter la
 > [page du projet](https://vigou3.github.io/introduction-programmation-r)
 > pour de l'information plus détaillée sur le document et pour
 > télécharger la plus récente version officielle.
+
+# Introduction à la programmation en R
 
 *Introduction à la programmation en R* est un ouvrage de référence qui
 se concentre non pas tant sur sur les fonctionnalités statistiques de
@@ -16,18 +16,18 @@ Le dépôt contient tous les fichiers nécessaires pour composer le
 document avec XeLaTeX, à l'exception des polices de caractères
 suivantes:
 
-> Lucida Bright OT
-> Lucida Bright Math
-> Lucida Grande Mono DK
-> Adobe Myriad Pro
+> Lucida Bright OT  
+> Lucida Bright Math  
+> Lucida Grande Mono DK  
+> Adobe Myriad Pro  
 > Font Awesome
 
-Les trois polices Lucida sont payantes et distribuées par le TeX Users
-Group: https://tug.org/lucida. La police Myriad Pro est livrée avec
-Acrobat Reader. La police Font Awesome est disponible gratuitement
-dans le site http://fontawesome.io. Prendre soin d'utiliser la version
-TrueType pour éviter que les symboles ne soient redimensionnés à
-l'écran ou à l'impression.
+Les trois polices Lucida sont payantes et distribuées par le
+[TeX Users Group](https://tug.org/lucida). La police Myriad Pro est
+livrée avec Acrobat Reader. La police
+[Font Awesome](http://fontawesome.io) est gratuite. Prendre soin
+d'utiliser la version TrueType pour éviter que les symboles ne soient
+redimensionnés à l'écran ou à l'impression.
 
 ## Composition du document
 
