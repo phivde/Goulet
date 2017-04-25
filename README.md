@@ -7,8 +7,8 @@
 
 *Introduction à la programmation en R* est un ouvrage de référence qui
 se concentre non pas tant sur sur les fonctionnalités statistiques de
-R, mais plutôt sur l'apprentissage du langage de programmation, plutôt
-que sur les fonctionnalités statistiques.
+R, mais plutôt sur l'apprentissage du langage de programmation
+sous-jacent.
 
 ## Contenu du dépôt
 
