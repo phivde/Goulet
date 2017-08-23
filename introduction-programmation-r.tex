@@ -20,26 +20,10 @@
   %%% =============================
   %%%  Informations de publication
   %%% =============================
-  \renewcommand{\year}{2016}
-  \newcommand{\ednum}{5a}
-  \newcommand{\edstr}{Cinquième édition révisée}
-  \newcommand{\ISBN}{978-2-9811416-6-8}
-
-  %%% ============
-  %%%  Page titre
-  %%% ============
-  \title{%
-    \bfseries\fontsize{42}{42}\selectfont Introduction à la \\
-                                          programmation en R}
-  \author{%
-    \mdseries\fontsize{20}{20}\selectfont Vincent Goulet \\
-    \mdseries\fontsize{14}{18}\selectfont École d'actuariat,
-                                          Université Laval \\
-                                          \vspace*{10mm}
-    \mdseries\fontsize{14}{18}\selectfont Avec la collaboration de \\
-    \mdseries\fontsize{20}{22}\selectfont Laurent Caron}
-  \date{%
-    \mdseries\fontsize{14}{18}\selectfont \edstr}
+  \renewcommand{\year}{2017}
+  \renewcommand{\month}{08-1}
+  \newcommand{\ISBN}{}
+  \newcommand{\ghurl}{https://github.com/vigou3/programmer-avec-r/}
 
   %%% ===================
   %%%  Style du document
@@ -53,6 +37,7 @@
   \setmathfont{Lucida Bright Math OT}
   \setmonofont{Lucida Grande Mono DK}
   \setsansfont[Scale=1.0,Numbers=OldStyle]{Myriad Pro}
+  \newfontfamily\fullcaps[Letters=Uppercase,Numbers=Uppercase]{Myriad Pro}
   \usepackage[babel=true]{microtype}
   \usepackage{icomma}
 
@@ -387,23 +372,29 @@
     puis-que
   }
 
+  %%% ============
+  %%%  Page titre
+  %%% ============
+  \title{%
+    \bfseries\fontsize{42}{42}\selectfont
+    Programmer avec R}
+  \author{%
+    \mdseries\fontsize{20}{20}\selectfont
+    Vincent Goulet}
+  \date{%
+    \mdseries\fontsize{14}{18}\selectfont
+    Édition {\fullcaps\year}.\month}
+
 %  \includeonly{introduction}
 
 \begin{document}
 
 \frontmatter
 
-%% Page couverture avant. Il faut modifier la largeur des graphiques
-%% puisque Sweave la règle à 0.8\textwidth.
-\setkeys{Gin}{width=\paperwidth}
-\includepdf[pages=1]{couvertures}
-\setkeys{Gin}{width=0.8\textwidth}
-\cleardoublepage
-
 \pagestyle{empty}
 
-\include{frontispice}
-\clearpage
+\include{couverture-avant}
+\null\cleardoublepage           % cf. section 2.2 textpos.pdf
 
 \include{notices}
 \clearpage
@@ -450,18 +441,13 @@
 \cleardoublepage
 \printindex
 
-\cleartoverso
+\pagestyle{empty}
 
+\cleartoverso
 \input{colophon}
 
 \cleartoverso
-
-%% Page couverture arrière.
-\AddToShipoutPictureFG*{%
-  \AtStockLowerLeft{%
-    \raisebox{10mm}{%
-      \hspace{5mm}\includegraphics[height=25mm,keepaspectratio=true]{codebarre_\ISBN}}}}
-\includepdf[pages=2,width=\paperwidth]{couvertures}
+\input{couverture-arriere}
 
 \end{document}
 
