@@ -7,7 +7,7 @@
   \usepackage{framed}                  % env. snugshade*, oframed
   \usepackage{paralist}
   \usepackage[shortlabels]{enumitem}
-  \usepackage{textpos}
+  \usepackage[absolute]{textpos}
   \usepackage{graphicx}
   \usepackage{manfnt}                  % \mantriangleright (puce)
   \usepackage{metalogo}                % \XeLaTeX logo
@@ -310,19 +310,10 @@
   \newcommand{\capsule}[2]{\href{#1}{#2}\marginpar{%
       \href{#1}{\raisebox{-0.5em}[0em][0em]{\HUGE\faYoutubePlay}}}}
 
-  %% «Boutons» de la page de notices
-  \newcommand{\downloadbutton}{%
-    \setlength{\fboxrule}{0.8pt}%
-    \framebox[40mm][l]{%
-      \rule[-5pt]{0mm}{16pt}%
-      \makebox[7mm]{\raisebox{-2.5pt}{\LARGE\faDownload}}\;%
-      {\sffamily Télécharger}}}
-  \newcommand{\browsebutton}{%
-    \setlength{\fboxrule}{0.8pt}%
-    \framebox[40mm][l]{%
-      \rule[-5pt]{0mm}{16pt}%
-      \makebox[7mm]{\raisebox{-3pt}{\LARGE\faGithub}}\;%
-      {\sffamily Voir sur GitHub}}}
+  %% Lien vers GitHub dans la page de notices
+  \newcommand{\viewsource}[1]{%
+    \href{#1}{%
+      Voir sur GitHub \raisebox{-1pt}{\footnotesize\faGithub}}}
 
   %% Raccourcis usuels vg
   \newcommand{\pt}{{\scriptscriptstyle \Sigma}}
@@ -373,6 +364,14 @@
 
   %%% Style de la bibliographie
   \bibliographystyle{francais}
+
+  %% Longueurs pour la composition des pages couvertures avant et
+  %% arrière.
+  \newlength{\banderougewidth} \newlength{\banderougeheight}
+  \newlength{\bandeorwidth}    \newlength{\bandeorheight}
+  \newlength{\imageheight}
+  \newlength{\logoheight}
+  \newlength{\gapwidth}
 
   %% Aide pour la césure
   \hyphenation{%
