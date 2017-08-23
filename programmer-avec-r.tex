@@ -20,6 +20,8 @@
   %%% =============================
   %%%  Informations de publication
   %%% =============================
+  \title{Programmer avec R}
+  \author{Vincent Goulet}
   \renewcommand{\year}{2017}
   \renewcommand{\month}{08-1}
   \newcommand{\ISBN}{}
@@ -43,19 +45,30 @@
 
   %% Couleurs
   \usepackage{xcolor}
-  \definecolor{comments}{rgb}{0.7,0,0}           % commentaires
-  \definecolor{link}{rgb}{0,0.4,0.6}             % liens internes
-  \definecolor{url}{rgb}{0.6,0,0}                % liens externes
-  \definecolor{citation}{rgb}{0,0.5,0}           % citations
-  \definecolor{codebg}{named}{LightYellow1}      % fond code R
-  \definecolor{prob}{named}{orange}              % encadrés «problème»
+  \definecolor{comments}{rgb}{0.7,0,0}      % commentaires
+  \definecolor{link}{rgb}{0,0.4,0.6}        % liens internes
+  \definecolor{url}{rgb}{0.6,0,0}           % liens externes
+  \definecolor{citation}{rgb}{0,0.5,0}      % citations
+  \definecolor{codebg}{named}{LightYellow1} % fond code R
+  \definecolor{prob}{named}{orange}         % encadrés «problème»
+  \definecolor{rouge}{rgb}{0.85,0,0.07} % rouge bandeau identitaire
+  \definecolor{or}{rgb}{1,0.8,0}        % or bandeau identitaire
 
   %% Hyperliens
   \usepackage{hyperref}
-  \hypersetup{colorlinks, linktocpage,
-    urlcolor=url, linkcolor=link, citecolor=citation,
-    bookmarksopen, bookmarksnumbered, bookmarksdepth=subsubsection,
-    pdfauthor={Vincent Goulet}}
+  \hypersetup{%
+    pdfauthor = \theauthor,
+    pdftitle = \thetitle,
+    colorlinks = {true},
+    linktocpage = {true},
+    urlcolor = {url},
+    linkcolor = {link},
+    citecolor = {citation},
+    pdfpagemode = {UseOutlines},
+    pdfstartview = {Fit},
+    bookmarksopen = {true},
+    bookmarksnumbered = {true},
+    bookmarksdepth = {subsubsection}}
   \setlength{\XeTeXLinkMargin}{1pt}
 
   %% Étiquettes de \autoref (redéfinitions compatibles avec babel).
@@ -371,19 +384,6 @@
     nom-bre
     puis-que
   }
-
-  %%% ============
-  %%%  Page titre
-  %%% ============
-  \title{%
-    \bfseries\fontsize{42}{42}\selectfont
-    Programmer avec R}
-  \author{%
-    \mdseries\fontsize{20}{20}\selectfont
-    Vincent Goulet}
-  \date{%
-    \mdseries\fontsize{14}{18}\selectfont
-    Édition {\fullcaps\year}.\month}
 
 %  \includeonly{introduction}
 
