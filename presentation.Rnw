@@ -522,6 +522,6 @@ q()
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-engine: xetex
-%%% TeX-master: "introduction-programmation-r"
+%%% TeX-master: "programmer-avec-r"
 %%% coding: utf-8
 %%% End:
