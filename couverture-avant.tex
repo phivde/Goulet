@@ -16,6 +16,18 @@
 \addtolength{\bandeorwidth}{-\gapwidth}
 \addtolength{\imageheight}{-\gapwidth}
 
+\def\titlefmt{%
+  \sffamily\bfseries\fontsize{52}{52}\selectfont\thetitle}
+\def\authorfmt{%
+  \sffamily\mdseries\fontsize{30}{38}\selectfont\theauthor}
+\def\affiliation{%
+  \sffamily\mdseries\fontsize{22}{26}\selectfont
+  Professeur titulaire \\
+  École d'actuariat, Université Laval}
+\def\edition{%
+  \sffamily\mdseries\fontsize{22}{26}\selectfont
+  Édition {\fullcaps\year}.\month}
+
 %% bandeau identitaire
 \begin{textblock*}{\paperwidth}[0,1](0mm,30\TPVertModule)
   \textcolor{rouge}{\rule{\banderougewidth}{\banderougeheight}}% % bande rouge
@@ -34,17 +46,17 @@
 \begin{textblock*}{\paperwidth}(0mm,0mm)
   \includegraphics[height=\imageheight,%
                    width=\paperwidth,%
-                   trim=446 0 281 0]{}
+                   trim=555 185 251 0,clip]{Xerus_inauris_1}
 \end{textblock*}
 
 %% titre
-\begin{textblock*}{\paperwidth}(0.3\TPHorizModule,5.5\TPVertModule)
-  \color{white} \thetitle
+\begin{textblock*}{\paperwidth}(0.3\TPHorizModule,4.5\TPVertModule)
+  \titlefmt
 \end{textblock*}
 
 %% auteur
-\begin{textblock*}{\paperwidth}(0.3\TPHorizModule,10\TPVertModule)
-  \color{white} \theauthor
+\begin{textblock*}{\paperwidth}(0.3\TPHorizModule,7.5\TPVertModule)
+  \authorfmt
 \end{textblock*}
 
 \null\cleardoublepage
@@ -54,21 +66,23 @@
 %%%
 
 %% titre
-\begin{textblock*}{\paperwidth}(0.3\TPHorizModule,5.5\TPVertModule)
-  \thetitle
+\begin{textblock*}{\paperwidth}(0.3\TPHorizModule,4.5\TPVertModule)
+  \titlefmt
 \end{textblock*}
 
 %% auteur
-\begin{textblock*}{2\TPHorizModule}(0.3\TPHorizModule,10\TPVertModule)
-  \theauthor \\
-  \mdseries
-  Professeur titulaire \\
-  École d'actuariat, Université Laval
+\begin{textblock*}{2\TPHorizModule}(0.3\TPHorizModule,7.5\TPVertModule)
+  \authorfmt
+\end{textblock*}
+
+%% affiliation
+\begin{textblock*}{2\TPHorizModule}(0.3\TPHorizModule,9\TPVertModule)
+  \affiliation
 \end{textblock*}
 
 %% édition
 \begin{textblock*}{1.7\TPHorizModule}(0.3\TPHorizModule,30\TPVertModule)
-  \thedate
+  \edition
 \end{textblock*}
 \endgroup
 
