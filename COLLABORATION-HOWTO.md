@@ -1,4 +1,8 @@
-# Comment collaborer au projet *Programmer avec R*
+# Collaborer au projet *Programmer avec R*
+
+> Seuls les étudiants de l'Université Laval inscrits au cours IFT-1902
+> à l'automne 2017 disposent des droits en écriture requis pour
+> effectuer la procédure décrite ci-dessous.
 
 La version de développement du projet [Programmer avec
 R](https://vigou3.github.io/programmer-avec-r] est hébergée dans un
@@ -12,8 +16,7 @@ Ce dépôt utilise l'interface [Atlassian Stash](https://www.atlassian.com/blog/
 La branche `master` du dépôt est réservée en écriture au gestionnaire
 du projet.
 
-Pour collaborer au projet, prière de suivre les instructions
-suivantes:
+Pour collaborer au projet, vous devez suivre la procédure suivante:
 
 1. Cloner le dépôt avec
 
