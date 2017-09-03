@@ -15,6 +15,8 @@
 \setlength{\gapwidth}{1.5pt}
 \addtolength{\bandeorwidth}{-\gapwidth}
 \addtolength{\imageheight}{-\gapwidth}
+\setlength{\fboxrule}{3pt}
+\setlength{\fboxsep}{0pt}
 
 \def\titlefmt{%
   \sffamily\bfseries\fontsize{52}{52}\selectfont\thetitle}
@@ -50,11 +52,21 @@
 \end{textblock*}
 
 %% titre
-\begin{textblock*}{\paperwidth}(0.3\TPHorizModule,4.5\TPVertModule)
+\begin{textblock*}{\paperwidth}(0.25\TPHorizModule,3.4\TPVertModule)
+  \pgfsetfillopacity{0.5}
+  \fbox{\textcolor{white}{\rule{2.27\TPHorizModule}{2.9\TPVertModule}}}
+  \pgfsetfillopacity{1}
+\end{textblock*}
+\begin{textblock*}{\paperwidth}(0.3\TPHorizModule,4\TPVertModule)
   \titlefmt
 \end{textblock*}
 
 %% auteur
+\begin{textblock*}{\paperwidth}(0.25\TPHorizModule,6.9\TPVertModule)
+  \pgfsetfillopacity{0.5}
+  \fbox{\textcolor{white}{\rule{0.97\TPHorizModule}{2.0\TPVertModule}}}
+  \pgfsetfillopacity{1}
+\end{textblock*}
 \begin{textblock*}{\paperwidth}(0.3\TPHorizModule,7.5\TPVertModule)
   \authorfmt
 \end{textblock*}
@@ -66,7 +78,7 @@
 %%%
 
 %% titre
-\begin{textblock*}{\paperwidth}(0.3\TPHorizModule,4.5\TPVertModule)
+\begin{textblock*}{\paperwidth}(0.3\TPHorizModule,4\TPVertModule)
   \titlefmt
 \end{textblock*}
 
@@ -76,7 +88,7 @@
 \end{textblock*}
 
 %% affiliation
-\begin{textblock*}{2\TPHorizModule}(0.3\TPHorizModule,9\TPVertModule)
+\begin{textblock*}{2\TPHorizModule}(0.3\TPHorizModule,10\TPVertModule)
   \affiliation
 \end{textblock*}
 
