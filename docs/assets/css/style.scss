@@ -53,7 +53,7 @@ a {
 .shaded {
   margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.6);
-  border: solid black 3px;
+  border: solid black 4px;
 
   @include large {
     max-width: 52rem;
