@@ -28,8 +28,8 @@ a {
 
 .page-header {
   color: #000;
-  background: #D1DBF2;
-  background-image: url('../../images/Fotolia_99831160.jpg');
+  background: #8B7765;
+  background-image: url('../../images/Xerus_inauris_1.jpg');
   background-repeat: no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -42,11 +42,21 @@ a {
   }
 
   @include medium {
-    padding: 6rem 4rem 2rem 4rem;
+    padding: 4rem 4rem 2rem 4rem;
   }
 
   @include small {
-    padding: 2.5rem 1rem 1.5rem 1rem;
+    padding: 3rem 1rem 1rem 1rem;
+  }
+}
+
+.shaded {
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.6);
+  border: solid black 3px;
+
+  @include large {
+    max-width: 52rem;
   }
 }
 
@@ -55,27 +65,6 @@ a {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   background: rgba(255, 255, 255, 0.5);
-}
-
-.latex sub, .latex sup {
-  text-transform: uppercase;
-}
-
-.latex sub {
-  vertical-align: -0.07ex;
-  margin-left: -0.1667em;
-  margin-right: -0.125em;
-}
-
-.latex, .latex sub {
-  font-size: 1em;
-}
-
-.latex sup {
-  font-size: 0.77em;
-  vertical-align: -0.5ex;
-  margin-left: -0.36em;
-  margin-right: -0.15em;
 }
 
 .main-content {
