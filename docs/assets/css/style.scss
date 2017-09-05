@@ -17,7 +17,9 @@ a {
   color: rgba(0, 0, 0, 0.8);
   background-color: rgba(255, 255, 255, 0.6);
   border-color: rgba(0, 0, 0, 0.8);
-
+  border-width: 2px;
+  border-radius: 0rem;
+  
   &:hover {
     color: rgba(0, 0, 0, 0.9);
     text-decoration: none;
