@@ -1,0 +1,122 @@
+%%% Copyright (C) 2017 Vincent Goulet
+%%%
+%%% Ce fichier fait partie du projet «Programmer avec R»
+%%% http://github.com/vigou3/programmer-avec-r
+%%%
+%%% Cette création est mise à disposition selon le contrat
+%%% Attribution-Partage dans les mêmes conditions 4.0
+%%% International de Creative Commons.
+%%% http://creativecommons.org/licenses/by-sa/4.0/
+
+\chapter{Éléments d'informatique pour programmeurs}
+\label{chap:informatique}
+
+Intro du chapitre
+
+\section{Bref historique des langages de programmation}
+\label{sec:informatique:historique}
+
+Ada Lovelace (1815--1852) est généralement reconnue comme la première
+auteure d'un algorithme et de ce que l'on appelle aujourd'hui un
+programme informatique. Le langage Ada, conçu en réponse à un cahier
+de charges du département de la Défense des États-Unis au début des
+années 1980, a d'ailleurs été nommé en son honneur.
+
+Franchissons d'un bond les premiers jours de l'informatique et de la
+programmation\footnote{%
+  Les lecteurs intéressés à en apprendre davantage sur le sujet
+  pourront débuter par les entrées de Wikipedia
+  (\link{https://fr.wikipedia.org/wiki/Histoire_des_langages_de_programmation}{français},
+  \link{https://en.wikipedia.org/wiki/History_of_programming_languages}{anglais}).} %
+pour arriver aux ordinateurs électriques modernes, dans les années
+1940. On programme généralement ceux-ci en \emph{assembleur}, un
+langage de très bas niveau facilement interprétable par la machine,
+mais difficile à lire par des humains; voir la
+\autoref{fig:informatique:assembleur}.
+
+\begin{figure}
+  \centering
+  \includegraphics[trim=0 475 0 0, clip=true]{Motorola_6800_Assembly_Language.png}
+  \caption[Programme assembleur pour un microprocesseur 8~bits
+  Motorola 6800.]{Extrait d'un programme en assembleur pour un
+    microprocesseur 8~bits Motorola 6800. Source:
+    \link{https://commons.wikimedia.org/wiki/File\%3AMotorola_6800_Assembly_Language.png}{Wikimedia Commons}}
+  \label{fig:informatique:assembleur}
+\end{figure}
+
+Premiers langages créés pour transmettre des instructions à un
+ordinateur à partir des années 1950. À l'origine intimement liés à
+l'architecture propre d'un ordinateur; autrement dit, à chaque type
+d'ordinateur son langage de programmation.
+
+Plus vieux langages encore en activité: COBOL (1959), FORTRAN (1954),
+LISP (1958)
+
+Certaines caractéristiques --- ou exigences --- des plus vieux
+langages proviennent de contraintes liées au support physique utilisé
+à l'époque de leur création: les cartes perforées.
+
+Empreinte de Fortran en calcul scientifique toujours importante,
+notamment via BLAS et LAPACK
+
+Algol Fin des années 1960 publication, by a committee of American and
+European computer scientists, "a new language for algorithms"; the
+ALGOL 60 Report (the "ALGOrithmic Language"). Velléité de
+standardisation des langages de programmation; évidemment un échec;
+néanmoins plusieurs innovations importantes qui feront en sorte qu'un
+grand nombre des langages qui verront le jour par la suite seront
+considérés comme des descendants d'Algol.
+
+APL (1962) longtemps un langage très prisé par les actuaires; probablement
+encore du code APL dans certaines compagnies d'assurance; inspiration
+pour S et R; continue sa vie aujourd'hui surtout sous J.
+
+Lisp langage beaucoup utilisé en intelligence artificielle;
+particulièrement élégant, sauf peut-être pour la syntaxe. Citation:
+\emph{}
+
+"Lisp is worth learning for the profound enlightenment experience you will have when you finally get it; that experience will make you a better programmer for the rest of your days, even if you never actually use Lisp itself a lot."
+- Eric Raymond, "How to Become a Hacker"
+http://www.paulgraham.com/quotes.html
+
+Greenspun's tenth rule of programming is an aphorism in computer programming and especially programming language circles that states:[1][2]
+
+Any sufficiently complicated C or Fortran program contains an ad-hoc,
+informally-specified, bug-ridden, slow implementation of half of
+Common Lisp.
+Version courte: Ceux qui ne connaissent pas le Lisp sont condamnés à
+le réinventer
+https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule
+
+
+C Kernighan et Ritchie, Bell Labs -> John Chambers et S; Unix;
+toujours beaucoup utilisé pour le calcul numérique intensif; évolution
+vers C++
+
+Python (1991)
+\url{https://en.wikipedia.org/wiki/Python_(programming_language)}
+
+Infix [infixée], Postfix [suffixée] and Prefix [préfixée] notation (encadré?)
+\url{http://www.cs.man.ac.uk/~pjj/cs212/fix.html}
+
+
+
+
+
+
+\section{Syntaxe et sémantique}
+\label{sec:informatique:syntaxe}
+
+\section{Paradigmes de programmation}
+\label{sec:informatique:paradigmes}
+
+\section{Systèmes d'exploitation}
+\label{sec:informatique:os}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-engine: xetex
+%%% TeX-master: "programmer-avec-r"
+%%% End:

@@ -14,12 +14,12 @@
   \usepackage{natbib,url}
   \usepackage{babel}
   \usepackage[autolanguage]{numprint}
-  \usepackage{actuarialangle,amsmath,amsthm}
+  \usepackage{amsmath,amsthm}
   \usepackage[noae]{Sweave}
   \usepackage{framed}                  % env. snugshade*, oframed
   \usepackage{paralist}
   \usepackage[shortlabels]{enumitem}
-  \usepackage[absolute]{textpos}
+  \usepackage[absolute]{textpos}       % éléments des pages de titre
   \usepackage{graphicx}
   \usepackage{manfnt}                  % \mantriangleright (puce)
   \usepackage{metalogo}                % \XeLaTeX logo
@@ -322,6 +322,9 @@
   \newcommand{\capsule}[2]{\href{#1}{#2}\marginpar{%
       \href{#1}{\raisebox{-0.5em}[0em][0em]{\HUGE\faYoutubePlay}}}}
 
+  %% Hyperlien avec symbole de lien externe juste après
+  \newcommand{\link}[2]{\href{#1}{#2~\raisebox{-0.2ex}{\faExternalLink}}}
+
   %% Lien vers GitHub dans la page de notices
   \newcommand{\viewsource}[1]{%
     \href{#1}{%
@@ -396,7 +399,7 @@
     puis-que
   }
 
-  \includeonly{couverture-avant}
+  \includeonly{informatique}
 
 \begin{document}
 
