@@ -25,6 +25,7 @@
   \usepackage{metalogo}                % \XeLaTeX logo
   \usepackage{applekeys}               % touches Mac
   \usepackage{fontawesome}             % icônes \fa*
+  \usepackage{awesomebox}              % boîtes info, important, etc.
   \usepackage{answers}                 % exercices et solutions
   \usepackage{listings}                % code informatique
   \usepackage{pgf}                     % transparence pour couverture avant
@@ -322,8 +323,18 @@
   \newcommand{\capsule}[2]{\href{#1}{#2}\marginpar{%
       \href{#1}{\raisebox{-0.5em}[0em][0em]{\HUGE\faYoutubePlay}}}}
 
-  %% Hyperlien avec symbole de lien externe juste après
-  \newcommand{\link}[2]{\href{#1}{#2~\raisebox{-0.2ex}{\faExternalLink}}}
+  %% Hyperlien avec symbole de lien externe juste après; second
+  %% argument peut être vide pour afficher l'url comme lien
+  %% [https://tex.stackexchange.com/q/53068/24355 pour procédure de
+  %% test du second paramètre vide]
+  \newcommand{\link}[2]{
+    \def\param{#2}%
+    \ifx\param\empty
+      \href{#1}{\nolinkurl{#1}~\raisebox{-0.2ex}{\faExternalLink}}%
+    \else
+      \href{#1}{#2~\raisebox{-0.2ex}{\faExternalLink}}%
+    \fi
+  }
 
   %% Lien vers GitHub dans la page de notices
   \newcommand{\viewsource}[1]{%
