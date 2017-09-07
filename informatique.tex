@@ -74,33 +74,17 @@ R.
     On peut alors voir qu'elle apprend le Fortran.}
 \end{figure}
 
-Autre ancien langage toujours en usage aujourd'hui dans les
-applications de gestion, COBOL (\emph{Common Business Oriented
-  Language}) a été créé en 1959 par un comité formé pour proposer un
-langage commun pour l'administration américaine. La légende urbaine
-veut que les programmeurs COBOL soient aujourd'hui fort bien rémunérés
-du fait de leur rareté et de l'importance opérationnelle des
-applications qu'ils doivent maintenir.
-
-Plus vieux langages encore en activité: COBOL (1959), FORTRAN (1954),
-LISP (1958)
-
-Lisp langage beaucoup utilisé en intelligence artificielle;
-particulièrement élégant, sauf peut-être pour la syntaxe. Citation:
-\emph{}
-
-"Lisp is worth learning for the profound enlightenment experience you will have when you finally get it; that experience will make you a better programmer for the rest of your days, even if you never actually use Lisp itself a lot."
-- Eric Raymond, "How to Become a Hacker"
-http://www.paulgraham.com/quotes.html
-
-Greenspun's tenth rule of programming is an aphorism in computer programming and especially programming language circles that states:[1][2]
-
-Any sufficiently complicated C or Fortran program contains an ad-hoc,
-informally-specified, bug-ridden, slow implementation of half of
-Common Lisp.
-Version courte: Ceux qui ne connaissent pas le Lisp sont condamnés à
-le réinventer
-https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule
+Le deuxième langage le plus ancien toujours largement diffusé est Lisp
+(pour \emph{LISt Processing}). Créé par John McCarthy en 1958 en tant
+que modèle pratique pour représenter des programmes, le Lisp est
+devenu le langage de choix pour la recherche et les applications en
+intelligence artificielle. Il se distingue en outre par une syntaxe
+simple en notation préfixée (voir encadré), le support pour la
+programmation fonctionnelle (\autoref{sec:informatique:paradigmes}) et
+la faculté de manipuler le code source en tant que structure de
+données. Le terme Lisp désigne aujourd'hui une famille de langages
+comprenant de nombreux dialectes, dont Common Lisp, Scheme et Emacs
+Lisp.
 
 \begin{figure}[t]
   \setlength{\FrameRule}{1pt}
@@ -130,15 +114,48 @@ x y +
     seul opérande (comme la négation) ou pour les appels de fonctions.
     La notation suffixée n'a jamais recours aux parenthèses.
 
-    La compagnie HP commercialise des calculatrices scientifiques
-    utilisant la notation suffixée (libellées RPN pour \emph{Reverse
-      Polish Notation}) depuis 1972.
+    La compagnie HP commercialise de très prisées calculatrices
+    scientifiques utilisant la notation suffixée (libellées RPN pour
+    \emph{Reverse Polish Notation}) depuis 1972.
   \end{emphbox}
 \end{figure}
 
-Infix [infixée], Postfix [suffixée] and Prefix [préfixée] notation (encadré?)
-\url{http://www.cs.man.ac.uk/~pjj/cs212/fix.html}
+Le Lisp est entouré d'une aura de beauté et d'élégance dont peu
+d'autres langages peuvent se targuer. Citons Eric Raymond
+dans
+\link{http://www.catb.org/esr/faqs/hacker-howto.html}{\emph{How to
+    Become a Hacker}}:
+\begin{quote}
+  Il faut apprendre le Lisp pour l'extraordinaire expérience d'éveil
+  que procure le fait de finalement le comprendre; cette expérience
+  fera de vous un meilleur programmeur pour toujours, même si vous
+  n'avez plus vraiment à utiliser le Lisp. (Traduction libre)
+\end{quote}
 
+Pour illustrer encore davantage la place toute particulière qu'occupe
+le Lisp en programmation, mentionnons également l'aphorisme selon
+lequel «ceux qui ne connaissent pas le Lisp sont condamnés à le
+réinventer», d'une certaine façon la version courte de la célèbre
+\link{https://en.wikipedia.org/wiki/Greenspun\%27s_tenth_rule}{\emph{Greenspun's
+    tenth rule of programming}}\footnote{%
+  Fait à noter, il n'y a pas d'autres lois que la dixième, de
+  l'\link{http://philip.greenspun.com/bboard/q-and-a-fetch-msg?msg_id=000tgU}{aveu
+    même de l'auteur}.}: %
+\begin{quote}
+  Tout programme en C ou en Fortran suffisamment complexe contient
+  une implémentation mal spécifiée, pleine de bogues et lente de la
+  moitié de Common Lisp. (Traduction libre)
+\end{quote}
+
+Complétons notre tour d'horizon des langages développés dans les
+années 1950 et toujours en usage aujourd'hui par le COBOL (pour
+\emph{COmmon Business Oriented Language}). Ce langage spécialisé dans
+les applications de gestion a été créé en 1959 par un comité formé
+pour proposer un langage commun pour l'administration américaine. La
+légende urbaine veut que les programmeurs COBOL soient comparativement
+très bien rémunérés aujourd'hui sous l'effet combiné de leur rareté et
+de l'importance opérationnelle des applications qu'ils doivent
+maintenir.
 
 Algol Fin des années 1960 publication, by a committee of American and
 European computer scientists, "a new language for algorithms"; the
