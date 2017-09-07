@@ -37,10 +37,11 @@ mais difficile à lire par des humains; voir la
 \begin{figure}
   \centering
   \includegraphics[trim=0 475 0 0, clip=true]{Motorola_6800_Assembly_Language.png}
-  \caption[Programme assembleur pour un microprocesseur 8~bits
+  \caption[Programme en assembleur pour un microprocesseur 8~bits
   Motorola 6800.]{Extrait d'un programme en assembleur pour un
-    microprocesseur 8~bits Motorola 6800. Source:
-    \link{https://commons.wikimedia.org/wiki/File\%3AMotorola_6800_Assembly_Language.png}{Wikimedia Commons}}
+    microprocesseur 8~bits Motorola 6800. {\small Source:
+      \link{https://commons.wikimedia.org/wiki/File\%3AMotorola_6800_Assembly_Language.png}{Wikimedia
+        Commons}}}
   \label{fig:informatique:assembleur}
 \end{figure}
 
@@ -167,7 +168,7 @@ les applications commerciales. Néanmoins, on doit à Algol plusieurs
 innovations importantes, de telle sorte qu'un grand nombre des
 langages qui verront le jour par la suite seront considérés comme ses
 descendants. \citet{Hoare:1973} a d'ailleurs cette jolie formule:
-«Voici un langage très en avance de son temps, il n'a pas seulement
+«Voici un langage très en avance sur son temps, il n'a pas seulement
 été une amélioration de ses prédécesseurs mais aussi une amélioration
 de presque tous ses successeurs.»
 
@@ -181,9 +182,42 @@ de presque tous ses successeurs.»
   \end{minipage}
 \end{figure}
 
-APL (1962) longtemps un langage très prisé par les actuaires; probablement
-encore du code APL dans certaines compagnies d'assurance; inspiration
-pour S et R; continue sa vie aujourd'hui surtout sous J.
+Ce survol des langages de programmation ne serait pas complet sans un
+mot sur APL (\emph{A Programming Language}, qui l'aurait cru). Même
+s'il n'a jamais connu une diffusion importante, ce langage conçu par
+Kenneth Iverson autour de 1962 n'en a pas moins eu une influence
+considérable sur la manière de penser et de représenter les opérations
+mathématiques sur les tableaux à plusieurs dimensions.
+
+Doté d'une foule de symboles pour représenter une large gamme
+d'opérations et d'une syntaxe tout à fait particulière --- les
+expressions sont exécutées de droite à gauche! --- l'APL est
+remarquablement concis et puissant; voir la
+\autoref{fig:informatique:apl}. Le revers de la cette médaille et ce
+qui a assurément nui à son adoption à large échelle, c'est la
+difficulté que l'on éprouve à relire le code. Assez pour que d'aucuns
+qualifient l'APL de «langage à écriture seulement».
+
+\begin{figure}
+  \centering
+  \scalebox{0.4}{\includegraphics{APL_intro}}
+  \caption[Opérations simples en APL.]{Opérations simples en APL. De
+    haut en bas: génération des nombres de $1$ à $5$ et stockage dans
+    la variable \code{x}; affichage du contenu de \code{x}; somme des
+    éléments de \code{x}; moyenne des éléments de \code{x}. {\small Source:
+    François-Dominique,
+    \link{https://commons.wikimedia.org/w/index.php?curid=43207460}{Wikimedia
+      Commons}, CC BY-SA 4.0}}
+  \label{fig:informatique:apl}
+\end{figure}
+
+APL ayant pendant longtemps été un langage très prisé par les
+actuaires, il subsiste encore du code dans certaines compagnies
+d'assurance. Le modèle de traitement des vecteurs, matrices et
+tableaux de l'APL a servi d'inspiration pour la conception du langage
+S --- nous y reviendrons au \autoref{chap:presentation}. Le langage
+continue sa vie aujourd'hui principalemnt sous forme de son
+successeur, J.
 
 
 
