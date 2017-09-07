@@ -327,7 +327,7 @@
   %% argument peut être vide pour afficher l'url comme lien
   %% [https://tex.stackexchange.com/q/53068/24355 pour procédure de
   %% test du second paramètre vide]
-  \newcommand{\link}[2]{
+  \newcommand{\link}[2]{%
     \def\param{#2}%
     \ifx\param\empty
       \href{#1}{\nolinkurl{#1}~\raisebox{-0.2ex}{\faExternalLink}}%
@@ -434,13 +434,12 @@
 \thispagestyle{empty}
 \begin{vplace}[0.45]
   \centering
-  \setkeys{Gin}{width=\textwidth}
-  \begin{minipage}{351pt}
+  \begin{minipage}{0.9\linewidth}
+    \setkeys{Gin}{width=\textwidth}
     \includegraphics{compiling.png} \\
     \footnotesize\sffamily%
     Tiré de \href{http://xkcd.com/303/}{XKCD.com}
   \end{minipage}
-  \setkeys{Gin}{width=0.8\textwidth}
 \end{vplace}
 
 \mainmatter
