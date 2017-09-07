@@ -57,38 +57,33 @@ langage FORTRAN (pour \emph{FORmula TRANslating System}). Le premier
 compilateur voit le jour deux ans plus tard. Fortran (avec des
 minuscules à partir de 1977) deviendra rapidement le langage standard
 dans le calcul scientifique. Plus d'un demi-siècle plus tard, son
-empreinte demeure importante. En effet, la plupart des progiciels
-scientifiques (dont R) recourent toujours aux bibliothèques
-BLAS\footnote{%
+empreinte demeure importante, notamment grâce aux bibliothèques
+d'algèbre linéaire BLAS\footnote{%
   \emph{Basic Linear Algebra Subprograms};
   \link{http://www.netlib.org/blas}{}.} %
 et LAPACK\footnote{%
   \emph{Linear Algebra PACKage};
   \link{http://www.netlib.org/lapack}{}.} %
-écrites en Fortran.
+auxquelles ont recours la plupart des progiciels scientifiques, dont
+R.
 
 \begin{figure}[t]
   \notebox{Dans le très recommandable film Les figures de l'ombre
-    (\emph{Hidden Figures}, 2016), une des héroïnes décide de
+    (\emph{Hidden Figures}, 2016), une des héroïnes entreprend de
     s'attaquer à la programmation des nouveaux ordinateurs de la NASA.
     On peut alors voir qu'elle apprend le Fortran.}
 \end{figure}
 
+Autre ancien langage toujours en usage aujourd'hui dans les
+applications de gestion, COBOL (\emph{Common Business Oriented
+  Language}) a été créé en 1959 par un comité formé pour proposer un
+langage commun pour l'administration américaine. La légende urbaine
+veut que les programmeurs COBOL soient aujourd'hui fort bien rémunérés
+du fait de leur rareté et de l'importance opérationnelle des
+applications qu'ils doivent maintenir.
+
 Plus vieux langages encore en activité: COBOL (1959), FORTRAN (1954),
 LISP (1958)
-
-
-Algol Fin des années 1960 publication, by a committee of American and
-European computer scientists, "a new language for algorithms"; the
-ALGOL 60 Report (the "ALGOrithmic Language"). Velléité de
-standardisation des langages de programmation; évidemment un échec;
-néanmoins plusieurs innovations importantes qui feront en sorte qu'un
-grand nombre des langages qui verront le jour par la suite seront
-considérés comme des descendants d'Algol.
-
-APL (1962) longtemps un langage très prisé par les actuaires; probablement
-encore du code APL dans certaines compagnies d'assurance; inspiration
-pour S et R; continue sa vie aujourd'hui surtout sous J.
 
 Lisp langage beaucoup utilisé en intelligence artificielle;
 particulièrement élégant, sauf peut-être pour la syntaxe. Citation:
@@ -107,6 +102,67 @@ Version courte: Ceux qui ne connaissent pas le Lisp sont condamnés à
 le réinventer
 https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule
 
+\begin{figure}[t]
+  \setlength{\FrameRule}{1pt}
+  \begin{emphbox}{\mdseries Notations infixée, préfixée et suffixée}
+    Les notations infixée (\emph{infix}), préfixée (\emph{prefix}) et
+    suffixée (\emph{postfix}) sont trois manières différentes, mais
+    équivalentes, d'écrire des expressions en mathématiques ou en
+    programmation.
+
+    Par exemple, l'opération d'addition de deux opérandes $x$ et $y$
+    s'écrit en notation infixée
+\begin{lstlisting}[backgroundcolor=\color{codebg}]
+x + y
+\end{lstlisting}
+    En notation préfixée, aussi appelée notation polonaise,
+    l'opérateur est placé \emph{avant} les opérandes:
+\begin{lstlisting}[backgroundcolor=\color{codebg}]
++ x y
+\end{lstlisting}
+    On l'aura compris, en notation suffixée, ou notation polonaise
+    inversée, l'opérateur apparait \emph{après} les opérandes:
+\begin{lstlisting}[backgroundcolor=\color{codebg}]
+x y +
+\end{lstlisting}
+    Nous sommes davantage habitués à lire la notation infixée, quoique
+    la notation préfixée nous soit familière pour les opérateurs à un
+    seul opérande (comme la négation) ou pour les appels de fonctions.
+    La notation suffixée n'a jamais recours aux parenthèses.
+
+    La compagnie HP commercialise des calculatrices scientifiques
+    utilisant la notation suffixée (libellées RPN pour \emph{Reverse
+      Polish Notation}) depuis 1972.
+  \end{emphbox}
+\end{figure}
+
+Infix [infixée], Postfix [suffixée] and Prefix [préfixée] notation (encadré?)
+\url{http://www.cs.man.ac.uk/~pjj/cs212/fix.html}
+
+
+Algol Fin des années 1960 publication, by a committee of American and
+European computer scientists, "a new language for algorithms"; the
+ALGOL 60 Report (the "ALGOrithmic Language"). Velléité de
+standardisation des langages de programmation; évidemment un échec;
+néanmoins plusieurs innovations importantes qui feront en sorte qu'un
+grand nombre des langages qui verront le jour par la suite seront
+considérés comme des descendants d'Algol.
+
+\begin{figure}[t]
+  \centering
+  \begin{minipage}{0.9\linewidth}
+    \setkeys{Gin}{width=\textwidth}
+    \includegraphics{standards} \\
+    \footnotesize\sffamily%
+    Tiré de \href{http://xkcd.com/927/}{XKCD.com}
+  \end{minipage}
+\end{figure}
+
+APL (1962) longtemps un langage très prisé par les actuaires; probablement
+encore du code APL dans certaines compagnies d'assurance; inspiration
+pour S et R; continue sa vie aujourd'hui surtout sous J.
+
+
 
 C Kernighan et Ritchie, Bell Labs -> John Chambers et S; Unix;
 toujours beaucoup utilisé pour le calcul numérique intensif; évolution
@@ -115,8 +171,6 @@ vers C++
 Python (1991)
 \url{https://en.wikipedia.org/wiki/Python_(programming_language)}
 
-Infix [infixée], Postfix [suffixée] and Prefix [préfixée] notation (encadré?)
-\url{http://www.cs.man.ac.uk/~pjj/cs212/fix.html}
 
 
 
