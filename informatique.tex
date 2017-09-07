@@ -18,9 +18,9 @@ Intro du chapitre
 
 Ada Lovelace (1815--1852) est généralement reconnue comme la première
 auteure d'un algorithme et de ce que l'on appelle aujourd'hui un
-programme informatique. Le langage Ada, conçu en réponse à un cahier
-de charges du département de la Défense des États-Unis au début des
-années 1980, a d'ailleurs été nommé en son honneur.
+programme informatique. C'est en son honneur qu'été nommé le langage
+Ada conçu en réponse à un cahier de charges du département de la
+Défense des États-Unis au début des années 1980.
 
 Franchissons d'un bond les premiers jours de l'informatique et de la
 programmation\footnote{%
@@ -29,7 +29,7 @@ programmation\footnote{%
   (\link{https://fr.wikipedia.org/wiki/Histoire_des_langages_de_programmation}{français},
   \link{https://en.wikipedia.org/wiki/History_of_programming_languages}{anglais}).} %
 pour arriver aux ordinateurs électriques modernes, dans les années
-1940. On programme généralement ceux-ci en \emph{assembleur}, un
+1940. On programme alors généralement ceux-ci en \emph{assembleur}, un
 langage de très bas niveau facilement interprétable par la machine,
 mais difficile à lire par des humains; voir la
 \autoref{fig:informatique:assembleur}.
@@ -44,20 +44,39 @@ mais difficile à lire par des humains; voir la
   \label{fig:informatique:assembleur}
 \end{figure}
 
-Premiers langages créés pour transmettre des instructions à un
-ordinateur à partir des années 1950. À l'origine intimement liés à
-l'architecture propre d'un ordinateur; autrement dit, à chaque type
-d'ordinateur son langage de programmation.
+Les premiers langages créés pour transmettre des instructions à un
+ordinateur apparaissent dans les années 1950. Ils sont à l'origine
+intimement liés à l'architecture d'un ordinateur: à chaque type
+d'ordinateur son langage de programmation. Certaines contraintes ---
+ou exigences --- des langages de l'époque proviennent aussi du support
+physique alors utilisé pour stocker les programmes: les cartes
+perforées.
+
+En 1954, l'ingénieur de IBM John Backus publie les spécifications du
+langage FORTRAN (pour \emph{FORmula TRANslating System}). Le premier
+compilateur voit le jour deux ans plus tard. Fortran (avec des
+minuscules à partir de 1977) deviendra rapidement le langage standard
+dans le calcul scientifique. Plus d'un demi-siècle plus tard, son
+empreinte demeure importante. En effet, la plupart des progiciels
+scientifiques (dont R) recourent toujours aux bibliothèques
+BLAS\footnote{%
+  \emph{Basic Linear Algebra Subprograms};
+  \link{http://www.netlib.org/blas}{}.} %
+et LAPACK\footnote{%
+  \emph{Linear Algebra PACKage};
+  \link{http://www.netlib.org/lapack}{}.} %
+écrites en Fortran.
+
+\begin{figure}[t]
+  \notebox{Dans le très recommandable film Les figures de l'ombre
+    (\emph{Hidden Figures}, 2016), une des héroïnes décide de
+    s'attaquer à la programmation des nouveaux ordinateurs de la NASA.
+    On peut alors voir qu'elle apprend le Fortran.}
+\end{figure}
 
 Plus vieux langages encore en activité: COBOL (1959), FORTRAN (1954),
 LISP (1958)
 
-Certaines caractéristiques --- ou exigences --- des plus vieux
-langages proviennent de contraintes liées au support physique utilisé
-à l'époque de leur création: les cartes perforées.
-
-Empreinte de Fortran en calcul scientifique toujours importante,
-notamment via BLAS et LAPACK
 
 Algol Fin des années 1960 publication, by a committee of American and
 European computer scientists, "a new language for algorithms"; the
