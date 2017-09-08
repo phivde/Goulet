@@ -21,6 +21,7 @@
   \usepackage[shortlabels]{enumitem}
   \usepackage[absolute]{textpos}       % éléments des pages de titre
   \usepackage{graphicx}
+  \usepackage{relsize}                 % \smaller et al.
   \usepackage{manfnt}                  % \mantriangleright (puce)
   \usepackage{metalogo}                % \XeLaTeX logo
   \usepackage{applekeys}               % touches Mac
@@ -330,9 +331,9 @@
   \newcommand{\link}[2]{%
     \def\param{#2}%
     \ifx\param\empty
-      \href{#1}{\nolinkurl{#1}~\raisebox{-0.1ex}{\small\faExternalLink}}%
+      \href{#1}{\nolinkurl{#1}~\raisebox{-0.1ex}{\smaller\faExternalLink}}%
     \else
-      \href{#1}{#2~\raisebox{-0.1ex}{\small\faExternalLink}}%
+      \href{#1}{#2~\raisebox{-0.1ex}{\smaller\faExternalLink}}%
     \fi
   }
 
