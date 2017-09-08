@@ -23,16 +23,12 @@ Ada conçu en réponse à un cahier de charges du département de la
 Défense des États-Unis au début des années 1980.
 
 Franchissons d'un bond les premiers jours de l'informatique et de la
-programmation\footnote{%
-  Les lecteurs intéressés à en apprendre davantage sur le sujet
-  pourront débuter par les entrées de Wikipedia
-  (\link{https://fr.wikipedia.org/wiki/Histoire_des_langages_de_programmation}{français},
-  \link{https://en.wikipedia.org/wiki/History_of_programming_languages}{anglais}).} %
-pour arriver aux ordinateurs électriques modernes, dans les années
-1940. On programme alors généralement ceux-ci en \emph{assembleur}, un
-langage de très bas niveau facilement interprétable par la machine,
-mais difficile à lire par des humains; voir la
-\autoref{fig:informatique:assembleur}.
+programmation pour arriver aux ordinateurs électriques modernes, dans
+les années 1940. On programme alors généralement ceux-ci en
+\emph{assembleur}, un langage de très bas niveau facilement
+interprétable par la machine, mais difficile à lire par des humains,
+comme l'extrait de programme de la
+\autoref{fig:informatique:assembleur} le démontre bien.
 
 \begin{figure}
   \centering
@@ -114,17 +110,18 @@ le Lisp en programmation, mentionnons également l'aphorisme selon
 lequel «ceux qui ne connaissent pas le Lisp sont condamnés à le
 réinventer», d'une certaine façon la version courte de la célèbre
 \link{https://en.wikipedia.org/wiki/Greenspun\%27s_tenth_rule}{\emph{Greenspun's
-    tenth rule of programming}}\footnote{%
-  Fait à noter, il n'y a pas d'autres lois que la dixième, de
-  l'\link{http://philip.greenspun.com/bboard/q-and-a-fetch-msg?msg_id=000tgU}{aveu
-    même de l'auteur}.}: %
+    tenth rule of programming}}: %
 \begin{quote}
   Tout programme en C ou en Fortran suffisamment complexe contient une
   implémentation mal spécifiée, pleine de bogues et lente de la moitié
   de Common Lisp.
 \end{quote}
+(Fait amusant à noter: il n'y a pas d'autres lois que la dixième, de
+l'\link{http://philip.greenspun.com/bboard/q-and-a-fetch-msg?msg_id=000tgU}{aveu
+  même de l'auteur}.)
 
 \begin{figure}[t]
+  \label{fig:informatique:notations}
   \setlength{\FrameRule}{1pt}
   \begin{emphbox}{\mdseries Notations infixée, préfixée et suffixée}
     Les notations infixée (\emph{infix}), préfixée (\emph{prefix}) et
@@ -161,11 +158,11 @@ x y +
 \subsection{COBOL}
 \label{sec:informatique:historique:cobol}
 
-Complétons notre tour d'horizon des langages développés dans les
-années 1950 et toujours en usage de nos jours par COBOL (\emph{COmmon
-  Business Oriented Language}). Ce langage spécialisé dans les
-applications de gestion a été créé en 1959 par un comité formé pour
-proposer un langage commun pour l'administration américaine.
+Le troisième langage développé dans les années 1950 et toujours en
+usage de nos jours est COBOL (\emph{COmmon Business Oriented
+  Language}). Ce langage spécialisé dans les applications de gestion a
+été créé en 1959 par un comité formé pour proposer un langage commun
+pour l'administration américaine.
 
 Le COBOL reste très utilisé dans de grandes entreprises, notamment
 dans les institutions financières. La légende urbaine veut d'ailleurs
@@ -189,10 +186,13 @@ sorte qu'un grand nombre des langages qui verront le jour par la suite
 seront considérés comme ses descendants; le poster
 \link{http://www.oreilly.com/go/languageposter}{\emph{History of
     Programming Languages}} de O'Reilly Media illustre ce fait à
-merveille. \citet{Hoare:1973} a d'ailleurs cette jolie formule: «Voici
-un langage très en avance sur son temps, il n'a pas seulement été une
-amélioration de ses prédécesseurs mais aussi une amélioration de
-presque tous ses successeurs.»
+merveille. \citet{Hoare:1973} a d'ailleurs cette jolie formule:
+\begin{quote}
+  Voici un langage très en avance sur son temps, il n'a pas seulement
+  été une amélioration de ses prédécesseurs mais aussi une
+  amélioration de presque tous ses successeurs.
+\end{quote}
+
 
 \begin{figure}[t]
   \centering
@@ -248,8 +248,7 @@ successeur, J.
 \subsection{C}
 \label{sec:informatique:historique:c}
 
-Le dernier jalon important auquel nous nous attarderons est le langage
-C. Celui-ci a été inventé en 1972 chez Bell Labs par Ken Thompson et
+Le langage C a été inventé en 1972 chez Bell Labs par Ken Thompson et
 Dennis Ritchie afin de réécrire le système d'exploitation UNIX
 (\autoref{sec:informatique:os:unix}). Il demeure beaucoup utilisé pour
 la programmation système: le noyau de systèmes d'exploitation comme
@@ -263,11 +262,14 @@ et la fermeture des fichiers, etc.
 
 Le langage demeure l'un des plus utilisés dans le monde et son
 influence est considérable. De nombreux langages plus modernes comme
-C$++$, C\# et Java reprennent des aspects de C. Le C est également
+\Cpp, C\# et Java reprennent des aspects de C. Le C est également
 beaucoup utilisé pour le calcul numérique intensif, où il s'est en
 quelque sorte substitué à Fortran. La plupart des progiciels
 scientifiques --- dont R, encore une fois --- offrent la possibilité
-d'appeler du code C lorsque la rapidité de calcul devient un enjeu.
+d'appeler du code C lorsque la rapidité de calcul devient un enjeu. Le
+gain en temps d'exécution doit toutefois être suffisamment grand pour
+compenser le temps de développement plus long qu'exige le C par
+rapport à des langages de plus haut niveau.
 
 \begin{figure}[t]
   \notebox{Dans l'ouvrage désormais classique de \cite{KandR:1978}, le
@@ -277,12 +279,54 @@ d'appeler du code C lorsque la rapidité de calcul devient un enjeu.
     exemple.}
 \end{figure}
 
-Python (1991)
-\url{https://en.wikipedia.org/wiki/Python_(programming_language)}
+\subsection{Autres jalons}
+\label{sec:informatique:historique:autres}
 
+Nous nous sommes attardés jusqu'ici à des langages de programmation
+vieux de plus de 40 ans à cause de leur importance historique et parce
+qu'ils sont toujours utilisés couramment. De nombreux autres langages
+ont vu le jour depuis, si bien qu'ils se comptent aujourd'hui par
+milliers. En voici quelques autres ayant occupé une place
+prépondérante dans l'histoire.
 
+\begin{itemize}
+\item Comme son nom l'indique, \textbf{\Cpp} (Bjarne Stroustrup, 1980)
+  est un dérivé du C qui lui ajoute, en autres choses, la
+  programmation orientée objet. Certains considèrent que {\Cpp}
+  devrait être le point d'entrée de toute personne voulant débuter à
+  programmer avec des langages de la famille du C. Le code C est
+  compatible avec le \Cpp.
+\item Principal représentant de l'ère Internet des années 1990,
+  \textbf{Java} (James Gosling, 1995) a été conçu pour que le code
+  écrit dans ce langage puisse s'exécuter sur n'importe quelle
+  plateforme informatique sans nécessiter une nouvelle compilation. Il
+  est donc très populaire dans les applications web ou embarquées. Sa
+  syntaxe est fortement inspirée du \Cpp.
+\item \textbf{Visual Basic} (Microsoft, 1991) permet de développer des
+  applications de manière interactive en disposant des composantes sur
+  un canevas. Le langage est aujourd'hui discontinué, mais son dérivé
+  \textbf{Visual Basic for Applications} (VBA) demeure beaucoup
+  utilisé dans les applications de la suite bureautique Office.
+\item \textbf{Python} (Guido van Rossum, 1991) est un langage de haut
+  niveau, orienté objet, multiplateforme et sous licence libre. C'est
+  un des langages les plus utilisés aujourd'hui pour le calcul
+  scientifique et l'analyse de données massives.
+\end{itemize}
 
+Certains langages de programmation ont une vocation généraliste,
+certains visent des niches particulières, alors que d'autres cherchent
+surtout à faire progresser l'état des connaissances dans la théorie
+des langages. Quoi qu'il en soit, un langage de programmation demeure
+un outil et, en informatique comme dans d'autres domaines, il convient
+de choisir le meilleur outil pour accomplir une tâche donnée.
 
+Nous invitons les lecteurs intéressés à en savoir davantage sur
+l'histoire des langages de programmation en général, ou sur l'un ou
+l'autre des langages mentionnés ci-dessus en particulier, à débuter
+par les très complètes entrées de Wikipedia en
+\link{https://fr.wikipedia.org/wiki/Histoire_des_langages_de_programmation}{français}
+et en
+\link{https://en.wikipedia.org/wiki/History_of_programming_languages}{anglais}.
 
 
 \section{Syntaxe et sémantique}
