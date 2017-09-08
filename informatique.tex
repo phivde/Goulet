@@ -123,6 +123,9 @@ l'\link{http://philip.greenspun.com/bboard/q-and-a-fetch-msg?msg_id=000tgU}{aveu
 \begin{figure}[t]
   \label{fig:informatique:notations}
   \setlength{\FrameRule}{1pt}
+  \lstset{backgroundcolor=\color{codebg},
+    frame=lr, rulecolor=\color{codebg},
+    xleftmargin=3.4pt, xrightmargin=3.4pt}
   \begin{emphbox}{\mdseries Notations infixée, préfixée et suffixée}
     Les notations infixée (\emph{infix}), préfixée (\emph{prefix}) et
     suffixée (\emph{postfix}) sont trois manières différentes, mais
@@ -131,17 +134,17 @@ l'\link{http://philip.greenspun.com/bboard/q-and-a-fetch-msg?msg_id=000tgU}{aveu
 
     Par exemple, l'opération d'addition de deux opérandes $x$ et $y$
     s'écrit en notation infixée
-\begin{lstlisting}[backgroundcolor=\color{codebg}]
+\begin{lstlisting}
 x + y
 \end{lstlisting}
     En notation préfixée, aussi appelée notation polonaise,
     l'opérateur est placé \emph{avant} les opérandes:
-\begin{lstlisting}[backgroundcolor=\color{codebg}]
+\begin{lstlisting}
 + x y
 \end{lstlisting}
     On l'aura compris, en notation suffixée, ou notation polonaise
     inversée, l'opérateur apparait \emph{après} les opérandes:
-\begin{lstlisting}[backgroundcolor=\color{codebg}]
+\begin{lstlisting}
 x y +
 \end{lstlisting}
     Nous sommes davantage habitués à lire la notation infixée, quoique
