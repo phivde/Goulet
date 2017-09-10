@@ -11,7 +11,7 @@
 \chapter{Éléments d'informatique pour programmeurs}
 \label{chap:informatique}
 
-Intro du chapitre
+% Intro du chapitre
 
 \section{Bref historique des langages de programmation}
 \label{sec:informatique:historique}
@@ -368,6 +368,52 @@ qui réduit le temps de développement.
 \section{Paradigmes de programmation}
 \label{sec:informatique:paradigmes}
 
+Un programme informatique est toujours écrit pour résoudre un problème
+donné. Or, comme pour tout problème dans la vie, la solution à
+celui-ci peut être formulée de différentes manières. Le style
+fondamental avec lequel on exprime la solution est appelé le
+\emph{paradigme} de programmation.
+
+Il existe plusieurs paradigmes de programmation. Nous nous
+contenterons ici de n'en présenter que quatre.
+
+\begin{description}
+\item[Impératif] On indique à l'ordinateur les opérations à exécuter
+  et l'ordre dans lequel les exécuter. C'est le paradigme le plus
+  intuitif.
+\item[Déclaratif] On indique cette fois à l'ordinateur ce que l'on
+  souhaite obtenir comme résultat, mais sans préciser comme y
+  parvenir. Il est laissé à la mise en œuvre du langage de déterminer
+  la meilleure méthode de résolution du problème.
+
+  Par exemple, pour extraire d'une base de données \code{etudiants} le
+  prénom de toutes les personnes de plus de 25~ans, on écrira dans un
+  langage déclaratif comme le SQL:
+\begin{Schunk}
+\begin{Sinput}
+SELECT prenom FROM etudiants WHERE age > 25
+\end{Sinput}
+\end{Schunk}
+  Nulle part n'est-il précisé comment le programme devrait procéder à
+  l'extraction.
+\item[Fonctionnel] Un programme est une suite d'appels de fonctions,
+  comme en mathématiques. L'exécution d'une fonction n'a pas d'impact
+  sur les autres fonctions\footnote{%
+    Autrement on dit qu'une fonction a un effet de bord (\emph{side
+      effect}.} %
+  Les opérations complexes sont réalisées en combinant les fonctions,
+  de manière analogue à la composition de fonctions $g \circ f$.
+\item[Orienté objet] Un programme est conçu comme un ensemble de blocs
+  logiciels (les objets) qui interagissent entre eux. Une
+  \emph{méthode} applique un traitement différent à un objet
+  selon sa \emph{classe}. Ce paradigme est particulièrement utilisé
+  dans les grands et complexes projets informatiques.
+\end{description}
+
+La plupart des langages d'usage courant combinent d'office, ou
+laissent au programmeur la possibilité de combiner, plusieurs
+paradigmes. Par exemple, le langage {\Cpp} est à la fois un langage
+impératif et orienté objet.
 
 
 \section{Sémantique et syntaxe}
@@ -402,8 +448,8 @@ respectée. Le respect de la sémantique, ou de la manière propre d'un
 langage d'exprimer des idées, demande plus d'efforts et de pratique.
 
 
-\section{Systèmes d'exploitation}
-\label{sec:informatique:os}
+% \section{Systèmes d'exploitation}
+% \label{sec:informatique:os}
 
 
 
