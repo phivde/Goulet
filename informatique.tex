@@ -332,6 +332,44 @@ et en
 \link{https://en.wikipedia.org/wiki/History_of_programming_languages}{anglais}.
 
 
+\section{Langages compilés et interprétés}
+\label{sec:informatique:compile_vs_interprete}
+
+Tous les langages de programmation\footnote{%
+  À l'exception du langage machine, mais rares sont les personnes qui
+  souhaitent ne programmer qu'avec des $0$ et des $1$.} %
+requièrent un traitement afin que les programmes écrits avec ceux-ci
+puissent être exploités par un ordinateur. Il existe deux grandes
+façons d'effectuer ce traitement: par \emph{compilation} et par
+\emph{interprétation}.
+
+Un compilateur est un programme informatique qui transforme en langage
+machine le code source rédigé dans un langage donné. On dit alors de
+ce langage qu'il est \emph{compilé}. Le compilateur produit un fichier
+informatique que l'ordinateur peut ensuite exécuter directement. Sur
+la plateforme Windows, on reconnait notamment ces fichiers par leurs
+extensions \code{.exe} ou \code{.dll}. Les noyaux d'à peu près toutes
+les applications sur nos ordinateurs sont des fichiers compilés.
+
+Un interprète (ou interpréteur), quant à lui, est un programme qui
+analyse, traduit et exécute le code source d'un programme
+informatique, et ce, à chaque fois que le programme doit être exécuté.
+Un langage qui nécessite l'intermédiaire d'un interprète est dit
+\emph{interprété}. Un programme écrit dans un langage interprété ne
+peut être distribué sans son interprète.
+
+Le traitement additionnel entre le code source et le langage machine
+fait généralement en sorte que les langages interprétés sont plus
+lents que les langages compilés à l'exécution. En revanche, une foule
+de détails de mise en œuvre sont pris en charge par l'interprète, ce
+qui réduit le temps de développement.
+
+
+\section{Paradigmes de programmation}
+\label{sec:informatique:paradigmes}
+
+
+
 \section{Sémantique et syntaxe}
 \label{sec:informatique:semantique}
 
@@ -363,9 +401,6 @@ programme compile ou s'exécute, c'est généralement que la syntaxe est
 respectée. Le respect de la sémantique, ou de la manière propre d'un
 langage d'exprimer des idées, demande plus d'efforts et de pratique.
 
-
-\section{Paradigmes de programmation}
-\label{sec:informatique:paradigmes}
 
 \section{Systèmes d'exploitation}
 \label{sec:informatique:os}
