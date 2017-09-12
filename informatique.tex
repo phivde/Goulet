@@ -453,28 +453,125 @@ langage d'exprimer des idées, demande plus d'efforts et de pratique.
 
 Le système d'exploitation (\emph{operating system}, OS) est un
 ensemble de programmes qui gère les ressources matérielles et
-logicielles d'un ordinateur. Premier logiciel exécuté par l'ordinateur
-lors de la mise en marche, le système d'exploitation reçoit les
-demandes de ressources des applications --- espace mémoire, unité de
-calcul, disque dur, communication avec les périphériques,
+logicielles d'un ordinateur. Premier programme exécuté par
+l'ordinateur lors de la mise en marche, le système d'exploitation
+reçoit les demandes de ressources des applications --- espace mémoire,
+unité de calcul, disque dur, communication avec les périphériques,
 utilisation du réseau --- et les alloue en fonction de l'état du
 système et des demandes concurrentes des autres applications. Tous les
 logiciels applicatifs requièrent un système d'exploitation pour
 fonctionner.
 
 Il existe une grande variété de systèmes d'exploitation. Les plus
-connus aujourd'hui sont Microsoft Windows, macOS de Apple et Linux pour
-les ordinateurs de table et les serveurs; Android et iOS pour les
-appareils mobiles.
+connus aujourd'hui sont, pour les ordinateurs personnels et les
+serveurs, Windows de Microsoft, macOS de Apple et Linux, un logiciel
+libre créé et toujours administré par Linus Torvalds. Pour les
+appareils mobiles, deux systèmes d'exploitation se partagent
+l'essentiel du marché: iOS et Android. Le premier est dérivé de macOS
+et le second, de Linux.
+
+Les systèmes macOS et Linux appartiennent à la famille des systèmes
+Unix. Cela ne laisse donc en fait que deux grandes classes de systèmes
+d'exploitation couramment utilisés: Windows et Unix.
 
 \subsection{Windows}
 \label{sec:informatique:os:windows}
 
+Le système d'exploitation Windows de Microsoft équipe près de 90~\%
+des ordinateurs personnels dans le monde. Dans les circonstances, rares
+sont les personnes qui n'ont jamais utilisé le système, ne serait-ce
+qu'à petites doses.
 
+À l'origine, en 1985, Windows n'était qu'une interface graphique
+superposée au véritable système d'exploitation des ordinateurs de type
+«compatibles IBM PC», le DOS. Les versions grand public depuis
+Windows~2000 sont plutôt basées sur le noyau de Windows~NT, un système
+conçu à partir de zéro et lancé au milieu des années 1990 en tant que
+système pour les entreprises.
+
+Le plus grand avantage de Windows est son ubiquité. À peu près toutes
+les applications, sauf peut-être celles s'adressant à un segment de
+marché très précis, sont disponibles sous Windows, en code natif, via
+un port depuis Unix, ou encore par l'intermédiaire d'une couche
+logicielle d'émulation comme Cygwin ou MinGW/MSYS.
+
+Un système d'exploitation multiutilisateur prend pour acquis que
+plusieurs utilisateurs se partageront les ressources de l'ordinateur,
+simultanément lorsqu'il s'agit d'un serveur, ou les uns après les
+autres dans le cas d'un ordinateur personnel. Dans un tel système, on
+établit des règles strictes d'accès aux ressources du système (seul
+l'administrateur peut installer ou supprimer des applications) et
+d'accès aux ressources des autres utilisateurs (Marianne n'a pas
+accès aux fichiers d'Alexandre et vice-versa).
+
+Les versions de Windows multiutilisateurs sont apparues relativement
+tard sur le marché grand public, et ce, sans que le paradigme ne soit
+imposé aux utilisateurs. Résultat: la plupart des utilisateurs de
+Windows s'octroient à la ronde les droits d'administrateur et, pire,
+plusieurs applications nécessitent toujours un accès total au système.
+C'est par ces failles que se propagent virus et autres logiciels
+malveillants sur la plateforme.
+
+Les systèmes Windows sont livrés avec une trousse de développement
+très restreinte. Les programmeurs doivent donc installer les outils
+nécessaires, souvent sous forme de suites logicielles monolithiques,
+ce qui entraîne dédoublements et, parfois, conflits.
 
 \subsection{Unix}
 \label{sec:informatique:os:unix}
 
+Le terme «Unix» --- ou UNIX qui, en majuscules, est une marque déposée
+de Open Group --- recoupe une famille de systèmes d'exploitation
+dérivant tous du premier système Unix développé chez Bell Labs dans
+les années 1970 par Kenneth Thompson, Dennis Ritchie et plusieurs
+autres.
+
+Les systèmes Unix partagent un certain nombre de caractéristiques
+communes. D'abord, ils sont intrinsèquement multitâches et
+multiutilisateurs. Ensuite, la «philosophie Unix» commande la
+modularité: le système d'exploitation fournit aux utilisateurs
+(via un interpréteur de commande, ou \emph{shell}) et aux applications
+une multitude de petits outils très spécialisés qui ne réalisent à peu
+près qu'une seule tâche. Le système rend ensuite simple, via un
+mécanisme dit de «redirection» (\emph{pipe}) de les combiner pour
+effectuer des opérations plus complexes.
+
+Par exemple, pour extraire le mot \emph{redirection} du code source
+contenant le précédent paragraphe, nous pourrions utiliser l'outil
+\code{grep} pour extraire la ligne où se trouve le mot, puis l'outil
+\code{cut} pour isoler le mot qui nous intéresse et, enfin, l'outil
+\code{tr} pour supprimer les guillemets autour du mot.\footnote{%
+  Dans la mesure où le mot recherché est le quatrième de la ligne dans
+  le fichier source \code{informatique.tex}, la commande résultante
+  est:
+  \code{grep "«redirection»" informatique.tex | cut -d " " -f 4 | tr -d «»}\,.
+  Le caractère \code{|} est la commande de redirection.}
+
+À l'exception notable des Mac, Unix demeure assez peu répandu sur les
+ordinateurs personnels. En revanche le système d'exploitation, en
+particulier sa variante libre Linux, équipe l'immense majorité des
+stations de travail, serveurs et supercalculateurs. De plus, bon
+nombre d'applications scientifiques et de langages de programmation
+sont d'abord développés sur des systèmes Unix. Pour ces
+raisons, nous estimons utile pour des programmeurs de connaître les
+quelques «Unix-ismes» ci-dessous.
+
+\begin{itemize}
+\item La barre oblique (\code{/}) est utilisée pour séparer les
+  dossiers dans les chemins d'accès aux fichiers (plus de détails à la
+  \autoref{sec:informatique:fs}).
+\item Tout utilisateur dispose d'un espace disque réservé identifié
+  comme le «répertoire personnel» ou le «dossier de départ»;
+  \emph{home directory}, en anglais. Ce répertoire est situé dans
+  \code{/Users} sous macOS et habituellement dans \code{/home} sous
+  Linux.
+\item À l'invite de commande et dans la configuration de plusieurs
+  applications, le caractère \,\verb=~=\, représente le répertoire
+  personnel.
+\item Toujours à l'invite de commande, il est possible d'appuyer sur
+  \code{TAB} pour compléter les noms de fichiers, de répertoires ou de
+  commandes.
+\end{itemize}
 
 
 
