@@ -25,7 +25,7 @@ Défense des États-Unis au début des années 1980.
 Franchissons d'un bond les premiers jours de l'informatique et de la
 programmation pour arriver aux ordinateurs électriques modernes, dans
 les années 1940. On programme alors généralement ceux-ci en
-\emph{assembleur}, un langage de très bas niveau facilement
+assembleur, un langage de très bas niveau facilement
 interprétable par la machine, mais difficile à lire par des humains,
 comme l'extrait de programme de la
 \autoref{fig:informatique:assembleur} le démontre bien.
@@ -70,12 +70,10 @@ auxquelles ont recours la plupart des progiciels scientifiques, dont
 R. Le langage est toujours utilisé en calcul haute performance et pour
 mesurer le rendement des superordinateurs.
 
-\begin{figure}[t]
-  \notebox{Dans le très recommandable film Les figures de l'ombre
-    (\emph{Hidden Figures}, 2016), une des héroïnes entreprend de
-    s'attaquer à la programmation des nouveaux ordinateurs de la NASA.
-    On peut alors voir qu'elle apprend le Fortran.}
-\end{figure}
+\notebox{Dans le très recommandable film «Les figures de l'ombre»
+  (\emph{Hidden Figures}, 2016), une des héroïnes entreprend de
+  s'attaquer à la programmation des nouveaux ordinateurs de la NASA.
+  On peut alors voir qu'elle apprend le Fortran.}
 
 \subsection{Lisp}
 \label{sec:informatique:historique:lisp}
@@ -138,12 +136,12 @@ l'\link{http://philip.greenspun.com/bboard/q-and-a-fetch-msg?msg_id=000tgU}{aveu
 x + y
 \end{lstlisting}
     En notation préfixée, aussi appelée notation polonaise,
-    l'opérateur est placé \emph{avant} les opérandes:
+    l'opérateur est placé avant les opérandes:
 \begin{lstlisting}
 + x y
 \end{lstlisting}
     On l'aura compris, en notation suffixée, ou notation polonaise
-    inversée, l'opérateur apparait \emph{après} les opérandes:
+    inversée, l'opérateur apparait après les opérandes:
 \begin{lstlisting}
 x y +
 \end{lstlisting}
@@ -274,13 +272,10 @@ gain en temps d'exécution doit toutefois être suffisamment grand pour
 compenser le temps de développement plus long qu'exige le C par
 rapport à des langages de plus haut niveau.
 
-\begin{figure}[t]
-  \notebox{Dans l'ouvrage désormais classique de \cite{KandR:1978}, le
-    premier exemple d'un programme C affiche le message «\emph{hello,
-      world}» à l'écran. Ça deviendra ensuite une tradition de
-    démontrer le fonctionnement ou la syntaxe d'un langage avec cet
-    exemple.}
-\end{figure}
+\notebox{Dans l'ouvrage classique de \cite{KandR:1978}, le premier
+  exemple d'un programme C affiche le message «\emph{hello, world}» à
+  l'écran. Ça deviendra ensuite une tradition de démontrer le
+  fonctionnement ou la syntaxe d'un langage avec cet exemple.}
 
 \subsection{Autres jalons}
 \label{sec:informatique:historique:autres}
@@ -340,12 +335,12 @@ Tous les langages de programmation\footnote{%
   souhaitent ne programmer qu'avec des $0$ et des $1$.} %
 requièrent un traitement afin que les programmes écrits avec ceux-ci
 puissent être exploités par un ordinateur. Il existe deux grandes
-façons d'effectuer ce traitement: par \emph{compilation} et par
-\emph{interprétation}.
+façons d'effectuer ce traitement: par compilation et par
+interprétation.
 
 Un compilateur est un programme informatique qui transforme en langage
 machine le code source rédigé dans un langage donné. On dit alors de
-ce langage qu'il est \emph{compilé}. Le compilateur produit un fichier
+ce langage qu'il est «compilé». Le compilateur produit un fichier
 informatique que l'ordinateur peut ensuite exécuter directement. Sur
 la plateforme Windows, on reconnait notamment ces fichiers par leurs
 extensions \code{.exe} ou \code{.dll}. Les noyaux d'à peu près toutes
@@ -355,7 +350,7 @@ Un interprète (ou interpréteur), quant à lui, est un programme qui
 analyse, traduit et exécute le code source d'un programme
 informatique, et ce, à chaque fois que le programme doit être exécuté.
 Un langage qui nécessite l'intermédiaire d'un interprète est dit
-\emph{interprété}. Un programme écrit dans un langage interprété ne
+«interprété». Un programme écrit dans un langage interprété ne
 peut être distribué sans son interprète.
 
 Le traitement additionnel entre le code source et le langage machine
@@ -372,7 +367,7 @@ Un programme informatique est toujours écrit pour résoudre un problème
 donné. Or, comme pour tout problème dans la vie, la solution à
 celui-ci peut être formulée de différentes manières. Le style
 fondamental avec lequel on exprime la solution est appelé le
-\emph{paradigme} de programmation.
+paradigme de programmation.
 
 Il existe plusieurs paradigmes de programmation. Nous nous
 contenterons ici de n'en présenter que quatre.
@@ -405,8 +400,8 @@ SELECT prenom FROM etudiants WHERE age > 25
   de manière analogue à la composition de fonctions $g \circ f$.
 \item[Orienté objet] Un programme est conçu comme un ensemble de blocs
   logiciels (les objets) qui interagissent entre eux. Une
-  \emph{méthode} applique un traitement différent à un objet
-  selon sa \emph{classe}. Ce paradigme est particulièrement utilisé
+  «méthode» applique un traitement différent à un objet
+  selon sa «classe». Ce paradigme est particulièrement utilisé
   dans les grands et complexes projets informatiques.
 \end{description}
 
@@ -424,7 +419,7 @@ programmation et les langues parlées ou écrites: leur apprentissage
 requiert de la pratique; on en connait jamais un trop grand nombre; le
 premier est plus difficile à apprendre que les suivants.
 L'informatique a également emprunté à la linguistique les notions de
-\emph{sémantique} et de \emph{syntaxe}.
+sémantique et de syntaxe.
 
 La sémantique est l'étude de ce que signifie un message ou un
 programme informatique, c'est-à-dire de ce qu'il transmet ou exécute.
@@ -558,22 +553,196 @@ quelques «Unix-ismes» ci-dessous.
 
 \begin{itemize}
 \item La barre oblique (\code{/}) est utilisée pour séparer les
-  dossiers dans les chemins d'accès aux fichiers (plus de détails à la
-  \autoref{sec:informatique:fs}).
+  dossiers dans les chemins d'accès aux fichiers.
 \item Tout utilisateur dispose d'un espace disque réservé identifié
   comme le «répertoire personnel» ou le «dossier de départ»;
   \emph{home directory}, en anglais. Ce répertoire est situé dans
   \code{/Users} sous macOS et habituellement dans \code{/home} sous
   Linux.
-\item À l'invite de commande et dans la configuration de plusieurs
+\item À la ligne de commande et dans la configuration de plusieurs
   applications, le caractère \,\verb=~=\, représente le répertoire
   personnel.
-\item Toujours à l'invite de commande, il est possible d'appuyer sur
+\item Plusieurs applications permettent de stocker des options de
+  configuration sous forme de texte brut dans des fichiers dont le nom
+  débute généralement par un point «\verb=.=»\,.
+\item Toujours à la ligne de commande, il est possible d'appuyer sur
   \code{TAB} pour compléter les noms de fichiers, de répertoires ou de
   commandes.
 \end{itemize}
+La \autoref{sec:informatique:fs} fournit des détails additionnels sur
+le système de fichiers de Unix.
 
 
+\section{Systèmes de fichiers}
+\label{sec:informatique:fs}
+
+Le système de fichiers d'un ordinateur contrôle l'inscription,
+l'organisation et la récupération des données sur une unité de
+stockage, souvent un disque dur.
+
+Loin de nous l'idée d'entrer dans les détails techniques des systèmes
+de fichiers. Nous souhaitons seulement attirer l'attention des
+lecteurs sur quelques points susceptibles de faciliter  la logique de
+classement des données dans un ordinateur
+
+En premier lieu, les fichiers sont regroupés dans des répertoires qui
+eux-mêmes contiennent des fichiers ou des sous-répertoires. Ce schéma
+se répète sans limite pratique. Il en résulte une classification sous
+forme d'arbre dont la «racine» est le répertoire contenant
+l'intégralité des fichiers. La \autoref{fig:informatique:fs} présente
+des extraits des arbres de fichiers usuels de Windows et de macOS.
+
+\begin{figure}
+  \begin{minipage}[t]{0.45\linewidth}
+    \dirtree{%
+      .1 \code{C:\textbackslash}.
+      .2 \code{Program Files\textbackslash}.
+      .3 \code{Internet Explorer\textbackslash}.
+      .3 \code{Windows NT\textbackslash}.
+      .2 \code{Users\textbackslash}.
+      .3 \code{Alexandre\textbackslash}.
+      .4 \code{Desktop\textbackslash}.
+      .4 \code{Documents\textbackslash}.
+      .5 \code{synthese-1.doc}.
+      .2 \code{Windows\textbackslash}.
+      .3 \code{explorer.exe}.
+      .3 \code{System32\textbackslash}.
+      .4 \code{wininit.exe}.
+    }
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.45\linewidth}
+    \dirtree{%
+      .1 \code{/}.
+      .2 \code{/Applications}.
+      .3 \code{/Mail.app}.
+      .3 \code{/Preview.app}.
+      .2 \code{/Users}.
+      .3 \code{/Marianne}.
+      .4 \code{/Desktop}.
+      .5 \code{freestyle.txt}.
+      .4 \code{/Documents}.
+      .5 \code{/Cours}.
+      .2 \code{/System}.
+      .2 \code{/bin}.
+      .3 \code{bash}.
+      .2 \code{/usr}.
+      .3 \code{/bin}.
+      .4 \code{grep}.
+    }
+  \end{minipage}
+  \caption[Extraits de la hiérarchie des systèmes de fichiers]{%
+    Extraits des arbres de fichiers de Windows~7 (à gauche) et de
+    macOS (à droite)}
+  \label{fig:informatique:fs}
+\end{figure}
+
+\subsection{Particularités du système de fichiers de Windows}
+\label{sec:informatique:fs:windows}
+
+Sous Windows, chaque lecteur physique ou lecteur réseau dispose de son
+propre arbre de fichiers. La racine est identifiée par une lettre. Le
+premier disque dur est \code{C}\footnote{%
+  La nomenclature des lecteurs date d'une époque où les ordinateurs
+  personnels n'étaient pas tous équipés d'un disque dur, mais plutôt
+  d'un ou deux lecteurs de disquettes. Ceux-ci étaient identifiés par
+  les lettres \code{A} et \code{B}.}. %
+Si le système comporte plus d'un disque, l'utilisateur doit
+constamment savoir sur quel disque retrouver ou enregistrer ses
+données.
+
+Le système de fichiers de Windows est insensible à la casse,
+c'est-à-dire qu'il ne fait aucune distinction entre \code{Program
+  Files}, \code{program files} et \code{PROGRAM FILES}.
+
+Dans les chemins d'accès (voir ci-dessous), on sépare les noms de
+répertoires par la barre oblique inversée \textbackslash\,.
+
+\subsection{Particularités du système de fichiers de Unix}
+\label{sec:informatique:fs:unix}
+
+La racine du système de fichiers est toujours \code{/} sous Unix.
+Les disques, physiques ou réseau, sont accessibles par divers «points
+de montage» dans le système de fichiers. Pour illustrer, supposons
+qu'un ordinateur dispose de deux disques durs; le premier est réservé
+au système d'exploitation et aux applications partagées, alors que le
+second renferme les fichiers personnels des utilisateurs. Dans un tel
+scénario, le premier disque sera monté sur le répertoire \code{/} et
+le second, sur le répertoire \code{/home}. Le système de fichier
+dirigera automatiquement les requêtes vers le bon disque.
+L'utilisateur n'a jamais à se préoccuper de l'organisation physique
+des disques.
+
+\osxbox{Sous macOS, les clés USB, disques durs externes ou disques
+  réseau sont montés dans le répertoire \code{/Volumes}. Si aucun
+  disque externe n'est connecté, le répertoire n'existe pas.}
+
+Le système de fichiers sous Unix est généralement sensible à la casse.
+On sépare les noms de répertoires par la barre oblique \code{/} dans
+les chemins d'accès.
+
+Les fichiers dont le nom débute un point «\verb=.=» --- souvent des fichiers
+de configuration, tel que mentionné à la
+\autoref{sec:informatique:os:unix} --- sont des fichiers cachés. À
+moins de demander explicitement de les afficher, ils n'apparaissent
+donc pas dans les listes de fichiers.
+
+\subsection{Chemin d'accès}
+\label{sec:informatique:fs:path}
+
+Le chemin d'accès (\emph{path}) d'un fichier ou d'un répertoire décrit
+la position de la ressource dans le système de fichier.
+Un chemin d'accès peut-être absolu ou relatif.
+\begin{description}
+\item[Chemin absolu] La position d'un fichier est décrite à partir de
+  la racine, de telle sorte que le chemin d'accès demeure valide où
+  que l'on se trouve dans le système de fichier.
+
+  Dans l'extrait de système de fichier Windows de la
+  \autoref{fig:informatique:fs}, le chemin d'accès absolu vers le
+  fichier \code{synthese-1.doc} est:
+\begin{Schunk}
+\begin{Sinput}
+C:\Users\Alexandre\Documents\synthese-1.doc
+\end{Sinput}
+\end{Schunk}
+\item[Chemin relatif] La position d'un fichier est donnée à partir
+  d'un point dans le système de fichier autre que la racine. Le chemin
+  dépend donc de l'endroit où l'on se trouve dans le système de
+  fichier. On a recours à deux points consécutifs «\verb=..=» pour
+  signifier une remontée d'un niveau dans l'arbre des fichiers.
+
+  Par exemple, pour une application dont le répertoire de travail
+  courant est \code{Documents/Cours} de l'utilisatrice Marianne dans
+  le système de fichier Unix de la \autoref{fig:informatique:fs}, le
+  chemin d'accès relatif vers le fichier \code{freestyle.txt} est:
+\begin{Schunk}
+\begin{Sinput}
+../../Desktop/freestyle.txt
+\end{Sinput}
+\end{Schunk}
+\end{description}
+
+La notion de chemin d'accès fait également référence à la liste des
+répertoires dans lesquels le système d'exploitation va chercher
+lorsqu'une application est appelée. Cette liste est conservée dans une
+variable d'environnement nommée \verb=%PATH%= sous Windows
+et \verb=$PATH= sous Unix. Il est hors de la portée de ce document
+d'expliquer comment modifier la variable d'environnement, mais la
+réponse se trouve à une requête près dans un moteur de recherche.
+
+
+% \section{Ligne de commande}
+% \label{sec:informatique:cli}
+
+
+
+
+% Exercices
+
+% 1. Obtenir PATH.
+
+% 2. conversion notations infixée, préfixée et suffixée
 
 %%% Local Variables:
 %%% mode: latex
