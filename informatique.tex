@@ -340,7 +340,7 @@ interprétation.
 
 Un compilateur est un programme informatique qui transforme en langage
 machine le code source rédigé dans un langage donné. On dit alors de
-ce langage qu'il est «compilé». Le compilateur produit un fichier
+ce langage qu'il est \emph{compilé}. Le compilateur produit un fichier
 informatique que l'ordinateur peut ensuite exécuter directement. Sur
 la plateforme Windows, on reconnait notamment ces fichiers par leurs
 extensions \code{.exe} ou \code{.dll}. Les noyaux d'à peu près toutes
@@ -350,7 +350,7 @@ Un interprète (ou interpréteur), quant à lui, est un programme qui
 analyse, traduit et exécute le code source d'un programme
 informatique, et ce, à chaque fois que le programme doit être exécuté.
 Un langage qui nécessite l'intermédiaire d'un interprète est dit
-«interprété». Un programme écrit dans un langage interprété ne
+\emph{interprété}. Un programme écrit dans un langage interprété ne
 peut être distribué sans son interprète.
 
 Le traitement additionnel entre le code source et le langage machine
@@ -400,8 +400,8 @@ SELECT prenom FROM etudiants WHERE age > 25
   de manière analogue à la composition de fonctions $g \circ f$.
 \item[Orienté objet] Un programme est conçu comme un ensemble de blocs
   logiciels (les objets) qui interagissent entre eux. Une
-  «méthode» applique un traitement différent à un objet
-  selon sa «classe». Ce paradigme est particulièrement utilisé
+  \emph{méthode} applique un traitement différent à un objet
+  selon sa \emph{classe}. Ce paradigme est particulièrement utilisé
   dans les grands et complexes projets informatiques.
 \end{description}
 
@@ -515,20 +515,20 @@ ce qui entraîne dédoublements et, parfois, conflits.
 \subsection{Unix}
 \label{sec:informatique:os:unix}
 
-Le terme «Unix» --- ou UNIX qui, en majuscules, est une marque déposée
-de Open Group --- recoupe une famille de systèmes d'exploitation
-dérivant tous du premier système Unix développé chez Bell Labs dans
-les années 1970 par Kenneth Thompson, Dennis Ritchie et plusieurs
-autres.
+Le terme \emph{Unix} --- ou UNIX qui, en majuscules, est une marque
+déposée de \link{http://www.opengroup.org/unix}{Open Group} ---
+recoupe une famille de systèmes d'exploitation dérivant tous du
+premier système Unix développé chez Bell Labs dans les années 1970 par
+Kenneth Thompson, Dennis Ritchie et plusieurs autres.
 
 Les systèmes Unix partagent un certain nombre de caractéristiques
 communes. D'abord, ils sont intrinsèquement multitâches et
 multiutilisateurs. Ensuite, la «philosophie Unix» commande la
-modularité: le système d'exploitation fournit aux utilisateurs
-(via un interpréteur de commande, ou \emph{shell}) et aux applications
-une multitude de petits outils très spécialisés qui ne réalisent à peu
+modularité: le système d'exploitation fournit aux utilisateurs (via un
+interpréteur de commandes, ou \emph{shell}) et aux applications une
+multitude de petits outils très spécialisés qui ne réalisent à peu
 près qu'une seule tâche. Le système rend ensuite simple, via un
-mécanisme dit de «redirection» (\emph{pipe}) de les combiner pour
+mécanisme dit de \emph{redirection} (\emph{pipe}) de les combiner pour
 effectuer des opérations plus complexes.
 
 Par exemple, pour extraire le mot \emph{redirection} du code source
@@ -536,7 +536,7 @@ contenant le précédent paragraphe, nous pourrions utiliser l'outil
 \code{grep} pour extraire la ligne où se trouve le mot, puis l'outil
 \code{cut} pour isoler le mot qui nous intéresse et, enfin, l'outil
 \code{tr} pour supprimer les guillemets autour du mot.\footnote{%
-  Dans la mesure où le mot recherché est le quatrième de la ligne dans
+  Dans la mesure où le mot que l'on recherche est le quatrième de la ligne dans
   le fichier source \code{informatique.tex}, la commande résultante
   est:
   \code{grep "«redirection»" informatique.tex | cut -d " " -f 4 | tr -d «»}\,.
@@ -555,22 +555,21 @@ quelques «Unix-ismes» ci-dessous.
 \item La barre oblique (\code{/}) est utilisée pour séparer les
   dossiers dans les chemins d'accès aux fichiers.
 \item Tout utilisateur dispose d'un espace disque réservé identifié
-  comme le «répertoire personnel» ou le «dossier de départ»;
-  \emph{home directory}, en anglais. Ce répertoire est situé dans
-  \code{/Users} sous macOS et habituellement dans \code{/home} sous
-  Linux.
+  comme le \emph{répertoire personnel} ou le \emph{dossier de départ}
+  (\emph{home directory}). Ce répertoire est situé dans \code{/Users}
+  sous macOS et habituellement dans \code{/home} sous Linux.
 \item À la ligne de commande et dans la configuration de plusieurs
   applications, le caractère \,\verb=~=\, représente le répertoire
   personnel.
-\item Plusieurs applications permettent de stocker des options de
-  configuration sous forme de texte brut dans des fichiers dont le nom
-  débute généralement par un point «\verb=.=»\,.
 \item Toujours à la ligne de commande, il est possible d'appuyer sur
   \code{TAB} pour compléter les noms de fichiers, de répertoires ou de
   commandes.
+\item Plusieurs applications permettent de stocker des options de
+  configuration sous forme de texte brut dans des fichiers dont le nom
+  débute généralement par un point «\verb=.=»\,.
 \end{itemize}
-La \autoref{sec:informatique:fs} fournit des détails additionnels sur
-le système de fichiers de Unix.
+La section suivante fournit des détails additionnels sur le système de
+fichiers de Unix.
 
 
 \section{Systèmes de fichiers}
@@ -588,7 +587,7 @@ classement des données dans un ordinateur
 En premier lieu, les fichiers sont regroupés dans des répertoires qui
 eux-mêmes contiennent des fichiers ou des sous-répertoires. Ce schéma
 se répète sans limite pratique. Il en résulte une classification sous
-forme d'arbre dont la «racine» est le répertoire contenant
+forme d'arbre dont la \emph{racine} est le répertoire contenant
 l'intégralité des fichiers. La \autoref{fig:informatique:fs} présente
 des extraits des arbres de fichiers usuels de Windows et de macOS.
 
@@ -647,45 +646,45 @@ premier disque dur est \code{C}\footnote{%
   personnels n'étaient pas tous équipés d'un disque dur, mais plutôt
   d'un ou deux lecteurs de disquettes. Ceux-ci étaient identifiés par
   les lettres \code{A} et \code{B}.}. %
-Si le système comporte plus d'un disque, l'utilisateur doit
-constamment savoir sur quel disque retrouver ou enregistrer ses
-données.
+Si le système comporte plus d'un disque, l'utilisateur doit savoir sur
+quel disque retrouver ou enregistrer ses données.
 
 Le système de fichiers de Windows est insensible à la casse,
 c'est-à-dire qu'il ne fait aucune distinction entre \code{Program
-  Files}, \code{program files} et \code{PROGRAM FILES}.
-
-Dans les chemins d'accès (voir ci-dessous), on sépare les noms de
-répertoires par la barre oblique inversée \textbackslash\,.
+  Files}, \code{program files} et \code{PROGRAM FILES}. Dans les
+chemins d'accès (voir ci-dessous), la barre oblique inversée
+\textbackslash sépare les noms de répertoires.
 
 \subsection{Particularités du système de fichiers de Unix}
 \label{sec:informatique:fs:unix}
 
-La racine du système de fichiers est toujours \code{/} sous Unix.
-Les disques, physiques ou réseau, sont accessibles par divers «points
-de montage» dans le système de fichiers. Pour illustrer, supposons
-qu'un ordinateur dispose de deux disques durs; le premier est réservé
-au système d'exploitation et aux applications partagées, alors que le
-second renferme les fichiers personnels des utilisateurs. Dans un tel
-scénario, le premier disque sera monté sur le répertoire \code{/} et
-le second, sur le répertoire \code{/home}. Le système de fichier
-dirigera automatiquement les requêtes vers le bon disque.
-L'utilisateur n'a jamais à se préoccuper de l'organisation physique
-des disques.
+La racine du système de fichiers est toujours \code{/} sous Unix. Les
+disques, physiques ou réseau, sont accessibles par divers \emph{points
+  de montage} dans le système de fichiers.
 
-\osxbox{Sous macOS, les clés USB, disques durs externes ou disques
-  réseau sont montés dans le répertoire \code{/Volumes}. Si aucun
-  disque externe n'est connecté, le répertoire n'existe pas.}
+Pour illustrer, supposons qu'un ordinateur dispose de deux disques
+durs; le premier est réservé au système d'exploitation et aux
+applications partagées, alors que le second renferme les fichiers
+personnels des utilisateurs. Dans un tel scénario, le premier disque
+sera monté sur le répertoire \code{/} et le second, sur le répertoire
+\code{/home}. Le système de fichier dirigera automatiquement les
+requêtes vers le bon disque. L'utilisateur n'a jamais à se préoccuper
+de l'organisation physique des disques.
+
+\osxbox{Les clés USB, disques durs externes ou disques réseau sont
+  montés dans le répertoire \code{/Volumes} sous macOS. Le répertoire
+  n'existe pas lorsque aucun disque externe n'est connecté.}
 
 Le système de fichiers sous Unix est généralement sensible à la casse.
-On sépare les noms de répertoires par la barre oblique \code{/} dans
-les chemins d'accès.
+La barre oblique \code{/} sépare les noms de répertoires dans les
+chemins d'accès.
 
-Les fichiers dont le nom débute un point «\verb=.=» --- souvent des fichiers
-de configuration, tel que mentionné à la
+Les fichiers dont le nom débute par un point «\verb=.=» --- souvent
+des fichiers de configuration, tel que mentionné à la
 \autoref{sec:informatique:os:unix} --- sont des fichiers cachés. À
 moins de demander explicitement de les afficher, ils n'apparaissent
-donc pas dans les listes de fichiers.
+donc pas dans la liste des fichiers à la ligne de commande ou dans
+les interfaces graphiques.
 
 \subsection{Chemin d'accès}
 \label{sec:informatique:fs:path}
@@ -695,8 +694,8 @@ la position de la ressource dans le système de fichier.
 Un chemin d'accès peut-être absolu ou relatif.
 \begin{description}
 \item[Chemin absolu] La position d'un fichier est décrite à partir de
-  la racine, de telle sorte que le chemin d'accès demeure valide où
-  que l'on se trouve dans le système de fichier.
+  la racine, de telle sorte que le chemin d'accès demeure valide
+  depuis n'importe quel point dans le système de fichier.
 
   Dans l'extrait de système de fichier Windows de la
   \autoref{fig:informatique:fs}, le chemin d'accès absolu vers le
@@ -707,15 +706,15 @@ C:\Users\Alexandre\Documents\synthese-1.doc
 \end{Sinput}
 \end{Schunk}
 \item[Chemin relatif] La position d'un fichier est donnée à partir
-  d'un point dans le système de fichier autre que la racine. Le chemin
-  dépend donc de l'endroit où l'on se trouve dans le système de
-  fichier. On a recours à deux points consécutifs «\verb=..=» pour
-  signifier une remontée d'un niveau dans l'arbre des fichiers.
+  d'un endroit précis dans le système de fichier autre que la racine.
+  Le chemin dépend donc du répertoire courant. On a recours au nom
+  fictif «\verb=..=» pour identifier le répertoire parent (un niveau
+  supérieur dans l'arbre des fichiers).
 
-  Par exemple, pour une application dont le répertoire de travail
-  courant est \code{Documents/Cours} de l'utilisatrice Marianne dans
-  le système de fichier Unix de la \autoref{fig:informatique:fs}, le
-  chemin d'accès relatif vers le fichier \code{freestyle.txt} est:
+  Par exemple, si le répertoire courant de Marianne est
+  \code{Documents/Cours} dans le système de fichier Unix de la
+  \autoref{fig:informatique:fs}, alors le chemin d'accès relatif vers
+  le fichier \code{freestyle.txt} est:
 \begin{Schunk}
 \begin{Sinput}
 ../../Desktop/freestyle.txt
@@ -724,23 +723,93 @@ C:\Users\Alexandre\Documents\synthese-1.doc
 \end{description}
 
 La notion de chemin d'accès fait également référence à la liste des
-répertoires dans lesquels le système d'exploitation va chercher
-lorsqu'une application est appelée. Cette liste est conservée dans une
-variable d'environnement nommée \verb=%PATH%= sous Windows
+répertoires dans lesquels le système d'exploitation recherche une
+application lorsqu'elle est appelée. Cette liste est conservée dans
+une variable d'environnement nommée \verb=%PATH%= sous Windows
 et \verb=$PATH= sous Unix. Il est hors de la portée de ce document
-d'expliquer comment modifier la variable d'environnement, mais la
-réponse se trouve à une requête près dans un moteur de recherche.
+d'expliquer comment modifier la variable d'environnement. Toutefois,
+la réponse se trouve à une requête près dans un moteur de recherche.
 
 
-% \section{Ligne de commande}
-% \label{sec:informatique:cli}
+\section{Ligne de commande}
+\label{sec:informatique:cli}
 
+Une interface en ligne de commande (\emph{command line interface},
+CLI), ou tout simplement \emph{ligne de commande}, est un mode
+d'interaction avec un programme informatique dans lequel l'utilisateur
+dicte les commandes et reçoit les réponses de l'ordinateur en mode
+texte. Le programme qui gère cette interface est un \emph{interpréteur
+  de commandes}, parfois aussi appelé (à tort) \emph{terminal} ou
+\emph{shell}. Lorsque l'interpréteur est prêt à recevoir une commande,
+il l'indique par une \emph{invite de commande} (\emph{command
+  prompt}).
 
+La ligne de commande est la plus ancienne des interfaces avec les
+ordinateurs. Si les interfaces graphiques ont à plusieurs égards
+grandement facilité l'interaction homme--machine, elles n'ont pas pour
+autant fait disparaitre ou rendu obsolète la ligne de commande.
+D'abord, celle-ci demeure parfois la seule --- et souvent la plus
+rapide --- interface pour réaliser certaines tâches sur un ordinateur
+muni d'une interface graphique. Ensuite, certains ordinateurs, comme
+les serveurs ou les supercalculateurs, n'offrent souvent aucune
+interface graphique.
+
+Sous Windows, l'interpréteur de commandes standard est \code{cmd.exe}.
+On le trouve dans le groupe de programmes \code{Accessoires} sous le
+nom \code{Invite de commandes}. L'invite de commande par défaut est
+\verb=C:\>=. Le répertoire courant au lancement de l'interpréteur est
+donc la racine du système de fichiers.
+
+Les programmeurs qui souhaitent bénéficier de certains outils Unix
+sous Windows peuvent installer les couches logicielles MinGW et MSYS
+--- nous recommandons à cet égard la distribution
+\link{http://www.msys2.org}{MSYS2}. Le programme \code{MSYS} fournit
+un interpréteur de commandes Bash \citep{bash} comme en standard
+sur les systèmes Unix.
+
+\windowsbox{On identifie la racine \code{C:\textbackslash} du
+  système de fichier d'un disque par \code{/c/} dans Bash sous
+  Windows.}
+
+Sous macOS, l'application de ligne de commande se nomme
+\code{Terminal}. Elle se trouve dans le sous-dossier
+\code{Utilitaires} du dossier \code{Applications}. L'interpréteur de
+commandes est Bash. L'invite de commande par défaut est \verb=$= et le
+répertoire courant au lancement de l'interpréteur est le répertoire
+personnel \,\verb=~=\, de l'utilisateur.
+
+Nous considérons essentiel pour des programmeurs de connaître les
+rudiments de la ligne de commande. Cela dit, comme nous ne pouvons
+nous étendre sur le sujet, nous limiterons notre présentation aux
+commandes suivantes de déplacement dans le système de fichiers et
+d'affichage des fichiers d'un répertoire.
+
+\begin{ttscript}{pwd}
+\item[\code{cd}] Change le répertoire courant pour celui
+  donné en argument. Cet argument peut être un chemin d'accès absolu
+  ou relatif (\autoref{sec:informatique:fs:path}). Le nom fictif
+  «\verb=..=» identifie le parent du répertoire courant.
+
+  Lorsque utilisée sans argument, la commande affiche le chemin
+  d'accès absolu du répertoire courant avec \code{cmd.exe}, ou ramène
+  directement l'invite de commande au répertoire personnel de
+  l'utilisateur avec Bash.
+\item[\code{pwd}] (Bash seulement) Affiche le chemin
+  d'accès absolu du répertoire courant.
+\item[\code{dir}] (\code{cmd.exe} seulement) Affiche les
+  fichiers du répertoire donné en argument, ou les fichiers du
+  répertoire courant sans aucun argument.
+\item[\code{ls}] (Bash seulement) Affiche les fichiers du
+  répertoire donné en argument, ou les fichiers du répertoire courant
+  sans aucun argument.
+\end{ttscript}
 
 
 % Exercices
 
 % 1. Obtenir PATH.
+
+% ls -a; ls -l; ls -la
 
 % 2. conversion notations infixée, préfixée et suffixée
 
