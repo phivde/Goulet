@@ -25,6 +25,7 @@
   \usepackage{manfnt}                  % \mantriangleright (puce)
   \usepackage{metalogo}                % \XeLaTeX logo
   \usepackage{applekeys}               % touches Mac
+  \usepackage{dirtree}                 % arbre pour exercice sur \include
   \usepackage{fontawesome}             % icônes \fa*
   \usepackage{awesomebox}              % boîtes info, important, etc.
   \usepackage{answers}                 % exercices et solutions
@@ -286,9 +287,11 @@
     {\end{infobox}}
 
   %% Remarques spécifiques OS X
-  \newenvironment{osx}{%
-    \begin{infobox}{\faApple}}%
-    {\end{infobox}}
+  % \newenvironment{osx}{%
+  %   \begin{infobox}{\faApple}}%
+  %   {\end{infobox}}
+  \newcommand{\osxbox}[1]{%
+    \awesomebox{\faApple}{\aweboxrulewidth}{black}{#1}}
 
   %% Listes de commandes
   \newenvironment{ttscript}[1]{%
@@ -299,7 +302,7 @@
         \addtolength{\leftmargin}{\labelsep}
         \setlength{\parsep}{0.5ex plus0.2ex minus0.2ex}
         \setlength{\itemsep}{0.3ex}
-        \renewcommand{\makelabel}[1]{\fbox{\vphantom{|}##1}\hfill}}}
+        \renewcommand{\makelabel}[1]{\colorbox{codebg}{\vphantom{|}##1}\hfill}}}
     {\end{list}}
 
   %%% Chapitre Opérateurs: l'espacement entre les expressions R et
@@ -415,7 +418,7 @@
     puis-que
   }
 
-  \includeonly{informatique}
+%  \includeonly{informatique}
 
 \begin{document}
 
@@ -431,7 +434,7 @@
 
 \pagestyle{companion}
 
-\include{introduction}
+%\include{introduction}
 \tableofcontents*
 
 %% Vignette tirée de xkcd.com
@@ -450,7 +453,7 @@
 \mainmatter
 
 \include{informatique}
-\include{presentation}
+%\include{presentation}
 % \include{bases}
 % \include{operateurs}
 % \include{exemples}
@@ -458,10 +461,10 @@
 % \include{avance}
 
 \appendix
-\include{emacs+ess}
-\include{rstudio}
+% \include{emacs+ess}
+% \include{rstudio}
 % \include{packages}
-\include{reponses}
+% \include{reponses}
 
 \bibliography{r,stat,informatique,vg}
 
