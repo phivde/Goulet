@@ -805,16 +805,79 @@ d'affichage des fichiers d'un répertoire.
 \end{ttscript}
 
 
+\section{Exercices}
+\label{operateurs:exercices}
+
+\Opensolutionfile{solutions}[solutions-informatique]
+
+\begin{Filesave}{solutions}
+\section*{Chapitre \ref*{informatique}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{informatique}}
+
+\end{Filesave}
+
+\begin{exercice}[nosol]
+  Des nouveaux langages de programmation apparaissent régulièrement.
+  Deux exemples récents provenant de géants de l'industrie sont
+  \link{https://swift.org}{Swift}, de Apple, et
+  \link{https://golang.org}{Go}, de Google. À partir des informations
+  glanées sur les sites Internet des langages et dans les pages
+  Wikipedia qui leurs sont consacrées, retracer les grands langages
+  ayant servi sources d'inspiration à Swift et à Go.
+\end{exercice}
+
+\begin{exercice}
+  Soit $A$, $B$, $C$ et $D$ quatre nombres. L'opération en notation
+  infixée
+  \begin{equation*}
+    A \times B + C / D
+  \end{equation*}
+  s'écrit
+  \begin{equation*}
+    +\, \times\, A\; B\; /\; C\; D
+  \end{equation*}
+  en notation préfixée et
+  \begin{equation*}
+    A\; B\, \times\, C\; D\; /\, +
+  \end{equation*}
+  en notation suffixée.
+  \begin{enumerate}
+  \item Exprimer en notations préfixée et suffixée l'opération en
+    notation infixée suivante:
+    \begin{equation*}
+      A \times (B + C) / D.
+    \end{equation*}
+  \item Les expressions suivantes en notation préfixée et suffixée,
+    dans l'ordre, effectuent la même opération arithmétique.
+    \begin{gather*}
+      \times\, A\, +\, B\; /\, C\; D \\
+      A\; B\; C\; D\; /\, +\, \times
+    \end{gather*}
+    Exprimer cette opération en notation infixée.
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+    \item $/\, \times\, A\, +\, B\; C\; D$ en notation préfixée;
+      $A\; B\; C\, +\, \times\, D\; /$ en notation suffixée.
+    \item $A \times (B + C / D)$
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+
+\end{exercice}
+\Closesolutionfile{solutions}
+
 % Exercices
 
 % 1. Obtenir PATH.
 
 % ls -a; ls -l; ls -la
 
-% 2. conversion notations infixée, préfixée et suffixée
-
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-engine: xetex
 %%% TeX-master: "programmer-avec-r"
+%%% coding: utf-8
 %%% End:
