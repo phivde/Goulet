@@ -1,4 +1,4 @@
-### -*-Makefile-*- pour préparer Programmer avec R
+### -*-Makefile-*- pour préparer "Programmer avec R"
 ##
 ## Copyright (C) 2017 Vincent Goulet
 ##
@@ -16,7 +16,7 @@
 ##
 ## Auteur: Vincent Goulet
 ##
-## Ce fichier fait partie du projet Programmer avec R
+## Ce fichier fait partie du projet "Programmer avec R"
 ## http://github.com/vigou3/programmer-avec-r
 
 
