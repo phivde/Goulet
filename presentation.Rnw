@@ -1,3 +1,13 @@
+%%% Copyright (C) 2017 Vincent Goulet
+%%%
+%%% Ce fichier fait partie du projet «Programmer avec R»
+%%% http://github.com/vigou3/programmer-avec-r
+%%%
+%%% Cette création est mise à disposition selon le contrat
+%%% Attribution-Partage dans les mêmes conditions 4.0
+%%% International de Creative Commons.
+%%% http://creativecommons.org/licenses/by-sa/4.0/
+
 \chapter{Présentation du langage R}
 \label{chap:presentation}
 
@@ -16,6 +26,7 @@ options(width=52)
 \item Créer, modifier et sauvegarder ses propres fichiers de script R.
 \end{objectifs}
 
+
 \section{Bref historique}
 \label{sec:presentation:historique}
 
@@ -33,24 +44,60 @@ version 4 \citep[\emph{Green Book;}][]{Chambers:greenbook:1998}; %
 voir aussi \cite{Chambers:evolution} et \cite{Becker:historyS:1994}
 pour plus de détails.
 
-Dès la fin des années 1980 et pendant près de vingt ans, le S a
-principalement été popularisé par une mise en {\oe}uvre commerciale
-nommée S-PLUS\index{S-PLUS}. En 2008, Lucent Technologies a vendu le
-langage S à Insightful Corporation, ce qui a effectivement stoppé le
+Dès la fin des années 1980 et pendant près de vingt ans, le S a été
+popularisé par une mise en œuvre commerciale nommée
+S-PLUS\index{S-PLUS}. En 2008, Lucent Technologies a vendu le langage
+S à Insightful Corporation, ce qui a effectivement stoppé le
 développement du langage par ses auteurs originaux. Aujourd'hui, le S
 est commercialisé de manière relativement confidentielle sous le nom
 Spotfire S$+$\index{S$+$} par TIBCO Software.
 
 Ce qui a fortement contribué à la perte d'influence de S-PLUS, c'est
-une nouvelle mise en {\oe}uvre du langage développée au milieu des
-années 1990. Inspirés à la fois par le S\index{S} et par
-Scheme\index{Scheme} (un dérivé du Lisp), Ross Ihaka et Robert
-Gentleman proposent un langage pour l'analyse de données et les
-graphiques qu'ils nomment R \citep{Ihaka:R:1996}. À la suggestion
-de Martin Maechler de l'ETH de Zurich, les auteurs décident d'intégrer
-leur nouveau langage au projet GNU\footnote{%
-  \url{http://www.gnu.org}}, %
-faisant de R un logiciel libre.
+une nouvelle mise en œuvre du langage développée à partir du milieu
+des années 1990 par Ross Ihaka et Robert Gentleman. Ceux-ci basent leur
+nouveau langage sur Scheme\index{Scheme} (un dialecte du
+\index{Lisp}Lisp), sans doute inspirés en cela par les travaux de Luke
+Tierney sur le système statistique LISP-STAT
+\citep{Tierney:lispstat:1990}. S'ils conservent en grande partie la
+sémantique de Scheme, Ihaka et Gentleman ont toutefois la bonne idée
+d'adopter la syntaxe du S, qu'ils jugent plus intuitive pour les
+statisticiens. La comparaison des mises en œuvre en Scheme et en S de
+la toute simple fonction factorielle, à la
+\autoref{fig:presentation:scheme_vs_s}, tend à leur donner raison.
+
+\begin{figure}
+  \centering
+  \begin{minipage}{0.7\linewidth}
+\begin{Schunk}
+\begin{Sinput}
+(define factorial (lambda (n)
+  (if (= n 1)
+      1
+    (* n (factorial (- n 1))))))
+\end{Sinput}
+\end{Schunk}
+  \end{minipage} \\[6pt]
+  \begin{minipage}{0.7\linewidth}
+\begin{Schunk}
+\begin{Sinput}
+factorial <- function(n)
+  if (n == 1) 1 else n * factorial(n - 1)
+\end{Sinput}
+\end{Schunk}
+  \end{minipage}
+  \caption[Mises en œuvre de la fonction factorielle.]{Mises en œuvre
+    en Scheme (en haut) et en S (en bas) de la fonction
+    factorielle.}
+  \label{fig:presentation:scheme_vs_s}
+\end{figure}
+
+Afin de souligner à la fois l'influence de S et leurs propres efforts,
+Ross Ihaka et Robert Gentleman choisissent de nommer leur langage pour
+l'analyse de données et les graphiques avec la première lettre de leur
+prénom respectif: R \citep{Ihaka:R:1996}. À la suggestion de
+Martin Maechler de l'ETH de Zurich, ils décident d'intégrer leur
+nouveau langage au projet \link{https://www.gnu.org}{GNU}, faisant de
+R un logiciel libre.
 
 Ainsi disponible gratuitement et ouvert aux contributions de tous,
 R gagne rapidement en popularité là même où S-PLUS avait acquis ses
@@ -65,44 +112,34 @@ projet R \citep{Chambers:R:2008}.
 \section{Description sommaire de R}
 \label{sec:presentation:description}
 
-\capsule{https://youtu.be/presentation}{R} est un environnement intégré
-de manipulation de données, de calcul et de préparation de graphiques.
-Toutefois, ce n'est pas seulement un «autre» environnement statistique
-(comme SPSS ou SAS, par exemple), mais aussi un langage de
-programmation complet et autonome.
+R est un environnement intégré de manipulation de données, de calcul
+et de préparation de graphiques. Toutefois, ce n'est pas seulement un
+«autre» environnement statistique (comme SPSS ou SAS, par exemple),
+mais aussi un %
+\capsule{https://www.youtube.com/watch?v=2Y6y-quo_50}{langage de programmation} %
+complet et autonome.
 
 Tel que mentionné précédemment, le R est un langage principalement
-inspiré du S et de Scheme\index{Scheme} \citep{Sussman:scheme:1996}.
-Le S\index{S} était à son tour inspiré de plusieurs langages, dont
-l'APL (autrefois un langage très prisé par les actuaires) et le Lisp.
-Comme tous ces langages, le R est
-\emph{interprété}\index{interprété (langage)}, c'est-à-dire qu'il
-requiert un autre programme --- l'\emph{interprète} --- pour que ses
-commandes soient exécutées. Par opposition, les programmes de langages
-\emph{compilés}\index{compilé (langage)}, comme le C ou le C++, sont
-d'abord convertis en code machine par le compilateur puis directement
-exécutés par l'ordinateur.
+inspiré de Scheme\index{Scheme} \citep{Sussman:scheme:1996} et du
+\index{S}S. Ce dernier était à son tour inspiré de plusieurs langages,
+dont l'\index{APL}APL et le \index{Lisp}Lisp (encore lui). Comme tous
+ses prédécesseurs, R est un langage interprété\index{interprété
+  (langage)}. Par conséquent, le programme que l'on lance lorsque l'on
+exécute R est en fait l'interpréteur. Celui-ci attend que l'on lui
+soumette des commandes dans le langage R, commandes qu'il exécutera
+immédiatement, une à une et en séquence.
 
-Cela signifie donc que lorsque l'on programme en R, il n'est pas
-possible de plaider l'attente de la fin de la phase de compilation
-pour perdre son temps au travail. Désolé!
-
-Le programme que l'on lance lorsque l'on exécute R est en fait
-l'interprète. Celui-ci attend que l'on lui soumette des commandes dans
-le langage R, commandes qu'il exécutera immédiatement, une à une et
-en séquence.
-
-Par analogie, Excel est certes un logiciel de manipulation de données,
-de mise en forme et de préparation de graphiques, mais c'est aussi au
-sens large un langage de programmation interprété. On utilise le
-langage de programmation lorsque l'on entre des commandes dans une
-cellule d'une feuille de calcul. L'interprète exécute les commandes et
-affiche les résultats dans la cellule.
+Par analogie, \index{Excel}Excel est certes un logiciel de
+manipulation de données, de mise en forme et de préparation de
+graphiques, mais c'est aussi au sens large un langage de programmation
+interprété. On utilise le langage de programmation lorsque l'on entre
+des commandes dans une cellule d'une feuille de calcul. L'interpréteur
+exécute les commandes et affiche les résultats dans la cellule.
 
 Le R est un langage particulièrement puissant pour les applications
-mathématiques et statistiques (et donc actuarielles) puisque
-précisément développé dans ce but. Parmi ses caractéristiques
-particulièrement intéressantes, on note:
+mathématiques et statistiques (et donc actuarielles), chose peu
+surprenante puisqu'il précisément été développé dans ce but. Parmi ses
+caractéristiques particulièrement intéressantes, on note:
 \begin{itemize}
 \item langage basé sur la notion de vecteur, ce qui simplifie les
   calculs mathématiques et réduit considérablement le recours aux
@@ -113,15 +150,14 @@ particulièrement intéressantes, on note:
 \end{itemize}
 
 
-
 \section{Interfaces}
 \label{sec:presentation:interfaces}
 
-R est d'abord et avant tout une application n'offrant qu'une invite de
-commande du type de celle présentée à la
-\autoref{fig:presentation:console}. En soi, cela n'est pas si
-différent d'un tableur tel que Excel: la zone d'entrée de texte dans
-une cellule n'est rien d'autre qu'une invite de commande\footnote{%
+R est d'abord et avant tout une application en ligne de commande,
+comme le montre la \autoref{fig:presentation:console}. En soi, cela
+n'est pas si différent d'un tableur tel que Excel: la zone d'entrée de
+texte dans une cellule n'est rien d'autre qu'une invite de
+commande\footnote{%
   Merci à Markus Gesmann pour cette observation.}, par ailleurs aux
 capacités d'édition plutôt réduites.
 
@@ -132,20 +168,19 @@ capacités d'édition plutôt réduites.
   \label{fig:presentation:console}
 \end{figure}
 
-\begin{itemize}
-\item Sous Windows, une interface graphique plutôt rudimentaire est
-  disponible. Elle facilite certaines opérations tel que
-  l'installation de packages externes, mais elle offre autrement peu
-  de fonctionnalités additionnelles pour l'édition de code R.
-\item L'interface graphique de R sous macOS est la plus élaborée.
-  Outre la console présentée à la
-  \autoref{fig:presentation:console}, l'application \code{R.app}
-  comporte de nombreuses fonctionnalités, dont un éditeur de code
-  assez complet.
-\item Sous Unix et Linux, R n'est accessible que depuis la ligne de
-  commande du système d'exploitation (terminal). Aucune interface
-  graphique n'est offerte avec la distribution de base de R.
-\end{itemize}
+Sous Windows, l'interface graphique fournie avec R est plutôt
+rudimentaire. Elle facilite certaines opérations tel que
+l'installation de packages externes, mais elle n'offre autrement que
+peu de fonctionnalités pour l'édition de code R.
+
+L'interface graphique de R sous macOS est la plus élaborée. Outre la
+console présentée à la \autoref{fig:presentation:console},
+l'application \code{R.app} comporte de nombreuses fonctionnalités,
+dont un éditeur de code assez complet.
+
+Sous Unix et Linux, R n'est accessible que depuis la ligne de commande
+du système d'exploitation. Aucune interface graphique n'est offerte
+avec la distribution de base de R.
 
 Peu importe la plateforme utilisée --- quoique dans une moindre mesure
 sous macOS --- nous recommandons d'interagir avec R par le biais d'un
@@ -157,67 +192,71 @@ développement intégré; voir la \autoref{sec:presentation:editeurs}.
 \label{sec:presentation:strategies}
 
 Dans la mesure où R se présente essentiellement sous forme d'une
-invite de commande, il existe deux grandes stratégies de travail avec
+ligne de commande, il existe deux grandes stratégies de travail avec
 cet environnement statistique.
 
-\begin{enumerate}
-\item On entre des expressions à la ligne de commande pour les évaluer
-  immédiatement:
+\subsection{Code virtuel et objets réels}
+\label{sec:presentation:strategies:code-virtuel}
+
+Dans l'approche dite de «code virtuel et objets réels», on entre des
+expressions à la ligne de commande pour les évaluer immédiatement:
 <<echo=TRUE>>=
 2 + 3
 @
-  On peut également créer des objets contenant le résultat d'un
-  calcul. Ces objets sont stockés en mémoire dans l'espace de travail
-  de R:
+On peut également créer des objets contenant le résultat d'un
+calcul. Ces objets sont stockés en mémoire dans l'espace de travail
+de R:
 <<echo=TRUE>>=
 x <- exp(2)
 x
 @
-  Lorsque la session de travail est terminée, on sauvegarde une image
-  de l'espace de travail sur le disque dur de l'ordinateur afin de
-  pouvoir conserver les objets pour une future séance de
-  travail\indexfonction{save.image}:
+
+Lorsque la session de travail est terminée, on sauvegarde une image de
+l'espace de travail sur le disque dur de l'ordinateur afin de pouvoir
+conserver les objets pour une future séance de
+travail\indexfonction{save.image}:
 <<eval=FALSE>>=
 save.image()
 @
-  Par défaut, l'image est sauvegardée dans un fichier nommé
-  \code{.RData} dans le dossier de travail actif (voir la
-  \autoref{sec:presentation:workspace}) et cette image est
-  automatiquement chargée en mémoire au prochain lancement de
-  R, tel qu'indiqué à la fin du message d'accueil:
-  \begin{Schunk}
+Par défaut, l'image est sauvegardée dans un fichier nommé
+\code{.RData} dans le répertoire de travail courant (plus de détails à
+la \autoref{sec:presentation:workspace}) et cette image est
+automatiquement chargée en mémoire au prochain lancement de R, tel
+qu'indiqué à la fin du message d'accueil:
+\begin{Schunk}
 \begin{verbatim}
 [Sauvegarde de la session précédente restaurée]
 \end{verbatim}
-  \end{Schunk}
+\end{Schunk}
 
-  Cette approche, dite de «code virtuel et objets réels» a un gros
-  inconvénient: le code utilisé pour créer les objets n'est pas
-  sauvegardé entre les sessions de travail. Or, celui-ci est souvent
-  bien plus compliqué que l'exemple ci-dessus. De plus, sans accès au
-  code qui a servi à créer l'objet \code{x}, comment savoir ce que la
-  valeur \code{\Sexpr{format(x, dec = ".")}} représente au juste?
+Cette approche a toutefois un gros inconvénient: le code utilisé pour
+créer les objets n'est pas sauvegardé entre les sessions de travail.
+Or, celui-ci est souvent bien plus compliqué que l'exemple ci-dessus.
+De plus, sans accès au code qui a servi à créer l'objet \code{x},
+comment savoir ce que la valeur \code{\Sexpr{format(x, dec = ".")}}
+représente au juste?
 
-\item L'approche dite de «code réel et objets virtuels» considère que
-  ce qu'il importe de conserver d'une session de travail à l'autre
-  n'est pas tant les objets que le code qui a servi à les créer.
-  Ainsi, on sauvegardera dans ce que l'on nommera des \emph{fichiers
-    de script} nos expressions R et le code de nos fonctions
-  personnelles. Par convention, on donne aux fichiers de script un nom
-  se terminant avec l'extension \code{.R}.
+\subsection{Code réel et objets virtuels}
+\label{sec:presentation:strategies:code-reel}
 
-  Avec cette approche, les objets sont créés au besoin en exécutant le
-  code des fichiers de script. Comment? Simplement en copiant le code
-  du fichier de script et en le collant dans l'invite de commande de
-  R. La \autoref{fig:presentation:script} illustre schématiquement
-  ce que le programmeur R a constamment sous les yeux: d'un côté son
-  fichier de script et, de l'autre, l'invite de commande R dans
-  laquelle son code a été exécuté.
+L'approche dite de «code réel et objets virtuels» considère que ce
+qu'il importe de conserver d'une session de travail à l'autre n'est
+pas tant les objets que le code qui a servi à les créer. Ainsi, on
+sauvegardera dans ce que l'on nommera des \emph{fichiers de script}
+nos expressions R et le code de nos fonctions personnelles. Par
+convention, on donne aux fichiers de script un nom se terminant avec
+l'extension \code{.R}.
 
-  La méthode d'apprentissage préconisée dans cet ouvrage suppose que
-  le lecteur utilisera cette seconde approche d'interaction avec R.
-\end{enumerate}
+Avec cette approche, les objets sont créés au besoin en exécutant le
+code des fichiers de script. Comment? Simplement en copiant le code du
+fichier de script et en le collant dans la ligne de commande de R. La
+\autoref{fig:presentation:script} illustre schématiquement ce que le
+programmeur R a constamment sous les yeux: d'un côté son fichier de
+script et, de l'autre, la ligne de commande R dans laquelle son code a
+été exécuté.
 
+La méthode d'apprentissage préconisée dans cet ouvrage suppose que le
+lecteur utilisera cette seconde approche d'interaction avec R.
 
 \begin{figure}
   \centering
@@ -227,39 +266,35 @@ save.image()
   \begin{framed}
   \lstinputlisting[language={},firstline=2]{script.Rout}
   \end{framed}
-  \caption{Fichier de script (en haut) et invite de commande R dans
+  \caption{Fichier de script (en haut) et ligne de commande R dans
     laquelle les expressions R ont été exécutées (en bas). Les lignes
     débutant par \code{\#} dans le fichier de script sont des
-    commentaires ignorés par l'interprète de commandes.}
+    commentaires ignorés par l'interpréteur de commandes.}
   \label{fig:presentation:script}
 \end{figure}
 
-\begin{figure}
-  \begin{information}
-    Toute analogie est boîteuse, mais celle-ci peut néanmoins s'avérer
-    utile pour illustrer l'approche «code réel, objets virtuels».
+\tipbox{Toute analogie est boîteuse, mais celle-ci peut néanmoins
+  s'avérer utile pour illustrer l'approche «code réel, objets
+  virtuels».
 
-    Avec un tableur comme Excel, que choisiriez-vous si l'on vous
-    proposait les options suivantes:
-    \begin{enumerate}
-    \item ne sauvegarder que les valeurs calculées d'une feuille de
-      calcul;
-    \item ne sauvegarder que les formules d'une feuille de calcul,
-      quitte à les réévaluer par la suite pour obtenir les valeurs
-      correspondantes.
-    \end{enumerate}
-    La seconde, sûrement{\dots} Or, sauvagarder l'espace de travail R
-    dans un fichier \code{.RData} (l'approche «objets réels, code
-    virtuel») correspond à la première option, alors que sauvegarder
-    le code source des fichiers de script correspond à la seconde.
+  Avec un tableur comme Excel, que choisiriez-vous si l'on vous
+  proposait les options suivantes:
+  \begin{enumerate}
+  \item ne sauvegarder que les valeurs calculées d'une feuille de
+    calcul;
+  \item ne sauvegarder que les formules d'une feuille de calcul,
+    quitte à les réévaluer par la suite pour obtenir les valeurs
+    correspondantes.
+  \end{enumerate}
+  La seconde, sûrement{\dots} Or, sauvagarder l'espace de travail R
+  dans un fichier \code{.RData} (l'approche «objets réels, code
+  virtuel») correspond à la première option, alors que sauvegarder
+  le code source des fichiers de script correspond à la seconde.
 
-    Là où l'analogie est boîteuse, la raison pour laquelle on n'a
-    jamais à se poser la question avec un tableur, c'est que le
-    progiciel évalue constamment et en temps réel les formules pour
-    afficher les résultats dans les cellules.
-  \end{information}
-\end{figure}
-
+  Là où l'analogie est boîteuse, la raison pour laquelle on n'a
+  jamais à se poser la question avec un tableur, c'est que le
+  progiciel évalue constamment et en temps réel les formules pour
+  afficher les résultats dans les cellules.}
 
 
 \section{Éditeurs de texte et environnements intégrés}
@@ -270,25 +305,48 @@ qu'expliqué à la section précédente, l'édition de code R est rendue
 beaucoup plus aisée avec un bon éditeur de texte pour programmeur ou
 un environnement de développement intégré (\emph{integrated
   development environment}, IDE).
-\begin{itemize}
-\item Un éditeur de texte est différent d'un traitement de texte en ce
-  qu'il s'agit d'un logiciel destiné à la création, l'édition et la
-  sauvegarde de fichiers textes purs, c'est-à-dire dépourvus
-  d'information de présentation et de mise en forme. Les applications
-  Bloc-notes sous Windows ou TextEdit sous macOS sont deux exemples
-  d'éditeurs de texte simples.
-\item Un éditeur de texte pour programmeur saura en plus reconnaître
-  la syntaxe d'un langage de programmation et assister à sa mise en
-  forme: indentation automatique du code, marquage des mots-clés,
-  manipulation d'objets, etc.
-\item Un éditeur compatible avec R réduira, entre autres, l'opération
-  de copier-coller à un simple raccourci clavier.
-\end{itemize}
+
+Un éditeur de texte est différent d'un traitement de texte en ce qu'il
+s'agit d'un logiciel destiné à la création, l'édition et la sauvegarde
+de fichiers textes purs, c'est-à-dire dépourvus d'information de
+présentation et de mise en forme. Les applications Bloc-notes sous
+Windows ou TextEdit sous macOS sont deux exemples d'éditeurs de texte
+simples.
+
+Un éditeur de texte pour programmeur saura en plus reconnaître la
+syntaxe d'un langage de programmation et assister à sa mise en forme:
+indentation automatique du code, marquage des mots-clés, manipulation
+d'objets, etc. Enfin, un éditeur compatible avec R réduira, entre
+autres, l'opération de copier-coller à un simple raccourci clavier.
 
 Le lecteur peut utiliser le logiciel de son choix pour l'édition de
 code R. Certains offrent simplement plus de fonctionnalités
-que d'autres.
+que d'autres. Voici quelques bons choix.
+
 \begin{itemize}
+\item RStudio\index{RStudio} est un environnement de développement
+  intégré (IDE) créé spécifiquement pour travailler avec R. Sa
+  popularité connaît une progression foudroyante depuis 2014. Il
+  permet de consulter dans une interface conviviale ses fichiers de
+  script, la ligne de commande R, les rubriques d'aide, les
+  graphiques, etc.; voir la \autoref{fig:presentation:rstudio}. C'est
+  probablement le meilleur choix d'éditeur pour la plupart des
+  personnes qui débutent avec R.
+
+  \begin{figure}[t]
+    \centering
+    \includegraphics[width=0.9\textwidth]{rstudio-screenshot}
+    \caption{Fenêtre de RStudio sous macOS dans sa configuration par
+      défaut. Dans le sens des aiguilles d'une montre, on y retrouve:
+      le fichier de script de la \autoref{fig:presentation:script}; la
+      liste des objets de l'environnement (vide, ici); une interface
+      pour charger des packages; l'invite de commandes R.}
+    \label{fig:presentation:rstudio}
+  \end{figure}
+
+  Logiciel libre dans sa version pour ordinateur personnel, RStudio
+  est disponible à l'identique sur les plateformes Windows, macOS et
+  Linux. L'\autoref{chap:rstudio} propose une introduction à RStudio.
 \item Dans la catégorie des éditeurs de texte, nous recommandons le
   vénérable et très puissant éditeur pour programmeur
   GNU~Emacs\index{Emacs}. À la question~6.2 de la foire aux questions
@@ -300,7 +358,9 @@ que d'autres.
   développement aussi riche qu'efficace. Entre autres fonctionnalités
   uniques à cet éditeur, le fichier de script et l'invite de commandes
   R sont regroupés dans la même fenêtre, comme on peut le voir à la
-  \autoref{fig:presentation:emacs}.
+  \autoref{fig:presentation:emacs}. Emacs est toutefois un logiciel
+  difficile à apprivoiser, surtout pour les personnes moins à l'aise
+  avec l'informatique.
 
   \begin{figure}[t]
     \centering
@@ -314,32 +374,9 @@ que d'autres.
 
   Emblême du logiciel libre, Emacs est disponible gratuitement et à
   l'identique sur toutes les plateformes supportées par R, dont
-  Windows, macOS et Linux.
-
-  Consulter l'\autoref{chap:emacs+ess} pour en savoir plus sur GNU~Emacs et
-  apprendre les commandes essentielles pour y faire ses premiers pas.
-  \enlargethispage{5mm}
-\item Emacs est toutefois un logiciel difficile à apprivoiser, surtout
-  pour les personnes moins à l'aise avec l'informatique.
-\item RStudio\index{RStudio} est un environnement de développement
-  intégré (IDE) créé spécifiquement pour travailler avec R. Sa
-  popularité connaît une progression foudroyante depuis 2014. Il
-  permet de consulter dans une interface conviviale ses fichiers de
-  script, la ligne de commande R, les rubriques d'aide, les
-  graphiques, etc.; voir la \autoref{fig:presentation:rstudio}.
-
-  \begin{figure}[t]
-    \centering
-    \includegraphics[width=0.9\textwidth]{rstudio-screenshot}
-    \caption{Fenêtre de RStudio sous macOS dans sa configuration par
-      défaut. Dans le sens des aiguilles d'une montre, on y retrouve:
-      le fichier de script de la \autoref{fig:presentation:script}; la
-      liste des objets de l'environnement (vide, ici); une interface
-      pour charger des packages; l'invite de commandes R.}
-    \label{fig:presentation:rstudio}
-  \end{figure}
-
-  RStudio est disponible sur les plateformes Windows, macOS et Linux.
+  Windows, macOS et Linux. Consulter l'\autoref{chap:emacs+ess} pour
+  en savoir plus sur GNU~Emacs et apprendre les commandes essentielles
+  pour y faire ses premiers pas.
 \item Il existe plusieurs autres options pour éditer efficacement du
   code R --- et le Bloc-notes de Windows n'en fait \emph{pas} partie!
   Nous recommandons plutôt:
@@ -348,7 +385,6 @@ que d'autres.
     de l'extension NppToR \citep{NppToR}, tous deux des logiciels
     libres, ou le partagiciel WinEdt\index{WinEdt} muni de l'extension
     libre R-WinEdt \citep{RWinEdt};
-    \enlargethispage{5mm}
   \item sous macOS, tout simplement l'éditeur de texte très complet
     intégré à l'application \code{R.app}, ou alors l'éditeur de texte
     commercial TextMate (essai gratuit de 30 jours);
@@ -356,7 +392,6 @@ que d'autres.
     dans la communauté R, après Emacs et RStudio.
   \end{itemize}
 \end{itemize}
-
 
 
 \section{Anatomie d'une session de travail}
@@ -400,28 +435,25 @@ même lorsque l'on utilise l'environnement intégré RStudio.
 \index{dossier de travail|see{répertoire de travail}}
 \label{sec:presentation:workspace}
 
-Le répertoire de travail (\emph{workspace}) de R est le dossier par
-défaut dans lequel le logiciel:
-\begin{inparaenum}[1)]
-\item va rechercher des fichiers de script ou de données; et
-\item va sauvegarder l'espace de travail dans le fichier
-  \code{.RData}.
-\end{inparaenum}
-Le répertoire de travail est déterminé au lancement de R.
-\begin{itemize}
-\item Les interfaces graphiques de R démarrent avec un répertoire de
-  travail par défaut. Pour le changer, utiliser l'entrée appropriée
-  dans le menu \texttt{Fichier} (Windows) ou \texttt{Divers} (macOS).
-  Consulter aussi les foires aux questions spécifiques aux interfaces
-  graphiques \citep{Rw-FAQ,RMacOSX-FAQ} pour des détails additionnels
-  sur la gestion des répertoires de travail.
-\item Dans RStudio, on change le répertoire de travail via le menu
-  \code{Session}.
-\item Avec GNU~Emacs, la situation est un peu plus simple puisque l'on
-  doit spécifier un répertoire de travail chaque fois que l'on démarre
-  un processus R; voir l'\autoref{chap:emacs+ess}.
-\end{itemize}
+Le répertoire de travail (\emph{workspace}) de R est le répertoire par
+défaut dans lequel le logiciel, d'une part, recherche des fichiers de
+script ou de données et, d'autre part, sauvegarde l'espace de travail
+dans le fichier \code{.RData}. Le répertoire de travail est déterminé
+au lancement de R.
 
+Les interfaces graphiques de R démarrent avec un répertoire de travail
+par défaut. Pour le changer, utiliser l'entrée appropriée dans le menu
+\texttt{Fichier} (Windows) ou \texttt{Divers} (macOS). Consulter aussi
+les foires aux questions spécifiques aux interfaces graphiques
+\citep{Rw-FAQ,RMacOSX-FAQ} pour des détails additionnels sur la
+gestion des répertoires de travail.
+
+Dans RStudio, on change le répertoire de travail via le menu
+\code{Session}.
+
+Avec GNU~Emacs, la situation est un peu plus simple puisque l'on doit
+spécifier un répertoire de travail au lancement d'un processus R; voir
+l'\autoref{chap:emacs+ess}.
 
 
 \section{Consulter l'aide en ligne}
@@ -431,51 +463,59 @@ Les rubriques d'aide des diverses fonctions de R contiennent une foule
 d'informations ainsi que des exemples d'utilisation. Leur consultation
 est tout à fait essentielle.
 
-\begin{itemize}
-\item Pour consulter la rubrique d'aide de la fonction \code{foo}, on
-  peut entrer à la ligne de commande
+Pour consulter la rubrique d'aide de la fonction \code{foo}, on entre
+à la ligne de commande:
 \begin{Schunk}
 \begin{Sinput}
 > ?foo
 \end{Sinput}
 \end{Schunk}
-  ou
+ou
 \begin{Schunk}
 \begin{Sinput}
 > help(foo)
 \end{Sinput}
 \end{Schunk}
-\end{itemize}
-
+Pour chercher de l'aide sur un sujet \code{bar}, la commande est:
+\begin{Schunk}
+\begin{Sinput}
+help.search("bar")
+\end{Sinput}
+\end{Schunk}
+Enfin, le système d'aide de R contient bon nombre de documents plus
+longs en format PDF. Les «vignettes» abordent habituellement une
+thématique dans son ensemble plutôt que simplement par le biais d'une
+suite de fonctions. Pour consulter la vignette sur \code{sujet},
+entrer à la ligne de commande:
+\begin{Schunk}
+\begin{lstlisting}
+vignette("sujet")
+\end{lstlisting}
+\end{Schunk}
 
 
 \section{Où trouver de la documentation}
 \label{sec:presentation:doc}
 
 La documentation officielle de R se compose de six guides accessibles
-depuis le menu \texttt{Aide} des interfaces graphiques ou encore en
-ligne dans le site du projet R\footnote{%
-  \url{http://www.r-project.org}}. %
-Pour le débutant, seuls \emph{An Introduction to R} et, possiblement,
-\emph{R Data Import/Export} peuvent s'avérer des ressources utiles à
-court terme.
-
-Plusieurs livres --- en versions papier ou électronique, gratuits ou
-non --- ont été publiés sur R. On en trouvera une liste exhaustive
-dans la section Documentation du site du projet R.
+depuis le menu \texttt{Aide} des interfaces graphiques ou encore
+\link{https://cran.r-project.org/manuals.html}{en ligne} dans le site
+du projet R. Pour les débutants, seuls \emph{An Introduction to R} et,
+possiblement, \emph{R Data Import/Export} peuvent s'avérer des
+ressources utiles à court terme.
 
 Depuis plusieurs années maintenant, les ouvrages de
 \citet{Venables:s:2000,MASS} demeurent des références standards
-\emph{de facto} sur les langages S et R. Plus récent,
-\cite{Braun:Rprogramming:2007} participe du même effort que le présent
-ouvrage en se concentrant sur la programmation en R plutôt que sur ses
-applications statistiques.
+\emph{de facto} sur les langages S et R. Plus récents,
+\cite{Braun:Rprogramming:2007,Braun:Rprogramming:2e:2016} participent du
+même effort que le présent ouvrage en se concentrant sur la
+programmation en R plutôt que sur ses applications statistiques.
 
 
 \section{Exemples}
 \label{sec:presentation:exemples}
 
-\lstinputlisting[firstline=3]{presentation.R}
+\lstinputlisting[firstline=13]{presentation.R}
 
 
 \section{Exercices}
