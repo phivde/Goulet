@@ -20,7 +20,7 @@ référence pour l'apprentissage plus poussé de l'éditeur.
   \centering
   \includegraphics{emacs.png} \\
   \footnotesize\sffamily\flushleft\vspace{-\baselineskip}%
-  Tiré de \href{http://xkcd.com/378/}{XKCD.com}. La commande \code{M-X
+  Tiré de \href{http://xkcd.com/378/}{XKCD.com}. La commande \code{M-x
     butterfly} existe vraiment dans Emacs\dots\ en référence à cette
   bande dessinée!
 \end{figure}
@@ -32,48 +32,43 @@ référence pour l'apprentissage plus poussé de l'éditeur.
 Emacs est le logiciel étendard du projet GNU («\emph{GNU is not
   Unix}»), dont le principal commanditaire est la \emph{Free Software
   Foundation} (FSF) à l'origine de tout le mouvement du logiciel
-libre.
-\begin{itemize}
-\item Richard M.\ Stallman, président de la FSF et grand apôtre du
-  libre, a écrit la première version de Emacs et il continue à ce jour
-  à contribuer au projet.
-\item Les origines de Emacs remontent au début des années 1980, une
-  époque où les interfaces graphiques n'existaient pas, le parc
-  informatique était beaucoup plus hétérogène qu'aujourd'hui (les
-  claviers n'étaient pas les mêmes d'une marque d'ordinateur à une
-  autre) et les modes de communication entre les ordinateurs
-  demeuraient rudimentaires.
-\item L'âge vénérable de Emacs transparaît à plusieurs endroits,
-  notamment dans la terminologie inhabituelle, les raccourcis clavier
-  non conformes aux standards d'aujourd'hui ou la manipulation des
-  fenêtres qui ne se fait pas avec une souris.
-\end{itemize}
+libre. Richard M.\ Stallman, président de la FSF et grand apôtre du
+libre, a écrit la première version de Emacs et il continue à ce jour à
+contribuer au projet.
+
+Les origines de Emacs remontent au début des années 1980, une époque
+où les interfaces graphiques n'existaient pas, le parc informatique
+était beaucoup plus hétérogène qu'aujourd'hui (les claviers n'étaient
+pas les mêmes d'une marque d'ordinateur à une autre) et les modes de
+communication entre les ordinateurs demeuraient rudimentaires.
+
+L'âge vénérable de Emacs transparaît à plusieurs endroits, notamment
+dans la terminologie inhabituelle, les raccourcis clavier non
+conformes aux standards d'aujourd'hui ou la manipulation des fenêtres
+qui ne se fait pas avec une souris.
 
 Emacs s'adapte à différentes tâches par l'entremise de \emph{modes}
 qui modifient son comportement ou lui ajoutent des fonctionnalités.
-L'un de ces modes est ESS (\emph{Emacs Speaks Statistics}).
-\begin{itemize}
-\item ESS permet d'interagir avec des logiciels statistiques (en
-  particulier R, S+ et SAS) directement depuis Emacs.
-\item Quelques-uns des développeurs de ESS sont aussi des développeurs
-  de R, d'où la grande compatibilité entre les deux logiciels.
-\item Lorsque ESS est installé, le mode est activé automatiquement en
-  ouvrant dans Emacs un fichier dont le nom se termine par l'extension
-  \code{.R}.
-\end{itemize}
+
+L'un de ces modes est ESS (\emph{Emacs Speaks Statistics}). ESS permet
+d'interagir avec des logiciels statistiques (en particulier R, S+ et
+SAS) directement depuis Emacs. Quelques-uns des développeurs de ESS
+sont aussi des développeurs de R, d'où la grande compatibilité entre
+les deux logiciels. Lorsque ESS est installé, le mode est activé
+automatiquement en ouvrant dans Emacs un fichier dont le nom se
+termine par l'extension \code{.R}.
 
 
 \section{Installation}
 \label{sec:emacs+ess:installation}
 
-GNU Emacs et le mode ESS sont normalement livrés d'office avec toutes
-les distributions Linux. Pour les environnements Windows et macOS,
-le plus simple consiste à installer les distributions préparées par le
-présent auteur. Consulter le site
-\begin{quote}
-  \url{http://vgoulet.act.ulaval.ca/emacs/}
-\end{quote}
+Le présent auteur prépare des distributions modifiées de GNU~Emacs
+pour \link{https://vigou3.github.io/emacs-modified-windows/}{Windows}
+et pour \link{https://vigou3.github.io/emacs-modified-macos/}{macOS}
+qui intègrent le mode ESS.
 
+Sous Linux, GNU Emacs et le mode ESS font normalement partie de toutes
+les distributions.
 
 \section{Description sommaire}
 \label{sec:emacs+ess:description}
@@ -164,7 +159,7 @@ Windows et macOS.
   \item \code{RET} est la touche \code{Entrée} (\returnkey);
   \end{itemize}
 \item Toutes les fonctionnalités de Emacs correspondent à une commande
-  pouvant être tapée dans le \emph{minibuffer}. \code{M-x} démarre
+  qui peut être tapée dans le \emph{minibuffer}. \code{M-x} démarre
   l'invite de commande.
 \item Le caractère \,\verb=~=\, représente le dossier vers lequel
   pointe la variable d'environnement \code{\$HOME} (Linux, macOS) ou
@@ -213,11 +208,6 @@ Emacs comporte une pléthore de commandes, il serait donc futile de
 tenter d'en faire une liste exhaustive ici. Nous nous contenterons de
 mentionner les commandes les plus importantes regroupées par tâche.
 
-% Pour débuter, il est utile de suivre le Tour guidé de Emacs\footnote{%
-%   \url{http://www.gnu.org/software/emacs/tour/} ou cliquer sur le lien
-%   dans l'écran d'accueil.} %
-% et de lire le tutoriel de Emacs, que l'on démarre avec \code{C-h t}.
-
 \subsection{Les essentielles}
 \label{sec:emacs+ess:commandes:essentielles}
 
@@ -234,11 +224,9 @@ Entre parenthèses, le nom de la commande Emacs correspondante. On peut
 entrer cette commande dans le \emph{minibuffer} au lieu d'utiliser le
 raccourci clavier.
 
-\begin{important}
-  On remarquera qu'il n'existe pas de commande «nouveau fichier» dans
-  Emacs. Pour créer un nouveau fichier, il suffit d'ouvrir un fichier
-  n'existant pas.\index{Emacs!nouveau fichier}
-\end{important}
+\importantbox{On remarquera qu'il n'existe pas de commande «nouveau
+  fichier» dans Emacs. Pour créer un nouveau fichier, il suffit
+  d'ouvrir un fichier n'existant pas.\index{Emacs!nouveau fichier}}
 
 \begin{ttscript}{C-x C-w}
   \raggedright
@@ -282,14 +270,10 @@ raccourci clavier.
 \item[\code{C-k}] supprimer jusqu'à la fin de la ligne (\code{kill-line})
 \end{ttscript}
 
-\begin{figure}[ht]
-  \begin{osx}
-    Plusieurs des raccourcis clavier de Emacs composés avec la touche
-    \code{Contrôle} (\ctlkey) sont valides sous macOS. Par exemple,
-    \ctlkey\,\code{A} et \ctlkey\,\code{E} déplacent le curseur au
-    début et à la fin de la ligne dans les champs texte.
-  \end{osx}
-\end{figure}
+\osxbox{Plusieurs des raccourcis clavier de Emacs composés avec la
+  touche \code{Contrôle} (\ctlkey) sont valides sous macOS. Par
+  exemple, \ctlkey\,\code{A} et \ctlkey\,\code{E} déplacent le curseur
+  au début et à la fin de la ligne dans les champs texte.}
 
 
 \subsection{Sélection de texte, copier, coller, couper}
@@ -410,12 +394,13 @@ Les quelques autres fonctions utiles sont:
 
 
 
-\section{Anatomie d'une session de travail (bis)}
+\section{Anatomie d'une session de travail (ter)}
 \label{sec:emacs+ess:session}
 
-On reprend ici les étapes d'une \capsule{https://youtu.be/KtmFDm2AKM4}{session de
-  travail} type présentées à la \autoref{sec:presentation:session}, mais
-en expliquant comment compléter chacune dans Emacs avec le mode ESS.
+On reprend ici les étapes d'une %
+\capsule{https://www.youtube.com/watch?v=KtmFDm2AKM4}{session de travail} %
+type présentées à la \autoref{sec:presentation:session}, mais en
+expliquant comment compléter chacune dans Emacs avec le mode ESS.
 
 \begin{enumerate}
 \item Lancer Emacs et ouvrir un fichier de script avec
@@ -490,9 +475,10 @@ clavier, etc.
 
 \begin{itemize}
 \item La configuration de Emacs se fait par le biais de commandes
-  réunies dans un \capsule{https://youtu.be/jdtjBBkfhO0}{fichier de
-    configuration} nommé \code{.emacs} (le point est important!) que
-  Emacs lit au démarrage.
+  réunies dans un %
+  \capsule{https://www.youtube.com/watch?v=jdtjBBkfhO0}{fichier de configuration} %
+  nommé \code{.emacs} (le point est important!) que Emacs lit au
+  démarrage.
 \item Le fichier \code{.emacs} doit se trouver dans le dossier
   \,\verb=~/=, c'est-à-dire dans le dossier de départ de l'utilisateur
   sous Linux et macOS, et dans le dossier référencé par la variable
@@ -507,12 +493,9 @@ Emacs possède son propre système d'aide très exhaustif, mais dont la
 navigation est peu intuitive selon les standards d'aujourd'hui.
 Consulter le menu \code{Help}.
 
-Autrement, on trouvera les manuels de Emacs et de ESS en divers
-formats dans les sites respectifs des deux projets:
-\begin{quote}
-  \url{http://www.gnu.org/software/emacs} \\
-  \url{http://ess.r-project.org}
-\end{quote}
+Autrement, on trouvera dans les sites respectifs des deux projets les
+manuels de \link{http://www.gnu.org/software/emacs}{Emacs} et de
+\link{http://ess.r-project.org}{ESS}.
 
 Enfin, si le désespoir vous prend au cours d'une séance de codage
 intensive, vous pouvez toujours consulter le psychothérapeute Emacs.
