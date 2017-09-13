@@ -18,12 +18,11 @@ complémentent souvent.
 
 ## Auteur
 
-Vincent Goulet, [École d'actuariat](https://www.act.ulaval.ca), [Université Laval](https://ulaval.ca)
+Vincent Goulet, professeur titulaire, [École d'actuariat](https://www.act.ulaval.ca), [Université Laval](https://ulaval.ca)
 
 ## Édition
 
 2017.09-1 ([notes de mise à jour]({{ site.github.repository_url }}/releases/tag/v2017.09-1/))
-
 
 ## Table des matières abrégée
 
@@ -31,6 +30,6 @@ Vincent Goulet, [École d'actuariat](https://www.act.ulaval.ca), [Université La
 2\. Présentation de R  
 A. RStudio: une introduction  
 B. GNU Emacs et ESS: la base  
-C. Réponses des exercices
+C. Réponses des exercices  
 Bibliographie  
 Index
