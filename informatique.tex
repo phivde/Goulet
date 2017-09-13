@@ -11,7 +11,23 @@
 \chapter{Éléments d'informatique pour programmeurs}
 \label{chap:informatique}
 
-% Intro du chapitre
+\begin{objectifs}
+\item Nommer et ordonner les grands jalons de l'histoire des langages
+  de programmation.
+\item Identifier les principaux paradigmes de programmation.
+\item Distinguer les concepts de syntaxe et de sémantique d'un langage
+  de programmation.
+\item Distinguer les concepts de langage compilé et de langage
+  interprété.
+\item Comparer les forces et faiblesses de divers langages de
+  programmation en fonction de divers critères.
+\item Comprendre la structure du système de fichiers d'un ordinateur
+  et identifier le chemin d'accès vers une ressource dans celui-ci.
+\item Naviguer dans le système de fichiers d'un ordinateur et obtenir
+  une liste des fichiers à partir d'une interface en ligne de
+  commande.
+\end{objectifs}
+
 
 \section{Bref historique des langages de programmation}
 \label{sec:informatique:historique}
@@ -25,7 +41,7 @@ Défense des États-Unis au début des années 1980.
 Franchissons d'un bond les premiers jours de l'informatique et de la
 programmation pour arriver aux ordinateurs électriques modernes, dans
 les années 1940. On programme alors généralement ceux-ci en
-assembleur, un langage de très bas niveau facilement
+\index{assembleur}assembleur, un langage de très bas niveau facilement
 interprétable par la machine, mais difficile à lire par des humains,
 comme l'extrait de programme de la
 \autoref{fig:informatique:assembleur} le démontre bien.
@@ -53,8 +69,8 @@ perforées.
 \label{sec:informatique:historique:fortran}
 
 En 1954, l'ingénieur de IBM John Backus publie les spécifications du
-langage FORTRAN (\emph{FORmula TRANslating System}). Le premier
-compilateur voit le jour deux ans plus tard. Fortran (avec des
+langage \index{Fortran}FORTRAN (\emph{FORmula TRANslating System}). Le
+premier compilateur voit le jour deux ans plus tard. Fortran (avec des
 minuscules à partir de 1977) deviendra rapidement le langage standard
 dans le calcul scientifique.
 
@@ -78,19 +94,20 @@ mesurer le rendement des superordinateurs.
 \subsection{Lisp}
 \label{sec:informatique:historique:lisp}
 
-Le deuxième langage le plus ancien toujours largement diffusé est Lisp
-(\emph{LISt Processing}). Créé par John McCarthy en 1958 en tant que
-modèle pratique pour représenter des programmes, le Lisp est devenu le
-langage de choix pour la recherche et les applications en intelligence
-artificielle. Le terme Lisp désigne aujourd'hui une famille de
-langages comprenant de nombreux dialectes, dont Common Lisp, Scheme et
-Emacs Lisp.
+Le deuxième langage le plus ancien toujours largement diffusé est
+\index{Lisp}Lisp (\emph{LISt Processing}). Créé par John McCarthy en
+1958 en tant que modèle pratique pour représenter des programmes, le
+Lisp est devenu le langage de choix pour la recherche et les
+applications en intelligence artificielle. Le terme Lisp désigne
+aujourd'hui une famille de langages comprenant de nombreux dialectes,
+dont Common Lisp, Scheme et Emacs Lisp.
 
-Le Lisp se distingue en outre par une syntaxe simple en notation
-préfixée (voir encadré), le support pour la programmation
-fonctionnelle (\autoref{sec:informatique:paradigmes}) et la faculté de
-manipuler le code source en tant que structure de données. Autre trait
-distinctif: la syntaxe du Lisp fait un usage immodéré des parenthèses.
+Le Lisp se distingue en outre par une syntaxe simple en
+\index{notation!préfixée}notation préfixée (voir encadré), le support
+pour la programmation fonctionnelle
+(\autoref{sec:informatique:paradigmes}) et la faculté de manipuler le
+code source en tant que structure de données. Autre trait distinctif:
+la syntaxe du Lisp fait un usage immodéré des parenthèses.
 
 Le Lisp est entouré d'une aura de beauté et d'élégance dont peu
 d'autres langages peuvent se targuer. Citons Eric Raymond dans
@@ -125,10 +142,11 @@ l'\link{http://philip.greenspun.com/bboard/q-and-a-fetch-msg?msg_id=000tgU}{aveu
     frame=lr, rulecolor=\color{codebg},
     xleftmargin=3.4pt, xrightmargin=3.4pt}
   \begin{emphbox}{\mdseries Notations infixée, préfixée et suffixée}
-    Les notations infixée (\emph{infix}), préfixée (\emph{prefix}) et
-    suffixée (\emph{postfix}) sont trois manières différentes, mais
-    équivalentes, d'écrire des expressions en mathématiques ou en
-    programmation.
+    Les notations \index{notation!infixée}infixée (\emph{infix}),
+    \index{notation!préfixée}préfixée (\emph{prefix}) et
+    \index{notation!suffixée}suffixée (\emph{postfix}) sont trois
+    manières différentes, mais équivalentes, d'écrire des expressions
+    en mathématiques ou en programmation.
 
     Par exemple, l'opération d'addition de deux opérandes $x$ et $y$
     s'écrit en notation infixée
@@ -160,10 +178,10 @@ x y +
 \label{sec:informatique:historique:cobol}
 
 Le troisième langage développé dans les années 1950 et toujours en
-usage de nos jours est COBOL (\emph{COmmon Business Oriented
-  Language}). Ce langage spécialisé dans les applications de gestion a
-été créé en 1959 par un comité formé pour proposer un langage commun
-pour l'administration américaine.
+usage de nos jours est \index{COBOL}COBOL (\emph{COmmon Business
+  Oriented Language}). Ce langage spécialisé dans les applications de
+gestion a été créé en 1959 par un comité formé pour proposer un
+langage commun pour l'administration américaine.
 
 Le COBOL reste très utilisé dans de grandes entreprises, notamment
 dans les institutions financières. La légende urbaine veut d'ailleurs
@@ -176,7 +194,7 @@ opérationnelle des applications qu'ils doivent maintenir.
 
 Dès la fin de la décennie 1950, un comité de scientifiques se réunit à
 Zurich pour concevoir ce que l'on voudrait voir devenir le langage de
-programmation standard. De ces rencontres naîtra Algol
+programmation standard. De ces rencontres naîtra \index{Algol}Algol
 (\emph{ALGorithmic Oriented Language}) en 1958. Comme la plupart des
 tentatives de définition d'un standard, c'est un échec: le langage est
 populaire dans les milieux académiques, mais restera peu utilisé dans
@@ -194,7 +212,6 @@ merveille. \citet{Hoare:1973} a d'ailleurs cette jolie formule:
   amélioration de presque tous ses successeurs.
 \end{quote}
 
-
 \begin{figure}[t]
   \centering
   \begin{minipage}{0.9\linewidth}
@@ -208,12 +225,12 @@ merveille. \citet{Hoare:1973} a d'ailleurs cette jolie formule:
 \subsection{APL}
 \label{sec:informatique:historique:apl}
 
-Notre historique ne serait pas complet sans un mot sur APL (\emph{A
-  Programming Language}, qui l'aurait cru). Même s'il n'a jamais connu
-une diffusion importante, ce langage conçu par Kenneth Iverson autour
-de 1962 n'en a pas moins eu une influence considérable sur la manière
-de penser et de représenter les opérations mathématiques sur les
-tableaux à plusieurs dimensions.
+Notre historique ne serait pas complet sans un mot sur \index{APL}APL
+(\emph{A Programming Language}, qui l'aurait cru). Même s'il n'a
+jamais connu une diffusion importante, ce langage conçu par Kenneth
+Iverson autour de 1962 n'en a pas moins eu une influence considérable
+sur la manière de penser et de représenter les opérations
+mathématiques sur les tableaux à plusieurs dimensions.
 
 Doté d'une large gamme de symboles pour représenter des opérations et
 d'une syntaxe tout à fait particulière --- les expressions sont
@@ -231,7 +248,7 @@ servi d'inspiration pour la conception du langage S --- nous y
 reviendrons au \autoref{chap:presentation}.
 
 Le langage continue sa vie aujourd'hui principalement sous forme de son
-successeur, J.
+successeur, \index{J}J.
 
 \begin{figure}
   \centering
@@ -249,11 +266,11 @@ successeur, J.
 \subsection{C}
 \label{sec:informatique:historique:c}
 
-Le langage C a été inventé en 1972 chez Bell Labs par Ken Thompson et
-Dennis Ritchie afin de réécrire le système d'exploitation UNIX
-(\autoref{sec:informatique:os:unix}). Il demeure beaucoup utilisé pour
-la programmation système: le noyau de systèmes d'exploitation comme
-Windows et Linux sont développés en grande partie en C.
+Le langage \index{C}C a été inventé en 1972 chez Bell Labs par Ken
+Thompson et Dennis Ritchie afin de réécrire le système d'exploitation
+UNIX (\autoref{sec:informatique:os:unix}). Il demeure beaucoup utilisé
+pour la programmation système: le noyau de systèmes d'exploitation
+comme Windows et Linux sont développés en grande partie en C.
 
 Le C est un langage de programmation généraliste considéré, selon les
 standards actuels, comme de bas niveau. Pour illustrer, l'utilisateur
@@ -263,14 +280,14 @@ et la fermeture des fichiers, etc.
 
 Le langage demeure l'un des plus utilisés dans le monde et son
 influence est considérable. De nombreux langages plus modernes comme
-\Cpp, C\# et Java reprennent des aspects de C. Le C est également
-beaucoup utilisé pour le calcul numérique intensif, où il s'est en
-quelque sorte substitué à Fortran. La plupart des progiciels
-scientifiques --- dont R, encore une fois --- offrent la possibilité
-d'appeler du code C lorsque la rapidité de calcul devient un enjeu. Le
-gain en temps d'exécution doit toutefois être suffisamment grand pour
-compenser le temps de développement plus long qu'exige le C par
-rapport à des langages de plus haut niveau.
+\index{C++@\Cpp}\Cpp, \index{C#@C\#}C\# et \index{Java}Java reprennent des
+aspects de C. Le C est également beaucoup utilisé pour le calcul
+numérique intensif, où il s'est en quelque sorte substitué à Fortran.
+La plupart des progiciels scientifiques --- dont R, encore une fois
+--- offrent la possibilité d'appeler du code C lorsque la rapidité de
+calcul devient un enjeu. Le gain en temps d'exécution doit toutefois
+être suffisamment grand pour compenser le temps de développement plus
+long qu'exige le C par rapport à des langages de plus haut niveau.
 
 \notebox{Dans l'ouvrage classique de \cite{KandR:1978}, le premier
   exemple d'un programme C affiche le message «\emph{hello, world}» à
@@ -288,27 +305,27 @@ milliers. En voici quelques autres ayant occupé une place
 prépondérante dans l'histoire.
 
 \begin{itemize}
-\item Comme son nom l'indique, \textbf{\Cpp} (Bjarne Stroustrup, 1980)
-  est un dérivé du C qui lui ajoute, en autres choses, la
-  programmation orientée objet. Certains considèrent que {\Cpp}
-  devrait être le point d'entrée de toute personne voulant débuter à
-  programmer avec des langages de la famille du C. Le code C est
-  compatible avec le \Cpp.
+\item Comme son nom l'indique, \index{C++@\Cpp}\textbf{\Cpp} (Bjarne
+  Stroustrup, 1980) est un dérivé du C qui lui ajoute, en autres
+  choses, la programmation orientée objet. Certains considèrent que
+  {\Cpp} devrait être le point d'entrée de toute personne voulant
+  débuter à programmer avec des langages de la famille du C. Le code C
+  est compatible avec le \Cpp.
 \item Principal représentant de l'ère Internet des années 1990,
-  \textbf{Java} (James Gosling, 1995) a été conçu pour que le code
-  écrit dans ce langage puisse s'exécuter sur n'importe quelle
-  plateforme informatique sans nécessiter une nouvelle compilation. Il
-  est donc très populaire dans les applications web ou embarquées. Sa
-  syntaxe est fortement inspirée du \Cpp.
-\item \textbf{Visual Basic} (Microsoft, 1991) permet de développer des
+  \index{Java}\textbf{Java} (James Gosling, 1995) a été conçu pour
+  que le code écrit dans ce langage puisse s'exécuter sur n'importe
+  quelle plateforme informatique sans nécessiter une nouvelle
+  compilation. Il est donc très populaire dans les applications web ou
+  embarquées. Sa syntaxe est fortement inspirée du \Cpp.
+\item \index{Visual Basic}\textbf{Visual Basic} (Microsoft, 1991) permet de développer des
   applications de manière interactive en disposant des composantes sur
   un canevas. Le langage est aujourd'hui discontinué, mais son dérivé
-  \textbf{Visual Basic for Applications} (VBA) demeure beaucoup
+  \textbf{Visual Basic for Applications} (\index{VBA}VBA) demeure beaucoup
   utilisé dans les applications de la suite bureautique Office.
-\item \textbf{Python} (Guido van Rossum, 1991) est un langage de haut
-  niveau, orienté objet, multiplateforme et sous licence libre. C'est
-  un des langages les plus utilisés aujourd'hui pour le calcul
-  scientifique et l'analyse de données massives.
+\item \index{Python}\textbf{Python} (Guido van Rossum, 1991) est un
+  langage de haut niveau, orienté objet, multiplateforme et sous
+  licence libre. C'est un des langages les plus utilisés aujourd'hui
+  pour le calcul scientifique et l'analyse de données massives.
 \end{itemize}
 
 Certains langages de programmation ont une vocation généraliste,
@@ -338,25 +355,27 @@ puissent être exploités par un ordinateur. Il existe deux grandes
 façons d'effectuer ce traitement: par compilation et par
 interprétation.
 
-Un compilateur est un programme informatique qui transforme en langage
-machine le code source rédigé dans un langage donné. On dit alors de
-ce langage qu'il est \emph{compilé}. Le compilateur produit un fichier
+Un \index{compilateur}compilateur est un programme informatique qui
+transforme en langage machine le code source rédigé dans un langage
+donné. On dit alors de ce langage qu'il est \index{compilé
+  (langage)}\emph{compilé}. Le compilateur produit un fichier
 informatique que l'ordinateur peut ensuite exécuter directement. Sur
 la plateforme Windows, on reconnait notamment ces fichiers par leurs
 extensions \code{.exe} ou \code{.dll}. Les noyaux d'à peu près toutes
 les applications sur nos ordinateurs sont des fichiers compilés.
 
-Un interprète (ou interpréteur), quant à lui, est un programme qui
+Un \index{interpréteur}interpréteur, quant à lui, est un programme qui
 analyse, traduit et exécute le code source d'un programme
 informatique, et ce, à chaque fois que le programme doit être exécuté.
-Un langage qui nécessite l'intermédiaire d'un interprète est dit
-\emph{interprété}. Un programme écrit dans un langage interprété ne
-peut être distribué sans son interprète.
+Un langage qui nécessite l'intermédiaire d'un interpréteur est dit
+\emph{interprété}. Un programme écrit dans un \index{interprété
+  (langage)}langage interprété ne peut être distribué sans son
+interpréteur.
 
 Le traitement additionnel entre le code source et le langage machine
 fait généralement en sorte que les langages interprétés sont plus
 lents que les langages compilés à l'exécution. En revanche, une foule
-de détails de mise en œuvre sont pris en charge par l'interprète, ce
+de détails de mise en œuvre sont pris en charge par l'interpréteur, ce
 qui réduit le temps de développement.
 
 
@@ -373,13 +392,14 @@ Il existe plusieurs paradigmes de programmation. Nous nous
 contenterons ici de n'en présenter que quatre.
 
 \begin{description}
-\item[Impératif] On indique à l'ordinateur les opérations à exécuter
-  et l'ordre dans lequel les exécuter. C'est le paradigme le plus
-  intuitif.
-\item[Déclaratif] On indique cette fois à l'ordinateur ce que l'on
-  souhaite obtenir comme résultat, mais sans préciser comme y
-  parvenir. Il est laissé à la mise en œuvre du langage de déterminer
-  la meilleure méthode de résolution du problème.
+\item[Impératif] \index{paradigme!impératif} On indique à l'ordinateur
+  les opérations à exécuter et l'ordre dans lequel les exécuter. C'est
+  le paradigme le plus intuitif.
+\item[Déclaratif] \index{paradigme!déclaratif} On indique cette fois à
+  l'ordinateur ce que l'on souhaite obtenir comme résultat, mais sans
+  préciser comme y parvenir. Il est laissé à la mise en œuvre du
+  langage de déterminer la meilleure méthode de résolution du
+  problème.
 
   Par exemple, pour extraire d'une base de données \code{etudiants} le
   prénom de toutes les personnes de plus de 25~ans, on écrira dans un
@@ -391,18 +411,19 @@ SELECT prenom FROM etudiants WHERE age > 25
 \end{Schunk}
   Nulle part n'est-il précisé comment le programme devrait procéder à
   l'extraction.
-\item[Fonctionnel] Un programme est une suite d'appels de fonctions,
-  comme en mathématiques. L'exécution d'une fonction n'a pas d'impact
-  sur les autres fonctions\footnote{%
+\item[Fonctionnel] \index{paradigme!fonctionnel} Un programme est une
+  suite d'appels de fonctions, comme en mathématiques. L'exécution
+  d'une fonction n'a pas d'impact sur les autres fonctions\footnote{%
     Autrement on dit qu'une fonction a un effet de bord (\emph{side
       effect}.} %
   Les opérations complexes sont réalisées en combinant les fonctions,
   de manière analogue à la composition de fonctions $g \circ f$.
-\item[Orienté objet] Un programme est conçu comme un ensemble de blocs
-  logiciels (les objets) qui interagissent entre eux. Une
-  \emph{méthode} applique un traitement différent à un objet
-  selon sa \emph{classe}. Ce paradigme est particulièrement utilisé
-  dans les grands et complexes projets informatiques.
+\item[Orienté objet] \index{paradigme!orienté objet} Un programme est
+  conçu comme un ensemble de blocs logiciels (les objets) qui
+  interagissent entre eux. Une \emph{méthode} applique un traitement
+  différent à un objet selon sa \emph{classe}. Ce paradigme est
+  particulièrement utilisé dans les grands et complexes projets
+  informatiques.
 \end{description}
 
 La plupart des langages d'usage courant combinent d'office, ou
@@ -419,7 +440,7 @@ programmation et les langues parlées ou écrites: leur apprentissage
 requiert de la pratique; on en connait jamais un trop grand nombre; le
 premier est plus difficile à apprendre que les suivants.
 L'informatique a également emprunté à la linguistique les notions de
-sémantique et de syntaxe.
+\index{sémantique}sémantique et de \index{syntaxe}syntaxe.
 
 La sémantique est l'étude de ce que signifie un message ou un
 programme informatique, c'est-à-dire de ce qu'il transmet ou exécute.
@@ -446,16 +467,16 @@ langage d'exprimer des idées, demande plus d'efforts et de pratique.
 \section{Systèmes d'exploitation}
 \label{sec:informatique:os}
 
-Le système d'exploitation (\emph{operating system}, OS) est un
-ensemble de programmes qui gère les ressources matérielles et
-logicielles d'un ordinateur. Premier programme exécuté par
-l'ordinateur lors de la mise en marche, le système d'exploitation
-reçoit les demandes de ressources des applications --- espace mémoire,
-unité de calcul, disque dur, communication avec les périphériques,
-utilisation du réseau --- et les alloue en fonction de l'état du
-système et des demandes concurrentes des autres applications. Tous les
-logiciels applicatifs requièrent un système d'exploitation pour
-fonctionner.
+Le \index{système d'exploitation}système d'exploitation
+(\emph{operating system}, OS) est un ensemble de programmes qui gère
+les ressources matérielles et logicielles d'un ordinateur. Premier
+programme exécuté par l'ordinateur lors de la mise en marche, le
+système d'exploitation reçoit les demandes de ressources des
+applications --- espace mémoire, unité de calcul, disque dur,
+communication avec les périphériques, utilisation du réseau --- et les
+alloue en fonction de l'état du système et des demandes concurrentes
+des autres applications. Tous les logiciels applicatifs requièrent un
+système d'exploitation pour fonctionner.
 
 Il existe une grande variété de systèmes d'exploitation. Les plus
 connus aujourd'hui sont, pour les ordinateurs personnels et les
@@ -472,10 +493,10 @@ d'exploitation couramment utilisés: Windows et Unix.
 \subsection{Windows}
 \label{sec:informatique:os:windows}
 
-Le système d'exploitation Windows de Microsoft équipe près de 90~\%
-des ordinateurs personnels dans le monde. Dans les circonstances, rares
-sont les personnes qui n'ont jamais utilisé le système, ne serait-ce
-qu'à petites doses.
+Le système d'exploitation \index{Windows}Windows de Microsoft équipe
+près de 90~\% des ordinateurs personnels dans le monde. Dans les
+circonstances, rares sont les personnes qui n'ont jamais utilisé le
+système, ne serait-ce qu'à petites doses.
 
 À l'origine, en 1985, Windows n'était qu'une interface graphique
 superposée au véritable système d'exploitation des ordinateurs de type
@@ -488,7 +509,7 @@ Le plus grand avantage de Windows est son ubiquité. À peu près toutes
 les applications, sauf peut-être celles s'adressant à un segment de
 marché très précis, sont disponibles sous Windows, en code natif, via
 un port depuis Unix, ou encore par l'intermédiaire d'une couche
-logicielle d'émulation comme Cygwin ou MinGW/MSYS.
+logicielle d'émulation comme Cygwin ou \index{MinGW}MinGW.
 
 Un système d'exploitation multiutilisateur prend pour acquis que
 plusieurs utilisateurs se partageront les ressources de l'ordinateur,
@@ -515,9 +536,9 @@ ce qui entraîne dédoublements et, parfois, conflits.
 \subsection{Unix}
 \label{sec:informatique:os:unix}
 
-Le terme \emph{Unix} --- ou UNIX qui, en majuscules, est une marque
-déposée de \link{http://www.opengroup.org/unix}{Open Group} ---
-recoupe une famille de systèmes d'exploitation dérivant tous du
+Le terme \index{Unix}\emph{Unix} --- ou UNIX qui, en majuscules, est
+une marque déposée de \link{http://www.opengroup.org/unix}{Open Group}
+--- recoupe une famille de systèmes d'exploitation dérivant tous du
 premier système Unix développé chez Bell Labs dans les années 1970 par
 Kenneth Thompson, Dennis Ritchie et plusieurs autres.
 
@@ -555,9 +576,11 @@ quelques «Unix-ismes» ci-dessous.
 \item La barre oblique (\code{/}) est utilisée pour séparer les
   dossiers dans les chemins d'accès aux fichiers.
 \item Tout utilisateur dispose d'un espace disque réservé identifié
-  comme le \emph{répertoire personnel} ou le \emph{dossier de départ}
-  (\emph{home directory}). Ce répertoire est situé dans \code{/Users}
-  sous macOS et habituellement dans \code{/home} sous Linux.
+  comme le \index{répertoire personnel}\emph{répertoire personnel} ou
+  le \index{dossier de départ|see{répertoire personnel}}\emph{dossier
+    de départ} (\emph{home directory}). Ce répertoire est situé dans
+  \code{/Users} sous macOS et habituellement dans \code{/home} sous
+  Linux.
 \item À la ligne de commande et dans la configuration de plusieurs
   applications, le caractère \,\verb=~=\, représente le répertoire
   personnel.
@@ -575,19 +598,19 @@ fichiers de Unix.
 \section{Systèmes de fichiers}
 \label{sec:informatique:fs}
 
-Le système de fichiers d'un ordinateur contrôle l'inscription,
-l'organisation et la récupération des données sur une unité de
-stockage, souvent un disque dur.
+Le \index{système de fichiers}système de fichiers d'un ordinateur
+contrôle l'inscription, l'organisation et la récupération des données
+sur une unité de stockage, souvent un disque dur.
 
-Loin de nous l'idée d'entrer dans les détails techniques des systèmes
-de fichiers. Nous souhaitons seulement attirer l'attention des
-lecteurs sur quelques points susceptibles de faciliter  la logique de
-classement des données dans un ordinateur
+Nous n'entrerons pas dans les détails techniques des systèmes de
+fichiers. Seulement, les programmeurs doivent être familiers avec
+quelques grands principes de l'organisation des données dans un
+ordinateur.
 
-En premier lieu, les fichiers sont regroupés dans des répertoires qui
-eux-mêmes contiennent des fichiers ou des sous-répertoires. Ce schéma
-se répète sans limite pratique. Il en résulte une classification sous
-forme d'arbre dont la \emph{racine} est le répertoire contenant
+Les fichiers sont regroupés dans des répertoires qui, eux-mêmes,
+contiennent des fichiers ou des sous-répertoires. Ce schéma se répète
+sans limite pratique. Il en résulte une classification sous forme
+d'arbre dont la \emph{racine} est le répertoire contenant
 l'intégralité des fichiers. La \autoref{fig:informatique:fs} présente
 des extraits des arbres de fichiers usuels de Windows et de macOS.
 
@@ -653,7 +676,7 @@ Le système de fichiers de Windows est insensible à la casse,
 c'est-à-dire qu'il ne fait aucune distinction entre \code{Program
   Files}, \code{program files} et \code{PROGRAM FILES}. Dans les
 chemins d'accès (voir ci-dessous), la barre oblique inversée
-\textbackslash sépare les noms de répertoires.
+{\textbackslash} sépare les noms de répertoires.
 
 \subsection{Particularités du système de fichiers de Unix}
 \label{sec:informatique:fs:unix}
@@ -689,13 +712,14 @@ les interfaces graphiques.
 \subsection{Chemin d'accès}
 \label{sec:informatique:fs:path}
 
-Le chemin d'accès (\emph{path}) d'un fichier ou d'un répertoire décrit
-la position de la ressource dans le système de fichier.
-Un chemin d'accès peut-être absolu ou relatif.
+Le \index{chemin d'accès}chemin d'accès (\emph{path}) d'un fichier ou
+d'un répertoire décrit la position de la ressource dans le système de
+fichier. Un chemin d'accès peut-être absolu ou relatif.
 \begin{description}
-\item[Chemin absolu] La position d'un fichier est décrite à partir de
-  la racine, de telle sorte que le chemin d'accès demeure valide
-  depuis n'importe quel point dans le système de fichier.
+\item[Chemin absolu] \index{chemin d'accès!absolu} La position d'un
+  fichier est décrite à partir de la racine, de telle sorte que le
+  chemin d'accès demeure valide depuis n'importe quel point dans le
+  système de fichier.
 
   Dans l'extrait de système de fichier Windows de la
   \autoref{fig:informatique:fs}, le chemin d'accès absolu vers le
@@ -705,11 +729,11 @@ Un chemin d'accès peut-être absolu ou relatif.
 C:\Users\Alexandre\Documents\synthese-1.doc
 \end{Sinput}
 \end{Schunk}
-\item[Chemin relatif] La position d'un fichier est donnée à partir
-  d'un endroit précis dans le système de fichier autre que la racine.
-  Le chemin dépend donc du répertoire courant. On a recours au nom
-  fictif «\verb=..=» pour identifier le répertoire parent (un niveau
-  supérieur dans l'arbre des fichiers).
+\item[Chemin relatif] \index{chemin d'accès!relatif} La position d'un
+  fichier est donnée à partir d'un endroit précis dans le système de
+  fichier autre que la racine. Le chemin dépend donc du répertoire
+  courant. On a recours au nom fictif «\verb=..=» pour identifier le
+  répertoire parent (un niveau supérieur dans l'arbre des fichiers).
 
   Par exemple, si le répertoire courant de Marianne est
   \code{Documents/Cours} dans le système de fichier Unix de la
@@ -727,22 +751,22 @@ répertoires dans lesquels le système d'exploitation recherche une
 application lorsqu'elle est appelée. Cette liste est conservée dans
 une variable d'environnement nommée \verb=%PATH%= sous Windows
 et \verb=$PATH= sous Unix. Il est hors de la portée de ce document
-d'expliquer comment modifier la variable d'environnement. Toutefois,
-la réponse se trouve à une requête près dans un moteur de recherche.
+d'expliquer comment modifier la variable d'environnement. La réponse
+se trouve à une requête près dans un moteur de recherche.
 
 
 \section{Ligne de commande}
 \label{sec:informatique:cli}
 
-Une interface en ligne de commande (\emph{command line interface},
-CLI), ou tout simplement \emph{ligne de commande}, est un mode
-d'interaction avec un programme informatique dans lequel l'utilisateur
-dicte les commandes et reçoit les réponses de l'ordinateur en mode
-texte. Le programme qui gère cette interface est un \emph{interpréteur
-  de commandes}, parfois aussi appelé (à tort) \emph{terminal} ou
-\emph{shell}. Lorsque l'interpréteur est prêt à recevoir une commande,
-il l'indique par une \emph{invite de commande} (\emph{command
-  prompt}).
+Une interface en \index{ligne de commande}ligne de commande
+(\emph{command line interface}, CLI), ou tout simplement \emph{ligne
+  de commande}, est un mode d'interaction avec un programme
+informatique dans lequel l'utilisateur dicte les commandes et reçoit
+les réponses de l'ordinateur en mode texte. Le programme qui gère
+cette interface est un \emph{interpréteur de commandes}, parfois aussi
+appelé (à tort) \emph{terminal} ou \emph{shell}. Lorsque
+l'interpréteur est prêt à recevoir une commande, il l'indique par une
+\emph{invite de commande} (\emph{command prompt}).
 
 La ligne de commande est la plus ancienne des interfaces avec les
 ordinateurs. Si les interfaces graphiques ont à plusieurs égards
@@ -754,54 +778,66 @@ muni d'une interface graphique. Ensuite, certains ordinateurs, comme
 les serveurs ou les supercalculateurs, n'offrent souvent aucune
 interface graphique.
 
-Sous Windows, l'interpréteur de commandes standard est \code{cmd.exe}.
-On le trouve dans le groupe de programmes \code{Accessoires} sous le
-nom \code{Invite de commandes}. L'invite de commande par défaut est
-\verb=C:\>=. Le répertoire courant au lancement de l'interpréteur est
-donc la racine du système de fichiers.
+\subsection{Ligne de commande Windows}
+\label{sec:informatique:cli:windows}
+
+L'interpréteur de commandes standard sous Windows est
+\index{cmd@\code{cmd.exe}}\code{cmd.exe}. On le trouve dans le groupe
+de programmes \code{Accessoires} sous le nom \code{Invite de
+  commandes}. L'invite de commande par défaut est \verb=C:\>=. À la
+gauche du symbole \verb=>= se trouve le chemin d'accès du répertoire
+courant. Au lancement de l'interpréteur, celui-ci est donc la racine
+du système de fichiers.
 
 Les programmeurs qui souhaitent bénéficier de certains outils Unix
-sous Windows peuvent installer les couches logicielles MinGW et MSYS
---- nous recommandons à cet égard la distribution
-\link{http://www.msys2.org}{MSYS2}. Le programme \code{MSYS} fournit
-un interpréteur de commandes Bash \citep{bash} comme en standard
-sur les systèmes Unix.
+sous Windows peuvent installer les couches logicielles
+\index{MinGW}MinGW et \index{MSYS}MSYS --- nous recommandons à cet
+égard la distribution \link{http://www.msys2.org}{MSYS2}\index{MSYS2}.
+Le programme \code{MSYS} fournit un interpréteur de commandes
+\index{Bash}Bash \citep{bash} comme en standard sur les systèmes Unix.
+Dans cet environnement, on identifie la racine \code{C:\textbackslash}
+du système de fichier d'un disque par \code{/c/}.
 
-\windowsbox{On identifie la racine \code{C:\textbackslash} du
-  système de fichier d'un disque par \code{/c/} dans Bash sous
-  Windows.}
+\subsection{Ligne de commande macOS}
+\label{sec:informatique:cli:macos}
 
 Sous macOS, l'application de ligne de commande se nomme
 \code{Terminal}. Elle se trouve dans le sous-dossier
 \code{Utilitaires} du dossier \code{Applications}. L'interpréteur de
-commandes est Bash. L'invite de commande par défaut est \verb=$= et le
-répertoire courant au lancement de l'interpréteur est le répertoire
-personnel \,\verb=~=\, de l'utilisateur.
+commandes est \index{Bash}Bash. L'invite de commande par défaut est le
+symbole \verb=$=, habituellement précédé du nom de l'ordinateur, du
+répertoire courant et du nom de l'utilisateur. Le répertoire courant
+au lancement de l'interpréteur est le répertoire personnel
+\,\verb=~=\, de l'utilisateur.
 
-Nous considérons essentiel pour des programmeurs de connaître les
-rudiments de la ligne de commande. Cela dit, comme nous ne pouvons
-nous étendre sur le sujet, nous limiterons notre présentation aux
-commandes suivantes de déplacement dans le système de fichiers et
-d'affichage des fichiers d'un répertoire.
+\subsection{Commandes essentielles}
+\label{sec:informatique:cli:commandes}
+
+Les programmeurs doivent connaître les rudiments de la ligne de
+commande. Cela dit, comme nous ne pouvons nous étendre sur le sujet,
+nous limiterons notre présentation aux commandes ci-dessous qui
+permettent de se déplacer dans le système de fichiers et d'afficher
+la liste des fichiers d'un répertoire.
 
 \begin{ttscript}{pwd}
-\item[\code{cd}] Change le répertoire courant pour celui
-  donné en argument. Cet argument peut être un chemin d'accès absolu
-  ou relatif (\autoref{sec:informatique:fs:path}). Le nom fictif
-  «\verb=..=» identifie le parent du répertoire courant.
+\item[\code{cd}] \indexfonction{cd} Change le répertoire courant pour
+  celui donné en argument. Cet argument peut être un chemin d'accès
+  absolu ou relatif (\autoref{sec:informatique:fs:path}). Le nom
+  fictif «\verb=..=» identifie le parent du répertoire courant.
 
   Lorsque utilisée sans argument, la commande affiche le chemin
   d'accès absolu du répertoire courant avec \code{cmd.exe}, ou ramène
   directement l'invite de commande au répertoire personnel de
   l'utilisateur avec Bash.
-\item[\code{pwd}] (Bash seulement) Affiche le chemin
-  d'accès absolu du répertoire courant.
-\item[\code{dir}] (\code{cmd.exe} seulement) Affiche les
+\item[\code{pwd}] \indexfonction{pwd} (\index{Bash}Bash seulement) Affiche le
+  chemin d'accès absolu du répertoire courant.
+\item[\code{dir}] \indexfonction{dir}
+  (\index{cmd@\code{cmd.exe}}\code{cmd.exe} seulement) Affiche les
   fichiers du répertoire donné en argument, ou les fichiers du
   répertoire courant sans aucun argument.
-\item[\code{ls}] (Bash seulement) Affiche les fichiers du
-  répertoire donné en argument, ou les fichiers du répertoire courant
-  sans aucun argument.
+\item[\code{ls}] \indexfonction{ls} (\index{Bash}Bash seulement) Affiche les
+  fichiers du répertoire donné en argument, ou les fichiers du
+  répertoire courant sans aucun argument.
 \end{ttscript}
 
 
@@ -811,8 +847,8 @@ d'affichage des fichiers d'un répertoire.
 \Opensolutionfile{solutions}[solutions-informatique]
 
 \begin{Filesave}{solutions}
-\section*{Chapitre \ref*{informatique}}
-\addcontentsline{toc}{section}{Chapitre \protect\ref*{informatique}}
+\section*{Chapitre \ref*{chap:informatique}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:informatique}}
 
 \end{Filesave}
 
@@ -823,57 +859,79 @@ d'affichage des fichiers d'un répertoire.
   \link{https://golang.org}{Go}, de Google. À partir des informations
   glanées sur les sites Internet des langages et dans les pages
   Wikipedia qui leurs sont consacrées, retracer les grands langages
-  ayant servi sources d'inspiration à Swift et à Go.
+  ayant servi sources d'inspiration à \index{Swift}Swift et à
+  \index{Go}Go.
 \end{exercice}
 
 \begin{exercice}
   Soit $A$, $B$, $C$ et $D$ quatre nombres. L'opération en notation
   infixée
   \begin{equation*}
-    A \times B + C / D
+    A \times B + C \div D
   \end{equation*}
   s'écrit
   \begin{equation*}
-    +\, \times\, A\; B\; /\; C\; D
+    +\, \times\, A\; B\, \div\, C\; D
   \end{equation*}
   en notation préfixée et
   \begin{equation*}
-    A\; B\, \times\, C\; D\; /\, +
+    A\; B\, \times\, C\; D\, \div +
   \end{equation*}
   en notation suffixée.
   \begin{enumerate}
   \item Exprimer en notations préfixée et suffixée l'opération en
     notation infixée suivante:
     \begin{equation*}
-      A \times (B + C) / D.
+      A \times (B + C) \div D.
     \end{equation*}
   \item Les expressions suivantes en notation préfixée et suffixée,
     dans l'ordre, effectuent la même opération arithmétique.
     \begin{gather*}
-      \times\, A\, +\, B\; /\, C\; D \\
-      A\; B\; C\; D\; /\, +\, \times
+      \times\, A\, +\, B\, \div\, C\; D \\
+      A\; B\; C\; D\, \div +\, \times
     \end{gather*}
     Exprimer cette opération en notation infixée.
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-    \item $/\, \times\, A\, +\, B\; C\; D$ en notation préfixée;
-      $A\; B\; C\, +\, \times\, D\; /$ en notation suffixée.
-    \item $A \times (B + C / D)$
+    \item $\div \times\, A\, +\, B\; C\; D$ en notation préfixée;
+      $A\; B\; C\, +\, \times\, D\, \div$ en notation suffixée.
+    \item $A \times (B + C \div D)$
     \end{enumerate}
   \end{sol}
 \end{exercice}
 
-\begin{exercice}
-
+\begin{exercice}[nosol]
+  Démarrer un interpréteur de commandes Bash. Si le système
+  d'exploitation de votre ordinateur est Windows, installer d'abord
+  \index{MSYS2}\link{http://www.msys2.org}{MSYS2}.
+  \begin{enumerate}
+  \item Afficher le répertoire courant. Vérifier qu'il correspond à
+    celui mentionné dans l'invite de commande.
+  \item Afficher la liste des fichiers du répertoire courant.
+  \item Choisir un sous-répertoire du répertoire courant que vous
+    savez contenir lui-même un sous-répertoire (par exemple:
+    \code{Documents/Cours}. Afficher, sans d'abord s'y déplacer, la
+    liste des fichiers du premier sous-répertoire (\code{Documents}),
+    puis celle du second (\code{Cours}).
+  \item Faire du sous-répertoire utilisé précédemment le répertoire
+    courant.
+  \item Afficher une liste détaillée des fichiers du nouveau
+    répertoire courant avec la commande \verb=ls -l=.
+  \item Descendre d'un autre niveau dans l'arbre des fichiers.
+  \item Revenir au répertoire personnel avec une seule commande.
+  \item Afficher la liste de tous les fichiers du répertoire
+    personnel, y compris les fichiers cachés, avec la commande
+    \verb=ls -a=.
+  \item Afficher la liste détaillée de tous fichiers du répertoire
+    personnel avec la commande \verb=ls -la=.
+  \item Afficher la liste des répertoires dans lesquels le système
+    d'exploitation recherche des applications avec la commande
+    \verb=echo $PATH=.
+  \end{enumerate}
 \end{exercice}
+
 \Closesolutionfile{solutions}
-
-% Exercices
-
-% 1. Obtenir PATH.
-
-% ls -a; ls -l; ls -la
 
 %%% Local Variables:
 %%% mode: latex
