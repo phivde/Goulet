@@ -31,6 +31,6 @@ Vincent Goulet, [École d'actuariat](https://www.act.ulaval.ca), [Université La
 2\. Présentation de R  
 A. RStudio: une introduction  
 B. GNU Emacs et ESS: la base  
-C. Réponses des exercices
+C. Réponses des exercices  
 Bibliographie  
 Index
