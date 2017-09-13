@@ -25,11 +25,11 @@ MASTER = programmer-avec-r.pdf
 ARCHIVE = programmer-avec-r.zip
 README = README.md
 SCRIPTS = \
-	presentation.R \
-	bases.R \
-	operateurs.R \
-	fonctions.R \
-	avance.R
+	presentation.R 
+	# bases.R \
+	# operateurs.R \
+	# fonctions.R \
+	# avance.R
 OTHER = LICENSE
 
 ## Numéro de version et numéro ISBN extraits du fichier maître
@@ -99,25 +99,25 @@ zip: ${MASTER} ${README} ${SCRIPTS} ${OTHER}
 create-release :
 	@echo ----- Creating release on GitHub...
 	@if [ -n "$(shell git status --porcelain | grep -v '^??')" ]; then \
-	    echo "uncommitted changes in repository; not creating release"; exit 2; fi
+	     echo "uncommitted changes in repository; not creating release"; exit 2; fi
 	@if [ -n "$(shell git log origin/master..HEAD)" ]; then \
 	    echo "unpushed commits in repository; pushing to origin"; \
-	    git push; fi
-	if [ -e relnotes.in ]; then rm relnotes.in; fi
-	touch relnotes.in
-	awk 'BEGIN { ORS=" "; print "{\"tag_name\": \"v${VERSION}\"," } \
-	      /^$$/ { next } \
-	      /^## Historique/ { state=0; next } \
-              (state==0) && /^### / { state = 1; out = $$2; \
-	                             for(i=3; i<=NF; i++) { out = out" "$$i }; \
-	                             printf "\"name\": \"Édition %s\", \"body\": \"", out; \
-	                             next } \
-	      (state==1) && /^### / { exit } \
-	      state==1 { printf "%s\\n", $$0 } \
-	      END { print "\"draft\": false, \"prerelease\": false}" }' \
-	      README.md >> relnotes.in
+	     git push; fi
+	# if [ -e relnotes.in ]; then rm relnotes.in; fi
+	# touch relnotes.in
+	# awk 'BEGIN { ORS=" "; print "{\"tag_name\": \"v${VERSION}\"," } \
+	#       /^$$/ { next } \
+	#       /^## Historique/ { state=0; next } \
+        #       (state==0) && /^### / { state = 1; out = $$2; \
+	#                              for(i=3; i<=NF; i++) { out = out" "$$i }; \
+	#                              printf "\"name\": \"Édition %s\", \"body\": \"", out; \
+	#                              next } \
+	#       (state==1) && /^### / { exit } \
+	#       state==1 { printf "%s\\n", $$0 } \
+	#       END { print "\"draft\": false, \"prerelease\": false}" }' \
+	#       README.md >> relnotes.in
 	curl --data @relnotes.in ${REPOSURL}/releases?access_token=${OAUTHTOKEN}
-	rm relnotes.in
+	# rm relnotes.in
 	@echo ----- Done creating the release
 
 upload :
