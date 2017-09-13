@@ -8,7 +8,7 @@
 %%% International de Creative Commons.
 %%% http://creativecommons.org/licenses/by-sa/4.0/
 
-\chapter{Présentation du langage R}
+\chapter{Présentation de R}
 \label{chap:presentation}
 
 <<echo=FALSE>>=
@@ -340,7 +340,7 @@ que d'autres. Voici quelques bons choix.
       défaut. Dans le sens des aiguilles d'une montre, on y retrouve:
       le fichier de script de la \autoref{fig:presentation:script}; la
       liste des objets de l'environnement (vide, ici); une interface
-      pour charger des packages; l'invite de commandes R.}
+      pour charger des packages; la ligne de commande R.}
     \label{fig:presentation:rstudio}
   \end{figure}
 
@@ -356,7 +356,7 @@ que d'autres. Voici quelques bons choix.
   En effet, combiné avec le mode ESS\index{Emacs!mode ESS}
   (\emph{Emacs Speaks Statistics}), Emacs offre un environnement de
   développement aussi riche qu'efficace. Entre autres fonctionnalités
-  uniques à cet éditeur, le fichier de script et l'invite de commandes
+  uniques à cet éditeur, le fichier de script et la ligne de commande
   R sont regroupés dans la même fenêtre, comme on peut le voir à la
   \autoref{fig:presentation:emacs}. Emacs est toutefois un logiciel
   difficile à apprivoiser, surtout pour les personnes moins à l'aise
@@ -368,7 +368,7 @@ que d'autres. Voici quelques bons choix.
     \caption{Fenêtre de GNU Emacs sous macOS en mode d'édition de code
       R. Dans la partie du haut, on retrouve le fichier de script de
       la \autoref{fig:presentation:script} et dans la partie du
-      bas, l'invite de commandes R.}
+      bas, la ligne de commande R.}
     \label{fig:presentation:emacs}
   \end{figure}
 
