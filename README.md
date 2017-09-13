@@ -67,14 +67,14 @@ Question d'éviter les publications accidentelles, `make all` est
 
 ## Historique des versions
 
-### Édition 2017.09-1
+### 2017.09-1 (2017-09-13)
 
 Cette édition préliminaire contient:
 
-1\. Éléments d'informatique pour programmeurs  
-2\. Présentation de R  
-A. RStudio: une introduction  
-B. GNU Emacs et ESS: la base  
-C. Réponses des exercices
-Bibliographie  
-Index
+- Chapitre 1 - Éléments d'informatique pour programmeurs
+- Chapitre 2 - Présentation de R
+- Annexe A - RStudio: une introduction
+- Annexe B - GNU Emacs et ESS: la base
+- Annexe C - Réponses des exercices
+- Bibliographie
+- Index
