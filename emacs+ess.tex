@@ -400,68 +400,95 @@ Les quelques autres fonctions utiles sont:
 \section{Anatomie d'une session de travail (ter)}
 \label{sec:emacs+ess:session}
 
-On reprend ici les étapes d'une %
-\capsule{https://www.youtube.com/watch?v=KtmFDm2AKM4}{session de travail} %
-type présentées à la \autoref{sec:presentation:session}, mais en
-expliquant comment compléter chacune dans Emacs avec le mode ESS.
+On reprend ici la description de la %
+\capsule{https://www.youtube.com/watch?v=KtmFDm2AKM4}{session de
+  travail} %
+type présentée à la \autoref{sec:presentation:session}, mais en
+expliquant comment compléter chaque étape dans Emacs avec le mode ESS.
+Sont intercalés dans les instructions les raccourcis clavier des
+commandes Emacs et les accès par les menus, le cas échéant.
 
 \begin{enumerate}
-\item Lancer Emacs et ouvrir un fichier de script avec
-  \begin{quote}
-    \code{C-x C-f}
-  \end{quote}
-  ou avec le menu
-  \begin{quote}
-    \code{File|Open File...}
-  \end{quote}
-  En spécifiant un nom de fichier qui n'existe pas déjà, on se trouve
-  à créer un nouveau fichier de script. S'assurer de terminer le nom
-  du nouveau fichier par \code{.R} pour que Emacs reconnaisse
-  automatiquement qu'il s'agit d'un fichier de script R.
-\item Démarrer un processus R à l'intérieur même de Emacs avec
-  \begin{quote}
-    \code{M-x R }\returnkey
-  \end{quote}
-  Emacs demandera alors de spécifier de répertoire de travail
-  (\emph{starting data directory}). Accepter la valeur par défaut, par
-  exemple
-  \begin{quote}
-    \verb=~/ =\returnkey
-  \end{quote}
-  ou indiquer un autre dossier. Un éventuel message de Emacs à l'effet
-  que le fichier \code{.Rhistory} n'a pas été trouvé est sans
-  conséquence et peut être ignoré.
+\item Lancer Emacs et ouvrir un fichier de script.
+  \begin{trivlist}
+  \item
+    \makebox[0.28\linewidth][l]{%
+      \colorbox{codebg}{\code{C-x C-f}}}
+    \hfill
+    \makebox[0.68\linewidth][l]{%
+      \colorbox{codebg}{\code{File|Open File...}}}
+  \end{trivlist}
+  En spécifiant un nom de fichier qui n'existe pas déjà, on crée un
+  nouveau fichier de script. S'assurer de terminer le nom du nouveau
+  fichier par \code{.R} pour que Emacs reconnaisse automatiquement
+  qu'il s'agit d'un fichier de script R.
+\item Démarrer un processus R à l'intérieur de Emacs.
+  \begin{trivlist}
+  \item
+    \makebox[0.28\linewidth][l]{%
+      \colorbox{codebg}{\code{M-x R }\returnkey}}
+  \end{trivlist}
+  Emacs demandera de spécifier de répertoire de travail
+  (\emph{starting data directory}). Accepter la valeur par défaut ou
+  indiquer un autre dossier.
+  \begin{trivlist}
+  \item
+    \makebox[0.28\linewidth][l]{%
+      \colorbox{codebg}{\code{\textasciitilde/ =}\returnkey}}
+  \end{trivlist}
+  Un éventuel message de Emacs à l'effet que le fichier
+  \code{.Rhistory} n'a pas été trouvé est sans conséquence et peut
+  être ignoré.
 \item Composer le code. Lors de cette étape, on se déplacera souvent
   du fichier de script à la ligne de commande afin d'essayer diverses
   expressions. On exécutera également des parties seulement du code se
   trouvant dans le fichier de script. Les commandes les plus utilisées
   sont alors:
-  \begin{quote}
-    \begin{ttscript}{C-c C-z}
-      \renewcommand{\makelabel}[1]{#1\hfill}
-    \item[\code{C-RET}] pour exécuter une ligne du fichier de script ou la
-      région sélectionnée;
-    \item[\code{C-c C-c}] pour exécuter un paragraphe du fichier de
-      script;
-    \item[\code{C-c C-z}] pour se déplacer entre le fichier de script et
-      la ligne de commande R.
-    \end{ttscript}
-  \end{quote}
-\item Sauvegarder le fichier de script:
-  \begin{quote}
-    \code{C-x C-s}
-  \end{quote}
+  \begin{trivlist}
+  \item
+    \makebox[0.28\linewidth][l]{%
+      \colorbox{codebg}{\code{C+RET}}}
+    \hfill
+    \makebox[0.68\linewidth][l]{%
+      \colorbox{codebg}{\code{ESS|Eval region | line}}}
+  \item
+    \makebox[0.28\linewidth][l]{%
+      \colorbox{codebg}{\code{C-c C-c}}}
+    \hfill
+    \makebox[0.68\linewidth][l]{%
+      \colorbox{codebg}{\code{ESS|Eval region | func | para \& step}}}
+  \item
+    \makebox[0.28\linewidth][l]{%
+      \colorbox{codebg}{\code{C-c C-z}}}
+    \hfill
+    \makebox[0.68\linewidth][l]{%
+      \colorbox{codebg}{\code{ESS|Process|Switch to process buffer}}}
+  \end{trivlist}
+\item Sauvegarder le fichier de script.
+  \begin{trivlist}
+  \item
+    \makebox[0.28\linewidth][l]{%
+      \colorbox{codebg}{\code{C-x C-s}}}
+    \hfill
+    \makebox[0.68\linewidth][l]{%
+      \colorbox{codebg}{\code{File|Save}}}
+  \end{trivlist}
   Les quatrième et cinquième caractères de la ligne de mode changent
   de \,\verb|**|\, à \,\verb|--|.
 \item Sauvegarder si désiré l'espace de travail de R avec
   \code{save.image()}\indexfonction{save.image}. Cela n'est
   habituellement pas nécessaire à moins que l'espace de travail ne
   contienne des objets importants ou longs à recréer.
-\item Quitter le processus R avec
-  \begin{quote}
-    \code{C-c C-q}
-  \end{quote}
-  Cette commande ESS se chargera de fermer tous les fichiers associés
+\item Quitter le processus R.
+  \begin{trivlist}
+  \item
+    \makebox[0.28\linewidth][l]{%
+      \colorbox{codebg}{\code{C-c C-q}}}
+    \hfill
+    \makebox[0.68\linewidth][l]{%
+      \colorbox{codebg}{\code{iESS|Quit}}}
+  \end{trivlist}
+  Cette commande de ESS se charge de fermer tous les fichiers associés
   au processus R. On peut ensuite quitter Emacs en fermant
   l'application de la manière usuelle.
 \end{enumerate}
