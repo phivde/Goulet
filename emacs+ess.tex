@@ -1,6 +1,6 @@
 \chapter{GNU Emacs et ESS: la base}
 \index{Emacs|(}
-\label{emacs+ess}
+\label{chap:emacs+ess}
 
 Emacs est l'Éditeur de texte des éditeurs de texte. À l'origine un
 éditeur pour les programmeurs (avec des modes spéciaux pour une
@@ -21,13 +21,13 @@ référence pour l'apprentissage plus poussé de l'éditeur.
   \includegraphics{emacs.png} \\
   \footnotesize\sffamily\flushleft\vspace{-\baselineskip}%
   Tiré de \href{http://xkcd.com/378/}{XKCD.com}. La commande \code{M-X
-    butterfly} existe vraiment dans Emacs... en référence à cette
+    butterfly} existe vraiment dans Emacs\dots\ en référence à cette
   bande dessinée!
 \end{figure}
 \setkeys{Gin}{width=0.8\textwidth}
 
 \section{Mise en contexte}
-\label{emacs+ess:contexte}
+\label{sec:emacs+ess:contexte}
 
 Emacs est le logiciel étendard du projet GNU («\emph{GNU is not
   Unix}»), dont le principal commanditaire est la \emph{Free Software
@@ -64,7 +64,7 @@ L'un de ces modes est ESS (\emph{Emacs Speaks Statistics}).
 
 
 \section{Installation}
-\label{emacs+ess:installation}
+\label{sec:emacs+ess:installation}
 
 GNU Emacs et le mode ESS sont normalement livrés d'office avec toutes
 les distributions Linux. Pour les environnements Windows et macOS,
@@ -76,7 +76,7 @@ présent auteur. Consulter le site
 
 
 \section{Description sommaire}
-\label{emacs+ess:description}
+\label{sec:emacs+ess:description}
 
 Au lancement, Emacs affiche un écran d'information contenant des liens
 vers différentes ressources. Cet écran disparaît dès que l'on appuie
@@ -141,7 +141,7 @@ mode pour chaque \emph{buffer}.
 
 
 \section{\emph{Emacs-ismes} et \emph{Unix-ismes}}
-\label{emacs+ess:ismes}
+\label{sec:emacs+ess:ismes}
 
 Emacs possède sa propre terminologie qu'il vaut mieux connaître
 lorsque l'on consulte la documentation. De plus, l'éditeur utilise des
@@ -191,7 +191,7 @@ Windows et macOS.
     laisser la touche \code{Option} (\optkey) jouer son rôle usuel, il
     suffit d'insérer les lignes suivantes dans son fichier de
     configuration \code{.emacs} (voir la
-    \autoref{emacs+ess:configuration}):
+    \autoref{sec:emacs+ess:configuration}):
 \begin{verbatim}
 ;;; ====================================
 ;;;  Assigner la touche Meta à Commande
@@ -207,7 +207,7 @@ Windows et macOS.
 
 
 \section{Commandes de base}
-\label{emacs+ess:commandes}
+\label{sec:emacs+ess:commandes}
 
 Emacs comporte une pléthore de commandes, il serait donc futile de
 tenter d'en faire une liste exhaustive ici. Nous nous contenterons de
@@ -219,7 +219,7 @@ mentionner les commandes les plus importantes regroupées par tâche.
 % et de lire le tutoriel de Emacs, que l'on démarre avec \code{C-h t}.
 
 \subsection{Les essentielles}
-\label{emacs+ess:commandes:essentielles}
+\label{sec:emacs+ess:commandes:essentielles}
 
 \begin{ttscript}{M-x}
 \item[\code{M-x}] démarrer l'invite de commande
@@ -228,7 +228,7 @@ mentionner les commandes les plus importantes regroupées par tâche.
 \end{ttscript}
 
 \subsection{Manipulation de fichiers}
-\label{emacs+ess:commandes:fichiers}
+\label{sec:emacs+ess:commandes:fichiers}
 
 Entre parenthèses, le nom de la commande Emacs correspondante. On peut
 entrer cette commande dans le \emph{minibuffer} au lieu d'utiliser le
@@ -263,7 +263,7 @@ raccourci clavier.
 
 \subsection{Déplacements simples du curseur}
 \index{Emacs!déplacement du curseur}
-\label{emacs+ess:commandes:deplacement}
+\label{sec:emacs+ess:commandes:deplacement}
 
 \begin{ttscript}{C-DEL | C-w}
   \raggedright
@@ -294,7 +294,7 @@ raccourci clavier.
 
 \subsection{Sélection de texte, copier, coller, couper}
 \index{Emacs!sélection}
-\label{emacs+ess:commandes:selection}
+\label{sec:emacs+ess:commandes:selection}
 
 \begin{ttscript}{C-x C-w}
   \raggedright
@@ -318,7 +318,7 @@ raccourci clavier.
 
 
 \subsection{Manipulation de fenêtres}
-\label{emacs+ess:commandes:fenetres}
+\label{sec:emacs+ess:commandes:fenetres}
 
 \begin{ttscript}{C-x C-w}
 \item[\code{C-x b}] changer de \emph{buffer}
@@ -335,7 +335,7 @@ raccourci clavier.
 
 \subsection{Manipulation de fichiers de script dans le mode ESS}
 \index{Emacs!mode ESS|(}
-\label{emacs+ess:commandes:script}
+\label{sec:emacs+ess:commandes:script}
 
 Le mode ESS dispose de fonctions «intelligentes» qui facilitent
 grandement la manipulation des fichiers de script. Les deux
@@ -365,7 +365,7 @@ Les quelques autres fonctions utiles sont:
 \end{ttscript}
 
 \subsection{Interaction avec l'invite de commande R}
-\label{emacs+ess:commandes:invite}
+\label{sec:emacs+ess:commandes:invite}
 
 \begin{ttscript}{M-p |M-n}
   \raggedright
@@ -384,7 +384,7 @@ Les quelques autres fonctions utiles sont:
 \end{ttscript}
 
 \subsection{Consultation des rubriques d'aide de R}
-\label{emacs+ess:commandes:aide}
+\label{sec:emacs+ess:commandes:aide}
 
 \begin{ttscript}{m, m}
   \raggedright
@@ -411,10 +411,10 @@ Les quelques autres fonctions utiles sont:
 
 
 \section{Anatomie d'une session de travail (bis)}
-\label{emacs+ess:session}
+\label{sec:emacs+ess:session}
 
 On reprend ici les étapes d'une \capsule{https://youtu.be/KtmFDm2AKM4}{session de
-  travail} type présentées à la \autoref{presentation:session}, mais
+  travail} type présentées à la \autoref{sec:presentation:session}, mais
 en expliquant comment compléter chacune dans Emacs avec le mode ESS.
 
 \begin{enumerate}
@@ -482,7 +482,7 @@ en expliquant comment compléter chacune dans Emacs avec le mode ESS.
 
 
 \section{Configuration de l'éditeur}
-\label{emacs+ess:configuration}
+\label{sec:emacs+ess:configuration}
 
 Une des grandes forces de Emacs est qu'à peu près chacune de ses
 facettes est configurable: couleurs, polices de caractère, raccourcis
@@ -501,7 +501,7 @@ clavier, etc.
 
 
 \section{Aide et documentation}
-\label{emacs+ess:aide}
+\label{sec:emacs+ess:aide}
 
 Emacs possède son propre système d'aide très exhaustif, mais dont la
 navigation est peu intuitive selon les standards d'aujourd'hui.

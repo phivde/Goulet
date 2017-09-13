@@ -1,5 +1,5 @@
 \chapter{Présentation du langage R}
-\label{presentation}
+\label{chap:presentation}
 
 <<echo=FALSE>>=
 options(width=52)
@@ -17,7 +17,7 @@ options(width=52)
 \end{objectifs}
 
 \section{Bref historique}
-\label{presentation:historique}
+\label{sec:presentation:historique}
 
 À l'origine fut le S\index{S}, un langage pour «programmer avec des
 données» développé chez Bell Laboratories à partir du milieu des
@@ -63,7 +63,7 @@ projet R \citep{Chambers:R:2008}.
 
 
 \section{Description sommaire de R}
-\label{presentation:description}
+\label{sec:presentation:description}
 
 \capsule{https://youtu.be/presentation}{R} est un environnement intégré
 de manipulation de données, de calcul et de préparation de graphiques.
@@ -115,7 +115,7 @@ particulièrement intéressantes, on note:
 
 
 \section{Interfaces}
-\label{presentation:interfaces}
+\label{sec:presentation:interfaces}
 
 R est d'abord et avant tout une application n'offrant qu'une invite de
 commande du type de celle présentée à la
@@ -150,11 +150,11 @@ capacités d'édition plutôt réduites.
 Peu importe la plateforme utilisée --- quoique dans une moindre mesure
 sous macOS --- nous recommandons d'interagir avec R par le biais d'un
 éditeur de texte pour programmeur ou d'un environnement de
-développement intégré; voir la \autoref{presentation:editeurs}.
+développement intégré; voir la \autoref{sec:presentation:editeurs}.
 
 
 \section{Stratégies de travail}
-\label{presentation:strategies}
+\label{sec:presentation:strategies}
 
 Dans la mesure où R se présente essentiellement sous forme d'une
 invite de commande, il existe deux grandes stratégies de travail avec
@@ -182,7 +182,7 @@ save.image()
 @
   Par défaut, l'image est sauvegardée dans un fichier nommé
   \code{.RData} dans le dossier de travail actif (voir la
-  \autoref{presentation:workspace}) et cette image est
+  \autoref{sec:presentation:workspace}) et cette image est
   automatiquement chargée en mémoire au prochain lancement de
   R, tel qu'indiqué à la fin du message d'accueil:
   \begin{Schunk}
@@ -263,7 +263,7 @@ save.image()
 
 
 \section{Éditeurs de texte et environnements intégrés}
-\label{presentation:editeurs}
+\label{sec:presentation:editeurs}
 
 Dans la mesure où l'on a recours à des fichiers de script tel
 qu'expliqué à la section précédente, l'édition de code R est rendue
@@ -316,7 +316,7 @@ que d'autres.
   l'identique sur toutes les plateformes supportées par R, dont
   Windows, macOS et Linux.
 
-  Consulter l'\autoref{emacs+ess} pour en savoir plus sur GNU~Emacs et
+  Consulter l'\autoref{chap:emacs+ess} pour en savoir plus sur GNU~Emacs et
   apprendre les commandes essentielles pour y faire ses premiers pas.
   \enlargethispage{5mm}
 \item Emacs est toutefois un logiciel difficile à apprivoiser, surtout
@@ -360,7 +360,7 @@ que d'autres.
 
 
 \section{Anatomie d'une session de travail}
-\label{presentation:session}
+\label{sec:presentation:session}
 
 Dans ses grandes lignes, une session de travail avec R réunit les
 étapes ci-dessous.
@@ -387,18 +387,18 @@ Dans ses grandes lignes, une session de travail avec R réunit les
 \item Quitter R en tapant \code{q()}\indexfonction{q} à la ligne de
   commande ou en fermant l'interface graphique par la procédure
   usuelle. Encore ici, la manière de procéder est quelque peu
-  différente dans GNU~Emacs; voir l'\autoref{emacs+ess}.
+  différente dans GNU~Emacs; voir l'\autoref{chap:emacs+ess}.
 \end{enumerate}
 Les étapes 1 et 2 sont interchangeables, tout comme les étapes 4, 5 et
-6. L'\autoref{emacs+ess} explique plus en détails la procédure à
-suivre lorsque l'on utilise GNU~Emacs. L'\autoref{rstudio} fait de
+6. L'\autoref{chap:emacs+ess} explique plus en détails la procédure à
+suivre lorsque l'on utilise GNU~Emacs. L'\autoref{chap:rstudio} fait de
 même lorsque l'on utilise l'environnement intégré RStudio.
 
 
 \section{Répertoire de travail}
 \index{repertoire@répertoire de travail}
 \index{dossier de travail|see{répertoire de travail}}
-\label{presentation:workspace}
+\label{sec:presentation:workspace}
 
 Le répertoire de travail (\emph{workspace}) de R est le dossier par
 défaut dans lequel le logiciel:
@@ -419,13 +419,13 @@ Le répertoire de travail est déterminé au lancement de R.
   \code{Session}.
 \item Avec GNU~Emacs, la situation est un peu plus simple puisque l'on
   doit spécifier un répertoire de travail chaque fois que l'on démarre
-  un processus R; voir l'\autoref{emacs+ess}.
+  un processus R; voir l'\autoref{chap:emacs+ess}.
 \end{itemize}
 
 
 
 \section{Consulter l'aide en ligne}
-\label{presentation:aide}
+\label{sec:presentation:aide}
 
 Les rubriques d'aide des diverses fonctions de R contiennent une foule
 d'informations ainsi que des exemples d'utilisation. Leur consultation
@@ -450,7 +450,7 @@ est tout à fait essentielle.
 
 
 \section{Où trouver de la documentation}
-\label{presentation:doc}
+\label{sec:presentation:doc}
 
 La documentation officielle de R se compose de six guides accessibles
 depuis le menu \texttt{Aide} des interfaces graphiques ou encore en
@@ -473,13 +473,13 @@ applications statistiques.
 
 
 \section{Exemples}
-\label{presentation:exemples}
+\label{sec:presentation:exemples}
 
 \lstinputlisting[firstline=3]{presentation.R}
 
 
 \section{Exercices}
-\label{presentation:exercices}
+\label{sec:presentation:exercices}
 
 \begin{exercice}[nosol]
   Démarrer une session R et entrer une à une les expressions

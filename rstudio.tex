@@ -1,6 +1,6 @@
 \chapter{RStudio: une introduction}
 \index{RStudio|(}
-\label{rstudio}
+\label{chap:rstudio}
 
 Un environnement de développement intégré (\emph{integrated
   development environment}, IDE) est un progiciel de productivité
@@ -23,7 +23,7 @@ navigateur web.
 
 
 \section{Installation}
-\label{rstudio:installation}
+\label{sec:rstudio:installation}
 
 RStudio est disponible à l'identique pour les plateformes Windows,
 macOS et Linux. Pour une utilisation locale sur son poste de travail,
@@ -35,7 +35,7 @@ depuis le site
 
 
 \section{Description sommaire}
-\label{rstudio:description}
+\label{sec:rstudio:description}
 
 La fenêtre de RStudio se divise toujours en quatre
 sous-fenêtres\footnote{%
@@ -106,13 +106,13 @@ la fenêtre jusqu'à ce qu'un fichier de script soit ouvert.
   modifiée. Par contre, chaque sous-fenêtre peut être redimensionnée.
 \item On peut modifier la liste des onglets affichés dans les deux
   navigateurs dans les préférences de l'application; voir la
-  \autoref{rstudio:configuration}.
+  \autoref{sec:rstudio:configuration}.
 \end{itemize}
 
 
 \section{Projets}
 \index{RStudio!projets}
-\label{rstudio:projets}
+\label{sec:rstudio:projets}
 
 Il est possible d'utiliser RStudio un peu comme un simple éditeur de
 texte.
@@ -129,7 +129,7 @@ de script et le lancement d'un processus R dans le bon répertoire de
 travail, RStudio propose la notion de \emph{projet}.
 \begin{itemize}
 \item Un projet RStudio est associé à un répertoire de travail de R
-  (\autoref{presentation:workspace}).
+  (\autoref{sec:presentation:workspace}).
 \item On crée un nouveau projet à partir du menu \code{Project} à
   l'extrémité droite de la barre d'outils ou à partir du menu
   \code{File|New Project...} On a alors l'option de créer un nouveau
@@ -155,7 +155,7 @@ de RStudio.
 
 
 \section{Commandes de base}
-\label{rstudio:commandes}
+\label{sec:rstudio:commandes}
 
 Comme l'interface de RStudio respecte les standards modernes, nous ne
 soulignons ici que les commandes particulièrement utiles pour la
@@ -223,12 +223,12 @@ sont particulièrement utiles.
 
 
 \section{Anatomie d'une session de travail (ter)}
-\label{rstudio:session}
+\label{sec:rstudio:session}
 
 On reprend ici les étapes d'une %
 %\capsule{http://youtu.be/xiNnHegDau8}{session de travail} %
 session de travail %
-type présentées à la \autoref{presentation:session}, mais en
+type présentées à la \autoref{sec:presentation:session}, mais en
 expliquant comment compléter chacune dans RStudio.
 
 \begin{enumerate}
@@ -285,38 +285,15 @@ expliquant comment compléter chacune dans RStudio.
   devrait demander si l'on souhaite sauvegarder l'espace de travail de
   R. Nous suggérons de ne pas le faire.
 
-  La \autoref{rstudio:configuration} explique comment configurer
+  La \autoref{sec:rstudio:configuration} explique comment configurer
   RStudio afin d'éviter de se faire poser la question à chaque
   fermeture de l'application.
 \end{enumerate}
 
-%% texte inutilisé mais conservé au cas où...
-% \begin{enumerate}
-% \item Créer d'abord un projet dans RStudio tel que décrit à la
-%   \autoref{rstudio:projets}.
-% \item Lancer l'application RStudio et ouvrir un projet avec la
-%   commande \code{Open Project...} du menu \code{Project} à l'extrémité
-%   droite de la barre d'outils ou à partir du menu
-%   \begin{quote}
-%     \code{File|Open Project...}
-%   \end{quote}
-%   L'ouverture du projet entraîne le démarrage d'un nouveau processus R
-%   et l'ouverture des fichiers de script associés au projet lors de la
-%   dernière séance de travail.
-% \item Quitter RStudio avec la commande \code{Close Project}
-%   du menu \code{Project} à l'extrémité droite de la barre d'outils ou
-%   à partir du menu
-%   \begin{quote}
-%     \code{File|Close Project}
-%   \end{quote}
-%   RStudio se chargera de sauvegarder tous les fichiers de scripts
-%   ouverts ainsi que le processus R [...]
-% \end{enumerate}
-
 
 \section{Configuration de l'éditeur}
 \index{RStudio!configuration}
-\label{rstudio:configuration}
+\label{sec:rstudio:configuration}
 
 Il est possible de configurer plusieurs facettes de RStudio à partir
 d'une interface familière.
@@ -348,7 +325,7 @@ d'une interface familière.
 
 
 \section{Aide et documentation}
-\label{rstudio:aide}
+\label{sec:rstudio:aide}
 
 La documentation de RStudio se trouve entièrement en ligne. On y
 accède par le menu \code{Help}. L'onglet \code{Help} du navigateur de
