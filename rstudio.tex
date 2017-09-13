@@ -208,7 +208,6 @@ intercalés dans les instructions les raccourcis clavier des commandes
 RStudio et les accès par les menus.
 
 \begin{enumerate}
-%  \zerotrivseps
 \item Lancer RStudio et ouvrir un nouveau fichier de script ou un
   fichier de script existant.
   \begin{trivlist}
@@ -273,7 +272,7 @@ RStudio et les accès par les menus.
   contienne des objets importants ou longs à recréer.
   \begin{trivlist}
   \item
-    \colorbox{codebg}{\code{Sesssion|Save Workspace As...}}
+    \colorbox{codebg}{\code{Session|Save Workspace As...}}
   \end{trivlist}
 \item Quitter RStudio de la manière usuelle. Par défaut, RStudio
   devrait demander si l'on souhaite sauvegarder l'espace de travail de
@@ -290,23 +289,16 @@ RStudio et les accès par les menus.
 \label{sec:rstudio:configuration}
 
 Il est possible de configurer plusieurs facettes de RStudio à partir
-d'une interface familière.
-\begin{itemize}
-\item On accède aux options de configuration par le menu
-  \begin{quote}
-    \code{Tools|Global Options...}
-  \end{quote}
-  sous Windows et Linux et par le menu standard
-  \begin{quote}
-    \code{RStudio|Preferences} (\code{\cmdkey\,,})
-  \end{quote}
-  sous macOS.
-\item Nous suggérons de régler l'option \code{Save workspace to .RData
-    on exit} à \code{Never} dans les options de configuration
-  générales; voir la \autoref{fig:rstudio:rstudiopreferences}. Avec ce
-  réglage, l'espace de travail de R ne sera pas sauvegardé à la
-  fermeture de RStudio.
-\end{itemize}
+d'une interface familière. On accède aux options de configuration par
+le menu \code{Tools|Global Options...} sous Windows et Linux, et par le
+menu standard \code{RStudio|Preferences} (\code{\cmdkey\,,})
+sous macOS.
+
+Nous recommandons de régler l'option \code{Save workspace to .RData on
+  exit} à \code{Never} dans les options de configuration générales,
+tel qu'illustré à la \autoref{fig:rstudio:rstudiopreferences}. Avec ce
+réglage, l'espace de travail de R ne sera pas sauvegardé à la
+fermeture de RStudio.
 
 \begin{figure}
   \centering
