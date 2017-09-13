@@ -287,11 +287,13 @@
     {\end{infobox}}
 
   %% Remarques spécifiques OS X
-  % \newenvironment{osx}{%
-  %   \begin{infobox}{\faApple}}%
-  %   {\end{infobox}}
+  \newenvironment{osx}{%
+    \begin{infobox}{\faApple}}%
+    {\end{infobox}}
   \newcommand{\osxbox}[1]{%
     \awesomebox{\faApple}{\aweboxrulewidth}{black}{#1}}
+  \newcommand{\windowsbox}[1]{%
+    \awesomebox{\faWindows}{\aweboxrulewidth}{black}{#1}}
 
   %% Listes de commandes
   \newenvironment{ttscript}[1]{%
@@ -325,7 +327,7 @@
 
   %% Indications de capsule vidéo
   \newcommand{\capsule}[2]{\href{#1}{#2}\marginpar{%
-      \href{#1}{\raisebox{-0.5em}[0em][0em]{\HUGE\faYoutubePlay}}}}
+      \href{#1}{\raisebox{-0.5em}[0em][0em]{\Huge\faYoutubePlay}}}}
 
   %% Hyperlien avec symbole de lien externe juste après; second
   %% argument peut être vide pour afficher l'url comme lien
@@ -453,7 +455,7 @@
 \mainmatter
 
 \include{informatique}
-%\include{presentation}
+\include{presentation}
 % \include{bases}
 % \include{operateurs}
 % \include{exemples}
@@ -461,15 +463,15 @@
 % \include{avance}
 
 \appendix
-% \include{emacs+ess}
-% \include{rstudio}
+\include{rstudio}
+\include{emacs+ess}
 % \include{packages}
-% \include{reponses}
+\include{reponses}
 
 \bibliography{r,stat,informatique,vg}
 
-%\cleardoublepage
-%\printindex
+\cleardoublepage
+\printindex
 
 \pagestyle{empty}
 
