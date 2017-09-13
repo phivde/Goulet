@@ -1,6 +1,4 @@
-> Le document n'est pas encore disponible. À suivre...
-
-# Présentation
+## Présentation
 
 *Programmer avec R* propose une introduction à la programmation
 informatique avec [R](https://www.r-project.org), le langage de
@@ -17,3 +15,22 @@ informatique se trouvant dans les sections d'exemples à la fin de
 chacun des chapitres. Ce code et les commentaires qui l'accompagnent
 reviennent sur l'essentiel des concepts du chapitre et les
 complémentent souvent. 
+
+## Auteur
+
+Vincent Goulet, [École d'actuariat](https://www.act.ulaval.ca), [Université Laval](https://ulaval.ca)
+
+## Édition
+
+2017.09-1 ([notes de mise à jour]({{ site.github.repository_url }}/releases/tag/v2017.09-1/))
+
+
+## Table des matières abrégée
+
+1\. Éléments d'informatique pour programmeurs  
+2\. Présentation de R  
+A. RStudio: une introduction  
+B. GNU Emacs et ESS: la base  
+C. Réponses des exercices
+Bibliographie  
+Index
