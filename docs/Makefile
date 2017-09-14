@@ -19,7 +19,9 @@ MONTH = $(shell grep "newcommand{\\\\month" ${MASTER} \
 	| cut -d } -f 2 | tr -d {)
 VERSION = ${YEAR}.${MONTH}
 
-update-pages:
+all: files commit
+
+files:
 	awk 'BEGIN { FS = "/"; OFS = "/" } \
 	     /^## Édition/ { print; getline; print; getline; \
 	                     gsub(/[0-9]{4}\.[0-9]{2}(-[0-9a-z]*)?/, "${VERSION}") } \
@@ -31,8 +33,9 @@ update-pages:
 	       /{{ site.github.releases_url }}/ { $$3 = "v${VERSION}" } 1' \
 	       default.html > tmpfile && \
 	  mv tmpfile default.html
-	# git commit index.md _layouts/default.html \
-	#      -m "Updated web page for version ${VERSION}" && \
-	#    git push
+
+commit:
+	git commit index.md _layouts/default.html -m "Updated web page for version ${VERSION}"
+	git push
 
 
