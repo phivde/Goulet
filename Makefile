@@ -135,7 +135,7 @@ upload :
 
 publish :
 	@echo ----- Publishing the web page...
-	# ${MAKE} -C docs
+	${MAKE} -C docs
 	@echo ----- Done publishing
 
 clean:
