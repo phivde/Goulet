@@ -175,7 +175,7 @@ Windows et macOS.
 \end{itemize}
 
 \begin{figure}[t]
-  \begin{osx}
+  \begin{emphbox}{\mdseries Configuration de la touche Meta sous macOS}
     Par défaut sous macOS, la touche \code{Meta} est assignée à
     \code{Option} (\optkey). Sur les claviers français, cela empêche
     d'accéder à certains caractères spéciaux tels que [, ], \{ ou \}.
@@ -191,14 +191,10 @@ Windows et macOS.
     configuration \code{.emacs} (voir la
     \autoref{sec:emacs+ess:configuration}):
 \begin{verbatim}
-;;; ====================================
-;;;  Assigner la touche Meta à Commande
-;;;  et laisser Option être Option
-;;; ====================================
 (setq-default ns-command-modifier 'meta)
 (setq-default ns-option-modifier 'none)
 \end{verbatim}
-  \end{osx}
+  \end{emphbox}
   \label{fig:ess:meta}
 \end{figure}
 
@@ -434,7 +430,7 @@ commandes Emacs et les accès par les menus, le cas échéant.
   \begin{trivlist}
   \item
     \makebox[0.28\linewidth][l]{%
-      \colorbox{codebg}{\code{\textasciitilde/ =}\returnkey}}
+      \colorbox{codebg}{\code{\textasciitilde/ = }\returnkey}}
   \end{trivlist}
   Un éventuel message de Emacs à l'effet que le fichier
   \code{.Rhistory} n'a pas été trouvé est sans conséquence et peut
