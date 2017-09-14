@@ -67,6 +67,13 @@ Question d'éviter les publications accidentelles, `make all` est
 
 ## Historique des versions
 
+### en développement
+
+- L'identification des parties des fenêtres RStudio (figure A.1) et
+  Emacs (figure B.1) est maintenant présente.
+- Retouches (essentiellement graphiques) aux sections Anatomie d'une
+  session de travail avec RStudio et avec Emacs.
+
 ### 2017.09-1 (2017-09-13)
 
 Cette édition préliminaire contient:
