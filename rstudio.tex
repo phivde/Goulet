@@ -59,6 +59,8 @@ la fenêtre jusqu'à ce qu'un fichier de script soit ouvert.
   \includegraphics{rstudiowindow-screenshot}
   \vspace{0.5\TPVertModule}
 
+  \begingroup
+  \TPoptions{absolute=false}
   %% Identification de la console
   \begin{textblock}{0.5}(2.65,-0.62)
     \large\faLongArrowDown
@@ -82,6 +84,7 @@ la fenêtre jusqu'à ce qu'un fichier de script soit ouvert.
   \begin{textblock}{2.2}(7.95,-1.9)
     \footnotesize\sffamily\raggedright Navigateur de fichiers, packages, graphiques, etc.
   \end{textblock}
+  \endgroup
   \caption{Fenêtre de RStudio et trois de ses sous-fenêtres au
     lancement de l'application sous macOS. Sous Windows et Linux, la
     fenêtre comporte également une barre de menu.}
@@ -196,55 +199,70 @@ sont particulièrement utiles.
 \section{Anatomie d'une session de travail (bis)}
 \label{sec:rstudio:session}
 
-On reprend ici les étapes d'une %
+On reprend ici la description de %
 %\capsule{http://youtu.be/xiNnHegDau8}{session de travail} %
-session de travail %
-type présentées à la \autoref{sec:presentation:session}, mais en
-expliquant comment compléter chacune dans RStudio.
+la session de travail %
+type présentée à la \autoref{sec:presentation:session}, mais en
+expliquant comment compléter chaque étape dans RStudio. Sont
+intercalés dans les instructions les raccourcis clavier des commandes
+RStudio et les accès par les menus.
 
 \begin{enumerate}
-\item Lancer RStudio et ouvrir soit un nouveau fichier de script avec
-  \begin{quote}
-    \code{Ctrl+Shift+N} $\bullet$ \code{\shiftkey\,\cmdkey\,N}
-  \end{quote}
-  ou avec le menu
-  \begin{quote}
-    \code{File|New File|R Script...},
-  \end{quote}
-  soit un fichier de script existant avec
-  \begin{quote}
-    \code{Ctrl+O} $\bullet$ \code{\cmdkey\,O}
-  \end{quote}
-  ou
-  \begin{quote}
-    \code{File|Open File...}
-  \end{quote}
+\item Lancer RStudio et ouvrir un nouveau fichier de script ou un
+  fichier de script existant.
+  \begin{trivlist}
+  \item
+    \makebox[0.38\linewidth][l]{%
+      \colorbox{codebg}{\code{Ctrl+Shift+N} $\bullet$ \code{\shiftkey\,\cmdkey\,N}}}
+    \hfill
+    \makebox[0.58\linewidth][l]{%
+      \colorbox{codebg}{\code{File|New File|R Script...}}}
+  \item
+    \makebox[0.38\linewidth][l]{%
+      \colorbox{codebg}{\code{Ctrl+O} $\bullet$ \code{\cmdkey\,O}}}
+    \hfill
+    \makebox[0.58\linewidth][l]{%
+      \colorbox{codebg}{\code{File|Open File...}}}
+  \end{trivlist}
 \item C'est une bonne pratique de faire du dossier où se trouve son ou
-  ses fichiers de scripts le répertoire de travail de R. Il suffit de
-  sélectionner le menu
-  \begin{quote}
-    \code{Session|Set Working Directory|To Source File Location}
-  \end{quote}
+  ses fichiers de scripts le répertoire de travail de R.
+  \begin{trivlist}
+  \item
+    \colorbox{codebg}{\code{Session|Set Working Directory|To Source File Location}}
+  \end{trivlist}
 \item Composer le code. Lors de cette étape de programmation, on se
-  déplacera souvent du fichier de script à la ligne de commande afin
+  déplacera souvent du fichier de script à la console R afin
   d'essayer diverses expressions. On exécutera également des parties
-  seulement du code se trouvant dans le fichier de script. Les
-  commandes les plus utilisées sont alors:
-  \begin{quote}
-    \begin{ttscript}{Ctrl+2 $\bullet$ \cmdkey}
-      \renewcommand{\makelabel}[1]{#1\hfill}
-    \item[\code{Ctrl+Retour} $\bullet$ \code{\cmdkey\,\returnkey}] pour
-      exécuter une ligne ou une région sélectionnée du fichier de script;
-    \item[\code{Ctrl+1} $\bullet$ \code{\cmdkey\,1}] pour
-      déplacer le curseur vers la sous-fenêtre d'édition de script;
-    \item [\code{Ctrl+2} $\bullet$ \code{\cmdkey\,2}] pour
-      déplacer le curseur vers la console R.
-    \end{ttscript}
-  \end{quote}
-\item Sauvegarder le fichier de script:
-  \begin{quote}
-    \code{Ctrl+S} $\bullet$ \code{\cmdkey\,S}
-  \end{quote}
+  seulement du code se trouvant dans le fichier de script.
+  \begin{trivlist}
+  \item
+    \makebox[0.38\linewidth][l]{%
+      \colorbox{codebg}{\code{Ctrl+Retour} $\bullet$ \code{\cmdkey\,\returnkey}}}
+    \hfill
+    \makebox[0.58\linewidth][l]{%
+      \colorbox{codebg}{\code{Code|Run Selected Line(s)}}}
+  \item
+    \makebox[0.38\linewidth][l]{%
+      \colorbox{codebg}{\code{Ctrl+1} $\bullet$ \code{\cmdkey\,1}}}
+    \hfill
+    \makebox[0.58\linewidth][l]{%
+      \colorbox{codebg}{\code{View|Move Focus to Source}}}
+  \item
+    \makebox[0.38\linewidth][l]{%
+      \colorbox{codebg}{\code{Ctrl+2} $\bullet$ \code{\cmdkey\,2}}}
+    \hfill
+    \makebox[0.58\linewidth][l]{%
+      \colorbox{codebg}{\code{View|Move Focus to Console}}}
+  \end{trivlist}
+\item Sauvegarder le fichier de script.
+  \begin{trivlist}
+  \item
+    \makebox[0.38\linewidth][l]{%
+      \colorbox{codebg}{\code{Ctrl+S} $\bullet$ \code{\cmdkey\,S}}}
+    \hfill
+    \makebox[0.58\linewidth][l]{%
+      \colorbox{codebg}{\code{File|Save}}}
+  \end{trivlist}
   (S'il s'agit d'un nouveau fichier, s'assurer de terminer son nom par
   \code{.R}.) Le nom du fichier dans l'onglet de la sous-fenêtre passe
   du rouge au noir.
@@ -252,6 +270,10 @@ expliquant comment compléter chacune dans RStudio.
   \code{save.image()}\indexfonction{save.image}. Cela n'est
   habituellement pas nécessaire à moins que l'espace de travail ne
   contienne des objets importants ou longs à recréer.
+  \begin{trivlist}
+  \item
+    \colorbox{codebg}{\code{Session|Save Workspace As...}}
+  \end{trivlist}
 \item Quitter RStudio de la manière usuelle. Par défaut, RStudio
   devrait demander si l'on souhaite sauvegarder l'espace de travail de
   R. Nous suggérons de ne pas le faire.
@@ -267,23 +289,16 @@ expliquant comment compléter chacune dans RStudio.
 \label{sec:rstudio:configuration}
 
 Il est possible de configurer plusieurs facettes de RStudio à partir
-d'une interface familière.
-\begin{itemize}
-\item On accède aux options de configuration par le menu
-  \begin{quote}
-    \code{Tools|Global Options...}
-  \end{quote}
-  sous Windows et Linux et par le menu standard
-  \begin{quote}
-    \code{RStudio|Preferences} (\code{\cmdkey\,,})
-  \end{quote}
-  sous macOS.
-\item Nous suggérons de régler l'option \code{Save workspace to .RData
-    on exit} à \code{Never} dans les options de configuration
-  générales; voir la \autoref{fig:rstudio:rstudiopreferences}. Avec ce
-  réglage, l'espace de travail de R ne sera pas sauvegardé à la
-  fermeture de RStudio.
-\end{itemize}
+d'une interface familière. On accède aux options de configuration par
+le menu \code{Tools|Global Options...} sous Windows et Linux, et par le
+menu standard \code{RStudio|Preferences} (\code{\cmdkey\,,})
+sous macOS.
+
+Nous recommandons de régler l'option \code{Save workspace to .RData on
+  exit} à \code{Never} dans les options de configuration générales,
+tel qu'illustré à la \autoref{fig:rstudio:rstudiopreferences}. Avec ce
+réglage, l'espace de travail de R ne sera pas sauvegardé à la
+fermeture de RStudio.
 
 \begin{figure}
   \centering
@@ -308,6 +323,6 @@ unifiée pour accéder à l'aide de R et à celle de RStudio.
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-engine: xetex
-%%% TeX-master: "introduction_programmation_r"
+%%% TeX-master: "programmer-avec-r"
 %%% coding: utf-8
 %%% End:

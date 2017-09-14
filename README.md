@@ -67,14 +67,23 @@ Question d'éviter les publications accidentelles, `make all` est
 
 ## Historique des versions
 
-### Édition 2017.09-1
+### 2017.09-1a (2017-09-13)
+
+Correction et révision de l'édition 2017.09-1. Aucun nouveau contenu.
+
+- L'identification des parties des fenêtres RStudio (figure A.1) et
+  Emacs (figure B.1) est maintenant présente.
+- Retouches (essentiellement graphiques) aux sections Anatomie d'une
+  session de travail avec RStudio et avec Emacs.
+
+### 2017.09-1 (2017-09-13)
 
 Cette édition préliminaire contient:
 
-1\. Éléments d'informatique pour programmeurs  
-2\. Présentation de R  
-A. RStudio: une introduction  
-B. GNU Emacs et ESS: la base  
-C. Réponses des exercices
-Bibliographie  
-Index
+- Chapitre 1 - Éléments d'informatique pour programmeurs
+- Chapitre 2 - Présentation de R
+- Annexe A - RStudio: une introduction
+- Annexe B - GNU Emacs et ESS: la base
+- Annexe C - Réponses des exercices
+- Bibliographie
+- Index
