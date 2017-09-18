@@ -228,7 +228,6 @@ raccourci clavier.
   d'ouvrir un fichier n'existant pas.\index{Emacs!nouveau fichier}}
 
 \begin{ttscript}{C-x C-w}
-  \raggedright
 \item[\code{C-x C-f}] ouvrir un fichier (\code{find-file})
 \item[\code{C-x C-s}] sauvegarder
   (\code{save-buffer})\index{Emacs!sauvegarder}
@@ -238,7 +237,7 @@ raccourci clavier.
   \\[\baselineskip]
 \item[\code{C-\_}] annuler (pratiquement illimité); aussi
   \code{C-x u} (\code{undo})
-  \\[\baselineskip]
+  \\
 \item[\code{C-s}] recherche incrémentale avant
   (\code{isearch-forward})
 \item[\code{C-r}] Recherche incrémentale arrière
@@ -253,19 +252,22 @@ raccourci clavier.
 \label{sec:emacs+ess:commandes:deplacement}
 
 \begin{ttscript}{C-DEL | C-w}
-  \raggedright
-\item[\code{C-b} | \code{C-f}] déplacer d'un caractère vers l'arrière~|~l'avant
+\item[\code{C-b} | \code{C-f}] déplacer d'un caractère vers
+  l'arrière~|~l'avant \newline
   (\code{backward-char} | \code{forward-char})
-\item[\code{C-a} | \code{C-e}] aller au début~|~fin de la ligne
+\item[\code{C-a} | \code{C-e}] aller au début~|~fin de la ligne \newline
   (\code{move-beginning-of-line} | \code{move-end-of-line})
-\item[\code{C-p} | \code{C-n}] aller à la ligne précédente~|~suivante
+\item[\code{C-p} | \code{C-n}] aller à la ligne précédente~|~suivante \newline
   (\code{previous-line} | \code{next-line})
-\item[\code{M-<} | \code{M->}] aller au début~|~fin du fichier
-  (\code{beginning-of-buffer} | \code{end-of-buffer}) \\[\baselineskip]
+\item[\code{M-<} | \code{M->}] aller au début~|~fin du fichier \newline
+  (\code{beginning-of-buffer} | \code{end-of-buffer})
+  \\
 \item[\code{DEL} | \code{C-d}] effacer le caractère à
-  gauche~|~droite du curseur (\code{delete-backward-char} | \code{delete-char})
+  gauche~|~droite du curseur  \newline
+  (\code{delete-backward-char} | \code{delete-char})
 \item[\code{M-DEL} | \code{M-d}] effacer le mot à gauche~|~droite
-  du curseur (\code{backward-kill-word} | \code{kill-word})
+  du curseur  \newline
+  (\code{backward-kill-word} | \code{kill-word})
 \item[\code{C-k}] supprimer jusqu'à la fin de la ligne (\code{kill-line})
 \end{ttscript}
 
@@ -280,24 +282,23 @@ raccourci clavier.
 \label{sec:emacs+ess:commandes:selection}
 
 \begin{ttscript}{C-x C-w}
-  \raggedright
 \item[\code{C-SPC}] débute la sélection (\code{set-mark-command})
 \item[\code{C-w}] couper la sélection (\code{kill-region})
 \item[\code{M-w}] copier la sélection (\code{kill-ring-save})
 \item[\code{C-y}] coller (\code{yank})
 \item[\code{M-y}] remplacer le dernier texte collé par la
-  sélection précédente (\code{yank-pop})
+  sélection précédente \newline
+  (\code{yank-pop})
 \end{ttscript}
 
-\begin{itemize}
-\item Il est possible d'utiliser les raccourcis clavier usuels de
+\tipbox{Il est possible d'utiliser les raccourcis clavier usuels de
   Windows (\code{C-c}, \code{C-x}, \code{C-v}) et macOS
   (\cmdkey\,\code{C}, \cmdkey\,\code{X}, \cmdkey\,\code{V}) en
-  activant le mode CUA dans le menu \code{Options}.
-\item On peut copier-coller directement avec la souris dans Windows en
+  activant le mode CUA dans le menu \code{Options}.}
+
+\windowsbox{ On peut copier-coller directement avec la souris dans Windows en
   sélectionnant du texte puis en appuyant sur le bouton central (ou la
-  molette) à l'endroit souhaité pour y copier le texte.
-\end{itemize}
+  molette) à l'endroit souhaité pour y copier le texte.}
 
 
 \subsection{Manipulation de fenêtres}
