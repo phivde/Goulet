@@ -67,6 +67,14 @@ Question d'éviter les publications accidentelles, `make all` est
 
 ## Historique des versions
 
+### en développement
+
+- Notes additionnelles sur l'utilisation de Git Bash comme ligne de
+  commande Unix sous Windows, notamment à l'exercice 1.3.
+- Ajout d'un encadré sur le raccourci clavier pour le sysmbole
+  d'assignation dans RStudio pour les Mac munis d'un clavier
+  canadien-français.
+
 ### 2017.09-1a (2017-09-13)
 
 Correction et révision de l'édition 2017.09-1. Aucun nouveau contenu.
