@@ -162,14 +162,15 @@ des commandes les plus utiles via le menu \code{Help} de
 l'application.
 
 Les raccourcis clavier sous, d'une part, Windows et Linux et sous,
-d'autre part, macOS légèrement différents. Nous fournissons les deux
-jeux ci-dessous, séparés par le symbole $\bullet$.
+d'autre part, macOS, différent légèrement. Nous fournissons ci-dessous
+les deux jeux, séparés par le symbole $\bullet$.
 
 \begin{ttscript}{Ctrl-Shift-S $\bullet$ \cmdkey\shiftkey S}
-  \raggedright
   \index{RStudio!symbole d'assignation}
 \item[\code{Alt+-} $\bullet$ \code{\optkey\,-}] insérer le
-  symbole d'assignation \verb*| <- |
+  symbole d'assignation \verb*| <- | (pour les Mac munis d'un clavier
+  canadien français, consulter l'encadré de la
+  \autopageref{fig:rstudio:assignation})
 \item[\code{Ctrl+Retour} $\bullet$ \code{\cmdkey\,\returnkey}]
   évaluer dans le processus R la ligne sous le curseur ou la région
   sélectionnée, puis déplacer le curseur à la prochaine expression
@@ -195,6 +196,41 @@ sont particulièrement utiles.
   la fenêtre d'historique des commandes
 \end{ttscript}
 
+\begin{figure}[t]
+  \begin{emphbox}{\mdseries Symbole d'assignation et
+      Mac munis d'un clavier canadien français}
+    Le très pratique raccourci clavier {\optkey\,-} servant à insérer
+    le symbole d'assignation ne fonctionne pas avec le clavier
+    canadien français sur les Mac. Cette combinaison de touches sert
+    déjà à insérer le symbole \textbar. C'est en fait un doublon
+    puisque, si l'on en croit le clavier, ce symbole est
+    principalement lié à la
+    touche {\optkey\,/}.
+
+    Il est possible de régler le problème en redéfinissant le raccourci
+    clavier associé au symbole d'assignation.
+
+    \begin{enumerate}
+    \item Ouvrir les préférences de RStudio (menu
+      \code{RStudio|Preferences} ou {\cmdkey\,,}).
+    \item Choisir la section \code{Code} dans la barre latérale de la
+      fenêtre des options.
+    \item Appuyer sur le bouton \code{Modify Keyboard Shortcuts\dots}.
+    \item Une nouvelle fenêtre liste toutes les commandes disponibles
+      et les raccoucis clavier associés. Dans le champ de recherche en
+      haut, taper les lettres de «assignment» jusqu'à ce que la
+      commande \code{Insert Assignment Operator} apparaisse.
+    \item Cliquer sur la case du raccouci clavier (qui devrait être
+      \code{Alt+-} par défaut) pour l'activer. Appuyer sur \optkey\,-
+      pour utiliser cette combinaison de touches comme raccourci. Oui,
+      on entre ce qui est apparemment la même combinaison de touches.
+      Pour une raison quelconque, c'est «Alt+\textbackslash» qui
+      apparait alors comme raccourci.
+    \item Fermer toutes les fenêtres de configuration.
+    \end{enumerate}
+  \end{emphbox}
+  \label{fig:rstudio:assignation}
+\end{figure}
 
 \section{Anatomie d'une session de travail (bis)}
 \label{sec:rstudio:session}
