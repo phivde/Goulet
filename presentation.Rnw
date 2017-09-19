@@ -272,7 +272,7 @@ vous utiliserez cette seconde approche d'interaction avec R.
   \label{fig:presentation:script}
 \end{figure}
 
-\tipbox{Toute analogie est boîteuse, mais celle-ci peut néanmoins
+\tipbox{Toute analogie est boiteuse, mais celle-ci peut néanmoins
   s'avérer utile pour illustrer l'approche «code réel, objets
   virtuels».
 
@@ -285,12 +285,12 @@ vous utiliserez cette seconde approche d'interaction avec R.
     quitte à les réévaluer par la suite pour obtenir les valeurs
     correspondantes.
   \end{enumerate}
-  La seconde, sûrement{\dots} Or, sauvagarder l'espace de travail R
+  La seconde, surement{\dots} Or, sauvagarder l'espace de travail R
   dans un fichier \code{.RData} (l'approche «objets réels, code
   virtuel») correspond à la première option, alors que sauvegarder
   le code source des fichiers de script correspond à la seconde.
 
-  Là où l'analogie est boîteuse, la raison pour laquelle on n'a
+  Là où l'analogie est boiteuse, la raison pour laquelle on n'a
   jamais à se poser la question avec un tableur, c'est que le
   progiciel évalue constamment et en temps réel les formules pour
   afficher les résultats dans les cellules.}
@@ -325,7 +325,7 @@ d'autres. Voici quelques bons choix.
 \begin{itemize}
 \item RStudio\index{RStudio} est un environnement de développement
   intégré (IDE) créé spécifiquement pour travailler avec R. Sa
-  popularité connaît une progression foudroyante depuis 2014. Il
+  popularité connait une progression foudroyante depuis 2014. Il
   permet de consulter dans une interface conviviale ses fichiers de
   script, la ligne de commande R, les rubriques d'aide, les
   graphiques, etc.; voir la \autoref{fig:presentation:rstudio}. C'est
