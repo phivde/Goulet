@@ -73,32 +73,73 @@ complexes.
 
 Les données fondamentales de R sont les suivantes:
 \begin{itemize}
-\item nombres réels: \code{0, 1, 2, 78.42, -1.39}\dots;
-\item chaines de caractères: \code{"a"}, \code{"abc"};
+\item nombres réels: \code{0, 1, 2, 78.42, -1.39}, \dots;
+\item chaines de caractères: \code{"a"}, \code{"abc"}, \dots;
 \item valeurs booléennes: \Objet{TRUE}, \Objet{FALSE};
 \item donnée manquante: \Objet{NA};
-\item valeurs infinies et indéterminée: \Objet{Inf}, \code{-Inf},
-  \Objet{NaN};
-\item valeur «néant»: \Objet{NULL};
+\item infini positif et négatif: \Objet{Inf}, \code{-Inf};
+\item valeur indéterminée: \Objet{NaN};
+\item «néant»: \Objet{NULL};
 \item nombres complexes: \code{1 + 2i}.
 \end{itemize}
 La grande majorité des langages de programmation offrent les deux
 premiers type de données ci-dessus. Les autres types se revèlent très
-utiles pour la programmation mathématique et la manipulation de
-données. Nous reviendrons sur les caractéristiques de certains à la
+utiles pour la programmation mathématique et l'analyse de données.
+Nous reviendrons sur leurs caractéristiques à la
 \autoref{sec:bases:objets}.
 
 Quant aux procédures fondamentales, nous pourrions les classer en
-trois grandes catégories:
+quatre grandes catégories:
 \begin{itemize}
-\item arithmétique: \verb| + - * / ^ < >= ==|, etc.;
-\item logique: \verb= & | !=\,;
-\item affectation: \verb| <-|\,.
+\item arithmétique: \verb|+ - * / ^ < >= ==|, etc.;
+\item logique: \verb=& | !=\,;
+\item indiçage: \verb=[ ] $=\,;
+\item affectation: \verb|<-|\,.
 \end{itemize}
-Les opérations arithmétiques sont applicables aux nombres réels, voire
+Les opérations arithmétiques sont applicables aux nombres réels ou
 complexes, alors que les opérations logiques ne sont applicables
 qu'aux valeurs booléennes. Nous traitons de l'opération d'affectation
 en détail à la section suivante.
+
+Le \autoref{tab:bases:operateurs} présente les opérateurs les plus
+fréquemment employés en ordre décroissant de priorité des opérations.
+Ils sont accompagnés d'une description succincte. Nous reviendrons sur
+certains opérateurs dans les chapitres subséquents.
+
+\begin{table}
+  \centering
+  \renewcommand{\arraystretch}{1.1}
+  \begin{tabular}{lp{8cm}}
+    \toprule
+    Opérateur     & Fonction \\
+    \midrule
+    \Fonction{\$} & extraction \\
+    \Fonction{[}\, \fonction{[[} & indiçage \\
+    \verb|^|\index{\string^@\verb=^=|bfhyperpage} & puissance \\
+    \Fonction{-}  & changement de signe \\
+    {\NoAutoSpacing\verb|:|}\index{:@\NoAutoSpacing\verb=:=}  & génération de suites \\
+    \Fonction{\%*\%}\, \Fonction{\%\%}\, \Fonction{\%/\%} & produit
+    matriciel, modulo, division entière \\
+    \Fonction{*}\, \Fonction{/} & multiplication, division \\
+    \Fonction{+}\, \Fonction{-} & addition, soustraction \\
+    \Fonction{<}\, \Fonction{<=}\, \Fonction{==}\, \Fonction{>=}\,
+    \Fonction{>}\, \verb|!=|\Index{"!=@\code{"!=}} & plus petit, plus petit ou égal, égal,
+    plus grand ou égal, plus grand, différent de \\
+    \verb=!=\Index{"!@\code{"!}}  & négation logique \\
+    \Fonction{\&}\, \Fonction{\&\&} & «et» logique \\
+    \code{\textbar}\Index{{"|}@\code{\textbar}},
+    \code{\textbar\textbar}\Index{{"|"|}@\code{\textbar\textbar}}    & «ou» logique \\
+    \fonction{->}\, \verb|->>|\index{->>@\verb=->>=|bfhyperpage} & affectation \\
+    \fonction{<-}\, \verb|<<-|\index{<<-@\verb=<<-=|bfhyperpage} & affectation \\
+    \bottomrule
+  \end{tabular}
+  \caption{Principaux opérateurs du langage R, en ordre décroissant
+    de priorité}
+  \label{tab:bases:operateurs}
+\end{table}
+
+\tipbox{Il est utile, voire essentiel de connaître le niveau de
+  priorité des opérateurs dans les expressions R.}
 
 
 \section{Commandes R}
@@ -108,11 +149,11 @@ L'utilisateur de R interagit avec l'interpréteur R en entrant des
 commandes à la ligne de commande. Toute commande R est soit une
 \emph{expression}\index{expression}, soit une
 \emph{affectation}\index{affectation}.
-\begin{itemize}
-\item Une expression est immédiatement évaluée et le résultat est
-  affiché sous l'invite de commande. Les symboles des données
-  fondamentales représentent ces données, comme on pourrait s'y
-  attendre.
+
+Une expression est immédiatement évaluée et le résultat est affiché
+sous l'invite de commande. Le symbole d'une donnée fondamentale
+représente cette donnée, comme on pourrait s'y attendre. L'invite de
+commande de R est le symbole \verb*|> |.
 <<echo=TRUE>>=
 42
 3 + 2i
@@ -120,55 +161,62 @@ commandes à la ligne de commande. Toute commande R est soit une
 pi
 cos(pi/4)
 @
-\item Lors d'une affectation, une expression est évaluée, mais le
-  résultat est stocké dans un \emph{objet} (ou \emph{variable}) et
-  rien n'est affiché à l'écran. Le symbole d'affectation est
-  \Fonction{<-}, c'est-à-dire les deux caractères \verb|<| et
-  \verb|-| placés obligatoirement l'un à la suite de l'autre.
+Lorsqu'une commande n'est pas syntaxiquement complète, l'invite de
+commande devient \verb*|+ | pour nous inciter à compléter la
+commande.
+<<echo=TRUE>>=
+2 *
+3
+@
+
+Lors d'une affectation, une expression est évaluée, mais le résultat
+est stocké dans un \emph{objet} (ou \emph{variable}) dans l'espace de
+travail et rien n'est affiché à l'écran. Tel que mentionné
+précédemment, le symbole d'affectation est \Fonction{<-}, c'est-à-dire
+les deux caractères \verb|<| et \verb|-| placés obligatoirement l'un à
+la suite de l'autre.
 <<echo=TRUE>>=
 a <- 5
 a
 b <- a
 b
 @
-\item Pour affecter le résultat d'un calcul dans un objet et
-  simultanément afficher ce résultat, il suffit de placer
-  l'affectation entre parenthèses pour ainsi créer une nouvelle
-  expression\footnote{%
-    En fait, cela devient un appel à l'opérateur \code{"("} qui ne
-    fait que retourner son argument.}.
+Pour affecter le résultat d'un calcul dans un objet et simultanément
+afficher ce résultat, il suffit de placer l'affectation entre
+parenthèses pour ainsi créer une nouvelle expression\footnote{%
+  En fait, cela devient un appel à l'opérateur \code{"("} qui ne fait
+  que retourner son argument.}.
 <<echo=TRUE>>=
 (a <- 2 + 3)
 @
-\item Le symbole d'affectation inversé \fonction{->} existe aussi,
-  mais il est rarement utilisé.
-\item Évitez d'utiliser l'opérateur \,\fonction{=}\, pour affecter une
-  valeur à une variable puisque cette pratique est susceptible
+
+Le symbole d'affectation inversé \fonction{->} existe aussi, mais il
+est rarement utilisé.
+
+\cautionbox{Évitez d'utiliser l'opérateur \,\fonction{=}\, pour
+  affecter une valeur à une variable. Cette pratique est susceptible
   d'engendrer de la confusion avec les constructions \code{nom =
     valeur} dans les appels de fonction. Les règles de syntaxe de R
-  commandent d'utiliser l'opérateur \code{<-} pour l'affectation, point.
-\end{itemize}
+  commandent d'utiliser l'opérateur \code{<-} pour l'affectation,
+  point.}
 
 Que ce soit dans les fichiers de script ou à la ligne de commande, on
 sépare les commandes R les unes des autres par un
-\index{;@\code{;}}point-virgule ou par un retour à la ligne.
-\begin{itemize}
-\item On considère généralement comme du mauvais style d'employer
-  les deux, c'est-à-dire de placer des points-virgules à la fin de
-  chaque ligne de code, surtout dans les fichiers de script.
-\item Le point-virgule peut être utile pour séparer deux courtes
-  expressions ou plus sur une même ligne.
+\index{;@\code{;}}point-virgule ou par un retour à la ligne. On
+considère généralement comme du mauvais style d'employer les deux,
+c'est-à-dire de placer des points-virgules à la fin de chaque ligne de
+code, surtout dans les fichiers de script. Le point-virgule peut être
+utile pour séparer deux courtes expressions ou plus sur une même
+ligne. C'est le seul emploi que nous faisons du point-virgule.
 <<echo=TRUE>>=
 a <- 5; a + 2
 @
-  C'est le seul emploi du point-virgule que l'on rencontrera dans cet
-  ouvrage.
-\end{itemize}
 
 On peut regrouper plusieurs commandes en une seule expression en les
-entourant d'accolades \Fonction{\{~\}}.
-\begin{itemize}
-\item Le résultat du regroupement est la valeur de la dernière commande.
+entourant d'accolades \Fonction{\{~\}}. Le résultat du regroupement
+est la valeur de la \emph{dernière} commande. Par conséquent, si le
+regroupement se termine par une affectation, aucune valeur n'est
+retournée ni affichée à l'écran.
 <<echo=TRUE>>=
 {
     a <- 2 + 3
@@ -176,65 +224,64 @@ entourant d'accolades \Fonction{\{~\}}.
     b
 }
 @
-\item Par conséquent, si le regroupement se termine par une
-  affectation, aucune valeur n'est retournée ni affichée à l'écran.
 <<echo=TRUE>>=
 {
     a <- 2 + 3
     b <- a
 }
 @
-\item Les règles ci-dessus joueront un rôle important dans la
-  composition de fonctions; voir le \autoref{sec:bases:fonctions}.
-\item Comme on peut le voir ci-dessus, lorsqu'une commande n'est pas
-  complète à la fin de la ligne, l'invite de commande de R change de
-  \verb*|> | à \verb*|+ | pour nous inciter à compléter notre commande.
-\end{itemize}
 
 
-\section{Conventions pour les noms d'objets}
-\label{sec:bases:noms}
+\section{Objets R}
+\label{sec:bases:objets}
+
+Tout dans le langage R est un objet: les variables contenant des
+données, les fonctions, les opérateurs, même le symbole représentant
+le nom d'un objet est lui-même un objet. Les objets possèdent au
+minimum un \emph{mode} et une \emph{longueur} et certains peuvent
+être dotés d'un ou de plusieurs \emph{attributs}.
+
+\subsection{Règles pour les noms d'objets}
+\label{sec:bases:objets:noms}
 
 Les caractères permis pour les noms d'objets sont les lettres
 minuscules a--z et majuscules A--Z, les chiffres 0--9, le point «.» et
 le caractère de soulignement «\_». Selon l'environnement linguistique
-de l'ordinateur, il peut être permis d'utiliser des lettres
-accentuées, mais cette pratique est fortement découragée puisqu'elle
-risque de nuire à la portabilité du code.
+de l'ordinateur, il peut être permis d'utiliser des lettres accentuées
+dans les noms d'objet, mais nous recommandons fortement d'éviter cette
+pratique qui nuit à la portabilité du code. Le nom d'un objet ne peut
+débuter par un chiffre. Si le nom débute par un point, alors le second
+caractère ne peut être un chiffre.
 
-\begin{itemize}
-\item Les noms d'objets ne peuvent commencer par un chiffre. S'ils
-  commencent par un point, le second caractère ne peut être un
-  chiffre.
-\item Le R est sensible à la casse, ce qui signifie que \code{foo},
-  \code{Foo} et \code{FOO} sont trois objets distincts. Un moyen
-  simple d'éviter des erreurs liées à la casse consiste à n'employer
-  que des lettres minuscules.
-\item Certains noms sont utilisés par le système R, aussi vaut-il mieux
-  éviter de les utiliser. En particulier, éviter d'utiliser
-  \begin{quote}
-    \code{c}, \code{q}, \code{t}, \code{C}, \code{D},
-    \code{I}, \code{diff}, \code{length}, \code{mean},
-    \code{pi}, \code{range}, \code{var}.
-  \end{quote}
-\item \index{noms d'objets!réservés} Certains mots sont réservés et il
-  est interdit de les utiliser comme nom d'objet. Les mots réservés
-  pour le système sont:
-  \begin{quote}
-    \code{break}, \code{else}, \code{for}, \code{function}, \code{if},
-    \code{in}, \code{next}, \code{repeat}, \code{return}, \code{while}, \\
-    \code{TRUE}, \code{FALSE}, \\
-    \code{Inf}, \code{NA}, \code{NaN}, \code{NULL}, \\
-    \verb|NA_integer_|, \verb|NA_real_|, \verb|NA_complex_|,
-    \verb|NA_character_|, \\
-    \code{...}, \code{..1}, \code{..2}, etc.
-  \end{quote}
-  Oui, `\code{...}' (\emph{point-point-point}) est véritablement un nom
-  d'objet dans R! Son usage est expliqué à la \autoref{avance:dots}.
-\item Les variables \code{T}\index{T@\code{T}|see{\code{TRUE}}} et
-  \code{F}\index{F@\code{F}|see{\code{FALSE}}} prennent par défaut les
-  valeurs \objet{TRUE} et \objet{FALSE}, respectivement, mais peuvent
-  être réaffectées:
+\warningbox{R est sensible à la casse, ce qui signifie que \code{foo},
+  \code{Foo} et \code{FOO} sont trois objets distincts.}
+
+Certains noms sont utilisés par le système R, aussi vaut-il mieux
+éviter de les utiliser comme nom de variable ou de fonction. En
+particulier, évitez:
+\begin{quote}
+  \code{c}, \code{q}, \code{t}, \code{C}, \code{D},
+  \code{I}, \code{diff}, \code{length}, \code{mean},
+  \code{pi}, \code{range}, \code{var}.
+\end{quote}
+De plus, certains mots sont réservés et il est interdit de les
+utiliser comme nom d'objet. Les mots réservés pour le système sont:
+\begin{quote}
+  \code{break}, \code{else}, \code{for}, \code{function}, \code{if},
+  \code{in}, \code{next}, \code{repeat}, \code{return}, \code{while}, \\
+  \code{TRUE}, \code{FALSE}, \\
+  \code{Inf}, \code{NA}, \code{NaN}, \code{NULL}, \\
+  \verb|NA_integer_|, \verb|NA_real_|, \verb|NA_complex_|,
+  \verb|NA_character_|, \\
+  \code{...}, \code{..1}, \code{..2}, etc.
+\end{quote}
+Oui, `\code{...}' (\emph{point-point-point}) est véritablement un nom
+d'objet dans R! Son usage est expliqué à la \autoref{avance:dots}.
+
+Les variables \code{T}\index{T@\code{T}|see{\code{TRUE}}} et
+\code{F}\index{F@\code{F}|see{\code{FALSE}}} prennent par défaut les
+valeurs \objet{TRUE} et \objet{FALSE}, respectivement, mais peuvent
+être réaffectées.
 <<echo=TRUE>>=
 T
 F
@@ -254,43 +301,25 @@ Error in TRUE <- 3 : membre gauche de l'assignation
 <<echo=FALSE>>=
 rm(T)
 @
-\item Nous recommandons de toujours écrire les valeurs booléennes
+
+\tipbox{Nous recommandons de toujours écrire les valeurs booléennes
   \code{TRUE} et \code{FALSE} au long pour éviter des bogues
-  difficiles à détecter.
-\end{itemize}
-
-
-\section{Les objets R}
-\label{bases:objets}
-
-Tout dans le langage R est un objet: les variables contenant des
-données, les fonctions, les opérateurs, même le symbole représentant
-le nom d'un objet est lui-même un objet. Les objets possèdent au
-minimum un \emph{mode} et une \emph{longueur} et certains peuvent
-être dotés d'un ou plusieurs \emph{attributs}
-
-\begin{itemize}
-\item Le mode d'un objet est obtenu avec la fonction \Fonction{mode}:
-<<echo=TRUE>>=
-v <- c(1, 2, 5, 9)
-mode(v)
-@
-\item La longueur d'un objet est obtenue avec la fonction
-  \Fonction{length}:
-<<echo=TRUE>>=
-length(v)
-@
-\end{itemize}
+  difficiles à détecter.}
 
 
 \subsection{Modes et types de données}
-\label{bases:objets:mode}
+\label{sec:bases:objets:mode}
 
 Le mode\Index{mode} prescrit ce qu'un objet peut contenir. À ce titre,
 un objet ne peut avoir qu'un seul mode. Le \autoref{tab:bases:modes}
 contient la liste des principaux modes disponibles en R. À chacun de
 ces modes correspond une fonction du même nom servant à créer un objet
-de ce mode.
+de ce mode. Le mode d'un objet est obtenu avec la fonction
+\Fonction{mode}.
+<<echo=TRUE>>=
+v <- c(1, 2, 5, 9)
+mode(v)
+@
 
 \begin{table}
   \centering
@@ -300,10 +329,10 @@ de ce mode.
     \midrule
     \Mode{numeric}    & nombres réels \\
     \Mode{complex}    & nombres complexes \\
-    \Mode{logical}    & valeurs booléennes (vrai/faux) \\
-    \Mode{character}  & chaînes de caractères \\
+    \Mode{logical}    & valeurs booléennes \\
+    \Mode{character}  & chaines de caractères \\
     \Mode{function}   & fonction \\
-    \Mode{list}       & données quelconques \\
+    \Mode{list}       & liste \\
     \Mode{expression} & expressions non évaluées \\
     \bottomrule
   \end{tabular}
@@ -311,128 +340,125 @@ de ce mode.
   \label{tab:bases:modes}
 \end{table}
 
-\begin{itemize}
-\item Les objets de mode \code{"numeric"}, \code{"complex"},
-  \code{"logical"} et \code{"character"} sont des objets
-  \emph{simples} (\emph{atomic} en anglais) qui ne peuvent contenir
-  que des données d'un seul type.
-\item En revanche, les objets de mode \code{"list"} ou
-  \code{"expression"} sont des objets \emph{récursifs} qui peuvent
-  contenir d'autres objets. Par exemple, une liste peut contenir une
-  ou plusieurs autres listes; voir la \autoref{bases:listes} pour
-  plus de détails.
-\item La fonction \Fonction{typeof} permet d'obtenir une description
+Les objets de mode \code{"numeric"}, \code{"complex"},
+\code{"logical"} et \code{"character"} sont des objets \emph{simples}
+(\emph{atomic}) qui contiennent des données d'un seul type. En
+revanche, les objets de mode \code{"list"} ou \code{"expression"} sont
+des objets \emph{récursifs} qui peuvent contenir d'autres objets. Par
+exemple, une liste peut contenir une ou plusieurs autres listes; nous
+y reviendrons au \autoref{chap:donnees}.
+
+\tipbox{La fonction \Fonction{typeof} permet d'obtenir une description
   plus précise de la représentation interne d'un objet (c'est-à-dire
   au niveau de la mise en {\oe}uvre en C). Le mode et le type d'un
-  objet sont souvent identiques.
-\end{itemize}
+  objet sont souvent identiques.}
 
 
 \subsection{Longueur}
-\label{bases:objets:longueur}
+\label{sec:bases:objets:longueur}
 
 La longueur\Index{longueur} d'un objet est égale au nombre d'éléments
-qu'il contient.
+qu'il contient. La longueur d'un objet est obtenue avec la fonction
+\Fonction{length}.
+<<echo=TRUE>>=
+v <- c(1, 2, 5, 9)
+length(v)
+@
 
-\begin{itemize}
-\item La longueur, au sens R du terme, d'une chaîne de caractères est
-  toujours $1$. Un objet de mode \code{character} doit contenir
-  plusieurs chaînes de caractères pour que sa longueur soit supérieure
-  à $1$:
+\tipbox{Il est permis --- et parfois utile --- de créer un objet de
+  longueur nulle, c'est-à-dire un objet qui existe, mais qui est
+  vide.}
+
+La longueur, au sens R du terme, d'une chaine de caractères est
+toujours $1$. Un objet de mode \code{character} doit contenir
+plusieurs chaines de caractères pour que sa longueur soit supérieure à
+$1$. Il faut utiliser la fonction \Fonction{nchar} pour obtenir le
+nombre de caractères dans une chaine.
 <<echo=TRUE>>=
 v1 <- "actuariat"
 length(v1)
+nchar(v1)
+@
+<<echo=TRUE>>=
 v2 <- c("a", "c", "t", "u", "a", "r", "i", "a", "t")
 length(v2)
-@
-\item Il faut utiliser la fonction \Fonction{nchar} pour obtenir le
-  nombre de caractères dans une chaîne:
-<<echo=TRUE>>=
-nchar(v1)
 nchar(v2)
 @
-\item Un objet peut être de longueur $0$ et doit alors être interprété
-  comme un contenant qui existe, mais qui est
-  vide\index{vide|see{\code{NULL}}}:
+
+\subsection{Valeurs spéciales}
+\label{sec:bases:objets:NA_et_al}
+
+Les objets valeur manquante (\code{NA}), infini (\code{Inf},
+\code{-Inf}), valeur indéterminée (\code{NaN}) et néant (\code{NULL})
+permettent de représenter de manière intuitive des quantitées souvent
+utilisées dans les applications statistiques et en analyse de données.
+Pour pleinement tirer profit de ces objets, il faut connaitre leurs
+caractéristiques spéciales.
+
+L'objet \code{NA} sert à représenter une donnée manquante. Chose un
+peu surprenante, c'est un objet de mode \mode{logical}. Cependant,
+\code{NA} ne peut être considéré ni \code{TRUE}, ni \code{FALSE}.
 <<echo=TRUE>>=
-v <- numeric(0)
-length(v)
+mode(NA)
+length(NA)
+NA == TRUE
+NA == FALSE
 @
-\end{itemize}
-
-
-\subsection{Objet spécial \code{NULL}}
-\label{bases:objets:NULL}
-
-L'objet spécial \Objet{NULL} représente «rien», ou le vide.
-
-\begin{itemize}
-\item Son mode est \Mode{NULL}.
-\item Sa longueur est $0$.
-\item Toutefois différent d'un objet vide:
-  \begin{itemize}
-  \item un objet de longueur $0$ est un contenant vide;
-  \item \code{NULL} est «pas de contenant».
-  \end{itemize}
-\item La fonction \Fonction{is.null} teste si un objet est \code{NULL}
-  ou non.
-\end{itemize}
-
-
-\subsection{Valeurs manquantes, indéterminées et infinies}
-\label{bases:objets:NA}
-
-Dans les applications statistiques, il est souvent utile de pouvoir
-représenter des données manquantes. Dans R, l'objet spécial \Objet{NA}
-remplit ce rôle.
-
-\begin{itemize}
-\item Par défaut, le mode de \code{NA} est \mode{logical}, mais
-  \code{NA} ne peut être considéré ni comme \code{TRUE}, ni comme
-  \code{FALSE}.
-\item Toute opération impliquant une donnée \code{NA} a comme
-  résultat \code{NA}.
-\item Certaines fonctions (\fonction{sum}, \fonction{mean}, par
-  exemple) ont par conséquent un argument \Argument{na.rm} qui,
-  lorsque \code{TRUE}, élimine les données manquantes avant de
-  faire un calcul.
-\item La valeur \code{NA} n'est égale à aucune autre, pas même
-  elle-même (selon la règle ci-dessus, le résultat de la comparaison
-  est \code{NA}):
+Toute opération, y compris la comparaison, impliquant la valeur
+\code{NA} a comme résultat \code{NA}. Par conséquent, la valeur
+\code{NA} n'est égale à aucune autre, pas même elle-même! Pour tester
+si une valeur est manquante, il faut avoir recours à la fonction
+\Fonction{is.na}.
 <<echo=TRUE>>=
-NA == NA
-@
-\item Par conséquent, pour tester si les éléments d'un objet sont
-  \code{NA} ou non il faut utiliser la fonction \Fonction{is.na}:
-<<echo=TRUE>>=
+x <- NA
+x == NA
 is.na(NA)
 @
-\end{itemize}
 
-La norme IEEE~754 régissant la représentation interne des nombres dans
-un ordinateur \citep{IEEE:754} prévoit les valeurs mathématiques
-spéciales $+\infty$ et $-\infty$ ainsi que les formes indéterminées du
-type $\frac{0}{0}$ ou $\infty - \infty$. R dispose d'objets spéciaux pour
-représenter ces valeurs.
-\begin{itemize}
-\item \Objet{Inf} représente $+\infty$.
-\item \Objet{-Inf} représente $-\infty$.
-\item \Objet{NaN} (\emph{Not a Number}) représente une forme
-  indéterminée.
-\item Ces valeurs sont testées avec les fonctions
-  \Fonction{is.infinite}, \Fonction{is.finite} et
-  \Fonction{is.nan}.
-\end{itemize}
+Les objets \code{Inf}, \code{-Inf} et \code{NaN} permettent de
+représenter les valeurs mathématiques spéciales prévues dans la norme
+IEEE~754 régissant la représentation interne des nombres dans un
+ordinateur \citep{IEEE:754}. De manière intuitive, l'objet \objet{Inf}
+représente $+\infty$, \objet{-Inf} représente $-\infty$ et \Objet{NaN}
+(\emph{Not a Number}) représente une forme indéterminée du type
+$\frac{0}{0}$ ou $\infty - \infty$. Les fonctions
+\Fonction{is.infinite}, \Fonction{is.finite} et \Fonction{is.nan}
+fournissent des manières robuste de tester ces valeurs.
+<<echo=TRUE>>=
+is.infinite(1/0)
+is.finite(-1/0)
+is.nan(0/0)
+is.nan(Inf - Inf)
+@
+
+Enfin, l'objet spécial \objet{NULL} représente «rien», ou le vide. Son
+mode est \Mode{NULL} et sa longueur est $0$. Il est toutefois
+différent d'un objet vide: un objet de longueur $0$ est un contenant
+vide, alors que \code{NULL} est «pas de contenant».
+<<echo=TRUE>>=
+mode(NULL)
+length(NULL)
+1 + NULL
+@
+Toute opération avec \code{NULL} retourne un objet de longueur
+nulle (et du mode approprié), y compris la comparaison. Par
+conséquent, la seule façon de tester si un objet est \code{NULL} est
+avec la fonction \Fonction{is.null}.
+<<echo=TRUE>>=
+x <- NULL
+x == NULL
+is.null(NULL)
+@
 
 
 \subsection{Attributs}
 \label{bases:objets:attributs}
 
 Les attributs\Index{attribut} d'un objet sont des éléments
-d'information additionnels liés à cet objet. La liste des attributs
-les plus fréquemment rencontrés se trouve au \autoref{tab:attributs}.
-Pour chaque attribut, il existe une fonction du même nom servant à
-extraire l'attribut correspondant d'un objet.
+d'information additionnels attachées à cet objet. Le
+\autoref{tab:attributs} fournit la liste des attributs les plus
+fréquemment utilisés. À chacun correspond une fonction du même nom
+servant à extraire l'attribut d'un objet.
 
 \begin{table}
   \centering
@@ -455,31 +481,27 @@ extraire l'attribut correspondant d'un objet.
   \label{tab:attributs}
 \end{table}
 
-\begin{itemize}
-\item Plus généralement, la fonction \Fonction{attributes} permet
-  d'extraire ou de modifier la liste des attributs d'un objet. On peut
-  aussi travailler sur un seul attribut à la fois avec la fonction
-  \Fonction{attr}.
-\item On peut ajouter à peu près ce que l'on veut à la liste des
-  attributs d'un objet. Par exemple, on pourrait vouloir attacher au
-  résultat d'un calcul la méthode de calcul utilisée:
+La fonction \Fonction{attributes} permet d'extraire ou de modifier la
+liste des attributs d'un objet, alors que la fonction \Fonction{attr}
+permet de travailler sur un seul attribut à la fois. Les programmeurs
+peuvent ajouter à peu près n'importe quoi à la liste des attributs
+d'un objet. Par exemple, nous pourrions vouloir attacher au résultat
+d'un calcul la méthode de calcul utilisée.
 <<echo=TRUE>>=
 x <- 3
 attr(x, "methode") <- "au pif"
 attributes(x)
 @
-\item Extraire un attribut qui n'existe pas retourne
-  \objet{NULL}:
+
+L'extraction d'un attribut qui n'existe pas retourne \objet{NULL},
+alors qu'à l'inverse, affecter à un attribut la valeur \code{NULL}
+efface cet attribut.
 <<echo=TRUE>>=
+attributes(x)
 dim(x)
-@
-\item
-À l'inverse, donner à un attribut la valeur \code{NULL} efface cet attribut:
-<<echo=TRUE>>=
 attr(x, "methode") <- NULL
 attributes(x)
 @
-\end{itemize}
 
 
 
@@ -515,7 +537,7 @@ v
 \item L'indiçage dans un vecteur se fait avec les crochets
   \fonction{[~]}. On peut extraire un élément d'un vecteur par sa
   position ou par son étiquette, si elle existe (auquel cas cette
-  approche est beaucoup plus sûre).
+  approche est beaucoup plus sure).
 <<echo=TRUE>>=
 v[3]
 v["c"]
@@ -527,7 +549,7 @@ v["c"]
 \begin{prob-astuce}
   Dans un vecteur simple, tous les éléments doivent être du même mode.
   Or, les informations du classement de la ligue comportent à la fois
-  des chaînes de caractères et des nombres. De plus, le classement se
+  des chaines de caractères et des nombres. De plus, le classement se
   présente sous forme d'un tableau à deux dimensions, alors qu'un
   vecteur n'en compte qu'une seule. Le vecteur simple n'est donc pas
   le type d'objet approprié pour stocker le classement de la ligue.
@@ -711,7 +733,7 @@ cbind(m, n)
 La liste\index{liste} est le mode de stockage le plus général et
 polyvalent du langage R. Il s'agit d'un type de vecteur spécial dont
 les éléments peuvent être de n'importe quel mode, y compris le mode
-\mode{list}. Cela permet donc d'emboîter des listes, d'où le
+\mode{list}. Cela permet donc d'emboiter des listes, d'où le
 qualificatif de \emph{récursif} pour ce type d'objet.
 
 \begin{itemize}
@@ -888,7 +910,7 @@ x[c(-2, -3)]
 x > 0
 x[x > 0]
 @
-\item Avec un vecteur de chaînes de caractères. Utile pour extraire
+\item Avec un vecteur de chaines de caractères. Utile pour extraire
   les éléments d'un vecteur à condition que ceux-ci soient nommés:
 <<echo=TRUE>>=
 x[c("B", "D")]
