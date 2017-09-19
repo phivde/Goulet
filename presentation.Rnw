@@ -36,8 +36,7 @@ années 1970 par une équipe de chercheurs menée par John~M.\ Chambers.
 Au fil du temps, le S a connu quatre principales versions communément
 identifiées par la couleur du livre dans lequel elles étaient
 présentées: %
-version «originale» \citep[\emph{Brown
-  Book;}][]{Chambers:brownbook:1984}, %
+version «originale» \citep[\emph{Brown Book;}][]{Chambers:brownbook:1984}, %
 version 2 \citep[\emph{Blue Book;}][]{Chambers:bluebook:1988}, %
 version 3 \citep[\emph{White Book;}][]{Chambers:whitebook:1992} et %
 version 4 \citep[\emph{Green Book;}][]{Chambers:greenbook:1998}; %
@@ -255,8 +254,8 @@ programmeur R a constamment sous les yeux: d'un côté son fichier de
 script et, de l'autre, la ligne de commande R dans laquelle son code a
 été exécuté.
 
-La méthode d'apprentissage préconisée dans cet ouvrage suppose que le
-lecteur utilisera cette seconde approche d'interaction avec R.
+La méthode d'apprentissage préconisée dans cet ouvrage suppose que
+vous utiliserez cette seconde approche d'interaction avec R.
 
 \begin{figure}
   \centering
@@ -319,9 +318,9 @@ indentation automatique du code, marquage des mots-clés, manipulation
 d'objets, etc. Enfin, un éditeur compatible avec R réduira, entre
 autres, l'opération de copier-coller à un simple raccourci clavier.
 
-Le lecteur peut utiliser le logiciel de son choix pour l'édition de
-code R. Certains offrent simplement plus de fonctionnalités
-que d'autres. Voici quelques bons choix.
+Vous pouvez utiliser le logiciel de votre choix pour l'édition de code
+R. Certains éditeurs offrent simplement plus de fonctionnalités que
+d'autres. Voici quelques bons choix.
 
 \begin{itemize}
 \item RStudio\index{RStudio} est un environnement de développement
@@ -397,7 +396,7 @@ que d'autres. Voici quelques bons choix.
 \section{Anatomie d'une session de travail}
 \label{sec:presentation:session}
 
-Dans ses grandes lignes, une session de travail avec R réunit les
+Dans ses grandes lignes, une session de travail avec R comporte les
 étapes ci-dessous.
 \begin{enumerate}
 \item Démarrer une session R en cliquant sur l'icône de l'application
@@ -486,7 +485,7 @@ Enfin, le système d'aide de R contient bon nombre de documents plus
 longs en format PDF. Les «vignettes» abordent habituellement une
 thématique dans son ensemble plutôt que simplement par le biais d'une
 suite de fonctions. Pour consulter la vignette sur \code{sujet},
-entrer à la ligne de commande:
+on entre à la ligne de commande:
 \begin{Schunk}
 \begin{lstlisting}
 vignette("sujet")
