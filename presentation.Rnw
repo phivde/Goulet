@@ -198,13 +198,14 @@ cet environnement statistique.
 \label{sec:presentation:strategies:code-virtuel}
 
 Dans l'approche dite de «code virtuel et objets réels», on entre des
-expressions à la ligne de commande pour les évaluer immédiatement:
+expressions à la ligne de commande pour les évaluer immédiatement.
 <<echo=TRUE>>=
 2 + 3
 @
+
 On peut également créer des objets contenant le résultat d'un
 calcul. Ces objets sont stockés en mémoire dans l'espace de travail
-de R:
+de R.
 <<echo=TRUE>>=
 x <- exp(2)
 x
@@ -213,10 +214,11 @@ x
 Lorsque la session de travail est terminée, on sauvegarde une image de
 l'espace de travail sur le disque dur de l'ordinateur afin de pouvoir
 conserver les objets pour une future séance de
-travail\indexfonction{save.image}:
+travail\indexfonction{save.image}.
 <<eval=FALSE>>=
 save.image()
 @
+
 Par défaut, l'image est sauvegardée dans un fichier nommé
 \code{.RData} dans le répertoire de travail courant (plus de détails à
 la \autoref{sec:presentation:workspace}) et cette image est
@@ -462,34 +464,31 @@ Les rubriques d'aide des diverses fonctions de R contiennent une foule
 d'informations ainsi que des exemples d'utilisation. Leur consultation
 est tout à fait essentielle.
 
-Pour consulter la rubrique d'aide de la fonction \code{foo}, on entre
-à la ligne de commande:
+Les fonctions \Fonction{?} et \Fonction{help} permettent de consulter
+la rubrique d'aide d'une fonction ou d'un autre type d'objet.
 \begin{Schunk}
-\begin{Sinput}
-> ?foo
-\end{Sinput}
+\begin{Verbatim}[commandchars=\\\{\}]
+> ?\meta{fonction}
+> help(\meta{fonction})
+\end{Verbatim}
 \end{Schunk}
-ou
+
+La fonction \Fonction{help.search} permet quant à elle de rechercher
+de l'aide sur un sujet.
 \begin{Schunk}
-\begin{Sinput}
-> help(foo)
-\end{Sinput}
+\begin{Verbatim}[commandchars=\\\{\}]
+help.search("\meta{sujet}")
+\end{Verbatim}
 \end{Schunk}
-Pour chercher de l'aide sur un sujet \code{bar}, la commande est:
-\begin{Schunk}
-\begin{Sinput}
-help.search("bar")
-\end{Sinput}
-\end{Schunk}
+
 Enfin, le système d'aide de R contient bon nombre de documents plus
 longs en format PDF. Les «vignettes» abordent habituellement une
 thématique dans son ensemble plutôt que simplement par le biais d'une
-suite de fonctions. Pour consulter la vignette sur \code{sujet},
-on entre à la ligne de commande:
+suite de fonctions.
 \begin{Schunk}
-\begin{lstlisting}
-vignette("sujet")
-\end{lstlisting}
+\begin{Verbatim}[commandchars=\\\{\}]
+vignette("\meta{sujet}")
+\end{Verbatim}
 \end{Schunk}
 
 
