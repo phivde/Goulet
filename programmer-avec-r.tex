@@ -26,7 +26,7 @@
   \usepackage{applekeys}               % touches Mac
   \usepackage{dirtree}                 % arbre pour exercice sur \include
   \usepackage{fontawesome}             % icônes \fa*
-  \usepackage{awesomebox}              % boîtes info, important, etc.
+  \usepackage{awesomebox}              % boites info, important, etc.
   \usepackage{answers}                 % exercices et solutions
   \usepackage{listings}                % code informatique
   \usepackage{pgf}                     % transparence pour couverture avant
@@ -187,7 +187,7 @@
   %% Sert pour les listes d'objectifs et les encadrés reliés aux
   %% problèmes (mises en situation) dans les chapitres. Arguments:
   %% couleur du cadre (optionnel; noir par défaut) et titre de la
-  %% boîte (obligatoire).
+  %% boite (obligatoire).
   \newenvironment{emphbox}[2][black]{%
     \colorlet{TFFrameColor}{#1}%
     \colorlet{TFTitleColor}{white}%
@@ -218,17 +218,26 @@
   %% Environnements de Sweave. Les environnements Sinput et Soutput
   %% utilisent Verbatim (de fancyvrb). On les réinitialise pour
   %% enlever la configuration par défaut de Sweave, puis on réduit
-  %% l'écart entre les blocs Sinput et Soutput. L'environnement Schunk
-  %% est complètement redéfini à partir de snugshade* (de framed) pour
-  %% insérer un fond de couleur derrière les blocs de code source.
+  %% l'écart entre les blocs Sinput et Soutput.
   \DefineVerbatimEnvironment{Sinput}{Verbatim}{}
   \DefineVerbatimEnvironment{Soutput}{Verbatim}{}
   \fvset{listparameters={\setlength{\topsep}{0pt}}}
+
+  %% L'environnement Schunk est complètement redéfini en un hybride
+  %% des environnements snugshade* et leftbar de framed.sty.
+  \makeatletter
   \renewenvironment{Schunk}{%
     \setlength{\topsep}{0pt}
-    \colorlet{shadecolor}{codebg}
-    \begin{snugshade*}}%
-    {\end{snugshade*}}
+    \def\FrameCommand##1{\hskip\@totalleftmargin
+       \vrule width 2pt\colorbox{codebg}{\hspace{3pt}##1}%
+      % There is no \@totalrightmargin, so:
+      \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+    \MakeFramed {\advance\hsize-\width
+      \@totalleftmargin\z@ \linewidth\hsize
+      \advance\labelsep\fboxsep
+      \@setminipage}%
+  }{\par\unskip\@minipagefalse\endMakeFramed}
+  \makeatother
 
   %% Exercices et réponses
   \Newassociation{sol}{solution}{solutions}
@@ -410,7 +419,7 @@
 
   %% Aide pour la césure
   \hyphenation{%
-    con-naî-tre
+    con-nai-tre
     con-sole
     cons-tante
     con-tenu
@@ -419,7 +428,7 @@
     puis-que
   }
 
-%  \includeonly{emacs+ess}
+  \includeonly{presentation,bases}
 
 \begin{document}
 
@@ -455,7 +464,7 @@
 
 \include{informatique}
 \include{presentation}
-% \include{bases}
+\include{bases}
 % \include{operateurs}
 % \include{exemples}
 % \include{fonctions}
