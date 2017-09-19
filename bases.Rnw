@@ -7,83 +7,118 @@ options(width=52)
 
 \begin{objectifs}
 \item Écrire et interpréter la syntaxe et la sémantique du langage R.
-\item Identifier les principaux types de données disponibles dans R.
-\item Utiliser les divers modes d'objets (en particulier
+\item Utiliser l'arithmétique vectorielle du langage R dans les
+  calculs.
+\item Créer et manipuler des vecteurs simples («atomiques»).
+\item Utiliser les divers modes des vecteurs (en particulier
   \code{numeric}, \code{character} et \code{logical}) et la conversion
   automatique de l'un à l'autre.
-\item Créer et manipuler des vecteurs, matrices, tableaux, listes et
-  \emph{data frames}.
-\item Extraire des données d'un objet ou y affecter de
-  nouvelles valeurs à l'aide des diverses méthodes d'indiçage.
+\item Extraire des données d'un vecteur simple ou y affecter de
+  nouvelles valeurs à l'aide des méthodes d'indiçage.
+\item Appeler une fonction R; concevoir comment les arguments sont
+  passés à la fonction et le traitement des valeurs par défaut.
+\item Définir une fonction R, ses divers arguments et, le cas échéant,
+  les valeurs par défaut de ceux-ci.
+\item Utiliser et définir des fonctions R ayant un nombre variable
+  d'arguments.
 \end{objectifs}
 
-Pour utiliser un langage de programmation, il faut en connaître la
-syntaxe et la sémantique, du moins dans leurs grandes lignes. C'est
-dans cet esprit que ce chapitre introduit des notions de base du
-langage R telles que l'expression, l'affectation et l'objet. Le
-concept de vecteur se trouvant au c{\oe}ur du langage, le chapitre
-fait une large place à la création et à la manipulation des vecteurs
-et autres types d'objets de stockage couramment employés en
-programmation en R.
+C'est dans ce chapitre que nous débutons réellement l'apprentissage de
+la programmation. Avouons-le d'entrée de jeu: notre présentation a
+fortement été influencée par l'ouvrage magistral de
+\cite{Sussman:scheme:1996}.
 
-\begin{prob-enonce}
-  Une ligue de hockey compte huit équipes. Le classement de la ligue
-  est disponible quotidiennement dans le journal dans le format
-  habituel; voir le \autoref{tab:bases:classement}.
+Les humains créent des programmes informatiques pour contrôler, à
+l'aide d'un ensemble de règles, les processus de calcul et de
+manipulation de données d'un ordinateur. Ces programmes sont rédigés
+dans un langage de programmation.
 
-  Afin d'effectuer différentes analyses statistiques, on désire
-  intégrer ces données dans un espace de travail R. On doit donc
-  déterminer le type d'objet R approprié pour stocker le classement de
-  la ligue.
+Un langage est toutefois plus qu'une simple manière de transmettre des
+instructions à un ordinateur, c'est aussi une façon de conceptualiser
+les procédures que l'ordinateur devra effectuer. Autrement dit, le
+type de langage de programmation que nous utilisons influence
+directement la solution que nous proposerons à un problème --- et vice
+versa. Comme nous l'avons déjà fait à la
+\autoref{sec:informatique:semantique}, dressons un parallèle avec les
+langues parlées et écrites: une langue ne constitue pas seulement un
+moyen de transmettre une idée, mais bien une façon de concevoir le
+monde. Ce n'est pas pour rien qu'il est parfois impossible de faire
+passer une idée d'une langue vers une autre --- ce que l'on appelle
+couramment une «expression intraduisible».
 
-  Ensuite, on souhaite extraire les valeurs suivantes de l'objet
-  précédemment créé.
-  \begin{enumerate}[a)]
-  \item Le nombre d'équipes de la ligue.
-  \item La fiche complète de l'équipe de Montréal.
-  \item La fiche complète de l'équipe à la septième position du
-    classement.
-  \end{enumerate}
-\end{prob-enonce}
+% Pour utiliser un langage de programmation, il faut en connaître la
+% syntaxe et la sémantique, du moins dans leurs grandes lignes. C'est
+% dans cet esprit que ce chapitre introduit des notions de base du
+% langage R telles que l'expression, l'affectation et l'objet. Le
+% concept de vecteur se trouvant au c{\oe}ur du langage, le chapitre
+% fait une large place à la création et à la manipulation des vecteurs
+% et autres types d'objets de stockage couramment employés en
+% programmation en R.
 
-%% Les floats ne peuvent se trouver à l'intérieur d'un environnement
-%% de framed.sty utilisé par prob-enonce.
-\begin{table}
-  \centering
-  \begin{tabular}{lrrrrr}
-    \toprule
-    Équipe & MJ & V & D & DP & PTS \\
-    \midrule
-    Washington  & 55 & 36 & 16 &  3 & 75 \\
-    Dallas      & 56 & 32 & 19 &  5 & 69 \\
-    Chicago     & 57 & 30 & 21 &  6 & 66 \\
-    Los Angeles & 58 & 30 & 22 &  6 & 66 \\
-    St-Louis    & 56 & 25 & 19 & 12 & 62 \\
-    Détroit     & 57 & 25 & 21 & 11 & 61 \\
-    Montréal    & 56 & 22 & 27 &  7 & 51 \\
-    Boston      & 57 & 24 & 31 &  2 & 50 \\
-    \bottomrule
-  \end{tabular} \\
-  \footnotesize%
-  \textbf{Légende:} MJ -- matchs joués; V -- victoires; D -- défaites; \\
-    DP: défaites en prolongation; PTS -- points
-  \caption{Classement de la ligue de hockey pour le problème à
-    résoudre du chapitre}
-  \label{tab:bases:classement}
-\end{table}
+Le langage de programmation étudié ici est le R. Sa syntaxe, celle du
+langage \index{S}S, s'apparente au \index{C}C. En revanche, la
+sémantique de R s'inspire du paradigme de la programmation
+fonctionnelle (\autoref{sec:informatique:paradigmes}), ce qui lui
+confère de plus grandes affinités avec le \index{Lisp}Lisp et
+\index{APL}l'APL.
+
+
+\section{Données et procédures fondamentales}
+\label{sec:bases:donnees}
+
+À sa plus simple expression, la programmation est un exercice de
+manipulation de \emph{données} à l'aide de \emph{procédures}. Un
+langage de programmation fournit au programmeur des données et des
+procédures fondamentales (ou \emph{génériques}), des manières de les
+combiner pour former des éléments complexes, ainsi qu'un mécanisme
+d'abstraction permettant de nommer et de manipuler ces éléments
+complexes.
+
+Les données fondamentales de R sont les suivantes:
+\begin{itemize}
+\item nombres réels: \code{0, 1, 2, 78.42, -1.39}\dots;
+\item chaines de caractères: \code{"a"}, \code{"abc"};
+\item valeurs booléennes: \Objet{TRUE}, \Objet{FALSE};
+\item donnée manquante: \Objet{NA};
+\item valeurs infinies et indéterminée: \Objet{Inf}, \code{-Inf},
+  \Objet{NaN};
+\item valeur «néant»: \Objet{NULL};
+\item nombres complexes: \code{1 + 2i}.
+\end{itemize}
+La grande majorité des langages de programmation offrent les deux
+premiers type de données ci-dessus. Les autres types se revèlent très
+utiles pour la programmation mathématique et la manipulation de
+données. Nous reviendrons sur les caractéristiques de certains à la
+\autoref{bases:objets}.
+
+Quant aux procédures fondamentales, nous pourrions les classer en
+trois grandes catégories:
+\begin{itemize}
+\item arithmétique: \verb| + - * / ^ < >= ==|, etc.;
+\item logique: \verb= & | !=\,;
+\item affectation: \verb| <-|\,.
+\end{itemize}
+Les opérations arithmétiques sont applicables aux nombres réels, voire
+complexes, alors que les opérations logiques ne sont applicables
+qu'aux valeurs booléennes. Nous traitons de l'opération d'affectation
+en détail à la section suivante.
 
 
 \section{Commandes R}
 \label{bases:commandes}
 
-Tel que vu au chapitre précédent, l'utilisateur de R interagit avec
-l'interprète R en entrant des commandes à l'invite de commande. Toute
-commande R est soit une \emph{expression}\index{expression}, soit une
+L'utilisateur de R interagit avec l'interpréteur R en entrant des
+commandes à la ligne de commande. Toute commande R est soit une
+\emph{expression}\index{expression}, soit une
 \emph{affectation}\index{affectation}.
 \begin{itemize}
-\item Normalement, une expression est immédiatement évaluée et le
-  résultat est affiché à l'écran:
+\item Une expression est immédiatement évaluée et le résultat est
+  affiché sous l'invite de commande. Les symboles des données
+  fondamentales représentent ces données, comme on pourrait s'y
+  attendre.
 <<echo=TRUE>>=
+42
+3 + 2i
 2 + 3
 pi
 cos(pi/4)
@@ -92,7 +127,7 @@ cos(pi/4)
   résultat est stocké dans un objet (variable) et rien n'est affiché à
   l'écran. Le symbole d'affectation est \Fonction{<-}, c'est-à-dire
   les deux caractères \verb|<| et \verb|-| placés obligatoirement l'un
-  à la suite de l'autre:
+  à la suite de l'autre.
 <<echo=TRUE>>=
 a <- 5
 a
@@ -104,30 +139,18 @@ b
   l'affectation entre parenthèses pour ainsi créer une nouvelle
   expression\footnote{%
     En fait, cela devient un appel à l'opérateur \code{"("} qui ne
-    fait que retourner son argument.}:
+    fait que retourner son argument.}.
 <<echo=TRUE>>=
 (a <- 2 + 3)
 @
 \item Le symbole d'affectation inversé \fonction{->} existe aussi,
   mais il est rarement utilisé.
-\item Éviter d'utiliser l'opérateur \,\fonction{=}\, pour affecter une
+\item Évitez d'utiliser l'opérateur \,\fonction{=}\, pour affecter une
   valeur à une variable puisque cette pratique est susceptible
   d'engendrer de la confusion avec les constructions \code{nom =
-    valeur} dans les appels de fonction.
+    valeur} dans les appels de fonction. Les règles de syntaxe de R
+  commandent d'utiliser l'opérateur \code{<-} pour l'affectation, point.
 \end{itemize}
-
-\begin{figure}[t]
-  \begin{information}
-    Dans les anciennes versions de S et R, l'on pouvait affecter avec
-    le caractère de soulignement «\code{\_}». Cet emploi n'est plus
-    permis, mais la pratique subsiste dans le mode ESS de Emacs.
-
-    Ainsi, taper le caractère «\code{\_}» hors d'une chaîne de
-    caractères dans Emacs génère automatiquement \verb*| <- |. Si l'on
-    souhaite véritablement obtenir le caractère de soulignement, il
-    suffit d'appuyer deux fois successives sur «\code{\_}».
-  \end{information}
-\end{figure}
 
 Que ce soit dans les fichiers de script ou à la ligne de commande, on
 sépare les commandes R les unes des autres par un
@@ -157,7 +180,7 @@ entourant d'accolades \Fonction{\{~\}}.
 }
 @
 \item Par conséquent, si le regroupement se termine par une
-  assignation, aucune valeur n'est retournée ni affichée à l'écran:
+  affectation, aucune valeur n'est retournée ni affichée à l'écran:
 <<echo=TRUE>>=
 {
     a <- 2 + 3
@@ -165,12 +188,11 @@ entourant d'accolades \Fonction{\{~\}}.
 }
 @
 \item Les règles ci-dessus joueront un rôle important dans la
-  composition de fonctions; voir le \autoref{fonctions}.
+  composition de fonctions; voir le \autoref{sec:bases:fonctions}.
 \item Comme on peut le voir ci-dessus, lorsqu'une commande n'est pas
   complète à la fin de la ligne, l'invite de commande de R change de
   \verb*|> | à \verb*|+ | pour nous inciter à compléter notre commande.
 \end{itemize}
-
 
 
 
