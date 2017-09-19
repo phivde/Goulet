@@ -17,7 +17,7 @@ options(width=52)
 
 \begin{objectifs}
 \item Comprendre ce qu'est un langage de programmation interprété.
-\item Connaître la provenance du langage R et les principes ayant
+\item Connaitre la provenance du langage R et les principes ayant
   guidé son développement.
 \item Mettre en place sur son poste de travail un environnement de
   développement en R.
@@ -312,7 +312,7 @@ présentation et de mise en forme. Les applications Bloc-notes sous
 Windows ou TextEdit sous macOS sont deux exemples d'éditeurs de texte
 simples.
 
-Un éditeur de texte pour programmeur saura en plus reconnaître la
+Un éditeur de texte pour programmeur saura en plus reconnaitre la
 syntaxe d'un langage de programmation et assister à sa mise en forme:
 indentation automatique du code, marquage des mots-clés, manipulation
 d'objets, etc. Enfin, un éditeur compatible avec R réduira, entre
