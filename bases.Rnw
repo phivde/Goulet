@@ -1,5 +1,5 @@
 \chapter{Bases du langage R}
-\label{bases}
+\label{chap:bases}
 
 <<echo=FALSE>>=
 options(width=52)
@@ -46,21 +46,18 @@ monde. Ce n'est pas pour rien qu'il est parfois impossible de faire
 passer une idée d'une langue vers une autre --- ce que l'on appelle
 couramment une «expression intraduisible».
 
-% Pour utiliser un langage de programmation, il faut en connaître la
-% syntaxe et la sémantique, du moins dans leurs grandes lignes. C'est
-% dans cet esprit que ce chapitre introduit des notions de base du
-% langage R telles que l'expression, l'affectation et l'objet. Le
-% concept de vecteur se trouvant au c{\oe}ur du langage, le chapitre
-% fait une large place à la création et à la manipulation des vecteurs
-% et autres types d'objets de stockage couramment employés en
-% programmation en R.
-
 Le langage de programmation étudié ici est le R. Sa syntaxe, celle du
 langage \index{S}S, s'apparente au \index{C}C. En revanche, la
 sémantique de R s'inspire du paradigme de la programmation
 fonctionnelle (\autoref{sec:informatique:paradigmes}), ce qui lui
 confère de plus grandes affinités avec le \index{Lisp}Lisp et
 \index{APL}l'APL.
+
+Ce chapitre introduit des notions de base du langage R telles que
+l'expression, l'affectation, et l'objet. Le concept de vecteur se
+trouvant au cœur du langage, nous faisons une large place à la
+création et à la manipulation des vecteurs. Le chapitre se termine par
+la définition de fonctions.
 
 
 \section{Données et procédures fondamentales}
@@ -89,7 +86,7 @@ La grande majorité des langages de programmation offrent les deux
 premiers type de données ci-dessus. Les autres types se revèlent très
 utiles pour la programmation mathématique et la manipulation de
 données. Nous reviendrons sur les caractéristiques de certains à la
-\autoref{bases:objets}.
+\autoref{sec:bases:objets}.
 
 Quant aux procédures fondamentales, nous pourrions les classer en
 trois grandes catégories:
@@ -105,7 +102,7 @@ en détail à la section suivante.
 
 
 \section{Commandes R}
-\label{bases:commandes}
+\label{sec:bases:commandes}
 
 L'utilisateur de R interagit avec l'interpréteur R en entrant des
 commandes à la ligne de commande. Toute commande R est soit une
@@ -124,10 +121,10 @@ pi
 cos(pi/4)
 @
 \item Lors d'une affectation, une expression est évaluée, mais le
-  résultat est stocké dans un objet (variable) et rien n'est affiché à
-  l'écran. Le symbole d'affectation est \Fonction{<-}, c'est-à-dire
-  les deux caractères \verb|<| et \verb|-| placés obligatoirement l'un
-  à la suite de l'autre.
+  résultat est stocké dans un \emph{objet} (ou \emph{variable}) et
+  rien n'est affiché à l'écran. Le symbole d'affectation est
+  \Fonction{<-}, c'est-à-dire les deux caractères \verb|<| et
+  \verb|-| placés obligatoirement l'un à la suite de l'autre.
 <<echo=TRUE>>=
 a <- 5
 a
@@ -160,7 +157,7 @@ sépare les commandes R les unes des autres par un
   les deux, c'est-à-dire de placer des points-virgules à la fin de
   chaque ligne de code, surtout dans les fichiers de script.
 \item Le point-virgule peut être utile pour séparer deux courtes
-  expressions ou plus sur une même ligne:
+  expressions ou plus sur une même ligne.
 <<echo=TRUE>>=
 a <- 5; a + 2
 @
@@ -171,7 +168,7 @@ a <- 5; a + 2
 On peut regrouper plusieurs commandes en une seule expression en les
 entourant d'accolades \Fonction{\{~\}}.
 \begin{itemize}
-\item Le résultat du regroupement est la valeur de la dernière commande:
+\item Le résultat du regroupement est la valeur de la dernière commande.
 <<echo=TRUE>>=
 {
     a <- 2 + 3
@@ -180,7 +177,7 @@ entourant d'accolades \Fonction{\{~\}}.
 }
 @
 \item Par conséquent, si le regroupement se termine par une
-  affectation, aucune valeur n'est retournée ni affichée à l'écran:
+  affectation, aucune valeur n'est retournée ni affichée à l'écran.
 <<echo=TRUE>>=
 {
     a <- 2 + 3
@@ -195,10 +192,8 @@ entourant d'accolades \Fonction{\{~\}}.
 \end{itemize}
 
 
-
 \section{Conventions pour les noms d'objets}
-\index{noms d'objets!conventions}
-\label{bases:noms}
+\label{sec:bases:noms}
 
 Les caractères permis pour les noms d'objets sont les lettres
 minuscules a--z et majuscules A--Z, les chiffres 0--9, le point «.» et
