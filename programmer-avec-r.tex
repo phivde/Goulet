@@ -413,7 +413,15 @@
     puis-que
   }
 
-%  \includeonly{presentation,bases}
+  \includeonly{%
+    notices,
+    informatique,
+    presentation,
+    bases,
+    rstudio,
+    emacs+ess,
+    reponses
+  }
 
 \begin{document}
 
@@ -421,7 +429,7 @@
 
 \pagestyle{empty}
 
-\include{couverture-avant}
+\input{couverture-avant}
 \null\cleardoublepage           % cf. section 2.2 textpos.pdf
 
 \include{notices}
@@ -450,19 +458,18 @@
 \include{informatique}
 \include{presentation}
 \include{bases}
-% \include{implementation}
-% \include{donnees}
-% \include{application}
-% \include{fonctions}
-% \include{collaboration}
-% \include{texte}
-% \include{debogage}
-% \include{oop}
+\include{implementation}
+\include{donnees}
+\include{application}
+\include{fonctions}
+\include{collaboration}
+\include{texte}
+\include{debogage}
+\include{oop}
 
 \appendix
 \include{rstudio}
 \include{emacs+ess}
-% \include{packages}
 \include{reponses}
 
 \bibliography{r,stat,informatique,vg}
