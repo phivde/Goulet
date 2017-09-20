@@ -1,4 +1,70 @@
-## Emacs: -*- coding: utf-8; fill-column: 62; comment-column: 27; -*-
+### Emacs: -*- coding: utf-8; fill-column: 62; comment-column: 27; -*-
+##
+## Copyright (C) 2017 Vincent Goulet
+##
+## Ce fichier fait partie du projet «Programmer avec R»
+## http://github.com/vigou3/programmer-avec-r
+##
+## Cette création est mise à disposition selon le contrat
+## Attribution-Partage dans les mêmes conditions 4.0
+## International de Creative Commons.
+## http://creativecommons.org/licenses/by-sa/4.0/
+
+###
+### DONNÉES ET PROCÉDURES FONDAMENTALES
+###
+
+## Nombres. Tous les nombres réels sont stockés en double
+## précision dans R, entiers comme nombres fractionnaires.
+486                        # nombre réel entier
+0.3324                     # nombre réel fractionnaire
+2e-3                       # notation scientifique
+1 + 2i                     # nombre complexe
+
+## Tout objet en R comporte au minimum un mode et une
+## longueur.
+mode(486)                  # pas de différence entre entier...
+mode(0.3324)               # ... et nombre réel
+length(486)                # vecteur de longueur 1
+mode(1 + 2i)               # nombre complexe
+
+## Valeurs booléennes. 'TRUE' et 'FALSE' sont des noms
+## réservés pour identifier les valeurs booléennes
+## correspondantes.
+TRUE                       # vrai
+FALSE                      # faux
+mode(TRUE)                 # mode "logical"
+! FALSE                    # négation logique
+TRUE & FALSE               # ET logique
+TRUE | FALSE               # OU logique
+
+## Donnée manquante. 'NA' est un nom réservé pour représenter
+## une donnée manquante.
+c(65, NA, 72, 88)          # traité comme une valeur
+NA + 2                     # tout calcul avec 'NA' donne NA
+is.na(c(65, NA))           # test si les données sont NA
+
+## Valeurs infinies et indéterminée. 'Inf', '-Inf' et 'NaN'
+## sont des noms réservés.
+1/0                        # +infini
+-1/0                       # -infini
+0/0                        # indétermination
+x <- c(65, Inf, NaN, 88)   # s'utilisent comme des valeurs
+is.finite(x)               # quels sont les nombres réels?
+is.nan(x)                  # lesquels sont indéterminés?
+
+## Valeur "néant". 'NULL' est un nom réservé pour représenter
+## le néant, rien.
+mode(NULL)                 # le mode de 'NULL' est NULL
+length(NULL)               # longueur nulle
+c(NULL, NULL)              # du néant ne résulte que le néant
+
+## Chaines de caractères. On crée une chaine de caractère en
+## l'entourant de guillemets doubles " ".
+"foobar"                   # *une* chaine de 6 caractères
+length("foobar")           # longueur de 1
+c("foo", "bar")            # *deux* chaines de 3 caractères
+length(c("foo", "bar"))    # longueur de 2
 
 ###
 ### COMMANDES R
@@ -20,19 +86,20 @@ gamma(5)                   # fonction gamma
 5 *                        # toujours incomplète
 3                          # complétée
 
-## Taper le nom d'un objet affiche son contenu. Pour une
+## Entrer le nom d'un objet affiche son contenu. Pour une
 ## fonction, c'est son code source qui est affiché.
 pi                         # constante numérique intégrée
 letters                    # chaîne de caractères intégrée
 LETTERS                    # version en majuscules
 matrix                     # fonction
 
-## Ne pas utiliser '=' pour l'affectation. Les opérateurs
-## d'affectation standard en R sont '<-' et '->'.
-x <- 5                     # affecter 5 à l'objet 'x'
+## On crée des nouveaux objets en leur affectant une valeur
+## avec l'opérateur '<-'. *Ne pas* utiliser '=' pour
+## l'affectation.
+x <- 5                     # affectation de 5 à l'objet 'x'
 5 -> x                     # idem, mais peu usité
 x                          # voir le contenu
-(x <- 5)                   # affecter et afficher
+(x <- 5)                   # affectation et affichage
 y <- x                     # affecter la valeur de 'x' à 'y'
 x <- y <- 5                # idem, en une seule expression
 y                          # 5
@@ -48,13 +115,15 @@ x <- 5;                    # éviter les ';' superflus
 {                          # début d'un groupe
     x <- 5                 # première expression du groupe
     y <- 2                 # seconde expression du groupe
-    x + y                  # résultat du groupe
+    x + y                  # dernière expression du groupe
 }                          # fin du groupe et résultat
 {x <- 5; y <- 2; x + y}    # valide, mais redondant
 
 ###
-### NOMS D'OBJETS
+### OBJETS R
 ###
+
+## NOMS D'OBJETS
 
 ## Quelques exemples de noms valides et invalides.
 foo <- 5                   # valide
@@ -65,7 +134,8 @@ foo_123 <- 5               # valide
 .123foo <- 5               # invalide; point suivi d'un chiffre
 
 ## Liste des objets dans l'espace de travail. Les objets dont
-## le nom commence par un point sont considérés cachés.
+## le nom commence par un point sont cachés, comme à la ligne
+## de commande Unix.
 ls()                       # l'objet '.foo' n'est pas affiché
 ls(all.names = TRUE)       # objets cachés aussi affichés
 
@@ -73,10 +143,6 @@ ls(all.names = TRUE)       # objets cachés aussi affichés
 foo <- 1
 Foo
 FOO
-
-###
-### LES OBJETS R
-###
 
 ## MODES ET TYPES DE DONNÉES
 
@@ -132,27 +198,6 @@ length(x)                  # l'objet 'x' existe...
 x[1] <- 1                  # possible, 'x' existe
 X[1] <- 1                  # impossible, 'X' n'existe pas
 
-## L'OBJET SPECIAL 'NULL'
-mode(NULL)                 # le mode de 'NULL' est NULL
-length(NULL)               # longueur nulle
-x <- c(NULL, NULL)         # s'utilise comme un objet normal
-x; length(x); mode(x)      # mais donne toujours le vide
-
-## L'OBJET SPÉCIAL 'NA'
-x <- c(65, NA, 72, 88)     # traité comme une valeur
-x + 2                      # tout calcul avec 'NA' donne NA
-mean(x)                    # voilà qui est pire
-mean(x, na.rm = TRUE)      # éliminer les 'NA' avant le calcul
-is.na(x)                   # tester si les données sont 'NA'
-
-## VALEURS INFINIES ET INDÉTERMINÉES
-1/0                        # +infini
--1/0                       # -infini
-0/0                        # indétermination
-x <- c(65, Inf, NaN, 88)   # s'utilisent comme des valeurs
-is.finite(x)               # quels sont les nombres réels?
-is.nan(x)                  # lesquels ne sont «pas un nombre»?
-
 ## ATTRIBUTS
 
 ## Les objets peuvent être dotés d'un ou plusieurs attributs.
@@ -160,38 +205,9 @@ data(cars)                 # jeu de données intégré
 attributes(cars)           # liste de tous les attributs
 attr(cars, "class")        # extraction d'un seul attribut
 
-## Attribut 'class'. Selon la classe d'un objet, certaines
-## fonctions (dites «fonctions génériques») vont se comporter
-## différemment.
-x <- sample(1:100, 10)     # échantillon aléatoire de 10
-                           # nombres entre 1 et 100
-class(x)                   # classe de l'objet
-plot(x)                    # graphique pour cette classe
-class(x) <- "ts"           # 'x' est maintenant une série
-                           # chronologique
-plot(x)                    # graphique pour les séries
-                           # chronologiques
-class(x) <- NULL; x        # suppression de l'attribut 'class'
-
-## Attribut 'dim'. Si l'attribut 'dim' compte deux valeurs,
-## l'objet est traité comme une matrice. S'il en compte plus
-## de deux, l'objet est traité comme un tableau (array).
+## L'attribut 'names' conserve les étiquettes des éléments
+## d'un vecteur.
 x <- 1:24                  # un vecteur
-dim(x) <- c(4, 6)          # ajoute un attribut 'dim'
-x                          # l'objet est une matrice
-dim(x) <- c(4, 2, 3)       # change les dimensions
-x                          # l'objet est maintenant un tableau
-
-## Attribut 'dimnames'. Permet d'assigner des étiquettes (ou
-## noms) aux dimensions d'une matrice ou d'un tableau.
-dimnames(x) <- list(1:4, c("a", "b"), c("A", "B", "C"))
-dimnames(x)                # remarquer la conversion
-x                          # affichage avec étiquettes
-attributes(x)              # tous les attributs de 'x'
-attributes(x) <- NULL; x   # supprimer les attributs
-
-## Attributs 'names'. Similaire à 'dimnames', mais pour les
-## éléments d'un vecteur ou d'une liste.
 names(x) <- letters[1:24]  # attribution d'étiquettes
 x                          # identification facilitée
 
@@ -200,14 +216,11 @@ x                          # identification facilitée
 ###
 
 ## La fonction de base pour créer des vecteurs est 'c'. Il
-## peut s'avérer utile de donner des étiquettes aux éléments
-## d'un vecteur.
-x <- c(a = -1, b = 2, c = 8, d = 10) # création d'un vecteur
-names(x)                             # extraire les étiquettes
-names(x) <- letters[1:length(x)]     # changer les étiquettes
-x[1]                       # extraction par position
-x["c"]                     # extraction par étiquette
-x[-2]                      # élimination d'un élément
+## peut s'avérer utile de nommer les éléments d'un vecteur.
+x <- c(A = -1, B = 2, C = 8, D = 10) # création d'un vecteur
+names(x)                             # extraire les noms
+names(x) <- letters[1:length(x)]     # changer les noms
+x                                    # nouveau vecteur
 
 ## La fonction 'vector' sert à initialiser des vecteurs avec
 ## des valeurs prédéterminées. Elle compte deux arguments: le
@@ -221,264 +234,255 @@ logical(5)                 # initialisé avec FALSE
 complex(5)                 # initialisé avec 0 + 0i
 character(5)               # initialisé avec chaînes vides
 
-###
-### MATRICES ET TABLEAUX
-###
-
-## Une matrice est un vecteur avec un attribut 'dim' de
-## longueur 2 une classe implicite "matrix". La manière
-## naturelle de créer une matrice est avec la fonction
-## 'matrix'.
-(x <- matrix(1:12, nrow = 3, ncol = 4)) # créer la matrice
-length(x)                  # 'x' est un vecteur...
-dim(x)                     # ... avec un attribut 'dim'...
-class(x)                   # ... et classe implicite "matrix"
-
-## Une manière moins naturelle mais équivalente --- et parfois
-## plus pratique --- de créer une matrice consiste à ajouter
-## un attribut 'dim' à un vecteur.
-x <- 1:12                  # vecteur simple
-dim(x) <- c(3, 4)          # ajout d'un attribut 'dim'
-x; class(x)                # 'x' est une matrice!
-
-## Les matrices sont remplies par colonne par défaut. Utiliser
-## l'option 'byrow' pour remplir par ligne.
-matrix(1:12, nrow = 3, byrow = TRUE)
-
-## Indicer la matrice ou le vecteur sous-jacent est
-## équivalent. Utiliser l'approche la plus simple selon le
-## contexte.
-x[1, 3]                    # l'élément en position (1, 3)...
-x[7]                       # ... est le 7e élément du vecteur
-x[1, ]                     # première ligne
-x[, 2]                     # deuxième colonne
-nrow(x)                    # nombre de lignes
-dim(x)[1]                  # idem
-ncol(x)                    # nombre de colonnes
-dim(x)[2]                  # idem
-
-## Fusion de matrices et vecteurs.
-x <- matrix(1:12, 3, 4)    # 'x' est une matrice 3 x 4
-y <- matrix(1:8, 2, 4)     # 'y' est une matrice 2 x 4
-z <- matrix(1:6, 3, 2)     # 'z' est une matrice 3 x 2
-rbind(x, 1:4)              # ajout d'une ligne à 'x'
-rbind(x, y)                # fusion verticale de 'x' et 'y'
-cbind(x, 1:3)              # ajout d'une colonne à 'x'
-cbind(x, z)                # concaténation de 'x' et 'z'
-rbind(x, z)                # dimensions incompatibles
-cbind(x, y)                # dimensions incompatibles
-
-## Les vecteurs ligne et colonne sont rarement nécessaires. On
-## peut les créer avec les fonctions 'rbind' et 'cbind',
-## respectivement.
-rbind(1:3)                 # un vecteur ligne
-cbind(1:3)                 # un vecteur colonne
-
-## Un tableau (array) est un vecteur avec un attribut 'dim' de
-## longueur supérieure à 2 et une classe implicite "array".
-## Quant au reste, la manipulation des tableaux est en tous
-## points identique à celle des matrices. Ne pas oublier:
-## les tableaux sont remplis de la première dimension à la
-## dernière!
-x <- array(1:60, 3:5)      # tableau 3 x 4 x 5
-length(x)                  # 'x' est un vecteur...
-dim(x)                     # ... avec un attribut 'dim'...
-class(x)                   # ... une classe implicite "array"
-x[1, 3, 2]                 # l'élément en position (1, 3, 2)...
-x[19]                      # ... est l'élément 19 du vecteur
-
-## Le tableau ci-dessus est un prisme rectangulaire 3 unités
-## de haut, 4 de large et 5 de profond. Indicer ce prisme avec
-## un seul indice équivaut à en extraire des «tranches», alors
-## qu'utiliser deux indices équivaut à en tirer des «carottes»
-## (au sens géologique du terme). Il est laissé en exercice de
-## généraliser à plus de dimensions...
-x                          # les cinq matrices
-x[, , 1]                   # tranches de haut en bas
-x[, 1, ]                   # tranches d'avant à l'arrière
-x[1, , ]                   # tranches de gauche à droite
-x[, 1, 1]                  # carotte de haut en bas
-x[1, 1, ]                  # carotte d'avant à l'arrière
-x[1, , 1]                  # carotte de gauche à droite
-
-###
-### LISTES
-###
-
-## La liste est l'objet le plus général en R. C'est un objet
-## récursif qui peut contenir des objets de n'importe quel
-## mode et longueur.
-(x <- list(joueur = c("V", "C", "C", "M", "A"),
-           score = c(10, 12, 11, 8, 15),
-           expert = c(FALSE, TRUE, FALSE, TRUE, TRUE),
-           niveau = 2))
-is.vector(x)               # vecteur...
-length(x)                  # ... de quatre éléments...
-mode(x)                    # ... de mode "list"
-is.recursive(x)            # objet récursif
-
-## Comme tout autre vecteur, une liste peut être concaténée
-## avec un autre vecteur avec la fonction 'c'.
-y <- list(TRUE, 1:5)       # liste de deux éléments
-c(x, y)                    # liste de six éléments
-
-## Pour initialiser une liste d'une longueur déterminée, mais
-## dont chaque élément est vide, uitliser la fonction
-## 'vector'.
-vector("list", 5)          # liste de NULL
-
-## Pour extraire un élément d'une liste, il faut utiliser les
-## doubles crochets [[ ]]. Les simples crochets [ ]
-## fonctionnent aussi, mais retournent une sous liste -- ce
-## qui est rarement ce que l'on souhaite.
-x[[1]]                     # premier élément de la liste...
-mode(x[[1]])               # ... un vecteur
-x[1]                       # aussi le premier élément...
-mode(x[1])                 # ... mais une sous liste...
-length(x[1])               # ... d'un seul élément
-x[[2]][1]                  # 1er élément du 2e élément
-x[[c(2, 1)]]               # idem, par indiçage récursif
-
-## Les éléments d'une liste étant généralement nommés (c'est
-## une bonne habitude à prendre!), il est souvent plus simple
-## et sûr d'extraire les éléments d'une liste par leur
-## étiquette.
-x$joueur                   # équivalent à a[[1]]
-x$score[1]                 # équivalent à a[[c(2, 1)]]
-x[["expert"]]              # aussi valide, mais peu usité
-x$level <- 1               # aussi pour l'affectation
-
-## Une liste peut contenir n'importe quoi...
-x[[5]] <- matrix(1, 2, 2)  # ... une matrice...
-x[[6]] <- list(20:25, TRUE)# ... une autre liste...
-x[[7]] <- seq              # ... même le code d'une fonction!
-x                          # eh ben!
-x[[c(6, 1, 3)]]            # de quel élément s'agit-il?
-
-## Pour supprimer un élément d'une liste, lui assigner la
-## valeur 'NULL'.
-x[[7]] <- NULL; length(x)  # suppression du 7e élément
-
-## Il est parfois utile de convertir une liste en un simple
-## vecteur. Les éléments de la liste sont alors «déroulés», y
-## compris la matrice en position 5 (qui n'est rien d'autre
-## qu'un vecteur, on s'en souviendra).
-unlist(x)                    # remarquer la conversion
-unlist(x, recursive = FALSE) # ne pas appliquer aux sous-listes
-unlist(x, use.names = FALSE) # éliminer les étiquettes
-
-###
-### DATA FRAMES
-###
-
-## Un data frame est une liste dont les éléments sont tous de
-## même longueur. Il comporte un attribut 'dim', ce qui fait
-## qu'il est représenté comme une matrice. Cependant, les
-## colonnes peuvent être de modes différents.
-(DF <- data.frame(Noms = c("Pierre", "Jean", "Jacques"),
-                  Age = c(42, 34, 19),
-                  Fumeur = c(TRUE, TRUE, FALSE)))
-mode(DF)                   # un data frame est une liste...
-class(DF)                  # ... de classe 'data.frame'
-dim(DF)                    # dimensions implicites
-names(DF)                  # titres des colonnes
-row.names(DF)              # titres des lignes (implicites)
-DF[1, ]                    # première ligne
-DF[, 1]                    # première colonne
-DF$Noms                    # idem, mais plus simple
-
-## Lorsque l'on doit travailler longtemps avec les différentes
-## colonnes d'un data frame, il est pratique de pouvoir y
-## accéder directement sans devoir toujours indicer. La
-## fonction 'attach' permet de rendre les colonnes
-## individuelles visibles dans l'espace de travail. Une fois
-## le travail terminé, 'detach' masque les colonnes.
-exists("Noms")             # variable n'existe pas
-attach(DF)                 # rendre les colonnes visibles
-exists("Noms")             # variable existe
-Noms                       # colonne accessible
-detach(DF)                 # masquer les colonnes
-exists("Noms")             # variable n'existe plus
-
-###
 ### INDIÇAGE
-###
 
-## Les opérations suivantes illustrent les différentes
-## techniques d'indiçage d'un vecteur pour l'extraction et
-## l'affectation, c'est-à-dire que l'on utilise à la fois la
-## fonction '[' et la fonction '[<-'. Les mêmes techniques
-## existent aussi pour les matrices, tableaux et listes.
+## L'indiçage est une opération importante et beaucoup
+## utilisée. Elle sert à extraire des éléments d'un vecteur
+## avec la construction 'x[i]', ou à les remplacer avec la
+## construction 'x[i] <- y'. Les fonctions sous-jacentes sont
+## '[' et '[<-'.
 ##
-## On crée d'abord un vecteur quelconque formé de vingt
-## nombres aléatoires entre 1 et 100 avec répétitions
-## possibles.
-(x <- sample(1:100, 20, replace = TRUE))
+## Les expressions suivantes illustrent les cinq méthodes
+## d'indiçage.
+x                          # le vecteur
+x[1]                       # extraction par position
+"["(x, 1)                  # idem avec la fonction '['
+x[-2]                      # suppression par position
+x[x > 5]                   # extraction par critère
+x["c"]                     # extraction par nom
+x[]                        # tous les éléments
+x[numeric(0)]              # différent d'indice vide
 
-## On ajoute des étiquettes aux éléments du vecteur à partir
-## de la variable interne 'letters'.
-names(x) <- letters[1:20]
-
-## On génère ensuite cinq nombres aléatoires entre 1 et 20
-## (sans répétitions).
-(y <- sample(1:20, 5))
-
-## On remplace maintenant les éléments de 'x' correspondant
-## aux positions dans le vecteur 'y' par des données
-## manquantes.
-x[y] <- NA
-x
-
-## Les cinq méthodes d'indiçage de base.
-x[1:10]                    # avec des entiers positifs
-"["(x, 1:10)               # idem, avec la fonction '['
-x[-(1:3)]                  # avec des entiers négatifs
-x[x < 10]                  # avec un vecteur booléen
-x[c("a", "k", "t")]        # par étiquettes
-x[]                        # aucun indice...
-x[numeric(0)]              # ... différent d'indice vide
+## Pour le prochain bloc d'exemples, nous remplaçons deux
+## données du vecteur 'x' par NA avec la construction 'x[i] <-
+## y'.
+x[c(1, 4)] <- NA           # manière usuelle
+"[<-"(x, c(1, 4), NA)      # idem, mais très peu usité
 
 ## Il arrive souvent de vouloir indicer spécifiquement les
-## données manquantes d'un vecteur (pour les éliminer ou les
-## remplacer par une autre valeur, par exemple). Pour ce
-## faire, on utilise la fonction 'is.na' et l'indiçage par un
-## vecteur booléen. (Note: l'opérateur '!' ci-dessous est la
-## négation logique.)
+## données manquantes d'un vecteur (pour les éliminer ou pour
+## les remplacer par une autre valeur, par exemple).
+##
+## Pour ce faire, on utilise la fonction 'is.na' et l'indiçage
+## par un vecteur booléen.
 is.na(x)                   # positions des données manquantes
 x[!is.na(x)]               # suppression des données manquantes
-x[is.na(x)] <- 0; x        # remplace les NA par des 0
-"[<-"(x, is.na(x), 0)      # idem, mais très peu usité
+x[is.na(x)] <- 0; x        # remplacement des NA par des 0
 
-## On laisse tomber les étiquettes de l'objet.
-names(x) <- NULL
+## Laissons tomber les noms de l'objet.
+names(x) <- NULL           # suppression de l'attribut 'names'
 
 ## Quelques cas spéciaux d'indiçage.
-length(x)                  # un rappel
-x[1:25]                    # allonge le vecteur avec des NA
-x[25] <- 10; x             # remplit les trous avec des NA
-x[0]                       # n'extraie rien
-x[0] <- 1; x               # n'affecte rien
-x[c(0, 1, 2)]              # le 0 est ignoré
-x[c(1, NA, 5)]             # indices NA retourne NA
+length(x)                  # rappel de la longueur
+x[1:8]                     # vecteur allongé avec des NA
+x[0]                       # extraction de rien
+x[0] <- 1; x               # affectation de rien
+x[c(0, 1, 2)]              # indice 0 ignoré
+x[c(1, NA, 5)]             # indice NA retourne NA
 x[2.6]                     # fractions tronquées vers 0
 
-## On laisse tomber les 5 derniers éléments et on convertit le
-## vecteur en une matrice 4 x 5.
-x <- x[1:20]               # ou x[-(21:25)]
-dim(x) <- c(4, 5); x       # ajouter un attribut 'dim'
+## ARITHMÉTIQUE VECTORIELLE
 
-## Dans l'indiçage des matrices et tableaux, l'indice de
-## chaque dimension obéit aux mêmes règles que ci-dessus. On
-## peut aussi indicer une matrice (ou un tableau) avec une
-## matrice. Si les exemples ci-dessous ne permettent pas d'en
-## comprendre le fonctionnement, consulter la rubrique d'aide
-## de la fonction '[' (ou de 'Extract').
-x[1, 2]                    # élément en position (1, 2)
-x[1, -2]                   # 1ère rangée sans 2e colonne
-x[c(1, 3), ]               # 1ère et 3e rangées
-x[-1, ]                    # supprimer 1ère rangée
-x[, -2]                    # supprimer 2e colonne
-x[x[, 1] > 10, ]           # lignes avec 1er élément > 10
-x[rbind(c(1, 1), c(2, 2))] # éléments x[1, 1] et x[2, 2]
-x[cbind(1:4, 1:4)]         # éléments x[i, i] (diagonale)
-diag(x)                    # idem et plus explicite
+## L'unité de base de l'arithmétique en R est le vecteur. Cela
+## rend très simple et intuitif de faire des opérations
+## mathématiques courantes.
+##
+## Là où plusieurs langages de programmation exigent des
+## boucles, R fait le calcul directement.
+##
+## En effet, les règles de l'arithmétique en R sont
+## globalement les mêmes qu'en algèbre vectorielle et
+## matricielle.
+5 * c(2, 3, 8, 10)         # multiplication par une constante
+c(2, 6, 8) + c(1, 4, 9)    # addition de deux vecteurs
+c(0, 3, -1, 4)^2           # élévation à une puissance
+
+## Dans les règles de l'arithmétique vectorielle, les
+## longueurs des vecteurs doivent toujours concorder.
+##
+## R permet plus de flexibilité en recyclant les vecteurs les
+## plus courts dans une opération.
+##
+## Il n'y a donc à peu près jamais d'erreurs de longueur en R!
+## C'est une arme à deux tranchants: le recyclage des vecteurs
+## facilite le codage, mais peut aussi résulter en des
+## réponses complètement erronées sans que le système ne
+## détecte d'erreur.
+8 + 1:10                   # 8 est recyclé 10 fois
+c(2, 5) * 1:10             # c(2, 5) est recyclé 5 fois
+c(-2, 3, -1, 4)^(1:4)      # quatre puissances différentes
+
+###
+### FONCTIONS
+###
+
+### PROGRAMMATION FONCTIONNELLE
+
+## Les fonctions sont des objets comme les autres dans R. Cela
+## signifie que:
+##
+## - le contenu d'une fonction (son code source) est toujours
+##   accessible;
+## - une fonction peut accepter en argument une autre
+##   fonction;
+## - une fonction peut retourner une fonction comme résultat;
+## - l'utilisateur peut définir de nouvelles fonctions.
+seq                        # contenu est le code source
+mode(seq)                  # mode est "function"
+rep(seq(5), 3)             # fonction argument d'une fonction
+lapply(1:5, seq)           # idem
+mode(ecdf(rpois(100, 1)))  # résultat de ecdf est une fonction
+ecdf(rpois(100, 1))(5)     # évaluation en un point
+c(seq, rep)                # vecteur de fonctions!
+
+### DÉFINITION D'UNE FONCTION
+
+## On définit une nouvelle fonction avec la syntaxe suivante:
+##
+##   <nom> <- function(<arguments>) <corps>
+##
+## où
+##
+## - 'nom' est le nom de la fonction;
+## - 'arguments' est la liste des arguments, séparés par des
+##    virgules;
+## - 'corps' est le corps de la fonction, soit une expression
+##   ou un groupe d'expressions réunies par des accolades { }.
+##
+## Une fonction retourne toujours la valeur de la *dernière*
+## expression de celle-ci.
+##
+## Voici un exemple trivial.
+square <- function(x) x * x
+square(10)
+
+## Supposons que l'on veut écrire une fonction pour calculer
+##
+##   f(x, y) = x (1 + xy)^2 + y (1 - y) + (1 + xy)(1 - y)
+##
+## Deux termes sont répétés dans cette expression. On a donc
+##
+##   a = 1 + xy
+##   b = 1 - y
+##
+## et f(x, y) = x a^2 + y b + a b.
+##
+## Une manière élégante de procéder au calcul de f(x, y) qui
+## adopte l'approche fonctionnelle fait appel à une fonction
+## intermédiaire à l'intérieur de la première fonction. (Il y
+## a ici des enjeux de «portée lexicale» sur lesquels nous
+## reviendrons en détail au chapitre 4.)
+f <- function(x, y)
+{
+    g <- function(a, b)
+        x * a^2 + y * b + a * b
+    g(1 + x * y, 1 - y)
+}
+f(2, 3)
+
+### Fonction anonyme
+
+## Comme le nom du concept l'indique, une fonction anonyme est
+## une fonction qui n'a pas de nom. C'est parfois utile pour
+## des fonctions courtes utilisées dans une autre fonction.
+##
+## Reprenons l'exemple précédent en généralisant les
+## expressions des termes 'a' et 'b'. La fonction 'f'
+## pourrait maintenant prendre en arguments 'x', 'y' et des
+## fonctions pour calculer 'a' et 'b'.
+f <- function(x, y, fa, fb)
+{
+    g <- function(a, b)
+        x * a^2 + y * b + a * b
+    g(fa(x, y), fb(x, y))
+}
+
+## Plutôt que de définir deux fonctions pour les arguments
+## 'fa' et 'fb', on passe directement des fonctions anonymes
+## en argument.
+f(2, 3,
+  function(x, y) 1 + x * y,
+  function(x, y) 1 - y)
+
+### Valeur par défaut d'un argument
+
+## La fonction suivante calcule la distance entre deux points
+## dans l'espace euclidien à 'n' dimensions, par défaut par
+## rapport à l'origine.
+##
+## Remarquez comment nous spécifions une valeur par défaut,
+## l'origine, pour l'argument 'y'.
+##
+## (Note: la fonction 'sum'... somme tous les éléments d'un
+## vecteur.)
+dist <- function(x, y = 0) sum((x - y)^2)
+
+## Quelques calculs de distances.
+dist(c(1, 1))                # (1, 1) par rapport à l'origine
+dist(c(1, 1, 1), c(3, 1, 2)) # entre (1, 1, 1) et (3, 1, 2)
+
+### Argument '...'
+
+## Nous illustrons l'utilisation de l'argument '...' de la
+## manière suivante pour le moment. Nous utiliserons davantage
+## cet argument avec les fonctions d'application.
+##
+## La fonction 'curve' prend en argument une expression
+## mathématique et trace la fonction pour un intervalle donné.
+curve(x^2, from = 0, to = 2)
+
+## Nous souhaitons, pour une raison quelconque, que tous nos
+## graphiques de ce type (et seulement de ce type) soient
+## tracés en orange.
+curve(x^2, from = 0, to = 2, col = "orange")
+
+## Plutôt que de redéfinir entièrement la fonction 'curve'
+## avec tous ses arguments (et il y en a plusieurs), nous
+## pouvons écrire une petite fonction qui, grâce à l'argument
+## '...', accepte tous les arguments de 'curve'.
+ocurve <- function(...) curve(..., col = "orange")
+ocurve(x^2, from = 0, to = 2)
+
+### APPEL D'UNE FONCTION
+
+## L'interpréteur R reconnait un appel de fonction au fait que
+## le nom de l'objet est suivi de parenthèses ( ).
+##
+## Une fonction peut n'avoir aucun argument ou plusieurs. Il
+## n'y a pas de limite pratique au nombre d'arguments.
+##
+## Les arguments d'une fonction peuvent être spécifiés selon
+## l'ordre établi dans la définition de la fonction.
+##
+## Cependant, il est beaucoup plus prudent et *fortement
+## recommandé* de spécifier les arguments par leur nom avec
+## une construction de la forme 'nom = valeur', surtout après
+## les deux ou trois premiers arguments.
+##
+## L'ordre des arguments est important; il est donc nécessaire
+## de les nommer s'ils ne sont pas appelés dans l'ordre.
+##
+## Certains arguments ont une valeur par défaut qui sera
+## utilisée si l'argument n'est pas spécifié dans l'appel de
+## la fonction.
+##
+## Examinons la définition de la fonction 'matrix', qui sert à
+## créer une matrice à partir d'un vecteur de valeurs.
+args(matrix)
+
+## La fonction compte cinq arguments et chacun a une valeur
+## par défaut (ce n'est pas toujours le cas).
+##
+## Quel sera le résultat de l'appel ci-dessous?
+matrix()
+
+## Les invocations de la fonction 'matrix' ci-dessous sont
+## toutes équivalentes.
+##
+## Portez attention si les arguments sont spécifiés par nom ou
+## par position.
+matrix(1:12, 3, 4)
+matrix(1:12, ncol = 4, nrow = 3)
+matrix(nrow = 3, ncol = 4, data = 1:12)
+matrix(nrow = 3, ncol = 4, byrow = FALSE, 1:12)
+matrix(nrow = 3, ncol = 4, 1:12, FALSE)
