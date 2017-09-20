@@ -25,8 +25,8 @@ MASTER = programmer-avec-r.pdf
 ARCHIVE = programmer-avec-r.zip
 README = README.md
 SCRIPTS = \
-	presentation.R 
-	# bases.R \
+	presentation.R \
+	bases.R \
 	# operateurs.R \
 	# fonctions.R \
 	# avance.R
@@ -48,8 +48,10 @@ TEXFILES = \
 	couverture-avant.tex \
 	notices.tex \
 	introduction.tex \
-	emacs+ess.tex \
+	collaboration.tex \
+	texte.tex \
 	rstudio.tex \
+	emacs+ess.tex \
 	packages.tex \
 	reponses.tex \
 	colophon.tex \

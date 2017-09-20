@@ -1,0 +1,36 @@
+%%% Copyright (C) 2017 Vincent Goulet
+%%%
+%%% Ce fichier fait partie du projet «Programmer avec R»
+%%% http://github.com/vigou3/programmer-avec-r
+%%%
+%%% Cette création est mise à disposition selon le contrat
+%%% Attribution-Partage dans les mêmes conditions 4.0
+%%% International de Creative Commons.
+%%% http://creativecommons.org/licenses/by-sa/4.0/
+
+\chapter{Structure de données de R}
+\label{chap:donnees}
+
+<<echo=FALSE>>=
+options(width=52)
+@
+
+\begin{objectifs}
+\item Distinguer les caractéristiques des structures de données
+  suivantes de R: le vecteur simple, la matrice, le tableau, la liste
+  et le \emph{data frame}.
+\item Créer et manipuler chacune des structures de données ci-dessus.
+\item Extraire des données des divers types d'objet ou y affecter de
+  nouvelles valeurs à l'aide des méthodes d'indiçage.
+\item Importer dans R des données provenant de sources externes.
+\item Exporter des données de R vers un format exploitable par
+  d'autres outils.
+\end{objectifs}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-engine: xetex
+%%% TeX-master: "programmer-avec-r"
+%%% coding: utf-8
+%%% End:

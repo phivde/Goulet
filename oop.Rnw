@@ -1,0 +1,34 @@
+%%% Copyright (C) 2017 Vincent Goulet
+%%%
+%%% Ce fichier fait partie du projet «Programmer avec R»
+%%% http://github.com/vigou3/programmer-avec-r
+%%%
+%%% Cette création est mise à disposition selon le contrat
+%%% Attribution-Partage dans les mêmes conditions 4.0
+%%% International de Creative Commons.
+%%% http://creativecommons.org/licenses/by-sa/4.0/
+
+\chapter{Programmation R orientée objet}
+\label{chap:oop}
+
+<<echo=FALSE>>=
+options(width=52)
+@
+
+\begin{objectifs}
+\item Expliquer les notions de classe, de méthode et de fonction
+  générique telles qu'employées dans le système S3 de R.
+\item Attribuer une classe S3 à un objet.
+\item Utiliser le mécanisme d'héritage des classes.
+\item Créer et utiliser des nouvelles méthodes pour des fonctions
+  génériques, notamment pour \code{print}, \code{summary} et
+  \code{plot}.
+\end{objectifs}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-engine: xetex
+%%% TeX-master: "programmer-avec-r"
+%%% coding: utf-8
+%%% End:

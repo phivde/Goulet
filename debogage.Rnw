@@ -1,0 +1,32 @@
+%%% Copyright (C) 2017 Vincent Goulet
+%%%
+%%% Ce fichier fait partie du projet «Programmer avec R»
+%%% http://github.com/vigou3/programmer-avec-r
+%%%
+%%% Cette création est mise à disposition selon le contrat
+%%% Attribution-Partage dans les mêmes conditions 4.0
+%%% International de Creative Commons.
+%%% http://creativecommons.org/licenses/by-sa/4.0/
+
+\chapter{Débogage}
+\label{chap:debogage}
+
+<<echo=FALSE>>=
+options(width=52)
+@
+
+\begin{objectifs}
+\item Repérer et corriger des erreurs de programmation, syntaxiques et
+  logiques.
+\item Utiliser les outils de débogage de R.
+\item Valider des résultats calculés avec ceux de l'expérimentation et
+  analyser des résultats obtenus.
+\end{objectifs}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-engine: xetex
+%%% TeX-master: "programmer-avec-r"
+%%% coding: utf-8
+%%% End:

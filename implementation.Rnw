@@ -1,0 +1,34 @@
+%%% Copyright (C) 2017 Vincent Goulet
+%%%
+%%% Ce fichier fait partie du projet «Programmer avec R»
+%%% http://github.com/vigou3/programmer-avec-r
+%%%
+%%% Cette création est mise à disposition selon le contrat
+%%% Attribution-Partage dans les mêmes conditions 4.0
+%%% International de Creative Commons.
+%%% http://creativecommons.org/licenses/by-sa/4.0/
+
+\chapter{Détails d'implémentation du langage R}
+\label{chap:implementation}
+
+<<echo=FALSE>>=
+options(width=52)
+@
+
+\begin{objectifs}
+\item Décrire le concept d'environnement d'évaluation de R.
+\item Identifier la valeur associée à un symbole en fonction de la
+  portée lexicale de R.
+\item Extraire des valeurs de l'environnement d'une fonction ou y en
+  assigner de nouvelles.
+\item Utiliser la portée lexicale et l'évaluation paresseuse pour
+  simplifier les fonctions R.
+\end{objectifs}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-engine: xetex
+%%% TeX-master: "programmer-avec-r"
+%%% coding: utf-8
+%%% End:
