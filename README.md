@@ -75,6 +75,8 @@ Question d'éviter les publications accidentelles, `make all` est
   d'assignation dans RStudio pour les Mac munis d'un clavier
   canadien-français.
 - Visuel des blocs de code modifié.
+- Nom du fichier d'accompagnement contenant le code des sections
+  d'exemples maintenant mentionné au début de la section.
 
 ### 2017.09-1a (2017-09-13)
 
