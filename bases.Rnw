@@ -685,10 +685,10 @@ taille d'un objet plus court
 \label{sec:bases:fonctions}
 
 Nous avons mentionné au début de la \autoref{sec:bases:fondamentales}
-qu'un langage de programmation devrait fournir un mécanisme
-d'abstraction pour utiliser les éléments composés. La possibilité que
-nous offre R de définir des objets contenant des valeurs constitue une
-première technique. La définition de \emph{fonctions} (le nom que nous
+qu'un langage de programmation doit fournir un mécanisme d'abstraction
+pour utiliser les éléments composés. La possibilité que nous offre R
+de définir des objets contenant des valeurs constitue une première
+technique. La définition de \emph{fonctions} (le nom que nous
 donnerons dorénavant au concept de procédure) est une technique
 d'abstration encore plus puissante, puisqu'elle permet de faire
 référence par un seul nom à toute une suite d'opérations.
@@ -696,8 +696,8 @@ référence par un seul nom à toute une suite d'opérations.
 \subsection{Programmation fonctionnelle}
 \label{sec:bases:fonctions:paradigme}
 
-Nous adoptons en bonne partie dans R le paradigme de la programmation
-fonctionnelle. Tel qu'expliqué sommairement à la
+Nous adoptons en bonne partie avec le langage R le paradigme de la
+programmation fonctionnelle. Tel qu'expliqué sommairement à la
 \autoref{sec:informatique:paradigmes}, dans ce paradigme un programme
 est constitué d'une suite d'appels de fonctions.
 
@@ -722,9 +722,35 @@ fonction \code{square}.
 square <- function(x) x * x
 @
 
-L'expression ci-dessus peut se lire ainsi: «\code{square} est une
-fonction qui prend en argument une valeur \code{x} et qui la multiplie
-par elle-même.»
+L'expression ci-dessus peut se lire ainsi:
+
+\begin{center}
+  \setlength{\unitlength}{7mm}
+  \begin{picture}(18,4.2)
+    \linethickness{1pt}
+
+    \put(0,1){\code{square}}     \put(0,3.5){\code{square}}
+    \put(2.2,1){est}             \put(2.3,3.5){\code{<-}}
+    \put(3.2,1){une fonction}    \put(3.5,3.5){\code{function}}
+    \put(6.6,1){
+      \begin{minipage}[t]{40mm}
+        \centering
+        qui prend en argument
+        une valeur \code{x}
+      \end{minipage}}           \put(8.9,3.5){\code{( x )}}
+    \put(12.8,1){%
+      \begin{minipage}[t]{32mm}
+        \centering
+        et la multiplie par elle-même.
+      \end{minipage}}           \put(14.4,3.5){\code{x * x}}
+
+    \put(0.9,3.2){\vector(0,-1){1.6}}
+    \put(2.6,3.2){\vector(0,-1){1.6}}
+    \put(4.6,3.2){\vector(0,-1){1.6}}
+    \put(9.7,3.2){\vector(0,-1){1.6}}
+    \put(15.2,3.2){\vector(0,-1){1.6}}
+  \end{picture}
+\end{center}
 
 Nous pouvons ensuite utiliser la fonction \code{square} de manière
 intuitive comme n'importe quelle autre fonction dans R (nous
