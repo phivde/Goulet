@@ -127,7 +127,7 @@ réinventer», d'une certaine façon la version courte de la célèbre
 \link{https://en.wikipedia.org/wiki/Greenspun\%27s_tenth_rule}{\emph{Greenspun's
     tenth rule of programming}}: %
 \begin{quote}
-  Tout programme en C ou en Fortran suffisamment complexe contient une
+  Tout programme suffisamment complexe en C ou en Fortran comporte une
   mise en œuvre mal spécifiée, pleine de bogues et lente de la moitié
   de Common Lisp.
 \end{quote}
@@ -204,7 +204,7 @@ Cela dit, on doit à Algol plusieurs innovations importantes, de telle
 sorte qu'un grand nombre des langages qui verront le jour par la suite
 seront considérés comme ses descendants; le poster
 \link{http://www.oreilly.com/go/languageposter}{\emph{History of
-    Programming Languages}} de O'Reilly Media illustre ce fait à
+    Programming Languages}} de O'Reilly Media illustre ceci à
 merveille. \citet{Hoare:1973} a d'ailleurs cette jolie formule:
 \begin{quote}
   Voici un langage très en avance sur son temps, il n'a pas seulement
@@ -426,10 +426,9 @@ SELECT prenom FROM etudiants WHERE age > 25
   informatiques.
 \end{description}
 
-La plupart des langages d'usage courant combinent d'office, ou
-laissent au programmeur la possibilité de combiner, plusieurs
-paradigmes. Par exemple, le langage {\Cpp} est à la fois un langage
-impératif et orienté objet.
+La plupart des langages d'usage courant combinent d'office, ou du
+moins permettent de combiner, plusieurs paradigmes. Par exemple, le
+langage {\Cpp} est à la fois un langage impératif et orienté objet.
 
 
 \section{Sémantique et syntaxe}
@@ -607,8 +606,8 @@ fichiers. Seulement, les programmeurs doivent être familiers avec
 quelques grands principes de l'organisation des données dans un
 ordinateur.
 
-Les fichiers sont regroupés dans des répertoires qui, eux-mêmes,
-contiennent des fichiers ou des sous-répertoires. Ce schéma se répète
+Les fichiers sont regroupés dans des répertoires. Ceux-ci contiennent
+eux-mêmes des fichiers ou des sous-répertoires. Ce schéma se répète
 sans limite pratique. Il en résulte une classification sous forme
 d'arbre dont la \emph{racine} est le répertoire contenant
 l'intégralité des fichiers. La \autoref{fig:informatique:fs} présente
@@ -791,10 +790,10 @@ Les programmeurs qui souhaitent bénéficier de certains outils Unix
 sous Windows peuvent installer les couches logicielles
 \index{MinGW}MinGW et \index{MSYS}MSYS --- nous recommandons à cet
 égard la distribution \link{http://www.msys2.org}{MSYS2}\index{MSYS2}.
-Le programme \code{MSYS2~MSYS} fournit un interpréteur de commandes
+Le programme \code{MSYS} fournit un interpréteur de commandes
 \index{Bash}Bash \citep{bash} comme en standard sur les systèmes Unix.
 Un interpréteur Bash est également fourni avec
-\link{https://git-scm.com/downloads}{\emph{Git for Windows}}.
+\link{https://git-scm.com/downloads}{Git for Windows}.
 
 À la ligne de commande Unix sous Windows, on identifie la racine
 \code{C:\textbackslash} du système de fichier d'un disque par
@@ -886,8 +885,8 @@ la liste des fichiers d'un répertoire.
     \begin{equation*}
       A \times (B + C) \div D.
     \end{equation*}
-  \item Les expressions suivantes en notation préfixée et suffixée,
-    dans l'ordre, effectuent la même opération arithmétique.
+  \item Les opérations suivantes exprimées en notation préfixée et
+    suffixée, dans l'ordre, effectuent la même opération arithmétique.
     \begin{gather*}
       \times\, A\, +\, B\, \div\, C\; D \\
       A\; B\; C\; D\, \div +\, \times
@@ -908,7 +907,7 @@ la liste des fichiers d'un répertoire.
   d'exploitation de votre ordinateur est Windows, vous pouvez utiliser
   la ligne de commande Git~Bash de
   \link{https://git-scm.com/downloads}{\emph{Git for Windows}} ou la
-  ligne de commande MSYS2~MSYS de
+  ligne de commande MSYS de
   \index{MSYS2}\link{http://www.msys2.org}{MSYS2}.
   \begin{enumerate}
   \item Afficher le répertoire courant. Vérifier qu'il correspond à
