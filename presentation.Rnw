@@ -261,12 +261,8 @@ vous utiliserez cette seconde approche d'interaction avec R.
 
 \begin{figure}
   \centering
-  \begin{framed}
-  \lstinputlisting[language={}]{script.R}
-  \end{framed}
-  \begin{framed}
-  \lstinputlisting[language={},firstline=2]{script.Rout}
-  \end{framed}
+  \lstinputlisting[frame=single,language={}]{script.R}
+  \lstinputlisting[frame=single,language={},firstline=2]{script.Rout}
   \caption{Fichier de script (en haut) et ligne de commande R dans
     laquelle les expressions R ont été exécutées (en bas). Les lignes
     débutant par \code{\#} dans le fichier de script sont des
@@ -346,8 +342,8 @@ d'autres. Voici quelques bons choix.
   \end{figure}
 
   Logiciel libre dans sa version pour ordinateur personnel, RStudio
-  est disponible à l'identique sur les plateformes Windows, macOS et
-  Linux. L'\autoref{chap:rstudio} propose une introduction à RStudio.
+  est disponible pour les plateformes Windows, macOS et Linux.
+  L'\autoref{chap:rstudio} propose une introduction à RStudio.
 \item Dans la catégorie des éditeurs de texte, nous recommandons le
   vénérable et très puissant éditeur pour programmeur
   GNU~Emacs\index{Emacs}. À la question~6.2 de la foire aux questions
@@ -443,7 +439,7 @@ dans le fichier \code{.RData}. Le répertoire de travail est déterminé
 au lancement de R.
 
 Les interfaces graphiques de R démarrent avec un répertoire de travail
-par défaut. Pour le changer, utiliser l'entrée appropriée dans le menu
+par défaut. Il est possible de le changer à partir du menu
 \texttt{Fichier} (Windows) ou \texttt{Divers} (macOS). Consulter aussi
 les foires aux questions spécifiques aux interfaces graphiques
 \citep{Rw-FAQ,RMacOSX-FAQ} pour des détails additionnels sur la
@@ -453,8 +449,8 @@ Dans RStudio, on change le répertoire de travail via le menu
 \code{Session}.
 
 Avec GNU~Emacs, la situation est un peu plus simple puisque l'on doit
-spécifier un répertoire de travail au lancement d'un processus R; voir
-l'\autoref{chap:emacs+ess}.
+spécifier un répertoire de travail au lancement d'un processus R; ceci
+est expliqué plus en détail à l'\autoref{chap:emacs+ess}.
 
 
 \section{Consulter l'aide en ligne}
@@ -513,7 +509,10 @@ programmation en R plutôt que sur ses applications statistiques.
 \section{Exemples}
 \label{sec:presentation:exemples}
 
-\lstinputlisting[firstline=13]{presentation.R}
+\def\scriptfilename{presentation.R}
+
+\scriptfile{\scriptfilename}
+\lstinputlisting[firstline=13]{\scriptfilename}
 
 
 \section{Exercices}
