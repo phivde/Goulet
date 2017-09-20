@@ -301,10 +301,6 @@
   \newcommand{\code}[1]{\texttt{#1}}
   \newcommand{\pkg}[1]{\textbf{#1}}
 
-  %% Indications de capsule vidéo
-  \newcommand{\capsule}[2]{\href{#1}{#2}\marginpar{%
-      \href{#1}{\raisebox{-0.5em}[0em][0em]{\Huge\faYoutubePlay}}}}
-
   %% Hyperlien avec symbole de lien externe juste après; second
   %% argument peut être vide pour afficher l'url comme lien
   %% [https://tex.stackexchange.com/q/53068/24355 pour procédure de
@@ -317,6 +313,27 @@
       \href{#1}{#2~\raisebox{-0.1ex}{\smaller\faExternalLink}}%
     \fi
   }
+
+  %% Indications de capsule vidéo
+  \newcommand{\capsule}[2]{\href{#1}{#2}\marginpar{%
+      \href{#1}{\raisebox{-0.5em}[0em][0em]{\Huge\faYoutubePlay}}}}
+
+  %% Boites additionnelles (basées sur awesomebox.sty) pour remarques
+  %% spécifiques à macOS et Windows
+  \newcommand{\osxbox}[1]{%
+    \awesomebox{\faApple}{\aweboxrulewidth}{black}{#1}}
+  \newcommand{\windowsbox}[1]{%
+    \awesomebox{\faWindows}{\aweboxrulewidth}{black}{#1}}
+
+  %% Boite pour le nom du fichier de script correspondant au début des
+  %% sections d'exemples.
+  \newcommand{\scriptfile}[1]{%
+    \begingroup
+    \noindent
+    \mbox{%
+      \makebox[3mm][l]{\raisebox{-0.5pt}{\small\faChevronCircleDown}}\;%
+      \smaller[1] {\sffamily Fichier d'accompagnement} {\ttfamily #1}}
+    \endgroup}
 
   %% Lien vers GitHub dans la page de notices
   \newcommand{\viewsource}[1]{%
@@ -396,7 +413,7 @@
     puis-que
   }
 
-  \includeonly{presentation,bases}
+%  \includeonly{presentation,bases}
 
 \begin{document}
 
@@ -433,14 +450,14 @@
 \include{informatique}
 \include{presentation}
 \include{bases}
-\include{implementation}
-\include{donnees}
-\include{application}
-\include{operateurs}
-\include{collaboration}
-\include{texte}
-\include{debogage}
-\include{oop}
+% \include{implementation}
+% \include{donnees}
+% \include{application}
+% \include{fonctions}
+% \include{collaboration}
+% \include{texte}
+% \include{debogage}
+% \include{oop}
 
 \appendix
 \include{rstudio}
