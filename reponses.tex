@@ -3,12 +3,23 @@
 \addcontentsline{toc}{chapter}{Réponses des exercices}
 \markboth{Réponses des exercices}{Réponses des exercices}
 
+\begingroup
+
+%% Environnement Schunk simplifié pour l'affichage des réponses
+\renewenvironment{Schunk}{%
+  \setlength{\topsep}{0pt}
+  \colorlet{shadecolor}{codebg}
+  \begin{snugshade*}}%
+  {\end{snugshade*}}
+
 \input{solutions-informatique}
 \input{solutions-bases}
 % \input{solutions-operateurs}
 % \input{solutions-exemples}
 % \input{solutions-fonctions}
 % \input{solutions-avance}
+
+\endgroup
 
 %%% Local Variables:
 %%% mode: latex
