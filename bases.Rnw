@@ -906,7 +906,6 @@ la fonction à une variable.
 \scriptfile{\scriptfilename}
 \lstinputlisting[firstline=13]{\scriptfilename}
 
-\vspace{\fill}
 
 \section{Exercices}
 \label{bases:exercices}
@@ -1012,8 +1011,8 @@ x <- c(18, 11, 10, 2, 19, 9, 12, 15, 13, 12, 1, 6)
 x
 @
   \end{center}
-  Créer ce vecteur dans l'environnement de travail, puis écrire des
-  expressions R permettant d'extraire les éléments suivants.
+  Écrire des expressions R pour créer ce vecteur dans l'espace de
+  travail et pour extraire les éléments suivants.
   \begin{enumerate}
   \item Le deuxième élément de l'échantillon.
   \item Les cinq premiers éléments de l'échantillon.
@@ -1150,39 +1149,6 @@ normINF <- function(x, y) max(abs(x - y))
 \end{exercice}
 
 \begin{exercice}
-  Une fonction R est définie ainsi:
-\begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
-f <- function(x = 0, y = NULL, z) \meta{corps}
-\end{Verbatim}
-\end{Schunk}
-  Déterminer la valeur des arguments \code{x}, \code{y} et \code{z}
-  dans les appels de fonction ci-dessous.
-  \begin{enumerate}
-  \item \code{f(2, 3, 4)}
-  \item \code{f(2, z = 3, y = 4)}
-  \item \code{f(x = 2, z = 3)}
-  \item \code{f(z = 2, 3, x = 4)}
-  \item \code{f(z = 2)}
-  \item \code{f(z = 2, 3, 4)}
-  \item \code{f(2, 3)}
-  \end{enumerate}
-  \begin{sol}
-    \begin{enumerate}
-    \item \code{x = 2}, \code{y = 3}, \code{z = 4}
-    \item \code{x = 2}, \code{y = 4}, \code{z = 3}
-    \item \code{x = 2}, \code{y = NULL}, \code{z = 3}
-    \item \code{x = 4}, \code{y = 3}, \code{z = 2}
-    \item \code{x = 0}, \code{y = NULL}, \code{z = 2}
-    \item \code{x = 3}, \code{y = 4}, \code{z = 2}
-    \item \link{http://i0.kym-cdn.com/entries/icons/original/000/000/157/itsatrap.jpg}{C'est un piège!} %
-      Cet appel n'est pas valide puisque l'argument \code{z} est
-      manquant.
-    \end{enumerate}
-  \end{sol}
-\end{exercice}
-
-\begin{exercice}
   Soit la fonction \code{f} suivante:
 <<echo=FALSE>>=
 f <- function(x, y)
@@ -1215,6 +1181,39 @@ f(f(1, 1), 1)
 <<echo=FALSE>>=
 f(1, f(f(1, 1), 1))
 @
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Une fonction R est définie ainsi:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+f <- function(x = 0, y = NULL, z) \meta{corps}
+\end{Verbatim}
+\end{Schunk}
+  Déterminer la valeur des arguments \code{x}, \code{y} et \code{z}
+  dans les appels de fonction ci-dessous.
+  \begin{enumerate}
+  \item \code{f(2, 3, 4)}
+  \item \code{f(2, z = 3, y = 4)}
+  \item \code{f(x = 2, z = 3)}
+  \item \code{f(z = 2, 3, x = 4)}
+  \item \code{f(z = 2)}
+  \item \code{f(z = 2, 3, 4)}
+  \item \code{f(2, 3)}
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+    \item \code{x = 2}, \code{y = 3}, \code{z = 4}
+    \item \code{x = 2}, \code{y = 4}, \code{z = 3}
+    \item \code{x = 2}, \code{y = NULL}, \code{z = 3}
+    \item \code{x = 4}, \code{y = 3}, \code{z = 2}
+    \item \code{x = 0}, \code{y = NULL}, \code{z = 2}
+    \item \code{x = 3}, \code{y = 4}, \code{z = 2}
+    \item \link{http://i0.kym-cdn.com/entries/icons/original/000/000/157/itsatrap.jpg}{C'est un piège!} %
+      Cet appel n'est pas valide puisque l'argument \code{z} est
+      manquant.
     \end{enumerate}
   \end{sol}
 \end{exercice}

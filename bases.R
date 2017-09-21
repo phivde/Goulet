@@ -365,7 +365,7 @@ square(10)
 ##   a = 1 + xy
 ##   b = 1 - y
 ##
-## et f(x, y) = x a^2 + y b + a b.
+## et f(x, y) = x a^2 + yb + ab.
 ##
 ## Une manière élégante de procéder au calcul de f(x, y) qui
 ## adopte l'approche fonctionnelle fait appel à une fonction
