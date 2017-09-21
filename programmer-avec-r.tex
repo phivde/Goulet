@@ -26,7 +26,7 @@
   \usepackage{applekeys}               % touches Mac
   \usepackage{dirtree}                 % arbre pour exercice sur \include
   \usepackage{fontawesome}             % icônes \fa*
-  \usepackage{awesomebox}              % boîtes info, important, etc.
+  \usepackage{awesomebox}              % boites info, important, etc.
   \usepackage{answers}                 % exercices et solutions
   \usepackage{listings}                % code informatique
   \usepackage{pgf}                     % transparence pour couverture avant
@@ -37,7 +37,7 @@
   \title{Programmer avec R}
   \author{Vincent Goulet}
   \renewcommand{\year}{2017}
-  \renewcommand{\month}{09-1a}
+  \renewcommand{\month}{09-2}
   \newcommand{\ISBN}{}
   \newcommand{\ghurl}{https://github.com/vigou3/programmer-avec-r/}
 
@@ -187,7 +187,7 @@
   %% Sert pour les listes d'objectifs et les encadrés reliés aux
   %% problèmes (mises en situation) dans les chapitres. Arguments:
   %% couleur du cadre (optionnel; noir par défaut) et titre de la
-  %% boîte (obligatoire).
+  %% boite (obligatoire).
   \newenvironment{emphbox}[2][black]{%
     \colorlet{TFFrameColor}{#1}%
     \colorlet{TFTitleColor}{white}%
@@ -218,17 +218,26 @@
   %% Environnements de Sweave. Les environnements Sinput et Soutput
   %% utilisent Verbatim (de fancyvrb). On les réinitialise pour
   %% enlever la configuration par défaut de Sweave, puis on réduit
-  %% l'écart entre les blocs Sinput et Soutput. L'environnement Schunk
-  %% est complètement redéfini à partir de snugshade* (de framed) pour
-  %% insérer un fond de couleur derrière les blocs de code source.
+  %% l'écart entre les blocs Sinput et Soutput.
   \DefineVerbatimEnvironment{Sinput}{Verbatim}{}
   \DefineVerbatimEnvironment{Soutput}{Verbatim}{}
   \fvset{listparameters={\setlength{\topsep}{0pt}}}
+
+  %% L'environnement Schunk est complètement redéfini en un hybride
+  %% des environnements snugshade* et leftbar de framed.sty.
+  \makeatletter
   \renewenvironment{Schunk}{%
-    \setlength{\topsep}{0pt}
-    \colorlet{shadecolor}{codebg}
-    \begin{snugshade*}}%
-    {\end{snugshade*}}
+    \setlength{\topsep}{1pt}
+    \def\FrameCommand##1{\hskip\@totalleftmargin
+       \vrule width 2pt\colorbox{codebg}{\hspace{3pt}##1}%
+      % There is no \@totalrightmargin, so:
+      \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+    \MakeFramed {\advance\hsize-\width
+      \@totalleftmargin\z@ \linewidth\hsize
+      \advance\labelsep\fboxsep
+      \@setminipage}%
+  }{\par\unskip\@minipagefalse\endMakeFramed}
+  \makeatother
 
   %% Exercices et réponses
   \Newassociation{sol}{solution}{solutions}
@@ -262,38 +271,6 @@
       \item}
     {\end{list}}
 
-  %% Encadré générique pour les remarques importantes et autres
-  %% comportant une icône sur la gauche. Argument: symbole à
-  %% placer sur la gauche (obligatoire).
-  \newenvironment{infobox}[1]{%
-    \setlength{\FrameRule}{1pt}
-    \begin{framed}%
-      \noindent
-      \begin{minipage}{0.1\linewidth}
-        \raisebox{-1.5em}[0em][0em]{\HUGE#1}
-      \end{minipage}
-      \begin{minipage}[t]{0.88\linewidth}}%
-      {\end{minipage}\end{framed}}
-
-  %% Remarques importantes
-  \newenvironment{important}{%
-    \begin{infobox}{\faExclamationCircle}}%
-    {\end{infobox}}
-
-  %% Informations
-  \newenvironment{information}{%
-    \begin{infobox}{\faInfoCircle}}%
-    {\end{infobox}}
-
-  %% Remarques spécifiques OS X
-  \newenvironment{osx}{%
-    \begin{infobox}{\faApple}}%
-    {\end{infobox}}
-  \newcommand{\osxbox}[1]{%
-    \awesomebox{\faApple}{\aweboxrulewidth}{black}{#1}}
-  \newcommand{\windowsbox}[1]{%
-    \awesomebox{\faWindows}{\aweboxrulewidth}{black}{#1}}
-
   %% Listes de commandes
   \newenvironment{ttscript}[1]{%
     \begin{list}{}{%
@@ -324,10 +301,6 @@
   \newcommand{\code}[1]{\texttt{#1}}
   \newcommand{\pkg}[1]{\textbf{#1}}
 
-  %% Indications de capsule vidéo
-  \newcommand{\capsule}[2]{\href{#1}{#2}\marginpar{%
-      \href{#1}{\raisebox{-0.5em}[0em][0em]{\Huge\faYoutubePlay}}}}
-
   %% Hyperlien avec symbole de lien externe juste après; second
   %% argument peut être vide pour afficher l'url comme lien
   %% [https://tex.stackexchange.com/q/53068/24355 pour procédure de
@@ -340,6 +313,27 @@
       \href{#1}{#2~\raisebox{-0.1ex}{\smaller\faExternalLink}}%
     \fi
   }
+
+  %% Indications de capsule vidéo
+  \newcommand{\capsule}[2]{\href{#1}{#2}\marginpar{%
+      \href{#1}{\raisebox{-0.5em}[0em][0em]{\Huge\faYoutubePlay}}}}
+
+  %% Boites additionnelles (basées sur awesomebox.sty) pour remarques
+  %% spécifiques à macOS et Windows
+  \newcommand{\osxbox}[1]{%
+    \awesomebox{\faApple}{\aweboxrulewidth}{black}{#1}}
+  \newcommand{\windowsbox}[1]{%
+    \awesomebox{\faWindows}{\aweboxrulewidth}{black}{#1}}
+
+  %% Boite pour le nom du fichier de script correspondant au début des
+  %% sections d'exemples.
+  \newcommand{\scriptfile}[1]{%
+    \begingroup
+    \noindent
+    \mbox{%
+      \makebox[3mm][l]{\raisebox{-0.5pt}{\small\faChevronCircleDown}}\;%
+      \smaller[1] {\sffamily Fichier d'accompagnement} {\ttfamily #1}}
+    \endgroup}
 
   %% Lien vers GitHub dans la page de notices
   \newcommand{\viewsource}[1]{%
@@ -410,7 +404,7 @@
 
   %% Aide pour la césure
   \hyphenation{%
-    con-naî-tre
+    con-nai-tre
     con-sole
     cons-tante
     con-tenu
@@ -419,7 +413,15 @@
     puis-que
   }
 
-%  \includeonly{emacs+ess}
+  \includeonly{%
+    notices,
+    informatique,
+    presentation,
+    bases,
+    rstudio,
+    emacs+ess,
+    reponses
+  }
 
 \begin{document}
 
@@ -427,7 +429,7 @@
 
 \pagestyle{empty}
 
-\include{couverture-avant}
+\input{couverture-avant}
 \null\cleardoublepage           % cf. section 2.2 textpos.pdf
 
 \include{notices}
@@ -455,16 +457,19 @@
 
 \include{informatique}
 \include{presentation}
-% \include{bases}
-% \include{operateurs}
-% \include{exemples}
-% \include{fonctions}
-% \include{avance}
+\include{bases}
+\include{implementation}
+\include{donnees}
+\include{application}
+\include{fonctions}
+\include{collaboration}
+\include{texte}
+\include{debogage}
+\include{oop}
 
 \appendix
 \include{rstudio}
 \include{emacs+ess}
-% \include{packages}
 \include{reponses}
 
 \bibliography{r,stat,informatique,vg}

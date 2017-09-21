@@ -67,6 +67,23 @@ Question d'éviter les publications accidentelles, `make all` est
 
 ## Historique des versions
 
+## 2017.09-2 (2017-09-20)
+
+**Nouveautés**
+
+- Chapitre 3 - Bases du langage R
+
+**Autres modifications**
+
+- Visuel des blocs de code modifié.
+- Nom du fichier d'accompagnement contenant le code des sections
+  d'exemples maintenant mentionné au début de la section.
+- Notes additionnelles sur l'utilisation de Git Bash comme ligne de
+  commande Unix sous Windows, notamment à l'exercice 1.3.
+- Ajout d'un encadré sur le raccourci clavier pour le sysmbole
+  d'assignation dans RStudio pour les Mac munis d'un clavier
+  canadien-français.
+
 ### 2017.09-1a (2017-09-13)
 
 Correction et révision de l'édition 2017.09-1. Aucun nouveau contenu.

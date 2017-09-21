@@ -138,8 +138,8 @@ travail, RStudio propose la notion de \emph{projet}.
   visé un fichier avec une extension \code{.Rproj} contenant diverses
   informations en lien avec le projet. De plus, le projet est
   immédiatement chargé dans RStudio.
-\item L'ouverture d'un projet entraîne: le lancement d'une session R
-  ayant comme répertoire de travail le dossier du projet; le
+\item L'ouverture d'un projet entraine: le lancement d'une session R
+  dont le répertoire de travail est celui du projet; le
   chargement du fichier \code{.RData} (le cas échéant); l'ouverture de
   tous les fichiers de scripts qui étaient ouverts lors de la dernière
   séance de travail.
@@ -162,14 +162,15 @@ des commandes les plus utiles via le menu \code{Help} de
 l'application.
 
 Les raccourcis clavier sous, d'une part, Windows et Linux et sous,
-d'autre part, macOS légèrement différents. Nous fournissons les deux
-jeux ci-dessous, séparés par le symbole $\bullet$.
+d'autre part, macOS, différent légèrement. Nous fournissons ci-dessous
+les deux jeux, séparés par le symbole $\bullet$.
 
 \begin{ttscript}{Ctrl-Shift-S $\bullet$ \cmdkey\shiftkey S}
-  \raggedright
-  \index{RStudio!symbole d'assignation}
+  \index{RStudio!symbole d'affectation}
 \item[\code{Alt+-} $\bullet$ \code{\optkey\,-}] insérer le
-  symbole d'assignation \verb*| <- |
+  symbole d'affectation \verb*| <- | (pour les Mac avec un clavier
+  canadien-français, consulter l'encadré de la
+  \autopageref{fig:rstudio:affectation})
 \item[\code{Ctrl+Retour} $\bullet$ \code{\cmdkey\,\returnkey}]
   évaluer dans le processus R la ligne sous le curseur ou la région
   sélectionnée, puis déplacer le curseur à la prochaine expression
@@ -188,13 +189,47 @@ jeux ci-dessous, séparés par le symbole $\bullet$.
 À la console --- ou ligne de commande --- R, les raccourcis suivants
 sont particulièrement utiles.
 \begin{ttscript}{Ctrl-I $\bullet$ \cmdkey\,I}
-  \raggedright
 \item[$\uparrow$ | $\downarrow$] expression
   précédente~|~suivante dans l'historique des commandes
 \item[\code{Ctrl+}$\uparrow$ $\bullet$ \cmdkey\,$\uparrow$] afficher
   la fenêtre d'historique des commandes
 \end{ttscript}
 
+\begin{figure}[t]
+  \begin{emphbox}{\mdseries Symbole d'affectation et
+      Mac munis d'un clavier canadien-français}
+    Le très pratique raccourci clavier {\optkey\,-} servant à insérer
+    le symbole d'affectation ne fonctionne pas avec le clavier
+    canadien-français sur les Mac. Cette combinaison de touches sert
+    déjà à insérer le symbole \textbar. C'est en fait un doublon
+    puisque, si l'on en croit le clavier, ce symbole est
+    principalement lié à la
+    touche {\optkey\,/}.
+
+    Il est possible de régler le problème en redéfinissant le raccourci
+    clavier associé au symbole d'affectation.
+
+    \begin{enumerate}
+    \item Ouvrir les préférences de RStudio (menu
+      \code{RStudio|Preferences} ou {\cmdkey\,,}).
+    \item Choisir la section \code{Code} dans la barre latérale de la
+      fenêtre des options.
+    \item Appuyer sur le bouton \code{Modify Keyboard Shortcuts\dots}.
+    \item Une nouvelle fenêtre liste toutes les commandes disponibles
+      et les raccoucis clavier associés. Dans le champ de recherche en
+      haut, taper les lettres de «assignment» jusqu'à ce que la
+      commande \code{Insert Assignment Operator} apparaisse.
+    \item Cliquer sur la case du raccouci clavier (qui devrait être
+      \code{Alt+-} par défaut) pour l'activer. Appuyer sur \optkey\,-
+      pour utiliser cette combinaison de touches comme raccourci. Oui,
+      on entre ce qui est apparemment la même combinaison de touches.
+      Pour une raison quelconque, c'est «Alt+\textbackslash» qui
+      apparait alors comme raccourci.
+    \item Fermer toutes les fenêtres de configuration.
+    \end{enumerate}
+  \end{emphbox}
+  \label{fig:rstudio:affectation}
+\end{figure}
 
 \section{Anatomie d'une session de travail (bis)}
 \label{sec:rstudio:session}
@@ -294,8 +329,11 @@ le menu \code{Tools|Global Options...} sous Windows et Linux, et par le
 menu standard \code{RStudio|Preferences} (\code{\cmdkey\,,})
 sous macOS.
 
-Nous recommandons de régler l'option \code{Save workspace to .RData on
-  exit} à \code{Never} dans les options de configuration générales,
+Nous recommandons de régler l'option
+\begin{quote}
+  \code{Save workspace to .RData on exit}
+\end{quote}
+à \code{Never} dans les options de configuration générales,
 tel qu'illustré à la \autoref{fig:rstudio:rstudiopreferences}. Avec ce
 réglage, l'espace de travail de R ne sera pas sauvegardé à la
 fermeture de RStudio.

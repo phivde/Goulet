@@ -17,7 +17,7 @@ options(width=52)
 
 \begin{objectifs}
 \item Comprendre ce qu'est un langage de programmation interprété.
-\item Connaître la provenance du langage R et les principes ayant
+\item Connaitre la provenance du langage R et les principes ayant
   guidé son développement.
 \item Mettre en place sur son poste de travail un environnement de
   développement en R.
@@ -36,8 +36,7 @@ années 1970 par une équipe de chercheurs menée par John~M.\ Chambers.
 Au fil du temps, le S a connu quatre principales versions communément
 identifiées par la couleur du livre dans lequel elles étaient
 présentées: %
-version «originale» \citep[\emph{Brown
-  Book;}][]{Chambers:brownbook:1984}, %
+version «originale» \citep[\emph{Brown Book;}][]{Chambers:brownbook:1984}, %
 version 2 \citep[\emph{Blue Book;}][]{Chambers:bluebook:1988}, %
 version 3 \citep[\emph{White Book;}][]{Chambers:whitebook:1992} et %
 version 4 \citep[\emph{Green Book;}][]{Chambers:greenbook:1998}; %
@@ -199,13 +198,14 @@ cet environnement statistique.
 \label{sec:presentation:strategies:code-virtuel}
 
 Dans l'approche dite de «code virtuel et objets réels», on entre des
-expressions à la ligne de commande pour les évaluer immédiatement:
+expressions à la ligne de commande pour les évaluer immédiatement.
 <<echo=TRUE>>=
 2 + 3
 @
+
 On peut également créer des objets contenant le résultat d'un
 calcul. Ces objets sont stockés en mémoire dans l'espace de travail
-de R:
+de R.
 <<echo=TRUE>>=
 x <- exp(2)
 x
@@ -214,10 +214,11 @@ x
 Lorsque la session de travail est terminée, on sauvegarde une image de
 l'espace de travail sur le disque dur de l'ordinateur afin de pouvoir
 conserver les objets pour une future séance de
-travail\indexfonction{save.image}:
+travail\indexfonction{save.image}.
 <<eval=FALSE>>=
 save.image()
 @
+
 Par défaut, l'image est sauvegardée dans un fichier nommé
 \code{.RData} dans le répertoire de travail courant (plus de détails à
 la \autoref{sec:presentation:workspace}) et cette image est
@@ -255,17 +256,13 @@ programmeur R a constamment sous les yeux: d'un côté son fichier de
 script et, de l'autre, la ligne de commande R dans laquelle son code a
 été exécuté.
 
-La méthode d'apprentissage préconisée dans cet ouvrage suppose que le
-lecteur utilisera cette seconde approche d'interaction avec R.
+La méthode d'apprentissage préconisée dans cet ouvrage suppose que
+vous utiliserez cette seconde approche d'interaction avec R.
 
 \begin{figure}
   \centering
-  \begin{framed}
-  \lstinputlisting[language={}]{script.R}
-  \end{framed}
-  \begin{framed}
-  \lstinputlisting[language={},firstline=2]{script.Rout}
-  \end{framed}
+  \lstinputlisting[frame=single,language={}]{script.R}
+  \lstinputlisting[frame=single,language={},firstline=2]{script.Rout}
   \caption{Fichier de script (en haut) et ligne de commande R dans
     laquelle les expressions R ont été exécutées (en bas). Les lignes
     débutant par \code{\#} dans le fichier de script sont des
@@ -273,7 +270,7 @@ lecteur utilisera cette seconde approche d'interaction avec R.
   \label{fig:presentation:script}
 \end{figure}
 
-\tipbox{Toute analogie est boîteuse, mais celle-ci peut néanmoins
+\tipbox{Toute analogie est boiteuse, mais celle-ci peut néanmoins
   s'avérer utile pour illustrer l'approche «code réel, objets
   virtuels».
 
@@ -286,12 +283,12 @@ lecteur utilisera cette seconde approche d'interaction avec R.
     quitte à les réévaluer par la suite pour obtenir les valeurs
     correspondantes.
   \end{enumerate}
-  La seconde, sûrement{\dots} Or, sauvagarder l'espace de travail R
+  La seconde, surement{\dots} Or, sauvagarder l'espace de travail R
   dans un fichier \code{.RData} (l'approche «objets réels, code
   virtuel») correspond à la première option, alors que sauvegarder
   le code source des fichiers de script correspond à la seconde.
 
-  Là où l'analogie est boîteuse, la raison pour laquelle on n'a
+  Là où l'analogie est boiteuse, la raison pour laquelle on n'a
   jamais à se poser la question avec un tableur, c'est que le
   progiciel évalue constamment et en temps réel les formules pour
   afficher les résultats dans les cellules.}
@@ -313,20 +310,20 @@ présentation et de mise en forme. Les applications Bloc-notes sous
 Windows ou TextEdit sous macOS sont deux exemples d'éditeurs de texte
 simples.
 
-Un éditeur de texte pour programmeur saura en plus reconnaître la
+Un éditeur de texte pour programmeur saura en plus reconnaitre la
 syntaxe d'un langage de programmation et assister à sa mise en forme:
 indentation automatique du code, marquage des mots-clés, manipulation
 d'objets, etc. Enfin, un éditeur compatible avec R réduira, entre
 autres, l'opération de copier-coller à un simple raccourci clavier.
 
-Le lecteur peut utiliser le logiciel de son choix pour l'édition de
-code R. Certains offrent simplement plus de fonctionnalités
-que d'autres. Voici quelques bons choix.
+Vous pouvez utiliser le logiciel de votre choix pour l'édition de code
+R. Certains éditeurs offrent simplement plus de fonctionnalités que
+d'autres. Voici quelques bons choix.
 
 \begin{itemize}
 \item RStudio\index{RStudio} est un environnement de développement
   intégré (IDE) créé spécifiquement pour travailler avec R. Sa
-  popularité connaît une progression foudroyante depuis 2014. Il
+  popularité connait une progression foudroyante depuis 2014. Il
   permet de consulter dans une interface conviviale ses fichiers de
   script, la ligne de commande R, les rubriques d'aide, les
   graphiques, etc.; voir la \autoref{fig:presentation:rstudio}. C'est
@@ -345,8 +342,8 @@ que d'autres. Voici quelques bons choix.
   \end{figure}
 
   Logiciel libre dans sa version pour ordinateur personnel, RStudio
-  est disponible à l'identique sur les plateformes Windows, macOS et
-  Linux. L'\autoref{chap:rstudio} propose une introduction à RStudio.
+  est disponible pour les plateformes Windows, macOS et Linux.
+  L'\autoref{chap:rstudio} propose une introduction à RStudio.
 \item Dans la catégorie des éditeurs de texte, nous recommandons le
   vénérable et très puissant éditeur pour programmeur
   GNU~Emacs\index{Emacs}. À la question~6.2 de la foire aux questions
@@ -397,7 +394,7 @@ que d'autres. Voici quelques bons choix.
 \section{Anatomie d'une session de travail}
 \label{sec:presentation:session}
 
-Dans ses grandes lignes, une session de travail avec R réunit les
+Dans ses grandes lignes, une session de travail avec R comporte les
 étapes ci-dessous.
 \begin{enumerate}
 \item Démarrer une session R en cliquant sur l'icône de l'application
@@ -442,7 +439,7 @@ dans le fichier \code{.RData}. Le répertoire de travail est déterminé
 au lancement de R.
 
 Les interfaces graphiques de R démarrent avec un répertoire de travail
-par défaut. Pour le changer, utiliser l'entrée appropriée dans le menu
+par défaut. Il est possible de le changer à partir du menu
 \texttt{Fichier} (Windows) ou \texttt{Divers} (macOS). Consulter aussi
 les foires aux questions spécifiques aux interfaces graphiques
 \citep{Rw-FAQ,RMacOSX-FAQ} pour des détails additionnels sur la
@@ -452,8 +449,8 @@ Dans RStudio, on change le répertoire de travail via le menu
 \code{Session}.
 
 Avec GNU~Emacs, la situation est un peu plus simple puisque l'on doit
-spécifier un répertoire de travail au lancement d'un processus R; voir
-l'\autoref{chap:emacs+ess}.
+spécifier un répertoire de travail au lancement d'un processus R; ceci
+est expliqué plus en détail à l'\autoref{chap:emacs+ess}.
 
 
 \section{Consulter l'aide en ligne}
@@ -463,34 +460,31 @@ Les rubriques d'aide des diverses fonctions de R contiennent une foule
 d'informations ainsi que des exemples d'utilisation. Leur consultation
 est tout à fait essentielle.
 
-Pour consulter la rubrique d'aide de la fonction \code{foo}, on entre
-à la ligne de commande:
+Les fonctions \Fonction{?} et \Fonction{help} permettent de consulter
+la rubrique d'aide d'une fonction ou d'un autre type d'objet.
 \begin{Schunk}
-\begin{Sinput}
-> ?foo
-\end{Sinput}
+\begin{Verbatim}[commandchars=\\\{\}]
+> ?\meta{fonction}
+> help(\meta{fonction})
+\end{Verbatim}
 \end{Schunk}
-ou
+
+La fonction \Fonction{help.search} permet quant à elle de rechercher
+de l'aide sur un sujet.
 \begin{Schunk}
-\begin{Sinput}
-> help(foo)
-\end{Sinput}
+\begin{Verbatim}[commandchars=\\\{\}]
+help.search("\meta{sujet}")
+\end{Verbatim}
 \end{Schunk}
-Pour chercher de l'aide sur un sujet \code{bar}, la commande est:
-\begin{Schunk}
-\begin{Sinput}
-help.search("bar")
-\end{Sinput}
-\end{Schunk}
+
 Enfin, le système d'aide de R contient bon nombre de documents plus
 longs en format PDF. Les «vignettes» abordent habituellement une
 thématique dans son ensemble plutôt que simplement par le biais d'une
-suite de fonctions. Pour consulter la vignette sur \code{sujet},
-entrer à la ligne de commande:
+suite de fonctions.
 \begin{Schunk}
-\begin{lstlisting}
-vignette("sujet")
-\end{lstlisting}
+\begin{Verbatim}[commandchars=\\\{\}]
+vignette("\meta{sujet}")
+\end{Verbatim}
 \end{Schunk}
 
 
@@ -515,7 +509,10 @@ programmation en R plutôt que sur ses applications statistiques.
 \section{Exemples}
 \label{sec:presentation:exemples}
 
-\lstinputlisting[firstline=13]{presentation.R}
+\def\scriptfilename{presentation.R}
+
+\scriptfile{\scriptfilename}
+\lstinputlisting[firstline=13]{\scriptfilename}
 
 
 \section{Exercices}

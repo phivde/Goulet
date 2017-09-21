@@ -1,3 +1,9 @@
+---
+title: Programmer avec R
+tagline: Apprendre la programmation. Avec R.
+description: Document d'introduction à la programmation informatique avec le langage R
+---
+
 ## Présentation
 
 *Programmer avec R* propose une introduction à la programmation
@@ -22,7 +28,7 @@ Vincent Goulet, professeur titulaire, [École d'actuariat](https://www.act.ulava
 
 ## Édition
 
-2017.09-1 ([notes de mise à jour]({{ site.github.repository_url }}/releases/tag/v2017.09-1/))
+2017.09-1a ([notes de mise à jour]({{ site.github.repository_url }}/releases/tag/v2017.09-1a/))
 
 ## Table des matières abrégée
 

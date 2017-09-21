@@ -1,5 +1,5 @@
 \chapter{Bases du langage R}
-\label{bases}
+\label{chap:bases}
 
 <<echo=FALSE>>=
 options(width=52)
@@ -7,148 +7,239 @@ options(width=52)
 
 \begin{objectifs}
 \item Écrire et interpréter la syntaxe et la sémantique du langage R.
-\item Identifier les principaux types de données disponibles dans R.
-\item Utiliser les divers modes d'objets (en particulier
+\item Utiliser l'arithmétique vectorielle du langage R dans les
+  calculs.
+\item Créer et manipuler des vecteurs simples («atomiques»).
+\item Utiliser les divers modes des vecteurs (en particulier
   \code{numeric}, \code{character} et \code{logical}) et la conversion
   automatique de l'un à l'autre.
-\item Créer et manipuler des vecteurs, matrices, tableaux, listes et
-  \emph{data frames}.
-\item Extraire des données d'un objet ou y affecter de
-  nouvelles valeurs à l'aide des diverses méthodes d'indiçage.
+\item Extraire des données d'un vecteur simple ou y affecter de
+  nouvelles valeurs à l'aide des méthodes d'indiçage.
+\item Appeler une fonction R; concevoir comment les arguments sont
+  passés à la fonction et le traitement des valeurs par défaut.
+\item Définir une fonction R, ses divers arguments et, le cas échéant,
+  les valeurs par défaut de ceux-ci.
+\item Utiliser et définir des fonctions R ayant un nombre variable
+  d'arguments.
 \end{objectifs}
 
-Pour utiliser un langage de programmation, il faut en connaître la
-syntaxe et la sémantique, du moins dans leurs grandes lignes. C'est
-dans cet esprit que ce chapitre introduit des notions de base du
-langage R telles que l'expression, l'affectation et l'objet. Le
-concept de vecteur se trouvant au c{\oe}ur du langage, le chapitre
-fait une large place à la création et à la manipulation des vecteurs
-et autres types d'objets de stockage couramment employés en
-programmation en R.
+C'est dans ce chapitre que nous débutons réellement l'apprentissage de
+la programmation. Avouons-le d'entrée de jeu: notre présentation a
+fortement été influencée par l'ouvrage magistral de
+\cite{Sussman:scheme:1996}.
 
-\begin{prob-enonce}
-  Une ligue de hockey compte huit équipes. Le classement de la ligue
-  est disponible quotidiennement dans le journal dans le format
-  habituel; voir le \autoref{tab:bases:classement}.
+Les humains créent des programmes informatiques pour contrôler, à
+l'aide d'un ensemble de règles, les processus de calcul et de
+manipulation de données d'un ordinateur. Ces programmes sont rédigés
+dans un langage de programmation.
 
-  Afin d'effectuer différentes analyses statistiques, on désire
-  intégrer ces données dans un espace de travail R. On doit donc
-  déterminer le type d'objet R approprié pour stocker le classement de
-  la ligue.
+Un langage est toutefois plus qu'une simple manière de transmettre des
+instructions à un ordinateur, c'est aussi une façon de conceptualiser
+les procédures que l'ordinateur devra effectuer. Autrement dit, le
+type de langage de programmation que nous utilisons influence
+directement la solution que nous proposerons à un problème --- et vice
+versa. Comme nous l'avons déjà fait à la
+\autoref{sec:informatique:semantique}, dressons un parallèle avec les
+langues parlées et écrites: une langue ne constitue pas seulement un
+moyen de transmettre une idée, mais bien une façon de concevoir le
+monde. Ce n'est pas pour rien qu'il est parfois impossible de faire
+passer une idée d'une langue vers une autre --- ce que l'on appelle
+couramment une «expression intraduisible».
 
-  Ensuite, on souhaite extraire les valeurs suivantes de l'objet
-  précédemment créé.
-  \begin{enumerate}[a)]
-  \item Le nombre d'équipes de la ligue.
-  \item La fiche complète de l'équipe de Montréal.
-  \item La fiche complète de l'équipe à la septième position du
-    classement.
-  \end{enumerate}
-\end{prob-enonce}
+Le langage de programmation étudié ici est le R. Sa syntaxe, celle du
+langage \index{S}S, s'apparente au \index{C}C. En revanche, la
+sémantique de R s'inspire du paradigme de la programmation
+fonctionnelle, ce qui lui confère de plus grandes affinités avec le
+\index{Lisp}Lisp et \index{APL}l'APL.
 
-%% Les floats ne peuvent se trouver à l'intérieur d'un environnement
-%% de framed.sty utilisé par prob-enonce.
+Ce chapitre introduit des notions de base du langage R telles que
+l'expression, l'affectation, et l'objet. Le concept de vecteur se
+trouvant au cœur du langage, nous faisons une large place à la
+création et à la manipulation des vecteurs. Le chapitre se termine par
+la définition de fonctions.
+
+
+\section{Données et procédures fondamentales}
+\label{sec:bases:fondamentales}
+
+À sa plus simple expression, la programmation est un exercice de
+manipulation de \emph{données} à l'aide de \emph{procédures}. Un
+langage de programmation fournit au programmeur des données et des
+procédures fondamentales (ou \emph{génériques}), des manières de les
+combiner pour former des éléments composés, ainsi qu'un mécanisme
+d'abstraction permettant de nommer et de manipuler ces éléments
+composés.
+
+Les données fondamentales de R sont les suivantes:
+\begin{itemize}
+\item nombres réels: \code{0, 1, 2, 78.42, -1.39}, \dots;
+\item chaines de caractères: \code{"a"}, \code{"abc"}, \dots;
+\item valeurs booléennes: \Objet{TRUE}, \Objet{FALSE};
+\item donnée manquante: \Objet{NA};
+\item infini positif et négatif: \Objet{Inf}, \code{-Inf};
+\item valeur indéterminée: \Objet{NaN};
+\item «néant»: \Objet{NULL};
+\item nombres complexes: \code{1 + 2i}.
+\end{itemize}
+La grande majorité des langages de programmation offrent les deux
+premiers type de données ci-dessus. Les autres types se revèlent très
+utiles pour la programmation mathématique et l'analyse de données.
+Nous reviendrons sur leurs caractéristiques à la
+\autoref{sec:bases:objets}.
+
+Nous pouvons classer les procédures fondamentales en quatre grandes
+catégories:
+\begin{itemize}
+\item arithmétique: \verb|+ - * / ^ < >= ==|, etc.;
+\item logique: \verb=& | !=\,;
+\item indiçage: \verb=[ ] $=\,;
+\item affectation: \verb|<-|\,.
+\end{itemize}
+Les opérations arithmétiques sont applicables aux nombres réels ou
+complexes, alors que les opérations logiques ne sont applicables
+qu'aux valeurs booléennes. Nous traitons de l'opération d'affectation
+en détail à la section suivante.
+
+Le \autoref{tab:bases:operateurs} présente les opérateurs les plus
+fréquemment employés en ordre décroissant de priorité des opérations.
+Ils sont accompagnés d'une description succincte. Nous reviendrons sur
+certains opérateurs dans les chapitres subséquents.
+
 \begin{table}
   \centering
-  \begin{tabular}{lrrrrr}
+  \renewcommand{\arraystretch}{1.1}
+  \begin{tabular}{lp{8cm}}
     \toprule
-    Équipe & MJ & V & D & DP & PTS \\
+    Opérateur     & Fonction \\
     \midrule
-    Washington  & 55 & 36 & 16 &  3 & 75 \\
-    Dallas      & 56 & 32 & 19 &  5 & 69 \\
-    Chicago     & 57 & 30 & 21 &  6 & 66 \\
-    Los Angeles & 58 & 30 & 22 &  6 & 66 \\
-    St-Louis    & 56 & 25 & 19 & 12 & 62 \\
-    Détroit     & 57 & 25 & 21 & 11 & 61 \\
-    Montréal    & 56 & 22 & 27 &  7 & 51 \\
-    Boston      & 57 & 24 & 31 &  2 & 50 \\
+    \verb=$= & extraction \\
+    \verb=[=\, \verb=[[= & indiçage \\
+    \verb=^= & puissance \\
+    \verb=-=  & changement de signe \\
+    \verb=:=  & génération de suites \\
+    \verb=%*%=\, \verb=%\%=\, \verb=%/%= & produit
+    matriciel, modulo, division entière \\
+    \verb=*=\, \verb=/= & multiplication, division \\
+    \verb=+=\, \verb=-= & addition, soustraction \\
+    \verb|<|\, \verb|<=|\, \verb|==|\, \verb|>=|\,
+    \verb|>|\, \verb|!=| & plus petit, plus petit ou égal, égal,
+    plus grand ou égal, plus grand, différent de \\
+    \verb=!= & négation logique \\
+    \verb=&=\, \verb=&&= & «et» logique \\
+    \verb=|=\, \verb=||= & «ou» logique \\
+    \verb|->|\, \verb|->>| & affectation \\
+    \verb|<-|\, \verb|<<-| & affectation \\
     \bottomrule
-  \end{tabular} \\
-  \footnotesize%
-  \textbf{Légende:} MJ -- matchs joués; V -- victoires; D -- défaites; \\
-    DP: défaites en prolongation; PTS -- points
-  \caption{Classement de la ligue de hockey pour le problème à
-    résoudre du chapitre}
-  \label{tab:bases:classement}
+  \end{tabular}
+  \caption{Principaux opérateurs du langage R, en ordre décroissant
+    de priorité}
+  \label{tab:bases:operateurs}
 \end{table}
+
+\tipbox{Il est utile, voire essentiel de connaître le niveau de
+  priorité des opérateurs dans les expressions R.}
 
 
 \section{Commandes R}
-\label{bases:commandes}
+\label{sec:bases:commandes}
 
-Tel que vu au chapitre précédent, l'utilisateur de R interagit avec
-l'interprète R en entrant des commandes à l'invite de commande. Toute
+Nous l'avons déjà vu, l'interaction avec l'interpréteur R se fait par
+l'intermédiaire de commandes entrées à la ligne de commande. Or, toute
 commande R est soit une \emph{expression}\index{expression}, soit une
 \emph{affectation}\index{affectation}.
-\begin{itemize}
-\item Normalement, une expression est immédiatement évaluée et le
-  résultat est affiché à l'écran:
+
+\subsection{Expression}
+\label{sec:bases:commandes:expression}
+
+Une \index{expression}expression R est une combinaison de symboles
+(noms de variables) et de procedures. Toute expression a une valeur.
+Le symbole d'une donnée fondamentale représente cette donnée, comme on
+pourrait s'y attendre.
+
+Lorsqu'une expression est entrée à la ligne de commande de
+l'interpréteur, elle est immédiatement évaluée et le résultat est
+affiché sous l'invite de commande \verb*|> | (le symbole \verb|>|
+suivi d'une espace).
 <<echo=TRUE>>=
+42
+3 + 2i
 2 + 3
 pi
 cos(pi/4)
 @
-\item Lors d'une affectation, une expression est évaluée, mais le
-  résultat est stocké dans un objet (variable) et rien n'est affiché à
-  l'écran. Le symbole d'affectation est \Fonction{<-}, c'est-à-dire
-  les deux caractères \verb|<| et \verb|-| placés obligatoirement l'un
-  à la suite de l'autre:
+
+Lorsqu'une commande n'est pas syntaxiquement complète, l'invite de
+commande se change en \verb*|+ | pour nous inciter à compléter la
+commande.
+<<echo=TRUE>>=
+2 *
+3
+@
+
+Il est possible de combiner plusieurs expressions ensemble pour en
+faire une expression composée. Celle-ci est évaluée de gauche à
+droite, à moins que des parenthèses ne viennent changer l'ordre
+d'évaluation, comme en mathématiques.
+<<echo=TRUE>>=
+(2 + ((2 + 4 * 6) * (3 + 5 + 7)))/2
+@
+
+\subsection{Affectation}
+\label{sec:bases:commandes:affectation}
+
+Dans une affectation, une expression est évaluée, mais le résultat est
+stocké dans un \emph{objet} (ou \emph{variable}) dans l'espace de
+travail et rien n'est affiché à l'écran. Tel que mentionné
+précédemment, le symbole d'affectation est \Fonction{<-}, c'est-à-dire
+les deux caractères \verb|<| et \verb|-| placés obligatoirement l'un à
+la suite de l'autre.
 <<echo=TRUE>>=
 a <- 5
 a
 b <- a
 b
 @
-\item Pour affecter le résultat d'un calcul dans un objet et
-  simultanément afficher ce résultat, il suffit de placer
-  l'affectation entre parenthèses pour ainsi créer une nouvelle
-  expression\footnote{%
-    En fait, cela devient un appel à l'opérateur \code{"("} qui ne
-    fait que retourner son argument.}:
+
+Pour affecter le résultat d'un calcul dans un objet et simultanément
+afficher ce résultat, il suffit de placer l'affectation entre
+parenthèses pour ainsi créer une nouvelle expression\footnote{%
+  En fait, cela devient un appel à l'opérateur \code{"("} qui ne fait
+  que retourner son argument.}.
 <<echo=TRUE>>=
 (a <- 2 + 3)
 @
-\item Le symbole d'affectation inversé \fonction{->} existe aussi,
-  mais il est rarement utilisé.
-\item Éviter d'utiliser l'opérateur \,\fonction{=}\, pour affecter une
-  valeur à une variable puisque cette pratique est susceptible
-  d'engendrer de la confusion avec les constructions \code{nom =
-    valeur} dans les appels de fonction.
-\end{itemize}
 
-\begin{figure}[t]
-  \begin{information}
-    Dans les anciennes versions de S et R, l'on pouvait affecter avec
-    le caractère de soulignement «\code{\_}». Cet emploi n'est plus
-    permis, mais la pratique subsiste dans le mode ESS de Emacs.
+Le symbole d'affectation inversé \fonction{->} existe aussi, mais il
+est rarement utilisé.
 
-    Ainsi, taper le caractère «\code{\_}» hors d'une chaîne de
-    caractères dans Emacs génère automatiquement \verb*| <- |. Si l'on
-    souhaite véritablement obtenir le caractère de soulignement, il
-    suffit d'appuyer deux fois successives sur «\code{\_}».
-  \end{information}
-\end{figure}
+\cautionbox{Évitez d'utiliser l'opérateur \,\fonction{=}\, pour
+  affecter une valeur à une variable. Cette pratique est susceptible
+  d'engendrer de la confusion avec les constructions \code{symbole =
+    valeur} dans les appels de fonction. Les règles de syntaxe de R
+  commandent d'utiliser l'opérateur \code{<-} pour l'affectation,
+  point.}
 
-Que ce soit dans les fichiers de script ou à la ligne de commande, on
-sépare les commandes R les unes des autres par un
-\index{;@\code{;}}point-virgule ou par un retour à la ligne.
-\begin{itemize}
-\item On considère généralement comme du mauvais style d'employer
-  les deux, c'est-à-dire de placer des points-virgules à la fin de
-  chaque ligne de code, surtout dans les fichiers de script.
-\item Le point-virgule peut être utile pour séparer deux courtes
-  expressions ou plus sur une même ligne:
+\subsection{Regroupement de commandes}
+\label{sec:bases:commandes:regroupement}
+
+Dans les fichiers de script ou à la ligne de commande, on sépare
+généralement les commandes R les unes des autres par un retour à la
+ligne. Il est également possible de séparer les commandes par un
+\index{;@\code{;}}point-virgule. Employer les deux --- placer des
+points-virgules à la fin de chaque ligne de code --- est considéré
+comme du mauvais style, surtout dans les fichiers de script. Le
+point-virgule peut être utile pour séparer deux courtes expressions ou
+plus sur une même ligne. C'est le seul emploi que nous faisons du
+point-virgule.
 <<echo=TRUE>>=
 a <- 5; a + 2
 @
-  C'est le seul emploi du point-virgule que l'on rencontrera dans cet
-  ouvrage.
-\end{itemize}
 
 On peut regrouper plusieurs commandes en une seule expression en les
-entourant d'accolades \Fonction{\{~\}}.
-\begin{itemize}
-\item Le résultat du regroupement est la valeur de la dernière commande:
+entourant d'accolades \Fonction{\{~\}}. Le résultat du regroupement
+est la valeur de la \emph{dernière} commande. Par conséquent, si le
+regroupement se termine par une affectation, aucune valeur n'est
+retournée ni affichée à l'écran.
 <<echo=TRUE>>=
 {
     a <- 2 + 3
@@ -156,68 +247,65 @@ entourant d'accolades \Fonction{\{~\}}.
     b
 }
 @
-\item Par conséquent, si le regroupement se termine par une
-  assignation, aucune valeur n'est retournée ni affichée à l'écran:
 <<echo=TRUE>>=
 {
     a <- 2 + 3
     b <- a
 }
 @
-\item Les règles ci-dessus joueront un rôle important dans la
-  composition de fonctions; voir le \autoref{fonctions}.
-\item Comme on peut le voir ci-dessus, lorsqu'une commande n'est pas
-  complète à la fin de la ligne, l'invite de commande de R change de
-  \verb*|> | à \verb*|+ | pour nous inciter à compléter notre commande.
-\end{itemize}
 
 
+\section{Objets R}
+\label{sec:bases:objets}
 
+Tout dans le langage R est un objet: les variables contenant des
+données, les fonctions, les opérateurs, même le symbole représentant
+le nom d'un objet est lui-même un objet. Les objets possèdent au
+minimum un \emph{mode} et une \emph{longueur} et certains peuvent
+être dotés d'un ou de plusieurs \emph{attributs}.
 
-\section{Conventions pour les noms d'objets}
-\index{noms d'objets!conventions}
-\label{bases:noms}
+\subsection{Règles pour les noms d'objets}
+\label{sec:bases:objets:noms}
 
 Les caractères permis pour les noms d'objets sont les lettres
 minuscules a--z et majuscules A--Z, les chiffres 0--9, le point «.» et
 le caractère de soulignement «\_». Selon l'environnement linguistique
-de l'ordinateur, il peut être permis d'utiliser des lettres
-accentuées, mais cette pratique est fortement découragée puisqu'elle
-risque de nuire à la portabilité du code.
+de l'ordinateur, il peut être permis d'utiliser des lettres accentuées
+dans les noms d'objet, mais nous recommandons fortement d'éviter cette
+pratique qui nuit à la portabilité du code. Le nom d'un objet ne peut
+débuter par un chiffre. Si le nom débute par un point, alors le second
+caractère ne peut être un chiffre.
 
-\begin{itemize}
-\item Les noms d'objets ne peuvent commencer par un chiffre. S'ils
-  commencent par un point, le second caractère ne peut être un
-  chiffre.
-\item Le R est sensible à la casse, ce qui signifie que \code{foo},
-  \code{Foo} et \code{FOO} sont trois objets distincts. Un moyen
-  simple d'éviter des erreurs liées à la casse consiste à n'employer
-  que des lettres minuscules.
-\item Certains noms sont utilisés par le système R, aussi vaut-il mieux
-  éviter de les utiliser. En particulier, éviter d'utiliser
-  \begin{quote}
-    \code{c}, \code{q}, \code{t}, \code{C}, \code{D},
-    \code{I}, \code{diff}, \code{length}, \code{mean},
-    \code{pi}, \code{range}, \code{var}.
-  \end{quote}
-\item \index{noms d'objets!réservés} Certains mots sont réservés et il
-  est interdit de les utiliser comme nom d'objet. Les mots réservés
-  pour le système sont:
-  \begin{quote}
-    \code{break}, \code{else}, \code{for}, \code{function}, \code{if},
-    \code{in}, \code{next}, \code{repeat}, \code{return}, \code{while}, \\
-    \code{TRUE}, \code{FALSE}, \\
-    \code{Inf}, \code{NA}, \code{NaN}, \code{NULL}, \\
-    \verb|NA_integer_|, \verb|NA_real_|, \verb|NA_complex_|,
-    \verb|NA_character_|, \\
-    \code{...}, \code{..1}, \code{..2}, etc.
-  \end{quote}
-  Oui, `\code{...}' (\emph{point-point-point}) est véritablement un nom
-  d'objet dans R! Son usage est expliqué à la \autoref{avance:dots}.
-\item Les variables \code{T}\index{T@\code{T}|see{\code{TRUE}}} et
-  \code{F}\index{F@\code{F}|see{\code{FALSE}}} prennent par défaut les
-  valeurs \objet{TRUE} et \objet{FALSE}, respectivement, mais peuvent
-  être réaffectées:
+\warningbox{R est sensible à la casse, ce qui signifie que \code{foo},
+  \code{Foo} et \code{FOO} sont trois objets distincts.}
+
+Certains noms sont utilisés par le système R, aussi vaut-il mieux
+éviter de les utiliser comme nom de variable ou de fonction. En
+particulier, évitez:
+\begin{quote}
+  \code{c}, \code{q}, \code{t}, \code{C}, \code{D},
+  \code{I}, \code{diff}, \code{length}, \code{mean},
+  \code{pi}, \code{range}, \code{var}.
+\end{quote}
+De plus, certains mots sont réservés et il est interdit de les
+utiliser comme nom d'objet. Les mots réservés pour le système sont:
+\begin{quote}
+  \code{break}, \code{else}, \code{for}, \code{function}, \code{if},
+  \code{in}, \code{next}, \code{repeat}, \code{return}, \code{while}, \\
+  \code{TRUE}, \code{FALSE}, \\
+  \code{Inf}, \code{NA}, \code{NaN}, \code{NULL}, \\
+  \verb|NA_integer_|, \verb|NA_real_|, \verb|NA_complex_|,
+  \verb|NA_character_|, \\
+  \code{...}, \code{..1}, \code{..2}, etc.
+\end{quote}
+Oui, `\code{...}' (\emph{point-point-point}) est véritablement un nom
+d'objet dans R! Son usage est expliqué à la
+\autoref{sec:bases:fonctions:definition}.
+
+Les variables \code{T}\index{T@\code{T}|see{\code{TRUE}}} et
+\code{F}\index{F@\code{F}|see{\code{FALSE}}} prennent par défaut les
+valeurs \objet{TRUE} et \objet{FALSE}, respectivement, mais peuvent
+être réaffectées.
 <<echo=TRUE>>=
 T
 F
@@ -237,43 +325,25 @@ Error in TRUE <- 3 : membre gauche de l'assignation
 <<echo=FALSE>>=
 rm(T)
 @
-\item Nous recommandons de toujours écrire les valeurs booléennes
+
+\tipbox{Nous recommandons de toujours écrire les valeurs booléennes
   \code{TRUE} et \code{FALSE} au long pour éviter des bogues
-  difficiles à détecter.
-\end{itemize}
-
-
-\section{Les objets R}
-\label{bases:objets}
-
-Tout dans le langage R est un objet: les variables contenant des
-données, les fonctions, les opérateurs, même le symbole représentant
-le nom d'un objet est lui-même un objet. Les objets possèdent au
-minimum un \emph{mode} et une \emph{longueur} et certains peuvent
-être dotés d'un ou plusieurs \emph{attributs}
-
-\begin{itemize}
-\item Le mode d'un objet est obtenu avec la fonction \Fonction{mode}:
-<<echo=TRUE>>=
-v <- c(1, 2, 5, 9)
-mode(v)
-@
-\item La longueur d'un objet est obtenue avec la fonction
-  \Fonction{length}:
-<<echo=TRUE>>=
-length(v)
-@
-\end{itemize}
+  difficiles à détecter.}
 
 
 \subsection{Modes et types de données}
-\label{bases:objets:mode}
+\label{sec:bases:objets:mode}
 
 Le mode\Index{mode} prescrit ce qu'un objet peut contenir. À ce titre,
 un objet ne peut avoir qu'un seul mode. Le \autoref{tab:bases:modes}
 contient la liste des principaux modes disponibles en R. À chacun de
 ces modes correspond une fonction du même nom servant à créer un objet
-de ce mode.
+de ce mode. Le mode d'un objet est obtenu avec la fonction
+\Fonction{mode}.
+<<echo=TRUE>>=
+v <- c(1, 2, 5, 9)
+mode(v)
+@
 
 \begin{table}
   \centering
@@ -283,10 +353,10 @@ de ce mode.
     \midrule
     \Mode{numeric}    & nombres réels \\
     \Mode{complex}    & nombres complexes \\
-    \Mode{logical}    & valeurs booléennes (vrai/faux) \\
-    \Mode{character}  & chaînes de caractères \\
+    \Mode{logical}    & valeurs booléennes \\
+    \Mode{character}  & chaines de caractères \\
     \Mode{function}   & fonction \\
-    \Mode{list}       & données quelconques \\
+    \Mode{list}       & liste \\
     \Mode{expression} & expressions non évaluées \\
     \bottomrule
   \end{tabular}
@@ -294,128 +364,125 @@ de ce mode.
   \label{tab:bases:modes}
 \end{table}
 
-\begin{itemize}
-\item Les objets de mode \code{"numeric"}, \code{"complex"},
-  \code{"logical"} et \code{"character"} sont des objets
-  \emph{simples} (\emph{atomic} en anglais) qui ne peuvent contenir
-  que des données d'un seul type.
-\item En revanche, les objets de mode \code{"list"} ou
-  \code{"expression"} sont des objets \emph{récursifs} qui peuvent
-  contenir d'autres objets. Par exemple, une liste peut contenir une
-  ou plusieurs autres listes; voir la \autoref{bases:listes} pour
-  plus de détails.
-\item La fonction \Fonction{typeof} permet d'obtenir une description
+Les objets de mode \code{"numeric"}, \code{"complex"},
+\code{"logical"} et \code{"character"} sont des objets \emph{simples}
+(\emph{atomic}) qui contiennent des données d'un seul type. En
+revanche, les objets de mode \code{"list"} ou \code{"expression"} sont
+des objets \emph{récursifs} qui peuvent contenir d'autres objets. Par
+exemple, une liste peut contenir une ou plusieurs autres listes; nous
+y reviendrons au \autoref{chap:donnees}.
+
+\tipbox{La fonction \Fonction{typeof} permet d'obtenir une description
   plus précise de la représentation interne d'un objet (c'est-à-dire
   au niveau de la mise en {\oe}uvre en C). Le mode et le type d'un
-  objet sont souvent identiques.
-\end{itemize}
+  objet sont souvent identiques.}
 
 
 \subsection{Longueur}
-\label{bases:objets:longueur}
+\label{sec:bases:objets:longueur}
 
 La longueur\Index{longueur} d'un objet est égale au nombre d'éléments
-qu'il contient.
+qu'il contient. La longueur d'un objet est obtenue avec la fonction
+\Fonction{length}.
+<<echo=TRUE>>=
+v <- c(1, 2, 5, 9)
+length(v)
+@
 
-\begin{itemize}
-\item La longueur, au sens R du terme, d'une chaîne de caractères est
-  toujours $1$. Un objet de mode \code{character} doit contenir
-  plusieurs chaînes de caractères pour que sa longueur soit supérieure
-  à $1$:
+\tipbox{Il est permis --- et parfois utile --- de créer un objet de
+  longueur nulle, c'est-à-dire un objet qui existe, mais qui est
+  vide.}
+
+Au sens R du terme, la longueur d'une chaine de caractères est
+toujours $1$. Un objet de mode \code{character} doit contenir
+plusieurs chaines de caractères pour que sa longueur soit supérieure à
+$1$. Il faut utiliser la fonction \Fonction{nchar} pour obtenir le
+nombre de caractères dans une chaine.
 <<echo=TRUE>>=
 v1 <- "actuariat"
 length(v1)
+nchar(v1)
+@
+<<echo=TRUE>>=
 v2 <- c("a", "c", "t", "u", "a", "r", "i", "a", "t")
 length(v2)
-@
-\item Il faut utiliser la fonction \Fonction{nchar} pour obtenir le
-  nombre de caractères dans une chaîne:
-<<echo=TRUE>>=
-nchar(v1)
 nchar(v2)
 @
-\item Un objet peut être de longueur $0$ et doit alors être interprété
-  comme un contenant qui existe, mais qui est
-  vide\index{vide|see{\code{NULL}}}:
+
+\subsection{Valeurs spéciales}
+\label{sec:bases:objets:NA_et_al}
+
+Les objets valeur manquante (\code{NA}), infini (\code{Inf},
+\code{-Inf}), valeur indéterminée (\code{NaN}) et néant (\code{NULL})
+permettent de représenter de manière intuitive des quantitées souvent
+utilisées dans les applications statistiques et en analyse de données.
+Pour pleinement tirer profit de ces objets, il faut connaitre leurs
+caractéristiques spéciales.
+
+L'objet \code{NA} sert à représenter une donnée manquante. Chose
+quelque peu surprenante, c'est un objet de mode \mode{logical}. Cependant,
+\code{NA} ne peut être considéré ni \code{TRUE}, ni \code{FALSE}.
 <<echo=TRUE>>=
-v <- numeric(0)
-length(v)
+mode(NA)
+length(NA)
+NA == TRUE
+NA == FALSE
 @
-\end{itemize}
-
-
-\subsection{Objet spécial \code{NULL}}
-\label{bases:objets:NULL}
-
-L'objet spécial \Objet{NULL} représente «rien», ou le vide.
-
-\begin{itemize}
-\item Son mode est \Mode{NULL}.
-\item Sa longueur est $0$.
-\item Toutefois différent d'un objet vide:
-  \begin{itemize}
-  \item un objet de longueur $0$ est un contenant vide;
-  \item \code{NULL} est «pas de contenant».
-  \end{itemize}
-\item La fonction \Fonction{is.null} teste si un objet est \code{NULL}
-  ou non.
-\end{itemize}
-
-
-\subsection{Valeurs manquantes, indéterminées et infinies}
-\label{bases:objets:NA}
-
-Dans les applications statistiques, il est souvent utile de pouvoir
-représenter des données manquantes. Dans R, l'objet spécial \Objet{NA}
-remplit ce rôle.
-
-\begin{itemize}
-\item Par défaut, le mode de \code{NA} est \mode{logical}, mais
-  \code{NA} ne peut être considéré ni comme \code{TRUE}, ni comme
-  \code{FALSE}.
-\item Toute opération impliquant une donnée \code{NA} a comme
-  résultat \code{NA}.
-\item Certaines fonctions (\fonction{sum}, \fonction{mean}, par
-  exemple) ont par conséquent un argument \Argument{na.rm} qui,
-  lorsque \code{TRUE}, élimine les données manquantes avant de
-  faire un calcul.
-\item La valeur \code{NA} n'est égale à aucune autre, pas même
-  elle-même (selon la règle ci-dessus, le résultat de la comparaison
-  est \code{NA}):
+Toute opération, y compris la comparaison, impliquant la valeur
+\code{NA} a comme résultat \code{NA}. Par conséquent, la valeur
+\code{NA} n'est égale à aucune autre, pas même elle-même! Pour tester
+si une valeur est manquante, il faut avoir recours à la fonction
+\Fonction{is.na}.
 <<echo=TRUE>>=
-NA == NA
-@
-\item Par conséquent, pour tester si les éléments d'un objet sont
-  \code{NA} ou non il faut utiliser la fonction \Fonction{is.na}:
-<<echo=TRUE>>=
+x <- NA
+x == NA
 is.na(NA)
 @
-\end{itemize}
 
-La norme IEEE~754 régissant la représentation interne des nombres dans
-un ordinateur \citep{IEEE:754} prévoit les valeurs mathématiques
-spéciales $+\infty$ et $-\infty$ ainsi que les formes indéterminées du
-type $\frac{0}{0}$ ou $\infty - \infty$. R dispose d'objets spéciaux pour
-représenter ces valeurs.
-\begin{itemize}
-\item \Objet{Inf} représente $+\infty$.
-\item \Objet{-Inf} représente $-\infty$.
-\item \Objet{NaN} (\emph{Not a Number}) représente une forme
-  indéterminée.
-\item Ces valeurs sont testées avec les fonctions
-  \Fonction{is.infinite}, \Fonction{is.finite} et
-  \Fonction{is.nan}.
-\end{itemize}
+Les objets \code{Inf}, \code{-Inf} et \code{NaN} permettent de
+représenter les valeurs mathématiques spéciales prévues dans la norme
+IEEE~754 régissant la représentation interne des nombres dans un
+ordinateur \citep{IEEE:754}. De manière intuitive, l'objet \objet{Inf}
+représente $+\infty$, \objet{-Inf} représente $-\infty$ et \Objet{NaN}
+(\emph{Not a Number}) représente une forme indéterminée du type
+$\frac{0}{0}$ ou $\infty - \infty$. Les fonctions
+\Fonction{is.infinite}, \Fonction{is.finite} et \Fonction{is.nan}
+fournissent des manières robuste de tester ces valeurs.
+<<echo=TRUE>>=
+is.infinite(1/0)
+is.finite(-1/0)
+is.nan(0/0)
+is.nan(Inf - Inf)
+@
+
+Enfin, l'objet spécial \objet{NULL} représente «rien», ou le vide. Son
+mode est \Mode{NULL} et sa longueur est $0$. Il est toutefois
+différent d'un objet vide: un objet de longueur $0$ est un contenant
+vide, alors que \code{NULL} est «pas de contenant».
+<<echo=TRUE>>=
+mode(NULL)
+length(NULL)
+1 + NULL
+@
+Ajouter \code{NULL} à un objet n'ajoute rien. Par ailleurs, la seule
+façon de tester si un objet est \code{NULL} est avec la fonction
+\Fonction{is.null}.
+<<echo=TRUE>>=
+c(3, NULL)
+x <- NULL
+x == NULL
+is.null(NULL)
+@
 
 
 \subsection{Attributs}
-\label{bases:objets:attributs}
+\label{sec:bases:objets:attributs}
 
 Les attributs\Index{attribut} d'un objet sont des éléments
-d'information additionnels liés à cet objet. La liste des attributs
-les plus fréquemment rencontrés se trouve au \autoref{tab:attributs}.
-Pour chaque attribut, il existe une fonction du même nom servant à
-extraire l'attribut correspondant d'un objet.
+d'information additionnels attachées à cet objet. Le
+\autoref{tab:attributs} fournit la liste des attributs les plus
+fréquemment utilisés. À chacun des attributs du tableau correspond une
+fonction du même nom servant à extraire l'attribut d'un objet.
 
 \begin{table}
   \centering
@@ -438,513 +505,407 @@ extraire l'attribut correspondant d'un objet.
   \label{tab:attributs}
 \end{table}
 
-\begin{itemize}
-\item Plus généralement, la fonction \Fonction{attributes} permet
-  d'extraire ou de modifier la liste des attributs d'un objet. On peut
-  aussi travailler sur un seul attribut à la fois avec la fonction
-  \Fonction{attr}.
-\item On peut ajouter à peu près ce que l'on veut à la liste des
-  attributs d'un objet. Par exemple, on pourrait vouloir attacher au
-  résultat d'un calcul la méthode de calcul utilisée:
+La fonction \Fonction{attributes} permet d'extraire ou de modifier la
+liste des attributs d'un objet, alors que la fonction \Fonction{attr}
+permet de travailler sur un seul attribut à la fois. Les programmeurs
+peuvent ajouter à peu près n'importe quoi à la liste des attributs
+d'un objet. Par exemple, nous pourrions vouloir attacher au résultat
+d'un calcul la méthode de calcul utilisée.
 <<echo=TRUE>>=
 x <- 3
 attr(x, "methode") <- "au pif"
 attributes(x)
 @
-\item Extraire un attribut qui n'existe pas retourne
-  \objet{NULL}:
+
+L'extraction d'un attribut qui n'existe pas retourne \objet{NULL},
+alors qu'à l'inverse, affecter à un attribut la valeur \code{NULL}
+efface cet attribut.
 <<echo=TRUE>>=
+attributes(x)
 dim(x)
-@
-\item
-À l'inverse, donner à un attribut la valeur \code{NULL} efface cet attribut:
-<<echo=TRUE>>=
 attr(x, "methode") <- NULL
 attributes(x)
 @
-\end{itemize}
-
 
 
 \section{Vecteurs}
-\label{bases:vecteurs}
+\label{sec:bases:vecteurs}
 
 En R, à toutes fins pratiques, \emph{tout} est un
-vecteur\index{vecteur}. Contrairement à certains autres langages de
-programmation, il n'y a pas de notion de scalaire en R; un scalaire
-est simplement un vecteur de longueur $1$. Comme nous le verrons au
-\autoref{operateurs}, le vecteur est l'unité de base dans les
-calculs.
+vecteur\index{vecteur}. C'est aussi l'unité de base dans les calculs.
+Nous nous restreignons pour le moment aux vecteurs simples (atomiques)
+dans lesquels tous les éléments sont du même mode.
 
-\begin{itemize}
-\item Dans un vecteur simple, tous les éléments doivent être du même
-  mode. Nous nous restreignons à ce type de vecteurs pour le moment.
-\item Les fonctions de base pour créer des vecteurs sont:
-  \begin{itemize}
-  \item \Fonction{c} (concaténation);
-  \item \Fonction{numeric} (vecteur de mode \mode{numeric});
-  \item \Fonction{logical} (vecteur de mode \mode{logical});
-  \item \Fonction{character} (vecteur de mode \mode{character}).
-  \end{itemize}
-\item Il est possible (et souvent souhaitable) de donner une étiquette
-  à chacun des éléments d'un vecteur.
+\subsection{Création de vecteurs}
+\label{sec:bases:vecteurs:creation}
+
+La fonction de base pour créer un vecteur est la fonction de
+concaténation \Fonction{c}.
+<<echo=TRUE>>=
+(x <- c(2, 5.1, 42))
+@
+
+Les fonctions \Fonction{numeric}, \Fonction{logical} et
+\Fonction{character} permettent également de créer des vecteurs du
+mode correspondant. Les fonctions prennent en argument la longueur du
+vecteur à créer. Celui-ci contiendra des valeurs initiales
+prédéterminées.
+<<echo=TRUE>>=
+numeric(5)
+logical(7)
+character(10)
+@
+
+Il est possible --- et souvent souhaitable --- de nommer les éléments
+d'un vecteur; on dit qu'on leur attribue une \emph{étiquette}. Les
+étiquettes sont enregistrées dans l'attribut \attribut{names} du
+vecteur. Il y a deux grandes façons de procéder: en spécificant les
+noms dès la création du vecteur, ou à posteriori en ajoutant
+l'attribut au vecteur.
 <<echo=TRUE>>=
 (v <- c(a = 1, b = 2, c = 5))
-v <- c(1, 2, 5)
+names(v)
+@
+<<echo=TRUE>>=
+(v <- c(1, 2, 5))
 names(v) <- c("a", "b", "c")
 v
 @
-  Ces étiquettes font alors partie des attributs du vecteur.
-\item L'indiçage dans un vecteur se fait avec les crochets
-  \fonction{[~]}. On peut extraire un élément d'un vecteur par sa
-  position ou par son étiquette, si elle existe (auquel cas cette
-  approche est beaucoup plus sûre).
-<<echo=TRUE>>=
-v[3]
-v["c"]
-@
-  La \autoref{bases:indicage} traite plus en détail de l'indiçage des
-  vecteurs et des matrices.
-\end{itemize}
 
-\begin{prob-astuce}
-  Dans un vecteur simple, tous les éléments doivent être du même mode.
-  Or, les informations du classement de la ligue comportent à la fois
-  des chaînes de caractères et des nombres. De plus, le classement se
-  présente sous forme d'un tableau à deux dimensions, alors qu'un
-  vecteur n'en compte qu'une seule. Le vecteur simple n'est donc pas
-  le type d'objet approprié pour stocker le classement de la ligue.
-\end{prob-astuce}
+\subsection{Indiçage}
+\label{sec:bases:vecteurs:indicage}
 
-\section{Matrices et tableaux}
-\label{bases:matrices}
+L'indiçage des vecteurs est une procédure beaucoup utilisée dans le
+langage R, aussi est-il important d'en maitriser toutes les
+subtilités. L'opération sert principalement à deux choses: extraire
+des éléments d'un objet avec la construction
+\verb|x[i]|\indexfonction{[}, ou remplacer des éléments avec la
+construction \verb|x[i] <- y|\Indexfonction{[<-}.
 
-Le R étant un langage spécialisé pour les calculs mathématiques, il
-supporte tout naturellement et de manière intuitive --- à une
-exception près, comme nous le verrons --- les matrices et, plus
-généralement, les tableaux à plusieurs dimensions.
-
-Les \capsule{https://youtu.be/indicage}{matrices et tableaux} ne sont
-rien d'autre que des vecteurs dotés d'un attribut \attribut{dim}. Ces
-objets sont donc stockés, et peuvent être manipulés, exactement comme
-des vecteurs simples.
-
-\begin{itemize}
-\item Une matrice est un vecteur avec un attribut \attribut{dim} de
-  longueur $2$. Cela change implicitement la classe de l'objet pour
-  \indexclasse{matrix}\code{"matrix"} et, de ce fait, le mode
-  d'affichage de l'objet ainsi que son interaction avec plusieurs
-  opérateurs et fonctions.
-\item La fonction de base pour créer des matrices est
-  \Fonction{matrix}:
-<<echo=TRUE>>=
-matrix(1:6, nrow = 2, ncol = 3)
-matrix(1:6, nrow = 2, ncol = 3, byrow = TRUE)
-@
-\item La généralisation d'une matrice à plus de deux dimensions est un
-  tableau (\emph{array}). Le nombre de dimensions du tableau est
-  toujours égal à la longueur de l'attribut \attribut{dim}. La classe
-  implicite d'un tableau est \indexclasse{array}\code{"array"}.
-\item La fonction de base pour créer des tableaux est
-  \Fonction{array}:
-<<echo=TRUE>>=
-array(1:24, dim = c(3, 4, 2))
-@
-\end{itemize}
-
-\begin{important}
-  On remarquera ci-dessus que les matrices et tableaux sont remplis en
-  faisant d'abord varier la première dimension, puis la seconde, etc.
-  Pour les matrices, cela revient à remplir par colonne. On conviendra
-  que cette convention, héritée du Fortran, n'est pas des plus
-  intuitives.
-
-  La fonction \code{matrix} a un argument \argument{byrow} qui permet
-  d'inverser l'ordre de remplissage. Cependant, il vaut mieux
-  s'habituer à la convention de R que d'essayer constamment de la
-  contourner.
-\end{important}
-
-L'ordre de remplissage inhabituel des tableaux rend leur manipulation
-difficile si on ne les visualise pas correctement. Imaginons un
-tableau de dimensions $3 \times 4 \times 5$.
-\begin{itemize}
-\item Il faut voir le tableau comme cinq matrices $3 \times 4$
-  (remplies par colonne!) les unes \emph{derrière} les autres.
-\item Autrement dit, le tableau est un prisme rectangulaire haut de $3$
-  unités, large de $4$ et profond de $5$.
-\item Si l'on ajoute une quatrième dimension, cela revient à aligner
-  des prismes les uns derrière les autres, et ainsi de suite.
-\end{itemize}
-La \autoref{fig:bases:tableaux} fournit une représentation schématique
-des tableaux à trois et quatre dimensions.
-
-\begin{figure}[t]
-  \centering
-  \hspace*{\fill}
-  \begin{minipage}[b]{0.4\linewidth}
-    \setlength{\unitlength}{5mm}
-    \begin{picture}(9,7)
-      \ttfamily
-      \put(0,0){\framebox(5,4)[tl]{}}
-      \multiput(1,4)(1,1){3}{\line(0,1){1}}
-      \multiput(1,5)(1,1){3}{\line(1,0){5}}
-      \multiput(6,5)(1,1){3}{\line(0,-1){4}}
-      \multiput(6,1)(1,1){3}{\line(-1,0){1}}
-      \put(0.5,3.5){\circle{0.6}}\put(0.51,3.51){\makebox(0,0){\footnotesize 1}}
-      \put(0.5,3){\vector(0,-1){2.5}}
-      \put(1.5,3.5){\circle{0.6}}\put(1.51,3.51){\makebox(0,0){\footnotesize 2}}
-      \put(2,3.5){\vector(1,0){2.5}}
-      \put(6.3,0.3){\circle{0.6}}\put(6.31,0.31){\makebox(0,0){\footnotesize 3}}
-      \put(6.7,0.7){\vector(1,1){1.3}}
-    \end{picture}
-    \subcaption{trois dimensions}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.45\linewidth}
-    \setlength{\unitlength}{5mm}
-    \setlength{\unitlength}{3.5mm}
-    \begin{picture}(14,12)
-      \ttfamily
-      \put(0,0){\framebox(5,4)[tl]{}}
-      \multiput(1,4)(1,1){3}{\line(0,1){1}}
-      \multiput(1,5)(1,1){3}{\line(1,0){5}}
-      \multiput(6,5)(1,1){3}{\line(0,-1){4}}
-      \multiput(6,1)(1,1){3}{\line(-1,0){1}}
-      \put(6,7){\line(0,1){2}}
-      \put(6,9){\line(1,0){5}}
-      \put(11,9){\line(0,-1){4}}
-      \put(11,5){\line(-1,0){3}}
-      \multiput(7,9)(1,1){3}{\line(0,1){1}}
-      \multiput(7,10)(1,1){3}{\line(1,0){5}}
-      \multiput(12,10)(1,1){3}{\line(0,-1){4}}
-      \multiput(12,6)(1,1){3}{\line(-1,0){1}}
-      \put(0.5,3.5){\circle{0.8}}\put(0.51,3.51){\makebox(0,0){\scriptsize 1}}
-      \put(0.5,2.9){\vector(0,-1){2.4}}
-      \put(1.5,3.5){\circle{0.8}}\put(1.51,3.51){\makebox(0,0){\scriptsize 2}}
-      \put(2.1,3.5){\vector(1,0){2.4}}
-      \put(6.3,0.3){\circle{0.8}}\put(6.31,0.31){\makebox(0,0){\scriptsize 3}}
-      \put(6.7,0.7){\vector(1,1){1.3}}
-      \put(7.3,0.3){\circle{0.8}}\put(7.31,0.31){\makebox(0,0){\scriptsize 4}}
-      \put(7.7,0.7){\vector(1,1){6.3}}
-    \end{picture}
-    \subcaption{quatre dimensions}
-  \end{minipage}
-  \caption{Représentation schématique de tableaux. Les chiffres encerclés
-    identifient l'ordre de remplissage.}
-  \label{fig:bases:tableaux}
-\end{figure}
-
-Comme pour les vecteurs, l'indiçage\index{indiçage!matrice} des
-matrices et tableaux se fait avec les crochets \fonction{[~]}.
-\begin{itemize}
-\item On extrait un élément d'une matrice en précisant sa position
-  dans chaque dimension de celle-ci, séparées par des virgules:
-<<echo=TRUE>>=
-(m <- matrix(c(40, 80, 45, 21, 55, 32),
-             nrow = 2, ncol = 3))
-m[1, 2]
-@
-\item On peut aussi ne donner que la position de l'élément dans le
-  vecteur sous-jacent:
-<<echo=TRUE>>=
-m[3]
-@
-\item \label{pg:bases:indicage_matrice} Lorsqu'une dimension est omise
-  dans les crochets, tous les éléments de cette dimension sont
-  extraits:
-<<echo=TRUE>>=
-m[2, ]
-@
-\item Les idées sont les mêmes pour les tableaux.
-\item Pour le reste, les règles d'indiçage de vecteurs exposées à la
-  \autoref{bases:indicage} s'appliquent à chaque position de
-  l'indice d'une matrice ou d'un tableau.
-\end{itemize}
-
-Des fonctions permettent de fusionner des matrices et des tableaux
-ayant au moins une dimension identique.
-\begin{itemize}
-\item La fonction \Fonction{rbind} permet de fusionner verticalement
-  deux matrices (ou plus) ayant le même nombre de colonnes.
-<<echo=TRUE>>=
-n <- matrix(1:9, nrow = 3)
-rbind(m, n)
-@
-\item La fonction \Fonction{cbind} permet de fusionner horizontalement
-  deux matrices (ou plus) ayant le même nombre de lignes.
-<<echo=TRUE>>=
-n <- matrix(1:4, nrow = 2)
-cbind(m, n)
-@
-\end{itemize}
-
-\begin{prob-astuce}
-  Une matrice convient bien pour stocker un tableau de données.
-  Toutefois, puisque la matrice est en fait un vecteur avec un
-  attribut \code{dim} de longueur $2$, tous les éléments doivent être
-  du même mode, comme c'était le cas avec les vecteurs simples.
-  Impossible dans ce cas d'y stocker le nom des équipes. La matrice
-  n'est toujours pas le type d'objet approprié.
-\end{prob-astuce}
-
-\section{Listes}
-\label{bases:listes}
-
-La liste\index{liste} est le mode de stockage le plus général et
-polyvalent du langage R. Il s'agit d'un type de vecteur spécial dont
-les éléments peuvent être de n'importe quel mode, y compris le mode
-\mode{list}. Cela permet donc d'emboîter des listes, d'où le
-qualificatif de \emph{récursif} pour ce type d'objet.
-
-\begin{itemize}
-\item La fonction de base pour créer des listes est \Fonction{list}:
-<<echo=TRUE>>=
-(x <- list(size = c(1, 5, 2), user = "Joe", new = TRUE))
-@ %
-  Ci-dessus, le premier élément de la liste est de mode
-  \code{"numeric"}, le second de mode \code{"character"} et le troisième
-  de mode \code{"logical"}.
-\item Nous recommandons de nommer les éléments d'une liste. En effet,
-  les listes contiennent souvent des données de types différents et il
-  peut s'avérer difficile d'identifier les éléments s'ils ne sont pas
-  nommés. De plus, comme nous le verrons ci-dessous, il est très
-  simple d'extraire les éléments d'une liste par leur étiquette.
-\item La liste demeure un vecteur. On peut donc
-  l'indicer\Index{indiçage!liste} avec l'opérateur \fonction{[~]}.
-  Cependant, cela retourne une liste contenant le ou les éléments
-  indicés. C'est rarement ce que l'on souhaite.
-\item Pour indicer un élément d'une liste et n'obtenir que cet
-  élément, et non une liste contenant l'élément, il faut utiliser
-  l'opérateur d'indiçage \Fonction{[[~]]}. Comparer
-<<echo=TRUE>>=
-x[1]
-@ %
-  et
-<<echo=TRUE>>=
-x[[1]]
-@
-  Évidemment, on ne peut extraire qu'un seul élément à la fois
-  avec les crochets doubles \code{[[~]]}.
-\item Petite subtilité peu employée, mais élégante. Si l'indice
-  utilisé dans \fonction{[[~]]} est un vecteur, il est utilisé
-  récursivement pour indicer la liste: cela sélectionnera la
-  composante de la liste correspondant au premier élément du vecteur,
-  puis l'élément de la composante correspondant au second élément du
-  vecteur, et ainsi de suite.
-\item Une autre --- la meilleure, en fait --- façon d'indicer un seul
-  élément d'une liste est par son étiquette avec l'opérateur \Fonction{\$}:
-<<echo=TRUE>>=
-x$size
-@
-\item La fonction \Fonction{unlist} convertit une liste en un vecteur
-  simple. Elle est surtout utile pour concaténer les éléments d'une
-  liste lorsque ceux-ci sont des scalaires. Attention, cette fonction
-  peut être destructrice si la structure interne de la liste est
-  importante.
-\end{itemize}
-
-\begin{table}[p]
-  \label{bases:astuce3}
-\begin{prob-astuce}
-  La liste permettrait de stocker à la fois le nom des équipes et
-  leurs statistiques puisqu'elle peut contenir des objets de mode
-  différent.
-
-  On crée d'abord des vecteurs simples contenant les données de chaque
-  colonne du classement des équipes.
-<<echo=TRUE>>=
-Equipe <- c("Washington", "Dallas", "Chicago",
-            "Los Angeles", "St-Louis", "Détroit",
-            "Montréal", "Boston")
-MJ  <- c(55, 56, 57, 58, 56, 57, 56, 57)
-V   <- c(36, 32, 30, 30, 25, 25, 22, 24)
-D   <- c(16, 19, 21, 22, 19, 21, 27, 31)
-DP  <- c( 3,  5,  6,  6, 12, 11,  7,  2)
-PTS <- c(75, 69, 66, 66, 62, 61, 51, 50)
-@
-  On les combine ensuite sous forme de liste nommée.
-<<echo=TRUE>>=
-list(Equipe = Equipe, MJ = MJ, V = V, D = D,
-     DP = DP, PTS = PTS)
-@
-  On constate que R ne présente pas le contenu de la liste sous
-  forme d'un tableau. Ce n'est donc pas le type d'objet le mieux
-  approprié pour stocker un classement. En fait, la liste est un mode
-  de stockage \emph{trop} général pour le type de données dont nous
-  disposons.
-\end{prob-astuce}
-\end{table}
-
-
-\section{\emph{Data frames}}
-\label{bases:dataframes}
-
-Les vecteurs, les matrices, les tableaux et les listes sont les types
-d'objets les plus fréquemment utilisés en programmation en R.
-Toutefois, un grand nombre de procédures statistiques --- pensons à la
-régression linéaire, par exemple --- repose davantage sur les
-\emph{data frames} pour le stockage des données.
-
-\begin{itemize}
-\item Un \emph{data frame} est une liste de classe
-  \indexclasse{data.frame}\code{"data.frame"} dont tous les éléments
-  sont de la même longueur (ou comptent le même nombre de lignes si
-  les éléments sont des matrices).
-\item Il est généralement représenté sous la forme d'un tableau à deux
-  dimensions. Chaque élément de la liste sous-jacente correspond à une
-  colonne.
-\item Bien que visuellement similaire à une matrice un \emph{data
-    frame} est plus général puisque les colonnes peuvent être de modes
-  différents; pensons à un tableau avec des noms (mode
-  \code{character}) dans une colonne et des notes (mode
-  \code{numeric}) dans une autre.
-\item On crée un \emph{data frame} avec la fonction
-  \Fonction{data.frame} ou, pour convertir un autre type d'objet en
-  \emph{data frame}, avec \Fonction{as.data.frame}.
-\item Le \emph{data frame} peut être indicé à la fois comme une liste
-  et comme une matrice.
-\item Les fonctions \fonction{rbind} et \fonction{cbind} peuvent être
-  utilisées pour ajouter des lignes ou des colonnes à un \emph{data
-    frame}.
-\item On peut rendre les colonnes d'un \emph{data frame} (ou d'une
-  liste) visibles dans l'espace de travail avec la fonction
-  \Fonction{attach}, puis les masquer avec \Fonction{detach}.
-\end{itemize}
-
-\begin{prob-astuce}
-  L'élément distinctif entre un \emph{data frame} et une liste
-  générale, c'est que tous les éléments du premier doivent être de la
-  même longueur et que, par conséquent, R les dispose en colonnes.
-  Nous avons donc ici le type d'objet tout désigné pour stocker des
-  données de modes différents, mais qui se présentent sous forme de
-  tableau à deux dimensions.
-\end{prob-astuce}
-
-
-\section{Indiçage}
-\label{bases:indicage}
-
-L'indiçage des vecteurs\Index{indiçage!vecteur} et
-matrices\Index{indiçage!matrice} a déjà été brièvement présenté aux
-sections \ref{bases:vecteurs} et \ref{bases:matrices}. La présente
-section contient plus de détails sur cette procédure des plus communes
-lors de l'utilisation du langage R. On se concentre toutefois sur le
-traitement des vecteurs.
-
-\begin{itemize}
-\item L'indiçage sert principalement à deux choses:
-  soit extraire des éléments d'un objet avec la construction
-  \code{x[i]},
-  ou les remplacer avec la construction \verb|x[i] <- y|.
-\item Il est utile de savoir que ces opérations sont en fait traduites
-  par l'interprète R en des appels à des fonctions nommées
-  \Fonction{[} et \Fonction{[<-}, dans l'ordre.
-\item De même, les opérations d'extraction et de remplacement d'un
-  élément d'une liste de la forme \verb|x$etiquette| et
-  \verb|x$etiquette <- y| correspondent à des appels aux fonctions
-  \fonction{\$} et \fonction{\$<-}.
-\end{itemize}
-
-Il existe cinq façons d'indicer un vecteur dans le langage R. Dans
-tous les cas, l'indiçage se fait à l'intérieur de crochets
-\Fonction{[~]}.
+Dans un cas comme dans l'autre, il faut d'abord indicer le vecteur. Il
+existe cinq façons de le faire, toujours à l'intérieur de crochets
+\code{[~]}.
 \begin{enumerate}
-\item Avec un vecteur d'entiers positifs. Les éléments se trouvant aux
-  positions correspondant aux entiers sont extraits du vecteur, dans
-  l'ordre. C'est la technique la plus courante:
+\item Avec un vecteur d'entiers positifs (extraction par position).
+  Les éléments se trouvant aux positions correspondant aux entiers
+  sont extraits du vecteur, dans l'ordre. C'est la technique la plus
+  courante.
 <<echo=TRUE>>=
 x <- c(A = 2, B = 4, C = -1, D = -5, E = 8)
 x[c(1, 3)]
 @
-\item Avec un vecteur d'entiers négatifs. Les éléments se trouvant aux
-  positions correspondant aux entiers négatifs sont alors
-  \emph{éliminés} du vecteur:
+\item Avec un vecteur d'entiers négatifs (suppression par position).
+  Les éléments se trouvant aux positions correspondant aux entiers
+  négatifs sont \emph{éliminés} du vecteur.
 <<echo=TRUE>>=
 x[c(-2, -3)]
 @
-\item Avec un vecteur booléen. Le vecteur d'indiçage doit alors être
-  de la même longueur que le vecteur indicé. Les éléments
-  correspondant à une valeur \code{TRUE} sont extraits du vecteur,
-  alors que ceux correspondant à \code{FALSE} sont éliminés:
+\item Avec un vecteur booléen (extraction par critère). Le vecteur
+  d'indiçage doit alors être de la même longueur que le vecteur
+  indicé. Les éléments correspondant à une valeur \code{TRUE} sont
+  extraits du vecteur, alors que ceux correspondant à \code{FALSE}
+  sont éliminés.
 <<echo=TRUE>>=
 x > 0
 x[x > 0]
 @
-\item Avec un vecteur de chaînes de caractères. Utile pour extraire
-  les éléments d'un vecteur à condition que ceux-ci soient nommés:
+\item Avec un vecteur de chaines de caractères (extraction par nom).
+  Les éléments dont l'étiquette correspond à l'une des chaines sont
+  extraits du vecteur. Ce mode d'indiçage par le nom a comme principal
+  avantage de permettre l'extraction d'éléments d'un vecteur
+  indépendemment de leur position dans celui-ci.
 <<echo=TRUE>>=
 x[c("B", "D")]
 @
 \item L'indice est laissé vide. Tous les éléments du vecteur sont
-  alors sélectionnés:
+  alors sélectionnés.
 <<echo=TRUE>>=
 x[]
 @
   Cette méthode est essentiellement utilisée avec les matrices et
-  tableaux pour sélectionner tous les éléments d'une dimension (voir
-  l'exemple à la \autopageref{pg:bases:indicage_matrice}).
-  Laisser l'indice vide est différent d'indicer avec un vecteur vide;
-  cette dernière opération retourne un vecteur vide.
+  tableaux pour sélectionner tous les éléments d'une dimension; nous y
+  reviendrons au \autoref{chap:donnees}. Laisser l'indice vide est
+  différent d'indicer avec un vecteur vide. Cette dernière opération
+  retourne un vecteur vide.
 \end{enumerate}
 
-\begin{prob-solution}
-  Nous avons déjà créé à l'Astuce de la \autopageref{bases:astuce3}
-  des vecteurs contenant les données des différentes colonnes du
-  classement de la ligue.
+\tipbox{Il n'est pas inutile de savoir que les opérations d'extraction
+  et de remplacement sont en fait traduites par l'interpréteur R en
+  des appels à des fonctions nommées \fonction{[} et \fonction{[<-},
+  dans l'ordre.}
+
+\subsection{Arithmétique vectorielle}
+\label{sec:bases:vecteurs:arithmetique}
+
+L'arithmétique vectorielle de R constitue l'une des grandes forces du
+langage. Elle permet de réaliser une grande variété de calculs sans
+avoir recours à des procédures itératives (boucles).
+
+Les procédures fondamentales de la \autoref{sec:bases:fondamentales}
+peuvent toutes opérer sur les vecteurs en effectuant les opérations
+\emph{élément par élément}. C'est la première règle de base de
+l'arithmétique vectorielle dans R.
 <<echo=TRUE>>=
-Equipe
-MJ
-V
-D
-DP
-PTS
+c(1, 2, 3) + c(4, 5, 6)
+1:3 * 4:6
 @
 
-  On crée l'objet \code{classement} qui contiendra le classement de la
-  ligue avec la fonction \code{data.frame}. Celle-ci prend en
-  arguments les différents vecteurs de données.
+La seconde règle de base se rapporte aux opérations entre des vecteurs
+de longueurs différentes. Dans de tels cas, les vecteurs les plus
+courts sont \emph{recyclés} autant de fois que nécessaire pour
+correspondre au plus long vecteur. Cette règle est particulièrement
+apparente avec les vecteurs de longueur $1$.
 <<echo=TRUE>>=
-(classement <- data.frame(Equipe, MJ, V, D,  DP, PTS))
+1:10 + 2
 @
 
-  On répond ensuite aux questions de traitement des données.
-  \begin{enumerate}[a)]
-  \item Le nombre d'équipes dans la ligue correspond au nombre de
-    lignes de l'objet:
+Si la longueur du plus long vecteur est un multiple de celle du ou des
+autres vecteurs, ces derniers sont recyclés un nombre entier de fois.
 <<echo=TRUE>>=
-dim(classement)[1]
+1:10 + 1:5 + c(2, 4)
 @
-    ou, comme nous le verrons dans le code informatique de la section
-    suivante,
-<<echo=TRUE>>=
-nrow(classement)
-@
-  \item Pour extraire la fiche complète de l'équipe de Montréal, il
-    suffit d'extraire cette ligne du tableau de données:
-<<echo=TRUE>>=
-## indiçage par vecteur booléen
-classement[classement$Equipe == "Montréal", ]
 
-## extraction par une fonction pratique et élégante
-subset(classement, Equipe == "Montréal")
-@
-  \item Pour extraire la fiche complète de l'équipe à la septième
-    position du classement, on peut indicer le tableau par position:
+Autrement, le plus court vecteur est recyclé un nombre fractionnaire
+de fois, mais comme ce résultat est rarement celui souhaité et qu'il
+provient généralement d'une erreur de programmation, un avertissement
+est affiché.
+\begin{Schunk}
+\begin{Sinput}
+> 1:10 + c(2, 4, 6)
+\end{Sinput}
+\begin{Soutput}
+ [1]  3  6  9  6  9 12  9 12 15 12
+Message d'avis :
+In 1:10 + c(2, 4, 6) :
+la taille d'un objet plus long n'est pas un multiple de la
+taille d'un objet plus court
+\end{Soutput}
+\end{Schunk}
+
+\cautionbox{La régle de recyclage des vecteurs fait en sorte qu'il y a
+  très peu d'erreurs de longueur dans R. Qu'une expression soit
+  valide ne signifie donc pas qu'elle effectue le bon calcul!}
+
+\section{Fonctions}
+\label{sec:bases:fonctions}
+
+Nous avons mentionné au début de la \autoref{sec:bases:fondamentales}
+qu'un langage de programmation doit fournir un mécanisme d'abstraction
+pour utiliser les éléments composés. La possibilité que nous offre R
+de définir des objets contenant des valeurs constitue une première
+technique. La définition de \emph{fonctions} (le nom que nous
+donnerons dorénavant au concept de procédure) est une technique
+d'abstration encore plus puissante, puisqu'elle permet de faire
+référence par un seul nom à toute une suite d'opérations.
+
+\subsection{Programmation fonctionnelle}
+\label{sec:bases:fonctions:paradigme}
+
+Nous adoptons en bonne partie avec le langage R le paradigme de la
+programmation fonctionnelle. Tel qu'expliqué sommairement à la
+\autoref{sec:informatique:paradigmes}, dans ce paradigme un programme
+est constitué d'une suite d'appels de fonctions.
+
+L'approche de programmation fonctionnelle dans R fait aussi en sorte
+qu'une fonction est traitée comme n'importe quel autre objet. Entre
+autres choses, cela signifie que:
+\begin{itemize}
+\item le contenu d'une fonction (son code source) est toujours
+  accessible;
+\item une fonction peut accepter en argument une autre fonction;
+\item une fonction peut retourner une fonction comme résultat;
+\item l'utilisateur peut définir de nouvelles fonctions.
+\end{itemize}
+
+Étudions un exemple très simple, pas véritablement utile en pratique
+au-delà de ses vertus pédagogiques. Nous voulons élever un
+nombre au carré. Pour faire ce calcul à répétition et de manière
+abstraite --- c'est-à-dire, sans avoir à se demander à chaque fois
+comment le calcul est fait ---, nous définissons une nouvelle
+fonction \code{square}.
 <<echo=TRUE>>=
-classement[7, ]
+square <- function(x) x * x
 @
-  \end{enumerate}
-\end{prob-solution}
+
+L'expression ci-dessus peut se lire ainsi:
+
+\begin{center}
+  \setlength{\unitlength}{7mm}
+  \begin{picture}(18,4.2)
+    \linethickness{1pt}
+
+    \put(0,1){\code{square}}     \put(0,3.5){\code{square}}
+    \put(2.2,1){est}             \put(2.3,3.5){\code{<-}}
+    \put(3.2,1){une fonction}    \put(3.5,3.5){\code{function}}
+    \put(6.6,1){
+      \begin{minipage}[t]{40mm}
+        \centering
+        qui prend en argument
+        une valeur \code{x}
+      \end{minipage}}           \put(8.9,3.5){\code{( x )}}
+    \put(12.8,1){%
+      \begin{minipage}[t]{32mm}
+        \centering
+        et la multiplie par elle-même.
+      \end{minipage}}           \put(14.4,3.5){\code{x * x}}
+
+    \put(0.9,3.2){\vector(0,-1){1.6}}
+    \put(2.6,3.2){\vector(0,-1){1.6}}
+    \put(4.6,3.2){\vector(0,-1){1.6}}
+    \put(9.7,3.2){\vector(0,-1){1.6}}
+    \put(15.2,3.2){\vector(0,-1){1.6}}
+  \end{picture}
+\end{center}
+
+Nous pouvons ensuite utiliser la fonction \code{square} de manière
+intuitive comme n'importe quelle autre fonction dans R (nous
+reviendrons sur les règles d'appel d'une fonction un peu plus loin).
+<<echo=TRUE>>=
+square(5)
+@
+
+L'approche de programmation fonctionnelle fait en sorte que les appels
+de fonctions peuvent être placés les uns à la suite des autres, comme
+la composition de fonctions $g \circ f$ en mathématiques. Pour élever
+un nombre à la puissance $4$, nous pouvons appliquer deux fois la
+fonction \code{square} à un argument.
+<<echo=TRUE>>=
+square(square(5))
+@
+
+\subsection{Définition d'une fonction}
+\label{sec:bases:fonctions:definition}
+
+Comme nous l'avons vu dans l'exemple ci-dessus, on définit une
+nouvelle fonction dans R à l'aide de la fonction \Fonction{function}.
+La syntaxe exacte de la définition d'une fonction est la suivante:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+\meta{nom} <- function(\meta{arguments}) \meta{corps}
+\end{Verbatim}
+\end{Schunk}
+
+\begin{itemize}
+\item \meta{nom} est le nom de la fonction (les règles pour les noms
+  de fonctions étant les mêmes que celles présentées à la
+  \autoref{sec:bases:objets:noms} pour tout autre objet).
+\item \meta{arguments} est la liste des arguments formels de la
+  fonction, séparés par des virgules.
+\item \meta{corps} est une expression ou un groupe d'expressions
+  réunies par des accolades, tel qu'expliqué à la
+  \autoref{sec:bases:commandes:regroupement}.
+\end{itemize}
+
+Nous souhaitons généralement attribuer un nom à une fonction, mais
+c'est tout à fait optionnel. En effet, l'appel à \fonction{function}
+retourne déjà une fonction et si aucun nom n'est attribué à cet objet,
+on obtient ce qui est appelé une \emph{fonction anonyme}. Les
+fonctions anonymes sont particulièrement utiles avec les fonctions
+d'application qui seront étudiées au \autoref{chap:application}.
+
+Une fonction peut n'avoir aucun argument formel ou plusieurs. Il n'y a
+pas de limite pratique au nombre d'arguments formels que peut avoir
+une fonction. Les arguments formels peuvent être des symboles, des
+constructions de la forme \code{symbole = défaut}, ou encore
+l'argument formel spécial `\code{...}'.
+
+Lorsqu'un symbole seul est utilisé comme argument, il indique le nom
+de celui-ci. L'objet de ce nom sera disponible à l'intérieur de la
+fonction.
+<<echo=TRUE>>=
+f <- function(x) 2 * x + 1
+f(2)
+@
+
+La construction \code{symbole = défaut} indique la valeur par défaut
+de l'argument \code{symbole}. En d'autres termes, c'est la valeur de
+l'argument si aucune valeur n'est spécifiée dans l'appel de la
+fonction.
+<<echo=TRUE>>=
+f <- function(x = 0) 2 * x + 1
+f(2)
+f()
+@
+
+Enfin, l'argument spécial `\code{...}' peut contenir un nombre
+arbitraire d'arguments. La fonction y ayant recours se trouve donc à
+accepter un nombre variable d'arguments. On utilise généralement
+`\code{...}' pour passer des arguments tels quels à une autre fonction
+qui, elle, saura quoi faire de ces arguments. On trouvera un meilleur
+exemple à la \autoref{bases:exemples} que ce que nous pourrions faire
+ici en quelques lignes.
+
+
+\subsection{Appel d'une fonction}
+\label{sec:bases:fonctions:appel}
+
+Nous avons déjà évoqué certaines des règles qui régissent les appels
+de fonctions dans R. Regardons maintenant cela de plus près. Aux fins
+d'illustrations, nous définissons une petite fonction comptant trois
+arguments, dont seul le premier n'a pas de valeur par défaut.
+<<echo=TRUE>>=
+f <- function(x, y = 0, p = 2) sum(abs(x - y)^p)
+@
+
+L'ordre des arguments dans la définition de la fonction est important.
+Nous avons deux choix au moment d'appeler une fonction: spécifier les
+valeurs des arguments dans le bon ordre, ou nommer explicitement les
+arguments avec une construction de la forme \code{symbole =
+  expression}, auquel cas l'ordre n'importe plus. Il est beaucoup plus
+prudent et \emph{fortement recommandé} de spécifier les arguments par
+leur nom, surtout après les deux ou trois premiers arguments.
+<<echo=TRUE>>=
+f(c(3, 2), c(1, 1), 2)
+f(y = c(1, 1), c(3, 2), 2)
+f(y = c(1, 1), p = 2, c(3, 2))
+@
+
+Il n'est pas nécessaire de spécifier une valeur pour un argument
+disposant d'une valeur par défaut. Cependant, si l'on omet un tel
+argument, il faudra nommer les arguments qui suivent, le cas échéant.
+<<echo=TRUE>>=
+f(c(3, 2))
+f(c(3, 2), p = 3)
+@
+
+\citet[section~4.3.2]{R-lang} fournit les détails sur le mécanisme de
+pairage entre les arguments d'une fonction et des valeurs qui lui sont
+passées.
+
+\tipbox{L'interpréteur R reconnait un appel de fonction au fait que le
+  nom de l'objet est suivi de parenthèses \code{(~)}.}
+
+\subsection{Retourner des résultats}
+\label{sec:bases:fonctions:resultats}
+
+La plupart des fonctions sont écrites dans le but de retourner un
+résultat. Or, les règles d'interprétation d'un regroupement
+d'expressions présentées à la
+\autoref{sec:bases:commandes:regroupement} s'appliquent ici au corps
+de la fonction: une fonction retourne tout simplement le résultat de
+sa \emph{dernière expression}.
+
+On évitera donc que la dernière expression soit une affectation, car
+la fonction ne retournera alors rien et on ne pourra utiliser une
+construction de la forme \code{x <- f()} pour affecter le résultat de
+la fonction à une variable.
+
+\cautionbox{Il existe une fonction \fonction{return} pour terminer
+  immédiatement l'exécution d'une fonction et retourner un résultat;
+  nous la présenterons avec les structures de contrôle au
+  \autoref{chap:application}. Cependant, l'utilisation de
+  \code{return} à la toute fin d'une fonction est tout à fait inutile
+  et c'est considéré comme du mauvais style en R.}
 
 
 \section{Exemples}
 \label{bases:exemples}
 
-\lstinputlisting[firstline=3]{bases.R}
+\def\scriptfilename{bases.R}
 
+\scriptfile{\scriptfilename}
+\lstinputlisting[firstline=13]{\scriptfilename}
 
-\vspace{\fill}
 
 \section{Exercices}
 \label{bases:exercices}
@@ -952,62 +913,90 @@ classement[7, ]
 \Opensolutionfile{solutions}[solutions-bases]
 
 \begin{Filesave}{solutions}
-\section*{Chapitre \ref*{bases}}
-\addcontentsline{toc}{section}{Chapitre \protect\ref*{bases}}
+\section*{Chapitre \ref*{chap:bases}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:bases}}
 
 \end{Filesave}
 
+Il est possible de compléter tous les exercices ci-dessous sans avoir
+recours à R, sinon pour vérifier vos réponses. (En fait, les exercices
+sont de peu d'intérêt autrement.)
+
 \begin{exercice}
+  Évaluer les expressions suivantes comme le ferait l'interpréteur R.
   \begin{enumerate}
-  \item Écrire une expression R pour créer la liste suivante:
-<<echo=FALSE>>=
-x <- list(1:5, data=matrix(1:6, 2, 3), numeric(3), test=logical(4))
-@
-<<echo=TRUE>>=
-x
-@ %
-  \item \index{etiquette@étiquette} Extraire les étiquettes de la
-    liste.
-  \item \index{mode} \index{longueur} Trouver le mode et la longueur
-    du quatrième élément de la liste.
-  \item \index{dimension} Extraire les dimensions du second élément de
-    la liste.
-  \item \index{indiçage!liste} Extraire les deuxième et troisième
-    éléments du second élément de la liste.
-  \item Remplacer le troisième élément de la liste par le vecteur
-    \verb|3:8|.
+  \item \verb|1:5 * c(0, 1, 0, 1, 0)|
+  \item \verb|c(2, 7, 1, 4) > 3|
+  \item \verb|c(2, 7, 1, 4) <= c(10, 4)|
+  \item \verb|c(-1, 2, 4)^(3:-2)|
+  \item \verb|c(TRUE, FALSE, FALSE) & c(TRUE, TRUE, FALSE)|
+  \item \verb=c(TRUE, FALSE, FALSE) | !2 < 3=
+  \item \verb|-1:1/0|
+  \item \verb|length(c("a", "abc", "ab"))|
+  \item \verb|x <- c(-1, -2, -3); length(x)|
+  \item \verb|mode(c(45.44, pi, TRUE))|
+  \item \verb|mode(c(5, "5", "cinq"))|
+  \item \verb|length(c(c(1, 3, 6, 7), NULL))|
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-    \item Il y a plusieurs façons de créer les troisième et quatrième
-      éléments de la liste. Le plus simple consiste à utiliser
-      \code{numeric()} et \code{logical()}:
-<<echo=TRUE,eval=FALSE>>=
-x <- list(1:5, data = matrix(1:6, 2, 3), numeric(3),
-          test = logical(4))
+    \item Produit élément par élément entre deux vecteurs.
+<<echo=FALSE>>=
+1:5 * c(0, 1, 0, 1, 0)
 @
-    \item
-<<echo=TRUE,eval=FALSE>>=
-names(x)
+     \item Comparaison élément par élément, le second vecteur étant
+       utilisé quatre fois.
+<<echo=FALSE>>=
+c(2, 7, 1, 4) > 3
 @
-    \item
-<<echo=TRUE,eval=FALSE>>=
-mode(x$test)
-length(x$test)
+     \item Comparaison élément par élément, le second vecteur étant
+       utilisé deux fois.
+<<echo=FALSE>>=
+c(2, 7, 1, 4) <= c(10, 4)
 @
-    \item
-<<echo=TRUE,eval=FALSE>>=
-dim(x$data)
+     \item Élévation à une puissance élément par élément, le premier
+       vecteur étant utilisé deux fois.
+<<echo=FALSE>>=
+c(-1, 2, 4)^(3:-2)
 @
-    \item
-<<echo=TRUE,eval=FALSE>>=
-x[[2]][c(2, 3)]
+     \item «Et» logique élément par élément.
+<<echo=FALSE>>=
+c(TRUE, FALSE, FALSE) & c(TRUE, TRUE, FALSE)
 @
-    \item
-<<echo=TRUE,eval=FALSE>>=
-x[[3]] <- 3:8
+     \item Attention à la priorité des opérations! Elles sont
+       effectuées dans cet ordre: inégalité, négation logique, «ou»
+       logique.
+<<echo=FALSE>>=
+c(TRUE, FALSE, FALSE) | !2 < 3
 @
-    \end{enumerate}
+     \item Encore ici, la génération d'une suite a priorité sur la
+       division.
+<<echo=FALSE>>=
+-1:1/0
+@
+     \item Vecteur de trois chaines de caractères, peu importe leur
+       longueur.
+<<echo=FALSE>>=
+length(c("a", "abc", "ab"))
+@
+     \item
+<<echo=FALSE>>=
+x <- c(-1, -2, -3); length(x)
+@
+     \item La valeur booléenne est convertie en nombre réel.
+<<echo=FALSE>>=
+mode(c(45.44, pi, TRUE))
+@
+     \item Le nombre réel est converti en chaine de caractères.
+<<echo=FALSE>>=
+mode(c(5, "5", "cinq"))
+@
+     \item Concaténer \code{NULL} à un vecteur n'ajoute rien (ou du
+       vide, qui n'a pas de longueur).
+<<echo=FALSE>>=
+length(c(c(1, 3, 6, 7), NULL))
+@
+     \end{enumerate}
   \end{sol}
 \end{exercice}
 
@@ -1016,20 +1005,25 @@ x[[3]] <- 3:8
   Soit \code{x} un vecteur contenant les valeurs d'un échantillon:
   \begin{center}
 <<echo=FALSE>>=
-x <- sample(1:20, 20, replace = TRUE)
+x <- c(18, 11, 10, 2, 19, 9, 12, 15, 13, 12, 1, 6)
 @
 <<echo=TRUE>>=
 x
 @
   \end{center}
-  Écrire une expression R permettant d'extraire les éléments suivants.
+  Écrire des expressions R pour créer ce vecteur dans l'espace de
+  travail et pour extraire les éléments suivants.
   \begin{enumerate}
   \item Le deuxième élément de l'échantillon.
   \item Les cinq premiers éléments de l'échantillon.
   \item Les éléments strictement supérieurs à $14$.
-  \item Tous les éléments sauf les éléments en positions $6$, $10$ et $12$.
+  \item Tous les éléments sauf ceux en positions $6$, $7$ et $12$.
   \end{enumerate}
   \begin{sol}
+    On crée d'abord le vecteur avec
+<<echo=TRUE>>=
+x <- c(18, 11, 10, 2, 19, 9, 12, 15, 13, 12, 1, 6)
+@
     \begin{enumerate}
 \item
 <<echo=TRUE,eval=FALSE>>=
@@ -1045,45 +1039,181 @@ x[x > 14]
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
-x[-c(6, 10, 12)]
+x[-c(6, 7, 12)]
 @
     \end{enumerate}
   \end{sol}
 \end{exercice}
-%\vspace{\fill}
 
 \begin{exercice}
-  \index{indiçage!matrice}
-  Soit \code{x} une matrice $10 \times 7$ obtenue aléatoirement avec
-<<echo=TRUE,eval=FALSE>>=
-x <- matrix(sample(1:100, 70), 7, 10)
-@
-  Écrire des expressions R permettant d'obtenir les éléments de la
-  matrice demandés ci-dessous.
+  Soit $\mat{x} = (x_1, \dots, x_n)$ et $\mat{y} = y_1, \dots, y_n$
+  deux vecteurs de nombres réels. Composer des expressions R pour
+  effectuer les calculs mathématiques ci-dessous. Vous pouvez utiliser
+  les fonctions R suivantes:
+  \begin{itemize}
+  \item \fonction{sum} pour calculer la somme des éléments d'un
+    vecteur;
+  \item \fonction{prod} pour calculer le produit des éléments d'un
+    vecteur;
+  \item \fonction{max} pour calculer le maximum d'un vecteur;
+  \item \fonction{abs} pour calculer la valeur absolue de chacun des
+    éléments d'un vecteur.
+  \end{itemize}
   \begin{enumerate}
-  \item L'élément $(4, 3)$.
-  \item Le contenu de la sixième ligne.
-  \item Les première et quatrième colonnes (simultanément).
-  \item Les lignes dont le premier élément est supérieur à $50$.
+  \item $3 (\mat{x} + \mat{y})$
+  \item $n^{-1} \sum_{i = 1}^n x_i$ (moyenne arithmétique de $\mat{x}$)
+  \item $(\prod_{i = 1}^n x_i)^{1/n}$ (moyenne géométrique de $\mat{x}$)
+  \item $1/(\prod_{i = 1}^n x_i^{-1})$ (moyenne harmonique de
+    $\mat{x}$)
+  \item $\langle \mat{x}, \mat{y} \rangle = \sum_{i = 1}^n x_i y_i$
+    (produit scalaire entre $\mat{x}$ et $\mat{y}$)
+  \item $\|\mat{x} - \mat{y}\|_1 = \sum_{i = 1}^n |x_i -
+    y_i|$ (norme $1$ entre $\mat{x}$ et $\mat{y}$)
+  \item $\|\mat{x} - \mat{y}\|_\infty = \max_{i = 1, \dots, n}(|x_i -
+    y_i|)$ (norme «infini» entre $\mat{x}$ et $\mat{y}$)
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-\item
+    \item
 <<echo=TRUE,eval=FALSE>>=
-x[4, 3]
+3 * (x + y)
 @
-\item
+    \item
 <<echo=TRUE,eval=FALSE>>=
-x[6, ]
+sum(x)/length(x)
 @
-\item
+    \item
 <<echo=TRUE,eval=FALSE>>=
-x[, c(1, 4)]
+prod(x)^(1/length(x))
 @
-\item
+    \item
 <<echo=TRUE,eval=FALSE>>=
-x[x[, 1] > 50, ]
+1/prod(1/x)
 @
+    \item
+<<echo=TRUE,eval=FALSE>>=
+sum(x * y)
+@
+    \item
+<<echo=TRUE,eval=FALSE>>=
+sum(abs(x - y))
+@
+    \item
+<<echo=TRUE,eval=FALSE>>=
+max(abs(x - y))
+@
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Pour chacun des exercices b)--g) de l'exercice précédent, composer
+  une fonction R pour effectuer le calcul demandé. Nommer les
+  fonctions %
+  \code{amean}, %
+  \code{gmean}, %
+  \code{hmean}, %
+  \code{pscal}, %
+  \code{norm1} et %
+  \code{normINF}, %
+  dans l'ordre.
+  \begin{sol}
+    \begin{enumerate}
+      \stepcounter{enumi}
+    \item
+<<echo=TRUE, eval=FALSE>>=
+amean <- function(x) sum(x)/length(x)
+@
+    \item
+<<echo=TRUE, eval=FALSE>>=
+gmean <- function(x) prod(x)^(1/length(x))
+@
+    \item
+<<echo=TRUE, eval=FALSE>>=
+hmean <- function(x) 1/prod(1/x)
+@
+    \item
+<<echo=TRUE, eval=FALSE>>=
+pscal <- function(x, y) sum(x * y)
+@
+    \item
+<<echo=TRUE, eval=FALSE>>=
+norm1 <- function(x, y) sum(abs(x - y))
+@
+    \item
+<<echo=TRUE, eval=FALSE>>=
+normINF <- function(x, y) max(abs(x - y))
+@
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Soit la fonction \code{f} suivante:
+<<echo=FALSE>>=
+f <- function(x, y)
+{
+    g <- function(a)
+        (x - y) * a + a * x
+    g(1 + x * y)
+}
+@
+<<echo=TRUE>>=
+f
+@
+  Évaluer les résultats des appels suivants.
+  \begin{enumerate}
+  \item \code{f(1, 1)}
+  \item \code{f(f(1, 1), 1)}
+  \item \code{f(1, f(f(1, 1), 1))}
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+    \item
+<<echo=FALSE>>=
+f(1, 1)
+@
+    \item
+<<echo=FALSE>>=
+f(f(1, 1), 1)
+@
+    \item
+<<echo=FALSE>>=
+f(1, f(f(1, 1), 1))
+@
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Une fonction R est définie ainsi:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+f <- function(x = 0, y = NULL, z) \meta{corps}
+\end{Verbatim}
+\end{Schunk}
+  Déterminer la valeur des arguments \code{x}, \code{y} et \code{z}
+  dans les appels de fonction ci-dessous.
+  \begin{enumerate}
+  \item \code{f(2, 3, 4)}
+  \item \code{f(2, z = 3, y = 4)}
+  \item \code{f(x = 2, z = 3)}
+  \item \code{f(z = 2, 3, x = 4)}
+  \item \code{f(z = 2)}
+  \item \code{f(z = 2, 3, 4)}
+  \item \code{f(2, 3)}
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+    \item \code{x = 2}, \code{y = 3}, \code{z = 4}
+    \item \code{x = 2}, \code{y = 4}, \code{z = 3}
+    \item \code{x = 2}, \code{y = NULL}, \code{z = 3}
+    \item \code{x = 4}, \code{y = 3}, \code{z = 2}
+    \item \code{x = 0}, \code{y = NULL}, \code{z = 2}
+    \item \code{x = 3}, \code{y = 4}, \code{z = 2}
+    \item \link{http://i0.kym-cdn.com/entries/icons/original/000/000/157/itsatrap.jpg}{C'est un piège!} %
+      Cet appel n'est pas valide puisque l'argument \code{z} est
+      manquant.
     \end{enumerate}
   \end{sol}
 \end{exercice}

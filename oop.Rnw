@@ -8,22 +8,21 @@
 %%% International de Creative Commons.
 %%% http://creativecommons.org/licenses/by-sa/4.0/
 
-\chapter{Fonctions utiles et extensions}
-\label{chap:fonctions}
+\chapter{Programmation R orientée objet}
+\label{chap:oop}
 
 <<echo=FALSE>>=
 options(width=52)
 @
 
 \begin{objectifs}
-\item Utiliser les fonctions R les plus courantes, notamment pour le
-  traitement des vecteurs, le calcul de sommaires et la manipulation
-  des matrices et des tableaux.
-\item Distinguer les concepts de paquetage et de bibliothèque dans R.
-\item Utiliser les fonctionnalités d'un paquetage dans une session de
-  travail R.
-\item Installer de nouveaux paquetages R depuis le site
-  \emph{Comprehensive R Archive Network} (CRAN).
+\item Expliquer les notions de classe, de méthode et de fonction
+  générique telles qu'employées dans le système S3 de R.
+\item Attribuer une classe S3 à un objet.
+\item Utiliser le mécanisme d'héritage des classes.
+\item Créer et utiliser des nouvelles méthodes pour des fonctions
+  génériques, notamment pour \code{print}, \code{summary} et
+  \code{plot}.
 \end{objectifs}
 
 

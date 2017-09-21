@@ -8,22 +8,19 @@
 %%% International de Creative Commons.
 %%% http://creativecommons.org/licenses/by-sa/4.0/
 
-\chapter{Fonctions utiles et extensions}
-\label{chap:fonctions}
+\chapter{Débogage}
+\label{chap:debogage}
 
 <<echo=FALSE>>=
 options(width=52)
 @
 
 \begin{objectifs}
-\item Utiliser les fonctions R les plus courantes, notamment pour le
-  traitement des vecteurs, le calcul de sommaires et la manipulation
-  des matrices et des tableaux.
-\item Distinguer les concepts de paquetage et de bibliothèque dans R.
-\item Utiliser les fonctionnalités d'un paquetage dans une session de
-  travail R.
-\item Installer de nouveaux paquetages R depuis le site
-  \emph{Comprehensive R Archive Network} (CRAN).
+\item Repérer et corriger des erreurs de programmation, syntaxiques et
+  logiques.
+\item Utiliser les outils de débogage de R.
+\item Valider des résultats calculés avec ceux de l'expérimentation et
+  analyser des résultats obtenus.
 \end{objectifs}
 
 

@@ -127,7 +127,7 @@ réinventer», d'une certaine façon la version courte de la célèbre
 \link{https://en.wikipedia.org/wiki/Greenspun\%27s_tenth_rule}{\emph{Greenspun's
     tenth rule of programming}}: %
 \begin{quote}
-  Tout programme en C ou en Fortran suffisamment complexe contient une
+  Tout programme suffisamment complexe en C ou en Fortran comporte une
   mise en œuvre mal spécifiée, pleine de bogues et lente de la moitié
   de Common Lisp.
 \end{quote}
@@ -194,7 +194,7 @@ opérationnelle des applications qu'ils doivent maintenir.
 
 Dès la fin de la décennie 1950, un comité de scientifiques se réunit à
 Zurich pour concevoir ce que l'on voudrait voir devenir le langage de
-programmation standard. De ces rencontres naîtra \index{Algol}Algol
+programmation standard. De ces rencontres naitra \index{Algol}Algol
 (\emph{ALGorithmic Oriented Language}) en 1958. Comme la plupart des
 tentatives de définition d'un standard, c'est un échec: le langage est
 populaire dans les milieux académiques, mais restera peu utilisé dans
@@ -204,7 +204,7 @@ Cela dit, on doit à Algol plusieurs innovations importantes, de telle
 sorte qu'un grand nombre des langages qui verront le jour par la suite
 seront considérés comme ses descendants; le poster
 \link{http://www.oreilly.com/go/languageposter}{\emph{History of
-    Programming Languages}} de O'Reilly Media illustre ce fait à
+    Programming Languages}} de O'Reilly Media illustre ceci à
 merveille. \citet{Hoare:1973} a d'ailleurs cette jolie formule:
 \begin{quote}
   Voici un langage très en avance sur son temps, il n'a pas seulement
@@ -426,10 +426,9 @@ SELECT prenom FROM etudiants WHERE age > 25
   informatiques.
 \end{description}
 
-La plupart des langages d'usage courant combinent d'office, ou
-laissent au programmeur la possibilité de combiner, plusieurs
-paradigmes. Par exemple, le langage {\Cpp} est à la fois un langage
-impératif et orienté objet.
+La plupart des langages d'usage courant combinent d'office, ou du
+moins permettent de combiner, plusieurs paradigmes. Par exemple, le
+langage {\Cpp} est à la fois un langage impératif et orienté objet.
 
 
 \section{Sémantique et syntaxe}
@@ -446,7 +445,7 @@ La sémantique est l'étude de ce que signifie un message ou un
 programme informatique, c'est-à-dire de ce qu'il transmet ou exécute.
 La syntaxe, quant à elle, étudie la structure du message ou du
 programme. En simplifiant, disons que, pour une langue donnée, un
-dictionnaire permet de connaître la sémantique, alors qu'une grammaire
+dictionnaire permet de connaitre la sémantique, alors qu'une grammaire
 décrit la syntaxe \citep{Hebenstreit:semantique}.
 
 Par exemple, exprimons le message «J'ai soif» en anglais. Dire
@@ -456,7 +455,7 @@ signification du message s'en trouve changée. En revanche, avec
 sans que l'erreur de syntaxe n'ait d'abord suscité une hésitation chez
 l'interlocuteur.
 
-Comme pour une langue, la maîtrise d'un langage de programmation exige
+Comme pour une langue, la maitrise d'un langage de programmation exige
 de respecter à la fois les règles de sémantique et les règles de
 syntaxe du langage. Le second volet est relativement facile: si le
 programme compile ou s'exécute, c'est généralement que la syntaxe est
@@ -531,7 +530,7 @@ malveillants sur la plateforme.
 Les systèmes Windows sont livrés avec une trousse de développement
 très restreinte. Les programmeurs doivent donc installer les outils
 nécessaires, souvent sous forme de suites logicielles monolithiques,
-ce qui entraîne dédoublements et, parfois, conflits.
+ce qui entraine dédoublements et, parfois, conflits.
 
 \subsection{Unix}
 \label{sec:informatique:os:unix}
@@ -569,7 +568,7 @@ particulier sa variante libre Linux, équipe l'immense majorité des
 stations de travail, serveurs et supercalculateurs. De plus, bon
 nombre d'applications scientifiques et de langages de programmation
 sont d'abord développés sur des systèmes Unix. Pour ces
-raisons, nous estimons utile pour des programmeurs de connaître les
+raisons, nous estimons utile pour des programmeurs de connaitre les
 quelques «Unix-ismes» ci-dessous.
 
 \begin{itemize}
@@ -607,8 +606,8 @@ fichiers. Seulement, les programmeurs doivent être familiers avec
 quelques grands principes de l'organisation des données dans un
 ordinateur.
 
-Les fichiers sont regroupés dans des répertoires qui, eux-mêmes,
-contiennent des fichiers ou des sous-répertoires. Ce schéma se répète
+Les fichiers sont regroupés dans des répertoires. Ceux-ci contiennent
+eux-mêmes des fichiers ou des sous-répertoires. Ce schéma se répète
 sans limite pratique. Il en résulte une classification sous forme
 d'arbre dont la \emph{racine} est le répertoire contenant
 l'intégralité des fichiers. La \autoref{fig:informatique:fs} présente
@@ -694,20 +693,18 @@ sera monté sur le répertoire \code{/} et le second, sur le répertoire
 requêtes vers le bon disque. L'utilisateur n'a jamais à se préoccuper
 de l'organisation physique des disques.
 
-\osxbox{Les clés USB, disques durs externes ou disques réseau sont
-  montés dans le répertoire \code{/Volumes} sous macOS. Le répertoire
+\osxbox{Sous macOS, Les clés USB, disques durs externes ou disques réseau sont
+  montés dans le répertoire \code{/Volumes}. Le répertoire
   n'existe pas lorsque aucun disque externe n'est connecté.}
 
 Le système de fichiers sous Unix est généralement sensible à la casse.
 La barre oblique \code{/} sépare les noms de répertoires dans les
 chemins d'accès.
 
-Les fichiers dont le nom débute par un point «\verb=.=» --- souvent
-des fichiers de configuration, tel que mentionné à la
-\autoref{sec:informatique:os:unix} --- sont des fichiers cachés. À
-moins de demander explicitement de les afficher, ils n'apparaissent
-donc pas dans la liste des fichiers à la ligne de commande ou dans
-les interfaces graphiques.
+Les fichiers dont le nom débute par un point «\verb=.=» sont des
+fichiers cachés. À moins de demander explicitement de les afficher,
+ils n'apparaissent donc pas dans la liste des fichiers à la ligne de
+commande ou dans les interfaces graphiques.
 
 \subsection{Chemin d'accès}
 \label{sec:informatique:fs:path}
@@ -795,8 +792,12 @@ sous Windows peuvent installer les couches logicielles
 égard la distribution \link{http://www.msys2.org}{MSYS2}\index{MSYS2}.
 Le programme \code{MSYS} fournit un interpréteur de commandes
 \index{Bash}Bash \citep{bash} comme en standard sur les systèmes Unix.
-Dans cet environnement, on identifie la racine \code{C:\textbackslash}
-du système de fichier d'un disque par \code{/c/}.
+Un interpréteur Bash est également fourni avec
+\link{https://git-scm.com/downloads}{Git for Windows}.
+
+À la ligne de commande Unix sous Windows, on identifie la racine
+\code{C:\textbackslash} du système de fichier d'un disque par
+\code{/c/}.
 
 \subsection{Ligne de commande macOS}
 \label{sec:informatique:cli:macos}
@@ -813,7 +814,7 @@ au lancement de l'interpréteur est le répertoire personnel
 \subsection{Commandes essentielles}
 \label{sec:informatique:cli:commandes}
 
-Les programmeurs doivent connaître les rudiments de la ligne de
+Les programmeurs doivent connaitre les rudiments de la ligne de
 commande. Cela dit, comme nous ne pouvons nous étendre sur le sujet,
 nous limiterons notre présentation aux commandes ci-dessous qui
 permettent de se déplacer dans le système de fichiers et d'afficher
@@ -884,8 +885,8 @@ la liste des fichiers d'un répertoire.
     \begin{equation*}
       A \times (B + C) \div D.
     \end{equation*}
-  \item Les expressions suivantes en notation préfixée et suffixée,
-    dans l'ordre, effectuent la même opération arithmétique.
+  \item Les opérations suivantes exprimées en notation préfixée et
+    suffixée, dans l'ordre, effectuent la même opération arithmétique.
     \begin{gather*}
       \times\, A\, +\, B\, \div\, C\; D \\
       A\; B\; C\; D\, \div +\, \times
@@ -903,7 +904,10 @@ la liste des fichiers d'un répertoire.
 
 \begin{exercice}[nosol]
   Démarrer un interpréteur de commandes Bash. Si le système
-  d'exploitation de votre ordinateur est Windows, installer d'abord
+  d'exploitation de votre ordinateur est Windows, vous pouvez utiliser
+  la ligne de commande Git~Bash de
+  \link{https://git-scm.com/downloads}{\emph{Git for Windows}} ou la
+  ligne de commande MSYS de
   \index{MSYS2}\link{http://www.msys2.org}{MSYS2}.
   \begin{enumerate}
   \item Afficher le répertoire courant. Vérifier qu'il correspond à
