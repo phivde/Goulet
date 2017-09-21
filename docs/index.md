@@ -28,12 +28,13 @@ Vincent Goulet, professeur titulaire, [École d'actuariat](https://www.act.ulava
 
 ## Édition
 
-2017.09-1a ([notes de mise à jour]({{ site.github.repository_url }}/releases/tag/v2017.09-1a/))
+2017.09-2 ([notes de mise à jour]({{ site.github.repository_url }}/releases/tag/v2017.09-2/))
 
 ## Table des matières abrégée
 
 1\. Éléments d'informatique pour programmeurs  
 2\. Présentation de R  
+3\. Bases du langage R  
 A. RStudio: une introduction  
 B. GNU Emacs et ESS: la base  
 C. Réponses des exercices  
