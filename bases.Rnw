@@ -87,8 +87,8 @@ utiles pour la programmation mathématique et l'analyse de données.
 Nous reviendrons sur leurs caractéristiques à la
 \autoref{sec:bases:objets}.
 
-Quant aux procédures fondamentales, nous pourrions les classer en
-quatre grandes catégories:
+Nous pouvons classer les procédures fondamentales en quatre grandes
+catégories:
 \begin{itemize}
 \item arithmétique: \verb|+ - * / ^ < >= ==|, etc.;
 \item logique: \verb=& | !=\,;
@@ -143,23 +143,23 @@ certains opérateurs dans les chapitres subséquents.
 \section{Commandes R}
 \label{sec:bases:commandes}
 
-L'utilisateur de R interagit avec l'interpréteur R en entrant des
-commandes à la ligne de commande. Toute commande R est soit une
-\emph{expression}\index{expression}, soit une
+Nous l'avons déjà vu, l'interaction avec l'interpréteur R se fait par
+l'intermédiaire de commandes entrées à la ligne de commande. Or, toute
+commande R est soit une \emph{expression}\index{expression}, soit une
 \emph{affectation}\index{affectation}.
 
-\subsection{Expressions}
-\label{sec:bases:commandes:expressions}
+\subsection{Expression}
+\label{sec:bases:commandes:expression}
 
-Une expression R est une combinaison de symboles (noms de variables)
-et de procedures. Toute expression a une valeur. Le symbole d'une
-donnée fondamentale représente cette donnée, comme on pourrait s'y
-attendre.
+Une \index{expression}expression R est une combinaison de symboles
+(noms de variables) et de procedures. Toute expression a une valeur.
+Le symbole d'une donnée fondamentale représente cette donnée, comme on
+pourrait s'y attendre.
 
 Lorsqu'une expression est entrée à la ligne de commande de
 l'interpréteur, elle est immédiatement évaluée et le résultat est
-affiché sous l'invite de commande (le symbole \verb|>| suivi d'une
-espace).
+affiché sous l'invite de commande \verb*|> | (le symbole \verb|>|
+suivi d'une espace).
 <<echo=TRUE>>=
 42
 3 + 2i
@@ -169,7 +169,7 @@ cos(pi/4)
 @
 
 Lorsqu'une commande n'est pas syntaxiquement complète, l'invite de
-commande devient \verb*|+ | pour nous inciter à compléter la
+commande se change en \verb*|+ | pour nous inciter à compléter la
 commande.
 <<echo=TRUE>>=
 2 *
@@ -184,8 +184,8 @@ d'évaluation, comme en mathématiques.
 (2 + ((2 + 4 * 6) * (3 + 5 + 7)))/2
 @
 
-\subsection{Affectations}
-\label{sec:bases:commandes:affectations}
+\subsection{Affectation}
+\label{sec:bases:commandes:affectation}
 
 Dans une affectation, une expression est évaluée, mais le résultat est
 stocké dans un \emph{objet} (ou \emph{variable}) dans l'espace de
@@ -214,22 +214,23 @@ est rarement utilisé.
 
 \cautionbox{Évitez d'utiliser l'opérateur \,\fonction{=}\, pour
   affecter une valeur à une variable. Cette pratique est susceptible
-  d'engendrer de la confusion avec les constructions \code{nom =
+  d'engendrer de la confusion avec les constructions \code{symbole =
     valeur} dans les appels de fonction. Les règles de syntaxe de R
   commandent d'utiliser l'opérateur \code{<-} pour l'affectation,
   point.}
 
-\subsection{Regroupements de commandes}
-\label{sec:bases:commandes:regroupements}
+\subsection{Regroupement de commandes}
+\label{sec:bases:commandes:regroupement}
 
-Dans les fichiers de script ou à la ligne de commande, on sépare les
-commandes R les unes des autres par un \index{;@\code{;}}point-virgule
-ou par un retour à la ligne. On considère généralement comme du
-mauvais style d'employer les deux, c'est-à-dire de placer des
-points-virgules à la fin de chaque ligne de code, surtout dans les
-fichiers de script. Le point-virgule peut être utile pour séparer deux
-courtes expressions ou plus sur une même ligne. C'est le seul emploi
-que nous faisons du point-virgule.
+Dans les fichiers de script ou à la ligne de commande, on sépare
+généralement les commandes R les unes des autres par un retour à la
+ligne. Il est également possible de séparer les commandes par un
+\index{;@\code{;}}point-virgule. Employer les deux --- placer des
+points-virgules à la fin de chaque ligne de code --- est considéré
+comme du mauvais style, surtout dans les fichiers de script. Le
+point-virgule peut être utile pour séparer deux courtes expressions ou
+plus sur une même ligne. C'est le seul emploi que nous faisons du
+point-virgule.
 <<echo=TRUE>>=
 a <- 5; a + 2
 @
@@ -252,8 +253,6 @@ retournée ni affichée à l'écran.
     b <- a
 }
 @
-
-
 
 
 \section{Objets R}
@@ -420,8 +419,8 @@ utilisées dans les applications statistiques et en analyse de données.
 Pour pleinement tirer profit de ces objets, il faut connaitre leurs
 caractéristiques spéciales.
 
-L'objet \code{NA} sert à représenter une donnée manquante. Chose un
-peu surprenante, c'est un objet de mode \mode{logical}. Cependant,
+L'objet \code{NA} sert à représenter une donnée manquante. Chose
+quelque peu surprenante, c'est un objet de mode \mode{logical}. Cependant,
 \code{NA} ne peut être considéré ni \code{TRUE}, ni \code{FALSE}.
 <<echo=TRUE>>=
 mode(NA)
@@ -465,11 +464,11 @@ mode(NULL)
 length(NULL)
 1 + NULL
 @
-Toute opération avec \code{NULL} retourne un objet de longueur
-nulle (et du mode approprié), y compris la comparaison. Par
-conséquent, la seule façon de tester si un objet est \code{NULL} est
-avec la fonction \Fonction{is.null}.
+Ajouter \code{NULL} à un objet n'ajoute rien. Par ailleurs, la seule
+façon de tester si un objet est \code{NULL} est avec la fonction
+\Fonction{is.null}.
 <<echo=TRUE>>=
+c(3, NULL)
 x <- NULL
 x == NULL
 is.null(NULL)
@@ -482,8 +481,8 @@ is.null(NULL)
 Les attributs\Index{attribut} d'un objet sont des éléments
 d'information additionnels attachées à cet objet. Le
 \autoref{tab:attributs} fournit la liste des attributs les plus
-fréquemment utilisés. À chacun correspond une fonction du même nom
-servant à extraire l'attribut d'un objet.
+fréquemment utilisés. À chacun des attributs du tableau correspond une
+fonction du même nom servant à extraire l'attribut d'un objet.
 
 \begin{table}
   \centering
@@ -540,8 +539,8 @@ dans lesquels tous les éléments sont du même mode.
 \subsection{Création de vecteurs}
 \label{sec:bases:vecteurs:creation}
 
-La fonction de concaténation \Fonction{c} constitue la fonction de
-base pour créer un vecteur.
+La fonction de base pour créer un vecteur est la fonction de
+concaténation \Fonction{c}.
 <<echo=TRUE>>=
 (x <- c(2, 5.1, 42))
 @
@@ -558,17 +557,17 @@ character(10)
 @
 
 Il est possible --- et souvent souhaitable --- de nommer les éléments
-d'un vecteur; on dit qu'on leur attribue une \emph{étiquette}. Ces
-étiquettes font alors partie des attributs du vecteur. Il y a deux
-grandes façons de procéder: en spécificant les noms dès la création du
-vecteur, ou à posteriori en ajoutant l'attribut \attribut{names} au
-vecteur.
+d'un vecteur; on dit qu'on leur attribue une \emph{étiquette}. Les
+étiquettes sont enregistrées dans l'attribut \attribut{names} du
+vecteur. Il y a deux grandes façons de procéder: en spécificant les
+noms dès la création du vecteur, ou à posteriori en ajoutant
+l'attribut au vecteur.
 <<echo=TRUE>>=
 (v <- c(a = 1, b = 2, c = 5))
 names(v)
 @
 <<echo=TRUE>>=
-v <- c(1, 2, 5)
+(v <- c(1, 2, 5))
 names(v) <- c("a", "b", "c")
 v
 @
@@ -584,34 +583,37 @@ des éléments d'un objet avec la construction
 construction \verb|x[i] <- y|\Indexfonction{[<-}.
 
 Dans un cas comme dans l'autre, il faut d'abord indicer le vecteur. Il
-existe cinq façons de le faire dans le langage R, toujours à
-l'intérieur de crochets \code{[~]}.
+existe cinq façons de le faire, toujours à l'intérieur de crochets
+\code{[~]}.
 \begin{enumerate}
-\item Avec un vecteur d'entiers positifs. Les éléments se trouvant aux
-  positions correspondant aux entiers sont extraits du vecteur, dans
-  l'ordre. C'est la technique la plus courante.
+\item Avec un vecteur d'entiers positifs (extraction par position).
+  Les éléments se trouvant aux positions correspondant aux entiers
+  sont extraits du vecteur, dans l'ordre. C'est la technique la plus
+  courante.
 <<echo=TRUE>>=
 x <- c(A = 2, B = 4, C = -1, D = -5, E = 8)
 x[c(1, 3)]
 @
-\item Avec un vecteur d'entiers négatifs. Les éléments se trouvant aux
-  positions correspondant aux entiers négatifs sont \emph{éliminés} du
-  vecteur.
+\item Avec un vecteur d'entiers négatifs (suppression par position).
+  Les éléments se trouvant aux positions correspondant aux entiers
+  négatifs sont \emph{éliminés} du vecteur.
 <<echo=TRUE>>=
 x[c(-2, -3)]
 @
-\item Avec un vecteur booléen. Le vecteur d'indiçage doit alors être
-  de la même longueur que le vecteur indicé. Les éléments
-  correspondant à une valeur \code{TRUE} sont extraits du vecteur,
-  alors que ceux correspondant à \code{FALSE} sont éliminés.
+\item Avec un vecteur booléen (extraction par critère). Le vecteur
+  d'indiçage doit alors être de la même longueur que le vecteur
+  indicé. Les éléments correspondant à une valeur \code{TRUE} sont
+  extraits du vecteur, alors que ceux correspondant à \code{FALSE}
+  sont éliminés.
 <<echo=TRUE>>=
 x > 0
 x[x > 0]
 @
-\item Avec un vecteur de chaines de caractères. Les éléments
-  dont l'étiquette correspond à l'une des chaines sont extraits du
-  vecteur. Ce mode d'indiçage par le nom permet d'extraire des élément
-  d'un vecteur indépendemment de leur position dans celui-ci.
+\item Avec un vecteur de chaines de caractères (extraction par nom).
+  Les éléments dont l'étiquette correspond à l'une des chaines sont
+  extraits du vecteur. Ce mode d'indiçage par le nom a comme principal
+  avantage de permettre l'extraction d'éléments d'un vecteur
+  indépendemment de leur position dans celui-ci.
 <<echo=TRUE>>=
 x[c("B", "D")]
 @
@@ -641,8 +643,8 @@ avoir recours à des procédures itératives (boucles).
 
 Les procédures fondamentales de la \autoref{sec:bases:fondamentales}
 peuvent toutes opérer sur les vecteurs en effectuant les opérations
-\emph{élément par élément}. C'est la première règle de base des
-opérations arithmétiques dans R.
+\emph{élément par élément}. C'est la première règle de base de
+l'arithmétique vectorielle dans R.
 <<echo=TRUE>>=
 c(1, 2, 3) + c(4, 5, 6)
 1:3 * 4:6
@@ -680,6 +682,9 @@ taille d'un objet plus court
 \end{Soutput}
 \end{Schunk}
 
+\cautionbox{La régle de recyclage des vecteurs fait en sorte qu'il y a
+  très peu d'erreurs de longueur dans R. Qu'une expression soit
+  valide ne signifie donc pas qu'elle effectue le bon calcul!}
 
 \section{Fonctions}
 \label{sec:bases:fonctions}
@@ -781,53 +786,57 @@ La syntaxe exacte de la définition d'une fonction est la suivante:
 \end{Schunk}
 
 \begin{itemize}
+\item \meta{nom} est le nom de la fonction (les règles pour les noms
+  de fonctions étant les mêmes que celles présentées à la
+  \autoref{sec:bases:objets:noms} pour tout autre objet).
 \item \meta{arguments} est la liste des arguments formels de la
   fonction, séparés par des virgules.
 \item \meta{corps} est une expression ou un groupe d'expressions
   réunies par des accolades, tel qu'expliqué à la
-  \autoref{sec:bases:commandes:regroupements}.
-\item \meta{nom} est le nom de la fonction (les règles pour les noms
-  de fonctions étant les mêmes que celles présentées à la
-  \autoref{sec:bases:objets:noms} pour tout autre objet).
+  \autoref{sec:bases:commandes:regroupement}.
 \end{itemize}
+
+Nous souhaitons généralement attribuer un nom à une fonction, mais
+c'est tout à fait optionnel. En effet, l'appel à \fonction{function}
+retourne déjà une fonction et si aucun nom n'est attribué à cet objet,
+on obtient ce qui est appelé une \emph{fonction anonyme}. Les
+fonctions anonymes sont particulièrement utiles avec les fonctions
+d'application qui seront étudiées au \autoref{chap:application}.
 
 Une fonction peut n'avoir aucun argument formel ou plusieurs. Il n'y a
 pas de limite pratique au nombre d'arguments formels que peut avoir
 une fonction. Les arguments formels peuvent être des symboles, des
 constructions de la forme \code{symbole = défaut}, ou encore
 l'argument formel spécial `\code{...}'.
-\begin{itemize}
-\item Lorsqu'un symbole seul est utilisé, il indique le nom de
-  l'argument. L'objet de ce nom sera disponible à l'intérieur de la
-  fonction.
+
+Lorsqu'un symbole seul est utilisé comme argument, il indique le nom
+de celui-ci. L'objet de ce nom sera disponible à l'intérieur de la
+fonction.
 <<echo=TRUE>>=
 f <- function(x) 2 * x + 1
 f(2)
 @
-\item La construction \code{symbole = défaut} indique la valeur par
-  défaut de l'argument \code{symbole}. En d'autres termes, c'est la
-  valeur de l'argument si aucune valeur n'est spécifiée dans l'appel
-  de la fonction.
+
+La construction \code{symbole = défaut} indique la valeur par défaut
+de l'argument \code{symbole}. En d'autres termes, c'est la valeur de
+l'argument si aucune valeur n'est spécifiée dans l'appel de la
+fonction.
 <<echo=TRUE>>=
 f <- function(x = 0) 2 * x + 1
 f(2)
 f()
 @
-\item L'argument spécial `\code{...}' peut contenir un nombre
-  arbitraire d'arguments. La fonction y ayant recours se trouve donc à
-  accepter un nombre variable d'arguments. On utilise généralement
-  `\code{...}' pour passer des arguments tels quels à une autre
-  fonction qui, elle, saura quoi faire de ces arguments.
-\end{itemize}
 
-Nous souhaitons généralement attribuer un nom à une fonction, mais
-c'est tout à fait optionnel. En effet, l'appel à \fonction{function}
-retourne déjà une fonction et si aucun nom ne lui est attribué, on
-obtient ce qui est appelé une \emph{fonction anonyme}. Les fonctions
-anonymes sont particulièrement utiles avec les fonctions d'application
-qui seront étudiées au \autoref{chap:application}.
+Enfin, l'argument spécial `\code{...}' peut contenir un nombre
+arbitraire d'arguments. La fonction y ayant recours se trouve donc à
+accepter un nombre variable d'arguments. On utilise généralement
+`\code{...}' pour passer des arguments tels quels à une autre fonction
+qui, elle, saura quoi faire de ces arguments. On trouvera un meilleur
+exemple à la \autoref{bases:exemples} que ce que nous pourrions faire
+ici en quelques lignes.
 
-\subsection{Appels de fonctions}
+
+\subsection{Appel d'une fonction}
 \label{sec:bases:fonctions:appel}
 
 Nous avons déjà évoqué certaines des règles qui régissent les appels
@@ -838,24 +847,20 @@ arguments, dont seul le premier n'a pas de valeur par défaut.
 f <- function(x, y = 0, p = 2) sum(abs(x - y)^p)
 @
 
-En premier lieu, l'interpréteur R reconnait un appel de fonction au
-fait que le nom de l'objet est suivi de parenthèses \code{(~)}.
-
-Ensuite, l'ordre des arguments dans la définition de la fonction est
-important. Nous avons deux choix au moment d'appeler une fonction:
-spécifier les valeurs des arguments dans le bon ordre, ou nommer
-explicitement les arguments avec une construction de la forme
-\code{symbole = expression}, auquel cas l'ordre n'importe plus. Il est
-beaucoup plus prudent et \emph{fortement recommandé} de spécifier les
-arguments par leur nom, surtout après les deux ou trois premiers
-arguments.
+L'ordre des arguments dans la définition de la fonction est important.
+Nous avons deux choix au moment d'appeler une fonction: spécifier les
+valeurs des arguments dans le bon ordre, ou nommer explicitement les
+arguments avec une construction de la forme \code{symbole =
+  expression}, auquel cas l'ordre n'importe plus. Il est beaucoup plus
+prudent et \emph{fortement recommandé} de spécifier les arguments par
+leur nom, surtout après les deux ou trois premiers arguments.
 <<echo=TRUE>>=
 f(c(3, 2), c(1, 1), 2)
 f(y = c(1, 1), c(3, 2), 2)
 f(y = c(1, 1), p = 2, c(3, 2))
 @
 
-Il n'est pas nécesaire de spécifier une valeur pour un argument
+Il n'est pas nécessaire de spécifier une valeur pour un argument
 disposant d'une valeur par défaut. Cependant, si l'on omet un tel
 argument, il faudra nommer les arguments qui suivent, le cas échéant.
 <<echo=TRUE>>=
@@ -867,21 +872,30 @@ f(c(3, 2), p = 3)
 pairage entre les arguments d'une fonction et des valeurs qui lui sont
 passées.
 
+\tipbox{L'interpréteur R reconnait un appel de fonction au fait que le
+  nom de l'objet est suivi de parenthèses \code{(~)}.}
+
 \subsection{Retourner des résultats}
 \label{sec:bases:fonctions:resultats}
 
 La plupart des fonctions sont écrites dans le but de retourner un
 résultat. Or, les règles d'interprétation d'un regroupement
 d'expressions présentées à la
-\autoref{sec:bases:commandes:regroupements} s'appliquent ici au corps
-de la fonction: une fonction tout simplement le résultat de la
-\emph{dernière expression} du corps de la fonction.
+\autoref{sec:bases:commandes:regroupement} s'appliquent ici au corps
+de la fonction: une fonction retourne tout simplement le résultat de
+sa \emph{dernière expression}.
 
 On évitera donc que la dernière expression soit une affectation, car
 la fonction ne retournera alors rien et on ne pourra utiliser une
 construction de la forme \code{x <- f()} pour affecter le résultat de
 la fonction à une variable.
 
+\cautionbox{Il existe une fonction \fonction{return} pour terminer
+  immédiatement l'exécution d'une fonction et retourner un résultat;
+  nous la présenterons avec les structures de contrôle au
+  \autoref{chap:application}. Cependant, l'utilisation de
+  \code{return} à la toute fin d'une fonction est tout à fait inutile
+  et c'est considéré comme du mauvais style en R.}
 
 
 \section{Exemples}
@@ -890,7 +904,7 @@ la fonction à une variable.
 \def\scriptfilename{bases.R}
 
 \scriptfile{\scriptfilename}
-\lstinputlisting[firstline=3]{\scriptfilename}
+\lstinputlisting[firstline=13]{\scriptfilename}
 
 \vspace{\fill}
 
@@ -900,62 +914,90 @@ la fonction à une variable.
 \Opensolutionfile{solutions}[solutions-bases]
 
 \begin{Filesave}{solutions}
-\section*{Chapitre \ref*{bases}}
-\addcontentsline{toc}{section}{Chapitre \protect\ref*{bases}}
+\section*{Chapitre \ref*{chap:bases}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:bases}}
 
 \end{Filesave}
 
+Il est possible de compléter tous les exercices ci-dessous sans avoir
+recours à R, sinon pour vérifier vos réponses. (En fait, les exercices
+sont de peu d'intérêt autrement.)
+
 \begin{exercice}
+  Évaluer les expressions suivantes comme le ferait l'interpréteur R.
   \begin{enumerate}
-  \item Écrire une expression R pour créer la liste suivante:
-<<echo=FALSE>>=
-x <- list(1:5, data=matrix(1:6, 2, 3), numeric(3), test=logical(4))
-@
-<<echo=TRUE>>=
-x
-@ %
-  \item \index{etiquette@étiquette} Extraire les étiquettes de la
-    liste.
-  \item \index{mode} \index{longueur} Trouver le mode et la longueur
-    du quatrième élément de la liste.
-  \item \index{dimension} Extraire les dimensions du second élément de
-    la liste.
-  \item \index{indiçage!liste} Extraire les deuxième et troisième
-    éléments du second élément de la liste.
-  \item Remplacer le troisième élément de la liste par le vecteur
-    \verb|3:8|.
+  \item \verb|1:5 * c(0, 1, 0, 1, 0)|
+  \item \verb|c(2, 7, 1, 4) > 3|
+  \item \verb|c(2, 7, 1, 4) <= c(10, 4)|
+  \item \verb|c(-1, 2, 4)^(3:-2)|
+  \item \verb|c(TRUE, FALSE, FALSE) & c(TRUE, TRUE, FALSE)|
+  \item \verb=c(TRUE, FALSE, FALSE) | !2 < 3=
+  \item \verb|-1:1/0|
+  \item \verb|length(c("a", "abc", "ab"))|
+  \item \verb|x <- c(-1, -2, -3); length(x)|
+  \item \verb|mode(c(45.44, pi, TRUE))|
+  \item \verb|mode(c(5, "5", "cinq"))|
+  \item \verb|length(c(c(1, 3, 6, 7), NULL))|
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-    \item Il y a plusieurs façons de créer les troisième et quatrième
-      éléments de la liste. Le plus simple consiste à utiliser
-      \code{numeric()} et \code{logical()}:
-<<echo=TRUE,eval=FALSE>>=
-x <- list(1:5, data = matrix(1:6, 2, 3), numeric(3),
-          test = logical(4))
+    \item Produit élément par élément entre deux vecteurs.
+<<echo=FALSE>>=
+1:5 * c(0, 1, 0, 1, 0)
 @
-    \item
-<<echo=TRUE,eval=FALSE>>=
-names(x)
+     \item Comparaison élément par élément, le second vecteur étant
+       utilisé quatre fois.
+<<echo=FALSE>>=
+c(2, 7, 1, 4) > 3
 @
-    \item
-<<echo=TRUE,eval=FALSE>>=
-mode(x$test)
-length(x$test)
+     \item Comparaison élément par élément, le second vecteur étant
+       utilisé deux fois.
+<<echo=FALSE>>=
+c(2, 7, 1, 4) <= c(10, 4)
 @
-    \item
-<<echo=TRUE,eval=FALSE>>=
-dim(x$data)
+     \item Élévation à une puissance élément par élément, le premier
+       vecteur étant utilisé deux fois.
+<<echo=FALSE>>=
+c(-1, 2, 4)^(3:-2)
 @
-    \item
-<<echo=TRUE,eval=FALSE>>=
-x[[2]][c(2, 3)]
+     \item «Et» logique élément par élément.
+<<echo=FALSE>>=
+c(TRUE, FALSE, FALSE) & c(TRUE, TRUE, FALSE)
 @
-    \item
-<<echo=TRUE,eval=FALSE>>=
-x[[3]] <- 3:8
+     \item Attention à la priorité des opérations! Elles sont
+       effectuées dans cet ordre: inégalité, négation logique, «ou»
+       logique.
+<<echo=FALSE>>=
+c(TRUE, FALSE, FALSE) | !2 < 3
 @
-    \end{enumerate}
+     \item Encore ici, la génération d'une suite a priorité sur la
+       division.
+<<echo=FALSE>>=
+-1:1/0
+@
+     \item Vecteur de trois chaines de caractères, peu importe leur
+       longueur.
+<<echo=FALSE>>=
+length(c("a", "abc", "ab"))
+@
+     \item
+<<echo=FALSE>>=
+x <- c(-1, -2, -3); length(x)
+@
+     \item La valeur booléenne est convertie en nombre réel.
+<<echo=FALSE>>=
+mode(c(45.44, pi, TRUE))
+@
+     \item Le nombre réel est converti en chaine de caractères.
+<<echo=FALSE>>=
+mode(c(5, "5", "cinq"))
+@
+     \item Concaténer \code{NULL} à un vecteur n'ajoute rien (ou du
+       vide, qui n'a pas de longueur).
+<<echo=FALSE>>=
+length(c(c(1, 3, 6, 7), NULL))
+@
+     \end{enumerate}
   \end{sol}
 \end{exercice}
 
@@ -964,20 +1006,25 @@ x[[3]] <- 3:8
   Soit \code{x} un vecteur contenant les valeurs d'un échantillon:
   \begin{center}
 <<echo=FALSE>>=
-x <- sample(1:20, 20, replace = TRUE)
+x <- c(18, 11, 10, 2, 19, 9, 12, 15, 13, 12, 1, 6)
 @
 <<echo=TRUE>>=
 x
 @
   \end{center}
-  Écrire une expression R permettant d'extraire les éléments suivants.
+  Créer ce vecteur dans l'environnement de travail, puis écrire des
+  expressions R permettant d'extraire les éléments suivants.
   \begin{enumerate}
   \item Le deuxième élément de l'échantillon.
   \item Les cinq premiers éléments de l'échantillon.
   \item Les éléments strictement supérieurs à $14$.
-  \item Tous les éléments sauf les éléments en positions $6$, $10$ et $12$.
+  \item Tous les éléments sauf ceux en positions $6$, $7$ et $12$.
   \end{enumerate}
   \begin{sol}
+    On crée d'abord le vecteur avec
+<<echo=TRUE>>=
+x <- c(18, 11, 10, 2, 19, 9, 12, 15, 13, 12, 1, 6)
+@
     \begin{enumerate}
 \item
 <<echo=TRUE,eval=FALSE>>=
@@ -993,44 +1040,180 @@ x[x > 14]
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
-x[-c(6, 10, 12)]
+x[-c(6, 7, 12)]
 @
     \end{enumerate}
   \end{sol}
 \end{exercice}
-%\vspace{\fill}
 
 \begin{exercice}
-  \index{indiçage!matrice}
-  Soit \code{x} une matrice $10 \times 7$ obtenue aléatoirement avec
-<<echo=TRUE,eval=FALSE>>=
-x <- matrix(sample(1:100, 70), 7, 10)
-@
-  Écrire des expressions R permettant d'obtenir les éléments de la
-  matrice demandés ci-dessous.
+  Soit $\mat{x} = (x_1, \dots, x_n)$ et $\mat{y} = y_1, \dots, y_n$
+  deux vecteurs de nombres réels. Composer des expressions R pour
+  effectuer les calculs mathématiques ci-dessous. Vous pouvez utiliser
+  les fonctions R suivantes:
+  \begin{itemize}
+  \item \fonction{sum} pour calculer la somme des éléments d'un
+    vecteur;
+  \item \fonction{prod} pour calculer le produit des éléments d'un
+    vecteur;
+  \item \fonction{max} pour calculer le maximum d'un vecteur;
+  \item \fonction{abs} pour calculer la valeur absolue de chacun des
+    éléments d'un vecteur.
+  \end{itemize}
   \begin{enumerate}
-  \item L'élément $(4, 3)$.
-  \item Le contenu de la sixième ligne.
-  \item Les première et quatrième colonnes (simultanément).
-  \item Les lignes dont le premier élément est supérieur à $50$.
+  \item $3 (\mat{x} + \mat{y})$
+  \item $n^{-1} \sum_{i = 1}^n x_i$ (moyenne arithmétique de $\mat{x}$)
+  \item $(\prod_{i = 1}^n x_i)^{1/n}$ (moyenne géométrique de $\mat{x}$)
+  \item $1/(\prod_{i = 1}^n x_i^{-1})$ (moyenne harmonique de
+    $\mat{x}$)
+  \item $\langle \mat{x}, \mat{y} \rangle = \sum_{i = 1}^n x_i y_i$
+    (produit scalaire entre $\mat{x}$ et $\mat{y}$)
+  \item $\|\mat{x} - \mat{y}\|_1 = \sum_{i = 1}^n |x_i -
+    y_i|$ (norme $1$ entre $\mat{x}$ et $\mat{y}$)
+  \item $\|\mat{x} - \mat{y}\|_\infty = \max_{i = 1, \dots, n}(|x_i -
+    y_i|)$ (norme «infini» entre $\mat{x}$ et $\mat{y}$)
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-\item
+    \item
 <<echo=TRUE,eval=FALSE>>=
-x[4, 3]
+3 * (x + y)
 @
-\item
+    \item
 <<echo=TRUE,eval=FALSE>>=
-x[6, ]
+sum(x)/length(x)
 @
-\item
+    \item
 <<echo=TRUE,eval=FALSE>>=
-x[, c(1, 4)]
+prod(x)^(1/length(x))
 @
-\item
+    \item
 <<echo=TRUE,eval=FALSE>>=
-x[x[, 1] > 50, ]
+1/prod(1/x)
+@
+    \item
+<<echo=TRUE,eval=FALSE>>=
+sum(x * y)
+@
+    \item
+<<echo=TRUE,eval=FALSE>>=
+sum(abs(x - y))
+@
+    \item
+<<echo=TRUE,eval=FALSE>>=
+max(abs(x - y))
+@
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Pour chacun des exercices b)--g) de l'exercice précédent, composer
+  une fonction R pour effectuer le calcul demandé. Nommer les
+  fonctions %
+  \code{amean}, %
+  \code{gmean}, %
+  \code{hmean}, %
+  \code{pscal}, %
+  \code{norm1} et %
+  \code{normINF}, %
+  dans l'ordre.
+  \begin{sol}
+    \begin{enumerate}
+      \stepcounter{enumi}
+    \item
+<<echo=TRUE, eval=FALSE>>=
+amean <- function(x) sum(x)/length(x)
+@
+    \item
+<<echo=TRUE, eval=FALSE>>=
+gmean <- function(x) prod(x)^(1/length(x))
+@
+    \item
+<<echo=TRUE, eval=FALSE>>=
+hmean <- function(x) 1/prod(1/x)
+@
+    \item
+<<echo=TRUE, eval=FALSE>>=
+pscal <- function(x, y) sum(x * y)
+@
+    \item
+<<echo=TRUE, eval=FALSE>>=
+norm1 <- function(x, y) sum(abs(x - y))
+@
+    \item
+<<echo=TRUE, eval=FALSE>>=
+normINF <- function(x, y) max(abs(x - y))
+@
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Une fonction R est définie ainsi:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+f <- function(x = 0, y = NULL, z) \meta{corps}
+\end{Verbatim}
+\end{Schunk}
+  Déterminer la valeur des arguments \code{x}, \code{y} et \code{z}
+  dans les appels de fonction ci-dessous.
+  \begin{enumerate}
+  \item \code{f(2, 3, 4)}
+  \item \code{f(2, z = 3, y = 4)}
+  \item \code{f(x = 2, z = 3)}
+  \item \code{f(z = 2, 3, x = 4)}
+  \item \code{f(z = 2)}
+  \item \code{f(z = 2, 3, 4)}
+  \item \code{f(2, 3)}
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+    \item \code{x = 2}, \code{y = 3}, \code{z = 4}
+    \item \code{x = 2}, \code{y = 4}, \code{z = 3}
+    \item \code{x = 2}, \code{y = NULL}, \code{z = 3}
+    \item \code{x = 4}, \code{y = 3}, \code{z = 2}
+    \item \code{x = 0}, \code{y = NULL}, \code{z = 2}
+    \item \code{x = 3}, \code{y = 4}, \code{z = 2}
+    \item \link{http://i0.kym-cdn.com/entries/icons/original/000/000/157/itsatrap.jpg}{C'est un piège!} %
+      Cet appel n'est pas valide puisque l'argument \code{z} est
+      manquant.
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Soit la fonction \code{f} suivante:
+<<echo=FALSE>>=
+f <- function(x, y)
+{
+    g <- function(a)
+        (x - y) * a + a * x
+    g(1 + x * y)
+}
+@
+<<echo=TRUE>>=
+f
+@
+  Évaluer les résultats des appels suivants.
+  \begin{enumerate}
+  \item \code{f(1, 1)}
+  \item \code{f(f(1, 1), 1)}
+  \item \code{f(1, f(f(1, 1), 1))}
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+    \item
+<<echo=FALSE>>=
+f(1, 1)
+@
+    \item
+<<echo=FALSE>>=
+f(f(1, 1), 1)
+@
+    \item
+<<echo=FALSE>>=
+f(1, f(f(1, 1), 1))
 @
     \end{enumerate}
   \end{sol}
