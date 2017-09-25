@@ -94,6 +94,9 @@ Question d'éviter les publications accidentelles, `make all` est
 - Ajout d'un encadré sur le raccourci clavier pour le sysmbole
   d'assignation dans RStudio pour les Mac munis d'un clavier
   canadien-français.
+- Ajout à l'annexe A d'un lien vers la vidéo de configuration du
+  raccourci pour le symbole d'affectation dans RStudio sur les Mac
+  munis d'un clavier canadien-français.
 
 ### 2017.09-1a (2017-09-13)
 
