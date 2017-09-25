@@ -739,13 +739,13 @@ L'expression ci-dessus peut se lire ainsi:
     \put(2.2,1){est}             \put(2.3,3.5){\code{<-}}
     \put(3.2,1){une fonction}    \put(3.5,3.5){\code{function}}
     \put(6.6,1){
-      \begin{minipage}[t]{40mm}
+      \begin{minipage}[t]{5.714\unitlength} % ~= 40mm
         \centering
         qui prend en argument
         une valeur \code{x}
       \end{minipage}}           \put(8.9,3.5){\code{( x )}}
     \put(12.8,1){%
-      \begin{minipage}[t]{32mm}
+      \begin{minipage}[t]{4.571\unitlength} % ~= 32mm
         \centering
         et la multiplie par elle-même.
       \end{minipage}}           \put(14.4,3.5){\code{x * x}}
