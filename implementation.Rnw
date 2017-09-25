@@ -26,6 +26,157 @@ options(width=52)
 \end{objectifs}
 
 
+\section{Mise en contexte}
+\label{sec:implementation:contexte}
+
+Au chapitre précédent, nous avons défini une fonction très simple pour
+élever un nombre au carré.
+<<echo=TRUE>>=
+square <- function(x) x * x
+@
+
+Intuitivement, la valeur de \code{x} à l'intérieur de la fonction
+\code{square} doit être celle passée en argument, et non celle d'un
+objet \code{x} qui existerait déjà dans l'espace de travail. De plus,
+si un tel objet \code{x} devait exister dans l'espace de travail,
+l'exécution de la fonction \code{square} ne devrait pas modifier sa
+valeur.
+<<echo=TRUE>>=
+x <- 5
+square(10)
+x
+@
+
+Examinons maintenant cet exemple quelque peu artificiel, mais non
+moins instructif, tiré de \citet{Ihaka:R:1996}. Une fonction \code{f}
+calcule le carré d'un nombre, puis affiche le résultat à l'écran par
+le biais d'une autre fonction \code{g}.
+<<echo=TRUE>>=
+f <- function(x)
+{
+    y <- x * x
+    g <- function() print(y)
+    g()
+}
+@
+
+On remarquera que l'objet \code{y} n'est pas un argument de la
+fonction \code{f}; que \code{y} est cependant défini dans la fonction
+\code{f}; que la fonction \code{g} utilise \code{y} sans que cet objet
+ne soit un argument de la fonction. Dans les circonstances, quels
+seront, selon vous, les résultats des expressions suivantes et,
+surtout, pourquoi? Allez les essayer, nous attendrons ici.
+<<echo=TRUE, eval=FALSE>>=
+y <- 123
+f(10)
+y
+@
+
+Les questions ci-dessus trouvent leurs réponses dans les concepts
+d'environnement d'évaluation et de portée lexicale de R. Maitriser ces
+concepts permet à la fois de simplifier notre code et de réduire
+significativement les sources de bogues. Le chapitre traite également
+du concept d'évaluation paresseuse auquel les programmeurs sont moins
+souvent directement confrontés, mais qu'il vaut quand même mieux
+connaître pour coder efficacement.
+
+
+\section{Environnement d'évaluation}
+\label{sec:implementation:environnement}
+
+Dans R, tout appel de fonction entraine implicitement la création d'un
+\emph{environnement d'évaluation} (ou \emph{environnement}, tout
+simplement) dans lequel, comme le nom l'indique, la fonction sera
+évaluée. Un environnement est constitué de deux choses: un \emph{cadre
+  d'évaluation} (\emph{evaluation frame}), constitué de couples
+symbole-valeur, et un pointeur vers l'environnement parent. La
+\autoref{fig:implementation:environnement} propose une représentation
+schématique.
+
+\begin{figure}
+  \centering
+  \setlength{\unitlength}{1mm}
+  \begin{picture}(50,32)
+    \put(10,0){%
+      \framebox(40,25)[tl]{
+        \begin{minipage}{35\unitlength}
+          \rule{0mm}{2ex}% increase distance from frame
+          Cadre d'évaluation \\[6pt]
+          \small
+          (\meta{symbole}, \meta{valeur}) \\
+          (\meta{symbole}, \meta{valeur}) \\
+          $\vdots$
+        \end{minipage}}}
+    \put(10,20){\line(-1,0){8}}
+    \put(10,20){\circle*{0.8}}
+    \put(2,20){\vector(0,1){7}}
+    \put(0,29){environnement parent}
+  \end{picture}
+  \caption{Représentation schématique d'un environnement dans R}
+  \label{fig:implementation:environnement}
+\end{figure}
+
+La notation de \citet{Ihaka:R:1996}, plus compacte, représente un
+environnement $\rho$ sous la forme:
+\begin{equation*}
+  \rho = \{ \meta{symbole} \mapsto \meta{valeur},
+  \meta{symbole} \mapsto \meta{valeur},  \dots; \rho_p\},
+\end{equation*}
+où $\rho_p$ est l'environnement parent.
+
+Tout ceci demeure bien abstrait. Illustrons le concept d'environnement
+en reprenant le premier exemple de la
+\autoref{chap:implementation:contexte}. Nous noterons $\rho_0$
+l'environnement de l'espace de travail de R, nommé \emph{environnement
+  global}, et $\rho_s$ son parent, l'environnement contenant les
+fonctions et les constantes du système.
+<<echo=TRUE>>=
+x <- 5
+square <- function(x) x * x
+@
+
+Après l'exécution des deux commandes ci-dessus (dans un espace de
+travail que l'on suppose vide au préalable), l'environnement global
+contient les objets \code{x} et \code{square}. Nous avons donc:
+\begin{equation*}
+  \rho_0 = \{ \code{x} \mapsto 5, \code{square} \mapsto \phi; \rho_s \},
+\end{equation*}
+où $\phi$ représente symboliquement la définition de la fonction
+\code{square}. Nous pouvons confirmer les valeurs des deux objets dans
+l'environnement global depuis la ligne de commande.
+<<echo=TRUE>>=
+x
+square
+@
+
+Un appel de fonction crée un nouvel environnement d'évaluation, disons
+$\rho_1$. Comme l'appel provient de la ligne de commande ou, autrement
+dit, de l'environnement global, ce dernier devient le parent de $\rho_1$.
+<<echo=TRUE, eval=FALSE>>=
+square(10)
+@
+
+Après l'appel ci-dessus, nous avons:
+\begin{equation*}
+  \rho_1 = \{ x \mapsto 10; \rho_0 \}.
+\end{equation*}
+
+Tel que mentionné précédemment, la fonction \code{square} est évaluée
+dans l'environnement $\rho_1$. Or, dans $\rho_1$ la valeur de \code{x}
+est $10$ et c'est pourquoi l'expression \verb=x * x= retourne la
+valeur $100$.
+
+C'est ainsi, à l'aide des environnements d'évaluation, que R ne
+confond pas la valeur de \code{x} dans l'espace de travail et celle à
+l'intérieur de la fonction \code{square}, pas plus que la seconde
+n'écrase la première durant l'exécution de la fonction.
+
+Il y a toutefois plus à connaitre à ce sujet. C'est l'objet de la
+prochaine section.
+
+
+
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-engine: xetex
