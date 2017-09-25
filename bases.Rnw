@@ -108,27 +108,28 @@ certains opérateurs dans les chapitres subséquents.
 \begin{table}
   \centering
   \renewcommand{\arraystretch}{1.1}
-  \begin{tabular}{lp{8cm}}
+\begin{tabular}{lp{8cm}}
     \toprule
     Opérateur     & Fonction \\
     \midrule
-    \verb=$= & extraction \\
-    \verb=[=\, \verb=[[= & indiçage \\
-    \verb=^= & puissance \\
-    \verb=-=  & changement de signe \\
-    \verb=:=  & génération de suites \\
-    \verb=%*%=\, \verb=%\%=\, \verb=%/%= & produit
+    \fonction{\$} & extraction d'une liste \\ %$
+    \fonction{[}\, \fonction{[[} & indiçage \\
+    \verb|^|\index{\string^@\verb=^=|bfhyperpage} & puissance \\
+    \fonction{-}  & changement de signe \\
+    {\NoAutoSpacing\verb|:|}\index{:@\NoAutoSpacing\verb=:=}  & génération de suites \\
+    \fonction{\%*\%}\, \fonction{\%\%}\, \fonction{\%/\%} & produit
     matriciel, modulo, division entière \\
-    \verb=*=\, \verb=/= & multiplication, division \\
-    \verb=+=\, \verb=-= & addition, soustraction \\
-    \verb|<|\, \verb|<=|\, \verb|==|\, \verb|>=|\,
-    \verb|>|\, \verb|!=| & plus petit, plus petit ou égal, égal,
+    \fonction{*}\, \fonction{/} & multiplication, division \\
+    \fonction{+}\, \fonction{-} & addition, soustraction \\
+    \fonction{<}\, \fonction{<=}\, \fonction{==}\, \fonction{>=}\,
+    \fonction{>}\, \verb|!=|\index{"!=@\code{"!=}} & plus petit, plus petit ou égal, égal,
     plus grand ou égal, plus grand, différent de \\
-    \verb=!= & négation logique \\
-    \verb=&=\, \verb=&&= & «et» logique \\
-    \verb=|=\, \verb=||= & «ou» logique \\
-    \verb|->|\, \verb|->>| & affectation \\
-    \verb|<-|\, \verb|<<-| & affectation \\
+    \verb=!=\index{"!@\code{"!}}  & négation logique \\
+    \fonction{\&}\, \fonction{\&\&} & «et» logique \\
+    \code{\textbar}\index{{"|}@\code{\textbar}},
+    \code{\textbar\textbar}\index{{"|"|}@\code{\textbar\textbar}}    & «ou» logique \\
+    \fonction{->}\, \verb|->>|\index{->>@\verb=->>=|bfhyperpage} & affectation \\
+    \fonction{<-}\, \verb|<<-|\index{<<-@\verb=<<-=|bfhyperpage} & affectation \\
     \bottomrule
   \end{tabular}
   \caption{Principaux opérateurs du langage R, en ordre décroissant
@@ -136,7 +137,7 @@ certains opérateurs dans les chapitres subséquents.
   \label{tab:bases:operateurs}
 \end{table}
 
-\tipbox{Il est utile, voire essentiel de connaître le niveau de
+\tipbox{Il est utile, voire essentiel, de connaître le niveau de
   priorité des opérateurs dans les expressions R.}
 
 
@@ -963,9 +964,11 @@ c(-1, 2, 4)^(3:-2)
 <<echo=FALSE>>=
 c(TRUE, FALSE, FALSE) & c(TRUE, TRUE, FALSE)
 @
-     \item Attention à la priorité des opérations! Elles sont
-       effectuées dans cet ordre: inégalité, négation logique, «ou»
-       logique.
+     \item Attention à la priorité des opérations! En vertu des
+       priorités énoncées au \autoref{tab:bases:operateurs}, les
+       opérations sont effectuées dans cet ordre: inégalité
+       (\verb=<=), négation logique (\verb=!=) , «ou» logique
+       (\verb=|=).
 <<echo=FALSE>>=
 c(TRUE, FALSE, FALSE) | !2 < 3
 @

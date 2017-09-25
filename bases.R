@@ -34,9 +34,19 @@ mode(1 + 2i)               # nombre complexe
 TRUE                       # vrai
 FALSE                      # faux
 mode(TRUE)                 # mode "logical"
-! FALSE                    # négation logique
+! c(TRUE, FALSE)           # négation logique
 TRUE & FALSE               # ET logique
 TRUE | FALSE               # OU logique
+
+## [Détails additionnels sur les expressions logiques. Les
+## expressions suivantes construisent un «tableau de vérité»
+## entre deux énoncés 'p' et 'q' qui peuvent chacun être
+## «vrai» ou «faux». Le ET logique est vrai seulement lorsque
+## les deux énoncés sont vrais, alors que le OU logique est
+## faux seulement lorsque les deux énoncés sont faux.]
+p <- c(TRUE, TRUE, FALSE, FALSE)
+q <- c(TRUE, FALSE, TRUE, FALSE)
+cbind("p" = p, "q" = q, "p ET q" = p & q, "p OU q" = p | q)
 
 ## Donnée manquante. 'NA' est un nom réservé pour représenter
 ## une donnée manquante.

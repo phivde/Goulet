@@ -74,6 +74,9 @@ Question d'éviter les publications accidentelles, `make all` est
 
 **Autres modifications**
 
+- Les opérateurs du tableau 3.1 sont maintenant référencés dans l'index.
+- Détails additionnels dans la solution de l'exercice 3.1f).
+- Détails additionnels sur les expression slogiques dans `bases.R`.
 
 ### 2017.09-2 (2017-09-20)
 
