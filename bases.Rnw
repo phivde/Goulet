@@ -833,7 +833,7 @@ arbitraire d'arguments. La fonction y ayant recours se trouve donc à
 accepter un nombre variable d'arguments. On utilise généralement
 `\code{...}' pour passer des arguments tels quels à une autre fonction
 qui, elle, saura quoi faire de ces arguments. On trouvera un meilleur
-exemple à la \autoref{bases:exemples} que ce que nous pourrions faire
+exemple à la \autoref{sec:bases:exemples} que ce que nous pourrions faire
 ici en quelques lignes.
 
 
@@ -900,7 +900,7 @@ la fonction à une variable.
 
 
 \section{Exemples}
-\label{bases:exemples}
+\label{sec:bases:exemples}
 
 \def\scriptfilename{bases.R}
 
@@ -909,7 +909,7 @@ la fonction à une variable.
 
 
 \section{Exercices}
-\label{bases:exercices}
+\label{sec:bases:exercices}
 
 \Opensolutionfile{solutions}[solutions-bases]
 
