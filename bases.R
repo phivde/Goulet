@@ -368,7 +368,7 @@ square(10)
 
 ## Supposons que l'on veut écrire une fonction pour calculer
 ##
-##   f(x, y) = x (1 + xy)^2 + y (1 - y) + (1 + xy)(1 - y)
+##   f(x, y) = x (1 + xy)^2 + y (1 - y) + (1 + xy)(1 - y).
 ##
 ## Deux termes sont répétés dans cette expression. On a donc
 ##
