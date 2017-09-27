@@ -32,12 +32,12 @@ git pull
 git checkout -b <nom_de_branche>
 ```
 	
-3. Effectuez les modifications dans le fichier puis publiez les modifications dans votre dépôt local:
+3. Effectuez les modifications dans le fichier puis publiez le fichier modifié dans votre dépôt local avec un commentaire utile, mais bref, sur la nature des modifications:
     
 ```
 git status
 git add <fichier>
-git commit
+git commit -m "<commentaire>"
 ```
 	
 4. Publiez la branche avec les modifications dans le dépôt BitBucket:
