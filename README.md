@@ -67,7 +67,7 @@ Question d'éviter les publications accidentelles, `make all` est
 
 ## Historique des versions
 
-### (en développement)
+### 2017.09-3 (2017-09-26)
 
 **Nouveautés**
 

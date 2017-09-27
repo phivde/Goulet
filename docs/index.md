@@ -35,6 +35,7 @@ Vincent Goulet, professeur titulaire, [École d'actuariat](https://www.act.ulava
 1\. Éléments d'informatique pour programmeurs  
 2\. Présentation de R  
 3\. Bases du langage R  
+4\. Détails d'impléemtation du langage R  
 A. RStudio: une introduction  
 B. GNU Emacs et ESS: la base  
 C. Réponses des exercices  
