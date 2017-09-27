@@ -73,12 +73,12 @@ y
 @
 
 Les questions ci-dessus trouvent leurs réponses dans les concepts
-d'environnement et de portée lexicale de R. Maitriser ces
-concepts permet à la fois de simplifier notre code et de réduire
+d'environnement et de portée lexicale de R. Maitriser ces concepts
+permet à la fois de simplifier notre code et de réduire
 significativement les sources de bogues. Le chapitre traite également
 du concept d'évaluation paresseuse auquel les programmeurs sont moins
-souvent directement confrontés, mais qu'il vaut quand même mieux
-connaître pour coder efficacement.
+souvent directement confrontés, mais qui permet aussi de coder plus
+efficacement.
 
 
 \section{Environnement}
