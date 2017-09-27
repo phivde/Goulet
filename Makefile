@@ -32,6 +32,7 @@ SCRIPTS = \
 	# fonctions.R \
 	# avance.R
 OTHER = LICENSE
+ROUTFILES := $(SCRIPTS:.R=.Rout)
 
 ## Numéro de version et numéro ISBN extraits du fichier maître
 YEAR = $(shell grep "newcommand{\\\\year" ${MASTER:.pdf=.tex} \
@@ -85,10 +86,15 @@ release: zip create-release upload publish
 %.tex: %.Rnw
 	$(SWEAVE) '$<'
 
+%.Rout: %.R
+	echo "options(error=expression(NULL))" | cat - $< > $<.tmp
+	$(RBATCH) $<.tmp $@
+	$(RM) $<.tmp
+
 $(MASTER): $(MASTER:.pdf=.tex) $(RNWFILES:.Rnw=.tex) $(TEXFILES) $(SCRIPTS)
 	$(TEXI2DVI) $(MASTER:.pdf=.tex)
 
-zip: ${MASTER} ${README} ${SCRIPTS} ${OTHER}
+zip: ${MASTER} ${README} ${SCRIPTS} ${ROUTFILES} ${OTHER}
 	if [ -d ${TMPDIR} ]; then ${RM} ${TMPDIR}; fi
 	mkdir -p ${TMPDIR}
 	touch ${TMPDIR}/${README} && \
