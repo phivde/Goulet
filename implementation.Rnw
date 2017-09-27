@@ -61,11 +61,11 @@ f <- function(x)
 @
 
 On remarquera que l'objet \code{y} n'est pas un argument de la
-fonction \code{f}; que \code{y} est cependant défini dans la fonction
-\code{f}; que la fonction \code{g} utilise \code{y} sans que cet objet
-ne soit un argument de la fonction. Dans les circonstances, quels
-seront, selon vous, les résultats des expressions suivantes et,
-surtout, pourquoi? Allez les essayer, nous attendrons ici.
+fonction, mais qu'il est défini dans \code{f}. De plus, la fonction
+\code{g} utilise \code{y} sans que cet objet ne soit un de ses
+arguments. Dans les circonstances, quels seront, selon vous, les
+résultats des expressions suivantes et, surtout, pourquoi? Allez les
+essayer, nous attendrons ici.
 <<echo=TRUE, eval=FALSE>>=
 y <- 123
 f(10)
@@ -73,7 +73,7 @@ y
 @
 
 Les questions ci-dessus trouvent leurs réponses dans les concepts
-d'environnement d'évaluation et de portée lexicale de R. Maitriser ces
+d'environnement et de portée lexicale de R. Maitriser ces
 concepts permet à la fois de simplifier notre code et de réduire
 significativement les sources de bogues. Le chapitre traite également
 du concept d'évaluation paresseuse auquel les programmeurs sont moins
@@ -81,17 +81,19 @@ souvent directement confrontés, mais qu'il vaut quand même mieux
 connaître pour coder efficacement.
 
 
-\section{Environnement d'évaluation}
+\section{Environnement}
 \label{sec:implementation:environnement}
 
-Dans R, tout appel de fonction entraine implicitement la création d'un
-\emph{environnement d'évaluation} (ou \emph{environnement}, tout
-simplement) dans lequel, comme le nom l'indique, la fonction sera
-évaluée. Un environnement est constitué de deux choses: un \emph{cadre
-  d'évaluation} (\emph{evaluation frame}), constitué de couples
-symbole-valeur, et un pointeur vers l'environnement parent. La
-\autoref{fig:implementation:environnement} propose une représentation
-schématique.
+Un \emph{environnement}\Index{environnement} dans R est un objet
+spécial formé de deux composantes: un
+\emph{dictionnaire}\Index{dictionnaire}\footnote{La traduction
+  littérale du terme \emph{frame} utilisé dans la documentation de R
+  serait \emph{cadre}, mais ce terme est moins explicite que
+  «dictionnaire».} %
+constitué de couples symbole-valeur, et un pointeur vers
+l'\emph{environnement englobant}\Index{environnement!englobant}. La
+\autoref{fig:implementation:environnement} propose une
+représentation schématique de l'environnement.
 
 \begin{figure}
   \centering
@@ -101,7 +103,7 @@ schématique.
       \framebox(40,25)[tl]{
         \begin{minipage}{35\unitlength}
           \rule{0mm}{2ex}% increase distance from frame
-          Cadre d'évaluation \\[6pt]
+          dictionnaire \\[6pt]
           \small
           (\meta{symbole}, \meta{valeur}) \\
           (\meta{symbole}, \meta{valeur}) \\
@@ -110,61 +112,127 @@ schématique.
     \put(10,20){\line(-1,0){8}}
     \put(10,20){\circle*{0.8}}
     \put(2,20){\vector(0,1){7}}
-    \put(0,29){environnement parent}
+    \put(0,29){environnement englobant}
   \end{picture}
   \caption{Représentation schématique d'un environnement dans R}
   \label{fig:implementation:environnement}
 \end{figure}
 
-La notation de \citet{Ihaka:R:1996}, plus compacte, représente un
-environnement $\rho$ sous la forme:
+La notion demeure pour l'instant plutôt abstraite. Elle devient plus
+concrète dans les contextes de création et d'appel de fonctions, où
+les environnements jouent un rôle important. Nous nous concentrons
+dans cette section sur le cas de la création des fonctions; le rôle
+des environnements dans les appels de fonctions est étudié à la
+section suivante.
+
+En termes techniques, une fonction définie avec \icode{function}
+dans R constitue une \emph{fermeture}\Index{fermeture}, ou
+\emph{clôture} (du Lisp \emph{closure}). Cette fermeture est formée de
+trois éléments, dont deux que nous connaissons déjà bien: les
+arguments formels de la fonction et le corps et la fonction. Le
+troisième élément est l'environnement de la fonction. L'environnement
+englobant de celui-ci est l'environnement actif au moment de la
+définition de la fonction (à moins qu'il ne soit changé) et le
+dictionnaire «capture» toutes les paires symbole-valeur de ce même
+environnement actif.
+
+Autrement dit, dès que nous définissons une fonction, R lui attribue
+un environnement. Lorsque la fonction est crée dans l'espace de
+travail, son environnement englobant est l'\emph{environnement
+  global}\Index{environnement!global}, représenté par le symbole
+\Icode{.GlobalEnv}, et son dictionnaire contient tous les objets se
+trouvant dans l'espace de travail. (Les expressions ci-dessous sont
+exécutées dans un espace de travail vide au préalable.)
+<<echo=FALSE>>=
+rm(list = ls())
+@
+<<echo=TRUE>>=
+x <- 5
+square <- function(x) x * x
+environment(square)
+ls(envir = environment(square))
+get("x", envir = environment(square))
+@
+
+Quelques fonctions permettent de manipuler l'environnement d'une
+fonction. Nous en avons déjà utilisé trois ci-dessus.
+\begin{ttscript}{environment}
+\item[\Icode{environment}] extraction ou modification de
+  l'environnement d'une fonction
+\item[\icode{ls}] affichage de la liste des éléments du
+  dictionnaire de l'environnement
+\item[\Icode{get}] extraction de la valeur associée à un symbole
+  dans le dictionnaire de l'environnement
+\item[\Icode{assign}] affectation d'une nouvelle paire
+  symbole-valeur dans le dictionnaire de l'environnement
+\item[\Icode{new.env}] création d'un nouvel environnement (vide par
+  défaut)
+\end{ttscript}
+
+Le code informatique de la \autoref{sec:implementation:exemples}
+contient des exemples plus élaborés de manipulation de l'environnement
+d'une fonction.
+
+\tipbox{La fonction \Icode{ls.str} permet d'afficher en une seule
+  commande la liste des objets d'un environnement et les valeurs de
+  ceux-ci.}
+
+\section{Environnement d'évaluation}
+\label{sec:implementation:evaluation}
+
+Dans R, tout appel de fonction entraine implicitement la création d'un
+\emph{environnement d'évaluation}\Index{environnement!d'évaluation},
+distinct de l'environnement de la fonction, et dans lequel, comme le
+nom l'indique, la fonction sera évaluée. Cet environnement
+d'évaluation ne vit que durant l'exécution de la fonction. Son
+environnement englobant est l'environnement de la fonction et son
+dictionnaire comprend toutes les variables définies à l'intérieur de
+la fonction, y compris les arguments.
+
+Pour bien illustrer tout cela, nous aurons recours à l'ingénieuse
+notation de \citet{Ihaka:R:1996} par laquelle un environnement
+d'évaluation $\rho$ est représenté sous la forme:
 \begin{equation*}
   \rho = \{ \meta{symbole} \mapsto \meta{valeur},
-  \meta{symbole} \mapsto \meta{valeur},  \dots; \rho_p\},
+  \meta{symbole} \mapsto \meta{valeur},  \dots; \rho_e\},
 \end{equation*}
-où $\rho_p$ est l'environnement parent.
-
-Tout ceci demeure bien abstrait. Illustrons le concept d'environnement
-en reprenant le premier exemple de la
-\autoref{chap:implementation:contexte}. Nous noterons $\rho_0$
-l'environnement de l'espace de travail de R, nommé \emph{environnement
-  global}, et $\rho_s$ son parent, l'environnement contenant les
-fonctions et les constantes du système.
+où $\rho_e$ est l'environnement englobant. Nous noterons $\rho_0$
+l'environnement global\index{environnement!global} et $\rho_s$ son
+environnement englobant\index{environnement!englobant}\footnote{%
+  Oui, l'environnement dit «global» est lui-même englobé d'un
+  environnement!}, %
+l'environnement contenant les fonctions et les constantes du système.
+Reprenons l'exemple de la section précédente.
 <<echo=TRUE>>=
 x <- 5
 square <- function(x) x * x
 @
 
-Après l'exécution des deux commandes ci-dessus (dans un espace de
-travail que l'on suppose vide au préalable), l'environnement global
-contient les objets \code{x} et \code{square}. Nous avons donc:
+Après l'exécution des deux commandes ci-dessus (toujours dans un
+espace de travail vide au préalable), l'environnement global contient
+les objets \code{x} et \code{square}. Nous avons donc:
 \begin{equation*}
   \rho_0 = \{ \code{x} \mapsto 5, \code{square} \mapsto \phi; \rho_s \},
 \end{equation*}
 où $\phi$ représente symboliquement la définition de la fonction
-\code{square}. Nous pouvons confirmer les valeurs des deux objets dans
-l'environnement global depuis la ligne de commande.
-<<echo=TRUE>>=
-x
-square
-@
+\code{square}.
 
-Un appel de fonction crée un nouvel environnement d'évaluation, disons
-$\rho_1$. Comme l'appel provient de la ligne de commande ou, autrement
-dit, de l'environnement global, ce dernier devient le parent de $\rho_1$.
+Un appel à la fonction \code{square} crée un nouvel environnement
+d'évaluation $\rho_1$.
 <<echo=TRUE, eval=FALSE>>=
 square(10)
 @
 
-Après l'appel ci-dessus, nous avons:
+Conformément à ce qui a été établi plus haut, l'environnement
+englobant de $\rho_1$ est celui de la fonction \code{square},
+$\rho_0$. De plus, le dictionnaire contient la paire (\code{x}, $10$),
+soit le symbole et la valeur de l'argument de la fonction. La fonction
+\code{square} est donc évaluée dans l'environnement
 \begin{equation*}
   \rho_1 = \{ x \mapsto 10; \rho_0 \}.
 \end{equation*}
-
-Tel que mentionné précédemment, la fonction \code{square} est évaluée
-dans l'environnement $\rho_1$. Or, dans $\rho_1$ la valeur de \code{x}
-est $10$ et c'est pourquoi l'expression \verb=x * x= retourne la
-valeur $100$.
+Or, dans cet environnement, la valeur de \code{x} est $10$. C'est
+pourquoi l'expression \verb=x * x= retourne la valeur $100$.
 
 C'est ainsi, à l'aide des environnements d'évaluation, que R ne
 confond pas la valeur de \code{x} dans l'espace de travail et celle à
@@ -174,8 +242,218 @@ n'écrase la première durant l'exécution de la fonction.
 Il y a toutefois plus à connaitre à ce sujet. C'est l'objet de la
 prochaine section.
 
+\warningbox{La mécanique de création d'environnements d'évaluation
+  pour tous les appels de fonctions fait en sorte que ceux-ci coûtent
+  cher en temps et en ressources système. Pour cette raison, le calcul
+  récursif (où une fonction s'appelle elle-même à répétition) est
+  plutôt inefficace en R.}
 
 
+\section{Portée lexicale}
+\label{sec:implementation:portee}
+
+Qu'arrive-t-il lorsqu'une variable n'est pas définie dans
+l'environnement d'évaluation\index{environnement!d'évaluation} d'une
+fonction? C'est là qu'entrent en jeu les très importantes règles de
+\emph{portée lexicale}\index{portée lexicale} (\emph{lexical scoping})
+de R. Celles-ci établissent comment R recherche un symbole.
+
+\begin{itemize}
+\item En premier lieu, R recherche le symbole dans le dictionnaire de
+  l'environnement courant. Si le symbole est trouvé, sa valeur est
+  retournée et la recherche est terminée.
+\item Autrement, R recherche le symbole \emph{dans le dictionnaire de
+    l'environnement englobant}. Cette procédure se répète autant de
+  fois que nécessaire. En d'autres termes, R recherche dans
+  l'environnement englobant\index{environnement!englobant}, dans
+  l'environnement englobant de l'environnement englobant, et ainsi de
+  suite jusqu'à ce que le symbole soit trouvé.
+\item Lorsque R atteint l'environnement
+  global\index{environnement!global} \icode{.GlobalEnv}, la recherche
+  se poursuit le long du chemin de recherche (\emph{search path}) qui
+  contient les paquetages chargés dans la session de travail:
+<<echo=TRUE>>=
+search()
+@
+\item Si R n'a toujours pas trouvé le symbole dans l'environnement du
+  paquetage de base (\code{package:base} ci-dessus), il passe à
+  l'environnement vide\index{environnement!vide} et, par conséquent,
+  la recherche du symbole échoue.
+\end{itemize}
+
+Les règles de portée lexicale méritent une bonne illustration.
+Reprenons le second exemple de la
+\autoref{sec:implementation:contexte}.
+<<echo=TRUE>>=
+y <- 123
+f <- function(x)
+{
+    y <- x * x
+    g <- function() print(y)
+    g()
+}
+f(10)
+@
+
+En supposant, comme précédemment, un espace de travail vide avant
+l'exécution des commandes ci-dessus, l'environnement global est
+maintenant:
+\begin{equation*}
+  \rho_0 = \{ \code{y} \mapsto 123, \code{f} \mapsto \phi; \rho_s \}.
+\end{equation*}
+La fonction \code{f} étant définie dans l'espace de travail, son
+environnement est $\rho_0$.
+
+L'évaluation de \code{f} en une certaine valeur entraine la création
+d'une cascade d'environnements. Tout d'abord, l'appel de la fonction
+crée, comme dans l'exemple de la
+\autoref{sec:implementation:evaluation}, l'environnement d'évaluation
+\begin{equation*}
+  \rho_1 = \{ \code{x} \mapsto 10; \rho_0 \}.
+\end{equation*}
+Le corps de la fonction \code{f} est ensuite évalué dans $\rho_1$, ce
+qui entraine l'ajout de deux objets dans l'environnement:
+\begin{equation*}
+  \rho_1 = \{ \code{x} \mapsto 10, \code{y} \mapsto 100,
+              \code{g} \mapsto \gamma; \rho_0 \},
+\end{equation*}
+où $\gamma$ est une représentation symbolique de la fonction \code{g}.
+Celle-ci se voit automatiquement munie d'un environnement dont
+l'environnement englobant est $\rho_1$.
+
+Toujours à l'intérieur de la fonction \code{f}, l'appel \code{g()}
+fait en sorte qu'est créé un nouvel environnement d'évaluation
+$\rho_2$ pour la fonction \code{g}. L'environnement englobant est
+$\rho_1$ et, comme cette fonction n'a aucun argument, son dictionnaire
+est vide:
+\begin{equation*}
+  \rho_2 = \{ ; \rho_1 \}.
+\end{equation*}
+L'expression \code{print(y)} est ensuite évaluée dans l'environnement
+$\rho_2$. L'objet \code{y} n'existe pas dans cet environnement. En
+vertu des règles de portée lexicale, R va alors rechercher le symbole
+\code{y} dans l'environnement enrobant $\rho_1$. À cet endroit, la
+valeur $100$ correspond au symbole. C'est donc cette valeur qui est
+affichée à l'écran. La valeur $123$ dans l'espace de travail n'entre
+jamais en jeu.
+<<echo=TRUE>>=
+f(10)
+@
+
+\cautionbox{Vous aurez compris que R trouvera éventuellement dans
+  l'espace de travail une variable qui n'est pas définie à l'intérieur
+  d'une fonction. Il est extrêmement dangereux de compter sur cette
+  fonctionnalité puisque la valeur dans l'espace de travail peut
+  changer à tout moment! Prenez l'habitude de passer en argument
+  toutes les valeurs dont une fonction qui est appelée depuis l'espace
+  de travail peut avoir besoin.}
+
+La portée lexicale de R est un outil puissant et, comme tous les
+outils puissants, il peut s'avérer dangereux. La mise en garde
+ci-dessus enjoint de ne pas se fier à la portée lexicale dans les
+fonctions conçues pour être appelées depuis la ligne de commande. Par
+contre, la portée lexicale est très utile pour simplifier le code des
+fonctions crées à l'intérieur d'autres fonctions puisque nous pouvons
+faire l'économie de passer tous les arguments d'une fonction à
+l'autre. On trouvera un exemple complet dans le code informatique de la
+\autoref{sec:implementation:exemples}.
+
+
+\section{Évaluation paresseuse}
+\label{sec:implementation:lazy}
+
+R utilise par défaut une technique d'évaluation des arguments des
+fonctions appelée \emph{évaluation paresseuse}\index{évaluation
+  paresseuse} (\emph{lazy evaluation}). Ce que cela signifie, c'est
+que toute expression passée en argument à une fonction ne sera évaluée
+qu'au moment où la valeur de l'argument sera utilisé dans la fonction,
+et pas avant. Ainsi, une expression en argument pourrait ne jamais
+être évaluée.
+
+La fonction \code{sumsq} ci-dessous calcule la somme des écarts au
+carré entre les éléments d'un vecteur \code{y} et une valeur pivot
+\code{about}, par défaut la moyenne des éléments de \code{y}.
+<<echo=TRUE>>=
+sumsq <- function(y, about = mean(y))
+    sum((y - about)^2)
+@
+
+Avec l'évaluation paresseuse, le calcul de la moyenne sera effectué
+uniquement lorsque l'argument \code{about} n'est pas spécifié dans
+l'appel de \code{sumsq}, et ce, seulement au moment d'effectuer le
+calcul \code{y - about}.
+
+
+\section{Exemples}
+\label{sec:implementation:exemples}
+
+\def\scriptfilename{implementation.R}
+
+\scriptfile{\scriptfilename}
+\lstinputlisting[firstline=13]{\scriptfilename}
+
+
+\section{Exercices}
+\label{sec:implementation:exercices}
+
+\Opensolutionfile{solutions}[solutions-implementation]
+
+\begin{Filesave}{solutions}
+\section*{Chapitre \ref*{chap:implementation}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:implementation}}
+
+\end{Filesave}
+
+\begin{exercice}
+  La fonction \icode{ecdf} de R prend en argument un vecteur de
+  données et retourne une fonction pour calculer la fonction de
+  répartition empirique de ces données:
+  \begin{equation*}
+    F_n(x) = \frac{\# x_i \leq x}{n}.
+  \end{equation*}
+<<echo=TRUE>>=
+Fn <- ecdf(c(1, 1, 3))
+mode(Fn)
+Fn(0:3)
+@
+  Dans l'exemple ci-dessus, on remarque que lorsque l'on appelle la
+  fonction \code{Fn} pour calculer $F_n(x)$ en diverses valeurs de
+  $x$, il n'est pas nécessaire de fournir le vecteur des données.
+  Expliquer pourquoi. \emph{Astuce}: fouiller dans l'environnement de
+  la fonction \code{Fn}.
+  \begin{sol}
+    On a
+<<echo=TRUE>>=
+
+@
+  \end{sol}
+
+\end{exercice}
+
+\begin{exercice}
+  On évalue les expressions suivantes dans un espace de travail vide.
+<<echo=TRUE>>=
+y <- 123
+f <- function(x)
+{
+    z <- x * x
+    g <- function() print(y)
+    g()
+}
+@
+  Déterminer le résultat de l'expression ci-dessous.
+<<echo=TRUE, eval=FALSE>>=
+f(10)
+@
+  \begin{sol}
+    Le résultat de \code{f(10)} est $123$ puisque \code{y} n'est pas
+    défini dans la fonction \code{f}. Par conséquent, R va remonter jusqu'à
+    l'environnement global pour trouver le symbole et la valeur qui
+    lui est associée.
+  \end{sol}
+\end{exercice}
+
+\Closesolutionfile{solutions}
 
 %%% Local Variables:
 %%% mode: latex
