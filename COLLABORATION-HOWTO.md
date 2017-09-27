@@ -10,7 +10,7 @@ Ce dépôt utilise l'interface [Atlassian BitBucket Server](https://www.atlassia
 
 La branche `master` du dépôt est réservée en écriture au gestionnaire du projet.
 
-Pour collaborer au projet, vous devez suivre la procédure suivante à partir d'une invite de commande (Git Bash sous Windows ou Terminal sous macOS):
+Pour collaborer au projet, vous devez publier vos modifications dans une nouvelle branche et effectuer une demande de tirage (*pull request*) vers la branche `master`. La procédure à suivre à partir d'une invite de commande (Git Bash sous Windows ou Terminal sous macOS) est la suivante.
 
 1. Si  vous travaillez sur le code source pour la première fois, déplacez-vous (avec la commande `cd` à la ligne de commande) dans le répertoire dans lequel vous voulez enregistrer le code source du projet (le répertoire `programmer-avec-r-develop` sera créé automatiquement), puis clonez le dépôt:
 
@@ -46,6 +46,6 @@ git commit -m "<commentaire>"
 git push -u origin <nom_de_branche>
 ```
 	
-5. Finalement, connectez-vous à l'interface graphique de BitBucket à l'adresse <https://projets.fsg.ulaval.ca/> avec votre IDUL/NIP et faites une demande de tirage (*pull request*) en sélectionnant l'option correspondante dans la barre latérale.
+5. Finalement, connectez-vous à l'interface graphique de BitBucket à l'adresse <https://projets.fsg.ulaval.ca/git/login> avec votre IDUL/NIP et faites une demande de tirage (*pull request*) vers la branche `master` en sélectionnant l'option correspondante dans la barre latérale.
 
 Pour des instructions plus détaillées, consultez les [excellents tutoriels](https://www.atlassian.com/git/tutorials) de Atlassian, en particulier celui sur le processus de collaboration [*Gitflow Workflow*](https://www.atlassian.com/git/tutorials/comparing-workflows#gitflow-workflow).
