@@ -371,22 +371,27 @@ R utilise par défaut une technique d'évaluation des arguments des
 fonctions appelée \emph{évaluation paresseuse}\index{évaluation
   paresseuse} (\emph{lazy evaluation}). Ce que cela signifie, c'est
 que toute expression passée en argument à une fonction ne sera évaluée
-qu'au moment où la valeur de l'argument sera utilisé dans la fonction,
+qu'au moment où la valeur de l'argument sera utilisée dans la fonction,
 et pas avant. Ainsi, une expression en argument pourrait ne jamais
-être évaluée.
+être évaluée. Ou encore, la valeur par défaut d'un argument peut
+dépendre de la valeur d'un autre argument puisque celui-ci sera connu
+au moment de l'évaluation.
 
-La fonction \code{sumsq} ci-dessous calcule la somme des écarts au
-carré entre les éléments d'un vecteur \code{y} et une valeur pivot
-\code{about}, par défaut la moyenne des éléments de \code{y}.
+Par exemple, la fonction \code{sumsq} ci-dessous calcule la somme des
+écarts au carré entre les éléments d'un vecteur \code{y} et une valeur
+pivot \code{about}, par défaut la moyenne des éléments de \code{y}. On
+remarque que la valeur par défaut de l'argument \code{about} dépend de
+celle de l'argument \code{y}.
 <<echo=TRUE>>=
 sumsq <- function(y, about = mean(y))
     sum((y - about)^2)
 @
 
-Avec l'évaluation paresseuse, le calcul de la moyenne sera effectué
-uniquement lorsque l'argument \code{about} n'est pas spécifié dans
-l'appel de \code{sumsq}, et ce, seulement au moment d'effectuer le
-calcul \code{y - about}.
+Avec l'évaluation paresseuse, d'une part, le calcul de la moyenne sera
+effectué uniquement lorsque l'argument \code{about} n'est pas spécifié
+dans l'appel de \code{sumsq}, et ce, seulement au moment d'effectuer
+le calcul \code{y - about}. D'autre part, la valeur de \code{y} sera
+connue au moment d'effectuer ce calcul. Joli, non?
 
 
 \section{Exemples}
@@ -411,8 +416,8 @@ calcul \code{y - about}.
 
 \begin{exercice}
   La fonction \icode{ecdf} de R prend en argument un vecteur de
-  données et retourne une fonction pour calculer la fonction de
-  répartition empirique de ces données:
+  données $(x_1, \dots, x_n)$ et retourne une fonction pour calculer
+  la fonction de répartition empirique de ces données:
   \begin{equation*}
     F_n(x) = \frac{\# x_i \leq x}{n}.
   \end{equation*}

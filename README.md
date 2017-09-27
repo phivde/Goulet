@@ -49,6 +49,8 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 #### Autres modifications
 
 - Mention et utilisation des fonctions `formals` et `body` dans le texte du chapitre 4.
+- Précisions additionnelles sur la fonction de répartition empirique dans l'énoncé de l'exercice 4.1.
+- Détails additionnels sur l'évaluation paresseuse.
 
 ### 2017.09-3 (2017-09-26)
 
