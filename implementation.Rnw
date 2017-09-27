@@ -445,25 +445,6 @@ ls.str(envir = environment(Fn))
 \end{exercice}
 
 \begin{exercice}
-  Déterminer le résultat du bloc d'expressions ci-dessous \citep[tiré
-  de][]{Wickham:adv-r:2017}.
-<<echo=TRUE, eval=FALSE>>=
-f <- function(x)
-{
-    a <- 2
-    x + a
-}
-f(1)
-@
-  \begin{sol}
-    Le résultat de \code{f(1)} est $3$. Nous avons ici une fonction
-    tout à fait standard qui retourne la somme d'un nombre en argument
-    (\code{x}) et d'un nombre défini à l'intérieur de la fonction
-    (\code{a}).
-  \end{sol}
-\end{exercice}
-
-\begin{exercice}
   Justifier le résultat du bloc d'expressions ci-dessous.
 <<echo=TRUE>>=
 y <- 123
@@ -538,6 +519,21 @@ f()
     dans plusieurs environnements successifs), R utilisera celle qui a
     cours lorsque l'addition est effectuée, soit celle à l'intérieur
     de la fonction \code{h}. Le résultat cherché est donc $13$.
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Écrire une fonction R qui calcule le produit de deux nombres passés
+  en arguments. Si un seul nombre est donné en argument, la fonction
+  calcule le produit de ce nombre avec son logarithme. \emph{Astuce}:
+  tirer profit de l'évaluation paresseuse.
+  \begin{sol}
+    Grâce à l'évaluation paresseuse, il suffit de spécifier comme
+    valeur par défaut pour le second argument le logarithme du premier
+    argument.
+<<echo=TRUE>>=
+f <- function(x, y = log(x)) x * y
+@
   \end{sol}
 \end{exercice}
 
