@@ -47,10 +47,10 @@ square(x = x)              # colle... signification?
 ##
 ## Le cas le plus simple est celui des fonctions créées dans
 ## l'espace de travail .GlobalEnv.
-f <- function(x) x + 2      # création d'une fonction
-formals(f)                  # arguments formels
-body(f)                     # corps de la fonction
-environment(f)              # environnement de la fonction
+f <- function(x) x + 2     # création d'une fonction
+formals(f)                 # arguments formels
+body(f)                    # corps de la fonction
+environment(f)             # environnement de la fonction
 
 ## Lorsqu'une fonction est créée à l'intérieur d'une autre
 ## fonction, son environnement hérite automatiquement de
