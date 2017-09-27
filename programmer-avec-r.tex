@@ -156,7 +156,7 @@
     keywordstyle=\mdseries,
     showstringspaces=false,
     index=[1][keywords],
-    indexstyle=\icode}
+    indexstyle=\indexfonction}
 
   %%% =========================
   %%%  Nouveaux environnements
@@ -356,8 +356,9 @@
   \renewcommand{\preindexhook}{%
     Les numéros de page en caractères gras indiquent les pages où les
     concepts sont introduits, définis ou expliqués.\vskip\onelineskip}
+  \newcommand{\icode}[1]{\code{#1}\indexcode{#1}}
+  \newcommand{\indexcode}[1]{\index{#1@\code{#1}}}
   \newcommand{\Index}[1]{\index{#1|bfhyperpage}}
-  \newcommand{\icode}[1]{\code{#1}\index{#1@\code{#1}}}
   \newcommand{\Icode}[1]{\code{#1}\Index{#1@\code{#1}}}
   \makeindex
 
@@ -391,8 +392,8 @@
   }
 
   \includeonly{%
-    % notices,
-    % informatique,
+    notices,
+    informatique,
     presentation,
     bases,
     implementation,
