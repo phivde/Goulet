@@ -48,6 +48,6 @@ git commit
 git push -u origin <nom_de_branche>
 ```
 	
-5. Accédez à l'interface graphique de BitBucket et faites une *pull request* en sélectionnant l'option correspondante dans la barre latérale.
+5. Accédez à l'interface graphique de BitBucket à l'adresse [https://projets.fsg.ulaval.ca/git/login] et connectez-vous avec votre IDUL/NIP. Ensuite, faites une demande de tirage (*pull request*) en sélectionnant l'option correspondante dans la barre latérale.
 
 Pour des instructions plus détaillées, consultez les [excellents tutoriels](https://www.atlassian.com/git/tutorials) de Atlassian, en particulier celui sur le processus de collaboration [*Gitflow Workflow*](https://www.atlassian.com/git/tutorials/comparing-workflows#gitflow-workflow).
