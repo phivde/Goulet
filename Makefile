@@ -27,6 +27,7 @@ README = README.md
 SCRIPTS = \
 	presentation.R \
 	bases.R \
+	implementation.R \
 	# operateurs.R \
 	# fonctions.R \
 	# avance.R
