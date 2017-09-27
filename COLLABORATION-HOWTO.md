@@ -4,9 +4,7 @@
 
 > Seuls les étudiants de l'Université Laval inscrits au cours IFT-1902 à l'automne 2017 disposent des droits en écriture requis pour effectuer la procédure décrite ci-dessous.
 
-La version de développement du projet [Programmer avec R](https://vigou3.github.io/programmer-avec-r) est hébergée dans un dépôt Git public de la [Faculté des sciences et de génie](https://fsg.ulaval.ca) de l'[Université Laval](https://ulaval.ca):
-
-    [https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-develop]
+La version de développement du projet [Programmer avec R](https://vigou3.github.io/programmer-avec-r) est hébergée dans un dépôt Git public de la [Faculté des sciences et de génie](https://fsg.ulaval.ca) de l'[Université Laval](https://ulaval.ca): <https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-develop>
 
 Ce dépôt utilise l'interface [Atlassian BitBucket Server](https://www.atlassian.com/software/bitbucket/server).
 
@@ -48,6 +46,6 @@ git commit
 git push -u origin <nom_de_branche>
 ```
 	
-5. Accédez à l'interface graphique de BitBucket à l'adresse [https://projets.fsg.ulaval.ca/git/login] et connectez-vous avec votre IDUL/NIP. Ensuite, faites une demande de tirage (*pull request*) en sélectionnant l'option correspondante dans la barre latérale.
+5. Accédez à l'interface graphique de BitBucket à l'adresse <https://projets.fsg.ulaval.ca/git/login> et connectez-vous avec votre IDUL/NIP. Ensuite, faites une demande de tirage (*pull request*) en sélectionnant l'option correspondante dans la barre latérale.
 
 Pour des instructions plus détaillées, consultez les [excellents tutoriels](https://www.atlassian.com/git/tutorials) de Atlassian, en particulier celui sur le processus de collaboration [*Gitflow Workflow*](https://www.atlassian.com/git/tutorials/comparing-workflows#gitflow-workflow).
