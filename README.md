@@ -67,13 +67,23 @@ Question d'éviter les publications accidentelles, `make all` est
 
 ## Historique des versions
 
+### (en développement)
+
+#### Nouveautés
+
+
+
+#### Autres modifications
+
+
+
 ### 2017.09-3 (2017-09-26)
 
-**Nouveautés**
+#### Nouveautés
 
 - Chapitre 4 - Détails d'implémentation du langage R
 
-**Autres modifications**
+#### Autres modifications
 
 - Les opérateurs du tableau 3.1 sont maintenant référencés dans l'index.
 - Détails additionnels dans la solution de l'exercice 3.1f).
@@ -81,11 +91,11 @@ Question d'éviter les publications accidentelles, `make all` est
 
 ### 2017.09-2 (2017-09-20)
 
-**Nouveautés**
+#### Nouveautés
 
 - Chapitre 3 - Bases du langage R
 
-**Autres modifications**
+#### Autres modifications
 
 - Visuel des blocs de code modifié.
 - Nom du fichier d'accompagnement contenant le code des sections
