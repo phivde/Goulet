@@ -47,10 +47,10 @@ square(10)
 x
 @
 
-Examinons maintenant cet exemple quelque peu artificiel, mais non
-moins instructif, tiré de \citet{Ihaka:R:1996}. Une fonction \code{f}
-calcule le carré d'un nombre, puis affiche le résultat à l'écran par
-le biais d'une autre fonction \code{g}.
+Examinons maintenant cet exemple quelque peu artificiel, mais
+néanmoins instructif, tiré de \citet{Ihaka:R:1996}. Une fonction
+\code{f} calcule le carré d'un nombre, puis affiche le résultat à
+l'écran par le biais d'une autre fonction \code{g}.
 <<echo=TRUE>>=
 f <- function(x)
 {
@@ -118,12 +118,11 @@ représentation schématique de l'environnement.
   \label{fig:implementation:environnement}
 \end{figure}
 
-La notion demeure pour l'instant plutôt abstraite. Elle devient plus
-concrète dans les contextes de création et d'appel de fonctions, où
-les environnements jouent un rôle important. Nous nous concentrons
-dans cette section sur le cas de la création des fonctions; le rôle
-des environnements dans les appels de fonctions est étudié à la
-section suivante.
+La notion, plutôt abstraite, devient plus concrète dans le contexte de
+la création et des appels de fonctions, où les environnements jouent
+un rôle important. Nous nous concentrons dans cette section sur le cas
+de la création des fonctions; le rôle des environnements dans les
+appels de fonctions est étudié à la section suivante.
 
 En termes techniques, une fonction définie avec \icode{function}
 dans R constitue une \emph{fermeture}\Index{fermeture}, ou
@@ -154,17 +153,17 @@ ls(envir = environment(square))
 get("x", envir = environment(square))
 @
 
-Quelques fonctions permettent de manipuler l'environnement d'une
-fonction. Nous en avons déjà utilisé trois ci-dessus.
+Quelques fonctions permettent de manipuler les environnement de
+fonctions. Nous en avons déjà utilisé trois ci-dessus.
 \begin{ttscript}{environment}
 \item[\Icode{environment}] extraction ou modification de
-  l'environnement d'une fonction
+  l'environnement
 \item[\icode{ls}] affichage de la liste des éléments du
-  dictionnaire de l'environnement
+  de l'environnement
 \item[\Icode{get}] extraction de la valeur associée à un symbole
-  dans le dictionnaire de l'environnement
+  dans l'environnement
 \item[\Icode{assign}] affectation d'une nouvelle paire
-  symbole-valeur dans le dictionnaire de l'environnement
+  symbole-valeur dans l'environnement
 \item[\Icode{new.env}] création d'un nouvel environnement (vide par
   défaut)
 \end{ttscript}
@@ -416,22 +415,45 @@ Fn <- ecdf(c(1, 1, 3))
 mode(Fn)
 Fn(0:3)
 @
-  Dans l'exemple ci-dessus, on remarque que lorsque l'on appelle la
-  fonction \code{Fn} pour calculer $F_n(x)$ en diverses valeurs de
-  $x$, il n'est pas nécessaire de fournir le vecteur des données.
-  Expliquer pourquoi. \emph{Astuce}: fouiller dans l'environnement de
-  la fonction \code{Fn}.
+  Expliquer pourquoi il n'est pas nécessaire de fournir les valeurs du
+  vecteur \code{x} à \code{Fn} lorsque l'on veut calculer $F_n(x)$.
+  \emph{Astuce}: fouiller dans l'environnement de la fonction
+  \code{Fn}.
   \begin{sol}
-    On a
+    La réponse au mystère se cache dans l'environnement de la
+    fonction \code{Fn}:
 <<echo=TRUE>>=
-
+ls.str(envir = environment(Fn))
 @
+    L'environnement de la fonction contient donc les éléments nécessaires
+    pour calculer la fonction de répartition empirique en un point
+    quelconque, soit, entre autres, les valeurs distinctes du
+    vecteur de données (vecteur \code{x}) et les valeurs correspondantes
+    de la fonction de répartition empirique (vecteur \code{y}).
   \end{sol}
-
 \end{exercice}
 
 \begin{exercice}
-  On évalue les expressions suivantes dans un espace de travail vide.
+  Déterminer le résultat du bloc d'expressions ci-dessous \citep[tiré
+  de][]{Wickham:adv-r:2017}.
+<<echo=TRUE, eval=FALSE>>=
+f <- function(x)
+{
+    a <- 2
+    x + a
+}
+f(1)
+@
+  \begin{sol}
+    Le résultat de \code{f(1)} est $3$. Nous avons ici une fonction
+    tout à fait standard qui retourne la somme d'un nombre en argument
+    (\code{x}) et d'un nombre défini à l'intérieur de la fonction
+    (\code{a}).
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Justifier le résultat du bloc d'expressions ci-dessous.
 <<echo=TRUE>>=
 y <- 123
 f <- function(x)
@@ -440,9 +462,6 @@ f <- function(x)
     g <- function() print(y)
     g()
 }
-@
-  Déterminer le résultat de l'expression ci-dessous.
-<<echo=TRUE, eval=FALSE>>=
 f(10)
 @
   \begin{sol}
@@ -450,6 +469,64 @@ f(10)
     défini dans la fonction \code{f}. Par conséquent, R va remonter jusqu'à
     l'environnement global pour trouver le symbole et la valeur qui
     lui est associée.
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Déterminer le résultat du bloc d'expressions ci-dessous \citep[tiré
+  de][]{Wickham:adv-r:2017}.
+<<echo=TRUE, eval=FALSE>>=
+x <- 20
+f <- function()
+{
+    x <- 10
+    function() x
+}
+g <- f()
+g()
+@
+  \begin{sol}
+    La fonction \code{f} retourne une fonction (anonyme) qui elle-même
+    retourne la valeur d'un objet \code{x} qui ne fait pas partie de
+    ses arguments, mais qui se trouve dans son environnement
+    d'évaluation. La valeur de \code{x} dans cet environnement est
+    $10$. C'est donc cette valeur que retourne l'appel \code{g()}.
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Déterminer le résultat du bloc d'expressions ci-dessous \citep[tiré
+  de][]{Wickham:adv-r:2017}.
+<<echo=TRUE, eval=FALSE>>=
+x <- 0
+y <- 10
+f <- function()
+{
+    x <- 1
+    g()
+}
+g <- function()
+{
+    x <- 2
+    h()
+}
+h <- function()
+{
+    x <- 3
+    x + y
+}
+f()
+@
+  \begin{sol}
+    Si l'on suit la chaine de fonctions, le calcul qui est effectué
+    par \code{f()} est en définitive \code{x + y}. Reste à déterminer
+    les valeurs de \code{x} et de \code{y} au moment du calcul. C'est
+    facile pour \code{y}: l'objet n'est défini que dans l'espace de
+    travail et sa valeur est $10$. Quant à \code{x}, même si sa valeur
+    change à plusieurs reprise (plus précisément: l'objet est défini
+    dans plusieurs environnements successifs), R utilisera celle qui a
+    cours lorsque l'addition est effectuée, soit celle à l'intérieur
+    de la fonction \code{h}. Le résultat cherché est donc $13$.
   \end{sol}
 \end{exercice}
 
