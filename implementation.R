@@ -72,6 +72,7 @@ f <- function(x)
 g <- f(2)
 ls(envir = environment(g))
 get("x", envir = environment(g))
+ls.str(envir = environment(g)) # plus simple
 
 ## Par conséquent, lorsque nous appelons la fonction 'g',
 ## l'expression 'x + y' utilise la valeur de 'x' dans
@@ -104,8 +105,7 @@ f <- function(x)
     fun
 }
 g <- f(2)
-ls(envir = environment(g))
-get("x", envir = environment(g))
+ls.str(envir = environment(g))
 g(10)
 
 ###
@@ -217,8 +217,8 @@ f(0, 1/0)                  # argument 'y' utilisé
 ## avant de faire la somme des écarts au carré.
 ##
 ## Grâce à l'évaluation paresseuse, les données manquantes
-## seront également supprimées avant le calcul de la moyenne
-## dans le cas c'est la valeur par défaut de l'argument
+## seront également supprimées *avant* le calcul de la moyenne
+## dans le cas où c'est la valeur par défaut de l'argument
 ## 'about' qui est utilisée.
 sumsq <- function(y, about = mean(y), na.rm = FALSE)
 {
