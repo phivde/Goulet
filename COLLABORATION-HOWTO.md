@@ -10,9 +10,9 @@ Ce dépôt utilise l'interface [Atlassian BitBucket Server](https://www.atlassia
 
 La branche `master` du dépôt est réservée en écriture au gestionnaire du projet.
 
-Pour collaborer au projet, vous devez suivre la procédure suivante:
+Pour collaborer au projet, vous devez suivre la procédure suivante à partir d'une invite de commande (Git Bash sous Windows ou Terminal sous macOS):
 
-1. Si c'est la première fois que vous travaillez sur le code source, clonez le dépôt avec
+1. Si c'est la première fois que vous travaillez sur le code source, placez-vous dans le répertoire dans lequel vous voulez enregistrer le code source du projet (le répertoire `programmer-avec-r-develop` sera créé automatiquement), puis clonez le dépôt:
 
 ```
 git clone https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-develop.git
@@ -20,13 +20,13 @@ git clone https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-develop.git
 
 **OU**
 
-1. Si vous avez déjà cloné le dépôt dans le passé et que vous voulez reprendre le travail sur le code source, mettez à jour votre copie locale du dépôt avec
+1. Si vous avez déjà cloné le dépôt dans le passé et que vous voulez reprendre le travail sur le code source, mettez à jour votre copie locale du dépôt:
 
 ```
 git pull
 ```
 
-2. Créez une branche (locale) pour vos modifications avec
+2. Créez une branche (locale) pour vos modifications:
 
 ```
 git checkout -b <nom_de_branche>
