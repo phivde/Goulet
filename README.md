@@ -71,12 +71,13 @@ Question d'éviter les publications accidentelles, `make all` est
 
 **Nouveautés**
 
+- Chapitre 4 - Détails d'implémentation du langage R
 
 **Autres modifications**
 
 - Les opérateurs du tableau 3.1 sont maintenant référencés dans l'index.
 - Détails additionnels dans la solution de l'exercice 3.1f).
-- Détails additionnels sur les expression slogiques dans `bases.R`.
+- Détails additionnels sur les expressions logiques dans `bases.R`.
 
 ### 2017.09-2 (2017-09-20)
 
