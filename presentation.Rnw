@@ -214,7 +214,7 @@ x
 Lorsque la session de travail est terminée, on sauvegarde une image de
 l'espace de travail sur le disque dur de l'ordinateur afin de pouvoir
 conserver les objets pour une future séance de
-travail\indexfonction{save.image}.
+travail\index{save.image@\code{save.image}}.
 <<eval=FALSE>>=
 save.image()
 @
@@ -413,10 +413,10 @@ Dans ses grandes lignes, une session de travail avec R comporte les
   l'environnement de développement.
 \item Si nécessaire --- et c'est rarement le cas --- sauvegarder
   l'espace de travail de la session R avec
-  \code{save.image()}\indexfonction{save.image}. En fait, on ne voudra
+  \code{save.image()}\index{save.image@\code{save.image}}. En fait, on ne voudra
   sauvegarder nos objets R que lorsque ceux-ci sont très longs à créer
   comme, par exemple, les résultats d'une simulation.
-\item Quitter R en tapant \code{q()}\indexfonction{q} à la ligne de
+\item Quitter R en tapant \code{q()}\index{q@\code{q}} à la ligne de
   commande ou en fermant l'interface graphique par la procédure
   usuelle. Encore ici, la manière de procéder est quelque peu
   différente dans GNU~Emacs; voir l'\autoref{chap:emacs+ess}.
@@ -460,7 +460,7 @@ Les rubriques d'aide des diverses fonctions de R contiennent une foule
 d'informations ainsi que des exemples d'utilisation. Leur consultation
 est tout à fait essentielle.
 
-Les fonctions \Fonction{?} et \Fonction{help} permettent de consulter
+Les fonctions \Icode{?} et \Icode{help} permettent de consulter
 la rubrique d'aide d'une fonction ou d'un autre type d'objet.
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -469,7 +469,7 @@ la rubrique d'aide d'une fonction ou d'un autre type d'objet.
 \end{Verbatim}
 \end{Schunk}
 
-La fonction \Fonction{help.search} permet quant à elle de rechercher
+La fonction \Icode{help.search} permet quant à elle de rechercher
 de l'aide sur un sujet.
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]

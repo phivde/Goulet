@@ -74,11 +74,11 @@ Les données fondamentales de R sont les suivantes:
 \begin{itemize}
 \item nombres réels: \code{0, 1, 2, 78.42, -1.39}, \dots;
 \item chaines de caractères: \code{"a"}, \code{"abc"}, \dots;
-\item valeurs booléennes: \Objet{TRUE}, \Objet{FALSE};
-\item donnée manquante: \Objet{NA};
-\item infini positif et négatif: \Objet{Inf}, \code{-Inf};
-\item valeur indéterminée: \Objet{NaN};
-\item «néant»: \Objet{NULL};
+\item valeurs booléennes: \Icode{TRUE}, \Icode{FALSE};
+\item donnée manquante: \Icode{NA};
+\item infini positif et négatif: \Icode{Inf}, \code{-Inf};
+\item valeur indéterminée: \Icode{NaN};
+\item «néant»: \Icode{NULL};
 \item nombres complexes: \code{1 + 2i}.
 \end{itemize}
 La grande majorité des langages de programmation offrent les deux
@@ -112,24 +112,24 @@ certains opérateurs dans les chapitres subséquents.
     \toprule
     Opérateur     & Fonction \\
     \midrule
-    \fonction{\$} & extraction d'une liste \\ %$
-    \fonction{[}\, \fonction{[[} & indiçage \\
+    \icode{\$} & extraction d'une liste \\ %$
+    \icode{[}\, \icode{[[} & indiçage \\
     \verb|^|\index{\string^@\verb=^=|bfhyperpage} & puissance \\
-    \fonction{-}  & changement de signe \\
+    \icode{-}  & changement de signe \\
     {\NoAutoSpacing\verb|:|}\index{:@\NoAutoSpacing\verb=:=}  & génération de suites \\
-    \fonction{\%*\%}\, \fonction{\%\%}\, \fonction{\%/\%} & produit
+    \icode{\%*\%}\, \icode{\%\%}\, \icode{\%/\%} & produit
     matriciel, modulo, division entière \\
-    \fonction{*}\, \fonction{/} & multiplication, division \\
-    \fonction{+}\, \fonction{-} & addition, soustraction \\
-    \fonction{<}\, \fonction{<=}\, \fonction{==}\, \fonction{>=}\,
-    \fonction{>}\, \verb|!=|\index{"!=@\code{"!=}} & plus petit, plus petit ou égal, égal,
+    \icode{*}\, \icode{/} & multiplication, division \\
+    \icode{+}\, \icode{-} & addition, soustraction \\
+    \icode{<}\, \icode{<=}\, \icode{==}\, \icode{>=}\,
+    \icode{>}\, \verb|!=|\index{"!=@\code{"!=}} & plus petit, plus petit ou égal, égal,
     plus grand ou égal, plus grand, différent de \\
     \verb=!=\index{"!@\code{"!}}  & négation logique \\
-    \fonction{\&}\, \fonction{\&\&} & «et» logique \\
+    \icode{\&}\, \icode{\&\&} & «et» logique \\
     \code{\textbar}\index{{"|}@\code{\textbar}},
     \code{\textbar\textbar}\index{{"|"|}@\code{\textbar\textbar}}    & «ou» logique \\
-    \fonction{->}\, \verb|->>|\index{->>@\verb=->>=|bfhyperpage} & affectation \\
-    \fonction{<-}\, \verb|<<-|\index{<<-@\verb=<<-=|bfhyperpage} & affectation \\
+    \icode{->}\, \verb|->>|\index{->>@\verb=->>=|bfhyperpage} & affectation \\
+    \icode{<-}\, \verb|<<-|\index{<<-@\verb=<<-=|bfhyperpage} & affectation \\
     \bottomrule
   \end{tabular}
   \caption{Principaux opérateurs du langage R, en ordre décroissant
@@ -191,7 +191,7 @@ d'évaluation, comme en mathématiques.
 Dans une affectation, une expression est évaluée, mais le résultat est
 stocké dans un \emph{objet} (ou \emph{variable}) dans l'espace de
 travail et rien n'est affiché à l'écran. Tel que mentionné
-précédemment, le symbole d'affectation est \Fonction{<-}, c'est-à-dire
+précédemment, le symbole d'affectation est \icode{<-}, c'est-à-dire
 les deux caractères \verb|<| et \verb|-| placés obligatoirement l'un à
 la suite de l'autre.
 <<echo=TRUE>>=
@@ -210,10 +210,10 @@ parenthèses pour ainsi créer une nouvelle expression\footnote{%
 (a <- 2 + 3)
 @
 
-Le symbole d'affectation inversé \fonction{->} existe aussi, mais il
+Le symbole d'affectation inversé \icode{->} existe aussi, mais il
 est rarement utilisé.
 
-\cautionbox{Évitez d'utiliser l'opérateur \,\fonction{=}\, pour
+\cautionbox{Évitez d'utiliser l'opérateur \,\icode{=}\, pour
   affecter une valeur à une variable. Cette pratique est susceptible
   d'engendrer de la confusion avec les constructions \code{symbole =
     valeur} dans les appels de fonction. Les règles de syntaxe de R
@@ -237,7 +237,7 @@ a <- 5; a + 2
 @
 
 On peut regrouper plusieurs commandes en une seule expression en les
-entourant d'accolades \Fonction{\{~\}}. Le résultat du regroupement
+entourant d'accolades \Icode{\{~\}}. Le résultat du regroupement
 est la valeur de la \emph{dernière} commande. Par conséquent, si le
 regroupement se termine par une affectation, aucune valeur n'est
 retournée ni affichée à l'écran.
@@ -305,7 +305,7 @@ d'objet dans R! Son usage est expliqué à la
 
 Les variables \code{T}\index{T@\code{T}|see{\code{TRUE}}} et
 \code{F}\index{F@\code{F}|see{\code{FALSE}}} prennent par défaut les
-valeurs \objet{TRUE} et \objet{FALSE}, respectivement, mais peuvent
+valeurs \icode{TRUE} et \icode{FALSE}, respectivement, mais peuvent
 être réaffectées.
 <<echo=TRUE>>=
 T
@@ -340,7 +340,7 @@ un objet ne peut avoir qu'un seul mode. Le \autoref{tab:bases:modes}
 contient la liste des principaux modes disponibles en R. À chacun de
 ces modes correspond une fonction du même nom servant à créer un objet
 de ce mode. Le mode d'un objet est obtenu avec la fonction
-\Fonction{mode}.
+\Icode{mode}.
 <<echo=TRUE>>=
 v <- c(1, 2, 5, 9)
 mode(v)
@@ -352,13 +352,13 @@ mode(v)
     \toprule
     Mode              & Contenu de l'objet \\
     \midrule
-    \Mode{numeric}    & nombres réels \\
-    \Mode{complex}    & nombres complexes \\
-    \Mode{logical}    & valeurs booléennes \\
-    \Mode{character}  & chaines de caractères \\
-    \Mode{function}   & fonction \\
-    \Mode{list}       & liste \\
-    \Mode{expression} & expressions non évaluées \\
+    \icode{numeric}    & nombres réels \\
+    \icode{complex}    & nombres complexes \\
+    \icode{logical}    & valeurs booléennes \\
+    \icode{character}  & chaines de caractères \\
+    \icode{function}   & fonction \\
+    \icode{list}       & liste \\
+    \icode{expression} & expressions non évaluées \\
     \bottomrule
   \end{tabular}
   \caption{Modes disponibles et contenus correspondants}
@@ -373,7 +373,7 @@ des objets \emph{récursifs} qui peuvent contenir d'autres objets. Par
 exemple, une liste peut contenir une ou plusieurs autres listes; nous
 y reviendrons au \autoref{chap:donnees}.
 
-\tipbox{La fonction \Fonction{typeof} permet d'obtenir une description
+\tipbox{La fonction \Icode{typeof} permet d'obtenir une description
   plus précise de la représentation interne d'un objet (c'est-à-dire
   au niveau de la mise en {\oe}uvre en C). Le mode et le type d'un
   objet sont souvent identiques.}
@@ -384,7 +384,7 @@ y reviendrons au \autoref{chap:donnees}.
 
 La longueur\Index{longueur} d'un objet est égale au nombre d'éléments
 qu'il contient. La longueur d'un objet est obtenue avec la fonction
-\Fonction{length}.
+\Icode{length}.
 <<echo=TRUE>>=
 v <- c(1, 2, 5, 9)
 length(v)
@@ -397,7 +397,7 @@ length(v)
 Au sens R du terme, la longueur d'une chaine de caractères est
 toujours $1$. Un objet de mode \code{character} doit contenir
 plusieurs chaines de caractères pour que sa longueur soit supérieure à
-$1$. Il faut utiliser la fonction \Fonction{nchar} pour obtenir le
+$1$. Il faut utiliser la fonction \Icode{nchar} pour obtenir le
 nombre de caractères dans une chaine.
 <<echo=TRUE>>=
 v1 <- "actuariat"
@@ -421,7 +421,7 @@ Pour pleinement tirer profit de ces objets, il faut connaitre leurs
 caractéristiques spéciales.
 
 L'objet \code{NA} sert à représenter une donnée manquante. Chose
-quelque peu surprenante, c'est un objet de mode \mode{logical}. Cependant,
+quelque peu surprenante, c'est un objet de mode \icode{logical}. Cependant,
 \code{NA} ne peut être considéré ni \code{TRUE}, ni \code{FALSE}.
 <<echo=TRUE>>=
 mode(NA)
@@ -433,7 +433,7 @@ Toute opération, y compris la comparaison, impliquant la valeur
 \code{NA} a comme résultat \code{NA}. Par conséquent, la valeur
 \code{NA} n'est égale à aucune autre, pas même elle-même! Pour tester
 si une valeur est manquante, il faut avoir recours à la fonction
-\Fonction{is.na}.
+\Icode{is.na}.
 <<echo=TRUE>>=
 x <- NA
 x == NA
@@ -443,11 +443,11 @@ is.na(NA)
 Les objets \code{Inf}, \code{-Inf} et \code{NaN} permettent de
 représenter les valeurs mathématiques spéciales prévues dans la norme
 IEEE~754 régissant la représentation interne des nombres dans un
-ordinateur \citep{IEEE:754}. De manière intuitive, l'objet \objet{Inf}
-représente $+\infty$, \objet{-Inf} représente $-\infty$ et \Objet{NaN}
+ordinateur \citep{IEEE:754}. De manière intuitive, l'objet \icode{Inf}
+représente $+\infty$, \code{-Inf} représente $-\infty$ et \icode{NaN}
 (\emph{Not a Number}) représente une forme indéterminée du type
 $\frac{0}{0}$ ou $\infty - \infty$. Les fonctions
-\Fonction{is.infinite}, \Fonction{is.finite} et \Fonction{is.nan}
+\Icode{is.infinite}, \Icode{is.finite} et \Icode{is.nan}
 fournissent des manières robuste de tester ces valeurs.
 <<echo=TRUE>>=
 is.infinite(1/0)
@@ -456,8 +456,8 @@ is.nan(0/0)
 is.nan(Inf - Inf)
 @
 
-Enfin, l'objet spécial \objet{NULL} représente «rien», ou le vide. Son
-mode est \Mode{NULL} et sa longueur est $0$. Il est toutefois
+Enfin, l'objet spécial \icode{NULL} représente «rien», ou le vide. Son
+mode est \code{NULL} et sa longueur est $0$. Il est toutefois
 différent d'un objet vide: un objet de longueur $0$ est un contenant
 vide, alors que \code{NULL} est «pas de contenant».
 <<echo=TRUE>>=
@@ -467,7 +467,7 @@ length(NULL)
 @
 Ajouter \code{NULL} à un objet n'ajoute rien. Par ailleurs, la seule
 façon de tester si un objet est \code{NULL} est avec la fonction
-\Fonction{is.null}.
+\Icode{is.null}.
 <<echo=TRUE>>=
 c(3, NULL)
 x <- NULL
@@ -491,14 +491,14 @@ fonction du même nom servant à extraire l'attribut d'un objet.
     \toprule
     Attribut            & Utilisation \\
     \midrule
-    \Attribut{class}    &
+    \icode{class}    &
     affecte le comportement d'un objet \\
-    \Attribut{dim}      &
+    \icode{dim}      &
     dimensions\index{dimension} des matrices et tableaux \\
-    \Attribut{dimnames} &
+    \icode{dimnames} &
     étiquettes\index{etiquette@étiquette} des dimensions des matrices
     et tableaux \\
-    \Attribut{names}    &
+    \icode{names}    &
     étiquettes des éléments d'un objet \\
     \bottomrule
   \end{tabular}
@@ -506,8 +506,8 @@ fonction du même nom servant à extraire l'attribut d'un objet.
   \label{tab:attributs}
 \end{table}
 
-La fonction \Fonction{attributes} permet d'extraire ou de modifier la
-liste des attributs d'un objet, alors que la fonction \Fonction{attr}
+La fonction \Icode{attributes} permet d'extraire ou de modifier la
+liste des attributs d'un objet, alors que la fonction \Icode{attr}
 permet de travailler sur un seul attribut à la fois. Les programmeurs
 peuvent ajouter à peu près n'importe quoi à la liste des attributs
 d'un objet. Par exemple, nous pourrions vouloir attacher au résultat
@@ -518,7 +518,7 @@ attr(x, "methode") <- "au pif"
 attributes(x)
 @
 
-L'extraction d'un attribut qui n'existe pas retourne \objet{NULL},
+L'extraction d'un attribut qui n'existe pas retourne \icode{NULL},
 alors qu'à l'inverse, affecter à un attribut la valeur \code{NULL}
 efface cet attribut.
 <<echo=TRUE>>=
@@ -541,13 +541,13 @@ dans lesquels tous les éléments sont du même mode.
 \label{sec:bases:vecteurs:creation}
 
 La fonction de base pour créer un vecteur est la fonction de
-concaténation \Fonction{c}.
+concaténation \Icode{c}.
 <<echo=TRUE>>=
 (x <- c(2, 5.1, 42))
 @
 
-Les fonctions \Fonction{numeric}, \Fonction{logical} et
-\Fonction{character} permettent également de créer des vecteurs du
+Les fonctions \Icode{numeric}, \Icode{logical} et
+\Icode{character} permettent également de créer des vecteurs du
 mode correspondant. Les fonctions prennent en argument la longueur du
 vecteur à créer. Celui-ci contiendra des valeurs initiales
 prédéterminées.
@@ -559,7 +559,7 @@ character(10)
 
 Il est possible --- et souvent souhaitable --- de nommer les éléments
 d'un vecteur; on dit qu'on leur attribue une \emph{étiquette}. Les
-étiquettes sont enregistrées dans l'attribut \attribut{names} du
+étiquettes sont enregistrées dans l'attribut \icode{names} du
 vecteur. Il y a deux grandes façons de procéder: en spécificant les
 noms dès la création du vecteur, ou à posteriori en ajoutant
 l'attribut au vecteur.
@@ -580,8 +580,8 @@ L'indiçage des vecteurs est une procédure beaucoup utilisée dans le
 langage R, aussi est-il important d'en maitriser toutes les
 subtilités. L'opération sert principalement à deux choses: extraire
 des éléments d'un objet avec la construction
-\verb|x[i]|\indexfonction{[}, ou remplacer des éléments avec la
-construction \verb|x[i] <- y|\Indexfonction{[<-}.
+\verb|x[i]|\index{[@\code{[}}, ou remplacer des éléments avec la
+construction \verb|x[i] <- y|\Index{[<-@\code{[<-}}.
 
 Dans un cas comme dans l'autre, il faut d'abord indicer le vecteur. Il
 existe cinq façons de le faire, toujours à l'intérieur de crochets
@@ -632,7 +632,7 @@ x[]
 
 \tipbox{Il n'est pas inutile de savoir que les opérations d'extraction
   et de remplacement sont en fait traduites par l'interpréteur R en
-  des appels à des fonctions nommées \fonction{[} et \fonction{[<-},
+  des appels à des fonctions nommées \icode{[} et \icode{[<-},
   dans l'ordre.}
 
 \subsection{Arithmétique vectorielle}
@@ -778,7 +778,7 @@ square(square(5))
 \label{sec:bases:fonctions:definition}
 
 Comme nous l'avons vu dans l'exemple ci-dessus, on définit une
-nouvelle fonction dans R à l'aide de la fonction \Fonction{function}.
+nouvelle fonction dans R à l'aide de la fonction \Icode{function}.
 La syntaxe exacte de la définition d'une fonction est la suivante:
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -798,7 +798,7 @@ La syntaxe exacte de la définition d'une fonction est la suivante:
 \end{itemize}
 
 Nous souhaitons généralement attribuer un nom à une fonction, mais
-c'est tout à fait optionnel. En effet, l'appel à \fonction{function}
+c'est tout à fait optionnel. En effet, l'appel à \icode{function}
 retourne déjà une fonction et si aucun nom n'est attribué à cet objet,
 on obtient ce qui est appelé une \emph{fonction anonyme}. Les
 fonctions anonymes sont particulièrement utiles avec les fonctions
@@ -891,7 +891,7 @@ la fonction ne retournera alors rien et on ne pourra utiliser une
 construction de la forme \code{x <- f()} pour affecter le résultat de
 la fonction à une variable.
 
-\cautionbox{Il existe une fonction \fonction{return} pour terminer
+\cautionbox{Il existe une fonction \icode{return} pour terminer
   immédiatement l'exécution d'une fonction et retourner un résultat;
   nous la présenterons avec les structures de contrôle au
   \autoref{chap:application}. Cependant, l'utilisation de
@@ -1054,12 +1054,12 @@ x[-c(6, 7, 12)]
   effectuer les calculs mathématiques ci-dessous. Vous pouvez utiliser
   les fonctions R suivantes:
   \begin{itemize}
-  \item \fonction{sum} pour calculer la somme des éléments d'un
+  \item \icode{sum} pour calculer la somme des éléments d'un
     vecteur;
-  \item \fonction{prod} pour calculer le produit des éléments d'un
+  \item \icode{prod} pour calculer le produit des éléments d'un
     vecteur;
-  \item \fonction{max} pour calculer le maximum d'un vecteur;
-  \item \fonction{abs} pour calculer la valeur absolue de chacun des
+  \item \icode{max} pour calculer le maximum d'un vecteur;
+  \item \icode{abs} pour calculer la valeur absolue de chacun des
     éléments d'un vecteur.
   \end{itemize}
   \begin{enumerate}
