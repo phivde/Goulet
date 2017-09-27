@@ -40,13 +40,9 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 ## Historique des versions
 
-### (en développement)
+### 2017.09-4 (2017-09-27)
 
-#### Nouveautés
-
-
-
-#### Autres modifications
+Révisions apportées au chapitre 4. Pas de nouveau chapitre.
 
 - Mention et utilisation des fonctions `formals` et `body` dans le texte du chapitre 4.
 - Précisions additionnelles sur la fonction de répartition empirique dans l'énoncé de l'exercice 4.1.
