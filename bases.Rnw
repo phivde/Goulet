@@ -821,52 +821,55 @@ fonction est la suivante:
 \item \meta{nom} est le nom de la fonction (les règles pour les noms
   de fonctions sont les mêmes que celles présentées à la
   \autoref{sec:bases:objets:noms} pour tout autre objet).
+
+  Nous souhaitons généralement attribuer un nom à une fonction, mais
+  c'est tout à fait optionnel. En effet, l'appel à \icode{function}
+  retourne déjà une fonction et si aucun nom n'est attribué à cet
+  objet, on obtient ce qui est appelé une
+  \index{fonction!anonyme}\emph{fonction anonyme}. Les fonctions
+  anonymes sont particulièrement utiles avec les fonctions
+  d'application qui seront étudiées au \autoref{chap:application}.
+
 \item \meta{arguments} est la liste des arguments formels de la
   fonction, séparés par des virgules.
-\item \meta{corps} est une expression ou un groupe d'expressions
-  réunies par des accolades, tel qu'expliqué à la
-  \autoref{sec:bases:commandes:regroupement}.
-\end{itemize}
 
-Nous souhaitons généralement attribuer un nom à une fonction, mais
-c'est tout à fait optionnel. En effet, l'appel à \icode{function}
-retourne déjà une fonction et si aucun nom n'est attribué à cet objet,
-on obtient ce qui est appelé une
-\index{fonction!anonyme}\emph{fonction anonyme}. Les fonctions
-anonymes sont particulièrement utiles avec les fonctions d'application
-qui seront étudiées au \autoref{chap:application}.
+  Une fonction peut n'avoir aucun \index{fonction!argument
+    formel}argument formel ou plusieurs. Il n'y a pas de limite
+  pratique au nombre d'arguments formels que peut avoir une fonction.
+  Les arguments peuvent être des symboles, des constructions de la
+  forme \code{symbole = défaut}, ou encore l'argument formel spécial
+  `\code{...}'.
 
-Une fonction peut n'avoir aucun \index{fonction!argument
-  formel}argument formel ou plusieurs. Il n'y a pas de limite pratique
-au nombre d'arguments formels que peut avoir une fonction. Les
-arguments peuvent être des symboles, des constructions de la
-forme \code{symbole = défaut}, ou encore l'argument formel spécial
-`\code{...}'.
-
-Lorsqu'un symbole seul est utilisé comme argument, il indique le nom
-de celui-ci. L'objet de ce nom sera disponible à l'intérieur de la
-fonction.
+  Lorsqu'un symbole seul est utilisé comme argument, il indique le nom
+  de celui-ci. L'objet de ce nom sera disponible à l'intérieur de la
+  fonction.
 <<echo=TRUE>>=
 f <- function(x) 2 * x + 1
 f(2)
 @
 
-La construction \code{symbole = défaut} indique la valeur par défaut
-de l'argument \code{symbole}, c'est-à-dire la valeur de l'argument si
-aucune n'est spécifiée dans l'appel de la fonction.
+  La construction \code{symbole = défaut} indique la valeur par défaut
+  de l'argument \code{symbole}, c'est-à-dire la valeur de l'argument si
+  aucune n'est spécifiée dans l'appel de la fonction.
 <<echo=TRUE>>=
 f <- function(x = 0) 2 * x + 1
 f(2)
 f()
 @
 
-Enfin, l'argument spécial `\code{...}' peut contenir un nombre
-arbitraire d'arguments. La fonction y ayant recours se trouve donc à
-accepter un nombre variable d'arguments. On utilise généralement
-`\code{...}' pour passer des arguments tels quels à une autre fonction
-qui, elle, saura quoi faire de ces arguments. On trouvera un meilleur
-exemple à la \autoref{sec:bases:exemples} que ce que nous pourrions faire
-ici en quelques lignes.
+  Enfin, l'argument spécial `\code{...}' peut contenir un nombre
+  arbitraire d'arguments. La fonction y ayant recours se trouve donc à
+  accepter un nombre variable d'arguments. On utilise généralement
+  `\code{...}' pour passer des arguments tels quels à une autre fonction
+  qui, elle, saura quoi faire de ces arguments. On trouvera un meilleur
+  exemple à la \autoref{sec:bases:exemples} que ce que nous pourrions faire
+  ici en quelques lignes.
+
+\item \meta{corps} est une expression ou un groupe d'expressions
+  réunies par des accolades, tel qu'expliqué à la
+  \autoref{sec:bases:commandes:regroupement}.
+\end{itemize}
+
 
 
 \subsection{Appel d'une fonction}
@@ -882,12 +885,16 @@ f <- function(x, y = 0, p = 2) sum(abs(x - y)^p)
 @
 
 L'ordre des arguments dans la définition de la fonction est important.
-Nous avons deux choix au moment d'appeler une fonction: spécifier les
-valeurs des arguments dans le bon ordre, ou nommer explicitement les
-arguments avec une construction de la forme \code{symbole =
-  expression}, auquel cas l'ordre n'importe plus. Il est beaucoup plus
-prudent et \emph{fortement recommandé} de spécifier les arguments par
-leur nom, surtout après les deux ou trois premiers arguments.
+Nous avons deux choix au moment d'appeler une fonction:
+\begin{enumerate}
+\item spécifier les valeurs des arguments dans le bon ordre; ou
+\item nommer explicitement les arguments avec une construction de la
+  forme \code{symbole = expression}, auquel cas l'ordre n'importe
+  plus.
+\end{enumerate}
+Il est beaucoup plus prudent et \emph{fortement recommandé} de
+spécifier les arguments par leur nom, surtout après les deux ou trois
+premiers arguments.
 <<echo=TRUE>>=
 f(c(3, 2), c(1, 1), 2)
 f(y = c(1, 1), c(3, 2), 2)
