@@ -822,13 +822,14 @@ fonction est la suivante:
   de fonctions sont les mêmes que celles présentées à la
   \autoref{sec:bases:objets:noms} pour tout autre objet).
 
-  Nous souhaitons généralement attribuer un nom à une fonction, mais
-  c'est tout à fait optionnel. En effet, l'appel à \icode{function}
-  retourne déjà une fonction et si aucun nom n'est attribué à cet
-  objet, on obtient ce qui est appelé une
-  \index{fonction!anonyme}\emph{fonction anonyme}. Les fonctions
-  anonymes sont particulièrement utiles avec les fonctions
-  d'application qui seront étudiées au \autoref{chap:application}.
+  Nous souhaitons généralement attribuer un nom à une fonction, ne
+  serait-ce que pour pouvoir la réutiliser. Cela dit, c'est tout à
+  fait optionnel. En effet, l'appel à \icode{function} retourne déjà
+  une fonction et si aucun nom n'est attribué à cet objet, on obtient
+  ce qui est appelé une \index{fonction!anonyme}\emph{fonction
+    anonyme}. Les fonctions anonymes sont particulièrement utiles avec
+  les fonctions d'application qui seront étudiées au
+  \autoref{chap:application}.
 
 \item \meta{arguments} est la liste des arguments formels de la
   fonction, séparés par des virgules.
@@ -892,6 +893,10 @@ Nous avons deux choix au moment d'appeler une fonction:
   forme \code{symbole = expression}, auquel cas l'ordre n'importe
   plus.
 \end{enumerate}
+Si certains arguments sont nommés et d'autre pas, ces derniers
+reçoivent des valeurs selon leur ordre dans la définition de la
+fonction, et non en fonction de leur position dans l'appel.
+
 Il est beaucoup plus prudent et \emph{fortement recommandé} de
 spécifier les arguments par leur nom, surtout après les deux ou trois
 premiers arguments.
