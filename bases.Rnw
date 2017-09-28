@@ -808,8 +808,9 @@ square(square(5))
 \label{sec:bases:fonctions:definition}
 
 Comme nous l'avons vu dans l'exemple ci-dessus, on définit une
-nouvelle fonction dans R à l'aide de la fonction \Icode{function}.
-La syntaxe exacte de la définition d'une fonction est la suivante:
+nouvelle \index{fonction!définition}fonction dans R à l'aide de la
+fonction \Icode{function}. La syntaxe exacte de la définition d'une
+fonction est la suivante:
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
 \meta{nom} <- function(\meta{arguments}) \meta{corps}
@@ -818,7 +819,7 @@ La syntaxe exacte de la définition d'une fonction est la suivante:
 
 \begin{itemize}
 \item \meta{nom} est le nom de la fonction (les règles pour les noms
-  de fonctions étant les mêmes que celles présentées à la
+  de fonctions sont les mêmes que celles présentées à la
   \autoref{sec:bases:objets:noms} pour tout autre objet).
 \item \meta{arguments} est la liste des arguments formels de la
   fonction, séparés par des virgules.
@@ -830,15 +831,17 @@ La syntaxe exacte de la définition d'une fonction est la suivante:
 Nous souhaitons généralement attribuer un nom à une fonction, mais
 c'est tout à fait optionnel. En effet, l'appel à \icode{function}
 retourne déjà une fonction et si aucun nom n'est attribué à cet objet,
-on obtient ce qui est appelé une \emph{fonction anonyme}. Les
-fonctions anonymes sont particulièrement utiles avec les fonctions
-d'application qui seront étudiées au \autoref{chap:application}.
+on obtient ce qui est appelé une
+\index{fonction!anonyme}\emph{fonction anonyme}. Les fonctions
+anonymes sont particulièrement utiles avec les fonctions d'application
+qui seront étudiées au \autoref{chap:application}.
 
-Une fonction peut n'avoir aucun argument formel ou plusieurs. Il n'y a
-pas de limite pratique au nombre d'arguments formels que peut avoir
-une fonction. Les arguments formels peuvent être des symboles, des
-constructions de la forme \code{symbole = défaut}, ou encore
-l'argument formel spécial `\code{...}'.
+Une fonction peut n'avoir aucun \index{fonction!argument
+  formel}argument formel ou plusieurs. Il n'y a pas de limite pratique
+au nombre d'arguments formels que peut avoir une fonction. Les
+arguments peuvent être des symboles, des constructions de la
+forme \code{symbole = défaut}, ou encore l'argument formel spécial
+`\code{...}'.
 
 Lorsqu'un symbole seul est utilisé comme argument, il indique le nom
 de celui-ci. L'objet de ce nom sera disponible à l'intérieur de la
@@ -849,9 +852,8 @@ f(2)
 @
 
 La construction \code{symbole = défaut} indique la valeur par défaut
-de l'argument \code{symbole}. En d'autres termes, c'est la valeur de
-l'argument si aucune valeur n'est spécifiée dans l'appel de la
-fonction.
+de l'argument \code{symbole}, c'est-à-dire la valeur de l'argument si
+aucune n'est spécifiée dans l'appel de la fonction.
 <<echo=TRUE>>=
 f <- function(x = 0) 2 * x + 1
 f(2)
@@ -870,10 +872,11 @@ ici en quelques lignes.
 \subsection{Appel d'une fonction}
 \label{sec:bases:fonctions:appel}
 
-Nous avons déjà évoqué certaines des règles qui régissent les appels
-de fonctions dans R. Regardons maintenant cela de plus près. Aux fins
-d'illustrations, nous définissons une petite fonction comptant trois
-arguments, dont seul le premier n'a pas de valeur par défaut.
+Nous avons déjà évoqué certaines des règles qui régissent les
+\index{fonction!appel}appels de fonctions dans R. Regardons maintenant
+cela de plus près. Aux fins d'illustrations, nous définissons une
+petite fonction comptant trois arguments, dont seul le premier n'a pas
+de valeur par défaut.
 <<echo=TRUE>>=
 f <- function(x, y = 0, p = 2) sum(abs(x - y)^p)
 @
@@ -910,8 +913,8 @@ passées.
 \label{sec:bases:fonctions:resultats}
 
 La plupart des fonctions sont écrites dans le but de retourner un
-résultat. Or, les règles d'interprétation d'un regroupement
-d'expressions présentées à la
+\index{fonction!résultat}résultat. Or, les règles d'interprétation
+d'un regroupement d'expressions présentées à la
 \autoref{sec:bases:commandes:regroupement} s'appliquent ici au corps
 de la fonction: une fonction retourne tout simplement le résultat de
 sa \emph{dernière expression}.
@@ -919,7 +922,7 @@ sa \emph{dernière expression}.
 On évitera donc que la dernière expression soit une affectation, car
 la fonction ne retournera alors rien et on ne pourra utiliser une
 construction de la forme \code{x <- f()} pour affecter le résultat de
-la fonction à une variable.
+la fonction à un objet.
 
 \cautionbox{Il existe une fonction \icode{return} pour terminer
   immédiatement l'exécution d'une fonction et retourner un résultat;
