@@ -40,19 +40,15 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 ## Historique des versions
 
-### (en développement)
+### 2017.09-3b (2017-09-28)
 
-#### Nouveautés
-
-
-
-#### Autres modifications
+Améliorations au chapitre 3. Pas de nouveau chapitre
 
 - Ajouts dans le chapitre 3 sur la conversion forcée d'un mode vers un autre dans la création des vecteurs et dans les opérations arithmétiques et logiques (sections 3.3.2, 3.4.1, 3.4.3 et les blocs correspondant dans `bases.R`).
 - Réorganisation du matériel des sections 3.5.2 et 3.5.3 dans des listes pour en faciliter la lecture.
 - Dans les règles d'appel d'une fonction (section 3.5.3), ajout d'une phrase pour expliciter le cas où certains arguments sont nommés et d'autres, non.
 
-### 2017.09-4 (2017-09-27)
+### 2017.09-3a (2017-09-27)
 
 Révisions apportées au chapitre 4. Pas de nouveau chapitre.
 
