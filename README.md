@@ -40,6 +40,16 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 ## Historique des versions
 
+### (en développement)
+
+#### Nouveautés
+
+
+
+#### Autres modifications
+
+- Ajouts dans le chapitre 3 sur la conversion forcée d'un mode vers un autre dans la création des vecteurs et dans les opérations arithmétiques et logiques (sections 3.3.2, 3.4.1, 3.4.3 et les blocs correspondant dans `bases.R`).
+
 ### 2017.09-4 (2017-09-27)
 
 Révisions apportées au chapitre 4. Pas de nouveau chapitre.

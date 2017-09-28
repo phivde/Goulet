@@ -164,16 +164,6 @@ mode(c(2, 1 + 5i))         # nombres complexes
 mode(c(TRUE, FALSE, TRUE)) # valeurs booléennes
 mode("foobar")             # chaînes de caractères
 
-## Si l'on mélange dans un même vecteur des objets de mode
-## différents, il y a conversion automatique vers le mode pour
-## lequel il y a le moins de perte d'information, c'est-à-dire
-## vers le mode qui permet le mieux de retrouver la valeur
-## originale des éléments.
-c(5, TRUE, FALSE)          # conversion en mode 'numeric'
-c(5, "z")                  # conversion en mode 'character'
-c(TRUE, "z")               # conversion en mode 'character'
-c(5, TRUE, "z")            # conversion en mode 'character'
-
 ## La plupart des autres types d'objets sont récursifs. Voici
 ## quelques autres modes.
 mode(seq)                  # une fonction
@@ -243,6 +233,16 @@ numeric                    # en effet, voici la fonction
 logical(5)                 # initialisé avec FALSE
 complex(5)                 # initialisé avec 0 + 0i
 character(5)               # initialisé avec chaînes vides
+
+## Si l'on mélange dans un même vecteur des objets de mode
+## différents, il y a conversion forcée vers le mode pour
+## lequel il y a le moins de perte d'information, c'est-à-dire
+## vers le mode qui permet le mieux de retrouver la valeur
+## originale des éléments.
+c(5, TRUE, FALSE)          # conversion en mode 'numeric'
+c(5, "z")                  # conversion en mode 'character'
+c(TRUE, "z")               # conversion en mode 'character'
+c(5, TRUE, "z")            # conversion en mode 'character'
 
 ### INDIÇAGE
 
@@ -321,6 +321,22 @@ c(0, 3, -1, 4)^2           # élévation à une puissance
 8 + 1:10                   # 8 est recyclé 10 fois
 c(2, 5) * 1:10             # c(2, 5) est recyclé 5 fois
 c(-2, 3, -1, 4)^(1:4)      # quatre puissances différentes
+
+## Dans les opérations arithmétiques (ou, plus généralement,
+## les opérations conçues pour travailler avec des nombres),
+## les valeurs booléennes TRUE et FALSE sont automatiquement
+## converties en 1 et 0, respectivement. Conséquence: il est
+## possible de faire des calculs avec des valeurs booléennes!
+c(5, 3) + c(TRUE, FALSE)   # équivalent à c(5, 3) + c(1, 0)
+5 + (3 < 4)                # (3 < 4) vaut TRUE
+5 + 3 < 4                  # priorité des opérations!
+
+## Dans les opérations logiques, ce sont les nombres qui sont
+## convertis en valeurs booléennes. Dans ce cas, zéro est
+## traité comme FALSE et tous les autres nombres comme TRUE.
+0:5 & 5:0
+0:5 | 5:0
+!0:5
 
 ###
 ### FONCTIONS
