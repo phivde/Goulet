@@ -710,7 +710,7 @@ argument n'est pas du bon mode, R effectuera une \index{conversion
 valeurs booléennes \code{TRUE} et \code{FALSE} se verront converties
 en $1$ et $0$, respectivement, dans les opérations arithmétiques. À
 l'inverse, dans les opérations logiques, $0$ est converti en
-\code{FALSE} et \emph{tout} nombre autre que $0$ est converti en
+\code{FALSE} et \emph{tout} autre nombre est converti en
 \code{TRUE}.
 <<echo=TRUE>>=
 2 + c(TRUE, FALSE)
@@ -928,6 +928,7 @@ la fonction à une variable.
   \code{return} à la toute fin d'une fonction est tout à fait inutile
   et c'est considéré comme du mauvais style en R.}
 
+\newpage
 
 \section{Exemples}
 \label{sec:bases:exemples}
