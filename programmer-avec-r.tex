@@ -73,17 +73,21 @@
   \hypersetup{%
     pdfauthor = \theauthor,
     pdftitle = \thetitle,
-    colorlinks = {true},
-    linktocpage = {true},
+    colorlinks = true,
+    linktocpage = true,
     urlcolor = {url},
     linkcolor = {link},
     citecolor = {citation},
     pdfpagemode = {UseOutlines},
-    pdfstartview = {Fit},
-    bookmarksopen = {true},
-    bookmarksnumbered = {true},
-    bookmarksdepth = {subsubsection}}
+    pdfstartview = {Fit}}
   \setlength{\XeTeXLinkMargin}{1pt}
+
+  %% Affichage de la table des matières du PDF
+  \usepackage{bookmark}
+  \bookmarksetup{%
+    open = true,
+    openlevel = 2,
+    numbered = true}
 
   %% Étiquettes de \autoref (redéfinitions compatibles avec babel).
   %% Attention! Les % à la fin des lignes sont importants sinon des
