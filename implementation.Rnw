@@ -164,7 +164,7 @@ fonctions. Nous en avons déjà utilisé trois ci-dessus.
 \begin{ttscript}{environment}
 \item[\Icode{environment}] extraction ou modification de
   l'environnement
-\item[\icode{ls}] affichage de la liste des éléments du
+\item[\icode{ls}] affichage de la liste des éléments
   de l'environnement
 \item[\Icode{get}] extraction de la valeur associée à un symbole
   dans l'environnement
