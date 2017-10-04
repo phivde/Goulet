@@ -12,15 +12,16 @@ La branche `master` du dépôt est réservée en écriture au gestionnaire du pr
 
 Pour collaborer au projet, vous devez publier vos modifications dans une nouvelle branche et effectuer une demande de tirage (*pull request*) vers la branche `master`. La procédure à suivre à partir d'une invite de commande (Git Bash sous Windows ou Terminal sous macOS) est la suivante.
 
-1. Si  vous travaillez sur le code source pour la première fois, déplacez-vous (avec la commande `cd` à la ligne de commande) dans le répertoire dans lequel vous voulez enregistrer le code source du projet (le répertoire `programmer-avec-r-develop` sera créé automatiquement), puis clonez le dépôt:
+1. Si  vous travaillez sur le code source pour la première fois, déplacez-vous (avec la commande `cd` à la ligne de commande) dans le répertoire dans lequel vous voulez enregistrer le code source du projet (le répertoire `programmer-avec-r-develop` sera créé automatiquement), clonez le dépôt et déplacez-vous ensuite dans le dossier du code source:
 
 ```
 git clone https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-develop.git
+cd programmer-avec-r-develop
 ```
 
 **OU**
 
-1. Si vous avez déjà cloné le dépôt dans le passé et que vous voulez reprendre le travail sur le code source, mettez à jour votre copie locale du dépôt:
+1. Si vous avez déjà cloné le dépôt dans le passé et que vous voulez reprendre le travail sur le code source, déplacez-vous (avec la commande `cd` à la ligne de commande) dans le répertoire du code source, puis mettez à jour votre copie locale du dépôt:
 
 ```
 git pull
@@ -32,7 +33,7 @@ git pull
 git checkout -b <nom_de_branche>
 ```
 	
-3. Effectuez maintenant vos modifications. Il y a un fichier par chapitre et son nom, avec une extension `.tex` ou `.Rnw`, a un lien évident avec le titre du chapitre. On ne fait des modifications que dans un seul fichier à la fois! Une fois les modifications terminées, publiez le fichier modifié dans votre dépôt local avec un commentaire utile, mais bref, sur la nature des modifications:
+3. Effectuez maintenant vos modifications. Il y a un fichier par chapitre et son nom, avec une extension `.tex` ou `.Rnw`, a un lien évident avec le titre du chapitre. Le code de la section d'exemples du chapitre se trouve dans un fichier du même nom avec une extension `.R`. On ne fait des modifications que dans un seul fichier à la fois! Une fois les modifications terminées, publiez le fichier modifié dans votre dépôt local avec un commentaire utile, mais bref, sur la nature des modifications:
     
 ```
 git status
