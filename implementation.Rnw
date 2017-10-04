@@ -29,7 +29,7 @@ options(width=52)
 \section{Mise en contexte}
 \label{sec:implementation:contexte}
 
-Au chapitre précédent, nous avons défini une fonction très simple pour
+Au chapitre précédent, nous avons définie une fonction très simple pour
 élever un nombre au carré.
 <<echo=TRUE>>=
 square <- function(x) x * x
@@ -415,9 +415,9 @@ connue au moment d'effectuer ce calcul. Joli, non?
 \end{Filesave}
 
 \begin{exercice}
-  La fonction \icode{ecdf} de R prend en argument un vecteur de
-  données $(x_1, \dots, x_n)$ et retourne une fonction pour calculer
-  la fonction de répartition empirique de ces données:
+  La fonction \icode{ecdf} de R retourne une fonction pour calculer
+  la fonction de répartition empirique d'un vecteur de
+  données $(x_1, \dots, x_n)$:
   \begin{equation*}
     F_n(x) = \frac{\# x_i \leq x}{n}.
   \end{equation*}
