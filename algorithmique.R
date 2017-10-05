@@ -248,3 +248,50 @@ bubblesort <- function(x)
 (x <- sample(0:10, 7, replace = TRUE))
 bubblesort(x)
 
+### EXERCICE 15 - Mise en œuvre de l'algorithme countingsort
+
+## L'algorithme compte le nombre d'occurences de chaque valeur
+## dans le vecteur pour ensuite les retourner dans le bon
+## ordre et le bon nombre de fois.
+##
+## Notre première mise en œuvre utilise une boucle pour passer
+## à travers toutes les valeurs du vecteur. Elle est un peu
+## plus générale que l'algorithme de Stephens (2013) dans la
+## mesure où elle fonctione pour des nombres en 'min' et 'max'
+## plutôt qu'uniquement entre 0 et 'max'. (Nous répondons donc
+## en même temps à l'exercice 16.)
+##
+## La clé ici pour éviter certaines boucles de l'algorithme:
+## la fonction 'rep' qui permet de répéter les valeurs d'un
+## vecteur autant de fois que nécessaire.
+countingsort <- function(x, min, max)
+{
+    min1m <- min - 1               # sert souvent
+    counts <- numeric(max - min1m) # initialisation
+
+    for (i in seq_along(x))
+    {
+        j <- x[i] - min1m
+        counts[j] <- counts[j] + 1
+    }
+
+    ## suite des nombres de 'min' à 'max' répétés chacun le
+    ## bon nombre de fois
+    rep(min:max, counts)
+}
+
+## Test
+(x <- sample(10:20, 100, replace = TRUE))
+countingsort(x, 10, 20)
+
+## La seconde mise en œuvre ci-dessous triche un peu: elle
+## utilise la fonction 'table' de R qui retourne justement le
+## tableau de fréquence de chaque valeur d'un vecteur.
+## Résultat: plus de boucle!
+countingsort <- function(x, min, max)
+    rep(min:max, table(x))
+
+## Test
+(x <- sample(10:20, 100, replace = TRUE))
+countingsort(x, 10, 20)
+
