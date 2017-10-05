@@ -108,7 +108,7 @@ insertionsort <- function(x)
 ## Test de notre fonction 'insertionsort'.
 insertionsort(x)
 
-### EXERCICE 2 - Mise en œuvre de l'algorithme selectionsort
+### EXERCICE 3 - Mise en œuvre de l'algorithme selectionsort
 
 ## L'algorithme selectionsort déplace graduellement vers
 ## l'avant la plus petite valeur du vecteur, la deuxième plus
@@ -118,6 +118,17 @@ insertionsort(x)
 ## travers toutes les positions du vecteur et un autre pour, à
 ## chaque itératio de la première boucle, trouver le minimum
 ## dans les valeurs restantes du vecteur.
+##
+## Dans plusieurs langages de programmation, l'échange de deux
+## éléments d'un vecteur nécessite une variable tampon
+## (temporaire), comme suit:
+##
+##   tmp <- x[i]
+##   x[i] <- x[j]
+##   x[j] <- tmp
+##
+## Remarquer, ci-dessous, comment l'échange est facile à faire
+## en R simplement par indiçage.
 selectionsort <- function(x)
 {
     xlen <- length(x)      # sert souvent
@@ -162,4 +173,6 @@ selectionsort <- function(x)
 ## Test
 (x <- sample(0:10, 7, replace = TRUE))
 selectionsort(x)
+
+### EXERCICE 5 - Mise en œuvre de l'algorithme bubblesort
 
