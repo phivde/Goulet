@@ -28,6 +28,7 @@ SCRIPTS = \
 	presentation.R \
 	bases.R \
 	implementation.R \
+	algorithmique.R \
 	# operateurs.R \
 	# fonctions.R \
 	# avance.R
