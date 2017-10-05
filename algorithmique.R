@@ -176,3 +176,75 @@ selectionsort(x)
 
 ### EXERCICE 5 - Mise en œuvre de l'algorithme bubblesort
 
+## L'algorithme fait graduellement «remonter à la surface» les
+## plus petites valeurs du vecteur. Il faut comparer deux
+## valeurs adjacentes tant que le vecteur n'est pas trié.
+##
+## Par nature, l'algorithme requiert deux boucles: une pour
+## comparer les valeurs deux à deux, et une autre pour
+## continuer le travail tant que le vecteur n'est pas trié.
+##
+## Une première version de la mise en œuvre colle de près à
+## l'algorithme de Stephens (2013).
+bubblesort <- function(x)
+{
+    ind <- 2:length(x)     # suite sert souvent
+
+    not_sorted <- TRUE     # entrer dans la boucle
+    while (not_sorted)
+    {
+        not_sorted <- FALSE
+        for (i in ind)
+        {
+            j <- i - 1
+            if (x[i] < x[j])
+            {
+                x[c(i, j)] <- x[c(j, i)]
+                not_sorted <- TRUE
+                next
+            }
+        }
+    }
+    x
+}
+
+## Test
+(x <- sample(0:10, 7, replace = TRUE))
+bubblesort(x)
+
+## Dans la version ci-dessus, il faut changer la variable
+## indicatrice 'not_sorted' plusieurs fois, dont une pour
+## s'assurer d'effectuer la boucle 'while' au moins une fois.
+##
+## La seconde mise œuvre, ci-dessous, est rendue plus facile à
+## suivre par l'utilisation d'une boucle 'repeat', qui est
+## toujours exécutée au moins une fois. Au passage, nous
+## inversons également le rôle de la variable indicatrice pour
+## éviter les déroutantes doubles négations.
+bubblesort <- function(x)
+{
+    ind <- 2:length(x)      # sert souvent
+
+    repeat
+    {
+        sorted <- TRUE
+        for (i in ind)
+        {
+            j <- i - 1
+            if (x[i] < x[j])
+            {
+                x[c(i, j)] <- x[c(j, i)]
+                sorted <- FALSE
+                next
+            }
+        }
+        if (sorted)
+            break
+    }
+    x
+}
+
+## Test
+(x <- sample(0:10, 7, replace = TRUE))
+bubblesort(x)
+
