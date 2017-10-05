@@ -4,9 +4,11 @@
 
 > Seuls les étudiants de l'Université Laval inscrits au cours IFT-1902 à l'automne 2017 disposent des droits en écriture requis pour effectuer la procédure décrite ci-dessous.
 
+> Ce guide est également disponible en [vidéo](https://youtu.be/ah4F4MF5JmM).
+
 La version de développement du projet [Programmer avec R](https://vigou3.github.io/programmer-avec-r) est hébergée dans un [dépôt Git public](https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-develop) de la Faculté des sciences et de génie de l'Université Laval.
 
-Ce dépôt utilise l'interface [Atlassian BitBucket Server](https://www.atlassian.com/software/bitbucket/server).
+Le dépôt utilise l'interface [Atlassian BitBucket Server](https://www.atlassian.com/software/bitbucket/server).
 
 La branche `master` du dépôt est réservée en écriture au gestionnaire du projet.
 
