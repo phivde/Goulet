@@ -47,67 +47,61 @@ de hachage (\emph{hashtable}) dont traitent habituellement les
 ouvrages d'algorithmique et de programmation.
 
 
-\section{Matrices et tableaux}
-\label{sec:donnees:matrices}
+\section{Matrice et tableau}
+\label{sec:donnees:matrice}
 
 R étant un langage spécialisé pour les calculs mathématiques, il
 supporte tout naturellement et de manière intuitive --- à une
-exception près, comme nous le verrons --- les matrices et, plus
-généralement, les tableaux à plusieurs dimensions.
+exception près, comme nous le verrons --- les
+\capsule{https://youtu.be/indicage}{matrices et tableaux}.
 
-Les \capsule{https://youtu.be/indicage}{matrices et tableaux} ne sont
-rien d'autre que des vecteurs dotés d'un attribut \attribut{dim}. Ces
+Nous avons établi d'entrée de jeu à la \autoref{sec:bases:vecteurs}
+qu'en R, tout est un vecteur. C'est aussi vrai pour les matrices et
+tableaux, qui ne sont rien d'autre que des vecteurs dotés d'un
+attribut \icode{dim} (\autoref{sec:bases:objets:attributs}). Ces
 objets sont donc stockés, et peuvent être manipulés, exactement comme
 des vecteurs simples.
 
-\begin{itemize}
-\item Une matrice est un vecteur avec un attribut \attribut{dim} de
-  longueur $2$. Cela change implicitement la classe de l'objet pour
-  \indexclasse{matrix}\code{"matrix"} et, de ce fait, le mode
-  d'affichage de l'objet ainsi que son interaction avec plusieurs
-  opérateurs et fonctions.
-\item La fonction de base pour créer des matrices est
-  \Fonction{matrix}:
+Une \Index{matrice}matrice est un vecteur avec un attribut \icode{dim}
+de longueur $2$. La présence de cet attribut change implicitement la
+classe de l'objet et, de ce fait, son mode d'affichage (sous forme de
+tableau rectangulaire) et son interaction avec plusieurs opérateurs et
+fonctions, notamment les opérateurs d'indiçage. La fonction de base
+pour créer une matrice est \Icode{matrix}:
 <<echo=TRUE>>=
-matrix(1:6, nrow = 2, ncol = 3)
+m <- matrix(1:6, nrow = 2, ncol = 3)
 matrix(1:6, nrow = 2, ncol = 3, byrow = TRUE)
 @
-\item La généralisation d'une matrice à plus de deux dimensions est un
-  tableau (\emph{array}). Le nombre de dimensions du tableau est
-  toujours égal à la longueur de l'attribut \attribut{dim}. La classe
-  implicite d'un tableau est \indexclasse{array}\code{"array"}.
-\item La fonction de base pour créer des tableaux est
-  \Fonction{array}:
+
+La généralisation d'une matrice à plus de deux dimensions est un
+\Index{tableau}tableau (\emph{array}). Le nombre de dimensions du
+tableau est toujours égal à la longueur de l'attribut \icode{dim}. La
+fonction de base pour créer des tableaux est \Icode{array}:
 <<echo=TRUE>>=
 array(1:24, dim = c(3, 4, 2))
 @
-\end{itemize}
 
-\begin{important}
-  On remarquera ci-dessus que les matrices et tableaux sont remplis en
+\importantbox{%
+  Vous aurez remarqué que les matrices et tableaux sont remplis en
   faisant d'abord varier la première dimension, puis la seconde, etc.
-  Pour les matrices, cela revient à remplir par colonne. On conviendra
-  que cette convention, héritée du Fortran, n'est pas des plus
-  intuitives.
+  Pour les matrices, cela revient à les remplir par colonne. Cette
+  convention, héritée du Fortran, n'est pas des plus intuitives, mais
+  elle a ses avantages dans plusieurs applications.
 
-  La fonction \code{matrix} a un argument \argument{byrow} qui permet
-  d'inverser l'ordre de remplissage. Cependant, il vaut mieux
-  s'habituer à la convention de R que d'essayer constamment de la
-  contourner.
-\end{important}
+  La fonction \icode{matrix} possède un argument \code{byrow} qui
+  permet d'inverser l'ordre de remplissage, mais il vaut mieux
+  vous habituer à la convention de R qu'essayer de constamment la
+  contourner.}
 
 L'ordre de remplissage inhabituel des tableaux rend leur manipulation
 difficile si on ne les visualise pas correctement. Imaginons un
-tableau de dimensions $3 \times 4 \times 5$.
-\begin{itemize}
-\item Il faut voir le tableau comme cinq matrices $3 \times 4$
-  (remplies par colonne!) les unes \emph{derrière} les autres.
-\item Autrement dit, le tableau est un prisme rectangulaire haut de $3$
-  unités, large de $4$ et profond de $5$.
-\item Si l'on ajoute une quatrième dimension, cela revient à aligner
-  des prismes les uns derrière les autres, et ainsi de suite.
-\end{itemize}
-La \autoref{fig:donnees:tableaux} fournit une représentation schématique
+tableau de dimensions $3 \times 4 \times 5$: il faut voir le tableau
+comme cinq matrices $3 \times 4$ (remplies par colonne!) les unes
+\emph{derrière} les autres. Autrement dit, le tableau est un prisme
+rectangulaire haut de $3$ unités, large de $4$ et profond de $5$. Si
+l'on ajoute une quatrième dimension, cela revient à aligner des
+prismes les uns derrière les autres, et ainsi de suite. La
+\autoref{fig:donnees:tableaux} fournit une représentation schématique
 des tableaux à trois et quatre dimensions.
 
 \begin{figure}[t]
@@ -116,17 +110,17 @@ des tableaux à trois et quatre dimensions.
   \begin{minipage}[b]{0.4\linewidth}
     \setlength{\unitlength}{5mm}
     \begin{picture}(9,7)
-      \ttfamily
+      \fullcaps
       \put(0,0){\framebox(5,4)[tl]{}}
       \multiput(1,4)(1,1){3}{\line(0,1){1}}
       \multiput(1,5)(1,1){3}{\line(1,0){5}}
       \multiput(6,5)(1,1){3}{\line(0,-1){4}}
       \multiput(6,1)(1,1){3}{\line(-1,0){1}}
-      \put(0.5,3.5){\circle{0.6}}\put(0.51,3.51){\makebox(0,0){\footnotesize 1}}
+      \put(0.5,3.5){\circle{0.7}}\put(0.51,3.51){\makebox(0,0){\footnotesize 1}}
       \put(0.5,3){\vector(0,-1){2.5}}
-      \put(1.5,3.5){\circle{0.6}}\put(1.51,3.51){\makebox(0,0){\footnotesize 2}}
+      \put(1.5,3.5){\circle{0.7}}\put(1.51,3.51){\makebox(0,0){\footnotesize 2}}
       \put(2,3.5){\vector(1,0){2.5}}
-      \put(6.3,0.3){\circle{0.6}}\put(6.31,0.31){\makebox(0,0){\footnotesize 3}}
+      \put(6.3,0.3){\circle{0.7}}\put(6.31,0.31){\makebox(0,0){\footnotesize 3}}
       \put(6.7,0.7){\vector(1,1){1.3}}
     \end{picture}
     \subcaption{trois dimensions}
@@ -136,7 +130,7 @@ des tableaux à trois et quatre dimensions.
     \setlength{\unitlength}{5mm}
     \setlength{\unitlength}{3.5mm}
     \begin{picture}(14,12)
-      \ttfamily
+      \fullcaps
       \put(0,0){\framebox(5,4)[tl]{}}
       \multiput(1,4)(1,1){3}{\line(0,1){1}}
       \multiput(1,5)(1,1){3}{\line(1,0){5}}
@@ -166,106 +160,129 @@ des tableaux à trois et quatre dimensions.
   \label{fig:donnees:tableaux}
 \end{figure}
 
-Comme pour les vecteurs, l'indiçage\index{indiçage!matrice} des
-matrices et tableaux se fait avec les crochets \fonction{[~]}.
-\begin{itemize}
-\item On extrait un élément d'une matrice en précisant sa position
-  dans chaque dimension de celle-ci, séparées par des virgules:
+L'indiçage\Index{indiçage!matrice} des matrices et tableaux se fait
+avec les crochets \verb=[ ]=\icode{[}, comme pour les vecteurs
+simples. D'ailleurs, l'ensemble des règles d'indiçage de la
+\autoref{sec:bases:vecteurs:indicage} s'appliquent à l'identique aux
+matrices tableaux, sinon qu'il faut préciser maintenant préciser des
+indices pour chaque dimension, séparés par des virgules.
+
+Par exemple, on extrait un élément d'une matrice en précisant sa
+position dans chaque dimension de celle-ci.
 <<echo=TRUE>>=
 (m <- matrix(c(40, 80, 45, 21, 55, 32),
              nrow = 2, ncol = 3))
 m[1, 2]
 @
-\item On peut aussi ne donner que la position de l'élément dans le
-  vecteur sous-jacent:
+
+Il est équivalent --- quoique moins usité --- d'utiliser la position
+de l'élément dans le vecteur sous-jacent à la matrice.
 <<echo=TRUE>>=
 m[3]
 @
-\item \label{pg:donnees:indicage_matrice} Lorsqu'une dimension est omise
-  dans les crochets, tous les éléments de cette dimension sont
-  extraits:
+
+En vertu de la cinquième règle d'indiçage de la
+\autoref{sec:bases:vecteurs:indicage}, lorsqu'une dimension est
+laissée vide dans les crochets, tous les éléments de cette dimension
+sont extraits.
 <<echo=TRUE>>=
 m[2, ]
+m[, 1]
 @
-\item Les idées sont les mêmes pour les tableaux.
-\item Pour le reste, les règles d'indiçage de vecteurs exposées à la
-  \autoref{sec:bases:indicage} s'appliquent à chaque position de
-  l'indice d'une matrice ou d'un tableau.
-\end{itemize}
 
-Des fonctions permettent de fusionner des matrices et des tableaux
-ayant au moins une dimension identique.
-\begin{itemize}
-\item La fonction \Fonction{rbind} permet de fusionner verticalement
-  deux matrices (ou plus) ayant le même nombre de colonnes.
+Les fonctions \Icode{rbind} et \Icode{cbind} permettent de fusionner
+des matrices et des tableaux ayant au moins une dimension en commun.
+La fonction \Icode{rbind} (\emph{row bind}) fusionne verticalement
+(empile) deux matrices (ou plus) ayant le même nombre de colonnes.
 <<echo=TRUE>>=
 n <- matrix(1:9, nrow = 3)
 rbind(m, n)
 @
-\item La fonction \Fonction{cbind} permet de fusionner horizontalement
-  deux matrices (ou plus) ayant le même nombre de lignes.
+
+La fonction \Icode{cbind} (\emph{column bind}), quant à elle,
+fusionne horizontalement (colle) deux matrices (ou plus) ayant le même
+nombre de lignes.
 <<echo=TRUE>>=
 n <- matrix(1:4, nrow = 2)
 cbind(m, n)
 @
-\end{itemize}
 
 
-\section{Listes}
-\label{sec:donnees:listes}
+\section{Liste}
+\label{sec:donnees:liste}
 
-La liste\index{liste} est le mode de stockage le plus général et
-polyvalent du langage R. Il s'agit d'un type de vecteur spécial dont
-les éléments peuvent être de n'importe quel mode, y compris le mode
-\mode{list}. Cela permet donc d'emboîter des listes, d'où le
-qualificatif de \emph{récursif} pour ce type d'objet.
+La liste\index{liste} est la structure de données la plus générale et
+polyvalente du langage R. Si les éléments d'un vecteur simple doivent
+tous être du même mode, ceux de la liste peuvent être de n'importe
+quel mode, y compris le mode \icode{list}. Par conséquent, il est
+possible d'emboîter des listes, d'où le qualificatif de
+\emph{récursif} pour ce type d'objet.
 
-\begin{itemize}
-\item La fonction de base pour créer des listes est \Fonction{list}:
+La fonction de base pour créer des listes est \Icode{list}:
 <<echo=TRUE>>=
 (x <- list(size = c(1, 5, 2), user = "Joe", new = TRUE))
 @ %
-  Ci-dessus, le premier élément de la liste est de mode
-  \code{"numeric"}, le second de mode \code{"character"} et le troisième
-  de mode \code{"logical"}.
-\item Nous recommandons de nommer les éléments d'une liste. En effet,
-  les listes contiennent souvent des données de types différents et il
-  peut s'avérer difficile d'identifier les éléments s'ils ne sont pas
-  nommés. De plus, comme nous le verrons ci-dessous, il est très
-  simple d'extraire les éléments d'une liste par leur étiquette.
-\item La liste demeure un vecteur. On peut donc
-  l'indicer\Index{indiçage!liste} avec l'opérateur \fonction{[~]}.
-  Cependant, cela retourne une liste contenant le ou les éléments
-  indicés. C'est rarement ce que l'on souhaite.
-\item Pour indicer un élément d'une liste et n'obtenir que cet
-  élément, et non une liste contenant l'élément, il faut utiliser
-  l'opérateur d'indiçage \Fonction{[[~]]}. Comparer
+
+(Dans l'exemple ci-dessus, le premier élément de la liste est de mode
+\code{numeric}, le second de mode \code{character} et le troisième
+de mode \code{logical}.)
+
+\tipbox{%
+  Nommez les éléments des listes. En effet, les listes contiennent
+  souvent des données de types différents et il peut s'avérer
+  difficile d'identifier les éléments s'ils ne sont pas nommés. De
+  plus, comme nous le verrons ci-dessous, il est très simple
+  d'extraire les éléments d'une liste par leur étiquette.}
+
+L'indiçage\Index{indiçage!liste} des listes recèle quelques subtilités
+auxquelles il faut porter une attention particulière. Tout d'abord, il
+existe trois opérateurs d'indiçage: les crochets simples usuels
+\code{[~]}, les crochets doubles \code{[[~]]} et le signe de dollar
+\code{\$}.
+
+Les crochets simples\icode{[} fonctionnent avec la liste
+comme avec tout vecteur. Le résultat de l'indiçage avec \code{[~]} est
+une liste. Quand on y pense, c'est le seul résultat logique lorsque
+l'on indice une liste avec un vecteur. Par conséquent, le résultat de
+l'extraction d'un seul élément d'une liste avec les crochets simples
+est non pas l'objet en question, mais bien une liste d'un élément
+contenant l'objet. C'est rarement ce que l'on souhaite obtenir.
 <<echo=TRUE>>=
 x[1]
-@ %
-  et
+x[-2]
+x[c(1, 3)]
+@
+
+Les crochets doubles\Icode{[[} permettent d'extraire un, et
+un seul, élément d'une liste à l'aide d'un entier positif ou d'une
+chaine de caractères. Le résultat est l'objet «sorti» de la liste.
 <<echo=TRUE>>=
 x[[1]]
+x[["size"]]
 @
-  Évidemment, on ne peut extraire qu'un seul élément à la fois
-  avec les crochets doubles \code{[[~]]}.
-\item Petite subtilité peu employée, mais élégante. Si l'indice
-  utilisé dans \fonction{[[~]]} est un vecteur, il est utilisé
-  récursivement pour indicer la liste: cela sélectionnera la
-  composante de la liste correspondant au premier élément du vecteur,
-  puis l'élément de la composante correspondant au second élément du
-  vecteur, et ainsi de suite.
-\item Une autre --- la meilleure, en fait --- façon d'indicer un seul
-  élément d'une liste est par son étiquette avec l'opérateur \Fonction{\$}:
+
+Petite fonctionnalité peu employée, mais élégante des crochets
+doubles: si l'indice est un vecteur d'entiers positifs, R utilisera
+les valeurs de celui-ci pour indicer récursivement la liste. Autrement
+dit, R sélectionnera la composante de la liste correspondant au
+premier élément du vecteur, puis l'élément de la composante
+correspondant au second élément du vecteur, et ainsi de suite.
+<<echo=TRUE>>=
+x[[c(1, 2)]]
+@
+
+Finalement, l'autre façon --- la meilleure, en fait --- de
+sélectionner un seul élément d'une liste est par son étiquette avec
+l'opérateur \Icode{\$}.
 <<echo=TRUE>>=
 x$size
 @
-\item La fonction \Fonction{unlist} convertit une liste en un vecteur
-  simple. Elle est surtout utile pour concaténer les éléments d'une
-  liste lorsque ceux-ci sont des scalaires. Attention, cette fonction
-  peut être destructrice si la structure interne de la liste est
-  importante.
-\end{itemize}
+
+Mentionnons en terminant la fonction \Icode{unlist} qui convertit une
+liste en un vecteur simple. Elle est surtout utile pour concaténer les
+éléments d'une liste lorsque ceux-ci sont des vecteurs simples.
+Attention, toutefois: cette fonction est destructrice si la structure
+interne de la liste est importante.
 
 
 \section{\emph{Data frames}}
@@ -279,7 +296,7 @@ régression linéaire, par exemple --- repose davantage sur les
 
 \begin{itemize}
 \item Un \emph{data frame} est une liste de classe
-  \indexclasse{data.frame}\code{"data.frame"} dont tous les éléments
+  \index{data.frame}\code{"data.frame"} dont tous les éléments
   sont de la même longueur (ou comptent le même nombre de lignes si
   les éléments sont des matrices).
 \item Il est généralement représenté sous la forme d'un tableau à deux
@@ -291,16 +308,16 @@ régression linéaire, par exemple --- repose davantage sur les
   \code{character}) dans une colonne et des notes (mode
   \code{numeric}) dans une autre.
 \item On crée un \emph{data frame} avec la fonction
-  \Fonction{data.frame} ou, pour convertir un autre type d'objet en
-  \emph{data frame}, avec \Fonction{as.data.frame}.
+  \Icode{data.frame} ou, pour convertir un autre type d'objet en
+  \emph{data frame}, avec \Icode{as.data.frame}.
 \item Le \emph{data frame} peut être indicé à la fois comme une liste
   et comme une matrice.
-\item Les fonctions \fonction{rbind} et \fonction{cbind} peuvent être
+\item Les fonctions \icode{rbind} et \icode{cbind} peuvent être
   utilisées pour ajouter des lignes ou des colonnes à un \emph{data
     frame}.
 \item On peut rendre les colonnes d'un \emph{data frame} (ou d'une
   liste) visibles dans l'espace de travail avec la fonction
-  \Fonction{attach}, puis les masquer avec \Fonction{detach}.
+  \Icode{attach}, puis les masquer avec \Icode{detach}.
 \end{itemize}
 
 
