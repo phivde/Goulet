@@ -368,14 +368,15 @@ l'autre. On trouvera un exemple complet dans le code informatique de la
 \label{sec:implementation:lazy}
 
 R utilise par défaut une technique d'évaluation des arguments des
-fonctions appelée \emph{évaluation paresseuse}\index{évaluation
-  paresseuse} (\emph{lazy evaluation}). Ce que cela signifie, c'est
-que toute expression passée en argument à une fonction ne sera évaluée
-qu'au moment où la valeur de l'argument sera utilisée dans la fonction,
-et pas avant. Ainsi, une expression en argument pourrait ne jamais
-être évaluée. Ou encore, la valeur par défaut d'un argument peut
-dépendre de la valeur d'un autre argument puisque celui-ci sera connu
-au moment de l'évaluation.
+fonctions appelée %
+\index{evaluation@évaluation paresseuse}\emph{évaluation paresseuse} %
+(\emph{lazy evaluation}). Ce que cela signifie, c'est que toute
+expression passée en argument à une fonction ne sera évaluée qu'au
+moment où la valeur de l'argument sera utilisée dans la fonction, et
+pas avant. Ainsi, une expression en argument pourrait ne jamais être
+évaluée. Ou encore, la valeur par défaut d'un argument peut dépendre
+de la valeur d'un autre argument puisque celui-ci sera connu au moment
+de l'évaluation.
 
 Par exemple, la fonction \code{sumsq} ci-dessous calcule la somme des
 écarts au carré entre les éléments d'un vecteur \code{y} et une valeur
