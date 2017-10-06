@@ -594,8 +594,8 @@ L'indiçage\Index{indiçage!vecteur} des vecteurs est une procédure
 beaucoup utilisée dans le langage R, aussi est-il important d'en
 maitriser toutes les subtilités. L'opération sert principalement à
 deux choses: extraire des éléments d'un objet avec la construction
-\verb|x[i]|\index{[@\code{[}}, ou remplacer des éléments avec la
-construction \verb|x[i] <- y|\Index{[<-@\code{[<-}}.
+\verb|x[i]|\icode{[}, ou remplacer des éléments avec la
+construction \verb|x[i] <- y|\Icode{[<-}.
 
 Dans un cas comme dans l'autre, il faut d'abord indicer le vecteur. Il
 existe cinq façons de le faire, toujours à l'intérieur de crochets
