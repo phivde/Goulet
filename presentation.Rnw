@@ -283,7 +283,7 @@ vous utiliserez cette seconde approche d'interaction avec R.
     quitte à les réévaluer par la suite pour obtenir les valeurs
     correspondantes.
   \end{enumerate}
-  La seconde, surement{\dots} Or, sauvagarder l'espace de travail R
+  La seconde, surement{\dots} Or, sauvegarder l'espace de travail R
   dans un fichier \code{.RData} (l'approche «objets réels, code
   virtuel») correspond à la première option, alors que sauvegarder
   le code source des fichiers de script correspond à la seconde.
