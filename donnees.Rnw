@@ -38,13 +38,17 @@ grandes quantités de données.
 Le modèle de données de R repose sur des structures abstraites et
 spécialisées que nous avons appelé des \emph{objets}. Jusqu'à
 maintenant, nous n'avons étudié que le vecteur simple (\emph{atomic}).
-Il existe d'autres structures de données en R --- c'est l'objet de ce
-chapitre! ---, mais leur mise en œuvre demeure tout à fait
-transparente pour les programmeuses et les programmeurs. Cet ouvrage
-fera donc l'impasse sur les notions de tableau (\emph{array}), de
-liste chainée (\emph{linked list}), d'arbre (\emph{tree}) ou de table
-de hachage (\emph{hashtable}) dont traitent habituellement les
-ouvrages d'algorithmique et de programmation.
+Il existe d'autres structures de données en R, mais leur mise en œuvre
+demeure tout à fait transparente pour les programmeuses et les
+programmeurs. Cet ouvrage fera donc l'impasse sur les notions de
+tableau (\emph{array}), de liste chainée (\emph{linked list}), d'arbre
+(\emph{tree}) ou de table de hachage (\emph{hashtable}) dont traitent
+habituellement les ouvrages d'algorithmique et de programmation.
+
+Le vecteur, la matrice, le tableau et la liste sont les types d'objets
+les plus fréquemment utilisés en programmation en R. Le facteur et le
+\emph{data frame} sont davantage des structures de données
+spécialisées pour l'analyse de données.
 
 
 \section{Matrice et tableau}
@@ -307,40 +311,86 @@ la liste est importante.
 unlist(x)
 @
 
+
+\section{Facteur}
+\label{sec:donnees:facteur}
+
+Il est très courant en analyse de données de travailler avec des
+catégories comme la couleur («rouge», «vert», «bleu»), la taille
+(«petit», «moyen», «grand») ou la position géographique (pays,
+province, état). Bien sûr, un vecteur de mode \code{character} suffit
+pour stocker ce genre de données. Cependant, R propose une structure
+de données dédiée pour les données catégorielles qui permet
+d'automatiser plusieurs traitements: le facteur.
+
+Un facteur est un vecteur de données correspondant à des catégories. À
+ce titre, il devrait normalement afficher un fort taux de redondance:
+inutile de définir des catégories s'il y a en une différente pour
+chaque donnée, n'est-ce pas?
+
+Les fonctions de base pour créer et manipuler des facteurs sont
+\Icode{factor} et \Icode{levels}. R représente les données sous forme
+de chaine de caractères, mais il les stocke et les traite à l'interne
+comme un vecteur d'entiers.
+<<echo=TRUE>>=
+(grandeurs <- factor(c("S", "S", "L", "XL",
+                       "M", "M", "L", "L")))
+levels(grandeurs)
+@
+
+En programmation, les facteurs sont assez peu utilisés en tant que
+structure de données. Par contre, ils servent implicitement dans les
+calculs par catégorie de données; nous y reviendrons au
+\autoref{chap:application} quand nous traiterons des fonctions
+d'application.
+
+
 \section{\emph{Data frames}}
 \label{sec:donnees:dataframes}
 
-Les vecteurs, les matrices, les tableaux et les listes sont les types
-d'objets les plus fréquemment utilisés en programmation en R.
-Toutefois, un grand nombre de procédures statistiques --- pensons à la
-régression linéaire, par exemple --- repose davantage sur les
-\emph{data frames} pour le stockage des données.
+Le \Index{data frame|emph}\emph{data frame} est une structure de
+données de R sur laquelle reposent plusieurs procédures statistiques
+--- pensons à la régression linéaire, par exemple. Un \emph{data
+  frame} est un hybride entre la matrice et la liste: c'est un tableau
+rectangulaire de données, mais dont chaque colonne peut être d'un mode
+différent. Pensons, par exemple, à un tableau avec des noms (mode
+\code{character}) dans une colonne et des notes (mode \code{numeric})
+dans une autre.
 
-\begin{itemize}
-\item Un \emph{data frame} est une liste de classe
-  \index{data.frame}\code{"data.frame"} dont tous les éléments
-  sont de la même longueur (ou comptent le même nombre de lignes si
-  les éléments sont des matrices).
-\item Il est généralement représenté sous la forme d'un tableau à deux
-  dimensions. Chaque élément de la liste sous-jacente correspond à une
-  colonne.
-\item Bien que visuellement similaire à une matrice un \emph{data
-    frame} est plus général puisque les colonnes peuvent être de modes
-  différents; pensons à un tableau avec des noms (mode
-  \code{character}) dans une colonne et des notes (mode
-  \code{numeric}) dans une autre.
-\item On crée un \emph{data frame} avec la fonction
-  \Icode{data.frame} ou, pour convertir un autre type d'objet en
-  \emph{data frame}, avec \Icode{as.data.frame}.
-\item Le \emph{data frame} peut être indicé à la fois comme une liste
-  et comme une matrice.
-\item Les fonctions \icode{rbind} et \icode{cbind} peuvent être
-  utilisées pour ajouter des lignes ou des colonnes à un \emph{data
-    frame}.
-\item On peut rendre les colonnes d'un \emph{data frame} (ou d'une
-  liste) visibles dans l'espace de travail avec la fonction
-  \Icode{attach}, puis les masquer avec \Icode{detach}.
-\end{itemize}
+Plus formellement, un \emph{data frame} est une liste de classe
+\code{data.frame} dont tous les éléments sont de la même longueur (ou
+comptent le même nombre de lignes, si les éléments sont des matrices).
+Chaque élément de la liste correspond à une colonne du \emph{data
+  frame}. On crée un \emph{data frame} avec la fonction
+\Icode{data.frame} ou, pour convertir un autre type d'objet en
+\emph{data frame}, avec \Icode{as.data.frame}.
+<<echo=TRUE>>=
+(x <- data.frame(Nom = c("Pierre", "Jean", "Jacques"),
+                 Age = c(42, 34, 19),
+                 Fumeur = c(TRUE, TRUE, FALSE),
+                 stringsAsFactors = FALSE))
+@
+
+(Ci-dessus, nous avons utilisé l'argument \Icode{stringsAsFactors}
+pour éviter que la colonne \code{Nom} ne soit automatiquement
+convertie en facteur.)
+
+Le \emph{data frame} peut être indicé à la fois comme une liste (pour
+l'extraction des colonnes) et comme une matrice (pour l'extraction des
+lignes ou des colonnes).
+<<echo=TRUE>>=
+x[1, ]
+x[, 1]
+x$Age
+@
+
+Il est possible d'ajouter des lignes ou des colonnes à un \emph{data
+  frame} avec les fonctions \icode{rbind} et \icode{cbind}.
+
+
+\section{Importation et exportation de données}
+\label{sec:donnees:import-export}
+
 
 
 %%% Local Variables:
