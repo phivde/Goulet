@@ -76,7 +76,7 @@
 ## NOTE: la fonction 'seq_len(n)' génère une suite de longueur
 ## 'n'. C'est généralement équivalent à '1:n', sauf lorsque 'n
 ## = 0': 'seq_len(0)' résulte en un vecteur de longueur nulle,
-## alors '1:0' résulte malencontreusement en [1 0].
+## alors que '1:0' résulte malencontreusement en [1 0].
 insertionsort <- function(x)
 {
     xlen <- length(x)      # sert souvent
