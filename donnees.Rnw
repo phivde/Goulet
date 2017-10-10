@@ -236,21 +236,22 @@ quel mode, y compris le mode \icode{list}. Par conséquent, il est
 possible d'emboîter des listes, d'où le qualificatif de
 \emph{récursif} pour ce type d'objet.
 
-La fonction de base pour créer des listes est \Icode{list}:
+La liste est la structure de données par excellence pour réunir dans
+un objet plusieurs types d'objets différents. La fonction de base pour
+créer des listes est \Icode{list}:
 <<echo=TRUE>>=
 (x <- list(size = c(1, 5, 2), user = "Joe", new = TRUE))
 @ %
 
-(Dans l'exemple ci-dessus, le premier élément de la liste est de mode
-\code{numeric}, le second de mode \code{character} et le troisième
-de mode \code{logical}.)
+(Dans l'exemple ci-dessus, le premier élément de la liste est un
+vecteur de mode \code{numeric}, le second un vecteur de mode
+\code{character} et le troisième, un vecteur de mode \code{logical}.)
 
 \tipbox{%
-  Nommez les éléments des listes. En effet, les listes contiennent
-  souvent des données de types différents et il peut s'avérer
-  difficile d'identifier les éléments s'ils ne sont pas nommés. De
-  plus, comme nous le verrons ci-dessous, il est très simple
-  d'extraire les éléments d'une liste par leur étiquette.}
+  Nommez les éléments des listes puisqu'il peut s'avérer difficile
+  autrement de les identifier. De plus, comme nous le verrons
+  ci-dessous, il est très simple d'extraire les éléments d'une liste
+  par leur étiquette.}
 
 L'indiçage\Index{indiçage!liste} des listes recèle quelques subtilités
 auxquelles il faut porter une attention particulière. Tout d'abord, il
@@ -258,7 +259,7 @@ existe trois opérateurs d'indiçage: les crochets simples usuels
 \code{[~]}, les crochets doubles \code{[[~]]} et le signe de dollar
 \code{\$}.
 
-Les crochets simples\icode{[} fonctionnent avec la liste
+Les crochets simples\indexcode{[} fonctionnent avec la liste
 comme avec tout vecteur. Le résultat de l'indiçage avec \code{[~]} est
 une liste. Quand on y pense, c'est le seul résultat logique lorsque
 l'on indice une liste avec un vecteur. Par conséquent, le résultat de
@@ -271,7 +272,7 @@ x[-2]
 x[c(1, 3)]
 @
 
-Les crochets doubles\Icode{[[} permettent d'extraire un, et
+Les crochets doubles\Indexcode{[[} permettent d'extraire un, et
 un seul, élément d'une liste à l'aide d'un entier positif ou d'une
 chaine de caractères. Le résultat est l'objet «sorti» de la liste.
 <<echo=TRUE>>=
@@ -298,10 +299,13 @@ x$size
 
 Mentionnons en terminant la fonction \Icode{unlist} qui convertit une
 liste en un vecteur simple. Elle est surtout utile pour concaténer les
-éléments d'une liste lorsque ceux-ci sont des vecteurs simples.
-Attention, toutefois: cette fonction est destructrice si la structure
-interne de la liste est importante.
-
+éléments d'une liste lorsque ceux-ci sont des vecteurs simples,
+idéalement de même mode car il y aura autrement conversion forcée.
+Attention: cette fonction est destructrice si la structure interne de
+la liste est importante.
+<<echo=TRUE>>=
+unlist(x)
+@
 
 \section{\emph{Data frames}}
 \label{sec:donnees:dataframes}
