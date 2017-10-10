@@ -50,10 +50,15 @@ ouvrages d'algorithmique et de programmation.
 \section{Matrice et tableau}
 \label{sec:donnees:matrice}
 
-R étant un langage spécialisé pour les calculs mathématiques, il
+R étant un langage spécialisé dans les calculs mathématiques, il
 supporte tout naturellement et de manière intuitive --- à une
 exception près, comme nous le verrons --- les
-\capsule{https://youtu.be/indicage}{matrices et tableaux}.
+\capsule{https://youtu.be/indicage}{matrices et tableaux}. Dans la
+terminologie de R, une matrice est un tableau rectangulaire de nombres
+à deux dimensions, alors qu'un tableau (\emph{array}) est la
+généralisation à plus de deux dimensions\footnote{%
+  Il est donc correct de dire qu'une matrice est un tableau à deux
+  dimensions.}. %
 
 Nous avons établi d'entrée de jeu à la \autoref{sec:bases:vecteurs}
 qu'en R, tout est un vecteur. C'est aussi vrai pour les matrices et
@@ -69,17 +74,22 @@ tableau rectangulaire) et son interaction avec plusieurs opérateurs et
 fonctions, notamment les opérateurs d'indiçage. La fonction de base
 pour créer une matrice est \Icode{matrix}:
 <<echo=TRUE>>=
-m <- matrix(1:6, nrow = 2, ncol = 3)
+matrix(1:6, nrow = 2, ncol = 3)
 matrix(1:6, nrow = 2, ncol = 3, byrow = TRUE)
 @
 
-La généralisation d'une matrice à plus de deux dimensions est un
-\Index{tableau}tableau (\emph{array}). Le nombre de dimensions du
-tableau est toujours égal à la longueur de l'attribut \icode{dim}. La
-fonction de base pour créer des tableaux est \Icode{array}:
+Tel que mentionné précédemment, la généralisation d'une matrice à plus
+de deux dimensions est un \Index{tableau}tableau. Le nombre de
+dimensions du tableau est toujours égal à la longueur de l'attribut
+\icode{dim}. La fonction de base pour créer des tableaux est
+\Icode{array}:
 <<echo=TRUE>>=
 array(1:24, dim = c(3, 4, 2))
 @
+
+Formellement, un tableau peut aussi compter une seule dimension. Un
+tel tableau comporte un attribut \code{dim} de longueur $1$, alors
+qu'un vecteur simple n'a pas d'attribut \code{dim}.
 
 \importantbox{%
   Vous aurez remarqué que les matrices et tableaux sont remplis en
@@ -90,7 +100,7 @@ array(1:24, dim = c(3, 4, 2))
 
   La fonction \icode{matrix} possède un argument \code{byrow} qui
   permet d'inverser l'ordre de remplissage, mais il vaut mieux
-  vous habituer à la convention de R qu'essayer de constamment la
+  vous habituer à la convention de R qu'essayer constamment de la
   contourner.}
 
 L'ordre de remplissage inhabituel des tableaux rend leur manipulation
@@ -161,17 +171,16 @@ des tableaux à trois et quatre dimensions.
 \end{figure}
 
 L'indiçage\Index{indiçage!matrice} des matrices et tableaux se fait
-avec les crochets \verb=[ ]=\icode{[}, comme pour les vecteurs
+avec les crochets \code{[~]}\indexcode{[}, comme pour les vecteurs
 simples. D'ailleurs, l'ensemble des règles d'indiçage de la
 \autoref{sec:bases:vecteurs:indicage} s'appliquent à l'identique aux
-matrices tableaux, sinon qu'il faut préciser maintenant préciser des
+matrices tableaux, sinon qu'il faut maintenant préciser des
 indices pour chaque dimension, séparés par des virgules.
 
 Par exemple, on extrait un élément d'une matrice en précisant sa
 position dans chaque dimension de celle-ci.
 <<echo=TRUE>>=
-(m <- matrix(c(40, 80, 45, 21, 55, 32),
-             nrow = 2, ncol = 3))
+(m <- matrix(c(40, 80, 45, 21, 55, 32), nrow = 2))
 m[1, 2]
 @
 
@@ -181,6 +190,13 @@ de l'élément dans le vecteur sous-jacent à la matrice.
 m[3]
 @
 
+Les indices négatifs suppriment des dimensions et les vecteurs
+booléens sélectionnent des dimensions, comme d'habitude.
+<<echo=TRUE>>=
+m[-1, -2]
+m[c(FALSE, TRUE), c(FALSE, TRUE, TRUE)]
+@
+
 En vertu de la cinquième règle d'indiçage de la
 \autoref{sec:bases:vecteurs:indicage}, lorsqu'une dimension est
 laissée vide dans les crochets, tous les éléments de cette dimension
@@ -188,6 +204,8 @@ sont extraits.
 <<echo=TRUE>>=
 m[2, ]
 m[, 1]
+m[-1, ]
+m[, -2]
 @
 
 Les fonctions \Icode{rbind} et \Icode{cbind} permettent de fusionner
@@ -199,9 +217,9 @@ n <- matrix(1:9, nrow = 3)
 rbind(m, n)
 @
 
-La fonction \Icode{cbind} (\emph{column bind}), quant à elle,
-fusionne horizontalement (colle) deux matrices (ou plus) ayant le même
-nombre de lignes.
+La fonction \Icode{cbind} (\emph{column bind}), quant à elle, fusionne
+horizontalement (place côte à côte) deux matrices (ou plus) ayant le
+même nombre de lignes.
 <<echo=TRUE>>=
 n <- matrix(1:4, nrow = 2)
 cbind(m, n)
