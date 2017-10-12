@@ -153,7 +153,7 @@ commande R est soit une \emph{expression}\index{expression}, soit une
 \label{sec:bases:commandes:expression}
 
 Une \index{expression}expression R est une combinaison de symboles
-(noms de variables) et de procedures. Toute expression a une valeur.
+(noms de variables) et de procédures. Toute expression a une valeur.
 Le symbole d'une donnée fondamentale représente cette donnée, comme on
 pourrait s'y attendre.
 
@@ -484,7 +484,7 @@ is.null(NULL)
 \label{sec:bases:objets:attributs}
 
 Les attributs\Index{attribut} d'un objet sont des éléments
-d'information additionnels attachées à cet objet. Le
+d'information additionnels attachés à cet objet. Le
 \autoref{tab:attributs} fournit la liste des attributs les plus
 fréquemment utilisés. À chacun des attributs du tableau correspond une
 fonction du même nom servant à extraire l'attribut d'un objet.
@@ -697,7 +697,7 @@ taille d'un objet plus court
 \end{Soutput}
 \end{Schunk}
 
-\cautionbox{La régle de recyclage des vecteurs fait en sorte qu'il y a
+\cautionbox{La règle de recyclage des vecteurs fait en sorte qu'il y a
   très peu d'erreurs de longueur dans R. Qu'une expression soit
   valide ne signifie donc pas qu'elle effectue le bon calcul!}
 

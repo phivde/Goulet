@@ -29,7 +29,7 @@ options(width=52)
 \section{Mise en contexte}
 \label{sec:implementation:contexte}
 
-Au chapitre précédent, nous avons définie une fonction très simple pour
+Au chapitre précédent, nous avons défini une fonction très simple pour
 élever un nombre au carré.
 <<echo=TRUE>>=
 square <- function(x) x * x
