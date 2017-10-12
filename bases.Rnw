@@ -697,7 +697,7 @@ taille d'un objet plus court
 \end{Soutput}
 \end{Schunk}
 
-\cautionbox{La régle de recyclage des vecteurs fait en sorte qu'il y a
+\cautionbox{La règle de recyclage des vecteurs fait en sorte qu'il y a
   très peu d'erreurs de longueur dans R. Qu'une expression soit
   valide ne signifie donc pas qu'elle effectue le bon calcul!}
 
