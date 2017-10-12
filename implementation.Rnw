@@ -128,7 +128,7 @@ En termes techniques, une fonction définie avec \icode{function}
 dans R constitue une \emph{fermeture}\Index{fermeture}, ou
 \emph{clôture} (du Lisp \emph{closure}). Cette fermeture est formée de
 trois éléments, dont deux que nous connaissons déjà bien: les
-arguments formels de la fonction et le corps et la fonction. Le
+arguments formels de la fonction et le corps de la fonction. Le
 troisième élément est l'environnement de la fonction. Les fonctions
 \Icode{formals}, \Icode{body} et \Icode{environment} permettent
 d'extraire ces trois éléments, dans l'ordre.
