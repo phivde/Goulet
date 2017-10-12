@@ -23,9 +23,10 @@ cd programmer-avec-r-develop
 
 **OU**
 
-1. Si vous avez déjà cloné le dépôt dans le passé et que vous voulez reprendre le travail sur le code source, déplacez-vous (avec la commande `cd` à la ligne de commande) dans le répertoire du code source, puis mettez à jour votre copie locale du dépôt:
+1. Si vous avez déjà cloné le dépôt dans le passé et que vous voulez reprendre le travail sur le code source, déplacez-vous (avec la commande `cd` à la ligne de commande) dans le répertoire du code source, puis mettez à jour votre copie locale du dépôt depuis la branche `master`:
 
 ```
+git checkout master
 git pull
 ```
 
