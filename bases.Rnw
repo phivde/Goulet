@@ -153,7 +153,7 @@ commande R est soit une \emph{expression}\index{expression}, soit une
 \label{sec:bases:commandes:expression}
 
 Une \index{expression}expression R est une combinaison de symboles
-(noms de variables) et de procedures. Toute expression a une valeur.
+(noms de variables) et de procédures. Toute expression a une valeur.
 Le symbole d'une donnée fondamentale représente cette donnée, comme on
 pourrait s'y attendre.
 
