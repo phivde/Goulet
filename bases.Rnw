@@ -484,7 +484,7 @@ is.null(NULL)
 \label{sec:bases:objets:attributs}
 
 Les attributs\Index{attribut} d'un objet sont des éléments
-d'information additionnels attachées à cet objet. Le
+d'information additionnels attachés à cet objet. Le
 \autoref{tab:attributs} fournit la liste des attributs les plus
 fréquemment utilisés. À chacun des attributs du tableau correspond une
 fonction du même nom servant à extraire l'attribut d'un objet.
