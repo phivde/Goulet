@@ -222,6 +222,11 @@ factor(c("S", "S", "L", "XL", "M", "M", "L", "L"),
 ## la même longueur. Il comporte un attribut 'dim', ce qui fait
 ## qu'il est représenté comme une matrice. Cependant, les
 ## colonnes peuvent être de modes différents.
+##
+## Nous créons ici le même data frame que dans l'exemple du
+## chapitre, mais avec l'option 'stringsAsFactors = FALSE'
+## pour éviter la conversion automatique de la colonne 'Nom'
+## en facteur.
 data.frame(Nom = c("Pierre", "Jean", "Jacques"),
            Age = c(42, 34, 19),
            Fumeur = c(TRUE, TRUE, FALSE),

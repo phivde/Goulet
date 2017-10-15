@@ -367,13 +367,8 @@ Chaque élément de la liste correspond à une colonne du \emph{data
 <<echo=TRUE>>=
 (x <- data.frame(Nom = c("Pierre", "Jean", "Jacques"),
                  Age = c(42, 34, 19),
-                 Fumeur = c(TRUE, TRUE, FALSE),
-                 stringsAsFactors = FALSE))
+                 Fumeur = c(TRUE, TRUE, FALSE)))
 @
-
-(Ci-dessus, nous avons utilisé l'argument \Icode{stringsAsFactors}
-pour éviter que la colonne \code{Nom} ne soit automatiquement
-convertie en facteur.)
 
 Le \emph{data frame} peut être indicé à la fois comme une liste (pour
 l'extraction des colonnes) et comme une matrice (pour l'extraction des
@@ -383,6 +378,13 @@ x[1, ]
 x[, 1]
 x$Age
 @
+
+\tipbox{On remarquera, ci-dessus, que les données de la colonne
+  \code{Nom} sont considérées comme des facteurs. C'est une
+  caractéristique de la fonction \code{data.frame} de convertir
+  automatiquement les chaines de caractères en facteurs. L'option
+  \code{stringAsFactors = FALSE} permet d'éviter la conversion
+  automatique.}
 
 Il est possible d'ajouter des lignes ou des colonnes à un \emph{data
   frame} avec les fonctions \icode{rbind} et \icode{cbind}.
