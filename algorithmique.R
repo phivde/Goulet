@@ -141,7 +141,7 @@ selectionsort <- function(x)
         i.min <- i
         for (j in i:xlen)
         {
-            if (x[j] < x[i.min])
+            if (x[j] < x[i.min])
                 i.min <- j
         }
 
@@ -154,6 +154,7 @@ selectionsort <- function(x)
 ## Test
 (x <- sample(0:10, 7, replace = TRUE))
 selectionsort(x)
+rss(x)
 
 ## La fonction 'which.min' de R retourne l'indice du minimum
 ## dans un vecteur. Nous pouvons l'utiliser pour éliminer la
