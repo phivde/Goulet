@@ -700,6 +700,159 @@ unlink("carburant.csv")
 
 \end{Filesave}
 
+\begin{exercice}
+  \index{indiçage!matrice}
+  Soit \code{x} une matrice $10 \times 7$ obtenue aléatoirement avec
+<<echo=TRUE,eval=FALSE>>=
+x <- matrix(sample(1:100, 70), 7, 10)
+@
+  Écrire des expressions R permettant d'obtenir les éléments de la
+  matrice demandés ci-dessous.
+  \begin{enumerate}
+  \item L'élément $(4, 3)$.
+  \item Le contenu de la sixième ligne.
+  \item Les première et quatrième colonnes (simultanément).
+  \item Les lignes dont le premier élément est supérieur à $50$.
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+\item
+<<echo=TRUE,eval=FALSE>>=
+x[4, 3]
+@
+\item
+<<echo=TRUE,eval=FALSE>>=
+x[6, ]
+@
+\item
+<<echo=TRUE,eval=FALSE>>=
+x[, c(1, 4)]
+@
+\item
+<<echo=TRUE,eval=FALSE>>=
+x[x[, 1] > 50, ]
+@
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  \begin{enumerate}
+  \item Écrire une expression R pour créer la liste suivante:
+<<echo=FALSE>>=
+x <- list(1:5, data=matrix(1:6, 2, 3), numeric(3), test=logical(4))
+@
+<<echo=TRUE>>=
+x
+@ %
+  \item \index{etiquette@étiquette} Extraire les étiquettes de la
+    liste.
+  \item \index{mode} \index{longueur} Trouver le mode et la longueur
+    du quatrième élément de la liste.
+  \item \index{dimension} Extraire les dimensions du second élément de
+    la liste.
+  \item \index{indiçage!liste} Extraire les deuxième et troisième
+    éléments du second élément de la liste.
+  \item Remplacer le troisième élément de la liste par le vecteur
+    \verb|3:8|.
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+    \item Il y a plusieurs façons de créer les troisième et quatrième
+      éléments de la liste. Le plus simple consiste à utiliser
+      \code{numeric()} et \code{logical()}:
+<<echo=TRUE,eval=FALSE>>=
+x <- list(1:5, data = matrix(1:6, 2, 3), numeric(3),
+          test = logical(4))
+@
+    \item
+<<echo=TRUE,eval=FALSE>>=
+names(x)
+@
+    \item
+<<echo=TRUE,eval=FALSE>>=
+mode(x$test)
+length(x$test)
+@
+    \item
+<<echo=TRUE,eval=FALSE>>=
+dim(x$data)
+@
+    \item
+<<echo=TRUE,eval=FALSE>>=
+x[[2]][c(2, 3)]
+@
+    \item
+<<echo=TRUE,eval=FALSE>>=
+x[[3]] <- 3:8
+@
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Effectuer une mise en œuvre de l'algorithme \emph{Bucketgsort} de
+  \citet[chapitre~6]{Stephens:algorithms:2013} permettant de trier des
+  entiers entre $1$ et $x_{\max}$. La fonction prend en argument le
+  vecteur des données à trier, la valeur de $x_{\max}$ et le nombre de
+  compartiments. Utiliser la fonction \icode{sort} pour trier les
+  compartiments.
+
+  \begin{sol}
+    La principale difficulté réside dans le fait que certains
+    compartiments peuvent demeurer vides (\code{NULL}). Or,
+    \icode{sort} ne peut prendre \code{NULL} en argument. Il faut donc
+    faire un test avant de trier les données.
+<<echo=TRUE, eval=FALSE>>=
+bucketsort <- function(x, max, nbuckets)
+{
+    ## création des compartiments
+    buck <- vector("list", nbuckets)
+    span <- max/nbuckets
+
+    ## répartition des données dans les compartiments
+    for (i in seq_along(x))
+    {
+        j <- ceiling(x[i]/span)
+        buck[[j]] <- c(buck[[j]], x[i])
+    }
+
+    ## tri des données dans chaque compartiment; on
+    ## effectue le tri seulement s'il y a des données
+    ## dans le compartiment
+    for (i in seq_len(nbuckets))
+        if (!is.null(buck[[i]]))
+            buck[[i]] <- sort(buck[[i]])
+
+    ## retourner le vecteur trié
+    unlist(buck)
+}
+@
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Importer dans R les données \code{boston} du dépôt de jeux de
+  données de \link{http://lib.stat.cmu.edu/datasets}{StatLib}.
+  Remarquer que les données commencent à la ligne $23$ du fichier. De
+  plus, chaque entrée du fichier compte $14$ variables, mais leurs
+  valeurs sont chaque fois réparties sur deux lignes à raison de $11$
+  variables sur une ligne et $3$ sur l'autre.
+  \begin{sol}
+    Avec les données réparties sur deux lignes, le plus simple demeure
+    d'importer les données avec \code{scan} et les replacer dans le
+    bon format avec \code{matrix}. Remarquer comment l'on peut
+    importer directement depuis Internet en spécifiant une url comme
+    nom de fichier.
+<<eval=FALSE>>=
+matrix(scan("http://lib.stat.cmu.edu/datasets/boston",
+            skip = 22),
+       ncol = 14, byrow = TRUE)
+@
+  \end{sol}
+\end{exercice}
+
+\Closesolutionfile{solutions}
 
 %%% Local Variables:
 %%% mode: latex
