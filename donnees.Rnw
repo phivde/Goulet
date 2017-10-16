@@ -414,19 +414,17 @@ procédure universelle. C'est d'ailleurs pourquoi la documentation
 officielle de R consacre le manuel \emph{R Data Import/Export}
 \citep{R-data} à ce seul sujet.
 
-De par sa nature
-ouverte, R offre de multiples autres façons d'interagir avec des
-données externes, notamment l'importation directe de fichiers de
-tableurs comme Excel. Il ne faut toutefois pas négliger que, parfois,
-un système de base de données demeure le meilleur outil pour préparer
-les données avant une analyse statistique. R peut ensuite se connecter
-à la base de données pour de manipulation des données demeure une  ou de la connection directe à des bases de
-données. Quand ce ne sont pas les
-
 Nous ne traitons ici que de l'importation et de l'exportation de
 données sous forme de fichiers en format texte brut\footnote{%
   C'est-à-dire sans aucune mise en forme, comme les fichiers de
   script.}.
+
+\tipbox{Il existe de multiples autres façons de travailler avec des
+  données externes, notamment l'importation de fichiers de tableurs
+  comme Excel ou, encore mieux, l'interaction directe avec une base de
+  données depuis R. Consultez le manuel \emph{R Data Import/Export}
+  pour en savoir plus.}
+
 
 \subsection{Importation de vecteurs de données}
 \label{sec:donnees:import-export:scan}
@@ -574,11 +572,11 @@ Les fonctions \Icode{read.table} et \Icode{read.csv} constituent les
 principaux outils d'importation de tableaux de données dans R. On
 choisira l'une ou l'autre selon le format du fichier de données:
 \code{read.table} si le séparateur des champs est une espace et
-\code{read.csv} si c'est plutôt une virgule. Les nombreux arguments de
-ces fonctions permettent de spécifier si les titres des lignes ou des
+\code{read.csv} si c'est une virgule. Les nombreux arguments de ces
+fonctions permettent de spécifier si les titres des lignes ou des
 colonnes apparaissent ou non dans le fichier, le mode de chaque
-colonne, le séparateur décimal, l'encodage, etc. Consulter la rubrique
-d'aide pour les détails.
+colonne, le séparateur décimal, l'encodage, etc. La rubrique
+d'aide fournit les détails.
 <<echo=TRUE>>=
 read.table("carburant.txt", header = TRUE)
 read.csv("carburant.csv", header = TRUE)
@@ -591,7 +589,7 @@ champs et le séparateur décimal; consulter le
 
 \begin{table}
   \centering
-  \caption{Principales caractéristiques des fonctions de la famille
+  \caption{Caractéristiques des fonctions de la famille
     \code{read.table}}
   \label{tab:donnees:read.table}
   \begin{tabular}{lcc}
@@ -681,6 +679,26 @@ write.csv(x, file = "carburant.csv", row.names = FALSE)
 unlink("carburant.txt")
 unlink("carburant.csv")
 @
+
+\section{Exemples}
+\label{sec:donnees:exemples}
+
+\def\scriptfilename{donnees.R}
+
+\scriptfile{\scriptfilename}
+\lstinputlisting[firstline=13]{\scriptfilename}
+
+
+\section{Exercices}
+\label{sec:donnees:exercices}
+
+\Opensolutionfile{solutions}[solutions-donnees]
+
+\begin{Filesave}{solutions}
+\section*{Chapitre \ref*{chap:donnees}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:donnees}}
+
+\end{Filesave}
 
 
 %%% Local Variables:
