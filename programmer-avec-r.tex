@@ -86,7 +86,7 @@
   \usepackage{bookmark}
   \bookmarksetup{%
     open = true,
-    openlevel = 3,
+    depth = 3,
     numbered = true}
 
   %% Étiquettes de \autoref (redéfinitions compatibles avec babel).
@@ -360,10 +360,11 @@
   \renewcommand{\preindexhook}{%
     Les numéros de page en caractères gras indiquent les pages où les
     concepts sont introduits, définis ou expliqués.\vskip\onelineskip}
-  \newcommand{\icode}[1]{\code{#1}\indexcode{#1}}
-  \newcommand{\indexcode}[1]{\index{#1@\code{#1}}}
   \newcommand{\Index}[1]{\index{#1|bfhyperpage}}
-  \newcommand{\Icode}[1]{\code{#1}\Index{#1@\code{#1}}}
+  \newcommand{\indexcode}[1]{\index{#1@\code{#1}}}
+  \newcommand{\Indexcode}[1]{\Index{#1@\code{#1}}}
+  \newcommand{\icode}[1]{\code{#1}\indexcode{#1}}
+  \newcommand{\Icode}[1]{\code{#1}\Indexcode{#1}}
   \makeindex
 
   %%% =======
