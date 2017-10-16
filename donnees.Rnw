@@ -8,7 +8,7 @@
 %%% International de Creative Commons.
 %%% http://creativecommons.org/licenses/by-sa/4.0/
 
-\chapter{Structure de données de R}
+\chapter{Structures de données de R}
 \label{chap:donnees}
 
 <<echo=FALSE>>=
@@ -17,8 +17,8 @@ options(width=52)
 
 \begin{objectifs}
 \item Distinguer les caractéristiques des structures de données
-  suivantes de R: le vecteur simple, la matrice, le tableau, la liste
-  et le \emph{data frame}.
+  suivantes de R: le vecteur simple, la matrice, le tableau, la liste,
+  le \emph{data frame} et le facteur.
 \item Créer et manipuler chacune des structures de données ci-dessus.
 \item Extraire des données des divers types d'objet ou y affecter de
   nouvelles valeurs à l'aide des méthodes d'indiçage.
@@ -27,6 +27,832 @@ options(width=52)
   d'autres outils.
 \end{objectifs}
 
+Une structure de données est une manière d'organiser les données dans
+un ordinateur afin de pouvoir les traiter efficacement. L'étude des
+structures de données va généralement de pair avec celle des
+algorithmes puisqu'elles en influencent directement la performance. Le
+bon choix de structure de données peut faire la différence entre un
+programme performant et un autre trop lent ou inapte à traiter des
+grandes quantités de données.
+
+Le modèle de données de R repose sur des structures abstraites et
+spécialisées que nous avons appelé des \emph{objets}. Jusqu'à
+maintenant, nous n'avons étudié que le vecteur simple (\emph{atomic}).
+Il existe d'autres structures de données en R, mais leur mise en œuvre
+demeure tout à fait transparente pour les programmeuses et les
+programmeurs. Cet ouvrage fera donc l'impasse sur les notions de
+tableau (\emph{array}), de liste chainée (\emph{linked list}), d'arbre
+(\emph{tree}) ou de table de hachage (\emph{hashtable}) dont traitent
+habituellement les ouvrages d'algorithmique et de programmation.
+
+Le vecteur, la matrice, le tableau et la liste sont les types d'objets
+les plus fréquemment utilisés en programmation en R. Le facteur et le
+\emph{data frame} sont davantage des structures de données
+spécialisées pour l'analyse de données.
+
+
+\section{Matrice et tableau}
+\label{sec:donnees:matrice}
+
+R étant un langage spécialisé dans les calculs mathématiques, il
+supporte tout naturellement et de manière intuitive --- à une
+exception près, comme nous le verrons --- les
+\capsule{https://youtu.be/jDUQlClI_XA}{matrices et tableaux}. Dans la
+terminologie de R, une matrice est un tableau rectangulaire de nombres
+à deux dimensions, alors qu'un tableau (\emph{array}) est la
+généralisation à plus de deux dimensions\footnote{%
+  Il est donc correct de dire qu'une matrice est un tableau à deux
+  dimensions.}. %
+
+Nous avons établi d'entrée de jeu à la \autoref{sec:bases:vecteurs}
+qu'en R, tout est un vecteur. C'est aussi vrai pour les matrices et
+tableaux, qui ne sont rien d'autre que des vecteurs dotés d'un
+attribut \icode{dim} (\autoref{sec:bases:objets:attributs}). Ces
+objets sont donc stockés, et peuvent être manipulés, exactement comme
+des vecteurs simples.
+
+Une \Index{matrice}matrice est un vecteur avec un attribut \icode{dim}
+de longueur $2$. La présence de cet attribut change implicitement la
+classe de l'objet et, de ce fait, son mode d'affichage (sous forme de
+tableau rectangulaire) et son interaction avec plusieurs opérateurs et
+fonctions, notamment les opérateurs d'indiçage. La fonction de base
+pour créer une matrice est \Icode{matrix}:
+<<echo=TRUE>>=
+matrix(1:6, nrow = 2, ncol = 3)
+matrix(1:6, nrow = 2, ncol = 3, byrow = TRUE)
+@
+
+Tel que mentionné précédemment, la généralisation d'une matrice à plus
+de deux dimensions est un \Index{tableau}tableau. Le nombre de
+dimensions du tableau est toujours égal à la longueur de l'attribut
+\icode{dim}. La fonction de base pour créer des tableaux est
+\Icode{array}:
+<<echo=TRUE>>=
+array(1:24, dim = c(3, 4, 2))
+@
+
+Formellement, un tableau peut aussi compter une seule dimension. Un
+tel tableau comporte un attribut \code{dim} de longueur $1$, alors
+qu'un vecteur simple n'a pas d'attribut \code{dim}.
+
+\importantbox{%
+  Vous aurez remarqué que les matrices et tableaux sont remplis en
+  faisant d'abord varier la première dimension, puis la seconde, etc.
+  Pour les matrices, cela revient à les remplir par colonne. Cette
+  convention, héritée du Fortran, n'est pas des plus intuitives, mais
+  elle a ses avantages dans plusieurs applications.
+
+  La fonction \icode{matrix} possède un argument \code{byrow} qui
+  permet d'inverser l'ordre de remplissage, mais il vaut mieux
+  vous habituer à la convention de R qu'essayer constamment de la
+  contourner.}
+
+L'ordre de remplissage inhabituel des tableaux rend leur manipulation
+difficile si on ne les visualise pas correctement. Imaginons un
+tableau de dimensions $3 \times 4 \times 5$: il faut voir le tableau
+comme cinq matrices $3 \times 4$ (remplies par colonne!) les unes
+\emph{derrière} les autres. Autrement dit, le tableau est un prisme
+rectangulaire haut de $3$ unités, large de $4$ et profond de $5$. Si
+l'on ajoute une quatrième dimension, cela revient à aligner des
+prismes les uns derrière les autres, et ainsi de suite. La
+\autoref{fig:donnees:tableaux} fournit une représentation schématique
+des tableaux à trois et quatre dimensions.
+
+\begin{figure}[t]
+  \centering
+  \hspace*{\fill}
+  \begin{minipage}[b]{0.4\linewidth}
+    \setlength{\unitlength}{5mm}
+    \begin{picture}(9,7)
+      \fullcaps
+      \put(0,0){\framebox(5,4)[tl]{}}
+      \multiput(1,4)(1,1){3}{\line(0,1){1}}
+      \multiput(1,5)(1,1){3}{\line(1,0){5}}
+      \multiput(6,5)(1,1){3}{\line(0,-1){4}}
+      \multiput(6,1)(1,1){3}{\line(-1,0){1}}
+      \put(0.5,3.5){\circle{0.7}}\put(0.51,3.51){\makebox(0,0){\footnotesize 1}}
+      \put(0.5,3){\vector(0,-1){2.5}}
+      \put(1.5,3.5){\circle{0.7}}\put(1.51,3.51){\makebox(0,0){\footnotesize 2}}
+      \put(2,3.5){\vector(1,0){2.5}}
+      \put(6.3,0.3){\circle{0.7}}\put(6.31,0.31){\makebox(0,0){\footnotesize 3}}
+      \put(6.7,0.7){\vector(1,1){1.3}}
+    \end{picture}
+    \subcaption{trois dimensions}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\linewidth}
+    \setlength{\unitlength}{5mm}
+    \setlength{\unitlength}{3.5mm}
+    \begin{picture}(14,12)
+      \fullcaps
+      \put(0,0){\framebox(5,4)[tl]{}}
+      \multiput(1,4)(1,1){3}{\line(0,1){1}}
+      \multiput(1,5)(1,1){3}{\line(1,0){5}}
+      \multiput(6,5)(1,1){3}{\line(0,-1){4}}
+      \multiput(6,1)(1,1){3}{\line(-1,0){1}}
+      \put(6,7){\line(0,1){2}}
+      \put(6,9){\line(1,0){5}}
+      \put(11,9){\line(0,-1){4}}
+      \put(11,5){\line(-1,0){3}}
+      \multiput(7,9)(1,1){3}{\line(0,1){1}}
+      \multiput(7,10)(1,1){3}{\line(1,0){5}}
+      \multiput(12,10)(1,1){3}{\line(0,-1){4}}
+      \multiput(12,6)(1,1){3}{\line(-1,0){1}}
+      \put(0.5,3.5){\circle{0.8}}\put(0.51,3.51){\makebox(0,0){\scriptsize 1}}
+      \put(0.5,2.9){\vector(0,-1){2.4}}
+      \put(1.5,3.5){\circle{0.8}}\put(1.51,3.51){\makebox(0,0){\scriptsize 2}}
+      \put(2.1,3.5){\vector(1,0){2.4}}
+      \put(6.3,0.3){\circle{0.8}}\put(6.31,0.31){\makebox(0,0){\scriptsize 3}}
+      \put(6.7,0.7){\vector(1,1){1.3}}
+      \put(7.3,0.3){\circle{0.8}}\put(7.31,0.31){\makebox(0,0){\scriptsize 4}}
+      \put(7.7,0.7){\vector(1,1){6.3}}
+    \end{picture}
+    \subcaption{quatre dimensions}
+  \end{minipage}
+  \caption{Représentation schématique de tableaux. Les chiffres encerclés
+    identifient l'ordre de remplissage.}
+  \label{fig:donnees:tableaux}
+\end{figure}
+
+L'indiçage\Index{indiçage!matrice} des matrices et tableaux se fait
+avec les crochets \code{[~]}\indexcode{[}, comme pour les vecteurs
+simples. D'ailleurs, l'ensemble des règles d'indiçage de la
+\autoref{sec:bases:vecteurs:indicage} s'appliquent à l'identique aux
+matrices tableaux, sinon qu'il faut maintenant préciser des
+indices pour chaque dimension, séparés par des virgules.
+
+Par exemple, on extrait un élément d'une matrice en précisant sa
+position dans chaque dimension de celle-ci.
+<<echo=TRUE>>=
+(m <- matrix(c(40, 80, 45, 21, 55, 32), nrow = 2))
+m[1, 2]
+@
+
+Il est équivalent --- quoique moins usité --- d'utiliser la position
+de l'élément dans le vecteur sous-jacent à la matrice.
+<<echo=TRUE>>=
+m[3]
+@
+
+Les indices négatifs suppriment des dimensions et les vecteurs
+booléens sélectionnent des dimensions, comme d'habitude.
+<<echo=TRUE>>=
+m[-1, -2]
+m[c(FALSE, TRUE), c(FALSE, TRUE, TRUE)]
+@
+
+En vertu de la cinquième règle d'indiçage de la
+\autoref{sec:bases:vecteurs:indicage}, lorsqu'une dimension est
+laissée vide dans les crochets, tous les éléments de cette dimension
+sont extraits.
+<<echo=TRUE>>=
+m[2, ]
+m[, 1]
+m[-1, ]
+m[, -2]
+@
+
+Les fonctions \Icode{rbind} et \Icode{cbind} permettent de fusionner
+des matrices et des tableaux ayant au moins une dimension en commun.
+La fonction \Icode{rbind} (\emph{row bind}) fusionne verticalement
+(empile) deux matrices (ou plus) ayant le même nombre de colonnes.
+<<echo=TRUE>>=
+n <- matrix(1:9, nrow = 3)
+rbind(m, n)
+@
+
+La fonction \Icode{cbind} (\emph{column bind}), quant à elle, fusionne
+horizontalement (place côte à côte) deux matrices (ou plus) ayant le
+même nombre de lignes.
+<<echo=TRUE>>=
+n <- matrix(1:4, nrow = 2)
+cbind(m, n)
+@
+
+
+\section{Liste}
+\label{sec:donnees:liste}
+
+La liste\index{liste} est la structure de données la plus générale et
+polyvalente du langage R. Si les éléments d'un vecteur simple doivent
+tous être du même mode, ceux de la liste peuvent être de n'importe
+quel mode, y compris le mode \icode{list}. Par conséquent, il est
+possible d'emboîter des listes, d'où le qualificatif de
+\emph{récursif} pour ce type d'objet.
+
+La liste est la structure de données par excellence pour réunir dans
+un objet plusieurs types d'objets différents. La fonction de base pour
+créer des listes est \Icode{list}:
+<<echo=TRUE>>=
+(x <- list(size = c(1, 5, 2), user = "Joe", new = TRUE))
+@ %
+
+(Dans l'exemple ci-dessus, le premier élément de la liste est un
+vecteur de mode \code{numeric}, le second un vecteur de mode
+\code{character} et le troisième, un vecteur de mode \code{logical}.)
+
+\tipbox{%
+  Nommez les éléments des listes puisqu'il peut s'avérer difficile
+  autrement de les identifier. De plus, comme nous le verrons
+  ci-dessous, il est très simple d'extraire les éléments d'une liste
+  par leur étiquette.}
+
+L'indiçage\Index{indiçage!liste} des listes recèle quelques subtilités
+auxquelles il faut porter une attention particulière. Tout d'abord, il
+existe trois opérateurs d'indiçage: les crochets simples usuels
+\code{[~]}, les crochets doubles \code{[[~]]} et le signe de dollar
+\code{\$}.
+
+Les crochets simples\indexcode{[} fonctionnent avec la liste
+comme avec tout vecteur. Le résultat de l'indiçage avec \code{[~]} est
+une liste. Quand on y pense, c'est le seul résultat logique lorsque
+l'on indice une liste avec un vecteur. Par conséquent, le résultat de
+l'extraction d'un seul élément d'une liste avec les crochets simples
+est non pas l'objet en question, mais bien une liste d'un élément
+contenant l'objet. C'est rarement ce que l'on souhaite obtenir.
+<<echo=TRUE>>=
+x[1]
+x[-2]
+x[c(1, 3)]
+@
+
+Les crochets doubles\Indexcode{[[} permettent d'extraire un, et
+un seul, élément d'une liste à l'aide d'un entier positif ou d'une
+chaine de caractères. Le résultat est l'objet «sorti» de la liste.
+<<echo=TRUE>>=
+x[[1]]
+x[["size"]]
+@
+
+Petite fonctionnalité peu employée, mais élégante des crochets
+doubles: si l'indice est un vecteur d'entiers positifs, R utilisera
+les valeurs de celui-ci pour indicer récursivement la liste. Autrement
+dit, R sélectionnera la composante de la liste correspondant au
+premier élément du vecteur, puis l'élément de la composante
+correspondant au second élément du vecteur, et ainsi de suite.
+<<echo=TRUE>>=
+x[[c(1, 2)]]
+@
+
+Finalement, l'autre façon --- la meilleure, en fait --- de
+sélectionner un seul élément d'une liste est par son étiquette avec
+l'opérateur \Icode{\$}.
+<<echo=TRUE>>=
+x$size
+@
+
+Mentionnons en terminant la fonction \Icode{unlist} qui convertit une
+liste en un vecteur simple. Elle est surtout utile pour concaténer les
+éléments d'une liste lorsque ceux-ci sont des vecteurs simples,
+idéalement de même mode car il y aura autrement conversion forcée.
+Attention: cette fonction est destructrice si la structure interne de
+la liste est importante.
+<<echo=TRUE>>=
+unlist(x)
+@
+
+
+\section{Facteur}
+\label{sec:donnees:facteur}
+
+Il est très courant en analyse de données de travailler avec des
+catégories comme la couleur («rouge», «vert», «bleu»), la taille
+(«petit», «moyen», «grand») ou la position géographique (pays,
+province, état). Bien sûr, un vecteur de mode \code{character} suffit
+pour stocker ce genre de données. Cependant, R propose une structure
+de données dédiée pour les données catégorielles qui permet
+d'automatiser plusieurs traitements: le facteur.
+
+Un facteur est un vecteur de données correspondant à des catégories. À
+ce titre, il devrait normalement afficher un fort taux de redondance:
+inutile de définir des catégories s'il y a en une différente pour
+chaque donnée, n'est-ce pas?
+
+Les fonctions de base pour créer et manipuler des facteurs sont
+\Icode{factor} et \Icode{levels}. R représente les données sous forme
+de chaine de caractères, mais il les stocke et les traite à l'interne
+comme un vecteur d'entiers.
+<<echo=TRUE>>=
+(grandeurs <- factor(c("S", "S", "L", "XL",
+                       "M", "M", "L", "L")))
+levels(grandeurs)
+@
+
+En programmation, les facteurs sont assez peu utilisés en tant que
+structure de données. Par contre, ils servent implicitement dans les
+calculs par catégorie de données; nous y reviendrons au
+\autoref{chap:application} quand nous traiterons des fonctions
+d'application.
+
+
+\section{\emph{Data frames}}
+\label{sec:donnees:dataframes}
+
+Le \Index{data frame|emph}\emph{data frame} est une structure de
+données de R sur laquelle reposent plusieurs procédures statistiques
+--- pensons à la régression linéaire, par exemple. Un \emph{data
+  frame} est un hybride entre la matrice et la liste: c'est un tableau
+rectangulaire de données, mais dont chaque colonne peut être d'un mode
+différent. Pensons, par exemple, à un tableau avec des noms (mode
+\code{character}) dans une colonne et des notes (mode \code{numeric})
+dans une autre.
+
+Plus formellement, un \emph{data frame} est une liste de classe
+\code{data.frame} dont tous les éléments sont de la même longueur (ou
+comptent le même nombre de lignes, si les éléments sont des matrices).
+Chaque élément de la liste correspond à une colonne du \emph{data
+  frame}. On crée un \emph{data frame} avec la fonction
+\Icode{data.frame} ou, pour convertir un autre type d'objet en
+\emph{data frame}, avec \Icode{as.data.frame}.
+<<echo=TRUE>>=
+(x <- data.frame(Nom = c("Pierre", "Jean", "Jacques"),
+                 Age = c(42, 34, 19),
+                 Fumeur = c(TRUE, TRUE, FALSE)))
+@
+
+Le \emph{data frame} peut être indicé à la fois comme une liste (pour
+l'extraction des colonnes) et comme une matrice (pour l'extraction des
+lignes ou des colonnes).
+<<echo=TRUE>>=
+x[1, ]
+x[, 1]
+x$Age
+@
+
+\tipbox{On remarquera, ci-dessus, que les données de la colonne
+  \code{Nom} sont considérées comme des facteurs. C'est une
+  caractéristique de la fonction \code{data.frame} de convertir
+  automatiquement les chaines de caractères en facteurs. L'option
+  \code{stringAsFactors = FALSE} permet d'éviter la conversion
+  automatique.}
+
+Il est possible d'ajouter des lignes ou des colonnes à un \emph{data
+  frame} avec les fonctions \icode{rbind} et \icode{cbind}.
+
+
+\section{Importation et exportation de données}
+\label{sec:donnees:import-export}
+
+«Est-ce que je peux transférer mes données de Excel à R?» Cette
+question et ses multiples variantes est assurément l'une des plus
+fréquemment posées par les utilisateurs de R. La réponse courte: oui,
+c'est possible d'importer (c'est la terminologie correcte) des données
+de source externe dans R. La réponse longue, cependant: oui, c'est
+possible, mais c'est souvent compliqué. Il en va de même pour la
+procédure inverse consistant à exporter des données de R pour usage
+dans une autre application.
+
+Ce qui rend souvent ardu l'échange de données entre différents
+systèmes et logiciels, c'est le nombre de facteurs qui influencent
+l'importation et l'exportation: le type de fichier (en format texte
+brut ou en format binaire), l'encodage des caractères (ASCII pur,
+UTF-8 ou autre), la disposition des données dans le fichier (notamment
+les matrices et tableaux), le caractère utilisé pour séparer les
+champs (espace, virgule ou autre), le format du fichier (Excel, SAS ou
+autre), etc. Difficile, dans les circonstances, de proposer une
+procédure universelle. C'est d'ailleurs pourquoi la documentation
+officielle de R consacre le manuel \emph{R Data Import/Export}
+\citep{R-data} à ce seul sujet.
+
+Nous ne traitons ici que de l'importation et de l'exportation de
+données sous forme de fichiers en format texte brut\footnote{%
+  C'est-à-dire sans aucune mise en forme, comme les fichiers de
+  script.}.
+
+\tipbox{Il existe de multiples autres façons de travailler avec des
+  données externes, notamment l'importation de fichiers de tableurs
+  comme Excel ou, encore mieux, l'interaction directe avec une base de
+  données depuis R. Consultez le manuel \emph{R Data Import/Export}
+  pour en savoir plus.}
+
+
+\subsection{Importation de vecteurs de données}
+\label{sec:donnees:import-export:scan}
+
+%% création des fichiers vecteur.data et matrice.data
+<<echo=FALSE>>=
+set.seed(1)
+vec <- sample(4200:4300, 5)
+mat <- matrix(sample(101:200, 15), 3, 5)
+cat(file = "vecteur.data", "# Vecteur de données",
+    vec, sep = "\n")
+cat(file = "matrice.data", "# Données d'une matrice 3 x 5\n")
+write(t(mat), file = "matrice.data", append = TRUE)
+@
+
+Le plus simple jeu de données à transférer d'un système à un autre est
+un vecteur ou une matrice de données toutes du même mode. Pour de
+genre d'applications, un fichier en format texte brut dans lequel les
+données sont disposées les unes à la suite des autres, sur une ou
+plusieurs lignes, convient parfaitement. Le fichier peut aussi
+contenir des commentaires, ceux-ci étant normalement délimités par un
+caractère spécial tel que \code{\#}, \code{\%} ou \code{;}\,. La
+\autoref{fig:donnees:scan} fournit deux exemples d'un tel fichier de
+données.
+
+\begin{figure}
+  \begin{minipage}{1.0\linewidth}
+    \begin{minipage}[t]{0.48\linewidth}
+\begin{lstlisting}[frame=single,language={}]
+<<echo=FALSE, results=tex>>=
+writeLines(readLines("vecteur.data"))
+@
+\end{lstlisting}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.48\linewidth}
+\begin{lstlisting}[frame=single,language={}]
+<<echo=FALSE, results=tex>>=
+writeLines(readLines("matrice.data"))
+@
+\end{lstlisting}
+    \end{minipage} \\
+    \mbox{}
+  \end{minipage}
+  \caption{Gauche: fichier de données \code{vecteur.data} contenant un
+    vecteur de données à raison d'une donnée par ligne. Droite:
+    fichier \code{matrice.data} contenant les données d'une matrice.
+    Dans les deux cas le caractère \# indique que le reste du texte
+    sur la ligne est un commentaire.}
+  \label{fig:donnees:scan}
+\end{figure}
+
+La fonction \Icode{scan} permet d'importer de telles données dans R.
+Elle lit l'intégralité des données du fichier dont le nom est donné en
+premier argument, ligne par ligne, puis retourne un vecteur. Seul
+l'ordre des données dans le fichier est pris en compte, leur
+disposition n'a aucune importance. La fonction ignore tout texte qui
+suit le caractère spécifié via l'argument \Icode{comment.char}.
+<<echo=TRUE>>=
+scan("vecteur.data", comment.char = "#")
+@
+
+Alternative à \code{comment.char}, l'argument \code{skip} permet de
+sauter un certain nombre de lignes au début du fichier lors de
+l'importation.
+<<echo=TRUE>>=
+scan("vecteur.data", skip = 1)
+@
+
+Pour recréer à l'identique dans R une matrice importée avec
+\code{scan}, il faut s'assurer de la remplir par ligne.
+<<echo=TRUE>>=
+matrix(scan("matrice.data", comment.char = "#"),
+       nrow = 3, byrow = TRUE)
+@
+
+La fonction \code{scan} compte de nombreux autres arguments; consulter
+sa rubrique d'aide si la structure du fichier de données à importer
+dans R ne correspond pas tout à fait aux cas traités ci-dessus.
+
+\importantbox{Dès qu'il s'agit d'accéder à un fichier, R recherche
+  celui-ci dans son \index{repertoire@répertoire de travail}répertoire
+  de travail (\autoref{sec:presentation:workspace}). Si le fichier se
+  trouve dans un autre répertoire, vous devez spécifier dans le nom le
+  \index{chemin d'accès}chemin d'accès complet
+  (\autoref{sec:informatique:fs:path}) vers le fichier.}
+
+%% nettoyage
+<<echo=FALSE>>=
+unlink("vecteur.data")
+unlink("matrice.data")
+@
+
+\subsection{Importation de tableaux de données}
+\label{sec:donnees:import-export:read.table}
+
+%% création des fichiers carburant.txt et carburant.csv
+<<echo=FALSE>>=
+carb <- matrix(c(16.9, 8, 350, 155, 4.360,
+                 15.5, 8, 351, 142, 4.054,
+                 19.2, 8, 267, 125, 3.605,
+                 18.5, 8, 360, 150, 3.940,
+                 30.0, 4, 98,  68,  2.155),
+               nrow = 5, byrow = TRUE,
+               dimnames = list(NULL, c("mpg", "nbcyl", "cylindree", "cv", "poids")))
+write.table(carb, file = "carburant.txt", row.names = FALSE)
+write.csv(carb, file = "carburant.csv", row.names = FALSE)
+@
+
+Les données des tableurs et des bases de données sont habituellement
+organisées en tableau rectangulaire où chaque ligne représente un
+«sujet», ou une «entrée», et chaque colonne représente une
+caractéristique observée chez les sujets. On reconnait là la structure
+du \emph{data frame} dans R.
+
+Les tableurs, les bases de données et les différents logiciels
+statistiques peuvent exporter leurs tableaux de données sous forme de
+fichier texte dans lequel les champs sont séparés par un caractère
+quelconque, souvent une espace. Le format le plus universel utilise
+toutefois comme séparateur la virgule ou le point-virgule; c'est le
+format de fichier CSV (\emph{comma-separated values}). La
+\autoref{fig:donnees:read.table} présente le même jeu de données dans
+deux formats différents.
+
+\begin{figure}
+\begin{lstlisting}[frame=single,language={}]
+<<echo=FALSE, results=tex>>=
+writeLines(readLines("carburant.txt"))
+@
+\end{lstlisting}
+\begin{lstlisting}[frame=single,language={}]
+<<echo=FALSE, results=tex>>=
+writeLines(readLines("carburant.csv"))
+@
+\end{lstlisting}
+  \caption{Haut: fichier \code{carburant.txt} contenant un jeu de
+    données rectangulaire dont les champs sont séparés par des
+    espaces. Bas: fichier \code{carburant.csv} contenant le même jeu
+    de données avec une virgule comme séparateur. Dans les deux
+    fichiers, la première ligne contient les titres des colonnes.}
+  \label{fig:donnees:read.table}
+\end{figure}
+
+Les fonctions \Icode{read.table} et \Icode{read.csv} constituent les
+principaux outils d'importation de tableaux de données dans R. On
+choisira l'une ou l'autre selon le format du fichier de données:
+\code{read.table} si le séparateur des champs est une espace et
+\code{read.csv} si c'est une virgule. Les nombreux arguments de ces
+fonctions permettent de spécifier si les titres des lignes ou des
+colonnes apparaissent ou non dans le fichier, le mode de chaque
+colonne, le séparateur décimal, l'encodage, etc. La rubrique
+d'aide fournit les détails.
+<<echo=TRUE>>=
+read.table("carburant.txt", header = TRUE)
+read.csv("carburant.csv", header = TRUE)
+@
+
+D'autres variantes de \icode{read.table} existent pour des formats de
+fichiers courants. Elles diffèrent uniquement par le séparateur des
+champs et le séparateur décimal; consulter le
+\autoref{tab:donnees:read.table}.
+
+\begin{table}
+  \centering
+  \caption{Caractéristiques des fonctions de la famille
+    \code{read.table}}
+  \label{tab:donnees:read.table}
+  \begin{tabular}{lcc}
+    \toprule
+             & Séparateur & Séparateur \\
+    Fonction & des champs & décimal \\
+    \midrule
+    \icode{read.table}  & espace     & \code{.} \\
+    \icode{read.csv}    & \code{,}   & \code{.} \\
+    \icode{read.csv2}   & \code{;}   & \code{,} \\
+    \icode{read.delim}  & tabulation & \code{.} \\
+    \icode{read.delim2} & tabulation & \code{,} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+%% nettoyage
+<<echo=FALSE>>=
+unlink("carburant.txt")
+unlink("carburant.csv")
+@
+
+\subsection{Exportation de données}
+\label{sec:donnees:import-export:write}
+
+R peut évidemment produire les types de fichiers mentionnés aux
+sections \ref{sec:donnees:import-export:scan} et
+\ref{sec:donnees:import-export:read.table} pour exporter ses données
+vers d'autres systèmes. Les exemples de cette section permettent
+d'ailleurs de recréer les fichiers des figures \ref{fig:donnees:scan}
+et \autoref{fig:donnees:read.table} (sans les commentaires).
+
+L'exportation d'un vecteur simple dans un fichier en format texte brut
+passe par la fonction \Icode{cat}. Les principaux arguments de la
+fonction sont: le ou les objets à exporter; le nom du fichier; le
+séparateur entre les éléments du vecteur dans le fichier. Le
+séparateur par défaut est une espace, ce qui fait en sorte que les
+éléments du vecteur se retrouvent sur une seule ligne dans le fichier
+d'exportation. Pour placer les éléments sur des lignes différentes, il
+faut utiliser un retour à la ligne, symbolisé par \verb="\n"=, comme
+séparateur.
+<<echo=FALSE>>=
+x <- vec
+@
+<<echo=TRUE>>=
+x
+cat(x, file = "vecteur.data", sep = "\n")
+@
+
+La fonction \Icode{write} joue le même rôle que \icode{cat}, sauf que
+les données sont disposées sous forme de tableau rectangulaire (de
+cinq colonnes par défaut) dans le fichier d'exportation. Elle est donc
+mieux appropriée pour exporter les matrices. Étant donné que R remplit
+les matrices par colonne, il faut prendre soin de les transposer avant
+de les exporter.
+<<echo=FALSE>>=
+x <- mat
+@
+<<echo=TRUE>>=
+x
+write(t(x), file = "matrice.data", ncolumns = 5)
+@
+
+%% nettoyage
+<<echo=FALSE>>=
+unlink("vecteur.data")
+unlink("matrice.data")
+@
+
+Enfin, les pendants d'exportation des fonctions \icode{read.table},
+\icode{read.csv} et \icode{read.csv2} sont \Icode{write.table},
+\Icode{write.csv} et \icode{write.csv2}, dans l'ordre. Divers
+arguments permettent de contrôler les informations à transférer du
+\emph{data frame} au fichier d'exportation ainsi que le format de ce
+dernier.
+<<echo=FALSE>>=
+x <- as.data.frame(carb)
+@
+<<echo=TRUE>>=
+x
+write.table(x, file = "carburant.txt", row.names = FALSE)
+write.csv(x, file = "carburant.csv", row.names = FALSE)
+@
+
+%% nettoyage
+<<echo=FALSE>>=
+unlink("carburant.txt")
+unlink("carburant.csv")
+@
+
+\section{Exemples}
+\label{sec:donnees:exemples}
+
+\def\scriptfilename{donnees.R}
+
+\scriptfile{\scriptfilename}
+\lstinputlisting[firstline=13]{\scriptfilename}
+
+
+\section{Exercices}
+\label{sec:donnees:exercices}
+
+\Opensolutionfile{solutions}[solutions-donnees]
+
+\begin{Filesave}{solutions}
+\section*{Chapitre \ref*{chap:donnees}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:donnees}}
+
+\end{Filesave}
+
+\begin{exercice}
+  \index{indiçage!matrice}
+  Soit \code{x} une matrice $10 \times 7$ obtenue aléatoirement avec
+<<echo=TRUE,eval=FALSE>>=
+x <- matrix(sample(1:100, 70), 7, 10)
+@
+  Écrire des expressions R permettant d'obtenir les éléments de la
+  matrice demandés ci-dessous.
+  \begin{enumerate}
+  \item L'élément $(4, 3)$.
+  \item Le contenu de la sixième ligne.
+  \item Les première et quatrième colonnes (simultanément).
+  \item Les lignes dont le premier élément est supérieur à $50$.
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+\item
+<<echo=TRUE,eval=FALSE>>=
+x[4, 3]
+@
+\item
+<<echo=TRUE,eval=FALSE>>=
+x[6, ]
+@
+\item
+<<echo=TRUE,eval=FALSE>>=
+x[, c(1, 4)]
+@
+\item
+<<echo=TRUE,eval=FALSE>>=
+x[x[, 1] > 50, ]
+@
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  \begin{enumerate}
+  \item Écrire une expression R pour créer la liste suivante:
+<<echo=FALSE>>=
+x <- list(1:5, data=matrix(1:6, 2, 3), numeric(3), test=logical(4))
+@
+<<echo=TRUE>>=
+x
+@ %
+  \item \index{etiquette@étiquette} Extraire les étiquettes de la
+    liste.
+  \item \index{mode} \index{longueur} Trouver le mode et la longueur
+    du quatrième élément de la liste.
+  \item \index{dimension} Extraire les dimensions du second élément de
+    la liste.
+  \item \index{indiçage!liste} Extraire les deuxième et troisième
+    éléments du second élément de la liste.
+  \item Remplacer le troisième élément de la liste par le vecteur
+    \verb|3:8|.
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+    \item Il y a plusieurs façons de créer les troisième et quatrième
+      éléments de la liste. Le plus simple consiste à utiliser
+      \code{numeric()} et \code{logical()}:
+<<echo=TRUE,eval=FALSE>>=
+x <- list(1:5, data = matrix(1:6, 2, 3), numeric(3),
+          test = logical(4))
+@
+    \item
+<<echo=TRUE,eval=FALSE>>=
+names(x)
+@
+    \item
+<<echo=TRUE,eval=FALSE>>=
+mode(x$test)
+length(x$test)
+@
+    \item
+<<echo=TRUE,eval=FALSE>>=
+dim(x$data)
+@
+    \item
+<<echo=TRUE,eval=FALSE>>=
+x[[2]][c(2, 3)]
+@
+    \item
+<<echo=TRUE,eval=FALSE>>=
+x[[3]] <- 3:8
+@
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Effectuer une mise en œuvre de l'algorithme \emph{Bucketgsort} de
+  \citet[chapitre~6]{Stephens:algorithms:2013} permettant de trier des
+  entiers entre $1$ et $x_{\max}$. La fonction prend en argument le
+  vecteur des données à trier, la valeur de $x_{\max}$ et le nombre de
+  compartiments. Utiliser la fonction \icode{sort} pour trier les
+  compartiments.
+
+  \begin{sol}
+    La principale difficulté réside dans le fait que certains
+    compartiments peuvent demeurer vides (\code{NULL}). Or,
+    \icode{sort} ne peut prendre \code{NULL} en argument. Il faut donc
+    faire un test avant de trier les données.
+<<echo=TRUE, eval=FALSE>>=
+bucketsort <- function(x, max, nbuckets)
+{
+    ## création des compartiments
+    buck <- vector("list", nbuckets)
+    span <- max/nbuckets
+
+    ## répartition des données dans les compartiments
+    for (i in seq_along(x))
+    {
+        j <- ceiling(x[i]/span)
+        buck[[j]] <- c(buck[[j]], x[i])
+    }
+
+    ## tri des données dans chaque compartiment; on
+    ## effectue le tri seulement s'il y a des données
+    ## dans le compartiment
+    for (i in seq_len(nbuckets))
+        if (!is.null(buck[[i]]))
+            buck[[i]] <- sort(buck[[i]])
+
+    ## retourner le vecteur trié
+    unlist(buck)
+}
+@
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Importer dans R les données \code{boston} du dépôt de jeux de
+  données de \link{http://lib.stat.cmu.edu/datasets}{StatLib}.
+  Remarquer que les données commencent à la ligne $23$ du fichier. De
+  plus, chaque entrée du fichier compte $14$ variables, mais leurs
+  valeurs sont chaque fois réparties sur deux lignes à raison de $11$
+  variables sur une ligne et $3$ sur l'autre.
+  \begin{sol}
+    Avec les données réparties sur deux lignes, le plus simple demeure
+    d'importer les données avec \code{scan} et les replacer dans le
+    bon format avec \code{matrix}. Remarquer comment l'on peut
+    importer directement depuis Internet en spécifiant une url comme
+    nom de fichier.
+<<eval=FALSE>>=
+matrix(scan("http://lib.stat.cmu.edu/datasets/boston",
+            skip = 22),
+       ncol = 14, byrow = TRUE)
+@
+  \end{sol}
+\end{exercice}
+
+\Closesolutionfile{solutions}
 
 %%% Local Variables:
 %%% mode: latex

@@ -137,7 +137,7 @@ exécute les commandes et affiche les résultats dans la cellule.
 
 Le R est un langage particulièrement puissant pour les applications
 mathématiques et statistiques (et donc actuarielles), chose peu
-surprenante puisqu'il précisément été développé dans ce but. Parmi ses
+surprenante puisqu'il a précisément été développé dans ce but. Parmi ses
 caractéristiques particulièrement intéressantes, on note:
 \begin{itemize}
 \item langage basé sur la notion de vecteur, ce qui simplifie les
@@ -283,7 +283,7 @@ vous utiliserez cette seconde approche d'interaction avec R.
     quitte à les réévaluer par la suite pour obtenir les valeurs
     correspondantes.
   \end{enumerate}
-  La seconde, surement{\dots} Or, sauvagarder l'espace de travail R
+  La seconde, surement{\dots} Or, sauvegarder l'espace de travail R
   dans un fichier \code{.RData} (l'approche «objets réels, code
   virtuel») correspond à la première option, alors que sauvegarder
   le code source des fichiers de script correspond à la seconde.
@@ -369,7 +369,7 @@ d'autres. Voici quelques bons choix.
     \label{fig:presentation:emacs}
   \end{figure}
 
-  Emblême du logiciel libre, Emacs est disponible gratuitement et à
+  Emblème du logiciel libre, Emacs est disponible gratuitement et à
   l'identique sur toutes les plateformes supportées par R, dont
   Windows, macOS et Linux. Consulter l'\autoref{chap:emacs+ess} pour
   en savoir plus sur GNU~Emacs et apprendre les commandes essentielles

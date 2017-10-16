@@ -40,9 +40,15 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 ## Historique des versions
 
+### 2017.10-1 (2017-10-16)
+
+- Chapitre 5 - Structure de données
+- Les fichiers de sortie `.Rout` de tous les fichiers d'accompagnement sont dorénavant livrés avec le document. Chaque fichier `.Rout` contient les résultats de l'évaluation de toutes les expressions du fichier `.R` correspondant.
+- Le fichier `algorithmique.R` contenant les solutions en R de certains exercices de Stephens (2013) est inclus dans la distribution.
+
 ### 2017.09-3b (2017-09-28)
 
-Améliorations au chapitre 3. Pas de nouveau chapitre
+Améliorations au chapitre 3. Pas de nouveau chapitre.
 
 - Ajouts dans le chapitre 3 sur la conversion forcée d'un mode vers un autre dans la création des vecteurs et dans les opérations arithmétiques et logiques (sections 3.3.2, 3.4.1, 3.4.3 et les blocs correspondant dans `bases.R`).
 - Réorganisation du matériel des sections 3.5.2 et 3.5.3 dans des listes pour en faciliter la lecture.

@@ -128,7 +128,7 @@ En termes techniques, une fonction définie avec \icode{function}
 dans R constitue une \emph{fermeture}\Index{fermeture}, ou
 \emph{clôture} (du Lisp \emph{closure}). Cette fermeture est formée de
 trois éléments, dont deux que nous connaissons déjà bien: les
-arguments formels de la fonction et le corps et la fonction. Le
+arguments formels de la fonction et le corps de la fonction. Le
 troisième élément est l'environnement de la fonction. Les fonctions
 \Icode{formals}, \Icode{body} et \Icode{environment} permettent
 d'extraire ces trois éléments, dans l'ordre.
@@ -164,7 +164,7 @@ fonctions. Nous en avons déjà utilisé trois ci-dessus.
 \begin{ttscript}{environment}
 \item[\Icode{environment}] extraction ou modification de
   l'environnement
-\item[\icode{ls}] affichage de la liste des éléments du
+\item[\icode{ls}] affichage de la liste des éléments
   de l'environnement
 \item[\Icode{get}] extraction de la valeur associée à un symbole
   dans l'environnement
@@ -368,14 +368,15 @@ l'autre. On trouvera un exemple complet dans le code informatique de la
 \label{sec:implementation:lazy}
 
 R utilise par défaut une technique d'évaluation des arguments des
-fonctions appelée \emph{évaluation paresseuse}\index{évaluation
-  paresseuse} (\emph{lazy evaluation}). Ce que cela signifie, c'est
-que toute expression passée en argument à une fonction ne sera évaluée
-qu'au moment où la valeur de l'argument sera utilisée dans la fonction,
-et pas avant. Ainsi, une expression en argument pourrait ne jamais
-être évaluée. Ou encore, la valeur par défaut d'un argument peut
-dépendre de la valeur d'un autre argument puisque celui-ci sera connu
-au moment de l'évaluation.
+fonctions appelée %
+\index{evaluation@évaluation paresseuse}\emph{évaluation paresseuse} %
+(\emph{lazy evaluation}). Ce que cela signifie, c'est que toute
+expression passée en argument à une fonction ne sera évaluée qu'au
+moment où la valeur de l'argument sera utilisée dans la fonction, et
+pas avant. Ainsi, une expression en argument pourrait ne jamais être
+évaluée. Ou encore, la valeur par défaut d'un argument peut dépendre
+de la valeur d'un autre argument puisque celui-ci sera connu au moment
+de l'évaluation.
 
 Par exemple, la fonction \code{sumsq} ci-dessous calcule la somme des
 écarts au carré entre les éléments d'un vecteur \code{y} et une valeur
@@ -415,9 +416,9 @@ connue au moment d'effectuer ce calcul. Joli, non?
 \end{Filesave}
 
 \begin{exercice}
-  La fonction \icode{ecdf} de R prend en argument un vecteur de
-  données $(x_1, \dots, x_n)$ et retourne une fonction pour calculer
-  la fonction de répartition empirique de ces données:
+  La fonction \icode{ecdf} de R retourne une fonction pour calculer
+  la fonction de répartition empirique d'un vecteur de
+  données $(x_1, \dots, x_n)$:
   \begin{equation*}
     F_n(x) = \frac{\# x_i \leq x}{n}.
   \end{equation*}

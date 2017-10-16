@@ -153,7 +153,7 @@ commande R est soit une \emph{expression}\index{expression}, soit une
 \label{sec:bases:commandes:expression}
 
 Une \index{expression}expression R est une combinaison de symboles
-(noms de variables) et de procedures. Toute expression a une valeur.
+(noms de variables) et de procédures. Toute expression a une valeur.
 Le symbole d'une donnée fondamentale représente cette donnée, comme on
 pourrait s'y attendre.
 
@@ -327,9 +327,8 @@ Error in TRUE <- 3 : membre gauche de l'assignation
 rm(T)
 @
 
-\tipbox{Nous recommandons de toujours écrire les valeurs booléennes
-  \code{TRUE} et \code{FALSE} au long pour éviter des bogues
-  difficiles à détecter.}
+\tipbox{Écrivez toujour les valeurs booléennes \code{TRUE} et
+  \code{FALSE} au long pour éviter des bogues difficiles à détecter.}
 
 
 \subsection{Modes et types de données}
@@ -485,7 +484,7 @@ is.null(NULL)
 \label{sec:bases:objets:attributs}
 
 Les attributs\Index{attribut} d'un objet sont des éléments
-d'information additionnels attachées à cet objet. Le
+d'information additionnels attachés à cet objet. Le
 \autoref{tab:attributs} fournit la liste des attributs les plus
 fréquemment utilisés. À chacun des attributs du tableau correspond une
 fonction du même nom servant à extraire l'attribut d'un objet.
@@ -591,12 +590,12 @@ c(2, FALSE, "a")
 \subsection{Indiçage}
 \label{sec:bases:vecteurs:indicage}
 
-L'indiçage des vecteurs est une procédure beaucoup utilisée dans le
-langage R, aussi est-il important d'en maitriser toutes les
-subtilités. L'opération sert principalement à deux choses: extraire
-des éléments d'un objet avec la construction
-\verb|x[i]|\index{[@\code{[}}, ou remplacer des éléments avec la
-construction \verb|x[i] <- y|\Index{[<-@\code{[<-}}.
+L'indiçage\Index{indiçage!vecteur} des vecteurs est une procédure
+beaucoup utilisée dans le langage R, aussi est-il important d'en
+maitriser toutes les subtilités. L'opération sert principalement à
+deux choses: extraire des éléments d'un objet avec la construction
+\verb|x[i]|\icode{[}, ou remplacer des éléments avec la
+construction \verb|x[i] <- y|\Icode{[<-}.
 
 Dans un cas comme dans l'autre, il faut d'abord indicer le vecteur. Il
 existe cinq façons de le faire, toujours à l'intérieur de crochets
@@ -698,7 +697,7 @@ taille d'un objet plus court
 \end{Soutput}
 \end{Schunk}
 
-\cautionbox{La régle de recyclage des vecteurs fait en sorte qu'il y a
+\cautionbox{La règle de recyclage des vecteurs fait en sorte qu'il y a
   très peu d'erreurs de longueur dans R. Qu'une expression soit
   valide ne signifie donc pas qu'elle effectue le bon calcul!}
 
@@ -895,7 +894,7 @@ Nous avons deux choix au moment d'appeler une fonction:
 \end{enumerate}
 Si certains arguments sont nommés et d'autre pas, ces derniers
 reçoivent des valeurs selon leur ordre dans la définition de la
-fonction, et non en fonction de leur position dans l'appel.
+fonction, et non selon leur position dans l'appel.
 
 Il est beaucoup plus prudent et \emph{fortement recommandé} de
 spécifier les arguments par leur nom, surtout après les deux ou trois
