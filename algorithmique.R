@@ -500,6 +500,6 @@ fibonacci(1)
 fibonacci(2)
 fibonacci(5)
 fibonacci(10)
-fibonacci(30)              # déjà lent
-fibonacci(35)              # long
-fibonacci(40)              # à vos risques et périls
+# fibonacci(30)              # déjà lent
+# fibonacci(35)              # long
+# fibonacci(40)              # à vos risques et périls
