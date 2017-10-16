@@ -44,7 +44,9 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 #### Nouveautés
 
-
+- Chapitre 5 - Structure de données
+- Les fichiers de sortie `.Rout` de tous les fichiers d'accompagnement sont dorénavant livrés avec le document. Chaque fichier `.Rout` contient les résultats de l'évaluation de toutes les expressions du fichier `.R` correspondant.
+- Le fichier `algorithmique.R` contenant les solutions en R de certains exercices de Stephens (2013) est inclus dans la distribution.
 
 #### Autres modifications
 
