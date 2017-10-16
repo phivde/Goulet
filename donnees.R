@@ -145,6 +145,10 @@ mode(x)                    # ... de mode "list"
 y <- list(TRUE, 1:5)       # liste de deux éléments
 c(x, y)                    # liste de six éléments
 
+## Pour initialiser une liste d'une longueur donnée, on
+## utilise la fonction 'vector'.
+vector("list", 5)
+
 ## Les crochets simples [ ] permettent d'extraire un ou
 ## plusieurs éléments d'une liste. Le résultat est toujours
 ## une liste, même si l'on extraie un seul élément.
