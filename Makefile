@@ -29,9 +29,7 @@ SCRIPTS = \
 	bases.R \
 	implementation.R \
 	algorithmique.R \
-	# operateurs.R \
-	# fonctions.R \
-	# avance.R
+	donnees.R 
 OTHER = LICENSE
 ROUTFILES := $(SCRIPTS:.R=.Rout)
 
@@ -102,7 +100,7 @@ zip: ${MASTER} ${README} ${SCRIPTS} ${ROUTFILES} ${OTHER}
 	  awk 'state==0 && /^# / { state=1 }; \
 	       /^## Auteur/ { printf("## Édition\n\n%s\n\n", "${VERSION}") } \
 	       state' ${README} >> ${TMPDIR}/${README}
-	cp ${MASTER} ${SCRIPTS} ${OTHER} ${TMPDIR}
+	cp ${MASTER} ${SCRIPTS} ${ROUTFILES} ${OTHER} ${TMPDIR}
 	cd ${TMPDIR} && zip --filesync -r ../${ARCHIVE} *
 	${RM} ${TMPDIR}
 
