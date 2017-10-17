@@ -40,6 +40,12 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 ## Historique des versions
 
+### (en développement)
+
+#### Nouveautés
+
+- Détails additionnels dans la solution de l'exercice 5.4.
+
 ### 2017.10-1 (2017-10-16)
 
 - Chapitre 5 - Structure de données

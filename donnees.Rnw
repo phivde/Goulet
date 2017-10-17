@@ -842,12 +842,29 @@ bucketsort <- function(x, max, nbuckets)
     Avec les données réparties sur deux lignes, le plus simple demeure
     d'importer les données avec \code{scan} et les replacer dans le
     bon format avec \code{matrix}. Remarquer comment l'on peut
-    importer directement depuis Internet en spécifiant une url comme
-    nom de fichier.
-<<eval=FALSE>>=
-matrix(scan("http://lib.stat.cmu.edu/datasets/boston",
-            skip = 22),
-       ncol = 14, byrow = TRUE)
+    importer directement depuis Internet en spécifiant une adresse URL
+    comme nom de fichier.
+<<echo=TRUE>>=
+x <- matrix(scan("http://lib.stat.cmu.edu/datasets/boston",
+                  skip = 22),
+             ncol = 14, byrow = TRUE)
+@
+    Juste pour le plaisir de la chose, amusons-nous à extraire les
+    noms des variables (colonnes) dans l'entête du fichier. Ils
+    forment le premier champ de mode caractère des lignes 8 à 21,
+    inclusivement.
+<<echo=TRUE>>=
+(xnames <- scan("boston", skip = 7, nlines = 14,
+                what = "character", flush = TRUE))
+@
+    Nous pouvons ensuite ajouter les noms de colonne à notre matrice
+    de données, puis convertir en \emph{data frame} pour un traitement
+    statistique ultérieur. La fonction \icode{head} permet d'afficher
+    les six premières lignes de l'objet.
+<<echo=TRUE>>=
+colnames(x) <- xnames
+x <- as.data.frame(x)
+head(x)
 @
   \end{sol}
 \end{exercice}
