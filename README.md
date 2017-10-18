@@ -44,9 +44,12 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 #### Nouveautés
 
-- Détails additionnels dans la solution de l'exercice 5.4.
+- Nouvel exercice 5.2.
+- Détails additionnels dans la solution de l'exercice 5.4 (anciennement 5.3).
 
 ### 2017.10-1 (2017-10-16)
+
+#### Nouveautés
 
 - Chapitre 5 - Structure de données
 - Les fichiers de sortie `.Rout` de tous les fichiers d'accompagnement sont dorénavant livrés avec le document. Chaque fichier `.Rout` contient les résultats de l'évaluation de toutes les expressions du fichier `.R` correspondant.

@@ -739,6 +739,22 @@ x[x[, 1] > 50, ]
 
 \begin{exercice}
   \begin{enumerate}
+  \item Trouver une formule pour calculer la position, dans le vecteur
+    sous-jacent, de l'élément $(i, j)$ d'une matrice $I \times J$
+    remplie par colonne.
+  \item Répéter la partie a) pour l'élément $(i, j, k)$ d'un tableau
+    $I \times J \times K$.
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+    \item \verb|(j - 1)*I + i|
+    \item \verb|((k - 1)*J + j - 1)*I + i|
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  \begin{enumerate}
   \item Écrire une expression R pour créer la liste suivante:
 <<echo=FALSE>>=
 x <- list(1:5, data=matrix(1:6, 2, 3), numeric(3), test=logical(4))
