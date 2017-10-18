@@ -178,11 +178,12 @@ L'indiçage\Index{indiçage!matrice} des matrices et tableaux se fait
 avec les crochets \code{[~]}\indexcode{[}, comme pour les vecteurs
 simples. D'ailleurs, l'ensemble des règles d'indiçage de la
 \autoref{sec:bases:vecteurs:indicage} s'appliquent à l'identique aux
-matrices tableaux, sinon qu'il faut maintenant préciser des
+matrices et tableaux, sinon qu'il faut maintenant préciser des
 indices pour chaque dimension, séparés par des virgules.
 
 Par exemple, on extrait un élément d'une matrice en précisant sa
 position dans chaque dimension de celle-ci.
+
 <<echo=TRUE>>=
 (m <- matrix(c(40, 80, 45, 21, 55, 32), nrow = 2))
 m[1, 2]
