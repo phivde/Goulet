@@ -159,7 +159,7 @@ ls(envir = environment(square))
 get("x", envir = environment(square))
 @
 
-Quelques fonctions permettent de manipuler les environnement de
+Quelques fonctions permettent de manipuler les environnements de
 fonctions. Nous en avons déjà utilisé trois ci-dessus.
 \begin{ttscript}{environment}
 \item[\Icode{environment}] extraction ou modification de
