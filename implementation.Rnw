@@ -140,7 +140,7 @@ dictionnaire «capture» tous les objets (ou toutes les paires
 symbole-valeur) de ce même environnement actif.
 
 Autrement dit, dès que nous définissons une fonction, R lui attribue
-un environnement. Lorsque la fonction est crée dans l'espace de
+un environnement. Lorsque la fonction est créée dans l'espace de  
 travail, son environnement englobant est l'\emph{environnement
   global}\Index{environnement!global}, représenté par le symbole
 \Icode{.GlobalEnv}, et son dictionnaire contient tous les objets se
@@ -159,7 +159,7 @@ ls(envir = environment(square))
 get("x", envir = environment(square))
 @
 
-Quelques fonctions permettent de manipuler les environnement de
+Quelques fonctions permettent de manipuler les environnements de
 fonctions. Nous en avons déjà utilisé trois ci-dessus.
 \begin{ttscript}{environment}
 \item[\Icode{environment}] extraction ou modification de
@@ -358,7 +358,7 @@ outils puissants, il peut s'avérer dangereux. La mise en garde
 ci-dessus enjoint de ne pas se fier à la portée lexicale dans les
 fonctions conçues pour être appelées depuis la ligne de commande. Par
 contre, la portée lexicale est très utile pour simplifier le code des
-fonctions crées à l'intérieur d'autres fonctions puisque nous pouvons
+fonctions créées à l'intérieur d'autres fonctions puisque nous pouvons
 faire l'économie de passer tous les arguments d'une fonction à
 l'autre. On trouvera un exemple complet dans le code informatique de la
 \autoref{sec:implementation:exemples}.
