@@ -792,7 +792,7 @@ x[[3]] <- 3:8
 \end{exercice}
 
 \begin{exercice}
-  Effectuer une mise en œuvre de l'algorithme \emph{Bucketgsort} de
+  Effectuer une mise en œuvre de l'algorithme \emph{Bucketsort} de
   \citet[chapitre~6]{Stephens:algorithms:2013} permettant de trier des
   entiers entre $1$ et $x_{\max}$. La fonction prend en argument le
   vecteur des données à trier, la valeur de $x_{\max}$ et le nombre de
