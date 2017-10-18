@@ -305,7 +305,7 @@ x$size
 Mentionnons en terminant la fonction \Icode{unlist} qui convertit une
 liste en un vecteur simple. Elle est surtout utile pour concaténer les
 éléments d'une liste lorsque ceux-ci sont des vecteurs simples,
-idéalement de même mode car il y aura autrement conversion forcée.
+idéalement de même mode, car il y aura autrement conversion forcée.
 Attention: cette fonction est destructrice si la structure interne de
 la liste est importante.
 <<echo=TRUE>>=
