@@ -47,6 +47,10 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 - Nouvel exercice 5.2.
 - Détails additionnels dans la solution de l'exercice 5.4 (anciennement 5.3).
 
+#### Autres modifications
+
+- Adresse URL vers la vidéo «Matrices et tableaux» modifiée pour mener à une nouvelle version.
+
 ### 2017.10-1 (2017-10-16)
 
 #### Nouveautés
