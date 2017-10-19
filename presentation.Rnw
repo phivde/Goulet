@@ -536,7 +536,7 @@ q()
 \begin{exercice}[nosol]
   Ouvrir dans un éditeur de texte le fichier de script contenant le
   code de la section précédente. Exécuter le code ligne par ligne et
-  observer les résultats. Repéter l'exercice avec un ou deux autres
+  observer les résultats. Répéter l'exercice avec un ou deux autres
   éditeurs de texte afin de les comparer et de vous permettre d'en
   choisir un pour la suite.
 \end{exercice}
