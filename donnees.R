@@ -28,9 +28,9 @@ dim(x)                     # deux dimensions
 matrix(1:12, nrow = 3, ncol = 4, byrow = TRUE)
 
 ## Il n'est pas nécessaire de préciser les deux dimensions de
-## la matrice s'il est possible d'en déduire une à partir du
-## vecteur de données. Les expressions ci-dessous sont toutes
-## équivalentes.
+## la matrice s'il est possible d'en déduire une à partir de
+## l'autre et de la longueur du vecteur de données. Les
+## expressions ci-dessous sont toutes équivalentes.
 matrix(1:12, nrow = 3, ncol = 4)
 matrix(1:12, nrow = 3)
 matrix(1:12, ncol = 4)
