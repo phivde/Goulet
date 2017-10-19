@@ -326,7 +326,7 @@ d'automatiser plusieurs traitements: le facteur.
 
 Un facteur est un vecteur de données correspondant à des catégories. À
 ce titre, il devrait normalement afficher un fort taux de redondance:
-inutile de définir des catégories s'il y a en une différente pour
+inutile de définir des catégories s'il y en a une différente pour
 chaque donnée, n'est-ce pas?
 
 Les fonctions de base pour créer et manipuler des facteurs sont
