@@ -44,12 +44,15 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 #### Nouveautés
 
+- Précisions sur l'endroit où sont créés les fichiers d'importation et d'exportation dans le fichier d'exemples `donnees.R`.
 - Nouvel exercice 5.2.
 - Détails additionnels dans la solution de l'exercice 5.4 (anciennement 5.3).
+- Mention de `getwd` et `setwd` à la section 2.7 ainsi que dans le fichier d'exemples `presentation.R`.
 
 #### Autres modifications
 
 - Adresse URL vers la vidéo «Matrices et tableaux» modifiée pour mener à une nouvelle version.
+- Correction de coquilles grâce aux contributions des étudiantes et étudiants.
 
 ### 2017.10-1 (2017-10-16)
 
