@@ -271,6 +271,13 @@ subset(USArrests, Murder > 10, select = Assault)
 ## d'exportation de données, nous allons d'abord exporter des
 ## données dans des fichiers pour ensuite les importer.
 ##
+## Les fichiers seront créés dans le répertoire de travail de
+## R. La commande
+##
+##   getwd()
+##
+## affiche le nom de ce répertoire.
+##
 ## Après chaque création de fichier d'exportation, ci-dessous,
 ## ouvrir le fichier correspondant dans votre éditeur pour
 ## voir les résultats.
