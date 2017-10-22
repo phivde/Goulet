@@ -40,7 +40,7 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 ## Historique des versions
 
-### (en développement)
+### 2017.10-1a (2017-10-22)
 
 #### Nouveautés
 
