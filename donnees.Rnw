@@ -862,11 +862,12 @@ bucketsort <- function(x, max, nbuckets)
     importer directement depuis Internet en spécifiant une adresse URL
     comme nom de fichier.
 <<echo=TRUE>>=
-x <- matrix(scan("http://lib.stat.cmu.edu/datasets/boston",
-                  skip = 22),
-             ncol = 14, byrow = TRUE)
+x <- matrix(
+    scan("http://lib.stat.cmu.edu/datasets/boston",
+         skip = 22),
+    ncol = 14, byrow = TRUE)
 @
-    Juste pour le plaisir de la chose, amusons-nous à extraire les
+    Juste pour le plaisir, amusons-nous à extraire les
     noms des variables (colonnes) dans l'entête du fichier. Ils
     forment le premier champ de mode caractère des lignes 8 à 21,
     inclusivement.
