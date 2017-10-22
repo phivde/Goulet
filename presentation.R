@@ -43,6 +43,9 @@ rnorm                      # fonction
 ### Core Team, 2017.)
 ###
 
+## Afficher le répertoire de travail de R.
+getwd()
+
 ## Générer deux vecteurs de nombres pseudo-aléatoires issus
 ## d'une loi normale centrée réduite.
 x <- rnorm(50)

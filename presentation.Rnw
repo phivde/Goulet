@@ -436,14 +436,18 @@ Le répertoire de travail (\emph{workspace}) de R est le répertoire par
 défaut dans lequel le logiciel, d'une part, recherche des fichiers de
 script ou de données et, d'autre part, sauvegarde l'espace de travail
 dans le fichier \code{.RData}. Le répertoire de travail est déterminé
-au lancement de R.
+au lancement de R. La fonction \Icode{getwd} permet affiche le
+répertoire de travail courant de R.
+<<echo=TRUE, eval=FALSE>>=
+getwd()
+@
 
 Les interfaces graphiques de R démarrent avec un répertoire de travail
-par défaut. Il est possible de le changer à partir du menu
-\texttt{Fichier} (Windows) ou \texttt{Divers} (macOS). Consulter aussi
-les foires aux questions spécifiques aux interfaces graphiques
-\citep{Rw-FAQ,RMacOSX-FAQ} pour des détails additionnels sur la
-gestion des répertoires de travail.
+par défaut. Il est possible de le changer avec la commande
+\Icode{setwd} ou à partir du menu \texttt{Fichier} (Windows) ou
+\texttt{Divers} (macOS). Consulter aussi les foires aux questions
+spécifiques aux interfaces graphiques \citep{Rw-FAQ,RMacOSX-FAQ} pour
+des détails additionnels sur la gestion des répertoires de travail.
 
 Dans RStudio, on change le répertoire de travail via le menu
 \code{Session}.
