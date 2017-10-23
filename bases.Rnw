@@ -108,28 +108,33 @@ certains opérateurs dans les chapitres subséquents.
 \begin{table}
   \centering
   \renewcommand{\arraystretch}{1.1}
-\begin{tabular}{lp{8cm}}
+  \begin{tabular}{lp{8cm}}
     \toprule
     Opérateur     & Fonction \\
     \midrule
     \icode{\$} & extraction d'une liste \\ %$
     \icode{[}\, \icode{[[} & indiçage \\
-    \verb|^|\index{\string^@\verb=^=|bfhyperpage} & puissance \\
-    \icode{-}  & changement de signe \\
-    {\NoAutoSpacing\verb|:|}\index{:@\NoAutoSpacing\verb=:=}  & génération de suites \\
-    \icode{\%*\%}\, \icode{\%\%}\, \icode{\%/\%} & produit
-    matriciel, modulo, division entière \\
+    \verb|^|\index{\string^@\verb=^=} & puissance \\
+    \icode{-} & changement de signe \\
+    {\NoAutoSpacing\verb|:|}\index{:@\NoAutoSpacing\verb=:=} & génération de suites \\
+    \icode{\%*\%}\, \icode{\%\%}\, \icode{\%/\%} & produit matriciel,
+                                                   modulo,
+                                                   division entière \\
     \icode{*}\, \icode{/} & multiplication, division \\
     \icode{+}\, \icode{-} & addition, soustraction \\
     \icode{<}\, \icode{<=}\, \icode{==}\, \icode{>=}\,
-    \icode{>}\, \verb|!=|\index{"!=@\code{"!=}} & plus petit, plus petit ou égal, égal,
-    plus grand ou égal, plus grand, différent de \\
+    \icode{>}\, \verb|!=|\index{"!=@\code{"!=}} & plus petit,
+                                                  plus petit ou égal,
+                                                  égal,
+                                                  plus grand ou égal,
+                                                  plus grand,
+                                                  différent de \\
     \verb=!=\index{"!@\code{"!}}  & négation logique \\
     \icode{\&}\, \icode{\&\&} & «et» logique \\
     \code{\textbar}\index{{"|}@\code{\textbar}},
-    \code{\textbar\textbar}\index{{"|"|}@\code{\textbar\textbar}}    & «ou» logique \\
-    \icode{->}\, \verb|->>|\index{->>@\verb=->>=|bfhyperpage} & affectation \\
-    \icode{<-}\, \verb|<<-|\index{<<-@\verb=<<-=|bfhyperpage} & affectation \\
+    \code{\textbar\textbar}\index{{"|"|}@\code{\textbar\textbar}} & «ou» logique \\
+    \icode{->}\, \verb|->>|\index{->>@\verb=->>=} & affectation \\
+    \icode{<-}\, \verb|<<-|\index{<<-@\verb=<<-=} & affectation \\
     \bottomrule
   \end{tabular}
   \caption{Principaux opérateurs du langage R, en ordre décroissant
