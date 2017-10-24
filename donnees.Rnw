@@ -569,15 +569,14 @@ writeLines(readLines("carburant.csv"))
   \label{fig:donnees:read.table}
 \end{figure}
 
-Les fonctions \Icode{read.table} et \Icode{read.csv} constituent les
-principaux outils d'importation de tableaux de données dans R. On
-choisira l'une ou l'autre selon le format du fichier de données:
-\code{read.table} si le séparateur des champs est une espace et
-\code{read.csv} si c'est une virgule. Les nombreux arguments de ces
-fonctions permettent de spécifier si les titres des lignes ou des
-colonnes apparaissent ou non dans le fichier, le mode de chaque
-colonne, le séparateur décimal, l'encodage, etc. La rubrique
-d'aide fournit les détails.
+Les deux principales fonctions d'importation de tableaux de données
+dans R sont \Icode{read.table} et \Icode{read.csv}. On choisira l'une
+ou l'autre selon le format du fichier de données: \code{read.table} si
+le séparateur des champs est une espace et \code{read.csv} si c'est
+une virgule. Les nombreux arguments de ces fonctions permettent de
+spécifier si les titres des lignes ou des colonnes apparaissent ou non
+dans le fichier, le mode de chaque colonne, le séparateur décimal,
+l'encodage, etc. La rubrique d'aide fournit les détails.
 <<echo=TRUE>>=
 read.table("carburant.txt", header = TRUE)
 read.csv("carburant.csv", header = TRUE)
