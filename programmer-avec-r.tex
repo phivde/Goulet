@@ -16,10 +16,10 @@
   \usepackage[autolanguage]{numprint}
   \usepackage{amsmath,amsthm}
   \usepackage[noae]{Sweave}
-  \usepackage{framed}                  % env. snugshade*, oframed
-  \usepackage[shortlabels]{enumitem}
-  \usepackage[absolute]{textpos}       % éléments des pages de titre
   \usepackage{graphicx}
+  \usepackage{framed}                  % env. snugshade*, oframed
+  \usepackage[absolute]{textpos}       % éléments des pages de titre
+  \usepackage[shortlabels]{enumitem}   % configuration listes
   \usepackage{relsize}                 % \smaller et al.
   \usepackage{manfnt}                  % \mantriangleright (puce)
   \usepackage{metalogo}                % \XeLaTeX logo
@@ -287,11 +287,6 @@
         \renewcommand{\makelabel}[1]{\colorbox{codebg}{\vphantom{|}##1}\hfill}}}
     {\end{list}}
 
-  %%% Chapitre Opérateurs: l'espacement entre les expressions R et
-  %%% leur sortie est réduit pour les exemples de fonctions.
-  \newlength{\compactsep} \setlength{\compactsep}{-0.5ex}
-  \newlength{\normalsep}  \setlength{\normalsep}{\topsep}
-
   %%% Listes de structures de contrôle
   \newenvironment{struclist}{%
     \begin{description}[style=nextline,font=\mdseries\ttfamily]}
@@ -403,6 +398,7 @@
     bases,
     implementation,
     donnees,
+    internes,
     rstudio,
     emacs+ess,
     reponses
@@ -446,7 +442,7 @@
 \include{implementation}
 \include{donnees}
 \include{application}
-\include{fonctions}
+\include{internes}
 \include{collaboration}
 \include{texte}
 \include{debogage}
