@@ -33,6 +33,138 @@ options(width=52)
 \end{objectifs}
 
 
+\section{Produit extérieur}
+\label{sec:internes:outer}
+
+La %
+\capsule{https://youtu.be/outer}{fonction \code{outer}}%
+\Indexcode{outer} %
+calcule le \index{produit!extérieur}produit extérieur entre deux
+vecteurs. Ce n'est pas la fonction la plus intuitive à utiliser, mais
+elle s'avère extrêmement utile pour effectuer plusieurs opérations en
+une seule expression tout en évitant les boucles.
+
+La syntaxe de \code{outer} est:
+\begin{quote}
+  \code{outer(X, Y, FUN)}
+\end{quote}
+Le résultat est l'application la fonction \code{FUN} (\fonction{"*"}
+par défaut) entre chacun des éléments de \code{X} et chacun des
+éléments de \code{Y}, autrement dit
+\begin{quote}
+  \code{FUN(X[i], Y[j])}
+\end{quote}
+pour toutes les valeurs des indices \code{i} et \code{j}.
+
+\begin{itemize}
+\item La dimension du résultat est par conséquent \code{c(dim(X),
+    dim(Y))}.
+\item Par exemple, le résultat du produit extérieur entre
+  deux vecteurs est une matrice contenant tous les produits entre les
+  éléments des deux vecteurs:
+<<echo=TRUE>>=
+outer(c(1, 2, 5), c(2, 3, 6))
+@
+\item Lorsque \code{FUN} est un opérateur arithmétique du
+  \autoref{tab:internes:operateurs}, on place le symbole entre
+  guillemets: \code{"*"}, \code{"+"}, \code{"<="}, etc.
+\item L'opérateur \Icode{\%o\%} est un raccourci de \code{outer(X,
+    Y, "*")}.
+\end{itemize}
+
+
+
+
+\section{Structures de contrôle}
+\label{sec:internes:structures}
+
+Les structures de contrôle sont des commandes qui permettent de
+déterminer le flux d'exécution d'un programme: choix entre des blocs
+de code, répétition de commandes ou sortie forcée.
+
+On se contente, ici, de mentionner les structures de contrôle
+disponibles en R. La \autoref{internes:exemples} fournit des
+exemples d'utilisation.
+
+\subsection{Exécution conditionnelle}
+
+\begin{struclist}
+\item[\fbox{if (\emph{condition}) \emph{branche.vrai} else
+    \emph{branche.faux}}] %
+  \rule{0em}{2.5ex}%
+  \Indexfonction{if}%
+  \Indexfonction{else}%
+  \sloppy Si \code{\emph{condition}} est vraie,
+  \code{\emph{branche.vrai}} est exécutée, sinon ce sera
+  \code{\emph{branche.faux}}. Dans le cas où l'une ou l'autre de
+  \code{\emph{branche.vrai}} ou \code{\emph{branche.faux}} comporte
+  plus d'une expression, regrouper celles-ci dans des accolades
+  \verb={ }=.
+\item[\fbox{ifelse(\emph{condition}, \emph{expression.vrai},
+    \emph{expression.faux})}] %
+  \rule{0em}{2.5ex}%
+  \Indexfonction{ifelse}%
+  Fonction vectorielle qui retourne un vecteur de la même longueur que
+  \code{\emph{condition}} formé ainsi: pour chaque élément \code{TRUE}
+  de \code{\emph{condition}} on choisit l'élément correspondant de
+  \code{\emph{expression.vrai}} et pour chaque élément \code{FALSE}
+  on choisit l'élément correspondant de \code{\emph{expression.faux}}.
+  L'utilisation n'est pas très intuitive, alors examiner attentivement
+  les exemples de la rubrique d'aide.
+\item[\fbox{switch(\emph{test}, \emph{cas.1 = action.1}, \emph{cas.2 =
+      action.2}, ...)}] %
+  \rule{0em}{2.5ex}%
+  \Indexfonction{switch}%
+  Structure utilisée plutôt rarement. Consulter la rubrique d'aide au
+  besoin.
+\end{struclist}
+
+\subsection{Boucles}
+
+Les boucles\index{boucle} sont et doivent être utilisées avec
+parcimonie en R, car elles sont généralement inefficaces. Dans la
+majeure partie des cas, il est possible de vectoriser les calculs pour
+éviter les boucles explicites, ou encore de s'en remettre aux
+fonctions \fonction{outer}, \fonction{apply}, \fonction{lapply}
+\fonction{sapply} et \fonction{mapply} (\autoref{avance:apply})
+pour réaliser les boucles de manière plus efficace.
+
+\begin{struclist}
+\item[\fbox{for (\emph{variable} in \emph{suite}) \emph{expression}}]
+  \rule{0em}{2.5ex}%
+  \Indexfonction{for}%
+  Exécuter \code{\emph{expression}} successivement pour chaque valeur
+  de \code{\emph{variable}} contenue dans \code{\emph{suite}}.  Encore
+  ici, on groupera les expressions dans des accolades \verb={ }=. À
+  noter que \code{\emph{suite}} n'a pas à être composée de nombres
+  consécutifs, ni même de nombres, en fait.
+\item[\fbox{while (\emph{condition}) \emph{expression}}]
+  \rule{0em}{2.5ex}%
+  \Indexfonction{while}%
+  Exécuter \code{\emph{expression}} tant que \code{\emph{condition}}
+  est vraie. Si \code{\emph{condition}} est fausse lors de l'entrée
+  dans la boucle, celle-ci n'est pas exécutée. Une boucle \code{while}
+  n'est par conséquent pas nécessairement toujours exécutée.
+\item[\fbox{repeat \emph{expression}}]
+  \rule{0em}{2.5ex}%
+  \Indexfonction{repeat}%
+  Répéter \code{\emph{expression}}. Cette dernière devra comporter un
+  test d'arrêt qui utilisera la commande \code{break}. Une boucle
+  \code{repeat} est toujours exécutée au moins une fois.
+\item[\fbox{break}]
+  \rule{0em}{2.5ex}%
+  \Indexfonction{break}%
+  Sortie immédiate d'une boucle \code{for}, \code{while} ou
+  \code{repeat}.
+\item[\fbox{next}]
+  \rule{0em}{2.5ex}%
+  \Indexfonction{next}%
+  Passage immédiat à la prochaine itération d'une boucle \code{for},
+  \code{while} ou \code{repeat}.
+\end{struclist}
+
+
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-engine: xetex

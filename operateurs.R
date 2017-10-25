@@ -188,6 +188,10 @@ x[c(-1, -2)]               # tous sauf les deux premiers
 unique(x)
 
 ## RECHERCHE D'ÉLÉMENTS DANS UN VECTEUR
+
+#valeurs \texttt{TRUE} dans un vecteur
+  booléen
+
 which(x >= 30)             # positions des éléments >= 30
 which.min(x)               # position du minimum
 which.max(x)               # position du maximum

@@ -110,7 +110,7 @@ certains opérateurs dans les chapitres subséquents.
   \renewcommand{\arraystretch}{1.1}
   \begin{tabular}{lp{8cm}}
     \toprule
-    Opérateur     & Fonction \\
+    Opérateur  & Fonction \\
     \midrule
     \icode{\$} & extraction d'une liste \\ %$
     \icode{[}\, \icode{[[} & indiçage \\
