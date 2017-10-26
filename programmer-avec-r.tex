@@ -279,12 +279,12 @@
   \newenvironment{ttscript}[1]{%
     \begin{list}{}{%
         \setlength{\labelsep}{1.5ex}
-        \settowidth{\labelwidth}{\fbox{\code{#1}}}
+        \settowidth{\labelwidth}{\fbox{#1}}
         \setlength{\leftmargin}{\labelwidth}
         \addtolength{\leftmargin}{\labelsep}
         \setlength{\parsep}{0.5ex plus0.2ex minus0.2ex}
         \setlength{\itemsep}{0.3ex}
-        \renewcommand{\makelabel}[1]{\colorbox{codebg}{\vphantom{|}##1}\hfill}}}
+        \renewcommand{\makelabel}[1]{\vphantom{|}##1\hfill}}}
     {\end{list}}
 
   %%% Listes de structures de contrôle
