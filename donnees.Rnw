@@ -252,11 +252,10 @@ créer des listes est \Icode{list}:
 vecteur de mode \code{numeric}, le second un vecteur de mode
 \code{character} et le troisième, un vecteur de mode \code{logical}.)
 
-\tipbox{%
-  Nommez les éléments des listes puisqu'il peut s'avérer difficile
-  autrement de les identifier. De plus, comme nous le verrons
-  ci-dessous, il est très simple d'extraire les éléments d'une liste
-  par leur étiquette.}
+\tipbox{Nommez les éléments des listes puisqu'il peut s'avérer
+  difficile autrement de les identifier. De plus, comme nous le
+  verrons ci-dessous, il est très simple d'extraire les éléments d'une
+  liste par leur étiquette.}
 
 L'indiçage\Index{indiçage!liste} des listes recèle quelques subtilités
 auxquelles il faut porter une attention particulière. Tout d'abord, il
@@ -380,7 +379,7 @@ x[, 1]
 x$Age
 @
 
-\tipbox{On remarquera, ci-dessus, que les données de la colonne
+\tipbox{Vous remarquerez, ci-dessus, que les données de la colonne
   \code{Nom} sont considérées comme des facteurs. C'est une
   caractéristique de la fonction \code{data.frame} de convertir
   automatiquement les chaines de caractères en facteurs. L'option
