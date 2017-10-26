@@ -332,7 +332,7 @@ Error in TRUE <- 3 : membre gauche de l'assignation
 rm(T)
 @
 
-\tipbox{Écrivez toujour les valeurs booléennes \code{TRUE} et
+\tipbox{Écrivez toujours les valeurs booléennes \code{TRUE} et
   \code{FALSE} au long pour éviter des bogues difficiles à détecter.}
 
 
