@@ -26,27 +26,40 @@ options(width=52)
   \emph{Comprehensive R Archive Network} (CRAN).
 \end{objectifs}
 
-Ce chapitre présente les principaux opérateurs arithmétiques,
-fonctions mathématiques et structures de contrôle disponibles dans R.
-La liste est évidemment loin d'être exhaustive, surtout étant donné
-l'évolution rapide du langage. Un des meilleurs endroits pour
-découvrir de nouvelles fonctions demeure la section \texttt{See Also}
-des rubriques d'aide, qui offre des hyperliens vers des fonctions
-apparentées au sujet de la rubrique.
+Le langage R compte un très grand nombre (des milliers!) de fonctions
+internes. Ce chapitre présente les opérateurs arithmétiques et les
+fonctions mathématiques les plus souvent utilisés pour programmer en R
+et pour manipuler des données. La liste est évidemment loin d'être
+exhaustive, surtout étant donné l'évolution rapide du langage. Un des
+meilleurs endroits pour découvrir de nouvelles fonctions demeure la
+section \texttt{See Also} des rubriques d'aide, qui offre des
+hyperliens vers des fonctions apparentées au sujet de la rubrique.
 
+L'un des aspects de R ayant sans aucun doute le plus contribué à son
+succès est la possibilité --- et la facilité --- d'ajouter des
+extensions au système de base par le biais de paquetages. Comme toute
+personne utilisant R sera un jour appelée à utiliser des paquetages,
+nous consacrons une section de ce chapitre à la mise en place d'une
+bibliothèque personnelle et à l'installation de paquetages.
 
 \section{Opérateurs}
 \label{sec:internes:operateurs}
 
-Nous avons déjà présenté au \autoref{tab:bases:operateurs} les
-opérateurs mathématiques et logiques les plus fréquemment employés, en
-ordre décroissant de priorité des opérations.
+Nous avons déjà présenté au \autoref{tab:bases:operateurs} à la
+\autopageref{tab:bases:operateurs} les opérateurs mathématiques et
+logiques les plus fréquemment employés dans R. Rappelons qu'ils sont
+classés dans le tableau en ordre décroissant de priorité des
+opérations.
 
 \tipbox{Les opérateurs de puissance \verb|^| et d'affectation
   \icode{<-} sont évalués de droite à gauche; tous les autres le sont
   de gauche à droite. Ainsi, \verb|2^2^3| est \verb|2^8|, et non
   \verb|4^3|, alors que \verb|1 - 1 - 1| vaut \verb|-1|, et non
   \verb|1|.}
+
+Comme la définition de la grande majorité des opérateurs coule de
+source, nous n'illustrons ici que les opérateurs de modulo et de
+division entière.
 
 \begin{ttscript}{\%/\%}
 \item[\code{\%\%}] modulo (reste d'une division)
@@ -59,22 +72,15 @@ ordre décroissant de priorité des opérations.
 @
 \end{ttscript}
 
-
 \section{Fonctions utiles}
 \label{sec:internes:fonctions}
 
-Le langage R compte un très grand nombre (des milliers!) de fonctions
-internes. Cette section en présente quelques-unes seulement, les
-fonctions de base les plus souvent utilisées pour programmer en R et
-pour manipuler des données.
-
-Pour chaque fonction présentée dans les sections suivantes, on fournit
-un ou deux exemples d'utilisation. Ces exemples sont souvent loin de
-courvrir toutes les utilisations possibles d'une fonction. La
-\autoref{internes:exemples} fournit des exemples additionnels,
-mais il est recommandé de consulter les diverses rubriques d'aide pour
-connaître toutes les options des fonctions.
-
+Pour chaque fonction présentée dans cette section, nous fournissons un
+ou deux exemples d'utilisation. Ces exemples sont loin de couvrir
+toutes les utilisations possibles d'une fonction. La
+\autoref{sec:internes:exemples} fournit des exemples additionnels. Nous
+recommandons de consulter également les rubriques d'aide des fonctions
+pour connaître toutes leurs options.
 
 \subsection{Suites et répétition}
 \label{sec:internes:fonctions:seq}
@@ -84,27 +90,41 @@ connaître toutes les options des fonctions.
 <<echo=TRUE>>=
 seq(1, 9, by = 2)
 @
-\item[\Icode{\protect seq\_len}] \index{suite}suite de nombres de $1$
-  à la valeur de l'argument (plus rapide que \code{seq})
+\item[\Icode{\protect seq\_len}] \index{suite}suite de nombres de la
+  longueur donnée en argument à partir de $1$ (plus rapide que
+  \code{seq})
 <<echo=TRUE>>=
 seq_len(10)
 @
-\item[\Icode{\protect seq\_along}] suite de nombres de $1$ à la
-  longueur du vecteur en argument (plus rapide que \code{seq})
+\item[\Icode{\protect seq\_along}] suite de nombres de la longueur du
+  vecteur en argument à partir de $1$ (plus rapide que \code{seq})
 <<echo=TRUE>>=
 seq_len(10)
 @
-\item[\Icode{rep}] \index{repetition@répétition}répétition de valeurs
-  ou de vecteurs
+\item[\Icode{rep}] \index{repetition@répétition}répétition de
+  vecteurs, de chaque élément d'un vecteur ou d'une combinaison des
+  deux
 <<echo=TRUE>>=
 rep(2, 10)
+rep(c(1, 3), each = 4)
+rep(c(1, 3), times = 2, each = 4)
+@
+\item[\Icode{rep.int}] répétition de vecteurs uniquement (plus rapide
+  que \code{rep})
+<<echo=TRUE>>=
+rep.int(2, 10)
+@
+\item[\Icode{rep\_len}] répétition de vecteurs jusqu'à une certaine
+  longueur (plus rapide que \code{rep})
+<<echo=TRUE>>=
+rep_len(1:3, 10)
 @
 \end{ttscript}
 
-\subsection{Tri}
+\subsection{Tri et opérations apparentées}
 \label{sec:internes:fonctions:tri}
 
-\begin{ttscript}{order}
+\begin{ttscript}{unique}
 \item[\Icode{sort}] \index{tri}tri en ordre croissant ou
   décroissant
 <<echo=TRUE>>=
@@ -163,7 +183,7 @@ tail(1:10, -3)
 \subsection{Recherche dans un vecteur}
 \label{sec:internes:fonctions:recherche}
 
-Les illustrations de cette sous-section utilisent le vecteur suivant.
+Les exemples de cette sous-section utilisent le vecteur suivant.
 <<echo=FALSE>>=
 x <- c(4, -1, 2, -3, 6)
 @
@@ -200,7 +220,7 @@ match(2, x)
 \subsection{Arrondi}
 \label{sec:internes:fonctions:arrondi}
 
-Les illustrations de cette sous-section utilisent le vecteur suivant.
+Les exemples de cette sous-section utilisent le vecteur suivant.
 <<echo=FALSE>>=
 x <- c(-3.68, -2/3, pi, 1/3, 2.52)
 @
@@ -235,7 +255,7 @@ trunc(x)
 \subsection{Sommaires et statistiques descriptives}
 \label{sec:internes:fonctions:sommaires}
 
-Les illustrations de cette sous-section utilisent le vecteur suivant.
+Les exemples de cette sous-section utilisent le vecteur suivant.
 <<echo=FALSE>>=
 x <- c(14, 17, 7, 9, 3, 4, 25, 21, 24, 11)
 @
@@ -244,21 +264,20 @@ x
 @
 
 \begin{ttscript}{quantile}
-\item[\Icode{sum}] \index{somme}somme des éléments d'un vecteur
+\item[\Icode{sum}] \index{somme}somme des éléments
 <<echo=TRUE>>=
 sum(x)
 @
-\item[\Icode{prod}] \index{produit}produit des éléments d'un vecteur
+\item[\Icode{prod}] \index{produit}produit des éléments
 <<echo=TRUE>>=
 prod(x)
 @
 \item[\Icode{diff}] \index{différences}différences entre les éléments
-  d'un vecteur (opérateur mathématique $\nabla$)
+  (opérateur mathématique $\nabla$)
 <<echo=TRUE>>=
 diff(x)
 @
-\item[\Icode{mean}] \index{moyenne}moyenne arithmétique (et moyenne
-  tronquée avec l'argument \code{trim})
+\item[\Icode{mean}] \index{moyenne}moyenne arithmétique
 <<echo=TRUE>>=
 mean(x)
 @
@@ -267,16 +286,16 @@ mean(x)
 <<echo=TRUE>>=
 var(x)
 @
-\item[\Icode{min}] \index{minimum!valeur}minimum d'un vecteur
+\item[\Icode{min}] \index{minimum!valeur}minimum
 <<echo=TRUE>>=
 min(x)
 @
-\item[\Icode{max}] \index{maximum!valeur}maximum d'un vecteur
+\item[\Icode{max}] \index{maximum!valeur}maximum
 <<echo=TRUE>>=
 max(x)
 @
-\item[\Icode{range}] \index{etendue@étendue}étendue d'un vecteur
-  (minimum et maximum)
+\item[\Icode{range}] \index{etendue@étendue}étendue (minimum et
+  maximum)
 <<echo=TRUE>>=
 range(x)
 @
@@ -298,7 +317,7 @@ summary(x)
 \subsection{Sommaires cumulatifs et comparaisons élément par élément}
 \label{sec:internes:fonctions:cumulatifs}
 
-Les illustrations de cette sous-section utilisent le vecteur suivant.
+Les exemples de cette sous-section utilisent le vecteur suivant.
 <<echo=FALSE>>=
 x <- c(14, 17, 7, 9, 3)
 @
@@ -315,7 +334,7 @@ cumsum(x)
 <<echo=TRUE>>=
 cumprod(x)
 @
-\item[\Icode{cummin}] \index{minimum!cumulatif}minimum
+\item[\Icode{cummin}] \index{minimum!cumulatif}minimum cumulatif
 <<echo=TRUE>>=
 cummin(x)
 @
@@ -339,7 +358,7 @@ pmax(x, c(16, 23,  4, 12,  3))
 \subsection{Opérations sur les matrices}
 \label{sec:internes:fonctions:matrices}
 
-Les illustrations de cette sous-section utilisent la matrice suivante.
+Les exemples de cette sous-section utilisent la matrice suivante.
 <<echo=FALSE>>=
 x <- matrix(c(2, 1, 4, 3), 2)
 @
@@ -474,8 +493,12 @@ boot           Bootstrap Functions
 \end{Verbatim}
 \end{Schunk}
 
-La fonction \Icode{library} sert également --- et surtout, en fait ---
-à charger un paquetage dans la session de travail.
+\subsection{Utilisation d'un paquetage}
+\label{sec:internes:paquetages:utilisation}
+
+Pour rendre disponibles les fonctionnalités d'un paquetage, peu
+importe sa provenance, il faut le charger dans la session de travail.
+C'est là le principal rôle de la fonction \Icode{library}.
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
 library("\meta{paquetage}")
@@ -485,18 +508,19 @@ library("\meta{paquetage}")
 \subsection{Création d'une bibliothèque personnelle}
 \label{sec:internes:paquetages:library}
 
-Nous recommandons fortement de créer une bibliothèque personnelle pour
-contenir les paquetages ajoutés au système de base. Tout d'abord, cela
-permet d'éviter les éventuels problèmes d'accès en écriture dans la
-bibliothèque principale, surtout sur des systèmes partagés. Ensuite,
-les paquetages placés dans une bibliothèque personnelle résistent
-mieux au processus de mise à jour de R que ceux ajoutés à la
-bibliothèque principale.
+Nous verrons à la \autoref{sec:internes:paquetages:install} comment
+ajouter des paquetages au système de base. Nous recommandons fortement
+de prévoir une bibliothèque personnelle pour contenir ces nouveaux
+paquetages. Tout d'abord, cela permet d'éviter les éventuels problèmes
+d'accès en écriture dans la bibliothèque principale, surtout sur des
+systèmes partagés. Ensuite, les paquetages placés dans une
+bibliothèque personnelle résistent mieux au processus de mise à jour
+de R que ceux ajoutés à la bibliothèque principale.
 
-Avant toute chose, vous devez créer un répertoire dans votre système
-de fichiers qui servira de bibliothèque personnelle. Dans la suite,
-nous utiliserons \verb=~/R/library=, où \verb=~= représente le dossier
-de départ (\autoref{sec:informatique:os:unix}).
+Avant toute chose, il faut créer un répertoire dans son système de
+fichiers qui servira de bibliothèque personnelle. Dans la suite, nous
+utiliserons \verb=~/R/library=, où \verb=~= représente le dossier de
+départ (\autoref{sec:informatique:os:unix}).
 
 \osxbox{Sous macOS, le dossier tout indiqué pour la bibliothèque
   personnelle est \verb=~/Library/R/library=. Toutefois, le dossier
@@ -505,22 +529,22 @@ de départ (\autoref{sec:informatique:os:unix}).
   Option (\optkey), puis sélectionnez \code{Bibliothèque}.}
 
 Au démarrage, R lit le fichier de configuration \verb=~/.Renviron=,
-s'il existe. C'est dans ce fichier que vous devez indiquer à R
-l'endroit où se trouve votre bibliothèque personnelle dans le système
-de fichiers.
+s'il existe. C'est dans ce fichier que l'on indique à R l'existence
+d'une bibliothèque personnelle de même que l'endroit où elle se trouve
+dans le système de fichiers.
 
-Ouvrez ou créez le fichier \verb=~/.Renviron= à l'aide de votre
-éditeur de texte favori\footnote{Pour créer le fichier dans RStudio,
-  sélectionner \code{File|New File|Text File}.} et ajoutez-y la ligne
-suivante:
+À l'aide d'un éditeur de texte, ouvrir ou créer\footnote{Pour créer le
+  fichier dans RStudio, sélectionner \code{File|New File|Text
+    File}.} %
+le fichier \verb=~/.Renviron= et y ajouter la ligne ci-dessous. Au
+besoin, remplacer le chemin \verb=~/R/library= par celui du répertoire
+créé précédemment. Utiliser la barre oblique avant (\code{/}) pour
+séparer les répertoires dans le chemin d'accès.
 \begin{Schunk}
 \begin{verbatim}
 R_LIBS_USER="~/R/library"
 \end{verbatim}
 \end{Schunk}
-Au besoin, remplacez le chemin \verb=~/R/library= par celui du
-répertoire créé précédemment. Utilisez la barre oblique avant
-(\code{/}) pour séparer les répertoires dans le chemin d'accès.
 
 \osxbox{Pour afficher les fichiers débutant par un point dans la boite
   de dialogue d'ouverture de fichier d'une application comme RStudio,
@@ -544,11 +568,10 @@ cat(paste0('"', sub("Versions/.*?/Resources", "\\\\meta{...}", .libPaths()), '"'
 La bibliothèque personnelle a toujours préséance sur la bibliothèque
 principale.
 
-\tipbox{Consulter la rubriques d'aide de \icode{Startup} pour les
+\tipbox{Consultez la rubriques d'aide de \icode{Startup} pour les
   détails sur la syntaxe et l'emplacement des fichiers de
-  configuration, celles de \icode{library} et \icode{.libPaths} pour
-  la gestion des bibliothèques et celle de \icode{options} pour les
-  différentes options reconnues par R.}
+  configuration et celles de \icode{library} et de \icode{.libPaths}
+  pour la gestion des bibliothèques.}
 
 \subsection{Installation de paquetages additionnels}
 \label{sec:internes:paquetages:install}
@@ -571,7 +594,7 @@ install.packages("\meta{paquetage}")
 
 Pour utiliser le paquetage, il faut le charger en mémoire avec
 \icode{library}, tel qu'expliqué à la
-\autoref{sec:internes:paquetages:base}. R recherche le paquetage
+\autoref{sec:internes:paquetages:utilisation}. R recherche le paquetage
 spécifié dans les bibliothèques de \icode{.libPaths}.
 
 
