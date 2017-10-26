@@ -36,18 +36,23 @@ a[2 - x %% 2]              # indiçage à répétition
 10 %/% 1:15
 
 ## L'opérateur à utiliser pour vérifier si deux valeurs sont
-## égales est '==', et non '='. C'est là une erreur commune
-## --- et qui peut être difficile à détecter --- lorsque l'on
-## programme en R.
+## égales est '==', et non '='. Utiliser le mauvais opérateur
+## est une erreur commune --- et qui peut être difficile à
+## détecter --- lorsque l'on programme en R.
 5 = 2                      # erreur de syntaxe
 5 == 2                     # comparaison
+y = 2                      # pas un test...
+y                          # ... plutôt une affectation
 
-## Attention, toutefois, '==' vérifie l'égalité bit pour bit
+## Attention, toutefois: '==' vérifie l'égalité bit pour bit
 ## dans la représentation interne des nombres dans
 ## l'ordinateur. Ça fonctionne bien pour les entiers ou les
-## valeurs booléennes, mais pas pour les nombres réels ou pour
-## les nombres entiers provenant d'un calcul et qui peuvent
-## s'avérer entiers en apparence seulement.
+## valeurs booléennes, mais pas pour les nombres réels ou,
+## plus insidieux, pour les nombres entiers provenant d'un
+## calcul et qui ne sont entiers qu'en apparence.
+##
+## [Pour en savoir (un peu) plus:
+##  http://floating-point-gui.de/formats/fp/]
 1.2 + 1.4 + 2.8            # 5.4 en apparence
 1.2 + 1.4 + 2.8 == 5.4     # non?!?
 0.3/0.1 == 3               # à gauche: faux entier
@@ -126,23 +131,33 @@ rank(x)                    # rang des élément de 'x'
 ## Renverser l'ordre d'un vecteur.
 rev(x)
 
-## Extraction ou suppression en tête ou en queue de vecteur.
+## Éléments distincts d'un vecteur.
+unique(x)
+
+## EXTRACTION DU DÉBUT ET DE LA FIN D'UN OBJET
+
+## L'idée des fonctions 'head' et 'tail', c'est que l'on se
+## positionne en tête ou en queue d'un objet pour effectuer
+## des extractions ou des suppressions de composantes.
+##
+## Avec un argument positif, les fonctions extraient des
+## composantes depuis la tête ou la queue de l'objet. Avec un
+## argument négatif, elles suppriment des composantes à
+## l'«autre bout» de l'objet.
 head(x, 3)                 # trois premiers éléments
 head(x, -2)                # tous sauf les deux derniers
 tail(x, 3)                 # trois derniers éléments
 tail(x, -2)                # tous sauf les deux premiers
 
-## Expressions équivalentes sans 'head' et 'tail'
-x[1:3]                     # trois premiers éléments
-x[1:(length(x) - 2)]       # tous sauf les deux derniers
-x[(length(x)-2):length(x)] # trois derniers éléments
-rev(rev(x)[1:3])           # avec petits vecteurs seulement
-x[c(-1, -2)]               # tous sauf les deux premiers
+## Les fonctions sont aussi valides sur les matrices et les
+## data frames. Elles extraient ou suppriment alors des lignes
+## entières.
+m <- matrix(1:30, 5, 6)    # matrice 5 x 6
+head(m, 3)                 # trois premières lignes
+tail(m, -2)                # sans les deux premières lignes
 
-## Seulement les éléments différents d'un vecteur.
-unique(x)
-
-## RECHERCHE D'ÉLÉMENTS DANS UN VECTEUR
+## RECHERCHE
+x                          # rappel
 which(x >= 30)             # positions des éléments >= 30
 which.min(x)               # position du minimum
 which.max(x)               # position du maximum
@@ -167,7 +182,6 @@ diff(x)                    # x[2] - x[1], x[3] - x[2], etc.
 mean(x)                    # moyenne des éléments
 mean(x, trim = 0.125)      # moyenne sans minimum et maximum
 var(x)                     # variance (sans biais)
-(length(x) - 1)/length(x) * var(x) # variance biaisée
 sd(x)                      # écart type
 max(x)                     # maximum
 min(x)                     # minimum
@@ -190,13 +204,13 @@ pmin(x, y)                 # minimum élément par élément
 pmax(x, y)                 # maximum élément par élément
 
 ## OPÉRATIONS SUR LES MATRICES
-(A <- sample(1:10, 16, replace = TRUE)) # avec remise
+(A <- sample(1:10, 16, replace = TRUE))
 dim(A) <- c(4, 4)          # conversion en une matrice 4 x 4
-b <- c(10, 5, 3, 1)        # un vecteur quelconque
-A                          # la matrice 'A'
-t(A)                       # sa transposée
-solve(A)                   # son inverse
-solve(A, b)                # la solution de Ax = b
+b <- c(10, 5, 3, 1)        # vecteur quelconque
+A                          # matrice 'A'
+t(A)                       # transposée
+solve(A)                   # inverse
+solve(A, b)                # solution de Ax = b
 A %*% solve(A, b)          # vérification de la réponse
 diag(A)                    # extraction de la diagonale de 'A'
 diag(b)                    # matrice diagonale formée avec 'b'
@@ -210,98 +224,8 @@ apply(A, 1, sum)           # équivalent à 'rowSums(A)'
 apply(A, 2, sum)           # équivalent à 'colSums(A)'
 apply(A, 1, prod)          # produit par ligne avec 'apply'
 
-## PRODUIT EXTÉRIEUR
-x <- c(1, 2, 4, 7, 10, 12)
-y <- c(2, 3, 6, 7, 9, 11)
-outer(x, y)                # produit extérieur
-x %o% y                    # équivalent plus court
-outer(x, y, "+")           # «somme extérieure»
-outer(x, y, "<=")          # toutes les comparaisons possibles
-outer(x, y, pmax)          # idem
-
 ###
-### STRUCTURES DE CONTRÔLE
-###
-
-## Pour illustrer les structures de contrôle, on a recours à
-## un petit exemple tout à fait artificiel: un vecteur est
-## rempli des nombres de 1 à 100, à l'exception des multiples
-## de 10. Ces derniers sont affichés à l'écran.
-##
-## À noter qu'il est possible --- et plus efficace --- de
-## créer le vecteur sans avoir recours à des boucles.
-(1:100)[-((1:10) * 10)]              # sans boucle!
-rep(1:9, 10) + rep(0:9*10, each = 9) # une autre façon!
-
-## Bon, l'exemple proprement dit...
-x <- numeric(0)            # initialisation du contenant 'x'
-j <- 0                     # compteur pour la boucle
-for (i in 1:100)
-{
-    if (i %% 10)           # si i n'est pas un multiple de 10
-        x[j <- j + 1] <- i # stocker sa valeur dans 'x'
-    else                   # sinon
-        print(i)           # afficher la valeur à l'écran
-}
-x                          # vérification
-
-## Même chose que ci-dessus, mais sans le compteur 'j' et les
-## valeurs manquantes aux positions 10, 20, ..., 100 sont
-## éliminées à la sortie de la boucle.
-x <- numeric(0)
-for (i in 1:100)
-{
-    if (i %% 10)
-        x[i] <- i
-    else
-        print(i)
-}
-x <- x[!is.na(x)]
-x
-
-## On peut refaire l'exemple avec une boucle 'while', mais
-## cette structure n'est pas naturelle ici puisque l'on sait
-## d'avance qu'il faudra faire la boucle exactement 100
-## fois. Le 'while' est plutôt utilisé lorsque le nombre de
-## répétitions est inconnu. De plus, une boucle 'while' n'est
-## pas nécessairement exécutée puisque le critère d'arrêt est
-## évalué dès l'entrée dans la boucle.
-x <- numeric(0)
-j <- 0
-i <- 1                     # pour entrer dans la boucle [*]
-while (i <= 100)
-{
-    if (i %% 10)
-        x[j <- j + 1] <- i
-    else
-        print(i)
-    i <- i + 1             # incrémenter le compteur!
-}
-x
-
-## La remarque faite au sujet de la boucle 'while' s'applique
-## aussi à la boucle 'repeat'. Par contre, le critère d'arrêt
-## de la boucle 'repeat' étant évalué à la toute fin, la
-## boucle est exécutée au moins une fois. S'il faut faire la
-## manoeuvre marquée [*] ci-dessus pour s'assurer qu'une
-## boucle 'while' est exécutée au moins une fois... c'est
-## qu'il faut utiliser 'repeat'.
-x <- numeric(0)
-j <- 0
-i <- 1
-repeat
-{
-    if (i %% 10)
-        x[j <- j + 1] <- i
-    else
-        print(i)
-    if (100 < (i <- i + 1)) # incrément et critère d'arrêt
-        break
-}
-x
-
-###
-### FONCTIONS ADDITIONNELLES
+### BIBLIOTHÈQUES ET PAQUETAGES
 ###
 
 ## La fonction 'search' retourne la liste des environnements
@@ -310,8 +234,27 @@ x
 search()
 
 ## Liste de tous les packages installés sur votre système.
+## Noter que MASS en fait partie. C'est un paquetage livré
+## avec R, mais qui n'est pas chargé par défaut.
 library()
 
-## Chargement du package 'MASS', qui contient plusieurs
+## Chargement du package MASS qui contient plusieurs
 ## fonctions statistiques très utiles.
 library("MASS")
+
+## Liste des bibliothèques consultées par R.
+.libPaths()
+
+## Installation du paquetage actuar depuis le miroir canadien
+## de CRAN.
+##
+## Si vous avez configuré une bibliothèque personnelle et
+## qu'elle apparait dans le résultat de '.libPaths()',
+## ci-dessus, le paquetage sera automatiquement installé dans
+## celle-ci.
+install.packages("actuar", repos = "http://cran.ca.r-project.org")
+
+## Chargement du paquetage dans la session de travail. R
+## recherche le paquetage dans toutes les bibliothèques de
+## '.libPaths()'.
+library("actuar")
