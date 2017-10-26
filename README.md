@@ -40,6 +40,14 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 ## Historique des versions
 
+### (en développement)
+
+#### Nouveautés
+
+#### Autres modifications
+
+- Exemples du chapitre 5: ajout sur les opérations arithmétiques avec les matrices dans le fichier `donnees.R`.
+
 ### 2017.10-1a (2017-10-22)
 
 #### Nouveautés
