@@ -8,7 +8,7 @@
 %%% International de Creative Commons.
 %%% http://creativecommons.org/licenses/by-sa/4.0/
 
-\chapter{Fonctions internes utiles et extensions}
+\chapter{Fonctions internes et extensions}
 \label{chap:internes}
 
 <<echo=FALSE>>=
@@ -137,18 +137,24 @@ unique(c(2, 4, 2, 5, 9, 5, 0))
 \begin{ttscript}{head}
 \item[\Icode{head}] avec second argument $n > 0$ ($n = 6$ par défaut):
   $n$ premières composantes d'un objet (éléments d'un vecteur, lignes
-  d'une matrice ou d'un \emph{data frame}); avec second argument
-  $n < 0$: objet sans les $|n|$ dernières composantes
+  d'une matrice ou d'un \emph{data frame})
 <<echo=TRUE>>=
 head(1:10, 3)
+@
+  avec second argument
+  $n < 0$: objet sans les $|n|$ dernières composantes
+<<echo=TRUE>>=
 head(1:10, -3)
 @
 \item[\Icode{tail}] avec second argument $n > 0$ ($n = 6$ par défaut):
   $n$ dernières composantes d'un objet (éléments d'un vecteur, lignes
-  d'une matrice ou d'un \emph{data frame}); avec second argument
-  $n < 0$: objet sans les $|n|$ premières composantes
+  d'une matrice ou d'un \emph{data frame});
 <<echo=TRUE>>=
 tail(1:10, 3)
+@
+  avec second argument $n < 0$: objet sans les $|n|$ premières
+  composantes
+<<echo=TRUE>>=
 tail(1:10, -3)
 @
 \end{ttscript}
@@ -237,11 +243,13 @@ x <- c(14, 17, 7, 9, 3, 4, 25, 21, 24, 11)
 x
 @
 
-\begin{ttscript}{sum, prod}
-\item[\Icode{sum}, \Icode{prod}] \index{somme}somme et
-  \index{produit}produit des éléments d'un vecteur
+\begin{ttscript}{quantile}
+\item[\Icode{sum}] \index{somme}somme des éléments d'un vecteur
 <<echo=TRUE>>=
 sum(x)
+@
+\item[\Icode{prod}] \index{produit}produit des éléments d'un vecteur
+<<echo=TRUE>>=
 prod(x)
 @
 \item[\Icode{diff}] \index{différences}différences entre les éléments
@@ -254,15 +262,17 @@ diff(x)
 <<echo=TRUE>>=
 mean(x)
 @
-\item[\Icode{var}, \Icode{sd}] \index{variance}variance et
-  \index{ecart type@écart type}écart type (versions sans biais)
+\item[\Icode{var}] \index{variance}variance (et \index{ecart
+    type@écart type}écart type avec \Icode{sd})
 <<echo=TRUE>>=
 var(x)
 @
-\item[\Icode{min}, \Icode{max}] \index{minimum!valeur}minimum et
-  \index{maximum!valeur}maximum d'un vecteur
+\item[\Icode{min}] \index{minimum!valeur}minimum d'un vecteur
 <<echo=TRUE>>=
 min(x)
+@
+\item[\Icode{max}] \index{maximum!valeur}maximum d'un vecteur
+<<echo=TRUE>>=
 max(x)
 @
 \item[\Icode{range}] \index{etendue@étendue}étendue d'un vecteur
@@ -296,22 +306,31 @@ x <- c(14, 17, 7, 9, 3)
 x
 @
 
-\begin{ttscript}{cumsum, cumprod}
-\item[\Icode{cumsum}, \Icode{cumprod}] \index{somme!cumulative}somme
-  cumulative et \index{produit!cumulatif}produit cumulatif
+\begin{ttscript}{cumprod}
+\item[\Icode{cumsum}] \index{somme!cumulative}somme cumulative
 <<echo=TRUE>>=
 cumsum(x)
+@
+\item[\Icode{cumprod}] \index{produit!cumulatif}produit cumulatif
+<<echo=TRUE>>=
 cumprod(x)
 @
-\item[\Icode{cummin}, \Icode{cummax}] \index{minimum!cumulatif}minimum
-  et \index{maximum!cumulatif}maximum cumulatif
+\item[\Icode{cummin}] \index{minimum!cumulatif}minimum
 <<echo=TRUE>>=
-cummin(x); cummax(x)
+cummin(x)
 @
-\item[\Icode{pmin}, \Icode{pmax}] \index{minimum!parallèle}minimum et
-  \index{maximum!parallèle}maximum élément par élément (en parallèle)
+\item[\Icode{cummax}] \index{maximum!cumulatif}maximum cumulatif
+<<echo=TRUE>>=
+cummax(x)
+@
+\item[\Icode{pmin}] \index{minimum!parallèle}minimum élément par
+  élément (en parallèle)
 <<echo=TRUE>>=
 pmin(x, 12)
+@
+\item[\Icode{pmax}] \index{maximum!parallèle}maximum élément par
+  élément (en parallèle)
+<<echo=TRUE>>=
 pmax(x, c(16, 23,  4, 12,  3))
 @
 \end{ttscript}
@@ -328,23 +347,34 @@ x <- matrix(c(2, 1, 4, 3), 2)
 x
 @
 
-\begin{ttscript}{rowMeans, colMeans}
-\item[\Icode{nrow}, \Icode{ncol}] \index{matrice!nombre de
-    lignes}nombre de lignes et nombre de \index{matrice!nombre de
-    colonnes}colonnes
+\begin{ttscript}{rowMeans}
+\item[\Icode{nrow}] \index{matrice!nombre de
+    lignes}nombre de lignes
 <<echo=TRUE>>=
 nrow(x)
+@
+\item[\Icode{ncol}] nombre de \index{matrice!nombre de
+    colonnes}colonnes
+<<echo=TRUE>>=
 ncol(x)
 @
-\item[\Icode{rowSums}, \Icode{colSums}] \index{matrice!sommes par
-    ligne}sommes par ligne et \index{matrice!sommes par colonne}sommes
-  par colonne
+\item[\Icode{rowSums}] \index{matrice!sommes par ligne}sommes par
+  ligne
 <<echo=TRUE>>=
 rowSums(x)
 @
-\item[\Icode{rowMeans}, \Icode{colMeans}] \index{matrice!moyennes par
-    ligne}moyennes par ligne et \index{matrice!moyennes par
-    colonne}moyennes par colonne
+\item[\Icode{colSums}] \index{matrice!sommes par colonne}sommes par
+  colonne
+<<echo=TRUE>>=
+colSums(x)
+@
+\item[\Icode{rowMeans}] \index{matrice!moyennes par ligne}moyennes par
+  ligne
+<<echo=TRUE>>=
+rowMeans(x)
+@
+\item[\Icode{colMeans}] \index{matrice!moyennes par colonne}moyennes
+  par colonne
 <<echo=TRUE>>=
 colMeans(x)
 @
@@ -361,21 +391,30 @@ t(x)
 det(x)
 @
 \item[\Icode{solve}] avec un seul argument (une matrice carrée):
-  \index{matrice!inverse}inverse; avec deux arguments (une matrice
+  \index{matrice!inverse}inverse
+<<echo=TRUE>>=
+solve(x)
+@
+  avec deux arguments (une matrice
   carrée et un vecteur): solution du système d'équations linéaires
   $\mat{A} \mat{x} = \mat{b}$
 <<echo=TRUE>>=
-solve(x)
 solve(x, c(1, 2))
 @
 \item[\Icode{diag}] avec une matrice en argument:
-  \index{matrice!diagonale}diagonale de la matrice; avec un vecteur en
-  argument: matrice diagonale formée avec le vecteur; avec un scalaire
+  \index{matrice!diagonale}diagonale de la matrice
+<<echo=TRUE>>=
+diag(x)
+@
+  avec un vecteur en
+  argument: matrice diagonale formée avec le vecteur
+<<echo=TRUE>>=
+diag(c(5, 1))
+@
+  avec un scalaire
   $p$ en argument: \index{matrice!identité}matrice identité
   $p \times p$
 <<echo=TRUE>>=
-diag(x)
-diag(c(5, 1))
 diag(2)
 @
 \end{ttscript}
@@ -416,7 +455,7 @@ bibliothèque de paquetages.
 > search()
 \end{Sinput}
 \begin{Soutput}
-<<echo=FALSE, results=tex, strip.white=FALSE>>=
+<<echo=FALSE, results=tex, strip.white=false>>=
 search()
 @
 \end{Soutput}
