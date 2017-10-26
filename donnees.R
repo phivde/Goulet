@@ -42,6 +42,19 @@ matrix(1, nrow = 3, ncol = 4)
 matrix(1:3, nrow = 3, ncol = 4)
 matrix(1:4, nrow = 3, ncol = 4, byrow = TRUE)
 
+## Les matrices et les tableaux étant des vecteurs, ils sont
+## soumis aux règles usuelles de l'arithmétique vectorielle.
+## Certains des opérations qui en résultent ne sont pas
+## définies en algèbre linéaire usuelle.
+(x <- matrix(1:4, 2))      # matrice 2 x 2
+(y <- matrix(3:6, 2))      # autre matrice 2 x 2
+5 * x                      # multiplication par une constante
+x + y                      # addition matricielle
+x * y                      # produit *élément par élément*
+x %*% y                    # produit matriciel
+x / y                      # division *élément par élément*
+x * c(2, 3)                # produit par colonne
+
 ## Dans l'indiçage des matrices et tableaux, l'indice de
 ## chaque dimension obéit aux règles usuelles d'indiçage des
 ## vecteurs.
