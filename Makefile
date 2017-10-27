@@ -30,7 +30,8 @@ SCRIPTS = \
 	implementation.R \
 	algorithmique.R \
 	donnees.R 
-OTHER = LICENSE
+OTHER = LICENSE \
+	100metres.data
 ROUTFILES := $(SCRIPTS:.R=.Rout)
 
 ## Numéro de version et numéro ISBN extraits du fichier maître
