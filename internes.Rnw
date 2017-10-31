@@ -153,35 +153,6 @@ unique(c(2, 4, 2, 5, 9, 5, 0))
 @
 \end{ttscript}
 
-\subsection{Extraction du début et de la fin d'un objet}
-\label{sec:internes:fonctions:head}
-
-\begin{ttscript}{head}
-\item[\Icode{head}] avec second argument $n > 0$ ($n = 6$ par défaut):
-  $n$ premières composantes d'un objet (éléments d'un vecteur, lignes
-  d'une matrice ou d'un \emph{data frame})
-<<echo=TRUE>>=
-head(1:10, 3)
-@
-  avec second argument
-  $n < 0$: objet sans les $|n|$ dernières composantes
-<<echo=TRUE>>=
-head(1:10, -3)
-@
-\item[\Icode{tail}] avec second argument $n > 0$ ($n = 6$ par défaut):
-  $n$ dernières composantes d'un objet (éléments d'un vecteur, lignes
-  d'une matrice ou d'un \emph{data frame});
-<<echo=TRUE>>=
-tail(1:10, 3)
-@
-  avec second argument $n < 0$: objet sans les $|n|$ premières
-  composantes
-<<echo=TRUE>>=
-tail(1:10, -3)
-@
-\end{ttscript}
-
-
 \subsection{Recherche}
 \label{sec:internes:fonctions:recherche}
 
@@ -218,7 +189,7 @@ match(2, x)
 @
 \end{ttscript}
 
-\subsection{Sommaires de vecteurs booléens}
+\subsection{Tests logiques}
 \label{sec:internes:fonctions:booleens}
 
 Les exemples de cette sous-section utilisent toujours le vecteur suivant.
@@ -381,6 +352,33 @@ pmax(x, c(16, 23,  4, 12,  3))
 @
 \end{ttscript}
 
+\subsection{Extraction du début et de la fin d'un objet}
+\label{sec:internes:fonctions:head}
+
+\begin{ttscript}{head}
+\item[\Icode{head}] avec second argument $n > 0$ ($n = 6$ par défaut):
+  $n$ premières composantes d'un objet (éléments d'un vecteur, lignes
+  d'une matrice ou d'un \emph{data frame})
+<<echo=TRUE>>=
+head(1:10, 3)
+@
+  avec second argument
+  $n < 0$: objet sans les $|n|$ dernières composantes
+<<echo=TRUE>>=
+head(1:10, -3)
+@
+\item[\Icode{tail}] avec second argument $n > 0$ ($n = 6$ par défaut):
+  $n$ dernières composantes d'un objet (éléments d'un vecteur, lignes
+  d'une matrice ou d'un \emph{data frame});
+<<echo=TRUE>>=
+tail(1:10, 3)
+@
+  avec second argument $n < 0$: objet sans les $|n|$ premières
+  composantes
+<<echo=TRUE>>=
+tail(1:10, -3)
+@
+\end{ttscript}
 
 \subsection{Opérations sur les matrices}
 \label{sec:internes:fonctions:matrices}
