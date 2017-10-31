@@ -134,28 +134,6 @@ rev(x)
 ## Éléments distincts d'un vecteur.
 unique(x)
 
-## EXTRACTION DU DÉBUT ET DE LA FIN D'UN OBJET
-
-## L'idée des fonctions 'head' et 'tail', c'est que l'on se
-## positionne en tête ou en queue d'un objet pour effectuer
-## des extractions ou des suppressions de composantes.
-##
-## Avec un argument positif, les fonctions extraient des
-## composantes depuis la tête ou la queue de l'objet. Avec un
-## argument négatif, elles suppriment des composantes à
-## l'«autre bout» de l'objet.
-head(x, 3)                 # trois premiers éléments
-head(x, -2)                # tous sauf les deux derniers
-tail(x, 3)                 # trois derniers éléments
-tail(x, -2)                # tous sauf les deux premiers
-
-## Les fonctions sont aussi valides sur les matrices et les
-## data frames. Elles extraient ou suppriment alors des lignes
-## entières.
-m <- matrix(1:30, 5, 6)    # matrice 5 x 6
-head(m, 3)                 # trois premières lignes
-tail(m, -2)                # sans les deux premières lignes
-
 ## RECHERCHE
 x                          # rappel
 which(x >= 30)             # positions des éléments >= 30
@@ -165,6 +143,34 @@ match(20, x)               # position du premier 20 dans 'x'
 match(c(20, 30), x)        # aussi pour plusieurs valeurs
 60 %in% x                  # 60 appartient à 'x'
 70 %in% x                  # 70 n'appartient pas à 'x'
+
+## TESTS LOGIQUES
+
+## Les fonctions 'any' et 'all' prennent en argument un
+## vecteur booléen et elles indiquent, respectivement, si au
+## moins une ou si toutes les valeurs sont TRUE.
+any(c(TRUE, FALSE, FALSE))  # au moins une valeur TRUE
+any(c(FALSE, FALSE, FALSE)) # aucune valeur TRUE
+all(c(TRUE, TRUE, TRUE))    # toutes les valeurs TRUE
+all(c(TRUE, FALSE, TRUE))   # aucune valeur TRUE
+
+## Les fonctions sont des compléments l'une de l'autre: si
+## 'any(x)' est TRUE, alors 'all(!x)' est FALSE, et
+## vice-versa.
+any(c(TRUE, FALSE, FALSE))   # TRUE
+all(!c(TRUE, FALSE, FALSE))  # complément: FALSE
+any(c(FALSE, FALSE, FALSE))  # FALSE
+all(!c(FALSE, FALSE, FALSE)) # complément: TRUE
+
+## Les fonctions sont habituellement utilisées avec une
+## expression logique en argument.
+x                          # rappel
+x > 50                     # valeurs > 50?
+x <= 50                    # valeurs <= 50?
+any(x > 50)                # y a-t-il des valeurs > 50?
+all(x <= 50)               # complément
+all(x > 50)                # toutes les valeurs > 50?
+any(x <= 50)               # complément
 
 ## ARRONDI
 (x <- c(-21.2, -pi, -1.5, -0.2, 0, 0.2, 1.7823, 315))
@@ -202,6 +208,28 @@ cummin(x)                  # minimum cumulatif
 cummax(y)                  # maximum cumulatif
 pmin(x, y)                 # minimum élément par élément
 pmax(x, y)                 # maximum élément par élément
+
+## EXTRACTION DU DÉBUT ET DE LA FIN D'UN OBJET
+
+## L'idée des fonctions 'head' et 'tail', c'est que l'on se
+## positionne en tête ou en queue d'un objet pour effectuer
+## des extractions ou des suppressions de composantes.
+##
+## Avec un argument positif, les fonctions extraient des
+## composantes depuis la tête ou la queue de l'objet. Avec un
+## argument négatif, elles suppriment des composantes à
+## l'«autre bout» de l'objet.
+head(x, 3)                 # trois premiers éléments
+head(x, -2)                # tous sauf les deux derniers
+tail(x, 3)                 # trois derniers éléments
+tail(x, -2)                # tous sauf les deux premiers
+
+## Les fonctions sont aussi valides sur les matrices et les
+## data frames. Elles extraient ou suppriment alors des lignes
+## entières.
+m <- matrix(1:30, 5, 6)    # matrice 5 x 6
+head(m, 3)                 # trois premières lignes
+tail(m, -2)                # sans les deux premières lignes
 
 ## OPÉRATIONS SUR LES MATRICES
 (A <- sample(1:10, 16, replace = TRUE))
