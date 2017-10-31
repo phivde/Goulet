@@ -190,7 +190,7 @@ match(2, x)
 \end{ttscript}
 
 \subsection{Tests logiques}
-\label{sec:internes:fonctions:booleens}
+\label{sec:internes:fonctions:tests}
 
 Les exemples de cette sous-section utilisent toujours le vecteur suivant.
 <<echo=FALSE>>=
