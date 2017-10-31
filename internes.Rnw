@@ -218,6 +218,32 @@ match(2, x)
 @
 \end{ttscript}
 
+\subsection{Sommaires de vecteurs booléens}
+\label{sec:internes:fonctions:booleens}
+
+Les exemples de cette sous-section utilisent toujours le vecteur suivant.
+<<echo=FALSE>>=
+x <- c(4, -1, 2, -3, 6)
+@
+<<echo=TRUE>>=
+x
+@
+
+\begin{ttscript}{any}
+\item[\Icode{any}] \index{any}vrai si au moins une valeur du vecteur
+  booléen en argument est vraie
+<<echo=TRUE>>=
+any(x < 0)
+any(x > 10)
+@
+\item[\Icode{all}] \index{all}vrai si toutes les valeurs du vecteur
+  booléen en argument sont vraies
+<<echo=TRUE>>=
+all(x < 0)
+all(x > -5)
+@
+
+\end{ttscript}
 
 \subsection{Arrondi}
 \label{sec:internes:fonctions:arrondi}
@@ -252,7 +278,6 @@ ceiling(x)
 trunc(x)
 @
 \end{ttscript}
-
 
 \subsection{Sommaires et statistiques descriptives}
 \label{sec:internes:fonctions:sommaires}
