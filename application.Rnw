@@ -8,7 +8,7 @@
 %%% International de Creative Commons.
 %%% http://creativecommons.org/licenses/by-sa/4.0/
 
-\chapter{Fonctions d'application et structures de contrôle}
+\chapter{Structures de contrôle et fonctions d'application}
 \label{chap:application}
 
 <<echo=FALSE>>=
@@ -16,6 +16,11 @@ options(width=52)
 @
 
 \begin{objectifs}
+\item Utiliser la fonction \code{if} pour l’exécution conditionnelle
+  d'expressions R.
+\item Concevoir une boucle dans R.
+\item Choisir entre les opérateurs \code{for}, \code{while} et
+  \code{repeat} lors de la construction d'une boucle R.
 \item Effectuer des sommaires sur des tableaux à l’aide de la fonction
   \code{apply}.
 \item Réduire des vecteurs et des listes avec les fonctions
@@ -23,14 +28,175 @@ options(width=52)
   ces fonctions.
 \item Passer des valeurs à une fonction d'application via l’argument
   `\code{...}'.
-\item Utiliser la fonction \code{if} pour l’exécution conditionnelle
-  d'expressions R.
-\item Distinguer la construction \code{if ... else} de la fonction
+\item Distinguer la construction \code{if ... else ...} de la fonction
   \code{ifelse}.
-\item Concevoir une boucle dans R.
-\item Choisir entre les opérateurs \code{for}, \code{while} et
-  \code{repeat} lors de la construction d'une boucle R.
 \end{objectifs}
+
+
+\section{Structures de contrôle}
+\label{sec:internes:structures}
+
+Les structures de contrôle sont des commandes qui permettent de
+déterminer le flux d'exécution d'un programme: choix entre des blocs
+de code, répétition de commandes ou sortie forcée.
+
+On se contente, ici, de mentionner les structures de contrôle
+disponibles en R. La \autoref{internes:exemples} fournit des
+exemples d'utilisation.
+
+\subsection{Exécution conditionnelle}
+
+La structure de contrôle \Indexcode{if}\Indexcode{else}\code{if ...
+  else ...} permet d'exécuter une expression ou une autre selon qu'une
+condition est vraie ou fausse. La clause alternative est optionnelle.
+Les syntaxes des deux formulations sont les suivantes:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+if (\meta{condition})
+    \meta{conséquence}
+\end{Verbatim}
+\end{Schunk}
+
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+if (\meta{condition})
+    \meta{conséquence}
+else
+    \meta{alternative}
+\end{Verbatim}
+\end{Schunk}
+
+\begin{itemize}
+\item \meta{condition} est une expression dont le résultat
+  est une valeur \code{TRUE} ou \code{FALSE} \emph{unique}. C'est une
+  erreur fréquente de construire des tests où \meta{condition} est un
+  vecteur, ce qui n'a guère de sens. Les fonctions \icode{any},
+  \icode{all} \autoref{sec:internes:fonctions:tests} et \icode{isTRUE}
+  se révèlent utiles dans les clauses \code{if} pour réduire les
+  vecteurs booléens à une valeur unique.
+\item \meta{conséquence} est une expression, ou un groupe
+  d'expressions regroupées entre accolades \verb={ }=, qui sont
+  exécutées lorsque \meta{condition} est \texttt{TRUE}.
+\item \meta{alternative} est une expression, ou un groupe
+  d'expressions regroupées entre accolades \verb={ }=, qui sont
+  exécutées lorsque \meta{condition} est \texttt{FALSE}.
+\end{itemize}
+
+\warningbox{Il tombe sous le sens que «vrai» est vrai, n'est-ce pas?
+  Prenez donc garde de ne pas écrire des expressions qui reviennent à
+  tester \verb|if (TRUE == TRUE)|. Oui, nous avons souvent rencontré
+  de telles constructions!}
+
+Pour choisir entre plus de deux possibilités, il est possible
+d'emboiter des structures \code{if ... else ...} les unes dans les
+autres.
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+if (\meta{condition 1})
+    \meta{conséquence 1}
+else if (\meta{condition 2})
+    \meta{conséquence 2}
+else
+    \meta{alternative}
+\end{Verbatim}
+\end{Schunk}
+
+Au-delà de trois ou quatre possibilités, il vaut souvent mieux
+utiliser la fonction \Icode{switch}. Sa syntaxe est la suivante:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+switch(\meta{expression}, \meta{cas.1} = \meta{action.1},
+                          \meta{cas.2} = \meta{action.2}, ...)
+\end{Verbatim}
+\end{Schunk}
+La fonction évalue d'abord \meta{expression}. Si le résultat est une
+valeur numérique $j$, alors \meta{action.$j$} est exécutée. Si le
+résultat de \meta{expression} est l'une des chaines de caractères
+\meta{cas.1}, \meta{cas.2}, \dots, alors c'est l'action correspondante
+qui est exécutée.
+<<echo=TRUE>>=
+switch(2, 2 + 3, mean(1:10), 5:1)
+switch("foo", foo = 2 + 3, bar = mean(1:10))
+@
+
+Enfin, la fonction \Icode{ifelse} --- une sorte de version vectorielle
+de la structure \code{if ... else ...} --- permet de calculer des
+valeurs selon les résultats d'un test sur un vecteur. Sa syntaxe est
+la suivante:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+ifelse(\meta{test}, \meta{oui}, \meta{non})
+\end{Verbatim}
+\end{Schunk}
+Les arguments \meta{test}, \meta{oui} et \meta{non} sont trois
+vecteurs de la même longueur
+\begin{itemize}
+\item \meta{test} est un vecteur booléen.
+\item \meta{oui} est un vecteur duquel sont extraites les valeurs
+  correspondant à des éléments \code{TRUE} dans \emta{test}.
+\item \meta{non} est un vecteur duquel sont extraites les valeurs
+  correspondant à des éléments \code{FALSE} dans \emta{test}.
+\end{itemize}
+<<echo=TRUE>>=
+x <- c(-2, 3, -1, 0, 5, 1)
+ifelse(x < 0, -x, x)
+@
+
+Une fois que l'on a compris son fonctionnement, la fonction
+\icode{ifelse} peut apparaitre comme un outil de choix dans notre
+arsenal de fonctions R, en particulier pour la programmation de
+fonctions mathématiques définies par branches. En réalité, cependant,
+\code{ifelse} est très lente. Dans la plupart des cas, il vaut mieux
+lui préférer des constructions moins élégantes, mais bien plus
+rapides. En particulier, la rubrique d'aide de la fonction souligne
+que la structure \code{if ... else ...} est beaucoup plus efficace si
+\meta{test} est un vecteur de longueur $1$.
+
+\subsection{Boucles}
+
+Les \index{boucle}boucles sont et doivent être utilisées avec
+parcimonie en R, car elles sont généralement inefficaces. Dans la
+majeure partie des cas, il est possible de vectoriser les calculs pour
+éviter les boucles explicites, ou encore de s'en remettre aux
+fonctions \fonction{outer}, \fonction{apply}, \fonction{lapply}
+\fonction{sapply} et \fonction{mapply} (\autoref{avance:apply}) pour
+réaliser les boucles de manière plus efficace.
+
+\begin{struclist}
+\item[\fbox{for (\emph{variable} in \emph{suite}) \emph{expression}}]
+  \rule{0em}{2.5ex}%
+  \Indexfonction{for}%
+  Exécuter \code{\emph{expression}} successivement pour chaque valeur
+  de \code{\emph{variable}} contenue dans \code{\emph{suite}}.  Encore
+  ici, on groupera les expressions dans des accolades \verb={ }=. À
+  noter que \code{\emph{suite}} n'a pas à être composée de nombres
+  consécutifs, ni même de nombres, en fait.
+\item[\fbox{while (\emph{condition}) \emph{expression}}]
+  \rule{0em}{2.5ex}%
+  \Indexfonction{while}%
+  Exécuter \code{\emph{expression}} tant que \code{\emph{condition}}
+  est vraie. Si \code{\emph{condition}} est fausse lors de l'entrée
+  dans la boucle, celle-ci n'est pas exécutée. Une boucle \code{while}
+  n'est par conséquent pas nécessairement toujours exécutée.
+\item[\fbox{repeat \emph{expression}}]
+  \rule{0em}{2.5ex}%
+  \Indexfonction{repeat}%
+  Répéter \code{\emph{expression}}. Cette dernière devra comporter un
+  test d'arrêt qui utilisera la commande \code{break}. Une boucle
+  \code{repeat} est toujours exécutée au moins une fois.
+\item[\fbox{break}]
+  \rule{0em}{2.5ex}%
+  \Indexfonction{break}%
+  Sortie immédiate d'une boucle \code{for}, \code{while} ou
+  \code{repeat}.
+\item[\fbox{next}]
+  \rule{0em}{2.5ex}%
+  \Indexfonction{next}%
+  Passage immédiat à la prochaine itération d'une boucle \code{for},
+  \code{while} ou \code{repeat}.
+\end{struclist}
+
+
 
 
 \section{Produit extérieur}
@@ -72,96 +238,6 @@ outer(c(1, 2, 5), c(2, 3, 6))
     Y, "*")}.
 \end{itemize}
 
-
-
-
-\section{Structures de contrôle}
-\label{sec:internes:structures}
-
-Les structures de contrôle sont des commandes qui permettent de
-déterminer le flux d'exécution d'un programme: choix entre des blocs
-de code, répétition de commandes ou sortie forcée.
-
-On se contente, ici, de mentionner les structures de contrôle
-disponibles en R. La \autoref{internes:exemples} fournit des
-exemples d'utilisation.
-
-\subsection{Exécution conditionnelle}
-
-\begin{struclist}
-\item[\fbox{if (\emph{condition}) \emph{branche.vrai} else
-    \emph{branche.faux}}] %
-  \rule{0em}{2.5ex}%
-  \Indexfonction{if}%
-  \Indexfonction{else}%
-  \sloppy Si \code{\emph{condition}} est vraie,
-  \code{\emph{branche.vrai}} est exécutée, sinon ce sera
-  \code{\emph{branche.faux}}. Dans le cas où l'une ou l'autre de
-  \code{\emph{branche.vrai}} ou \code{\emph{branche.faux}} comporte
-  plus d'une expression, regrouper celles-ci dans des accolades
-  \verb={ }=.
-\item[\fbox{ifelse(\emph{condition}, \emph{expression.vrai},
-    \emph{expression.faux})}] %
-  \rule{0em}{2.5ex}%
-  \Indexfonction{ifelse}%
-  Fonction vectorielle qui retourne un vecteur de la même longueur que
-  \code{\emph{condition}} formé ainsi: pour chaque élément \code{TRUE}
-  de \code{\emph{condition}} on choisit l'élément correspondant de
-  \code{\emph{expression.vrai}} et pour chaque élément \code{FALSE}
-  on choisit l'élément correspondant de \code{\emph{expression.faux}}.
-  L'utilisation n'est pas très intuitive, alors examiner attentivement
-  les exemples de la rubrique d'aide.
-\item[\fbox{switch(\emph{test}, \emph{cas.1 = action.1}, \emph{cas.2 =
-      action.2}, ...)}] %
-  \rule{0em}{2.5ex}%
-  \Indexfonction{switch}%
-  Structure utilisée plutôt rarement. Consulter la rubrique d'aide au
-  besoin.
-\end{struclist}
-
-\subsection{Boucles}
-
-Les boucles\index{boucle} sont et doivent être utilisées avec
-parcimonie en R, car elles sont généralement inefficaces. Dans la
-majeure partie des cas, il est possible de vectoriser les calculs pour
-éviter les boucles explicites, ou encore de s'en remettre aux
-fonctions \fonction{outer}, \fonction{apply}, \fonction{lapply}
-\fonction{sapply} et \fonction{mapply} (\autoref{avance:apply})
-pour réaliser les boucles de manière plus efficace.
-
-\begin{struclist}
-\item[\fbox{for (\emph{variable} in \emph{suite}) \emph{expression}}]
-  \rule{0em}{2.5ex}%
-  \Indexfonction{for}%
-  Exécuter \code{\emph{expression}} successivement pour chaque valeur
-  de \code{\emph{variable}} contenue dans \code{\emph{suite}}.  Encore
-  ici, on groupera les expressions dans des accolades \verb={ }=. À
-  noter que \code{\emph{suite}} n'a pas à être composée de nombres
-  consécutifs, ni même de nombres, en fait.
-\item[\fbox{while (\emph{condition}) \emph{expression}}]
-  \rule{0em}{2.5ex}%
-  \Indexfonction{while}%
-  Exécuter \code{\emph{expression}} tant que \code{\emph{condition}}
-  est vraie. Si \code{\emph{condition}} est fausse lors de l'entrée
-  dans la boucle, celle-ci n'est pas exécutée. Une boucle \code{while}
-  n'est par conséquent pas nécessairement toujours exécutée.
-\item[\fbox{repeat \emph{expression}}]
-  \rule{0em}{2.5ex}%
-  \Indexfonction{repeat}%
-  Répéter \code{\emph{expression}}. Cette dernière devra comporter un
-  test d'arrêt qui utilisera la commande \code{break}. Une boucle
-  \code{repeat} est toujours exécutée au moins une fois.
-\item[\fbox{break}]
-  \rule{0em}{2.5ex}%
-  \Indexfonction{break}%
-  Sortie immédiate d'une boucle \code{for}, \code{while} ou
-  \code{repeat}.
-\item[\fbox{next}]
-  \rule{0em}{2.5ex}%
-  \Indexfonction{next}%
-  Passage immédiat à la prochaine itération d'une boucle \code{for},
-  \code{while} ou \code{repeat}.
-\end{struclist}
 
 
 
