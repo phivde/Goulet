@@ -32,24 +32,62 @@ options(width=52)
   \code{ifelse}.
 \end{objectifs}
 
+- Intro: définition structure de contrôle, repéter des calculs, choisir entre des options et contrôle le
+flux d'un programme; applicatio
+- Exécution conditionnelle
+  - if
+  - switch
+  - ifelse
+- Boucles
+  - for
+  - while et repeat
+  - break, next, return
+  - stop, warning
+- Récursivité
+- Exemple: suite de Fibonacci/Syndrôme de la plaque à biscuits
+- Produit extérieur
 
-\section{Structures de contrôle}
-\label{sec:internes:structures}
 
-Les structures de contrôle sont des commandes qui permettent de
-déterminer le flux d'exécution d'un programme: choix entre des blocs
-de code, répétition de commandes ou sortie forcée.
+Comme bien d'autres machines conçues par les humains, les ordinateurs
+ont toujours été mis à contribution pour les tâches répétitives et
+fastidieuses. Ce n'est donc pas pour rien que tous les langages de
+programmation prévoient un ou plusieurs mécanismes pour répéter une
+procédure un certain nombre de fois ou jusqu'à ce qu'une condition
+soit remplie.
 
-On se contente, ici, de mentionner les structures de contrôle
-disponibles en R. La \autoref{internes:exemples} fournit des
-exemples d'utilisation.
+La répétition de procédures, la sortie forcée d'un programme ou le
+choix entre diverses procédures sont réalisés à l'aide de commandes
+spéciales appelées \emph{structures de contrôle}. Ce chapitre étudie
+en premier lieu les structures de contrôle disponibles dans le langage
+R.
 
-\subsection{Exécution conditionnelle}
+Nous savons déjà que certains types de calculs répétitifs sont
+automatiquement pris en charge par le langage R via une couche
+d'abstraction que nous avons appelée l'arithmétique vectorielle
+(\autoref{sec:bases:vecteurs:arithmetique}). Un autre large pan des
+calculs répétitifs peut être réduit à quelques fonctions abstraites
+dites d'\emph{application} (\emph{mapping}, un autre concept hérité du
+\index{Lisp}Lisp). Les fonctions d'application masquent efficacement
+les calculs répétitifs sur les dimensions des matrices et des
+tableaux, ainsi que ceux sur les éléments d'un vecteur ou d'une liste.
 
-La structure de contrôle \Indexcode{if}\Indexcode{else}\code{if ...
-  else ...} permet d'exécuter une expression ou une autre selon qu'une
-condition est vraie ou fausse. La clause alternative est optionnelle.
-Les syntaxes des deux formulations sont les suivantes:
+
+\section{Exécution conditionnelle}
+\label{sec:application:if}
+
+Les premières structures de contrôle que nous étudions sont les
+structures d'exécution conditionnelle. La plupart des programmes
+doivent pouvoir effectuer des tests pour choisir entre deux actions
+possibles ou plus. Par exemple, le programme pourrait s'arrêter avec
+un message d'erreur si les arguments fournis par l'utilisateur ne sont
+pas valides, effectuer des calculs différents selon la valeur d'un
+argument, ou retourner un résultat prédéfini si un argument satisfait
+certaines conditions.
+
+La structure \Indexcode{if}\Indexcode{else}\code{if ... else ...}
+permet d'exécuter une expression ou une autre selon qu'une condition
+est vraie ou fausse. La clause alternative est optionnelle. Les
+syntaxes des deux formulations sont les suivantes:
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
 if (\meta{condition})
@@ -152,15 +190,17 @@ rapides. En particulier, la rubrique d'aide de la fonction souligne
 que la structure \code{if ... else ...} est beaucoup plus efficace si
 \meta{test} est un vecteur de longueur $1$.
 
-\subsection{Boucles}
 
-Les \index{boucle}boucles sont et doivent être utilisées avec
-parcimonie en R, car elles sont généralement inefficaces. Dans la
-majeure partie des cas, il est possible de vectoriser les calculs pour
-éviter les boucles explicites, ou encore de s'en remettre aux
-fonctions \fonction{outer}, \fonction{apply}, \fonction{lapply}
-\fonction{sapply} et \fonction{mapply} (\autoref{avance:apply}) pour
-réaliser les boucles de manière plus efficace.
+\section{Boucles itératives}
+\label{sec:internes:boucles}
+
+
+
+
+
+\subsection{}
+
+
 
 \begin{struclist}
 \item[\fbox{for (\emph{variable} in \emph{suite}) \emph{expression}}]
@@ -196,6 +236,17 @@ réaliser les boucles de manière plus efficace.
   \code{while} ou \code{repeat}.
 \end{struclist}
 
+
+\section{Fonctions d'application}
+\label{sec:application:apply}
+
+Les \index{boucle}boucles sont et doivent être utilisées avec
+parcimonie en R, car elles sont généralement inefficaces. Dans la
+majeure partie des cas, il est possible de vectoriser les calculs pour
+éviter les boucles explicites, ou encore de s'en remettre aux
+fonctions \fonction{outer}, \fonction{apply}, \fonction{lapply}
+\fonction{sapply} et \fonction{mapply} (\autoref{avance:apply}) pour
+réaliser les boucles de manière plus efficace.
 
 
 
