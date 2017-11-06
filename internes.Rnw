@@ -576,7 +576,8 @@ R_LIBS_USER="~/R/library"
 
 Une fois la configuration terminée et après un redémarrage de R, le
 chemin vers la bibliothèque personnelle devrait apparaitre dans les
-résultats de la commande \icode{.libPaths}.
+résultats de la commande
+\Index{libPaths@\code{.libPaths}}\code{.libPaths}.
 \begin{Schunk}
 \begin{Sinput}
 > .libPaths()
@@ -594,8 +595,9 @@ principale.
 
 \tipbox{Consultez la rubriques d'aide de \icode{Startup} pour les
   détails sur la syntaxe et l'emplacement des fichiers de
-  configuration et celles de \icode{library} et de \icode{.libPaths}
-  pour la gestion des bibliothèques.}
+  configuration et celles de \icode{library} et de
+  \index{libPaths@\code{.libPaths}}\code{.libPaths} pour la gestion
+  des bibliothèques.}
 
 \subsection{Installation de paquetages additionnels}
 \label{sec:internes:paquetages:install}
@@ -609,7 +611,8 @@ paquetages et le nombre ne cesse de croitre.
 L'installation d'un paquetage distribué via CRAN est très simple avec
 la fonction \Icode{install.packages}. Celle-ci télécharge le paquetage
 spécifié en argument depuis CRAN et l'installe, par défaut, dans la
-première bibliothèque de \icode{.libPaths}.
+première bibliothèque de
+\index{libPaths@\code{.libPaths}}\code{.libPaths}.
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
 install.packages("\meta{paquetage}")
@@ -618,8 +621,9 @@ install.packages("\meta{paquetage}")
 
 Pour utiliser le paquetage, il faut le charger en mémoire avec
 \icode{library}, tel qu'expliqué à la
-\autoref{sec:internes:paquetages:utilisation}. R recherche le paquetage
-spécifié dans les bibliothèques de \icode{.libPaths}.
+\autoref{sec:internes:paquetages:utilisation}. R recherche le
+paquetage spécifié dans les bibliothèques de
+\index{libPaths@\code{.libPaths}}\code{.libPaths}.
 
 
 \section{Exemples}

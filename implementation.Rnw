@@ -140,12 +140,13 @@ dictionnaire «capture» tous les objets (ou toutes les paires
 symbole-valeur) de ce même environnement actif.
 
 Autrement dit, dès que nous définissons une fonction, R lui attribue
-un environnement. Lorsque la fonction est créée dans l'espace de  
+un environnement. Lorsque la fonction est créée dans l'espace de
 travail, son environnement englobant est l'\emph{environnement
   global}\Index{environnement!global}, représenté par le symbole
-\Icode{.GlobalEnv}, et son dictionnaire contient tous les objets se
-trouvant dans l'espace de travail. (Les expressions ci-dessous sont
-exécutées dans un espace de travail vide au préalable.)
+\Index{GlobalEnv@\code{.GlobalEnv}}\code{.GlobalEnv}, et son
+dictionnaire contient tous les objets se trouvant dans l'espace de
+travail. (Les expressions ci-dessous sont exécutées dans un espace de
+travail vide au préalable.)
 <<echo=FALSE>>=
 rm(list = ls())
 @
@@ -274,7 +275,8 @@ de R. Celles-ci établissent comment R recherche un symbole.
   l'environnement englobant de l'environnement englobant, et ainsi de
   suite jusqu'à ce que le symbole soit trouvé.
 \item Lorsque R atteint l'environnement
-  global\index{environnement!global} \icode{.GlobalEnv}, la recherche
+  global\index{environnement!global}
+  \index{GlobalEnv@\code{.GlobalEnv}}\code{.GlobalEnv}, la recherche
   se poursuit le long du chemin de recherche (\emph{search path}) qui
   contient les paquetages chargés dans la session de travail:
 <<echo=TRUE>>=
