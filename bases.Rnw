@@ -843,7 +843,7 @@ fonction est la suivante:
   pratique au nombre d'arguments formels que peut avoir une fonction.
   Les arguments peuvent être des symboles, des constructions de la
   forme \code{symbole = défaut}, ou encore l'argument formel spécial
-  `\code{...}'.
+  `\icode{...}'.
 
   Lorsqu'un symbole seul est utilisé comme argument, il indique le nom
   de celui-ci. L'objet de ce nom sera disponible à l'intérieur de la
@@ -862,7 +862,7 @@ f(2)
 f()
 @
 
-  Enfin, l'argument spécial `\code{...}' peut contenir un nombre
+  Enfin, l'argument spécial `\Icode{...}' peut contenir un nombre
   arbitraire d'arguments. La fonction y ayant recours se trouve donc à
   accepter un nombre variable d'arguments. On utilise généralement
   `\code{...}' pour passer des arguments tels quels à une autre fonction
