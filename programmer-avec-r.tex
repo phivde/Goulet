@@ -287,11 +287,6 @@
         \renewcommand{\makelabel}[1]{\vphantom{|}##1\hfill}}}
     {\end{list}}
 
-  %%% Listes de structures de contrôle
-  \newenvironment{struclist}{%
-    \begin{description}[style=nextline,font=\mdseries\ttfamily]}
-    {\end{description}}
-
   %%% =====================
   %%%  Nouvelles commandes
   %%% =====================
@@ -358,8 +353,8 @@
   \newcommand{\Index}[1]{\index{#1|bfhyperpage}}
   \newcommand{\indexcode}[1]{\index{#1@\code{#1}}}
   \newcommand{\Indexcode}[1]{\Index{#1@\code{#1}}}
-  \newcommand{\icode}[1]{\code{#1}\indexcode{#1}}
-  \newcommand{\Icode}[1]{\code{#1}\Indexcode{#1}}
+  \newcommand{\icode}[1]{\indexcode{#1}\code{#1}}
+  \newcommand{\Icode}[1]{\Indexcode{#1}\code{#1}}
   \makeindex
 
   %%% =======
@@ -398,6 +393,7 @@
     bases,
     implementation,
     donnees,
+    application,
     internes,
     rstudio,
     emacs+ess,
