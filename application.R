@@ -15,12 +15,67 @@
 ### EXÉCUTION CONDITIONNELLE
 ###
 
-## exemple d'erreur de test non unique
+## Il est quelque peu délicat d'illustrer l'utilisation de la
+## fonction 'if' à l'extérieur d'une fonction. Nous aurons
+## l'occasion de l'utiliser plusieurs fois dans les exemples
+## de fonctions itératives, plus loin.
+##
+## Pour l'instant, contentons-nous de ces deux petits exemples
+## qui démontrent un usage adéquat de 'if'.
+x <- c(-1, 2, 3)
+if (any(x < 0)) print("il y a des nombres négatifs")
+if (all(x > 0)) print("tous les nombres sont positifs")
 
-## exemples de tests if (TRUE == TRUE)
+## Première erreur fréquente dans l'utilisation de 'if': la
+## condition en argument n'est pas une valeur unique.
+##
+## Portez bien attention au message d'avertissement de R: le
+## test a été effectué, mais uniquement avec la première
+## valeur du vecteur booléen 'x < 0'. Comme, dans le présent
+## exemple, la première valeur de 'x' est négatif,
+## l'expression 'print' est exécutée.
+if (x < 0)  print("il y a des nombres négatifs")
 
-## Utilisation de if comme une fonction
+## Seconde erreur fréquente: tester que vrai est vrai. (Ce
+## n'est pas une «erreur» au sens propre puisque la syntaxe
+## est valide, mais c'est un non-sens syntaxique, une forme de
+## pléonasme comme «monter en haut» ou «deux jumeaux».)
+##
+## Voici un exemple de construction avec un test inutile. Le
+## résultat de 'any' est déjà TRUE ou FALSE, alors pas besoin
+## de vérifier si TRUE == TRUE ou si FALSE == TRUE.
+if (any(x < 0) == TRUE) print("il y a des nombres négatifs")
 
+## Détail intéressant sur la structure 'if ... else ...': il
+## est possible de l'utiliser comme une fonction normale,
+## c'est-à-dire d'affecter le résultat de la structure à une
+## variable.
+##
+## D'abord, le style de programmation le plus usuel:
+## l'affectation est effectuée à l'intérieur des clauses 'if'
+## et 'else'.
+f <- function(y)
+{
+    if (y < 0)
+        x <- "rouge"
+    else
+        x <- "jaune"
+    paste("la couleur est:", x)
+}
+f(-2)
+f(3)
+
+## Ensuite, la version où le résultat de 'if ... else ...' est
+## directement affecté dans la variable. C'est plus compact et
+## très lisible si la conséquence et l'alternative sont des
+## expressions courtes.
+f <- function(y)
+{
+    x <- if (y < 0) "rouge" else "jaune"
+    paste("la couleur est:", x)
+}
+f(-2)
+f(3)
 
 ## De l'inefficacité de 'ifelse'.
 ##
@@ -34,7 +89,9 @@
 x <- sample(-10:10, 1e6, replace = TRUE)
 system.time(ifelse(x < 0, x + 2, x^2))
 
-## Solution alternative n'ayant pas recours à ifelse().
+## Solution alternative n'ayant pas recours à ifelse(). C'est
+## plus long à programmer, mais l'exécution est néanmoins plus
+## rapide.
 f <- function(x)
 {
    y <- numeric(length(x)) # contenant
@@ -50,8 +107,99 @@ system.time(f(x))
 ### BOUCLES ITÉRATIVES ET CONTRÔLE DU FLUX
 ###
 
-## diverses mises en oeuvre de la version simplifiée de Newton-Raphson
-## dans SICP.
+## Méthode du point fixe
+##
+## Nous allons illustrer l'utilisation des boucles avec la
+## méthode du point fixe. On dit qu'une valeur x est un «point
+## fixe» d'une fonction f si cette valeur satisfait l'équation
+##
+##   x = f(x).
+##
+## La méthode numérique de recherche du point fixe d'une
+## fonction f est simple et puissante: elle consiste à choisir
+## une valeur de départ, puis à évaluer successivement f(x),
+## f(f(x)), f(f(f(x))), ... jusqu'à ce que la valeur change
+## «peu».
+##
+## L'algorithme est donc très simple:
+##
+## 1. Choisir une valeur de départ x[0].
+## 2. Pour n = 1, 2, 3, ...
+##    2.1 Calculer x[n] = f(x[n - 1])
+##    2.2 Si |x[n] - x[n - 1]|/|x[n]| < TOL, passer à
+##        l'étape 3.
+## 3. Retourner la valeur x[n].
+
+## Comme première illustration, supposons que nous avons
+## besoin d'une fonction pour calculer la racine carrée d'un
+## nombre, c'est à dire la valeur positive de y satisfaisant
+## l'équation y^2 = x. Cette équation peut se réécrire sous
+## forme de point fixe ainsi:
+##
+##   y = x/y.
+##
+## La méthode du point fixe ne converge avec cette fonction
+## (l'algorithme oscille perpétuellement entre deux valeurs).
+##
+## Une variante de l'équation y^2 = x fonctionnera mieux (en
+## fait, on peut démontrer que l'algorithme converge toujours
+## pour cette fonction):
+##
+##   y = (y - x/y)/2.
+##
+## Voici une première mise en oeuvre de notre fonction 'sqrt'
+## utilisant la méthode du point fixe. Puisqu'il faut au
+## minimum vérifier si la valeur initiale est un point fixe,
+## nous utilisons une boucle 'repeat'.
+sqrt <- function(x, start = 1, TOL = 1E-10)
+{
+    repeat
+    {
+        y <- (start + x/start)/2
+        if (abs(y - start)/y < TOL)
+            break
+        start <- y
+    }
+    y
+}
+sqrt(9, 1)
+sqrt(225, 1)
+sqrt(3047, 50)
+
+## Formidable. Toutefois, si nous voulions utiliser la méthode
+## du point fixe pour résoudre une autre équation, il faudrait
+## écrire une nouvelle fonction qui serait pour l'essentiel
+## identique, sinon pour le calcul de la fonction
+## (mathématique) f(x) pour laquelle nous cherchons le point
+## fixe.
+##
+## Créons donc une fonction de point fixe générale qui prendra
+## f(x) en argument.
+fixed_point <- function(FUN, start, TOL = 1E-10)
+{
+    repeat
+    {
+        x <- FUN(start)
+        if (abs(x - start)/x < TOL)
+            break
+        start <- x
+    }
+    x
+}
+
+## Nous pouvons ensuite écrire une nouvelle fonction 'sqrt'
+## utilisant 'fixed_point'. Nous y ajoutons un test de
+## validité de l'argument, pour faire bonne mesure.
+sqrt <- function(x)
+{
+    if (x < 0)
+        stop("cannot compute square root of negative value")
+
+    fixed_point(function(y) (y + x/y)/2, start = 1)
+}
+sqrt(9)
+sqrt(25)
+sqrt(3047)
 
 ###
 ### FONCTIONS D'APPLICATION
