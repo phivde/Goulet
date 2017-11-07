@@ -82,15 +82,17 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 ## Historique des versions
 
-### (en développement)
+### 2017.11-1 (2017-11-07)
 
 #### Nouveautés
 
+- Chapitre 6 - Structures de contrôle et fonctions d'application
 - Chapitre 7 - Fonctions internes et extensions
 
 #### Autres modifications
 
 - Exemples du chapitre 5: ajout sur les opérations arithmétiques avec les matrices dans le fichier `donnees.R`.
+- L'annexe C apparaissait en double dans la table des matières.
 
 ### 2017.10-1a (2017-10-22)
 
