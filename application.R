@@ -129,6 +129,10 @@ system.time(f(x))
 ##    2.2 Si |x[n] - x[n - 1]|/|x[n]| < TOL, passer à
 ##        l'étape 3.
 ## 3. Retourner la valeur x[n].
+##
+## Avant de poursuivre votre lecture, tentez d'identifier le
+## meilleur type de boucle ('for', 'while' ou 'repeat') à
+## utiliser pour programmer cet algorithme.
 
 ## Comme première illustration, supposons que nous avons
 ## besoin d'une fonction pour calculer la racine carrée d'un
