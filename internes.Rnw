@@ -642,7 +642,7 @@ paquetage spécifié dans les bibliothèques de
 
 \begin{Filesave}{solutions}
 \section*{Chapitre \ref*{chap:internes}}
-\addcontentsline{toc}{section}{Chapitre \protect\ref*{internes}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:internes}}
 
 \end{Filesave}
 
@@ -933,6 +933,11 @@ unique(cummin(temps))
 temps[match(unique(cummin(temps)), temps)]
 @
   \end{sol}
+\end{exercice}
+
+\begin{exercice}[nosol]
+  Installer le paquetage \pkg{actuar} \citep{actuar} dans une
+  bibliothèque personnelle sur votre poste de travail.
 \end{exercice}
 
 \Closesolutionfile{solutions}
