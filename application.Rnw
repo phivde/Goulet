@@ -169,9 +169,9 @@ vecteurs de la même longueur
 \begin{itemize}
 \item \meta{test} est un vecteur booléen.
 \item \meta{oui} est un vecteur duquel sont extraites les valeurs
-  correspondant à des éléments \code{TRUE} dans \emta{test}.
+  correspondant à des éléments \code{TRUE} dans \meta{test}.
 \item \meta{non} est un vecteur duquel sont extraites les valeurs
-  correspondant à des éléments \code{FALSE} dans \emta{test}.
+  correspondant à des éléments \code{FALSE} dans \meta{test}.
 \end{itemize}
 <<echo=TRUE>>=
 x <- c(-2, 3, -1, 0, 5, 1)
@@ -605,7 +605,7 @@ La \capsule{https://youtu.be/8UQN6RRnsFA}{fonction \Icode{apply}}
 s'utilise autant avec les matrices qu'avec les tableaux. Sa syntaxe
 complète est la suivante:
 \begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
+\begin{Verbatim}
 apply(X, MARGIN, FUN, ...)
 \end{Verbatim}
 \end{Schunk}
@@ -618,7 +618,7 @@ apply(X, MARGIN, FUN, ...)
   La fonction reçoit les sous-ensembles de \code{X} sans que ceux-ci
   ne soient nommés. Les règles habituelles d'évaluation d'un appel de
   fonction s'appliquent: les données constituent le premier argument
-  de \code{FUN} à moins que des arguments nommés dans `\code{...}'
+  de \code{FUN}, à moins que des arguments nommés dans `\code{...}'
   n'aient préséance.
 \item `\code{...}' contient des arguments supplémentaires à passer à
   \code{FUN}, séparés par des virgules.
@@ -696,7 +696,7 @@ Les expressions suivantes calculent, dans l'ordre:
 <<echo=TRUE>>=
 apply(x, 1, sum)
 apply(x, 2, sum)
-apply(x, 3, sum=)
+apply(x, 3, sum)
 apply(x, c(1, 2), sum)
 apply(x, c(2, 3), sum)
 apply(x, c(1, 3), sum)
@@ -704,7 +704,7 @@ apply(x, c(1, 3), sum)
 
 \tipbox{Truc mnémotechnique: la ou les dimensions figurant dans
   l'argument \code{MARGIN} sont celles retenues par le passage de
-  \fonction{apply}. En d'autres termes, les dimensions du résultat de
+  \icode{apply}. En d'autres termes, les dimensions du résultat de
   \code{apply} sont \code{dim(X)[\code{MARGIN}]}.}
 
 \subsection[Listes et vecteurs]{Fonctions d'application pour les listes et les vecteurs}
@@ -717,126 +717,162 @@ sur chaque élément d'une liste, il faut utiliser une procédure
 itérative, procédure que R masque avec des fonctions d'application.
 
 La fonction d'application de base pour les listes et les vecteurs est
-\Icode{lapply}. Sa syntaxe est similaire à celle de \icode{apply},
-l'argument \code{MARGIN} en moins:
+\Icode{lapply}. Elle applique une fonction \code{FUN} à tous les
+éléments d'un vecteur ou d'une liste \code{X} et retourne le résultat
+sous forme de liste. La syntaxe de \code{lapply} est similaire à celle
+de \icode{apply}, l'argument \code{MARGIN} en moins:
 \begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
-lapply(X, \code{FUN}, ...)
+\begin{Verbatim}
+lapply(X, FUN, ...)
 \end{Verbatim}
 \end{Schunk}
 \begin{itemize}
 \item \code{X} est un vecteur ou une liste.
-\item
-\item Les éléments de \code{X} sont passés comme à la fonction
-  \code{FUN} sans être nommés. Les règles habituelles d'évaluation
-  d'un appel de fonction s'appliquent. Par conséquent, les éléments de
-  \code{X} seront considérés comme les premiers arguments de
-  \code{FUN} à moins que des arguments nommés dans `\code{...}' aient
-  préséance.
-\item Par exemple, on crée une liste formée de quatre vecteurs
-  aléatoires de taille $5$, $6$, $7$ et $8$:
-<<echo=TRUE>>=
-(x <- lapply(5:8, sample, x = 1:10))
-@
-  Le premier argument de la fonction \fonction{sample} est \code{x}.
-  Dans l'expression ci-dessus, cet argument est passé à
-  la fonction via l'argument `\code{...}' de \code{lapply}. Par conséquent, les
-  valeurs successives de \verb|5:8| servent comme deuxième argument à
-  la fonction \fonction{sample}, soit la taille de l'échantillon.
-\item On peut ensuite calculer la moyenne de chacun des vecteurs
-  obtenus ci-dessus, toujours sans faire de boucle:
-<<echo=TRUE>>=
-lapply(x, mean)
-@
+\item \code{FUN} est la fonction à appliquer à chacun des éléments de
+  \code{X}. Ceux-ci ne sont pas nommés lorsqu'ils sont passés à la
+  fonction. Les règles habituelles d'évaluation d'un appel de fonction
+  s'appliquent: les données constituent le premier argument de
+  \code{FUN}, à moins que des arguments nommés dans `\code{...}'
+  n'aient préséance.
 \end{itemize}
 
-La fonction \fonction{lapply} applique une fonction \code{FUN} à
-  tous les éléments d'un vecteur ou d'une liste \code{X} et retourne
-  le résultat sous forme de liste. Le résultat est donc:
-  \begin{quote}
-\begin{verbatim}
-list(FUN(X[[1]], ...),
-     FUN(X[[2]], ...),
-     FUN(X[[3]], ...),
-     ...)
-\end{verbatim}
-  \end{quote}
-
-
-Impossible, par conséquent, de
-passer directement la liste à la fonction \icode{sort} en espérant
-qu'elle effectuera le tri sur chaque élément de la liste. L'analyste
-se résoud à écrire une fonction itérative de tri de chaque élément
-d'une liste.
-
-Une liste \code{x} contient les âges des employés de trois entreprises.
-<<echo=FALSE>>=
-set.seed(1)
-x <- lapply(c(6, 12, 7), sample, x = 20:65, replace = TRUE)
-@
+Nous avons déjà rencontré la fonction \icode{sample} qui permet de
+tirer un échantillon aléatoire parmi un ensemble de valeurs. Le
+premier argument de \code{sample} est \code{x}, l'ensemble de valeurs.
+Le second argument est \code{size}, la taille de l'échantillon. Les
+expressions ci-dessous permettent de créer une liste formée de quatre
+vecteurs aléatoires de taille $5$, $6$, $7$ et $8$; de calculer la
+somme de chacun de ces vecteurs; de trier chacun des vecteurs.
 <<echo=TRUE>>=
-x
+(x <- lapply(5:8, sample, x = 1:10))
+lapply(x, sum)
+lapply(x, sort)
 @
 
-Un analyste souhaite trier en ordre croissant chacun des vecteurs de
-la liste. Or, il n'y a pas d'arithmétique vectorielle qui tienne pour
-les listes. Impossible, par conséquent, de passer directement la liste
-à la fonction \icode{sort} en espérant qu'elle effectuera le tri sur
-chaque élément de la liste. L'analyste se résoud à écrire une fonction
-itérative de tri de chaque élément d'une liste.
+Sœur siamoise de \code{lapply}, la fonction \Icode{sapply} retourne,
+lorsque c'est possible, son résultat sous forme de vecteur ou de
+matrice. Le résultat est donc \emph{simplifié} par rapport à celui de
+\code{lapply}, d'où le nom de la fonction. La syntaxe en change pas:
+\begin{Schunk}
+\begin{Verbatim}
+sapply(X, FUN, ...)
+\end{Verbatim}
+\end{Schunk}
+\begin{itemize}
+\item Si les résultats de l'application sont tous des vecteurs de
+  longueur $1$, alors \code{sapply} retourne un vecteur.
+\item Si les résultats de l'application sont des vecteurs de la même
+  longueur supérieure à $a$, alors \code{sapply} retourne une
+  matrice, remplie comme toujours par colonne.
+\item Si les résultats de l'application sont des vecteurs de longueurs
+  différentes, alors \code{sapply} est identique à \code{lapply}.
+\end{itemize}
 <<echo=TRUE>>=
-lsort <- function(x)
-{
-    for (i in seq_along(x))
-        x[[i]] <- sort(x[[i]])
-    x
-}
-@
-<<echo=TRUE>>=
-lsort(x)
+(x <- lapply(rep(5, 3), sample, x = 1:10))
+sapply(x, sum)
+sapply(x, sort)
 @
 
+\tipbox{La fonction \icode{sapply} est souvent utile pour rendre
+  vectorielle une fonction \code{f} qui ne le serait pas autrement. Il
+  y a deux stratégies possibles: appliquer la fonction \code{f} à un
+  vecteur avec \code{sapply}, ou modifier \code{f} pour y intégrer un
+  appel à \code{sapply}.}
+
+\importantbox{Dans un grand nombre de cas, il est possible de
+  remplacer les boucles \icode{for} par des applications avec
+  \icode{lapply} ou \icode{sapply}. On ne saurait donc trop insister
+  sur l'importance de ces deux fonctions.}
+
+Autre membre de la famille des fonctions d'application sur les listes
+et les vecteurs, \Icode{mapply} est une version multidimensionnelle de
+\code{sapply}. Sa syntaxe est, pour l'essentiel:
+\begin{Schunk}
+\begin{Verbatim}
+mapply(FUN, ...)
+\end{Verbatim}
+\end{Schunk}
+Le résultat de \code{mapply} est l'application de la fonction
+\code{FUN} aux premiers éléments de tous les arguments contenus dans
+`\code{...}', puis à tous les seconds éléments, et ainsi de suite.
+
+Ainsi, si \code{v} et \code{w} sont des vecteurs, \code{mapply(FUN, v,
+  w)} retourne sous forme de liste, de vecteur ou de matrice, selon le
+cas, \code{FUN(v[1], w[1])}, \code{FUN(v[2], w[2])}, etc.
+
+\subsection[Catégories]{Fonction d'application pour les catégories}
+\label{sec:application:application:tapply}
+
+La fonction \Icode{tapply} applique une fonction à chacune des
+catégories définies par un facteur ou une combinaison de facteurs.
+Pour mieux comprendre, étudions la syntaxe de la fonction:
+\begin{Schunk}
+\begin{Verbatim}
+tapply(X, INDEX, FUN, ...)
+\end{Verbatim}
+\end{Schunk}
+\begin{itemize}
+\item \code{X} est un vecteur.
+\item \code{INDEX} est facteur ou une liste de facteurs, chacun de la
+  même longueur que \code{X}.
+\item \code{FUN} est la fonction à appliquer à chacune des catégories
+  définies par le ou les facteurs dans \code{INDEX}.
+\end{itemize}
+<<echo=TRUE>>=
+x <- data.frame(couleur=c("r", "v", "r", "r", "v"),
+                score=c(2, 0, 4, 3, 10))
+str(x)
+tapply(x$score, x$couleur, mean)
+@
 
 \subsection{Produit extérieur}
 \label{sec:application:application:outer}
 
-La %
-\capsule{https://youtu.be/outer}{fonction \code{outer}}%
-\Indexcode{outer} %
+Nous étirons quelque peu le concept de fonction d'application pour
+discuter ici de la fonction de produit extérieur \code{outer}. Ce
+n'est pas la fonction la plus intuitive à utiliser, mais elle s'avère
+extrêmement utile pour effectuer plusieurs opérations en une seule
+expression tout en masquant les boucles implicites.
+
+La \capsule{https://youtu.be/cyPUAnieWHw}{fonction \Icode{outer}}
 calcule le \index{produit!extérieur}produit extérieur entre deux
-vecteurs. Ce n'est pas la fonction la plus intuitive à utiliser, mais
-elle s'avère extrêmement utile pour effectuer plusieurs opérations en
-une seule expression tout en évitant les boucles.
-
-La syntaxe de \code{outer} est:
-\begin{quote}
-  \code{outer(X, Y, FUN)}
-\end{quote}
-Le résultat est l'application la fonction \code{FUN} (\fonction{"*"}
-par défaut) entre chacun des éléments de \code{X} et chacun des
-éléments de \code{Y}, autrement dit
-\begin{quote}
-  \code{FUN(X[i], Y[j])}
-\end{quote}
-pour toutes les valeurs des indices \code{i} et \code{j}.
-
+vecteurs, c'est à dire le résultat de \code{FUN(X[i], Y[j])} pour
+toutes les valeurs des indices \code{i} et \code{j}. La syntaxe de la
+fonction est la suivante:
+\begin{Schunk}
+\begin{Verbatim}
+outer(X, Y, FUN, ...)
+\end{Verbatim}
+\end{Schunk}
 \begin{itemize}
-\item La dimension du résultat est par conséquent \code{c(dim(X),
-    dim(Y))}.
-\item Par exemple, le résultat du produit extérieur entre
-  deux vecteurs est une matrice contenant tous les produits entre les
-  éléments des deux vecteurs:
+\item \code{X} et \code{Y} sont deux objets, normalement des vecteurs
+  ou des matrices.
+\item \code{FUN} est la fonction à appliquer (\code{"*"} par défaut)
+  entre chacun des éléments de \code{X} et chacun des éléments de
+  \code{Y}. Lorsque \code{FUN} est un opérateur arithmétique du
+  \autoref{tab:bases:operateurs}, il faut placer le symbole entre
+  guillemets: \code{"*"}, \code{"+"}, \code{"<="}, etc.
+\end{itemize}
+La dimension du résultat de \code{outer} est \code{c(dim(X), dim(Y))}.
 <<echo=TRUE>>=
 outer(c(1, 2, 5), c(2, 3, 6))
 @
-\item Lorsque \code{FUN} est un opérateur arithmétique du
-  \autoref{tab:internes:operateurs}, on place le symbole entre
-  guillemets: \code{"*"}, \code{"+"}, \code{"<="}, etc.
-\item L'opérateur \Icode{\%o\%} est un raccourci de \code{outer(X,
-    Y, "*")}.
-\end{itemize}
+
+L'opérateur \Icode{\%o\%} est un raccourci de \code{outer(X, Y, "*")}.
+
+\section{Exemples}
+\label{sec:application:exemples}
+
+\def\scriptfilename{application.R}
+
+\scriptfile{\scriptfilename}
+\lstinputlisting[firstline=13]{\scriptfilename}
 
 
+\section{Exercices}
+\label{sec:application:exercices}
+
+\Opensolutionfile{solutions}[solutions-application]
 
 
 %%% Local Variables:
