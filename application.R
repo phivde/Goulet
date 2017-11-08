@@ -412,6 +412,23 @@ x <- lapply(rep(12, 4), sample, x = 1:100)
 ## ces quatre échantillons aléatoires.
 mapply(mean, x, 0:3/10)
 
+## FONCTION 'tapply'
+
+## Le jeu de données 'airquality' livré avec R contient les
+## mesures quotidiennes de la qualité de l'air à New York
+## Daily entre mai et septembre 1973.
+?airquality                # rubrique d'aide du jeu de données
+
+## La colonne 'Temp' contient la température du jour et la
+## colonne 'Month', le mois (sous forme d'entier de 5 à 9).
+##
+## La fonction 'tapply' permet de calculer facilement la
+## température moyenne par mois.
+tapply(airquality$Temp, airquality$Month, mean)
+
+## Équivalent (sauf pour la présentation des résultats).
+by(airquality$Temp, airquality$Month, mean)
+
 ## PRODUIT EXTÉRIEUR
 x <- c(1, 2, 4, 7, 10, 12)
 y <- c(2, 3, 6, 7, 9, 11)

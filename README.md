@@ -84,6 +84,10 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 ### (en développpement)
 
+#### Nouveautés
+
+- Ajout d'exemples d'utilisation de `tapply` dans `application.R`.
+
 #### Autres modifications
 
 - Libellé de la section 6.6.4 changé pour «Fonction d'application pour groupes de données».
