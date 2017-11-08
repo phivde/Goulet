@@ -82,6 +82,12 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 ## Historique des versions
 
+### (en développpement)
+
+#### Autres modifications
+
+- Libellé de la section 6.6.4 changé pour «Fonction d'application pour groupes de données».
+
 ### 2017.11-1 (2017-11-07)
 
 #### Nouveautés

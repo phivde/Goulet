@@ -800,12 +800,13 @@ Ainsi, si \code{v} et \code{w} sont des vecteurs, \code{mapply(FUN, v,
   w)} retourne sous forme de liste, de vecteur ou de matrice, selon le
 cas, \code{FUN(v[1], w[1])}, \code{FUN(v[2], w[2])}, etc.
 
-\subsection[Catégories]{Fonction d'application pour les catégories}
+\subsection[Groupes de données]{Fonction d'application pour groupes de données}
 \label{sec:application:application:tapply}
 
-La fonction \Icode{tapply} applique une fonction à chacune des
-catégories définies par un facteur ou une combinaison de facteurs.
-Pour mieux comprendre, étudions la syntaxe de la fonction:
+La fonction \Icode{tapply} applique une fonction à chacun des groupes
+de données définis par les catégories d'un facteur ou d'une
+combinaison de facteurs. Pour mieux comprendre, étudions la syntaxe de
+la fonction:
 \begin{Schunk}
 \begin{Verbatim}
 tapply(X, INDEX, FUN, ...)
@@ -815,8 +816,8 @@ tapply(X, INDEX, FUN, ...)
 \item \code{X} est un vecteur.
 \item \code{INDEX} est facteur ou une liste de facteurs, chacun de la
   même longueur que \code{X}.
-\item \code{FUN} est la fonction à appliquer à chacune des catégories
-  définies par le ou les facteurs dans \code{INDEX}.
+\item \code{FUN} est la fonction à appliquer à chacun des groupes de
+  données définis par les catégories des facteurs dans \code{INDEX}.
 \end{itemize}
 <<echo=TRUE>>=
 x <- data.frame(couleur=c("r", "v", "r", "r", "v"),
