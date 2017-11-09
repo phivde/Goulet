@@ -211,6 +211,9 @@ sqrt(3047)
 
 ## FONCTION 'apply'
 
+## La fonction 'apply' applique une fonction sur une ou
+## plusieurs dimensions d'une matrice ou d'un tableau.
+##
 ## Création d'une matrice et d'un tableau à trois dimensions
 ## pour les exemples.
 m <- matrix(sample(1:100, 20), nrow = 4, ncol = 5)
@@ -405,6 +408,10 @@ sapply(x, fun, y = c(3, 5, 7))
 
 ## FONCTION 'mapply'
 
+## Application de la fonction 'fun' sur les échantillons de la
+## liste 'x' avec un seuil différent pour chacun.
+mapply(fun, x, c(3, 5, 7, 7))
+
 ## Création de quatre échantillons aléatoires de taille 12.
 x <- lapply(rep(12, 4), sample, x = 1:100)
 
@@ -429,12 +436,22 @@ tapply(airquality$Temp, airquality$Month, mean)
 ## Équivalent (sauf pour la présentation des résultats).
 by(airquality$Temp, airquality$Month, mean)
 
-## PRODUIT EXTÉRIEUR
+## FONCTION 'outer'
+
+## La fonction 'outer' applique une fonction (le produit par
+## défaut, d'où le nom de la fonction, dérivé de «produit
+## extérieur») à toutes les combinaisons des éléments de ses
+## deux premiers arguments.
 x <- c(1, 2, 4, 7, 10, 12)
 y <- c(2, 3, 6, 7, 9, 11)
 outer(x, y)                # produit extérieur
 x %o% y                    # équivalent plus court
+
+## Pour effectuer un calcul autre que le produit, on spécifie
+## la fonction à appliquer en troisième argument. Si la
+## fonction est un des opérateurs arithmétiques de base, il
+## faut placer le symbole entre guillemets " ".
 outer(x, y, "+")           # «somme extérieure»
 outer(x, y, "<=")          # toutes les comparaisons possibles
-outer(x, y, pmax)          # idem
+outer(x, y, function(x, y) x + 2 * y) # fonction quelconque
 
