@@ -317,7 +317,7 @@ repeat
 
 Bien qu'elles ne soient pas à proprement parler des commandes de
 contrôle de flux, les trois fonctions ci-dessous permettent néanmoins
-de contrôle l'exécution d'une fonction.
+de contrôler l'exécution d'une fonction.
 
 \begin{ttscript}{warning}
 \item[\Icode{return}] Force la sortie immédiate de la fonction et
