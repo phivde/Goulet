@@ -91,6 +91,8 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 #### Autres modifications
 
+- Des notes de développement avaient été oubliées au début du chapitre 6. Note à moi-même: les faire en commentaires la prochaine fois.
+- Lien vers la nouvelle version (du 2017-11-15) de la vidéo sur la fonction `apply`.
 - Libellé de la section 6.6.4 changé pour «Fonction d'application pour groupes de données».
 
 ### 2017.11-1 (2017-11-07)
