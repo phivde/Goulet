@@ -32,22 +32,6 @@ options(width=52)
   \code{ifelse}.
 \end{objectifs}
 
-- Intro: définition structure de contrôle, repéter des calculs, choisir entre des options et contrôle le
-flux d'un programme; applicatio
-- Exécution conditionnelle
-  - if
-  - switch
-  - ifelse
-- Boucles
-  - for
-  - while et repeat
-  - break, next, return
-  - stop, warning
-- Récursivité
-- Exemple: suite de Fibonacci/Syndrôme de la plaque à biscuits
-- Produit extérieur
-
-
 Comme bien d'autres machines conçues par les humains, les ordinateurs
 ont toujours été mis à contribution pour les tâches répétitives et
 fastidieuses. Ce n'est donc pas pour rien que tous les langages de
