@@ -88,6 +88,7 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 - Ajout d'exemples d'utilisation de `mapply` et de `tapply` dans `application.R`.
 - Texte additionnel dans la section sur la fonction `outer` dans `application.R`.
+- Ajout d'une référence à Oualline (1997)
 
 #### Autres modifications
 
