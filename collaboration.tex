@@ -23,6 +23,293 @@
   communauté par le biais d'un serveur Git.
 \end{objectifs}
 
+De manière générale, le développement et la maintenance de code
+informatique repose sur la contribution de plusieurs personnes. En
+effet, il est plutôt rare, dans le milieu professionnel, d'être appelé
+à concevoir un programme informatique à partir d'une page blanche et
+en complète autarcie, c'est-à-dire sans que quiconque n'ait à
+interagir avec le code à un stade ou à un autre. Une grande part du
+travail de programmation consiste à corriger, à mettre à jour ou à
+améliorer du code existant. Dans ce contexte, l'adhésion à un certain
+nombre de normes et de bonnes pratiques permet de faciliter le travail
+de tous les intervenants et de réduire les risques d'erreurs. Ce
+chapitre présente quelques unes de ces bonnes pratiques à adopter en
+matière de style de programmation, de présentation du code et de
+documentation.
+
+Autre élément fondamental lors de travail collaboratif: le partage et
+l'échange des contributions de chacun. Comment rendre le travail de
+Marianne disponible à Alexandre? Comment s'assurer qu'une modification
+apportée dans un fichier par Alexandre n'écrase celle sur laquelle
+Marianne travaille depuis plusieurs heures? Comment identifier à coup
+sûr et automatiquement la plus récente version d'un fichier? Ce genre
+de questions, auxquelles quiconque a déjà travaillé en équipe sur un
+projet a déjà été confronté, les informaticiens y ont répondu depuis
+de très nombreuses années avec les systèmes de gestion de versions.
+Nous offrons, dans ce chapitre, une courte introduction à ces outils
+de développement incontournables avant de diriger les lecteurs vers la
+documentation officielle du système de gestion le plus utilisé dans le
+monde en ce moment: Git.
+
+
+\section{Style}
+\label{sec:collaboration:style}
+
+Il en va du code informatique comme de la prose: si le style peut
+varier d'un auteur à l'autre, l'œuvre doit toujours être à la fois
+agréable à lire et facile à comprendre. Bref, les meilleurs
+programmeurs préfèrent la \emph{lisibilité} de leur code aux effets de
+style qui n'auraient pour seul mérite d'afficher leur maitrise du
+langage.
+
+Tout programmeur devrait constamment garder en tête les trois
+objectifs suivants en effectuant son travail: simplicité, clarté,
+concision. Ces objectifs entrent souvent en conflit les uns avec les
+autres! Tout l'art de la bonne programmation consiste donc à trouver
+un juste équilibre entre les trois pôles.
+
+\citet{Kernighan:practice:1999,Oualline:C:1997,Kernighan:style:1978}
+proposent d'excellents chapitres sur le style en programmation. Nous
+se saurions être aussi complet que ces auteurs établis. Néanmoins,
+nous vous incitons à porter une attention particulière aux quelques
+points de style livrés en vrac, ci-dessous.
+
+\begin{itemize}
+\item Utilisez des noms de variables significatifs. Ne soyez pas ce
+  collègue qui nomme les variables d'un programme \code{x}, \code{xx}
+  et \code{xxx} (cas vécu). Attention, toutefois, de ne pas pousser le
+  concept trop loin. Ici comme ailleurs, la clarté peut provenir de la
+  concision; la terminologie\footnote{%
+    Vous remarquerez que nous préférons utiliser l'anglais pour les
+    noms d'objets, question d'uniformité avec les identificateurs du
+    langage. Chose certaine, évitez à tout prix les accents dans les
+    noms d'objets.}
+  \begin{Schunk}
+\begin{Verbatim}
+xlen <- length(x)
+\end{Verbatim}
+  \end{Schunk}
+  est aussi claire que
+  \begin{Schunk}
+\begin{Verbatim}
+length_of_x <- length(x)
+\end{Verbatim}
+  \end{Schunk}
+  et bien plus simple à utiliser au fil d'un programme.
+
+  Certains noms d'objets sans réelle signification sont tellement
+  usuels qu'il est contre-productif de leur préférer des versions plus
+  explicites. Pensons, ici, à \code{x} comme premier argument d'une
+  fonction R ou à \code{i}, \code{j} et \code{k} comme compteurs dans
+  les boucles \code{for}.
+
+  Quant à la mise en forme des longs noms, plusieurs styles
+  s'affrontent: \code{variable.name}, \code{variable\_name},
+  \code{variableName}, \code{VariableName}, etc. Assurez-vous
+  simplement de suivre, le cas échéant, le standard en vigueur dans
+  votre équipe de travail et, par-dessus tout, soyez constant. Notre
+  préférence, qui concorde avec le code source de R, va aux noms
+  d'objets courts et entièrement en minuscules.
+  %
+\item Dès qu'elles sont disponibles, utilisez les fonctions internes
+  de R au lieu de reprogrammer certaines procédures. Non seulement
+  bénéficierez-vous de l'optimisation des fonctions internes, mais
+  votre code gagnera également en lisibilité. Comparez
+  \begin{Schunk}
+\begin{Verbatim}
+sum(x)/length(x)
+\end{Verbatim}
+  \end{Schunk}
+  à
+  \begin{Schunk}
+\begin{Verbatim}
+mean(x)
+\end{Verbatim}
+  \end{Schunk}
+  %
+\item Connaitre sur le bout des doigts la priorité des opérateurs du
+  \autoref{tab:bases:operateurs}, c'est bien, mais rendre explicite
+  l'ordre des opérations dans une expression à l'aide de parenthèses,
+  c'est mieux. À ce propos, \citet{Oualline:C:1997} ramène la
+  quinzaine de règles de priorité des opérations (du langage C) à
+  seulement deux:
+  \begin{enumerate}
+  \item La multiplication et la division précèdent l'addition et la
+    soustraction.
+  \item Placer tout le reste entre parenthèses.
+  \end{enumerate}
+  %
+\item Évitez les expressions logiques complexes, surtout celles
+  reposant sur la double négation. Par exemple, pour exécuter une
+  expression si un vecteur contient des données manquantes, la
+  condition
+  \begin{Schunk}
+\begin{Verbatim}
+if (any(is.na(x)))
+\end{Verbatim}
+  \end{Schunk}
+  est beaucoup plus facile à déchiffrer que la version logiquement
+  équivalente
+  \begin{Schunk}
+\begin{Verbatim}
+if (!all(!is.na(x)))
+\end{Verbatim}
+  \end{Schunk}
+  En revanche, s'il s'agit plutôt d'exécuter une expression quand un
+  vecteur ne contient pas de données manquantes, alors
+  \begin{Schunk}
+\begin{Verbatim}
+if (all(!is.na(x)))
+\end{Verbatim}
+  \end{Schunk}
+  est plus simple que
+  \begin{Schunk}
+\begin{Verbatim}
+if (!any(is.na(x)))
+\end{Verbatim}
+  \end{Schunk}
+
+  De plus, le conseil précédent sur la priorité des opérations est
+  particulièrement indiqué avec les opérations logiques. Sauriez-vous
+  confirmer, sans consulter le \autoref{tab:bases:operateurs}, l'ordre
+  des opérations dans l'expression logique suivante?\footnote{%
+    C'est \code{(!p) | (q \& r)}.}
+  \begin{Schunk}
+\begin{Verbatim}
+!p | q & r
+\end{Verbatim}
+  \end{Schunk}
+  %
+\item Utilisez les fonctions d'application
+  (\autoref{chap:application}) plutôt que des boucles explicites. Une
+  expression utilisant une fonction d'application est plus concise et
+  plus simple à décoder. Comparez
+  \begin{Schunk}
+\begin{Verbatim}
+z <- numeric(n)
+for (i in seq_len(n))
+    z[i] <- mean(x[[i]])
+\end{Verbatim}
+  \end{Schunk}
+  et
+  \begin{Schunk}
+\begin{Verbatim}
+z <- sapply(x, mean)
+\end{Verbatim}
+  \end{Schunk}
+
+  Encore ici, évitez de pousser la logique trop loin. Si une boucle
+  est plus naturelle et simple à comprendre qu'une fonction
+  d'application, optez pour la boucle. Dans la même veine, une
+  fonction d'application \icode{sapply} à l'intérieur d'une autre
+  fonction \code{sapply}, ce n'est généralement ni plus efficace, ni
+  plus simple à déchiffrer qu'une double boucle \icode{for}.
+  %
+\item Utilisez \icode{return} uniquement pour provoquer la sortie
+  anticipée d'une fonction, habituellement à l'intérieur d'une clause
+  \code{if}. En d'autres termes, \code{return} n'a pas sa place, en R,
+  à la toute fin d'une fonction.
+  %
+\item Adoptez la
+  \link{https://fr.wikipedia.org/wiki/Philosophie_d\%27Unix}{philosophie
+    Unix}, notamment le précepte qui appelle à créer des programmes
+  qui effectuent une seule chose et qui le font bien. Lorsqu'une
+  fonction devient «longue» --- cela dépend du contexte, mais
+  généralement dès une vingtaine de lignes en R --- il convient de la
+  scinder en plusieurs blocs logiques.
+\end{itemize}
+
+
+
+
+\section{Commentaires}
+\label{sec:collaboration:commentaires}
+
+
+\section{Présentation du code}
+\label{sec:collaboration:presentation}
+
+Si tous conviennent que l'adoption d'un style propre et uniforme
+favorise le développement et la lecture de code, il existe plusieurs
+chapelles dans le monde des programmeurs quant à la «bonne façon» de
+présenter et, surtout, d'indenter le code informatique.
+
+Par exemple, Emacs\index{Emacs} reconnaît et supporte les styles de
+codage suivants, entre autres:
+\begin{center}
+  \begin{minipage}[t]{9cm}
+    C++/Stroustrup
+    \hfill
+    \begin{minipage}[t]{5cm}
+\begin{verbatim}
+for (i in 1:10)
+{
+    expression
+}
+\end{verbatim}
+    \end{minipage}
+  \end{minipage}
+  \vspace{\baselineskip}
+
+  \begin{minipage}[t]{9cm}
+    K\&R (1TBS)
+    \hfill
+    \begin{minipage}[t]{5cm}
+\begin{verbatim}
+for (i in 1:10){
+     expression
+}
+\end{verbatim}
+    \end{minipage}
+  \end{minipage}
+  \vspace{\baselineskip}
+
+  \begin{minipage}[t]{9cm}
+    Whitesmith
+    \hfill
+    \begin{minipage}[t]{5cm}
+\begin{verbatim}
+for (i in 1:10)
+     {
+     expression
+     }
+\end{verbatim}
+    \end{minipage}
+  \end{minipage}
+  \vspace{\baselineskip}
+
+  \begin{minipage}[t]{9cm}
+    GNU
+    \hfill
+    \begin{minipage}[t]{5cm}
+\begin{verbatim}
+for (i in 1:10)
+  {
+    expression
+  }
+\end{verbatim}
+    \end{minipage}
+  \end{minipage}
+\end{center}
+
+\begin{itemize}
+\item Pour des raisons générales de lisibilité et de popularité, le
+  style C++, avec les accolades sur leurs propres lignes et une
+  indentation de quatre (4) espaces est considéré comme standard pour
+  la programmation en R.
+% \item La version de GNU~Emacs distribuée par l'auteur est déjà
+%   configurée pour utiliser ce style de codage.
+\item Consulter la documentation de votre éditeur de texte pour savoir
+  s'il est possible de configurer le niveau d'indentation. La plupart des
+  bons éditeurs pour programmeurs le permettent.
+\item Surtout, éviter de ne pas du tout indenter le code.
+\end{itemize}
+
+
+\section{Gestion des versions}
+\label{sec:collaboration:git}
+
+
 
 %%% Local Variables:
 %%% mode: latex
