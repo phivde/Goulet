@@ -68,11 +68,12 @@ concision. Ces objectifs entrent souvent en conflit les uns avec les
 autres! Tout l'art de la bonne programmation consiste donc à trouver
 un juste équilibre entre les trois pôles.
 
-\citet{Kernighan:practice:1999,Oualline:C:1997,Kernighan:style:1978}
-proposent d'excellents chapitres sur le style en programmation. Nous
-se saurions être aussi complet que ces auteurs établis. Néanmoins,
-nous vous incitons à porter une attention particulière aux quelques
-points de style livrés en vrac, ci-dessous.
+\citet{Kernighan:practice:1999},
+\citet{Oualline:C:1997,Oualline:C++:2003},
+\citet{Kernighan:style:1978} proposent d'excellents chapitres sur le
+style en programmation. Nous se saurions être aussi exhaustif que ces
+auteurs établis. Néanmoins, nous vous incitons à porter une attention
+particulière aux quelques points de style livrés en vrac, ci-dessous.
 
 \begin{itemize}
 \item Utilisez des noms de variables significatifs. Ne soyez pas ce
@@ -101,15 +102,16 @@ length_of_x <- length(x)
   usuels qu'il est contre-productif de leur préférer des versions plus
   explicites. Pensons, ici, à \code{x} comme premier argument d'une
   fonction R ou à \code{i}, \code{j} et \code{k} comme compteurs dans
-  les boucles \code{for}.
+  les boucles \icode{for}.
 
-  Quant à la mise en forme des longs noms, plusieurs styles
-  s'affrontent: \code{variable.name}, \code{variable\_name},
-  \code{variableName}, \code{VariableName}, etc. Assurez-vous
-  simplement de suivre, le cas échéant, le standard en vigueur dans
-  votre équipe de travail et, par-dessus tout, soyez constant. Notre
-  préférence, qui concorde avec le code source de R, va aux noms
-  d'objets courts et entièrement en minuscules.
+  Quant à la composition des noms d'objets formés de plusieurs mots,
+  divers styles s'affrontent: \code{variable.name},
+  \code{variable\_name}, \code{variableName}, \code{VariableName},
+  etc. Assurez-vous simplement de suivre le standard en vigueur dans
+  votre équipe de travail, le cas échéant, et, par-dessus tout, soyez
+  constant. Notre préférence, qui concorde avec une grande partie du
+  code source de R, va aux noms d'objets courts et entièrement en
+  minuscules.
   %
 \item Dès qu'elles sont disponibles, utilisez les fonctions internes
   de R au lieu de reprogrammer certaines procédures. Non seulement
@@ -128,11 +130,12 @@ mean(x)
   \end{Schunk}
   %
 \item Connaitre sur le bout des doigts la priorité des opérateurs du
-  \autoref{tab:bases:operateurs}, c'est bien, mais rendre explicite
-  l'ordre des opérations dans une expression à l'aide de parenthèses,
-  c'est mieux. À ce propos, \citet{Oualline:C:1997} ramène la
-  quinzaine de règles de priorité des opérations (du langage C) à
-  seulement deux:
+  \autoref{tab:bases:operateurs}, c'est bien; rendre explicite l'ordre
+  des opérations dans une expression à l'aide de parenthèses, c'est
+  mieux. N'hésitez pas à utiliser des parenthèses dès que l'ombre d'un
+  doute pourrait planer sur l'ordre des opérations. D'ailleurs, à ce
+  propos, \citet{Oualline:C:1997} ramène la quinzaine de règles de
+  priorité des opérations (du langage C) à seulement deux:
   \begin{enumerate}
   \item La multiplication et la division précèdent l'addition et la
     soustraction.
@@ -148,15 +151,15 @@ mean(x)
 if (any(is.na(x)))
 \end{Verbatim}
   \end{Schunk}
-  est beaucoup plus facile à déchiffrer que la version logiquement
-  équivalente
+  est beaucoup plus facile à déchiffrer que la version équivalente
+  d'un point de vue logique
   \begin{Schunk}
 \begin{Verbatim}
 if (!all(!is.na(x)))
 \end{Verbatim}
   \end{Schunk}
   En revanche, s'il s'agit plutôt d'exécuter une expression quand un
-  vecteur ne contient pas de données manquantes, alors
+  vecteur ne contient aucune donnée manquante, alors
   \begin{Schunk}
 \begin{Verbatim}
 if (all(!is.na(x)))
@@ -182,8 +185,8 @@ if (!any(is.na(x)))
   %
 \item Utilisez les fonctions d'application
   (\autoref{chap:application}) plutôt que des boucles explicites. Une
-  expression utilisant une fonction d'application est plus concise et
-  plus simple à décoder. Comparez
+  expression ayant recours à une fonction d'application est plus
+  concise et plus simple à décoder. Comparez
   \begin{Schunk}
 \begin{Verbatim}
 z <- numeric(n)
@@ -199,16 +202,11 @@ z <- sapply(x, mean)
   \end{Schunk}
 
   Encore ici, évitez de pousser la logique trop loin. Si une boucle
-  est plus naturelle et simple à comprendre qu'une fonction
-  d'application, optez pour la boucle. Dans la même veine, une
+  est plus naturelle et plus simple à comprendre qu'une fonction
+  d'application, optez pour la boucle. En particulier, une
   fonction d'application \icode{sapply} à l'intérieur d'une autre
   fonction \code{sapply}, ce n'est généralement ni plus efficace, ni
   plus simple à déchiffrer qu'une double boucle \icode{for}.
-  %
-\item Utilisez \icode{return} uniquement pour provoquer la sortie
-  anticipée d'une fonction, habituellement à l'intérieur d'une clause
-  \code{if}. En d'autres termes, \code{return} n'a pas sa place, en R,
-  à la toute fin d'une fonction.
   %
 \item Adoptez la
   \link{https://fr.wikipedia.org/wiki/Philosophie_d\%27Unix}{philosophie
@@ -217,9 +215,12 @@ z <- sapply(x, mean)
   fonction devient «longue» --- cela dépend du contexte, mais
   généralement dès une vingtaine de lignes en R --- il convient de la
   scinder en plusieurs blocs logiques.
+  %
+\item Enfin, utilisez \icode{return} uniquement pour provoquer la
+  sortie anticipée d'une fonction, habituellement à l'intérieur d'une
+  clause \code{if}. En d'autres termes, \code{return} n'a pas sa
+  place, en R, à la toute fin d'une fonction.
 \end{itemize}
-
-
 
 
 \section{Commentaires}
