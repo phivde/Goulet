@@ -379,7 +379,7 @@ for (i in 1:10)
     \end{Schunk}
   \end{minipage}
 \end{minipage}
-\vspace{\bottomsep}
+\vspace{\topsep}
 
 Le code source de R est entièrement composé dans un style analogue aux
 style C++, ci-dessus, ou RRR du \index{Emacs!mode ESS}mode ESS de Emacs:
@@ -403,7 +403,35 @@ dans son domaine et de demeurer constant au fil de son code.
 \section{Commentaires}
 \label{sec:collaboration:commentaires}
 
+Les commentaires dans le code servent à guider le lecteur (ou
+vous-même, quelque temps après la rédaction) dans la lecture d'un
+programme. Le niveau de détails que devraient comporter les
+commentaires fait, comme le style d'indentation, l'objet de vifs
+débats.
 
+Certains affirment qu'un bon programme se passe d'explications et que,
+par conséquent, les commentaires sont en large partie inutiles. C'est
+faux. Comme \citet{Oualline:C:1997} le mentionne, un programme sans
+commentaires constitue une bombe qui n'attend que d'exploser. Un jour
+ou l'autre, quelqu'un devra modifier ledit programme et l'absence de
+commentaires rendra la tâche beaucoup plus ardue que nécessaire.
+
+À l'autre bout du spectre, on trouve les tenants de tout, tout
+commenter, jusqu'à l'évidence.
+\begin{Schunk}
+\begin{Verbatim}
+## calculer la somme de x
+z <- sum(x)
+\end{Verbatim}
+\end{Schunk}
+Cette pratique s'avère plus souvent qu'autrement contre-productive:
+non seulement force-t-elle le programmeur à passer du temps à rédiger
+des commentaires sans véritable utilité, mais elle surcharge également
+le code, le rendant de ce fait plus difficile à lire.
+
+Comme à peu près toute chose en ce monde, la meilleure solution
+
+\link{https://www.gnu.org/software/emacs/manual/html_node/elisp/Comment-Tips.html}{toto}
 
 \section{Gestion des versions}
 \label{sec:collaboration:git}
