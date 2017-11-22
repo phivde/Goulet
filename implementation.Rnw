@@ -65,7 +65,7 @@ fonction, mais qu'il est défini dans \code{f}. De plus, la fonction
 \code{g} utilise \code{y} sans que cet objet ne soit un de ses
 arguments. Dans les circonstances, quels seront, selon vous, les
 résultats des expressions suivantes et, surtout, pourquoi? Allez les
-essayer, nous attendrons ici.
+essayer, je vous attends ici.
 <<echo=TRUE, eval=FALSE>>=
 y <- 123
 f(10)
@@ -362,8 +362,8 @@ fonctions conçues pour être appelées depuis la ligne de commande. Par
 contre, la portée lexicale est très utile pour simplifier le code des
 fonctions créées à l'intérieur d'autres fonctions puisque nous pouvons
 faire l'économie de passer tous les arguments d'une fonction à
-l'autre. On trouvera un exemple complet dans le code informatique de la
-\autoref{sec:implementation:exemples}.
+l'autre. Vous trouverez un exemple complet dans le code informatique
+de la \autoref{sec:implementation:exemples}.
 
 
 \section{Évaluation paresseuse}

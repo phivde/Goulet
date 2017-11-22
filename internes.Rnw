@@ -40,13 +40,13 @@ L'un des aspects de R ayant sans aucun doute le plus contribué à son
 succès est la possibilité --- et la facilité --- d'ajouter des
 extensions au système de base par le biais de paquetages. Comme toute
 personne utilisant R sera un jour appelée à utiliser des paquetages,
-nous consacrons une section de ce chapitre à la mise en place d'une
-bibliothèque personnelle et à l'installation de paquetages.
+une section de ce chapitre est consacrée à la mise en place d'une bibliothèque
+personnelle et à l'installation de paquetages.
 
 \section{Opérateurs}
 \label{sec:internes:operateurs}
 
-Nous avons déjà présenté au \autoref{tab:bases:operateurs} à la
+Nous avons déjà rencontré au \autoref{tab:bases:operateurs} à la
 \autopageref{tab:bases:operateurs} les opérateurs mathématiques et
 logiques les plus fréquemment employés dans R. Rappelons qu'ils sont
 classés dans le tableau en ordre décroissant de priorité des
@@ -59,7 +59,7 @@ opérations.
   \verb|1|.}
 
 Comme la définition de la grande majorité des opérateurs coule de
-source, nous n'illustrons ici que les opérateurs de modulo et de
+source, je n'illustre ici que les opérateurs de modulo et de
 division entière.
 
 \begin{ttscript}{\%/\%}
@@ -76,11 +76,11 @@ division entière.
 \section{Fonctions utiles}
 \label{sec:internes:fonctions}
 
-Pour chaque fonction présentée dans cette section, nous fournissons un
+Pour chaque fonction présentée dans cette section, je fournis un
 ou deux exemples d'utilisation. Ces exemples sont loin de couvrir
 toutes les utilisations possibles d'une fonction. La
-\autoref{sec:internes:exemples} fournit des exemples additionnels. Nous
-recommandons de consulter également les rubriques d'aide des fonctions
+\autoref{sec:internes:exemples} fournit des exemples additionnels. Je
+recommande de consulter également les rubriques d'aide des fonctions
 pour connaître toutes leurs options.
 
 \subsection{Suites et répétition}
@@ -470,7 +470,7 @@ diag(2)
 Dans la terminologie de R, un \index{paquetage}\emph{paquetage}
 (\emph{package}\footnote{%
   L'équipe de traduction française de R a choisi de conserver le terme
-  anglais. Nous ne les suivons pas dans cette voie.}). %
+  anglais. Je ne les suis pas dans cette voie.}). %
 est un ensemble cohérent de fonctions, de jeux de données et de
 documentation. Les paquetages sont régroupés dans une
 \emph{bibliothèque} (\emph{library}).
@@ -533,7 +533,7 @@ library("\meta{paquetage}")
 \label{sec:internes:paquetages:library}
 
 Nous verrons à la \autoref{sec:internes:paquetages:install} comment
-ajouter des paquetages au système de base. Nous recommandons fortement
+ajouter des paquetages au système de base. Je recommande fortement
 de prévoir une bibliothèque personnelle pour contenir ces nouveaux
 paquetages. Tout d'abord, cela permet d'éviter les éventuels problèmes
 d'accès en écriture dans la bibliothèque principale, surtout sur des

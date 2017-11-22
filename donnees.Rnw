@@ -36,7 +36,7 @@ programme performant et un autre trop lent ou inapte à traiter des
 grandes quantités de données.
 
 Le modèle de données de R repose sur des structures abstraites et
-spécialisées que nous avons appelé des \emph{objets}. Jusqu'à
+spécialisées que nous avons appelées des \emph{objets}. Jusqu'à
 maintenant, nous n'avons étudié que le vecteur simple (\emph{atomic}).
 Il existe d'autres structures de données en R, mais leur mise en œuvre
 demeure tout à fait transparente pour les programmeuses et les
@@ -414,7 +414,7 @@ procédure universelle. C'est d'ailleurs pourquoi la documentation
 officielle de R consacre le manuel \emph{R Data Import/Export}
 \citep{R-data} à ce seul sujet.
 
-Nous ne traitons ici que de l'importation et de l'exportation de
+Nous ne traitons, ici, que de l'importation et de l'exportation de
 données sous forme de fichiers en format texte brut\footnote{%
   C'est-à-dire sans aucune mise en forme, comme les fichiers de
   script.}.

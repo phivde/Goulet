@@ -227,9 +227,9 @@ bubblesort(x)
 ##
 ## La seconde mise œuvre, ci-dessous, est rendue plus facile à
 ## suivre par l'utilisation d'une boucle 'repeat', qui est
-## toujours exécutée au moins une fois. Au passage, nous
-## inversons également le rôle de la variable indicatrice pour
-## éviter les déroutantes doubles négations.
+## toujours exécutée au moins une fois. Au passage, j'inverse
+## également le rôle de la variable indicatrice pour éviter
+## les déroutantes doubles négations.
 bubblesort <- function(x)
 {
     ind <- 2:length(x)      # sert souvent
@@ -266,9 +266,9 @@ bubblesort(x)
 ## Notre première mise en œuvre utilise une boucle pour passer
 ## à travers toutes les valeurs du vecteur. Elle est un peu
 ## plus générale que l'algorithme de Stephens (2013) dans la
-## mesure où elle fonctionne pour des nombres en 'min' et 'max'
-## plutôt que uniquement entre 0 et 'max'. (Nous répondons donc
-## en même temps à l'exercice 16.)
+## mesure où elle fonctionne pour des nombres entre 'min' et
+## 'max' plutôt que uniquement entre 0 et 'max'. (Nous
+## répondons donc en même temps à l'exercice 16.)
 ##
 ## La clé ici pour éviter certaines boucles de l'algorithme:
 ## la fonction 'rep' qui permet de répéter les valeurs d'un
@@ -346,9 +346,9 @@ linsearch(21, x)
 ## valeur recherchée et, sinon, à recommencer le même
 ## processus à partir de la valeur suivante du vecteur.
 ##
-## Nous proposons deux mises en œuvre. La première a recours à
-## une fonction auxiliaire qui garde le compte de la
-## progression dans le vecteur.
+## Je propose deux mises en œuvre. La première a recours à une
+## fonction auxiliaire qui garde le compte de la progression
+## dans le vecteur.
 ##
 ## Remarquez comment la portée lexicale de R fait en sorte que
 ## nous n'avons pas à passer les variables 'x', 'target' et
@@ -475,8 +475,8 @@ rbinsearch(21, x)
 
 ### EXERCICE 1 - Mise en œuvre récursive de la factorielle
 
-## Nous avons déjà donné cette fonction en exemple dans le
-## chapitre 2 du document de référence.
+## Cette fonction apparait déjà en exemple dans le chapitre 2
+## du document de référence.
 factorial <- function(n)
     if (n == 0) 1 else n * factorial(n - 1)
 

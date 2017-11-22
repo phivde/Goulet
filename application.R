@@ -247,9 +247,9 @@ apply(a, 1, prod)          # le résultat est un vecteur
 ## devenir confondante si l'on ne visualise pas les calculs
 ## qui sont réalisés.
 ##
-## Nous reprenons ici les exemples du chapitre en montrant
-## comment calculer le premier élément de chaque utilisation
-## de 'apply'.
+## Reprenons ici les exemples du chapitre en montrant comment
+## calculer le premier élément de chaque utilisation de
+## 'apply'.
 ##
 ## Au besoin, réviser l'indiçage des tableaux au chapitre 3.
 (x <- array(sample(0:10, 24, rep = TRUE), c(3, 4, 2)))
@@ -311,8 +311,8 @@ sapply(x, fun)             # aucune boucle explicite!
 ## EXEMPLES ADDITIONNELS SUR L'UTILISATION DE L'ARGUMENT
 ## '...' AVEC 'lapply' ET 'sapply'
 
-## Aux fins des exemples ci-dessous, nous créons d'abord une
-## liste formée de nombres aléatoires.
+## Aux fins des exemples ci-dessous, créons d'abord une liste
+## formée de nombres aléatoires.
 ##
 ## L'expression ci-dessous fait usage de l'argument '...' de
 ## 'lapply'. Pouvez-vous la décoder? Nous y reviendrons plus

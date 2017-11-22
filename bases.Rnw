@@ -24,7 +24,7 @@ options(width=52)
 \end{objectifs}
 
 C'est dans ce chapitre que nous débutons réellement l'apprentissage de
-la programmation. Avouons-le d'entrée de jeu: notre présentation a
+la programmation. Je l'avoue d'entrée de jeu: la présentation a
 fortement été influencée par l'ouvrage magistral de
 \cite{Sussman:scheme:1996}.
 
@@ -235,7 +235,7 @@ ligne. Il est également possible de séparer les commandes par un
 points-virgules à la fin de chaque ligne de code --- est considéré
 comme du mauvais style, surtout dans les fichiers de script. Le
 point-virgule peut être utile pour séparer deux courtes expressions ou
-plus sur une même ligne. C'est le seul emploi que nous faisons du
+plus sur une même ligne. C'est le seul emploi que je fais du
 point-virgule.
 <<echo=TRUE>>=
 a <- 5; a + 2
@@ -277,7 +277,7 @@ Les caractères permis pour les noms d'objets sont les lettres
 minuscules a--z et majuscules A--Z, les chiffres 0--9, le point «.» et
 le caractère de soulignement «\_». Selon l'environnement linguistique
 de l'ordinateur, il peut être permis d'utiliser des lettres accentuées
-dans les noms d'objet, mais nous recommandons fortement d'éviter cette
+dans les noms d'objet, mais je recommande fortement d'éviter cette
 pratique qui nuit à la portabilité du code. Le nom d'un objet ne peut
 débuter par un chiffre. Si le nom débute par un point, alors le second
 caractère ne peut être un chiffre.
@@ -726,7 +726,7 @@ c(0, 5, -1) & TRUE
 
 Nous avons mentionné au début de la \autoref{sec:bases:fondamentales}
 qu'un langage de programmation doit fournir un mécanisme d'abstraction
-pour utiliser les éléments composés. La possibilité que nous offre R
+pour utiliser les éléments composés. La possibilité qu'offre R
 de définir des objets contenant des valeurs constitue une première
 technique. La définition de \emph{fonctions} (le nom que nous
 donnerons dorénavant au concept de procédure) est une technique
@@ -866,9 +866,9 @@ f()
   arbitraire d'arguments. La fonction y ayant recours se trouve donc à
   accepter un nombre variable d'arguments. On utilise généralement
   `\code{...}' pour passer des arguments tels quels à une autre fonction
-  qui, elle, saura quoi faire de ces arguments. On trouvera un meilleur
-  exemple à la \autoref{sec:bases:exemples} que ce que nous pourrions faire
-  ici en quelques lignes.
+  qui, elle, saura quoi faire de ces arguments. Vous trouverez un
+  meilleur exemple à la \autoref{sec:bases:exemples} que ce que nous
+  pourrions faire ici en quelques lignes.
 
 \item \meta{corps} est une expression ou un groupe d'expressions
   réunies par des accolades, tel qu'expliqué à la
@@ -942,7 +942,7 @@ la fonction à un objet.
 
 \cautionbox{Il existe une fonction \icode{return} pour terminer
   immédiatement l'exécution d'une fonction et retourner un résultat;
-  nous la présenterons avec les structures de contrôle au
+  nous l'étudierons plus formellement avec les structures de contrôle au
   \autoref{chap:application}. Cependant, l'utilisation de
   \code{return} à la toute fin d'une fonction est tout à fait inutile
   et c'est considéré comme du mauvais style en R.}

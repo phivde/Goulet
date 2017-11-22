@@ -104,7 +104,7 @@ else
 
 \warningbox{Il tombe sous le sens que «vrai» est vrai, n'est-ce pas?
   Prenez donc garde de ne pas écrire des expressions qui reviennent à
-  tester \verb|if (TRUE == TRUE)|. Oui, nous avons souvent rencontré
+  tester \verb|if (TRUE == TRUE)|. Oui, j'ai souvent rencontré
   de telles constructions!}
 
 Pour choisir entre plus de deux possibilités, il est possible
@@ -193,8 +193,8 @@ en intelligence artificielle.\footnote{%
   Si l'on définit plus largement l'itération comme la répétition d'un
   bloc d'instructions, alors la récursivité n'est qu'une forme
   d'itération. Il est toutefois d'usage en informatique de distinguer
-  les procédures itératives des procédures récursives comme nous le
-  faisons ici.}
+  les procédures itératives des procédures récursives comme je le
+  fais ici.}
 
 Nous reviendrons sur la récursivité à la
 \autoref{sec:application:recursivite}. La présente section étudie les
@@ -440,8 +440,8 @@ pas assez grand, vous sortez un plat pouvant contenir deux biscuits,
 vous changez le premier biscuit de plat et vous y rangez aussi le
 second biscuit. Arrivés au troisième biscuit, le petit manège
 recommence, et ainsi de suite jusqu'à ce que le plateau de biscuits
-soit épuisé. C'est ce que nous nommerons, non sans un sourire en coin,
-le Syndrôme de la plaque à
+soit épuisé. C'est ce que je nomme, non sans un sourire en coin, le
+Syndrôme de la plaque à
 biscuits{\texttrademark}\index{syndrome@Syndrôme de la plaque à
   biscuits}\index{biscuits|see{Syndrôme de la plaque à biscuits}}.
 
@@ -813,7 +813,7 @@ tapply(x$score, x$couleur, mean)
 \subsection{Produit extérieur}
 \label{sec:application:application:outer}
 
-Nous étirons quelque peu le concept de fonction d'application pour
+J'étire quelque peu le concept de fonction d'application pour
 discuter ici de la fonction de produit extérieur \code{outer}. Ce
 n'est pas la fonction la plus intuitive à utiliser, mais elle s'avère
 extrêmement utile pour effectuer plusieurs opérations en une seule
@@ -1136,7 +1136,7 @@ rpareto <- function(n, shape, scale)
     tailles $100$, $150$, $200$, $250$ et $300$ d'une loi de Pareto
     avec $\alpha = 2$ et $\lambda = \nombre{5000}$. Les échantillons
     aléatoires devraient être stockés dans une liste.
-  \item Nous vous donnons l'exemple suivant d'utilisation de la
+  \item Vous disposez de l'exemple suivant d'utilisation de la
     fonction \icode{paste}:
 <<echo=TRUE>>=
 paste("a", 1:5, sep = "")

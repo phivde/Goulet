@@ -182,7 +182,7 @@ du système d'exploitation. Aucune interface graphique n'est offerte
 avec la distribution de base de R.
 
 Peu importe la plateforme utilisée --- quoique dans une moindre mesure
-sous macOS --- nous recommandons d'interagir avec R par le biais d'un
+sous macOS --- je recommande d'interagir avec R par le biais d'un
 éditeur de texte pour programmeur ou d'un environnement de
 développement intégré; voir la \autoref{sec:presentation:editeurs}.
 
@@ -344,7 +344,7 @@ d'autres. Voici quelques bons choix.
   Logiciel libre dans sa version pour ordinateur personnel, RStudio
   est disponible pour les plateformes Windows, macOS et Linux.
   L'\autoref{chap:rstudio} propose une introduction à RStudio.
-\item Dans la catégorie des éditeurs de texte, nous recommandons le
+\item Dans la catégorie des éditeurs de texte, je recommande le
   vénérable et très puissant éditeur pour programmeur
   GNU~Emacs\index{Emacs}. À la question~6.2 de la foire aux questions
   de R \citep{R-FAQ}, «Devrais-je utiliser R à l'intérieur de
@@ -376,7 +376,7 @@ d'autres. Voici quelques bons choix.
   pour y faire ses premiers pas.
 \item Il existe plusieurs autres options pour éditer efficacement du
   code R --- et le Bloc-notes de Windows n'en fait \emph{pas} partie!
-  Nous recommandons plutôt:
+  Je recommande plutôt:
   \begin{itemize}
   \item sous Windows, l'éditeur Notepad++\index{Notepad++} additionné
     de l'extension NppToR \citep{NppToR}, tous deux des logiciels
