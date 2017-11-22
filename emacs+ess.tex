@@ -50,13 +50,13 @@ qui ne se fait pas avec une souris.
 Emacs s'adapte à différentes tâches par l'entremise de \emph{modes}
 qui modifient son comportement ou lui ajoutent des fonctionnalités.
 
-L'un de ces modes est ESS (\emph{Emacs Speaks Statistics}). ESS permet
-d'interagir avec des logiciels statistiques (en particulier R, S+ et
-SAS) directement depuis Emacs. Quelques-uns des développeurs de ESS
-sont aussi des développeurs de R, d'où la grande compatibilité entre
-les deux logiciels. Lorsque ESS est installé, le mode est activé
-automatiquement en ouvrant dans Emacs un fichier dont le nom se
-termine par l'extension \code{.R}.
+L'un de ces modes est ESS \citep[\emph{Emacs Speaks
+  Statistics},][]{ESS}. ESS permet d'interagir avec des logiciels
+statistiques (en particulier R, S+ et SAS) directement depuis Emacs.
+Quelques-uns des développeurs de ESS sont aussi des développeurs de R,
+d'où la grande compatibilité entre les deux logiciels. Lorsque ESS est
+installé, le mode est activé automatiquement en ouvrant dans Emacs un
+fichier dont le nom se termine par l'extension \code{.R}.
 
 
 \section{Installation}
@@ -338,6 +338,11 @@ principales commandes à connaitre sont les suivantes:
 \end{ttscript}
 Les quelques autres fonctions utiles sont:
 \begin{ttscript}{C-x C-w}
+\item[\code{\_}] insérer le symbole d'affectation \verb*| <- | (sauf
+  dans les champs texte et dans les commentaires);
+  appuyer deux fois consécutives pour obtenir le caractère de
+  soulignement \newline
+  (\code{ess-smart-S-assign})
 \item[\code{C-c C-z}] déplacer le curseur vers le processus R \newline
   (\code{ess-switch-to-inferior-or-script-buffer})
 \item[\code{C-c C-f}] évaluer le code de la fonction courante dans
