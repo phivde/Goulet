@@ -46,8 +46,8 @@ sûr et automatiquement la plus récente version d'un fichier? Ce genre
 de questions, auxquelles quiconque a déjà travaillé en équipe sur un
 projet a déjà été confronté, les informaticiens y ont répondu depuis
 de très nombreuses années avec les systèmes de gestion de versions.
-Nous offrons, dans ce chapitre, une courte introduction à ces outils
-de développement incontournables avant de diriger les lecteurs vers la
+J'offre, dans ce chapitre, une courte introduction à ces outils de
+développement incontournables avant de vous diriger vers la
 documentation officielle du système de gestion le plus utilisé dans le
 monde en ce moment: Git.
 
@@ -71,8 +71,8 @@ un juste équilibre entre les trois pôles.
 \citet{Kernighan:practice:1999},
 \citet{Oualline:C:1997,Oualline:C++:2003},
 \citet{Kernighan:style:1978} proposent d'excellents chapitres sur le
-style en programmation. Nous se saurions être aussi exhaustif que ces
-auteurs établis. Néanmoins, nous vous incitons à porter une attention
+style en programmation. Je ne saurais être aussi exhaustif que ces
+auteurs établis. Néanmoins, je vous incite à porter une attention
 particulière aux quelques points de style livrés en vrac, ci-dessous.
 
 \begin{itemize}
@@ -81,7 +81,7 @@ particulière aux quelques points de style livrés en vrac, ci-dessous.
   et \code{xxx} (cas vécu). Attention, toutefois, de ne pas pousser le
   concept trop loin. Ici comme ailleurs, la clarté peut provenir de la
   concision; la terminologie\footnote{%
-    Vous remarquerez que nous préférons utiliser l'anglais pour les
+    Vous remarquerez que je préfère utiliser l'anglais pour les
     noms d'objets, question d'uniformité avec les identificateurs du
     langage. Chose certaine, évitez à tout prix les accents dans les
     noms d'objets.}
@@ -223,88 +223,186 @@ z <- sapply(x, mean)
 \end{itemize}
 
 
-\section{Commentaires}
-\label{sec:collaboration:commentaires}
-
-
 \section{Présentation du code}
 \label{sec:collaboration:presentation}
 
-Si tous conviennent que l'adoption d'un style propre et uniforme
-favorise le développement et la lecture de code, il existe plusieurs
-chapelles dans le monde des programmeurs quant à la «bonne façon» de
-présenter et, surtout, d'indenter le code informatique.
+Le code bien mis en forme est plus facile et agréable à consulter. Il
+existe plusieurs chapelles dans le monde des programmeurs quant à la
+«bonne façon» de présenter et, surtout, d'indenter le code
+informatique.
 
-Par exemple, Emacs\index{Emacs} reconnaît et supporte les styles de
-codage suivants, entre autres:
-\begin{center}
-  \begin{minipage}[t]{9cm}
-    C++/Stroustrup
-    \hfill
-    \begin{minipage}[t]{5cm}
-\begin{verbatim}
+Voyons d'abord ce qui rallie tout le monde.
+
+En premier lieu, veillez à limiter la longueur des lignes de code à
+environ 80 caractères. Ce standard remonte à l'époque des terminaux en
+format texte qui ne pouvaient afficher de l'information que sur 80
+colonnes. Pourquoi s'y tenir encore aujourd'hui, alors que nos écrans
+d'ordinateur sont très larges? Parce que les longues lignes de texte
+sont difficile à suivre, notre œil ayant tendance à sauter à la ligne
+inférieure en se déplaçant de la gauche vers la droite\footnote{%
+  C'est pourquoi les journaux et les magazines sont composés en
+  colonnes de texte étroites.}. %
+Profitez donc plutôt de l'espace horizontal à l'écran pour afficher
+des fenêtres côte-à-côte.
+
+Si de multiples niveaux d'indentation (voir plus bas) font en sorte
+qu'il manque de place à droite pour écrire du code, le problème n'est
+peut-être pas tant la limite sur la longueur des lignes que la
+conception même du programme. Simplifiez l'algorithme ou scindez le
+programme en plusieurs fonctions.
+
+Ensuite, aérez le code avec des lignes blanches entre les blocs
+logiques et, surtout, avec des espaces. Les espaces en programmation
+jouent le même rôle que dans du texte normal: elles facilitent la
+lecture. En particulier, utilisez des espaces dans les circonstances
+suivantes:
+\begin{itemize}
+\item de part et d'autre du symbole d'affectation \icode{<-}; ces
+  espaces sont ajoutées automatiquement avec les raccourcis clavier
+  des éditeurs spécialisés GNU~Emacs
+  (\autoref{sec:emacs+ess:commandes:script}) et RStudio
+  (\autoref{sec:rstudio:commandes});
+\item de part et d'autre de tous les opérateurs\footnote{%
+    Sauf peut-être la division: je préfère \code{(x + y)/z} à \code{(x
+      + y) / z}.};
+\item après les virgules;
+\item avant la parenthèse ouvrante \code{(}, sauf dans les appels de
+  fonction.
+\end{itemize}
+Comparez les deux blocs de code de la
+\autoref{fig:collaboration:espaces}. Vous serez sans doute d'accord
+que celui qui respecte les indications ci-dessus s'avère bien plus
+lisible.
+
+\begin{figure}
+  \begin{minipage}{0.48\linewidth}
+    \begin{Schunk}
+\begin{Verbatim}
+f<-function(x,y)
+{
+    if(y<0)
+        y<--y
+    x*(1+x*y)^2
+}
+\end{Verbatim}
+    \end{Schunk}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.48\linewidth}
+    \begin{Schunk}
+\begin{Verbatim}
+f <- function(x, y)
+{
+    if (y < 0)
+        y <- -y
+    x * (1 + x * y)^2
+}
+\end{Verbatim}
+    \end{Schunk}
+  \end{minipage}
+  \caption{Blocs de code sans (à gauche) et avec (à droite) les
+    espaces appropriées. Le code de droite est plus lisible.}
+  \label{fig:collaboration:espaces}
+\end{figure}
+
+Passons maintenant au dossier chaud parmi les programmeurs:
+l'indentation du code et la position des accolades. Tous s'entendent
+au moins sur un point: il est absolument essentiel d'indenter les
+blocs de code pour mettre la structure d'un programme en évidence. En
+clair, cela signifie que toute expression --- ou groupe d'expressions
+entre accolades --- doit être placé en retrait de la marge de gauche
+dès lors qu'elle fait partie d'une structure de contrôle ou de la
+définition d'une fonction. Le code de la
+\autoref{fig:collaboration:espaces} est correctement indenté.
+
+\importantbox{Ne pas du tout indenter son code est passible de la
+  peine capitale, d'excommunication, de bannissement de la Terre du
+  Milieu\dots\ choisissez votre châtiment.}
+
+La source des insolubles débats se situe, comme souvent, dans les
+détails: le nombre d'espaces dont il convient d'indenter le code et la
+position des accolades, surtout l'accolade ouvrante. À titre
+d'exemples, l'éditeur GNU~Emacs\index{Emacs} reconnaît et supporte au
+moins les styles d'indentation suivants:
+
+\vspace{\topsep}\noindent
+\begin{minipage}{\linewidth}
+  \begin{minipage}[t]{0.48\linewidth}
+    C++
+    \begin{Schunk}
+\begin{Verbatim}
 for (i in 1:10)
 {
     expression
 }
-\end{verbatim}
-    \end{minipage}
+\end{Verbatim}
+    \end{Schunk}
   \end{minipage}
-  \vspace{\baselineskip}
-
-  \begin{minipage}[t]{9cm}
-    K\&R (1TBS)
-    \hfill
-    \begin{minipage}[t]{5cm}
-\begin{verbatim}
+  \hfill
+  \begin{minipage}[t]{0.48\linewidth}
+    K\&R (1TBS\footnotemark)
+    \begin{Schunk}
+\begin{Verbatim}
 for (i in 1:10){
      expression
 }
-\end{verbatim}
-    \end{minipage}
+\end{Verbatim}
+    \end{Schunk}
   \end{minipage}
-  \vspace{\baselineskip}
+\end{minipage}
+\footnotetext{\emph{One True Bracing Style}. C'est dire
+  combien les amateurs de ce style le tiennent en haute estime.}
 
-  \begin{minipage}[t]{9cm}
+\vspace{\topsep}\noindent
+\begin{minipage}{\linewidth}
+  \begin{minipage}[t]{0.48\linewidth}
     Whitesmith
-    \hfill
-    \begin{minipage}[t]{5cm}
-\begin{verbatim}
+    \begin{Schunk}
+\begin{Verbatim}
 for (i in 1:10)
      {
      expression
      }
-\end{verbatim}
-    \end{minipage}
+\end{Verbatim}
+    \end{Schunk}
   \end{minipage}
-  \vspace{\baselineskip}
-
-  \begin{minipage}[t]{9cm}
+  \hfill
+  \begin{minipage}[t]{0.48\linewidth}
     GNU
-    \hfill
-    \begin{minipage}[t]{5cm}
-\begin{verbatim}
+    \begin{Schunk}
+\begin{Verbatim}
 for (i in 1:10)
   {
     expression
   }
-\end{verbatim}
-    \end{minipage}
+\end{Verbatim}
+    \end{Schunk}
   \end{minipage}
-\end{center}
+\end{minipage}
+\vspace{\bottomsep}
 
+Le code source de R est entièrement composé dans un style analogue aux
+style C++, ci-dessus, ou RRR du \index{Emacs!mode ESS}mode ESS de Emacs:
 \begin{itemize}
-\item Pour des raisons générales de lisibilité et de popularité, le
-  style C++, avec les accolades sur leurs propres lignes et une
-  indentation de quatre (4) espaces est considéré comme standard pour
-  la programmation en R.
-% \item La version de GNU~Emacs distribuée par l'auteur est déjà
-%   configurée pour utiliser ce style de codage.
-\item Consulter la documentation de votre éditeur de texte pour savoir
-  s'il est possible de configurer le niveau d'indentation. La plupart des
-  bons éditeurs pour programmeurs le permettent.
-\item Surtout, éviter de ne pas du tout indenter le code.
+\item le code est indenté de quatre (4) espaces;
+\item les accolades ouvrante et fermante sont placées sur leurs
+  propres lignes.
 \end{itemize}
+Ce style peut être  considéré comme standard pour la programmation en
+R.
+
+En définitive, le style d'indentation utilisé n'a pas tellement
+d'importance. Ce qui compte, c'est de se conformer au style en vigueur
+dans son domaine et de demeurer constant au fil de son code.
+
+\tipbox{Les bons éditeurs pour programmeurs permettent de configurer
+  le niveau d'indentation. Consultez la documentation de votre
+  éditeur.}
+
+
+\section{Commentaires}
+\label{sec:collaboration:commentaires}
+
 
 
 \section{Gestion des versions}
