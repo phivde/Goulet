@@ -99,7 +99,7 @@ length_of_x <- length(x)
   et bien plus simple à utiliser au fil d'un programme.
 
   Certains noms d'objets sans réelle signification sont tellement
-  usuels qu'il est contre-productif de leur préférer des versions plus
+  usuels qu'il est contre productif de leur préférer des versions plus
   explicites. Pensons, ici, à \code{x} comme premier argument d'une
   fonction R ou à \code{i}, \code{j} et \code{k} comme compteurs dans
   les boucles \icode{for}.
@@ -424,7 +424,7 @@ commenter, jusqu'à l'évidence.
 z <- sum(x)
 \end{Verbatim}
 \end{Schunk}
-Cette pratique s'avère plus souvent qu'autrement contre-productive:
+Cette pratique s'avère plus souvent qu'autrement contre productive:
 non seulement force-t-elle le programmeur à passer du temps à rédiger
 des commentaires sans véritable utilité, mais elle surcharge également
 le code, le rendant de ce fait plus difficile à lire.
@@ -474,7 +474,7 @@ d'exemples du présent document, j'ai utilisé la
   alignés sur une colonne à droite du code source. Ils servent à
   expliquer ce qu'effectue une ligne de code.
 \item Les commentaires qui débutent par deux carrés, \code{\#\#}, sont
-  alignés sur le niveau d'indention courant. Lorsqu'ils apparaissent à
+  alignés sur le niveau d'indentation courant. Lorsqu'ils apparaissent à
   l'intérieur d'une fonction, ils décrivent le rôle du bloc de code qui
   suit ou l'état de la fonction à ce stade. À l'extérieur des
   fonctions, ils marquent des sous-sections du code source.
@@ -485,9 +485,9 @@ d'exemples du présent document, j'ai utilisé la
 \end{itemize}
 
 L'éditeur \index{RStudio}RStudio, de son côté, utilise par défaut les
-niveaux de titres de
+niveaux de titres du langage de balisage
 \link{https://daringfireball.net/projects/markdown/syntax}{Markdown},
-dont la hiéararchie est exactement l'inverse de celle de Emacs. Ainsi,
+dont la hiérarchie est exactement l'inverse de celle de Emacs. Ainsi,
 les commentaires de premier niveau sont ceux qui débutent par un seul
 carré, \code{\#}; les commentaires de deuxième niveau débutent par
 deux carrés, \code{\#\#}, etc.
@@ -496,6 +496,215 @@ deux carrés, \code{\#\#}, etc.
 \section{Gestion des versions}
 \label{sec:collaboration:git}
 
+Un système de gestion de versions gère l'ensemble des versions --- ou
+\emph{révisions} --- d'un ou plusieurs fichiers, normalement en format
+texte. Dans le monde de la programmation, un tel système se charge du
+maintient du code source d'un projet logiciel. Il enregistre la
+nature, la date et l'auteur de chaque révision apportée à un fichier
+et il permet ensuite de retourner à des révisions précédentes, de
+comparer des révisions entre elles ou de fusionner des révisions.
+
+Outil incontournable en contexte de travail collaboratif, le système
+de gestion de version permet de régler les problèmes de suivi de la
+plus récente version d'un fichier, de partage de fichiers entre les
+membres d'une équipe et de mise en commun des contributions. Comme les
+versions successives sont entreposées dans un référentiel situé sur un
+serveur central, le système fournit également une forme de copie de
+sauvegarde du code source d'un projet.
+
+\tipbox{L'utilisation d'un système de gestion de versions vaut le coup
+  même pour vos projets strictement individuels, ce serait-ce que pour
+  les volets de copie de sauvegarde et de suivi des versions.}
+
+Les systèmes de contrôle de version de première génération ont vu le
+jour dans les années 1970 et 1980:
+\link{https://fr.wikipedia.org/wiki/Source_Code_Control_System}{\emph{Source
+    Code Control System}} (SCCS, 1972),
+\link{https://fr.wikipedia.org/wiki/GNU_RCS}{\emph{Revision Control
+    System}} (RCS, 1982). Ces systèmes ne permettaient pas de
+travailler à plusieurs à la fois sur un même fichier. Cette barrière a
+été levée par les systèmes centralisés de seconde génération qui ont
+pu se développer grâce à l'accès de plus en plus généralisé à la
+réseautique --- notamment à Internet --- au cours des années 1990 et
+2000. Pendant plus d'une décennie, le système libre
+\link{https://fr.wikipedia.org/wiki/Concurrent_versions_system}{\emph{Concurrent
+    Versions System}} (CVS, 1990) a régné sur le monde de la gestion
+de versions, jusqu'à l'arrivée de
+\link{https://fr.wikipedia.org/wiki/Apache_Subversion}{\emph{Apache
+    Subversion}} (SVN, 2000). Construit selon les mêmes principes que
+CVS et compatible avec lui, Subversion se voulait surtout une
+meilleure implémentation d'un système de gestion de version
+centralisé. Le système est rapidement devenu le standard \emph{de
+  facto}, si bien que le code source de plusieurs projets
+informatiques est toujours administré avec Subversion.
+
+Par leur nature, les systèmes centralisés requièrent un accès au
+serveur central pour toute opération de publication d'une modification
+à un fichier. C'est pour lever cette contrainte que sont apparus, au
+milieu des années 2000, les systèmes de gestion de version distribués.
+Les principaux représentants de cette troisième génération de systèmes
+sont \link{https://fr.wikipedia.org/wiki/Git}{\emph{Git}} (2005),
+\link{https://fr.wikipedia.org/wiki/Mercurial}{\emph{Mercurial}} (hg,
+2005) et
+\link{https://fr.wikipedia.org/wiki/Bazaar_(logiciel)}{\emph{Bazaar}}
+(bzr, 2005).
+
+Git a été développé à l'origine par Linus Torvalds pour administrer le
+code source du noyau du système d'exploitation Linux. Le système a
+connu une popularité foudroyante, notamment grâce à GitHub, un site
+d'hébergement de projets libres basé sur Git et doté d'une interface
+particulièrement conviviale. Résultat: Git est aujourd'hui le système
+de gestion de versions le plus utilisé dans le monde.
+
+Après cette entrée en matière, je vous renvois, chère lectrice et cher
+lecteur, vers la documentation officielle de Git pour en apprendre les
+rudiments. Étant donné le niveau de qualité de l'ouvrage libre
+\emph{Pro Git} \citep{ProGit:2e:2014}, je ne pourrais que faire moins
+bien.
+
+Pour atteindre les objectifs d'apprentissage fixés en entête de
+chapitre, vous devrez couvrir les sections suivantes de \emph{Pro Git}:
+\begin{itemize}
+\item chapitre 1, toutes les sections;
+\item chapitre 2, sections 2.1, 2.2 et 2.5 (2.3 et 2.4 étant
+  optionnelles, mais utiles);
+\item chapitre 3, sections 3.1, 3.2 et 3.3.
+\end{itemize}
+
+Bonne lecture!
+
+\section{Exemples}
+\label{sec:collaboration:exemples}
+
+\def\scriptfilename{collaboration.R}
+
+\scriptfile{\scriptfilename}
+\lstinputlisting[firstline=13]{\scriptfilename}
+
+
+\section{Exercices}
+\label{sec:collaboration:exercices}
+
+\Opensolutionfile{solutions}[solutions-collaboration]
+
+\begin{Filesave}{solutions}
+\section*{Chapitre \ref*{chap:collaboration}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:collaboration}}
+
+\end{Filesave}
+
+\begin{exercice}[nosol]
+  Configurer votre éditeur de texte pour indenter le code R de quatre
+  (4) caractères. Dans RStudio, ouvrir le panneau des options
+  globales, sélectionner la catégorie \code{Code} et inscrire la
+  valeur \code{4} dans le champs \code{Tab width} (voir la
+  \autoref{fig:collaboration:rstudio-tab-width}).
+  \begin{figure}
+    \centering
+    \includegraphics{rstudio-tab-width}
+    \caption{Configuration de RStudio pour indenter le code de quatre
+      caractères}
+    \label{fig:collaboration:rstudio-tab-width}
+  \end{figure}
+\end{exercice}
+
+\begin{exercice}
+  Présenter le code ci-dessous selon les normes d'espacement,
+  d'indentation et de positionnement des accolades mentionnées à la
+  \autoref{sec:collaboration:presentation}. Pour ajuster
+  automatiquement l'indentation avec RStudio, sélectionner le bloc de
+  code et choisir dans les menus \code{Code|Reformat Code}.
+
+\begin{Schunk}
+\begin{Verbatim}
+f <- function(x){
+  if(all(x>=0)|| all(x<=0))
+  { stop("all x are the same sign")
+  }
+  if (sum(diff(sign(x[x!=0]))!=0)>1)
+  warning("more than one sign change")
+ r<-polyroot(x)
+i<-1/Re(r)[abs(Im(r))< .Machine$double.eps^0.5]-1
+i[i > -1]
+}
+\end{Verbatim}
+\end{Schunk}
+\begin{sol}
+  La présentation correcte comporte des espaces autour de tous les
+  opérateurs, une indentation de quatre (4) caractères et des
+  accolades ouvrante et fermante placées sur leur propre ligne.
+\begin{Schunk}
+\begin{Verbatim}
+tri <- function(x)
+{
+    if (all(x >= 0) || all(x <= 0))
+    {
+        stop("tous les flux financiers sont du même signe")
+    }
+    if (sum(diff(sign(x[x != 0])) != 0) > 1)
+        warning("plus d'un changement de signe dans les flux nets\n  le taux de rendement peut ne pas être unique")
+    r <- polyroot(x)
+    i <- 1/Re(r)[abs(Im(r)) < .Machine$double.eps^0.5] - 1
+    i[i > -1]
+}
+\end{Verbatim}
+\end{Schunk}
+\end{sol}
+\end{exercice}
+
+\begin{exercice}[nosol]
+  Suivre le tutoriel interactif \link{https://try.github.io/}{tryGit}
+  pour vous familiariser avec les commandes principales de Git.
+\end{exercice}
+
+\begin{exercice}[nosol]
+  Créer un compte chez \link{https://github.com}{GitHub}, puis créer
+  un «embranchement» (\emph{fork}) du projet test
+  \link{https://github.com/octocat/Spoon-Knife}{Spoon-Knife} depuis
+  l'interface graphique de GitHub. Vous disposerez alors d'une copie
+  de ce projet dans vos propres projets. Effectuer ensuite les
+  opérations suivantes.
+  \begin{enumerate}
+  \item Cloner le projet sur votre poste de travail.
+  \item Créer une branche locale pour effectuer une modification au
+    projet.
+  \item Modifier le fichier \code{index.html} d'une manière
+    quelconque.
+  \item Publier localement la modification dans la branche.
+  \item Publier la branche dans le dépôt GitHub.
+  \item Effectuer une «demande de tirage» (\emph{pull request}) dans
+    le projet original à partir de l'interface de GitHub. Comme il
+    s'agit d'un dépôt test, elle sera ignorée.
+  \end{enumerate}
+
+  \begin{sol}
+    Pour créer l'embranchement (\emph{fork}), il suffit d'appuyer sur
+    le bouton \code{Fork} en haut à droite de la page
+    \link{https://github.com/octocat/Spoon-Knife}{Spoon-Knife}.
+    Ensuite, les commandes à exécuter depuis une ligne de commande Git
+    Bash (Windows) ou Terminal (macOS) sont les suivantes, dans
+    l'ordre:
+\begin{Schunk}
+\begin{Verbatim}[commentchars=\\\{\}]
+git clone https://github.com/\meta{username}/Spoon-Knife.git
+cd Spoon-Knife
+git checkout -b \meta{nom_branche}
+\meta{modifier le fichier index.html avec son éditeur}
+git status
+git add index.html
+git commit -m "\meta{message}"
+git push -u origin \meta{nom_branche}
+\end{Verbatim}
+\end{Schunk}
+    Enfin, retourner sur la page du projet d'origine et appuyer sur le
+    bouton \code{Compare \& pull request} et suivre les instructions.
+    Votre demande de tirage devrait ensuite apparaitre dans la liste
+    de toutes les demandes du projet (plus de \nombre{5000} au moment
+    d'écrire ces lignes).
+  \end{sol}
+\end{exercice}
+
+\Closesolutionfile{solutions}
 
 
 %%% Local Variables:
