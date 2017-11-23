@@ -86,6 +86,7 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 #### Nouveautés
 
+- Chapitre 8 - Travail collaboratif
 - Exemples d'utilisation de `mapply` et de `tapply` dans `application.R`.
 - Texte additionnel dans la section sur la fonction `outer` dans `application.R`.
 - Référence à Oualline (1997) à la fin de la section 1.1.
@@ -96,6 +97,7 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 - Des notes de développement avaient été oubliées au début du chapitre 6. Note à moi-même: les faire en commentaires la prochaine fois.
 - Lien vers la nouvelle version (du 2017-11-15) de la vidéo sur la fonction `apply`.
 - Libellé de la section 6.6.4 changé pour «Fonction d'application pour groupes de données».
+- Plus de place faite au «je» dans le texte (plutôt qu'au «nous»).
 
 ### 2017.11-1 (2017-11-07)
 
