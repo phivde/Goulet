@@ -82,7 +82,7 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 ## Historique des versions
 
-### (en développement)
+### 2017.11-2 (2017-11-23)
 
 #### Nouveautés
 
