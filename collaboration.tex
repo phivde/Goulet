@@ -403,20 +403,20 @@ dans son domaine et de demeurer constant au fil de son code.
 \section{Commentaires}
 \label{sec:collaboration:commentaires}
 
-Les commentaires dans le code servent à guider le lecteur (ou
-vous-même, quelque temps après la rédaction) dans la lecture d'un
-programme. Le niveau de détails que devraient comporter les
-commentaires fait, comme le style d'indentation, l'objet de vifs
+Les commentaires dans le code servent à guider le lecteur ---
+peut-être vous-même, quelque temps après la rédaction --- dans la
+lecture d'un programme. Le niveau de détails que devraient comporter
+les commentaires fait, comme le style d'indentation, l'objet de vifs
 débats.
 
 Certains affirment qu'un bon programme se passe d'explications et que,
-par conséquent, les commentaires sont en large partie inutiles. C'est
-faux. Comme \citet{Oualline:C:1997} le mentionne, un programme sans
-commentaires constitue une bombe qui n'attend que d'exploser. Un jour
-ou l'autre, quelqu'un devra modifier ledit programme et l'absence de
+par conséquent, les commentaires sont en grande partie inutiles. Or,
+comme le mentionne \citet{Oualline:C:1997}, un programme sans
+commentaires constitue une bombe en attente d'exploser. Un jour ou
+l'autre, quelqu'un devra modifier ledit programme et l'absence de
 commentaires rendra la tâche beaucoup plus ardue que nécessaire.
 
-À l'autre bout du spectre, on trouve les tenants de tout, tout
+À l'autre bout du spectre, on trouve les tenants du tout, tout
 commenter, jusqu'à l'évidence.
 \begin{Schunk}
 \begin{Verbatim}
@@ -429,9 +429,69 @@ non seulement force-t-elle le programmeur à passer du temps à rédiger
 des commentaires sans véritable utilité, mais elle surcharge également
 le code, le rendant de ce fait plus difficile à lire.
 
-Comme à peu près toute chose en ce monde, la meilleure solution
+Comme bien des choses en ce monde, la meilleure solution se trouve
+dans le juste milieu: commenter ni trop, ni trop peu. Les quelques
+préceptes suivants, dont certains sont tirés de
+\citet{Kernighan:practice:1999}, devraient vous aider à trouver un
+juste équilibre.
 
-\link{https://www.gnu.org/software/emacs/manual/html_node/elisp/Comment-Tips.html}{toto}
+\begin{itemize}
+\item Documentez non pas ce que \emph{fait} le programme, mais
+  \emph{pourquoi} il le fait. Lire qu'un bloc de code effectue tel
+  calcul s'avère de peu de secours si l'on ne sait pas dans quel but
+  le calcul est effectué.
+\item N'enfoncez pas de portes ouvertes. Indiquer que l'expression
+  \code{i <- i + 1} incrémente le compteur \code{i} n'est pas utile.
+  Les commentaires doivent fournir de l'information qui ne saute pas
+  aux yeux ou qui se trouve éparpillée dans le code.
+\item Définissez ce que fait chaque fonction, la nature de ses
+  arguments et la valeur retournée. Si une fonction R fait partie d'un
+  paquetage, vous devrez nécessairement placer ces informations dans
+  l'obligatoire rubrique d'aide de la fonction. Autrement, placez ces
+  informations en commentaires avant la définition de la fonction.
+  Vous devriez pouvoir expliquer ce que fait une fonction en une
+  phrase.
+\item Éclairez les zones d'ombre, ne les rendez pas plus opaques. Des
+  commentaires confus, imprécis ou qui entrent carrément en
+  contradiction avec le code nuisent davantage qu'ils n'aident. Soyez
+  concis et gardez toujours à l'esprit de fournir au lecteur des
+  informations justes et pertinentes.
+\item Ne documentez pas du mauvais code, réécrivez-le. Si les
+  commentaires sont beaucoup plus longs que le code auxquels ils se
+  rapportent, c'est probablement qu'il est temps de réviser le code.
+\end{itemize}
+
+Dans R, le symbole numéro \code{\#} --- ou carré --- marque le début
+d'un commentaire, et ce, peut importe où le symbole se trouve sur la
+ligne. Il est possible de combiner les \code{\#} pour développer une
+forme de hiérarchie dans les commentaires ou pour délimiter
+différentes sections d'un fichier de script. Pour les fichiers
+d'exemples du présent document, j'ai utilisé la
+\link{https://www.gnu.org/software/emacs/manual/html_node/elisp/Comment-Tips.html}{%
+  convention de l'éditeur \index{Emacs}GNU~Emacs}:
+\begin{itemize}
+\item Les commentaires qui débutent par un seul carré, \code{\#}, sont
+  alignés sur une colonne à droite du code source. Ils servent à
+  expliquer ce qu'effectue une ligne de code.
+\item Les commentaires qui débutent par deux carrés, \code{\#\#}, sont
+  alignés sur le niveau d'indention courant. Lorsqu'ils apparaissent à
+  l'intérieur d'une fonction, ils décrivent le rôle du bloc de code qui
+  suit ou l'état de la fonction à ce stade. À l'extérieur des
+  fonctions, ils marquent des sous-sections du code source.
+\item Les commentaires qui débutent par trois carrés, \code{\#\#\#},
+  sont toujours alignés sur la marge de gauche. Ils ne sont utilisés
+  qu'à l'extérieur des fonctions. Ils marquent soit des sections, soit
+  des entêtes de fonctions.
+\end{itemize}
+
+L'éditeur \index{RStudio}RStudio, de son côté, utilise par défaut les
+niveaux de titres de
+\link{https://daringfireball.net/projects/markdown/syntax}{Markdown},
+dont la hiéararchie est exactement l'inverse de celle de Emacs. Ainsi,
+les commentaires de premier niveau sont ceux qui débutent par un seul
+carré, \code{\#}; les commentaires de deuxième niveau débutent par
+deux carrés, \code{\#\#}, etc.
+
 
 \section{Gestion des versions}
 \label{sec:collaboration:git}
