@@ -117,13 +117,13 @@ create-release :
 	touch relnotes.in
 	awk 'BEGIN { ORS=" "; print "{\"tag_name\": \"v${VERSION}\"," } \
 	      /^$$/ { next } \
-	      /^## Historique/ { state=0; next } \
-              (state==0) && /^### / { state = 1; out = $$2; \
+	      /^## Historique/ { state=1; next } \
+              (state==1) && /^### / { state = 2; out = $$2; \
 	                             for(i=3; i<=NF; i++) { out = out" "$$i }; \
 	                             printf "\"name\": \"Édition %s\", \"body\": \"", out; \
 	                             next } \
-	      (state==1) && /^### / { exit } \
-	      state==1 { printf "%s\\n", $$0 } \
+	      (state==2) && /^### / { exit } \
+	      state==2 { printf "%s\\n", $$0 } \
 	      END { print "\", \"draft\": false, \"prerelease\": false}" }' \
 	      README.md >> relnotes.in
 	curl --data @relnotes.in ${REPOSURL}/releases?access_token=${OAUTHTOKEN}
