@@ -56,7 +56,6 @@ TEXFILES = \
 	texte.tex \
 	rstudio.tex \
 	emacs+ess.tex \
-	packages.tex \
 	reponses.tex \
 	colophon.tex \
 	couverture-arriere.tex
