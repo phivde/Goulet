@@ -573,13 +573,13 @@ chapitre, vous devrez couvrir les sections suivantes de \emph{Pro Git}:
 
 Bonne lecture!
 
-\section{Exemples}
-\label{sec:collaboration:exemples}
+% \section{Exemples}
+% \label{sec:collaboration:exemples}
 
-\def\scriptfilename{collaboration.R}
+% \def\scriptfilename{collaboration.R}
 
-\scriptfile{\scriptfilename}
-\lstinputlisting[firstline=13]{\scriptfilename}
+% \scriptfile{\scriptfilename}
+% \lstinputlisting[firstline=13]{\scriptfilename}
 
 
 \section{Exercices}
@@ -639,10 +639,10 @@ tri <- function(x)
 {
     if (all(x >= 0) || all(x <= 0))
     {
-        stop("tous les flux financiers sont du même signe")
+        stop("all x are the same sign")
     }
     if (sum(diff(sign(x[x != 0])) != 0) > 1)
-        warning("plus d'un changement de signe dans les flux nets\n  le taux de rendement peut ne pas être unique")
+        warning("more than one sign change")
     r <- polyroot(x)
     i <- 1/Re(r)[abs(Im(r)) < .Machine$double.eps^0.5] - 1
     i[i > -1]
@@ -657,7 +657,7 @@ tri <- function(x)
   pour vous familiariser avec les commandes principales de Git.
 \end{exercice}
 
-\begin{exercice}[nosol]
+\begin{exercice}
   Créer un compte chez \link{https://github.com}{GitHub}, puis créer
   un «embranchement» (\emph{fork}) du projet test
   \link{https://github.com/octocat/Spoon-Knife}{Spoon-Knife} depuis
@@ -685,7 +685,7 @@ tri <- function(x)
     Bash (Windows) ou Terminal (macOS) sont les suivantes, dans
     l'ordre:
 \begin{Schunk}
-\begin{Verbatim}[commentchars=\\\{\}]
+\begin{Verbatim}[commandchars=\\\{\}]
 git clone https://github.com/\meta{username}/Spoon-Knife.git
 cd Spoon-Knife
 git checkout -b \meta{nom_branche}
