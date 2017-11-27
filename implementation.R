@@ -21,11 +21,12 @@
 ## Ceci signifie que l'interpréteur R fait bien la distinction
 ## entre un objet dans l'espace de travail et un objet utilisé
 ## dans une fonction (fort heureusement!).
-x <- 5                     # objet dans l'espace de travail
-square(10)                 # dans 'square' x vaut 10
-x                          # valeur inchangée
-square(x)                  # passer valeur de 'x' à 'square'
-square(x = x)              # colle... signification?
+square <- function(x) x * x  # fonction de bases.R
+x <- 5                       # objet dans l'espace de travail
+square(10)                   # dans 'square' x vaut 10
+x                            # valeur inchangée
+square(x)                    # passer valeur de 'x' à 'square'
+square(x = x)                # colle... signification?
 
 ###
 ### ENVIRONNEMENT ET ENVIRONNEMENT D'ÉVALUATION
