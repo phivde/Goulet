@@ -206,7 +206,6 @@ f <- function(x, y)
 f(5, does_not_exist)       # argument 'y' jamais utilisé
 f(0, does_not_exist)       # argument 'y' utilisé
 f(0, 1/0)                  # argument 'y' utilisé
-@
 
 ## Voici un autre exemple plus intéressant tiré de Ihaka et
 ## Gentleman (1996).
