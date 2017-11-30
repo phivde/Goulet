@@ -27,14 +27,376 @@
 \end{objectifs}
 
 
+\section{Exercices}
+\label{sec:texte:exercices}
+
+\Opensolutionfile{solutions}[solutions-texte]
+
+\begin{Filesave}{solutions}
+\section*{Chapitre \ref*{chap:texte}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:texte}}
+
+\end{Filesave}
+
+
+\begin{exercice}
+  Dans chacun des cas ci-dessous, déterminer à laquelle ou lesquelles
+  des chaines de caractères correspond l'expression régulière donnée.
+  Les symboles \verb=/= ne servent qu'à délimiter le début et la fin
+  des expressions régulières. Ne pas tenir compte des espaces avant ou
+  après les chaines.\footnote{%
+    Exercice adapté de
+    \url{https://regex.sketchengine.co.uk/extra_regexps.html}.}
+  \begin{enumerate}
+    \setlength{\multicolsep}{0pt}
+  \item \verb~/a(ab)*a/~
+    \begin{enumerate}[1)]
+      \begin{multicols}{3}
+      \item \verb~abababa~
+      \item \verb~aaba~
+      \item \verb~aabbaa~
+      \end{multicols}
+      \begin{multicols}{3}
+      \item \verb~aba~
+      \item \verb~aabababa~
+      \end{multicols}
+    \end{enumerate}
+  \item \verb~/ab+c?/~
+    \begin{enumerate}[1)]
+      \begin{multicols}{4}
+      \item \verb~abc~
+      \item \verb~ac~
+      \item \verb~abbb~
+      \item \verb~bbc~
+      \end{multicols}
+    \end{enumerate}
+  \item \verb~/a.[bc]+/~
+    \begin{enumerate}[1)]
+      \begin{multicols}{3}
+      \item \verb~abc~
+      \item \verb~abbbbbbbb~
+      \item \verb~azc~
+      \end{multicols}
+      \begin{multicols}{3}
+      \item \verb~abcbcbcbc~
+      \item \verb~ac~
+      \item \verb~asccbbbbcbcccc~
+      \end{multicols}
+    \end{enumerate}
+  \item \verb~/abc|xyz/~
+    \begin{enumerate}[1)]
+      \begin{multicols}{3}
+      \item \verb~abc~
+      \item \verb~xyz~
+      \item \verb~abc|xyz~
+      \end{multicols}
+    \end{enumerate}
+  \item \verb~/[a-z]+[\.\?!]/~
+    \begin{enumerate}[1)]
+      \begin{multicols}{3}
+      \item \verb~battle!~
+      \item \verb~Hot~
+      \item \verb~green~
+      \end{multicols}
+      \begin{multicols}{3}
+      \item \verb~swamping.~
+      \item \verb~jump up.~
+      \item \verb~undulate?~
+      \end{multicols}
+      \begin{multicols}{3}
+      \item \verb~is.?~
+      \end{multicols}
+    \end{enumerate}
+  \item \verb~/[a-zA-Z]*[^,]=/~
+    \begin{enumerate}[1)]
+      \begin{multicols}{3}
+      \item \verb~Butt=~
+      \item \verb~BotHEr,=~
+      \item \verb~Ample~
+      \end{multicols}
+      \begin{multicols}{3}
+      \item \verb~FIdDlE7h=~
+      \item \verb~Brittle =~
+      \item \verb~Other.=~
+      \end{multicols}
+    \end{enumerate}
+  \item \verb~/[a-z][\.\?!]\s+[A-Z]/~
+    \begin{enumerate}[1)]
+      \begin{multicols}{3}
+      \item \verb~A. B~
+      \item \verb~c! d~
+      \item \verb~e f~
+      \end{multicols}
+      \begin{multicols}{3}
+      \item \verb~g. H~
+      \item \verb~i? J~
+      \item \verb~k L~
+      \end{multicols}
+    \end{enumerate}
+  \item \verb~/<[^>]+>/~
+    \begin{enumerate}[1)]
+      \begin{multicols}{2}
+      \item \verb~<an xml tag>~
+      \item \verb~<opentag> <closetag>~
+      \end{multicols}
+      \begin{multicols}{2}
+      \item \verb~</closetag>~
+      \item \verb~<>~
+      \end{multicols}
+      \begin{multicols}{2}
+      \item \verb~<with attribute=”77”>~
+      \end{multicols}
+    \end{enumerate}
+  \end{enumerate}
+
+  \begin{sol}
+    \begin{enumerate}
+    \item L'expression régulière recherche «\verb=a=», suivi zéro ou
+      plusieurs occurrences de «\verb=ab=», suivi de «\verb=b=». Les
+      choix 2 et 5 satisfont ces conditions.
+    \item L'expression régulière recherche «\verb=a=», suivi d'au
+      moins une occurrence de «\verb=b=», suivi de zéro ou une
+      occurrence de «\verb=c=». Les choix 1 et 3 satisfont ces
+      conditions.
+    \item L'expression régulière recherche «\verb=a=», suivi d'un
+      caractère quelconque (incluant «\verb=b=» ou «\verb=c=»), suivi
+      d'au moins une occurrence de «\verb=b=» ou de «\verb=c=». Les
+      choix 1, 2, 3, 4 et 6 satisfont ces conditions.
+    \item L'expression régulière recherche «\verb=abc=» ou
+      «\verb=xyz=». Les choix 1 et 2 satisfont la condition. Le
+      troisième choix n'est pas valide puisque l'expression ne
+      recherche pas le symbole «\verb=|=».
+    \item L'expression régulière recherche au moins lettre minuscule
+      (à l'exclusion de tout autre symbole), suivi de l'un ou l'autre
+      des symboles «\verb=.=», «\verb=?=», «\verb=!=» (sans
+      répétition). Les choix 1, 4 et 6 satisfont ces conditions.
+    \item L'expression régulière recherche zéro ou plusieurs lettres
+      minuscules ou majuscule (mais aucun autre symbole), suivi de
+      tout autre caractère qu'une virgule, suivi du symbole
+      «\verb|=|». Les choix 1, 5 et 6 satisfont ces conditions.
+    \item L'expression régulière recherche une lettre minuscule, suivi
+      de l'un ou l'autre des symboles «\verb=.=», «\verb=?=»,
+      «\verb=!=» (sans répétition), suivi d'au moins une espace, suivi
+      d'une lettre majuscule. Les choix 4 et 5 satisfont ces
+      conditions.
+    \item L'expression régulière recherche un symbole «\verb=<=»,
+      suivi d'au moins symbole autre que «\verb=>=», suivi du symbole
+      «\verb=>=». Les choix 1, 3 et 5 satisfont ces conditions.
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Composer une expression régulière qui correspond à tous les mots de
+  la liste de gauche, ci-dessous, mais à aucun des mots de la liste de
+  droite.\footnote{%
+    Exercice adapté de
+    \url{https://regex.sketchengine.co.uk/cgi/ex1.cgi}.}
+  \begin{center}
+    \begin{minipage}[t]{0.3\linewidth}
+      pit \\
+      spot \\
+      spate \\
+      slap two \\
+      respite
+    \end{minipage}
+    \begin{minipage}[t]{0.3\linewidth}
+      pt \\
+      Pot \\
+      peat \\
+      part
+    \end{minipage}
+  \end{center}
+  \begin{sol}
+    L'expression doit correspondre à la lettre minuscule «\verb=p=»
+    précédée ou non d'une ou plusieurs lettres (ou symboles, ce n'est
+    pas spécifié), suivie d'une (et une seule) lettre ou d'une espace,
+    de la lettre «\verb=t=» et, enfin, de zéro ou de plusieurs
+    lettres. Il y a assurément plusieurs réponses valides. En voici
+    une: \verb=/.*p[a-z ]t.*/=.
+  \end{sol}
+
+\end{exercice}
+
+\begin{exercice}
+  Composer une expression régulière qui permet de vérifier la validité
+  d'un code postal canadien dans un formulaire électronique. Ne pas
+  tenir compte des règles précises de composition d'un code postal,
+  mais bien seulement qu'il s'agit d'une suite de six caractères
+  alternant entre une lettre et un chiffre. Les lettres peuvent être
+  fournies en majuscule ou en minuscule et l'espace entre le troisième
+  et le quatrième symbole peut être présent ou non.
+  \begin{sol}
+    \verb=[a-zA-z][0-9][a-zA-z]\s?[0-9][a-zA-z][0-9]= si l'on ne
+    permet que zéro ou une espace entre les deux blocs. S'il n'y a pas
+    de limite au nombre d'espaces, remplacer «\verb=?=» par
+    «\verb=*=».
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Le fichier \code{100metres.data}, livré avec le présent document,
+  contient la liste des 31 meilleurs temps enregistrés au 100~mètres
+  homme entre 1964 et 2005 (voir l'\autoref{ex:internes:100metres}).
+  Écrire une commande \code{sed} permettant de changer le séparateur
+  décimal dans les temps pour une virgule.
+  \begin{sol}
+    \code{sed} est l'outil idéal pour de tels traitements simples à
+    effectuer ligne par ligne.
+    \begin{Schunk}
+\begin{Verbatim}
+sed 's/\./,/' 100metres.data
+\end{Verbatim}
+    \end{Schunk}
+    Pour placer le fichier modifié dans, disons,
+    \code{100metres-dec.data}, utiliser
+    \begin{Schunk}
+\begin{Verbatim}
+sed 's/\./,/' 100metres.data > 100metres-dec.data
+\end{Verbatim}
+    \end{Schunk}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  \begin{enumerate}
+  \item Extraire du fichier \code{100metres.data} informations des
+    temps réalisés au mois d'août.
+  \item Extraire les informations des temps de moins de 10~secondes.
+  \item Extraire les lignes du fichier satisfaisant les deux
+    conditions ci-dessus. Vous pouvez utiliser l'opérateur de
+    redirection \verb=|= de Unix (\autoref{sec:informatique:os:unix})
+    pour combiner les deux commandes précédentes.
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+    \item C'est un travail pour \code{grep}. La solution la plus serait:
+      \begin{Schunk}
+\begin{Verbatim}
+grep '-08-' 100metres.data
+\end{Verbatim}
+      \end{Schunk}
+      Cependant, \code{grep} n'aime pas cette commande puisque le
+      symbole \verb=-= est utilisé pour passer des options. Dans ce
+      cas, il vaut mieux utiliser une option \verb=-e= pour déclarer
+      explicitement à \code{grep} que ce qui suit est l'expression à
+      rechercher:
+      \begin{Schunk}
+\begin{Verbatim}
+grep -e '-08-' 100metres.data
+\end{Verbatim}
+      \end{Schunk}
+      Autrement, simplement ajouter quelque chose à chercher avant le tiret:
+      \begin{Schunk}
+\begin{Verbatim}
+grep '.*-08-' 100metres.data
+\end{Verbatim}
+      \end{Schunk}
+    \item Le plus simple, ici, consiste à utiliser \code{awk} puisque
+      les seconds champs --- les temps --- seront automatiquement
+      disponibles.
+      \begin{Schunk}
+\begin{Verbatim}
+awk '$2 < 10 { print }' 100metres.data
+\end{Verbatim}
+      \end{Schunk} %$
+      Malheureusement, cette commande risque de ne pas fonctionner sur
+      certains systèmes qui traitent la virgule comme le séparateur
+      décimal, notamment les Mac en configuration française. Dans ce
+      cas, essayer plutôt (j'ai supprimé la commande \verb={ print }=
+      ci-dessous puisqu'elle est implicite):
+      \begin{Schunk}
+\begin{Verbatim}
+LC_NUMERIC="en_US.UTF-8" awk '$2 < 10' 100metres.data
+\end{Verbatim}
+      \end{Schunk} %$
+      Une solution avec \code{grep} consisterait à rechercher un
+      «\verb=9.=» après l'espace sur chaque ligne:
+      \begin{Schunk}
+\begin{Verbatim}
+grep ' 9\.' 100metres.data
+\end{Verbatim}
+      \end{Schunk}
+    \item Nous pouvons combiner les deux commandes ainsi:
+      \begin{Schunk}
+\begin{Verbatim}
+grep -e '-08-' 100metres.data | awk '$2 < 10'
+\end{Verbatim}
+      \end{Schunk} %$
+      ou
+      \begin{Schunk}
+\begin{Verbatim}
+grep -e '-08-' 100metres.data | grep ' 9\.'
+\end{Verbatim}
+      \end{Schunk}
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Pour tous les appels à une fonction \code{f} comportant deux
+  arguments dans le fichier \code{implementation.R} livré avec le
+  présent document, changer le nom de la fonction pour \code{fun} et
+  inverser l'ordre des deux arguments.
+  \begin{sol}
+    Ce traitement s'effectue bien avec \code{sed}:
+    \begin{Schunk}
+\begin{Verbatim}
+sed -E 's/( |^)f\((.*), (.*)\)/fun(\3, \2)/' \
+  implementation.R
+\end{Verbatim}
+    \end{Schunk}
+    Le premier groupe \verb=( |^)= capture une espace avant \code{f}
+    ou le début de la ligne.
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Dans le code source du présent document, le fichier
+  \code{docs/index.md} contient une ligne de ce type (scindée sur
+  trois lignes ici pour des raisons de contraintes horizontales):
+  \begin{Schunk}
+\begin{Verbatim}
+2017.11-2 ([notes de mise à jour]
+  ({{ site.github.repository_url }}
+  /releases/tag/v2017.11-2/))
+\end{Verbatim}
+  \end{Schunk}
+  Le numéro de version du document apparait donc deux fois sur la
+  ligne. Ce numéro de version est composé ainsi: année de publication;
+  un point; mois de publication; une portion optionnelle composée d'un
+  tiret, de un ou plusieurs chiffres et possiblement d'une lettre.
+  Autrement dit, les chaines de caractères suivantes constituent
+  toutes des numéros de versions valides:
+  \begin{trivlist}
+  \item 2017.11
+  \item 2017.11-2
+  \item 2017.11-2a
+  \item 2017.11-42k
+  \end{trivlist}
+  Écrire une commande \code{sed} permettant de remplacer le numéro de
+  version qui se trouverait actuellement dans le fichier
+  \code{index.md}, quel qu'il fut, par ce le numéro de version
+  2017.12-1a.
+  \begin{sol}
+    Il y a deux choses à noter: l'expression régulière nécessaire et
+    le fait d'ajouter la commande \code{g} à \code{sed} pour remplacer
+    toutes les correspondances sur la ligne.
+    \begin{Schunk}
+\begin{Verbatim}
+sed 's/[0-9]{4}\.[0-9]{2}(-[0-9a-z]*)?/2012.12-1a/g' index.md
+\end{Verbatim}
+
+    \end{Schunk}
+  \end{sol}
+\end{exercice}
+
+\Closesolutionfile{solutions}
+
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-engine: xetex
 %%% TeX-master: "programmer-avec-r"
 %%% coding: utf-8
-%%% End:
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "programmer-avec-r"
 %%% End:
