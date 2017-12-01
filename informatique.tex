@@ -552,19 +552,21 @@ multiutilisateurs. Ensuite, la
 utilisateurs (via un interpréteur de commandes, ou \emph{shell}) et
 aux applications une multitude de petits outils très spécialisés qui
 ne réalisent à peu près qu'une seule tâche. Le système rend ensuite
-simple, via un mécanisme dit de \emph{redirection} (\emph{pipe}) de
-les combiner pour effectuer des opérations plus complexes.
+simple, via un mécanisme dit de transfert de données («tuyau»,
+\emph{pipe}) de les combiner pour effectuer des opérations plus
+complexes.
 
-Par exemple, pour extraire le mot \emph{redirection} du code source
+Par exemple, pour extraire le mot \emph{tuyau} du code source
 contenant le précédent paragraphe, nous pourrions utiliser l'outil
 \code{grep} pour extraire la ligne où se trouve le mot, puis l'outil
 \code{cut} pour isoler le mot qui nous intéresse et, enfin, l'outil
-\code{tr} pour supprimer les guillemets autour du mot.\footnote{%
-  Dans la mesure où le mot que l'on recherche est le quatrième de la ligne dans
-  le fichier source \code{informatique.tex}, la commande résultante
-  est:
-  \code{grep "«redirection»" informatique.tex | cut -d " " -f 4 | tr -d «»}\,.
-  Le caractère \code{|} est la commande de redirection.}
+\code{tr} pour supprimer la parenthèse ouvrante, les guillemets et la
+virgule autour du mot.\footnote{%
+  Dans la mesure où le mot que l'on recherche est le quatrième de la
+  ligne dans le fichier source \code{informatique.tex}, la commande
+  résultante est: \code{grep "«tuyau»" informatique.tex | cut -d " "
+    -f 4 | tr -d \(«»,}\,. Le caractère \code{|} est l'opérateur de
+  transfert de données.}
 
 À l'exception notable des Mac, Unix demeure assez peu répandu sur les
 ordinateurs personnels. En revanche le système d'exploitation, en
