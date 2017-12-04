@@ -306,13 +306,13 @@ f <- function(x, y)
 \end{figure}
 
 Passons maintenant au dossier chaud parmi les programmeurs:
-l'indentation du code et la position des accolades. Tous s'entendent
-au moins sur un point: il est absolument essentiel d'indenter les
-blocs de code pour mettre la structure d'un programme en évidence. En
-clair, cela signifie que toute expression --- ou groupe d'expressions
-entre accolades --- doit être placé en retrait de la marge de gauche
-dès lors qu'elle fait partie d'une structure de contrôle ou de la
-définition d'une fonction. Le code de la
+\index{indentation}l'indentation du code et la position des accolades.
+Tous s'entendent au moins sur un point: il est absolument essentiel
+d'indenter les blocs de code pour mettre la structure d'un programme
+en évidence. En clair, cela signifie que toute expression --- ou
+groupe d'expressions entre accolades --- doit être placé en retrait de
+la marge de gauche dès lors qu'elle fait partie d'une structure de
+contrôle ou de la définition d'une fonction. Le code de la
 \autoref{fig:collaboration:espaces} est correctement indenté.
 
 \importantbox{Ne pas du tout indenter son code est passible de la
@@ -403,11 +403,11 @@ dans son domaine et de demeurer constant au fil de son code.
 \section{Commentaires}
 \label{sec:collaboration:commentaires}
 
-Les commentaires dans le code servent à guider le lecteur ---
-peut-être vous-même, quelque temps après la rédaction --- dans la
-lecture d'un programme. Le niveau de détails que devraient comporter
-les commentaires fait, comme le style d'indentation, l'objet de vifs
-débats.
+Les \index{commentaires}commentaires dans le code servent à guider le
+lecteur --- peut-être vous-même, quelque temps après la rédaction ---
+dans la lecture d'un programme. Le niveau de détails que devraient
+comporter les commentaires fait, comme le style d'indentation, l'objet
+de vifs débats.
 
 Certains affirment qu'un bon programme se passe d'explications et que,
 par conséquent, les commentaires sont en grande partie inutiles. Or,
@@ -527,10 +527,10 @@ travailler à plusieurs à la fois sur un même fichier. Cette barrière a
 pu se développer grâce à l'accès de plus en plus généralisé à la
 réseautique --- notamment à Internet --- au cours des années 1990 et
 2000. Pendant plus d'une décennie, le système libre
-\link{https://fr.wikipedia.org/wiki/Concurrent_versions_system}{\emph{Concurrent
+\index{CVS}\link{https://fr.wikipedia.org/wiki/Concurrent_versions_system}{\emph{Concurrent
     Versions System}} (CVS, 1990) a régné sur le monde de la gestion
 de versions, jusqu'à l'arrivée de
-\link{https://fr.wikipedia.org/wiki/Apache_Subversion}{\emph{Apache
+\index{Subversion}\link{https://fr.wikipedia.org/wiki/Apache_Subversion}{\emph{Apache
     Subversion}} (SVN, 2000). Construit selon les mêmes principes que
 CVS et compatible avec lui, Subversion se voulait surtout une
 meilleure implémentation d'un système de gestion de version
@@ -543,18 +543,19 @@ serveur central pour toute opération de publication d'une modification
 à un fichier. C'est pour lever cette contrainte que sont apparus, au
 milieu des années 2000, les systèmes de gestion de version distribués.
 Les principaux représentants de cette troisième génération de systèmes
-sont \link{https://fr.wikipedia.org/wiki/Git}{\emph{Git}} (2005),
-\link{https://fr.wikipedia.org/wiki/Mercurial}{\emph{Mercurial}} (hg,
+sont \index{Git}\link{https://fr.wikipedia.org/wiki/Git}{\emph{Git}} (2005),
+\index{Mercurial}\link{https://fr.wikipedia.org/wiki/Mercurial}{\emph{Mercurial}} (hg,
 2005) et
-\link{https://fr.wikipedia.org/wiki/Bazaar_(logiciel)}{\emph{Bazaar}}
+\index{Bazaar}\link{https://fr.wikipedia.org/wiki/Bazaar_(logiciel)}{\emph{Bazaar}}
 (bzr, 2005).
 
-Git a été développé à l'origine par Linus Torvalds pour administrer le
-code source du noyau du système d'exploitation Linux. Le système a
-connu une popularité foudroyante, notamment grâce à GitHub, un site
-d'hébergement de projets libres basé sur Git et doté d'une interface
-particulièrement conviviale. Résultat: Git est aujourd'hui le système
-de gestion de versions le plus utilisé dans le monde.
+\Index{Git}Git a été développé à l'origine par Linus Torvalds pour
+administrer le code source du noyau du système d'exploitation Linux.
+Le système a connu une popularité foudroyante, notamment grâce à
+GitHub, un site d'hébergement de projets libres basé sur Git et doté
+d'une interface particulièrement conviviale. Résultat: Git est
+aujourd'hui le système de gestion de versions le plus utilisé dans le
+monde.
 
 Après cette entrée en matière, je vous renvois, chère lectrice et cher
 lecteur, vers la documentation officielle de Git pour en apprendre les
@@ -634,7 +635,7 @@ i[i > -1]
   opérateurs, une indentation de quatre (4) caractères et des
   accolades ouvrante et fermante placées sur leur propre ligne.
 \begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[fontsize=\relsize{-1}]
 tri <- function(x)
 {
     if (all(x >= 0) || all(x <= 0))
@@ -681,19 +682,19 @@ tri <- function(x)
     Pour créer l'embranchement (\emph{fork}), il suffit d'appuyer sur
     le bouton \code{Fork} en haut à droite de la page
     \link{https://github.com/octocat/Spoon-Knife}{Spoon-Knife}.
-    Ensuite, les commandes à exécuter depuis une ligne de commande Git
-    Bash (Windows) ou Terminal (macOS) sont les suivantes, dans
-    l'ordre:
+    Ensuite, les commandes à exécuter depuis une ligne de commande
+    \index{Git~Bash}Git~Bash (Windows) ou \index{Terminal}Terminal
+    (macOS) sont les suivantes, dans l'ordre:
 \begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
-git clone https://github.com/\meta{username}/Spoon-Knife.git
-cd Spoon-Knife
-git checkout -b \meta{nom_branche}
+\begin{Verbatim}[commandchars=\\\{\},fontsize=\relsize{-1}]
+~$ git clone https://github.com/\meta{username}/Spoon-Knife.git
+~$ cd Spoon-Knife
+~/Spoon-Knife$ git checkout -b \meta{nom_branche}
 \meta{modifier le fichier index.html avec son éditeur}
-git status
-git add index.html
-git commit -m "\meta{message}"
-git push -u origin \meta{nom_branche}
+~/Spoon-Knife$ git status
+~/Spoon-Knife$ git add index.html
+~/Spoon-Knife$ git commit -m "\meta{message}"
+~/Spoon-Knife$ git push -u origin \meta{nom_branche}
 \end{Verbatim}
 \end{Schunk}
     Enfin, retourner sur la page du projet d'origine et appuyer sur le
