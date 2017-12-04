@@ -881,6 +881,7 @@ m[rowMeans(m) > 7, ]
 \end{exercice}
 
 \begin{exercice}
+  \label{ex:internes:100metres}
   On vous donne la liste et la date des 31 meilleurs temps enregistrés
   au 100~mètres homme entre 1964 et 2005.
 <<echo=TRUE, eval=TRUE>>=
