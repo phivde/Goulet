@@ -547,7 +547,7 @@ Kenneth Thompson, Dennis Ritchie et plusieurs autres.
 Les systèmes Unix partagent un certain nombre de caractéristiques
 communes. D'abord, ils sont intrinsèquement multitâches et
 multiutilisateurs. Ensuite, la
-\link{https://fr.wikipedia.org/wiki/Philosophie_d\%27Unix}{philosophie
+\Index{Unix!philosophie}\link{https://fr.wikipedia.org/wiki/Philosophie_d\%27Unix}{philosophie
   Unix} commande la modularité: le système d'exploitation fournit aux
 utilisateurs (via un interpréteur de commandes, ou \emph{shell}) et
 aux applications une multitude de petits outils très spécialisés qui
@@ -568,7 +568,7 @@ virgule autour du mot.\footnote{%
     -f 4 | tr -d \textbackslash(«»,}\,. Le caractère \code{|} est l'opérateur de
   transfert de données.}
 
-À l'exception notable des Mac, Unix demeure assez peu répandu sur les
+À l'exception notable des Mac, \index{Unix}Unix demeure assez peu répandu sur les
 ordinateurs personnels. En revanche le système d'exploitation, en
 particulier sa variante libre Linux, équipe l'immense majorité des
 stations de travail, serveurs et supercalculateurs. De plus, bon
@@ -686,9 +686,9 @@ chemins d'accès (voir ci-dessous), la barre oblique inversée
 \subsection{Particularités du système de fichiers de Unix}
 \label{sec:informatique:fs:unix}
 
-La racine du système de fichiers est toujours \code{/} sous Unix. Les
-disques, physiques ou réseau, sont accessibles par divers \emph{points
-  de montage} dans le système de fichiers.
+La racine du système de fichiers est toujours \code{/} sous
+\index{Unix}Unix. Les disques, physiques ou réseau, sont accessibles
+par divers \emph{points de montage} dans le système de fichiers.
 
 Pour illustrer, supposons qu'un ordinateur dispose de deux disques
 durs; le premier est réservé au système d'exploitation et aux
@@ -753,7 +753,8 @@ La notion de chemin d'accès fait également référence à la liste des
 répertoires dans lesquels le système d'exploitation recherche une
 application lorsqu'elle est appelée. Cette liste est conservée dans
 une variable d'environnement nommée \verb=%PATH%= sous Windows
-et \verb=$PATH= sous Unix. Il est hors de la portée de ce document
+et \verb=$PATH= sous
+\index{$Unix$}Unix. Il est hors de la portée de ce document
 d'expliquer comment modifier la variable d'environnement. La réponse
 se trouve à une requête près dans un moteur de recherche.
 
@@ -792,16 +793,18 @@ gauche du symbole \verb=>= se trouve le chemin d'accès du répertoire
 courant. Au lancement de l'interpréteur, celui-ci est donc la racine
 du système de fichiers.
 
-Les programmeurs qui souhaitent bénéficier de certains outils Unix
-sous Windows peuvent installer les couches logicielles
-\index{MinGW}MinGW et \index{MSYS}MSYS --- je recommande à cet
-égard la distribution \link{http://www.msys2.org}{MSYS2}\index{MSYS2}.
-Le programme \code{MSYS} fournit un interpréteur de commandes
-\index{Bash}Bash \citep{bash} comme en standard sur les systèmes Unix.
-Un interpréteur Bash est également fourni avec
-\link{https://git-scm.com/downloads}{Git for Windows}.
+Les programmeurs qui souhaitent bénéficier de certains outils
+\index{Unix}Unix sous Windows peuvent installer les couches
+logicielles \index{MinGW}MinGW et \index{MSYS}MSYS --- je recommande à
+cet égard la distribution
+\link{http://www.msys2.org}{MSYS2}\index{MSYS2}. Le programme
+\code{MSYS} fournit un interpréteur de commandes \index{Bash}Bash
+\citep{bash} comme en standard sur les systèmes Unix. Un interpréteur
+Bash est également fourni avec \index{Git}
+\link{https://git-scm.com/downloads}{Git for Windows}: le programme
+est d'ailleurs nommé \index{Git~Bash}Git~Bash.
 
-À la ligne de commande Unix sous Windows, on identifie la racine
+À la ligne de commande \index{Unix}Unix sous Windows, on identifie la racine
 \code{C:\textbackslash} du système de fichier d'un disque par
 \code{/c/}.
 
@@ -809,17 +812,18 @@ Un interpréteur Bash est également fourni avec
 \label{sec:informatique:cli:macos}
 
 Sous macOS, l'application de ligne de commande se nomme
-\code{Terminal}. Elle se trouve dans le sous-dossier
-\code{Utilitaires} du dossier \code{Applications}. L'interpréteur de
-commandes est \index{Bash}Bash. L'invite de commande par défaut est le
-symbole \verb=$=, habituellement précédé du nom de l'ordinateur, du
-répertoire courant et du nom de l'utilisateur. Le répertoire courant
-au lancement de l'interpréteur est le répertoire personnel
-\,\verb=~=\, de l'utilisateur.
+\index{Terminal}Terminal. Elle se trouve dans le sous-dossier
+Utilitaires du dossier Applications. L'interpréteur de commandes est
+\index{Bash}Bash. L'invite de commande par défaut est le symbole
+\verb=$=, habituellement précédé du nom de l'ordinateur, du répertoire
+courant et du nom de l'utilisateur. Le répertoire courant au lancement
+de l'interpréteur est le répertoire personnel \,\verb=~=\, de
+l'utilisateur.
 
-\tipbox{Explorez les préférences de l'application \code{Terminal} pour
-  configurer la police de caractères et les couleurs afin de rendre la
-  ligne de commande plus agréable à utiliser.}
+\tipbox{Explorez les préférences de l'application
+  \index{Terminal}Terminal pour configurer la police de caractères et
+  les couleurs afin de rendre la ligne de commande plus agréable à
+  utiliser.}
 
 \subsection{Commandes essentielles}
 \label{sec:informatique:cli:commandes}
@@ -947,7 +951,7 @@ Downloads
 \begin{exercice}[nosol]
   Démarrer un interpréteur de commandes Bash. Si le système
   d'exploitation de votre ordinateur est Windows, vous pouvez utiliser
-  la ligne de commande Git~Bash de
+  la ligne de commande \index{Git~Bash}Git~Bash de
   \link{https://git-scm.com/downloads}{\emph{Git for Windows}} ou la
   ligne de commande MSYS de
   \index{MSYS2}\link{http://www.msys2.org}{MSYS2}.
