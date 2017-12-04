@@ -24,8 +24,8 @@ all: files commit
 files:
 	awk 'BEGIN { FS = "/"; OFS = "/" } \
 	     /^## Édition/ { print; getline; print; getline; \
-	                     gsub(/[0-9]{4}\.[0-9]{2}(-[0-9a-z]*)?/, "${VERSION}") } \
-	     /\[documentation\]/ { $$3 = "v${VERSION}" } 1' \
+	                     gsub(/[0-9]{4}\.[0-9]{2}(-[0-9]*[a-z]*)?/, "${VERSION}") } \
+	     1' \
 	    index.md > tmpfile && \
 	  mv tmpfile index.md
 	cd _layouts && \
