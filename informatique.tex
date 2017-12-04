@@ -565,7 +565,7 @@ virgule autour du mot.\footnote{%
   Dans la mesure où le mot que l'on recherche est le quatrième de la
   ligne dans le fichier source \code{informatique.tex}, la commande
   résultante est: \code{grep "«tuyau»" informatique.tex | cut -d " "
-    -f 4 | tr -d \textbackslash(«»,}\,. Le caractère \code{|} est l'opérateur de
+    -f 4 | tr -d \bs(«»,}\,. Le caractère \code{|} est l'opérateur de
   transfert de données.}
 
 À l'exception notable des Mac, \index{Unix}Unix demeure assez peu répandu sur les
@@ -622,18 +622,18 @@ des extraits des arbres de fichiers usuels de Windows et de macOS.
 \begin{figure}
   \begin{minipage}[t]{0.45\linewidth}
     \dirtree{%
-      .1 \code{C:\textbackslash}.
-      .2 \code{Program Files\textbackslash}.
-      .3 \code{Internet Explorer\textbackslash}.
-      .3 \code{Windows NT\textbackslash}.
-      .2 \code{Users\textbackslash}.
-      .3 \code{Alexandre\textbackslash}.
-      .4 \code{Desktop\textbackslash}.
-      .4 \code{Documents\textbackslash}.
+      .1 \code{C:\bs}.
+      .2 \code{Program Files\bs}.
+      .3 \code{Internet Explorer\bs}.
+      .3 \code{Windows NT\bs}.
+      .2 \code{Users\bs}.
+      .3 \code{Alexandre\bs}.
+      .4 \code{Desktop\bs}.
+      .4 \code{Documents\bs}.
       .5 \code{synthese-1.doc}.
-      .2 \code{Windows\textbackslash}.
+      .2 \code{Windows\bs}.
       .3 \code{explorer.exe}.
-      .3 \code{System32\textbackslash}.
+      .3 \code{System32\bs}.
       .4 \code{wininit.exe}.
     }
   \end{minipage}
@@ -681,7 +681,7 @@ Le système de fichiers de Windows est insensible à la casse,
 c'est-à-dire qu'il ne fait aucune distinction entre \code{Program
   Files}, \code{program files} et \code{PROGRAM FILES}. Dans les
 chemins d'accès (voir ci-dessous), la barre oblique inversée
-{\textbackslash} sépare les noms de répertoires.
+{\bs} sépare les noms de répertoires.
 
 \subsection{Particularités du système de fichiers de Unix}
 \label{sec:informatique:fs:unix}
@@ -804,9 +804,8 @@ Bash est également fourni avec \index{Git}
 \link{https://git-scm.com/downloads}{Git for Windows}: le programme
 est d'ailleurs nommé \index{Git~Bash}Git~Bash.
 
-À la ligne de commande \index{Unix}Unix sous Windows, on identifie la racine
-\code{C:\textbackslash} du système de fichier d'un disque par
-\code{/c/}.
+À la ligne de commande \index{Unix}Unix sous Windows, on identifie la
+racine \code{C:\bs} du système de fichier d'un disque par \code{/c/}.
 
 \subsection{Ligne de commande macOS}
 \label{sec:informatique:cli:macos}
