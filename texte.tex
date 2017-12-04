@@ -96,8 +96,9 @@ nécessaires. Aux fins de cet ouvrage, j'ai choisi de concentrer notre
 étude sur les utilitaires Unix standards en ligne de commande
 \code{grep}, \code{sed} et \code{awk}. Ils font partie intégrante des
 systèmes d'exploitation macOS et Linux et, sous Windows, ils sont
-livrés avec les interpréteurs de commande Bash de \index{MSYS2}MSYS2
-ou de \index{Git~Bash}Git~Bash (\autoref{sec:informatique:cli}).
+livrés avec les interpréteurs de commande MSYS de \index{MSYS2}MSYS2
+et \index{Git~Bash}Git~Bash de \emph{Git for Windows}
+(\autoref{sec:informatique:cli}).
 
 Comme la plupart des utilitaires Unix, \Icode{grep}, \Icode{sed} et
 \Icode{awk} prennent en entrée un flux de texte ou un ou plusieurs
@@ -121,25 +122,36 @@ outils diffèrent quant au type de traitement qu'ils peuvent effectuer.
   proviennent de
   \link{https://en.wikipedia.org/wiki/Berkeley_Software_Distribution}{BSD}.}
 
-Avant d'aller plus loin, il convient de dire un mot sur les opérateurs
-de transfert de données et de redirection de \index{Unix}Unix. Les
-programmes Unix en ligne de commande recoivent leurs données d'une
-\Index{entree standard@entrée standard}\emph{entrée standard}
-(\emph{standard input}, souvent abrégé en \emph{stdin}) et renvoient
-leurs résultats vers la \emph{sortie standard} (\emph{standard
-  output}, \emph{stdout}). Pour simplifier, l'entrée stardard d'un
-terminal serait le clavier et la sortie standard, l'écran.
 
-L'opérateur de transfert de données «\verb=|=» permet de transférer la
-sortie d'un programme directement à l'entrée d'un autre programme.
-Autrement dit, plutôt que d'afficher ses résultats à l'écran, le
-premier programme les passe en entrée au second programme. L'opérateur
-de redirection «\verb=>=» permet, lui, de rediriger la sortie d'un
-programme vers un fichier afin de sauvegarder les résultats. Enfin,
-l'opérateur de redirection «\verb=<=» permet, à l'inverse du précédent,
-de déverser le contenu d'un fichier dans l'entrée standard d'un
-programme. La documentation citée en référence à la section suivante
-utilise abondamment ces opérateurs.
+\section{Transfert de données et redirection}
+\label{sec:texte:flux}
+
+Parce qu'ils sont souvent utilisés avec les outils \icode{grep},
+\icode{sed} et \icode{awk}, il convient, avant d'aller plus loin, de
+dire un mot sur les opérateurs de transfert de données et de
+redirection de \index{Unix}Unix.
+
+Les programmes Unix en ligne de commande recoivent leurs données d'une
+\Index{entree standard@entrée standard}\Index{Unix!entree
+  standard@entrée standard}\emph{entrée standard} (\emph{standard
+  input}, souvent abrégé en \emph{stdin}) et renvoient leurs résultats
+vers la \Index{sortie standard}\Index{Unix!sortie
+  standard}\emph{sortie standard} (\emph{standard output},
+\emph{stdout}). Pour simplifier, l'entrée stardard d'un terminal
+serait le clavier et la sortie standard, l'écran.
+
+L'opérateur de transfert de données \Index{{"|}@\code{\textbar}
+  (Bash)} «\code{\textbar}» permet de transférer la sortie d'un
+programme directement à l'entrée d'un autre programme. Autrement dit,
+plutôt que d'afficher ses résultats à l'écran, le premier programme
+les passe en entrée au second programme. L'opérateur de redirection
+\Index{>@\code{>} (Bash)}«\code{>}» permet, lui, de rediriger la
+sortie d'un programme vers un fichier afin de sauvegarder les
+résultats. Enfin, l'opérateur de redirection \Index{>@\code{<}
+  (Bash)}«\code{<}» permet, à l'inverse du précédent, de déverser le
+contenu d'un fichier dans l'entrée standard d'un programme. La
+documentation citée en référence à la section suivante utilise
+abondamment ces opérateurs.
 
 \importantbox{L'espace horizontal étant compté dans ce document, il
   est parfois nécessaire de scinder une commande sur deux lignes ou
@@ -152,22 +164,37 @@ utilise abondamment ces opérateurs.
 \section{Expressions régulières}
 \label{sec:texte:regex}
 
-% Il existe une multitude de tutoriels et de documents de référence sur les expressions régulières et sur les utilitaires 'grep', 'sed' et 'awk' dans Internet. La référence que nous utiliserons dans le cours est le guide [Shell Scripting Primer](https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/) de la bibliothèque pour développeurs de Apple.
+Il existe une multitude de tutoriels et de documents de référence sur
+les expressions régulières et sur les utilitaires \icode{grep},
+\icode{sed} et \icode{awk}, que ce soit dans Internet ou sous forme de
+livre. Or, le guide \link{https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/}{\emph{Shell Scripting Primer}} de la bibliothèque
+pour développeurs de Apple \citep{Apple:shellprimer} s'avère une
+référence idéale pour vous accompagner dans l'atteinte des objectifs
+d'apprentissage mentionnés au début du chapitre.
 
-% > Utilisateurs de Windows: pas de souci! Bien qu'émanant de Apple, le guide traite d'outils Unix standards, outils que vous avez justement installé avec Git Bash au début de la session.
+\windowsbox{Utilisateurs de Windows: pas de souci! Bien qu'émanant de
+  Apple, le guide traite de procédures et d'outils Unix standards,
+  outils dont vous disposez si vous avez installé \index{Git}\emph{Git
+    for Windows} ou MSYS2\index{MSYS2}, tel qu'expliqué à la
+  \autoref{sec:informatique:cli:windows}.}
 
-% Les chapitres du guide à lire sont les suivants:
+Je vous invite à étudier les chapitres suivants du guide \emph{Shell
+  Scripting Primer}:
+\begin{itemize}
+\item
+  \link{https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/RegularExpressionsUnfettered/RegularExpressionsUnfettered.html}{\emph{Regular
+      Expressions Unfettered}} jusqu'à la section \emph{Using
+    Modifiers}, inclusivement.
+\item
+  \link{https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/Howawk-ward/Howawk-ward.html}{\emph{How
+      AWK-ward}} jusqu'à la section \emph{Changing the Record and
+    Field Separators in AWK Scripts}, inclusivement.
+\end{itemize}
 
-% - Chapitre [Regular Expressions Unfettered](https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/RegularExpressionsUnfettered/RegularExpressionsUnfettered.html) jusqu'à la section [Using Modifiers](https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/RegularExpressionsUnfettered/RegularExpressionsUnfettered.html#//apple_ref/doc/uid/TP40004268-CH238-SW17), inclusivement.
-
-% - Chapitre [How AWK-ward](https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/Howawk-ward/Howawk-ward.html) jusqu'à la section [Changing the Record and Field Separators in AWK Scripts](https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/Howawk-ward/Howawk-ward.html#//apple_ref/doc/uid/TP40004268-TP40003518-SW3), inclusivement.
-
-% ! Aucune notion relative à Perl n'est au programme du cours.
-
-% > Vous trouverez plusieurs ressources alternatives dans la section Activités complémentaires.
+\warningbox{Vous pouvez ignorer toutes les notions relatives à Perl
+  exposées dans \emph{Shell Scripting Primer}.}
 
 
-% \ lorsque commandes longues
 
 
 \section{Exercices}
