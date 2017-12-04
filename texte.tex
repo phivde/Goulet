@@ -26,31 +26,131 @@
   texte à l'aide d'expressions régulières avec les divers outils de R.
 \end{objectifs}
 
-\newpage
 
-% Ce chapitre est consacré à l'étude des \emph{expressions régulières} pour
-% l'analyse et le contrôle de texte. Une expression régulière (\emph{regular
-% expression}, ou regex ou regexp) est une chaine de caractères qui
-% décrit, selon une syntaxe précise, un ensemble de chaines de
-% caractères possibles \citep{Wikipedia:Expression_reguliere}.
+Ce chapitre est consacré à l'étude des \emph{expressions régulières}
+--- ou expressions relationnelles --- pour l'analyse et le contrôle de
+texte. Une expression régulière (\emph{regular expression}, ou regex
+ou regexp) est une chaine de caractères qui décrit, selon une syntaxe
+précise, un ensemble de chaines de caractères possibles
+\citep{Wikipedia:Expression_reguliere}.
 
-% Par exemple, les plaques d'immatriculation récentes distribuées par la
-% Société d'assurance automobile du Québec (SAAQ) sont composées ainsi:
-% une lettre, deux chiffres, une espace, trois lettres. Les lettres O, I
-% et U ne sont pas utilisées à cause de leur similitude avec,
-% respectivement, les chiffres 0 et 1 et la lettre V. L'expression
-% régulière \verb=[A-HJ-NP-TV-Z][0-9]{2} [A-HJ-NP-TV-Z]{3}= permet de
-% décrire l'ensemble des numéros de plaques possibles (y compris les
-% combinaisons de lettres exclues comme \code{LSD} ou \code{SEX}).
+Par exemple, les plaques d'immatriculation récentes distribuées par la
+Société d'assurance automobile du Québec (SAAQ) sont composées ainsi:
+une lettre, deux chiffres, une espace, trois lettres. Les lettres
+\textsf{O}, \textsf{I} et \textsf{U} ne sont pas utilisées à cause de
+leur similitude avec, respectivement, les chiffres $0$ et $1$ et la
+lettre \textsf{V}. L'expression régulière
+\begin{Schunk}
+\begin{Verbatim}
+[A-HJ-NP-TV-Z][0-9]{2} [A-HJ-NP-TV-Z]{3}
+\end{Verbatim}
+\end{Schunk}
+permet de décrire
+l'ensemble des numéros de plaques possibles (y compris les
+combinaisons de lettres exclues comme \code{LSD} ou \code{SEX}).
 
-% Un jour ou l'autre, vous aurez à traiter des chaines de caractères en
-% programmation. Ce jour-là, connaitre les expressions régulières vous
-% sauvera énormément de temps.
+Voici quelques autres utilisations possibles des expressions
+régulières.
+\begin{itemize}
+\item Rechercher du texte pouvant contenir des variations
+  orthographiques comme, par exemple, «je transfert» plutôt que «je
+  transfère» ou encore les multiples variations autour du verbe
+  «appeler»: appel, appelle, appellent, appeler, appellez, etc.
+\item Remplacer le nom d'une commande par un autre lorsque la commande
+  s'étant de part et d'autre d'un argument qui, lui, change d'une fois
+  à l'autre. Par exemple, dans le système de mise en page {\LaTeX}, la
+  syntaxe des commandes est la suivante:
+  \cmd{\cmd}\oarg{option}\marg{arg}. Pour remplacer toutes les
+  utilisations d'une commande \cmd{\foo} par \cmd{\bar}, il faut
+  pouvoir tenir compte de la présence possible d'un argument optionnel
+  \oarg{option} ainsi que de l'argument \marg{arg} qui change d'une
+  utilisation de la commande à une autre.
+\item Extraire les coordonnées géographiques d'un lieu (latitude et
+  longitude) de l'URL d'une carte Google Maps. Par exemple, l'%
+  \link{https://www.google.ca/maps/place/Universite+Laval/@46.7817463,-71.2769311,17z/data=!3m1!4b1!4m5!3m4!1s0x4cb896c469ff32f9:0x15feb853bd2f8247!8m2!3d46.7817463!4d-71.2747424}{URL
+    correspondant} à la recherche «Université Laval» est
+  \begin{Schunk}
+\begin{Verbatim}
+https://www.google.ca/maps/place/Universite+Laval/
+  @46.7817463,-71.2769311,17z/data=!3m1!4b1!4m5!3m4!
+  1s0x4cb896c469ff32f9:0x15feb853bd2f8247!8m2!3d
+  46.7817463!4d-71.2747424
+\end{Verbatim}
+  \end{Schunk}
+  dont on décode que le lieu se trouve à une latitude de
+  $\nombre{46,7817463}$ et à une longitude de $\nombre{-71.2769311}$
+  en degrés décimaux.
+\end{itemize}
+
+Un jour ou l'autre, vous aurez à traiter des chaines de caractères en
+programmation ou en analyse de données. Ce jour-là, connaitre les
+expressions régulières vous sauvera énormément de temps.
 
 
-% * Lectures obligatoires
+\section{Outils d'analyse et de contrôle du texte}
+\label{sec:texte:outils}
 
-% Ce module n'est pas basé sur le document de référence, mais bien sur de la documentation disponible en ligne.
+L'expression régulière ne constitue qu'un langage de description d'une
+chaine de texte. Pour exploiter ce langage, des outils sont
+nécessaires. Aux fins de cet ouvrage, j'ai choisi de concentrer notre
+étude sur les utilitaires Unix standards en ligne de commande
+\code{grep}, \code{sed} et \code{awk}. Ils font partie intégrante des
+systèmes d'exploitation macOS et Linux et, sous Windows, ils sont
+livrés avec les interpréteurs de commande Bash de \index{MSYS2}MSYS2
+ou de \index{Git~Bash}Git~Bash (\autoref{sec:informatique:cli}).
+
+Comme la plupart des utilitaires Unix, \Icode{grep}, \Icode{sed} et
+\Icode{awk} prennent en entrée un flux de texte ou un ou plusieurs
+fichiers en format texte brut et ils opèrent sur cette entrée ligne
+par ligne. Le résultat du traitement est affiché à la ligne de
+commande, envoyé à un autre programme ou redirigé vers un fichier. Les
+outils diffèrent quant au type de traitement qu'ils peuvent effectuer.
+\begin{description}
+\item[\code{grep}] sélectionne les lignes en entrée correspondant à
+  une expression régulière;
+\item[\code{sed}] sert surtout pour rechercher et remplacer du texte;
+\item[\code{awk}] permet de traiter aisément du texte séparé en champs
+  ainsi que du texte réparti sur plusieurs lignes.
+\end{description}
+
+\warningbox{Il existe plusieurs versions différentes de ces outils,
+  parfois avec des différences importantes, notamment en ce qui a
+  trait à \code{sed}. Les versions sous Linux, \index{MSYS2}MSYS2 et
+  \index{Git~Bash}Git~Bash sont généralement celles du
+  \link{https://www.gnu.org/}{projet GNU}. Dans macOS, elles
+  proviennent de
+  \link{https://en.wikipedia.org/wiki/Berkeley_Software_Distribution}{BSD}.}
+
+Avant d'aller plus loin, il convient de dire un mot sur les opérateurs
+de transfert de données et de redirection de \index{Unix}Unix. Les
+programmes Unix en ligne de commande recoivent leurs données d'une
+\Index{entree standard@entrée standard}\emph{entrée standard}
+(\emph{standard input}, souvent abrégé en \emph{stdin}) et renvoient
+leurs résultats vers la \emph{sortie standard} (\emph{standard
+  output}, \emph{stdout}). Pour simplifier, l'entrée stardard d'un
+terminal serait le clavier et la sortie standard, l'écran.
+
+L'opérateur de transfert de données «\verb=|=» permet de transférer la
+sortie d'un programme directement à l'entrée d'un autre programme.
+Autrement dit, plutôt que d'afficher ses résultats à l'écran, le
+premier programme les passe en entrée au second programme. L'opérateur
+de redirection «\verb=>=» permet, lui, de rediriger la sortie d'un
+programme vers un fichier afin de sauvegarder les résultats. Enfin,
+l'opérateur de redirection «\verb=<=» permet, à l'inverse du précédent,
+de déverser le contenu d'un fichier dans l'entrée standard d'un
+programme. La documentation citée en référence à la section suivante
+utilise abondamment ces opérateurs.
+
+\importantbox{L'espace horizontal étant compté dans ce document, il
+  est parfois nécessaire de scinder une commande sur deux lignes ou
+  plus. Pour ces cas, j'ai inséré le symbole de continuation de ligne
+  «\textbackslash» de Bash à la fin des lignes. Vous pouvez ainsi copier les
+  commandes directement du document et les coller dans une ligne de
+  commande. Le symbole ne fait \emph{pas} partie des commandes.}
+
+
+\section{Expressions régulières}
+\label{sec:texte:regex}
 
 % Il existe une multitude de tutoriels et de documents de référence sur les expressions régulières et sur les utilitaires 'grep', 'sed' et 'awk' dans Internet. La référence que nous utiliserons dans le cours est le guide [Shell Scripting Primer](https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/) de la bibliothèque pour développeurs de Apple.
 
@@ -69,7 +169,6 @@
 
 % \ lorsque commandes longues
 
-% Un mot sur les opérateurs |, > et <.
 
 \section{Exercices}
 \label{sec:texte:exercices}
