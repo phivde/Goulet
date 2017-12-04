@@ -565,7 +565,7 @@ virgule autour du mot.\footnote{%
   Dans la mesure où le mot que l'on recherche est le quatrième de la
   ligne dans le fichier source \code{informatique.tex}, la commande
   résultante est: \code{grep "«tuyau»" informatique.tex | cut -d " "
-    -f 4 | tr -d \(«»,}\,. Le caractère \code{|} est l'opérateur de
+    -f 4 | tr -d \textbackslash(«»,}\,. Le caractère \code{|} est l'opérateur de
   transfert de données.}
 
 À l'exception notable des Mac, Unix demeure assez peu répandu sur les
@@ -830,6 +830,11 @@ limiterons la présentation aux commandes ci-dessous qui
 permettent de se déplacer dans le système de fichiers et d'afficher
 la liste des fichiers d'un répertoire.
 
+\importantbox{Dans les exemples ci-dessous et pour le reste du
+  document, l'invite de commande du système d'exploitation sera
+  représentée par le symbole \code{\$} précédé du nom du répertoire
+  courant.}
+
 \begin{ttscript}{pwd}
 \item[\Icode{cd}] Change le répertoire courant pour
   celui donné en argument. Cet argument peut être un chemin d'accès
@@ -840,16 +845,44 @@ la liste des fichiers d'un répertoire.
   d'accès absolu du répertoire courant avec \code{cmd.exe}, ou ramène
   directement l'invite de commande au répertoire personnel de
   l'utilisateur avec Bash.
+  \begin{Schunk}
+\begin{Verbatim}
+~$ cd Desktop/
+/Users/vincent/Desktop
+~/Desktop$ cd ~/Documents/cours/
+~/Documents/cours$ cd
+~$
+\end{Verbatim}
+  \end{Schunk}
 \item[\Icode{pwd}] (\index{Bash}Bash seulement) Affiche le chemin
   d'accès absolu du répertoire courant.
+  \begin{Schunk}
+\begin{Verbatim}
+~$ pwd
+/Users/vincent
+\end{Verbatim}
+  \end{Schunk} %$
 \item[\Icode{dir}] (\index{cmd@\code{cmd.exe}}\code{cmd.exe}
   seulement) Affiche les fichiers du répertoire donné en argument, ou
   les fichiers du répertoire courant sans aucun argument.
 \item[\code{ls}] \Index{ls@\code{ls} (Bash)} (\index{Bash}Bash
   seulement) Affiche les fichiers du répertoire donné en argument, ou
   les fichiers du répertoire courant sans aucun argument.
+  \begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+~$ ls
+Desktop
+Documents
+Downloads
+\meta{...}
+\end{Verbatim}
+  \end{Schunk} %$
 \end{ttscript}
 
+\tipbox{Les systèmes d'exploitation affichent certains répertoires
+  (\code{Bureau} ou \code{Musique}, par exemple) dans la langue de
+  l'interface plutôt que sous leur vrai nom anglais. La commande
+  \code{ls} affiche toujours le véritable nom des répertoires.}
 
 \section{Exercices}
 \label{operateurs:exercices}
