@@ -55,7 +55,7 @@ régulières.
 \item Rechercher du texte pouvant contenir des variations
   orthographiques comme, par exemple, «je transfert» plutôt que «je
   transfère» ou encore les multiples variations autour du verbe
-  «appeler»: appel, appelle, appellent, appeler, appellez, etc.
+  «appeler»: appel, appelle, appellent, appeler, appelez, etc.
 \item Remplacer le nom d'une commande par un autre lorsque la commande
   s'étant de part et d'autre d'un argument qui, lui, change d'une fois
   à l'autre. Par exemple, dans le système de mise en page {\LaTeX}, la
@@ -131,13 +131,13 @@ Parce qu'ils sont souvent utilisés avec les outils \icode{grep},
 dire un mot sur les opérateurs de transfert de données et de
 redirection de \index{Unix}Unix.
 
-Les programmes Unix en ligne de commande recoivent leurs données d'une
+Les programmes Unix en ligne de commande reçoivent leurs données d'une
 \Index{entree standard@entrée standard}\Index{Unix!entree
   standard@entrée standard}\emph{entrée standard} (\emph{standard
   input}, souvent abrégé en \emph{stdin}) et renvoient leurs résultats
 vers la \Index{sortie standard}\Index{Unix!sortie
   standard}\emph{sortie standard} (\emph{standard output},
-\emph{stdout}). Pour simplifier, l'entrée stardard d'un terminal
+\emph{stdout}). Pour simplifier, l'entrée standard d'un terminal
 serait le clavier et la sortie standard, l'écran.
 
 L'opérateur de transfert de données \Index{{"|}@\code{\textbar}
@@ -152,13 +152,6 @@ résultats. Enfin, l'opérateur de redirection \Index{>@\code{<}
 contenu d'un fichier dans l'entrée standard d'un programme. La
 documentation citée en référence à la section suivante utilise
 abondamment ces opérateurs.
-
-\importantbox{L'espace horizontal étant compté dans ce document, il
-  est parfois nécessaire de scinder une commande sur deux lignes ou
-  plus. Pour ces cas, j'ai inséré le symbole de continuation de ligne
-  «\bs» de Bash à la fin des lignes. Vous pouvez ainsi copier les
-  commandes directement du document et les coller dans une ligne de
-  commande. Le symbole ne fait \emph{pas} partie des commandes.}
 
 
 \section{Expressions régulières}
@@ -178,8 +171,8 @@ d'apprentissage mentionnés au début du chapitre.
     for Windows} ou MSYS2\index{MSYS2}, tel qu'expliqué à la
   \autoref{sec:informatique:cli:windows}.}
 
-Je vous invite à étudier les chapitres suivants du guide \emph{Shell
-  Scripting Primer}:
+Je vous invite donc à étudier les chapitres suivants du guide
+\emph{Shell Scripting Primer}:
 \begin{itemize}
 \item
   \link{https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/RegularExpressionsUnfettered/RegularExpressionsUnfettered.html}{\emph{Regular
@@ -190,12 +183,242 @@ Je vous invite à étudier les chapitres suivants du guide \emph{Shell
       AWK-ward}} jusqu'à la section \emph{Changing the Record and
     Field Separators in AWK Scripts}, inclusivement.
 \end{itemize}
+Revenez ensuite ici pour des exemples additionnels et des exercices.
 
 \warningbox{Vous pouvez ignorer toutes les notions relatives à Perl
   exposées dans \emph{Shell Scripting Primer}.}
 
 
+\section{Exemples additionnels}
+\label{sec:texte:exemples}
 
+Exceptionnellement, les exemples additionnels de ce chapitre se
+présentent sous forme de texte normal plutôt que sous forme de fichier
+de script.
+
+Les exemples ci-dessous utilisent des fichiers distribués avec le
+présent document dans l'archive \code{programmer-avec-r.zip}.
+Assurez-vous d'avoir extrait les fichiers de l'archive quelque part
+sur votre disque et notez cet endroit: vous devrez le connaitre dans
+un instant.
+
+Vous devez entrer les expressions ci-dessous à une ligne de commande
+du \index{Terminal}Terminal sous macOS, ou de \index{Git~Bash}Git~Bash
+ou MSYS sous Windows.
+
+\importantbox{L'espace horizontal étant compté dans ce document, il
+  est parfois nécessaire de scinder une commande sur deux lignes ou
+  plus. Pour ces cas, j'ai inséré le symbole de continuation de ligne
+  «\bs» de Bash à la fin des lignes. Vous pouvez ainsi copier les
+  commandes directement du document et les coller dans une ligne de
+  commande. Le symbole ne fait \emph{pas} partie des commandes.}
+
+En premier lieu, déplacez, à l'aide de la commande \icode{cd},
+l'invite de commande dans le répertoire où vous avez extrait les
+fichiers de l'archive.
+
+Comme premier exemple, dressons la liste de toutes les utilisations de
+la fonction \code{matrix} dans les fichiers d'exemples. C'est un
+travail pour l'utilitaire \icode{grep}.
+\begin{Schunk}
+\begin{Verbatim}
+$ grep matrix *.R
+\end{Verbatim}
+\end{Schunk}
+
+L'option \code{-l} de \icode{grep} permet de limiter les résultats à
+la liste des fichiers contenant au moins une utilisation de
+\code{matrix}.
+\begin{Schunk}
+\begin{Verbatim}
+$ grep -l matrix *.R
+\end{Verbatim}
+\end{Schunk}
+
+La commande suivante permet de savoir quel fichier d'exemples traite
+de la suite de Fibonacci.
+\begin{Schunk}
+\begin{Verbatim}
+$ grep -l fibonacci *.R
+\end{Verbatim}
+\end{Schunk}
+
+Pour connaitre les fichiers d'exemples dans lesquels apparaissent les
+objets \code{letters} et \code{LETTERS}, nous devons rechercher sans
+égard à la casse pour attraper les deux cas.
+\begin{Schunk}
+\begin{Verbatim}
+$ grep -i letters *.R
+\end{Verbatim}
+\end{Schunk}
+
+Allons-y maintenant d'une expression régulière plus élaborée pour
+trouver toutes les utilisations de la fonction \code{g} dans les
+fichiers d'exemples, c'est-à-dire la chaine \code{g(} précédée d'au
+moins une espace ou en début de ligne.
+\begin{Schunk}
+\begin{Verbatim}
+$ grep -E '( |^)g\(' *.R
+\end{Verbatim}
+\end{Schunk}
+
+Tel que mentionné à la \autoref{sec:texte:outils}, la fonction
+\icode{sed} sert surtout pour rechercher et remplacer dans un fichier,
+et ce, ligne par ligne par défaut. Remplaçons les symboles de
+commentaires triples \code{\#\#\#} en début de ligne (à la Emacs) dans
+le fichier \code{implementation.R} par un symbole unique \code{\#} (à
+la RStudio). Pour faire bonne mesure, plaçons le résultat dans un
+nouveau fichier \code{implementation-new.R} à l'aide de l'opérateur de
+redirection \index{>@\code{>} (Bash)}\code{>}.
+\begin{Schunk}
+\begin{Verbatim}
+$ sed 's/^###/#/' implementation.R > implementation-new.R
+\end{Verbatim}
+\end{Schunk}
+
+Le programme \icode{awk} est particulièrement utile pour traiter des
+fichiers dont les lignes sont séparés en «champs», comme des colonnes
+de données, par exemple. Or, le présent document est justement livré
+avec le fichier \code{100metres.data} qui contient la liste des 31
+meilleurs temps enregistrés au 100~mètres homme entre 1964 et 2005
+(voir l'\autoref{ex:internes:100metres}). La commande \Icode{cat}
+permet d'afficher le contenu du fichier sur la sortie standard.
+\begin{Schunk}
+\begin{Verbatim}
+$ cat 100metres.data
+\end{Verbatim}
+\end{Schunk}
+
+Effectuons dans un premier temps l'extraction des temps des records
+(second champ). La première commande utilise un transfert de données
+du programme \icode{cat} vers \icode{awk}, alors que la seconde, plus
+usuelle et tout à fait équivalente, emploie un fichier en entrée.
+\begin{Schunk}
+\begin{Verbatim}
+$ cat 100metres.data | awk '{ print $2 }'
+$ awk '{ print $2 }' 100metres.data
+\end{Verbatim}
+\end{Schunk}
+
+L'inversion des deux colonnes du fichier est simple à réaliser avec
+\icode{awk}.
+\begin{Schunk}
+\begin{Verbatim}
+$ awk '{ print $2, $1 }' 100metres.data
+\end{Verbatim}
+\end{Schunk}
+
+Les colonnes du fichier \code{100metres.data} sont séparées par une
+espace. Remplaçons ces espaces par des virgules pour convertir le
+fichier en format CSV. Je fournis deux solutions, avec \icode{awk} et avec
+\icode{sed}.
+\begin{Schunk}
+\begin{Verbatim}
+$ awk '{ print $1","$2 }' 100metres.data
+$ sed 's/ /,/' 100metres.data
+\end{Verbatim}
+\end{Schunk}
+
+Changeons maintenant le format de la date du format
+\link{https://fr.wikipedia.org/wiki/ISO_8601}{ISO~8601} aaaa-mm-qq
+vers le format américain qq/mm/aa. D'abord une solution avec
+\icode{awk}. En premier lieu, nous devons changer le séparateur de
+champs de \code{awk} (l'espace par défaut) pour l'espace et le tiret.
+Ainsi, \code{awk} va non seulement séparer les deux colonnes du
+fichier, mais aussi les champs de la date. Ensuite, nous replaçons les
+champs dans l'ordre voulu avec les bons séparateurs. La fonction
+\index{substr@\code{substr} (awk)}\code{substr} de \code{awk} permet
+de sélectionner une partie d'une chaine de caractères
+\citep[section~9.1.3]{awk}.
+\begin{Schunk}
+\begin{Verbatim}
+$ awk 'BEGIN { FS = "[ -]" } \
+       { print $2"/"$3"/"substr($1, 3), $4 }' \
+       100metres.data
+\end{Verbatim}
+\end{Schunk}
+
+La solution avec \icode{sed} maintenant, qui repose non pas sur des
+champs détectés automatiquement, mais plutôt sur la recherche et le
+remplacement d'expressions régulières. Nous recherchons l'expression
+régulière suivante en capturant chaque élément trouvé (sauf les
+tirets): les nombres 19 ou 20; deux chiffres; un tiret; deux chiffres;
+un tiret; deux chiffres; tout le reste de la ligne. Nous replaçons
+ensuite les éléments capturés dans l'ordre souhaité avec des barres
+obliques \code{/} entre les éléments de dates. Comme le symbole
+\code{/} est utilisé dans la chaine de sortie, il faut utiliser un
+autre symbole pour séparer les champs de la commande \code{sed}. J'ai
+utilisé le symbole \code{~} ici.
+\begin{Schunk}
+\begin{Verbatim}
+$ sed -E 's~(19|20)([0-9]{2})-([0-9]{2})-([0-9]{2})(.*)~'\
+'\3/\4/\2\5~' 100metres.data
+\end{Verbatim}
+\end{Schunk}
+
+Amusons-nous maintenant avec le fichier \code{README.md} qui contient,
+réunies à la fin du fichier, les notes de mise à jour des différentes
+versions du document. Les deux commandes suivantes dressent la liste
+des numéros de versions avec les variantes de base et étendue
+des expressions régulières.
+\begin{Schunk}
+\begin{Verbatim}
+$ grep '^### [[:digit:]]' README.md
+$ grep -E '^#{3} [[:digit:]]' README.md
+\end{Verbatim}
+\end{Schunk}
+
+Terminons avec deux exemples plus avancés. Nous souhaitons d'abord
+extraire tout l'historique des versions du fichier \code{README.md}.
+Cet historique se trouve à la fin du fichier, à partir de la ligne
+débutant par la chaine \code{\#\# Historique}. Le meilleur outil pour
+effectuer des opérations sur plusieurs lignes d'un fichier est
+\icode{awk}, tel que mentionné à la \autoref{sec:texte:outils}.
+L'idée, ici, est la suivante: lorsque la chaine est trouvée, donner
+une valeur de 1 (vrai) à une variable d'«état», puis afficher les
+lignes lorsque la variable est vraie (donc toutes celles qui suivent).
+Je présente deux versions de la commande, une explicite et une plus
+compacte.
+\begin{Schunk}
+\begin{Verbatim}
+$ awk '/^## Historique/ { state = 1; next } \
+       state == 1 { print }' README.md
+$ awk '/^## Historique/ { state = 1; next } \
+       state' README.md
+\end{Verbatim}
+\end{Schunk}
+
+\tipbox{Explication de la version compacte: écrire \code{state == 1}
+  pour tester que la variable \code{state} est vraie n'est pas
+  nécessaire dans la mesure où il est sous-entendu que l'expression
+  qui précède l'action dans une commande \icode{awk} est un test
+  conditionnel et que \code{awk} traite la valeur $1$ comme vraie. De
+  plus, la commande \code{print} est implicite avec \code{awk}, donc
+  il n'est pas nécessaire de la demander explicitement.}
+
+Ensuite, nous voulons extraire seulement les notes de mise à jour de
+la dernière version du document. L'idée consiste à afficher les lignes
+du fichier à partir de la première section marquée par '\#\#\#' après
+'\#\# Historique' et d'arrêter lorsqu'une autre section marquée par
+'\#\#\#' est atteinte. Tout ceci requiert deux valeurs de la
+variable d'état \code{state}.
+\begin{Schunk}
+\begin{Verbatim}
+$ awk '/^## Historique/ { state = 1 } \
+       (state == 1) && /^### / { state = 2; next } \
+       (state == 2) && /^### / { exit } \
+       state == 2 { print }' README.md
+\end{Verbatim}
+\end{Schunk}
+
+\tipbox{Les opérations de composition du présent document, de
+  publication dans GitHub et de mise à jour de la page web sont
+  entièrement automatisées à l'aide de l'outil
+  \link{https://fr.wikipedia.org/wiki/Make}{\code{make}} standard sur
+  les systèmes Unix. Vous pouvez retrouver une variante de la commande
+  \code{awk} ci-dessus dans la règle \code{create-release} du fichier
+  de configuration \code{Makefile} qui se trouve dans le
+  \link{\ghurl}{code source} du document.}
 
 \section{Exercices}
 \label{sec:texte:exercices}
@@ -405,11 +628,9 @@ Je vous invite à étudier les chapitres suivants du guide \emph{Shell
 \end{exercice}
 
 \begin{exercice}
-  Le fichier \code{100metres.data}, livré avec le présent document,
-  contient la liste des 31 meilleurs temps enregistrés au 100~mètres
-  homme entre 1964 et 2005 (voir l'\autoref{ex:internes:100metres}).
   Écrire une commande \code{sed} permettant de changer le séparateur
-  décimal dans les temps pour une virgule.
+  décimal dans les temps du fichier \code{100metres.data} pour une
+  virgule.
   \begin{sol}
     \code{sed} est l'outil idéal pour de tels traitements simples à
     effectuer ligne par ligne.
@@ -518,6 +739,16 @@ $ sed -E 's/( |^)f\((.*), (.*)\)/fun(\3, \2)/' \
     \end{Schunk}
     Le premier groupe \verb=( |^)= capture une espace avant \code{f}
     ou le début de la ligne.
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Déterminer si la commande \code{print} est nécessaire ou non dans la
+  toute dernière commande \icode{awk} de la
+  \autoref{sec:texte:exemples}
+  \begin{sol}
+    La commande n'est pas nécessaire puisqu'il s'agit de l'action
+    implicite dans \code{awk}.
   \end{sol}
 \end{exercice}
 
