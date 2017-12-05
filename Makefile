@@ -56,6 +56,7 @@ TEXFILES = \
 	texte.tex \
 	rstudio.tex \
 	emacs+ess.tex \
+	git.tex \
 	reponses.tex \
 	colophon.tex \
 	couverture-arriere.tex
@@ -115,15 +116,17 @@ create-release :
 	     git push; fi
 	if [ -e relnotes.in ]; then rm relnotes.in; fi
 	touch relnotes.in
-	awk 'BEGIN { ORS=" "; print "{\"tag_name\": \"v${VERSION}\"," } \
+	awk 'BEGIN { ORS = " "; print "{\"tag_name\": \"v${VERSION}\"," } \
 	      /^$$/ { next } \
-	      /^## Historique/ { state=1; next } \
-              (state==1) && /^### / { state = 2; out = $$2; \
-	                             for(i=3; i<=NF; i++) { out = out" "$$i }; \
-	                             printf "\"name\": \"Édition %s\", \"body\": \"", out; \
-	                             next } \
-	      (state==2) && /^### / { exit } \
-	      state==2 { printf "%s\\n", $$0 } \
+	      /^## Historique/ { state = 1; next } \
+              (state == 1) && /^### / { \
+		state = 2; \
+		out = $$2; \
+	        for(i = 3; i <= NF; i++) { out = out" "$$i }; \
+	        printf "\"name\": \"Édition %s\", \"body\": \"", out; \
+	        next } \
+	      (state == 2) && /^### / { exit } \
+	      state == 2 { printf "%s\\n", $$0 } \
 	      END { print "\", \"draft\": false, \"prerelease\": false}" }' \
 	      README.md >> relnotes.in
 	curl --data @relnotes.in ${REPOSURL}/releases?access_token=${OAUTHTOKEN}
