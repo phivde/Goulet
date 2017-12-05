@@ -17,6 +17,7 @@ aucun changement au texte.
 \endgroup
 
 \section{Démarrage rapide}
+\label{sec:git:getting_started}
 
 Ce chapitre traite du démarrage rapide avec Git.
 Nous commencerons par expliquer les bases de la gestion de version, puis nous parlerons de l'installation de Git sur votre système et finalement du paramétrage pour commencer à l'utiliser.
@@ -45,7 +46,7 @@ Pour traiter ce problème, les programmeurs ont développé il y a longtemps des
   \centering
   \includegraphics{images/local}
   \caption{Gestion de version locale}
-  \label{fig:progit:local}
+  \label{fig:git:local}
 \end{figure}
 
 Un des systèmes les plus populaires était RCS, qui est encore distribué avec de nombreux systèmes d'exploitation aujourd'hui.
@@ -65,7 +66,7 @@ Pendant de nombreuses années, cela a été le standard pour la gestion de versi
   \centering
   \includegraphics{images/centralized}
   \caption{Gestion de version centralisée}
-  \label{fig:progit:centralized}
+  \label{fig:git:centralized}
 \end{figure}
 
 Ce schéma offre de nombreux avantages par rapport à la gestion de version locale.
@@ -89,7 +90,7 @@ Chaque extraction devient une sauvegarde complète de toutes les données.
   \centering
   \includegraphics{images/distributed}
   \caption{Gestion de version distribuée}
-  \label{fig:progit:distributed}
+  \label{fig:git:distributed}
 \end{figure}
 
 De plus, un grand nombre de ces systèmes gère particulièrement bien le fait d'avoir plusieurs dépôts avec lesquels travailler, vous permettant de collaborer avec différents groupes de personnes de manières différentes simultanément dans le même projet.
@@ -136,7 +137,7 @@ Ces systèmes (CVS, Subversion, Perforce, Bazaar et autres) considèrent l'infor
   \centering
   \includegraphics{images/deltas}
   \caption{D'autres systèmes sauvent l'information comme des modifications sur des fichiers}
-  \label{fig:progit:deltas}
+  \label{fig:git:deltas}
 \end{figure}
 
 Git ne gère pas et ne stocke pas les informations de cette manière.
@@ -149,7 +150,7 @@ Git pense ses données plus à la manière d'un *flux d'instantanés*.
   \centering
   \includegraphics{images/snapshots}
   \caption{Git stocke les données comme des instantanés du projet au cours du temps}
-  \label{fig:progit:snapshots}
+  \label{fig:git:snapshots}
 \end{figure}
 
 C'est une distinction importante entre Git et quasiment tous les autres VCS.
@@ -220,7 +221,7 @@ Ceci nous mène aux trois sections principales d'un projet Git : le répertoire
   \centering
   \includegraphics{images/areas}
   \caption{Répertoire de travail, zone d'index et répertoire Git}
-  \label{fig:progit:areas}
+  \label{fig:git:areas}
 \end{figure}
 
 Le répertoire Git est l'endroit où Git stocke les méta-données et la base de données des objets de votre projet.
@@ -241,7 +242,7 @@ L'utilisation standard de Git se passe comme suit :
 Si une version particulière d'un fichier est dans le répertoire Git, il est considéré comme validé.
 S'il est modifié mais a été ajouté dans la zone d'index, il est indexé.
 S'il a été modifié depuis le dernier instantané mais n'a pas été indexé, il est modifié.
-Dans la \autoref{sec:git:git_basics}, vous en apprendrez plus sur ces états et comment vous pouvez en tirer parti ou complètement occulter la phase d'indexation.
+Dans la \autoref{sec:git:basics}, vous en apprendrez plus sur ces états et comment vous pouvez en tirer parti ou complètement occulter la phase d'indexation.
 
 \subsection{La ligne de commande}
 
@@ -394,7 +395,7 @@ $ git init
 
 Cela crée un nouveau sous-répertoire nommé \code{.git} qui contient tous les fichiers nécessaires au dépôt --- un squelette de dépôt Git.
 Pour l'instant, aucun fichier n'est encore versionné.
-(consulter la \autoref{sec:git:internals} pour plus d'information sur les fichiers contenus dans le répertoire \code{.git} que vous venez de créer.)
+(consulter \emph{Les tripes de Git} pour plus d'information sur les fichiers contenus dans le répertoire \code{.git} que vous venez de créer.)
 \begin{Schunk}
 \begin{Verbatim}
 $ git add *.c
@@ -410,7 +411,7 @@ Si vous souhaitez obtenir une copie d'un dépôt Git existant --- par exemple, u
 Si vous êtes familier avec d'autres systèmes de gestion de version tels que Subversion, vous noterez que la commande est \code{clone} et non \code{checkout}.
 C'est une distinction importante --- Git reçoit une copie de quasiment toutes les données dont le serveur dispose.
 Toutes les versions de tous les fichiers pour l'historique du projet sont téléchargées quand vous lancez \code{git clone}.
-En fait, si le disque du serveur se corrompt, vous pouvez utiliser n'importe quel clone pour remettre le serveur dans l'état où il était au moment du clonage (vous pourriez perdre quelques paramètres du serveur, mais toutes les données sous gestion de version seraient récupérées --- consulter la \autoref{sec:git:on_the_server} pour de plus amples détails).
+En fait, si le disque du serveur se corrompt, vous pouvez utiliser n'importe quel clone pour remettre le serveur dans l'état où il était au moment du clonage (vous pourriez perdre quelques paramètres du serveur, mais toutes les données sous gestion de version seraient récupérées --- consulter \emph{Installation de Git sur un serveur} pour de plus amples détails).
 
 Vous clonez un dépôt avec \code{git clone \meta{url}}.
 Par exemple, si vous voulez cloner la bibliothèque logicielle Git appelée libgit2, vous pouvez le faire de la manière suivante:
@@ -433,7 +434,7 @@ Cette commande réalise la même chose que la précédente, mais le répertoire 
 
 Git dispose de différents protocoles de transfert que vous pouvez utiliser.
 L'exemple précédent utilise le protocole \code{https://}, mais vous pouvez aussi voir \code{git://} ou \code{utilisateur@serveur:/chemin.git}, qui utilise le protocole de transfert SSH.
-La \autoref{sec:git:on_the_server} introduit toutes les options disponibles pour mettre en place un serveur Git, ainsi que leurs avantages et inconvénients.
+\emph{Installation de Git sur un serveur} introduit toutes les options disponibles pour mettre en place un serveur Git, ainsi que leurs avantages et inconvénients.
 
 \subsection{Enregistrer des modifications dans le dépôt}
 
@@ -452,7 +453,7 @@ Vous \emph{indexez} ces fichiers modifiés et vous enregistrez toutes les modifi
   \centering
   \includegraphics{images/lifecycle}
   \caption{Le cycle de vie des états des fichiers}
-  \label{fig:progit:lifecycle}
+  \label{fig:git:lifecycle}
 \end{figure}
 
 \subsubsection{Vérifier l'état des fichiers}
@@ -1218,7 +1219,7 @@ Le \autoref{tab:git:pretty_format} liste les options de formatage les plus utile
 Vous pourriez vous demander quelle est la différence entre \emph{auteur}  et \emph{validateur}.
 L'\emph{auteur} est la personne qui a réalisé initialement le travail, alors que le \emph{validateur} est la personne qui a effectivement validé ce travail en gestion de version.
 Donc, si quelqu'un envoie un patch à un projet et un des membres du projet l'applique, les deux personnes reçoivent le crédit --- l'écrivain en tant qu'auteur, et le membre du projet en tant que validateur.
-Nous traiterons plus avant de cette distinction dans le \autoref{sec:git:distributed_git}.
+Nous traiterons plus avant de cette distinction dans \emph{Git distribué}.
 
 Les options \code{oneline} et \code{format} sont encore plus utiles avec une autre option \code{log} appelée \code{--graph}.
 Cette option ajoute un joli graphe en caractères ASCII pour décrire l'historique des branches et fusions:
@@ -1424,7 +1425,7 @@ Le fichier \code{CONTRIBUTING.md} est modifié mais de retour à l'état non ind
 Appeler \code{git reset} sans option n'est pas dangereux - cela ne touche qu'à la zone d'index.}
 
 Pour l'instant, cette invocation magique est la seule à connaître pour la commande \code{git reset}.
-Nous entrerons plus en détail sur ce que \code{reset} réalise et comment le maîtriser pour faire des choses intéressantes dans la \autoref{sec:git:reset}
+Nous entrerons plus en détail sur ce que \code{reset} réalise et comment le maîtriser pour faire des choses intéressantes dans \emph{Reset demystifié}.
 
 \subsubsection{Réinitialiser un fichier modifié}
 
@@ -1467,7 +1468,7 @@ N'utilisez jamais cette commande à moins d'être vraiment sûr de ne pas vouloi
 Si vous souhaitez seulement écarter momentanément cette modification, nous verrons comment mettre de côté et créer des branches dans la \autoref{sec:git:branching}; ce sont de meilleures façons de procéder.
 
 Souvenez-vous, tout ce qui a été validé dans Git peut quasiment toujours être récupéré.
-Y compris des \emph{commits} sur des branches qui ont été effacées ou des \emph{commits} qui ont été écrasés par une validation avec l'option \code{--amend} (se référer au \autoref{sec:git:data_recovery} pour la récupération de données).
+Y compris des \emph{commits} sur des branches qui ont été effacées ou des \emph{commits} qui ont été écrasés par une validation avec l'option \code{--amend} (se référer au chapitre \emph{Récupération de données} pour la récupération de données).
 Cependant, tout ce que vous perdez avant de l'avoir validé n'a aucune chance d'être récupérable via Git.
 
 \subsection{Travailler avec des dépôts distants}
@@ -1528,7 +1529,7 @@ origin    git@github.com:mojombo/grit.git (push)
 \end{Verbatim}
 \end{Schunk}
 
-Notez que ces dépôts distants sont accessibles au moyen de différents protocoles; nous traiterons des protocoles au \autoref{sec:git:on_the_server}.
+Notez que ces dépôts distants sont accessibles au moyen de différents protocoles; nous traiterons des protocoles dans \emph{Installation de Git sur un serveur}.
 
 \subsubsection{Ajouter des dépôts distants}
 
@@ -1732,7 +1733,7 @@ un \emph{blob} pour le contenu de chacun de vos trois fichiers, un arbre (\emph{
   \centering
   \includegraphics{images/commit-and-tree}
   \caption{Un commit et son arbre}
-  \label{fig:progit:commit-and-tree}
+  \label{fig:git:commit-and-tree}
 \end{figure}
 
 Si vous faites des modifications et validez à nouveau, le prochain \emph{commit} stocke un pointeur vers le \emph{commit} le précédant immédiatement.
@@ -1741,7 +1742,7 @@ Si vous faites des modifications et validez à nouveau, le prochain \emph{commit
   \centering
   \includegraphics{images/commits-and-parents}
   \caption{Commits et leurs parents}
-  \label{fig:progit:commits-and-parents}
+  \label{fig:git:commits-and-parents}
 \end{figure}
 
 Une branche dans Git est simplement un pointeur léger et déplaçable vers un de ces \emph{commits}.
@@ -1757,7 +1758,7 @@ La seule raison pour laquelle chaque dépôt en a une est que la commande \code{
   \centering
   \includegraphics{images/branch-and-history}
   \caption{Une branche et l'historique de ses \emph{commits}}
-  \label{fig:progit:branch-and-history}
+  \label{fig:git:branch-and-history}
 \end{figure}
 
 \subsubsection{Créer une nouvelle branche}
@@ -1779,7 +1780,7 @@ Cela crée un nouveau pointeur vers le \emph{commit} courant.
   \centering
   \includegraphics{images/two-branches}
   \caption{Deux branches pointant vers la même série de \emph{commits}}
-  \label{fig:progit:two-branches}
+  \label{fig:git:two-branches}
 \end{figure}
 
 Comment Git connaît-il alors la branche sur laquelle vous vous trouvez?
@@ -1793,7 +1794,7 @@ En effet, la commande \code{git branch} n'a fait que créer une nouvelle branche
   \centering
   \includegraphics{images/head-to-master}
   \caption{HEAD pointant vers une branche}
-  \label{fig:progit:head-to-master}
+  \label{fig:git:head-to-master}
 \end{figure}
 
 Vous pouvez vérifier cela facilement grâce à la commande \code{git log} qui vous montre vers quoi les branches pointent. Il s'agit de l'option \code{--decorate}.
@@ -1825,7 +1826,7 @@ Cela déplace \code{HEAD} pour le faire pointer vers la branche \code{testing}.
   \centering
   \includegraphics{images/head-to-testing}
   \caption{HEAD pointe vers la branche courante}
-  \label{fig:progit:head-to-testing}
+  \label{fig:git:head-to-testing}
 \end{figure}
 
 Qu'est-ce que cela signifie?
@@ -1841,7 +1842,7 @@ $ git commit -a -m 'made a change'
   \centering
   \includegraphics{images/advance-testing}
   \caption{La branche HEAD avance à chaque \emph{commit}}
-  \label{fig:progit:advance-testing}
+  \label{fig:git:advance-testing}
 \end{figure}
 
 C'est intéressant parce qu'à présent, votre branche \code{test} a avancé tandis que la branche \code{master} pointe toujours sur le \emph{commit} sur lequel vous étiez lorsque vous avez lancé la commande \code{git checkout} pour changer de branche.
@@ -1856,7 +1857,7 @@ $ git checkout master
   \centering
   \includegraphics{images/checkout-master}
   \caption{HEAD est déplacé lors d'un \emph{checkout}}
-  \label{fig:progit:checkout-master}
+  \label{fig:git:checkout-master}
 \end{figure}
 
 Cette commande a réalisé deux actions.
@@ -1885,7 +1886,7 @@ Et vous avez fait tout ceci avec de simples commandes: \code{branch}, \code{chec
   \centering
   \includegraphics{images/advance-master}
   \caption{Divergence d'historique}
-  \label{fig:progit:advance-master}
+  \label{fig:git:divergent_history}
 \end{figure}
 
 Vous pouvez également voir ceci grâce à la commande \code{git log}.
@@ -1942,7 +1943,7 @@ Commençons par supposer que vous travaillez sur votre projet et avez déjà que
   \centering
   \includegraphics{images/basic-branching-1}
   \caption{Historique de \emph{commits} simple}
-  \label{fig:progit:basic-branching-1}
+  \label{fig:git:basic-branching-1}
 \end{figure}
 
 Vous avez décidé de travailler sur le problème numéroté \#53 dans l'outil de gestion des tâches que votre entreprise utilise, quel qu'il soit.
@@ -1966,7 +1967,7 @@ $ git checkout prob53
   \centering
   \includegraphics{images/basic-branching-2}
   \caption{Création d'un nouveau pointeur de branche}
-  \label{fig:progit:basic-branching-2}
+  \label{fig:git:basic-branching-2}
 \end{figure}
 
 Vous travaillez sur votre site web et validez vos modifications.
@@ -1982,7 +1983,7 @@ $ git commit -a -m "ajout d'un pied de page [problème 53]"
   \centering
   \includegraphics{images/basic-branching-3}
   \caption{La branche \code{prob53} a avancé avec votre travail}
-  \label{fig:progit:basic-branching-3}
+  \label{fig:git:basic-branching-3}
 \end{figure}
 
 À ce moment-là, vous recevez un appel qui vous apprend qu'il y a un problème sur le site web qu'il faut résoudre immédiatement.
@@ -1991,7 +1992,7 @@ Tout ce que vous avez à faire, c'est simplement de rebasculer sur la branche \c
 
 Cependant, avant de le faire, notez que si votre copie de travail ou votre zone d'index contiennent des modifications non validées qui sont en conflit avec la branche que vous extrayez, Git ne vous laissera pas effectuer le changement de branche.
 Le mieux est d'avoir votre copie de travail propre au moment de changer de branche.
-Il y a des moyens de contourner ceci (précisément par le remisage et l'amendement de \emph{commit}) dont nous parlerons plus loin, à la \autoref{sec:git:stashing}.
+Il y a des moyens de contourner ceci (précisément par le remisage et l'amendement de \emph{commit}) dont nous parlerons plus loin, au chapitre \emph{Remisage et nettoyage}.
 Pour l'instant, nous supposons que vous avez validé tous vos changements et que vous pouvez donc rebasculer vers votre branche \code{master}:
 \begin{Schunk}
 \begin{Verbatim}
@@ -2022,7 +2023,7 @@ $ git commit -a
   \centering
   \includegraphics{images/basic-branching-4}
   \caption{Branche de correctif basée sur \code{master}}
-  \label{fig:progit:basic-branching-4}
+  \label{fig:git:basic-branching-4}
 \end{figure}
 
 Vous pouvez lancer vos tests, vous assurer que la correction est efficace et la fusionner dans la branche \code{master} pour la déployer en production.
@@ -2048,7 +2049,7 @@ Votre modification est maintenant dans l'instantané (\emph{snapshot}) du \emph{
   \centering
   \includegraphics{images/basic-branching-5}
   \caption{Avancement du pointeur de \code{master} sur \code{correctif}}
-  \label{fig:progit:basic-branching-5}
+  \label{fig:git:basic-branching-5}
 \end{figure}
 
 Après le déploiement de votre correctif super-important, vous voilà prêt à retourner travailler sur le sujet qui vous occupait avant l'interruption.
@@ -2078,7 +2079,7 @@ $ git commit -a -m 'Nouveau pied de page terminé [issue 53]'
   \centering
   \includegraphics{images/basic-branching-6}
   \caption{Le travail continue sur \code{prob53}}
-  \label{fig:progit:basic-branching-6}
+  \label{fig:git:basic-branching-6}
 \end{figure}
 
 Il est utile de noter que le travail réalisé dans la branche \code{correctif} n'est pas contenu dans les fichiers de la branche \code{prob53}.
@@ -2111,7 +2112,7 @@ Dans ce cas, Git réalise une simple fusion à trois sources (\emph{three-way me
   \centering
   \includegraphics{images/basic-merging-1}
   \caption{Trois instantanés utilisés dans une fusion classique}
-  \label{fig:progit:basic-merging-1}
+  \label{fig:git:basic-merging-1}
 \end{figure}
 
 Au lieu d'avancer simplement le pointeur de branche, Git crée un nouvel instantané qui résulte de la fusion à trois sources et crée automatiquement un nouveau \emph{commit} qui pointe dessus.
@@ -2121,7 +2122,7 @@ On appelle ceci un \emph{commit} de fusion (\emph{merge commit}) qui est spécia
   \centering
   \includegraphics{images/basic-merging-2}
   \caption{Un \emph{commit} de fusion}
-  \label{fig:progit:basic-merging-2}
+  \label{fig:git:basic-merging-2}
 \end{figure}
 
 Il est à noter que Git détermine par lui-même le meilleur ancêtre commun à utiliser comme base de la fusion. Ce comportement est très différent de celui de CVS ou Subversion (avant la version 1.5), où le développeur en charge de la fusion doit trouver par lui-même la meilleure base.
@@ -2228,7 +2229,7 @@ Hit return to start merge resolution tool (opendiff):
 Si vous souhaitez utiliser un outil de fusion autre que celui par défaut (Git a choisi \code{opendiff} dans ce cas car la commande a été lancée depuis un Mac), vous pouvez voir tous les outils supportés après l'indication «\emph{of the following tools:}».
 Entrez simplement le nom de l'outil que vous préféreriez utiliser.
 
-\notebox{Si vous avez besoin d'outils plus avancés pour résoudre des conflits complexes, vous trouverez davantage d'informations au \autoref{sec:git:advanced_merging}.}
+\notebox{Si vous avez besoin d'outils plus avancés pour résoudre des conflits complexes, vous trouverez davantage d'informations au chapitre \emph{Fusion avancée}.}
 
 Après avoir quitté l'outil de fusion, Git vous demande si la fusion a été réussie.
 Si vous répondez par la positive à l'outil, il ajoute le fichier dans l'index pour le marquer comme résolu.
