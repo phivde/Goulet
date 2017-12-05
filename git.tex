@@ -1300,6 +1300,8 @@ Le \autoref{tab:git:pretty_format} liste les options de formatage les plus utile
 
 \begin{table}
   \centering
+  \caption{Options utiles pour \code{git log --pretty=format}}
+  \label{tab:git:pretty_format}
   \begin{tabular}{ll}
     \toprule
     Option   & Description du formatage \\
@@ -1321,8 +1323,6 @@ Le \autoref{tab:git:pretty_format} liste les options de formatage les plus utile
     \code{\%s}     & Sujet \\
     \bottomrule
   \end{tabular}
-  \caption{Options utiles pour \code{git log --pretty=format}}
-  \label{tab:git:pretty_format}
 \end{table}
 
 Vous pourriez vous demander quelle est la différence entre \emph{auteur}  et \emph{validateur}.
@@ -1355,6 +1355,8 @@ Le \autoref{tab:git:log_options} donne une liste des options que nous avons trai
 
 \begin{table}
   \centering
+  \caption{Options usuelles de \code{git log}}
+  \label{tab:git:log_options}
   \begin{tabularx}{1.0\linewidth}{lX}
     \toprule
     Option            & Description \\
@@ -1371,8 +1373,6 @@ Le \autoref{tab:git:log_options} donne une liste des options que nous avons trai
     \code{--oneline}       & Option de convenance correspondant à \code{--pretty=oneline --abbrev-commit} \\
     \bottomrule
   \end{tabularx}
-  \caption{Options usuelles de \code{git log}}
-  \label{tab:git:log_options}
 \end{table}
 
 \subsubsection{Limiter la longueur de l'historique}
@@ -1414,6 +1414,8 @@ Le \autoref{tab:git:limit_options} récapitule les options que nous venons de vo
 
 \begin{table}
   \centering
+  \caption{Options pour limiter la sortie de \code{git log}}
+  \label{tab:git:limit_options}
   \begin{tabularx}{1.0\linewidth}{lX}
     \toprule
     Option                & Description \\
@@ -1427,8 +1429,6 @@ Le \autoref{tab:git:limit_options} récapitule les options que nous venons de vo
     \code{-S}                  & Ne montre que les \emph{commits} dont les ajouts ou retraits contient la chaîne de caractères \\
     \bottomrule
   \end{tabularx}
-  \caption{Options pour limiter la sortie de \code{git log}}
-  \label{tab:git:limit_options}
 \end{table}
 
 Par exemple, si vous souhaitez visualiser quels \emph{commits} modifiant les fichiers de test dans l'historique du code source de Git ont été validés par Junio Hamano et n'étaient pas des fusions durant le mois d'octobre 2008, vous pouvez lancer ce qui suit:
