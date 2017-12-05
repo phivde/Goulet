@@ -1,5 +1,19 @@
-\chapter{Pro Git}
+\chapter{Pro Git --- extraits}
 \label{chap:git}
+
+\begingroup
+\itshape%
+Cette annexe contient le chapitre 1 en entier et des extraits des
+chapitres 2 (sections 2.1 à 2.5) et 3 (sections 3.1 à 3.3) de
+\emph{Pro Git} de \citet{ProGit:2e:2014}. Hormis
+l'adaptation à la mise en page du présent document et la conversion
+des chapitres en sections, je n'ai apporté aucun changement au texte.
+
+\emph{Pro Git} est mis à disposition selon le contrat
+\href{http://creativecommons.org/licenses/by-sa/4.0/deed.fr}{%
+  Attribution-Pas d’utilisation commerciale-Partage dans les mêmes
+  conditions 3.0 non transposé} de Creative Commons.
+\endgroup
 
 \section{Démarrage rapide}
 
@@ -239,108 +253,6 @@ De plus, le choix d'un outil graphique est sujet à des goûts personnels, mais 
 
 Nous considérons que vous savez ouvrir un Terminal sous Mac ou une invite de commandes ou Powershell sous Windows.
 Si ce n'est pas le cas, il va falloir tout d'abord vous renseigner sur ces applications pour pouvoir comprendre la suite des exemples et descriptions du livre.
-
-\subsection{Installation de Git}
-
-Avant de commencer à utiliser Git, il faut qu'il soit disponible sur votre ordinateur.
-Même s'il est déjà installé, c'est probablement une bonne idée d'utiliser la dernière version disponible.
-Vous pouvez l'installer soit comme paquet ou avec un installateur, soit en téléchargeant le code et en le compilant par vous-même.
-
-\notebox{Ce livre a été écrit en utilisant Git version *2.0.0*.
-  Bien que la plupart des commandes utilisées fonctionnent vraisemblablement encore avec d'anciennes version de Git, certaines peuvent agir différemment.
-  Comme Git est particulièrement excellent pour préserver les compatibilités amont, toute version supérieure à 2.0 devrait fonctionner sans différence.}
-
-\subsubsection{Installation sur Linux}
-
-Si vous voulez installer les outils basiques de Git sur Linux via un installateur binaire, vous pouvez généralement le faire au moyen de l'outil de gestion de paquet fourni avec votre distribution.
-Sur Fedora, par exemple, vous pouvez utiliser \code{dnf}:
-\begin{Schunk}
-\begin{Verbatim}
-$ dnf install git-all
-\end{Verbatim}
-\end{Schunk}
-
-Sur une distribution basée sur Debian, telle que Ubuntu, essayer \code{apt-get}:
-\begin{Schunk}
-\begin{Verbatim}
-$ apt-get install git-all
-\end{Verbatim}
-\end{Schunk}
-
-Pour plus d'options, des instructions d'installation sur différentes versions Unix sont disponibles sur le site web de Git, à \link{http://git-scm.com/download/linux}{}.
-
-\subsubsection{Installation sur Mac}
-
-Il existe plusieurs méthodes d'installation de Git sur un Mac.
-La plus facile est probablement d'installer les \emph{Xcode Command Line Tools}.
-Sur Mavericks (10.9) ou postérieur, vous pouvez simplement essayer de lancer \code{git} dans le terminal la première fois.
-S'il n'est pas déjà installé, il vous demandera de le faire.
-
-Si vous souhaitez une version plus à jour, vous pouvez aussi l'installer à partir de l'installateur binaire.
-Un installateur de Git pour OS X est maintenu et disponible au téléchargement sur le site web de Git à \link{http://git-scm.com/download/mac}{}.
-
-Vous pouvez aussi l'installer comme sous-partie de l'installation de GitHub pour Mac.
-Leur outil Git graphique a une option pour installer les outils en ligne de commande.
-Vous pouvez télécharger cet outil depuis le site web de GitHub pour Mac, à \link{http://mac.github.com}{}.
-
-\subsubsection{Installation sur Windows}
-
-Il existe aussi plusieurs manières d'installer Git sur Windows.
-L'application officielle est disponible au téléchargement sur le site web de Git.
-Rendez-vous sur http://git-scm.com/download/win[] et le téléchargement démarrera automatiquement.
-Notez que c'est un projet nommé \emph{Git for Windows} (appelé aussi msysGit), qui est séparé de Git lui-même; pour plus d'information, rendez-vous à \link{http://msysgit.github.io/}{}.
-
-Une autre méthode facile pour installer Git est d'installer \emph{Github for Windows}.
-L'installateur inclut une version en ligne de commande avec l'interface graphique.
-Elle fonctionne aussi avec Powershell et paramètre correctement les caches d'authentification et les réglages CRLF.
-Nous en apprendrons plus sur ces sujets plus tard, mais il suffit de savoir que ces options sont très utiles.
-Vous pouvez télécharger ceci depuis le site de \emph{Github for Windows}, à l'adresse \link{http://windows.github.com}{}.
-
-\subsubsection{Installation depuis les sources}
-
-Certains peuvent plutôt trouver utile d'installer Git depuis les sources car on obtient la version la plus récente.
-Les installateurs de version binaire tendent à être un peu en retard, même si Git a gagné en maturité ces dernières années, ce qui limite les évolutions.
-
-Pour installer Git, vous avez besoin des bibliothèques suivantes: autotools, curl, zlib, openssl, expat, libiconv.
-Par exemple, si vous avez un système d'exploitation qui utilise dnf (tel que Fedora) ou apt-get (tel qu'un système basé sur Debian), vous pouvez utiliser l'une des commandes suivantes pour installer les dépendances:
-
-\begin{Schunk}
-\begin{Verbatim}
-$ dnf install curl-devel expat-devel gettext-devel \
-    openssl-devel zlib-devel
-\end{Verbatim}
-\end{Schunk}
-
-\begin{Schunk}
-\begin{Verbatim}
-$ apt-get install libcurl4-gnutls-dev libexpat1-dev gettext \
-    libz-dev libssl-dev
-\end{Verbatim}
-\end{Schunk}
-
-Quand vous avez toutes les dépendances nécessaires, vous pouvez poursuivre et télécharger la dernière version de Git depuis plusieurs sites.
-Vous pouvez l'obtenir via Kernel.org, à \link{https://www.kernel.org/pub/software/scm/git}{}, ou sur le miroir sur le site web GitHub à \link{https://github.com/git/git/releases}{}.
-
-Puis, compiler et installer:
-
-\begin{Schunk}
-\begin{Verbatim}
-$ tar -zxf git-1.9.1.tar.gz
-$ cd git-1.9.1
-$ make configure
-$ ./configure --prefix=/usr
-$ make all doc info
-$ sudo make install install-doc install-html install-info
-\end{Verbatim}
-\end{Schunk}
-
-Après ceci, vous pouvez obtenir Git par Git lui-même pour les mises à jour:
-
-\begin{Schunk}
-\begin{Verbatim}
-$ git clone git://git.kernel.org/pub/scm/git/git.git
-\end{Verbatim}
-\end{Schunk}
 
 \subsection{Paramétrage à la première utilisation de Git}
 \label{sec:git:first_time}
