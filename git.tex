@@ -1,13 +1,14 @@
 \chapter{Pro Git --- extraits}
 \label{chap:git}
 
-\begingroup
-\itshape%
-Cette annexe contient le chapitre 1 en entier et des extraits des
-chapitres 2 (sections 2.1 à 2.5) et 3 (sections 3.1 à 3.3) de
-\emph{Pro Git} de \citet{ProGit:2e:2014}. Hormis
-l'adaptation à la mise en page du présent document et la conversion
-des chapitres en sections, je n'ai apporté aucun changement au texte.
+\begingroup \itshape%
+Cette annexe contient le chapitre 1 en entier (à l'exception de la
+section 1.5) et des extraits des chapitres 2 (sections 2.1 à 2.5) et 3
+(sections 3.1 à 3.3) de \emph{Pro Git} de \citet{ProGit:2e:2014}.
+Hormis l'adaptation à la mise en page du présent document, la
+conversion des chapitres en sections et des modifications visant à
+corriger les dépassements de texte dans la marge, je n'ai apporté
+aucun changement au texte.
 
 \emph{Pro Git} est mis à disposition selon le contrat
 \href{http://creativecommons.org/licenses/by-sa/4.0/deed.fr}{%
@@ -271,11 +272,11 @@ Si vous passez l'option \code{--system} à \code{git config}, il lit et écrit c
 Vous pouvez forcer Git à lire et écrire ce fichier en passant l'option \code{--global}.
 \item Fichier \code{config} dans le répertoire Git (c'est-à-dire \code{.git/config}) du dépôt en cours d'utilisation: spécifique au seul dépôt en cours.
 \end{itemize}
-Chaque niveau surcharge le niveau précédent, donc les valeurs dans \code{.git/config} surchargent celles de \code{/etc/gitconfig}.
+Chaque niveau surcharge le niveau précédent, par conséquent les valeurs dans \code{.git/config} surchargent celles de \code{/etc/gitconfig}.
 
-Sur les systèmes Windows, Git recherche le fichier \code{.gitconfig} dans le répertoire \code{\$HOME} (\code{\%USERPROFILE\%} dans l’environnement natif de Windows) qui est \code{C:{\bs}Documents and Settings{\bs}\$USER} ou \code{C:{\bs}Users{\bs}\$USER} la plupart du temps, selon la version (\code{\$USER} devient \code{\%USERNAME\%} dans l’environnement de Windows).
+Sur les systèmes Windows, Git recherche le fichier \code{.gitconfig} dans le répertoire \code{\$HOME} (\code{\%USERPROFILE\%} dans l’environnement natif de Windows) qui est \code{C:{\bs}Users{\bs}\$USER} la plupart du temps, selon la version (\code{\$USER} devient \code{\%USERNAME\%} dans l’environnement de Windows).
 Il recherche tout de même \code{/etc/gitconfig}, bien qu'il soit relatif à la racine MSys, qui se trouve où vous aurez décidé d'installer Git sur votre système Windows.
-Si vous utilisez une version 2.x ou supérieure de Git pour Windows, il y a aussi un fichier de configuration système à \code{C:{\bs}Documents and Settings{\bs}All Users{\bs}Application Data{\bs}Git{\bs}config} sur Windows XP, et dans \code{C:{\bs}ProgramData{\bs}Git{\bs}config} sur Windows Vista et supérieur.
+Si vous utilisez une version 2.x ou supérieure de Git pour Windows, il y a aussi un fichier de configuration système dans \code{C:{\bs}ProgramData{\bs}Git{\bs}config} sur Windows Vista et supérieur.
 Ce fichier de configuration ne peut être modifié qu'avec la commande \code{git config -f \meta{fichier}} en tant qu'administrateur.
 
 \subsubsection{Votre identité}
@@ -305,7 +306,7 @@ $ git config --global core.editor emacs
 \end{Verbatim}
 \end{Schunk}
 
-\cautionbox{Vim et Emacs sont des éditeurs de texte populaires chez les développeurs sur les systèmes à base Unix tels que Linux et Mac.
+\warningbox{Vim et Emacs sont des éditeurs de texte populaires chez les développeurs sur les systèmes à base Unix tels que Linux et Mac.
 Si vous n'êtes habitué à aucun de ces deux éditeurs ou utilisez un système Windows, il se peut que vous deviez chercher les instructions pour renseigner votre éditeur favori.
 Si vous ne renseignez pas un éditeur et ne connaissez pas Vim ou Emacs, vous risquez fort d'avoir des surprises lorsqu'ils démarreront.}
 
@@ -325,7 +326,7 @@ color.diff=auto
 \end{Verbatim}
 \end{Schunk}
 
-Vous pourrez voir certains paramètres apparaître plusieurs fois car Git lit les mêmes paramètres depuis plusieurs fichiers (\code{/etc/gitconfig} et \verb=~/.gitconfig=, par exemple).
+Vous pourrez voir certains paramètres apparaître plusieurs fois car Git lit les mêmes paramètres depuis plusieurs fichiers (par exemple \verb=~/.gitconfig= et \code{/etc/gitconfig}).
 Git utilise la dernière valeur pour chaque paramètre.
 
 Vous pouvez aussi vérifier la valeur effective d'un paramètre particulier en tapant \code{git config \meta{paramètre}}:
@@ -342,10 +343,10 @@ John Doe
 Si vous avez besoin d'aide pour utiliser Git, il y a trois moyens d'obtenir les pages de manuel pour toutes les commandes de Git:
 
 \begin{Schunk}
-\begin{Verbatim}
-$ git help <commande>
-$ git <commande> --help
-$ man git-<commande>
+\begin{Verbatim}[commandchars=\\\{\}]
+$ git help \meta{commande}
+$ git \meta{commande} --help
+$ man git-\meta{commande}
 \end{Verbatim}
 \end{Schunk}
 
@@ -483,13 +484,14 @@ $ git status
 Sur la branche master
 Votre branche est à jour avec 'origin/master'.
 Fichiers non suivis:
-  (utilisez "git add <fichier>..." pour inclure dans ce qui sera validé)
-\end{itemize}
-
+  (utilisez "git add <fichier>..." pour inclure dans ce
+   qui sera validé)
 
         LISEZMOI
 
-aucune modification ajoutée à la validation mais des fichiers non suivis sont présents (utilisez "git add" pour les suivre)
+aucune modification ajoutée à la validation mais des
+fichiers non suivis sont présents (utilisez "git add" pour
+les suivre)
 \end{Verbatim}
 \end{Schunk}
 
@@ -517,11 +519,8 @@ Sur la branche master
 Votre branche est à jour avec 'origin/master'.
 Modifications qui seront validées :
   (utilisez "git reset HEAD <fichier>..." pour désindexer)
-\end{itemize}
-
 
         nouveau fichier: LISEZMOI
-
 \end{Verbatim}
 \end{Schunk}
 
@@ -541,17 +540,16 @@ Sur la branche master
 Votre branche est à jour avec 'origin/master'.
 Modifications qui seront validées :
   (utilisez "git reset HEAD <fichier>..." pour désindexer)
-\end{itemize}
-
 
         nouveau fichier: LISEZMOI
 
 Modifications qui ne seront pas validées :
-  (utilisez "git add <fichier>..." pour mettre à jour ce qui sera validé)
-  (utilisez "git checkout -- <fichier>..." pour annuler les modifications dans la copie de travail)
+  (utilisez "git add <fichier>..." pour mettre à jour ce
+   qui sera validé)
+  (utilisez "git checkout -- <fichier>..." pour annuler les
+   modifications dans la copie de travail)
 
         modifié:         CONTRIBUTING.md
-
 \end{Verbatim}
 \end{Schunk}
 
@@ -566,8 +564,6 @@ Sur la branche master
 Votre branche est à jour avec 'origin/master'.
 Modifications qui seront validées :
   (utilisez "git reset HEAD <fichier>..." pour désindexer)
-\end{itemize}
-
 
         nouveau fichier: LISEZMOI
         modifié:         CONTRIBUTING.md
@@ -587,25 +583,24 @@ Sur la branche master
 Votre branche est à jour avec 'origin/master'.
 Modifications qui seront validées :
   (utilisez "git reset HEAD <fichier>..." pour désindexer)
-\end{itemize}
-
 
         nouveau fichier: LISEZMOI
         modifié:         CONTRIBUTING.md
 
 Modifications qui ne seront pas validées :
-  (utilisez "git add <fichier>..." pour mettre à jour ce qui sera validé)
-  (utilisez "git checkout -- <fichier>..." pour annuler les modifications dans la copie de travail)
+  (utilisez "git add <fichier>..." pour mettre à jour ce
+   qui sera validé)
+  (utilisez "git checkout -- <fichier>..." pour annuler les
+   modifications dans la copie de travail)
 
         modifié:         CONTRIBUTING.md
-
 \end{Verbatim}
 \end{Schunk}
 
 Que s'est-il donc passé?
 À présent, \code{CONTRIBUTING.md} apparaît à la fois comme indexé et non indexé.
 En fait, Git indexe un fichier dans son état au moment où la commande \code{git add} est lancée.
-Si on valide les modifications maintenant, la version de \code{CONTRIBUTING.md} qui fera partie de l'instantané est celle correspondant au moment où la commande \code{git add CONTRIBUTING.md} a été lancée, et non la version actuellement présente dans la copie de travail au moment où la commande \code{git commit} est lancée.
+Si on valide les modifications maintenant, la version de \code{CONTRIBUTING.md} qui fera partie de l'instantané est celle correspondant au moment où a été lancée la commande \code{git add CONTRIBUTING.md}, et non la version actuellement présente dans la copie de travail au moment où la commande \code{git commit} est lancée.
 Si le fichier est modifié après un \code{git add}, il faut relancer \code{git add} pour prendre en compte l'état actuel de la copie de travail:
 \begin{Schunk}
 \begin{Verbatim}
@@ -615,8 +610,6 @@ Sur la branche master
 Votre branche est à jour avec 'origin/master'.
 Modifications qui seront validées :
   (utilisez "git reset HEAD <fichier>..." pour désindexer)
-\end{itemize}
-
 
         nouveau fichier: LISEZMOI
         modifié:         CONTRIBUTING.md
@@ -666,7 +659,7 @@ La seconde ligne indique à Git d'ignorer tous les fichiers se terminant par un 
 On peut aussi inclure un répertoire \code{log}, \code{tmp} ou \code{pid}, ou le répertoire de documentation générée automatiquement, ou tout autre fichier.
 Renseigner un fichier \code{.gitignore} avant de commencer à travailler est généralement une bonne idée qui évitera de valider par inadvertance des fichiers qui ne doivent pas apparaître dans le dépôt Git.
 
-Les règles de construction des patrons à placer dans le fichier \code{.gitignore} sont les suivantes:
+Les règles de construction des patrons à placer dans \code{.gitignore} sont les suivantes:
 \begin{itemize}
 \item les lignes vides ou commençant par \code{\#} sont ignorées;
 \item les patrons standards de fichiers sont utilisables;
@@ -719,40 +712,37 @@ Sur la branche master
 Votre branche est à jour avec 'origin/master'.
 Modifications qui seront validées :
   (utilisez "git reset HEAD <fichier>..." pour désindexer)
-\end{itemize}
-
 
         nouveau fichier: LISEZMOI
 
 Modifications qui ne seront pas validées :
-  (utilisez "git add <fichier>..." pour mettre à jour ce qui sera validé)
-  (utilisez "git checkout -- <fichier>..." pour annuler les modifications dans la copie de travail)
+  (utilisez "git add <fichier>..." pour mettre à jour ce
+   qui sera validé)
+  (utilisez "git checkout -- <fichier>..." pour annuler les
+   modifications dans la copie de travail)
 
         modifié:         CONTRIBUTING.md
-
 \end{Verbatim}
 \end{Schunk}
 
 Pour visualiser ce qui a été modifié mais pas encore indexé, tapez \code{git diff} sans autre argument:
 \begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
 $ git diff
 diff --git a/CONTRIBUTING.md b/CONTRIBUTING.md
 index 8ebb991..643e24f 100644
 --- a/CONTRIBUTING.md
 +++ b/CONTRIBUTING.md
 @@ -65,7 +65,8 @@ branch directly, things can get messy.
- Please include a nice description of your changes when you submit your PR;
- if we have to read the whole diff to figure out why you're contributing
- in the first place, you're less likely to get feedback and have your change
+ Please include a nice description of your changes whe\meta{...}
+ if we have to read the whole diff to figure out why y\meta{...}
+ in the first place, you're less likely to get feedbac\meta{...}
 -merged in.
-+merged in. Also, split your changes into comprehensive chunks if you patch is
++merged in. Also, split your changes into comprehensiv\meta{...}
 +longer than a dozen lines.
-\end{itemize}
 
-
- If you are starting to work on a particular area, feel free to submit a PR
- that highlights your work in progress (and note in the PR title that it's
+ If you are starting to work on a particular area, feel\meta{...}
+ that highlights your work in progress (and note in the\meta{...}
 \end{Verbatim}
 \end{Schunk}
 
@@ -787,23 +777,22 @@ Sur la branche master
 Votre branche est à jour avec 'origin/master'.
 Modifications qui seront validées :
   (utilisez "git reset HEAD <fichier>..." pour désindexer)
-\end{itemize}
-
 
         nouveau fichier: CONTRIBUTING.md
 
 Modifications qui ne seront pas validées :
-  (utilisez "git add <fichier>..." pour mettre à jour ce qui sera validé)
-  (utilisez "git checkout -- <fichier>..." pour annuler les modifications dans la copie de travail)
+  (utilisez "git add <fichier>..." pour mettre à jour ce
+   qui sera validé)
+  (utilisez "git checkout -- <fichier>..." pour annuler les
+   modifications dans la copie de travail)
 
         modifié:         CONTRIBUTING.md
-
 \end{Verbatim}
 \end{Schunk}
 
 À présent, vous pouvez utiliser \code{git diff} pour visualiser les modifications non indexées:
 \begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
 $ git diff
 diff --git a/CONTRIBUTING.md b/CONTRIBUTING.md
 index 643e24f..87f08c8 100644
@@ -811,33 +800,30 @@ index 643e24f..87f08c8 100644
 +++ b/CONTRIBUTING.md
 @@ -119,3 +119,4 @@ at the
  ## Starter Projects
-\end{itemize}
 
-
- See our [projects list](https://github.com/libgit2/libgit2/blob/development/PROJECTS.md).
+ See our [projects list](https://github.com/libgit2/lib\meta{...}
 +ligne de test
 \end{Verbatim}
 \end{Schunk}
-et \code{git diff --cached} pour visualiser ce qui a été indexé jusqu'à maintenant:
+
+La commande \code{git diff --cached} permet de visualiser ce qui a été indexé jusqu'à maintenant:
 \begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
 $ git diff --cached
 diff --git a/CONTRIBUTING.md b/CONTRIBUTING.md
 index 8ebb991..643e24f 100644
 --- a/CONTRIBUTING.md
 +++ b/CONTRIBUTING.md
 @@ -65,7 +65,8 @@ branch directly, things can get messy.
- Please include a nice description of your changes when you submit your PR;
- if we have to read the whole diff to figure out why you're contributing
- in the first place, you're less likely to get feedback and have your change
+ Please include a nice description of your changes when\meta{...}
+ if we have to read the whole diff to figure out why yo\meta{...}
+ in the first place, you're less likely to get feedback\meta{...}
 -merged in.
-+merged in. Also, split your changes into comprehensive chunks if you patch is
++merged in. Also, split your changes into comprehensive\meta{...}
 +longer than a dozen lines.
-\end{itemize}
 
-
- If you are starting to work on a particular area, feel free to submit a PR
- that highlights your work in progress (and note in the PR title that it's
+ If you are starting to work on a particular area, feel\meta{...}
+ that highlights your work in progress (and note in the\meta{...}
 \end{Verbatim}
 \end{Schunk}
 
@@ -864,8 +850,9 @@ L'éditeur affiche le texte suivant:
 \begin{Verbatim}
 
 
-# Veuillez saisir le message de validation pour vos modifications. Les lignes
-# commençant par '#' seront ignorées, et un message vide abandonne la validation.
+# Veuillez saisir le message de validation pour vos
+# modifications. Les lignes commençant par '#' seront
+# ignorées, et un message vide abandonne la validation.
 # Sur la branche master
 # Votre branche est à jour avec 'origin/master'.
 #
@@ -876,7 +863,7 @@ L'éditeur affiche le texte suivant:
 \end{Verbatim}
 \end{Schunk}
 
-Vous constatez que le message de validation par défaut contient une ligne vide suivie en commentaire par le résultat de la commande \code{git status}.
+Vous constatez que le message de validation par défaut contient une ligne vide suivie en commentaire par le résultat de \code{git status}.
 Vous pouvez effacer ces lignes de commentaire et saisir votre propre message de validation, ou vous pouvez les laisser en place pour vous aider à vous rappeler ce que vous êtes en train de valider (pour un rappel plus explicite de ce que vous avez modifié, vous pouvez aussi passer l'option \code{-v} à la commande \code{git commit}.
 Cette option place le résultat du diff en commentaire dans l'éditeur pour vous permettre de visualiser exactement ce que vous avez modifié.
 Quand vous quittez l'éditeur (après avoir sauvegardé le message), Git crée votre \emph{commit} avec ce message de validation (après avoir retiré les commentaires et le diff).
@@ -908,21 +895,22 @@ $ git status
 Sur la branche master
 Votre branche est à jour avec 'origin/master'.
 Modifications qui ne seront pas validées :
-  (utilisez "git add <fichier>..." pour mettre à jour ce qui sera validé)
-  (utilisez "git checkout -- <fichier>..." pour annuler les modifications dans la copie de travail)
-\end{itemize}
-
+  (utilisez "git add <fichier>..." pour mettre à jour ce
+   qui sera validé)
+  (utilisez "git checkout -- <fichier>..." pour annuler les
+   modifications dans la copie de travail)
 
         modifié:         CONTRIBUTING.md
 
-aucune modification n'a été ajoutée à la validation (utilisez "git add" ou "git commit -a")
+aucune modification n'a été ajoutée à la validation
+(utilisez "git add" ou "git commit -a")
 $ git commit -a -m 'added new benchmarks'
 [master 83e38c7] added new benchmarks
  1 file changed, 5 insertions(+), 0 deletions(-)
 \end{Verbatim}
 \end{Schunk}
 
-Notez bien que vous n'avez pas eu à lancer \code{git add} sur le fichier \code{CONTRIBUTING.md} avant de valider.
+Notez que vous n'avez pas eu à lancer \code{git add} sur \code{CONTRIBUTING.md} avant de valider.
 
 \subsubsection{Effacer des fichiers}
 \label{sec:git:removing_files}
@@ -938,14 +926,15 @@ $ git status
 Sur la branche master
 Votre branche est à jour avec 'origin/master'.
 Modifications qui ne seront pas validées :
-  (utilisez "git add/rm <fichier>..." pour mettre à jour ce qui sera validé)
-  (utilisez "git checkout -- <fichier>..." pour annuler les modifications dans la copie de travail)
-\end{itemize}
-
+  (utilisez "git add/rm <fichier>..." pour mettre à jour ce
+   qui sera validé)
+  (utilisez "git checkout -- <fichier>..." pour annuler les
+   modifications dans la copie de travail)
 
         supprimé:        PROJECTS.md
 
-aucune modification n'a été ajoutée à la validation (utilisez "git add" ou "git commit -a")
+aucune modification n'a été ajoutée à la validation
+(utilisez "git add" ou "git commit -a")
 \end{Verbatim}
 \end{Schunk}
 
@@ -958,11 +947,8 @@ Sur la branche master
 Votre branche est à jour avec 'origin/master'.
 Modifications qui seront validées :
   (utilisez "git reset HEAD <fichier>..." pour désindexer)
-\end{itemize}
-
 
         supprimé:        PROJECTS.md
-
 \end{Verbatim}
 \end{Schunk}
 
@@ -1023,8 +1009,6 @@ Sur la branche master
 Votre branche est à jour avec 'origin/master'.
 Modifications qui seront validées :
   (utilisez "git reset HEAD <fichier>..." pour désindexer)
-\end{itemize}
-
 
         renommé:         LISEZMOI.txt -> LISEZMOI
 \end{Verbatim}
@@ -1049,7 +1033,7 @@ Le point principal est que vous pouvez utiliser n'importe quel outil pour renomm
 Après avoir créé plusieurs \emph{commits} ou si vous avez cloné un dépôt ayant un historique de \emph{commits}, vous souhaitez probablement revoir le fil des évènements.
 Pour ce faire, la commande \code{git log} est l'outil le plus basique et le plus puissant.
 
-Les exemples qui suivent utilisent un projet très simple nommé \code{simplegit} utilisé pour les démonstrations.
+Les exemples qui suivent utilisent le projet très simple \code{simplegit} conçu pour les démonstrations.
 Pour récupérer le projet, lancez:
 \begin{Schunk}
 \begin{Verbatim}
@@ -1064,8 +1048,6 @@ $ git log
 commit ca82a6dff817ec66f44342007202690a93763949
 Author: Scott Chacon <schacon@gee-mail.com>
 Date:   Mon Mar 17 21:52:11 2008 -0700
-\end{itemize}
-
 
     changed the version number
 
@@ -1093,13 +1075,11 @@ Nous allons détailler quelques-unes des plus utilisées.
 Une des options les plus utiles est \code{-p}, qui montre les différences introduites entre chaque validation.
 Vous pouvez aussi utiliser \code{-2} qui limite la sortie de la commande aux deux entrées les plus récentes:
 \begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
 $ git log -p -2
 commit ca82a6dff817ec66f44342007202690a93763949
 Author: Scott Chacon <schacon@gee-mail.com>
 Date:   Mon Mar 17 21:52:11 2008 -0700
-\end{itemize}
-
 
     changed the version number
 
@@ -1115,7 +1095,7 @@ index a874b73..8f94139 100644
 +    s.version   =   "0.1.1"
      s.author    =   "Scott Chacon"
      s.email     =   "schacon@gee-mail.com"
-     s.summary   =   "A simple gem for using Git in Ruby code."
+     s.summary   =   "A simple gem for using Git in Rub\meta{...}
 
 commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7
 Author: Scott Chacon <schacon@gee-mail.com>
@@ -1151,8 +1131,6 @@ $ git log --stat
 commit ca82a6dff817ec66f44342007202690a93763949
 Author: Scott Chacon <schacon@gee-mail.com>
 Date:   Mon Mar 17 21:52:11 2008 -0700
-\end{itemize}
-
 
     changed the version number
 
@@ -1189,10 +1167,10 @@ Quelques options incluses sont disponibles.
 L'option \code{oneline} affiche chaque \emph{commit} sur une seule ligne, ce qui peut s'avérer utile lors de la revue d'un long journal.
 En complément, les options \code{short} (court), \code{full} (complet) et \code{fuller} (plus complet) montrent le résultat à peu de choses près dans le même format mais avec plus ou moins d'informations:
 \begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
 $ git log --pretty=oneline
-ca82a6dff817ec66f44342007202690a93763949 changed the version number
-085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7 removed unnecessary test
+ca82a6dff817ec66f44342007202690a93763949 changed the ve\meta{...}
+085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7 removed unnece\meta{...}
 a11bef06a3f659402fe7563abf99ad00de2209e6 first commit
 \end{Verbatim}
 \end{Schunk}
@@ -1200,10 +1178,10 @@ a11bef06a3f659402fe7563abf99ad00de2209e6 first commit
 L'option la plus intéressante est \code{format} qui permet de décrire précisément le format de sortie.
 C'est spécialement utile pour générer des sorties dans un format facile à analyser par une machine --- lorsqu'on spécifie intégralement et explicitement le format, on s'assure qu'il ne changera pas au gré des mises à jour de Git:
 \begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
 $ git log --pretty=format:"%h - %an, %ar : %s"
-ca82a6d - Scott Chacon, 6 years ago : changed the version number
-085bb3b - Scott Chacon, 6 years ago : removed unnecessary test
+ca82a6d - Scott Chacon, 6 years ago : changed the versi\meta{...}
+085bb3b - Scott Chacon, 6 years ago : removed unnecessa\meta{...}
 a11bef0 - Scott Chacon, 6 years ago : first commit
 \end{Verbatim}
 \end{Schunk}
@@ -1247,16 +1225,16 @@ Cette option ajoute un joli graphe en caractères ASCII pour décrire l'historiq
 \begin{Schunk}
 \begin{Verbatim}
 $ git log --pretty=format:"%h %s" --graph
-\item 2d3acf9 ignore errors from SIGCHLD on trap
-\item  5e3ee11 Merge branch 'master' of git:
+* 2d3acf9 ignore errors from SIGCHLD on trap
+*  5e3ee11 Merge branch 'master' of git:
 |\
 | * 420eac9 Added a method for getting the current branch.
-\item | 30e367c timeout code and tests
-\item | 5a09431 add timeout protection to grit
-\item | e1193f8 support for heads with slashes in them
+* | 30e367c timeout code and tests
+* | 5a09431 add timeout protection to grit
+* | e1193f8 support for heads with slashes in them
 |/
-\item d6016bc require time for xmlschema
-\item  11d191e Merge branch 'defunkt' into local
+* d6016bc require time for xmlschema
+*  11d191e Merge branch 'defunkt' into local
 \end{Verbatim}
 \end{Schunk}
 
@@ -1282,7 +1260,7 @@ Le \autoref{tab:git:log_options} donne une liste des options que nous avons trai
     \code{--relative-date} & Affiche la date en format relatif (par exemple "2 weeks ago": il y a deux semaines) au lieu du format de date complet \\
     \code{--graph}         & Affiche en caractères ASCII le graphe de branches et fusions en vis-à-vis de l'historique \\
     \code{--pretty}        & Affiche les \emph{commits} dans un format alternatif. Les formats incluent \code{oneline}, \code{short}, \code{full}, \code{fuller}, et \code{format} (où on peut spécifier son propre format) \\
-    \code{--oneline}       & Option de convenance correspondant à \code{--pretty=oneline --abbrev-commit} \\
+    \code{--oneline}       & Raccourci pour les options \code{--pretty=oneline --abbrev-commit} \\
     \bottomrule
   \end{tabularx}
 \end{table}
@@ -1332,7 +1310,7 @@ Le \autoref{tab:git:limit_options} récapitule les options que nous venons de vo
     \toprule
     Option                & Description \\
     \midrule
-    \code{-(n)}                & N'affiche que les n derniers \emph{commits} \\
+    \code{-\meta{n}}                & N'affiche que les \meta{n} derniers \emph{commits} \\
     \code{--since}, \code{--after}  & Limite l'affichage aux \emph{commits} réalisés après la date spécifiée \\
     \code{--until}, \code{--before} & Limite l'affichage aux \emph{commits} réalisés avant la date spécifiée \\
     \code{--author}            & Ne montre que les \emph{commits} dont le champ auteur correspond à la chaîne passée en argument \\
@@ -1345,15 +1323,16 @@ Le \autoref{tab:git:limit_options} récapitule les options que nous venons de vo
 
 Par exemple, si vous souhaitez visualiser quels \emph{commits} modifiant les fichiers de test dans l'historique du code source de Git ont été validés par Junio Hamano et n'étaient pas des fusions durant le mois d'octobre 2008, vous pouvez lancer ce qui suit:
 \begin{Schunk}
-\begin{Verbatim}
-$ git log --pretty="%h - %s" --author=gitster --since="2008-10-01" \
-   --before="2008-11-01" --no-merges -- t/
-5610e3b - Fix testcase failure when extended attributes are in use
-acd3b9e - Enhance hold\emph{lock_file_for}{update,append}() API
-f563754 - demonstrate breakage of detached checkout with symbolic link HEAD
-d1a43f2 - reset --hard/read-tree --reset -u: remove unmerged new paths
-51a94af - Fix "checkout --track -b newbranch" on detached HEAD
-b0ad11e - pull: allow "git pull origin $something:$current_branch" into an unborn branch
+\begin{Verbatim}[commandchars=|[\]]
+$ git log --pretty="%h - %s" --author=gitster \
+   --since="2008-10-01" --before="2008-11-01" --no-merges
+   -- t/
+5610e3b - Fix testcase failure when extended attributes|meta[...]
+acd3b9e - Enhance hold_lock_file_for_{update,append}() |meta[...]
+f563754 - demonstrate breakage of detached checkout wit|meta[...]
+d1a43f2 - reset --hard/read-tree --reset -u: remove unm|meta[...]
+51a94af - Fix "checkout --track -b newbranch" on detach|meta[...]
+b0ad11e - pull: allow "git pull origin $something:$curr|meta[...]
 \end{Verbatim}
 \end{Schunk}
 
@@ -1407,8 +1386,6 @@ Sur la branche master
 Votre branche est à jour avec 'origin/master'.
 Modifications qui seront validées:
   (utilisez "git reset HEAD <fichier>..." pour désindexer)
-\end{itemize}
-
 
     renommé:   README.md -> README
     modifié:   CONTRIBUTING.md
@@ -1427,17 +1404,16 @@ Sur la branche master
 Votre branche est à jour avec 'origin/master'.
 Modifications qui seront validées :
   (utilisez "git reset HEAD <fichier>..." pour désindexer)
-\end{itemize}
-
 
         renommé:         README.md -> README
 
 Modifications qui ne seront pas validées :
-  (utilisez "git add <fichier>..." pour mettre à jour ce qui sera validé)
-  (utilisez "git checkout -- <fichier>..." pour annuler les modifications dans la copie de travail)
+  (utilisez "git add <fichier>..." pour mettre à jour ce
+   qui sera validé)
+  (utilisez "git checkout -- <fichier>..." pour annuler les
+   modifications dans la copie de travail)
 
         modifié:         CONTRIBUTING.md
-
 \end{Verbatim}
 \end{Schunk}
 
@@ -1459,10 +1435,10 @@ Dans le résultat de la dernière commande, la zone de travail ressemble à ceci
 \begin{Schunk}
 \begin{Verbatim}
 Modifications qui ne seront pas validées :
-  (utilisez "git add <fichier>..." pour mettre à jour ce qui sera validé)
-  (utilisez "git checkout -- <fichier>..." pour annuler les modifications dans la copie de travail)
-\end{itemize}
-
+  (utilisez "git add <fichier>..." pour mettre à jour ce
+   qui sera validé)
+  (utilisez "git checkout -- <fichier>..." pour annuler les
+   modifications dans la copie de travail)
 
         modifié:         CONTRIBUTING.md
 \end{Verbatim}
@@ -1478,11 +1454,8 @@ Sur la branche master
 Votre branche est à jour avec 'origin/master'.
 Modifications qui seront validées :
   (utilisez "git reset HEAD <fichier>..." pour désindexer)
-\end{itemize}
-
 
         renommé:         README.md -> README
-
 \end{Verbatim}
 \end{Schunk}
 
@@ -1513,12 +1486,12 @@ Pour visualiser les serveurs distants que vous avez enregistrés, vous pouvez la
 Elle liste les noms des différentes références distantes que vous avez spécifiées.
 Si vous avez cloné un dépôt, vous devriez au moins voir l'origine \code{origin} --- c'est-à-dire le nom par défaut que Git donne au serveur à partir duquel vous avez cloné:
 \begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
 $ git clone https://github.com/schacon/ticgit
 Clonage dans 'ticgit'...
 remote: Counting objects: 1857, done.
 remote: Total 1857 (delta 0), reused 0 (delta 0)
-Réception d'objets: 100% (1857/1857), 374.35 KiB | 243.00 KiB/s, fait.
+Réception d'objets: 100% (1857/1857), 374.35 KiB | 243.\meta{...}
 Résolution des deltas: 100% (772/772), fait.
 Vérification de la connectivité... fait.
 $ cd ticgit
@@ -1589,7 +1562,7 @@ Depuis https://github.com/paulboone/ticgit
 \end{Verbatim}
 \end{Schunk}
 
-La branche \code{master} de Paul est accessible localement en tant que \code{pb/master} --- vous pouvez la fusionner dans une de vos propres branches, ou vous pouvez extraire une branche localement si vous souhaitez l'inspecter. Nous traiterons plus en détail de la nature des branches et de leur utilisation à la \autoref{sec:git:branching}.
+La branche \code{master} de Paul est nommée localement \code{pb/master} --- vous pouvez la fusionner dans une de vos propres branches, ou vous pouvez extraire une branche localement si vous souhaitez l'inspecter. Nous traiterons plus en détail de la nature des branches et de leur utilisation à la \autoref{sec:git:branching}.
 
 \subsubsection{Récupérer et tirer depuis des dépôts distants}
 \label{sec:git:fetching_and_pulling}
@@ -1639,7 +1612,7 @@ Si vous lancez cette commande avec un nom court particulier, tel que \code{origi
 \begin{Schunk}
 \begin{Verbatim}
 $ git remote show origin
-\item distante origin
+* distante origin
   URL de rapatriement : https://github.com/schacon/ticgit
   URL push : https://github.com/schacon/ticgit
   Branche HEAD : master
@@ -1660,9 +1633,9 @@ Cela donne aussi la liste des autres références qu'il aura tirées.
 Le résultat ci-dessus est un exemple simple mais réaliste de dépôt distant.
 Lors d'une utilisation plus intense de Git, la commande \code{git remote show} fournira beaucoup d'information:
 \begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
 $ git remote show origin
-\item distante origin
+* distante origin
   URL: https://github.com/my-org/complex-project
   URL de rapatriement : https://github.com/my-org/complex-project
   URL push : https://github.com/my-org/complex-project
@@ -1671,16 +1644,16 @@ $ git remote show origin
     master                           suivi
     dev-branch                       suivi
     markdown-strip                   suivi
-    issue-43                         nouveau (le prochain rapatriement (fetch) stockera dans remotes/origin)
-    issue-45                         nouveau (le prochain rapatriement (fetch) stockera dans remotes/origin)
-    refs/remotes/origin/issue-11     dépassé (utilisez 'git remote prune' pour supprimer)
+    issue-43                         nouveau (le procha\meta{...}
+    issue-45                         nouveau (le procha\meta{...}
+    refs/remotes/origin/issue-11     dépassé (utilisez \meta{...}
   Branches locales configurées pour 'git pull' :
     dev-branch fusionne avec la distante dev-branch
     master     fusionne avec la distante master
   Références locales configurées pour 'git push' :
-    dev-branch                     pousse vers dev-branch        (à jour)
-    markdown-strip                 pousse vers markdown-strip    (à jour)
-    master                         pousse vers master            (à jour)
+    dev-branch                     pousse vers dev-branc\meta{...}
+    markdown-strip                 pousse vers markdown-\meta{...}
+    master                         pousse vers master   \meta{...}
 \end{Verbatim}
 \end{Schunk}
 
@@ -1689,7 +1662,7 @@ Elle montre aussi les branches distantes qui n'ont pas encore été rapatriées,
 
 \subsubsection{Retirer et renommer des dépôts distants}
 
-Si vous souhaitez renommer une référence, vous pouvez lancer \code{git remote rename} pour modifier le nom court d'un dépôt distant.
+Si vous souhaitez renommer une référence, vous pouvez lancer la commande \code{git remote rename} pour modifier le nom court d'un dépôt distant.
 Par exemple, si vous souhaitez renommer \code{pb} en \code{paul}, vous pouvez le faire avec \code{git remote rename}:
 \begin{Schunk}
 \begin{Verbatim}
@@ -1701,7 +1674,7 @@ paul
 \end{Schunk}
 
 Il faut mentionner que ceci modifie aussi les noms de branches distantes.
-Celle qui était référencée sous \code{pb/master} l'est maintenant sous \code{paul/master}.
+Celle qui était référencée sous \code{pb/master} l'est maintenant sous le nom \code{paul/master}.
 
 Si vous souhaitez retirer un dépôt distant pour certaines raisons --- vous avez changé de serveur ou vous n'utilisez plus ce serveur particulier, ou peut-être un contributeur a cessé de contribuer --- vous pouvez utiliser \code{git remote rm}:
 \begin{Schunk}
@@ -1721,7 +1694,7 @@ Au prochain chapitre, nous traiterons de la fonctionnalité unique de Git: son m
 \section{Les branches avec Git}
 \label{sec:git:branching}
 
-Presque tous les VCS proposent une certaine forme de gestion de branches.
+Presque tous les VCS proposent une forme ou une autre de gestion de branches.
 Créer une branche signifie diverger de la ligne principale de développement et continuer à travailler sans impacter cette ligne.
 Pour de nombreux VCS, il s'agit d'un processus coûteux qui nécessite souvent la création d'une nouvelle copie du répertoire de travail, ce qui peut prendre longtemps dans le cas de gros projets.
 
@@ -1776,7 +1749,7 @@ La branche par défaut dans Git s'appelle \code{master}.
 Au fur et à mesure des validations, la branche \code{master} pointe vers le dernier des \emph{commits} réalisés.
 À chaque validation, le pointeur de la branche \code{master} avance automatiquement.
 
-\notebox{La branche \code{}master\code{} n'est pas une branche spéciale.
+\notebox{La branche \code{master} n'est pas une branche spéciale.
 Elle est identique à toutes les autres branches.
 La seule raison pour laquelle chaque dépôt en a une est que la commande \code{git init} la crée par défaut et que la plupart des gens ne s'embêtent pas à la changer.}
 
@@ -1825,10 +1798,10 @@ En effet, la commande \code{git branch} n'a fait que créer une nouvelle branche
 
 Vous pouvez vérifier cela facilement grâce à la commande \code{git log} qui vous montre vers quoi les branches pointent. Il s'agit de l'option \code{--decorate}.
 \begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
 $ git log --oneline --decorate
-f30ab (HEAD, master, test) add feature #32 - ability to add new
-34ac2 fixed bug #1328 - stack overflow under certain conditions
+f30ab (HEAD, master, test) add feature #32 - ability to\meta{...}
+34ac2 fixed bug #1328 - stack overflow under certain co\meta{...}
 98ca9 initial commit of my project
 \end{Verbatim}
 \end{Schunk}
@@ -1893,7 +1866,7 @@ Cette commande annule les modifications réalisées dans la branche \code{test} 
 
 \notebox{Il est important de noter que lorsque vous changez de branche avec Git, les fichiers de votre répertoire de travail sont modifiés.
 Si vous basculez vers une branche plus ancienne, votre répertoire de travail sera remis dans l'état dans lequel il était lors du dernier \emph{commit} sur cette branche.
-Si git n'est pas en mesure d'effectuer cette action proprement, il ne vous laissera pas changer de branche.}
+Si Git n'est pas en mesure d'effectuer cette action proprement, il ne vous laissera pas changer de branche.}
 
 Réalisons quelques autres modifications et validons à nouveau:
 \begin{Schunk}
@@ -1918,14 +1891,14 @@ Et vous avez fait tout ceci avec de simples commandes: \code{branch}, \code{chec
 Vous pouvez également voir ceci grâce à la commande \code{git log}.
 La commande \code{git log --oneline --decorate --graph --all} va afficher l'historique de vos \emph{commits}, affichant les endroits où sont positionnés vos pointeurs de branche ainsi que la manière dont votre historique a divergé.
 \begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
 $ git log --oneline --decorate --graph --all
-\item c2b9e (HEAD, master) made other changes
+* c2b9e (HEAD, master) made other changes
 | * 87ab2 (test) made a change
 |/
-\item f30ab add feature #32 - ability to add new formats to the
-\item 34ac2 fixed bug #1328 - stack overflow under certain conditions
-\item 98ca9 initial commit of my project
+* f30ab add feature #32 - ability to add new formats to the
+* 34ac2 fixed bug #1328 - stack overflow under certain \meta{...}
+* 98ca9 initial commit of my project
 \end{Verbatim}
 \end{Schunk}
 
@@ -2016,7 +1989,7 @@ $ git commit -a -m "ajout d'un pied de page [problème 53]"
 Avec Git, vous n'avez pas à déployer en même temps votre correctif et les modifications déjà validées pour \code{prob53} et vous n'avez pas non plus à vous fatiguer à annuler ces modifications avant de pouvoir appliquer votre correctif sur ce qu'il y a en production.
 Tout ce que vous avez à faire, c'est simplement de rebasculer sur la branche \code{master}.
 
-Cependant, avant de le faire, notez que si votre copie de travail ou votre zone d'index contiennent des modifications non validées qui sont en conflit avec la branche que vous extrayez, Git ne vous laissera pas changer de branche.
+Cependant, avant de le faire, notez que si votre copie de travail ou votre zone d'index contiennent des modifications non validées qui sont en conflit avec la branche que vous extrayez, Git ne vous laissera pas effectuer le changement de branche.
 Le mieux est d'avoir votre copie de travail propre au moment de changer de branche.
 Il y a des moyens de contourner ceci (précisément par le remisage et l'amendement de \emph{commit}) dont nous parlerons plus loin, à la \autoref{sec:git:stashing}.
 Pour l'instant, nous supposons que vous avez validé tous vos changements et que vous pouvez donc rebasculer vers votre branche \code{master}:
@@ -2034,12 +2007,13 @@ Il ajoute, retire et modifie automatiquement les fichiers de manière à s'assur
 Vous avez ensuite un correctif à faire.
 Pour ce faire, créons une branche \code{correctif} sur laquelle travailler jusqu'à résolution du problème:
 \begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
 $ git checkout -b correctif
 Switched to a new branch 'correctif'
 $ vim index.html
-$ git commit -a -m "correction de l'adresse email incorrecte"
-[correctif 1fb7853] "correction de l'adresse email incorrecte"
+$ git commit -a
+    -m "correction de l'adresse email incorrecte"
+[correctif 1fb7853] "correction de l'adresse email inco\meta{...}
  1 file changed, 2 insertions(+)
 \end{Verbatim}
 \end{Schunk}
@@ -2066,7 +2040,7 @@ Fast-forward
 
 Vous noterez la mention \code{fast-forward} lors de cette fusion (\emph{merge}).
 Comme le \emph{commit} \code{C4} pointé par la branche \code{hotfix} que vous avez fusionnée était directement devant le \emph{commit} \code{C2} sur lequel vous vous trouvez, Git a simplement déplacé le pointeur (vers l'avant).
-Autrement dit, lorsque l'on cherche à fusionner un \emph{commit} qui peut être atteint en parcourant l'historique depuis le \emph{commit} d'origine, Git se contente d'avancer le pointeur car il n'y a pas de travaux divergents à fusionner --- ceci s'appelle un \code{fast-forward} (avance rapide).
+Autrement dit, lorsque l'on cherche à fusionner un \emph{commit} qui peut être atteint en parcourant l'historique depuis le \emph{commit} d'origine, Git se contente d'avancer le pointeur car il n'y a pas de travaux divergents à fusionner. Ceci s'appelle un \code{fast-forward} (avance rapide).
 
 Votre modification est maintenant dans l'instantané (\emph{snapshot}) du \emph{commit} pointé par la branche \code{master} et vous pouvez déployer votre correctif.
 
@@ -2172,7 +2146,8 @@ Si votre résolution du problème \#53 a modifié la même section de fichier qu
 $ git merge prob53
 Auto-merging index.html
 CONFLICT (content): Merge conflict in index.html
-Automatic merge failed; fix conflicts and then commit the result.
+Automatic merge failed; fix conflicts and then commit
+the result.
 \end{Verbatim}
 \end{Schunk}
 
@@ -2185,15 +2160,14 @@ $ git status
 On branch master
 You have unmerged paths.
   (fix conflicts and run "git commit")
-\end{itemize}
-
 
 Unmerged paths:
   (use "git add <file>..." to mark resolution)
 
     both modified:      index.html
 
-no changes added to commit (use "git add" and/or "git commit -a")
+no changes added to commit (use "git add" and/or
+"git commit -a")
 \end{Verbatim}
 \end{Schunk}
 
@@ -2231,13 +2205,16 @@ Si vous souhaitez utiliser un outil graphique pour résoudre ces conflits, vous 
 \begin{Schunk}
 \begin{Verbatim}
 $ git mergetool
-\end{itemize}
 
-
-This message is displayed because 'merge.tool' is not configured.
-See 'git mergetool --tool-help' or 'git help config' for more details.
-'git mergetool' will now attempt to use one of the following tools:
-opendiff kdiff3 tkdiff xxdiff meld tortoisemerge gvimdiff diffuse diffmerge ecmerge p4merge araxis bc3 codecompare vimdiff emerge
+This message is displayed because 'merge.tool' is not
+configured.
+See 'git mergetool --tool-help' or 'git help config' for
+more details.
+'git mergetool' will now attempt to use one of the
+following tools:
+opendiff kdiff3 tkdiff xxdiff meld tortoisemerge gvimdiff
+diffuse diffmerge ecmerge p4merge araxis bc3 codecompare
+vimdiff emerge
 Merging:
 index.html
 
@@ -2263,8 +2240,6 @@ $ git status
 On branch master
 All conflicts fixed but you are still merging.
   (use "git commit" to conclude merge)
-\end{itemize}
-
 
 Changes to be committed:
 
@@ -2277,8 +2252,6 @@ Le message de validation par défaut ressemble à ceci:
 \begin{Schunk}
 \begin{Verbatim}
 Merge branch 'prob53'
-\end{itemize}
-
 
 Conflicts:
     index.html
@@ -2289,8 +2262,9 @@ Conflicts:
 # and try again.
 
 
-# Please enter the commit message for your changes. Lines starting
-# with '#' will be ignored, and an empty message aborts the commit.
+# Please enter the commit message for your changes. Lines
+# starting with '#' will be ignored, and an empty message
+# aborts the commit.
 # On branch master
 # All conflicts fixed but you are still merging.
 #
@@ -2313,7 +2287,7 @@ Si vous la lancez sans argument, vous obtenez la liste des branches courantes:
 \begin{Verbatim}
 $ git branch
   prob53
-\item master
+* master
   test
 \end{Verbatim}
 \end{Schunk}
@@ -2325,7 +2299,7 @@ Pour visualiser la liste des derniers \emph{commits} sur chaque branche, vous po
 \begin{Verbatim}
 $ git branch -v
   prob53   93b412c fix javascript issue
-\item master  7a98805 Merge branch 'prob53'
+* master  7a98805 Merge branch 'prob53'
   test 782fd34 add scott to the author list in the readmes
 \end{Verbatim}
 \end{Schunk}
@@ -2336,14 +2310,14 @@ Pour voir quelles branches ont déjà été fusionnées dans votre branche coura
 \begin{Verbatim}
 $ git branch --merged
   prob53
-\item master
+* master
 \end{Verbatim}
 \end{Schunk}
 
 Comme vous avez déjà fusionné \code{prob53} un peu plus tôt, vous la voyez dans votre liste.
 Les branches de cette liste qui ne comportent pas le préfixe \code{*} peuvent généralement être effacées sans risque au moyen de \code{git branch -d} puisque vous avez déjà intégré leurs modifications dans une autre branche et ne risquez donc pas de perdre quoi que ce soit.
 
-Pour visualiser les branches qui contiennent des travaux qui n'ont pas encore été fusionnés, vous pouvez utiliser la commande \code{git branch --no-merged} :
+Pour visualiser les branches qui contiennent des travaux qui n'ont pas encore été fusionnés, vous pouvez utiliser  \code{git branch --no-merged} :
 \begin{Schunk}
 \begin{Verbatim}
 $ git branch --no-merged
@@ -2357,7 +2331,8 @@ Comme elle contient des modifications qui n'ont pas encore été intégrées, es
 \begin{Verbatim}
 $ git branch -d test
 error: The branch 'test' is not fully merged.
-If you are sure you want to delete it, run 'git branch -D test'.
+If you are sure you want to delete it, run
+'git branch -D test'.
 \end{Verbatim}
 \end{Schunk}
 
