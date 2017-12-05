@@ -22,6 +22,7 @@
   \usepackage[absolute]{textpos}       % éléments des pages de titre
   \usepackage[shortlabels]{enumitem}   % configuration listes
   \usepackage{multicol}                % environnement multicols
+  \usepackage{float}                   % positionnement [H] annexe C
   \usepackage{relsize}                 % \smaller et al.
   \usepackage{manfnt}                  % \mantriangleright (puce)
   \usepackage{metalogo}                % \XeLaTeX logo
@@ -388,7 +389,7 @@
     puis-que
   }
 
-  % \includeonly{%
+  % \includeonly{
   %   notices,
   %   informatique,
   %   presentation,
@@ -401,6 +402,7 @@
   %   texte,
   %   rstudio,
   %   emacs+ess,
+  %   git,
   %   reponses
   % }
 
@@ -451,6 +453,7 @@
 \appendix
 \include{rstudio}
 \include{emacs+ess}
+\include{git}
 \include{reponses}
 
 \bibliography{r,stat,informatique,vg}
