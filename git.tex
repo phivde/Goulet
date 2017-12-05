@@ -10,10 +10,13 @@
   Cette annexe contient le chapitre 1 en entier (à l'exception de la
   section 1.5) et des extraits des chapitres 2 (sections 2.1 à 2.5) et
   3 (sections 3.1 à 3.3) de \emph{Pro Git} de \citet{ProGit:2e:2014}.
+
   Hormis l'adaptation à la mise en page du présent document, la
   conversion des chapitres en sections et des modifications mineures
   visant à corriger les dépassements de texte dans la marge, je n'ai
-  apporté aucun changement au texte.
+  apporté aucun changement au texte. Les renvois vers les sections du
+  livre qui ne sont pas reproduites ici sont remplacés par des liens
+  vers la version en ligne.
 
   \emph{Pro Git} est mis à disposition selon le contrat
   \href{http://creativecommons.org/licenses/by-sa/4.0/deed.fr}{%
@@ -400,7 +403,7 @@ $ git init
 
 Cela crée un nouveau sous-répertoire nommé \code{.git} qui contient tous les fichiers nécessaires au dépôt --- un squelette de dépôt Git.
 Pour l'instant, aucun fichier n'est encore versionné.
-(consulter \emph{Les tripes de Git} pour plus d'information sur les fichiers contenus dans le répertoire \code{.git} que vous venez de créer.)
+(consulter \link{https://www.git-scm.com/book/fr/v2/ch00/_git_internals}{Les tripes de Git} pour plus d'information sur les fichiers contenus dans le répertoire \code{.git} que vous venez de créer.)
 \begin{Schunk}
 \begin{Verbatim}
 $ git add *.c
@@ -416,7 +419,7 @@ Si vous souhaitez obtenir une copie d'un dépôt Git existant --- par exemple, u
 Si vous êtes familier avec d'autres systèmes de gestion de version tels que Subversion, vous noterez que la commande est \code{clone} et non \code{checkout}.
 C'est une distinction importante --- Git reçoit une copie de quasiment toutes les données dont le serveur dispose.
 Toutes les versions de tous les fichiers pour l'historique du projet sont téléchargées quand vous lancez \code{git clone}.
-En fait, si le disque du serveur se corrompt, vous pouvez utiliser n'importe quel clone pour remettre le serveur dans l'état où il était au moment du clonage (vous pourriez perdre quelques paramètres du serveur, mais toutes les données sous gestion de version seraient récupérées --- consulter \emph{Installation de Git sur un serveur} pour de plus amples détails).
+En fait, si le disque du serveur se corrompt, vous pouvez utiliser n'importe quel clone pour remettre le serveur dans l'état où il était au moment du clonage (vous pourriez perdre quelques paramètres du serveur, mais toutes les données sous gestion de version seraient récupérées --- consulter \link{https://www.git-scm.com/book/fr/v2/ch00/_git_on_the_server}{Installation de Git sur un serveur} pour de plus amples détails).
 
 Vous clonez un dépôt avec \code{git clone \meta{url}}.
 Par exemple, si vous voulez cloner la bibliothèque logicielle Git appelée libgit2, vous pouvez le faire de la manière suivante:
@@ -439,7 +442,7 @@ Cette commande réalise la même chose que la précédente, mais le répertoire 
 
 Git dispose de différents protocoles de transfert que vous pouvez utiliser.
 L'exemple précédent utilise le protocole \code{https://}, mais vous pouvez aussi voir \code{git://} ou \code{utilisateur@serveur:/chemin.git}, qui utilise le protocole de transfert SSH.
-\emph{Installation de Git sur un serveur} introduit toutes les options disponibles pour mettre en place un serveur Git, ainsi que leurs avantages et inconvénients.
+\link{https://www.git-scm.com/book/fr/v2/ch00/_git_on_the_server}{Installation de Git sur un serveur} introduit toutes les options disponibles pour mettre en place un serveur Git, ainsi que leurs avantages et inconvénients.
 
 \subsection{Enregistrer des modifications dans le dépôt}
 
@@ -1118,7 +1121,7 @@ index a0a60ae..47c6340 100644
 
  end
 -
--if $0 == \emph{_FILE_}
+-if $0 == __FILE__
 -  git = SimpleGit.new
 -  puts git.show
 -end
@@ -1224,7 +1227,7 @@ Le \autoref{tab:git:pretty_format} liste les options de formatage les plus utile
 Vous pourriez vous demander quelle est la différence entre \emph{auteur}  et \emph{validateur}.
 L'\emph{auteur} est la personne qui a réalisé initialement le travail, alors que le \emph{validateur} est la personne qui a effectivement validé ce travail en gestion de version.
 Donc, si quelqu'un envoie un patch à un projet et un des membres du projet l'applique, les deux personnes reçoivent le crédit --- l'écrivain en tant qu'auteur, et le membre du projet en tant que validateur.
-Nous traiterons plus avant de cette distinction dans \emph{Git distribué}.
+Nous traiterons plus avant de cette distinction dans \link{https://www.git-scm.com/book/fr/v2/ch00/_distributed_git}{Git distribué}.
 
 Les options \code{oneline} et \code{format} sont encore plus utiles avec une autre option \code{log} appelée \code{--graph}.
 Cette option ajoute un joli graphe en caractères ASCII pour décrire l'historique des branches et fusions:
@@ -1430,7 +1433,7 @@ Le fichier \code{CONTRIBUTING.md} est modifié mais de retour à l'état non ind
 Appeler \code{git reset} sans option n'est pas dangereux - cela ne touche qu'à la zone d'index.}
 
 Pour l'instant, cette invocation magique est la seule à connaître pour la commande \code{git reset}.
-Nous entrerons plus en détail sur ce que \code{reset} réalise et comment le maîtriser pour faire des choses intéressantes dans \emph{Reset demystifié}.
+Nous entrerons plus en détail sur ce que \code{reset} réalise et comment le maîtriser pour faire des choses intéressantes dans \link{https://www.git-scm.com/book/fr/v2/ch00/_git_reset}{Reset demystifié}.
 
 \subsubsection{Réinitialiser un fichier modifié}
 
@@ -1473,7 +1476,7 @@ N'utilisez jamais cette commande à moins d'être vraiment sûr de ne pas vouloi
 Si vous souhaitez seulement écarter momentanément cette modification, nous verrons comment mettre de côté et créer des branches dans la \autoref{sec:git:branching}; ce sont de meilleures façons de procéder.
 
 Souvenez-vous, tout ce qui a été validé dans Git peut quasiment toujours être récupéré.
-Y compris des \emph{commits} sur des branches qui ont été effacées ou des \emph{commits} qui ont été écrasés par une validation avec l'option \code{--amend} (se référer au chapitre \emph{Récupération de données} pour la récupération de données).
+Y compris des \emph{commits} sur des branches qui ont été effacées ou des \emph{commits} qui ont été écrasés par une validation avec l'option \code{--amend} (se référer au chapitre \link{https://www.git-scm.com/book/fr/v2/ch00/_data_recovery}{Récupération de données} pour la récupération de données).
 Cependant, tout ce que vous perdez avant de l'avoir validé n'a aucune chance d'être récupérable via Git.
 
 \subsection{Travailler avec des dépôts distants}
@@ -1534,7 +1537,7 @@ origin    git@github.com:mojombo/grit.git (push)
 \end{Verbatim}
 \end{Schunk}
 
-Notez que ces dépôts distants sont accessibles au moyen de différents protocoles; nous traiterons des protocoles dans \emph{Installation de Git sur un serveur}.
+Notez que ces dépôts distants sont accessibles au moyen de différents protocoles; nous traiterons des protocoles dans \link{https://www.git-scm.com/book/fr/v2/ch00/_git_on_the_server}{Installation de Git sur un serveur}.
 
 \subsubsection{Ajouter des dépôts distants}
 
@@ -1997,7 +2000,7 @@ Tout ce que vous avez à faire, c'est simplement de rebasculer sur la branche \c
 
 Cependant, avant de le faire, notez que si votre copie de travail ou votre zone d'index contiennent des modifications non validées qui sont en conflit avec la branche que vous extrayez, Git ne vous laissera pas effectuer le changement de branche.
 Le mieux est d'avoir votre copie de travail propre au moment de changer de branche.
-Il y a des moyens de contourner ceci (précisément par le remisage et l'amendement de \emph{commit}) dont nous parlerons plus loin, au chapitre \emph{Remisage et nettoyage}.
+Il y a des moyens de contourner ceci (précisément par le remisage et l'amendement de \emph{commit}) dont nous parlerons plus loin, au chapitre \link{https://www.git-scm.com/book/fr/v2/ch00/_git_stashing}{Remisage et nettoyage}.
 Pour l'instant, nous supposons que vous avez validé tous vos changements et que vous pouvez donc rebasculer vers votre branche \code{master}:
 \begin{Schunk}
 \begin{Verbatim}
@@ -2234,7 +2237,7 @@ Hit return to start merge resolution tool (opendiff):
 Si vous souhaitez utiliser un outil de fusion autre que celui par défaut (Git a choisi \code{opendiff} dans ce cas car la commande a été lancée depuis un Mac), vous pouvez voir tous les outils supportés après l'indication «\emph{of the following tools:}».
 Entrez simplement le nom de l'outil que vous préféreriez utiliser.
 
-\notebox{Si vous avez besoin d'outils plus avancés pour résoudre des conflits complexes, vous trouverez davantage d'informations au chapitre \emph{Fusion avancée}.}
+\notebox{Si vous avez besoin d'outils plus avancés pour résoudre des conflits complexes, vous trouverez davantage d'informations au chapitre \link{https://www.git-scm.com/book/fr/v2/ch00/_advanced_merging}{Fusion avancée}.}
 
 Après avoir quitté l'outil de fusion, Git vous demande si la fusion a été réussie.
 Si vous répondez par la positive à l'outil, il ajoute le fichier dans l'index pour le marquer comme résolu.
