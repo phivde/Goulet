@@ -162,7 +162,7 @@ capacités d'édition plutôt réduites.
 
 \begin{figure}
   \centering
-  \includegraphics{console-screenshot}
+  \includegraphics{images/console-screenshot}
   \caption{Fenêtre de la console sous macOS au démarrage de R}
   \label{fig:presentation:console}
 \end{figure}
@@ -332,7 +332,7 @@ d'autres. Voici quelques bons choix.
 
   \begin{figure}[t]
     \centering
-    \includegraphics[width=0.9\textwidth]{rstudio-screenshot}
+    \includegraphics[width=0.9\textwidth]{images/rstudio-screenshot}
     \caption{Fenêtre de RStudio sous macOS dans sa configuration par
       défaut. Dans le sens des aiguilles d'une montre, on y retrouve:
       le fichier de script de la \autoref{fig:presentation:script}; la
@@ -361,7 +361,7 @@ d'autres. Voici quelques bons choix.
 
   \begin{figure}[t]
     \centering
-    \includegraphics[width=0.9\textwidth]{emacs-screenshot}
+    \includegraphics[width=0.9\textwidth]{images/emacs-screenshot}
     \caption{Fenêtre de GNU Emacs sous macOS en mode d'édition de code
       R. Dans la partie du haut, on retrouve le fichier de script de
       la \autoref{fig:presentation:script} et dans la partie du
