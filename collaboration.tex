@@ -518,20 +518,20 @@ sauvegarde du code source d'un projet.
 
 Les systèmes de contrôle de version de première génération ont vu le
 jour dans les années 1970 et 1980:
-\link{https://fr.wikipedia.org/wiki/Source_Code_Control_System}{\emph{Source
-    Code Control System}} (SCCS, 1972),
-\link{https://fr.wikipedia.org/wiki/GNU_RCS}{\emph{Revision Control
-    System}} (RCS, 1982). Ces systèmes ne permettaient pas de
+\link{https://fr.wikipedia.org/wiki/Source_Code_Control_System}{Source
+    Code Control System} (SCCS, 1972),
+\link{https://fr.wikipedia.org/wiki/GNU_RCS}{Revision Control
+    System} (RCS, 1982). Ces systèmes ne permettaient pas de
 travailler à plusieurs à la fois sur un même fichier. Cette barrière a
 été levée par les systèmes centralisés de seconde génération qui ont
 pu se développer grâce à l'accès de plus en plus généralisé à la
 réseautique --- notamment à Internet --- au cours des années 1990 et
 2000. Pendant plus d'une décennie, le système libre
-\index{CVS}\link{https://fr.wikipedia.org/wiki/Concurrent_versions_system}{\emph{Concurrent
-    Versions System}} (CVS, 1990) a régné sur le monde de la gestion
+\index{CVS}\link{https://fr.wikipedia.org/wiki/Concurrent_versions_system}{Concurrent
+    Versions System} (CVS, 1990) a régné sur le monde de la gestion
 de versions, jusqu'à l'arrivée de
-\index{Subversion}\link{https://fr.wikipedia.org/wiki/Apache_Subversion}{\emph{Apache
-    Subversion}} (SVN, 2000). Construit selon les mêmes principes que
+\index{Subversion}\link{https://fr.wikipedia.org/wiki/Apache_Subversion}{Apache
+    Subversion} (SVN, 2000). Construit selon les mêmes principes que
 CVS et compatible avec lui, Subversion se voulait surtout une
 meilleure implémentation d'un système de gestion de version
 centralisé. Le système est rapidement devenu le standard \emph{de
@@ -543,10 +543,10 @@ serveur central pour toute opération de publication d'une modification
 à un fichier. C'est pour lever cette contrainte que sont apparus, au
 milieu des années 2000, les systèmes de gestion de version distribués.
 Les principaux représentants de cette troisième génération de systèmes
-sont \index{Git}\link{https://fr.wikipedia.org/wiki/Git}{\emph{Git}} (2005),
-\index{Mercurial}\link{https://fr.wikipedia.org/wiki/Mercurial}{\emph{Mercurial}} (hg,
+sont \index{Git}\link{https://fr.wikipedia.org/wiki/Git}{Git} (2005),
+\index{Mercurial}\link{https://fr.wikipedia.org/wiki/Mercurial}{Mercurial} (hg,
 2005) et
-\index{Bazaar}\link{https://fr.wikipedia.org/wiki/Bazaar_(logiciel)}{\emph{Bazaar}}
+\index{Bazaar}\link{https://fr.wikipedia.org/wiki/Bazaar_(logiciel)}{Bazaar}
 (bzr, 2005).
 
 \Index{Git}Git a été développé à l'origine par Linus Torvalds pour
@@ -566,13 +566,59 @@ bien.
 Pour atteindre les objectifs d'apprentissage fixés en entête de
 chapitre, vous devrez couvrir les sections suivantes de \emph{Pro Git}:
 \begin{itemize}
-\item chapitre 1, toutes les sections;
-\item chapitre 2, sections 2.1, 2.2 et 2.5 (2.3 et 2.4 étant
+\item chapitre 1, toutes les sections, sauf la section~1.5 sur
+  l'installation de Git;
+\item chapitre 2, sections 2.1, 2.2 et 2.5 (les sections 2.3 et 2.4 sont
   optionnelles, mais utiles);
 \item chapitre 3, sections 3.1, 3.2 et 3.3.
 \end{itemize}
+Pour votre commodité, ces sections sont reproduites à
+l'\autoref{chap:git}.
 
-Bonne lecture!
+\begin{figure}[t]
+  \begin{emphbox}{\mdseries Configuration de l'éditeur de texte pour
+      les messages de Git}
+    La \autoref{sec:git:first_time} mentionne la possibilité de
+    configurer l'éditeur de texte qui sera utilisé quand Git doit vous
+    demander de saisir un message. Dans le seul exemple qui est
+    fourni, c'est Emacs qui est utilisé comme éditeur en remplacement
+    de Vim.
+
+    Il y a fort à parier que vous souhaiterez configurer Git pour
+    utiliser un éditeur plus convivial.
+
+    \begin{description}
+    \item[Windows]
+    Le plus simple sous Windows consiste à utiliser le Bloc-notes.
+    Entrez la commande suivante à l'invite de commande (Git Bash) pour
+    choisir cet éditeur par défaut:
+    \begin{Schunk}
+\begin{Verbatim}
+$ git config --global core.editor notepad
+\end{Verbatim}
+    \end{Schunk}%$
+
+    \item[macOS]
+    Le meilleur truc sous macOS consiste à utiliser la commande
+    générique \code{open} pour ouvrir un fichier. Ainsi, c'est votre
+    éditeur de fichiers par défaut du Finder qui sera utilisé à tout
+    coup. Par défaut, il s'agit de TextEdit. Entrez la commande
+    suivante à l'invite de commande du Terminal:
+    \begin{Schunk}
+\begin{Verbatim}
+$ git config --global core.editor open
+\end{Verbatim}
+    \end{Schunk}
+  \end{description}
+
+    \emph{Sources}:
+    \link{https://stackoverflow.com/questions/10564/how-can-i-set-up-an-editor-to-work-with-git-on-windows}{How
+      can I set up an editor to work with Git on Windows?},
+    \link{https://stackoverflow.com/questions/3539594/change-the-default-editor-for-files-opened-in-the-terminal-e-g-set-it-to-text}{Change the default editor for files opened in the terminal?}
+  \end{emphbox}
+  \label{fig:colloration:editeur}
+\end{figure}
+
 
 % \section{Exemples}
 % \label{sec:collaboration:exemples}
@@ -607,6 +653,12 @@ Bonne lecture!
       caractères}
     \label{fig:collaboration:rstudio-tab-width}
   \end{figure}
+\end{exercice}
+
+\begin{exercice}[nosol]
+  Configurer l'éditeur par défaut de Git sur votre poste de travail
+  tel qu'expliqué dans l'encadré de la
+  \autopageref{fig:colloration:editeur}.
 \end{exercice}
 
 \begin{exercice}
