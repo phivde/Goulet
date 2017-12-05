@@ -140,18 +140,19 @@ vers la \Index{sortie standard}\Index{Unix!sortie
 \emph{stdout}). Pour simplifier, l'entrée standard d'un terminal
 serait le clavier et la sortie standard, l'écran.
 
-L'opérateur de transfert de données \Index{{"|}@\code{\textbar}
-  (Bash)} «\code{\textbar}» permet de transférer la sortie d'un
-programme directement à l'entrée d'un autre programme. Autrement dit,
-plutôt que d'afficher ses résultats à l'écran, le premier programme
-les passe en entrée au second programme. L'opérateur de redirection
-\Index{>@\code{>} (Bash)}«\code{>}» permet, lui, de rediriger la
+L'opérateur de transfert de données %
+\index{{"|}@\code{\textbar} (Bash)|bfhyperpage} «\code{\textbar}» permet de
+transférer la sortie d'un programme directement à l'entrée d'un autre
+programme. Autrement dit, plutôt que d'afficher ses résultats à
+l'écran, le premier programme les passe en entrée au second programme.
+L'opérateur de redirection %
+\index{>@\code{>} (Bash)|bfhyperpage}«\code{>}» permet, lui, de rediriger la
 sortie d'un programme vers un fichier afin de sauvegarder les
-résultats. Enfin, l'opérateur de redirection \Index{>@\code{<}
-  (Bash)}«\code{<}» permet, à l'inverse du précédent, de déverser le
-contenu d'un fichier dans l'entrée standard d'un programme. La
-documentation citée en référence à la section suivante utilise
-abondamment ces opérateurs.
+résultats. Enfin, l'opérateur de redirection %
+\Index{>@\code{<} (Bash)}«\code{<}» permet, à l'inverse du précédent,
+de déverser le contenu d'un fichier dans l'entrée standard d'un
+programme. La documentation citée en référence à la section suivante
+utilise abondamment ces opérateurs.
 
 
 \section{Expressions régulières}
@@ -291,8 +292,10 @@ $ cat 100metres.data
 
 Effectuons dans un premier temps l'extraction des temps des records
 (second champ). La première commande utilise un transfert de données
-du programme \icode{cat} vers \icode{awk}, alors que la seconde, plus
-usuelle et tout à fait équivalente, emploie un fichier en entrée.
+du programme \icode{cat} vers \icode{awk} avec l'opérateur %
+\index{{"|}@\code{\textbar} (Bash)}\code{\textbar}, alors
+que la seconde, plus usuelle et tout à fait équivalente, emploie un
+fichier en entrée.
 \begin{Schunk}
 \begin{Verbatim}
 $ cat 100metres.data | awk '{ print $2 }'
@@ -441,7 +444,7 @@ $ awk '/^## Historique/ { state = 1 } \
     Exercice adapté de
     \url{https://regex.sketchengine.co.uk/extra_regexps.html}.}
   \begin{enumerate}
-    \setlength{\multicolsep}{0pt}
+    \setlength{\multicolsep}{2pt}
   \item \verb~/a(ab)*a/~
     \begin{enumerate}[1)]
       \begin{multicols}{3}
@@ -456,11 +459,14 @@ $ awk '/^## Historique/ { state = 1 } \
     \end{enumerate}
   \item \verb~/ab+c?/~
     \begin{enumerate}[1)]
-      \begin{multicols}{4}
+      \begin{multicols}{3}
       \item \verb~abc~
       \item \verb~ac~
       \item \verb~abbb~
+      \end{multicols}
+      \begin{multicols}{3}
       \item \verb~bbc~
+      \item \verb~abcc~
       \end{multicols}
     \end{enumerate}
   \item \verb~/a.[bc]+/~
@@ -745,10 +751,10 @@ $ sed -E 's/( |^)f\((.*), (.*)\)/fun(\3, \2)/' \
 \begin{exercice}
   Déterminer si la commande \code{print} est nécessaire ou non dans la
   toute dernière commande \icode{awk} de la
-  \autoref{sec:texte:exemples}
+  \autoref{sec:texte:exemples}.
   \begin{sol}
-    La commande n'est pas nécessaire puisqu'il s'agit de l'action
-    implicite dans \code{awk}.
+    La commande \code{print} n'est pas nécessaire puisqu'il s'agit de
+    l'action implicite dans \code{awk}.
   \end{sol}
 \end{exercice}
 
@@ -799,7 +805,6 @@ $ sed -E \
 \end{exercice}
 
 \Closesolutionfile{solutions}
-
 
 %%% Local Variables:
 %%% mode: latex
