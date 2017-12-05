@@ -26,7 +26,7 @@ Il est facile d'oublier le répertoire dans lequel vous êtes et d'écrire accid
 
 Pour traiter ce problème, les programmeurs ont développé il y a longtemps des VCS locaux qui utilisaient une base de données simple pour conserver les modifications d'un fichier.
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/local}
   \caption{Gestion de version locale}
@@ -46,7 +46,7 @@ Pour traiter ce problème, les systèmes de gestion de version centralisés (CVC
 Ces systèmes tels que CVS, Subversion, et Perforce, mettent en place un serveur central qui contient tous les fichiers sous gestion de version, et des clients qui peuvent extraire les fichiers de ce dépôt central.
 Pendant de nombreuses années, cela a été le standard pour la gestion de version.
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/centralized}
   \caption{Gestion de version centralisée}
@@ -70,7 +70,7 @@ Dans un DVCS (tel que Git, Mercurial, Bazaar ou Darcs), les clients n'extraient 
 Ainsi, si le serveur disparaît et si les systèmes collaboraient via ce serveur, n'importe quel dépôt d'un des clients peut être copié sur le serveur pour le restaurer.
 Chaque extraction devient une sauvegarde complète de toutes les données.
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/distributed}
   \caption{Gestion de version distribuée}
@@ -117,7 +117,7 @@ La différence majeure entre Git et les autres VCS (Subversion et autres) résid
 Au niveau conceptuel, la plupart des autres systèmes gèrent l'information comme une liste de modifications de fichiers.
 Ces systèmes (CVS, Subversion, Perforce, Bazaar et autres) considèrent l'information qu'ils gèrent comme une liste de fichiers et les modifications effectuées sur chaque fichier dans le temps.
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/deltas}
   \caption{D'autres systèmes sauvent l'information comme des modifications sur des fichiers}
@@ -130,7 +130,7 @@ Git ne gère pas et ne stocke pas les informations de cette manière.
 Pour être efficace, si les fichiers n'ont pas changé, Git ne stocke pas le fichier à nouveau, juste une référence vers le fichier original qu'il a déjà enregistré.
 Git pense ses données plus à la manière d'un *flux d'instantanés*.
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/snapshots}
   \caption{Git stocke les données comme des instantanés du projet au cours du temps}
@@ -201,7 +201,7 @@ Indexé signifie que vous avez marqué un fichier modifié dans sa version actue
 
 Ceci nous mène aux trois sections principales d'un projet Git : le répertoire Git, le répertoire de travail et la zone d'index.
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/areas}
   \caption{Répertoire de travail, zone d'index et répertoire Git}
@@ -535,7 +535,7 @@ Quand vous clonez un dépôt pour la première fois, tous les fichiers seront so
 Au fur et à mesure que vous éditez des fichiers, Git les considère comme modifiés, car vous les avez modifiés depuis le dernier instantané.
 Vous \emph{indexez} ces fichiers modifiés et vous enregistrez toutes les modifications indexées, puis ce cycle se répète.
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/lifecycle}
   \caption{Le cycle de vie des états des fichiers}
@@ -1843,7 +1843,7 @@ Git crée alors un objet \emph{commit} qui contient les méta-données et un poi
 Votre dépôt Git contient à présent cinq objets:
 un \emph{blob} pour le contenu de chacun de vos trois fichiers, un arbre (\emph{tree}) qui liste le contenu du répertoire et spécifie quels noms de fichiers sont attachés à quels \emph{blobs} et enfin un objet \emph{commit} portant le pointeur vers l'arbre de la racine ainsi que toutes les méta-données attachées au \emph{commit}.
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/commit-and-tree}
   \caption{Un commit et son arbre}
@@ -1852,7 +1852,7 @@ un \emph{blob} pour le contenu de chacun de vos trois fichiers, un arbre (\emph{
 
 Si vous faites des modifications et validez à nouveau, le prochain \emph{commit} stocke un pointeur vers le \emph{commit} le précédant immédiatement.
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/commits-and-parents}
   \caption{Commits et leurs parents}
@@ -1868,7 +1868,7 @@ Au fur et à mesure des validations, la branche \code{master} pointe vers le der
 Elle est identique à toutes les autres branches.
 La seule raison pour laquelle chaque dépôt en a une est que la commande \code{git init} la crée par défaut et que la plupart des gens ne s'embêtent pas à la changer.}
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/branch-and-history}
   \caption{Une branche et l'historique de ses \emph{commits}}
@@ -1890,7 +1890,7 @@ $ git branch testing
 
 Cela crée un nouveau pointeur vers le \emph{commit} courant.
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/two-branches}
   \caption{Deux branches pointant vers la même série de \emph{commits}}
@@ -1904,7 +1904,7 @@ Dans Git, il s'agit simplement d'un pointeur sur la branche locale où vous vous
 Dans ce cas, vous vous trouvez toujours sur \code{master}.
 En effet, la commande \code{git branch} n'a fait que créer une nouvelle branche — elle n'a pas fait basculer la copie de travail vers cette branche.
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/head-to-master}
   \caption{HEAD pointant vers une branche}
@@ -1936,7 +1936,7 @@ $ git checkout testing
 
 Cela déplace \code{HEAD} pour le faire pointer vers la branche \code{testing}.
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/head-to-testing}
   \caption{HEAD pointe vers la branche courante}
@@ -1952,7 +1952,7 @@ $ git commit -a -m 'made a change'
 \end{Verbatim}
 \end{Schunk}
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/advance-testing}
   \caption{La branche HEAD avance à chaque \emph{commit}}
@@ -1967,7 +1967,7 @@ $ git checkout master
 \end{Verbatim}
 \end{Schunk}
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/checkout-master}
   \caption{HEAD est déplacé lors d'un \emph{checkout}}
@@ -1996,7 +1996,7 @@ Vous avez créé une branche et basculé dessus, y avez réalisé des modificati
 Ces deux modifications sont isolées dans des branches séparées: vous pouvez basculer d'une branche à l'autre et les fusionner quand vous êtes prêt.
 Et vous avez fait tout ceci avec de simples commandes: \code{branch}, \code{checkout} et \code{commit}.
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/advance-master}
   \caption{Divergence d'historique}
@@ -2053,7 +2053,7 @@ Vous faites donc ce qui suit:
 
 Commençons par supposer que vous travaillez sur votre projet et avez déjà quelques \emph{commits}.
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/basic-branching-1}
   \caption{Historique de \emph{commits} simple}
@@ -2077,7 +2077,7 @@ $ git checkout prob53
 \end{Verbatim}
 \end{Schunk}
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/basic-branching-2}
   \caption{Création d'un nouveau pointeur de branche}
@@ -2093,7 +2093,7 @@ $ git commit -a -m "ajout d'un pied de page [problème 53]"
 \end{Verbatim}
 \end{Schunk}
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/basic-branching-3}
   \caption{La branche \code{prob53} a avancé avec votre travail}
@@ -2132,7 +2132,7 @@ $ git commit -a -m "correction de l'adresse email incorrecte"
 \end{Verbatim}
 \end{Schunk}
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/basic-branching-4}
   \caption{Branche de correctif basée sur \code{master}}
@@ -2158,7 +2158,7 @@ Autrement dit, lorsque l'on cherche à fusionner un \emph{commit} qui peut être
 
 Votre modification est maintenant dans l'instantané (\emph{snapshot}) du \emph{commit} pointé par la branche \code{master} et vous pouvez déployer votre correctif.
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/basic-branching-5}
   \caption{Avancement du pointeur de \code{master} sur \code{correctif}}
@@ -2188,7 +2188,7 @@ $ git commit -a -m 'Nouveau pied de page terminé [issue 53]'
 \end{Verbatim}
 \end{Schunk}
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/basic-branching-6}
   \caption{Le travail continue sur \code{prob53}}
@@ -2221,7 +2221,7 @@ Dans ce cas, à un certain moment, l'historique de développement a divergé.
 Comme le \emph{commit} sur la branche sur laquelle vous vous trouvez n'est plus un ancêtre direct de la branche que vous cherchez à fusionner, Git doit effectuer quelques actions.
 Dans ce cas, Git réalise une simple fusion à trois sources (\emph{three-way merge}), en utilisant les deux instantanés pointés par les sommets des branches ainsi que leur plus proche ancêtre commun.
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/basic-merging-1}
   \caption{Trois instantanés utilisés dans une fusion classique}
@@ -2231,7 +2231,7 @@ Dans ce cas, Git réalise une simple fusion à trois sources (\emph{three-way me
 Au lieu d'avancer simplement le pointeur de branche, Git crée un nouvel instantané qui résulte de la fusion à trois sources et crée automatiquement un nouveau \emph{commit} qui pointe dessus.
 On appelle ceci un \emph{commit} de fusion (\emph{merge commit}) qui est spécial en cela qu'il a plus d'un parent.
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics{images/basic-merging-2}
   \caption{Un \emph{commit} de fusion}
