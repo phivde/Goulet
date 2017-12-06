@@ -27,10 +27,20 @@
 \end{objectifs}
 
 
-Ce chapitre est consacré à l'étude des \emph{expressions régulières}
---- ou expressions relationnelles --- pour l'analyse et le contrôle de
-texte. Une expression régulière (\emph{regular expression}, ou regex
-ou regexp) est une chaine de caractères qui décrit, selon une syntaxe
+Peut-être vous êtes-vous déjà demandé comment s'effectue la validation
+de certains champs comme le code postal ou l'adresse de courrier
+électronique dans les formulaires électroniques. Sûrement pas en
+vérifiant si l'entrée figure dans la liste des quelques 17,5 millions
+de codes postaux possibles ou, pire, parmi les milliards d'adresse de
+courriel que les \link{https://tools.ietf.org/html/rfc3696}{règles
+  internationales} permettent de concevoir! Non, ce qu'il faut, c'est
+un «langage» qui permet de décrire \emph{comment} une chaine de
+caractères peut être composée, sans toutefois en fixer la composition
+exacte. Un tel langage existe: ce sont les \emph{expressions
+  régulières} ou expressions relationnelles.
+
+Une expression régulière (\emph{regular expression}, ou regex ou
+regexp) est une chaine de caractères qui décrit, selon une syntaxe
 précise, un ensemble de chaines de caractères possibles
 \citep{Wikipedia:Expression_reguliere}.
 
@@ -38,26 +48,26 @@ Par exemple, les plaques d'immatriculation récentes distribuées par la
 Société d'assurance automobile du Québec (SAAQ) sont composées ainsi:
 une lettre, deux chiffres, une espace, trois lettres. Les lettres
 \textsf{O}, \textsf{I} et \textsf{U} ne sont pas utilisées à cause de
-leur similitude avec, respectivement, les chiffres $0$ et $1$ et la
-lettre \textsf{V}. L'expression régulière
+leur similitude avec, respectivement, les chiffres {\fullcaps 0} et
+{\fullcaps 1} et la lettre \textsf{V}. L'expression régulière suivante
+permet de décrire l'ensemble des numéros de plaques possibles (y
+compris les combinaisons de lettres exclues comme \code{LSD} ou
+\code{SEX}):
 \begin{Schunk}
 \begin{Verbatim}
 [A-HJ-NP-TV-Z][0-9]{2} [A-HJ-NP-TV-Z]{3}
 \end{Verbatim}
 \end{Schunk}
-permet de décrire
-l'ensemble des numéros de plaques possibles (y compris les
-combinaisons de lettres exclues comme \code{LSD} ou \code{SEX}).
 
 Voici quelques autres utilisations possibles des expressions
 régulières.
 \begin{itemize}
-\item Rechercher du texte pouvant contenir des variations
-  orthographiques comme, par exemple, «je transfert» plutôt que «je
-  transfère» ou encore les multiples variations autour du verbe
+\item Rechercher du texte pouvant contenir des variations ou des
+  fautes d'orthographe comme, par exemple, «je transfert» plutôt que
+  «je transfère», ou encore les multiples variations autour du verbe
   «appeler»: appel, appelle, appellent, appeler, appelez, etc.
 \item Remplacer le nom d'une commande par un autre lorsque la commande
-  s'étant de part et d'autre d'un argument qui, lui, change d'une fois
+  s'étend de part et d'autre d'un argument qui, lui, change d'une fois
   à l'autre. Par exemple, dans le système de mise en page {\LaTeX}, la
   syntaxe des commandes est la suivante:
   \cmdprint{\cmd}\oarg{option}\marg{arg}. Pour remplacer toutes les
@@ -97,8 +107,8 @@ nécessaires. Aux fins de cet ouvrage, j'ai choisi de concentrer notre
 \code{grep}, \code{sed} et \code{awk}. Ils font partie intégrante des
 systèmes d'exploitation macOS et Linux et, sous Windows, ils sont
 livrés avec les interpréteurs de commande MSYS de \index{MSYS2}MSYS2
-et \index{Git~Bash}Git~Bash de \emph{Git for Windows}
-(\autoref{sec:informatique:cli}).
+et \index{Git~Bash}Git~Bash de \emph{Git for Windows} dont nous avons
+déjà parlé à la \autoref{sec:informatique:cli}.
 
 Comme la plupart des utilitaires Unix, \Icode{grep}, \Icode{sed} et
 \Icode{awk} prennent en entrée un flux de texte ou un ou plusieurs
@@ -141,18 +151,28 @@ vers la \Index{sortie standard}\Index{Unix!sortie
 serait le clavier et la sortie standard, l'écran.
 
 L'opérateur de transfert de données %
-\index{{"|}@\code{\textbar} (Bash)|bfhyperpage} «\code{\textbar}» permet de
+\index{{"|}@\code{\textbar} (Bash)|bfhyperpage} «\code{\textbar}»
+(nommé «tuyau», de l'anglais \emph{pipe}) permet de
 transférer la sortie d'un programme directement à l'entrée d'un autre
 programme. Autrement dit, plutôt que d'afficher ses résultats à
 l'écran, le premier programme les passe en entrée au second programme.
+
 L'opérateur de redirection %
-\index{>@\code{>} (Bash)|bfhyperpage}«\code{>}» permet, lui, de rediriger la
-sortie d'un programme vers un fichier afin de sauvegarder les
-résultats. Enfin, l'opérateur de redirection %
+\index{>@\code{>} (Bash)|bfhyperpage}«\code{>}» permet, lui, de
+rediriger la sortie d'un programme vers un fichier afin de sauvegarder
+les résultats. Si le fichier existe déjà, son contenu est écrasé pour
+le nouveau contenu. Pour ajouter le nouveau contenu à la fin du
+fichier, il faut utiliser la variante double %
+\index{>>@\code{>>} (Bash)|bfhyperpage}«\code{>>}» de l'opérateur de
+redirection.
+
+Enfin, l'opérateur de redirection %
 \Index{>@\code{<} (Bash)}«\code{<}» permet, à l'inverse du précédent,
 de déverser le contenu d'un fichier dans l'entrée standard d'un
-programme. La documentation citée en référence à la section suivante
-utilise abondamment ces opérateurs.
+programme. La variante double existe également.
+
+La documentation citée en référence à la section suivante utilise
+abondamment les opérateurs ci-dessus.
 
 
 \section{Expressions régulières}
@@ -193,26 +213,26 @@ Revenez ensuite ici pour des exemples additionnels et des exercices.
 \section{Exemples additionnels}
 \label{sec:texte:exemples}
 
-Exceptionnellement, les exemples additionnels de ce chapitre se
-présentent sous forme de texte normal plutôt que sous forme de fichier
-de script.
+Exceptionnellement, je présente les exemples additionnels de ce
+chapitre en texte normal plutôt que sous forme de fichier de script.
 
 Les exemples ci-dessous utilisent des fichiers distribués avec le
 présent document dans l'archive \code{programmer-avec-r.zip}.
 Assurez-vous d'avoir extrait les fichiers de l'archive quelque part
-sur votre disque et notez cet endroit: vous devrez le connaitre dans
+sur votre disque et notez bien cet endroit: vous en aurez besoin dans
 un instant.
 
 Vous devez entrer les expressions ci-dessous à une ligne de commande
 du \index{Terminal}Terminal sous macOS, ou de \index{Git~Bash}Git~Bash
 ou MSYS sous Windows.
 
-\importantbox{L'espace horizontal étant compté dans ce document, il
-  est parfois nécessaire de scinder une commande sur deux lignes ou
-  plus. Pour ces cas, j'ai inséré le symbole de continuation de ligne
-  «\bs» de Bash à la fin des lignes. Vous pouvez ainsi copier les
-  commandes directement du document et les coller dans une ligne de
-  commande. Le symbole ne fait \emph{pas} partie des commandes.}
+\importantbox{L'espace horizontal étant compté dans un document en
+  format PDF, il est parfois nécessaire de scinder une commande sur
+  deux lignes ou plus. Pour ces cas, j'ai inséré le symbole de
+  continuation de ligne «\bs» de Bash à la fin des lignes. Vous pouvez
+  ainsi copier les commandes directement du document et les coller
+  dans une ligne de commande. Le symbole {\bs} ne fait \emph{pas}
+  partie des commandes.}
 
 En premier lieu, déplacez, à l'aide de la commande \icode{cd},
 l'invite de commande dans le répertoire où vous avez extrait les
@@ -360,7 +380,7 @@ $ sed -E 's~(19|20)([0-9]{2})-([0-9]{2})-([0-9]{2})(.*)~'\
 \end{Schunk}
 
 Amusons-nous maintenant avec le fichier \code{README.md} qui contient,
-réunies à la fin du fichier, les notes de mise à jour des différentes
+regroupées à la fin du fichier, les notes de mise à jour des différentes
 versions du document. Les deux commandes suivantes dressent la liste
 des numéros de versions avec les variantes de base et étendue
 des expressions régulières.
@@ -395,15 +415,15 @@ $ awk '/^## Historique/ { state = 1; next } \
   pour tester que la variable \code{state} est vraie n'est pas
   nécessaire dans la mesure où il est sous-entendu que l'expression
   qui précède l'action dans une commande \icode{awk} est un test
-  conditionnel et que \code{awk} traite la valeur $1$ comme vraie. De
+  conditionnel et que \code{awk} traite la valeur 1 comme vraie. De
   plus, la commande \code{print} est implicite avec \code{awk}, donc
   il n'est pas nécessaire de la demander explicitement.}
 
 Ensuite, nous voulons extraire seulement les notes de mise à jour de
-la dernière version du document. L'idée consiste à afficher les lignes
-du fichier à partir de la première section marquée par '\#\#\#' après
-'\#\# Historique' et d'arrêter lorsqu'une autre section marquée par
-'\#\#\#' est atteinte. Tout ceci requiert deux valeurs de la
+la \emph{dernière} version du document. L'idée consiste à afficher les lignes
+du fichier à partir de la première section marquée par \code{\#\#\#} après
+\code{\#\# Historique} et d'arrêter lorsqu'une autre section marquée par
+\code{\#\#\#} est atteinte. Ces opérations nécessitent deux valeurs de la
 variable d'état \code{state}.
 \begin{Schunk}
 \begin{Verbatim}
@@ -414,13 +434,14 @@ $ awk '/^## Historique/ { state = 1 } \
 \end{Verbatim}
 \end{Schunk}
 
-\tipbox{Les opérations de composition du présent document, de
+\notebox{Les opérations de composition du présent document, de
   publication dans GitHub et de mise à jour de la page web sont
-  entièrement automatisées à l'aide de l'outil
-  \link{https://fr.wikipedia.org/wiki/Make}{\code{make}} standard sur
-  les systèmes Unix. Vous pouvez retrouver une variante de la commande
-  \code{awk} ci-dessus dans la règle \code{create-release} du fichier
-  de configuration \code{Makefile} qui se trouve dans le
+  entièrement automatisées à l'aide de
+  \link{https://fr.wikipedia.org/wiki/Make}{\code{make}}, un autre de
+  ces outils standards sur les systèmes Unix. Vous pouvez retrouver
+  une variante un peu plus élaborée de la commande \code{awk}
+  ci-dessus dans la règle \code{create-release} du fichier de
+  configuration \code{Makefile} qui se trouve dans le
   \link{\ghurl}{code source} du document.}
 
 \section{Exercices}
@@ -761,9 +782,9 @@ $ sed -E 's/( |^)f\((.*), (.*)\)/fun(\3, \2)/' \
 \begin{exercice}
   Dans le code source du présent document\footnote{%
     Disponible en clonant avec Git le projet
-    \url{https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-develop.git}}, %
+    \url{https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-develop.git}.}, %
   le fichier \code{docs/index.md} contient une ligne de ce type
-  (scindée sur trois lignes ici pour des raisons de contraintes
+  (affichée sur trois lignes ici pour des raisons de contraintes
   horizontales):
   \begin{Schunk}
 \begin{Verbatim}
