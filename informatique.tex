@@ -946,7 +946,7 @@ Downloads
   \end{sol}
 \end{exercice}
 
-\begin{exercice}[nosol]
+\begin{exercice}
   Démarrer un interpréteur de commandes Bash. Si le système
   d'exploitation de votre ordinateur est Windows, vous pouvez utiliser
   la ligne de commande \index{Git~Bash}Git~Bash de
@@ -955,7 +955,9 @@ Downloads
   \index{MSYS2}\link{http://www.msys2.org}{MSYS2}.
   \begin{enumerate}
   \item Afficher le répertoire courant. Vérifier qu'il correspond à
-    celui mentionné dans l'invite de commande.
+    celui mentionné dans l'invite de commande. Localiser ce répertoire
+    dans l'interface graphique de votre système d'exploitation (Finder
+    sous macOS, Windows~Explorer sous Windows).
   \item Afficher la liste des fichiers du répertoire courant.
   \item Choisir un sous-répertoire du répertoire courant que vous
     savez contenir lui-même un sous-répertoire (par exemple:
@@ -977,6 +979,57 @@ Downloads
     d'exploitation recherche des applications avec la commande
     \verb=echo $PATH=.
   \end{enumerate}
+  \begin{sol}
+    Vous trouverez ci-dessous une transcription (partielle) de la
+    séance de travail à effectuer depuis une ligne de commande Bash.
+    \begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textbf{~$} pwd
+/Users/vincent
+\textbf{~$} ls
+Desktop           Music        emacs-modified-extensions
+Documents         Pictures     emacs-modified-macos
+Downloads         Public       emacs-modified-windows
+\meta{...}
+\textbf{~$} ls Documents/
+Spoon-Knife
+actexam
+actuar
+actuarialangle
+actuarialsymbol
+\meta{...}
+\textbf{~$} ls Documents/cours/
+ACT-2002        ACT-2005        ACT-2008        IFT-1902
+\textbf{~$} cd Documents/
+/Users/vincent/Documents
+\textbf{~/Documents$} ls -l
+drwxr-xr-x   6 vincent staff 204 29 nov 14:40 Spoon-Knife
+drwxr-xr-x   6 vincent staff 204 21 nov  2016 actexam
+drwxr-xr-x  10 vincent staff 340  1 sep 09:56 actuar
+\meta{...}
+\textbf{~/Documents$} cd cours/
+/Users/vincent/Documents/cours
+\textbf{~/Documents/cours$} cd
+\textbf{~$} ls -a
+.                     .bashrc           .profile
+..                    .cache            .rstudio-desktop
+.CFUserTextEncoding   .cups             .subversion
+\meta{...}
+\textbf{~$} ls -la
+total 584
+drwxr-xr-x@ 71 vincent staff  2414  4 déc 21:03 .
+drwxr-xr-x   5 root    admin   170 19 oct 04:13 ..
+drwxr-xr-x   4 vincent staff   136 10 mai  2017 .R
+-rw-r--r--   1 vincent staff    63  5 jul  2013 .Renviron
+-rw-r--r--   1 vincent staff 23185  9 nov 09:13 .Rhistory
+-rw-r--r--   1 vincent staff    71  4 jan  2016 .Rprofile
+\meta{...}
+\textbf{~$} echo PATH
+/opt/local/bin:/opt/local/sbin:~/bin:/usr/local/bin:
+/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin
+\end{Verbatim}
+    \end{Schunk}
+  \end{sol}
 \end{exercice}
 
 \Closesolutionfile{solutions}
