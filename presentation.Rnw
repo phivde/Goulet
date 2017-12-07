@@ -65,25 +65,16 @@ la toute simple fonction factorielle, à la
 \autoref{fig:presentation:scheme_vs_s}, tend à leur donner raison.
 
 \begin{figure}
-  \centering
-  \begin{minipage}{0.7\linewidth}
-\begin{Schunk}
-\begin{Sinput}
+\begin{lstlisting}[frame=single,language=lisp]
 (define factorial (lambda (n)
   (if (= n 1)
       1
     (* n (factorial (- n 1))))))
-\end{Sinput}
-\end{Schunk}
-  \end{minipage} \\[6pt]
-  \begin{minipage}{0.7\linewidth}
-\begin{Schunk}
-\begin{Sinput}
+\end{lstlisting}
+\begin{lstlisting}[frame=single,language=R]
 factorial <- function(n)
   if (n == 1) 1 else n * factorial(n - 1)
-\end{Sinput}
-\end{Schunk}
-  \end{minipage}
+\end{lstlisting}
   \caption[Mises en œuvre de la fonction factorielle.]{Mises en œuvre
     en Scheme (en haut) et en S (en bas) de la fonction
     factorielle.}
