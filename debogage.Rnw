@@ -45,7 +45,7 @@ les trouver --- autrement que par comparaison avec une version
 antérieure, bien sûr!
 
 \begin{figure}
-\begin{lstlisting}[frame=single,language=R]
+\begin{lstlisting}[frame=single, numbers=left, language=R]
 rgamma_ar <- function(n, shape, rate = 1; scale = 1/rate)
 {
     if (shape <= 0 | shape >= 1)
@@ -87,11 +87,11 @@ particulier l'oubli de parenthèses ou d'accolades. Ici, votre premier
 outil de débogage demeure votre éditeur de texte pour programmeur ---
 d'où l'importance d'en utiliser un bon. D'ailleurs, je vous recommande
 de lire l'argumentaire bien plus développé sur le sujet de
-\cite[chapitre~3]{Hunt:pragmatic:1999}.
+\citet[chapitre~3]{Hunt:pragmatic:1999}.
 
-Un bon éditeur de texte va, entre autres, indenter le code
-automatiquement en fonction de ce que contient le code, plutôt qu'en
-fonction de ce que vous \emph{pensez} qu'il contient. J'utilise
+Un bon éditeur de texte va, entre autres choses, indenter le code
+automatiquement en fonction de ce qu'il contient, et non en fonction
+de ce que vous \emph{pensez} qu'il contient. J'utilise pour ma part
 l'éditeur GNU~Emacs depuis de nombreuses années pour des tâches
 d'édition de diverses natures et jamais je n'ai pris le moteur
 d'indentation en défaut. En d'autres termes, quand Emacs ne dispose
@@ -100,15 +100,16 @@ une erreur quelque part. Pratique.
 
 La simple édition du code de la \autoref{fig:debogage:rgamma_ar} avec
 un bon outil fait immédiatement ressortir un premier problème dans la
-boucle \code{while}, qui se retrouve indentée comme ceci:
+boucle \code{while} (lignes 20--25), qui se retrouve indentée comme
+ci-dessous.
 \begin{Schunk}
 \begin{Verbatim}
-    while (i < n)
-    {
-        y <- Ginv(runif(1)
-                  if (runif(1) <= ratio(y))
-                      x[i <- i + 1] <- y
-    }
+while (i < n)
+{
+    y <- Ginv(runif(1)
+              if (runif(1) <= ratio(y))
+                  x[i <- i + 1] <- y
+}
 \end{Verbatim}
 \end{Schunk}
 
@@ -125,7 +126,7 @@ l'interpréteur identifie comme causant problème.
 Dans notre exemple, l'interpréteur identifie correctement que nous
 avons utilisé un point-virgule «\code{;}» en lieu et place d'une
 virgule «\code{,}» pour séparer deux arguments dans la définition de
-la fonction:
+la fonction.
 \begin{Schunk}
 \begin{Verbatim}
 Erreur : ';' inattendu(e) in
@@ -137,7 +138,7 @@ Avec ces deux erreurs maintenant corrigées, nous pouvons définir la
 fonction dans l'espace de travail et l'utiliser sans erreur
 d'exécution.
 <<echo=FALSE>>=
-rgamma_ar <- function(n, shape, rate = 1; scale = 1/rate)
+rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
 {
     if (shape <= 0 | shape >= 1)
         stop("valeur de shape inadmissible")
@@ -169,86 +170,178 @@ rgamma_ar <- function(n, shape, rate = 1; scale = 1/rate)
 rgamma_ar(5, 0.5, 1)
 @
 
+Les personnes un tant soit peu familières avec la distribution gamma
+auront tôt fait de remarquer une anomalie dans les résultats
+ci-dessus: la distribution étant strictement positive, elle ne peut
+générer la valeur $0$ que l'on retrouve en première position du
+vecteur.
 
+Une des premières choses à investiguer lorsqu'un bogue survient, c'est
+s'il est \emph{reproductible}, tant avec les mêmes conditions d'entrée
+(les valeurs des arguments) que sous d'autres conditions. Voyons voir.
+<<echo=TRUE>>=
+rgamma_ar(5, 0.5, 1)
+rgamma_ar(5, 0.8, 1)
+rgamma_ar(5, 0.5, 2)
+rgamma_ar(10, 0.5, 1)
+rgamma_ar(1, 0.5, 1)
+@
 
- Les messages d'erreur de l'interprète ne sont pas toujours d'un
-  grand secours{\dots} tant que l'on n'a pas appris à les reconnaître.
-  Un exemple de message d'erreur fréquemment rencontré:
-  \begin{quote}
-    \code{valeur manquante là où TRUE / FALSE est requis}
-  \end{quote}
-  Cette erreur provient généralement d'une commande \fonction{if} dont
-  l'argument vaut \objet{NA} plutôt que \objet{TRUE} ou \objet{FALSE}.
-  La raison: des valeurs manquantes se sont faufilées dans les
-  calculs à notre insu jusqu'à l'instruction \fonction{if}, faisant en
-  sorte que l'argument de \fonction{if} vaut \code{NA} alors qu'il ne
-  peut être que booléen.
+Il semble y avoir une constante, ici: c'est toujours la première
+valeur du vecteur de résultats qui est nulle, quelque soit le nombre de
+valeurs aléatoires demandé ou la paramétrisation de la loi gamma. Cela
+disculpe fort probablement les fonctions internes \code{ratio} et
+\code{Ginv} puisqu'elles semblent faire leur travail correctement pour
+les cas autres que le tout premier.
 
- Boucles: un calcul en trop ou un manquant.
- Fonction \code{apply}: application sur la mauvaise dimension.
- Attention au recyclage des vecteurs: ce n'est pas parce qu'un
-  calcul s'effectue sans erreur apparente que c'est le bon calcul.
+Dès qu'une fonction comporte une boucle, vos efforts de débogage
+devraient se tourner de ce côté. En effet, il est très facile de se
+tromper dans le critère d'arrêt d'une boucle, de telle sorte qu'il
+manque une itération ou, à l'inverse, qu'il y en a une de trop. Il
+faut également examiner l'effet des compteurs de près: seraient-ils
+incrémentés trop tôt ou trop tard dans la boucle?
 
+Il est temps de regarder une première technique de débogage, de loin
+la plus simple. Lorsqu'une fonction ne retourne pas le résultat
+attendu, placez des commandes \icode{print} à des endroits
+stratégiques dans la fonction de façon à pouvoir suivre les valeurs
+prises par les différents objets. Dans notre exemple, nous aimerions
+suivre les valeurs du vecteur \code{x}, du compteur \code{i} et de
+l'objet \code{y}. Pour ce faire, nous remplaçons les lignes 20 à 25 de
+la \autoref{fig:debogage:rgamma_ar} par l'extrait de code
+ci-dessous\footnote{%
+  Le code modifié est fourni en exemple dans la
+  \autoref{sec:debogage:exemples}.}, %
+puis nous exécutons de nouveau la fonction.
+\begin{Schunk}
+\begin{Verbatim}
+while (i < n)
+{
+    y <- Ginv(runif(1))
+    if (runif(1) <= ratio(y))
+    {
+        print(paste("valeur de y acceptée:", y))
+        x[i <- i + 1] <- y
+        print(c(i, x))
+    }
+}
+\end{Verbatim}
+\end{Schunk}
+<<echo=FALSE>>=
+rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
+{
+    if (shape <= 0 | shape >= 1)
+        stop("valeur de shape inadmissible")
+    ratio <- function(x)
+        if (x <= 1) exp(-x) else x^(shape - 1)
+    Ginv <- function(x)
+    {
+        k <- 1 + shape * exp(-1)
+        if (x <= 1/k)
+            (k * x)^(1/shape)
+        else
+            -log(((1/shape) + exp(-1)) * (1 - x))
+    }
+    x <- numeric(n)
+    i <- 1
+    while (i < n)
+    {
+        y <- Ginv(runif(1))
+        if (runif(1) <= ratio(y))
+        {
+            print(paste("valeur de y acceptée:", y))
+            x[i <- i + 1] <- y
+            print(c(i, x))
+        }
+    }
+    x * scale
+}
+@
+<<echo=TRUE>>=
+rgamma_ar(5, 0.5, 1)
+@
 
+Les résultats précédents nous apprennent que lorsque la première
+valeur \code{y} est acceptée, elle est placée en seconde position dans
+le vecteur \code{x}. Le coupable est donc notre compteur \code{i}! En
+y regardant de plus près, nous réalisons, en effet, qu'il est
+initialisé à la valeur $1$ à l'extérieur de la boucle \code{while}
+(ligne 19 de la \autoref{fig:debogage:rgamma_ar}) et qu'il est ensuite
+incrémenté \emph{avant} que l'affectation dans \code{x} ne soit
+effectuée dans la clause \code{if} (ligne 24). Le correctif est donc
+facile à appliquer: initialiser \code{i} avec la valeur $0$. Ceci
+fait, la fonction retourne maintenant des valeurs plausibles.
+<<echo=FALSE>>=
+rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
+{
+    if (shape <= 0 | shape >= 1)
+        stop("valeur de shape inadmissible")
+    ratio <- function(x)
+        if (x <= 1) exp(-x) else x^(shape - 1)
+    Ginv <- function(x)
+    {
+        k <- 1 + shape * exp(-1)
+        if (x <= 1/k)
+            (k * x)^(1/shape)
+        else
+            -log(((1/shape) + exp(-1)) * (1 - x))
+    }
+    x <- numeric(n)
+    i <- 0
+    while (i < n)
+    {
+        y <- Ginv(runif(1))
+        if (runif(1) <= ratio(y))
+        {
+            print(paste("valeur de y acceptée:", y))
+            x[i <- i + 1] <- y
+            print(c(i, x))
+        }
+    }
+    x * scale
+}
+@
+<<echo=TRUE>>=
+rgamma_ar(5, 0.5, 1)
+@
+
+En l'état, la fonction \code{rgamma\_ar} semble valide. Je vous
+rappelle la mise en garde de la
+\autoref{sec:bases:vecteurs:arithmetique}: avec le recyclage des
+vecteurs dans R, ce n'est pas parce qu'une expression --- ou une
+fonction --- s'exécute sans erreur apparente que le calcul effectué
+est bon pour autant. Il faut vérifier l'exactitude des calculs à
+l'aide de tests de contrôle. Le sujet ne sera pas étudié plus avant
+ici.
 
 
 
 \begin{itemize}
-\item Les erreurs de syntaxe sont les plus fréquentes (en particulier
-  l'oubli de virgules). Lors de la définition d'une fonction, une
-  vérification de la syntaxe est effectuée par l'interprète R.
-  Attention, cependant: une erreur peut prendre sa source plusieurs
-  lignes avant celle que l'interprète pointe comme causant problème.
-
-  ici, indentation un bon indice; votre premier outil de débogage,
-  c'est votre éditeur de texte --- d'où l'importance d'en utiliser un
-  bon. Dans Emacs, lorsque l'indentation n'est pas celle attendue,
-  c'est qu'il y a une erreur dans le code.
-
-\item Les messages d'erreur de l'interprète ne sont pas toujours d'un
-  grand secours{\dots} tant que l'on n'a pas appris à les reconnaître.
-  Un exemple de message d'erreur fréquemment rencontré:
-  \begin{quote}
-    \code{valeur manquante là où TRUE / FALSE est requis}
-  \end{quote}
-  Cette erreur provient généralement d'une commande \fonction{if} dont
-  l'argument vaut \objet{NA} plutôt que \objet{TRUE} ou \objet{FALSE}.
-  La raison: des valeurs manquantes se sont faufilées dans les
-  calculs à notre insu jusqu'à l'instruction \fonction{if}, faisant en
-  sorte que l'argument de \fonction{if} vaut \code{NA} alors qu'il ne
-  peut être que booléen.
-
-\item Boucles: un calcul en trop ou un manquant.
-\item Fonction \code{apply}: application sur la mauvaise dimension.
-\item Attention au recyclage des vecteurs: ce n'est pas parce qu'un
-  calcul s'effectue sans erreur apparente que c'est le bon calcul.
-
-\item Lorsqu'une fonction ne retourne pas le résultat attendu, placer
-  des commandes \fonction{print} à l'intérieur de la fonction, de
-  façon à pouvoir suivre les valeurs prises par les différentes
-  variables.
-
-  Par exemple, la modification suivante à la boucle de la fonction
-  \code{fp} permet d'afficher les valeurs successives de la variable
-  \code{i} et de détecter, par exemple, une procédure itérative divergente:
-  \begin{Schunk}
-\begin{Verbatim}
-repeat
-{
-    it <- i
-    i <- (1 - (1 + it)^(-n))/k
-    print(i)
-    if (abs((i - it)/it < TOL))
-        break
-}
-\end{Verbatim}
-  \end{Schunk}
 \item Quand ce qui précède ne fonctionne pas, ne reste souvent qu'à
   exécuter manuellement la fonction. Pour ce faire, définir dans
   l'espace de travail tous les arguments de la fonction, puis exécuter
   le corps de la fonction ligne par ligne. La vérification du résultat
   de chaque ligne permet généralement de retrouver la ou les
   expressions qui causent problème.
+\item  Les messages d'erreur de l'interprète ne sont pas toujours d'un
+  grand secours{\dots} tant que l'on n'a pas appris à les reconnaître.
+  Un exemple de message d'erreur fréquemment rencontré:
+  \begin{quote}
+    \code{valeur manquante là où TRUE / FALSE est requis}
+  \end{quote}
+  Cette erreur provient généralement d'une commande \code{if} dont
+  l'argument vaut \code{NA} plutôt que \code{TRUE} ou \code{FALSE}.
+  La raison: des valeurs manquantes se sont faufilées dans les
+  calculs à notre insu jusqu'à l'instruction \code{if}, faisant en
+  sorte que l'argument de \code{if} vaut \code{NA} alors qu'il ne
+  peut être que booléen.
+\item
+ Boucles: un calcul en trop ou un manquant.
+ Fonction \code{apply}: application sur la mauvaise dimension.
+ Attention au recyclage des vecteurs: ce n'est pas parce qu'un
+  calcul s'effectue sans erreur apparente que c'est le bon calcul.
+
+
 \end{itemize}
 
 
@@ -258,6 +351,16 @@ repeat
 
 \section{Arrêt du déroulement}
 \label{sec:debogage:browser}
+
+
+\section{Exemples}
+\label{sec:debogage:exemples}
+
+\def\scriptfilename{debogage.R}
+
+\scriptfile{\scriptfilename}
+\lstinputlisting[firstline=13]{\scriptfilename}
+
 
 
 
