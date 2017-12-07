@@ -82,6 +82,27 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 ## Historique des versions
 
+### (en développement)
+
+#### Nouveautés
+
+- Fichier d'exemples `collaboration.R` pour le chapitre 8.
+- Annexe C avec le texte intégral des sections du livre Pro Git à l'étude pour le chapitre 8.
+- Encadré à la fin du chapitre 8 sur la configuration de l'éditeur de texte pour Git.
+- Nouvel exercice 8.2 demandant d'effectuer la configuration de l'encadré ci-dessus.
+- Chapitre 9 - Analyse et contrôle de texte. Ce chapitre reprend, tout en l'améliorant, le matériel sur les expressions régulières publié dans le site de cours.
+- Exercice 9.7 qui ne se trouvait pas dans la liste d'exercices publiée dans le site de cours.
+- Astuce sur les préférences de l'application Terminal à la section 1.7.2.
+- Exemples pour les commandes `cd`, `pwd` et `ls` à la section 1.7.3.
+- Astuce sur le véritable nom de certains répertoires à la section 1.7.3.
+- Solution pour l'exercice 1.3.
+
+#### Autres modifications
+
+- À la section 1.5.2, correction du vocabulaire: le symbole | est un opérateur de *transfert de données* et non de redirection.
+- Utilisation systématique du symbole $ pour l'invite de commande du système d'exploitation.
+- Nouvelles entrées d'index.
+
 ### 2017.11-2 (2017-11-23)
 
 #### Nouveautés
