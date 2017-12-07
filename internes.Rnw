@@ -472,7 +472,7 @@ Dans la terminologie de R, un \index{paquetage}\emph{paquetage}
   L'équipe de traduction française de R a choisi de conserver le terme
   anglais. Je ne les suis pas dans cette voie.}). %
 est un ensemble cohérent de fonctions, de jeux de données et de
-documentation. Les paquetages sont régroupés dans une
+documentation. Les paquetages sont regroupés dans une
 \emph{bibliothèque} (\emph{library}).
 
 La modularité et l'ouverture de R rendent facile d'ajouter des
