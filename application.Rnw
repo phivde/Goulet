@@ -998,9 +998,9 @@ sum(x * w)/sum(w)
 \end{exercice}
 
 \begin{exercice}
-  Nous pouvons généraliser la définition de moyenne pondérée de
-  l'\autoref{exercice:application:moyennes} aux matrices et aux
-  tableaux de données.
+  Nous pouvons généraliser aux matrices et aux tableaux de données la
+  définition de moyenne pondérée de
+  l'\autoref{exercice:application:moyennes}.
 
   Dans le cas d'une matrice $n \times p$ d'observations $X_{ij}$ et
   poids $w_{ij}$ correspondant, on définit les moyennes pondérées
