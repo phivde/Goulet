@@ -315,43 +315,38 @@ l'aide de tests de contrôle. Le sujet ne sera pas étudié plus avant
 ici.
 
 
-
-\begin{itemize}
-\item Quand ce qui précède ne fonctionne pas, ne reste souvent qu'à
-  exécuter manuellement la fonction. Pour ce faire, définir dans
-  l'espace de travail tous les arguments de la fonction, puis exécuter
-  le corps de la fonction ligne par ligne. La vérification du résultat
-  de chaque ligne permet généralement de retrouver la ou les
-  expressions qui causent problème.
-\item  Les messages d'erreur de l'interprète ne sont pas toujours d'un
-  grand secours{\dots} tant que l'on n'a pas appris à les reconnaître.
-  Un exemple de message d'erreur fréquemment rencontré:
-  \begin{quote}
-    \code{valeur manquante là où TRUE / FALSE est requis}
-  \end{quote}
-  Cette erreur provient généralement d'une commande \code{if} dont
-  l'argument vaut \code{NA} plutôt que \code{TRUE} ou \code{FALSE}.
-  La raison: des valeurs manquantes se sont faufilées dans les
-  calculs à notre insu jusqu'à l'instruction \code{if}, faisant en
-  sorte que l'argument de \code{if} vaut \code{NA} alors qu'il ne
-  peut être que booléen.
-\item
- Boucles: un calcul en trop ou un manquant.
- Fonction \code{apply}: application sur la mauvaise dimension.
- Attention au recyclage des vecteurs: ce n'est pas parce qu'un
-  calcul s'effectue sans erreur apparente que c'est le bon calcul.
-
-
-\end{itemize}
+\tipbox{Lorsqu'une erreur survient, assurez-vous de bien lire les
+  messages d'erreur de R. Il faut parfois apprendre à les reconnaître.
+  Par exemple, le message assez fréquent «\code{valeur manquante là où
+    TRUE / FALSE est requis}» provient d'une clause \code{if} dont
+  l'argument vaut \code{NA} plutôt que \code{TRUE} ou \code{FALSE}. En
+  général, c'est parce que des valeurs manquantes se sont faufilées à
+  votre insu dans les calculs jusqu'à l'instruction \code{if}.}
 
 
 \section{Exécution pas-à-pas}
 \label{sec:debogage:pas-a-pas}
 
+La technique d'affichage de résultats intermédiaires s'est avérée
+suffisante pour trouver et corriger les bogues de la fonction
+\code{rgamma\_ar}, à la section précédente. Ce n'est pas toujours
+ainsi.
+
+Quand ce qui précède ne fonctionne pas, ne reste souvent qu'à
+  exécuter manuellement la fonction. Pour ce faire, définir dans
+  l'espace de travail tous les arguments de la fonction, puis exécuter
+  le corps de la fonction ligne par ligne. La vérification du résultat
+  de chaque ligne permet généralement de retrouver la ou les
+  expressions qui causent problème.
+
+
 
 \section{Arrêt du déroulement}
 \label{sec:debogage:browser}
 
+- traceback
+- browser; exemple de ligne de commande
+- liens vers procédures dans RStudio et avec ESS
 
 \section{Exemples}
 \label{sec:debogage:exemples}
