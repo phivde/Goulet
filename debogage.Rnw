@@ -329,16 +329,44 @@ ici.
 
 La technique d'affichage de résultats intermédiaires s'est avérée
 suffisante pour trouver et corriger les bogues de la fonction
-\code{rgamma\_ar}, à la section précédente. Ce n'est pas toujours
-ainsi.
+\code{rgamma\_ar}, à la section précédente. Ce n'est toutefois pas
+toujours ainsi.
 
-Quand ce qui précède ne fonctionne pas, ne reste souvent qu'à
-  exécuter manuellement la fonction. Pour ce faire, définir dans
-  l'espace de travail tous les arguments de la fonction, puis exécuter
-  le corps de la fonction ligne par ligne. La vérification du résultat
-  de chaque ligne permet généralement de retrouver la ou les
-  expressions qui causent problème.
+Une autre méthode de débogage simple à mettre en œuvre avec les
+langages de programmation interprétés comme R consiste à exécuter
+pas-à-pas le code d'une fonction. Voici comment procéder.
 
+\begin{enumerate}
+\item Définir dans l'espace de travail tous les arguments de la
+  fonction en y affectant des valeurs avec lesquelles vous souhaitez
+  tester le code.
+
+  Dans l'exemple de la section précédente, il s'agirait de définir les
+  objets \code{n}, \code{shape} et \code{scale} (\code{rate} n'étant
+  pas utilisé dans la fonction).
+\item Exécuter ligne par ligne le \emph{corps} de la fonction. Après
+  chaque ligne ou groupe de lignes, vérifier les valeurs des
+  différents objets. Cela permet souvent de déceler les expressions
+  qui causent problème.
+
+  Dans notre exemple, il faut exécuter le corps de la fonction à
+  partir de la ligne 3 dans la \autoref{fig:debogage:rgamma_ar}.
+\item Lorsque la fonction contient une boucle, sauter par-dessus la
+  ligne contenant l'expression \code{for}, \code{while} ou
+  \code{repeat} (et celle contenant l'éventuelle accolade ouvrante)
+  pour pouvoir exécuter les itérations de la boucle une à une. Porter
+  une attention particulière à la première et à la dernière itération.
+
+  Dans l'exemple, sauter les lignes 20 et 21 de la
+  \autoref{fig:debogage:rgamma_ar}.
+\end{enumerate}
+
+Une fois la séance de débogage terminée, supprimez de l'espace de
+travail les objets que vous avez créés au cours de celle-ci et
+exécutez de nouveau votre fonction. Cela vous prémunira contre une
+fonction qui se serait valide seulement lorsque certains objets
+existent dans l'espace de travail grâce à la magie de la portée
+lexicale de R.
 
 
 \section{Arrêt du déroulement}
