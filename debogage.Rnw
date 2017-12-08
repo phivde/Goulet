@@ -335,38 +335,83 @@ toujours ainsi.
 Une autre méthode de débogage simple à mettre en œuvre avec les
 langages de programmation interprétés comme R consiste à exécuter
 pas-à-pas le code d'une fonction. Voici comment procéder.
-
 \begin{enumerate}
 \item Définir dans l'espace de travail tous les arguments de la
-  fonction en y affectant des valeurs avec lesquelles vous souhaitez
+  fonction en y affectant les valeurs avec lesquelles vous souhaitez
   tester le code.
-
-  Dans l'exemple de la section précédente, il s'agirait de définir les
-  objets \code{n}, \code{shape} et \code{scale} (\code{rate} n'étant
-  pas utilisé dans la fonction).
 \item Exécuter ligne par ligne le \emph{corps} de la fonction. Après
   chaque ligne ou groupe de lignes, vérifier les valeurs des
-  différents objets. Cela permet souvent de déceler les expressions
-  qui causent problème.
-
-  Dans notre exemple, il faut exécuter le corps de la fonction à
-  partir de la ligne 3 dans la \autoref{fig:debogage:rgamma_ar}.
+  différents objets. Cela permet habituellement de détecter les
+  expressions qui causent problème.
 \item Lorsque la fonction contient une boucle, sauter par-dessus la
   ligne contenant l'expression \code{for}, \code{while} ou
   \code{repeat} (et celle contenant l'éventuelle accolade ouvrante)
   pour pouvoir exécuter les itérations de la boucle une à une. Porter
   une attention particulière à la première et à la dernière itération.
-
-  Dans l'exemple, sauter les lignes 20 et 21 de la
-  \autoref{fig:debogage:rgamma_ar}.
 \end{enumerate}
 
-Une fois la séance de débogage terminée, supprimez de l'espace de
-travail les objets que vous avez créés au cours de celle-ci et
-exécutez de nouveau votre fonction. Cela vous prémunira contre une
-fonction qui se serait valide seulement lorsque certains objets
-existent dans l'espace de travail grâce à la magie de la portée
-lexicale de R.
+Vous trouverez ci-dessous la transcription d'une session de débogage
+par la méthode pas-à-pas pour l'exemple de la section précédente.
+Remarquez comment j'ai évité d'évaluer les lignes 1--2 et 20--21 de la
+\autoref{fig:debogage:rgamma_ar}. J'ai également placé le nombre
+aléatoire issu de l'expression \code{runif(1)} dans la clause
+\code{if} dans un objet \code{u} afin de mieux pouvoir valider le
+test. Au final, la technique permet de détecter le problème de
+compteur mal initialisé.
+
+\begin{Schunk}
+\begin{Verbatim}
+> n <- 5
+> shape <- 0.5
+> scale <- 1
+>     if (shape <= 0 | shape >= 1)
++         stop("valeur de shape inadmissible")
+>     ratio <- function(x)
++         if (x <= 1) exp(-x) else x^(shape - 1)
+>     Ginv <- function(x)
++     {
++         k <- 1 + shape * exp(-1)
++         if (x <= 1/k)
++             (k * x)^(1/shape)
++         else
++             -log(((1/shape) + exp(-1)) * (1 - x))
++     }
+>     x <- numeric(n)
+>     i <- 1
+> x
+[1] 0 0 0 0 0
+> i
+[1] 1
+>         u <- runif(1)
+>         if (u <= ratio(y))
++             x[i <- i + 1] <- y
+> u
+[1] 0.9470823
+> ratio(y)
+[1] 0.9426682
+> x
+[1] 0 0 0 0 0
+>         y <- Ginv(runif(1))
+>         u <- runif(1)
+>         if (u <= ratio(y))
++             x[i <- i + 1] <- y
+> u
+[1] 0.1297151
+> ratio(y)
+[1] 0.5810007
+> x
+[1] 0.0000000 0.5430033 0.0000000 0.0000000 0.0000000
+> i
+[1] 2
+\end{Verbatim}
+\end{Schunk}
+
+\tipbox{Une fois la séance de débogage terminée, supprimez de l'espace
+  de travail les objets que vous avez créés au cours de celle-ci et
+  exécutez de nouveau votre fonction. Cela vous prémunira contre une
+  fonction qui se serait valide seulement lorsque certains objets
+  existent dans l'espace de travail grâce à la magie de la portée
+  lexicale de R.}
 
 
 \section{Arrêt du déroulement}
