@@ -427,7 +427,7 @@ les outils de débogage de R peuvent nous simplifier la tâche.
 Un premier outil de R très utile dès qu'un appel de fonction retourne
 un message d'erreur est la fonction \Icode{traceback}. Je vous
 encourage fortement à développer le réflexe de l'utiliser. La fonction
-retourne la pile des appels de fonction (\emph{call stack}) en ordre
+affiche la pile des appels de fonction (\emph{call stack}) en ordre
 chronologique inverse au moment de l'erreur. Cela permet d'identifier
 avec précision l'appel de fonction qui a causé l'erreur.
 \begin{Schunk}
@@ -435,8 +435,9 @@ avec précision l'appel de fonction qui a causé l'erreur.
 > foo <- function(x) bar(2 * x)
 > bar <- function(x) x + variable.inconnue
 > foo(2)
-Error in bar(2 * x) (from #1) : objet 'variable.inconnue' introuvable
-> traceback()
+Error in bar(2 * x) (from #1) : objet 'variable.inconnue'
+introuvable
+> tracebac(k)
 2: bar(2 * x) at #1
 1: foo(2)
 \end{Verbatim}
@@ -550,9 +551,186 @@ Browse[2]> c
 \scriptfile{\scriptfilename}
 \lstinputlisting[firstline=13]{\scriptfilename}
 
+\section{Exercices}
+\label{sec:debogage:exercices}
 
+\Opensolutionfile{solutions}[solutions-debogage]
 
+\begin{Filesave}{solutions}
+\section*{Chapitre \ref*{chap:debogage}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:debogage}}
 
+\end{Filesave}
+
+\begin{exercice}[nosol]
+  Trouver les erreurs qui empêchent la définition de la fonction
+  suivante.
+  \begin{Schunk}
+\begin{verbatim}
+AnnuiteFinPeriode <- function(n, i)
+{{
+    v <- 1/1 + i)
+    ValPresChaquePmt <- v^(1:n)
+    sum(ValPresChaquepmt)
+}
+\end{verbatim}
+  \end{Schunk}
+\end{exercice}
+
+\begin{exercice}
+  La fonction ci-dessous calcule la valeur des paramètres d'une loi
+  normale, gamma ou Pareto à partir de la moyenne et de la variance,
+  qui sont connues par l'utilisateur.
+  \begin{Schunk}
+\begin{verbatim}
+param <- function(moyenne, variance, loi)
+{
+    loi <- tolower(loi)
+    if (loi == "normale")
+        param1 <- moyenne
+        param2 <- sqrt(variance)
+        return(list(mean = param1, sd = param2))
+    if (loi == "gamma")
+        param2 <- moyenne/variance
+        param1 <- moyenne * param2
+        return(list(shape = param1, scale = param2))
+    if (loi == "pareto")
+        cte <- variance/moyenne^2
+        param1 <- 2 * cte/(cte-1)
+        param2 <- moyenne * (param1 - 1)
+        return(list(alpha = param1, lambda = param2))
+    stop("La loi doit etre une de \"normale\",
+\"gamma\" ou \"pareto\"")
+}
+\end{verbatim}
+  \end{Schunk}
+  L'utilisation de la fonction pour diverses lois donne les résultats
+  suivants:
+<<echo=FALSE>>=
+param <- function(moyenne, variance, loi)
+{
+    loi <- tolower(loi)
+    if (loi == "normale")
+        param1 <- moyenne
+        param2 <- sqrt(variance)
+        return(list(mean = param1, sd = param2))
+    if (loi == "gamma")
+        param2 <- moyenne/variance
+        param1 <- moyenne * param2
+        return(list(shape = param1, scale = param2))
+    if (loi == "pareto")
+        cte <- variance/moyenne^2
+        param1 <- 2 * cte/(cte-1)
+        param2 <- moyenne * (param1 - 1)
+        return(list(alpha = param1, lambda = param2))
+    stop("La loi doit etre une de \"normale\", \"gamma\" ou \"pareto\"")
+}
+@
+<<echo=TRUE>>=
+param(2, 4, "normale")
+@
+\begin{Schunk}
+\begin{Sinput}
+> param(50, 7500, "gamma")
+\end{Sinput}
+\begin{Soutput}
+Erreur dans param(50, 7500, "gamma") : Objet "param1"
+introuvable
+\end{Soutput}
+\end{Schunk}
+\begin{Schunk}
+\begin{Sinput}
+> param(50, 7500, "pareto")
+\end{Sinput}
+\begin{Soutput}
+Erreur dans param(50, 7500, "pareto") : Objet "param1"
+introuvable
+\end{Soutput}
+\end{Schunk}
+  \begin{enumerate}
+  \item Expliquer pour quelle raison la fonction se comporte ainsi.
+  \item Appliquer les correctifs nécessaires à la fonction pour que
+    celle-ci puisse calculer les bonnes valeurs. (Les erreurs ne se
+    trouvent pas dans les mathématiques de la fonction.)
+  \end{enumerate}
+  \begin{sol}
+    Il manque des accolades aux clauses \code{if}.
+    \begin{Schunk}
+\begin{verbatim}
+param <- function (moyenne, variance, loi)
+{
+    loi <- tolower(loi)
+    if (loi == "normale")
+    {
+        param1 <- moyenne
+        param2 <- sqrt(variance)
+        return(list(mean = param1, sd = param2))
+    }
+    if (loi == "gamma")
+    {
+        param2 <- moyenne/variance
+        param1 <- moyenne * param2
+        return(list(shape = param1, scale = param2))
+    }
+    if (loi == "pareto")
+    {
+        cte <- variance/moyenne^2
+        param1 <- 2 * cte/(cte-1)
+        param2 <- moyenne * (param1 - 1)
+        return(list(alpha = param1, lambda = param2))
+    }
+    stop("La loi doit etre une de \"normale\",
+\"gamma\" ou \"pareto\"")
+}
+\end{verbatim}
+    \end{Schunk}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  \index{matrice}
+  Vous devez calculer la note finale d'un groupe d'étudiants à partir
+  de deux informations:
+  \begin{enumerate}[1)]
+  \item une matrice contenant la note sur $100$ des étudiants à
+    chacune des évaluations, et
+  \item un vecteur contenant la pondération des évaluations.
+  \end{enumerate}
+  Un de vos collègues a composé la fonction \code{notes.finales}
+  ci-dessous afin de faire le calcul de la note finale pour chacun de
+  ses étudiants. Votre collègue vous mentionne toutefois que sa
+  fonction est plutôt lente et inefficace pour de grands groupes
+  d'étudiants. Modifiez la fonction afin d'en réduire le nombre
+  d'opérations et faire en sorte qu'elle n'utilise aucune boucle.
+  \begin{Schunk}
+\begin{verbatim}
+notes.finales <- function(notes, p)
+{
+    netud <- nrow(notes)
+    neval <- ncol(notes)
+    final <- (1:netud) * 0
+    for(i in 1:netud)
+    {
+        for(j in 1:neval)
+        {
+            final[i] <- final[i] + notes[i, j] * p[j]
+        }
+    }
+    final
+}
+\end{verbatim}
+  \end{Schunk}
+  \begin{sol}
+    Le calcul à faire n'est qu'un simple produit matriciel, donc:
+    \begin{Schunk}
+\begin{verbatim}
+notes.finales <- function(notes, p) notes %*% p
+\end{verbatim}
+    \end{Schunk}
+  \end{sol}
+\end{exercice}
+
+\Closesolutionfile{solutions}
 
 %%% Local Variables:
 %%% mode: latex
