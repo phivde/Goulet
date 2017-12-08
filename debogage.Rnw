@@ -418,12 +418,129 @@ initialisé.
 \section{Navigateur d'environnements}
 \label{sec:debogage:browser}
 
-Pour efficace qu'elle fut, la méthode de débogage pas-à-pas
+Pour efficace qu'elle fut, la technique d'évaluation pas-à-pas devient
+rapidement fastidieuse lorsque la fonction à déboguer est longue ou,
+surtout, lorsqu'elle contient de nombreux appels à des fonctions dont
+nous souhaitons également valider le code. Dans de telles situations,
+les outils de débogage de R peuvent nous simplifier la tâche.
 
+Un premier outil de R très utile dès qu'un appel de fonction retourne
+un message d'erreur est la fonction \Icode{traceback}. Je vous
+encourage fortement à développer le réflexe de l'utiliser. La fonction
+retourne la pile des appels de fonction (\emph{call stack}) en ordre
+chronologique inverse au moment de l'erreur. Cela permet d'identifier
+avec précision l'appel de fonction qui a causé l'erreur.
+\begin{Schunk}
+\begin{Verbatim}
+> foo <- function(x) bar(2 * x)
+> bar <- function(x) x + variable.inconnue
+> foo(2)
+Error in bar(2 * x) (from #1) : objet 'variable.inconnue' introuvable
+> traceback()
+2: bar(2 * x) at #1
+1: foo(2)
+\end{Verbatim}
+\end{Schunk}
 
-- traceback
-- browser; exemple de ligne de commande
-- liens vers procédures dans RStudio et avec ESS
+Le second --- et plus puissant --- outil de débogage de R permet en
+quelque sorte d'automatiser la technique d'évaluation pas-à-pas.
+L'idée est la suivante: pour analyser le déroulement d'une fonction
+\code{fun}, vous ajoutez un appel à la fonction \Icode{browser} en un
+point quelconque de la fonction et vous définissez la fonction dans
+l'espace de travail. Vous évaluez ensuite un appel à la fonction.
+Quand l'interpréteur atteint la commande \code{browser()}, il
+interrompt le déroulement de la fonction et il vous remet le contrôle
+dans un mode d'interaction spécial nommé «navigateur d'environnement».
+Celui-ci vous permet d'explorer à loisir l'environnement d'évaluation
+(\autoref{chap:implementation}) de la fonction en ce point. Vous
+pouvez également poursuivre l'exécution de la fonction ligne par ligne
+comme dans la technique d'évaluation pas-à-pas. Avantage non
+négligeable: le navigateur peut entrer récursivement dans
+l'environnement d'évaluation de chaque appel de fonction.
+
+Une fois entré dans le navigateur d'environnement, diverses commandes
+spéciales deviennent disponibles. Je ne présente ici que les plus
+importantes; consultez la rubrique d'aide de la fonction
+\icode{browser} pour la liste complète.
+
+\begin{ttscript}{m}
+\item[\code{n}] évaluer la prochaine expression de la fonction (celle
+  qui est affichée à l'invite de commande du navigateur), sans
+  toutefois entrer dans les appels de fonction.
+\item[\code{s}] évaluer la prochaine expression de la fonction en
+  entrant dans les appels de fonctions.
+\item[\code{c}] quitter le navigateur et poursuivre l'exécution de la
+  fonction normalement.
+\item[\code{Q}] quitter le navigateur ainsi que l'évaluation en cours
+  pour retourner à l'invite de commande de R.
+\end{ttscript}
+
+Reprenons l'exemple de la section précédente en supposant que nous
+avons inséré la commande \code{browser()} à la ligne 17 de la
+\autoref{fig:debogage:rgamma_ar}. La transcription d'une séance
+d'utilisation du navigateur d'environnement suit.
+
+\begin{Schunk}
+\begin{Verbatim}
+> rgamma_ar(5, 0.5, 1)
+Called from: rgamma_ar(5, 0.5, 1)
+Browse[1]> n
+debug à #18 :x <- numeric(n)
+Browse[2]> n
+debug à #19 :i <- 1
+Browse[2]> x
+[1] 0 0 0 0 0
+Browse[2]> n
+debug à #20 :while (i < n) {
+    y <- Ginv(runif(1))
+    if (runif(1) <= ratio(y))
+        x[i <- i + 1] <- y
+}
+Browse[2]> i
+[1] 1
+Browse[2]> n
+debug à #22 :y <- Ginv(runif(1))
+Browse[2]> s
+debugging in: Ginv(runif(1))
+debug à #9 :{
+    k <- 1 + shape * exp(-1)
+    if (x <= 1/k)
+        (k * x)^(1/shape)
+    else -log(((1/shape) + exp(-1)) * (1 - x))
+}
+Browse[3]> n
+debug à #11 :k <- 1 + shape * exp(-1)
+Browse[3]> n
+debug à #12 :if (x <= 1/k) (k * x)^(1/shape)
+    else -log(((1/shape) + exp(-1)) * (1 - x))
+Browse[3]> k
+[1] 1.18394
+Browse[3]> n
+debug à #12 :-log(((1/shape) + exp(-1)) * (1 - x))
+Browse[3]> n
+exiting from: Ginv(runif(1))
+debug à #23 :if (runif(1) <= ratio(y)) x[i <- i + 1] <- y
+Browse[2]> n
+debug à #23 :x[i <- i + 1] <- y
+Browse[2]> n
+debug à #20 :(while) i < n
+Browse[2]> y
+[1] 1.667504
+Browse[2]> x
+[1] 0.000000 1.667504 0.000000 0.000000 0.000000
+Browse[2]> c
+debug à #26 :x * scale
+Browse[2]> c
+[1] 0.000000000 1.667504209 0.164785294 1.176891303
+[5] 0.008645285
+\end{Verbatim}
+\end{Schunk}
+
+\tipbox{Les environnements de développement intégrés comme Emacs avec
+  le mode ESS ou RStudio facilitent l'utilisation du navigateur
+  d'environnement. Consultez la documentation de votre éditeur sous la
+  rubrique \emph{Debugging} pour en tirer le meilleur parti.}
+
 
 \section{Exemples}
 \label{sec:debogage:exemples}
