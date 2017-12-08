@@ -79,8 +79,9 @@ rgamma_ar <- function(n, shape, rate = 1; scale = 1/rate)
 \end{figure}
 
 
-\section{Erreurs simples et affichage de résultats intermédiaires}
-\label{sec:debogage:simple}
+\section{Vérification de la syntaxe et affichage de résultats
+  intermédiaires}
+\label{sec:debogage:syntaxe}
 
 Les simples erreurs de syntaxe sont de loin les plus fréquentes --- en
 particulier l'oubli de parenthèses ou d'accolades. Ici, votre premier
@@ -324,7 +325,7 @@ ici.
   votre insu dans les calculs jusqu'à l'instruction \code{if}.}
 
 
-\section{Exécution pas-à-pas}
+\section{Évaluation pas-à-pas}
 \label{sec:debogage:pas-a-pas}
 
 La technique d'affichage de résultats intermédiaires s'est avérée
@@ -333,7 +334,7 @@ suffisante pour trouver et corriger les bogues de la fonction
 toujours ainsi.
 
 Une autre méthode de débogage simple à mettre en œuvre avec les
-langages de programmation interprétés comme R consiste à exécuter
+langages de programmation interprétés comme R consiste à évaluer
 pas-à-pas le code d'une fonction. Voici comment procéder.
 \begin{enumerate}
 \item Définir dans l'espace de travail tous les arguments de la
@@ -352,12 +353,12 @@ pas-à-pas le code d'une fonction. Voici comment procéder.
 
 Vous trouverez ci-dessous la transcription d'une session de débogage
 par la méthode pas-à-pas pour l'exemple de la section précédente.
-Remarquez comment j'ai évité d'évaluer les lignes 1--2 et 20--21 de la
+Remarquez comment je n'ai pas évalué les lignes 1--2 et 20--21 de la
 \autoref{fig:debogage:rgamma_ar}. J'ai également placé le nombre
 aléatoire issu de l'expression \code{runif(1)} dans la clause
-\code{if} dans un objet \code{u} afin de mieux pouvoir valider le
-test. Au final, la technique permet de détecter le problème de
-compteur mal initialisé.
+\code{if} dans un objet \code{u} afin de pouvoir valider le test. Au
+final, la technique permet de détecter le problème de compteur mal
+initialisé.
 
 \begin{Schunk}
 \begin{Verbatim}
@@ -407,15 +408,18 @@ compteur mal initialisé.
 \end{Schunk}
 
 \tipbox{Une fois la séance de débogage terminée, supprimez de l'espace
-  de travail les objets que vous avez créés au cours de celle-ci et
-  exécutez de nouveau votre fonction. Cela vous prémunira contre une
-  fonction qui se serait valide seulement lorsque certains objets
-  existent dans l'espace de travail grâce à la magie de la portée
-  lexicale de R.}
+  de travail les objets que vous avez créés au cours de celle-ci, puis
+  évaluez de nouveau votre fonction. Cela vous prémunira contre une
+  fonction qui, par la magie de la portée lexicale de R, serait valide
+  seulement lorsque certains objets existent dans l'espace de
+  travail.}
 
 
-\section{Arrêt du déroulement}
+\section{Navigateur d'environnements}
 \label{sec:debogage:browser}
+
+Pour efficace qu'elle fut, la méthode de débogage pas-à-pas
+
 
 - traceback
 - browser; exemple de ligne de commande
