@@ -82,6 +82,10 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 ## Historique des versions
 
+### 2017.12-1b (2017-12-09)
+
+- Ajout des fichiers `collaboration.R` et `debogage.R` manquants dans la version précédente.
+
 ### 2017.12-1a (2017-12-08)
 
 - Erreur d'assemblage dans la version précédente: il manque le chapitre 10!
