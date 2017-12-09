@@ -437,7 +437,7 @@ avec précision l'appel de fonction qui a causé l'erreur.
 > foo(2)
 Error in bar(2 * x) (from #1) : objet 'variable.inconnue'
 introuvable
-> tracebac(k)
+> traceback()
 2: bar(2 * x) at #1
 1: foo(2)
 \end{Verbatim}
