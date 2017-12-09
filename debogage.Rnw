@@ -418,7 +418,7 @@ initialisé.
 \section{Navigateur d'environnements}
 \label{sec:debogage:browser}
 
-Pour efficace qu'elle fut, la technique d'évaluation pas-à-pas devient
+Pour efficace qu'elle soit, la technique d'évaluation pas-à-pas devient
 rapidement fastidieuse lorsque la fonction à déboguer est longue ou,
 surtout, lorsqu'elle contient de nombreux appels à des fonctions dont
 nous souhaitons également valider le code. Dans de telles situations,
