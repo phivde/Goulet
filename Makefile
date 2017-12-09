@@ -31,7 +31,9 @@ SCRIPTS = \
 	algorithmique.R \
 	donnees.R \
 	application.R \
-	internes.R 
+	internes.R \
+	collaboration.R \
+	debogage.R
 OTHER = LICENSE \
 	100metres.data
 ROUTFILES := $(SCRIPTS:.R=.Rout)
