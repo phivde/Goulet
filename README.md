@@ -82,6 +82,12 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 ## Historique des versions
 
+### (en développement)
+
+#### Autres modifications
+
+- Dans le fichier `algorithmique.R`, suppression d'un appel à une fonction 'rss' qui n'existe as dans le fichier.
+
 ### 2017.12-1b (2017-12-09)
 
 - Ajout des fichiers `collaboration.R` et `debogage.R` manquants dans la version précédente.
