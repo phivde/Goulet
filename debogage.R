@@ -119,7 +119,7 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
     x * scale
 }
 
-## Nous ne sommes pas sortis bu bois: l'appel de fonction
+## Nous ne sommes pas sortis du bois: l'appel de la fonction
 ## ci-dessous retourne une valeur de 0, ce qui n'est pas une
 ## valeur admissible pour une distribution gamma.
 rgamma_ar(5, 0.5, 1)
