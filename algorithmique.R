@@ -160,7 +160,6 @@ selectionsort <- function(x)
 ## Test
 (x <- sample(0:10, 7, replace = TRUE))
 selectionsort(x)
-rss(x)
 
 ## La fonction 'which.min' de R retourne l'indice du minimum
 ## dans un vecteur. Nous pouvons l'utiliser pour éliminer la
