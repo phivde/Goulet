@@ -541,7 +541,7 @@ attributes(x)
 \section{Vecteurs}
 \label{sec:bases:vecteurs}
 
-En R, à toutes fins pratiques, \emph{tout} est un
+En R, pratiquement, \emph{tout} est un
 vecteur\index{vecteur}. C'est aussi l'unité de base dans les calculs.
 Nous nous restreignons pour le moment aux vecteurs simples (atomiques)
 dans lesquels tous les éléments sont du même mode.
