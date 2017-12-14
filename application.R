@@ -142,8 +142,9 @@ system.time(f(x))
 ##
 ##   y = x/y.
 ##
-## La méthode du point fixe ne converge avec cette fonction
-## (l'algorithme oscille perpétuellement entre deux valeurs).
+## La méthode du point fixe ne converge pas avec cette
+## fonction (l'algorithme oscille perpétuellement entre deux
+## valeurs).
 ##
 ## Une variante de l'équation y^2 = x fonctionnera mieux (en
 ## fait, on peut démontrer que l'algorithme converge toujours
