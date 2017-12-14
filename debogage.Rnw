@@ -189,7 +189,7 @@ rgamma_ar(1, 0.5, 1)
 @
 
 Il semble y avoir une constante, ici: c'est toujours la première
-valeur du vecteur de résultats qui est nulle, quelque soit le nombre de
+valeur du vecteur de résultats qui est nulle, quel que soit le nombre de
 valeurs aléatoires demandé ou la paramétrisation de la loi gamma. Cela
 disculpe fort probablement les fonctions internes \code{ratio} et
 \code{Ginv} puisqu'elles semblent faire leur travail correctement pour
