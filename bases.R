@@ -15,7 +15,7 @@
 ###
 
 ## Nombres. Tous les nombres réels sont stockés en double
-## précision dans R, entiers comme nombres fractionnaires.
+## précision dans R, entiers comme fractionnaires.
 486                        # nombre réel entier
 0.3324                     # nombre réel fractionnaire
 2e-3                       # notation scientifique
