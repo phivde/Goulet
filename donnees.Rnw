@@ -472,7 +472,7 @@ writeLines(readLines("matrice.data"))
   \caption{Gauche: fichier de données \code{vecteur.data} contenant un
     vecteur de données à raison d'une donnée par ligne. Droite:
     fichier \code{matrice.data} contenant les données d'une matrice.
-    Dans les deux cas le caractère \# indique que le reste du texte
+    Dans les deux cas, le caractère \# indique que le reste du texte
     sur la ligne est un commentaire.}
   \label{fig:donnees:scan}
 \end{figure}
