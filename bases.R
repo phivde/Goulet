@@ -107,7 +107,7 @@ matrix                     # fonction
 ## avec l'opérateur '<-'. *Ne pas* utiliser '=' pour
 ## l'affectation.
 x <- 5                     # affectation de 5 à l'objet 'x'
-5 -> x                     # idem, mais peu usité
+5 -> x                     # idem, mais peu utilisé
 x                          # voir le contenu
 (x <- 5)                   # affectation et affichage
 y <- x                     # affecter la valeur de 'x' à 'y'
