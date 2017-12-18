@@ -82,7 +82,7 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 ## Historique des versions
 
-### (en développement)
+### 2017.12-1c (2017-12-17)
 
 - Fin de la section 8.4 retravaillée afin, notamment, d'insérer un lien vers la vidéo sur le [travail collaboratif](https://youtu.be/bdIjgjg6zoc).
 - Dans le fichier `algorithmique.R`, suppression d'un appel à une fonction 'rss' qui n'existe pas dans le fichier.
