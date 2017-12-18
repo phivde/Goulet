@@ -635,7 +635,6 @@ $ awk '/^## Historique/ { state = 1 } \
     lettres. Il y a assurément plusieurs réponses valides. En voici
     une: \verb=/.*p[a-z ]t.*/=.
   \end{sol}
-
 \end{exercice}
 
 \begin{exercice}
@@ -647,10 +646,10 @@ $ awk '/^## Historique/ { state = 1 } \
   fournies en majuscule ou en minuscule et l'espace entre le troisième
   et le quatrième symbole peut être présent ou non.
   \begin{sol}
-    \verb=[a-zA-z][0-9][a-zA-z]\s?[0-9][a-zA-z][0-9]= si l'on ne
-    permet que zéro ou une espace entre les deux blocs. S'il n'y a pas
-    de limite au nombre d'espaces, remplacer «\verb=?=» par
-    «\verb=*=».
+    \verb=[a-zA-z][0-9][a-zA-z]\s?[0-9][a-zA-z][0-9]=
+    convient si l'on ne permet que zéro ou une espace entre les deux
+    blocs. S'il n'y a pas de limite au nombre d'espaces, remplacer
+    «\verb=?=» par «\verb=*=».
   \end{sol}
 \end{exercice}
 

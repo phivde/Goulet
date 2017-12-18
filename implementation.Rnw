@@ -439,7 +439,7 @@ Fn(0:3)
 <<echo=TRUE>>=
 ls.str(envir = environment(Fn))
 @
-    L'environnement de la fonction contient donc les éléments nécessaires
+    L'environnement de la fonction contient donc les éléments requis
     pour calculer la fonction de répartition empirique en un point
     quelconque, soit, entre autres, les valeurs distinctes du
     vecteur de données (vecteur \code{x}) et les valeurs correspondantes
