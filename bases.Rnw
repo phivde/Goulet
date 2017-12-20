@@ -633,7 +633,7 @@ x[x > 0]
   Les éléments dont l'étiquette correspond à l'une des chaines sont
   extraits du vecteur. Ce mode d'indiçage par le nom a comme principal
   avantage de permettre l'extraction d'éléments d'un vecteur
-  indépendemment de leur position dans celui-ci.
+  indépendamment de leur position dans celui-ci.
 <<echo=TRUE>>=
 x[c("B", "D")]
 @
