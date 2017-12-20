@@ -164,7 +164,7 @@ vector("list", 5)
 
 ## Les crochets simples [ ] permettent d'extraire un ou
 ## plusieurs éléments d'une liste. Le résultat est toujours
-## une liste, même si l'on extraie un seul élément.
+## une liste, même si l'on extrait un seul élément.
 x[c(1, 2)]                 # deux premiers éléments
 x[1]                       # premier élément: une liste
 
