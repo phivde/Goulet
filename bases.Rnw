@@ -424,7 +424,7 @@ nchar(v2)
 
 Les objets valeur manquante (\code{NA}), infini (\code{Inf},
 \code{-Inf}), valeur indéterminée (\code{NaN}) et néant (\code{NULL})
-permettent de représenter de manière intuitive des quantitées souvent
+permettent de représenter de manière intuitive des quantités souvent
 utilisées dans les applications statistiques et en analyse de données.
 Pour pleinement tirer profit de ces objets, il faut connaitre leurs
 caractéristiques spéciales.
