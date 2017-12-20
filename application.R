@@ -339,7 +339,7 @@ fun <- function(x, y) mean(x[x > y])
 ## 'sapply'.
 sapply(x, fun, 7)          # moyennes des données > 7
 
-## Les fonctions 'lapply' et 'sapply' passent tout à tour les
+## Les fonctions 'lapply' et 'sapply' passent tour à tour les
 ## éléments de leur premier argument comme *premier* argument
 ## à la fonction, sans le nommer explicitement. L'expression
 ## ci-dessus est donc équivalente à
