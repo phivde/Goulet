@@ -69,7 +69,7 @@ mode(NULL)                 # le mode de 'NULL' est NULL
 length(NULL)               # longueur nulle
 c(NULL, NULL)              # du néant ne résulte que le néant
 
-## Chaines de caractères. On crée une chaine de caractère en
+## Chaines de caractères. On crée une chaine de caractères en
 ## l'entourant de guillemets doubles " ".
 "foobar"                   # *une* chaine de 6 caractères
 length("foobar")           # longueur de 1
