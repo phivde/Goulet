@@ -176,7 +176,7 @@ que la structure \code{if ... else ...} est beaucoup plus efficace si
 \section{Boucles itératives}
 \label{sec:application:boucles}
 
-Il existe deux grandes manière de répéter des calculs en
+Il existe deux grandes manières de répéter des calculs en
 programmation: par \index{iteration@itération}itération ou par
 \index{recursivite@récursivité}récursivité. Une procédure itérative
 répète un bloc d'instructions, habituellement avec un léger changement
