@@ -214,7 +214,7 @@ unlist(x, use.names = FALSE) # éliminer les étiquettes
 ###
 
 ## Les facteurs jouent un rôle important en analyse de
-## données. surtout pour classer des données en diverses
+## données, surtout pour classer des données en diverses
 ## catégories. Les données d'un facteur devraient normalement
 ## afficher un fort taux de redondance.
 ##
