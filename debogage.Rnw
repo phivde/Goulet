@@ -312,8 +312,7 @@ rappelle la mise en garde de la
 vecteurs dans R, ce n'est pas parce qu'une expression --- ou une
 fonction --- s'exécute sans erreur apparente que le calcul effectué
 est bon pour autant. Il faut vérifier l'exactitude des calculs à
-l'aide de tests de contrôle. Le sujet ne sera pas étudié plus avant
-ici.
+l'aide de tests de contrôle. Le sujet ne sera pas étudié plus en détail ici.
 
 
 \tipbox{Lorsqu'une erreur survient, assurez-vous de bien lire les
