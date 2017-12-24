@@ -457,7 +457,7 @@ représente $+\infty$, \code{-Inf} représente $-\infty$ et \icode{NaN}
 (\emph{Not a Number}) représente une forme indéterminée du type
 $\frac{0}{0}$ ou $\infty - \infty$. Les fonctions
 \Icode{is.infinite}, \Icode{is.finite} et \Icode{is.nan}
-fournissent des manières robuste de tester ces valeurs.
+fournissent des manières robustes de tester ces valeurs.
 <<echo=TRUE>>=
 is.infinite(1/0)
 is.finite(-1/0)
