@@ -38,7 +38,7 @@ if (x < 0)  print("il y a des nombres négatifs")
 
 ## Seconde erreur fréquente: tester que vrai est vrai. (Ce
 ## n'est pas une «erreur» au sens propre puisque la syntaxe
-## est valide, mais c'est un non-sens syntaxique, une forme de
+## est valide, mais c'est un non-sens sémantique, une forme de
 ## pléonasme comme «monter en haut» ou «deux jumeaux».)
 ##
 ## Voici un exemple de construction avec un test inutile. Le
