@@ -301,7 +301,7 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
     }
 
     ## Les valeurs dans 'x' proviennent d'une distribution
-    ## Gamma(shape, 1). Il faut les retouner sur la bonne
+    ## Gamma(shape, 1). Il faut les retourner sur la bonne
     ## échelle.
     x * scale
 }
