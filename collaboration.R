@@ -290,7 +290,7 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
 
     ## La méthode d'acceptation-rejet commande d'utiliser une
     ## boucle 'while' puisque nous ne savons pas d'avance
-    ## quelle proportion de valeurs simulées seront acceptées.
+    ## combien de valeurs simulées seront acceptées.
     x <- numeric(n)  # contenant pour les valeurs simulées
     i <- 0           # compteur du nombre de valeurs acceptées
     while (i < n)
@@ -301,7 +301,7 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
     }
 
     ## Les valeurs dans 'x' proviennent d'une distribution
-    ## Gamma(shape, 1). Il faut les retouner sur la bonne
+    ## Gamma(shape, 1). Il faut les retourner sur la bonne
     ## échelle.
     x * scale
 }

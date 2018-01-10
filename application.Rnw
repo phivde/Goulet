@@ -176,7 +176,7 @@ que la structure \code{if ... else ...} est beaucoup plus efficace si
 \section{Boucles itératives}
 \label{sec:application:boucles}
 
-Il existe deux grandes manière de répéter des calculs en
+Il existe deux grandes manières de répéter des calculs en
 programmation: par \index{iteration@itération}itération ou par
 \index{recursivite@récursivité}récursivité. Une procédure itérative
 répète un bloc d'instructions, habituellement avec un léger changement
@@ -798,7 +798,7 @@ tapply(X, INDEX, FUN, ...)
 \end{Schunk}
 \begin{itemize}
 \item \code{X} est un vecteur.
-\item \code{INDEX} est facteur ou une liste de facteurs, chacun de la
+\item \code{INDEX} est un facteur ou une liste de facteurs, chacun de la
   même longueur que \code{X}.
 \item \code{FUN} est la fonction à appliquer à chacun des groupes de
   données définis par les catégories des facteurs dans \code{INDEX}.

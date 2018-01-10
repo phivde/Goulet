@@ -20,7 +20,17 @@ En revanche, le lecteur est appelé à lire et à exécuter le code
 informatique se trouvant dans les sections d'exemples à la fin de
 chacun des chapitres. Ce code et les commentaires qui l'accompagnent
 reviennent sur l'essentiel des concepts du chapitre et les
-complémentent souvent. 
+complémentent souvent.
+
+Question de développer, chez le lecteur, une culture de l'informatique
+et une connaissance des outils de développement informatique
+essentiels, *Programmer avec R* traite également de l'histoire des
+langages de programmation; des principes de base des systèmes
+d'exploitation et des systèmes de gestion de fichiers; des outils de
+travail collaboratif, dont le système de gestion
+[Git](https://git-scm.com); des outils d'analyse et de contrôle de
+texte `grep`, `sed` et `awk`.
+
 
 ## Auteur
 
@@ -35,9 +45,16 @@ Vincent Goulet, professeur titulaire, [École d'actuariat](https://www.act.ulava
 1\. Éléments d'informatique pour programmeurs  
 2\. Présentation de R  
 3\. Bases du langage R  
-4\. Détails d'impléemtation du langage R  
+4\. Détails d'implémentation du langage R  
+5\. Structures de données de R  
+6\. Structures de contrôle et fonctions d'application  
+7\. Fonctions internes et extensions  
+8\. Travail collaboratif  
+9\. Analyse et contrôle de texte  
+10\. Débogage
 A. RStudio: une introduction  
 B. GNU Emacs et ESS: la base  
+C. Démarrer avec Git  
 C. Réponses des exercices  
 Bibliographie  
 Index

@@ -38,7 +38,7 @@ if (x < 0)  print("il y a des nombres négatifs")
 
 ## Seconde erreur fréquente: tester que vrai est vrai. (Ce
 ## n'est pas une «erreur» au sens propre puisque la syntaxe
-## est valide, mais c'est un non-sens syntaxique, une forme de
+## est valide, mais c'est un non-sens sémantique, une forme de
 ## pléonasme comme «monter en haut» ou «deux jumeaux».)
 ##
 ## Voici un exemple de construction avec un test inutile. Le
@@ -339,7 +339,7 @@ fun <- function(x, y) mean(x[x > y])
 ## 'sapply'.
 sapply(x, fun, 7)          # moyennes des données > 7
 
-## Les fonctions 'lapply' et 'sapply' passent tout à tour les
+## Les fonctions 'lapply' et 'sapply' passent tour à tour les
 ## éléments de leur premier argument comme *premier* argument
 ## à la fonction, sans le nommer explicitement. L'expression
 ## ci-dessus est donc équivalente à

@@ -29,7 +29,7 @@ débogage. En fait, il n'est pas rare que le débogage et les tests de
 validité accaparent la plus grande part du temps de développement d'un
 projet.
 
-Les techniques de débogages les plus simples et naïves sont parfois
+Les techniques de débogage les plus simples et naïves sont parfois
 les plus efficaces et certainement les plus faciles à apprendre.
 Lorsqu'elles ne suffisent pas à la tâche, les outils de débogage de R
 peuvent accélérer la résolution des problèmes. Je présente dans les
@@ -312,8 +312,7 @@ rappelle la mise en garde de la
 vecteurs dans R, ce n'est pas parce qu'une expression --- ou une
 fonction --- s'exécute sans erreur apparente que le calcul effectué
 est bon pour autant. Il faut vérifier l'exactitude des calculs à
-l'aide de tests de contrôle. Le sujet ne sera pas étudié plus avant
-ici.
+l'aide de tests de contrôle. Le sujet ne sera pas étudié plus en détail ici.
 
 
 \tipbox{Lorsqu'une erreur survient, assurez-vous de bien lire les

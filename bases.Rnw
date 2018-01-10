@@ -424,7 +424,7 @@ nchar(v2)
 
 Les objets valeur manquante (\code{NA}), infini (\code{Inf},
 \code{-Inf}), valeur indéterminée (\code{NaN}) et néant (\code{NULL})
-permettent de représenter de manière intuitive des quantitées souvent
+permettent de représenter de manière intuitive des quantités souvent
 utilisées dans les applications statistiques et en analyse de données.
 Pour pleinement tirer profit de ces objets, il faut connaitre leurs
 caractéristiques spéciales.
@@ -457,7 +457,7 @@ représente $+\infty$, \code{-Inf} représente $-\infty$ et \icode{NaN}
 (\emph{Not a Number}) représente une forme indéterminée du type
 $\frac{0}{0}$ ou $\infty - \infty$. Les fonctions
 \Icode{is.infinite}, \Icode{is.finite} et \Icode{is.nan}
-fournissent des manières robuste de tester ces valeurs.
+fournissent des manières robustes de tester ces valeurs.
 <<echo=TRUE>>=
 is.infinite(1/0)
 is.finite(-1/0)
@@ -633,7 +633,7 @@ x[x > 0]
   Les éléments dont l'étiquette correspond à l'une des chaines sont
   extraits du vecteur. Ce mode d'indiçage par le nom a comme principal
   avantage de permettre l'extraction d'éléments d'un vecteur
-  indépendemment de leur position dans celui-ci.
+  indépendamment de leur position dans celui-ci.
 <<echo=TRUE>>=
 x[c("B", "D")]
 @
