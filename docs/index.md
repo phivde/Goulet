@@ -51,7 +51,7 @@ Vincent Goulet, professeur titulaire, [École d'actuariat](https://www.act.ulava
 7\. Fonctions internes et extensions  
 8\. Travail collaboratif  
 9\. Analyse et contrôle de texte  
-10\. Débogage
+10\. Débogage  
 A. RStudio: une introduction  
 B. GNU Emacs et ESS: la base  
 C. Démarrer avec Git  
