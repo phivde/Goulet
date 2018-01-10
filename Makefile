@@ -24,31 +24,11 @@
 MASTER = programmer-avec-r.pdf
 ARCHIVE = programmer-avec-r.zip
 README = README.md
-SCRIPTS = \
-	presentation.R \
-	bases.R \
-	implementation.R \
-	algorithmique.R \
-	donnees.R \
-	application.R \
-	internes.R \
-	collaboration.R \
-	debogage.R
 OTHER = LICENSE \
 	100metres.data
-ROUTFILES := $(SCRIPTS:.R=.Rout)
 
-## Numéro de version et numéro ISBN extraits du fichier maître
-YEAR = $(shell grep "newcommand{\\\\year" ${MASTER:.pdf=.tex} \
-	| cut -d } -f 2 | tr -d {)
-MONTH = $(shell grep "newcommand{\\\\month" ${MASTER:.pdf=.tex} \
-	| cut -d } -f 2 | tr -d {)
-VERSION = ${YEAR}.${MONTH}
-ISBN = $(shell grep "newcommand{\\\\ISBN" ${MASTER:.pdf=.tex} \
-	| cut -d } -f 2 | tr -d {)
-
-## Le document maître dépend de tous les fichiers .tex et des fichiers
-## .R mentionnés
+## Le document maître dépend de tous les fichiers .Rnw et des fichiers
+## .tex et .R mentionnés ci-dessous.
 RNWFILES = $(wildcard *.Rnw)
 TEXFILES = \
 	couverture-avant.tex \
@@ -62,6 +42,23 @@ TEXFILES = \
 	reponses.tex \
 	colophon.tex \
 	couverture-arriere.tex
+SCRIPTS = \
+	presentation.R \
+	bases.R \
+	implementation.R \
+	algorithmique.R \
+	donnees.R \
+	application.R \
+	internes.R \
+	collaboration.R \
+	debogage.R
+
+## Numéro de version extrait du fichier maître
+YEAR = $(shell grep "newcommand{\\\\year" ${MASTER:.pdf=.tex} \
+	| cut -d } -f 2 | tr -d {)
+MONTH = $(shell grep "newcommand{\\\\month" ${MASTER:.pdf=.tex} \
+	| cut -d } -f 2 | tr -d {)
+VERSION = ${YEAR}.${MONTH}
 
 ## Outils de travail
 SWEAVE = R CMD SWEAVE --encoding="utf-8"
@@ -85,6 +82,8 @@ pdf: $(MASTER)
 
 tex: $(RNWFILES:.Rnw=.tex)
 
+Rout: $(SCRIPTS:.R=.Rout)
+
 release: zip create-release upload publish
 
 %.tex: %.Rnw
@@ -98,14 +97,14 @@ release: zip create-release upload publish
 $(MASTER): $(MASTER:.pdf=.tex) $(RNWFILES:.Rnw=.tex) $(TEXFILES) $(SCRIPTS)
 	$(TEXI2DVI) $(MASTER:.pdf=.tex)
 
-zip: ${MASTER} ${README} ${SCRIPTS} ${ROUTFILES} ${OTHER}
+zip: ${MASTER} ${README} ${SCRIPTS} ${SCRIPTS:.R=.Rout} ${OTHER}
 	if [ -d ${TMPDIR} ]; then ${RM} ${TMPDIR}; fi
 	mkdir -p ${TMPDIR}
 	touch ${TMPDIR}/${README} && \
 	  awk 'state==0 && /^# / { state=1 }; \
 	       /^## Auteur/ { printf("## Édition\n\n%s\n\n", "${VERSION}") } \
 	       state' ${README} >> ${TMPDIR}/${README}
-	cp ${MASTER} ${SCRIPTS} ${ROUTFILES} ${OTHER} ${TMPDIR}
+	cp ${MASTER} ${SCRIPTS} ${SCRIPTS:.R=.Rout} ${OTHER} ${TMPDIR}
 	cd ${TMPDIR} && zip --filesync -r ../${ARCHIVE} *
 	${RM} ${TMPDIR}
 
