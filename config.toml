@@ -1,0 +1,15 @@
+title = "Vincent Goulet"
+baseURL = "https://vigou3.gitlab.io"
+languageCode = "fr-ca"
+theme = "ananke"
+
+MetaDataFormat = "yaml"
+DefaultContentLanguage = "fr"
+enableRobotsTXT = true
+
+[params]
+  favicon = ""
+  custom_css = ["/css/custom.css"]
+  gitlab = "https://gitlab.com/vigou3"
+  background_color_class = "bg-black"
+  featured_image = "/images/Xerus_inauris_1.jpg"
