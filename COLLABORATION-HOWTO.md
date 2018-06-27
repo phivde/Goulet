@@ -6,7 +6,7 @@
 
 > Ce guide est également disponible en [vidéo](https://youtu.be/ah4F4MF5JmM).
 
-La version de développement du projet [Programmer avec R](https://vigou3.github.io/programmer-avec-r) est hébergée dans un [dépôt Git public](https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-develop) de la Faculté des sciences et de génie de l'Université Laval.
+La version de développement du projet [Programmer avec R](https://vigou3.gitlab.io/programmer-avec-r) est hébergée dans un [dépôt Git public](https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-develop) de la Faculté des sciences et de génie de l'Université Laval.
 
 Le dépôt utilise l'interface [Atlassian BitBucket Server](https://www.atlassian.com/software/bitbucket/server).
 
