@@ -5,11 +5,16 @@
 ## 'make pdf' crée les fichiers .tex à partir des fichiers .Rnw avec
 ## Sweave et compile le document maître avec XeLaTeX.
 ##
+## 'make tex' crée les fichiers .tex à partir des fichiers .Rnw avec
+## Sweave.
+##
+## 'make contrib' crée le fichier COLLABORATEURS.
+##
 ## 'make zip' crée l'archive contenant le code source des sections
 ## d'exemples.
 ##
-## 'make release' crée une nouvelle version dans GitHub, téléverse les
-## fichiers PDF et .zip et modifie les liens de la page web.
+## 'make release' crée une nouvelle version dans GitLab, téléverse le
+## fichier .zip et modifie les liens de la page web.
 ##
 ## 'make all' est équivalent à 'make pdf' question d'éviter les
 ## publications accidentelles.
@@ -17,13 +22,14 @@
 ## Auteur: Vincent Goulet
 ##
 ## Ce fichier fait partie du projet "Programmer avec R"
-## http://github.com/vigou3/programmer-avec-r
+## http://gitlab.com/vigou3/programmer-avec-r
 
 
 ## Principaux fichiers
 MASTER = programmer-avec-r.pdf
 ARCHIVE = programmer-avec-r.zip
 README = README.md
+COLLABORATEURS = COLLABORATEURS
 OTHER = LICENSE \
 	100metres.data
 
@@ -53,12 +59,19 @@ SCRIPTS = \
 	collaboration.R \
 	debogage.R
 
-## Numéro de version extrait du fichier maître
+## Informations de publication extraites du fichier maître
+TITLE = $(shell grep "\\\\title" ${MASTER:.pdf=.tex} \
+	| cut -d { -f 2 | tr -d })
+REPOSURL = $(shell grep "newcommand{\\\\reposurl" ${MASTER:.pdf=.tex} \
+	| cut -d } -f 2 | tr -d {)
 YEAR = $(shell grep "newcommand{\\\\year" ${MASTER:.pdf=.tex} \
 	| cut -d } -f 2 | tr -d {)
 MONTH = $(shell grep "newcommand{\\\\month" ${MASTER:.pdf=.tex} \
 	| cut -d } -f 2 | tr -d {)
 VERSION = ${YEAR}.${MONTH}
+
+## Auteurs à exclure du fichier COLLABORATEURS (regex)
+OMITAUTHORS = Vincent Goulet|Inconnu|unknown
 
 ## Outils de travail
 SWEAVE = R CMD SWEAVE --encoding="utf-8"
@@ -67,16 +80,23 @@ RBATCH = R CMD BATCH --no-timing
 RM = rm -rf
 
 ## Dossier temporaire pour construire l'archive
-TMPDIR = tmpdir
+BUILDDIR = tmpdir
 
-## Dépôt GitHub et authentification
-REPOSURL = https://api.github.com/repos/vigou3/programmer-avec-r
-OAUTHTOKEN = $(shell cat ~/.github/token)
+## Dépôt GitLab et authentification
+REPOSNAME = $(shell basename ${REPOSURL})
+APIURL = https://gitlab.com/api/v4/projects/vigou3%2F${REPOSNAME}
+OAUTHTOKEN = $(shell cat ~/.gitlab/token)
+
+## Variables automatiques
+TAGNAME = v${VERSION}
+FILESIZE = $(shell du -h ${ARCHIVE} | cut -f1 | sed 's/\([KMG]\)/ \1o/')
 
 
 all: pdf
 
-.PHONY: tex pdf zip release create-release upload publish clean
+.PHONY: tex pdf zip release upload create-release publish clean
+
+FORCE: ;
 
 pdf: $(MASTER)
 
@@ -84,7 +104,7 @@ tex: $(RNWFILES:.Rnw=.tex)
 
 Rout: $(SCRIPTS:.R=.Rout)
 
-release: zip create-release upload publish
+release: zip upload create-release publish
 
 %.tex: %.Rnw
 	$(SWEAVE) '$<'
@@ -97,19 +117,37 @@ release: zip create-release upload publish
 $(MASTER): $(MASTER:.pdf=.tex) $(RNWFILES:.Rnw=.tex) $(TEXFILES) $(SCRIPTS)
 	$(TEXI2DVI) $(MASTER:.pdf=.tex)
 
+${COLLABORATEURS}: FORCE
+	git log --pretty="%an%n" | sort | uniq | \
+	  grep -v -E "${OMITAUTHORS}" | \
+	  awk 'BEGIN { print "Les personnes dont le nom [1] apparait ci-dessous ont contribué à\nl'\''amélioration de «${TITLE}»." } \
+	       { print $$0 } \
+	       END { print "\n[1] Noms tels qu'\''ils figurent dans le journal du dépôt Git\n    ${REPOSURL}" }' > ${COLLABORATEURS}
+
 zip: ${MASTER} ${README} ${SCRIPTS} ${SCRIPTS:.R=.Rout} ${OTHER}
-	if [ -d ${TMPDIR} ]; then ${RM} ${TMPDIR}; fi
-	mkdir -p ${TMPDIR}
-	touch ${TMPDIR}/${README} && \
+	if [ -d ${BUILDDIR} ]; then ${RM} ${BUILDDIR}; fi
+	mkdir -p ${BUILDDIR}
+	touch ${BUILDDIR}/${README} && \
 	  awk 'state==0 && /^# / { state=1 }; \
 	       /^## Auteur/ { printf("## Édition\n\n%s\n\n", "${VERSION}") } \
-	       state' ${README} >> ${TMPDIR}/${README}
-	cp ${MASTER} ${SCRIPTS} ${SCRIPTS:.R=.Rout} ${OTHER} ${TMPDIR}
-	cd ${TMPDIR} && zip --filesync -r ../${ARCHIVE} *
-	${RM} ${TMPDIR}
+	       state' ${README} >> ${BUILDDIR}/${README}
+	cp ${MASTER} ${SCRIPTS} ${SCRIPTS:.R=.Rout} ${OTHER} ${BUILDDIR}
+	cd ${BUILDDIR} && zip --filesync -r ../${ARCHIVE} *
+	${RM} ${BUILDDIR}
+
+upload :
+	@echo ----- Uploading archive to GitLab...
+	$(eval upload_url_markdown=$(shell curl --form "file=@${ARCHIVE}" \
+	                                        --header "PRIVATE-TOKEN: ${OAUTHTOKEN}"	\
+	                                        --silent \
+	                                        ${APIURL}/uploads \
+	                                   | awk -F '"' '{ print $$12 }'))
+	@echo Markdown ready url to file:
+	@echo "${upload_url_markdown}"
+	@echo ----- Done uploading files
 
 create-release :
-	@echo ----- Creating release on GitHub...
+	@echo ----- Creating release on GitLab...
 	@if [ -n "$(shell git status --porcelain | grep -v '^??')" ]; then \
 	     echo "uncommitted changes in repository; not creating release"; exit 2; fi
 	@if [ -n "$(shell git log origin/master..HEAD)" ]; then \
@@ -117,39 +155,34 @@ create-release :
 	     git push; fi
 	if [ -e relnotes.in ]; then rm relnotes.in; fi
 	touch relnotes.in
-	awk 'BEGIN { ORS = " "; print "{\"tag_name\": \"v${VERSION}\"," } \
+	awk 'BEGIN { ORS = " "; print "{\"tag_name\": \"${TAGNAME}\"," } \
 	      /^$$/ { next } \
 	      /^## Historique/ { state = 1; next } \
               (state == 1) && /^### / { \
 		state = 2; \
 		out = $$2; \
 	        for(i = 3; i <= NF; i++) { out = out" "$$i }; \
-	        printf "\"name\": \"Édition %s\", \"body\": \"", out; \
+	        printf "\"description\": \"# Édition %s\\n", out; \
 	        next } \
 	      (state == 2) && /^### / { exit } \
 	      state == 2 { printf "%s\\n", $$0 } \
-	      END { print "\", \"draft\": false, \"prerelease\": false}" }' \
-	      README.md >> relnotes.in
-	curl --data @relnotes.in ${REPOSURL}/releases?access_token=${OAUTHTOKEN}
+	      END { print "\\n## Télécharger la distribution\\n${upload_url_markdown} (${FILESIZE})\"}" }' \
+	     README.md >> relnotes.in
+	curl --request POST \
+	     --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+	     "${APIURL}/repository/tags?tag_name=${TAGNAME}&ref=master"
+	curl --data @relnotes.in \
+	     --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+	     --header "Content-Type: application/json" \
+	     ${APIURL}/repository/tags/${TAGNAME}/release
 	rm relnotes.in
 	@echo ----- Done creating the release
 
-upload :
-	@echo ----- Getting upload URL from GitHub...
-	$(eval upload_url=$(shell curl -s ${REPOSURL}/releases/latest \
-	 			  | awk -F '[ {]' '/^  \"upload_url\"/ \
-	                                    { print substr($$4, 2, length) }'))
-	@echo ${upload_url}
-	@echo ----- Uploading PDF and archive to GitHub...
-	curl -H 'Content-Type: application/zip' \
-	     -H 'Authorization: token ${OAUTHTOKEN}' \
-	     --upload-file ${ARCHIVE} \
-             -i "${upload_url}?&name=${ARCHIVE}" -s
-	@echo ----- Done uploading files
-
-publish :
+publish:
 	@echo ----- Publishing the web page...
-	${MAKE} -C docs
+	git checkout pages && \
+	  ${MAKE} && \
+	  git checkout master
 	@echo ----- Done publishing
 
 clean:
