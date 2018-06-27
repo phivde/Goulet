@@ -2,7 +2,7 @@
 
 # Programmer avec R
 
-*Programmer avec R* est un ouvrage d'initiation à la programmation informatique basé sur le langage R. Les fonctionnalités statistiques de R n'y sont pas abordées. On se concentre plutôt sur l'apprentissage du langage de programmation sous-jacent.
+[*Programmer avec R*](https://vigou3.gitlab.io/programmer-avec-r) est un ouvrage d'initiation à la programmation informatique basé sur le langage R. Les fonctionnalités statistiques de R n'y sont pas abordées. On se concentre plutôt sur l'apprentissage du langage de programmation sous-jacent.
 
 ## Auteur
 
