@@ -29,7 +29,7 @@ d'exploitation et des systèmes de gestion de fichiers; des outils de
 travail collaboratif, dont le système de gestion
 [Git](https://git-scm.com); des outils d'analyse et de contrôle de
 texte `grep`, `sed` et `awk`.
- 
+
 
 ## Auteur
 
