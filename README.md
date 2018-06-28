@@ -82,6 +82,10 @@ Question d'éviter les publications accidentelles, `make all` est équivalent à
 
 ## Historique des versions
 
+### 2018.06 (2018-06-27)
+
+Recompilation de la version 2017.12-1c avec les nouveaux liens vers le dépôt GitLab.
+
 ### 2017.12-1c (2017-12-17)
 
 - Fin de la section 8.4 retravaillée afin, notamment, d'insérer un lien vers la vidéo sur le [travail collaboratif](https://youtu.be/bdIjgjg6zoc).
