@@ -17,18 +17,18 @@ Prière de passer par ce dépôt pour proposer des modifications; consulter le f
 ## Composition du document
 
 La production du document repose sur la programmation lettrée avec LaTeX et
-[Sweave](https://stat.ethz.ch/R-manual/R-devel/library/utils/doc/Sweave.pdf). La composition du document, c'est-à-dire la transformation du code source vers le format PDF, requiert les outils suivants.
+[Sweave](https://stat.ethz.ch/R-manual/R-devel/library/utils/doc/Sweave.pdf). La composition du document, c'est-à-dire la transformation du code source vers le format PDF, requiert les outils ci-dessous.
 
 ### LaTeX
 
 LaTeX est l'un des systèmes de mise en page les plus utilisés dans le monde, particulièrement dans la production de documents scientifiques intégrant de multiples équations mathématiques, des graphiques, du code informatique, etc.
 
-La composition d'un document requiert d'abord une distribution du système LaTeX. Nous recommandons la distribution [TeX Live](https://tug.org/texlive) administrée par le [TeX Users Group](https://tug.org/). 
+La composition d'un document requiert d'abord une distribution du système LaTeX. Je recommande la distribution [TeX Live](https://tug.org/texlive) administrée par le [TeX Users Group](https://tug.org/). 
 
 - [Vidéo expliquant l'installation sur Windows](https://youtu.be/7MfodhaghUk)
 - [Vidéo expliquant l'installation sur macOS](https://youtu.be/kA53EQ3Q47w)
 
-Ensuite, des connaissances de base sur le fonctionnement de LaTeX sont nécessaires. Consulter [*Rédaction avec LaTeX*](https://vigou3.github.io/formation-latex-ul/), la formation LaTeX de l'Université Laval. 
+Ensuite, des connaissances de base sur le fonctionnement de LaTeX sont nécessaires. Consultez [*Rédaction avec LaTeX*](https://vigou3.github.io/formation-latex-ul/), la formation LaTeX de  l'Université Laval (c'est une suggestion biaisée, j'en suis l'auteur). 
 
 >  *Rédaction avec LaTeX* est distribué avec TeX Live. 
 
@@ -38,45 +38,41 @@ Le moteur XeLaTeX est utilisé pour composer le document.
 
 La compilation du document requiert les polices de caractères suivantes:
 
-- [Lucida Bright OT, Lucida Math OT et Lucida Mono DK](https://tug.org/store/lucida/). Ces polices de très grande qualité sont payantes. La Bibliothèque de l'Université Laval détient une licence d'utilisation de cette police. Les étudiants et le personnel de l'Université peuvent s'en procurer une copie gratuitement en écrivant à [mailto:lucida@bibl.ulaval.ca].
+- [Lucida Bright OT, Lucida Math OT et Lucida Mono DK](https://tug.org/store/lucida/). Ces polices de très grande qualité sont payantes. La Bibliothèque de l'Université Laval détient une licence d'utilisation de cette police. Les étudiants et le personnel de l'Université peuvent s'en procurer une copie gratuitement en écrivant à <lucida@bibl.ulaval.ca>.
 - [Myriad Pro](https://fontsup.com/fr/family/myriad+pro.html) en versions *Regular*, *Bold*, *Italic* et *Bold Italic*. Cette police est normalement livrée avec Acrobat Reader.
-- [Font Awesome](http://fontawesome.io/). Cette police fournit une multitude d'icônes et de symboles. Télécharger la plus récente version de la distribution et installer la police `fontawesome-webfont.ttf` du dossier `fonts`.
+- [Font Awesome](http://fontawesome.io/). Cette police fournit une multitude d'icônes et de symboles. Téléchargez la plus récente version de la distribution et installez la police `fontawesome-webfont.ttf` du dossier `fonts`.
 
-### Outils Unix additionnels
+### Outils Unix additionnels (Windows)
 
-La composition du document de référence est rendue plus facile par l'utilisation de l'outil Unix standard `make`. Celui-ci n'est livré ni avec Windows, ni avec macOS.
+La composition du document de référence est rendue plus facile par l'utilisation de l'outil Unix standard `make` qui n'est pas livré avec Windows. 
 
-#### Installation des outils sous Windows
-
-Il y a différentes manières d'installer des outils Unix sous Windows. Nous recommandons l'environnement de compilation [MSYS2](http://www.msys2.org/).
+Il y a différentes manières d'installer des outils Unix sous Windows. Je recommande l'environnement de compilation [MSYS2](http://www.msys2.org/). (Vous devez savoir si vous disposez d'[une version 32 ou 64 bits de Windows](https://support.microsoft.com/fr-ca/help/15056/windows-7-32-64-bit-faq) et choisir la distribution de MSYS2 en conséquence.)
 
 - [Télécharger MSYS2](http://www.msys2.org/) (Windows seulement)
 
-> Vous devez savoir si vous disposez d'[une version 32 ou 64 bits de Windows](https://support.microsoft.com/fr-ca/help/15056/windows-7-32-64-bit-faq) et choisir la distribution de MSYS2 en conséquence. 
-
-Une fois l'installation de MSYS2 complétée (bien lire les instructions sur la page du projet), démarrer l'invite de commande MSYS et entrer
+Une fois l'installation de MSYS2 complétée (bien lire les instructions sur la page du projet), démarrez l'invite de commande MSYS et entrez
 
     pacman -S make
 
-pour installer le paquetage additionnel.
+pour installer le paquetage contenant `make`.
 
-#### Installation des outils sous macOS
+### Outils Unix additionnels (macOS)
 
-Les outils Unix de compilation sont livrés avec XCode sous macOS. Pour pouvoir les utiliser depuis la ligne de commande, il faut installer les *Command Line Tools*. Entrer simplement à l'invite de commande du Terminal
+Les outils Unix de compilation ne sont pas livrés avec macOS, mais leur installation est très simple. Ils sont livrés avec XCode. Pour pouvoir les utiliser depuis la ligne de commande, il faut installer les *Command Line Tools*. Entrez simplement à l'invite de commande du Terminal
 
     xcode-select --install
 
-puis suivre les instructions.
+puis suivez les instructions.
 
 ### Lancement de la composition
 
-Nous avons automatisé le processus de compilation avec l'outil Unix standard `make`. Le fichier `Makefile` fournit les recettes principales suivantes:
+J'ai automatisé le processus de compilation avec l'outil Unix standard `make`. Le fichier `Makefile` fournit les recettes principales suivantes:
 
 - `pdf` crée les fichiers `.tex` à partir des fichiers `.Rnw` avec Sweave et compile le document maître avec XeLaTeX;
 
 - `zip` crée l'archive contenant le document et le code source des sections d'exemples;
 
-- `release` crée une nouvelle version (*tag*) dans GitLab, téléverse le fichier `.zip` et modifie les liens de la page web;
+- `release` crée une nouvelle version (*tag*) dans GitLab, téléverse le fichier `.zip` et modifie les liens de la page web.
 
 Question d'éviter les publications accidentelles, `make all` est équivalent à `make pdf`.
 
