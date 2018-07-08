@@ -11,5 +11,6 @@
 *.snm
 *.toc
 *.vrb
+*.Rout
 auto/
 auto/*
