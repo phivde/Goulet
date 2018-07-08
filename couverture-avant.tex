@@ -32,13 +32,13 @@
 \def\titlefmt{%
   \sffamily\bfseries\fontsize{52}{52}\selectfont\thetitle}
 \def\authorfmt{%
-  \sffamily\mdseries\fontsize{30}{38}\selectfont\theauthor}
+  \sffamily\mdseries\fontsize{28}{38}\selectfont\theauthor}
 \def\affiliation{%
-  \sffamily\mdseries\fontsize{22}{26}\selectfont
+  \sffamily\mdseries\fontsize{16}{20}\selectfont
   Professeur titulaire \\
   École d'actuariat, Université Laval}
 \def\edition{%
-  \sffamily\mdseries\fontsize{22}{26}\selectfont
+  \sffamily\mdseries\fontsize{16}{16}\selectfont
   Édition {\fullcaps\year}.\month}
 
 %% bandeau identitaire
@@ -63,23 +63,13 @@
 \end{textblock*}
 
 %% titre
-\begin{textblock*}{\paperwidth}(0.3\TPHorizModule,3.1\TPVertModule)
-  \pgfsetfillopacity{0.6}
-  \fbox{\textcolor{white}{\rule{2.27\TPHorizModule}{2.9\TPVertModule}}}
-  \pgfsetfillopacity{1}
-\end{textblock*}
 \begin{textblock*}{\paperwidth}(0.35\TPHorizModule,3.7\TPVertModule)
-  \titlefmt
+  \textcolor{black!10}{\titlefmt}
 \end{textblock*}
 
 %% auteur
-\begin{textblock*}{\paperwidth}(0.3\TPHorizModule,6.6\TPVertModule)
-  \pgfsetfillopacity{0.6}
-  \fbox{\textcolor{white}{\rule{0.97\TPHorizModule}{2.0\TPVertModule}}}
-  \pgfsetfillopacity{1}
-\end{textblock*}
 \begin{textblock*}{\paperwidth}(0.35\TPHorizModule,7.2\TPVertModule)
-  \authorfmt
+  \textcolor{black!10}{\authorfmt}
 \end{textblock*}
 
 \null\cleardoublepage
@@ -99,12 +89,12 @@
 \end{textblock*}
 
 %% affiliation
-\begin{textblock*}{2\TPHorizModule}(0.35\TPHorizModule,9.7\TPVertModule)
+\begin{textblock*}{2\TPHorizModule}(0.35\TPHorizModule,9.0\TPVertModule)
   \affiliation
 \end{textblock*}
 
 %% édition
-\begin{textblock*}{1.7\TPHorizModule}(0.35\TPHorizModule,30\TPVertModule)
+\begin{textblock*}{1.7\TPHorizModule}(0.35\TPHorizModule,31\TPVertModule)
   \edition
 \end{textblock*}
 \endgroup
