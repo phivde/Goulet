@@ -946,7 +946,7 @@ temps[match(unique(cummin(temps)), temps)]
 
 
 %%% Local Variables:
-%%% mode: latex
+%%% mode: noweb
 %%% TeX-engine: xetex
 %%% TeX-master: "programmer-avec-r"
 %%% coding: utf-8
