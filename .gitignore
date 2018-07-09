@@ -12,5 +12,10 @@
 *.toc
 *.vrb
 *.Rout
+solutions-*
+Rplots.pdf
+.RData
 auto/
 auto/*
+COLLABORATEURS
+100metres.data
