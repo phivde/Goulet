@@ -80,7 +80,7 @@ RBATCH = R CMD BATCH --no-timing
 RM = rm -rf
 
 ## Dossier temporaire pour construire l'archive
-BUILDDIR = tmpdir
+BUILDDIR = build
 
 ## Dépôt GitLab et authentification
 REPOSNAME = $(shell basename ${REPOSURL})
@@ -94,7 +94,7 @@ FILESIZE = $(shell du -h ${ARCHIVE} | cut -f1 | sed 's/\([KMG]\)/ \1o/')
 
 all: pdf
 
-.PHONY: tex pdf zip release upload create-release publish clean
+.PHONY: pdf tex Rout contrib zip release upload create-release publish clean
 
 FORCE: ;
 
@@ -103,6 +103,8 @@ pdf: $(MASTER)
 tex: $(RNWFILES:.Rnw=.tex)
 
 Rout: $(SCRIPTS:.R=.Rout)
+
+contrib: ${COLLABORATEURS}
 
 release: zip upload create-release publish
 
@@ -114,7 +116,7 @@ release: zip upload create-release publish
 	$(RBATCH) $<.tmp $@
 	$(RM) $<.tmp
 
-$(MASTER): $(MASTER:.pdf=.tex) $(RNWFILES:.Rnw=.tex) $(TEXFILES) $(SCRIPTS)
+$(MASTER): tex $(MASTER:.pdf=.tex) $(TEXFILES) $(SCRIPTS)
 	$(TEXI2DVI) $(MASTER:.pdf=.tex)
 
 ${COLLABORATEURS}: FORCE
@@ -124,7 +126,7 @@ ${COLLABORATEURS}: FORCE
 	       { print $$0 } \
 	       END { print "\n[1] Noms tels qu'\''ils figurent dans le journal du dépôt Git\n    ${REPOSURL}" }' > ${COLLABORATEURS}
 
-zip: ${MASTER} ${README} ${SCRIPTS} ${SCRIPTS:.R=.Rout} ${OTHER}
+zip: pdf Rout ${README} ${OTHER}
 	if [ -d ${BUILDDIR} ]; then ${RM} ${BUILDDIR}; fi
 	mkdir -p ${BUILDDIR}
 	touch ${BUILDDIR}/${README} && \
