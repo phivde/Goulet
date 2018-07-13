@@ -633,7 +633,7 @@ paquetage spécifié dans les bibliothèques de
 \def\scriptfilename{internes.R}
 
 \scriptfile{\scriptfilename}
-\lstinputlisting[firstline=13]{\scriptfilename}
+\lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
 
 
 \section{Exercices}

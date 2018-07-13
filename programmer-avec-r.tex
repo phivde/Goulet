@@ -161,8 +161,17 @@
     commentstyle=\color{comments}\slshape,
     keywordstyle=\mdseries,
     showstringspaces=false,
+    numbers=left,
+    numberstyle=\smaller[2]\ttfamily,
+    firstnumber=\scriptfirstline,
+    escapechar=`,
+    moredelim=[il]{\#-*-},
     index=[1][keywords],
     indexstyle=\indexcode}
+
+  %% L'entête des fichiers de script n'est pas affiché dans le
+  %% document.
+  \def\scriptfirstline{14}      % nombre magique!
 
   %%% =========================
   %%%  Nouveaux environnements

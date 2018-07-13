@@ -966,7 +966,7 @@ la fonction à un objet.
 \def\scriptfilename{bases.R}
 
 \scriptfile{\scriptfilename}
-\lstinputlisting[firstline=13]{\scriptfilename}
+\lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
 
 
 \section{Exercices}

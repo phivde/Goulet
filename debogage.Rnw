@@ -549,7 +549,7 @@ Browse[2]> c
 \def\scriptfilename{debogage.R}
 
 \scriptfile{\scriptfilename}
-\lstinputlisting[firstline=13]{\scriptfilename}
+\lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
 
 \section{Exercices}
 \label{sec:debogage:exercices}

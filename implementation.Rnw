@@ -404,7 +404,7 @@ connue au moment d'effectuer ce calcul. Joli, non?
 \def\scriptfilename{implementation.R}
 
 \scriptfile{\scriptfilename}
-\lstinputlisting[firstline=13]{\scriptfilename}
+\lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
 
 
 \section{Exercices}

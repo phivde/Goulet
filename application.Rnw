@@ -852,7 +852,7 @@ L'opérateur \Icode{\%o\%} est un raccourci de \code{outer(X, Y, "*")}.
 \def\scriptfilename{application.R}
 
 \scriptfile{\scriptfilename}
-\lstinputlisting[firstline=13]{\scriptfilename}
+\lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
 
 
 \section{Exercices}

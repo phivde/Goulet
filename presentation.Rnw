@@ -508,7 +508,7 @@ programmation en R plutôt que sur ses applications statistiques.
 \def\scriptfilename{presentation.R}
 
 \scriptfile{\scriptfilename}
-\lstinputlisting[firstline=13]{\scriptfilename}
+\lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
 
 
 \section{Exercices}
