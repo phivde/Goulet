@@ -30,8 +30,10 @@ MASTER = programmer-avec-r.pdf
 ARCHIVE = programmer-avec-r.zip
 README = README.md
 COLLABORATEURS = COLLABORATEURS
-OTHER = LICENSE \
-	100metres.data
+LICENSE = LICENSE
+
+## Autres fichiers à include dans l'archive
+OTHER = 100metres.data
 
 ## Le document maître dépend de tous les fichiers .Rnw et des fichiers
 ## .tex et .R mentionnés ci-dessous.
@@ -40,6 +42,7 @@ TEXFILES = \
 	couverture-avant.tex \
 	notices.tex \
 	introduction.tex \
+	informatique.tex \
 	collaboration.tex \
 	texte.tex \
 	rstudio.tex \
@@ -77,10 +80,11 @@ OMITAUTHORS = Vincent Goulet|Inconnu|unknown
 SWEAVE = R CMD SWEAVE --encoding="utf-8"
 TEXI2DVI = LATEX=xelatex TEXINDY=makeindex texi2dvi -b
 RBATCH = R CMD BATCH --no-timing
+CP = cp -p
 RM = rm -rf
 
 ## Dossier temporaire pour construire l'archive
-BUILDDIR = build
+BUILDDIR = tmpdir
 
 ## Dépôt GitLab et authentification
 REPOSNAME = $(shell basename ${REPOSURL})
@@ -98,6 +102,25 @@ all: pdf
 
 FORCE: ;
 
+%.tex: %.Rnw
+	$(SWEAVE) '$<'
+
+%.Rout: %.R
+	echo "options(error=expression(NULL))" | cat - $< > $<.tmp
+	$(RBATCH) $<.tmp $@
+	$(RM) $<.tmp
+
+$(MASTER): ${MASTER:.pdf=.tex} ${RNWFILES:.Rnw=.tex} $(TEXFILES) $(SCRIPTS) \
+	   $(wildcard data/*) $(wildcard images/*) $(wildcard data/*) 
+	$(TEXI2DVI) $(MASTER:.pdf=.tex)
+
+${COLLABORATEURS}: FORCE
+	git log --pretty="%an%n" | sort | uniq | \
+	  grep -v -E "${OMITAUTHORS}" | \
+	  awk 'BEGIN { print "Les personnes dont le nom [1] apparait ci-dessous ont contribué à\nl'\''amélioration de «${TITLE}»." } \
+	       { print $$0 } \
+	       END { print "\n[1] Noms tels qu'\''ils figurent dans le journal du dépôt Git\n    ${REPOSURL}" }' > ${COLLABORATEURS}
+
 pdf: $(MASTER)
 
 tex: $(RNWFILES:.Rnw=.tex)
@@ -108,32 +131,14 @@ contrib: ${COLLABORATEURS}
 
 release: zip upload create-release publish
 
-%.tex: %.Rnw
-	$(SWEAVE) '$<'
-
-%.Rout: %.R
-	echo "options(error=expression(NULL))" | cat - $< > $<.tmp
-	$(RBATCH) $<.tmp $@
-	$(RM) $<.tmp
-
-$(MASTER): tex $(MASTER:.pdf=.tex) $(TEXFILES) $(SCRIPTS)
-	$(TEXI2DVI) $(MASTER:.pdf=.tex)
-
-${COLLABORATEURS}: FORCE
-	git log --pretty="%an%n" | sort | uniq | \
-	  grep -v -E "${OMITAUTHORS}" | \
-	  awk 'BEGIN { print "Les personnes dont le nom [1] apparait ci-dessous ont contribué à\nl'\''amélioration de «${TITLE}»." } \
-	       { print $$0 } \
-	       END { print "\n[1] Noms tels qu'\''ils figurent dans le journal du dépôt Git\n    ${REPOSURL}" }' > ${COLLABORATEURS}
-
-zip: pdf Rout ${README} ${OTHER}
+zip: ${MASTER} ${README} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS}
 	if [ -d ${BUILDDIR} ]; then ${RM} ${BUILDDIR}; fi
 	mkdir -p ${BUILDDIR}
 	touch ${BUILDDIR}/${README} && \
 	  awk 'state==0 && /^# / { state=1 }; \
 	       /^## Auteur/ { printf("## Édition\n\n%s\n\n", "${VERSION}") } \
 	       state' ${README} >> ${BUILDDIR}/${README}
-	cp ${MASTER} ${SCRIPTS} ${SCRIPTS:.R=.Rout} ${OTHER} ${BUILDDIR}
+	${CP} ${MASTER} ${SCRIPTS} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS} ${OTHER} ${BUILDDIR}
 	cd ${BUILDDIR} && zip --filesync -r ../${ARCHIVE} *
 	${RM} ${BUILDDIR}
 
@@ -155,7 +160,7 @@ create-release :
 	@if [ -n "$(shell git log origin/master..HEAD)" ]; then \
 	    echo "unpushed commits in repository; pushing to origin"; \
 	     git push; fi
-	if [ -e relnotes.in ]; then rm relnotes.in; fi
+	if [ -e relnotes.in ]; then ${RM} relnotes.in; fi
 	touch relnotes.in
 	awk 'BEGIN { ORS = " "; print "{\"tag_name\": \"${TAGNAME}\"," } \
 	      /^$$/ { next } \
@@ -177,7 +182,7 @@ create-release :
 	     --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
 	     --header "Content-Type: application/json" \
 	     ${APIURL}/repository/tags/${TAGNAME}/release
-	rm relnotes.in
+	${RM} relnotes.in
 	@echo ----- Done creating the release
 
 publish:
@@ -188,8 +193,13 @@ publish:
 	@echo ----- Done publishing
 
 clean:
-	$(RM) $(RNWFILES:.Rnw=.tex) \
+	$(RM) ${MASTER} \
+	      ${ARCHIVE} \
+	      $(RNWFILES:.Rnw=.tex) \
+	      $(SCRIPTS:.R=.Rout) \
+	      ${OTHER} \
+	      solutions-* \
 	      *-[0-9][0-9][0-9].pdf \
-	      *.aux *.log  *.blg *.bbl *.out *.rel *~ Rplots.ps
+	      *.aux *.log  *.blg *.bbl *.out *.rel *~ Rplots* .RData
 
 
