@@ -197,6 +197,7 @@ clean:
 	      ${ARCHIVE} \
 	      $(RNWFILES:.Rnw=.tex) \
 	      $(SCRIPTS:.R=.Rout) \
+	      ${COLLABORATEURS} \
 	      ${OTHER} \
 	      solutions-* \
 	      *-[0-9][0-9][0-9].pdf \
