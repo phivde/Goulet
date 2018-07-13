@@ -870,9 +870,17 @@ x <- matrix(
     noms des variables (colonnes) dans l'entête du fichier. Ils
     forment le premier champ de mode caractère des lignes 8 à 21,
     inclusivement.
+<<echo=FALSE, results=hide>>=
+## copier (temporairement) le fichier de données du sous-dossier 'data' vers le  dossier de travail courant pour le bloc de code suivant
+file.copy("data/boston", ".")
+@
 <<echo=TRUE>>=
 (xnames <- scan("boston", skip = 7, nlines = 14,
                 what = "character", flush = TRUE))
+@
+<<echo=FALSE, results=hide>>=
+## supprimer le fichier de données
+file.remove("boston")
 @
     Nous pouvons ensuite ajouter les noms de colonne à notre matrice
     de données, puis convertir en \emph{data frame} pour un traitement

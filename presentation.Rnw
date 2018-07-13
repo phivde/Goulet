@@ -253,8 +253,8 @@ vous utiliserez cette seconde approche d'interaction avec R.
 
 \begin{figure}
   \centering
-  \lstinputlisting[frame=single,language={}]{script.R}
-  \lstinputlisting[frame=single,language={},firstline=2]{script.Rout}
+  \lstinputlisting[frame=single,language={}]{include/script.R}
+  \lstinputlisting[frame=single,language={},firstline=2]{include/script.Rout}
   \caption{Fichier de script (en haut) et ligne de commande R dans
     laquelle les expressions R ont été exécutées (en bas). Les lignes
     débutant par \code{\#} dans le fichier de script sont des
@@ -553,7 +553,7 @@ q()
 \end{exercice}
 
 %%% Local Variables:
-%%% mode: noweb
+%%% mode: latex
 %%% TeX-engine: xetex
 %%% TeX-master: "programmer-avec-r"
 %%% coding: utf-8
