@@ -10,8 +10,9 @@
 ##
 ## 'make contrib' crée le fichier COLLABORATEURS.
 ##
-## 'make zip' crée l'archive contenant le code source des sections
-## d'exemples.
+## 'make Rout' crée les fichiers .Rout avec R CMD BATCH.
+##
+## 'make zip' crée l'archive de la distribution.
 ##
 ## 'make release' crée une nouvelle version dans GitLab, téléverse le
 ## fichier .zip et modifie les liens de la page web.
@@ -106,7 +107,10 @@ FORCE: ;
 	$(SWEAVE) '$<'
 
 %.Rout: %.R
-	echo "options(error=expression(NULL))" | cat - $< > $<.tmp
+	echo "options(error=expression(NULL))" | cat - $< | \
+	  sed -e 's/`.*`//' \
+	      -e 's/ *#-\*-.*//' \
+	  > $<.tmp
 	$(RBATCH) $<.tmp $@
 	$(RM) $<.tmp
 
@@ -138,7 +142,12 @@ zip: ${MASTER} ${README} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS}
 	  awk 'state==0 && /^# / { state=1 }; \
 	       /^## Auteur/ { printf("## Édition\n\n%s\n\n", "${VERSION}") } \
 	       state' ${README} >> ${BUILDDIR}/${README}
-	${CP} ${MASTER} ${SCRIPTS} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS} ${OTHER} ${BUILDDIR}
+	for f in ${SCRIPTS}; \
+	    do sed -e 's/`.*`//' \
+	           -e 's/ *#-\*-.*//' \
+	           $$f > ${BUILDDIR}/$$f; \
+	done
+	${CP} ${MASTER} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS} ${OTHER} ${BUILDDIR}
 	cd ${BUILDDIR} && zip --filesync -r ../${ARCHIVE} *
 	${RM} ${BUILDDIR}
 
