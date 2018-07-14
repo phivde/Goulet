@@ -156,6 +156,9 @@ certains opérateurs dans les chapitres subséquents.
 \tipbox{Il est utile, voire essentiel, de connaître le niveau de
   priorité des opérateurs dans les expressions R.}
 
+\gotorbox{Étudier et exécuter les lignes
+  \reflines{bases:fondamentales} du code informatique de la
+  \autoref{sec:bases:exemples}.}
 
 \section{Commandes R}
 \label{sec:bases:commandes}

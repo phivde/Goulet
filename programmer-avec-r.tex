@@ -162,7 +162,7 @@
     keywordstyle=\mdseries,
     showstringspaces=false,
     numbers=left,
-    numberstyle=\smaller[2]\ttfamily,
+    numberstyle=\scriptsize\ttfamily,
     firstnumber=\scriptfirstline,
     escapechar=`,
     moredelim=[il]{\#-*-},
@@ -319,6 +319,13 @@
     \fi
   }
 
+  %% Commandes pour les références et liens vers des numéros de lignes
+  %% dans le code informatique.
+  \newcommand{\labelline}[1]{%
+    \label{lst:#1}\hyperlink{goto:#1}{\faExchange}}
+  \newcommand{\reflines}[1]{%
+    \hypertarget{goto:#1}{\ref{lst:#1}}--\hypertarget{goto:#1:fin}{\ref{lst:#1:fin}}}
+
   %% Indications de capsule vidéo
   \newcommand{\capsule}[2]{\href{#1}{#2}\marginpar{%
       \href{#1}{\raisebox{-0.5em}[0em][0em]{\Huge\faYoutubePlay}}}}
@@ -329,6 +336,11 @@
     \awesomebox{\faApple}{\aweboxrulewidth}{black}{#1}}
   \newcommand{\windowsbox}[1]{%
     \awesomebox{\faWindows}{\aweboxrulewidth}{black}{#1}}
+
+  %% Boite additionnelle (basée sur awesomebox.sty) pour changements
+  %% au fil de la lecture.
+  \newcommand{\gotorbox}[1]{%
+    \awesomebox{\faMapSigns}{\aweboxrulewidth}{black}{\sffamily #1}}
 
   %% Boite pour le nom du fichier de script correspondant au début des
   %% sections d'exemples.
@@ -396,7 +408,7 @@
     puis-que
   }
 
-%  \includeonly{}
+  \includeonly{bases}
 
 \begin{document}
 

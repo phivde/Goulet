@@ -12,7 +12,7 @@
 ## https://creativecommons.org/licenses/by-sa/4.0/
 
 ###
-### DONNÉES ET PROCÉDURES FONDAMENTALES                       `\label{lst:bases:fondamentales}`
+### DONNÉES ET PROCÉDURES FONDAMENTALES                       `\labelline{bases:fondamentales}`
 ###
 
 ## Nombres. Tous les nombres réels sont stockés en double
@@ -75,10 +75,10 @@ c(NULL, NULL)              # du néant ne résulte que le néant
 "foobar"                   # *une* chaine de 6 caractères
 length("foobar")           # longueur de 1
 c("foo", "bar")            # *deux* chaines de 3 caractères
-length(c("foo", "bar"))    # longueur de 2                    `\label{lst:bases:fondamentales:fin}`
+length(c("foo", "bar"))    # longueur de 2                    `\labelline{bases:fondamentales:fin}`
 
 ###
-### COMMANDES R                                               `\label{lst:bases:commandes}`
+### COMMANDES R                                               `\labelline{bases:commandes}`
 ###
 
 ## Les expressions entrées à la ligne de commande sont
@@ -128,10 +128,10 @@ x <- 5;                    # éviter les ';' superflus
     y <- 2                 # seconde expression du groupe
     x + y                  # dernière expression du groupe
 }                          # fin du groupe et résultat
-{x <- 5; y <- 2; x + y}    # valide, mais redondant           `\label{lst:bases:commandes:fin}`
+{x <- 5; y <- 2; x + y}    # valide, mais redondant           `\labelline{bases:commandes:fin}`
 
 ###
-### OBJETS R                                                  `\label{lst:bases:objets}`
+### OBJETS R                                                  `\labelline{bases:objets}`
 ###
 
 ## NOMS D'OBJETS
@@ -210,10 +210,10 @@ attr(cars, "class")        # extraction d'un seul attribut
 ## d'un vecteur.
 x <- 1:24                  # un vecteur
 names(x) <- letters[1:24]  # attribution d'étiquettes
-x                          # identification facilitée         `\label{lst:bases:objets:fin}`
+x                          # identification facilitée         `\labelline{bases:objets:fin}`
 
 ###
-### VECTEURS                                                  `\label{lst:bases:vecteurs}`
+### VECTEURS                                                  `\labelline{bases:vecteurs}`
 ###
 
 ## La fonction de base pour créer des vecteurs est 'c'. Il
@@ -337,10 +337,10 @@ c(5, 3) + c(TRUE, FALSE)   # équivalent à c(5, 3) + c(1, 0)
 ## traité comme FALSE et tous les autres nombres comme TRUE.
 0:5 & 5:0
 0:5 | 5:0
-!0:5                       #-*-                               `\label{lst:bases:vecteurs}`
+!0:5                       #-*-                               `\labelline{bases:vecteurs}`
 
 ###
-### FONCTIONS                                                 `\label{lst:bases:fonctions}`
+### FONCTIONS                                                 `\labelline{bases:fonctions}`
 ###
 
 ### PROGRAMMATION FONCTIONNELLE
@@ -512,4 +512,4 @@ matrix(1:12, 3, 4)
 matrix(1:12, ncol = 4, nrow = 3)
 matrix(nrow = 3, ncol = 4, data = 1:12)
 matrix(nrow = 3, ncol = 4, byrow = FALSE, 1:12)
-matrix(nrow = 3, ncol = 4, 1:12, FALSE) #-*-                  `\label{lst:bases:fonctions:fin}`
+matrix(nrow = 3, ncol = 4, 1:12, FALSE) #-*-                  `\labelline{bases:fonctions:fin}`
