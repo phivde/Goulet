@@ -31,9 +31,10 @@ MASTER = programmer-avec-r.pdf
 ARCHIVE = ${MASTER:.pdf=.zip}
 README = README.md
 COLLABORATEURS = COLLABORATEURS
-LICENSE = LICENSE COLLABORATION-HOWTO.md
+LICENSE = LICENSE
 
-## Autres fichiers à include dans l'archive
+## Autres fichiers à inclure dans l'archive
+HOWTO = COLLABORATION-HOWTO.md
 OTHER = 100metres.data
 
 ## Le document maître dépend de tous les fichiers .Rnw et des fichiers
@@ -135,7 +136,7 @@ contrib: ${COLLABORATEURS}
 
 release: zip upload create-release publish
 
-zip: ${MASTER} ${README} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS}
+zip: ${MASTER} ${README} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS} ${HOWTO}
 	if [ -d ${BUILDDIR} ]; then ${RM} ${BUILDDIR}; fi
 	mkdir -p ${BUILDDIR}
 	touch ${BUILDDIR}/${README} && \
@@ -147,7 +148,8 @@ zip: ${MASTER} ${README} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS}
 	           -e 's/ *#-\*-.*//' \
 	           $$f > ${BUILDDIR}/$$f; \
 	done
-	${CP} ${MASTER} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS} ${OTHER} ${BUILDDIR}
+	${CP} ${MASTER} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS} \
+	      ${HOWTO} ${OTHER} ${BUILDDIR}
 	cd ${BUILDDIR} && zip --filesync -r ../${ARCHIVE} *
 	${RM} ${BUILDDIR}
 
@@ -202,7 +204,7 @@ publish:
 	@echo ----- Done publishing
 
 clean:
-	$(RM) ${MASTER} \
+	${RM} ${MASTER} \
 	      ${ARCHIVE} \
 	      $(RNWFILES:.Rnw=.tex) \
 	      $(SCRIPTS:.R=.Rout) \
