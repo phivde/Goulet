@@ -28,7 +28,7 @@
 
 ## Principaux fichiers
 MASTER = programmer-avec-r.pdf
-ARCHIVE = programmer-avec-r.zip
+ARCHIVE = ${MASTER:.pdf=.zip}
 README = README.md
 COLLABORATEURS = COLLABORATEURS
 LICENSE = LICENSE
@@ -115,7 +115,7 @@ FORCE: ;
 	$(RM) $<.tmp
 
 $(MASTER): ${MASTER:.pdf=.tex} ${RNWFILES:.Rnw=.tex} $(TEXFILES) $(SCRIPTS) \
-	   $(wildcard data/*) $(wildcard images/*) $(wildcard data/*) 
+	   $(wildcard data/*) $(wildcard images/*)
 	$(TEXI2DVI) $(MASTER:.pdf=.tex)
 
 ${COLLABORATEURS}: FORCE
