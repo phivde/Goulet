@@ -31,7 +31,7 @@ MASTER = programmer-avec-r.pdf
 ARCHIVE = ${MASTER:.pdf=.zip}
 README = README.md
 COLLABORATEURS = COLLABORATEURS
-LICENSE = LICENSE
+LICENSE = LICENSE COLLABORATION-HOWTO.md
 
 ## Autres fichiers à include dans l'archive
 OTHER = 100metres.data
