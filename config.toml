@@ -1,4 +1,4 @@
-title = "Vincent Goulet"
+title = "vigou3"
 baseURL = "https://vigou3.gitlab.io/programmer-avec-r"
 languageCode = "fr-ca"
 theme = "ananke"
@@ -8,7 +8,7 @@ DefaultContentLanguage = "fr"
 enableRobotsTXT = true
 
 [params]
-  favicon = ""
+  gitlab_home = "https://vigou3.gitlab.io/"
   custom_css = ["/css/custom.css"]
   gitlab = "https://gitlab.com/vigou3"
   background_color_class = "bg-black"
