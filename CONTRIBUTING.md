@@ -2,7 +2,7 @@
 
 # Collaborer au projet *Programmer avec R*
 
-> Seuls les étudiants de l'Université Laval inscrits au cours IFT-1902 à l'automne 2017 disposent des droits en écriture requis pour effectuer la procédure décrite ci-dessous.
+> Seuls les étudiants de l'Université Laval inscrits au cours IFT-1902 disposent des droits en écriture requis pour effectuer la procédure décrite ci-dessous.
 
 > Ce guide est également disponible en [vidéo](https://youtu.be/ah4F4MF5JmM).
 
