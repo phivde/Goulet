@@ -30,11 +30,12 @@
 MASTER = programmer-avec-r.pdf
 ARCHIVE = ${MASTER:.pdf=.zip}
 README = README.md
+NEWS = NEWS
 COLLABORATEURS = COLLABORATEURS
 LICENSE = LICENSE
 
 ## Autres fichiers à inclure dans l'archive
-HOWTO = COLLABORATION-HOWTO.md
+CONTRIBUTING = CONTRIBUTING.md
 OTHER = 100metres.data
 
 ## Le document maître dépend de tous les fichiers .Rnw et des fichiers
@@ -135,11 +136,11 @@ contrib: ${COLLABORATEURS}
 
 release: zip upload create-release publish
 
-zip: ${MASTER} ${README} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS} ${HOWTO}
+zip: ${MASTER} ${README} ${NEWS} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS} ${CONTRIBUTING}
 	if [ -d ${BUILDDIR} ]; then ${RM} ${BUILDDIR}; fi
 	mkdir -p ${BUILDDIR}
 	touch ${BUILDDIR}/${README} && \
-	  awk 'state==0 && /^# / { state=1 }; \
+	  awk '(state == 0) && /^# / { state = 1 }; \
 	       /^## Auteur/ { printf("## Édition\n\n%s\n\n", "${VERSION}") } \
 	       state' ${README} >> ${BUILDDIR}/${README}
 	for f in ${SCRIPTS}; \
@@ -147,8 +148,9 @@ zip: ${MASTER} ${README} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS} ${HOWT
 	           -e 's/ *#-\*-.*//' \
 	           $$f > ${BUILDDIR}/$$f; \
 	done
-	${CP} ${MASTER} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS} \
-	      ${HOWTO} ${OTHER} ${BUILDDIR}
+	${CP} ${MASTER} ${SCRIPTS:.R=.Rout} ${NEWS} ${LICENSE} \
+	      ${COLLABORATEURS} ${CONTRIBUTING} ${OTHER} \
+	      ${BUILDDIR}
 	cd ${BUILDDIR} && zip --filesync -r ../${ARCHIVE} *
 	${RM} ${BUILDDIR}
 
@@ -175,17 +177,16 @@ create-release :
 	$(eval FILESIZE = $(shell du -h ${ARCHIVE} | cut -f1 | sed 's/\([KMG]\)/ \1o/'))
 	awk 'BEGIN { ORS = " "; print "{\"tag_name\": \"${TAGNAME}\"," } \
 	      /^$$/ { next } \
-	      /^## Historique/ { state = 1; next } \
-              (state == 1) && /^### / { \
-		state = 2; \
+	      (state == 0) && /^# / { \
+		state = 1; \
 		out = $$2; \
 	        for(i = 3; i <= NF; i++) { out = out" "$$i }; \
 	        printf "\"description\": \"# Édition %s\\n", out; \
 	        next } \
-	      (state == 2) && /^### / { exit } \
-	      state == 2 { printf "%s\\n", $$0 } \
+	      (state == 1) && /^# / { exit } \
+	      state == 1 { printf "%s\\n", $$0 } \
 	      END { print "\\n## Télécharger la distribution\\n${upload_url_markdown} (${FILESIZE})\"}" }' \
-	     README.md >> relnotes.in
+	     ${NEWS} >> relnotes.in
 	curl --request POST \
 	     --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
 	     "${APIURL}/repository/tags?tag_name=${TAGNAME}&ref=master"
