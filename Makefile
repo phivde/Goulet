@@ -93,9 +93,8 @@ REPOSNAME = $(shell basename ${REPOSURL})
 APIURL = https://gitlab.com/api/v4/projects/vigou3%2F${REPOSNAME}
 OAUTHTOKEN = $(shell cat ~/.gitlab/token)
 
-## Variables automatiques
+## Variable automatique
 TAGNAME = v${VERSION}
-FILESIZE = $(shell du -h ${ARCHIVE} | cut -f1 | sed 's/\([KMG]\)/ \1o/')
 
 
 all: pdf
@@ -173,6 +172,7 @@ create-release :
 	     git push; fi
 	if [ -e relnotes.in ]; then ${RM} relnotes.in; fi
 	touch relnotes.in
+	$(eval FILESIZE = $(shell du -h ${ARCHIVE} | cut -f1 | sed 's/\([KMG]\)/ \1o/'))
 	awk 'BEGIN { ORS = " "; print "{\"tag_name\": \"${TAGNAME}\"," } \
 	      /^$$/ { next } \
 	      /^## Historique/ { state = 1; next } \
