@@ -152,6 +152,7 @@ zip: ${MASTER} ${README} ${NEWS} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS
 	      ${COLLABORATEURS} ${CONTRIBUTING} ${OTHER} \
 	      ${BUILDDIR}
 	cd ${BUILDDIR} && zip --filesync -r ../${ARCHIVE} *
+	if [ -e ${COLLABORATEURS} ]; then ${RM} ${COLLABORATEURS}; fi
 	${RM} ${BUILDDIR}
 
 upload :
