@@ -217,15 +217,18 @@ Fin Puissance
 \end{Schunk}
 
 Pour élever un nombre à la puissance $21$, le premier algorithme
-requiert $20$ opérations et le second, seulement $6$. Le dénombrement du
-nombre d'opérations requis par un algorithme est un aspect important
-de leur analyse. Il se fait généralement en notation $O()$ qui
-signifie «de l'ordre de». Dans le premier algorithme de calcul de
+requiert $20$ opérations et le second, seulement $6$. Le dénombrement
+du nombre d'opérations requis par un algorithme est un aspect
+important de leur analyse. Il se fait généralement en notation $O()$
+qui signifie «de l'ordre de». Dans le premier algorithme de calcul de
 $b^n$, le nombre d'opérations est directement proportionnel à $n$,
 donc on dit que l'algorithme est $O(n)$. Dans le second algorithme où
 la puissance est divisée par deux à répétition, le nombre d'opérations
 est proportionnel au logarithme (en base deux) de $n$, d'où un
-algorithme $O(\log n)$.
+algorithme $O(\log n)$. Pour en savoir plus,
+\citet[chapitre~1]{Stephens:algorithms:2013} propose une introduction
+à la fois très claire et concise au dénombrement du nombre
+d'opérations d'un algorithme.
 
 \citet{Kernighan:practice:1999} font remarquer fort à propos que «si
 tous les programmes reposent sur des algorithmes, très peu de
