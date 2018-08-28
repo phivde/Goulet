@@ -29,25 +29,247 @@
   commande.
 \end{objectifs}
 
+Vous savez programmer.
 
-- Programmer c'est avant tout résoudre des problèmes. Plutôt que de le
-faire avec des mathématiques, on demande à une machine de le faire
-pour nous.
-- Les humains ont inventé toutes sortes de langages. Certains
-parviennent à mieux exprimer certaines réalités que d'autres. Idem
-pour les langages de programmation, qui servent à donner des
-instructions à une machine qui ne comprend que deux instructions: vrai
-et faux, ouvert ou fermé, 0 ou 1.
-- Introduire la notion d'algorithme; parallèle avec les recettes
-culinaires.
+En effet, avec l'omniprésence des outils numériques dans notre vie
+quotidienne, nous automatisons tous certaines tâches:
+%%
+demander une alarme pour le lendemain matin;
+enregistrer une émission de télé qui sera diffusée dans trois jours;
+planifier des virements entre comptes chez notre institution
+  financière;
+signaler du contenu ou interpeller quelqu'un sur les médias sociaux
+  à l'aide des symboles \code{\#} et \code{@};
+entrer un code de triche dans un jeu vidéo;
+calculer la moyenne d'une colonne dans un tableur;
+guider un robot vers la sortie d'un labyrinthe.
+%%
+Vous pouvez sans doute ajouter vos propres exemples à cette liste.
 
+Dans chacun des exemples précités, l'utilisateur dicte à une machine
+des tâches à effectuer en utilisant un langage qu'elle est à même de
+comprendre. Que le langage soit excessivement simple ou qu'une
+interface vous guide pas à pas dans la programmation n'y change
+fondamentalement rien: vous programmez.
+
+Cet ouvrage vise simplement à vous faire atteindre un niveau de
+sophistication bien plus grand qui fera réellement de vous des
+programmeuses et des programmeurs informatiques.
+
+<description du chapitre>
+
+\section{Qu'est-ce que programmer?}
+\label{sec:informatique:programmer?}
+
+Programmer est une activité scientifique consistant d'abord et avant
+tout à \emph{résoudre des problèmes}. Plutôt que d'avoir recours aux
+mathématiques ou à l'expérimentation, les programmeurs demandent à une
+machine de résoudre le problème pour eux. Comme le souligne
+\citet{Swinnen:python:2012} --- dont la lecture du chapitre~1 est
+chaudement recommandée --- programmer est «une compétence de haut
+niveau, qui implique des capacités et des connaissances diverses: être
+capable de (re)formuler un problème de plusieurs manières différentes,
+être capable d’imaginer des solutions innovantes et efficaces, être
+capable d’exprimer ces solutions de manière claire et complète.»
+
+La première difficulté réside toutefois dans le fait de «demander» à
+une machine de résoudre un problème: il faut établir un mode de
+communication pour que l'humain puisse dicter des instructions à une
+machine qui, en définitive, ne comprend que deux instructions: vrai et
+faux, ouvert ou fermé, 0 ou 1. C'est là le rôle du \emph{langage de
+  programmation}.
+
+Tout au long de leur histoire, les humains ont inventé une multitude
+de langages pour échanger entre eux: langues parlées, écritures,
+langues des signes, peinture, musique, etc. Certains langages
+parviennent à mieux exprimer certaines réalités ou certains sentiments
+que d'autres. Or, il en va de même des langages de programmation: non
+seulement sont-ils nombreux, mais certains conviennent mieux à
+certains types de tâches que d'autres. Vous serez à même d'apprécier
+la diversité des langages de programmation à la lecture de la
+\autoref{sec:informatique:historique} qui retrace les grands jalons de
+leur histoire.
+
+\subsection{Algorithme}
+\label{sec:informatique:programmer:algorithme}
+
+Vous avez probablement déjà trié une liste de mots à l'aide d'un
+ordinateur. Pourtant, l'ordinateur n'a aucune connaissance du concept
+d'ordre alphabétique. Et même s'il «connaissait» cet ordre, comment au
+juste réalise-t-il l'opération de tri? Ce genre de questions relève de
+l'une des pierres d'assise de l'informatique:
+l'\index{algorithmique}algorithmique, la science qui étudie les
+algorithmes et les structures de données.
+
+Un \index{algorithme}\emph{algorithme} est une procédure de calcul
+permettant de résoudre un problème bien spécifié. En cela,
+l'algorithme explique comment, à partir d'entrants, obtenir l'extrant
+solution du problème. Quand on y pense, ce n'est pas très différent
+d'une recette culinaire où les entrants sont les ingrédients, la
+procédure les étapes de la recette et les extrants, le mets.
+
+L'algorithmique est une discipline riche en techniques ingénieuses et
+en analyses mathématiques poussées. Connaitre ses principes de base et
+les algorithmes classiques permet de mieux planifier ses méthodes de
+résolution de problème. En effet, un bon algorithme permet de résoudre
+en quelques secondes un problème qui pourrait autrement prendre des
+années.
+
+À titre d'exemple, supposons que vous devez calculer, pour un jeu de
+données quelconque, l'écart moyen des données supérieures à $12$ par
+rapport à cette valeur. Un premier algorithme de très haut niveau
+permettant de résoudre ce problème irait comme suit.
+
+\begin{Schunk}
+  \begin{enumerate}
+  \item Sélectionner les données supérieures à $12$.
+  \item Soustraire $12$ de chaque valeur retenue à la première étape.
+  \item Effectuer la moyenne des valeurs obtenues à la seconde étape.
+  \end{enumerate}
+\end{Schunk}
+
+Apportons une toute petite modification à l'algorithme ci-dessus.
+
+\begin{Schunk}
+  \begin{enumerate}
+  \item Sélectionner les données supérieures à $12$.
+  \item Effectuer la moyenne des valeurs obtenues à la première étape.
+  \item Soustraire $12$ de la valeur retenue à la seconde étape.
+  \end{enumerate}
+\end{Schunk}
+
+Mathématiquement, les deux approches sont tout à fait équivalentes.
+Cependant, avec la première approche, nous effectuons une soustraction
+pour chaque valeur supérieure à $12$ que compte jeu de données. Avec
+la seconde approche, nous n'effectuons qu'une seule soustraction. Si
+le jeu de données compte un million d'entrées supérieures à $12$,
+c'est un million de soustractions contre une seule. En temps de
+calcul, cela ne représente qu'un écart de quelques centièmes de
+secondes sur un ordinateur moderne, mais ces fractions de secondes
+peuvent finir par faire une différence importante lorsque la taille
+des jeux de données augmente ou lorsque l'opération se répète de
+nombreuses fois.
+
+Attardons-nous à un second exemple intéressant: l'élévation d'une
+valeur $b$ à la puissance $n$. Un premier algorithme, écrit cette fois
+en \index{pseudo-langage}\emph{pseudo-langage}, pourrait se lire
+ainsi.
+
+\begin{Schunk}
+\begin{Verbatim}
+Puissance(nombre réel b, entier n)
+  Si n = 0, retourner 1.
+    Retourner b * Puissance(b, n - 1).
+Fin Puissance
+\end{Verbatim}
+\end{Schunk}
+
+Cet algorithme est \index{algorithme|récursif}\emph{récursif}: la
+procédure \code{Puissance} s'appelle elle-même à répétition jusqu'à
+l'obtention du résultat désiré. Mathématiquement, l'algorithme revient
+à calculer $b^n$ de la manière la plus simple et intuitive qui soit:
+\begin{equation*}
+  b^n = b (b (b \cdots (b))).
+\end{equation*}
+Cela peut convenir lorsque $n$ est petit, mais peut-on faire mieux
+pour une «grande» valeur de $n$? Imaginez que vous ne disposez que
+d'une calculatrice munie des opérations arithmétiques de base et du
+carré, et que vous devez élever un nombre à la puissance, disons,
+$21$. Comment feriez-vous pour réduire le nombre d'opérations à entrer
+au clavier?
+
+\notebox{Cet exemple est moins fantaisiste qu'il n'y parait. Jusqu'au
+  milieu des années 1990, les étudiants en actuariat ne disposaient
+  que de ce type de calculatrice pour les examens professionnels! Le
+  modèle en question de Texas Instruments était affectueusement nommé
+  «TI 0».}
+
+Vous avez pensé à un «algorithme»? Votre idée consiste fort
+probablement à diviser la puissance par deux autant de fois que
+possible et à élever au carré par la suite. Dans notre exemple, cela
+donne
+\begin{align*}
+  b^{21}
+  &= b (b^{20}) \\
+  & = b (b^{10})^2 \\
+  &= b ((b^5)^2)^2 \\
+  & = b ((b (b^4))^2)^2 \\
+  &= b ((b (b^2)^2)^2)^2.
+\end{align*}
+Ce calcul se traduit en algorithme comme suit.
+
+\begin{Schunk}
+\begin{Verbatim}
+Puissance(nombre réel b, entier n)
+  Si n = 0, retourner 1.
+    Si n est pair, retourner (Puissance(b, n/2))^2.
+    Si n est impair, retourner b * Puissance(b, n - 1).
+Fin Puissance
+\end{Verbatim}
+\end{Schunk}
+
+Pour élever un nombre à la puissance $21$, le premier algorithme
+requiert $20$ opérations et le second, seulement $6$. Le dénombrement du
+nombre d'opérations requis par un algorithme est un aspect important
+de leur analyse. Il se fait généralement en notation $O()$ qui
+signifie «de l'ordre de». Dans le premier algorithme de calcul de
+$b^n$, le nombre d'opérations est directement proportionnel à $n$,
+donc on dit que l'algorithme est $O(n)$. Dans le second algorithme où
+la puissance est divisée par deux à répétition, le nombre d'opérations
+est proportionnel au logarithme (en base deux) de $n$, d'où un
+algorithme $O(log n)$.
+
+\citet{Kernighan:practice:1999} font remarquer fort à propos que «si
+tous les programmes reposent sur des algorithmes, très peu de
+programmes exigent d'en concevoir de nouveaux». Autrement dit, aussi
+complexe soit-il, un programme repose souvent sur quelques algorithmes
+fondamentaux bien connus et bien établis. À ce titre, les algorithmes
+de tri et de recherche jouent un rôle particulièrement important: on
+estime que 25~\% du temps de calcul des ordinateurs est consacré au
+tri et à la recherche! Ce n'est pour rien que Donald Knuth consacre un
+volume entier de son œuvre monumentale \emph{The Art of Computer
+  Programming} à ce seul sujet \citep{Knuth:ACP:vol1:1997}.
+
+
+\subsection{Sémantique et syntaxe}
+\label{sec:informatique:programmer:semantique}
+
+Il y a plusieurs parallèles à dresser entre les langages de
+programmation et les langues parlées ou écrites: leur apprentissage
+requiert de la pratique; on en connait jamais un trop grand nombre; le
+premier est plus difficile à apprendre que les suivants.
+L'informatique a également emprunté à la linguistique les notions de
+\index{sémantique}sémantique et de \index{syntaxe}syntaxe.
+
+La sémantique est l'étude de ce que signifie un message ou un
+programme informatique, c'est-à-dire de ce qu'il transmet ou exécute.
+La syntaxe, quant à elle, étudie la structure du message ou du
+programme. En simplifiant, disons que, pour une langue donnée, un
+dictionnaire permet de connaitre la sémantique, alors qu'une grammaire
+décrit la syntaxe \citep{Hebenstreit:semantique}.
+
+Par exemple, exprimons le message «J'ai soif» en anglais. Dire
+«\emph{I am hungry}» relèverait d'une erreur de sémantique, puisque la
+signification du message s'en trouve changée. En revanche, avec
+«\emph{I have thirsty}», le bon message se rendra, mais peut-être pas
+sans que l'erreur de syntaxe n'ait d'abord suscité une hésitation chez
+l'interlocuteur\footnote{%
+  La formule correcte est «I am thirsty», soit littéralement «Je suis
+  soif», en français.}.
+
+Comme pour une langue, la maitrise d'un langage de programmation exige
+de respecter à la fois les règles de sémantique et les règles de
+syntaxe du langage. Le second volet est relativement facile: si le
+programme compile ou s'exécute, c'est généralement que la syntaxe est
+respectée. Le respect de la sémantique, ou de la manière propre d'un
+langage d'exprimer des idées, demande plus d'efforts et de pratique.
 
 
 \section{Bref historique des langages de programmation}
 \label{sec:informatique:historique}
 
 Ada Lovelace (1815--1852) est généralement reconnue comme la première
-auteure d'un algorithme et de ce que l'on appelle aujourd'hui un
+autrice d'un algorithme et de ce que l'on appelle aujourd'hui un
 programme informatique. C'est en son honneur qu'a été nommé le langage
 Ada conçu en réponse à un cahier de charges du département de la
 Défense des États-Unis au début des années 1980.
@@ -447,37 +669,6 @@ La plupart des langages d'usage courant combinent d'office, ou du
 moins permettent de combiner, plusieurs paradigmes. Par exemple, le
 langage {\Cpp} est à la fois un langage impératif et orienté objet.
 
-
-\section{Sémantique et syntaxe}
-\label{sec:informatique:semantique}
-
-Il y a plusieurs parallèles à dresser entre les langages de
-programmation et les langues parlées ou écrites: leur apprentissage
-requiert de la pratique; on en connait jamais un trop grand nombre; le
-premier est plus difficile à apprendre que les suivants.
-L'informatique a également emprunté à la linguistique les notions de
-\index{sémantique}sémantique et de \index{syntaxe}syntaxe.
-
-La sémantique est l'étude de ce que signifie un message ou un
-programme informatique, c'est-à-dire de ce qu'il transmet ou exécute.
-La syntaxe, quant à elle, étudie la structure du message ou du
-programme. En simplifiant, disons que, pour une langue donnée, un
-dictionnaire permet de connaitre la sémantique, alors qu'une grammaire
-décrit la syntaxe \citep{Hebenstreit:semantique}.
-
-Par exemple, exprimons le message «J'ai soif» en anglais. Dire
-«\emph{I am hungry}» relèverait d'une erreur de sémantique, puisque la
-signification du message s'en trouve changée. En revanche, avec
-«\emph{I have thirsty}» le bon message se rendra, mais peut-être pas
-sans que l'erreur de syntaxe n'ait d'abord suscité une hésitation chez
-l'interlocuteur.
-
-Comme pour une langue, la maitrise d'un langage de programmation exige
-de respecter à la fois les règles de sémantique et les règles de
-syntaxe du langage. Le second volet est relativement facile: si le
-programme compile ou s'exécute, c'est généralement que la syntaxe est
-respectée. Le respect de la sémantique, ou de la manière propre d'un
-langage d'exprimer des idées, demande plus d'efforts et de pratique.
 
 
 \section{Systèmes d'exploitation}
