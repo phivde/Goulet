@@ -265,6 +265,93 @@ respectée. Le respect de la sémantique, ou de la manière propre d'un
 langage d'exprimer des idées, demande plus d'efforts et de pratique.
 
 
+\subsection{Langages compilés et interprétés}
+\label{sec:informatique:programmer:compile_vs_interprete}
+
+Tous les langages de programmation\footnote{%
+  À l'exception du langage machine, mais rares sont les personnes qui
+  souhaitent ne programmer qu'avec des $0$ et des $1$.} %
+requièrent un traitement afin que les programmes écrits avec ceux-ci
+puissent être exploités par un ordinateur. Il existe deux grandes
+façons d'effectuer ce traitement: par compilation et par
+interprétation.
+
+Un \index{compilateur}compilateur est un programme informatique qui
+transforme en langage machine le code source rédigé dans un langage
+donné. On dit alors de ce langage qu'il est \index{compilé
+  (langage)}\emph{compilé}. Le compilateur produit un fichier
+informatique que l'ordinateur peut ensuite exécuter directement. Sur
+la plateforme Windows, on reconnait notamment ces fichiers par leurs
+extensions \code{.exe} ou \code{.dll}. Les noyaux d'à peu près toutes
+les applications sur nos ordinateurs sont des fichiers compilés.
+
+Un \index{interpréteur}interpréteur, quant à lui, est un programme qui
+analyse, traduit et exécute le code source d'un programme
+informatique, et ce, à chaque fois que le programme doit être exécuté.
+Un langage qui nécessite l'intermédiaire d'un interpréteur est dit
+\emph{interprété}. Un programme écrit dans un \index{interprété
+  (langage)}langage interprété ne peut être distribué sans son
+interpréteur.
+
+Le traitement additionnel entre le code source et le langage machine
+fait généralement en sorte que les langages interprétés sont plus
+lents que les langages compilés à l'exécution. En revanche, une foule
+de détails de mise en œuvre sont pris en charge par l'interpréteur, ce
+qui réduit le temps de développement.
+
+
+\subsection{Paradigmes de programmation}
+\label{sec:informatique:programmer:paradigmes}
+
+Un programme informatique est toujours écrit pour résoudre un problème
+donné. Or, comme pour tout problème dans la vie, la solution à
+celui-ci peut être formulée de différentes manières. Le style
+fondamental avec lequel on exprime la solution est appelé le
+paradigme de programmation.
+
+Il existe plusieurs paradigmes de programmation. Nous nous
+contenterons ici de se pencher sur seulement quatre.
+
+\begin{description}
+\item[Impératif] \index{paradigme!impératif} On indique à l'ordinateur
+  les opérations à exécuter et l'ordre dans lequel les exécuter. C'est
+  le paradigme le plus intuitif.
+\item[Déclaratif] \index{paradigme!déclaratif} On indique cette fois à
+  l'ordinateur ce que l'on souhaite obtenir comme résultat, mais sans
+  préciser comment y parvenir. Il est laissé à la mise en œuvre du
+  langage de déterminer la meilleure méthode de résolution du
+  problème.
+
+  Par exemple, pour extraire d'une base de données \code{etudiants} le
+  prénom de toutes les personnes de plus de 25~ans, on écrira dans un
+  langage déclaratif comme le SQL:
+\begin{Schunk}
+\begin{Verbatim}
+SELECT prenom FROM etudiants WHERE age > 25
+\end{Verbatim}
+\end{Schunk}
+  Nulle part n'est-il précisé comment le programme devrait procéder à
+  l'extraction.
+\item[Fonctionnel] \index{paradigme!fonctionnel} Un programme est une
+  suite d'appels de fonctions, comme en mathématiques. L'exécution
+  d'une fonction n'a pas d'impact sur les autres fonctions\footnote{%
+    Autrement on dit qu'une fonction a un effet de bord (\emph{side
+      effect}.} %
+  Les opérations complexes sont réalisées en combinant les fonctions,
+  de manière analogue à la composition de fonctions $g \circ f$.
+\item[Orienté objet] \index{paradigme!orienté objet} Un programme est
+  conçu comme un ensemble de blocs logiciels (les objets) qui
+  interagissent entre eux. Une \emph{méthode} applique un traitement
+  différent à un objet selon sa \emph{classe}. Ce paradigme est
+  particulièrement utilisé dans les grands et complexes projets
+  informatiques.
+\end{description}
+
+La plupart des langages d'usage courant combinent d'office, ou du
+moins permettent de combiner, plusieurs paradigmes. Par exemple, le
+langage {\Cpp} est à la fois un langage impératif et orienté objet.
+
+
 \section{Bref historique des langages de programmation}
 \label{sec:informatique:historique}
 
@@ -280,7 +367,13 @@ les années 1940. On programme alors généralement ceux-ci en
 \index{assembleur}assembleur, un langage de très bas niveau facilement
 interprétable par la machine, mais difficile à lire par des humains,
 comme l'extrait de programme de la
-\autoref{fig:informatique:assembleur} le démontre bien.
+\autoref{fig:informatique:assembleur} le démontre bien. À l'époque, le
+coût d'utilisation d'un ordinateur est bien plus grand que celui d'une
+personne. Il est donc économiquement justifié de demander à l'humain
+d'«assembler» le programme à la main pour que la machine puisse
+l'exécuter plus directement. Il faudra attendre les années
+\textbf{XXXX} pour qu'il devienne financièrement avantageux de confier
+de telles tâches cléricales à l'ordinateur lui-même <\textbf{citation}>.
 
 \begin{figure}
   \centering
@@ -339,43 +432,19 @@ aujourd'hui une famille de langages comprenant de nombreux dialectes,
 dont Common Lisp, Scheme et Emacs Lisp.
 
 Le Lisp se distingue en outre par une syntaxe simple en
-\index{notation!préfixée}notation préfixée (voir encadré), le support
-pour la programmation fonctionnelle
-(\autoref{sec:informatique:paradigmes}) et la faculté de manipuler le
-code source en tant que structure de données. Autre trait distinctif:
-la syntaxe du Lisp fait un usage immodéré des parenthèses.
-
-Le Lisp est entouré d'une aura de beauté et d'élégance dont peu
-d'autres langages peuvent se targuer. Citons Eric Raymond dans
-\link{http://www.catb.org/esr/faqs/hacker-howto.html}{\emph{How to
-    Become a Hacker}}:
-\begin{quote}
-  Il faut apprendre le Lisp pour l'extraordinaire expérience d'éveil
-  [\emph{enlightenment experience}] que procure le fait de finalement
-  le comprendre; cette expérience fera de vous un meilleur programmeur
-  pour toujours, même si vous n'avez plus vraiment à utiliser le Lisp.
-\end{quote}
-
-Pour illustrer encore davantage la place toute particulière qu'occupe
-le Lisp en programmation, mentionnons également l'aphorisme selon
-lequel «ceux qui ne connaissent pas le Lisp sont condamnés à le
-réinventer», d'une certaine façon la version courte de la célèbre
-\link{https://en.wikipedia.org/wiki/Greenspun\%27s_tenth_rule}{\emph{Greenspun's
-    tenth rule of programming}}: %
-\begin{quote}
-  Tout programme suffisamment complexe en C ou en Fortran comporte une
-  mise en œuvre mal spécifiée, pleine de bogues et lente de la moitié
-  de Common Lisp.
-\end{quote}
-(Fait amusant à noter: il n'y a pas d'autres lois que la dixième, de
-l'\link{http://philip.greenspun.com/bboard/q-and-a-fetch-msg?msg_id=000tgU}{aveu
-  même de l'auteur}.)
+\index{notation!préfixée}notation préfixée (voir l'encadré à la
+\autopageref{fig:informatique:notations}), le support pour la
+programmation fonctionnelle
+(\autoref{sec:informatique:programmer:paradigmes}) et la faculté de
+manipuler le code source en tant que structure de données. Autre trait
+distinctif: la syntaxe du Lisp fait un usage immodéré des parenthèses.
 
 \begin{figure}[t]
   \label{fig:informatique:notations}
   \setlength{\FrameRule}{1pt}
   \lstset{backgroundcolor=\color{codebg},
     frame=lr, rulecolor=\color{codebg},
+    numbers=none,
     xleftmargin=3.4pt, xrightmargin=3.4pt}
   \begin{emphbox}{\mdseries Notations infixée, préfixée et suffixée}
     Les notations \index{notation!infixée}infixée (\emph{infix}),
@@ -409,6 +478,32 @@ x y +
     \emph{Reverse Polish Notation}) depuis 1972.
   \end{emphbox}
 \end{figure}
+
+Le Lisp est entouré d'une aura de beauté et d'élégance dont peu
+d'autres langages peuvent se targuer. Citons Eric Raymond dans
+\link{http://www.catb.org/esr/faqs/hacker-howto.html}{\emph{How to
+    Become a Hacker}}:
+\begin{quote}
+  Il faut apprendre le Lisp pour l'extraordinaire expérience d'éveil
+  [\emph{enlightenment experience}] que procure le fait de finalement
+  le comprendre; cette expérience fera de vous un meilleur programmeur
+  pour toujours, même si vous n'avez plus vraiment à utiliser le Lisp.
+\end{quote}
+
+Pour illustrer encore davantage la place toute particulière qu'occupe
+le Lisp en programmation, mentionnons également l'aphorisme selon
+lequel «ceux qui ne connaissent pas le Lisp sont condamnés à le
+réinventer», d'une certaine façon la version courte de la célèbre
+\link{https://en.wikipedia.org/wiki/Greenspun\%27s_tenth_rule}{\emph{Greenspun's
+    tenth rule of programming}}: %
+\begin{quote}
+  Tout programme suffisamment complexe en C ou en Fortran comporte une
+  mise en œuvre mal spécifiée, pleine de bogues et lente de la moitié
+  de Common Lisp.
+\end{quote}
+(Fait amusant à noter: il n'y a pas d'autres lois que la dixième, de
+l'\link{http://philip.greenspun.com/bboard/q-and-a-fetch-msg?msg_id=000tgU}{aveu
+  même de l'auteur}.)
 
 \subsection{COBOL}
 \label{sec:informatique:historique:cobol}
@@ -478,10 +573,11 @@ code. Assez pour que d'aucuns qualifient l'APL de «langage à écriture
 seulement».
 
 APL a pendant longtemps été un langage très prisé par les actuaires,
-aussi subsiste-t-il du code dans certaines compagnies d'assurance. Le
-modèle de traitement des vecteurs, matrices et tableaux de l'APL a
-servi d'inspiration pour la conception du langage S --- nous y
-reviendrons au \autoref{chap:presentation}.
+ce qui fait qu'il subsiste des applications dans ce langage dans
+certaines compagnies d'assurance. Le modèle de traitement des
+vecteurs, matrices et tableaux de l'APL a servi d'inspiration pour la
+conception du langage S --- nous y reviendrons au
+\autoref{chap:presentation}.
 
 Le langage continue sa vie aujourd'hui principalement sous forme de son
 successeur, \index{J}J.
@@ -492,10 +588,12 @@ successeur, \index{J}J.
   \caption[Opérations simples en APL.]{Opérations simples en APL. De
     haut en bas: génération des nombres de $1$ à $5$ et stockage dans
     la variable \code{x}; affichage du contenu de \code{x}; somme des
-    éléments de \code{x}; moyenne des éléments de \code{x}. {\small Source:
-    François-Dominique,
-    \link{https://commons.wikimedia.org/w/index.php?curid=43207460}{Wikimedia
-      Commons}, CC BY-SA 4.0}}
+    éléments de \code{x}; moyenne des éléments de \code{x}. {\small
+      Image: {\textcopyright} François-Dominique,
+      \href{https://creativecommons.org/licenses/by-sa/4.0/deed.fr}{CC
+        BY-SA 4.0}, via
+      \href{https://commons.wikimedia.org/w/index.php?curid=43207460}{Wikimedia
+        Commons}}}
   \label{fig:informatique:apl}
 \end{figure}
 
@@ -553,11 +651,12 @@ prépondérante dans l'histoire.
   quelle plateforme informatique sans nécessiter une nouvelle
   compilation. Il est donc très populaire dans les applications web ou
   embarquées. Sa syntaxe est fortement inspirée du \Cpp.
-\item \index{Visual Basic}\textbf{Visual Basic} (Microsoft, 1991) permet de développer des
-  applications de manière interactive en disposant des composantes sur
-  un canevas. Le langage est aujourd'hui discontinué, mais son dérivé
-  \textbf{Visual Basic for Applications} (\index{VBA}VBA) demeure beaucoup
-  utilisé dans les applications de la suite bureautique Office.
+\item \index{Visual Basic}\textbf{Visual Basic} (Microsoft, 1991)
+  permet de développer des applications de manière interactive en
+  disposant des composantes sur un canevas. Le langage est aujourd'hui
+  discontinué, mais son dérivé \textbf{Visual Basic for Applications}
+  (\index{VBA}VBA) demeure beaucoup utilisé dans les applications de
+  la suite bureautique Office.
 \item \index{Python}\textbf{Python} (Guido van Rossum, 1991) est un
   langage de haut niveau, orienté objet, multiplateforme et sous
   licence libre. C'est un des langages les plus utilisés aujourd'hui
@@ -583,96 +682,19 @@ introduction à la notion de programmation ainsi qu'une brève, mais
 instructive, histoire du langage C.
 
 
-\section{Langages compilés et interprétés}
-\label{sec:informatique:compile_vs_interprete}
-
-Tous les langages de programmation\footnote{%
-  À l'exception du langage machine, mais rares sont les personnes qui
-  souhaitent ne programmer qu'avec des $0$ et des $1$.} %
-requièrent un traitement afin que les programmes écrits avec ceux-ci
-puissent être exploités par un ordinateur. Il existe deux grandes
-façons d'effectuer ce traitement: par compilation et par
-interprétation.
-
-Un \index{compilateur}compilateur est un programme informatique qui
-transforme en langage machine le code source rédigé dans un langage
-donné. On dit alors de ce langage qu'il est \index{compilé
-  (langage)}\emph{compilé}. Le compilateur produit un fichier
-informatique que l'ordinateur peut ensuite exécuter directement. Sur
-la plateforme Windows, on reconnait notamment ces fichiers par leurs
-extensions \code{.exe} ou \code{.dll}. Les noyaux d'à peu près toutes
-les applications sur nos ordinateurs sont des fichiers compilés.
-
-Un \index{interpréteur}interpréteur, quant à lui, est un programme qui
-analyse, traduit et exécute le code source d'un programme
-informatique, et ce, à chaque fois que le programme doit être exécuté.
-Un langage qui nécessite l'intermédiaire d'un interpréteur est dit
-\emph{interprété}. Un programme écrit dans un \index{interprété
-  (langage)}langage interprété ne peut être distribué sans son
-interpréteur.
-
-Le traitement additionnel entre le code source et le langage machine
-fait généralement en sorte que les langages interprétés sont plus
-lents que les langages compilés à l'exécution. En revanche, une foule
-de détails de mise en œuvre sont pris en charge par l'interpréteur, ce
-qui réduit le temps de développement.
-
-
-\section{Paradigmes de programmation}
-\label{sec:informatique:paradigmes}
-
-Un programme informatique est toujours écrit pour résoudre un problème
-donné. Or, comme pour tout problème dans la vie, la solution à
-celui-ci peut être formulée de différentes manières. Le style
-fondamental avec lequel on exprime la solution est appelé le
-paradigme de programmation.
-
-Il existe plusieurs paradigmes de programmation. Nous nous
-contenterons ici de se pencher sur seulement quatre.
-
-\begin{description}
-\item[Impératif] \index{paradigme!impératif} On indique à l'ordinateur
-  les opérations à exécuter et l'ordre dans lequel les exécuter. C'est
-  le paradigme le plus intuitif.
-\item[Déclaratif] \index{paradigme!déclaratif} On indique cette fois à
-  l'ordinateur ce que l'on souhaite obtenir comme résultat, mais sans
-  préciser comment y parvenir. Il est laissé à la mise en œuvre du
-  langage de déterminer la meilleure méthode de résolution du
-  problème.
-
-  Par exemple, pour extraire d'une base de données \code{etudiants} le
-  prénom de toutes les personnes de plus de 25~ans, on écrira dans un
-  langage déclaratif comme le SQL:
-\begin{Schunk}
-\begin{Verbatim}
-SELECT prenom FROM etudiants WHERE age > 25
-\end{Verbatim}
-\end{Schunk}
-  Nulle part n'est-il précisé comment le programme devrait procéder à
-  l'extraction.
-\item[Fonctionnel] \index{paradigme!fonctionnel} Un programme est une
-  suite d'appels de fonctions, comme en mathématiques. L'exécution
-  d'une fonction n'a pas d'impact sur les autres fonctions\footnote{%
-    Autrement on dit qu'une fonction a un effet de bord (\emph{side
-      effect}.} %
-  Les opérations complexes sont réalisées en combinant les fonctions,
-  de manière analogue à la composition de fonctions $g \circ f$.
-\item[Orienté objet] \index{paradigme!orienté objet} Un programme est
-  conçu comme un ensemble de blocs logiciels (les objets) qui
-  interagissent entre eux. Une \emph{méthode} applique un traitement
-  différent à un objet selon sa \emph{classe}. Ce paradigme est
-  particulièrement utilisé dans les grands et complexes projets
-  informatiques.
-\end{description}
-
-La plupart des langages d'usage courant combinent d'office, ou du
-moins permettent de combiner, plusieurs paradigmes. Par exemple, le
-langage {\Cpp} est à la fois un langage impératif et orienté objet.
-
-
-
 \section{Systèmes d'exploitation}
 \label{sec:informatique:os}
+
+À titre de (futurs) programmeurs, vous devrez tirer profit au maximum
+des ressources de votre ordinateur. Ceci exige d'en connaitre le
+fonctionnement mieux que l'utilisateur lambda. Or, vos principaux
+outils numériques sont aujourd'hui les téléphones et tablettes aux
+interfaces hautement simplifiées. Connaissez-vous le rôle du
+système d'exploitation d'un ordinateur? En connaissez-vous les
+diverses variantes et leurs caractéristiques principales?
+Comprenez-vous bien le système de classification des fichiers de votre
+ordinateur? Vous devrez pouvoir répondre «oui» à ces questions. Cette
+section et la suivante sont là pour vous y aider.
 
 Le \index{système d'exploitation}système d'exploitation
 (\emph{operating system}, OS) est un ensemble de programmes qui gère
@@ -714,9 +736,9 @@ système pour les entreprises.
 
 Le plus grand avantage de Windows est son ubiquité. À peu près toutes
 les applications, sauf peut-être celles s'adressant à un segment de
-marché très précis, sont disponibles sous Windows, en code natif, via
-un port depuis Unix, ou encore par l'intermédiaire d'une couche
-logicielle d'émulation comme Cygwin ou \index{MinGW}MinGW.
+marché très précis, sont disponibles sous Windows, que ce soit en code
+natif, via un port depuis Unix, ou encore par l'intermédiaire d'une
+couche logicielle d'émulation comme Cygwin ou \index{MinGW}MinGW.
 
 Un système d'exploitation multiutilisateur prend pour acquis que
 plusieurs utilisateurs se partageront les ressources de l'ordinateur,
@@ -773,14 +795,14 @@ virgule autour du mot.\footnote{%
     -f 4 | tr -d \bs(«»,}\,. Le caractère \code{|} est l'opérateur de
   transfert de données.}
 
-À l'exception notable des Mac, \index{Unix}Unix demeure assez peu répandu sur les
-ordinateurs personnels. En revanche le système d'exploitation, en
-particulier sa variante libre Linux, équipe l'immense majorité des
-stations de travail, serveurs et supercalculateurs. De plus, bon
-nombre d'applications scientifiques et de langages de programmation
-sont d'abord développés sur des systèmes Unix. Pour ces
-raisons, j'estime utile pour des programmeurs de connaitre les
-quelques «Unix-ismes» ci-dessous.
+À l'exception notable des Mac, \index{Unix}Unix demeure assez peu
+répandu sur les ordinateurs personnels. En revanche le système
+d'exploitation, en particulier sa variante libre Linux, équipe
+l'immense majorité des stations de travail, des serveurs et des
+supercalculateurs. De plus, bon nombre d'applications scientifiques et
+de langages de programmation sont d'abord développés sur des systèmes
+Unix. Pour ces raisons, j'estime utile pour des programmeurs de
+connaitre les quelques «Unix-ismes» ci-dessous.
 
 \begin{itemize}
 \item La barre oblique (\code{/}) est utilisée pour séparer les
@@ -817,10 +839,11 @@ fichiers. Seulement, les programmeurs doivent être familiers avec
 quelques grands principes de l'organisation des données dans un
 ordinateur.
 
-Les fichiers sont regroupés dans des répertoires. Ceux-ci contiennent
-eux-mêmes des fichiers ou des sous-répertoires. Ce schéma se répète
-sans limite pratique. Il en résulte une classification sous forme
-d'arbre dont la \emph{racine} est le répertoire contenant
+Les fichiers sont regroupés dans des
+\index{répertoire}\emph{répertoires} (ou dossiers). Ceux-ci
+contiennent eux-mêmes des fichiers ou des sous-répertoires. Ce schéma
+se répète sans limite pratique. Il en résulte une classification sous
+forme d'arbre dont la \emph{racine} est le répertoire contenant
 l'intégralité des fichiers. La \autoref{fig:informatique:fs} présente
 des extraits des arbres de fichiers usuels de Windows et de macOS.
 
@@ -864,10 +887,32 @@ des extraits des arbres de fichiers usuels de Windows et de macOS.
     }
   \end{minipage}
   \caption[Extraits de la hiérarchie des systèmes de fichiers]{%
-    Extraits des arbres de fichiers de Windows~7 (à gauche) et de
+    Extraits des arbres de fichiers de Windows (à gauche) et de
     macOS (à droite)}
   \label{fig:informatique:fs}
 \end{figure}
+
+Les interfaces graphiques des systèmes d'exploitation contiennent
+toutes une application pour naviger à l'intérieur du système de
+fichiers. Sous Windows, il s'agit de l'\index{Explorateur
+  Windows}Explorateur Windows. Sous macOS, l'outil de navigation est
+le \index{Finder}Finder. La \autoref{fig:informatique:explorer+finder}
+présente des fenêtres types de ces deux applications.
+
+\begin{figure}
+  \begin{minipage}{0.48\linewidth}
+    \includegraphics[width=\linewidth]{explorer}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.48\linewidth}
+    \includegraphics[width=\linewidth]{finder}
+  \end{minipage}
+  \caption[Interfaces graphiques de navigation dans le système de
+  fichiers]{Interfaces graphiques de navigation dans le système de
+    fichiers: Explorateur Windows (à gauche) et Finder (à droite)}
+  \label{fig:informatique:explorer+finder}
+\end{figure}
+
 
 \subsection{Particularités du système de fichiers de Windows}
 \label{sec:informatique:fs:windows}
@@ -891,9 +936,10 @@ chemins d'accès (voir ci-dessous), la barre oblique inversée
 \subsection{Particularités du système de fichiers de Unix}
 \label{sec:informatique:fs:unix}
 
-La racine du système de fichiers est toujours \code{/} sous
-\index{Unix}Unix. Les disques, physiques ou réseau, sont accessibles
-par divers \emph{points de montage} dans le système de fichiers.
+La racine du système de fichiers est toujours identifiée pas le
+symbole \code{/} sous \index{Unix}Unix. Les disques, physiques ou
+réseau, sont accessibles par divers \emph{points de montage} dans le
+système de fichiers.
 
 Pour illustrer, supposons qu'un ordinateur dispose de deux disques
 durs; le premier est réservé au système d'exploitation et aux
@@ -904,8 +950,8 @@ sera monté sur le répertoire \code{/} et le second, sur le répertoire
 requêtes vers le bon disque. L'utilisateur n'a jamais à se préoccuper
 de l'organisation physique des disques.
 
-\osxbox{Sous macOS, les clés USB, disques durs externes ou disques réseau sont
-  montés dans le répertoire \code{/Volumes}. Le répertoire
+\osxbox{Sous macOS, les clés USB, disques durs externes ou disques
+  réseau sont montés dans le répertoire \code{/Volumes}. Le répertoire
   n'existe pas lorsqu'aucun disque externe n'est connecté.}
 
 Le système de fichiers sous Unix est généralement sensible à la casse.
@@ -943,10 +989,10 @@ C:\Users\Alexandre\Documents\synthese-1.doc
   courant. On a recours au nom fictif «\verb=..=» pour identifier le
   répertoire parent (un niveau supérieur dans l'arbre des fichiers).
 
-  Par exemple, si le répertoire courant de Marianne est
-  \code{Documents/Cours} dans le système de fichier Unix de la
-  \autoref{fig:informatique:fs}, alors le chemin d'accès relatif vers
-  le fichier \code{freestyle.txt} est:
+  Par exemple, à partir du répertoire \code{Documents/Cours} de
+  Marianne dans le système de fichier Unix de la
+  \autoref{fig:informatique:fs}, le chemin d'accès relatif vers le
+  fichier \code{freestyle.txt} est:
 \begin{Schunk}
 \begin{Verbatim}
 ../../Desktop/freestyle.txt
