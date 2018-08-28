@@ -90,8 +90,16 @@ la diversité des langages de programmation à la lecture de la
 \autoref{sec:informatique:historique} qui retrace les grands jalons de
 leur histoire.
 
+\section{Concepts fondamentaux}
+\label{sec:informatique:concepts}
+
+Cette section introduit quelques concepts avec lesquels il s'avère
+utile d'être familier avant de se lancer dans l'étude de la
+programmation. Nous aurons l'occasion de revenir sur ceux-ci plus loin
+dans l'ouvrage.
+
 \subsection{Algorithme}
-\label{sec:informatique:programmer:algorithme}
+\label{sec:informatique:concepts:algorithme}
 
 Vous avez probablement déjà trié une liste de mots à l'aide d'un
 ordinateur. Pourtant, l'ordinateur n'a aucune connaissance du concept
@@ -164,7 +172,7 @@ Fin Puissance
 \end{Verbatim}
 \end{Schunk}
 
-Cet algorithme est \index{algorithme|récursif}\emph{récursif}: la
+Cet algorithme est \index{algorithme!récursif}\emph{récursif}: la
 procédure \code{Puissance} s'appelle elle-même à répétition jusqu'à
 l'obtention du résultat désiré. Mathématiquement, l'algorithme revient
 à calculer $b^n$ de la manière la plus simple et intuitive qui soit:
@@ -178,11 +186,11 @@ carré, et que vous devez élever un nombre à la puissance, disons,
 $21$. Comment feriez-vous pour réduire le nombre d'opérations à entrer
 au clavier?
 
-\notebox{Cet exemple est moins fantaisiste qu'il n'y parait. Jusqu'au
+\notebox{Cet exemple est moins fantaisiste qu'il n'y parait! Jusqu'au
   milieu des années 1990, les étudiants en actuariat ne disposaient
-  que de ce type de calculatrice pour les examens professionnels! Le
-  modèle en question de Texas Instruments était affectueusement nommé
-  «TI 0».}
+  que de ce type de calculatrice pour les examens professionnels. Il
+  s'agissait d'un modèle de Texas Instruments qui était
+  affectueusement surnommé «TI-0».}
 
 Vous avez pensé à un «algorithme»? Votre idée consiste fort
 probablement à diviser la puissance par deux autant de fois que
@@ -217,7 +225,7 @@ $b^n$, le nombre d'opérations est directement proportionnel à $n$,
 donc on dit que l'algorithme est $O(n)$. Dans le second algorithme où
 la puissance est divisée par deux à répétition, le nombre d'opérations
 est proportionnel au logarithme (en base deux) de $n$, d'où un
-algorithme $O(log n)$.
+algorithme $O(\log n)$.
 
 \citet{Kernighan:practice:1999} font remarquer fort à propos que «si
 tous les programmes reposent sur des algorithmes, très peu de
@@ -225,14 +233,14 @@ programmes exigent d'en concevoir de nouveaux». Autrement dit, aussi
 complexe soit-il, un programme repose souvent sur quelques algorithmes
 fondamentaux bien connus et bien établis. À ce titre, les algorithmes
 de tri et de recherche jouent un rôle particulièrement important: on
-estime que 25~\% du temps de calcul des ordinateurs est consacré au
-tri et à la recherche! Ce n'est pour rien que Donald Knuth consacre un
-volume entier de son œuvre monumentale \emph{The Art of Computer
-  Programming} à ce seul sujet \citep{Knuth:ACP:vol1:1997}.
+estime que 25~\% du temps de calcul des ordinateurs dans le monde est
+consacré au tri et à la recherche! Ce n'est pour rien que Donald Knuth
+consacre un volume entier de son œuvre monumentale \emph{The Art of
+  Computer Programming} à ce seul sujet \citep{Knuth:ACP:vol1:1997}.
 
 
 \subsection{Sémantique et syntaxe}
-\label{sec:informatique:programmer:semantique}
+\label{sec:informatique:concepts:semantique}
 
 Il y a plusieurs parallèles à dresser entre les langages de
 programmation et les langues parlées ou écrites: leur apprentissage
@@ -266,11 +274,11 @@ langage d'exprimer des idées, demande plus d'efforts et de pratique.
 
 
 \subsection{Langages compilés et interprétés}
-\label{sec:informatique:programmer:compile_vs_interprete}
+\label{sec:informatique:concepts:compile_vs_interprete}
 
 Tous les langages de programmation\footnote{%
   À l'exception du langage machine, mais rares sont les personnes qui
-  souhaitent ne programmer qu'avec des $0$ et des $1$.} %
+  ne souhaitent programmer qu'avec des $0$ et des $1$.} %
 requièrent un traitement afin que les programmes écrits avec ceux-ci
 puissent être exploités par un ordinateur. Il existe deux grandes
 façons d'effectuer ce traitement: par compilation et par
@@ -301,13 +309,13 @@ qui réduit le temps de développement.
 
 
 \subsection{Paradigmes de programmation}
-\label{sec:informatique:programmer:paradigmes}
+\label{sec:informatique:concepts:paradigmes}
 
 Un programme informatique est toujours écrit pour résoudre un problème
 donné. Or, comme pour tout problème dans la vie, la solution à
 celui-ci peut être formulée de différentes manières. Le style
 fondamental avec lequel on exprime la solution est appelé le
-paradigme de programmation.
+\index{paradigme}\emph{paradigme} de programmation.
 
 Il existe plusieurs paradigmes de programmation. Nous nous
 contenterons ici de se pencher sur seulement quatre.
@@ -336,7 +344,7 @@ SELECT prenom FROM etudiants WHERE age > 25
   suite d'appels de fonctions, comme en mathématiques. L'exécution
   d'une fonction n'a pas d'impact sur les autres fonctions\footnote{%
     Autrement on dit qu'une fonction a un effet de bord (\emph{side
-      effect}.} %
+      effect}).} %
   Les opérations complexes sont réalisées en combinant les fonctions,
   de manière analogue à la composition de fonctions $g \circ f$.
 \item[Orienté objet] \index{paradigme!orienté objet} Un programme est
@@ -435,7 +443,7 @@ Le Lisp se distingue en outre par une syntaxe simple en
 \index{notation!préfixée}notation préfixée (voir l'encadré à la
 \autopageref{fig:informatique:notations}), le support pour la
 programmation fonctionnelle
-(\autoref{sec:informatique:programmer:paradigmes}) et la faculté de
+(\autoref{sec:informatique:concepts:paradigmes}) et la faculté de
 manipuler le code source en tant que structure de données. Autre trait
 distinctif: la syntaxe du Lisp fait un usage immodéré des parenthèses.
 
