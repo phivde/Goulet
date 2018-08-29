@@ -432,9 +432,26 @@ Dans ses grandes lignes, une session de travail avec R comporte les
   différente dans GNU~Emacs; voir l'\autoref{chap:emacs+ess}.
 \end{enumerate}
 Les étapes 1 et 2 sont interchangeables, tout comme les étapes 4, 5 et
-6. L'\autoref{chap:emacs+ess} explique plus en détails la procédure à
-suivre lorsque l'on utilise GNU~Emacs. L'\autoref{chap:rstudio} fait de
-même lorsque l'on utilise l'environnement intégré RStudio.
+6. Consultez l'\autoref{chap:emacs+ess} pour la procédure à suivre
+détaillée lorsque l'on utilise GNU~Emacs, ou l'\autoref{chap:rstudio}
+pour l'environnement intégré RStudio.
+
+\def\scriptfilename{presentation.R}
+\gotorbox{C'est le temps de vous lancer dans une première session de
+  travail R. %
+  \hypertarget{goto:presentation}\relax
+  \hypertarget{goto:presentation:fin}\relax
+
+  Le fichier de script \code{\scriptfilename} livré avec le présent
+  document et reproduit à la \autoref{sec:presentation:exemples}
+  contient du code qui passe en revue quelques unes des
+  fonctionnalités de R. Ouvrez ce fichier dans votre éditeur de texte,
+  puis exécutez les lignes une par une en prenant bien soin de lire
+  les commentaires et d'examiner les résultats.
+
+  Poursuivez la lecture une fois la session de travail terminée. (En
+  consultation électronique, les symboles {\gotorsign} insérés dans le
+  code informatique permettent de revenir ici directement.)}
 
 
 \section{Répertoire de travail}
@@ -523,7 +540,8 @@ programmation en R plutôt que sur ses applications statistiques.
 \section{Exemples}
 \label{sec:presentation:exemples}
 
-\def\scriptfilename{presentation.R}
+%% exceptionnellement, le nom du fichier de script est défini plus
+%% haut, à la fin de la section «Anatomie d'une session de travail»
 
 \scriptfile{\scriptfilename}
 \lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}

@@ -325,7 +325,7 @@
   %% Commandes pour les références et liens vers des numéros de lignes
   %% dans le code informatique.
   \newcommand{\labelline}[1]{%
-    \label{lst:#1}\hyperlink{goto:#1}{\small\faMapSigns}}
+    \label{lst:#1}\hyperlink{goto:#1}{\small\gotorsign}}
   \newcommand{\reflines}[1]{%
     \hypertarget{goto:#1}{\ref{lst:#1}}--\hypertarget{goto:#1:fin}{\ref{lst:#1:fin}}}
 
@@ -342,8 +342,9 @@
 
   %% Boite additionnelle (basée sur awesomebox.sty) pour changements
   %% au fil de la lecture.
+  \def\gotorsign{\faMapSigns}   % symbole utilisé
   \newcommand{\gotorbox}[1]{%
-    \awesomebox{\faMapSigns}{\aweboxrulewidth}{black}{#1}}
+    \awesomebox{\gotorsign}{\aweboxrulewidth}{black}{#1}}
 
   %% Boite pour le nom du fichier de script correspondant au début des
   %% sections d'exemples.
@@ -411,7 +412,7 @@
     puis-que
   }
 
-  \includeonly{informatique}
+  \includeonly{informatique,presentation}
 
 \begin{document}
 
