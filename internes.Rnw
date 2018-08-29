@@ -47,8 +47,8 @@ personnelle et à l'installation de paquetages.
 \section{Opérateurs}
 \label{sec:internes:operateurs}
 
-Nous avons déjà rencontré au \autoref{tab:bases:operateurs} à la
-\autopageref{tab:bases:operateurs} les opérateurs mathématiques et
+Nous avons déjà rencontré au \autoref{tab:premiers:operateurs} à la
+\autopageref{tab:premiers:operateurs} les opérateurs mathématiques et
 logiques les plus fréquemment employés dans R. Rappelons qu'ils sont
 classés dans le tableau en ordre décroissant de priorité des
 opérations.

@@ -49,7 +49,7 @@ R.
 Nous savons déjà que certains types de calculs répétitifs sont
 automatiquement pris en charge par le langage R via une couche
 d'abstraction que nous avons appelée l'arithmétique vectorielle
-(\autoref{sec:bases:vecteurs:arithmetique}). Un autre large pan des
+(\autoref{sec:premiers:vecteurs:arithmetique}). Un autre large pan des
 calculs répétitifs peut être réduit à quelques fonctions abstraites
 dites d'\emph{application} (\emph{mapping}, un autre concept hérité du
 \index{Lisp}Lisp). Les fonctions d'application masquent efficacement
@@ -611,7 +611,7 @@ apply(X, MARGIN, FUN, ...)
 
 Le quatrième argument de \code{apply} est l'argument formel spécial
 `\icode{...}' dont nous avons traité à la
-\autoref{sec:bases:fonctions:definition}. Il devient très utile, ici,
+\autoref{sec:premiers:fonctions:definition}. Il devient très utile, ici,
 lorsque la fonction \code{FUN} prend plus d'un argument.
 
 Pour illustrer, reprenons l'exemple précédent en supposant maintenant
@@ -836,7 +836,7 @@ outer(X, Y, FUN, ...)
 \item \code{FUN} est la fonction à appliquer (\code{"*"} par défaut)
   entre chacun des éléments de \code{X} et chacun des éléments de
   \code{Y}. Lorsque \code{FUN} est un opérateur arithmétique du
-  \autoref{tab:bases:operateurs}, il faut placer le symbole entre
+  \autoref{tab:premiers:operateurs}, il faut placer le symbole entre
   guillemets: \code{"*"}, \code{"+"}, \code{"<="}, etc.
 \end{itemize}
 La dimension du résultat de \code{outer} est \code{c(dim(X), dim(Y))}.

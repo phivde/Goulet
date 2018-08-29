@@ -10,7 +10,7 @@
 %%% https://creativecommons.org/licenses/by-sa/4.0/
 
 \chapter{Premiers pas avec R}
-\label{chap:bases}
+\label{chap:premiers}
 
 <<echo=FALSE>>=
 options(width=52)
@@ -71,7 +71,7 @@ la définition de fonctions.
 
 
 \section{Données et procédures fondamentales}
-\label{sec:bases:fondamentales}
+\label{sec:premiers:fondamentales}
 
 À sa plus simple expression, la programmation est un exercice de
 manipulation de \emph{données} à l'aide de \emph{procédures}. Un
@@ -96,7 +96,7 @@ La grande majorité des langages de programmation offrent les deux
 premiers type de données ci-dessus. Les autres types se révèlent très
 utiles pour la programmation mathématique et l'analyse de données.
 Nous reviendrons sur leurs caractéristiques à la
-\autoref{sec:bases:objets}.
+\autoref{sec:premiers:objets}.
 
 Nous pouvons classer les procédures fondamentales en quatre grandes
 catégories:
@@ -111,7 +111,7 @@ complexes, alors que les opérations logiques ne sont applicables
 qu'aux valeurs booléennes. Nous traitons de l'opération d'affectation
 en détail à la section suivante.
 
-Le \autoref{tab:bases:operateurs} présente les opérateurs les plus
+Le \autoref{tab:premiers:operateurs} présente les opérateurs les plus
 fréquemment employés en ordre décroissant de priorité des opérations.
 Ils sont accompagnés d'une description succincte. Nous reviendrons sur
 certains opérateurs dans les chapitres subséquents.
@@ -150,7 +150,7 @@ certains opérateurs dans les chapitres subséquents.
   \end{tabular}
   \caption{Principaux opérateurs du langage R, en ordre décroissant
     de priorité}
-  \label{tab:bases:operateurs}
+  \label{tab:premiers:operateurs}
 \end{table}
 
 \tipbox{Il est utile, voire essentiel, de connaître le niveau de
@@ -158,10 +158,10 @@ certains opérateurs dans les chapitres subséquents.
 
 \gotorbox{Étudier et exécuter les lignes
   \reflines{bases:fondamentales} du code informatique de la
-  \autoref{sec:bases:exemples}.}
+  \autoref{sec:premiers:exemples}.}
 
 \section{Commandes R}
-\label{sec:bases:commandes}
+\label{sec:premiers:commandes}
 
 Nous l'avons déjà vu, l'interaction avec l'interpréteur R se fait par
 l'intermédiaire de commandes entrées à la ligne de commande. Or, toute
@@ -169,7 +169,7 @@ commande R est soit une \emph{expression}\index{expression}, soit une
 \emph{affectation}\index{affectation}.
 
 \subsection{Expression}
-\label{sec:bases:commandes:expression}
+\label{sec:premiers:commandes:expression}
 
 Une \index{expression}expression R est une combinaison de symboles
 (noms de variables) et de procédures. Toute expression a une valeur.
@@ -205,7 +205,7 @@ d'évaluation, comme en mathématiques.
 @
 
 \subsection{Affectation}
-\label{sec:bases:commandes:affectation}
+\label{sec:premiers:commandes:affectation}
 
 Dans une affectation, une expression est évaluée, mais le résultat est
 stocké dans un \emph{objet} (ou \emph{variable}) dans l'espace de
@@ -240,7 +240,7 @@ est rarement utilisé.
   point.}
 
 \subsection{Regroupement de commandes}
-\label{sec:bases:commandes:regroupement}
+\label{sec:premiers:commandes:regroupement}
 
 Dans les fichiers de script ou à la ligne de commande, on sépare
 généralement les commandes R les unes des autres par un retour à la
@@ -276,7 +276,7 @@ retournée ni affichée à l'écran.
 
 
 \section{Objets R}
-\label{sec:bases:objets}
+\label{sec:premiers:objets}
 
 Tout dans le langage R est un objet: les variables contenant des
 données, les fonctions, les opérateurs, même le symbole représentant
@@ -285,7 +285,7 @@ minimum un \emph{mode} et une \emph{longueur} et certains peuvent
 être dotés d'un ou de plusieurs \emph{attributs}.
 
 \subsection{Règles pour les noms d'objets}
-\label{sec:bases:objets:noms}
+\label{sec:premiers:objets:noms}
 
 Les caractères permis pour les noms d'objets sont les lettres
 minuscules a--z et majuscules A--Z, les chiffres 0--9, le point «.» et
@@ -320,7 +320,7 @@ utiliser comme nom d'objet. Les mots réservés pour le système sont:
 \end{quote}
 Oui, `\code{...}' (\emph{point-point-point}) est véritablement un nom
 d'objet dans R! Son usage est expliqué à la
-\autoref{sec:bases:fonctions:definition}.
+\autoref{sec:premiers:fonctions:definition}.
 
 Les variables \code{T}\index{T@\code{T}|see{\code{TRUE}}} et
 \code{F}\index{F@\code{F}|see{\code{FALSE}}} prennent par défaut les
@@ -351,10 +351,10 @@ rm(T)
 
 
 \subsection{Modes et types de données}
-\label{sec:bases:objets:mode}
+\label{sec:premiers:objets:mode}
 
 Le mode\Index{mode} prescrit ce qu'un objet peut contenir. À ce titre,
-un objet ne peut avoir qu'un seul mode. Le \autoref{tab:bases:modes}
+un objet ne peut avoir qu'un seul mode. Le \autoref{tab:premiers:modes}
 contient la liste des principaux modes disponibles en R. À chacun de
 ces modes correspond une fonction du même nom servant à créer un objet
 de ce mode. Le mode d'un objet est obtenu avec la fonction
@@ -380,7 +380,7 @@ mode(v)
     \bottomrule
   \end{tabular}
   \caption{Modes disponibles et contenus correspondants}
-  \label{tab:bases:modes}
+  \label{tab:premiers:modes}
 \end{table}
 
 Les objets de mode \code{numeric}, \code{complex},
@@ -403,7 +403,7 @@ un autre. Nous y revenons plus loin.
 
 
 \subsection{Longueur}
-\label{sec:bases:objets:longueur}
+\label{sec:premiers:objets:longueur}
 
 La longueur\Index{longueur} d'un objet est égale au nombre d'éléments
 qu'il contient. La longueur d'un objet est obtenue avec la fonction
@@ -434,7 +434,7 @@ nchar(v2)
 @
 
 \subsection{Valeurs spéciales}
-\label{sec:bases:objets:NA_et_al}
+\label{sec:premiers:objets:NA_et_al}
 
 Les objets valeur manquante (\code{NA}), infini (\code{Inf},
 \code{-Inf}), valeur indéterminée (\code{NaN}) et néant (\code{NULL})
@@ -500,7 +500,7 @@ is.null(NULL)
 
 
 \subsection{Attributs}
-\label{sec:bases:objets:attributs}
+\label{sec:premiers:objets:attributs}
 
 Les attributs\Index{attribut} d'un objet sont des éléments
 d'information additionnels attachés à cet objet. Le
@@ -553,7 +553,7 @@ attributes(x)
 
 
 \section{Vecteurs}
-\label{sec:bases:vecteurs}
+\label{sec:premiers:vecteurs}
 
 En R, pratiquement, \emph{tout} est un
 vecteur\index{vecteur}. C'est aussi l'unité de base dans les calculs.
@@ -561,7 +561,7 @@ Nous nous restreignons pour le moment aux vecteurs simples (atomiques)
 dans lesquels tous les éléments sont du même mode.
 
 \subsection{Création de vecteurs}
-\label{sec:bases:vecteurs:creation}
+\label{sec:premiers:vecteurs:creation}
 
 La fonction de base pour créer un vecteur est la fonction de
 concaténation \Icode{c}.
@@ -607,7 +607,7 @@ c(2, FALSE, "a")
 
 
 \subsection{Indiçage}
-\label{sec:bases:vecteurs:indicage}
+\label{sec:premiers:vecteurs:indicage}
 
 L'indiçage\Index{indiçage!vecteur} des vecteurs est une procédure
 beaucoup utilisée dans le langage R, aussi est-il important d'en
@@ -669,13 +669,13 @@ x[]
   dans l'ordre.}
 
 \subsection{Arithmétique vectorielle}
-\label{sec:bases:vecteurs:arithmetique}
+\label{sec:premiers:vecteurs:arithmetique}
 
 L'arithmétique vectorielle de R constitue l'une des grandes forces du
 langage. Elle permet de réaliser une grande variété de calculs sans
 avoir recours à des procédures itératives (boucles).
 
-Les procédures fondamentales de la \autoref{sec:bases:fondamentales}
+Les procédures fondamentales de la \autoref{sec:premiers:fondamentales}
 peuvent toutes opérer sur les vecteurs en effectuant les opérations
 \emph{élément par élément}. C'est la première règle de base de
 l'arithmétique vectorielle dans R.
@@ -736,9 +736,9 @@ c(0, 5, -1) & TRUE
 @
 
 \section{Fonctions}
-\label{sec:bases:fonctions}
+\label{sec:premiers:fonctions}
 
-Nous avons mentionné au début de la \autoref{sec:bases:fondamentales}
+Nous avons mentionné au début de la \autoref{sec:premiers:fondamentales}
 qu'un langage de programmation doit fournir un mécanisme d'abstraction
 pour utiliser les éléments composés. La possibilité qu'offre R
 de définir des objets contenant des valeurs constitue une première
@@ -748,7 +748,7 @@ d'abstration encore plus puissante, puisqu'elle permet de faire
 référence par un seul nom à toute une suite d'opérations.
 
 \subsection{Programmation fonctionnelle}
-\label{sec:bases:fonctions:paradigme}
+\label{sec:premiers:fonctions:paradigme}
 
 Nous adoptons en bonne partie avec le langage R le paradigme de la
 programmation fonctionnelle. Tel qu'expliqué sommairement à la
@@ -823,7 +823,7 @@ square(square(5))
 @
 
 \subsection{Définition d'une fonction}
-\label{sec:bases:fonctions:definition}
+\label{sec:premiers:fonctions:definition}
 
 Comme nous l'avons vu dans l'exemple ci-dessus, on définit une
 nouvelle \index{fonction!définition}fonction dans R à l'aide de la
@@ -838,7 +838,7 @@ fonction est la suivante:
 \begin{itemize}
 \item \meta{nom} est le nom de la fonction (les règles pour les noms
   de fonctions sont les mêmes que celles présentées à la
-  \autoref{sec:bases:objets:noms} pour tout autre objet).
+  \autoref{sec:premiers:objets:noms} pour tout autre objet).
 
   Nous souhaitons généralement attribuer un nom à une fonction, ne
   serait-ce que pour pouvoir la réutiliser. Cela dit, c'est tout à
@@ -881,18 +881,18 @@ f()
   accepter un nombre variable d'arguments. On utilise généralement
   `\code{...}' pour passer des arguments tels quels à une autre fonction
   qui, elle, saura quoi faire de ces arguments. Vous trouverez un
-  meilleur exemple à la \autoref{sec:bases:exemples} que ce que nous
+  meilleur exemple à la \autoref{sec:premiers:exemples} que ce que nous
   pourrions faire ici en quelques lignes.
 
 \item \meta{corps} est une expression ou un groupe d'expressions
   réunies par des accolades, tel qu'expliqué à la
-  \autoref{sec:bases:commandes:regroupement}.
+  \autoref{sec:premiers:commandes:regroupement}.
 \end{itemize}
 
 
 
 \subsection{Appel d'une fonction}
-\label{sec:bases:fonctions:appel}
+\label{sec:premiers:fonctions:appel}
 
 Nous avons déjà évoqué certaines des règles qui régissent les
 \index{fonction!appel}appels de fonctions dans R. Regardons maintenant
@@ -940,12 +940,12 @@ passées.
   nom de l'objet est suivi de parenthèses \code{(~)}.}
 
 \subsection{Retourner des résultats}
-\label{sec:bases:fonctions:resultats}
+\label{sec:premiers:fonctions:resultats}
 
 La plupart des fonctions sont écrites dans le but de retourner un
 \index{fonction!résultat}résultat. Or, les règles d'interprétation
 d'un regroupement d'expressions présentées à la
-\autoref{sec:bases:commandes:regroupement} s'appliquent ici au corps
+\autoref{sec:premiers:commandes:regroupement} s'appliquent ici au corps
 de la fonction: une fonction retourne tout simplement le résultat de
 sa \emph{dernière expression}.
 
@@ -964,7 +964,7 @@ la fonction à un objet.
 \newpage
 
 \section{Exemples}
-\label{sec:bases:exemples}
+\label{sec:premiers:exemples}
 
 \def\scriptfilename{bases.R}
 
@@ -973,13 +973,13 @@ la fonction à un objet.
 
 
 \section{Exercices}
-\label{sec:bases:exercices}
+\label{sec:premiers:exercices}
 
 \Opensolutionfile{solutions}[solutions-bases]
 
 \begin{Filesave}{solutions}
-\section*{Chapitre \ref*{chap:bases}}
-\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:bases}}
+\section*{Chapitre \ref*{chap:premiers}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:premiers}}
 
 \end{Filesave}
 
@@ -1029,7 +1029,7 @@ c(-1, 2, 4)^(3:-2)
 c(TRUE, FALSE, FALSE) & c(TRUE, TRUE, FALSE)
 @
      \item Attention à la priorité des opérations! En vertu des
-       priorités énoncées au \autoref{tab:bases:operateurs}, les
+       priorités énoncées au \autoref{tab:premiers:operateurs}, les
        opérations sont effectuées dans cet ordre: inégalité
        (\verb=<=), négation logique (\verb=!=) , «ou» logique
        (\verb=|=).

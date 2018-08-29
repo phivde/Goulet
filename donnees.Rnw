@@ -65,10 +65,10 @@ généralisation à plus de deux dimensions\footnote{%
   Il est donc correct de dire qu'une matrice est un tableau à deux
   dimensions.}. %
 
-Nous avons établi d'entrée de jeu à la \autoref{sec:bases:vecteurs}
+Nous avons établi d'entrée de jeu à la \autoref{sec:premiers:vecteurs}
 qu'en R, tout est un vecteur. C'est aussi vrai pour les matrices et
 tableaux, qui ne sont rien d'autre que des vecteurs dotés d'un
-attribut \icode{dim} (\autoref{sec:bases:objets:attributs}). Ces
+attribut \icode{dim} (\autoref{sec:premiers:objets:attributs}). Ces
 objets sont donc stockés, et peuvent être manipulés, exactement comme
 des vecteurs simples.
 
@@ -178,7 +178,7 @@ des tableaux à trois et quatre dimensions.
 L'indiçage\Index{indiçage!matrice} des matrices et tableaux se fait
 avec les crochets \code{[~]}\indexcode{[}, comme pour les vecteurs
 simples. D'ailleurs, l'ensemble des règles d'indiçage de la
-\autoref{sec:bases:vecteurs:indicage} s'appliquent à l'identique aux
+\autoref{sec:premiers:vecteurs:indicage} s'appliquent à l'identique aux
 matrices et tableaux, sinon qu'il faut maintenant préciser des
 indices pour chaque dimension, séparés par des virgules.
 
@@ -204,7 +204,7 @@ m[c(FALSE, TRUE), c(FALSE, TRUE, TRUE)]
 @
 
 En vertu de la cinquième règle d'indiçage de la
-\autoref{sec:bases:vecteurs:indicage}, lorsqu'une dimension est
+\autoref{sec:premiers:vecteurs:indicage}, lorsqu'une dimension est
 laissée vide dans les crochets, tous les éléments de cette dimension
 sont extraits.
 <<echo=TRUE>>=

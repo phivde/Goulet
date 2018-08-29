@@ -309,7 +309,7 @@ rgamma_ar(5, 0.5, 1)
 
 En l'état, la fonction \code{rgamma\_ar} semble valide. Je vous
 rappelle la mise en garde de la
-\autoref{sec:bases:vecteurs:arithmetique}: avec le recyclage des
+\autoref{sec:premiers:vecteurs:arithmetique}: avec le recyclage des
 vecteurs dans R, ce n'est pas parce qu'une expression --- ou une
 fonction --- s'exécute sans erreur apparente que le calcul effectué
 est bon pour autant. Il faut vérifier l'exactitude des calculs à
