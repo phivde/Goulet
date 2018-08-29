@@ -77,9 +77,10 @@ la toute simple fonction factorielle, à la
 factorial <- function(n)
   if (n == 1) 1 else n * factorial(n - 1)
 \end{lstlisting}
-  \caption[Mises en œuvre de la fonction factorielle.]{Mises en œuvre
-    en Scheme (en haut) et en S (en bas) de la fonction
-    factorielle.}
+  \caption[Mises en œuvre en Scheme et en S de la fonction
+  factorielle]{%
+    Mises en œuvre en Scheme (en haut) et en S (en bas) de la fonction
+    factorielle}
   \label{fig:presentation:scheme_vs_s}
 \end{figure}
 
@@ -256,10 +257,11 @@ vous utiliserez cette seconde approche d'interaction avec R.
   \centering
   \lstinputlisting[frame=single,language={}]{include/script.R}
   \lstinputlisting[frame=single,language={},firstline=2]{include/script.Rout}
-  \caption{Fichier de script (en haut) et ligne de commande R dans
-    laquelle les expressions R ont été exécutées (en bas). Les lignes
-    débutant par \code{\#} dans le fichier de script sont des
-    commentaires ignorés par l'interpréteur de commandes.}
+  \caption[Fichier de script et ligne de commande R]{Fichier de script
+    (en haut) et ligne de commande R dans laquelle les expressions R
+    ont été exécutées (en bas). Les lignes débutant par \code{\#} dans
+    le fichier de script sont des commentaires ignorés par
+    l'interpréteur de commandes.}
   \label{fig:presentation:script}
 \end{figure}
 
@@ -326,7 +328,8 @@ d'autres. Voici quelques bons choix.
   \begin{figure}[t]
     \centering
     \includegraphics[width=0.9\textwidth]{images/rstudio-screenshot}
-    \caption{Fenêtre de RStudio sous macOS dans sa configuration par
+    \caption[Fenêtre de RStudio sous macOS dans sa configuration par
+    défaut]{Fenêtre de RStudio sous macOS dans sa configuration par
       défaut. Dans le sens des aiguilles d'une montre, on y retrouve:
       le fichier de script de la \autoref{fig:presentation:script}; la
       liste des objets de l'environnement (vide, ici); une interface
@@ -355,10 +358,11 @@ d'autres. Voici quelques bons choix.
   \begin{figure}[t]
     \centering
     \includegraphics[width=0.9\textwidth]{images/emacs-screenshot}
-    \caption{Fenêtre de GNU Emacs sous macOS en mode d'édition de code
-      R. Dans la partie du haut, on retrouve le fichier de script de
-      la \autoref{fig:presentation:script} et dans la partie du
-      bas, la ligne de commande R.}
+    \caption[Fenêtre de GNU Emacs sous macOS en mode d'édition de code
+    R]{Fenêtre de GNU Emacs sous macOS en mode d'édition de code R.
+      Dans la partie du haut, on retrouve le fichier de script de la
+      \autoref{fig:presentation:script} et dans la partie du bas, la
+      ligne de commande R.}
     \label{fig:presentation:emacs}
   \end{figure}
 
