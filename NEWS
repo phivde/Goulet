@@ -8,6 +8,8 @@
 
 - Ajout de la liste des tableaux et de la liste des figures au début
   du document.
+- Le lecteur est maintenant guidé vers des blocs de code informatique
+  au fil des chapitres.
 - Chapitre 1 réorganisé: ajout d'une courte introduction à ce que
   constitue la programmation informatique; ajout d'une introduction à
   la notion d'algorithme; modification à l'ordre de présentation de
@@ -16,6 +18,10 @@
 
 ## Autres changements
 
+- Les lignes des fichiers de script en fin de chapitre sont maintenant
+  numérotées. De plus, des hyperliens insérés dans le code permettent
+  de retourner directement au point où la lecture du chapitre a été
+  interrompue.
 - L'historique des versions se trouve maintenant dans le fichier
   `NEWS`.
 - Les instructions de collaboration se trouvent maintenant dans le
