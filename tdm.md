@@ -72,7 +72,7 @@ Penser à découper tout ça en deux
 ## Analyse et contrôle de texte
 
 + ligne de commande
-+ redirection avec de parler de regex
++ redirection avant de parler de regex
 
 ## Travail collaboratif avec Git
 
