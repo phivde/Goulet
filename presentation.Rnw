@@ -101,6 +101,12 @@ rangent massivement derrière le projet libre. D'ailleurs John Chambers
 place aujourd'hui ses efforts de réflexion et de développement dans le
 projet R \citep{Chambers:R:2008}.
 
+À partir du début de la décennie 2010, l'analyse de données, l'analyse
+prédictive et l'intelligence artificielle font une entrée fracassante
+dans la liste des outils d'affaires incontournables. Déjà bien établi
+dans ces domaines, R devient, avec \index{Python}Python, la
+\emph{lingua franca} de la science des données.
+
 
 \section{Description sommaire de R}
 \label{sec:presentation:description}
