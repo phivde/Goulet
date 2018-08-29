@@ -9,7 +9,7 @@
 %%% International de Creative Commons.
 %%% https://creativecommons.org/licenses/by-sa/4.0/
 
-\chapter{Bases du langage R}
+\chapter{Premiers pas avec R}
 \label{chap:bases}
 
 <<echo=FALSE>>=
