@@ -28,10 +28,6 @@ options(width=52)
   nouvelles valeurs à l'aide des méthodes d'indiçage.
 \item Appeler une fonction R; concevoir comment les arguments sont
   passés à la fonction et le traitement des valeurs par défaut.
-\item Définir une fonction R, ses divers arguments et, le cas échéant,
-  les valeurs par défaut de ceux-ci.
-\item Utiliser et définir des fonctions R ayant un nombre variable
-  d'arguments.
 \end{objectifs}
 
 C'est dans ce chapitre que nous débutons réellement l'apprentissage de
@@ -752,173 +748,60 @@ l'inverse, dans les opérations logiques, $0$ est converti en
 c(0, 5, -1) & TRUE
 @
 
-\section{Fonctions}
-\label{sec:premiers:fonctions}
 
-Nous avons mentionné au début de la \autoref{sec:premiers:fondamentales}
-qu'un langage de programmation doit fournir un mécanisme d'abstraction
-pour utiliser les éléments composés. La possibilité qu'offre R
-de définir des objets contenant des valeurs constitue une première
-technique. La définition de \emph{fonctions} (le nom que nous
-donnerons dorénavant au concept de procédure) est une technique
-d'abstration encore plus puissante, puisqu'elle permet de faire
-référence par un seul nom à toute une suite d'opérations.
+\section{Appel d'une fonction}
+\label{sec:premiers:appel}
 
-\subsection{Programmation fonctionnelle}
-\label{sec:premiers:fonctions:paradigme}
+Nous avons mentionné au début de la
+\autoref{sec:premiers:fondamentales} qu'un langage de programmation
+doit fournir un mécanisme d'abstraction pour utiliser les éléments
+composés. La possibilité qu'offre R de définir des objets contenant
+des valeurs constitue une première technique. La définition de
+\index{fonctions}\emph{fonctions} --- le nom que nous donnerons
+dorénavant au concept de \index{procédure}procédure --- est une
+technique d'abstration encore plus puissante, puisqu'elle permet de
+faire référence par un seul nom à toute une suite d'opérations.
 
-Nous adoptons en bonne partie avec le langage R le paradigme de la
-programmation fonctionnelle. Tel qu'expliqué sommairement à la
-\autoref{sec:informatique:paradigmes}, dans ce paradigme un programme
-est constitué d'une suite d'appels de fonctions.
+Au-delà des opérateurs de base, le langage R compte un très grand
+nombre (des milliers!) de fonctions internes. Cette section passe en
+revue les règles d'appel d'une fonction. Nous étudierons au
+\autoref{chap:fonctions} comment composer vos propres fonctions.
+Celles-ci obéiront aux mêmes règles d'appel.
 
-L'approche de programmation fonctionnelle dans R fait aussi en sorte
-qu'une fonction est traitée comme n'importe quel autre objet. Entre
-autres choses, cela signifie que:
-\begin{itemize}
-\item le contenu d'une fonction (son code source) est toujours
-  accessible;
-\item une fonction peut accepter en argument une autre fonction;
-\item une fonction peut retourner une fonction comme résultat;
-\item l'utilisateur peut définir de nouvelles fonctions.
-\end{itemize}
-
-Étudions un exemple très simple, pas véritablement utile en pratique
-au-delà de ses vertus pédagogiques. Nous voulons élever un
-nombre au carré. Pour faire ce calcul à répétition et de manière
-abstraite --- c'est-à-dire, sans avoir à se demander à chaque fois
-comment le calcul est fait ---, nous définissons une nouvelle
-fonction \code{square}.
-<<echo=TRUE>>=
-square <- function(x) x * x
-@
-
-L'expression ci-dessus peut se lire ainsi:
-
-\begin{center}
-  \setlength{\unitlength}{7mm}
-  \begin{picture}(18,4.2)
-    \linethickness{1pt}
-
-    \put(0,1){\code{square}}     \put(0,3.5){\code{square}}
-    \put(2.2,1){est}             \put(2.3,3.5){\code{<-}}
-    \put(3.2,1){une fonction}    \put(3.5,3.5){\code{function}}
-    \put(6.6,1){
-      \begin{minipage}[t]{5.714\unitlength} % ~= 40mm
-        \centering
-        qui prend en argument
-        une valeur \code{x}
-      \end{minipage}}           \put(8.9,3.5){\code{( x )}}
-    \put(12.8,1){%
-      \begin{minipage}[t]{4.571\unitlength} % ~= 32mm
-        \centering
-        et la multiplie par elle-même.
-      \end{minipage}}           \put(14.4,3.5){\code{x * x}}
-
-    \put(0.9,3.2){\vector(0,-1){1.6}}
-    \put(2.6,3.2){\vector(0,-1){1.6}}
-    \put(4.6,3.2){\vector(0,-1){1.6}}
-    \put(9.7,3.2){\vector(0,-1){1.6}}
-    \put(15.2,3.2){\vector(0,-1){1.6}}
-  \end{picture}
-\end{center}
-
-Nous pouvons ensuite utiliser la fonction \code{square} de manière
-intuitive comme n'importe quelle autre fonction dans R (nous
-reviendrons sur les règles d'appel d'une fonction un peu plus loin).
-<<echo=TRUE>>=
-square(5)
-@
-
-L'approche de programmation fonctionnelle fait en sorte que les appels
-de fonctions peuvent être placés les uns à la suite des autres, comme
-la composition de fonctions $g \circ f$ en mathématiques. Pour élever
-un nombre à la puissance $4$, nous pouvons appliquer deux fois la
-fonction \code{square} à un argument.
-<<echo=TRUE>>=
-square(square(5))
-@
-
-\subsection{Définition d'une fonction}
-\label{sec:premiers:fonctions:definition}
-
-Comme nous l'avons vu dans l'exemple ci-dessus, on définit une
-nouvelle \index{fonction!définition}fonction dans R à l'aide de la
-fonction \Icode{function}. La syntaxe exacte de la définition d'une
-fonction est la suivante:
+Un \index{fonction!appel}appel de fonction est constitué du nom de
+l'objet suivi obligatoirement de parenthèses \code{(~)} et, le cas
+échéant, d'arguments entre ces parenthèses.
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
-\meta{nom} <- function(\meta{arguments}) \meta{corps}
+\meta{nom\_fonction}(\meta{arguments})
 \end{Verbatim}
 \end{Schunk}
 
-\begin{itemize}
-\item \meta{nom} est le nom de la fonction (les règles pour les noms
-  de fonctions sont les mêmes que celles présentées à la
-  \autoref{sec:premiers:objets:noms} pour tout autre objet).
-
-  Nous souhaitons généralement attribuer un nom à une fonction, ne
-  serait-ce que pour pouvoir la réutiliser. Cela dit, c'est tout à
-  fait optionnel. En effet, l'appel à \icode{function} retourne déjà
-  une fonction et si aucun nom n'est attribué à cet objet, on obtient
-  ce qui est appelé une \index{fonction!anonyme}\emph{fonction
-    anonyme}. Les fonctions anonymes sont particulièrement utiles avec
-  les fonctions d'application qui seront étudiées au
-  \autoref{chap:application}.
-
-\item \meta{arguments} est la liste des arguments formels de la
-  fonction, séparés par des virgules.
-
-  Une fonction peut n'avoir aucun \index{fonction!argument
-    formel}argument formel ou plusieurs. Il n'y a pas de limite
-  pratique au nombre d'arguments formels que peut avoir une fonction.
-  Les arguments peuvent être des symboles, des constructions de la
-  forme \code{symbole = défaut}, ou encore l'argument formel spécial
-  `\icode{...}'.
-
-  Lorsqu'un symbole seul est utilisé comme argument, il indique le nom
-  de celui-ci. L'objet de ce nom sera disponible à l'intérieur de la
-  fonction.
+Regardons cela de plus près. Aux fins d'illustrations, nous
+définissons une petite fonction \code{foo} qui calcule la quantité
+\begin{equation*}
+  d = \sum_{i = 1}^n |x_i - y_i|^p
+\end{equation*}
+pour deux vecteurs $\mat{x} = (x_1, \dots, x_n)$ et
+$\mat{y} = (y_1, \dots, y_n)$ et une valeur $p$. La définition --- ou
+le \index{prototype}prototype --- de la fonction apparait ci-dessous.
+<<echo=FALSE>>=
+foo <- function(x, y = 0, p = 2) sum(abs(x - y)^p)
+@
 <<echo=TRUE>>=
-f <- function(x) 2 * x + 1
-f(2)
+foo
 @
 
-  La construction \code{symbole = défaut} indique la valeur par défaut
-  de l'argument \code{symbole}, c'est-à-dire la valeur de l'argument si
-  aucune n'est spécifiée dans l'appel de la fonction.
-<<echo=TRUE>>=
-f <- function(x = 0) 2 * x + 1
-f(2)
-f()
-@
+Vous remarquerez que la fonction fait elle-même appel à deux fonctions
+internes (\icode{sum} et \icode{abs}) ainsi qu'à deux opérateurs de base
+(\code{-} et \verb|^|).
 
-  Enfin, l'argument spécial `\Icode{...}' peut contenir un nombre
-  arbitraire d'arguments. La fonction y ayant recours se trouve donc à
-  accepter un nombre variable d'arguments. On utilise généralement
-  `\code{...}' pour passer des arguments tels quels à une autre fonction
-  qui, elle, saura quoi faire de ces arguments. Vous trouverez un
-  meilleur exemple à la \autoref{sec:premiers:exemples} que ce que nous
-  pourrions faire ici en quelques lignes.
-
-\item \meta{corps} est une expression ou un groupe d'expressions
-  réunies par des accolades, tel qu'expliqué à la
-  \autoref{sec:premiers:commandes:regroupement}.
-\end{itemize}
-
-
-
-\subsection{Appel d'une fonction}
-\label{sec:premiers:fonctions:appel}
-
-Nous avons déjà évoqué certaines des règles qui régissent les
-\index{fonction!appel}appels de fonctions dans R. Regardons maintenant
-cela de plus près. Aux fins d'illustrations, nous définissons une
-petite fonction comptant trois arguments, dont seul le premier n'a pas
-de valeur par défaut.
-<<echo=TRUE>>=
-f <- function(x, y = 0, p = 2) sum(abs(x - y)^p)
-@
+La fonction compte trois arguments. La construction \code{symbole =
+  défaut} indique la valeur par défaut de l'argument \code{symbole},
+c'est-à-dire la valeur de l'argument si aucune n'est spécifiée dans
+l'appel de la fonction. Ainsi, seul le premier argument de \code{foo}
+n'a pas de valeur par défaut. La valeur par défaut de l'argument
+\code{y} est $0$ et celle de l'argument \code{p}, $2$.
 
 L'ordre des arguments dans la définition de la fonction est important.
 Nous avons deux choix au moment d'appeler une fonction:
@@ -936,17 +819,17 @@ Il est beaucoup plus prudent et \emph{fortement recommandé} de
 spécifier les arguments par leur nom, surtout après les deux ou trois
 premiers arguments.
 <<echo=TRUE>>=
-f(c(3, 2), c(1, 1), 2)
-f(y = c(1, 1), c(3, 2), 2)
-f(y = c(1, 1), p = 2, c(3, 2))
+foo(c(3, 2), c(1, 1), 2)
+foo(y = c(1, 1), c(3, 2), 2)
+foo(y = c(1, 1), p = 2, c(3, 2))
 @
 
 Il n'est pas nécessaire de spécifier une valeur pour un argument
 disposant d'une valeur par défaut. Cependant, si l'on omet un tel
 argument, il faudra nommer les arguments qui suivent, le cas échéant.
 <<echo=TRUE>>=
-f(c(3, 2))
-f(c(3, 2), p = 3)
+foo(c(3, 2))
+foo(c(3, 2), p = 3)
 @
 
 \citet[section~4.3.2]{R-lang} fournit les détails sur le mécanisme de
@@ -956,29 +839,7 @@ passées.
 \tipbox{L'interpréteur R reconnait un appel de fonction au fait que le
   nom de l'objet est suivi de parenthèses \code{(~)}.}
 
-\subsection{Retourner des résultats}
-\label{sec:premiers:fonctions:resultats}
 
-La plupart des fonctions sont écrites dans le but de retourner un
-\index{fonction!résultat}résultat. Or, les règles d'interprétation
-d'un regroupement d'expressions présentées à la
-\autoref{sec:premiers:commandes:regroupement} s'appliquent ici au corps
-de la fonction: une fonction retourne tout simplement le résultat de
-sa \emph{dernière expression}.
-
-On évitera donc que la dernière expression soit une affectation, car
-la fonction ne retournera alors rien et on ne pourra utiliser une
-construction de la forme \code{x <- f()} pour affecter le résultat de
-la fonction à un objet.
-
-\cautionbox{Il existe une fonction \icode{return} pour terminer
-  immédiatement l'exécution d'une fonction et retourner un résultat;
-  nous l'étudierons plus formellement avec les structures de contrôle au
-  \autoref{chap:application}. Cependant, l'utilisation de
-  \code{return} à la toute fin d'une fonction est tout à fait inutile
-  et c'est considéré comme du mauvais style en R.}
-
-\newpage
 
 \section{Exemples}
 \label{sec:premiers:exemples}
