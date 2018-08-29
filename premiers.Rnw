@@ -11,6 +11,7 @@
 
 \chapter{Premiers pas avec R}
 \label{chap:premiers}
+\def\scriptfilename{premiers.R}
 
 <<echo=FALSE>>=
 options(width=52)
@@ -169,9 +170,10 @@ division entière.
 @
 \end{ttscript}
 
-\gotorbox{Étudier et exécuter les lignes
-  \reflines{premiers:fondamentales} du code informatique de la
-  \autoref{sec:premiers:exemples}.}
+\gotorbox{Étudiez les lignes \reflines{premiers:fondamentales}
+  du fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:premiers:exemples}.}
+
 
 \section{Commandes R}
 \label{sec:premiers:commandes}
@@ -287,6 +289,10 @@ retournée ni affichée à l'écran.
 }
 @
 
+\gotorbox{Étudiez les lignes \reflines{premiers:commandes}
+  du fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:premiers:exemples}.}
+
 
 \section{Objets R}
 \label{sec:premiers:objets}
@@ -333,7 +339,7 @@ utiliser comme nom d'objet. Les mots réservés pour le système sont:
 \end{quote}
 Oui, `\code{...}' (\emph{point-point-point}) est véritablement un nom
 d'objet dans R! Son usage est expliqué à la
-\autoref{sec:premiers:fonctions:definition}.
+\autoref{sec:fonctions:definition}.
 
 Les variables \code{T}\index{T@\code{T}|see{\code{TRUE}}} et
 \code{F}\index{F@\code{F}|see{\code{FALSE}}} prennent par défaut les
@@ -564,6 +570,10 @@ attr(x, "methode") <- NULL
 attributes(x)
 @
 
+\gotorbox{Étudiez les lignes \reflines{premiers:objets}
+  du fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:premiers:exemples}.}
+
 
 \section{Vecteurs}
 \label{sec:premiers:vecteurs}
@@ -618,7 +628,6 @@ c(2, TRUE, FALSE)
 c(2, FALSE, "a")
 @
 
-
 \subsection{Indiçage}
 \label{sec:premiers:vecteurs:indicage}
 
@@ -626,8 +635,8 @@ L'indiçage\Index{indiçage!vecteur} des vecteurs est une procédure
 beaucoup utilisée dans le langage R, aussi est-il important d'en
 maitriser toutes les subtilités. L'opération sert principalement à
 deux choses: extraire des éléments d'un objet avec la construction
-\verb|x[i]|\icode{[}, ou remplacer des éléments avec la
-construction \verb|x[i] <- y|\Icode{[<-}.
+\verb|x[i]|\indexcode{[}, ou remplacer des éléments avec la
+construction \verb|x[i] <- y|\Indexcode{[<-}.
 
 Dans un cas comme dans l'autre, il faut d'abord indicer le vecteur. Il
 existe cinq façons de le faire, toujours à l'intérieur de crochets
@@ -748,6 +757,12 @@ l'inverse, dans les opérations logiques, $0$ est converti en
 c(0, 5, -1) & TRUE
 @
 
+\gotorbox{La présente section est très importante pour la suite.
+  Étudiez donc en y portant une attention particulière les lignes
+  \reflines{premiers:vecteurs} du fichier de script
+  \code{\scriptfilename} reproduit à la
+  \autoref{sec:premiers:exemples}.}
+
 
 \section{Appel d'une fonction}
 \label{sec:premiers:appel}
@@ -836,15 +851,273 @@ foo(c(3, 2), p = 3)
 pairage entre les arguments d'une fonction et des valeurs qui lui sont
 passées.
 
-\tipbox{L'interpréteur R reconnait un appel de fonction au fait que le
-  nom de l'objet est suivi de parenthèses \code{(~)}.}
+\gotorbox{Étudiez les lignes \reflines{premiers:appel}
+  du fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:premiers:exemples}.}
 
+
+\section{Quelques fonctions internes utiles}
+\label{sec:premiers:internes}
+
+Cette section présente quelques fonctions internes souvent utilisés
+pour programmer en R et pour manipuler des données. Elle reviendra à
+intervalles réguliers dans le document au fur à mesure que nous
+découvrirons de nouvelles fonctionnalités du langage.
+
+La liste de fonctions ci-dessous est évidemment loin d'être
+exhaustive. Un des meilleurs endroits pour découvrir de nouvelles
+fonctions demeure la section \code{See Also} des rubriques d'aide, qui
+offre des hyperliens vers des fonctions apparentées au sujet de la
+rubrique.
+
+Pour chaque fonction présentée dans cette section, je fournis un ou
+deux exemples d'utilisation. Ces exemples sont loin de couvrir toutes
+les utilisations possibles d'une fonction. La
+\autoref{sec:premiers:exemples} fournit des exemples additionnels.
+Consultez les rubriques d'aide des fonctions pour connaître toutes
+leurs options.
+
+\tipbox{Vraiment, consultez les rubriques d'aide.}
+
+\subsection{Suites et répétition}
+\label{sec:premiers:internes:seq}
+
+\begin{ttscript}{seqmalong}
+\item[\Icode{seq}] suite de nombres générale
+<<echo=TRUE>>=
+seq(1, 9, by = 2)
+@
+\item[\Icode{\protect seq\_len}] \index{suite}suite de nombres de la
+  longueur donnée en argument à partir de $1$ (plus rapide que
+  \code{seq})
+<<echo=TRUE>>=
+seq_len(10)
+@
+\item[\Icode{\protect seq\_along}] suite de nombres de la longueur du
+  vecteur en argument à partir de $1$ (plus rapide que \code{seq})
+<<echo=TRUE>>=
+seq_along(10)
+@
+\item[\Icode{rep}] \index{repetition@répétition}répétition de
+  vecteurs, de chaque élément d'un vecteur ou d'une combinaison des
+  deux
+<<echo=TRUE>>=
+rep(2, 10)
+rep(c(1, 3), each = 4)
+rep(c(1, 3), times = 2, each = 4)
+@
+\item[\Icode{rep.int}] répétition de vecteurs complets uniquement
+  (plus rapide que \code{rep})
+<<echo=TRUE>>=
+rep.int(2, 10)
+@
+\item[\Icode{rep\_len}] répétition de vecteurs jusqu'à une certaine
+  longueur (plus rapide que \code{rep})
+<<echo=TRUE>>=
+rep_len(1:3, 10)
+@
+\end{ttscript}
+
+\subsection{Extraction du début et de la fin d'un objet}
+\label{sec:premiers:internes:head}
+
+\begin{ttscript}{head}
+\item[\Icode{head}] avec second argument $n > 0$ ($n = 6$ par défaut):
+  $n$ premières composantes d'un objet (éléments d'un vecteur, lignes
+  d'une matrice ou d'un \emph{data frame})
+<<echo=TRUE>>=
+head(1:10, 3)
+@
+  avec second argument
+  $n < 0$: objet sans les $|n|$ dernières composantes
+<<echo=TRUE>>=
+head(1:10, -3)
+@
+\item[\Icode{tail}] avec second argument $n > 0$ ($n = 6$ par défaut):
+  $n$ dernières composantes d'un objet (éléments d'un vecteur, lignes
+  d'une matrice ou d'un \emph{data frame});
+<<echo=TRUE>>=
+tail(1:10, 3)
+@
+  avec second argument $n < 0$: objet sans les $|n|$ premières
+  composantes
+<<echo=TRUE>>=
+tail(1:10, -3)
+@
+\end{ttscript}
+
+\subsection{Arrondi}
+\label{sec:premiers:internes:arrondi}
+
+Les exemples de cette sous-section utilisent le vecteur suivant.
+<<echo=FALSE>>=
+x <- c(-3.68, -2/3, pi, 1/3, 2.52)
+@
+<<echo=TRUE>>=
+x
+@
+
+\begin{ttscript}{ceiling}
+\item[\Icode{round}] \index{arrondi}arrondi à un nombre défini de
+  décimales ($0$ par défaut)
+<<echo=TRUE>>=
+round(x)
+round(x, 3)
+@
+\item[\Icode{floor}] plus grand entier inférieur ou égal à l'argument
+<<echo=TRUE>>=
+floor(x)
+@
+\item[\Icode{ceiling}] plus petit entier supérieur ou égal à
+  l'argument
+<<echo=TRUE>>=
+ceiling(x)
+@
+\item[\Icode{trunc}] troncature vers zéro; différent de \texttt{floor}
+  pour les nombres négatifs
+<<echo=TRUE>>=
+trunc(x)
+@
+\end{ttscript}
+
+\subsection{Tests logiques}
+\label{sec:premiers:internes:tests}
+
+Les exemples de cette sous-section utilisent toujours le vecteur suivant.
+<<echo=FALSE>>=
+x <- c(4, -1, 2, -3, 6)
+@
+<<echo=TRUE>>=
+x
+@
+
+\begin{ttscript}{any}
+\item[\Icode{any}] \index{any}vrai si au moins une valeur du vecteur
+  booléen en argument est vraie
+<<echo=TRUE>>=
+any(x < 0)
+any(x > 10)
+@
+\item[\Icode{all}] \index{all}vrai si toutes les valeurs du vecteur
+  booléen en argument sont vraies
+<<echo=TRUE>>=
+all(x < 0)
+all(x > -5)
+@
+
+\end{ttscript}
+
+\subsection{Sommaires et statistiques descriptives}
+\label{sec:premiers:internes:sommaires}
+
+Les exemples de cette sous-section utilisent le vecteur suivant.
+<<echo=FALSE>>=
+x <- c(14, 17, 7, 9, 3, 4, 25, 21, 24, 11)
+@
+<<echo=TRUE>>=
+x
+@
+
+\begin{ttscript}{quantile}
+\item[\Icode{sum}] \index{somme}somme des éléments
+<<echo=TRUE>>=
+sum(x)
+@
+\item[\Icode{prod}] \index{produit}produit des éléments
+<<echo=TRUE>>=
+prod(x)
+@
+\item[\Icode{diff}] \index{différences}différences entre les éléments
+  (opérateur mathématique $\nabla$)
+<<echo=TRUE>>=
+diff(x)
+@
+\item[\Icode{mean}] \index{moyenne}moyenne arithmétique
+<<echo=TRUE>>=
+mean(x)
+@
+\item[\Icode{var}] \index{variance}variance (et \index{ecart
+    type@écart type}écart type avec \Icode{sd})
+<<echo=TRUE>>=
+var(x)
+@
+\item[\Icode{min}] \index{minimum!valeur}minimum
+<<echo=TRUE>>=
+min(x)
+@
+\item[\Icode{max}] \index{maximum!valeur}maximum
+<<echo=TRUE>>=
+max(x)
+@
+\item[\Icode{range}] \index{etendue@étendue}étendue (minimum et
+  maximum)
+<<echo=TRUE>>=
+range(x)
+@
+\item[\Icode{median}] \index{mediane@médiane}médiane empirique
+<<echo=TRUE>>=
+median(x)
+@
+\item[\Icode{quantile}] \index{quantile}quantiles empiriques
+<<echo=TRUE>>=
+quantile(x)
+@
+\item[\Icode{summary}] principales statistiques descriptives
+<<echo=TRUE>>=
+summary(x)
+@
+\end{ttscript}
+
+
+\subsection{Sommaires cumulatifs et comparaisons élément par élément}
+\label{sec:premiers:internes:cumulatifs}
+
+Les exemples de cette sous-section utilisent le vecteur suivant.
+<<echo=FALSE>>=
+x <- c(14, 17, 7, 9, 3)
+@
+<<echo=TRUE>>=
+x
+@
+
+\begin{ttscript}{cumprod}
+\item[\Icode{cumsum}] \index{somme!cumulative}somme cumulative
+<<echo=TRUE>>=
+cumsum(x)
+@
+\item[\Icode{cumprod}] \index{produit!cumulatif}produit cumulatif
+<<echo=TRUE>>=
+cumprod(x)
+@
+\item[\Icode{cummin}] \index{minimum!cumulatif}minimum cumulatif
+<<echo=TRUE>>=
+cummin(x)
+@
+\item[\Icode{cummax}] \index{maximum!cumulatif}maximum cumulatif
+<<echo=TRUE>>=
+cummax(x)
+@
+\item[\Icode{pmin}] \index{minimum!parallèle}minimum élément par
+  élément (en parallèle)
+<<echo=TRUE>>=
+pmin(x, 12)
+@
+\item[\Icode{pmax}] \index{maximum!parallèle}maximum élément par
+  élément (en parallèle)
+<<echo=TRUE>>=
+pmax(x, c(16, 23,  4, 12,  3))
+@
+\end{ttscript}
+
+\gotorbox{Vous trouverez plusieurs exemples additionnels d'utilisation des
+  fonctions présentées dans cette section dans le code des lignes
+  \reflines{premiers:internes}
+  du fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:premiers:exemples}.}
 
 
 \section{Exemples}
 \label{sec:premiers:exemples}
-
-\def\scriptfilename{premiers.R}
 
 \scriptfile{\scriptfilename}
 \lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
