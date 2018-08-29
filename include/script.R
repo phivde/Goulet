@@ -1,5 +1,6 @@
 ## Fichier de script simple contenant des expressions R pour
-## faire des calculs et créer des objets.
+## faire des calculs et créer des objets. Tout le texte qui
+## suit le caractère # est ignoré.
 2 + 3
 
 ## Probabilité d'une loi de Poisson(10)

@@ -67,13 +67,13 @@ la toute simple fonction factorielle, à la
 \autoref{fig:presentation:scheme_vs_s}, tend à leur donner raison.
 
 \begin{figure}
-\begin{lstlisting}[frame=single,language=lisp]
+\begin{lstlisting}[frame=single,language=lisp,numbers=none]
 (define factorial (lambda (n)
   (if (= n 1)
       1
     (* n (factorial (- n 1))))))
 \end{lstlisting}
-\begin{lstlisting}[frame=single,language=R]
+\begin{lstlisting}[frame=single,language=R,numbers=none]
 factorial <- function(n)
   if (n == 1) 1 else n * factorial(n - 1)
 \end{lstlisting}
@@ -158,8 +158,8 @@ comme le montre la \autoref{fig:presentation:console}. En soi, cela
 n'est pas si différent d'un tableur tel que Excel: la zone d'entrée de
 texte dans une cellule n'est rien d'autre qu'une invite de
 commande\footnote{%
-  Merci à Markus Gesmann pour cette observation.}, par ailleurs aux
-capacités d'édition plutôt réduites.
+  Merci à Markus Gesmann pour cette observation.}, %
+par ailleurs aux capacités d'édition plutôt réduites.
 
 \begin{figure}
   \centering
@@ -185,9 +185,10 @@ avec la distribution de base de R.
 Peu importe la plateforme utilisée --- quoique dans une moindre mesure
 sous macOS --- je recommande d'interagir avec R par le biais d'un
 éditeur de texte pour programmeur ou d'un environnement de
-développement intégré; voir la \autoref{sec:presentation:editeurs}.
+développement intégré. Nous y reviendrons à la
+\autoref{sec:presentation:editeurs}.
 
-
+\enlargethispage{5mm}
 \section{Stratégies de travail}
 \label{sec:presentation:strategies}
 
@@ -249,21 +250,26 @@ nos expressions R et le code de nos fonctions personnelles. Par
 convention, on donne aux fichiers de script un nom se terminant avec
 l'extension \code{.R}.
 
+\tipbox{Dans les fichiers de script comme à la ligne de commande, le
+  caractère \code{\#} marque le début d'un
+  \index{commentaire}commentaire dans R. Ainsi, tout ce qui est inclus
+  entre ce caractère et le saut à la ligne suivant est complètement
+  ignoré par l'interpréteur.}
+
 Avec cette approche, les objets sont créés au besoin en exécutant le
 code des fichiers de script. Comment? Simplement en copiant le code du
 fichier de script et en le collant dans la ligne de commande de R. La
 \autoref{fig:presentation:script} illustre schématiquement ce que le
-programmeur R a constamment sous les yeux: d'un côté son fichier de
-script et, de l'autre, la ligne de commande R dans laquelle son code a
-été exécuté.
+programmeur R a constamment sous les yeux: son fichier de script et la
+ligne de commande R dans laquelle son code a été exécuté.
 
 La méthode d'apprentissage préconisée dans cet ouvrage suppose que
 vous utiliserez cette seconde approche d'interaction avec R.
 
 \begin{figure}
   \centering
-  \lstinputlisting[frame=single,language={}]{include/script.R}
-  \lstinputlisting[frame=single,language={},firstline=2]{include/script.Rout}
+  \lstinputlisting[frame=single,language={},numbers=none]{include/script.R}
+  \lstinputlisting[frame=single,language={},numbers=none,firstline=2]{include/script.Rout}
   \caption[Fichier de script et ligne de commande R]{Fichier de script
     (en haut) et ligne de commande R dans laquelle les expressions R
     ont été exécutées (en bas). Les lignes débutant par \code{\#} dans
@@ -285,7 +291,7 @@ vous utiliserez cette seconde approche d'interaction avec R.
     quitte à les réévaluer par la suite pour obtenir les valeurs
     correspondantes.
   \end{enumerate}
-  La seconde, surement{\dots} Or, sauvegarder l'espace de travail R
+  La seconde, assurément{\dots} Or, sauvegarder l'espace de travail R
   dans un fichier \code{.RData} (l'approche «objets réels, code
   virtuel») correspond à la première option, alors que sauvegarder
   le code source des fichiers de script correspond à la seconde.
