@@ -1264,6 +1264,7 @@ x[-c(6, 7, 12)]
 \end{exercice}
 
 \begin{exercice}
+  \label{ex:premiers:moyennes}
   Soit $\mat{x} = (x_1, \dots, x_n)$ et $\mat{y} = y_1, \dots, y_n$
   deux vecteurs de nombres réels. Composer des expressions R pour
   effectuer les calculs mathématiques ci-dessous. Vous pouvez utiliser
@@ -1325,85 +1326,6 @@ max(abs(x - y))
 \end{exercice}
 
 \begin{exercice}
-  Pour chacun des exercices b)--g) de l'exercice précédent, composer
-  une fonction R pour effectuer le calcul demandé. Nommer les
-  fonctions %
-  \code{amean}, %
-  \code{gmean}, %
-  \code{hmean}, %
-  \code{pscal}, %
-  \code{norm1} et %
-  \code{normINF}, %
-  dans l'ordre.
-  \begin{sol}
-    \begin{enumerate}
-      \stepcounter{enumi}
-    \item
-<<echo=TRUE, eval=FALSE>>=
-amean <- function(x) sum(x)/length(x)
-@
-    \item
-<<echo=TRUE, eval=FALSE>>=
-gmean <- function(x) prod(x)^(1/length(x))
-@
-    \item
-<<echo=TRUE, eval=FALSE>>=
-hmean <- function(x) 1/prod(1/x)
-@
-    \item
-<<echo=TRUE, eval=FALSE>>=
-pscal <- function(x, y) sum(x * y)
-@
-    \item
-<<echo=TRUE, eval=FALSE>>=
-norm1 <- function(x, y) sum(abs(x - y))
-@
-    \item
-<<echo=TRUE, eval=FALSE>>=
-normINF <- function(x, y) max(abs(x - y))
-@
-    \end{enumerate}
-  \end{sol}
-\end{exercice}
-
-\begin{exercice}
-  Soit la fonction \code{f} suivante:
-<<echo=FALSE>>=
-f <- function(x, y)
-{
-    g <- function(a)
-        (x - y) * a + a * x
-    g(1 + x * y)
-}
-@
-<<echo=TRUE>>=
-f
-@
-  Évaluer les résultats des appels suivants.
-  \begin{enumerate}
-  \item \code{f(1, 1)}
-  \item \code{f(f(1, 1), 1)}
-  \item \code{f(1, f(f(1, 1), 1))}
-  \end{enumerate}
-  \begin{sol}
-    \begin{enumerate}
-    \item
-<<echo=FALSE>>=
-f(1, 1)
-@
-    \item
-<<echo=FALSE>>=
-f(f(1, 1), 1)
-@
-    \item
-<<echo=FALSE>>=
-f(1, f(f(1, 1), 1))
-@
-    \end{enumerate}
-  \end{sol}
-\end{exercice}
-
-\begin{exercice}
   Une fonction R est définie ainsi:
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1432,6 +1354,43 @@ f <- function(x = 0, y = NULL, z) \meta{corps}
     \item \link{http://i0.kym-cdn.com/entries/icons/original/000/000/157/itsatrap.jpg}{C'est un piège!} %
       Cet appel n'est pas valide puisque l'argument \code{z} est
       manquant.
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Soit la fonction \code{f} suivante:
+<<echo=FALSE>>=
+f <- function(x, y)
+{
+    g <- function(a)
+        (x - y) * a + a * x
+    g(1 + x * y)
+}
+@
+<<echo=TRUE>>=
+f
+@
+  Évaluer les résultats des appels ci-dessous.
+  \begin{enumerate}
+  \item \code{f(1, 1)}
+  \item \code{f(f(1, 1), 1)}
+  \item \code{f(1, f(f(1, 1), 1))}
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+    \item
+<<echo=FALSE>>=
+f(1, 1)
+@
+    \item
+<<echo=FALSE>>=
+f(f(1, 1), 1)
+@
+    \item
+<<echo=FALSE>>=
+f(1, f(f(1, 1), 1))
+@
     \end{enumerate}
   \end{sol}
 \end{exercice}
