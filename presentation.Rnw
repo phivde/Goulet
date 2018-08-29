@@ -48,9 +48,10 @@ Dès la fin des années 1980 et pendant près de vingt ans, le S a été
 popularisé par une mise en œuvre commerciale nommée
 S-PLUS\index{S-PLUS}. En 2008, Lucent Technologies a vendu le langage
 S à Insightful Corporation, ce qui a effectivement stoppé le
-développement du langage par ses auteurs originaux. Aujourd'hui, le S
-est commercialisé de manière relativement confidentielle sous le nom
-Spotfire S$+$\index{S$+$} par TIBCO Software.
+développement du langage par ses auteurs originaux. Le système S a
+ensuite été commercialisé de manière relativement confidentielle sous
+le nom Spotfire S$+$\index{S$+$} par TIBCO Software. Le terme S$+$ est
+aujourd'hui disparu du nom du produit.
 
 Ce qui a fortement contribué à la perte d'influence de S-PLUS, c'est
 une nouvelle mise en œuvre du langage développée à partir du milieu
