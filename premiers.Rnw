@@ -157,7 +157,7 @@ certains opérateurs dans les chapitres subséquents.
   priorité des opérateurs dans les expressions R.}
 
 \gotorbox{Étudier et exécuter les lignes
-  \reflines{bases:fondamentales} du code informatique de la
+  \reflines{premiers:fondamentales} du code informatique de la
   \autoref{sec:premiers:exemples}.}
 
 \section{Commandes R}
@@ -966,7 +966,7 @@ la fonction à un objet.
 \section{Exemples}
 \label{sec:premiers:exemples}
 
-\def\scriptfilename{bases.R}
+\def\scriptfilename{premiers.R}
 
 \scriptfile{\scriptfilename}
 \lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
@@ -975,7 +975,7 @@ la fonction à un objet.
 \section{Exercices}
 \label{sec:premiers:exercices}
 
-\Opensolutionfile{solutions}[solutions-bases]
+\Opensolutionfile{solutions}[solutions-premiers]
 
 \begin{Filesave}{solutions}
 \section*{Chapitre \ref*{chap:premiers}}

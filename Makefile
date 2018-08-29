@@ -56,7 +56,7 @@ TEXFILES = \
 	couverture-arriere.tex
 SCRIPTS = \
 	presentation.R \
-	bases.R \
+	premiers.R \
 	implementation.R \
 	algorithmique.R \
 	donnees.R \
