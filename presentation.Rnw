@@ -250,7 +250,7 @@ nos expressions R et le code de nos fonctions personnelles. Par
 convention, on donne aux fichiers de script un nom se terminant avec
 l'extension \code{.R}.
 
-\tipbox{Dans les fichiers de script comme à la ligne de commande, le
+\importantbox{Dans les fichiers de script comme à la ligne de commande, le
   caractère \code{\#} marque le début d'un
   \index{commentaire}commentaire dans R. Ainsi, tout ce qui est inclus
   entre ce caractère et le saut à la ligne suivant est complètement
