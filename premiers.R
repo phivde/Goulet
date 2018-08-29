@@ -75,7 +75,47 @@ c(NULL, NULL)              # du néant ne résulte que le néant
 "foobar"                   # *une* chaine de 6 caractères
 length("foobar")           # longueur de 1
 c("foo", "bar")            # *deux* chaines de 3 caractères
-length(c("foo", "bar"))    # longueur de 2                    `\labelline{bases:fondamentales:fin}`
+length(c("foo", "bar"))    # longueur de 2
+
+## L'opérateur modulo retourne le reste d'une division.
+5 %% 2                     # 5/2 = 2 reste 1
+5 %% 1:5                   # remarquer la périodicité
+10 %% 1:15                 # x %% y = x si x < y
+
+## Un nombre 'x' est pair si 'x mod 2 = 0' et il est impair si
+## 'x mod 2 = 1'.
+a <- c("Impair", "Pair")
+x <- c(2, 3, 6, 8, 9, 11, 12)
+x %% 2                     # pair ou impair?
+2 - x %% 2                 # observer priorité des opérations
+a[2 - x %% 2]              # indiçage à répétition
+
+## La division entière retourne la partie entière de la
+## division d'un nombre par un autre.
+5 %/% 1:5
+10 %/% 1:15
+
+## L'opérateur à utiliser pour vérifier si deux valeurs sont
+## égales est '==', et non '='. Utiliser le mauvais opérateur
+## est une erreur commune --- et qui peut être difficile à
+## détecter --- lorsque l'on programme en R.
+5 = 2                      # erreur de syntaxe
+5 == 2                     # comparaison
+y = 2                      # pas un test...
+y                          # ... plutôt une affectation
+
+## Attention, toutefois: '==' vérifie l'égalité bit pour bit
+## dans la représentation interne des nombres dans
+## l'ordinateur. Ça fonctionne bien pour les entiers ou les
+## valeurs booléennes, mais pas pour les nombres réels ou,
+## plus insidieux, pour les nombres entiers provenant d'un
+## calcul et qui ne sont entiers qu'en apparence.
+##
+## [Pour en savoir (un peu) plus:
+##  http://floating-point-gui.de/formats/fp/]
+1.2 + 1.4 + 2.8            # 5.4 en apparence
+1.2 + 1.4 + 2.8 == 5.4     # non?!?
+0.3/0.1 == 3               # à gauche: faux entier            `\labelline{bases:fondamentales:fin}`
 
 ###
 ### COMMANDES R                                               `\labelline{bases:commandes}`

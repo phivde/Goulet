@@ -50,12 +50,12 @@ les procédures que l'ordinateur devra effectuer. Autrement dit, le
 type de langage de programmation que nous utilisons influence
 directement la solution que nous proposerons à un problème --- et vice
 versa. Comme nous l'avons déjà fait à la
-\autoref{sec:informatique:semantique}, dressons un parallèle avec les
-langues parlées et écrites: une langue ne constitue pas seulement un
-moyen de transmettre une idée, mais bien une façon de concevoir le
-monde. Ce n'est pas pour rien qu'il est parfois impossible de faire
-passer une idée d'une langue vers une autre --- ce que l'on appelle
-couramment une «expression intraduisible».
+\autoref{sec:informatique:concepts:semantique}, dressons un parallèle
+avec les langues parlées et écrites: une langue ne constitue pas
+seulement un moyen de transmettre une idée, mais bien une façon de
+concevoir le monde. Ce n'est pas pour rien qu'il est parfois
+impossible de faire passer une idée d'une langue vers une autre --- ce
+que l'on appelle couramment une «expression intraduisible».
 
 Le langage de programmation étudié ici est le R. Sa syntaxe, celle du
 langage \index{S}S, s'apparente au \index{C}C. En revanche, la
@@ -98,8 +98,8 @@ utiles pour la programmation mathématique et l'analyse de données.
 Nous reviendrons sur leurs caractéristiques à la
 \autoref{sec:premiers:objets}.
 
-Nous pouvons classer les procédures fondamentales en quatre grandes
-catégories:
+Nous pouvons classer les procédures fondamentales --- ou
+\index{opérateurs}\emph{opérateurs} --- en quatre grandes catégories:
 \begin{itemize}
 \item arithmétique: \verb|+ - * / ^ < >= ==|, etc.;
 \item logique: \verb=& | !=\,;
@@ -113,8 +113,7 @@ en détail à la section suivante.
 
 Le \autoref{tab:premiers:operateurs} présente les opérateurs les plus
 fréquemment employés en ordre décroissant de priorité des opérations.
-Ils sont accompagnés d'une description succincte. Nous reviendrons sur
-certains opérateurs dans les chapitres subséquents.
+Ils sont accompagnés d'une description succincte.
 
 \begin{table}
   \centering
@@ -142,7 +141,7 @@ certains opérateurs dans les chapitres subséquents.
                                                   différent de \\
     \verb=!=\index{"!@\code{"!}}  & négation logique \\
     \icode{\&}\, \icode{\&\&} & «et» logique \\
-    \code{\textbar}\index{{"|}@\code{\textbar}},
+    \code{\textbar}\index{{"|}@\code{\textbar}}\,
     \code{\textbar\textbar}\index{{"|"|}@\code{\textbar\textbar}} & «ou» logique \\
     \icode{->}\, \verb|->>|\index{->>@\verb=->>=} & affectation \\
     \icode{<-}\, \verb|<<-|\index{<<-@\verb=<<-=} & affectation \\
@@ -153,8 +152,26 @@ certains opérateurs dans les chapitres subséquents.
   \label{tab:premiers:operateurs}
 \end{table}
 
-\tipbox{Il est utile, voire essentiel, de connaître le niveau de
-  priorité des opérateurs dans les expressions R.}
+\tipbox{Les opérateurs de puissance \verb|^| et d'affectation
+  \icode{<-} sont évalués de droite à gauche; tous les autres le sont
+  de gauche à droite. Ainsi, \verb|2^2^3| est \verb|2^8|, et non
+  \verb|4^3|, alors que \verb|1 - 1 - 1| vaut \verb|-1|, et non
+  \verb|1|.}
+
+Comme la définition de la grande majorité des opérateurs coule de
+source, illustrons ici uniquement les opérateurs de modulo et de
+division entière.
+
+\begin{ttscript}{\%/\%}
+\item[\code{\%\%}] modulo (reste d'une division)
+<<echo=TRUE>>=
+5 %% 3
+@
+\item[\code{\%/\%}] division entière (partie entière d'une division)
+<<echo=TRUE>>=
+5 %/% 3
+@
+\end{ttscript}
 
 \gotorbox{Étudier et exécuter les lignes
   \reflines{premiers:fondamentales} du code informatique de la
