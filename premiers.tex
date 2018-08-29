@@ -1,0 +1,1604 @@
+%%% Copyright (C) 2018 Vincent Goulet
+%%%
+%%% Ce fichier fait partie du projet
+%%% «Programmer avec R»
+%%% https://gitlab.com/vigou3/programmer-avec-r
+%%%
+%%% Cette création est mise à disposition selon le contrat
+%%% Attribution-Partage dans les mêmes conditions 4.0
+%%% International de Creative Commons.
+%%% https://creativecommons.org/licenses/by-sa/4.0/
+
+\chapter{Premiers pas avec R}
+\label{chap:premiers}
+
+
+\begin{objectifs}
+\item Écrire et interpréter la syntaxe et la sémantique du langage R.
+\item Utiliser l'arithmétique vectorielle du langage R dans les
+  calculs.
+\item Créer et manipuler des vecteurs simples («atomiques»).
+\item Utiliser les divers modes des vecteurs (en particulier
+  \code{numeric}, \code{character} et \code{logical}) et la conversion
+  automatique de l'un à l'autre.
+\item Extraire des données d'un vecteur simple ou y affecter de
+  nouvelles valeurs à l'aide des méthodes d'indiçage.
+\item Appeler une fonction R; concevoir comment les arguments sont
+  passés à la fonction et le traitement des valeurs par défaut.
+\item Définir une fonction R, ses divers arguments et, le cas échéant,
+  les valeurs par défaut de ceux-ci.
+\item Utiliser et définir des fonctions R ayant un nombre variable
+  d'arguments.
+\end{objectifs}
+
+C'est dans ce chapitre que nous débutons réellement l'apprentissage de
+la programmation. Je l'avoue d'entrée de jeu: la présentation a
+fortement été influencée par l'ouvrage magistral de
+\cite{Sussman:scheme:1996}.
+
+Les humains créent des programmes informatiques pour contrôler, à
+l'aide d'un ensemble de règles, les processus de calcul et de
+manipulation de données d'un ordinateur. Ces programmes sont rédigés
+dans un langage de programmation.
+
+Un langage est toutefois plus qu'une simple manière de transmettre des
+instructions à un ordinateur, c'est aussi une façon de conceptualiser
+les procédures que l'ordinateur devra effectuer. Autrement dit, le
+type de langage de programmation que nous utilisons influence
+directement la solution que nous proposerons à un problème --- et vice
+versa. Comme nous l'avons déjà fait à la
+\autoref{sec:informatique:concepts:semantique}, dressons un parallèle
+avec les langues parlées et écrites: une langue ne constitue pas
+seulement un moyen de transmettre une idée, mais bien une façon de
+concevoir le monde. Ce n'est pas pour rien qu'il est parfois
+impossible de faire passer une idée d'une langue vers une autre --- ce
+que l'on appelle couramment une «expression intraduisible».
+
+Le langage de programmation étudié ici est le R. Sa syntaxe, celle du
+langage \index{S}S, s'apparente au \index{C}C. En revanche, la
+sémantique de R s'inspire du paradigme de la programmation
+fonctionnelle, ce qui lui confère de plus grandes affinités avec le
+\index{Lisp}Lisp et \index{APL}l'APL.
+
+Ce chapitre introduit des notions de base du langage R telles que
+l'expression, l'affectation, et l'objet. Le concept de vecteur se
+trouvant au cœur du langage, nous faisons une large place à la
+création et à la manipulation des vecteurs. Le chapitre se termine par
+la définition de fonctions.
+
+
+\section{Données et procédures fondamentales}
+\label{sec:premiers:fondamentales}
+
+À sa plus simple expression, la programmation est un exercice de
+manipulation de \emph{données} à l'aide de \emph{procédures}. Un
+langage de programmation fournit au programmeur des données et des
+procédures fondamentales (ou \emph{génériques}), des manières de les
+combiner pour former des éléments composés, ainsi qu'un mécanisme
+d'abstraction permettant de nommer et de manipuler ces éléments
+composés.
+
+Les données fondamentales de R sont les suivantes:
+\begin{itemize}
+\item nombres réels: \code{0, 1, 2, 78.42, -1.39}, \dots;
+\item chaines de caractères: \code{"a"}, \code{"abc"}, \dots;
+\item valeurs booléennes: \Icode{TRUE}, \Icode{FALSE};
+\item donnée manquante: \Icode{NA};
+\item infini positif et négatif: \Icode{Inf}, \code{-Inf};
+\item valeur indéterminée: \Icode{NaN};
+\item «néant»: \Icode{NULL};
+\item nombres complexes: \code{1 + 2i}.
+\end{itemize}
+La grande majorité des langages de programmation offrent les deux
+premiers type de données ci-dessus. Les autres types se révèlent très
+utiles pour la programmation mathématique et l'analyse de données.
+Nous reviendrons sur leurs caractéristiques à la
+\autoref{sec:premiers:objets}.
+
+Nous pouvons classer les procédures fondamentales --- ou
+\index{opérateurs}\emph{opérateurs} --- en quatre grandes catégories:
+\begin{itemize}
+\item arithmétique: \verb|+ - * / ^ < >= ==|, etc.;
+\item logique: \verb=& | !=\,;
+\item indiçage: \verb=[ ] $=\,;
+\item affectation: \verb|<-|\,.
+\end{itemize}
+Les opérations arithmétiques sont applicables aux nombres réels ou
+complexes, alors que les opérations logiques ne sont applicables
+qu'aux valeurs booléennes. Nous traitons de l'opération d'affectation
+en détail à la section suivante.
+
+Le \autoref{tab:premiers:operateurs} présente les opérateurs les plus
+fréquemment employés en ordre décroissant de priorité des opérations.
+Ils sont accompagnés d'une description succincte.
+
+\begin{table}
+  \centering
+  \renewcommand{\arraystretch}{1.1}
+  \begin{tabular}{lp{8cm}}
+    \toprule
+    Opérateur  & Fonction \\
+    \midrule
+    \icode{\$} & extraction d'une liste \\ %$
+    \icode{[}\, \icode{[[} & indiçage \\
+    \verb|^|\index{\string^@\verb=^=} & puissance \\
+    \icode{-} & changement de signe \\
+    {\NoAutoSpacing\verb|:|}\index{:@\NoAutoSpacing\verb=:=} & génération de suites \\
+    \icode{\%*\%}\, \icode{\%\%}\, \icode{\%/\%} & produit matriciel,
+                                                   modulo,
+                                                   division entière \\
+    \icode{*}\, \icode{/} & multiplication, division \\
+    \icode{+}\, \icode{-} & addition, soustraction \\
+    \icode{<}\, \icode{<=}\, \icode{==}\, \icode{>=}\,
+    \icode{>}\, \verb|!=|\index{"!=@\code{"!=}} & plus petit,
+                                                  plus petit ou égal,
+                                                  égal,
+                                                  plus grand ou égal,
+                                                  plus grand,
+                                                  différent de \\
+    \verb=!=\index{"!@\code{"!}}  & négation logique \\
+    \icode{\&}\, \icode{\&\&} & «et» logique \\
+    \code{\textbar}\index{{"|}@\code{\textbar}}\,
+    \code{\textbar\textbar}\index{{"|"|}@\code{\textbar\textbar}} & «ou» logique \\
+    \icode{->}\, \verb|->>|\index{->>@\verb=->>=} & affectation \\
+    \icode{<-}\, \verb|<<-|\index{<<-@\verb=<<-=} & affectation \\
+    \bottomrule
+  \end{tabular}
+  \caption{Principaux opérateurs du langage R, en ordre décroissant
+    de priorité}
+  \label{tab:premiers:operateurs}
+\end{table}
+
+\tipbox{Les opérateurs de puissance \verb|^| et d'affectation
+  \icode{<-} sont évalués de droite à gauche; tous les autres le sont
+  de gauche à droite. Ainsi, \verb|2^2^3| est \verb|2^8|, et non
+  \verb|4^3|, alors que \verb|1 - 1 - 1| vaut \verb|-1|, et non
+  \verb|1|.}
+
+Comme la définition de la grande majorité des opérateurs coule de
+source, illustrons ici uniquement les opérateurs de modulo et de
+division entière.
+
+\begin{ttscript}{\%/\%}
+\item[\code{\%\%}] modulo (reste d'une division)
+\begin{Schunk}
+\begin{Sinput}
+> 5 %% 3
+\end{Sinput}
+\begin{Soutput}
+[1] 2
+\end{Soutput}
+\end{Schunk}
+\item[\code{\%/\%}] division entière (partie entière d'une division)
+\begin{Schunk}
+\begin{Sinput}
+> 5 %/% 3
+\end{Sinput}
+\begin{Soutput}
+[1] 1
+\end{Soutput}
+\end{Schunk}
+\end{ttscript}
+
+\gotorbox{Étudier et exécuter les lignes
+  \reflines{premiers:fondamentales} du code informatique de la
+  \autoref{sec:premiers:exemples}.}
+
+\section{Commandes R}
+\label{sec:premiers:commandes}
+
+Nous l'avons déjà vu, l'interaction avec l'interpréteur R se fait par
+l'intermédiaire de commandes entrées à la ligne de commande. Or, toute
+commande R est soit une \emph{expression}\index{expression}, soit une
+\emph{affectation}\index{affectation}.
+
+\subsection{Expression}
+\label{sec:premiers:commandes:expression}
+
+Une \index{expression}expression R est une combinaison de symboles
+(noms de variables) et de procédures. Toute expression a une valeur.
+Le symbole d'une donnée fondamentale représente cette donnée, comme on
+pourrait s'y attendre.
+
+Lorsqu'une expression est entrée à la ligne de commande de
+l'interpréteur, elle est immédiatement évaluée et le résultat est
+affiché sous l'invite de commande \verb*|> | (le symbole \verb|>|
+suivi d'une espace).
+\begin{Schunk}
+\begin{Sinput}
+> 42
+\end{Sinput}
+\begin{Soutput}
+[1] 42
+\end{Soutput}
+\begin{Sinput}
+> 3 + 2i
+\end{Sinput}
+\begin{Soutput}
+[1] 3+2i
+\end{Soutput}
+\begin{Sinput}
+> 2 + 3
+\end{Sinput}
+\begin{Soutput}
+[1] 5
+\end{Soutput}
+\begin{Sinput}
+> pi
+\end{Sinput}
+\begin{Soutput}
+[1] 3.141593
+\end{Soutput}
+\begin{Sinput}
+> cos(pi/4)
+\end{Sinput}
+\begin{Soutput}
+[1] 0.7071068
+\end{Soutput}
+\end{Schunk}
+
+Lorsqu'une commande n'est pas syntaxiquement complète, l'invite de
+commande se change en \verb*|+ | pour nous inciter à compléter la
+commande.
+\begin{Schunk}
+\begin{Sinput}
+> 2 *
++ 3
+\end{Sinput}
+\begin{Soutput}
+[1] 6
+\end{Soutput}
+\end{Schunk}
+
+Il est possible de combiner plusieurs expressions ensemble pour en
+faire une expression composée. Celle-ci est évaluée de gauche à
+droite, à moins que des parenthèses ne viennent changer l'ordre
+d'évaluation, comme en mathématiques.
+\begin{Schunk}
+\begin{Sinput}
+> (2 + ((2 + 4 * 6) * (3 + 5 + 7)))/2
+\end{Sinput}
+\begin{Soutput}
+[1] 196
+\end{Soutput}
+\end{Schunk}
+
+\subsection{Affectation}
+\label{sec:premiers:commandes:affectation}
+
+Dans une affectation, une expression est évaluée, mais le résultat est
+stocké dans un \emph{objet} (ou \emph{variable}) dans l'espace de
+travail et rien n'est affiché à l'écran. Tel que mentionné
+précédemment, le symbole d'affectation est \icode{<-}, c'est-à-dire
+les deux caractères \verb|<| et \verb|-| placés obligatoirement l'un à
+la suite de l'autre.
+\begin{Schunk}
+\begin{Sinput}
+> a <- 5
+> a
+\end{Sinput}
+\begin{Soutput}
+[1] 5
+\end{Soutput}
+\begin{Sinput}
+> b <- a
+> b
+\end{Sinput}
+\begin{Soutput}
+[1] 5
+\end{Soutput}
+\end{Schunk}
+
+Pour affecter le résultat d'un calcul dans un objet et simultanément
+afficher ce résultat, il suffit de placer l'affectation entre
+parenthèses pour ainsi créer une nouvelle expression\footnote{%
+  En fait, cela devient un appel à l'opérateur \code{"("} qui ne fait
+  que retourner son argument.}.
+\begin{Schunk}
+\begin{Sinput}
+> (a <- 2 + 3)
+\end{Sinput}
+\begin{Soutput}
+[1] 5
+\end{Soutput}
+\end{Schunk}
+
+Le symbole d'affectation inversé \icode{->} existe aussi, mais il
+est rarement utilisé.
+
+\cautionbox{Évitez d'utiliser l'opérateur \,\icode{=}\, pour
+  affecter une valeur à une variable. Cette pratique est susceptible
+  d'engendrer de la confusion avec les constructions \code{symbole =
+    valeur} dans les appels de fonction. Les règles de syntaxe de R
+  commandent d'utiliser l'opérateur \code{<-} pour l'affectation,
+  point.}
+
+\subsection{Regroupement de commandes}
+\label{sec:premiers:commandes:regroupement}
+
+Dans les fichiers de script ou à la ligne de commande, on sépare
+généralement les commandes R les unes des autres par un retour à la
+ligne. Il est également possible de séparer les commandes par un
+\index{;@\code{;}}point-virgule. Employer les deux --- placer des
+points-virgules à la fin de chaque ligne de code --- est considéré
+comme du mauvais style, surtout dans les fichiers de script. Le
+point-virgule peut être utile pour séparer deux courtes expressions ou
+plus sur une même ligne. C'est le seul emploi que je fais du
+point-virgule.
+\begin{Schunk}
+\begin{Sinput}
+> a <- 5; a + 2
+\end{Sinput}
+\begin{Soutput}
+[1] 7
+\end{Soutput}
+\end{Schunk}
+
+On peut regrouper plusieurs commandes en une seule expression en les
+entourant d'accolades \Icode{\{~\}}. Le résultat du regroupement
+est la valeur de la \emph{dernière} commande. Par conséquent, si le
+regroupement se termine par une affectation, aucune valeur n'est
+retournée ni affichée à l'écran.
+\begin{Schunk}
+\begin{Sinput}
+> {
++     a <- 2 + 3
++     b <- a
++     b
++ }
+\end{Sinput}
+\begin{Soutput}
+[1] 5
+\end{Soutput}
+\end{Schunk}
+\begin{Schunk}
+\begin{Sinput}
+> {
++     a <- 2 + 3
++     b <- a
++ }
+\end{Sinput}
+\end{Schunk}
+
+
+\section{Objets R}
+\label{sec:premiers:objets}
+
+Tout dans le langage R est un objet: les variables contenant des
+données, les fonctions, les opérateurs, même le symbole représentant
+le nom d'un objet est lui-même un objet. Les objets possèdent au
+minimum un \emph{mode} et une \emph{longueur} et certains peuvent
+être dotés d'un ou de plusieurs \emph{attributs}.
+
+\subsection{Règles pour les noms d'objets}
+\label{sec:premiers:objets:noms}
+
+Les caractères permis pour les noms d'objets sont les lettres
+minuscules a--z et majuscules A--Z, les chiffres 0--9, le point «.» et
+le caractère de soulignement «\_». Selon l'environnement linguistique
+de l'ordinateur, il peut être permis d'utiliser des lettres accentuées
+dans les noms d'objet, mais je recommande fortement d'éviter cette
+pratique qui nuit à la portabilité du code. Le nom d'un objet ne peut
+débuter par un chiffre. Si le nom débute par un point, alors le second
+caractère ne peut être un chiffre.
+
+\warningbox{R est sensible à la casse, ce qui signifie que \code{foo},
+  \code{Foo} et \code{FOO} sont trois objets distincts.}
+
+Certains noms sont utilisés par le système R, aussi vaut-il mieux
+éviter de les utiliser comme nom de variable ou de fonction. En
+particulier, évitez:
+\begin{quote}
+  \code{c}, \code{q}, \code{t}, \code{C}, \code{D},
+  \code{I}, \code{diff}, \code{length}, \code{mean},
+  \code{pi}, \code{range}, \code{var}.
+\end{quote}
+De plus, certains mots sont réservés et il est interdit de les
+utiliser comme nom d'objet. Les mots réservés pour le système sont:
+\begin{quote}
+  \code{break}, \code{else}, \code{for}, \code{function}, \code{if},
+  \code{in}, \code{next}, \code{repeat}, \code{return}, \code{while}, \\
+  \code{TRUE}, \code{FALSE}, \\
+  \code{Inf}, \code{NA}, \code{NaN}, \code{NULL}, \\
+  \verb|NA_integer_|, \verb|NA_real_|, \verb|NA_complex_|,
+  \verb|NA_character_|, \\
+  \code{...}, \code{..1}, \code{..2}, etc.
+\end{quote}
+Oui, `\code{...}' (\emph{point-point-point}) est véritablement un nom
+d'objet dans R! Son usage est expliqué à la
+\autoref{sec:premiers:fonctions:definition}.
+
+Les variables \code{T}\index{T@\code{T}|see{\code{TRUE}}} et
+\code{F}\index{F@\code{F}|see{\code{FALSE}}} prennent par défaut les
+valeurs \icode{TRUE} et \icode{FALSE}, respectivement, mais peuvent
+être réaffectées.
+\begin{Schunk}
+\begin{Sinput}
+> T
+\end{Sinput}
+\begin{Soutput}
+[1] TRUE
+\end{Soutput}
+\begin{Sinput}
+> F
+\end{Sinput}
+\begin{Soutput}
+[1] FALSE
+\end{Soutput}
+\end{Schunk}
+\begin{Schunk}
+\begin{Sinput}
+> TRUE <- 3
+\end{Sinput}
+\begin{Soutput}
+Error in TRUE <- 3 : membre gauche de l'assignation
+(do_set) incorrect
+\end{Soutput}
+\end{Schunk}
+\begin{Schunk}
+\begin{Sinput}
+> (T <- 3)
+\end{Sinput}
+\begin{Soutput}
+[1] 3
+\end{Soutput}
+\end{Schunk}
+
+\tipbox{Écrivez toujours les valeurs booléennes \code{TRUE} et
+  \code{FALSE} au long pour éviter des bogues difficiles à détecter.}
+
+
+\subsection{Modes et types de données}
+\label{sec:premiers:objets:mode}
+
+Le mode\Index{mode} prescrit ce qu'un objet peut contenir. À ce titre,
+un objet ne peut avoir qu'un seul mode. Le \autoref{tab:premiers:modes}
+contient la liste des principaux modes disponibles en R. À chacun de
+ces modes correspond une fonction du même nom servant à créer un objet
+de ce mode. Le mode d'un objet est obtenu avec la fonction
+\Icode{mode}.
+\begin{Schunk}
+\begin{Sinput}
+> v <- c(1, 2, 5, 9)
+> mode(v)
+\end{Sinput}
+\begin{Soutput}
+[1] "numeric"
+\end{Soutput}
+\end{Schunk}
+
+\begin{table}
+  \centering
+  \begin{tabular}{ll}
+    \toprule
+    Mode              & Contenu de l'objet \\
+    \midrule
+    \icode{numeric}    & nombres réels \\
+    \icode{complex}    & nombres complexes \\
+    \icode{logical}    & valeurs booléennes \\
+    \icode{character}  & chaines de caractères \\
+    \icode{function}   & fonction \\
+    \icode{list}       & liste \\
+    \icode{expression} & expressions non évaluées \\
+    \bottomrule
+  \end{tabular}
+  \caption{Modes disponibles et contenus correspondants}
+  \label{tab:premiers:modes}
+\end{table}
+
+Les objets de mode \code{numeric}, \code{complex},
+\code{logical} et \code{character} sont des objets \emph{simples}
+(\emph{atomic}) qui contiennent des données d'un seul type. En
+revanche, les objets de mode \code{list} ou \code{expression} sont
+des objets \emph{récursifs} qui peuvent contenir d'autres objets. Par
+exemple, une liste peut contenir une ou plusieurs autres listes; nous
+y reviendrons au \autoref{chap:donnees}.
+
+\tipbox{La fonction \Icode{typeof} permet d'obtenir une description
+  plus précise de la représentation interne d'un objet (c'est-à-dire
+  au niveau de la mise en {\oe}uvre en C). Le mode et le type d'un
+  objet sont souvent identiques.}
+
+Plusieurs opérations --- notamment la création de vecteurs ou les
+opérations arithmétiques et logiques --- entrainent ce que l'on
+appelle la \emph{conversion forcée} (\emph{coercion}) d'un mode vers
+un autre. Nous y revenons plus loin.
+
+
+\subsection{Longueur}
+\label{sec:premiers:objets:longueur}
+
+La longueur\Index{longueur} d'un objet est égale au nombre d'éléments
+qu'il contient. La longueur d'un objet est obtenue avec la fonction
+\Icode{length}.
+\begin{Schunk}
+\begin{Sinput}
+> v <- c(1, 2, 5, 9)
+> length(v)
+\end{Sinput}
+\begin{Soutput}
+[1] 4
+\end{Soutput}
+\end{Schunk}
+
+\tipbox{Il est permis --- et parfois utile --- de créer un objet de
+  longueur nulle, c'est-à-dire un objet qui existe, mais qui est
+  vide.}
+
+Au sens R du terme, la longueur d'une chaine de caractères est
+toujours $1$. Un objet de mode \code{character} doit contenir
+plusieurs chaines de caractères pour que sa longueur soit supérieure à
+$1$. Il faut utiliser la fonction \Icode{nchar} pour obtenir le
+nombre de caractères dans une chaine.
+\begin{Schunk}
+\begin{Sinput}
+> v1 <- "actuariat"
+> length(v1)
+\end{Sinput}
+\begin{Soutput}
+[1] 1
+\end{Soutput}
+\begin{Sinput}
+> nchar(v1)
+\end{Sinput}
+\begin{Soutput}
+[1] 9
+\end{Soutput}
+\end{Schunk}
+\begin{Schunk}
+\begin{Sinput}
+> v2 <- c("a", "c", "t", "u", "a", "r", "i", "a", "t")
+> length(v2)
+\end{Sinput}
+\begin{Soutput}
+[1] 9
+\end{Soutput}
+\begin{Sinput}
+> nchar(v2)
+\end{Sinput}
+\begin{Soutput}
+[1] 1 1 1 1 1 1 1 1 1
+\end{Soutput}
+\end{Schunk}
+
+\subsection{Valeurs spéciales}
+\label{sec:premiers:objets:NA_et_al}
+
+Les objets valeur manquante (\code{NA}), infini (\code{Inf},
+\code{-Inf}), valeur indéterminée (\code{NaN}) et néant (\code{NULL})
+permettent de représenter de manière intuitive des quantités souvent
+utilisées dans les applications statistiques et en analyse de données.
+Pour pleinement tirer profit de ces objets, il faut connaitre leurs
+caractéristiques spéciales.
+
+L'objet \code{NA} sert à représenter une donnée manquante. Chose
+quelque peu surprenante, c'est un objet de mode \icode{logical}. Cependant,
+\code{NA} ne peut être considéré ni \code{TRUE}, ni \code{FALSE}.
+\begin{Schunk}
+\begin{Sinput}
+> mode(NA)
+\end{Sinput}
+\begin{Soutput}
+[1] "logical"
+\end{Soutput}
+\begin{Sinput}
+> length(NA)
+\end{Sinput}
+\begin{Soutput}
+[1] 1
+\end{Soutput}
+\begin{Sinput}
+> NA == TRUE
+\end{Sinput}
+\begin{Soutput}
+[1] NA
+\end{Soutput}
+\begin{Sinput}
+> NA == FALSE
+\end{Sinput}
+\begin{Soutput}
+[1] NA
+\end{Soutput}
+\end{Schunk}
+Toute opération, y compris la comparaison, impliquant la valeur
+\code{NA} a comme résultat \code{NA}. Par conséquent, la valeur
+\code{NA} n'est égale à aucune autre, pas même elle-même! Pour tester
+si une valeur est manquante, il faut avoir recours à la fonction
+\Icode{is.na}.
+\begin{Schunk}
+\begin{Sinput}
+> x <- NA
+> x == NA
+\end{Sinput}
+\begin{Soutput}
+[1] NA
+\end{Soutput}
+\begin{Sinput}
+> is.na(NA)
+\end{Sinput}
+\begin{Soutput}
+[1] TRUE
+\end{Soutput}
+\end{Schunk}
+
+Les objets \code{Inf}, \code{-Inf} et \code{NaN} permettent de
+représenter les valeurs mathématiques spéciales prévues dans la norme
+IEEE~754 régissant la représentation interne des nombres dans un
+ordinateur \citep{IEEE:754}. De manière intuitive, l'objet \icode{Inf}
+représente $+\infty$, \code{-Inf} représente $-\infty$ et \icode{NaN}
+(\emph{Not a Number}) représente une forme indéterminée du type
+$\frac{0}{0}$ ou $\infty - \infty$. Les fonctions
+\Icode{is.infinite}, \Icode{is.finite} et \Icode{is.nan}
+fournissent des manières robustes de tester ces valeurs.
+\begin{Schunk}
+\begin{Sinput}
+> is.infinite(1/0)
+\end{Sinput}
+\begin{Soutput}
+[1] TRUE
+\end{Soutput}
+\begin{Sinput}
+> is.finite(-1/0)
+\end{Sinput}
+\begin{Soutput}
+[1] FALSE
+\end{Soutput}
+\begin{Sinput}
+> is.nan(0/0)
+\end{Sinput}
+\begin{Soutput}
+[1] TRUE
+\end{Soutput}
+\begin{Sinput}
+> is.nan(Inf - Inf)
+\end{Sinput}
+\begin{Soutput}
+[1] TRUE
+\end{Soutput}
+\end{Schunk}
+
+Enfin, l'objet spécial \icode{NULL} représente «rien», ou le vide. Son
+mode est \code{NULL} et sa longueur est $0$. Il est toutefois
+différent d'un objet vide: un objet de longueur $0$ est un contenant
+vide, alors que \code{NULL} est «pas de contenant».
+\begin{Schunk}
+\begin{Sinput}
+> mode(NULL)
+\end{Sinput}
+\begin{Soutput}
+[1] "NULL"
+\end{Soutput}
+\begin{Sinput}
+> length(NULL)
+\end{Sinput}
+\begin{Soutput}
+[1] 0
+\end{Soutput}
+\begin{Sinput}
+> 1 + NULL
+\end{Sinput}
+\begin{Soutput}
+numeric(0)
+\end{Soutput}
+\end{Schunk}
+Ajouter \code{NULL} à un objet n'ajoute rien. Par ailleurs, la seule
+façon de tester si un objet est \code{NULL} est avec la fonction
+\Icode{is.null}.
+\begin{Schunk}
+\begin{Sinput}
+> c(3, NULL)
+\end{Sinput}
+\begin{Soutput}
+[1] 3
+\end{Soutput}
+\begin{Sinput}
+> x <- NULL
+> x == NULL
+\end{Sinput}
+\begin{Soutput}
+logical(0)
+\end{Soutput}
+\begin{Sinput}
+> is.null(NULL)
+\end{Sinput}
+\begin{Soutput}
+[1] TRUE
+\end{Soutput}
+\end{Schunk}
+
+
+\subsection{Attributs}
+\label{sec:premiers:objets:attributs}
+
+Les attributs\Index{attribut} d'un objet sont des éléments
+d'information additionnels attachés à cet objet. Le
+\autoref{tab:attributs} fournit la liste des attributs les plus
+fréquemment utilisés. À chacun des attributs du tableau correspond une
+fonction du même nom servant à extraire l'attribut d'un objet.
+
+\begin{table}
+  \centering
+  \begin{tabular}{ll}
+    \toprule
+    Attribut            & Utilisation \\
+    \midrule
+    \icode{class}    &
+    affecte le comportement d'un objet \\
+    \icode{dim}      &
+    dimensions\index{dimension} des matrices et tableaux \\
+    \icode{dimnames} &
+    étiquettes\index{etiquette@étiquette} des dimensions des matrices
+    et tableaux \\
+    \icode{names}    &
+    étiquettes des éléments d'un objet \\
+    \bottomrule
+  \end{tabular}
+  \caption{Attributs les plus usuels d'un objet}
+  \label{tab:attributs}
+\end{table}
+
+La fonction \Icode{attributes} permet d'extraire ou de modifier la
+liste des attributs d'un objet, alors que la fonction \Icode{attr}
+permet de travailler sur un seul attribut à la fois. Les programmeurs
+peuvent ajouter à peu près n'importe quoi à la liste des attributs
+d'un objet. Par exemple, nous pourrions vouloir attacher au résultat
+d'un calcul la méthode de calcul utilisée.
+\begin{Schunk}
+\begin{Sinput}
+> x <- 3
+> attr(x, "methode") <- "au pif"
+> attributes(x)
+\end{Sinput}
+\begin{Soutput}
+$methode
+[1] "au pif"
+\end{Soutput}
+\end{Schunk}
+
+L'extraction d'un attribut qui n'existe pas retourne \icode{NULL},
+alors qu'à l'inverse, affecter à un attribut la valeur \code{NULL}
+efface cet attribut.
+\begin{Schunk}
+\begin{Sinput}
+> attributes(x)
+\end{Sinput}
+\begin{Soutput}
+$methode
+[1] "au pif"
+\end{Soutput}
+\begin{Sinput}
+> dim(x)
+\end{Sinput}
+\begin{Soutput}
+NULL
+\end{Soutput}
+\begin{Sinput}
+> attr(x, "methode") <- NULL
+> attributes(x)
+\end{Sinput}
+\begin{Soutput}
+NULL
+\end{Soutput}
+\end{Schunk}
+
+
+\section{Vecteurs}
+\label{sec:premiers:vecteurs}
+
+En R, pratiquement, \emph{tout} est un
+vecteur\index{vecteur}. C'est aussi l'unité de base dans les calculs.
+Nous nous restreignons pour le moment aux vecteurs simples (atomiques)
+dans lesquels tous les éléments sont du même mode.
+
+\subsection{Création de vecteurs}
+\label{sec:premiers:vecteurs:creation}
+
+La fonction de base pour créer un vecteur est la fonction de
+concaténation \Icode{c}.
+\begin{Schunk}
+\begin{Sinput}
+> (x <- c(2, 5.1, 42))
+\end{Sinput}
+\begin{Soutput}
+[1]  2.0  5.1 42.0
+\end{Soutput}
+\end{Schunk}
+
+Les fonctions \Icode{numeric}, \Icode{logical} et
+\Icode{character} permettent également de créer des vecteurs du
+mode correspondant. Les fonctions prennent en argument la longueur du
+vecteur à créer. Celui-ci contiendra des valeurs initiales
+prédéterminées.
+\begin{Schunk}
+\begin{Sinput}
+> numeric(5)
+\end{Sinput}
+\begin{Soutput}
+[1] 0 0 0 0 0
+\end{Soutput}
+\begin{Sinput}
+> logical(7)
+\end{Sinput}
+\begin{Soutput}
+[1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+\end{Soutput}
+\begin{Sinput}
+> character(10)
+\end{Sinput}
+\begin{Soutput}
+ [1] "" "" "" "" "" "" "" "" "" ""
+\end{Soutput}
+\end{Schunk}
+
+Il est possible --- et souvent souhaitable --- de nommer les éléments
+d'un vecteur; on dit qu'on leur attribue une \emph{étiquette}. Les
+étiquettes sont enregistrées dans l'attribut \icode{names} du
+vecteur. Il y a deux grandes façons de procéder: en spécificant les
+noms dès la création du vecteur, ou à posteriori en ajoutant
+l'attribut au vecteur.
+\begin{Schunk}
+\begin{Sinput}
+> (v <- c(a = 1, b = 2, c = 5))
+\end{Sinput}
+\begin{Soutput}
+a b c
+1 2 5
+\end{Soutput}
+\begin{Sinput}
+> names(v)
+\end{Sinput}
+\begin{Soutput}
+[1] "a" "b" "c"
+\end{Soutput}
+\end{Schunk}
+\begin{Schunk}
+\begin{Sinput}
+> (v <- c(1, 2, 5))
+\end{Sinput}
+\begin{Soutput}
+[1] 1 2 5
+\end{Soutput}
+\begin{Sinput}
+> names(v) <- c("a", "b", "c")
+> v
+\end{Sinput}
+\begin{Soutput}
+a b c
+1 2 5
+\end{Soutput}
+\end{Schunk}
+
+Si l'on tente de créer un vecteur simple avec des objets de modes
+différents, R effectuera une \index{conversion forcée}conversion
+forcée vers un \index{mode}mode unique. Celui-ci est choisi pour
+minimiser la perte d'information sur les objets originaux.
+\begin{Schunk}
+\begin{Sinput}
+> c(2, TRUE, FALSE)
+\end{Sinput}
+\begin{Soutput}
+[1] 2 1 0
+\end{Soutput}
+\begin{Sinput}
+> c(2, FALSE, "a")
+\end{Sinput}
+\begin{Soutput}
+[1] "2"     "FALSE" "a"
+\end{Soutput}
+\end{Schunk}
+
+
+\subsection{Indiçage}
+\label{sec:premiers:vecteurs:indicage}
+
+L'indiçage\Index{indiçage!vecteur} des vecteurs est une procédure
+beaucoup utilisée dans le langage R, aussi est-il important d'en
+maitriser toutes les subtilités. L'opération sert principalement à
+deux choses: extraire des éléments d'un objet avec la construction
+\verb|x[i]|\icode{[}, ou remplacer des éléments avec la
+construction \verb|x[i] <- y|\Icode{[<-}.
+
+Dans un cas comme dans l'autre, il faut d'abord indicer le vecteur. Il
+existe cinq façons de le faire, toujours à l'intérieur de crochets
+\code{[~]}.
+\begin{enumerate}
+\item Avec un vecteur d'entiers positifs (extraction par position).
+  Les éléments se trouvant aux positions correspondant aux entiers
+  sont extraits du vecteur, dans l'ordre. C'est la technique la plus
+  courante.
+\begin{Schunk}
+\begin{Sinput}
+> x <- c(A = 2, B = 4, C = -1, D = -5, E = 8)
+> x[c(1, 3)]
+\end{Sinput}
+\begin{Soutput}
+ A  C
+ 2 -1
+\end{Soutput}
+\end{Schunk}
+\item Avec un vecteur d'entiers négatifs (suppression par position).
+  Les éléments se trouvant aux positions correspondant aux entiers
+  négatifs sont \emph{éliminés} du vecteur.
+\begin{Schunk}
+\begin{Sinput}
+> x[c(-2, -3)]
+\end{Sinput}
+\begin{Soutput}
+ A  D  E
+ 2 -5  8
+\end{Soutput}
+\end{Schunk}
+\item Avec un vecteur booléen (extraction par critère). Le vecteur
+  d'indiçage doit alors être de la même longueur que le vecteur
+  indicé. Les éléments correspondant à une valeur \code{TRUE} sont
+  extraits du vecteur, alors que ceux correspondant à \code{FALSE}
+  sont éliminés.
+\begin{Schunk}
+\begin{Sinput}
+> x > 0
+\end{Sinput}
+\begin{Soutput}
+    A     B     C     D     E
+ TRUE  TRUE FALSE FALSE  TRUE
+\end{Soutput}
+\begin{Sinput}
+> x[x > 0]
+\end{Sinput}
+\begin{Soutput}
+A B E
+2 4 8
+\end{Soutput}
+\end{Schunk}
+\item Avec un vecteur de chaines de caractères (extraction par nom).
+  Les éléments dont l'étiquette correspond à l'une des chaines sont
+  extraits du vecteur. Ce mode d'indiçage par le nom a comme principal
+  avantage de permettre l'extraction d'éléments d'un vecteur
+  indépendamment de leur position dans celui-ci.
+\begin{Schunk}
+\begin{Sinput}
+> x[c("B", "D")]
+\end{Sinput}
+\begin{Soutput}
+ B  D
+ 4 -5
+\end{Soutput}
+\end{Schunk}
+\item L'indice est laissé vide. Tous les éléments du vecteur sont
+  alors sélectionnés.
+\begin{Schunk}
+\begin{Sinput}
+> x[]
+\end{Sinput}
+\begin{Soutput}
+ A  B  C  D  E
+ 2  4 -1 -5  8
+\end{Soutput}
+\end{Schunk}
+  Cette méthode est essentiellement utilisée avec les matrices et
+  tableaux pour sélectionner tous les éléments d'une dimension; nous y
+  reviendrons au \autoref{chap:donnees}. Laisser l'indice vide est
+  différent d'indicer avec un vecteur vide. Cette dernière opération
+  retourne un vecteur vide.
+\end{enumerate}
+
+\tipbox{Il n'est pas inutile de savoir que les opérations d'extraction
+  et de remplacement sont en fait traduites par l'interpréteur R en
+  des appels à des fonctions nommées \icode{[} et \icode{[<-},
+  dans l'ordre.}
+
+\subsection{Arithmétique vectorielle}
+\label{sec:premiers:vecteurs:arithmetique}
+
+L'arithmétique vectorielle de R constitue l'une des grandes forces du
+langage. Elle permet de réaliser une grande variété de calculs sans
+avoir recours à des procédures itératives (boucles).
+
+Les procédures fondamentales de la \autoref{sec:premiers:fondamentales}
+peuvent toutes opérer sur les vecteurs en effectuant les opérations
+\emph{élément par élément}. C'est la première règle de base de
+l'arithmétique vectorielle dans R.
+\begin{Schunk}
+\begin{Sinput}
+> c(1, 2, 3) + c(4, 5, 6)
+\end{Sinput}
+\begin{Soutput}
+[1] 5 7 9
+\end{Soutput}
+\begin{Sinput}
+> 1:3 * 4:6
+\end{Sinput}
+\begin{Soutput}
+[1]  4 10 18
+\end{Soutput}
+\end{Schunk}
+
+La seconde règle de base se rapporte aux opérations entre des vecteurs
+de longueurs différentes. Dans de tels cas, les vecteurs les plus
+courts sont \emph{recyclés} autant de fois que nécessaire pour
+correspondre au plus long vecteur. Cette règle est particulièrement
+apparente avec les vecteurs de longueur $1$.
+\begin{Schunk}
+\begin{Sinput}
+> 1:10 + 2
+\end{Sinput}
+\begin{Soutput}
+ [1]  3  4  5  6  7  8  9 10 11 12
+\end{Soutput}
+\end{Schunk}
+
+Si la longueur du plus long vecteur est un multiple de celle du ou des
+autres vecteurs, ces derniers sont recyclés un nombre entier de fois.
+\begin{Schunk}
+\begin{Sinput}
+> 1:10 + 1:5 + c(2, 4)
+\end{Sinput}
+\begin{Soutput}
+ [1]  4  8  8 12 12 11 11 15 15 19
+\end{Soutput}
+\end{Schunk}
+
+Autrement, le plus court vecteur est recyclé un nombre fractionnaire
+de fois, mais comme ce résultat est rarement celui souhaité et qu'il
+provient généralement d'une erreur de programmation, un avertissement
+est affiché.
+\begin{Schunk}
+\begin{Sinput}
+> 1:10 + c(2, 4, 6)
+\end{Sinput}
+\begin{Soutput}
+ [1]  3  6  9  6  9 12  9 12 15 12
+Message d'avis :
+In 1:10 + c(2, 4, 6) :
+la taille d'un objet plus long n'est pas un multiple de la
+taille d'un objet plus court
+\end{Soutput}
+\end{Schunk}
+
+\cautionbox{La règle de recyclage des vecteurs fait en sorte qu'il y a
+  très peu d'erreurs de longueur dans R. Qu'une expression soit
+  valide ne signifie donc pas qu'elle effectue le bon calcul!}
+
+Il tombe sous le sens que les opérations arithmétiques sont conçues
+pour des arguments de \index{mode}mode \icode{numeric} et les
+opérations logiques, pour des arguments de mode \icode{logical}. Si un
+argument n'est pas du bon mode, R effectuera une \index{conversion
+  forcée}conversion forcée vers le mode approprié. En particulier, les
+valeurs booléennes \code{TRUE} et \code{FALSE} se verront converties
+en $1$ et $0$, respectivement, dans les opérations arithmétiques. À
+l'inverse, dans les opérations logiques, $0$ est converti en
+\code{FALSE} et \emph{tout} autre nombre est converti en
+\code{TRUE}.
+\begin{Schunk}
+\begin{Sinput}
+> 2 + c(TRUE, FALSE)
+\end{Sinput}
+\begin{Soutput}
+[1] 3 2
+\end{Soutput}
+\begin{Sinput}
+> c(0, 5, -1) & TRUE
+\end{Sinput}
+\begin{Soutput}
+[1] FALSE  TRUE  TRUE
+\end{Soutput}
+\end{Schunk}
+
+
+\section{Appel d'une fonction}
+\label{sec:premiers:appel}
+
+Nous avons mentionné au début de la
+\autoref{sec:premiers:fondamentales} qu'un langage de programmation
+doit fournir un mécanisme d'abstraction pour utiliser les éléments
+composés. La possibilité qu'offre R de définir des objets contenant
+des valeurs constitue une première technique. La définition de
+\index{fonctions}\emph{fonctions} --- le nom que nous donnerons
+dorénavant au concept de \index{procédure}procédure --- est une
+technique d'abstration encore plus puissante, puisqu'elle permet de
+faire référence par un seul nom à toute une suite d'opérations.
+
+Au-delà des opérateurs de base, le langage R compte un très grand
+nombre (des milliers!) de fonctions internes. Cette section passe en
+revue les règles d'appel d'une fonction. Nous étudierons au
+\autoref{chap:fonctions} comment composer vos propres fonctions.
+Celles-ci obéiront aux mêmes règles d'appel.
+
+Un \index{fonction!appel}appel de fonction est constitué du nom de
+l'objet suivi obligatoirement de parenthèses \code{(~)} et, le cas
+échéant, d'arguments entre ces parenthèses.
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+\meta{nom\_fonction}(\meta{arguments})
+\end{Verbatim}
+\end{Schunk}
+
+Regardons cela de plus près. Aux fins d'illustrations, nous
+définissons une petite fonction \code{foo} qui calcule la quantité
+\begin{equation*}
+  d = \sum_{i = 1}^n |x_i - y_i|^p
+\end{equation*}
+pour deux vecteurs $\mat{x} = (x_1, \dots, x_n)$ et
+$\mat{y} = (y_1, \dots, y_n)$ et une valeur $p$. La définition --- ou
+le \index{prototype}prototype --- de la fonction apparait ci-dessous.
+\begin{Schunk}
+\begin{Sinput}
+> foo
+\end{Sinput}
+\begin{Soutput}
+function(x, y = 0, p = 2) sum(abs(x - y)^p)
+\end{Soutput}
+\end{Schunk}
+
+Vous remarquerez que la fonction fait elle-même appel à deux fonctions
+internes (\icode{sum} et \icode{abs}) ainsi qu'à deux opérateurs de base
+(\code{-} et \verb|^|).
+
+La fonction compte trois arguments. La construction \code{symbole =
+  défaut} indique la valeur par défaut de l'argument \code{symbole},
+c'est-à-dire la valeur de l'argument si aucune n'est spécifiée dans
+l'appel de la fonction. Ainsi, seul le premier argument de \code{foo}
+n'a pas de valeur par défaut. La valeur par défaut de l'argument
+\code{y} est $0$ et celle de l'argument \code{p}, $2$.
+
+L'ordre des arguments dans la définition de la fonction est important.
+Nous avons deux choix au moment d'appeler une fonction:
+\begin{enumerate}
+\item spécifier les valeurs des arguments dans le bon ordre; ou
+\item nommer explicitement les arguments avec une construction de la
+  forme \code{symbole = expression}, auquel cas l'ordre n'importe
+  plus.
+\end{enumerate}
+Si certains arguments sont nommés et d'autre pas, ces derniers
+reçoivent des valeurs selon leur ordre dans la définition de la
+fonction, et non selon leur position dans l'appel.
+
+Il est beaucoup plus prudent et \emph{fortement recommandé} de
+spécifier les arguments par leur nom, surtout après les deux ou trois
+premiers arguments.
+\begin{Schunk}
+\begin{Sinput}
+> foo(c(3, 2), c(1, 1), 2)
+\end{Sinput}
+\begin{Soutput}
+[1] 5
+\end{Soutput}
+\begin{Sinput}
+> foo(y = c(1, 1), c(3, 2), 2)
+\end{Sinput}
+\begin{Soutput}
+[1] 5
+\end{Soutput}
+\begin{Sinput}
+> foo(y = c(1, 1), p = 2, c(3, 2))
+\end{Sinput}
+\begin{Soutput}
+[1] 5
+\end{Soutput}
+\end{Schunk}
+
+Il n'est pas nécessaire de spécifier une valeur pour un argument
+disposant d'une valeur par défaut. Cependant, si l'on omet un tel
+argument, il faudra nommer les arguments qui suivent, le cas échéant.
+\begin{Schunk}
+\begin{Sinput}
+> foo(c(3, 2))
+\end{Sinput}
+\begin{Soutput}
+[1] 13
+\end{Soutput}
+\begin{Sinput}
+> foo(c(3, 2), p = 3)
+\end{Sinput}
+\begin{Soutput}
+[1] 35
+\end{Soutput}
+\end{Schunk}
+
+\citet[section~4.3.2]{R-lang} fournit les détails sur le mécanisme de
+pairage entre les arguments d'une fonction et des valeurs qui lui sont
+passées.
+
+\tipbox{L'interpréteur R reconnait un appel de fonction au fait que le
+  nom de l'objet est suivi de parenthèses \code{(~)}.}
+
+
+\section{Exemples}
+\label{sec:premiers:exemples}
+
+\def\scriptfilename{premiers.R}
+
+\scriptfile{\scriptfilename}
+\lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
+
+
+\section{Exercices}
+\label{sec:premiers:exercices}
+
+\Opensolutionfile{solutions}[solutions-premiers]
+
+\begin{Filesave}{solutions}
+\section*{Chapitre \ref*{chap:premiers}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:premiers}}
+
+\end{Filesave}
+
+Il est possible de compléter tous les exercices ci-dessous sans avoir
+recours à R, sinon pour vérifier vos réponses. (En fait, les exercices
+sont de peu d'intérêt autrement.)
+
+\begin{exercice}
+  Évaluer les expressions suivantes comme le ferait l'interpréteur R.
+  \begin{enumerate}
+  \item \verb|1:5 * c(0, 1, 0, 1, 0)|
+  \item \verb|c(2, 7, 1, 4) > 3|
+  \item \verb|c(2, 7, 1, 4) <= c(10, 4)|
+  \item \verb|c(-1, 2, 4)^(3:-2)|
+  \item \verb|c(TRUE, FALSE, FALSE) & c(TRUE, TRUE, FALSE)|
+  \item \verb=c(TRUE, FALSE, FALSE) | !2 < 3=
+  \item \verb|-1:1/0|
+  \item \verb|length(c("a", "abc", "ab"))|
+  \item \verb|x <- c(-1, -2, -3); length(x)|
+  \item \verb|mode(c(45.44, pi, TRUE))|
+  \item \verb|mode(c(5, "5", "cinq"))|
+  \item \verb|length(c(c(1, 3, 6, 7), NULL))|
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+    \item Produit élément par élément entre deux vecteurs.
+\begin{Schunk}
+\begin{Soutput}
+[1] 0 2 0 4 0
+\end{Soutput}
+\end{Schunk}
+     \item Comparaison élément par élément, le second vecteur étant
+       utilisé quatre fois.
+\begin{Schunk}
+\begin{Soutput}
+[1] FALSE  TRUE FALSE  TRUE
+\end{Soutput}
+\end{Schunk}
+     \item Comparaison élément par élément, le second vecteur étant
+       utilisé deux fois.
+\begin{Schunk}
+\begin{Soutput}
+[1]  TRUE FALSE  TRUE  TRUE
+\end{Soutput}
+\end{Schunk}
+     \item Élévation à une puissance élément par élément, le premier
+       vecteur étant utilisé deux fois.
+\begin{Schunk}
+\begin{Soutput}
+[1] -1.0000  4.0000  4.0000  1.0000  0.5000  0.0625
+\end{Soutput}
+\end{Schunk}
+     \item «Et» logique élément par élément.
+\begin{Schunk}
+\begin{Soutput}
+[1]  TRUE FALSE FALSE
+\end{Soutput}
+\end{Schunk}
+     \item Attention à la priorité des opérations! En vertu des
+       priorités énoncées au \autoref{tab:premiers:operateurs}, les
+       opérations sont effectuées dans cet ordre: inégalité
+       (\verb=<=), négation logique (\verb=!=) , «ou» logique
+       (\verb=|=).
+\begin{Schunk}
+\begin{Soutput}
+[1]  TRUE FALSE FALSE
+\end{Soutput}
+\end{Schunk}
+     \item Encore ici, la génération d'une suite a priorité sur la
+       division.
+\begin{Schunk}
+\begin{Soutput}
+[1] -Inf  NaN  Inf
+\end{Soutput}
+\end{Schunk}
+     \item Vecteur de trois chaines de caractères, peu importe leur
+       longueur.
+\begin{Schunk}
+\begin{Soutput}
+[1] 3
+\end{Soutput}
+\end{Schunk}
+     \item
+\begin{Schunk}
+\begin{Soutput}
+[1] 3
+\end{Soutput}
+\end{Schunk}
+     \item La valeur booléenne est convertie en nombre réel.
+\begin{Schunk}
+\begin{Soutput}
+[1] "numeric"
+\end{Soutput}
+\end{Schunk}
+     \item Le nombre réel est converti en chaine de caractères.
+\begin{Schunk}
+\begin{Soutput}
+[1] "character"
+\end{Soutput}
+\end{Schunk}
+     \item Concaténer \code{NULL} à un vecteur n'ajoute rien (ou du
+       vide, qui n'a pas de longueur).
+\begin{Schunk}
+\begin{Soutput}
+[1] 4
+\end{Soutput}
+\end{Schunk}
+     \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  \index{indiçage!vecteur}
+  Soit \code{x} un vecteur contenant les valeurs d'un échantillon:
+  \begin{center}
+\begin{Schunk}
+\begin{Sinput}
+> x
+\end{Sinput}
+\begin{Soutput}
+ [1] 18 11 10  2 19  9 12 15 13 12  1  6
+\end{Soutput}
+\end{Schunk}
+  \end{center}
+  Écrire des expressions R pour créer ce vecteur dans l'espace de
+  travail et pour extraire les éléments suivants.
+  \begin{enumerate}
+  \item Le deuxième élément de l'échantillon.
+  \item Les cinq premiers éléments de l'échantillon.
+  \item Les éléments strictement supérieurs à $14$.
+  \item Tous les éléments sauf ceux en positions $6$, $7$ et $12$.
+  \end{enumerate}
+  \begin{sol}
+    On crée d'abord le vecteur avec
+\begin{Schunk}
+\begin{Sinput}
+> x <- c(18, 11, 10, 2, 19, 9, 12, 15, 13, 12, 1, 6)
+\end{Sinput}
+\end{Schunk}
+    \begin{enumerate}
+\item
+\begin{Schunk}
+\begin{Sinput}
+> x[2]
+\end{Sinput}
+\end{Schunk}
+\item
+\begin{Schunk}
+\begin{Sinput}
+> x[1:5]
+\end{Sinput}
+\end{Schunk}
+\item
+\begin{Schunk}
+\begin{Sinput}
+> x[x > 14]
+\end{Sinput}
+\end{Schunk}
+\item
+\begin{Schunk}
+\begin{Sinput}
+> x[-c(6, 7, 12)]
+\end{Sinput}
+\end{Schunk}
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Soit $\mat{x} = (x_1, \dots, x_n)$ et $\mat{y} = y_1, \dots, y_n$
+  deux vecteurs de nombres réels. Composer des expressions R pour
+  effectuer les calculs mathématiques ci-dessous. Vous pouvez utiliser
+  les fonctions R suivantes:
+  \begin{itemize}
+  \item \icode{sum} pour calculer la somme des éléments d'un
+    vecteur;
+  \item \icode{prod} pour calculer le produit des éléments d'un
+    vecteur;
+  \item \icode{max} pour calculer le maximum d'un vecteur;
+  \item \icode{abs} pour calculer la valeur absolue de chacun des
+    éléments d'un vecteur.
+  \end{itemize}
+  \begin{enumerate}
+  \item $3 (\mat{x} + \mat{y})$
+  \item $n^{-1} \sum_{i = 1}^n x_i$ (moyenne arithmétique de $\mat{x}$)
+  \item $(\prod_{i = 1}^n x_i)^{1/n}$ (moyenne géométrique de $\mat{x}$)
+  \item $1/(\prod_{i = 1}^n x_i^{-1})$ (moyenne harmonique de
+    $\mat{x}$)
+  \item $\langle \mat{x}, \mat{y} \rangle = \sum_{i = 1}^n x_i y_i$
+    (produit scalaire entre $\mat{x}$ et $\mat{y}$)
+  \item $\|\mat{x} - \mat{y}\|_1 = \sum_{i = 1}^n |x_i -
+    y_i|$ (norme $1$ entre $\mat{x}$ et $\mat{y}$)
+  \item $\|\mat{x} - \mat{y}\|_\infty = \max_{i = 1, \dots, n}(|x_i -
+    y_i|)$ (norme «infini» entre $\mat{x}$ et $\mat{y}$)
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+    \item
+\begin{Schunk}
+\begin{Sinput}
+> 3 * (x + y)
+\end{Sinput}
+\end{Schunk}
+    \item
+\begin{Schunk}
+\begin{Sinput}
+> sum(x)/length(x)
+\end{Sinput}
+\end{Schunk}
+    \item
+\begin{Schunk}
+\begin{Sinput}
+> prod(x)^(1/length(x))
+\end{Sinput}
+\end{Schunk}
+    \item
+\begin{Schunk}
+\begin{Sinput}
+> 1/prod(1/x)
+\end{Sinput}
+\end{Schunk}
+    \item
+\begin{Schunk}
+\begin{Sinput}
+> sum(x * y)
+\end{Sinput}
+\end{Schunk}
+    \item
+\begin{Schunk}
+\begin{Sinput}
+> sum(abs(x - y))
+\end{Sinput}
+\end{Schunk}
+    \item
+\begin{Schunk}
+\begin{Sinput}
+> max(abs(x - y))
+\end{Sinput}
+\end{Schunk}
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Pour chacun des exercices b)--g) de l'exercice précédent, composer
+  une fonction R pour effectuer le calcul demandé. Nommer les
+  fonctions %
+  \code{amean}, %
+  \code{gmean}, %
+  \code{hmean}, %
+  \code{pscal}, %
+  \code{norm1} et %
+  \code{normINF}, %
+  dans l'ordre.
+  \begin{sol}
+    \begin{enumerate}
+      \stepcounter{enumi}
+    \item
+\begin{Schunk}
+\begin{Sinput}
+> amean <- function(x) sum(x)/length(x)
+\end{Sinput}
+\end{Schunk}
+    \item
+\begin{Schunk}
+\begin{Sinput}
+> gmean <- function(x) prod(x)^(1/length(x))
+\end{Sinput}
+\end{Schunk}
+    \item
+\begin{Schunk}
+\begin{Sinput}
+> hmean <- function(x) 1/prod(1/x)
+\end{Sinput}
+\end{Schunk}
+    \item
+\begin{Schunk}
+\begin{Sinput}
+> pscal <- function(x, y) sum(x * y)
+\end{Sinput}
+\end{Schunk}
+    \item
+\begin{Schunk}
+\begin{Sinput}
+> norm1 <- function(x, y) sum(abs(x - y))
+\end{Sinput}
+\end{Schunk}
+    \item
+\begin{Schunk}
+\begin{Sinput}
+> normINF <- function(x, y) max(abs(x - y))
+\end{Sinput}
+\end{Schunk}
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Soit la fonction \code{f} suivante:
+\begin{Schunk}
+\begin{Sinput}
+> f
+\end{Sinput}
+\begin{Soutput}
+function(x, y)
+{
+    g <- function(a)
+        (x - y) * a + a * x
+    g(1 + x * y)
+}
+\end{Soutput}
+\end{Schunk}
+  Évaluer les résultats des appels suivants.
+  \begin{enumerate}
+  \item \code{f(1, 1)}
+  \item \code{f(f(1, 1), 1)}
+  \item \code{f(1, f(f(1, 1), 1))}
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+    \item
+\begin{Schunk}
+\begin{Soutput}
+[1] 2
+\end{Soutput}
+\end{Schunk}
+    \item
+\begin{Schunk}
+\begin{Soutput}
+[1] 9
+\end{Soutput}
+\end{Schunk}
+    \item
+\begin{Schunk}
+\begin{Soutput}
+[1] -70
+\end{Soutput}
+\end{Schunk}
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Une fonction R est définie ainsi:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+f <- function(x = 0, y = NULL, z) \meta{corps}
+\end{Verbatim}
+\end{Schunk}
+  Déterminer la valeur des arguments \code{x}, \code{y} et \code{z}
+  dans les appels de fonction ci-dessous.
+  \begin{enumerate}
+  \item \code{f(2, 3, 4)}
+  \item \code{f(2, z = 3, y = 4)}
+  \item \code{f(x = 2, z = 3)}
+  \item \code{f(z = 2, 3, x = 4)}
+  \item \code{f(z = 2)}
+  \item \code{f(z = 2, 3, 4)}
+  \item \code{f(2, 3)}
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+    \item \code{x = 2}, \code{y = 3}, \code{z = 4}
+    \item \code{x = 2}, \code{y = 4}, \code{z = 3}
+    \item \code{x = 2}, \code{y = NULL}, \code{z = 3}
+    \item \code{x = 4}, \code{y = 3}, \code{z = 2}
+    \item \code{x = 0}, \code{y = NULL}, \code{z = 2}
+    \item \code{x = 3}, \code{y = 4}, \code{z = 2}
+    \item \link{http://i0.kym-cdn.com/entries/icons/original/000/000/157/itsatrap.jpg}{C'est un piège!} %
+      Cet appel n'est pas valide puisque l'argument \code{z} est
+      manquant.
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\Closesolutionfile{solutions}
+
+%%% Local Variables:
+%%% mode: noweb
+%%% TeX-engine: xetex
+%%% TeX-master: "programmer-avec-r"
+%%% coding: utf-8
+%%% End:
