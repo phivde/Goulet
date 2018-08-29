@@ -145,6 +145,7 @@
     og=«, fg=»}
   \addto\captionsfrench{\def\figurename{{\scshape Fig.}}}
   \addto\captionsfrench{\def\tablename{{\scshape Tab.}}}
+  \addto\captionsfrench{\def\listfigurename{Liste des figures}}
 
   %%% =========================
   %%%  Sections de code source
@@ -410,7 +411,7 @@
     puis-que
   }
 
-  \includeonly{bases}
+  \includeonly{informatique}
 
 \begin{document}
 
@@ -428,6 +429,12 @@
 
 %\include{introduction}
 \tableofcontents*
+\clearpage
+
+\listoftables
+\clearpage
+
+\listoffigures
 
 %% Vignette tirée de xkcd.com
 \cleartoverso
