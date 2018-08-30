@@ -206,6 +206,12 @@ résultat de la fonction à un objet.
   \code{return} à la toute fin d'une fonction est tout à fait inutile
   et c'est considéré comme du mauvais style en R.}
 
+\gotorbox{Étudiez les lignes \reflines{fonctions:definition}
+  du fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:premiers:exemples} pour des exemples
+  additionnels de définitions de fonctions et, surtout, d'utilisation
+  des fonctions anonymes et de l'argument `\code{...}`.}
+
 
 \section{Structures de contrôle}
 \label{sec:fonctions:controle}
@@ -479,6 +485,10 @@ de contrôler l'exécution d'une fonction.
   avertissements sont affichés à la console après l'exécution de la
   fonction.
 \end{ttscript}
+
+\gotorbox{Étudiez les lignes \reflines{fonctions:controle}
+  du fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:premiers:exemples}.}
 
 
 \section{Récursivité}
@@ -1134,6 +1144,11 @@ les commentaires de premier niveau sont ceux qui débutent par un seul
 carré, \code{\#}; les commentaires de deuxième niveau débutent par
 deux carrés, \code{\#\#}, etc.
 
+\gotorbox{Le fichier de script \code{\scriptfilename} reproduit à la
+  \autoref{sec:premiers:exemples} contient, aux lignes
+  \reflines{fonctions:pratiques}, un long exemple d'amélioration du
+  style et de la présentation du code d'une fonction. Vous y trouverez
+  même un cas de Syndrôme de la plaque à biscuits{\texttrademark}.}
 
 
 \section{Exemples}
@@ -1244,20 +1259,20 @@ prod_mat <- function(A, B)
   (4) caractères. Dans RStudio, ouvrir le panneau des options
   globales, sélectionner la catégorie \code{Code} et inscrire la
   valeur \code{4} dans le champs \code{Tab width} (voir la
-  \autoref{fig:collaboration:rstudio-tab-width}).
+  \autoref{fig:fonctions:rstudio-tab-width}).
   \begin{figure}
     \centering
     \includegraphics{images/rstudio-tab-width}
-    \caption{Configuration de RStudio pour indenter le code de quatre
-      caractères}
-    \label{fig:collaboration:rstudio-tab-width}
+    \caption{Configuration de RStudio pour une indentation du code
+      de quatre caractères}
+    \label{fig:fonctions:rstudio-tab-width}
   \end{figure}
 \end{exercice}
 
 \begin{exercice}
   Présenter le code ci-dessous selon les normes d'espacement,
   d'indentation et de positionnement des accolades mentionnées à la
-  \autoref{sec:collaboration:presentation}. Pour ajuster
+  \autoref{sec:fonctions:pratiques}. Pour ajuster
   automatiquement l'indentation avec RStudio, sélectionner le bloc de
   code et choisir dans les menus \code{Code|Reformat Code}.
 
