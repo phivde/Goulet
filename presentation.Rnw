@@ -11,8 +11,8 @@
 
 \chapter{Présentation de R}
 \label{chap:presentation}
-\def\scriptfilename{presentation.R}
 
+\def\scriptfilename{\currfilebase.R}
 <<echo=FALSE>>=
 options(width=52)
 @

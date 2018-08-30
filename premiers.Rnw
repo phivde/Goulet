@@ -11,8 +11,8 @@
 
 \chapter{Premiers pas avec R}
 \label{chap:premiers}
-\def\scriptfilename{premiers.R}
 
+\def\scriptfilename{\currfilebase.R}
 <<echo=FALSE>>=
 options(width=52)
 @
