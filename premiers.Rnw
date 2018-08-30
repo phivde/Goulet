@@ -775,16 +775,6 @@ c(0, 5, -1) & TRUE
 \section{Appel d'une fonction}
 \label{sec:premiers:appel}
 
-Nous avons mentionné au début de la
-\autoref{sec:premiers:fondamentales} qu'un langage de programmation
-doit fournir un mécanisme d'abstraction pour utiliser les éléments
-composés. La possibilité qu'offre R de définir des objets contenant
-des valeurs constitue une première technique. La définition de
-\index{fonctions}\emph{fonctions} --- le nom que nous donnerons
-dorénavant au concept de \index{procédure}procédure --- est une
-technique d'abstration encore plus puissante, puisqu'elle permet de
-faire référence par un seul nom à toute une suite d'opérations.
-
 Au-delà des opérateurs de base, le langage R compte un très grand
 nombre (des milliers!) de fonctions internes. Cette section passe en
 revue les règles d'appel d'une fonction. Nous étudierons au
