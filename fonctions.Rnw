@@ -690,6 +690,11 @@ section présente quelques unes de ces bonnes pratiques à adopter en
 matière de style de programmation, de présentation du code et de
 documentation.
 
+\tipbox{Je me suis efforcé de respecter les bonnes pratiques
+  ci-dessous dans le code informatique des sections d'exemples. Prêtez
+  donc attention à la manière dont le code qui vous est fourni est
+  construit et présenté.}
+
 \subsection{Style}
 \label{sec:fonctions:pratiques:style}
 
