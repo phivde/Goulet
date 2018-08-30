@@ -679,7 +679,7 @@ Avons-nous vraiment gagné en efficacité? Le code informatique de la
 fonction est de trois à cinq fois plus rapide que la première!
 
 
-\section[Bonnes pratiques]{Petit guide de bonnes pratiques de la programmation informatique}
+\section{Bonnes pratiques de la programmation informatique}
 \label{sec:fonctions:pratiques}
 
 De manière générale, le développement et la maintenance de code
