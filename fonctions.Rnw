@@ -547,8 +547,7 @@ de procéder par itération pour résoudre ce problème. La fonction
 \autoref{fig:application:fibonacci0}, propose une première solution.
 
 \begin{figure}
-\begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[frame=single]
 fibonacci0 <- function(nterm)
 {
     if (nterm < 1)
@@ -561,7 +560,6 @@ fibonacci0 <- function(nterm)
     x
 }
 \end{Verbatim}
-\end{Schunk}
   \caption{Première version d'une fonction pour calculer les $n$
     premiers termes de la suite de Fibonacci}
   \label{fig:application:fibonacci0}
@@ -636,8 +634,7 @@ de la bonne longueur et le remplir par la suite. La fonction
 Syndrôme.
 
 \begin{figure}
-\begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[frame=single]
 fibonacci <- function(nterm)
 {
     if (nterm < 1)
@@ -651,7 +648,6 @@ fibonacci <- function(nterm)
     x
 }
 \end{Verbatim}
-\end{Schunk}
   \caption{Fonction pour calculer les $n$ premiers termes de la suite
     de Fibonacci ne souffrant pas du Syndrôme de la plaque à
     biscuits{\texttrademark}}
@@ -683,7 +679,7 @@ Avons-nous vraiment gagné en efficacité? Le code informatique de la
 fonction est de trois à cinq fois plus rapide que la première!
 
 
-\section{Bonnes pratiques de la programmation informatique}
+\section[Bonnes pratiques]{Petit guide de bonnes pratiques de la programmation informatique}
 \label{sec:fonctions:pratiques}
 
 De manière générale, le développement et la maintenance de code
@@ -928,8 +924,7 @@ lisible.
 
 \begin{figure}
   \begin{minipage}{0.48\linewidth}
-    \begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[frame=single]
 f<-function(x,y)
 {
     if(y<0)
@@ -937,12 +932,10 @@ f<-function(x,y)
     x*(1+x*y)^2
 }
 \end{Verbatim}
-    \end{Schunk}
   \end{minipage}
   \hfill
   \begin{minipage}{0.48\linewidth}
-    \begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[frame=single]
 f <- function(x, y)
 {
     if (y < 0)
@@ -950,7 +943,6 @@ f <- function(x, y)
     x * (1 + x * y)^2
 }
 \end{Verbatim}
-    \end{Schunk}
   \end{minipage}
   \caption[Blocs de code sans et avec les espaces appropriées]{Blocs
     de code sans (à gauche) et avec (à droite) les espaces
