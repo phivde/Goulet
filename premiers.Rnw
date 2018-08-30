@@ -63,8 +63,10 @@ fonctionnelle, ce qui lui confère de plus grandes affinités avec le
 Ce chapitre introduit des notions de base du langage R telles que
 l'expression, l'affectation, et l'objet. Le concept de vecteur se
 trouvant au cœur du langage, nous faisons une large place à la
-création et à la manipulation des vecteurs. Le chapitre se termine par
-la définition de fonctions.
+création et à la manipulation des vecteurs. Après avoir présenté les
+règles d'appels d'une fonction, le chapitre se termine par
+l'introduction de fonctions internes utiles à ce stade de vos
+apprentissages.
 
 
 \section{Données et procédures fondamentales}
@@ -222,17 +224,23 @@ d'évaluation, comme en mathématiques.
 \subsection{Affectation}
 \label{sec:premiers:commandes:affectation}
 
-Dans une affectation, une expression est évaluée, mais le résultat est
-stocké dans un \emph{objet} (ou \emph{variable}) dans l'espace de
-travail et rien n'est affiché à l'écran. Tel que mentionné
-précédemment, le symbole d'affectation est \icode{<-}, c'est-à-dire
-les deux caractères \verb|<| et \verb|-| placés obligatoirement l'un à
-la suite de l'autre.
+Dans une \index{affectation}affectation, une expression est évaluée,
+mais le résultat est stocké dans un \emph{objet} (ou \emph{variable})
+dans %
+l'\index{espace de travail}espace de travail %
+et rien n'est affiché à l'écran. Tel que mentionné précédemment, le
+symbole d'affectation est \icode{<-} --- c'est-à-dire les deux
+caractères \verb|<| et \verb|-| placés obligatoirement l'un à la suite
+de l'autre --- et le symbole est évalué de droite à gauche. Ainsi,
+toute expression est évaluée avant que son résultat ne soit placé dans
+l'objet.
 <<echo=TRUE>>=
 a <- 5
 a
 b <- a
 b
+x <- 2 + 3
+x
 @
 
 Pour affecter le résultat d'un calcul dans un objet et simultanément
@@ -792,8 +800,8 @@ l'objet suivi obligatoirement de parenthèses \code{(~)} et, le cas
 \end{Verbatim}
 \end{Schunk}
 
-Regardons cela de plus près. Aux fins d'illustrations, nous
-définissons une petite fonction \code{foo} qui calcule la quantité
+Regardons cela de plus près. Aux fins d'illustrations, définissons
+tout d'abiord une petite fonction \code{foo} qui calcule la quantité
 \begin{equation*}
   d = \sum_{i = 1}^n |x_i - y_i|^p
 \end{equation*}
@@ -811,12 +819,13 @@ Vous remarquerez que la fonction fait elle-même appel à deux fonctions
 internes (\icode{sum} et \icode{abs}) ainsi qu'à deux opérateurs de base
 (\code{-} et \verb|^|).
 
-La fonction compte trois arguments. La construction \code{symbole =
-  défaut} indique la valeur par défaut de l'argument \code{symbole},
-c'est-à-dire la valeur de l'argument si aucune n'est spécifiée dans
-l'appel de la fonction. Ainsi, seul le premier argument de \code{foo}
-n'a pas de valeur par défaut. La valeur par défaut de l'argument
-\code{y} est $0$ et celle de l'argument \code{p}, $2$.
+La fonction compte trois arguments nommés \code{x}, \code{y} et
+\code{p}. La construction \code{symbole = défaut} indique la valeur
+par défaut de l'argument \code{symbole}, c'est-à-dire la valeur de
+l'argument si aucune n'est spécifiée dans l'appel de la fonction.
+Ainsi, seul le premier argument de \code{foo} n'a pas de valeur par
+défaut. La valeur par défaut de l'argument \code{y} est $0$ et celle
+de l'argument \code{p} est $2$.
 
 L'ordre des arguments dans la définition de la fonction est important.
 Nous avons deux choix au moment d'appeler une fonction:
