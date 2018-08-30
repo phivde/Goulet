@@ -194,10 +194,10 @@ d'un regroupement d'expressions présentées à la
 de la fonction: une fonction retourne tout simplement le résultat de
 sa \emph{dernière expression}.
 
-On évitera donc que la dernière expression soit une affectation, car
-la fonction ne retournera alors rien et on ne pourra utiliser une
-construction de la forme \code{x <- f()} pour affecter le résultat de
-la fonction à un objet.
+Ainsi, on évitera que la dernière expression soit une affectation. En
+effet, la fonction ne retournerait alors rien et nous ne pourrions
+utiliser une construction de la forme \code{x <- f()} pour affecter le
+résultat de la fonction à un objet.
 
 \cautionbox{Il existe une fonction \icode{return} pour terminer
   immédiatement l'exécution d'une fonction et retourner un résultat;
@@ -1234,6 +1234,64 @@ prod_mat <- function(A, B)
   \end{sol}
 \end{exercice}
 
+\begin{exercice}[nosol]
+  Configurer votre éditeur de texte pour indenter le code R de quatre
+  (4) caractères. Dans RStudio, ouvrir le panneau des options
+  globales, sélectionner la catégorie \code{Code} et inscrire la
+  valeur \code{4} dans le champs \code{Tab width} (voir la
+  \autoref{fig:collaboration:rstudio-tab-width}).
+  \begin{figure}
+    \centering
+    \includegraphics{images/rstudio-tab-width}
+    \caption{Configuration de RStudio pour indenter le code de quatre
+      caractères}
+    \label{fig:collaboration:rstudio-tab-width}
+  \end{figure}
+\end{exercice}
+
+\begin{exercice}
+  Présenter le code ci-dessous selon les normes d'espacement,
+  d'indentation et de positionnement des accolades mentionnées à la
+  \autoref{sec:collaboration:presentation}. Pour ajuster
+  automatiquement l'indentation avec RStudio, sélectionner le bloc de
+  code et choisir dans les menus \code{Code|Reformat Code}.
+
+\begin{Schunk}
+\begin{Verbatim}
+f <- function(x){
+  if(all(x>=0)|| all(x<=0))
+  { stop("all x are the same sign")
+  }
+  if (sum(diff(sign(x[x!=0]))!=0)>1)
+  warning("more than one sign change")
+ r<-polyroot(x)
+i<-1/Re(r)[abs(Im(r))< .Machine$double.eps^0.5]-1
+i[i > -1]
+}
+\end{Verbatim}
+\end{Schunk}
+\begin{sol}
+  La présentation correcte comporte des espaces autour de tous les
+  opérateurs, une indentation de quatre (4) caractères et des
+  accolades ouvrante et fermante placées sur leur propre ligne.
+\begin{Schunk}
+\begin{Verbatim}[fontsize=\relsize{-1}]
+tri <- function(x)
+{
+    if (all(x >= 0) || all(x <= 0))
+    {
+        stop("all x are the same sign")
+    }
+    if (sum(diff(sign(x[x != 0])) != 0) > 1)
+        warning("more than one sign change")
+    r <- polyroot(x)
+    i <- 1/Re(r)[abs(Im(r)) < .Machine$double.eps^0.5] - 1
+    i[i > -1]
+}
+\end{Verbatim}
+\end{Schunk}
+\end{sol}
+\end{exercice}
 
 \Closesolutionfile{solutions}
 
