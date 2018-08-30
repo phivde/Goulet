@@ -117,6 +117,9 @@ Ils sont accompagnés d'une description succincte.
 \begin{table}
   \centering
   \renewcommand{\arraystretch}{1.1}
+  \caption[Principaux opérateurs du langage R]{Principaux opérateurs
+    du langage R, en ordre décroissant de priorité}
+  \label{tab:premiers:operateurs}
   \begin{tabular}{lp{8cm}}
     \toprule
     Opérateur  & Fonction \\
@@ -146,9 +149,6 @@ Ils sont accompagnés d'une description succincte.
     \icode{<-}\, \verb|<<-|\index{<<-@\verb=<<-=} & affectation \\
     \bottomrule
   \end{tabular}
-  \caption[Principaux opérateurs du langage R]{Principaux opérateurs
-    du langage R, en ordre décroissant de priorité}
-  \label{tab:premiers:operateurs}
 \end{table}
 
 \tipbox{Les opérateurs de puissance \verb|^| et d'affectation
@@ -393,6 +393,8 @@ mode(v)
 
 \begin{table}
   \centering
+  \caption{Modes disponibles et contenus correspondants}
+  \label{tab:premiers:modes}
   \begin{tabular}{ll}
     \toprule
     Mode              & Contenu de l'objet \\
@@ -406,8 +408,6 @@ mode(v)
     \icode{expression} & expressions non évaluées \\
     \bottomrule
   \end{tabular}
-  \caption{Modes disponibles et contenus correspondants}
-  \label{tab:premiers:modes}
 \end{table}
 
 Les objets de mode \code{numeric}, \code{complex},
@@ -537,6 +537,8 @@ fonction du même nom servant à extraire l'attribut d'un objet.
 
 \begin{table}
   \centering
+  \caption{Attributs les plus usuels d'un objet}
+  \label{tab:attributs}
   \begin{tabular}{ll}
     \toprule
     Attribut            & Utilisation \\
@@ -552,8 +554,6 @@ fonction du même nom servant à extraire l'attribut d'un objet.
     étiquettes des éléments d'un objet \\
     \bottomrule
   \end{tabular}
-  \caption{Attributs les plus usuels d'un objet}
-  \label{tab:attributs}
 \end{table}
 
 La fonction \Icode{attributes} permet d'extraire ou de modifier la
