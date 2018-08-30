@@ -146,8 +146,8 @@ Ils sont accompagnés d'une description succincte.
     \icode{<-}\, \verb|<<-|\index{<<-@\verb=<<-=} & affectation \\
     \bottomrule
   \end{tabular}
-  \caption{Principaux opérateurs du langage R, en ordre décroissant
-    de priorité}
+  \caption[Principaux opérateurs du langage R]{Principaux opérateurs
+    du langage R, en ordre décroissant de priorité}
   \label{tab:premiers:operateurs}
 \end{table}
 
