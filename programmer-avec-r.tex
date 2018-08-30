@@ -325,7 +325,7 @@
   %% Commandes pour les références et liens vers des numéros de lignes
   %% dans le code informatique.
   \newcommand{\labelline}[1]{%
-    \label{lst:#1}\hyperlink{goto:#1}{\small\gotorsign}}
+    \label{lst:#1}\hfill\hyperlink{goto:#1}{\small\gotorsign}}
   \newcommand{\reflines}[1]{%
     \hypertarget{goto:#1}{\ref{lst:#1}}--\hypertarget{goto:#1:fin}{\ref{lst:#1:fin}}}
 

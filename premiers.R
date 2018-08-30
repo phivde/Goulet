@@ -12,7 +12,7 @@
 ## https://creativecommons.org/licenses/by-sa/4.0/
 
 ###
-### DONNÉES ET PROCÉDURES FONDAMENTALES                       `\labelline{premiers:fondamentales}`
+### DONNÉES ET PROCÉDURES FONDAMENTALES  `\labelline{premiers:fondamentales}`
 ###
 
 ## Nombres. Tous les nombres réels sont stockés en double
@@ -115,10 +115,10 @@ y                          # ... plutôt une affectation
 ##  http://floating-point-gui.de/formats/fp/]
 1.2 + 1.4 + 2.8            # 5.4 en apparence
 1.2 + 1.4 + 2.8 == 5.4     # non?!?
-0.3/0.1 == 3               # à gauche: faux entier            `\labelline{premiers:fondamentales:fin}`
+0.3/0.1 == 3               # à gauche: faux entier `\labelline{premiers:fondamentales:fin}`
 
 ###
-### COMMANDES R                                               `\labelline{premiers:commandes}`
+### COMMANDES R            `\labelline{premiers:commandes}`
 ###
 
 ## Les expressions entrées à la ligne de commande sont
@@ -168,10 +168,10 @@ x <- 5;                    # éviter les ';' superflus
     y <- 2                 # seconde expression du groupe
     x + y                  # dernière expression du groupe
 }                          # fin du groupe et résultat
-{x <- 5; y <- 2; x + y}    # valide, mais redondant           `\labelline{premiers:commandes:fin}`
+{x <- 5; y <- 2; x + y}    # valide, mais redondant `\labelline{premiers:commandes:fin}`
 
 ###
-### OBJETS R                                                  `\labelline{premiers:objets}`
+### OBJETS R               `\labelline{premiers:objets}`
 ###
 
 ## NOMS D'OBJETS
@@ -250,10 +250,10 @@ attr(cars, "class")        # extraction d'un seul attribut
 ## d'un vecteur.
 x <- 1:24                  # un vecteur
 names(x) <- letters[1:24]  # attribution d'étiquettes
-x                          # identification facilitée         `\labelline{premiers:objets:fin}`
+x                          # identification facilitée `\labelline{premiers:objets:fin}`
 
 ###
-### VECTEURS                                                  `\labelline{premiers:vecteurs}`
+### VECTEURS               `\labelline{premiers:vecteurs}`
 ###
 
 ## La fonction de base pour créer des vecteurs est 'c'. Il
@@ -377,10 +377,10 @@ c(5, 3) + c(TRUE, FALSE)   # équivalent à c(5, 3) + c(1, 0)
 ## traité comme FALSE et tous les autres nombres comme TRUE.
 0:5 & 5:0
 0:5 | 5:0
-!0:5                       #-*-                                   `\labelline{premiers:vecteurs:fin}`
+!0:5                       #-*- `\labelline{premiers:vecteurs:fin}`
 
 ###
-### APPEL D'UNE FONCTION                                      `\labelline{premiers:appel}`
+### APPEL D'UNE FONCTION   `\labelline{premiers:appel}`
 ###
 
 ## L'interpréteur R reconnait un appel de fonction au fait que
@@ -423,10 +423,10 @@ matrix(1:12, 3, 4)
 matrix(1:12, ncol = 4, nrow = 3)
 matrix(nrow = 3, ncol = 4, data = 1:12)
 matrix(nrow = 3, ncol = 4, byrow = FALSE, 1:12)
-matrix(nrow = 3, ncol = 4, 1:12, FALSE) #-*-                      `\labelline{premiers:appel:fin}`
+matrix(nrow = 3, ncol = 4, 1:12, FALSE) #-*- `\labelline{premiers:appel:fin}`
 
 ###
-### QUELQUES FONCTIONS INTERNES UTILES                        `\labelline{premiers:internes}`
+### QUELQUES FONCTIONS INTERNES UTILES  `\labelline{premiers:internes}`
 ###
 
 ## Pour les exemples qui suivent, on se donne un vecteur non
@@ -562,4 +562,4 @@ rev(cumprod(rev(y)))       # produit cumulatif renversé
 cummin(x)                  # minimum cumulatif
 cummax(y)                  # maximum cumulatif
 pmin(x, y)                 # minimum élément par élément
-pmax(x, y)                 # maximum élément par élément      `\labelline{premiers:internes:fin}`
+pmax(x, y)                 # maximum élément par élément `\labelline{premiers:internes:fin}`

@@ -12,7 +12,7 @@
 ## https://creativecommons.org/licenses/by-sa/4.0/
 
 ###
-### COMMANDES R                                               `\labelline{presentation}`
+### COMMANDES R            `\labelline{presentation}`
 ###
 
 ## Les expressions entrées à la ligne de commande sont
@@ -117,4 +117,4 @@ round(m %*% solve(m))    # l'arrondi donne la matrice identité
 ls()
 
 ## Nettoyage.
-rm(x, y, v, m) #-*-                                           `\labelline{presentation:fin}`
+rm(x, y, v, m)             #-*- `\labelline{presentation:fin}`
