@@ -790,8 +790,8 @@ l'objet suivi obligatoirement de parenthèses \code{(~)} et, le cas
 \end{Verbatim}
 \end{Schunk}
 
-Regardons cela de plus près. Aux fins d'illustrations, définissons
-tout d'abiord une petite fonction \code{foo} qui calcule la quantité
+Regardons cela de plus près. À des fins d'illustration, j'ai défini
+une petite fonction \code{foo} qui calcule la quantité
 \begin{equation*}
   d = \sum_{i = 1}^n |x_i - y_i|^p
 \end{equation*}
