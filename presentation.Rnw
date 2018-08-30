@@ -11,6 +11,7 @@
 
 \chapter{Présentation de R}
 \label{chap:presentation}
+\def\scriptfilename{presentation.R}
 
 <<echo=FALSE>>=
 options(width=52)
@@ -436,7 +437,6 @@ Les étapes 1 et 2 sont interchangeables, tout comme les étapes 4, 5 et
 détaillée lorsque l'on utilise GNU~Emacs, ou l'\autoref{chap:rstudio}
 pour l'environnement intégré RStudio.
 
-\def\scriptfilename{presentation.R}
 \gotorbox{C'est le temps de vous lancer dans une première session de
   travail R. %
   \hypertarget{goto:presentation}\relax
@@ -539,9 +539,6 @@ programmation en R plutôt que sur ses applications statistiques.
 
 \section{Exemples}
 \label{sec:presentation:exemples}
-
-%% exceptionnellement, le nom du fichier de script est défini plus
-%% haut, à la fin de la section «Anatomie d'une session de travail»
 
 \scriptfile{\scriptfilename}
 \lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
