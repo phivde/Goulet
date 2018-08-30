@@ -12,7 +12,7 @@
 ## https://creativecommons.org/licenses/by-sa/4.0/
 
 ###
-### PROGRAMMATION FONCTIONNELLE  `\labelline{fonctions:paradigme}`
+### PROGRAMMATION FONCTIONNELLE  `\labelline{fonctions:definition}`
 ###
 
 ## Les fonctions sont des objets comme les autres dans R. Cela
@@ -30,10 +30,10 @@ rep(seq(5), 3)             # fonction argument d'une fonction
 lapply(1:5, seq)           # idem
 mode(ecdf(rpois(100, 1)))  # résultat de ecdf est une fonction
 ecdf(rpois(100, 1))(5)     # évaluation en un point
-c(seq, rep)                # vecteur de fonctions!  `\labelline{fonctions:paradigme:fin}`
+c(seq, rep)                # vecteur de fonctions!
 
 ###
-### DÉFINITION D'UNE FONCTION  `\labelline{fonctions:definition}`
+### DÉFINITION D'UNE FONCTION
 ###
 
 ## On définit une nouvelle fonction avec la syntaxe suivante:
