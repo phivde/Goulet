@@ -27,9 +27,6 @@
   de programmation.
 \item Comprendre la structure du système de fichiers d'un ordinateur
   et identifier le chemin d'accès vers une ressource dans celui-ci.
-% \item Naviguer dans le système de fichiers d'un ordinateur et obtenir
-%   une liste des fichiers à partir d'une interface en ligne de
-%   commande.
 \end{objectifs}
 
 Vous savez programmer.
@@ -801,11 +798,14 @@ contenant le précédent paragraphe, nous pourrions utiliser l'outil
 \code{cut} pour isoler le mot qui nous intéresse et, enfin, l'outil
 \code{tr} pour supprimer la parenthèse ouvrante, les guillemets et la
 virgule autour du mot.\footnote{%
+  \index{{"|}@\code{\textbar} (Bash)} %
+  \index{cut@\code{cut}} %
+  \index{tr@\code{tr}} %
   Dans la mesure où le mot que l'on recherche est le quatrième de la
   ligne dans le fichier source \code{informatique.tex}, la commande
   résultante est: \code{grep "«tuyau»" informatique.tex | cut -d " "
-    -f 4 | tr -d \bs(«»,}\,. Le caractère \code{|} est l'opérateur de
-  transfert de données.}
+    -f 4 | tr -d \bs(«»,}\,. Le caractère \code{\textbar} est
+  l'opérateur de transfert de données.}
 
 À l'exception notable des Mac, \index{Unix}Unix demeure assez peu
 répandu sur les ordinateurs personnels. En revanche le système
@@ -1021,134 +1021,6 @@ document d'expliquer comment modifier la variable d'environnement. La
 réponse se trouve à une requête près dans un moteur de recherche.
 
 
-% \section{Ligne de commande}
-% \label{sec:informatique:cli}
-
-% Une interface en \index{ligne de commande}ligne de commande
-% (\emph{command line interface}, CLI), ou tout simplement \emph{ligne
-%   de commande}, est un mode d'interaction avec un programme
-% informatique dans lequel l'utilisateur dicte les commandes et reçoit
-% les réponses de l'ordinateur en mode texte. Le programme qui gère
-% cette interface est un \emph{interpréteur de commandes}, parfois aussi
-% appelé (à tort) \emph{terminal} ou \emph{shell}. Lorsque
-% l'interpréteur est prêt à recevoir une commande, il l'indique par une
-% \emph{invite de commande} (\emph{command prompt}).
-
-% La ligne de commande est la plus ancienne des interfaces avec les
-% ordinateurs. Si les interfaces graphiques ont à plusieurs égards
-% grandement facilité l'interaction homme--machine, elles n'ont pas pour
-% autant fait disparaitre ou rendu obsolète la ligne de commande.
-% D'abord, celle-ci demeure parfois la seule --- et souvent la plus
-% rapide --- interface pour réaliser certaines tâches sur un ordinateur
-% muni d'une interface graphique. Ensuite, certains ordinateurs, comme
-% les serveurs ou les supercalculateurs, n'offrent souvent aucune
-% interface graphique.
-
-% \subsection{Ligne de commande Windows}
-% \label{sec:informatique:cli:windows}
-
-% L'interpréteur de commandes standard sous Windows est
-% \index{cmd@\code{cmd.exe}}\code{cmd.exe}. On le trouve dans le groupe
-% de programmes \code{Accessoires} sous le nom \code{Invite de
-%   commandes}. L'invite de commande par défaut est \verb=C:\>=. À la
-% gauche du symbole \verb=>= se trouve le chemin d'accès du répertoire
-% courant. Au lancement de l'interpréteur, celui-ci est donc la racine
-% du système de fichiers.
-
-% Les programmeurs qui souhaitent bénéficier de certains outils
-% \index{Unix}Unix sous Windows peuvent installer les couches
-% logicielles \index{MinGW}MinGW et \index{MSYS}MSYS --- je recommande à
-% cet égard la distribution
-% \link{http://www.msys2.org}{MSYS2}\index{MSYS2}. Le programme
-% \code{MSYS} fournit un interpréteur de commandes \index{Bash}Bash
-% \citep{bash} comme en standard sur les systèmes Unix. Un interpréteur
-% Bash est également fourni avec \index{Git}
-% \link{https://git-scm.com/downloads}{Git for Windows}: le programme
-% est d'ailleurs nommé \index{Git~Bash}Git~Bash.
-
-% À la ligne de commande \index{Unix}Unix sous Windows, on identifie la
-% racine \code{C:\bs} du système de fichier d'un disque par \code{/c/}.
-
-% \subsection{Ligne de commande macOS}
-% \label{sec:informatique:cli:macos}
-
-% Sous macOS, l'application de ligne de commande se nomme
-% \index{Terminal}Terminal. Elle se trouve dans le sous-dossier
-% Utilitaires du dossier Applications. L'interpréteur de commandes est
-% \index{Bash}Bash. L'invite de commande par défaut est le symbole
-% \verb=$=, habituellement précédé du nom de l'ordinateur, du répertoire
-% courant et du nom de l'utilisateur. Le répertoire courant au lancement
-% de l'interpréteur est le répertoire personnel \,\verb=~=\, de
-% l'utilisateur.
-
-% \tipbox{Explorez les préférences de l'application
-%   \index{Terminal}Terminal pour configurer la police de caractères et
-%   les couleurs afin de rendre la ligne de commande plus agréable à
-%   utiliser.}
-
-% \subsection{Commandes essentielles}
-% \label{sec:informatique:cli:commandes}
-
-% Les programmeurs doivent connaitre les rudiments de la ligne de
-% commande. Cela dit, comme nous ne pouvons nous étendre sur le sujet,
-% limiterons la présentation aux commandes ci-dessous qui
-% permettent de se déplacer dans le système de fichiers et d'afficher
-% la liste des fichiers d'un répertoire.
-
-% \importantbox{Dans les exemples ci-dessous et pour le reste du
-%   document, l'invite de commande du système d'exploitation sera
-%   représentée par le symbole \code{\$} précédé du nom du répertoire
-%   courant (lorsque cela s'avère pertinent).}
-
-% \begin{ttscript}{pwd}
-% \item[\Icode{cd}] Change le répertoire courant pour
-%   celui donné en argument. Cet argument peut être un chemin d'accès
-%   absolu ou relatif (\autoref{sec:informatique:fs:path}). Le nom
-%   fictif «\verb=..=» identifie le parent du répertoire courant.
-
-%   Lorsque utilisée sans argument, la commande affiche le chemin
-%   d'accès absolu du répertoire courant avec \code{cmd.exe}, ou ramène
-%   directement l'invite de commande au répertoire personnel de
-%   l'utilisateur avec Bash.
-%   \begin{Schunk}
-% \begin{Verbatim}
-% ~$ cd Desktop/
-% /Users/vincent/Desktop
-% ~/Desktop$ cd ~/Documents/cours/
-% ~/Documents/cours$ cd
-% ~$
-% \end{Verbatim}
-%   \end{Schunk}
-% \item[\Icode{pwd}] (\index{Bash}Bash seulement) Affiche le chemin
-%   d'accès absolu du répertoire courant.
-%   \begin{Schunk}
-% \begin{Verbatim}
-% ~$ pwd
-% /Users/vincent
-% \end{Verbatim}
-%   \end{Schunk} %$
-% \item[\Icode{dir}] (\index{cmd@\code{cmd.exe}}\code{cmd.exe}
-%   seulement) Affiche les fichiers du répertoire donné en argument, ou
-%   les fichiers du répertoire courant sans aucun argument.
-% \item[\code{ls}] \Index{ls@\code{ls} (Bash)} (\index{Bash}Bash
-%   seulement) Affiche les fichiers du répertoire donné en argument, ou
-%   les fichiers du répertoire courant sans aucun argument.
-%   \begin{Schunk}
-% \begin{Verbatim}[commandchars=\\\{\}]
-% ~$ ls
-% Desktop
-% Documents
-% Downloads
-% \meta{...}
-% \end{Verbatim}
-%   \end{Schunk} %$
-% \end{ttscript}
-
-% \tipbox{Les systèmes d'exploitation affichent certains répertoires
-%   (\code{Bureau} ou \code{Musique}, par exemple) dans la langue de
-%   l'interface plutôt que sous leur vrai nom anglais. La commande
-%   \code{ls} affiche toujours le véritable nom des répertoires.}
-
 \section{Exercices}
 \label{operateurs:exercices}
 
@@ -1208,92 +1080,6 @@ réponse se trouve à une requête près dans un moteur de recherche.
     \end{enumerate}
   \end{sol}
 \end{exercice}
-
-% \begin{exercice}
-%   Démarrer un interpréteur de commandes Bash. Si le système
-%   d'exploitation de votre ordinateur est Windows, vous pouvez utiliser
-%   la ligne de commande \index{Git~Bash}Git~Bash de
-%   \link{https://git-scm.com/downloads}{\emph{Git for Windows}} ou la
-%   ligne de commande MSYS de
-%   \index{MSYS2}\link{http://www.msys2.org}{MSYS2}.
-%   \begin{enumerate}
-%   \item Afficher le répertoire courant. Vérifier qu'il correspond à
-%     celui mentionné dans l'invite de commande. Localiser ce répertoire
-%     dans l'interface graphique de votre système d'exploitation (Finder
-%     sous macOS, Windows~Explorer sous Windows).
-%   \item Afficher la liste des fichiers du répertoire courant.
-%   \item Choisir un sous-répertoire du répertoire courant que vous
-%     savez contenir lui-même un sous-répertoire (par exemple:
-%     \code{Documents/Cours}. Afficher, sans d'abord s'y déplacer, la
-%     liste des fichiers du premier sous-répertoire (\code{Documents}),
-%     puis celle du second (\code{Cours}).
-%   \item Faire du sous-répertoire utilisé précédemment le répertoire
-%     courant.
-%   \item Afficher une liste détaillée des fichiers du nouveau
-%     répertoire courant avec la commande \verb=ls -l=.
-%   \item Descendre d'un autre niveau dans l'arbre des fichiers.
-%   \item Revenir au répertoire personnel avec une seule commande.
-%   \item Afficher la liste de tous les fichiers du répertoire
-%     personnel, y compris les fichiers cachés, avec la commande
-%     \verb=ls -a=.
-%   \item Afficher la liste détaillée de tous fichiers du répertoire
-%     personnel avec la commande \verb=ls -la=.
-%   \item Afficher la liste des répertoires dans lesquels le système
-%     d'exploitation recherche des applications avec la commande
-%     \verb=echo $PATH=.
-%   \end{enumerate}
-%   \begin{sol}
-%     Vous trouverez ci-dessous une transcription (partielle) de la
-%     séance de travail à effectuer depuis une ligne de commande Bash.
-%     \begin{Schunk}
-% \begin{Verbatim}[commandchars=\\\{\}]
-% \textbf{~$} pwd
-% /Users/vincent
-% \textbf{~$} ls
-% Desktop           Music        emacs-modified-extensions
-% Documents         Pictures     emacs-modified-macos
-% Downloads         Public       emacs-modified-windows
-% \meta{...}
-% \textbf{~$} ls Documents/
-% Spoon-Knife
-% actexam
-% actuar
-% actuarialangle
-% actuarialsymbol
-% \meta{...}
-% \textbf{~$} ls Documents/cours/
-% ACT-2002        ACT-2005        ACT-2008        IFT-1902
-% \textbf{~$} cd Documents/
-% /Users/vincent/Documents
-% \textbf{~/Documents$} ls -l
-% drwxr-xr-x   6 vincent staff 204 29 nov 14:40 Spoon-Knife
-% drwxr-xr-x   6 vincent staff 204 21 nov  2016 actexam
-% drwxr-xr-x  10 vincent staff 340  1 sep 09:56 actuar
-% \meta{...}
-% \textbf{~/Documents$} cd cours/
-% /Users/vincent/Documents/cours
-% \textbf{~/Documents/cours$} cd
-% \textbf{~$} ls -a
-% .                     .bashrc           .profile
-% ..                    .cache            .rstudio-desktop
-% .CFUserTextEncoding   .cups             .subversion
-% \meta{...}
-% \textbf{~$} ls -la
-% total 584
-% drwxr-xr-x@ 71 vincent staff  2414  4 déc 21:03 .
-% drwxr-xr-x   5 root    admin   170 19 oct 04:13 ..
-% drwxr-xr-x   4 vincent staff   136 10 mai  2017 .R
-% -rw-r--r--   1 vincent staff    63  5 jul  2013 .Renviron
-% -rw-r--r--   1 vincent staff 23185  9 nov 09:13 .Rhistory
-% -rw-r--r--   1 vincent staff    71  4 jan  2016 .Rprofile
-% \meta{...}
-% \textbf{~$} echo PATH
-% /opt/local/bin:/opt/local/sbin:~/bin:/usr/local/bin:
-% /usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin
-% \end{Verbatim}
-%     \end{Schunk}
-%   \end{sol}
-% \end{exercice}
 
 \Closesolutionfile{solutions}
 
