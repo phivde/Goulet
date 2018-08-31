@@ -134,48 +134,6 @@ outils diffèrent quant au type de traitement qu'ils peuvent effectuer.
   \link{https://en.wikipedia.org/wiki/Berkeley_Software_Distribution}{BSD}.}
 
 
-\section{Transfert de données et redirection}
-\label{sec:texte:flux}
-
-Parce qu'ils sont souvent utilisés avec les outils \icode{grep},
-\icode{sed} et \icode{awk}, il convient, avant d'aller plus loin, de
-dire un mot sur les opérateurs de transfert de données et de
-redirection de \index{Unix}Unix.
-
-Les programmes Unix en ligne de commande reçoivent leurs données d'une
-\Index{entree standard@entrée standard}\Index{Unix!entree
-  standard@entrée standard}\emph{entrée standard} (\emph{standard
-  input}, souvent abrégé en \emph{stdin}) et renvoient leurs résultats
-vers la \Index{sortie standard}\Index{Unix!sortie
-  standard}\emph{sortie standard} (\emph{standard output},
-\emph{stdout}). Pour simplifier, l'entrée standard d'un terminal
-serait le clavier et la sortie standard, l'écran.
-
-L'opérateur de transfert de données %
-\index{{"|}@\code{\textbar} (Bash)|bfhyperpage} «\code{\textbar}»
-(nommé «tuyau», de l'anglais \emph{pipe}) permet de
-transférer la sortie d'un programme directement à l'entrée d'un autre
-programme. Autrement dit, plutôt que d'afficher ses résultats à
-l'écran, le premier programme les passe en entrée au second programme.
-
-L'opérateur de redirection %
-\index{>@\code{>} (Bash)|bfhyperpage}«\code{>}» permet, lui, de
-rediriger la sortie d'un programme vers un fichier afin de sauvegarder
-les résultats. Si le fichier existe déjà, son contenu est écrasé pour
-le nouveau contenu. Pour ajouter le nouveau contenu à la fin du
-fichier, il faut utiliser la variante double %
-\index{>>@\code{>>} (Bash)|bfhyperpage}«\code{>>}» de l'opérateur de
-redirection.
-
-Enfin, l'opérateur de redirection %
-\Index{>@\code{<} (Bash)}«\code{<}» permet, à l'inverse du précédent,
-de déverser le contenu d'un fichier dans l'entrée standard d'un
-programme. La variante double existe également.
-
-La documentation citée en référence à la section suivante utilise
-abondamment les opérateurs ci-dessus.
-
-
 \section{Expressions régulières}
 \label{sec:texte:regex}
 
@@ -392,51 +350,50 @@ $ grep -E '^#{3} [[:digit:]]' README.md
 \end{Verbatim}
 \end{Schunk}
 
-Terminons avec deux exemples plus avancés. Nous souhaitons d'abord
-extraire tout l'historique des versions du fichier \code{README.md}.
-Cet historique se trouve à la fin du fichier, à partir de la ligne
-débutant par la chaine \code{\#\# Historique}. Le meilleur outil pour
-effectuer des opérations sur plusieurs lignes d'un fichier est
-\icode{awk}, tel que mentionné à la \autoref{sec:texte:outils}.
-L'idée, ici, est la suivante: lorsque la chaine est trouvée, donner
-une valeur de 1 (vrai) à une variable d'«état», puis afficher les
-lignes lorsque la variable est vraie (donc toutes celles qui suivent).
-Je présente deux versions de la commande, une explicite et une plus
-compacte.
+Terminons avec un exemple plus avancé. Nous souhaitons extraire du
+fichier \code{NEWS} contenant l'historique des versions du document
+les notes de mise à jour de la plus récente version. Si vous examinez
+le fichier, vous constaterez que les notes de mise à jour relatives à
+une version donnée débutent toujours à une ligne marqué par %
+\verb*|# |. %
+Le meilleur outil pour effectuer des opérations sur plusieurs lignes
+d'un fichier est \icode{awk}, tel que mentionné à la
+\autoref{sec:texte:outils}.
+
+L'idée, ici, consiste à avoir recours à une variable dite d'«état».
+Avant qu'elle ne soit explicitement définie, la valeur de cette
+variable est $0$ (faux). Lorsque la chaine marquant le début des notes
+d'une version est trouvée, on donne une valeur de $1$ (vrai) à la
+variable, puis l'on affiche les lignes jusqu'à ce que l'on rencontre
+une nouvelle ligne débutant par %
+\verb*|# |, %
+moment où cesse le traitement du fichier.
 \begin{Schunk}
 \begin{Verbatim}
-$ awk '/^## Historique/ { state = 1; next } \
-       state == 1 { print }' README.md
-$ awk '/^## Historique/ { state = 1; next } \
-       state' README.md
+$ awk '(state == 0) && /^# / { state = 1; next } \
+       (state == 1) && /^# / { exit } \
+       state == 1 { print }' NEWS
 \end{Verbatim}
 \end{Schunk}
 
-\tipbox{Explication de la version compacte: écrire \code{state == 1}
-  pour tester que la variable \code{state} est vraie n'est pas
-  nécessaire dans la mesure où il est sous-entendu que l'expression
-  qui précède l'action dans une commande \icode{awk} est un test
-  conditionnel et que \code{awk} traite la valeur 1 comme vraie. De
-  plus, la commande \code{print} est implicite avec \code{awk}, donc
-  il n'est pas nécessaire de la demander explicitement.}
-
-Ensuite, nous voulons extraire seulement les notes de mise à jour de
-la \emph{dernière} version du document. L'idée consiste à afficher les lignes
-du fichier à partir de la première section marquée par \code{\#\#\#} après
-\code{\#\# Historique} et d'arrêter lorsqu'une autre section marquée par
-\code{\#\#\#} est atteinte. Ces opérations nécessitent deux valeurs de la
-variable d'état \code{state}.
+Nous pouvons écrire la commande ci-dessus de manière légèrement plus
+compacte. En effet, écrire \code{state == 1} pour tester que la
+variable \code{state} est vraie n'est pas nécessaire dans la mesure où
+il est sous-entendu que l'expression qui précède l'action dans une
+commande \icode{awk} est un test conditionnel et que \code{awk} traite
+la valeur
+$1$ comme vraie. De plus, la commande \code{print} est implicite avec
+\code{awk}. Il n'est donc pas nécessaire de la demander explicitement.
 \begin{Schunk}
 \begin{Verbatim}
-$ awk '/^## Historique/ { state = 1 } \
-       (state == 1) && /^### / { state = 2; next } \
-       (state == 2) && /^### / { exit } \
-       state == 2 { print }' README.md
+$ awk '(state == 0) && /^# / { state = 1; next } \
+       (state == 1) && /^# / { exit } \
+       state' NEWS
 \end{Verbatim}
 \end{Schunk}
 
 \notebox{Les opérations de composition du présent document, de
-  publication dans GitHub et de mise à jour de la page web sont
+  publication dans GitLab et de mise à jour de la page web sont
   entièrement automatisées à l'aide de
   \link{https://fr.wikipedia.org/wiki/Make}{\code{make}}, un autre de
   ces outils standards sur les systèmes Unix. Vous pouvez retrouver
@@ -455,7 +412,6 @@ $ awk '/^## Historique/ { state = 1 } \
 \addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:texte}}
 
 \end{Filesave}
-
 
 \begin{exercice}
   Dans chacun des cas ci-dessous, déterminer à laquelle ou auxquelles
