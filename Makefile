@@ -46,23 +46,24 @@ TEXFILES = \
 	notices.tex \
 	introduction.tex \
 	informatique.tex \
-	collaboration.tex \
+	algorithmique.tex \
+	cli.tex \
 	texte.tex \
+	git.tex \
 	rstudio.tex \
 	emacs+ess.tex \
-	git.tex \
 	reponses.tex \
 	colophon.tex \
 	couverture-arriere.tex
 SCRIPTS = \
 	presentation.R \
 	premiers.R \
+	fonctions.R \
 	implementation.R \
 	algorithmique.R \
 	donnees.R \
 	application.R \
-	internes.R \
-	collaboration.R \
+	paquetages.R \
 	debogage.R
 
 ## Informations de publication extraites du fichier maître
