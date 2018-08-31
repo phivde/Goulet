@@ -52,7 +52,7 @@ TEXFILES = \
 	git.tex \
 	rstudio.tex \
 	emacs+ess.tex \
-	reponses.tex \
+	solutions.tex \
 	colophon.tex \
 	couverture-arriere.tex
 SCRIPTS = \
