@@ -47,6 +47,7 @@ TEXFILES = \
 	introduction.tex \
 	informatique.tex \
 	algorithmique.tex \
+	paquetages.tex \
 	cli.tex \
 	texte.tex \
 	git.tex \
