@@ -1557,9 +1557,9 @@ cumprod(1:10)
 \end{exercice}
 
 \begin{exercice}
-  Soit \code{x} un vecteur de longueur 20 quelconque. Écrire des
-  expressions R permettant d'obtenir ou de calculer chacun des
-  résultats demandés ci-dessous.
+  Soit \code{x} un vecteur de longueur $20$. Écrire des expressions R
+  permettant d'obtenir ou de calculer chacun des résultats demandés
+  ci-dessous.
   \begin{enumerate}
   \item Les cinq premiers éléments de \code{x}.
   \item La valeur maximale de \code{x}.
