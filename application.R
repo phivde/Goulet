@@ -11,207 +11,9 @@
 ## International de Creative Commons.
 ## https://creativecommons.org/licenses/by-sa/4.0/
 
-
 ###
-### EXÉCUTION CONDITIONNELLE
+### FONCTION 'apply'  `\labelline{application:apply}`
 ###
-
-## Il est quelque peu délicat d'illustrer l'utilisation de la
-## fonction 'if' à l'extérieur d'une fonction. Nous aurons
-## l'occasion de l'utiliser plusieurs fois dans les exemples
-## de fonctions itératives, plus loin.
-##
-## Pour l'instant, contentons-nous de ces deux petits exemples
-## qui démontrent un usage adéquat de 'if'.
-x <- c(-1, 2, 3)
-if (any(x < 0)) print("il y a des nombres négatifs")
-if (all(x > 0)) print("tous les nombres sont positifs")
-
-## Première erreur fréquente dans l'utilisation de 'if': la
-## condition en argument n'est pas une valeur unique.
-##
-## Portez bien attention au message d'avertissement de R: le
-## test a été effectué, mais uniquement avec la première
-## valeur du vecteur booléen 'x < 0'. Comme, dans le présent
-## exemple, la première valeur de 'x' est négatif,
-## l'expression 'print' est exécutée.
-if (x < 0)  print("il y a des nombres négatifs")
-
-## Seconde erreur fréquente: tester que vrai est vrai. (Ce
-## n'est pas une «erreur» au sens propre puisque la syntaxe
-## est valide, mais c'est un non-sens sémantique, une forme de
-## pléonasme comme «monter en haut» ou «deux jumeaux».)
-##
-## Voici un exemple de construction avec un test inutile. Le
-## résultat de 'any' est déjà TRUE ou FALSE, alors pas besoin
-## de vérifier si TRUE == TRUE ou si FALSE == TRUE.
-if (any(x < 0) == TRUE) print("il y a des nombres négatifs")
-
-## Détail intéressant sur la structure 'if ... else ...': il
-## est possible de l'utiliser comme une fonction normale,
-## c'est-à-dire d'affecter le résultat de la structure à une
-## variable.
-##
-## D'abord, le style de programmation le plus usuel:
-## l'affectation est effectuée à l'intérieur des clauses 'if'
-## et 'else'.
-f <- function(y)
-{
-    if (y < 0)
-        x <- "rouge"
-    else
-        x <- "jaune"
-    paste("la couleur est:", x)
-}
-f(-2)
-f(3)
-
-## Ensuite, la version où le résultat de 'if ... else ...' est
-## directement affecté dans la variable. C'est plus compact et
-## très lisible si la conséquence et l'alternative sont des
-## expressions courtes.
-f <- function(y)
-{
-    x <- if (y < 0) "rouge" else "jaune"
-    paste("la couleur est:", x)
-}
-f(-2)
-f(3)
-
-## De l'inefficacité de 'ifelse'.
-##
-## Supposons que l'on veut une fonction *vectorielle* pour calculer
-##
-##   f(x) = x + 2, si x < 0
-##        = x^2,   si x >= 0.
-##
-## On se tourne naturellement vers ifelse() pour ce genre de
-## calcul. Voyons voir le temps de calcul.
-x <- sample(-10:10, 1e6, replace = TRUE)
-system.time(ifelse(x < 0, x + 2, x^2))
-
-## Solution alternative n'ayant pas recours à ifelse(). C'est
-## plus long à programmer, mais l'exécution est néanmoins plus
-## rapide.
-f <- function(x)
-{
-   y <- numeric(length(x)) # contenant
-   w <- x < 0              # x < 0 ou non
-   y[w] <- x[w] + 2        # calcul pour les x < 0
-   w <- !w                 # x >= 0 ou non
-   y[w] <- x[w]^2          # calcul pour les x >= 0
-   y
-}
-system.time(f(x))
-
-###
-### BOUCLES ITÉRATIVES ET CONTRÔLE DU FLUX
-###
-
-## Méthode du point fixe
-##
-## Nous allons illustrer l'utilisation des boucles avec la
-## méthode du point fixe. On dit qu'une valeur x est un «point
-## fixe» d'une fonction f si cette valeur satisfait l'équation
-##
-##   x = f(x).
-##
-## La méthode numérique de recherche du point fixe d'une
-## fonction f est simple et puissante: elle consiste à choisir
-## une valeur de départ, puis à évaluer successivement f(x),
-## f(f(x)), f(f(f(x))), ... jusqu'à ce que la valeur change
-## «peu».
-##
-## L'algorithme est donc très simple:
-##
-## 1. Choisir une valeur de départ x[0].
-## 2. Pour n = 1, 2, 3, ...
-##    2.1 Calculer x[n] = f(x[n - 1])
-##    2.2 Si |x[n] - x[n - 1]|/|x[n]| < TOL, passer à
-##        l'étape 3.
-## 3. Retourner la valeur x[n].
-##
-## Avant de poursuivre votre lecture, tentez d'identifier le
-## meilleur type de boucle ('for', 'while' ou 'repeat') à
-## utiliser pour programmer cet algorithme.
-
-## Comme première illustration, supposons que nous avons
-## besoin d'une fonction pour calculer la racine carrée d'un
-## nombre, c'est à dire la valeur positive de y satisfaisant
-## l'équation y^2 = x. Cette équation peut se réécrire sous
-## forme de point fixe ainsi:
-##
-##   y = x/y.
-##
-## La méthode du point fixe ne converge pas avec cette
-## fonction (l'algorithme oscille perpétuellement entre deux
-## valeurs).
-##
-## Une variante de l'équation y^2 = x fonctionnera mieux (en
-## fait, on peut démontrer que l'algorithme converge toujours
-## pour cette fonction):
-##
-##   y = (y - x/y)/2.
-##
-## Voici une première mise en oeuvre de notre fonction 'sqrt'
-## utilisant la méthode du point fixe. Puisqu'il faut au
-## minimum vérifier si la valeur initiale est un point fixe,
-## nous utilisons une boucle 'repeat'.
-sqrt <- function(x, start = 1, TOL = 1E-10)
-{
-    repeat
-    {
-        y <- (start + x/start)/2
-        if (abs(y - start)/y < TOL)
-            break
-        start <- y
-    }
-    y
-}
-sqrt(9, 1)
-sqrt(225, 1)
-sqrt(3047, 50)
-
-## Formidable. Toutefois, si nous voulions utiliser la méthode
-## du point fixe pour résoudre une autre équation, il faudrait
-## écrire une nouvelle fonction qui serait pour l'essentiel
-## identique, sinon pour le calcul de la fonction
-## (mathématique) f(x) pour laquelle nous cherchons le point
-## fixe.
-##
-## Créons donc une fonction de point fixe générale qui prendra
-## f(x) en argument.
-fixed_point <- function(FUN, start, TOL = 1E-10)
-{
-    repeat
-    {
-        x <- FUN(start)
-        if (abs(x - start)/x < TOL)
-            break
-        start <- x
-    }
-    x
-}
-
-## Nous pouvons ensuite écrire une nouvelle fonction 'sqrt'
-## utilisant 'fixed_point'. Nous y ajoutons un test de
-## validité de l'argument, pour faire bonne mesure.
-sqrt <- function(x)
-{
-    if (x < 0)
-        stop("cannot compute square root of negative value")
-
-    fixed_point(function(y) (y + x/y)/2, start = 1)
-}
-sqrt(9)
-sqrt(25)
-sqrt(3047)
-
-###
-### FONCTIONS D'APPLICATION
-###
-
-## FONCTION 'apply'
 
 ## La fonction 'apply' applique une fonction sur une ou
 ## plusieurs dimensions d'une matrice ou d'un tableau.
@@ -271,9 +73,11 @@ apply(x, c(2, 3), sum) # sommes des 6 carottes verticales
 sum(x[, 1, 1])         # équivalent pour la première somme
 
 apply(x, c(1, 3), sum) # sommes des 8 carottes transversales
-sum(x[1, , 1])         # équivalent pour la première somme
+sum(x[1, , 1])         # équivalent pour la première somme  `\labelline{application:apply:fin}`
 
-## FONCTIONS 'lapply' ET 'sapply'
+###
+### FONCTIONS 'lapply' ET 'sapply'  `\labelline{application:lstapply}`
+###
 
 ## La fonction 'lapply' applique une fonction à tous les
 ## éléments d'un vecteur ou d'une liste et retourne une liste,
@@ -353,9 +157,9 @@ sapply(x, fun, 7)          # moyennes des données > 7
 ## ci-dessus est inversé.
 fun <- function(y, x) mean(x[x > y])
 
-## Les règles d'appariement des arguments des fonctions en R
-## font en sorte que lorsque les arguments sont nommés dans
-## l'appel de fonction, leur ordre n'a pas d'importance. Par
+## Les règles de pairage des arguments des fonctions en R font
+## en sorte que lorsque les arguments sont nommés dans l'appel
+## de fonction, leur ordre n'a pas d'importance. Par
 ## conséquent, un appel de la forme
 ##
 ##   fun(x, y = 7)
@@ -436,9 +240,11 @@ mapply(mean, x, 0:3/10)
 tapply(airquality$Temp, airquality$Month, mean)
 
 ## Équivalent (sauf pour la présentation des résultats).
-by(airquality$Temp, airquality$Month, mean)
+by(airquality$Temp, airquality$Month, mean) #-*- `\labelline{application:lstapply:fin}`
 
-## FONCTION 'outer'
+###
+### FONCTION 'outer'  `\labelline{application:outer}`
+###
 
 ## La fonction 'outer' applique une fonction (le produit par
 ## défaut, d'où le nom de la fonction, dérivé de «produit
@@ -455,5 +261,4 @@ x %o% y                    # équivalent plus court
 ## faut placer le symbole entre guillemets " ".
 outer(x, y, "+")           # «somme extérieure»
 outer(x, y, "<=")          # toutes les comparaisons possibles
-outer(x, y, function(x, y) x + 2 * y) # fonction quelconque
-
+outer(x, y, function(x, y) x + 2 * y) # fonction quelconque  `\labelline{application:outer:fin}`
