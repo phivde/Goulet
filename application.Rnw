@@ -759,7 +759,6 @@ sum(sapply(x, function(x) x$nb.acc[1] == 1))
 
 \Closesolutionfile{solutions}
 
-
 %%% Local Variables:
 %%% mode: noweb
 %%% TeX-engine: xetex
