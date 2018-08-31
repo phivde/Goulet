@@ -47,7 +47,7 @@ référence par un seul nom à toute une suite d'opérations.
 
 Nous adoptons en bonne partie avec le langage R le paradigme de la
 programmation fonctionnelle. Tel qu'expliqué sommairement à la
-\autoref{sec:informatique:paradigmes}, dans ce paradigme un programme
+\autoref{sec:informatique:concepts:paradigmes}, dans ce paradigme un programme
 est constitué d'une suite d'appels de fonctions.
 
 L'approche de programmation fonctionnelle dans R fait aussi en sorte
