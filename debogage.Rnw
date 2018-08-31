@@ -40,7 +40,7 @@ régulièrement, de la plus simple à la plus puissante.
 Au cours du chapitre, nous allons tâcher de déboguer la fonction dont
 le code se trouve à la \autoref{fig:debogage:rgamma_ar}. Il s'agit de
 la fonction \code{rgamma\_ar} des exemples du
-\autoref{chap:collaboration} (sans les commentaires) dans laquelle
+\autoref{chap:fonctions} (sans les commentaires) dans laquelle
 j'ai inséré quelques petites anomalies. Voyons voir si nous pouvons
 les trouver --- autrement que par comparaison avec une version
 antérieure, bien sûr!

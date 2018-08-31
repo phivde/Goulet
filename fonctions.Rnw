@@ -269,7 +269,7 @@ else
   valeur \code{TRUE} ou \code{FALSE} \emph{unique}. C'est une erreur
   fréquente de construire un test de telle sorte que \meta{condition}
   est un vecteur, ce qui n'a guère de sens. Les fonctions \icode{any},
-  \icode{all} (\autoref{sec:internes:fonctions:tests}) et \icode{isTRUE}
+  \icode{all} (\autoref{sec:premiers:internes:tests}) et \icode{isTRUE}
   se révèlent utiles dans les clauses \code{if} pour réduire les
   vecteurs booléens à une valeur unique.
 \item \meta{conséquence} est une expression, ou un groupe
@@ -374,7 +374,7 @@ en intelligence artificielle.\footnote{%
   fais ici.}
 
 Nous reviendrons sur la récursivité à la
-\autoref{sec:application:recursivite}. La présente section étudie les
+\autoref{sec:fonctions:recursivite}. La présente section étudie les
 structures de contrôles itératives de R. Elles sont de trois types: la
 boucle à contrôle par dénombrement (boucle \code{for}), la boucle à
 pré-condition «tant que» (boucle \code{while}) et la boucle à
@@ -441,10 +441,10 @@ repeat
 \end{itemize}
 
 Le test d'arrêt d'une boucle \icode{repeat} utilise habituellement la
-commande \icode{break} (\autoref{sec:application:flux}) pour forcer la
-sortie de la boucle. Puisque le test se trouve à l'intérieur de la
-boucle --- généralement à ou vers la fin ---, une boucle \code{repeat}
-est toujours exécutée au moins une fois.
+commande \icode{break} (\autoref{sec:fonctions:controle:flux}) pour
+forcer la sortie de la boucle. Puisque le test se trouve à l'intérieur
+de la boucle --- généralement à ou vers la fin ---, une boucle
+\code{repeat} est toujours exécutée au moins une fois.
 
 \subsection{Contrôle du flux}
 \label{sec:fonctions:controle:flux}

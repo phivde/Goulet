@@ -1,33 +1,197 @@
-\chapter{Démarrer avec Git}
+%%% Copyright (C) 2018 Vincent Goulet
+%%%
+%%% Ce fichier fait partie du projet
+%%% «Programmer avec R»
+%%% https://gitlab.com/vigou3/programmer-avec-r
+%%%
+%%% Cette création est mise à disposition selon le contrat
+%%% Attribution-Partage dans les mêmes conditions 4.0
+%%% International de Creative Commons.
+%%% https://creativecommons.org/licenses/by-sa/4.0/
+
+\chapter{Travail collaboratif avec Git}
 \label{chap:git}
 
-\begingroup
-\setkeys{Gin}{width=0.6\textwidth}
-\raggedbottom
+\begin{objectifs}
+\item Créer une version locale d'un projet informatique hébergé dans
+  un dépôt utilisant le système de gestion de version Git.
+\item Créer, utiliser et supprimer une branche dans un projet avec
+  Git.
+\item Publier des ajouts et des modifications à un projet avec Git.
+\item Rendre disponibles des ajouts et des modifications à une
+  communauté par le biais d'un serveur Git.
+\end{objectifs}
+
+Nous avons déjà traité, à la \autoref{sec:fonctions:pratiques} de
+bonnes pratiques à adopter en matière de style de programmation et de
+présentation du code dans un contexte de travail collaboratif. Un
+autre enjeu surgit toutefois dès que plus d'une personne œuvre sur un
+projet: le partage et l'échange des contributions de chacun. Comment
+rendre le travail de Marianne disponible à Alexandre? Comment
+s'assurer qu'une modification apportée dans un fichier par Alexandre
+n'écrase pas celle sur laquelle Marianne travaille depuis plusieurs
+heures? Comment identifier à coup sûr et automatiquement la plus
+récente version d'un fichier? Ce genre de questions, auxquelles
+quiconque a déjà travaillé en équipe sur un projet a déjà été
+confronté, les informaticiens y ont répondu depuis de très nombreuses
+années avec les systèmes de gestion de versions.
+
+Les systèmes de gestion de versions constituent des outils de
+développement incontournables. Après une courte introduction de mon
+cru au concept de gestion des versions, ce chapitre reprend la
+documentation officielle du système de gestion le plus utilisé dans le
+monde en ce moment: Git.
+
+
+\section{Gestion des versions}
+\label{sec:git:vc}
+
+Un système de gestion de versions gère l'ensemble des versions --- ou
+\emph{révisions} --- d'un ou plusieurs fichiers, normalement en format
+texte. Dans le monde de la programmation, un tel système se charge du
+maintient du code source d'un projet logiciel. Il enregistre la
+nature, la date et l'auteur de chaque révision apportée à un fichier
+et il permet ensuite de retourner à des révisions précédentes, de
+comparer des révisions entre elles ou de fusionner des révisions.
+
+Outil essentiel en contexte de travail collaboratif, le système de
+gestion de version permet de régler les problèmes de suivi de la plus
+récente version d'un fichier, de partage de fichiers entre les membres
+d'une équipe et de mise en commun des contributions. Comme les
+versions successives sont entreposées dans un référentiel situé sur un
+serveur central, le système fournit également une forme de copie de
+sauvegarde du code source d'un projet.
+
+\tipbox{L'utilisation d'un système de gestion de versions vaut le coup
+  même pour vos projets strictement individuels, ne serait-ce que pour
+  les volets de copie de sauvegarde et de suivi des versions.}
+
+Les systèmes de contrôle de version de première génération ont vu le
+jour dans les années 1970 et 1980:
+\link{https://fr.wikipedia.org/wiki/Source_Code_Control_System}{Source
+    Code Control System} (SCCS, 1972),
+\link{https://fr.wikipedia.org/wiki/GNU_RCS}{Revision Control
+    System} (RCS, 1982). Ces systèmes ne permettaient pas de
+travailler à plusieurs à la fois sur un même fichier. Cette barrière a
+été levée par les systèmes centralisés de seconde génération qui ont
+pu se développer grâce à l'accès de plus en plus généralisé à la
+réseautique --- notamment à Internet --- au cours des années 1990 et
+2000. Pendant plus d'une décennie, le système libre
+\index{CVS}\link{https://fr.wikipedia.org/wiki/Concurrent_versions_system}{Concurrent
+    Versions System} (CVS, 1990) a régné sur le monde de la gestion
+de versions, jusqu'à l'arrivée de
+\index{Subversion}\link{https://fr.wikipedia.org/wiki/Apache_Subversion}{Apache
+    Subversion} (SVN, 2000). Construit selon les mêmes principes que
+CVS et compatible avec lui, Subversion se voulait surtout une
+meilleure implémentation d'un système de gestion de version
+centralisé. Le système est rapidement devenu le standard \emph{de
+  facto}, si bien que le code source de plusieurs projets
+informatiques est toujours administré avec Subversion.
+
+Par leur nature, les systèmes centralisés requièrent un accès au
+serveur central pour toute opération de publication d'une modification
+à un fichier. C'est pour lever cette contrainte que sont apparus, au
+milieu des années 2000, les systèmes de gestion de version distribués.
+Les principaux représentants de cette troisième génération de systèmes
+sont \index{Git}\link{https://fr.wikipedia.org/wiki/Git}{Git} (2005),
+\index{Mercurial}\link{https://fr.wikipedia.org/wiki/Mercurial}{Mercurial} (hg,
+2005) et
+\index{Bazaar}\link{https://fr.wikipedia.org/wiki/Bazaar_(logiciel)}{Bazaar}
+(bzr, 2005).
+
+\Index{Git}Git (avec un «g» dur, «guitte») a été développé à l'origine
+par Linus Torvalds pour administrer le code source du noyau du système
+d'exploitation Linux. Le système a connu une popularité foudroyante,
+notamment grâce à GitHub, un site d'hébergement de projets libres basé
+sur Git et doté d'une interface particulièrement conviviale. Résultat:
+Git est aujourd'hui le système de gestion de versions le plus utilisé
+dans le monde.
+
+Créez un compte dans l'un des nombreux dépôts Git publics
+(\link{https://github.com}{GitHub}, \link{https://gitlab.com}{GitLab},
+\link{bitbucket.org}{BitBucket}, pour ne nommer que ceux-là) et
+commencez à vous familiariser avec le cycle de travail de Git pour un
+projet personnel. Ajoutez ensuite graduellement le volet de %
+\capsule{https://youtu.be/bdIjgjg6zoc}{travail collaboratif}. %
+
+Après cette entrée en matière, le reste du chapitre est constitué
+d'extraits de \emph{Pro Git} \citep{ProGit:2e:2014} choisis afin de
+vous permettre d'atteindre les objectifs d'apprentissage fixés en
+entête de chapitre. L'ouvrage, libre et particulièrement bien fait,
+fait partie de la documentation officielle de Git. J'ai retenu les
+parties suivantes de \emph{Pro Git}:
+\begin{itemize}
+\item chapitre 1, toutes les sections, sauf la section~1.5 sur
+  l'installation de Git;
+\item chapitre 2, sections 2.1, 2.2 et 2.5 (les sections 2.3 et 2.4,
+  bien qu'utiles, sont optionnelles);
+\item chapitre 3, sections 3.1, 3.2 et 3.3.
+\end{itemize}
+
+\begin{figure}[t]
+  \begin{emphbox}{\mdseries Configuration de l'éditeur de texte pour
+      les messages de Git}
+    La \autoref{sec:git:first_time} mentionne la possibilité de
+    configurer l'éditeur de texte qui sera utilisé quand Git doit vous
+    demander de saisir un message. Dans le seul exemple qui est
+    fourni, c'est Emacs qui est utilisé comme éditeur en remplacement
+    de Vim.
+
+    Il y a fort à parier que vous souhaiterez configurer Git pour
+    utiliser un éditeur plus convivial.
+
+    \begin{description}
+    \item[Windows]
+    Le plus simple sous Windows consiste à utiliser le Bloc-notes.
+    Entrez la commande suivante à l'invite de commande (Git Bash) pour
+    choisir cet éditeur par défaut:
+    \begin{Schunk}
+\begin{Verbatim}
+$ git config --global core.editor notepad
+\end{Verbatim}
+    \end{Schunk}%$
+
+    \item[macOS]
+    Le meilleur truc sous macOS consiste à utiliser la commande
+    générique \code{open} pour ouvrir un fichier. Ainsi, c'est votre
+    éditeur de fichiers par défaut du Finder qui sera utilisé à tout
+    coup. Par défaut, il s'agit de TextEdit. Entrez la commande
+    suivante à l'invite de commande du Terminal:
+    \begin{Schunk}
+\begin{Verbatim}
+$ git config --global core.editor open
+\end{Verbatim}
+    \end{Schunk}
+  \end{description}
+
+    \emph{Sources}:
+    \link{https://stackoverflow.com/questions/10564/how-can-i-set-up-an-editor-to-work-with-git-on-windows}{How
+      can I set up an editor to work with Git on Windows?},
+    \link{https://stackoverflow.com/questions/3539594/change-the-default-editor-for-files-opened-in-the-terminal-e-g-set-it-to-text}{Change the default editor for files opened in the terminal?}
+  \end{emphbox}
+  \label{fig:git:editeur}
+\end{figure}
+
+
+\section{Démarrage rapide avec Git}
+\label{sec:git:getting_started}
 
 {%
-  \itshape%
-  Cette annexe contient le chapitre 1 en entier (à l'exception de la
-  section 1.5) et des extraits des chapitres 2 (sections 2.1 à 2.5) et
-  3 (sections 3.1 à 3.3) de \emph{Pro Git} de \citet{ProGit:2e:2014}.
-
+  \itshape\noindent%
   Hormis l'adaptation à la mise en page du présent document, la
   conversion des chapitres en sections et des modifications mineures
   visant à corriger les dépassements de texte dans la marge, je n'ai
   apporté aucun changement au texte. Les renvois vers les sections du
   livre qui ne sont pas reproduites ici sont remplacés par des liens
-  vers la version en ligne.
-
-  \emph{Pro Git} est mis à disposition selon le contrat
-  \href{https://creativecommons.org/licenses/by-nc-sa/3.0/deed.fr}{%
-    Attribution-Pas d’utilisation commerciale-Partage dans les mêmes
-    conditions 3.0 non transposé} de Creative Commons. %
+  vers la \link{https://git-scm.com/book/fr/v2}{version en ligne}.
 }
+\medskip
 
-\section{Démarrage rapide}
-\label{sec:git:getting_started}
+\begingroup
+\setkeys{Gin}{width=0.6\textwidth}
+\raggedbottom
 
-Ce chapitre traite du démarrage rapide avec Git.
+Cette section traite du démarrage rapide avec Git.
 Nous commencerons par expliquer les bases de la gestion de version, puis nous parlerons de l'installation de Git sur votre système et finalement du paramétrage pour commencer à l'utiliser.
 À la fin de ce chapitre vous devriez en savoir assez pour comprendre pourquoi on parle beaucoup de Git, pourquoi vous devriez l'utiliser et vous devriez en avoir une installation prête à l'emploi.
 
@@ -212,7 +376,7 @@ Par contre, comme dans la plupart des systèmes de gestion de version, vous pouv
 mais dès que vous avez validé un instantané dans Git, il est très difficile de le perdre, spécialement si en plus vous synchronisez votre base de données locale avec un dépôt distant.
 
 Cela fait de l'usage de Git un vrai plaisir, car on peut expérimenter sans danger de casser définitivement son projet.
-Pour une information plus approfondie sur la manière dont Git stocke ses données et comment récupérer des données qui pourraient sembler perdues, référez-vous à la \autoref{sec:git:undoing}.
+Pour une information plus approfondie sur la manière dont Git stocke ses données et comment récupérer des données qui pourraient sembler perdues, référez-vous à la \link{https://git-scm.com/book/fr/v2/Les-bases-de-Git-Annuler-des-actions#s_undoing}{Annuler des actions}.
 
 \subsubsection{Les trois états}
 
@@ -1035,449 +1199,6 @@ $ git add LISEZMOI
 Git trouve implicitement que c'est un renommage, donc cela importe peu si vous renommez un fichier de cette manière ou avec la commande \code{mv}.
 La seule différence réelle est que \code{git mv} ne fait qu'une commande à taper au lieu de trois --- c'est une commande de convenance.
 Le point principal est que vous pouvez utiliser n'importe quel outil pour renommer un fichier, et traiter les commandes \code{add}/\code{rm} plus tard, avant de valider la modification.
-
-\subsection{Visualiser l'historique des validations}
-\label{sec:git:viewing_history}
-
-Après avoir créé plusieurs \emph{commits} ou si vous avez cloné un dépôt ayant un historique de \emph{commits}, vous souhaitez probablement revoir le fil des évènements.
-Pour ce faire, la commande \code{git log} est l'outil le plus basique et le plus puissant.
-
-Les exemples qui suivent utilisent le projet très simple \code{simplegit} conçu pour les démonstrations.
-Pour récupérer le projet, lancez:
-\begin{Schunk}
-\begin{Verbatim}
-git clone https://github.com/schacon/simplegit-progit
-\end{Verbatim}
-\end{Schunk}
-
-Lorsque vous lancez \code{git log} dans le répertoire de ce projet, vous devriez obtenir un résultat qui ressemble à ceci:
-\begin{Schunk}
-\begin{Verbatim}
-$ git log
-commit ca82a6dff817ec66f44342007202690a93763949
-Author: Scott Chacon <schacon@gee-mail.com>
-Date:   Mon Mar 17 21:52:11 2008 -0700
-
-    changed the version number
-
-commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7
-Author: Scott Chacon <schacon@gee-mail.com>
-Date:   Sat Mar 15 16:40:33 2008 -0700
-
-    removed unnecessary test
-
-commit a11bef06a3f659402fe7563abf99ad00de2209e6
-Author: Scott Chacon <schacon@gee-mail.com>
-Date:   Sat Mar 15 10:31:28 2008 -0700
-
-    first commit
-\end{Verbatim}
-\end{Schunk}
-
-Par défaut, \code{git log} invoqué sans argument énumère en ordre chronologique inversé les \emph{commits} réalisés.
-Cela signifie que les \emph{commits} les plus récents apparaissent en premier.
-Comme vous le remarquez, cette commande indique chaque \emph{commit} avec sa somme de contrôle SHA-1, le nom et l'e-mail de l'auteur, la date et le message du \emph{commit}.
-
-\code{git log} dispose d'un très grand nombre d'options permettant de paramétrer exactement ce que l'on cherche à voir.
-Nous allons détailler quelques-unes des plus utilisées.
-
-Une des options les plus utiles est \code{-p}, qui montre les différences introduites entre chaque validation.
-Vous pouvez aussi utiliser \code{-2} qui limite la sortie de la commande aux deux entrées les plus récentes:
-\begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
-$ git log -p -2
-commit ca82a6dff817ec66f44342007202690a93763949
-Author: Scott Chacon <schacon@gee-mail.com>
-Date:   Mon Mar 17 21:52:11 2008 -0700
-
-    changed the version number
-
-diff --git a/Rakefile b/Rakefile
-index a874b73..8f94139 100644
---- a/Rakefile
-+++ b/Rakefile
-@@ -5,7 +5,7 @@ require 'rake/gempackagetask'
- spec = Gem::Specification.new do |s|
-     s.platform  =   Gem::Platform::RUBY
-     s.name      =   "simplegit"
--    s.version   =   "0.1.0"
-+    s.version   =   "0.1.1"
-     s.author    =   "Scott Chacon"
-     s.email     =   "schacon@gee-mail.com"
-     s.summary   =   "A simple gem for using Git in Rub\meta{...}
-
-commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7
-Author: Scott Chacon <schacon@gee-mail.com>
-Date:   Sat Mar 15 16:40:33 2008 -0700
-
-    removed unnecessary test
-
-diff --git a/lib/simplegit.rb b/lib/simplegit.rb
-index a0a60ae..47c6340 100644
---- a/lib/simplegit.rb
-+++ b/lib/simplegit.rb
-@@ -18,8 +18,3 @@ class SimpleGit
-     end
-
- end
--
--if $0 == __FILE__
--  git = SimpleGit.new
--  puts git.show
--end
-\ No newline at end of file
-\end{Verbatim}
-\end{Schunk}
-
-Cette option affiche la même information mais avec un diff suivant directement chaque entrée.
-C'est très utile pour des revues de code ou pour naviguer rapidement à travers l'historique des modifications qu'un collaborateur a apportées.
-
-Vous pouvez aussi utiliser une liste d'options de résumé avec \code{git log}.
-Par exemple, si vous souhaitez visualiser des statistiques résumées pour chaque \emph{commit}, vous pouvez utiliser l'option \code{--stat}:
-\begin{Schunk}
-\begin{Verbatim}
-$ git log --stat
-commit ca82a6dff817ec66f44342007202690a93763949
-Author: Scott Chacon <schacon@gee-mail.com>
-Date:   Mon Mar 17 21:52:11 2008 -0700
-
-    changed the version number
-
- Rakefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7
-Author: Scott Chacon <schacon@gee-mail.com>
-Date:   Sat Mar 15 16:40:33 2008 -0700
-
-    removed unnecessary test
-
- lib/simplegit.rb | 5 -----
- 1 file changed, 5 deletions(-)
-
-commit a11bef06a3f659402fe7563abf99ad00de2209e6
-Author: Scott Chacon <schacon@gee-mail.com>
-Date:   Sat Mar 15 10:31:28 2008 -0700
-
-    first commit
-
- README           |  6 ++++++
- Rakefile         | 23 +++++++++++++++++++++++
- lib/simplegit.rb | 25 +++++++++++++++++++++++++
- 3 files changed, 54 insertions(+)
-\end{Verbatim}
-\end{Schunk}
-
-Comme vous pouvez le voir, l'option \code{--stat} affiche sous chaque entrée de validation une liste des fichiers modifiés, combien de fichiers ont été changés et combien de lignes ont été ajoutées ou retirées dans ces fichiers.
-Elle ajoute un résumé des informations en fin de sortie.
-Une autre option utile est \code{--pretty}.
-Cette option modifie le journal vers un format différent.
-Quelques options incluses sont disponibles.
-L'option \code{oneline} affiche chaque \emph{commit} sur une seule ligne, ce qui peut s'avérer utile lors de la revue d'un long journal.
-En complément, les options \code{short} (court), \code{full} (complet) et \code{fuller} (plus complet) montrent le résultat à peu de choses près dans le même format mais avec plus ou moins d'informations:
-\begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
-$ git log --pretty=oneline
-ca82a6dff817ec66f44342007202690a93763949 changed the ve\meta{...}
-085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7 removed unnece\meta{...}
-a11bef06a3f659402fe7563abf99ad00de2209e6 first commit
-\end{Verbatim}
-\end{Schunk}
-
-L'option la plus intéressante est \code{format} qui permet de décrire précisément le format de sortie.
-C'est spécialement utile pour générer des sorties dans un format facile à analyser par une machine --- lorsqu'on spécifie intégralement et explicitement le format, on s'assure qu'il ne changera pas au gré des mises à jour de Git:
-\begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
-$ git log --pretty=format:"%h - %an, %ar : %s"
-ca82a6d - Scott Chacon, 6 years ago : changed the versi\meta{...}
-085bb3b - Scott Chacon, 6 years ago : removed unnecessa\meta{...}
-a11bef0 - Scott Chacon, 6 years ago : first commit
-\end{Verbatim}
-\end{Schunk}
-
-Le \autoref{tab:git:pretty_format} liste les options de formatage les plus utiles.
-
-\begin{table}
-  \centering
-  \caption{Options utiles pour \code{git log --pretty=format}}
-  \label{tab:git:pretty_format}
-  \begin{tabular}{ll}
-    \toprule
-    Option   & Description du formatage \\
-    \midrule
-    \code{\%H}     & Somme de contrôle du commit \\
-    \code{\%h}     & Somme de contrôle abrégée du commit \\
-    \code{\%T}     & Somme de contrôle de l'arborescence \\
-    \code{\%t}     & Somme de contrôle abrégée de l'arborescence \\
-    \code{\%P}     & Sommes de contrôle des parents \\
-    \code{\%p}     & Sommes de contrôle abrégées des parents \\
-    \code{\%an}    & Nom de l'auteur \\
-    \code{\%ae}    & E-mail de l'auteur \\
-    \code{\%ad}    & Date de l'auteur (au format de l'option -date=) \\
-    \code{\%ar}    & Date relative de l'auteur \\
-    \code{\%cn}    & Nom du validateur \\
-    \code{\%ce}    & E-mail du validateur \\
-    \code{\%cd}    & Date du validateur \\
-    \code{\%cr}    & Date relative du validateur \\
-    \code{\%s}     & Sujet \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-Vous pourriez vous demander quelle est la différence entre \emph{auteur}  et \emph{validateur}.
-L'\emph{auteur} est la personne qui a réalisé initialement le travail, alors que le \emph{validateur} est la personne qui a effectivement validé ce travail en gestion de version.
-Donc, si quelqu'un envoie un patch à un projet et un des membres du projet l'applique, les deux personnes reçoivent le crédit --- l'écrivain en tant qu'auteur, et le membre du projet en tant que validateur.
-Nous traiterons plus avant de cette distinction dans \link{https://www.git-scm.com/book/fr/v2/ch00/_distributed_git}{Git distribué}.
-
-Les options \code{oneline} et \code{format} sont encore plus utiles avec une autre option \code{log} appelée \code{--graph}.
-Cette option ajoute un joli graphe en caractères ASCII pour décrire l'historique des branches et fusions:
-\begin{Schunk}
-\begin{Verbatim}
-$ git log --pretty=format:"%h %s" --graph
-* 2d3acf9 ignore errors from SIGCHLD on trap
-*  5e3ee11 Merge branch 'master' of git:
-|\
-| * 420eac9 Added a method for getting the current branch.
-* | 30e367c timeout code and tests
-* | 5a09431 add timeout protection to grit
-* | e1193f8 support for heads with slashes in them
-|/
-* d6016bc require time for xmlschema
-*  11d191e Merge branch 'defunkt' into local
-\end{Verbatim}
-\end{Schunk}
-
-Ces options deviendront plus intéressantes quand nous aborderons les branches et les fusions dans le prochain chapitre.
-
-Les options ci-dessus ne sont que des options simples de format de sortie de \code{git log} --- il y en a de nombreuses autres.
-Le \autoref{tab:git:log_options} donne une liste des options que nous avons traitées ainsi que d'autres options communément utilisées accompagnées de la manière dont elles modifient le résultat de la commande \code{log}.
-
-\begin{table}
-  \centering
-  \caption{Options usuelles de \code{git log}}
-  \label{tab:git:log_options}
-  \begin{tabularx}{1.0\linewidth}{lX}
-    \toprule
-    Option            & Description \\
-    \midrule
-    \code{-p}              & Affiche le patch appliqué par chaque commit \\
-    \code{--stat}          & Affiche les statistiques de chaque fichier pour chaque commit \\
-    \code{--shortstat}     & N'affiche que les ligne modifiées/insérées/effacées de l'option --stat \\
-    \code{--name-only}     & Affiche la liste des fichiers modifiés après les informations du commit \\
-    \code{--name-status}   & Affiche la liste des fichiers affectés accompagnés des informations d'ajout/modification/suppression \\
-    \code{--abbrev-commit} & N'affiche que les premiers caractères de la somme de contrôle SHA-1 \\
-    \code{--relative-date} & Affiche la date en format relatif (par exemple "2 weeks ago": il y a deux semaines) au lieu du format de date complet \\
-    \code{--graph}         & Affiche en caractères ASCII le graphe de branches et fusions en vis-à-vis de l'historique \\
-    \code{--pretty}        & Affiche les \emph{commits} dans un format alternatif. Les formats incluent \code{oneline}, \code{short}, \code{full}, \code{fuller}, et \code{format} (où on peut spécifier son propre format) \\
-    \code{--oneline}       & Raccourci pour les options \code{--pretty=oneline --abbrev-commit} \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
-
-\subsubsection{Limiter la longueur de l'historique}
-
-En complément des options de formatage de sortie, \code{git log} est pourvu de certaines options de limitation utiles --- des options qui permettent de restreindre la liste à un sous-ensemble de \emph{commits}.
-Vous avez déjà vu une de ces options --- l'option \code{-2} qui ne montre que les deux derniers \emph{commits}.
-En fait, on peut utiliser \code{-<n>}, où \code{n} correspond au nombre de \emph{commits} que l'on cherche à visualiser en partant des plus récents.
-En vérité, il est peu probable que vous utilisiez cette option, parce que Git injecte par défaut sa sortie dans un outil de pagination qui permet de la visualiser page à page.
-
-Cependant, les options de limitation portant sur le temps, telles que \code{--since} (depuis) et \code{--until} (jusqu'à) sont très utiles.
-Par exemple, la commande suivante affiche la liste des \emph{commits} des deux dernières semaines:
-\begin{Schunk}
-\begin{Verbatim}
-$ git log --since=2.weeks
-\end{Verbatim}
-\end{Schunk}
-
-Cette commande fonctionne avec de nombreux formats --- vous pouvez indiquer une date spécifique (2008-01-05) ou une date relative au présent telle que «2 years 1 day 3 minutes ago».
-
-Vous pouvez aussi restreindre la liste aux \emph{commits} vérifiant certains critères de recherche.
-L'option \code{--author} permet de filtrer sur un auteur spécifique, et l'option \code{--grep} permet de chercher des mots clés dans les messages de validation.
-Notez que si vous spécifiez à la fois \code{--author} et \code{--grep}, la commande retournera seulement des \emph{commits} correspondant simultanément aux deux critères.
-
-Si vous souhaitez spécifier plusieurs options \code{--grep},  vous devez ajouter l'option \code{--all-match}, car, par défaut, ces commandes retournent les \emph{commits} vérifiant au moins un critère de recherche.
-
-Un autre filtre vraiment utile est l'option \code{-S} qui prend une chaîne de caractères et ne retourne que les \emph{commits} qui introduisent des modifications qui ajoutent ou retirent du texte comportant cette chaîne.
-Par exemple, si vous voulez trouver la dernière validation qui a ajouté ou retiré une référence à une fonction spécifique, vous pouvez lancer:
-\begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
-$ git log -S\meta{nom\_de\_fonction}
-\end{Verbatim}
-\end{Schunk}
-
-La dernière option vraiment utile à \code{git log} est la spécification d'un chemin.
-Si un répertoire ou un nom de fichier est spécifié, le journal est limité aux \emph{commits} qui ont introduit des modifications aux fichiers concernés.
-C'est toujours la dernière option de la commande, souvent précédée de deux tirets (\code{--}) pour séparer les chemins des options précédentes.
-
-Le \autoref{tab:git:limit_options} récapitule les options que nous venons de voir ainsi que quelques autres pour référence.
-
-\begin{table}
-  \centering
-  \caption{Options pour limiter la sortie de \code{git log}}
-  \label{tab:git:limit_options}
-  \begin{tabularx}{1.0\linewidth}{lX}
-    \toprule
-    Option                & Description \\
-    \midrule
-    \code{-\meta{n}}                & N'affiche que les \meta{n} derniers \emph{commits} \\
-    \code{--since}, \code{--after}  & Limite l'affichage aux \emph{commits} réalisés après la date spécifiée \\
-    \code{--until}, \code{--before} & Limite l'affichage aux \emph{commits} réalisés avant la date spécifiée \\
-    \code{--author}            & Ne montre que les \emph{commits} dont le champ auteur correspond à la chaîne passée en argument \\
-    \code{--committer}         & Ne montre que les \emph{commits} dont le champ validateur correspond à la chaîne passée en argument \\
-    \code{--grep}              & Ne montre que les \emph{commits} dont le message de validation contient la chaîne de caractères \\
-    \code{-S}                  & Ne montre que les \emph{commits} dont les ajouts ou retraits contient la chaîne de caractères \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
-
-Par exemple, si vous souhaitez visualiser quels \emph{commits} modifiant les fichiers de test dans l'historique du code source de Git ont été validés par Junio Hamano et n'étaient pas des fusions durant le mois d'octobre 2008, vous pouvez lancer ce qui suit:
-\begin{Schunk}
-\begin{Verbatim}[commandchars=|[\]]
-$ git log --pretty="%h - %s" --author=gitster \
-   --since="2008-10-01" --before="2008-11-01" --no-merges
-   -- t/
-5610e3b - Fix testcase failure when extended attributes|meta[...]
-acd3b9e - Enhance hold_lock_file_for_{update,append}() |meta[...]
-f563754 - demonstrate breakage of detached checkout wit|meta[...]
-d1a43f2 - reset --hard/read-tree --reset -u: remove unm|meta[...]
-51a94af - Fix "checkout --track -b newbranch" on detach|meta[...]
-b0ad11e - pull: allow "git pull origin $something:$curr|meta[...]
-\end{Verbatim}
-\end{Schunk}
-
-À partir des \nombre{40000} \emph{commits} constituant l'historique des sources de Git, cette commande extrait les 6 qui correspondent aux critères.
-
-\subsection{Annuler des actions}
-\label{sec:git:undoing}
-
-À tout moment, vous pouvez désirer annuler une de vos dernières actions.
-Dans cette section, nous allons passer en revue quelques outils de base permettant d'annuler des modifications.
-Il faut être très attentif car certaines de ces annulations sont définitives (elles ne peuvent pas être elles-mêmes annulées).
-C'est donc un des rares cas d'utilisation de Git où des erreurs de manipulation peuvent entraîner des pertes définitives de données.
-
-Une des annulations les plus communes apparaît lorsqu'on valide une modification trop tôt en oubliant d'ajouter certains fichiers, ou si on se trompe dans le message de validation.
-Si vous souhaitez rectifier cette erreur, vous pouvez valider le complément de modification avec l'option \code{--amend}:
-\begin{Schunk}
-\begin{Verbatim}
-$ git commit --amend
-\end{Verbatim}
-\end{Schunk}
-
-Cette commande prend en compte la zone d'index et l'utilise pour le \emph{commit}.
-Si aucune modification n'a été réalisée depuis la dernière validation (par exemple en lançant cette commande immédiatement après la dernière validation), alors l'instantané sera identique et la seule modification à introduire sera le message de validation.
-
-L'éditeur de message de validation démarre, mais il contient déjà le message de la validation précédente.
-Vous pouvez éditer ce message normalement, mais il écrasera le message de la validation précédente.
-
-Par exemple, si vous validez une version puis réalisez que vous avez oublié d'indexer les modifications d'un fichier que vous vouliez ajouter à ce \emph{commit}, vous pouvez faire quelque chose comme ceci:
-\begin{Schunk}
-\begin{Verbatim}
-$ git commit -m 'validation initiale'
-$ git add fichier_oublie
-$ git commit --amend
-\end{Verbatim}
-\end{Schunk}
-
-Vous n'aurez au final qu'un unique \emph{commit} --- la seconde validation remplace le résultat de la première.
-
-\subsubsection{Désindexer un fichier déjà indexé}
-\label{sec:git:unstaging}
-
-Les deux sections suivantes démontrent comment bricoler les modifications dans votre zone d'index et votre zone de travail.
-Un point sympathique est que la commande permettant de connaître l'état de ces deux zones vous rappelle aussi comment annuler les modifications.
-Par exemple, supposons que vous avez modifié deux fichiers et voulez les valider comme deux modifications indépendantes, mais que vous avez tapé accidentellement \code{git add *} et donc indexé les deux.
-Comment annuler l'indexation d'un des fichiers? La commande \code{git status} vous le rappelle:
-\begin{Schunk}
-\begin{Verbatim}
-$ git add .
-$ git status
-Sur la branche master
-Votre branche est à jour avec 'origin/master'.
-Modifications qui seront validées:
-  (utilisez "git reset HEAD <fichier>..." pour désindexer)
-
-    renommé:   README.md -> README
-    modifié:   CONTRIBUTING.md
-\end{Verbatim}
-\end{Schunk}
-
-Juste sous le texte «Modifications qui seront validées», elle vous indique d'utiliser \code{git reset HEAD <fichier>...} pour désindexer un fichier.
-Utilisons donc ce conseil pour désindexer le fichier \code{CONTRIBUTING.md}:
-\begin{Schunk}
-\begin{Verbatim}
-$ git reset HEAD CONTRIBUTING.md
-Modifications non indexées après reset :
-M       CONTRIBUTING.md
-$ git status
-Sur la branche master
-Votre branche est à jour avec 'origin/master'.
-Modifications qui seront validées :
-  (utilisez "git reset HEAD <fichier>..." pour désindexer)
-
-        renommé:         README.md -> README
-
-Modifications qui ne seront pas validées :
-  (utilisez "git add <fichier>..." pour mettre à jour ce
-   qui sera validé)
-  (utilisez "git checkout -- <fichier>..." pour annuler les
-   modifications dans la copie de travail)
-
-        modifié:         CONTRIBUTING.md
-\end{Verbatim}
-\end{Schunk}
-
-La commande à taper peut sembler étrange mais elle fonctionne.
-Le fichier \code{CONTRIBUTING.md} est modifié mais de retour à l'état non indexé.
-
-\notebox{Bien que \code{git reset} \emph{puisse} être une commande dangereuse conjuguée avec l'option \code{--hard}, dans le cas présent, le fichier dans la copie de travail n'a pas été touché.
-Appeler \code{git reset} sans option n'est pas dangereux - cela ne touche qu'à la zone d'index.}
-
-Pour l'instant, cette invocation magique est la seule à connaître pour la commande \code{git reset}.
-Nous entrerons plus en détail sur ce que \code{reset} réalise et comment le maîtriser pour faire des choses intéressantes dans \link{https://www.git-scm.com/book/fr/v2/ch00/_git_reset}{Reset demystifié}.
-
-\subsubsection{Réinitialiser un fichier modifié}
-
-Que faire si vous réalisez que vous ne souhaitez pas conserver les modifications du fichier \code{CONTRIBUTING.md}?
-Comment le réinitialiser facilement, le ramener à son état du dernier instantané (ou lors du clonage, ou dans l'état dans lequel vous l'avez obtenu dans votre copie de travail)?
-Heureusement, \code{git status} vous indique comment procéder.
-Dans le résultat de la dernière commande, la zone de travail ressemble à ceci:
-\begin{Schunk}
-\begin{Verbatim}
-Modifications qui ne seront pas validées :
-  (utilisez "git add <fichier>..." pour mettre à jour ce
-   qui sera validé)
-  (utilisez "git checkout -- <fichier>..." pour annuler les
-   modifications dans la copie de travail)
-
-        modifié:         CONTRIBUTING.md
-\end{Verbatim}
-\end{Schunk}
-
-Ce qui vous indique de façon explicite comment annuler des modifications que vous avez faites.
-Faisons comme indiqué:
-\begin{Schunk}
-\begin{Verbatim}
-$ git checkout -- CONTRIBUTING.md
-$ git status
-Sur la branche master
-Votre branche est à jour avec 'origin/master'.
-Modifications qui seront validées :
-  (utilisez "git reset HEAD <fichier>..." pour désindexer)
-
-        renommé:         README.md -> README
-\end{Verbatim}
-\end{Schunk}
-
-Vous pouvez constater que les modifications ont été annulées.
-
-\importantbox{Vous devriez aussi vous apercevoir que c'est une commande dangereuse: toutes les modifications que vous auriez réalisées sur ce fichier ont disparu --- vous venez tout juste de l'écraser avec un autre fichier.
-N'utilisez jamais cette commande à moins d'être vraiment sûr de ne pas vouloir de ces modifications.}
-
-Si vous souhaitez seulement écarter momentanément cette modification, nous verrons comment mettre de côté et créer des branches dans la \autoref{sec:git:branching}; ce sont de meilleures façons de procéder.
-
-Souvenez-vous, tout ce qui a été validé dans Git peut quasiment toujours être récupéré.
-Y compris des \emph{commits} sur des branches qui ont été effacées ou des \emph{commits} qui ont été écrasés par une validation avec l'option \code{--amend} (se référer au chapitre \link{https://www.git-scm.com/book/fr/v2/ch00/_data_recovery}{Récupération de données} pour la récupération de données).
-Cependant, tout ce que vous perdez avant de l'avoir validé n'a aucune chance d'être récupérable via Git.
 
 \subsection{Travailler avec des dépôts distants}
 \label{sec:git:remote_repos}
@@ -2355,6 +2076,80 @@ Vous devriez aussi être capable de partager vos branches en les poussant sur un
 Nous aborderons ensuite tout ce que vous devez savoir pour faire tourner votre propre serveur d'hébergement de dépôts.
 
 \endgroup                       % fin effet \raggedbottom et \setkeys
+
+
+\section{Exercices}
+\label{sec:git:exercices}
+
+\Opensolutionfile{solutions}[solutions-git]
+
+\begin{Filesave}{solutions}
+\section*{Chapitre \ref*{chap:git}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:git}}
+
+\end{Filesave}
+
+\begin{exercice}[nosol]
+  Configurer l'éditeur par défaut de Git sur votre poste de travail
+  tel qu'expliqué dans l'encadré de la
+  \autopageref{fig:git:editeur}.
+\end{exercice}
+
+
+\begin{exercice}[nosol]
+  Suivre le tutoriel interactif \link{https://try.github.io/}{tryGit}
+  pour vous familiariser avec les commandes principales de Git.
+\end{exercice}
+
+\begin{exercice}
+  Créer un compte chez \link{https://github.com}{GitHub}, puis créer
+  un «embranchement» (\emph{fork}) du projet test
+  \link{https://github.com/octocat/Spoon-Knife}{Spoon-Knife} depuis
+  l'interface graphique de GitHub. Vous disposerez alors d'une copie
+  de ce projet dans vos propres projets. Effectuer ensuite les
+  opérations suivantes.
+  \begin{enumerate}
+  \item Cloner le projet sur votre poste de travail.
+  \item Créer une branche locale pour effectuer une modification au
+    projet.
+  \item Modifier le fichier \code{index.html} d'une manière
+    quelconque.
+  \item Publier localement la modification dans la branche.
+  \item Publier la branche dans le dépôt GitHub.
+  \item Effectuer une «demande de tirage» (\emph{pull request}) dans
+    le projet original à partir de l'interface de GitHub. Comme il
+    s'agit d'un dépôt test, elle sera ignorée.
+  \end{enumerate}
+
+  \begin{sol}
+    Pour créer l'embranchement (\emph{fork}), il suffit d'appuyer sur
+    le bouton \code{Fork} en haut à droite de la page
+    \link{https://github.com/octocat/Spoon-Knife}{Spoon-Knife}.
+    Ensuite, les commandes à exécuter depuis une ligne de commande
+    \index{Git~Bash}Git~Bash (Windows) ou \index{Terminal}Terminal
+    (macOS) sont les suivantes, dans l'ordre:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\},fontsize=\relsize{-1}]
+~$ git clone https://github.com/\meta{username}/Spoon-Knife.git
+~$ cd Spoon-Knife
+~/Spoon-Knife$ git checkout -b \meta{nom_branche}
+\meta{modifier le fichier index.html avec son éditeur}
+~/Spoon-Knife$ git status
+~/Spoon-Knife$ git add index.html
+~/Spoon-Knife$ git commit -m "\meta{message}"
+~/Spoon-Knife$ git push -u origin \meta{nom_branche}
+\end{Verbatim}
+\end{Schunk}
+    Enfin, retourner sur la page du projet d'origine et appuyer sur le
+    bouton \code{Compare \& pull request} et suivre les instructions.
+    Votre demande de tirage devrait ensuite apparaitre dans la liste
+    de toutes les demandes du projet (plus de \nombre{5000} au moment
+    d'écrire ces lignes).
+  \end{sol}
+\end{exercice}
+
+\Closesolutionfile{solutions}
+
 
 %%% Local Variables:
 %%% mode: latex

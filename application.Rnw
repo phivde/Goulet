@@ -130,7 +130,7 @@ apply(X, MARGIN, FUN, ...)
 
 Le quatrième argument de \code{apply} est l'argument formel spécial
 `\icode{...}' dont nous avons traité à la
-\autoref{sec:premiers:fonctions:definition}. Il devient très utile, ici,
+\autoref{sec:fonctions:definition}. Il devient très utile, ici,
 lorsque la fonction \code{FUN} prend plus d'un argument.
 
 Pour illustrer, reprenons l'exemple précédent en supposant maintenant
