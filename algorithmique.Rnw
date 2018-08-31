@@ -1,0 +1,651 @@
+%%% Copyright (C) 2018 Vincent Goulet
+%%%
+%%% Ce fichier fait partie du projet
+%%% «Programmer avec R»
+%%% https://gitlab.com/vigou3/programmer-avec-r
+%%%
+%%% Cette création est mise à disposition selon le contrat
+%%% Attribution-Partage dans les mêmes conditions 4.0
+%%% International de Creative Commons.
+%%% https://creativecommons.org/licenses/by-sa/4.0/
+
+\chapter{Algorithmique}
+\label{chap:algorithmique}
+
+\def\scriptfilename{\currfilebase.R}
+<<echo=FALSE>>=
+options(width=52)
+@
+
+\begin{objectifs}
+\item Expliquer les algorithmes classiques de tri et de recherche;
+  comparer leurs avantages et inconvénients.
+\item Exprimer une méthode de résolution de problème sous la forme
+  d'un algorithme à l'aide de pseudo-code.
+\item Effectuer la mise en oeuvre d'un algorithme donné dans le
+  langage R.
+\end{objectifs}
+
+Tel que déjà exprimé au \autoref{chap:informatique},
+l'\index{algorithmique}algorithmique --- la science qui étudie les
+algorithmes et les structures de données --- constitue une pierre
+d'assise de l'informatique. L'étude d'algorithmes permet tout à la
+fois de découvrir de multiples méthodes de résolution d'un problème et
+de se sensibiliser aux notions d'efficacité et de temps de calcul.
+
+Le dénombrement des opérations d'un algorithme en notation $O()$ a
+déjà fait l'objet d'une brève introduction à la
+\autoref{sec:informatique:concepts:algorithme}. Je recommande de
+relire cette section ou, pour plus de détails, le chapitre~1 de
+\citet{Stephens:algorithms:2013}.
+
+L'étude des algorithmes s'accompagne habituellement de celle des
+structures de données ou, en d'autres termes, de la manière
+d'organiser les données dans un ordinateur. Il existe bien différentes
+structures de données en R (nous irons au-delà du vecteur simple au
+\autoref{chap:donnes}), mais leur réelle mise en œuvre demeure tout à
+fait transparente pour les programmeuses et les programmeurs. C'est
+pourquoi nous ferons l'impasse dans ce cours sur les notions de
+tableau (\emph{array}), de liste chainée (\emph{list}), d'arbre
+(\emph{tree}) ou de table de hachage (\emph{hashtable}).
+
+
+\section{Algorithmes classiques}
+\label{sec:algorithmique:tri}
+
+Pour l'étude des algorithmes classiques, je m'en remets à l'excellent
+ouvrage \emph{Essential Algorithms} de
+\citet{Stephens:algorithms:2013}. Rédigé dans un style clair et
+direct, le manuscrit va juste assez loin pour nos besoins dans les
+différentes notions, sans pour autant sacrifier les détails
+importants. Bref, un juste équilibre entre «algorithmique pour les
+nuls» et un livre plus théorique.
+
+Je vous invite donc à étudier les chapitre suivants de \emph{Essential
+Algorithms}:
+\begin{itemize}
+\item chapitre 6, pages 131--138, 145 (à partir de la section
+  \emph{Quicksort})--148 et 156--160;
+\item chapitre 7, pages 163--168;
+\item chapitre 9, pages 185--193.
+\end{itemize}
+
+Quelques remarques pour vous aider dans votre lecture.
+\begin{itemize}
+\item Partout où vous lirez \emph{array}, pensez tout simplement à un
+  vecteur dans R.
+\item Tel que mentionné au chapitre~1 de
+  \citet{Stephens:algorithms:2013}, l'auteur a pris le parti d'indicer
+  les vecteurs comme dans plusieurs langages de programmation, soit de
+  $0$ à $n - 1$ pour un vecteur de longueur $n$. Vous devrez adapter
+  les algorithmes en conséquence pour la programmation en R où les
+  vecteurs sont plutôt indicés de $1$ à $n$.
+\item Le livre fait ici et là référence au concept de \emph{library}.
+  Une bibliothèque (le nom en français) est une collection de
+  fonctions ou de sous-programmes que l'on peut utiliser dans nos
+  programmes. Certains langages de programmation sont constitué d'un
+  noyau assez restreint auquel on ajoute plusieurs fonctionnalités
+  standards (le tri ou la recherche, par exemple) par le biais de
+  bibliothèques. C'est en partie le cas de R, mais le système de base
+  contient déjà un grand nombre de fonctionnalités.
+\end{itemize}
+
+
+\section{Fonctions internes utiles}
+\label{sec:algorithmique:internes}
+
+Le tri et la recherche sont des opérations de base dans l'analyse de
+données. Il ne faut donc pas se surprendre que R comporte des
+fonctions internes pour ces opérations.
+
+\subsection{Tri et opérations apparentées}
+\label{sec:internes:fonctions:tri}
+
+\begin{ttscript}{unique}
+\item[\Icode{sort}] \index{tri}tri en ordre croissant ou
+  décroissant
+<<echo=TRUE>>=
+sort(c(4, -1, 2, 6))
+@
+\item[\Icode{rank}] \index{rang}rang des éléments d'un vecteur dans
+  l'ordre croissant ou décroissant
+<<echo=TRUE>>=
+rank(c(4, -1, 2, 6))
+@
+\item[\href{https://youtu.be/order}{\Icode{order}}] \index{ordre}ordre
+  \capsule{https://youtu.be/order}{} d'extraction des éléments d'un
+  vecteur pour les placer en ordre croissant ou décroissant
+<<echo=TRUE>>=
+order(c(4, -1, 2, 6))
+@
+\item[\Icode{rev}] vecteur \index{renverser}renversé
+<<echo=TRUE>>=
+rev(1:10)
+@
+\item[\Icode{unique}] éléments uniques d'un vecteur
+<<echo=TRUE>>=
+unique(c(2, 4, 2, 5, 9, 5, 0))
+@
+\end{ttscript}
+
+\subsection{Recherche}
+\label{sec:internes:fonctions:recherche}
+
+Les exemples de cette sous-section utilisent le vecteur suivant.
+<<echo=FALSE>>=
+x <- c(4, -1, 2, -3, 6)
+@
+<<echo=TRUE>>=
+x
+@
+
+\begin{ttscript}{which.max}
+\item[\Icode{which}] positions des éléments satisfaisant la condition
+  en argument
+<<echo=TRUE>>=
+which(x < 0)
+@
+\item[\Icode{which.min}] position du \index{minimum!position}minimum
+<<echo=TRUE>>=
+which.min(x)
+@
+\item[\Icode{which.max}] position du \index{maximum!position}maximum
+<<echo=TRUE>>=
+which.max(x)
+@
+\item[\Icode{match}] position de la première occurrence d'un élément
+<<echo=TRUE>>=
+match(2, x)
+@
+\item[\Icode{\%in\%}] appartenance d'une ou plusieurs valeurs au
+  vecteur
+<<echo=TRUE>>=
+-1:2 %in% x
+@
+\end{ttscript}
+
+
+\section{Exercices}
+\label{sec:algorithmique:exercices}
+
+\Opensolutionfile{solutions}[solutions-algorithmique]
+
+\begin{Filesave}{solutions}
+\section*{Chapitre \ref*{chap:algorithmique}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:algorithmique}}
+
+Nous allons tester nos fonctions avec des vecteurs aléatoires obtenus
+avec la fonction \Icode{sample} qui tire un échantillon aléatoire
+parmi des valeurs avec ou sans remise:
+\begin{Schunk}
+\begin{Verbatim}
+sample(x, size, replace = FALSE)
+\end{Verbatim}
+\end{Schunk}
+\begin{itemize}
+\item \code{x} est un vecteur parmi lequel sera tiré l'échantillon;
+\item \code{size} est la taille de l'échantillon;
+\item \code{replace} est une valeur booléenne qui indique si
+  l'échantillonnage doit s'effectuer avec ou sans remise.
+\end{itemize}
+\end{Filesave}
+
+\begin{exercice}
+  Effectuer une mise en œuvre en R de l'algorithme
+  \index{insertionsort}\emph{insertionsort}.
+  \begin{sol}
+    L'algorithme \index{insertionsort}\emph{insertionsort} déplace
+    successivement les valeurs du vecteur vers l'avant dans leur
+    position en ordre croissant, comme on le ferait avec des cartes.
+    L'algorithme requiert deux boucles: une pour passer par toutes les
+    valeurs du vecteur et une autre pour déterminer à quel endroit,
+    parmi les valeurs déjà triées, chaque valeur doit se retrouver.
+
+    La fonction \icode{insertionsort} de la
+    \autoref{fig:algorithmique:insertionsort} constitue une mise en
+    œuvre de l'algorithme en R. L'expression à l'intérieur de la
+    clause \icode{if} repositionne les éléments du vecteur dans le bon
+    ordre.
+
+    \begin{figure}
+      \lstinputlisting[frame=single,numbers=none]{include/insertionsort.R}
+      \caption{Mise en œuvre en R de l'algorithme
+        \emph{insertionsort}}
+      \label{fig:algorithmique:insertionsort}
+    \end{figure}
+
+<<echo=FALSE>>=
+source("include/insertionsort.R")
+@
+<<echo=TRUE>>=
+(x <- sample(0:10, 7, replace = TRUE))
+insertionsort(x)
+@
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Effectuer une mise en œuvre en R de l'algorithme
+  \index{selectionsort}\emph{selectionsort}.
+  \begin{sol}
+    L'algorithme \emph{selectionsort} déplace graduellement vers
+    l'avant la plus petite valeur du vecteur, la deuxième plus petite
+    valeur, et ainsi de suite.Deux boucles sont encore nécessaires:
+    une pour passer à travers toutes les positions du vecteur et un
+    autre pour, à chaque itération de la première boucle, trouver le
+    minimum dans les valeurs restantes du vecteur.
+
+    La fonction \icode{selectionsort} de la
+    \autoref{fig:algorithmique:selecionsort} constitue une mise en
+    œuvre de l'algorithme en R. Dans plusieurs langages de
+    programmation, l'échange de deux éléments d'un vecteur nécessite
+    une variable tampon (temporaire), comme ceci:
+    \begin{Schunk}
+\begin{Verbatim}
+tmp <- x[i]
+x[i] <- x[j]
+x[j] <- tmp
+\end{Verbatim}
+    \end{Schunk}
+    Vous remarquerez comment l'échange est facile à faire en R
+    simplement par indiçage.
+
+    \begin{figure}
+      \lstinputlisting[frame=single,numbers=none]{include/selectionsort.R}
+      \caption{Mise en œuvre en R de l'algorithme \emph{selectionsort}}
+      \label{fig:algorithmique:selectionsort}
+    \end{figure}
+
+<<echo=FALSE>>=
+source("include/selectionsort.R")
+@
+<<echo=TRUE>>=
+(x <- sample(0:10, 7, replace = TRUE))
+selectionsort(x)
+@
+
+    La fonction \icode{which.min} retourne l'indice du minimum
+    dans un vecteur. Nous pouvons l'utiliser pour éliminer la
+    seconde boucle dans la mise en œuvre de la
+    \autoref{fig:algorithmique:selecionsort}; voir la fonction de la
+    \autoref{fig:algorithmique:selecionsort-which}.
+
+    \begin{figure}
+      \lstinputlisting[frame=single,numbers=none]{include/selectionsort-which.R}
+      \caption{Mise en œuvre en R de l'algorithme \emph{selectionsort}
+        utilisant la fonction \code{which.min}}
+      \label{fig:algorithmique:selectionsort-which}
+    \end{figure}
+
+<<echo=FALSE>>=
+source("include/selectionsort-which.R")
+@
+<<echo=TRUE>>=
+(x <- sample(0:10, 7, replace = TRUE))
+selectionsort(x)
+@
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Effectuer une mise en œuvre en R de l'algorithme
+  \index{bubblesort}\emph{bubblesort}.
+  \begin{sol}
+    L'algorithme \emph{bubblesort} fait graduellement «remonter à la
+    surface» les plus petites valeurs du vecteur. Il faut comparer
+    deux valeurs adjacentes tant que le vecteur n'est pas trié. Par
+    nature, l'algorithme requiert deux boucles: une pour comparer les
+    valeurs deux à deux, et une autre pour continuer le travail tant
+    que le vecteur n'est pas trié.
+
+    Une première version de la mise en œuvre, à la
+    \autoref{fig:algorithmique:bubblesort-while}, colle de près à
+    l'algorithme de \citet{Stephens:algorithms:2013}.
+
+    \begin{figure}
+      \lstinputlisting[frame=single,numbers=none]{include/bubblesort-while.R}
+      \caption{Mise en œuvre en R de l'algorithme \emph{bubblesort}}
+      \label{fig:algorithmique:bubblesort-while}
+    \end{figure}
+
+<<echo=FALSE>>=
+source("include/bubblesort-while.R")
+@
+<<echo=TRUE>>=
+(x <- sample(0:10, 7, replace = TRUE))
+bubblesort(x)
+@
+
+    Dans la version de \icode{bubblesort} de la
+    \autoref{fig:algorithmique:bubblesort-while}, il faut changer la
+    variable indicatrice \code{not\_sorted} plusieurs fois, dont une pour
+    s'assurer d'effectuer la boucle \code{while} au moins une fois.
+
+    Une seconde mise œuvre, à la
+    \autoref{fig:algorithmique:bubblesort-repeat}, est rendue plus facile à
+    suivre par l'utilisation d'une boucle \code{repeat}, qui est
+    toujours exécutée au moins une fois. Au passage, j'inverse
+    également le rôle de la variable indicatrice pour éviter
+    les déroutantes doubles négations.
+
+    \begin{figure}
+      \lstinputlisting[frame=single,numbers=none]{include/bubblesort-repeat.R}
+      \caption{Mise en œuvre en R de l'algorithme \emph{bubblesort}
+        utilisant une boucle \code{repeat}}
+      \label{fig:algorithmique:bubblesort-repeat}
+    \end{figure}
+
+<<echo=FALSE>>=
+source("include/bubblesort-repeat.R")
+@
+<<echo=TRUE>>=
+(x <- sample(0:10, 7, replace = TRUE))
+bubblesort(x)
+@
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Effectuer une mise en œuvre en R de l'algorithme
+  \index{countingsort}\emph{countingsort}.
+  \begin{sol}
+    L'algorithme \emph{countingsort} compte le nombre d'occurrences de
+    chaque valeur dans le vecteur pour ensuite les retourner dans le
+    bon ordre et le bon nombre de fois.
+
+    La mise en œuvre d'une fonction \icode{countingsort} à
+    la \autoref{fig:algorithmique:countingsort} utilise une boucle
+    pour passer à travers toutes les valeurs du vecteur. Elle est un
+    peu plus générale que l'algorithme de
+    \citet{Stephens:algorithms:2013} dans la mesure où elle fonctionne
+    pour des nombres entre \code{min} et \code{max} plutôt que
+    uniquement entre 0 et \code{max}. La clé ici pour éviter certaines
+    boucles de l'algorithme: la fonction \icode{rep} qui permet de
+    répéter les valeurs d'un vecteur autant de fois que nécessaire.
+
+    \begin{figure}
+      \lstinputlisting[frame=single,numbers=none]{include/countingsort.R}
+      \caption{Mise en œuvre en R de l'algorithme \emph{countingsort}}
+      \label{fig:algorithmique:countingsort}
+    \end{figure}
+
+<<echo=FALSE>>=
+source("include/countingsort.R")
+@
+<<echo=TRUE>>=
+(x <- sample(10:20, 100, replace = TRUE))
+countingsort(x, 10, 20)
+@
+
+    La seconde mise en œuvre ci-dessous triche un peu: elle
+    utilise la fonction \icode{table} de R qui retourne justement le
+    tableau de fréquence de chaque valeur d'un vecteur.
+    Résultat: plus de boucle! Cela dit, c'est un exercice bien
+    artificiel puisque \code{table} elle-même trie les données\dots
+<<echo=TRUE>>=
+countingsort <- function(x, min, max)
+    rep(min:max, table(x))
+(x <- sample(10:20, 100, replace = TRUE))
+countingsort(x, 10, 20)
+@
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Effectuer une mise en œuvre en R de l'algorithme \emph{linear search}.
+  \begin{sol}
+    L'algorithme \emph{linear search} compare une à une les valeurs du
+    vecteur à celle qui est recherchée. Ceci requiert une boucle.
+
+    La fonction \icode{linsearch} présentée à la
+    \autoref{fig:algorithmique:linsearch} retourne \code{NA}
+    plutôt que $-1$ lorsque la valeur n'est pas trouvée, comme c'est
+    l'usage en R.
+
+    \begin{figure}
+      \lstinputlisting[frame=single,numbers=none]{include/linsearch.R}
+      \caption{Mise en œuvre en R de l'algorithme
+        \emph{linear search}}
+      \label{fig:algorithmique:linsearch}
+    \end{figure}
+
+<<echo=FALSE>>=
+source("include/linsearch.R")
+@
+<<echo=TRUE>>=
+x <- c(4, 5, 7, 9, 9, 11, 11, 12, 16, 19)
+linsearch(7, x)
+linsearch(10, x)
+linsearch(21, x)
+@
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Effectuer une mise en œuvre récursive en R de l'algorithme
+  \emph{linear search}.
+  \begin{sol}
+    En version récursive, l'algorithme de recherche linéaire revient à
+    vérifier si la valeur courante du vecteur est la valeur recherchée
+    et, sinon, à recommencer le même processus à partir de la valeur
+    suivante du vecteur.
+
+    Je propose deux mises en œuvre. La première, à la
+    \autoref{fig:algorithmique:rlinsearch}, a recours à une fonction
+    auxiliaire qui garde le compte de la progression dans le vecteur.
+    Remarquez comment la portée lexicale de R
+    (\autoref{sec:implementation:portee}) fait en sorte que nous
+    n'avons pas à passer les variables \code{x}, \code{target} et
+    \code{xlen} à la fonction auxiliaire.
+
+    \begin{figure}
+      \lstinputlisting[frame=single,numbers=none]{include/rlinsearch.R}
+      \caption{Mise en œuvre récursive en R de l'algorithme
+        \emph{linear search}}
+      \label{fig:algorithmique:rlinsearch}
+    \end{figure}
+
+<<echo=FALSE>>=
+source("include/rlinsearch.R")
+@
+<<echo=TRUE>>=
+x <- c(4, 5, 7, 9, 9, 11, 11, 12, 16, 19)
+rlinsearch(7, x)
+rlinsearch(10, x)
+rlinsearch(21, x)
+@
+
+    La seconde mise en œuvre, à la
+    \autoref{fig:algorithmique:rlinsearch-na} est un peu plus simple,
+    mais, comme la position de la valeur recherchée dans le vecteur
+    est calculée, elle repose sur le fait que tout calcul avec
+    \code{NA} retourne \code{NA}, ce qui ne constitue sans doute pas
+    du bon style\dots
+
+    \begin{figure}
+      \lstinputlisting[frame=single,numbers=none]{include/rlinsearch-na.R}
+      \caption{Mise en œuvre récursive en R de l'algorithme
+        \emph{linear search} utilisant une propriété de la valeur
+        \code{NA}}
+      \label{fig:algorithmique:rlinsearch-na}
+    \end{figure}
+
+<<echo=FALSE>>=
+source("include/rlinsearch-na.R")
+@
+<<echo=TRUE>>=
+x <- c(4, 5, 7, 9, 9, 11, 11, 12, 16, 19)
+rlinsearch(7, x)
+rlinsearch(10, x)
+rlinsearch(21, x)
+@
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Effectuer une mise en œuvre en R de l'algorithme \emph{binary search}.
+  \begin{sol}
+    L'algorithme \emph{binary search} coupe en deux l'intervalle dans
+    lequel la valeur recherchée pourrait se trouver jusqu'à ce qu'il
+    ne reste que la valeur recherchée ou un intervalle vide, auquel
+    cas la valeur ne se trouve pas dans le vecteur.
+
+    Attention à une chose: dans l'algorithme de
+    \citet{Stephens:algorithms:2013}, il est spécifié que le résultat
+    du calcul $\text{mid} = (\min + \max)/2$ doit être un entier
+    (\emph{integer}). Dans R, nous pouvons obtenir ce résultat avec
+    \icode{as.integer} ou, plus simplement, en calculant la partie
+    entière du résultat avec \icode{floor}. C'est ce qu'utilise la
+    fonction \icode{binsearch} de la
+    \autoref{fig:algorithmique:binsearch}.
+
+    \begin{figure}
+      \lstinputlisting[frame=single,numbers=none]{include/binsearch.R}
+      \caption{Mise en œuvre en R de l'algorithme
+        \emph{binary search}}
+      \label{fig:algorithmique:binsearch}
+    \end{figure}
+
+<<echo=FALSE>>=
+source("include/binsearch.R")
+@
+<<echo=TRUE>>=
+x <- c(4, 5, 7, 9, 9, 11, 11, 12, 16, 19)
+binsearch(7, x)
+binsearch(10, x)
+binsearch(21, x)
+@
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Effectuer une mise en œuvre récursive en R de l'algorithme
+  \emph{binary search}.
+  \begin{sol}
+    La mise en œuvre récursive la plus simple de l'algorithme
+    \emph{binary search}, à la figure
+    \autoref{fig:algorithmique:rbinsearch}, utilise une fonction
+    auxiliaire. Remarquez comment une fonction récursive (\code{fun}
+    dans le cas présent) doit toujours --- normalement dès le départ
+    --- contenir un critère d'arrêt des récursions. Autrement, le
+    processus se répète à l'infini.
+
+    \begin{figure}
+      \lstinputlisting[frame=single,numbers=none]{include/rbinsearch.R}
+      \caption{Mise en œuvre récursive en R de l'algorithme
+        \emph{binary search}}
+      \label{fig:algorithmique:rbinsearch}
+    \end{figure}
+
+<<echo=FALSE>>=
+source("include/rbinsearch.R")
+@
+<<echo=TRUE>>=
+x <- c(4, 5, 7, 9, 9, 11, 11, 12, 16, 19)
+rbinsearch(7, x)
+rbinsearch(10, x)
+rbinsearch(21, x)
+@
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Effectuer une mise en œuvre récursive en R de la fonction
+  factorielle.
+  \begin{sol}
+    Voir la \autoref{fig:presentation:scheme_vs_s}.
+<<echo=TRUE>>=
+factorial(0)
+factorial(1)
+factorial(5)
+@
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Effectuer une mise en œuvre récursive en R de la suite de Fibonacci.
+  \begin{sol}
+    L'algorithme de base pour calculer un élément de la suite
+    de Fibonnacci de manière récursive est très lent parce que
+    plusieurs valeurs sont calculées à de multiples reprises.
+<<echo=TRUE>>=
+fibonacci <- function(n)
+    if (n <= 1) n else fibonacci(n - 1) + fibonacci(n - 2)
+fibonacci(0)
+fibonacci(1)
+fibonacci(2)
+fibonacci(5)
+fibonacci(10)
+# fibonacci(30)              # déjà lent
+# fibonacci(35)              # long
+# fibonacci(40)              # à vos risques et périls
+@
+  \end{sol}
+\end{exercice}
+
+
+
+\begin{exercice}
+  \label{ex:algorithmique:100metres}
+  On vous donne la liste et la date des 31 meilleurs temps enregistrés
+  au 100~mètres homme entre 1964 et 2005.
+<<echo=TRUE, eval=TRUE>>=
+temps <- c(10.06, 10.03, 10.02,  9.95, 10.04, 10.07,
+           10.08, 10.05,  9.98, 10.09, 10.01, 10.00,
+            9.97,  9.93,  9.96,  9.99,  9.92,  9.94,
+            9.90,  9.86,  9.88,  9.87,  9.85,  9.91,
+            9.84,  9.89,  9.79,  9.80,  9.82,  9.78,
+            9.77)
+names(temps) <- c("1964-10-15", "1968-06-20",
+    "1968-10-13", "1968-10-14", "1968-10-14",
+    "1968-10-14", "1968-10-14", "1975-08-20",
+    "1977-08-11", "1978-07-30", "1979-09-04",
+    "1981-05-16", "1983-05-14", "1983-07-03",
+    "1984-05-05", "1984-05-06", "1988-09-24",
+    "1989-06-16", "1991-06-14", "1991-08-25",
+    "1991-08-25", "1993-08-15", "1994-07-06",
+    "1994-08-23", "1996-07-27", "1996-07-27",
+    "1999-06-16", "1999-08-22", "2001-08-05",
+    "2002-09-14", "2005-06-14")
+@
+<<echo=FALSE, eval=TRUE>>=
+cat(temps, file = "100metres.data", labels = names(temps), fill = 1)
+@
+  Les données se trouvent dans le fichier
+  \code{100metres.data} distribué avec ce document. Les dates se
+  trouvent la première colonne du fichier et les temps, dans la
+  seconde. La commande \icode{scan} utilisée avec l'argument
+  \code{what = list("", 1)} permet d'importer ces données dans R.
+
+  Extraire de ce vecteur les records du monde seulement, c'est-à-dire
+  la première fois que chaque temps a été réalisé.
+  \begin{sol}
+    D'abord, recréons le vecteur des temps à partir des données du
+    fichier \code{100metres.data}.
+<<eval=TRUE>>=
+x <- scan("100metres.data", what = list("", 1))
+temps <- x[[2]]
+names(temps) <- x[[1]]
+@
+    Ensuite, la clé pour obtenir les premiers records consiste à
+    calculer les minimums cumulatifs avec \icode{cummin}. Une première
+    expression retourne les temps, mais sans les dates.
+<<eval=TRUE>>=
+unique(cummin(temps))
+@
+    Nous pouvons récupérer les dates en retrouvant les records dans le
+    vecteur.
+<<eval=TRUE>>=
+temps[match(unique(cummin(temps)), temps)]
+@
+  \end{sol}
+\end{exercice}
+
+\Closesolutionfile{solutions}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-engine: xetex
+%%% TeX-master: "programmer-avec-r"
+%%% coding: utf-8
+%%% End:
