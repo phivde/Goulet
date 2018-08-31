@@ -24,6 +24,8 @@ options(width=52)
   d'arguments.
 \item Utiliser la fonction \code{if} pour l’exécution conditionnelle
   d'expressions R.
+\item Distinguer la construction \code{if ... else ...} de la fonction
+  \code{ifelse}.
 \item Concevoir une boucle dans R.
 \item Choisir entre les opérateurs \code{for}, \code{while} et
   \code{repeat} lors de la construction d'une boucle R.
@@ -227,7 +229,10 @@ La répétition de procédures, la sortie forcée d'un programme ou le
 choix entre diverses procédures sont réalisés à l'aide de commandes
 spéciales appelées %
 \index{structures de contrôle}\emph{structures de contrôle}. %
-C'est le sujet de cette section.
+On retrouve les structures de boucles dans la grande majorité des
+langages de programmation, du moins chez les descendants de
+\index{Fortran}Fortran et \index{Algol}d'Algol.
+
 
 \subsection{Exécution conditionnelle}
 \label{sec:fonctions:controle:if}
