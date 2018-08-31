@@ -12,7 +12,7 @@
 ## https://creativecommons.org/licenses/by-sa/4.0/
 
 ###
-### MATRICE ET TABLEAU
+### MATRICE ET TABLEAU  `\labelline{donnees:matrice}`
 ###
 
 ## Une matrice est un vecteur avec un attribut 'dim' de
@@ -136,10 +136,34 @@ x[1, , ]                   # tranche horizontale
 x[, 1, 1]                  # carotte de haut en bas
 x[1, 1, ]                  # carotte de devant à derrière
 x[1, , 1]                  # carotte de gauche à droite
-x[1, 1, 1]                 # donnée unique
+x[1, 1, 1]                 # donnée unique  `\labelline{donnees:matrice:fin}`
 
 ###
-### LISTE
+### FONCTIONS INTERNES UTILES  `\labelline{donnees:internes}`
+###
+
+## On se donne un vecteur de 16 éléments.
+(A <- sample(1:10, 16, replace = TRUE))
+
+## Opérations sur les matrices.
+dim(A) <- c(4, 4)          # conversion en une matrice 4 x 4
+b <- c(10, 5, 3, 1)        # vecteur quelconque
+A                          # matrice 'A'
+t(A)                       # transposée
+solve(A)                   # inverse
+solve(A, b)                # solution de Ax = b
+A %*% solve(A, b)          # vérification de la réponse
+diag(A)                    # extraction de la diagonale de 'A'
+diag(b)                    # matrice diagonale formée avec 'b'
+diag(4)                    # matrice identité 4 x 4
+(A <- cbind(A, b))         # matrice 4 x 5
+nrow(A)                    # nombre de lignes de 'A'
+ncol(A)                    # nombre de colonnes de 'A'
+rowSums(A)                 # sommes par ligne
+colSums(A)                 # sommes par colonne  `\labelline{donnees:internes:fin}`
+
+###
+### LISTE  `\labelline{donnees:liste}`
 ###
 
 ## La liste est l'objet le plus général en R. C'est un objet
@@ -208,10 +232,10 @@ x[[7]] <- NULL; length(x)  # suppression du 7e élément
 ## n'est rien d'autre qu'un vecteur, on s'en souviendra).
 unlist(x)                    # remarquer la conversion
 unlist(x, recursive = FALSE) # ne pas appliquer aux sous-listes
-unlist(x, use.names = FALSE) # éliminer les étiquettes
+unlist(x, use.names = FALSE) # éliminer les étiquettes  `\labelline{donnees:liste:fin}`
 
 ###
-### FACTEUR
+### FACTEUR  `\labelline{donnees:facteur+df}`
 ###
 
 ## Les facteurs jouent un rôle important en analyse de
@@ -275,10 +299,10 @@ USArrests[1, ]             # première ligne
 ## Par exemple, nous pouvons extraire ainsi le nombre
 ## d'assauts dans les états comptant un taux de meurtre
 ## supérieur à 10.
-subset(USArrests, Murder > 10, select = Assault)
+subset(USArrests, Murder > 10, select = Assault) #-*- `\labelline{donnees:facteur+df:fin}`
 
 ###
-### IMPORTATION ET EXPORTATION DE DONNÉES
+### IMPORTATION ET EXPORTATION DE DONNÉES  `\labelline{donnees:import-export}`
 ###
 
 ## Pour illustrer les procédures d'importation et
@@ -384,4 +408,4 @@ read.csv2("USArrests.csv2")
 ## spécifiés en argument, ici ceux créés précédemment dans le
 ## répertoire de travail.
 unlink(c("vecteur.data", "matrice.data",
-         "USArrests.txt", "USArrests.csv", "USArrests.csv2"))
+         "USArrests.txt", "USArrests.csv", "USArrests.csv2")) #-*- `\labelline{donnees:import-export:fin}`
