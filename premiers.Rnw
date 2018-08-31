@@ -924,7 +924,7 @@ rep_len(1:3, 10)
   \code{1:\meta{n}}, sauf lorsque \meta{n} vaut $0$. En effet,
   \code{seq\_len(0)} résulte en un vecteur de longueur nulle, alors
   que le résultat de \code{seq(0)} et \code{1:0} est
-  malencontreusement le vecteur $(1\; 0)$.}
+  malencontreusement le vecteur \code{c(1, 0)}.}
 
 \subsection{Extraction du début et de la fin d'un objet}
 \label{sec:premiers:internes:head}
