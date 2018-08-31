@@ -61,7 +61,6 @@ SCRIPTS = \
 	premiers.R \
 	fonctions.R \
 	implementation.R \
-	algorithmique.R \
 	donnees.R \
 	application.R \
 	paquetages.R \
