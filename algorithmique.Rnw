@@ -188,6 +188,14 @@ sample(x, size, replace = FALSE)
 \item \code{replace} est une valeur booléenne qui indique si
   l'échantillonnage doit s'effectuer avec ou sans remise.
 \end{itemize}
+
+\begingroup
+%% modifications locales au style des listings
+\lstset{%
+  frame=single,
+  numbers=none,
+  basicstyle=\normalfont\ttfamily\NoAutoSpacing}
+
 \end{Filesave}
 
 \begin{exercice}
@@ -208,7 +216,7 @@ sample(x, size, replace = FALSE)
     ordre.
 
     \begin{figure}
-      \lstinputlisting[frame=single,numbers=none]{include/insertionsort.R}
+      \lstinputlisting{include/insertionsort.R}
       \caption{Mise en œuvre en R de l'algorithme
         \emph{insertionsort}}
       \label{fig:algorithmique:insertionsort}
@@ -251,7 +259,7 @@ x[j] <- tmp
     simplement par indiçage.
 
     \begin{figure}
-      \lstinputlisting[frame=single,numbers=none]{include/selectionsort.R}
+      \lstinputlisting{include/selectionsort.R}
       \caption{Mise en œuvre en R de l'algorithme \emph{selectionsort}}
       \label{fig:algorithmique:selectionsort}
     \end{figure}
@@ -271,7 +279,7 @@ selectionsort(x)
     \autoref{fig:algorithmique:selecionsort-which}.
 
     \begin{figure}
-      \lstinputlisting[frame=single,numbers=none]{include/selectionsort-which.R}
+      \lstinputlisting{include/selectionsort-which.R}
       \caption{Mise en œuvre en R de l'algorithme \emph{selectionsort}
         utilisant la fonction \code{which.min}}
       \label{fig:algorithmique:selectionsort-which}
@@ -303,7 +311,7 @@ selectionsort(x)
     l'algorithme de \citet{Stephens:algorithms:2013}.
 
     \begin{figure}
-      \lstinputlisting[frame=single,numbers=none]{include/bubblesort-while.R}
+      \lstinputlisting{include/bubblesort-while.R}
       \caption{Mise en œuvre en R de l'algorithme \emph{bubblesort}}
       \label{fig:algorithmique:bubblesort-while}
     \end{figure}
@@ -329,7 +337,7 @@ bubblesort(x)
     les déroutantes doubles négations.
 
     \begin{figure}
-      \lstinputlisting[frame=single,numbers=none]{include/bubblesort-repeat.R}
+      \lstinputlisting{include/bubblesort-repeat.R}
       \caption{Mise en œuvre en R de l'algorithme \emph{bubblesort}
         utilisant une boucle \code{repeat}}
       \label{fig:algorithmique:bubblesort-repeat}
@@ -364,7 +372,7 @@ bubblesort(x)
     répéter les valeurs d'un vecteur autant de fois que nécessaire.
 
     \begin{figure}
-      \lstinputlisting[frame=single,numbers=none]{include/countingsort.R}
+      \lstinputlisting{include/countingsort.R}
       \caption{Mise en œuvre en R de l'algorithme \emph{countingsort}}
       \label{fig:algorithmique:countingsort}
     \end{figure}
@@ -403,7 +411,7 @@ countingsort(x, 10, 20)
     l'usage en R.
 
     \begin{figure}
-      \lstinputlisting[frame=single,numbers=none]{include/linsearch.R}
+      \lstinputlisting{include/linsearch.R}
       \caption{Mise en œuvre en R de l'algorithme
         \emph{linear search}}
       \label{fig:algorithmique:linsearch}
@@ -439,7 +447,7 @@ linsearch(21, x)
     \code{xlen} à la fonction auxiliaire.
 
     \begin{figure}
-      \lstinputlisting[frame=single,numbers=none]{include/rlinsearch.R}
+      \lstinputlisting{include/rlinsearch.R}
       \caption{Mise en œuvre récursive en R de l'algorithme
         \emph{linear search}}
       \label{fig:algorithmique:rlinsearch}
@@ -463,7 +471,7 @@ rlinsearch(21, x)
     du bon style\dots
 
     \begin{figure}
-      \lstinputlisting[frame=single,numbers=none]{include/rlinsearch-na.R}
+      \lstinputlisting{include/rlinsearch-na.R}
       \caption{Mise en œuvre récursive en R de l'algorithme
         \emph{linear search} utilisant une propriété de la valeur
         \code{NA}}
@@ -500,7 +508,7 @@ rlinsearch(21, x)
     \autoref{fig:algorithmique:binsearch}.
 
     \begin{figure}
-      \lstinputlisting[frame=single,numbers=none]{include/binsearch.R}
+      \lstinputlisting{include/binsearch.R}
       \caption{Mise en œuvre en R de l'algorithme
         \emph{binary search}}
       \label{fig:algorithmique:binsearch}
@@ -531,7 +539,7 @@ binsearch(21, x)
     processus se répète à l'infini.
 
     \begin{figure}
-      \lstinputlisting[frame=single,numbers=none]{include/rbinsearch.R}
+      \lstinputlisting{include/rbinsearch.R}
       \caption{Mise en œuvre récursive en R de l'algorithme
         \emph{binary search}}
       \label{fig:algorithmique:rbinsearch}
@@ -640,6 +648,10 @@ temps[match(unique(cummin(temps)), temps)]
 @
   \end{sol}
 \end{exercice}
+
+\begin{Filesave}{solutions}
+\endgroup                               % fin de \lstset local
+\end{Filesave}
 
 \Closesolutionfile{solutions}
 
