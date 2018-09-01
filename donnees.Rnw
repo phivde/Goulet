@@ -576,11 +576,13 @@ writeLines(readLines("matrice.data"))
     \end{minipage} \\
     \mbox{}
   \end{minipage}
-  \caption{Gauche: fichier de données \code{vecteur.data} contenant un
-    vecteur de données à raison d'une donnée par ligne. Droite:
-    fichier \code{matrice.data} contenant les données d'une matrice.
-    Dans les deux cas, le caractère \# indique que le reste du texte
-    sur la ligne est un commentaire.}
+  \caption[Exemples de fichiers contenant des vecteurs de données en
+  texte brut]{Exemples de fichiers contenant des vecteurs de données
+    en texte brut. Gauche: fichier de données \code{vecteur.data}
+    contenant un vecteur de données à raison d'une donnée par ligne.
+    Droite: fichier \code{matrice.data} contenant les données d'une
+    matrice. Dans les deux cas, le caractère \# indique que le reste
+    du texte sur la ligne est un commentaire.}
   \label{fig:donnees:scan}
 \end{figure}
 
@@ -667,11 +669,13 @@ writeLines(readLines("carburant.txt"))
 writeLines(readLines("carburant.csv"))
 @
 \end{lstlisting}
-  \caption{Haut: fichier \code{carburant.txt} contenant un jeu de
-    données rectangulaire dont les champs sont séparés par des
-    espaces. Bas: fichier \code{carburant.csv} contenant le même jeu
-    de données avec une virgule comme séparateur. Dans les deux
-    fichiers, la première ligne contient les titres des colonnes.}
+  \caption[Exemples de tableaux de données en texte brut]{Exemples de
+    tableaux de données en texte brut. Haut: fichier
+    \code{carburant.txt} contenant un jeu de données rectangulaire
+    dont les champs sont séparés par des espaces. Bas: fichier
+    \code{carburant.csv} contenant le même jeu de données avec une
+    virgule comme séparateur. Dans les deux fichiers, la première
+    ligne contient les titres des colonnes.}
   \label{fig:donnees:read.table}
 \end{figure}
 
