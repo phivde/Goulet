@@ -45,8 +45,10 @@ j'ai inséré quelques petites anomalies. Voyons voir si nous pouvons
 les trouver --- autrement que par comparaison avec une version
 antérieure, bien sûr!
 
-\begin{figure}
-\begin{lstlisting}[frame=single, numbers=left, language=R]
+\begin{figure}[t]
+  \renewcommand{\theFancyVerbLine}{%
+    \textcolor{gray}{\tiny\ttfamily\arabic{FancyVerbLine}}}
+\begin{Verbatim}[frame=single, numbers=left, numbersep=3pt]
 rgamma_ar <- function(n, shape, rate = 1; scale = 1/rate)
 {
     if (shape <= 0 | shape >= 1)
@@ -74,22 +76,25 @@ rgamma_ar <- function(n, shape, rate = 1; scale = 1/rate)
     }
     x * scale
 }
-\end{lstlisting}
+\end{Verbatim}
   \caption{Code d'une fonction à déboguer}
   \label{fig:debogage:rgamma_ar}
 \end{figure}
 
 
-\section{Vérification de la syntaxe et affichage de résultats
-  intermédiaires}
+\section{Approche naïve}
 \label{sec:debogage:syntaxe}
 
-Les simples erreurs de syntaxe sont de loin les plus fréquentes --- en
-particulier l'oubli de parenthèses ou d'accolades. Ici, votre premier
-outil de débogage demeure votre éditeur de texte pour programmeur ---
-d'où l'importance d'en utiliser un bon. D'ailleurs, je vous recommande
-de lire l'argumentaire bien plus développé sur le sujet de
-\citet[chapitre~3]{Hunt:pragmatic:1999}.
+La première technique de débogage que vous devriez utiliser consiste
+simplement à vérifier la syntaxe de votre programme et à afficher des
+résultats intermédiaires pour identifier les sources d'erreurs.
+
+Les erreurs de syntaxe sont de loin les erreurs les plus fréquentes
+--- en particulier l'oubli de parenthèses ou d'accolades. Ici, votre
+premier outil de débogage demeure votre éditeur de texte pour
+programmeur --- d'où l'importance d'en utiliser un bon. D'ailleurs, je
+vous recommande de lire l'argumentaire bien plus développé sur le
+sujet de \citet[chapitre~3]{Hunt:pragmatic:1999}.
 
 Un bon éditeur de texte va, entre autres choses, indenter le code
 automatiquement en fonction de ce qu'il contient, et non en fonction
