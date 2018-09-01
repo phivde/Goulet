@@ -558,9 +558,10 @@ caractère spécial tel que \code{\#}, \code{\%} ou \code{;}\,. La
 données.
 
 \begin{figure}
+  \lstset{frame=single,language={},numbers=none}
   \begin{minipage}{1.0\linewidth}
     \begin{minipage}[t]{0.48\linewidth}
-\begin{lstlisting}[frame=single,language={}]
+\begin{lstlisting}
 <<echo=FALSE, results=tex>>=
 writeLines(readLines("vecteur.data"))
 @
@@ -568,7 +569,7 @@ writeLines(readLines("vecteur.data"))
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.48\linewidth}
-\begin{lstlisting}[frame=single,language={}]
+\begin{lstlisting}
 <<echo=FALSE, results=tex>>=
 writeLines(readLines("matrice.data"))
 @
@@ -659,12 +660,13 @@ format de fichier CSV (\emph{comma-separated values}). La
 deux formats différents.
 
 \begin{figure}
-\begin{lstlisting}[frame=single,language={}]
+  \lstset{frame=single,language={},numbers=none}
+\begin{lstlisting}
 <<echo=FALSE, results=tex>>=
 writeLines(readLines("carburant.txt"))
 @
 \end{lstlisting}
-\begin{lstlisting}[frame=single,language={}]
+\begin{lstlisting}
 <<echo=FALSE, results=tex>>=
 writeLines(readLines("carburant.csv"))
 @
