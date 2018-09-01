@@ -109,11 +109,16 @@
     \def\tableautorefname{tableau}%
   }
 
-  %% Table des matières (inspirée de classicthesis.sty)
+  %% Table des matières et al. (inspiré de classicthesis.sty)
   \renewcommand{\cftchapterleader}{\hspace{1.5em}}
   \renewcommand{\cftchapterafterpnum}{\cftparfillskip}
   \renewcommand{\cftsectionleader}{\hspace{1.5em}}
   \renewcommand{\cftsectionafterpnum}{\cftparfillskip}
+  \renewcommand{\cfttableleader}{\hspace{1.5em}}
+  \renewcommand{\cfttableafterpnum}{\cftparfillskip}
+  \renewcommand{\cftfigureleader}{\hspace{1.5em}}
+  \renewcommand{\cftfigureafterpnum}{\cftparfillskip}
+  \setlength{\cftfigurenumwidth}{3.2em}
 
   %% Titres des chapitres
   \chapterstyle{hangnum}
