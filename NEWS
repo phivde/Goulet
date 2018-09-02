@@ -4,17 +4,39 @@
 
 # (en développement)
 
+Révision majeure du document préparée pour la seconde itération du
+cours IFT-1902 Informatique pour actuaires.
+
 ## Nouveautés
 
 - Ajout de la liste des tableaux et de la liste des figures au début
   du document.
+- Ajout d'un introduction qui, notamment, explique les fonctionnalités
+  interactives du document.
 - Le lecteur est maintenant guidé vers des blocs de code informatique
   au fil des chapitres.
-- Chapitre 1 réorganisé: ajout d'une courte introduction à ce que
+- Le chapitre 1 a été réorganisé: ajout d'une courte introduction à ce que
   constitue la programmation informatique; ajout d'une introduction à
   la notion d'algorithme; modification à l'ordre de présentation de
-  certains concepts. Le matériel sur la ligne de commande a été
-  déplacé au chapitre ***X***.
+  certains concepts. Le matériel sur la ligne de commande fait
+  maintenant l'objet du chapitre autonome (le 10).
+- Le chapitre 3 ne couvre plus la définition de fonctions.
+- Un nouveau chapitre 4 regroupe tout ce qui a trait à la définition
+  de fonctions, les structures de contrôle et les bonnes pratiques en
+  matière de programmation.
+- Un nouveau chapitre 6 offre une introduction à l'algorithmique. Les
+  exercices de Stephens (2013) sont également repris dans ce chapitre,
+  ce qui permet d'inclure les solutions dans le document.
+- Il n'y a plus de chapitre sur les fonctions internes utiles.
+  Celles-ci ont été dispersées dans le document dans les chapitres où
+  elles s'avèrent les plus pertinentes (par exemple: les fonctions de
+  manipulation de matrices dans le chapitre où l'on présente les
+  matrices). Le matériel sur les paquetages fait maintenant l'objet
+  d'un chapitre autonome.
+- Le chapitre sur l'analyse et le contrôle de texte vient maintenant
+  avant celui sur Git.
+- Les extraits de «Pro Git» qui étaient présentés dans l'annexe C le
+  sont maintenant directement dans le chapitre sur Git.
 
 ## Autres changements
 
@@ -25,7 +47,7 @@
 - L'historique des versions se trouve maintenant dans le fichier
   `NEWS`.
 - Les instructions de collaboration se trouvent maintenant dans le
-  fichier `CONTRIBUTING`.
+  fichier `CONTRIBUTING.md`.
 
 
 # 2018.06 (2018-06-27)
