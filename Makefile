@@ -57,7 +57,7 @@ files:
 
 commit:
 	git commit content/_index.md layouts/partials/site-header.html \
-	    -m "Updated web page for version ${VERSION}"
+	    -m "Updated web page for version ${VERSION}"; \
 	git push
 
 
