@@ -135,7 +135,7 @@ Rout: $(SCRIPTS:.R=.Rout)
 
 contrib: ${COLLABORATEURS}
 
-release: zip upload create-release publish
+release: zip check upload create-release publish
 
 zip: ${MASTER} ${README} ${NEWS} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS} ${CONTRIBUTING}
 	if [ -d ${BUILDDIR} ]; then ${RM} ${BUILDDIR}; fi
@@ -156,7 +156,15 @@ zip: ${MASTER} ${README} ${NEWS} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS
 	if [ -e ${COLLABORATEURS} ]; then ${RM} ${COLLABORATEURS}; fi
 	${RM} ${BUILDDIR}
 
-upload :
+check:
+	@echo ----- Checking status of working directory...
+	@if [ -n "$(shell git status --porcelain | grep -v '^??')" ]; then \
+	     echo "uncommitted changes in repository; not creating release"; exit 2; fi
+	@if [ -n "$(shell git log origin/master..HEAD)" ]; then \
+	    echo "unpushed commits in repository; pushing to origin"; \
+	     git push; fi
+
+upload:
 	@echo ----- Uploading archive to GitLab...
 	$(eval upload_url_markdown=$(shell curl --form "file=@${ARCHIVE}" \
 	                                        --header "PRIVATE-TOKEN: ${OAUTHTOKEN}"	\
@@ -167,13 +175,8 @@ upload :
 	@echo "${upload_url_markdown}"
 	@echo ----- Done uploading files
 
-create-release :
+create-release:
 	@echo ----- Creating release on GitLab...
-	@if [ -n "$(shell git status --porcelain | grep -v '^??')" ]; then \
-	     echo "uncommitted changes in repository; not creating release"; exit 2; fi
-	@if [ -n "$(shell git log origin/master..HEAD)" ]; then \
-	    echo "unpushed commits in repository; pushing to origin"; \
-	     git push; fi
 	if [ -e relnotes.in ]; then ${RM} relnotes.in; fi
 	touch relnotes.in
 	$(eval FILESIZE = $(shell du -h ${ARCHIVE} | cut -f1 | sed 's/\([KMG]\)/ \1o/'))
