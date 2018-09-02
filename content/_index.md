@@ -30,7 +30,6 @@ travail collaboratif, dont le système de gestion
 [Git](https://git-scm.com); des outils d'analyse et de contrôle de
 texte `grep`, `sed` et `awk`.
 
-
 ## Auteur
 
 Vincent Goulet, professeur titulaire, [École d'actuariat](https://www.act.ulaval.ca), [Université Laval](https://ulaval.ca)
@@ -43,17 +42,19 @@ Vincent Goulet, professeur titulaire, [École d'actuariat](https://www.act.ulava
 
 1\. Éléments d'informatique pour programmeurs  
 2\. Présentation de R  
-3\. Bases du langage R  
-4\. Détails d'implémentation du langage R  
-5\. Structures de données de R  
-6\. Structures de contrôle et fonctions d'application  
-7\. Fonctions internes et extensions  
-8\. Travail collaboratif  
-9\. Analyse et contrôle de texte  
-10\. Débogage  
+3\. Premier pas avec R  
+4\. Fonctions  
+5\. Détails d'implémentation du langage R  
+6\. Algorithmique  
+7\. Structures de données de R  
+8\. Fonctions d'application  
+9\. Bibliothèques et paquetages  
+10\. Ligne de commande  
+11\. Analyse et contrôle de texte  
+12\. Travail collaboratif  
+13\. Débogage  
 A. RStudio: une introduction  
 B. GNU Emacs et ESS: la base  
-C. Démarrer avec Git  
-D. Réponses des exercices  
+C. Solutions des exercices  
 Bibliographie  
 Index
