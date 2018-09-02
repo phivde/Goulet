@@ -12,7 +12,7 @@
 ## https://creativecommons.org/licenses/by-sa/4.0/
 
 ###
-### MISE EN CONTEXTE
+### MISE EN CONTEXTE  `\labelline{implementation:contexte}`
 ###
 
 ## La portée (domaine où un objet existe et comporte une
@@ -27,10 +27,10 @@ x <- 5                       # objet dans l'espace de travail
 square(10)                   # dans 'square' x vaut 10
 x                            # valeur inchangée
 square(x)                    # passer valeur de 'x' à 'square'
-square(x = x)                # colle... signification?
+square(x = x)                # colle... signification?  `\labelline{implementation:contexte:fin}`
 
 ###
-### ENVIRONNEMENT ET ENVIRONNEMENT D'ÉVALUATION
+### ENVIRONNEMENT ET ENVIRONNEMENT D'ÉVALUATION  `\labelline{implementation:environnement}`
 ###
 
 ## Un environnement est un objet spécial qui contient un lien
@@ -110,10 +110,10 @@ f <- function(x)
 }
 g <- f(2)
 ls.str(envir = environment(g))
-g(10)
+g(10)                      #-*- `\labelline{implementation:environnement:fin}`
 
 ###
-### PORTÉE LEXICALE
+### PORTÉE LEXICALE  `\labelline{implementation:portee}`
 ###
 
 ## Tout appel de fonction dans R crée un environnement
@@ -180,10 +180,10 @@ f <- function(x, y)
     g(1 + x * y, 1 - y)
 }
 f(2, 3)
-f(2, 4)
+f(2, 4)                    #-*- `\labelline{implementation:portee:fin}`
 
 ###
-### ÉVALUATION PARESSEUSE
+### ÉVALUATION PARESSEUSE  `\labelline{implementation:lazy}`
 ###
 
 ## L'évaluation paresseuse est une technique par laquelle un
@@ -229,4 +229,4 @@ sumsq <- function(y, about = mean(y), na.rm = FALSE)
         y <- y[!is.na(y)]
     sum((y - about)^2)
 }
-sumsq(c(10, 0, NA, -10), na.rm = TRUE)
+sumsq(c(10, 0, NA, -10), na.rm = TRUE) #-*- `\labelline{implementation:lazy:fin}`

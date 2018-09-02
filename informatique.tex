@@ -13,28 +13,366 @@
 \label{chap:informatique}
 
 \begin{objectifs}
-\item Nommer et ordonner les grands jalons de l'histoire des langages
-  de programmation.
+\item Expliquer la nature de la programmation informatique et le rôle
+  des langages.
+\item Définir le concept d'algorithme.
+\item Comparer la performance d'algorithmes à l'aide de la notation
+  $O()$.
 \item Identifier les principaux paradigmes de programmation.
 \item Distinguer les concepts de syntaxe et de sémantique d'un langage
   de programmation.
 \item Distinguer les concepts de langage compilé et de langage
   interprété.
-\item Comparer les forces et faiblesses de divers langages de
-  programmation en fonction de divers critères.
+\item Nommer et ordonner les grands jalons de l'histoire des langages
+  de programmation.
 \item Comprendre la structure du système de fichiers d'un ordinateur
   et identifier le chemin d'accès vers une ressource dans celui-ci.
-\item Naviguer dans le système de fichiers d'un ordinateur et obtenir
-  une liste des fichiers à partir d'une interface en ligne de
-  commande.
 \end{objectifs}
+
+Vous savez programmer.
+
+En effet, avec l'omniprésence des outils numériques dans notre vie
+quotidienne, nous automatisons tous certaines tâches:
+%%
+demander une alarme pour le lendemain matin;
+enregistrer une émission de télé qui sera diffusée dans trois jours;
+planifier des virements chez notre institution
+  financière;
+signaler du contenu ou interpeller quelqu'un sur les médias sociaux
+  à l'aide de symboles spéciaux (comme \code{\#} et \code{@});
+entrer un code de triche dans un jeu vidéo;
+calculer la moyenne d'une colonne dans un tableur;
+guider un robot vers la sortie d'un labyrinthe.
+%%
+Vous pouvez sans doute ajouter vos propres exemples à cette liste.
+
+Dans chacun des exemples précités, vous dictez à une machine des
+tâches à effectuer en utilisant un langage qu'elle est à même de
+comprendre. Que le langage soit excessivement simple ou qu'une
+interface vous guide pas à pas dans la programmation n'y change
+fondamentalement rien: vous programmez. Cet ouvrage vise simplement à
+vous faire atteindre un niveau de sophistication bien plus grand, un
+niveau qui fera réellement de vous des programmeuses et des
+programmeurs informatiques.
+
+
+\section{Qu'est-ce que programmer?}
+\label{sec:informatique:programmer}
+
+Programmer est une activité scientifique consistant d'abord et avant
+tout à \emph{résoudre des problèmes}. Plutôt que d'avoir recours aux
+mathématiques ou à l'expérimentation, les programmeurs demandent à une
+machine de résoudre le problème pour eux. Comme le souligne
+\citet{Swinnen:python:2012} --- dont la lecture du chapitre~1 est
+chaudement recommandée --- programmer est «une compétence de haut
+niveau, qui implique des capacités et des connaissances diverses: être
+capable de (re)formuler un problème de plusieurs manières différentes,
+être capable d’imaginer des solutions innovantes et efficaces, être
+capable d’exprimer ces solutions de manière claire et complète.»
+
+La première difficulté réside toutefois dans le fait de «demander» à
+une machine de résoudre un problème: il faut établir un mode de
+communication pour que l'humain puisse dicter des instructions à une
+machine qui, en définitive, ne comprend que deux instructions: vrai et
+faux, ouvert ou fermé, 0 ou 1. C'est là le rôle du \emph{langage de
+  programmation}.
+
+Tout au long de leur histoire, les humains ont inventé une multitude
+de langages pour échanger entre eux: langues parlées, écritures,
+langues des signes, peinture, musique, etc. Certains langages
+parviennent à mieux exprimer certaines réalités ou certains sentiments
+que d'autres. Or, il en va de même des langages de programmation: non
+seulement sont-ils nombreux, mais certains conviennent mieux à
+certains types de tâches que d'autres. Vous serez à même d'apprécier
+la diversité des langages de programmation à la lecture de la
+\autoref{sec:informatique:historique} qui retrace les grands jalons de
+leur histoire.
+
+\section{Quelques concepts fondamentaux}
+\label{sec:informatique:concepts}
+
+Cette section introduit quelques concepts avec lesquels il s'avère
+utile d'être familier avant de se lancer dans l'étude de la
+programmation. Nous aurons l'occasion de revenir sur ceux-ci plus loin
+dans l'ouvrage.
+
+\subsection{Algorithme}
+\label{sec:informatique:concepts:algorithme}
+
+Vous avez probablement déjà trié une liste de mots à l'aide d'un
+ordinateur. Pourtant, l'ordinateur n'a aucune connaissance du concept
+d'ordre alphabétique. Et même s'il «connaissait» cet ordre, comment au
+juste réalise-t-il l'opération de tri? Ce genre de questions relève
+d'une pierre d'assise de l'informatique:
+l'\index{algorithmique}algorithmique, la science qui étudie les
+algorithmes et les structures de données.
+
+Un \index{algorithme}\emph{algorithme} est une procédure de calcul
+permettant de résoudre un problème bien spécifié. En cela,
+l'algorithme explique comment, à partir d'entrants, obtenir l'extrant
+solution du problème. Quand on y pense, ce n'est pas très différent
+d'une recette culinaire où les entrants sont les ingrédients, la
+procédure les étapes de la recette et les extrants, le mets.
+
+L'algorithmique est une discipline riche en techniques ingénieuses et
+en analyses mathématiques poussées. Connaitre ses principes de base et
+les algorithmes classiques permet de mieux planifier ses méthodes de
+résolution de problème. En effet, un bon algorithme permet de résoudre
+en quelques secondes un problème qui pourrait autrement prendre des
+années.
+
+À titre d'exemple, supposons que vous devez calculer, pour un jeu de
+données quelconque, l'écart moyen des données supérieures à $12$ par
+rapport à cette valeur. Un premier algorithme de très haut niveau
+permettant de résoudre ce problème irait comme suit.
+
+\begin{Schunk}
+  \begin{enumerate}
+  \item Sélectionner les données supérieures à $12$.
+  \item Soustraire $12$ de chaque valeur retenue à la première étape.
+  \item Effectuer la moyenne des valeurs obtenues à la seconde étape.
+  \end{enumerate}
+\end{Schunk}
+
+Apportons une toute petite modification à l'algorithme ci-dessus.
+
+\begin{Schunk}
+  \begin{enumerate}
+  \item Sélectionner les données supérieures à $12$.
+  \item Effectuer la moyenne des valeurs obtenues à la première étape.
+  \item Soustraire $12$ de la valeur retenue à la seconde étape.
+  \end{enumerate}
+\end{Schunk}
+
+Mathématiquement, les deux approches sont tout à fait équivalentes.
+Cependant, avec la première approche, nous effectuons une soustraction
+pour chaque valeur supérieure à $12$ que compte jeu de données. Avec
+la seconde approche, nous n'effectuons qu'une seule soustraction. Si
+le jeu de données compte un million d'entrées supérieures à $12$,
+c'est un million de soustractions contre une seule. En temps de
+calcul, cela ne représente qu'un écart de quelques centièmes de
+secondes sur un ordinateur moderne, mais ces fractions de secondes
+peuvent finir par faire une différence importante lorsque la taille
+des jeux de données augmente ou lorsque l'opération se répète de
+nombreuses fois.
+
+Attardons-nous à un second exemple intéressant: l'élévation d'une
+valeur $b$ à la puissance $n$. Un premier algorithme, écrit cette fois
+en \index{pseudo-langage}\emph{pseudo-langage}, pourrait se lire
+ainsi.
+
+\begin{Schunk}
+\begin{Verbatim}
+Puissance(nombre réel b, entier n)
+  Si n = 0, retourner 1.
+    Retourner b * Puissance(b, n - 1).
+Fin Puissance
+\end{Verbatim}
+\end{Schunk}
+
+Cet algorithme est \index{algorithme!récursif}\emph{récursif}: la
+procédure \code{Puissance} s'appelle elle-même à répétition jusqu'à
+l'obtention du résultat désiré. Mathématiquement, l'algorithme revient
+à calculer $b^n$ de la manière la plus simple et intuitive qui soit:
+\begin{equation*}
+  b^n = b (b (b \cdots (b))).
+\end{equation*}
+Cela peut convenir lorsque $n$ est petit, mais peut-on faire mieux
+pour une «grande» valeur de $n$? Imaginez que vous ne disposez que
+d'une calculatrice munie des opérations arithmétiques de base et du
+carré, et que vous devez élever un nombre à la puissance, disons,
+$21$. Comment feriez-vous pour réduire le nombre d'opérations à entrer
+au clavier?
+
+\notebox{Cet exemple est moins fantaisiste qu'il n'y parait! Jusqu'au
+  milieu des années 1990, les étudiants en actuariat ne disposaient
+  que de ce type de calculatrice pour les examens professionnels. Il
+  s'agissait d'un modèle de Texas Instruments affectueusement surnommé
+  «TI-0».}
+
+Vous avez pensé à un «algorithme»? Votre idée consiste fort
+probablement à diviser la puissance par deux autant de fois que
+possible et à élever au carré par la suite. Dans notre exemple, cela
+donne
+\begin{align*}
+  b^{21}
+  &= b (b^{20}) \\
+  & = b (b^{10})^2 \\
+  &= b ((b^5)^2)^2 \\
+  & = b ((b (b^4))^2)^2 \\
+  &= b ((b (b^2)^2)^2)^2.
+\end{align*}
+Ce calcul se traduit en algorithme comme suit.
+
+\begin{Schunk}
+\begin{Verbatim}
+Puissance(nombre réel b, entier n)
+  Si n = 0, retourner 1.
+    Si n est pair, retourner (Puissance(b, n/2))^2.
+    Si n est impair, retourner b * Puissance(b, n - 1).
+Fin Puissance
+\end{Verbatim}
+\end{Schunk}
+
+Pour élever un nombre à la puissance $21$, le premier algorithme
+requiert $20$ opérations et le second, seulement $6$. Le dénombrement
+du nombre d'opérations requis par un algorithme est un aspect
+important de leur analyse. Il se fait généralement en notation $O()$
+qui signifie «de l'ordre de». Dans le premier algorithme de calcul de
+$b^n$, le nombre d'opérations est directement proportionnel à $n$,
+donc on dit que l'algorithme est $O(n)$. Dans le second algorithme où
+la puissance est divisée par deux à répétition, le nombre d'opérations
+est proportionnel au logarithme (en base deux) de $n$, d'où un
+algorithme $O(\log n)$. Pour en savoir plus,
+\citet[chapitre~1]{Stephens:algorithms:2013} propose une introduction
+à la fois très claire et concise au dénombrement du nombre
+d'opérations d'un algorithme.
+
+\citet{Kernighan:practice:1999} font remarquer, fort à propos:
+\begin{quote}
+  Tous les programmes reposent sur des algorithmes et des structures
+  de données, mais très peu de programmes exigent d'en concevoir de
+  nouveaux.
+\end{quote}
+Autrement dit, aussi complexe soit-il, un programme repose souvent sur
+quelques algorithmes fondamentaux bien connus et bien établis. À ce
+titre, les algorithmes de tri et de recherche jouent un rôle
+particulièrement important: on estime que 25~\% du temps de calcul des
+ordinateurs dans le monde est consacré au tri et à la recherche! Ce
+n'est pour rien que Donald Knuth consacre un volume entier de son
+œuvre monumentale \emph{The Art of Computer Programming} à ce seul
+sujet \citep{Knuth:ACP:vol1:1997}.
+
+L'étude des algoirthmes classiques de tri et de recherche fera l'objet
+du \autoref{chap:algorithmique}.
+
+
+\subsection{Sémantique et syntaxe}
+\label{sec:informatique:concepts:semantique}
+
+Il y a plusieurs parallèles à dresser entre les langages de
+programmation et les langues parlées ou écrites: leur apprentissage
+requiert de la pratique; on en connait jamais un trop grand nombre; le
+premier est plus difficile à apprendre que les suivants.
+L'informatique a également emprunté à la linguistique les notions de
+\index{sémantique}sémantique et de \index{syntaxe}syntaxe.
+
+La sémantique est l'étude de ce que signifie un message ou un
+programme informatique, c'est-à-dire de ce qu'il transmet ou exécute.
+La syntaxe, quant à elle, étudie la structure du message ou du
+programme. En simplifiant, disons que, pour une langue donnée, un
+dictionnaire permet de connaitre la sémantique, alors qu'une grammaire
+décrit la syntaxe \citep{Hebenstreit:semantique}.
+
+Par exemple, exprimons le message «J'ai soif» en anglais. Dire
+«\emph{I am hungry}» relèverait d'une erreur de sémantique, puisque la
+signification du message s'en trouve changée. En revanche, avec
+«\emph{I have thirsty}», le bon message se rendra, mais peut-être pas
+sans que l'erreur de syntaxe n'ait d'abord suscité une hésitation chez
+l'interlocuteur\footnote{%
+  La formule correcte est «I am thirsty», soit littéralement «Je suis
+  soif», en français.}.
+
+Comme pour une langue, la maitrise d'un langage de programmation exige
+de respecter à la fois les règles de sémantique et les règles de
+syntaxe du langage. Le second volet est relativement facile: si le
+programme compile ou s'exécute, c'est généralement que la syntaxe est
+respectée. Le respect de la sémantique, ou de la manière propre d'un
+langage d'exprimer des idées, demande plus d'efforts et de pratique.
+
+
+\subsection{Langages compilés et interprétés}
+\label{sec:informatique:concepts:compile_vs_interprete}
+
+Tous les langages de programmation\footnote{%
+  À l'exception du langage machine, mais rares sont les personnes qui
+  ne souhaitent programmer qu'avec des $0$ et des $1$.} %
+requièrent un traitement afin que les programmes écrits avec ceux-ci
+puissent être exploités par un ordinateur. Il existe deux grandes
+façons d'effectuer ce traitement: par compilation et par
+interprétation.
+
+Un \index{compilateur}compilateur est un programme informatique qui
+transforme en langage machine le code source rédigé dans un langage
+donné. On dit alors de ce langage qu'il est \index{compilé
+  (langage)}\emph{compilé}. Le compilateur produit un fichier
+informatique que l'ordinateur peut ensuite exécuter directement. Sur
+la plateforme Windows, on reconnait notamment ces fichiers par leurs
+extensions \code{.exe} ou \code{.dll}. Les noyaux d'à peu près toutes
+les applications sur nos ordinateurs sont des fichiers compilés.
+
+Un \index{interpréteur}interpréteur, quant à lui, est un programme qui
+analyse, traduit et exécute le code source d'un programme
+informatique, et ce, à chaque fois que le programme doit être exécuté.
+Un langage qui nécessite l'intermédiaire d'un interpréteur est dit
+\emph{interprété}. Un programme écrit dans un \index{interprété
+  (langage)}langage interprété ne peut être distribué sans son
+interpréteur.
+
+Le traitement additionnel entre le code source et le langage machine
+fait généralement en sorte que les langages interprétés sont plus
+lents que les langages compilés à l'exécution. En revanche, une foule
+de détails de mise en œuvre sont pris en charge par l'interpréteur, ce
+qui réduit le temps de développement.
+
+
+\subsection{Paradigmes de programmation}
+\label{sec:informatique:concepts:paradigmes}
+
+Un programme informatique est toujours écrit pour résoudre un problème
+donné. Or, comme pour tout problème dans la vie, la solution à
+celui-ci peut être formulée de différentes manières. Le style
+fondamental avec lequel on exprime la solution est appelé le
+\index{paradigme}\emph{paradigme} de programmation.
+
+Il existe plusieurs paradigmes de programmation. Nous nous
+contenterons ici de se pencher sur seulement quatre.
+
+\begin{description}
+\item[Impératif] \index{paradigme!impératif} On indique à l'ordinateur
+  les opérations à exécuter et l'ordre dans lequel les exécuter. C'est
+  le paradigme le plus intuitif.
+\item[Déclaratif] \index{paradigme!déclaratif} On indique cette fois à
+  l'ordinateur ce que l'on souhaite obtenir comme résultat, mais sans
+  préciser comment y parvenir. Il est laissé à la mise en œuvre du
+  langage de déterminer la meilleure méthode de résolution du
+  problème.
+
+  Par exemple, pour extraire d'une base de données \code{etudiants} le
+  prénom de toutes les personnes de plus de 25~ans, on écrira dans un
+  langage déclaratif comme le SQL:
+\begin{Schunk}
+\begin{Verbatim}
+SELECT prenom FROM etudiants WHERE age > 25
+\end{Verbatim}
+\end{Schunk}
+  Nulle part n'est-il précisé comment le programme devrait procéder à
+  l'extraction.
+\item[Fonctionnel] \index{paradigme!fonctionnel} Un programme est une
+  suite d'appels de fonctions, comme en mathématiques. L'exécution
+  d'une fonction n'a pas d'impact sur les autres fonctions\footnote{%
+    Autrement on dit qu'une fonction a un effet de bord (\emph{side
+      effect}).} %
+  Les opérations complexes sont réalisées en combinant les fonctions,
+  de manière analogue à la composition de fonctions $g \circ f$.
+\item[Orienté objet] \index{paradigme!orienté objet} Un programme est
+  conçu comme un ensemble de blocs logiciels (les objets) qui
+  interagissent entre eux. Une \emph{méthode} applique un traitement
+  différent à un objet selon sa \emph{classe}. Ce paradigme est
+  particulièrement utilisé dans les grands et complexes projets
+  informatiques.
+\end{description}
+
+La plupart des langages d'usage courant combinent d'office, ou du
+moins permettent de combiner, plusieurs paradigmes. Par exemple, le
+langage {\Cpp} est à la fois un langage impératif et orienté objet.
 
 
 \section{Bref historique des langages de programmation}
 \label{sec:informatique:historique}
 
 Ada Lovelace (1815--1852) est généralement reconnue comme la première
-auteure d'un algorithme et de ce que l'on appelle aujourd'hui un
+autrice d'un algorithme et de ce que l'on appelle aujourd'hui un
 programme informatique. C'est en son honneur qu'a été nommé le langage
 Ada conçu en réponse à un cahier de charges du département de la
 Défense des États-Unis au début des années 1980.
@@ -45,13 +383,19 @@ les années 1940. On programme alors généralement ceux-ci en
 \index{assembleur}assembleur, un langage de très bas niveau facilement
 interprétable par la machine, mais difficile à lire par des humains,
 comme l'extrait de programme de la
-\autoref{fig:informatique:assembleur} le démontre bien.
+\autoref{fig:informatique:assembleur} le démontre bien. À l'époque, le
+coût d'utilisation d'un ordinateur est bien plus grand que celui d'une
+personne. Il est donc économiquement justifié de demander à l'humain
+d'«assembler» le programme à la main pour que la machine puisse
+l'exécuter plus directement. Il faudra attendre les années
+\textbf{XXXX} pour qu'il devienne financièrement avantageux de confier
+de telles tâches cléricales à l'ordinateur lui-même <\textbf{citation}>.
 
 \begin{figure}
   \centering
   \includegraphics[trim=0 475 0 0, clip=true]{images/Motorola_6800_Assembly_Language.png}
   \caption[Programme en assembleur pour un microprocesseur 8~bits
-  Motorola 6800.]{Extrait d'un programme en assembleur pour un
+    Motorola 6800]{Extrait d'un programme en assembleur pour un
     microprocesseur 8~bits Motorola 6800. {\small Source:
       \link{https://commons.wikimedia.org/wiki/File\%3AMotorola_6800_Assembly_Language.png}{Wikimedia
         Commons}}}
@@ -104,43 +448,19 @@ aujourd'hui une famille de langages comprenant de nombreux dialectes,
 dont Common Lisp, Scheme et Emacs Lisp.
 
 Le Lisp se distingue en outre par une syntaxe simple en
-\index{notation!préfixée}notation préfixée (voir encadré), le support
-pour la programmation fonctionnelle
-(\autoref{sec:informatique:paradigmes}) et la faculté de manipuler le
-code source en tant que structure de données. Autre trait distinctif:
-la syntaxe du Lisp fait un usage immodéré des parenthèses.
-
-Le Lisp est entouré d'une aura de beauté et d'élégance dont peu
-d'autres langages peuvent se targuer. Citons Eric Raymond dans
-\link{http://www.catb.org/esr/faqs/hacker-howto.html}{\emph{How to
-    Become a Hacker}}:
-\begin{quote}
-  Il faut apprendre le Lisp pour l'extraordinaire expérience d'éveil
-  [\emph{enlightenment experience}] que procure le fait de finalement
-  le comprendre; cette expérience fera de vous un meilleur programmeur
-  pour toujours, même si vous n'avez plus vraiment à utiliser le Lisp.
-\end{quote}
-
-Pour illustrer encore davantage la place toute particulière qu'occupe
-le Lisp en programmation, mentionnons également l'aphorisme selon
-lequel «ceux qui ne connaissent pas le Lisp sont condamnés à le
-réinventer», d'une certaine façon la version courte de la célèbre
-\link{https://en.wikipedia.org/wiki/Greenspun\%27s_tenth_rule}{\emph{Greenspun's
-    tenth rule of programming}}: %
-\begin{quote}
-  Tout programme suffisamment complexe en C ou en Fortran comporte une
-  mise en œuvre mal spécifiée, pleine de bogues et lente de la moitié
-  de Common Lisp.
-\end{quote}
-(Fait amusant à noter: il n'y a pas d'autres lois que la dixième, de
-l'\link{http://philip.greenspun.com/bboard/q-and-a-fetch-msg?msg_id=000tgU}{aveu
-  même de l'auteur}.)
+\index{notation!préfixée}notation préfixée (voir l'encadré à la
+\autopageref{fig:informatique:notations}), le support pour la
+programmation fonctionnelle
+(\autoref{sec:informatique:concepts:paradigmes}) et la faculté de
+manipuler le code source en tant que structure de données. Autre trait
+distinctif: la syntaxe du Lisp fait un usage immodéré des parenthèses.
 
 \begin{figure}[t]
   \label{fig:informatique:notations}
   \setlength{\FrameRule}{1pt}
   \lstset{backgroundcolor=\color{codebg},
     frame=lr, rulecolor=\color{codebg},
+    numbers=none,
     xleftmargin=3.4pt, xrightmargin=3.4pt}
   \begin{emphbox}{\mdseries Notations infixée, préfixée et suffixée}
     Les notations \index{notation!infixée}infixée (\emph{infix}),
@@ -174,6 +494,32 @@ x y +
     \emph{Reverse Polish Notation}) depuis 1972.
   \end{emphbox}
 \end{figure}
+
+Le Lisp est entouré d'une aura de beauté et d'élégance dont peu
+d'autres langages peuvent se targuer. Citons Eric Raymond dans
+\link{http://www.catb.org/esr/faqs/hacker-howto.html}{\emph{How to
+    Become a Hacker}}:
+\begin{quote}
+  Il faut apprendre le Lisp pour l'extraordinaire expérience d'éveil
+  [\emph{enlightenment experience}] que procure le fait de finalement
+  le comprendre; cette expérience fera de vous un meilleur programmeur
+  pour toujours, même si vous n'avez plus vraiment à utiliser le Lisp.
+\end{quote}
+
+Pour illustrer encore davantage la place toute particulière qu'occupe
+le Lisp en programmation, mentionnons également l'aphorisme selon
+lequel «ceux qui ne connaissent pas le Lisp sont condamnés à le
+réinventer», d'une certaine façon la version courte de la célèbre
+\link{https://en.wikipedia.org/wiki/Greenspun\%27s_tenth_rule}{\emph{Greenspun's
+    tenth rule of programming}}: %
+\begin{quote}
+  Tout programme suffisamment complexe en C ou en Fortran comporte une
+  mise en œuvre mal spécifiée, pleine de bogues et lente de la moitié
+  de Common Lisp.
+\end{quote}
+(Fait amusant à noter: il n'y a pas d'autres lois que la dixième, de
+l'\link{http://philip.greenspun.com/bboard/q-and-a-fetch-msg?msg_id=000tgU}{aveu
+  même de l'auteur}.)
 
 \subsection{COBOL}
 \label{sec:informatique:historique:cobol}
@@ -243,10 +589,11 @@ code. Assez pour que d'aucuns qualifient l'APL de «langage à écriture
 seulement».
 
 APL a pendant longtemps été un langage très prisé par les actuaires,
-aussi subsiste-t-il du code dans certaines compagnies d'assurance. Le
-modèle de traitement des vecteurs, matrices et tableaux de l'APL a
-servi d'inspiration pour la conception du langage S --- nous y
-reviendrons au \autoref{chap:presentation}.
+ce qui fait qu'il subsiste des applications dans ce langage dans
+certaines compagnies d'assurance. Le modèle de traitement des
+vecteurs, matrices et tableaux de l'APL a servi d'inspiration pour la
+conception du langage S --- nous y reviendrons au
+\autoref{chap:presentation}.
 
 Le langage continue sa vie aujourd'hui principalement sous forme de son
 successeur, \index{J}J.
@@ -254,13 +601,15 @@ successeur, \index{J}J.
 \begin{figure}
   \centering
   \scalebox{0.4}{\includegraphics{images/APL_intro}}
-  \caption[Opérations simples en APL.]{Opérations simples en APL. De
+  \caption[Opérations simples en APL]{Opérations simples en APL. De
     haut en bas: génération des nombres de $1$ à $5$ et stockage dans
     la variable \code{x}; affichage du contenu de \code{x}; somme des
-    éléments de \code{x}; moyenne des éléments de \code{x}. {\small Source:
-    François-Dominique,
-    \link{https://commons.wikimedia.org/w/index.php?curid=43207460}{Wikimedia
-      Commons}, CC BY-SA 4.0}}
+    éléments de \code{x}; moyenne des éléments de \code{x}. {\small
+      Image: {\textcopyright} François-Dominique,
+      \href{https://creativecommons.org/licenses/by-sa/4.0/deed.fr}{CC
+        BY-SA 4.0}, via
+      \href{https://commons.wikimedia.org/w/index.php?curid=43207460}{Wikimedia
+        Commons}}}
   \label{fig:informatique:apl}
 \end{figure}
 
@@ -318,11 +667,12 @@ prépondérante dans l'histoire.
   quelle plateforme informatique sans nécessiter une nouvelle
   compilation. Il est donc très populaire dans les applications web ou
   embarquées. Sa syntaxe est fortement inspirée du \Cpp.
-\item \index{Visual Basic}\textbf{Visual Basic} (Microsoft, 1991) permet de développer des
-  applications de manière interactive en disposant des composantes sur
-  un canevas. Le langage est aujourd'hui discontinué, mais son dérivé
-  \textbf{Visual Basic for Applications} (\index{VBA}VBA) demeure beaucoup
-  utilisé dans les applications de la suite bureautique Office.
+\item \index{Visual Basic}\textbf{Visual Basic} (Microsoft, 1991)
+  permet de développer des applications de manière interactive en
+  disposant des composantes sur un canevas. Le langage est aujourd'hui
+  discontinué, mais son dérivé \textbf{Visual Basic for Applications}
+  (\index{VBA}VBA) demeure beaucoup utilisé dans les applications de
+  la suite bureautique Office.
 \item \index{Python}\textbf{Python} (Guido van Rossum, 1991) est un
   langage de haut niveau, orienté objet, multiplateforme et sous
   licence libre. C'est un des langages les plus utilisés aujourd'hui
@@ -348,127 +698,19 @@ introduction à la notion de programmation ainsi qu'une brève, mais
 instructive, histoire du langage C.
 
 
-\section{Langages compilés et interprétés}
-\label{sec:informatique:compile_vs_interprete}
-
-Tous les langages de programmation\footnote{%
-  À l'exception du langage machine, mais rares sont les personnes qui
-  souhaitent ne programmer qu'avec des $0$ et des $1$.} %
-requièrent un traitement afin que les programmes écrits avec ceux-ci
-puissent être exploités par un ordinateur. Il existe deux grandes
-façons d'effectuer ce traitement: par compilation et par
-interprétation.
-
-Un \index{compilateur}compilateur est un programme informatique qui
-transforme en langage machine le code source rédigé dans un langage
-donné. On dit alors de ce langage qu'il est \index{compilé
-  (langage)}\emph{compilé}. Le compilateur produit un fichier
-informatique que l'ordinateur peut ensuite exécuter directement. Sur
-la plateforme Windows, on reconnait notamment ces fichiers par leurs
-extensions \code{.exe} ou \code{.dll}. Les noyaux d'à peu près toutes
-les applications sur nos ordinateurs sont des fichiers compilés.
-
-Un \index{interpréteur}interpréteur, quant à lui, est un programme qui
-analyse, traduit et exécute le code source d'un programme
-informatique, et ce, à chaque fois que le programme doit être exécuté.
-Un langage qui nécessite l'intermédiaire d'un interpréteur est dit
-\emph{interprété}. Un programme écrit dans un \index{interprété
-  (langage)}langage interprété ne peut être distribué sans son
-interpréteur.
-
-Le traitement additionnel entre le code source et le langage machine
-fait généralement en sorte que les langages interprétés sont plus
-lents que les langages compilés à l'exécution. En revanche, une foule
-de détails de mise en œuvre sont pris en charge par l'interpréteur, ce
-qui réduit le temps de développement.
-
-
-\section{Paradigmes de programmation}
-\label{sec:informatique:paradigmes}
-
-Un programme informatique est toujours écrit pour résoudre un problème
-donné. Or, comme pour tout problème dans la vie, la solution à
-celui-ci peut être formulée de différentes manières. Le style
-fondamental avec lequel on exprime la solution est appelé le
-paradigme de programmation.
-
-Il existe plusieurs paradigmes de programmation. Nous nous
-contenterons ici de se pencher sur seulement quatre.
-
-\begin{description}
-\item[Impératif] \index{paradigme!impératif} On indique à l'ordinateur
-  les opérations à exécuter et l'ordre dans lequel les exécuter. C'est
-  le paradigme le plus intuitif.
-\item[Déclaratif] \index{paradigme!déclaratif} On indique cette fois à
-  l'ordinateur ce que l'on souhaite obtenir comme résultat, mais sans
-  préciser comment y parvenir. Il est laissé à la mise en œuvre du
-  langage de déterminer la meilleure méthode de résolution du
-  problème.
-
-  Par exemple, pour extraire d'une base de données \code{etudiants} le
-  prénom de toutes les personnes de plus de 25~ans, on écrira dans un
-  langage déclaratif comme le SQL:
-\begin{Schunk}
-\begin{Verbatim}
-SELECT prenom FROM etudiants WHERE age > 25
-\end{Verbatim}
-\end{Schunk}
-  Nulle part n'est-il précisé comment le programme devrait procéder à
-  l'extraction.
-\item[Fonctionnel] \index{paradigme!fonctionnel} Un programme est une
-  suite d'appels de fonctions, comme en mathématiques. L'exécution
-  d'une fonction n'a pas d'impact sur les autres fonctions\footnote{%
-    Autrement on dit qu'une fonction a un effet de bord (\emph{side
-      effect}.} %
-  Les opérations complexes sont réalisées en combinant les fonctions,
-  de manière analogue à la composition de fonctions $g \circ f$.
-\item[Orienté objet] \index{paradigme!orienté objet} Un programme est
-  conçu comme un ensemble de blocs logiciels (les objets) qui
-  interagissent entre eux. Une \emph{méthode} applique un traitement
-  différent à un objet selon sa \emph{classe}. Ce paradigme est
-  particulièrement utilisé dans les grands et complexes projets
-  informatiques.
-\end{description}
-
-La plupart des langages d'usage courant combinent d'office, ou du
-moins permettent de combiner, plusieurs paradigmes. Par exemple, le
-langage {\Cpp} est à la fois un langage impératif et orienté objet.
-
-
-\section{Sémantique et syntaxe}
-\label{sec:informatique:semantique}
-
-Il y a plusieurs parallèles à dresser entre les langages de
-programmation et les langues parlées ou écrites: leur apprentissage
-requiert de la pratique; on en connait jamais un trop grand nombre; le
-premier est plus difficile à apprendre que les suivants.
-L'informatique a également emprunté à la linguistique les notions de
-\index{sémantique}sémantique et de \index{syntaxe}syntaxe.
-
-La sémantique est l'étude de ce que signifie un message ou un
-programme informatique, c'est-à-dire de ce qu'il transmet ou exécute.
-La syntaxe, quant à elle, étudie la structure du message ou du
-programme. En simplifiant, disons que, pour une langue donnée, un
-dictionnaire permet de connaitre la sémantique, alors qu'une grammaire
-décrit la syntaxe \citep{Hebenstreit:semantique}.
-
-Par exemple, exprimons le message «J'ai soif» en anglais. Dire
-«\emph{I am hungry}» relèverait d'une erreur de sémantique, puisque la
-signification du message s'en trouve changée. En revanche, avec
-«\emph{I have thirsty}» le bon message se rendra, mais peut-être pas
-sans que l'erreur de syntaxe n'ait d'abord suscité une hésitation chez
-l'interlocuteur.
-
-Comme pour une langue, la maitrise d'un langage de programmation exige
-de respecter à la fois les règles de sémantique et les règles de
-syntaxe du langage. Le second volet est relativement facile: si le
-programme compile ou s'exécute, c'est généralement que la syntaxe est
-respectée. Le respect de la sémantique, ou de la manière propre d'un
-langage d'exprimer des idées, demande plus d'efforts et de pratique.
-
-
 \section{Systèmes d'exploitation}
 \label{sec:informatique:os}
+
+À titre de (futurs) programmeurs, vous devrez tirer profit au maximum
+des ressources de votre ordinateur. Ceci exige d'en connaitre le
+fonctionnement mieux que l'utilisateur lambda. Or, vos principaux
+outils numériques sont aujourd'hui les téléphones et tablettes aux
+interfaces hautement simplifiées. Connaissez-vous le rôle du
+système d'exploitation d'un ordinateur? En connaissez-vous les
+diverses variantes et leurs caractéristiques principales?
+Comprenez-vous bien le système de classification des fichiers de votre
+ordinateur? Vous devrez pouvoir répondre «oui» à ces questions. Cette
+section et la suivante sont là pour vous y aider.
 
 Le \index{système d'exploitation}système d'exploitation
 (\emph{operating system}, OS) est un ensemble de programmes qui gère
@@ -510,9 +752,9 @@ système pour les entreprises.
 
 Le plus grand avantage de Windows est son ubiquité. À peu près toutes
 les applications, sauf peut-être celles s'adressant à un segment de
-marché très précis, sont disponibles sous Windows, en code natif, via
-un port depuis Unix, ou encore par l'intermédiaire d'une couche
-logicielle d'émulation comme Cygwin ou \index{MinGW}MinGW.
+marché très précis, sont disponibles sous Windows, que ce soit en code
+natif, via un port depuis Unix, ou encore par l'intermédiaire d'une
+couche logicielle d'émulation comme Cygwin ou \index{MinGW}MinGW.
 
 Un système d'exploitation multiutilisateur prend pour acquis que
 plusieurs utilisateurs se partageront les ressources de l'ordinateur,
@@ -563,20 +805,22 @@ contenant le précédent paragraphe, nous pourrions utiliser l'outil
 \code{cut} pour isoler le mot qui nous intéresse et, enfin, l'outil
 \code{tr} pour supprimer la parenthèse ouvrante, les guillemets et la
 virgule autour du mot.\footnote{%
+  \index{{"|}@\code{\textbar} (Bash)} %
+  \index{cut@\code{cut}} %
+  \index{tr@\code{tr}} %
   Dans la mesure où le mot que l'on recherche est le quatrième de la
   ligne dans le fichier source \code{informatique.tex}, la commande
   résultante est: \code{grep "«tuyau»" informatique.tex | cut -d " "
-    -f 4 | tr -d \bs(«»,}\,. Le caractère \code{|} est l'opérateur de
-  transfert de données.}
+    -f 4 | tr -d \bs(«»,}\,.}
 
-À l'exception notable des Mac, \index{Unix}Unix demeure assez peu répandu sur les
-ordinateurs personnels. En revanche le système d'exploitation, en
-particulier sa variante libre Linux, équipe l'immense majorité des
-stations de travail, serveurs et supercalculateurs. De plus, bon
-nombre d'applications scientifiques et de langages de programmation
-sont d'abord développés sur des systèmes Unix. Pour ces
-raisons, j'estime utile pour des programmeurs de connaitre les
-quelques «Unix-ismes» ci-dessous.
+À l'exception notable des Mac, \index{Unix}Unix demeure assez peu
+répandu sur les ordinateurs personnels. En revanche le système
+d'exploitation, en particulier sa variante libre Linux, équipe
+l'immense majorité des stations de travail, des serveurs et des
+supercalculateurs. De plus, bon nombre d'applications scientifiques et
+de langages de programmation sont d'abord développés sur des systèmes
+Unix. Pour ces raisons, j'estime utile pour des programmeurs de
+connaitre les quelques «Unix-ismes» ci-dessous.
 
 \begin{itemize}
 \item La barre oblique (\code{/}) est utilisée pour séparer les
@@ -613,10 +857,11 @@ fichiers. Seulement, les programmeurs doivent être familiers avec
 quelques grands principes de l'organisation des données dans un
 ordinateur.
 
-Les fichiers sont regroupés dans des répertoires. Ceux-ci contiennent
-eux-mêmes des fichiers ou des sous-répertoires. Ce schéma se répète
-sans limite pratique. Il en résulte une classification sous forme
-d'arbre dont la \emph{racine} est le répertoire contenant
+Les fichiers sont regroupés dans des
+\index{répertoire}\emph{répertoires} (ou dossiers). Ceux-ci
+contiennent eux-mêmes des fichiers ou des sous-répertoires. Ce schéma
+se répète sans limite pratique. Il en résulte une classification sous
+forme d'arbre dont la \emph{racine} est le répertoire contenant
 l'intégralité des fichiers. La \autoref{fig:informatique:fs} présente
 des extraits des arbres de fichiers usuels de Windows et de macOS.
 
@@ -660,10 +905,32 @@ des extraits des arbres de fichiers usuels de Windows et de macOS.
     }
   \end{minipage}
   \caption[Extraits de la hiérarchie des systèmes de fichiers]{%
-    Extraits des arbres de fichiers de Windows~7 (à gauche) et de
+    Extraits des arbres de fichiers de Windows (à gauche) et de
     macOS (à droite)}
   \label{fig:informatique:fs}
 \end{figure}
+
+Les interfaces graphiques des systèmes d'exploitation contiennent
+toutes une application pour naviger à l'intérieur du système de
+fichiers. Sous Windows, il s'agit de l'\index{Explorateur
+  Windows}Explorateur Windows. Sous macOS, l'outil de navigation est
+le \index{Finder}Finder. La \autoref{fig:informatique:explorer+finder}
+présente des fenêtres types de ces deux applications.
+
+\begin{figure}
+  \begin{minipage}{0.48\linewidth}
+    \includegraphics[width=\linewidth]{explorer}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.48\linewidth}
+    \includegraphics[width=\linewidth]{finder}
+  \end{minipage}
+  \caption[Interfaces graphiques de navigation dans le système de
+  fichiers]{Interfaces graphiques de navigation dans le système de
+    fichiers: Explorateur Windows (à gauche) et Finder (à droite)}
+  \label{fig:informatique:explorer+finder}
+\end{figure}
+
 
 \subsection{Particularités du système de fichiers de Windows}
 \label{sec:informatique:fs:windows}
@@ -687,9 +954,10 @@ chemins d'accès (voir ci-dessous), la barre oblique inversée
 \subsection{Particularités du système de fichiers de Unix}
 \label{sec:informatique:fs:unix}
 
-La racine du système de fichiers est toujours \code{/} sous
-\index{Unix}Unix. Les disques, physiques ou réseau, sont accessibles
-par divers \emph{points de montage} dans le système de fichiers.
+La racine du système de fichiers est toujours identifiée pas le
+symbole \code{/} sous \index{Unix}Unix. Les disques, physiques ou
+réseau, sont accessibles par divers \emph{points de montage} dans le
+système de fichiers.
 
 Pour illustrer, supposons qu'un ordinateur dispose de deux disques
 durs; le premier est réservé au système d'exploitation et aux
@@ -700,8 +968,8 @@ sera monté sur le répertoire \code{/} et le second, sur le répertoire
 requêtes vers le bon disque. L'utilisateur n'a jamais à se préoccuper
 de l'organisation physique des disques.
 
-\osxbox{Sous macOS, les clés USB, disques durs externes ou disques réseau sont
-  montés dans le répertoire \code{/Volumes}. Le répertoire
+\osxbox{Sous macOS, les clés USB, disques durs externes ou disques
+  réseau sont montés dans le répertoire \code{/Volumes}. Le répertoire
   n'existe pas lorsqu'aucun disque externe n'est connecté.}
 
 Le système de fichiers sous Unix est généralement sensible à la casse.
@@ -739,10 +1007,10 @@ C:\Users\Alexandre\Documents\synthese-1.doc
   courant. On a recours au nom fictif «\verb=..=» pour identifier le
   répertoire parent (un niveau supérieur dans l'arbre des fichiers).
 
-  Par exemple, si le répertoire courant de Marianne est
-  \code{Documents/Cours} dans le système de fichier Unix de la
-  \autoref{fig:informatique:fs}, alors le chemin d'accès relatif vers
-  le fichier \code{freestyle.txt} est:
+  Par exemple, à partir du répertoire \code{Documents/Cours} de
+  Marianne dans le système de fichier Unix de la
+  \autoref{fig:informatique:fs}, le chemin d'accès relatif vers le
+  fichier \code{freestyle.txt} est:
 \begin{Schunk}
 \begin{Verbatim}
 ../../Desktop/freestyle.txt
@@ -758,134 +1026,6 @@ et \verb=$PATH= sous \index{Unix}Unix. Il est hors de la portée de ce
 document d'expliquer comment modifier la variable d'environnement. La
 réponse se trouve à une requête près dans un moteur de recherche.
 
-
-\section{Ligne de commande}
-\label{sec:informatique:cli}
-
-Une interface en \index{ligne de commande}ligne de commande
-(\emph{command line interface}, CLI), ou tout simplement \emph{ligne
-  de commande}, est un mode d'interaction avec un programme
-informatique dans lequel l'utilisateur dicte les commandes et reçoit
-les réponses de l'ordinateur en mode texte. Le programme qui gère
-cette interface est un \emph{interpréteur de commandes}, parfois aussi
-appelé (à tort) \emph{terminal} ou \emph{shell}. Lorsque
-l'interpréteur est prêt à recevoir une commande, il l'indique par une
-\emph{invite de commande} (\emph{command prompt}).
-
-La ligne de commande est la plus ancienne des interfaces avec les
-ordinateurs. Si les interfaces graphiques ont à plusieurs égards
-grandement facilité l'interaction homme--machine, elles n'ont pas pour
-autant fait disparaitre ou rendu obsolète la ligne de commande.
-D'abord, celle-ci demeure parfois la seule --- et souvent la plus
-rapide --- interface pour réaliser certaines tâches sur un ordinateur
-muni d'une interface graphique. Ensuite, certains ordinateurs, comme
-les serveurs ou les supercalculateurs, n'offrent souvent aucune
-interface graphique.
-
-\subsection{Ligne de commande Windows}
-\label{sec:informatique:cli:windows}
-
-L'interpréteur de commandes standard sous Windows est
-\index{cmd@\code{cmd.exe}}\code{cmd.exe}. On le trouve dans le groupe
-de programmes \code{Accessoires} sous le nom \code{Invite de
-  commandes}. L'invite de commande par défaut est \verb=C:\>=. À la
-gauche du symbole \verb=>= se trouve le chemin d'accès du répertoire
-courant. Au lancement de l'interpréteur, celui-ci est donc la racine
-du système de fichiers.
-
-Les programmeurs qui souhaitent bénéficier de certains outils
-\index{Unix}Unix sous Windows peuvent installer les couches
-logicielles \index{MinGW}MinGW et \index{MSYS}MSYS --- je recommande à
-cet égard la distribution
-\link{http://www.msys2.org}{MSYS2}\index{MSYS2}. Le programme
-\code{MSYS} fournit un interpréteur de commandes \index{Bash}Bash
-\citep{bash} comme en standard sur les systèmes Unix. Un interpréteur
-Bash est également fourni avec \index{Git}
-\link{https://git-scm.com/downloads}{Git for Windows}: le programme
-est d'ailleurs nommé \index{Git~Bash}Git~Bash.
-
-À la ligne de commande \index{Unix}Unix sous Windows, on identifie la
-racine \code{C:\bs} du système de fichier d'un disque par \code{/c/}.
-
-\subsection{Ligne de commande macOS}
-\label{sec:informatique:cli:macos}
-
-Sous macOS, l'application de ligne de commande se nomme
-\index{Terminal}Terminal. Elle se trouve dans le sous-dossier
-Utilitaires du dossier Applications. L'interpréteur de commandes est
-\index{Bash}Bash. L'invite de commande par défaut est le symbole
-\verb=$=, habituellement précédé du nom de l'ordinateur, du répertoire
-courant et du nom de l'utilisateur. Le répertoire courant au lancement
-de l'interpréteur est le répertoire personnel \,\verb=~=\, de
-l'utilisateur.
-
-\tipbox{Explorez les préférences de l'application
-  \index{Terminal}Terminal pour configurer la police de caractères et
-  les couleurs afin de rendre la ligne de commande plus agréable à
-  utiliser.}
-
-\subsection{Commandes essentielles}
-\label{sec:informatique:cli:commandes}
-
-Les programmeurs doivent connaitre les rudiments de la ligne de
-commande. Cela dit, comme nous ne pouvons nous étendre sur le sujet,
-limiterons la présentation aux commandes ci-dessous qui
-permettent de se déplacer dans le système de fichiers et d'afficher
-la liste des fichiers d'un répertoire.
-
-\importantbox{Dans les exemples ci-dessous et pour le reste du
-  document, l'invite de commande du système d'exploitation sera
-  représentée par le symbole \code{\$} précédé du nom du répertoire
-  courant (lorsque cela s'avère pertinent).}
-
-\begin{ttscript}{pwd}
-\item[\Icode{cd}] Change le répertoire courant pour
-  celui donné en argument. Cet argument peut être un chemin d'accès
-  absolu ou relatif (\autoref{sec:informatique:fs:path}). Le nom
-  fictif «\verb=..=» identifie le parent du répertoire courant.
-
-  Lorsque utilisée sans argument, la commande affiche le chemin
-  d'accès absolu du répertoire courant avec \code{cmd.exe}, ou ramène
-  directement l'invite de commande au répertoire personnel de
-  l'utilisateur avec Bash.
-  \begin{Schunk}
-\begin{Verbatim}
-~$ cd Desktop/
-/Users/vincent/Desktop
-~/Desktop$ cd ~/Documents/cours/
-~/Documents/cours$ cd
-~$
-\end{Verbatim}
-  \end{Schunk}
-\item[\Icode{pwd}] (\index{Bash}Bash seulement) Affiche le chemin
-  d'accès absolu du répertoire courant.
-  \begin{Schunk}
-\begin{Verbatim}
-~$ pwd
-/Users/vincent
-\end{Verbatim}
-  \end{Schunk} %$
-\item[\Icode{dir}] (\index{cmd@\code{cmd.exe}}\code{cmd.exe}
-  seulement) Affiche les fichiers du répertoire donné en argument, ou
-  les fichiers du répertoire courant sans aucun argument.
-\item[\code{ls}] \Index{ls@\code{ls} (Bash)} (\index{Bash}Bash
-  seulement) Affiche les fichiers du répertoire donné en argument, ou
-  les fichiers du répertoire courant sans aucun argument.
-  \begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
-~$ ls
-Desktop
-Documents
-Downloads
-\meta{...}
-\end{Verbatim}
-  \end{Schunk} %$
-\end{ttscript}
-
-\tipbox{Les systèmes d'exploitation affichent certains répertoires
-  (\code{Bureau} ou \code{Musique}, par exemple) dans la langue de
-  l'interface plutôt que sous leur vrai nom anglais. La commande
-  \code{ls} affiche toujours le véritable nom des répertoires.}
 
 \section{Exercices}
 \label{operateurs:exercices}
@@ -944,92 +1084,6 @@ Downloads
       $A\; B\; C\, +\, \times\, D\, \div$ en notation suffixée.
     \item $A \times (B + C \div D)$
     \end{enumerate}
-  \end{sol}
-\end{exercice}
-
-\begin{exercice}
-  Démarrer un interpréteur de commandes Bash. Si le système
-  d'exploitation de votre ordinateur est Windows, vous pouvez utiliser
-  la ligne de commande \index{Git~Bash}Git~Bash de
-  \link{https://git-scm.com/downloads}{\emph{Git for Windows}} ou la
-  ligne de commande MSYS de
-  \index{MSYS2}\link{http://www.msys2.org}{MSYS2}.
-  \begin{enumerate}
-  \item Afficher le répertoire courant. Vérifier qu'il correspond à
-    celui mentionné dans l'invite de commande. Localiser ce répertoire
-    dans l'interface graphique de votre système d'exploitation (Finder
-    sous macOS, Windows~Explorer sous Windows).
-  \item Afficher la liste des fichiers du répertoire courant.
-  \item Choisir un sous-répertoire du répertoire courant que vous
-    savez contenir lui-même un sous-répertoire (par exemple:
-    \code{Documents/Cours}. Afficher, sans d'abord s'y déplacer, la
-    liste des fichiers du premier sous-répertoire (\code{Documents}),
-    puis celle du second (\code{Cours}).
-  \item Faire du sous-répertoire utilisé précédemment le répertoire
-    courant.
-  \item Afficher une liste détaillée des fichiers du nouveau
-    répertoire courant avec la commande \verb=ls -l=.
-  \item Descendre d'un autre niveau dans l'arbre des fichiers.
-  \item Revenir au répertoire personnel avec une seule commande.
-  \item Afficher la liste de tous les fichiers du répertoire
-    personnel, y compris les fichiers cachés, avec la commande
-    \verb=ls -a=.
-  \item Afficher la liste détaillée de tous fichiers du répertoire
-    personnel avec la commande \verb=ls -la=.
-  \item Afficher la liste des répertoires dans lesquels le système
-    d'exploitation recherche des applications avec la commande
-    \verb=echo $PATH=.
-  \end{enumerate}
-  \begin{sol}
-    Vous trouverez ci-dessous une transcription (partielle) de la
-    séance de travail à effectuer depuis une ligne de commande Bash.
-    \begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
-\textbf{~$} pwd
-/Users/vincent
-\textbf{~$} ls
-Desktop           Music        emacs-modified-extensions
-Documents         Pictures     emacs-modified-macos
-Downloads         Public       emacs-modified-windows
-\meta{...}
-\textbf{~$} ls Documents/
-Spoon-Knife
-actexam
-actuar
-actuarialangle
-actuarialsymbol
-\meta{...}
-\textbf{~$} ls Documents/cours/
-ACT-2002        ACT-2005        ACT-2008        IFT-1902
-\textbf{~$} cd Documents/
-/Users/vincent/Documents
-\textbf{~/Documents$} ls -l
-drwxr-xr-x   6 vincent staff 204 29 nov 14:40 Spoon-Knife
-drwxr-xr-x   6 vincent staff 204 21 nov  2016 actexam
-drwxr-xr-x  10 vincent staff 340  1 sep 09:56 actuar
-\meta{...}
-\textbf{~/Documents$} cd cours/
-/Users/vincent/Documents/cours
-\textbf{~/Documents/cours$} cd
-\textbf{~$} ls -a
-.                     .bashrc           .profile
-..                    .cache            .rstudio-desktop
-.CFUserTextEncoding   .cups             .subversion
-\meta{...}
-\textbf{~$} ls -la
-total 584
-drwxr-xr-x@ 71 vincent staff  2414  4 déc 21:03 .
-drwxr-xr-x   5 root    admin   170 19 oct 04:13 ..
-drwxr-xr-x   4 vincent staff   136 10 mai  2017 .R
--rw-r--r--   1 vincent staff    63  5 jul  2013 .Renviron
--rw-r--r--   1 vincent staff 23185  9 nov 09:13 .Rhistory
--rw-r--r--   1 vincent staff    71  4 jan  2016 .Rprofile
-\meta{...}
-\textbf{~$} echo PATH
-/opt/local/bin:/opt/local/sbin:~/bin:/usr/local/bin:
-/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin
-\end{Verbatim}
-    \end{Schunk}
   \end{sol}
 \end{exercice}
 

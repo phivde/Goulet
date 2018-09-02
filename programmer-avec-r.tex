@@ -17,6 +17,7 @@
   \usepackage{amsmath,amsthm}
   \usepackage[noae]{Sweave}
   \usepackage{graphicx}
+  \usepackage{currfile}                % pour noms fichiers de script
   \usepackage{actuarialangle}          % \angl et al.
   \usepackage{framed}                  % env. snugshade*, oframed
   \usepackage[absolute]{textpos}       % éléments des pages de titre
@@ -54,8 +55,10 @@
   \setmainfont[Ligatures=TeX,Numbers=OldStyle]{Lucida Bright OT}
   \setmathfont{Lucida Bright Math OT}
   \setmonofont{Lucida Grande Mono DK}
-  \setsansfont[Scale=1.0,Numbers=OldStyle]{Myriad Pro}
-  \newfontfamily\fullcaps[Letters=Uppercase,Numbers=Uppercase]{Myriad Pro}
+  \setsansfont[Scale=1.0,Numbers=OldStyle,
+               BoldFont=Myriad Pro Semibold,
+               BoldItalicFont=Myriad Pro Semibold Italic]{Myriad Pro}
+  \newfontfamily\fullcaps[Scale=1.0,Numbers=Uppercase]{Myriad Pro}
   \usepackage[babel=true]{microtype}
   \usepackage{icomma}
 
@@ -106,11 +109,16 @@
     \def\tableautorefname{tableau}%
   }
 
-  %% Table des matières (inspirée de classicthesis.sty)
+  %% Table des matières et al. (inspiré de classicthesis.sty)
   \renewcommand{\cftchapterleader}{\hspace{1.5em}}
   \renewcommand{\cftchapterafterpnum}{\cftparfillskip}
   \renewcommand{\cftsectionleader}{\hspace{1.5em}}
   \renewcommand{\cftsectionafterpnum}{\cftparfillskip}
+  \renewcommand{\cfttableleader}{\hspace{1.5em}}
+  \renewcommand{\cfttableafterpnum}{\cftparfillskip}
+  \renewcommand{\cftfigureleader}{\hspace{1.5em}}
+  \renewcommand{\cftfigureafterpnum}{\cftparfillskip}
+  \setlength{\cftfigurenumwidth}{3.2em}
 
   %% Titres des chapitres
   \chapterstyle{hangnum}
@@ -143,6 +151,7 @@
     og=«, fg=»}
   \addto\captionsfrench{\def\figurename{{\scshape Fig.}}}
   \addto\captionsfrench{\def\tablename{{\scshape Tab.}}}
+  \addto\captionsfrench{\def\listfigurename{Liste des figures}}
 
   %%% =========================
   %%%  Sections de code source
@@ -161,8 +170,17 @@
     commentstyle=\color{comments}\slshape,
     keywordstyle=\mdseries,
     showstringspaces=false,
+    numbers=left,
+    numberstyle=\color{gray}\tiny\ttfamily,
+    firstnumber=\scriptfirstline,
+    escapechar=`,
+    moredelim=[il]{\#-*-},
     index=[1][keywords],
     indexstyle=\indexcode}
+
+  %% L'entête des fichiers de script n'est pas affiché dans le
+  %% document.
+  \def\scriptfirstline{14}      % nombre magique!
 
   %%% =========================
   %%%  Nouveaux environnements
@@ -310,6 +328,13 @@
     \fi
   }
 
+  %% Commandes pour les références et liens vers des numéros de lignes
+  %% dans le code informatique.
+  \newcommand{\labelline}[1]{%
+    \label{lst:#1}\hfill\hyperlink{goto:#1}{\small\gotorsign}}
+  \newcommand{\reflines}[1]{%
+    \hypertarget{goto:#1}{\ref{lst:#1}}--\hypertarget{goto:#1:fin}{\ref{lst:#1:fin}}}
+
   %% Indications de capsule vidéo
   \newcommand{\capsule}[2]{\href{#1}{#2}\marginpar{%
       \href{#1}{\raisebox{-0.5em}[0em][0em]{\Huge\faYoutubePlay}}}}
@@ -320,6 +345,12 @@
     \awesomebox{\faApple}{\aweboxrulewidth}{black}{#1}}
   \newcommand{\windowsbox}[1]{%
     \awesomebox{\faWindows}{\aweboxrulewidth}{black}{#1}}
+
+  %% Boite additionnelle (basée sur awesomebox.sty) pour changements
+  %% au fil de la lecture.
+  \def\gotorsign{\faMapSigns}   % symbole utilisé
+  \newcommand{\gotorbox}[1]{%
+    \awesomebox{\gotorsign}{\aweboxrulewidth}{black}{#1}}
 
   %% Boite pour le nom du fichier de script correspondant au début des
   %% sections d'exemples.
@@ -349,6 +380,7 @@
   %%% =======
   \newcommand{\bfhyperpage}[1]{\textbf{\hyperpage{#1}}}
   \renewcommand{\preindexhook}{%
+    \label{chap:index}
     Les numéros de page en caractères gras indiquent les pages où les
     concepts sont introduits, définis ou expliqués.\vskip\onelineskip}
   \newcommand{\Index}[1]{\index{#1|bfhyperpage}}
@@ -387,7 +419,7 @@
     puis-que
   }
 
-%  \includeonly{}
+%  \includeonly{donnees}
 
 \begin{document}
 
@@ -403,8 +435,13 @@
 
 \pagestyle{companion}
 
-%\include{introduction}
+\include{introduction}
+
 \tableofcontents*
+\cleartorecto
+\listoftables*
+\cleartorecto
+\listoffigures*
 
 %% Vignette tirée de xkcd.com
 \cleartoverso
@@ -423,21 +460,23 @@
 
 \include{informatique}
 \include{presentation}
-\include{bases}
+\include{premiers}
+\include{fonctions}
 \include{implementation}
+\include{algorithmique}
 \include{donnees}
 \include{application}
-\include{internes}
-\include{collaboration}
+\include{paquetages}
+\include{cli}
 \include{texte}
+\include{git}
 \include{debogage}
 %\include{oop}
 
 \appendix
 \include{rstudio}
 \include{emacs+ess}
-\include{git}
-\include{reponses}
+\include{solutions}
 
 \bibliography{r,stat,informatique,vg}
 

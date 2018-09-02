@@ -12,6 +12,7 @@
 \chapter{Détails d'implémentation du langage R}
 \label{chap:implementation}
 
+\def\scriptfilename{\currfilebase.R}
 <<echo=FALSE>>=
 options(width=52)
 @
@@ -80,6 +81,12 @@ significativement les sources de bogues. Le chapitre traite également
 du concept d'évaluation paresseuse auquel les programmeurs sont moins
 souvent directement confrontés, mais qui permet aussi de coder plus
 efficacement.
+
+\gotorbox{Étudiez les lignes \reflines{implementation:contexte} du
+  fichier de script \code{\scriptfilename} reproduit à la
+  \autoref{sec:implementation:exemples}. Je vous invite
+  particulièrement à tenter de répondre à la colle de la ligne
+  \ref{lst:implementation:contexte:fin}.}
 
 
 \section{Environnement}
@@ -251,9 +258,13 @@ prochaine section.
 
 \warningbox{La mécanique de création d'environnements d'évaluation
   pour tous les appels de fonctions fait en sorte que ceux-ci coûtent
-  cher en temps et en ressources système. Pour cette raison, le calcul
-  récursif (où une fonction s'appelle elle-même à répétition) est
-  plutôt inefficace en R.}
+  cher en temps et en ressources système. C'est pour cette raison que
+  le calcul récursif est plutôt inefficace en R.}
+
+\gotorbox{Avant d'aller plus loin, passez en revue les exemples des
+  lignes \reflines{implementation:environnement} du fichier de script
+  \code{\scriptfilename} reproduit à la
+  \autoref{sec:implementation:exemples}.}
 
 
 \section{Portée lexicale}
@@ -366,6 +377,10 @@ faire l'économie de passer tous les arguments d'une fonction à
 l'autre. Vous trouverez un exemple complet dans le code informatique
 de la \autoref{sec:implementation:exemples}.
 
+\gotorbox{Étudiez les lignes \reflines{implementation:portee}
+  du fichier de script \code{\scriptfilename} reproduit à la
+  \autoref{sec:implementation:exemples}.}
+
 
 \section{Évaluation paresseuse}
 \label{sec:implementation:lazy}
@@ -397,14 +412,16 @@ dans l'appel de \code{sumsq}, et ce, seulement au moment d'effectuer
 le calcul \code{y - about}. D'autre part, la valeur de \code{y} sera
 connue au moment d'effectuer ce calcul. Joli, non?
 
+\gotorbox{Étudiez les lignes \reflines{implementation:lazy}
+  du fichier de script \code{\scriptfilename} reproduit à la
+  \autoref{sec:implementation:exemples}.}
+
 
 \section{Exemples}
 \label{sec:implementation:exemples}
 
-\def\scriptfilename{implementation.R}
-
 \scriptfile{\scriptfilename}
-\lstinputlisting[firstline=13]{\scriptfilename}
+\lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
 
 
 \section{Exercices}

@@ -12,6 +12,7 @@
 \chapter{Structures de données de R}
 \label{chap:donnees}
 
+\def\scriptfilename{\currfilebase.R}
 <<echo=FALSE>>=
 options(width=52)
 @
@@ -65,10 +66,10 @@ généralisation à plus de deux dimensions\footnote{%
   Il est donc correct de dire qu'une matrice est un tableau à deux
   dimensions.}. %
 
-Nous avons établi d'entrée de jeu à la \autoref{sec:bases:vecteurs}
+Nous avons établi d'entrée de jeu à la \autoref{sec:premiers:vecteurs}
 qu'en R, tout est un vecteur. C'est aussi vrai pour les matrices et
 tableaux, qui ne sont rien d'autre que des vecteurs dotés d'un
-attribut \icode{dim} (\autoref{sec:bases:objets:attributs}). Ces
+attribut \icode{dim} (\autoref{sec:premiers:objets:attributs}). Ces
 objets sont donc stockés, et peuvent être manipulés, exactement comme
 des vecteurs simples.
 
@@ -170,15 +171,16 @@ des tableaux à trois et quatre dimensions.
     \end{picture}
     \subcaption{quatre dimensions}
   \end{minipage}
-  \caption{Représentation schématique de tableaux. Les chiffres encerclés
-    identifient l'ordre de remplissage.}
+  \caption[Représentation schématique de tableaux]{Représentation
+    schématique de tableaux. Les chiffres encerclés identifient
+    l'ordre de remplissage.}
   \label{fig:donnees:tableaux}
 \end{figure}
 
 L'indiçage\Index{indiçage!matrice} des matrices et tableaux se fait
 avec les crochets \code{[~]}\indexcode{[}, comme pour les vecteurs
 simples. D'ailleurs, l'ensemble des règles d'indiçage de la
-\autoref{sec:bases:vecteurs:indicage} s'appliquent à l'identique aux
+\autoref{sec:premiers:vecteurs:indicage} s'appliquent à l'identique aux
 matrices et tableaux, sinon qu'il faut maintenant préciser des
 indices pour chaque dimension, séparés par des virgules.
 
@@ -204,7 +206,7 @@ m[c(FALSE, TRUE), c(FALSE, TRUE, TRUE)]
 @
 
 En vertu de la cinquième règle d'indiçage de la
-\autoref{sec:bases:vecteurs:indicage}, lorsqu'une dimension est
+\autoref{sec:premiers:vecteurs:indicage}, lorsqu'une dimension est
 laissée vide dans les crochets, tous les éléments de cette dimension
 sont extraits.
 <<echo=TRUE>>=
@@ -230,6 +232,100 @@ même nombre de lignes.
 n <- matrix(1:4, nrow = 2)
 cbind(m, n)
 @
+
+\gotorbox{Étudiez les lignes \reflines{donnees:matrice}
+  du fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:donnees:exemples}.}
+
+
+\section{Fonctions internes utiles}
+\label{sec:donnees:internes}
+
+Cette section présente les fonctions internes couramment utilisées
+pour les opérations sur les matrices. Les exemples utilisent la
+matrice suivante.
+<<echo=FALSE>>=
+x <- matrix(c(2, 1, 4, 3), 2)
+@
+<<echo=TRUE>>=
+x
+@
+
+\begin{ttscript}{rowMeans}
+\item[\Icode{nrow}] \index{matrice!nombre de
+    lignes}nombre de lignes
+<<echo=TRUE>>=
+nrow(x)
+@
+\item[\Icode{ncol}] nombre de \index{matrice!nombre de
+    colonnes}colonnes
+<<echo=TRUE>>=
+ncol(x)
+@
+\item[\Icode{rowSums}] \index{matrice!sommes par ligne}sommes par
+  ligne
+<<echo=TRUE>>=
+rowSums(x)
+@
+\item[\Icode{colSums}] \index{matrice!sommes par colonne}sommes par
+  colonne
+<<echo=TRUE>>=
+colSums(x)
+@
+\item[\Icode{rowMeans}] \index{matrice!moyennes par ligne}moyennes par
+  ligne
+<<echo=TRUE>>=
+rowMeans(x)
+@
+\item[\Icode{colMeans}] \index{matrice!moyennes par colonne}moyennes
+  par colonne
+<<echo=TRUE>>=
+colMeans(x)
+@
+\item[\code{\%*\%}] \index{matrice!produit}produit matriciel
+<<echo=TRUE>>=
+x %*% x
+@
+\item[\Icode{t}] \index{matrice!transposée}transposée
+<<echo=TRUE>>=
+t(x)
+@
+\item[\Icode{det}] \index{matrice!déterminant}déterminant
+<<echo=TRUE>>=
+det(x)
+@
+\item[\Icode{solve}] avec un seul argument (une matrice carrée):
+  \index{matrice!inverse}inverse
+<<echo=TRUE>>=
+solve(x)
+@
+  avec deux arguments (une matrice
+  carrée et un vecteur): solution du système d'équations linéaires
+  $\mat{A} \mat{x} = \mat{b}$
+<<echo=TRUE>>=
+solve(x, c(1, 2))
+@
+\item[\Icode{diag}] avec une matrice en argument:
+  \index{matrice!diagonale}diagonale de la matrice
+<<echo=TRUE>>=
+diag(x)
+@
+  avec un vecteur en
+  argument: matrice diagonale formée avec le vecteur
+<<echo=TRUE>>=
+diag(c(5, 1))
+@
+  avec un scalaire
+  $p$ en argument: \index{matrice!identité}matrice identité
+  $p \times p$
+<<echo=TRUE>>=
+diag(2)
+@
+\end{ttscript}
+
+\gotorbox{Étudiez les lignes \reflines{donnees:internes}
+  du fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:donnees:exemples}.}
 
 
 \section{Liste}
@@ -312,6 +408,12 @@ la liste est importante.
 unlist(x)
 @
 
+\gotorbox{La liste est une structure de données très importante en R.
+  Prenez le temps de bien étudier les lignes
+  \reflines{donnees:matrice} du fichier de script
+  \code{\scriptfilename} reproduit à la
+  \autoref{sec:donnees:exemples}.}
+
 
 \section{Facteur}
 \label{sec:donnees:facteur}
@@ -390,6 +492,10 @@ x$Age
 Il est possible d'ajouter des lignes ou des colonnes à un \emph{data
   frame} avec les fonctions \icode{rbind} et \icode{cbind}.
 
+\gotorbox{Étudiez les lignes \reflines{donnees:facteur+df}
+  du fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:donnees:exemples}.}
+
 
 \section{Importation et exportation de données}
 \label{sec:donnees:import-export}
@@ -452,9 +558,10 @@ caractère spécial tel que \code{\#}, \code{\%} ou \code{;}\,. La
 données.
 
 \begin{figure}
+  \lstset{frame=single,language={},numbers=none}
   \begin{minipage}{1.0\linewidth}
     \begin{minipage}[t]{0.48\linewidth}
-\begin{lstlisting}[frame=single,language={}]
+\begin{lstlisting}
 <<echo=FALSE, results=tex>>=
 writeLines(readLines("vecteur.data"))
 @
@@ -462,7 +569,7 @@ writeLines(readLines("vecteur.data"))
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.48\linewidth}
-\begin{lstlisting}[frame=single,language={}]
+\begin{lstlisting}
 <<echo=FALSE, results=tex>>=
 writeLines(readLines("matrice.data"))
 @
@@ -470,11 +577,13 @@ writeLines(readLines("matrice.data"))
     \end{minipage} \\
     \mbox{}
   \end{minipage}
-  \caption{Gauche: fichier de données \code{vecteur.data} contenant un
-    vecteur de données à raison d'une donnée par ligne. Droite:
-    fichier \code{matrice.data} contenant les données d'une matrice.
-    Dans les deux cas, le caractère \# indique que le reste du texte
-    sur la ligne est un commentaire.}
+  \caption[Exemples de fichiers contenant des vecteurs de données en
+  texte brut]{Exemples de fichiers contenant des vecteurs de données
+    en texte brut. Gauche: fichier de données \code{vecteur.data}
+    contenant un vecteur de données à raison d'une donnée par ligne.
+    Droite: fichier \code{matrice.data} contenant les données d'une
+    matrice. Dans les deux cas, le caractère \# indique que le reste
+    du texte sur la ligne est un commentaire.}
   \label{fig:donnees:scan}
 \end{figure}
 
@@ -551,21 +660,24 @@ format de fichier CSV (\emph{comma-separated values}). La
 deux formats différents.
 
 \begin{figure}
-\begin{lstlisting}[frame=single,language={}]
+  \lstset{frame=single,language={},numbers=none}
+\begin{lstlisting}
 <<echo=FALSE, results=tex>>=
 writeLines(readLines("carburant.txt"))
 @
 \end{lstlisting}
-\begin{lstlisting}[frame=single,language={}]
+\begin{lstlisting}
 <<echo=FALSE, results=tex>>=
 writeLines(readLines("carburant.csv"))
 @
 \end{lstlisting}
-  \caption{Haut: fichier \code{carburant.txt} contenant un jeu de
-    données rectangulaire dont les champs sont séparés par des
-    espaces. Bas: fichier \code{carburant.csv} contenant le même jeu
-    de données avec une virgule comme séparateur. Dans les deux
-    fichiers, la première ligne contient les titres des colonnes.}
+  \caption[Exemples de tableaux de données en texte brut]{Exemples de
+    tableaux de données en texte brut. Haut: fichier
+    \code{carburant.txt} contenant un jeu de données rectangulaire
+    dont les champs sont séparés par des espaces. Bas: fichier
+    \code{carburant.csv} contenant le même jeu de données avec une
+    virgule comme séparateur. Dans les deux fichiers, la première
+    ligne contient les titres des colonnes.}
   \label{fig:donnees:read.table}
 \end{figure}
 
@@ -680,13 +792,18 @@ unlink("carburant.txt")
 unlink("carburant.csv")
 @
 
+\gotorbox{Des exemples interactifs vous permettrons de mieux
+  comprendre le fonctionnement des fonctions d'importation et
+  d'exportation. Étudiez les lignes \reflines{donnees:import-export}
+  du fichier de script \code{\scriptfilename} reproduit à la
+  \autoref{sec:donnees:exemples}.}
+
+
 \section{Exemples}
 \label{sec:donnees:exemples}
 
-\def\scriptfilename{donnees.R}
-
 \scriptfile{\scriptfilename}
-\lstinputlisting[firstline=13]{\scriptfilename}
+\lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
 
 
 \section{Exercices}
@@ -748,6 +865,43 @@ x[x[, 1] > 50, ]
     \begin{enumerate}
     \item \verb|(j - 1)*I + i|
     \item \verb|((k - 1)*J + j - 1)*I + i|
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Soit \code{m} une matrice $10 \times 7$ quelconque. Écrire des
+  expressions R permettant d'effectuer les tâches demandées
+  ci-dessous.
+  \begin{enumerate}
+  \item Calculer la somme des éléments de chacunes des lignes de la
+    matrice.
+  \item Calculer la moyenne des éléments de chacunes des colonnes de
+    la matrice.
+  \item Calculer la valeur maximale de la sous-matrice formée par les
+    trois premières lignes et les trois premières colonnes de la
+    matrice.
+  \item Extraire toutes les lignes de la matrice dont la moyenne des
+    éléments est supérieure à $7$.
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+\item
+<<echo=TRUE, eval=FALSE>>=
+rowSums(m)
+@
+\item
+<<echo=TRUE, eval=FALSE>>=
+colMeans(m)
+@
+\item
+<<echo=TRUE, eval=FALSE>>=
+max(m[1:3, 1:3])
+@
+\item
+<<echo=TRUE, eval=FALSE>>=
+m[rowMeans(m) > 7, ]
+@
     \end{enumerate}
   \end{sol}
 \end{exercice}
@@ -870,9 +1024,17 @@ x <- matrix(
     noms des variables (colonnes) dans l'entête du fichier. Ils
     forment le premier champ de mode caractère des lignes 8 à 21,
     inclusivement.
+<<echo=FALSE, results=hide>>=
+## copier (temporairement) le fichier de données du sous-dossier 'data' vers le  dossier de travail courant pour le bloc de code suivant
+file.copy("data/boston", ".")
+@
 <<echo=TRUE>>=
 (xnames <- scan("boston", skip = 7, nlines = 14,
                 what = "character", flush = TRUE))
+@
+<<echo=FALSE, results=hide>>=
+## supprimer le fichier de données
+file.remove("boston")
 @
     Nous pouvons ensuite ajouter les noms de colonne à notre matrice
     de données, puis convertir en \emph{data frame} pour un traitement

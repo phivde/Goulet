@@ -10,8 +10,11 @@
 *.out
 *.snm
 *.toc
+*.lot
+*.lof
 *.vrb
 *.Rout
+*-[0-9][0-9][0-9].pdf
 solutions-*
 Rplots.pdf
 .RData

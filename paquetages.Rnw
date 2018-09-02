@@ -1,0 +1,227 @@
+%%% Copyright (C) 2018 Vincent Goulet
+%%%
+%%% Ce fichier fait partie du projet
+%%% «Programmer avec R»
+%%% https://gitlab.com/vigou3/programmer-avec-r
+%%%
+%%% Cette création est mise à disposition selon le contrat
+%%% Attribution-Partage dans les mêmes conditions 4.0
+%%% International de Creative Commons.
+%%% https://creativecommons.org/licenses/by-sa/4.0/
+
+\chapter{Bibliothèques et paquetages}
+\label{chap:paquetages}
+
+\def\scriptfilename{\currfilebase.R}
+<<echo=FALSE>>=
+options(width=52)
+@
+
+\begin{objectifs}
+\item Distinguer les concepts de bibliothèque et de paquetage dans R.
+\item Utiliser les fonctionnalités d'un paquetage dans une session de
+  travail R.
+\item Installer de nouveaux paquetages R depuis le site
+  \emph{Comprehensive R Archive Network} (CRAN).
+\end{objectifs}
+
+L'un des aspects de R ayant sans aucun doute le plus contribué à son
+succès est la possibilité --- et la facilité --- d'ajouter des
+extensions au système de base par le biais de paquetages. Toute
+personne utilisant R sera un jour appelée à utiliser des paquetages.
+Ce chapitre explique comment ajouter une bibliothèque personnelle au
+système et comment la garnir de paquetages téléchargés depuis le site
+\emph{Comprehensive R Archive Network} (CRAN).
+
+Dans la terminologie de R, un \index{paquetage}\emph{paquetage}
+(\emph{package}\footnote{%
+  L'équipe de traduction française de R a choisi de conserver le terme
+  anglais. Je ne les suis pas dans cette voie.}). %
+est un ensemble cohérent de fonctions, de jeux de données et de
+documentation. Les paquetages sont regroupés dans une
+\emph{bibliothèque} (\emph{library}).
+
+\warningbox{Insistons sur la terminologie puisque la confusion règne
+  souvent hors de la documentation officielle de R: un paquetage est
+  un ensemble de fonctions, alors qu'une bibliothèque est un ensemble
+  de paquetages.}
+
+
+\section{Système de base}
+\label{sec:paquetages:base}
+
+La bibliothèque de base de R contient une trentaine de paquetages dont
+certains sont chargés par défaut au démarrage. La fonction
+\icode{search} fournit la liste des paquetages chargés dans la session
+de travail, alors que \icode{library} affiche le contenu de la
+bibliothèque de paquetages.
+\begin{Schunk}
+\begin{Sinput}
+> search()
+\end{Sinput}
+\begin{Soutput}
+<<echo=FALSE, results=tex, strip.white=false>>=
+search()
+@
+\end{Soutput}
+\begin{Sinput}
+> library()
+\end{Sinput}
+\begin{Verbatim}[commandchars=\\\{\}]
+Packages dans la bibliothèque
+‘/Library/Frameworks/R.framework/\meta{...}/library’ :
+
+base           The R Base Package
+boot           Bootstrap Functions
+               (Originally by Angelo Canty for S)
+\meta{...}
+\end{Verbatim}
+\end{Schunk}
+
+
+\section{Utilisation d'un paquetage}
+\label{sec:paquetages:utilisation}
+
+Pour rendre disponibles les fonctionnalités d'un paquetage, peu
+importe sa provenance, il faut le charger dans la session de travail.
+C'est là le principal rôle de la fonction \Icode{library}.
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+library("\meta{paquetage}")
+\end{Verbatim}
+\end{Schunk}
+
+
+\section{Création d'une bibliothèque personnelle}
+\label{sec:paquetages:library}
+
+Nous verrons à la \autoref{sec:paquetages:install} comment ajouter des
+paquetages au système de base. Je recommande fortement de prévoir une
+bibliothèque personnelle pour contenir ces nouveaux paquetages. Tout
+d'abord, cela permet d'éviter les éventuels problèmes d'accès en
+écriture dans la bibliothèque principale, surtout sur des systèmes
+partagés. Ensuite, les paquetages placés dans une bibliothèque
+personnelle résistent mieux au processus de mise à jour de R que ceux
+ajoutés à la bibliothèque principale.
+
+Avant toute chose, il faut créer un répertoire dans son système de
+fichiers qui servira de bibliothèque personnelle. Dans la suite, nous
+utiliserons \verb=~/R/library=, où \verb=~= représente le dossier de
+départ (\autoref{sec:informatique:os:unix}).
+
+\osxbox{Sous macOS, le dossier tout indiqué pour la bibliothèque
+  personnelle est \verb=~/Library/R/library=. Toutefois, le dossier
+  \verb=~/Library= est caché dans le Finder. Pour y accéder, cliquez
+  sur le menu \code{Aller} en appuyant simultanément sur la touche
+  Option (\optkey), puis sélectionnez \code{Bibliothèque}.}
+
+Au démarrage, R lit le fichier de configuration \verb=~/.Renviron=,
+s'il existe. C'est dans ce fichier que l'on indique à R l'existence
+d'une bibliothèque personnelle de même que l'endroit où elle se trouve
+dans le système de fichiers.
+
+À l'aide d'un éditeur de texte, ouvrir ou créer\footnote{Pour créer le
+  fichier dans RStudio, sélectionner \code{File|New File|Text
+    File}.} %
+le fichier \verb=~/.Renviron= et y ajouter la ligne ci-dessous. Au
+besoin, remplacer le chemin \verb=~/R/library= par celui du répertoire
+créé précédemment. Utiliser la barre oblique avant (\code{/}) pour
+séparer les répertoires dans le chemin d'accès.
+\begin{Schunk}
+\begin{verbatim}
+R_LIBS_USER="~/R/library"
+\end{verbatim}
+\end{Schunk}
+
+\osxbox{Pour afficher les fichiers débutant par un point dans la boite
+  de dialogue d'ouverture de fichier d'une application comme RStudio,
+  appuyez sur \shiftkey\cmdkey\code{.} (\shiftkey\cmdkey~«point»).}
+
+Une fois la configuration terminée et après un redémarrage de R, le
+chemin vers la bibliothèque personnelle devrait apparaitre dans les
+résultats de la commande
+\Index{libPaths@\code{.libPaths}}\code{.libPaths}.
+\begin{Schunk}
+\begin{Sinput}
+> .libPaths()
+\end{Sinput}
+\begin{Verbatim}[commandchars=\\\{\}]
+<<echo=FALSE, results=tex, strip.white=false>>=
+cat(paste0('"', sub("Versions/.*?/Resources", "\\\\meta{...}", .libPaths()), '"'),
+    fill = TRUE, labels = c("[1]", "[2]"))
+@
+\end{Verbatim}
+\end{Schunk}
+
+La bibliothèque personnelle a toujours préséance sur la bibliothèque
+principale.
+
+\tipbox{Consultez la rubriques d'aide de \icode{Startup} pour les
+  détails sur la syntaxe et l'emplacement des fichiers de
+  configuration et celles de \icode{library} et de
+  \index{libPaths@\code{.libPaths}}\code{.libPaths} pour la gestion
+  des bibliothèques.}
+
+
+\section{Installation de paquetages additionnels}
+\label{sec:paquetages:install}
+
+Dès les débuts de R, les développeurs et utilisateurs ont mis sur pied
+le dépôt central de paquetages
+\link{http://cran.r-project.org}{\emph{Comprehensive R Archive
+    Network}} (CRAN). Ce site compte aujourd'hui des milliers de
+paquetages et le nombre ne cesse de croitre.
+
+L'installation d'un paquetage distribué via CRAN est très simple avec
+la fonction \Icode{install.packages}. Celle-ci télécharge le paquetage
+spécifié en argument depuis CRAN et l'installe, par défaut, dans la
+première bibliothèque de
+\index{libPaths@\code{.libPaths}}\code{.libPaths}.
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+install.packages("\meta{paquetage}")
+\end{Verbatim}
+\end{Schunk}
+
+Pour utiliser le paquetage, il faut le charger en mémoire avec
+\icode{library}, tel qu'expliqué à la
+\autoref{sec:paquetages:utilisation}. R recherche le paquetage
+spécifié dans les bibliothèques de
+\index{libPaths@\code{.libPaths}}\code{.libPaths}.
+
+\gotorbox{Étudiez le fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:paquetages:exemples}.}
+
+
+\section{Exemples}
+\label{sec:paquetages:exemples}
+
+\scriptfile{\scriptfilename}
+\lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
+
+
+\section{Exercices}
+\label{sec:paquetages:exercices}
+
+\Opensolutionfile{solutions}[solutions-internes]
+
+\begin{Filesave}{solutions}
+\section*{Chapitre \ref*{chap:paquetages}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:paquetages}}
+
+\end{Filesave}
+
+\begin{exercice}[nosol]
+  Installer un paquetage disponible dans CRAN dans une bibliothèque
+  personnelle sur votre poste de travail.
+\end{exercice}
+
+\Closesolutionfile{solutions}
+
+
+%%% Local Variables:
+%%% mode: noweb
+%%% TeX-engine: xetex
+%%% TeX-master: "programmer-avec-r"
+%%% coding: utf-8
+%%% End:

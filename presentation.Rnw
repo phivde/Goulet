@@ -12,6 +12,7 @@
 \chapter{Présentation de R}
 \label{chap:presentation}
 
+\def\scriptfilename{\currfilebase.R}
 <<echo=FALSE>>=
 options(width=52)
 @
@@ -48,9 +49,10 @@ Dès la fin des années 1980 et pendant près de vingt ans, le S a été
 popularisé par une mise en œuvre commerciale nommée
 S-PLUS\index{S-PLUS}. En 2008, Lucent Technologies a vendu le langage
 S à Insightful Corporation, ce qui a effectivement stoppé le
-développement du langage par ses auteurs originaux. Aujourd'hui, le S
-est commercialisé de manière relativement confidentielle sous le nom
-Spotfire S$+$\index{S$+$} par TIBCO Software.
+développement du langage par ses auteurs originaux. Le système S a
+ensuite été commercialisé de manière relativement confidentielle sous
+le nom Spotfire S$+$\index{S$+$} par TIBCO Software. Le terme S$+$ est
+aujourd'hui disparu du nom du produit.
 
 Ce qui a fortement contribué à la perte d'influence de S-PLUS, c'est
 une nouvelle mise en œuvre du langage développée à partir du milieu
@@ -66,19 +68,21 @@ la toute simple fonction factorielle, à la
 \autoref{fig:presentation:scheme_vs_s}, tend à leur donner raison.
 
 \begin{figure}
-\begin{lstlisting}[frame=single,language=lisp]
+\begin{Verbatim}[frame=single]
 (define factorial (lambda (n)
   (if (= n 1)
       1
     (* n (factorial (- n 1))))))
-\end{lstlisting}
-\begin{lstlisting}[frame=single,language=R]
+\end{Verbatim}
+  \medskip
+\begin{Verbatim}[frame=single]
 factorial <- function(n)
   if (n == 1) 1 else n * factorial(n - 1)
-\end{lstlisting}
-  \caption[Mises en œuvre de la fonction factorielle.]{Mises en œuvre
-    en Scheme (en haut) et en S (en bas) de la fonction
-    factorielle.}
+\end{Verbatim}
+  \caption[Mises en œuvre en Scheme et en S de la fonction
+  factorielle]{%
+    Mises en œuvre en Scheme (en haut) et en S (en bas) de la fonction
+    factorielle}
   \label{fig:presentation:scheme_vs_s}
 \end{figure}
 
@@ -98,6 +102,12 @@ S-PLUS, puis le surpasse lorsque les efforts de développement se
 rangent massivement derrière le projet libre. D'ailleurs John Chambers
 place aujourd'hui ses efforts de réflexion et de développement dans le
 projet R \citep{Chambers:R:2008}.
+
+À partir du début de la décennie 2010, l'analyse de données, l'analyse
+prédictive et l'intelligence artificielle font une entrée fracassante
+dans la liste des outils d'affaires incontournables. Déjà bien établi
+dans ces domaines, R devient, avec \index{Python}Python, la
+\emph{lingua franca} de la science des données.
 
 
 \section{Description sommaire de R}
@@ -123,14 +133,15 @@ immédiatement, une à une et en séquence.
 Par analogie, \index{Excel}Excel est certes un logiciel de
 manipulation de données, de mise en forme et de préparation de
 graphiques, mais c'est aussi au sens large un langage de programmation
-interprété. On utilise le langage de programmation lorsque l'on entre
-des commandes dans une cellule d'une feuille de calcul. L'interpréteur
-exécute les commandes et affiche les résultats dans la cellule.
+interprété. Pensez-y: nous utilisons le langage de programmation
+lorsque nous entrons des commandes dans une cellule d'une feuille de
+calcul, puis l'interpréteur exécute les commandes et affiche les
+résultats dans la cellule.
 
 Le R est un langage particulièrement puissant pour les applications
-mathématiques et statistiques (et donc actuarielles), chose peu
-surprenante puisqu'il a précisément été développé dans ce but. Parmi ses
-caractéristiques particulièrement intéressantes, on note:
+mathématiques et statistiques, chose peu surprenante puisqu'il a
+précisément été développé dans ce but. Parmi ses caractéristiques
+particulièrement intéressantes, on note:
 \begin{itemize}
 \item langage basé sur la notion de vecteur, ce qui simplifie les
   calculs mathématiques et réduit considérablement le recours aux
@@ -149,8 +160,8 @@ comme le montre la \autoref{fig:presentation:console}. En soi, cela
 n'est pas si différent d'un tableur tel que Excel: la zone d'entrée de
 texte dans une cellule n'est rien d'autre qu'une invite de
 commande\footnote{%
-  Merci à Markus Gesmann pour cette observation.}, par ailleurs aux
-capacités d'édition plutôt réduites.
+  Merci à Markus Gesmann pour cette observation.}, %
+par ailleurs aux capacités d'édition plutôt réduites.
 
 \begin{figure}
   \centering
@@ -176,9 +187,10 @@ avec la distribution de base de R.
 Peu importe la plateforme utilisée --- quoique dans une moindre mesure
 sous macOS --- je recommande d'interagir avec R par le biais d'un
 éditeur de texte pour programmeur ou d'un environnement de
-développement intégré; voir la \autoref{sec:presentation:editeurs}.
+développement intégré. Nous y reviendrons à la
+\autoref{sec:presentation:editeurs}.
 
-
+\enlargethispage{5mm}
 \section{Stratégies de travail}
 \label{sec:presentation:strategies}
 
@@ -195,8 +207,9 @@ expressions à la ligne de commande pour les évaluer immédiatement.
 2 + 3
 @
 
-On peut également créer des objets contenant le résultat d'un
-calcul. Ces objets sont stockés en mémoire dans l'espace de travail
+On peut également créer des objets contenant le résultat d'un calcul.
+Ces objets sont stockés en mémoire dans %
+l'\index{espace de travail}espace de travail %
 de R.
 <<echo=TRUE>>=
 x <- exp(2)
@@ -240,25 +253,31 @@ nos expressions R et le code de nos fonctions personnelles. Par
 convention, on donne aux fichiers de script un nom se terminant avec
 l'extension \code{.R}.
 
+\importantbox{Dans les fichiers de script comme à la ligne de commande, le
+  caractère \code{\#} marque le début d'un
+  \index{commentaire}commentaire dans R. Ainsi, tout ce qui est inclus
+  entre ce caractère et le saut à la ligne suivant est complètement
+  ignoré par l'interpréteur.}
+
 Avec cette approche, les objets sont créés au besoin en exécutant le
 code des fichiers de script. Comment? Simplement en copiant le code du
 fichier de script et en le collant dans la ligne de commande de R. La
 \autoref{fig:presentation:script} illustre schématiquement ce que le
-programmeur R a constamment sous les yeux: d'un côté son fichier de
-script et, de l'autre, la ligne de commande R dans laquelle son code a
-été exécuté.
+programmeur R a constamment sous les yeux: son fichier de script et la
+ligne de commande R dans laquelle son code a été exécuté.
 
 La méthode d'apprentissage préconisée dans cet ouvrage suppose que
 vous utiliserez cette seconde approche d'interaction avec R.
 
 \begin{figure}
   \centering
-  \lstinputlisting[frame=single,language={}]{script.R}
-  \lstinputlisting[frame=single,language={},firstline=2]{script.Rout}
-  \caption{Fichier de script (en haut) et ligne de commande R dans
-    laquelle les expressions R ont été exécutées (en bas). Les lignes
-    débutant par \code{\#} dans le fichier de script sont des
-    commentaires ignorés par l'interpréteur de commandes.}
+  \lstinputlisting[frame=single,language={},numbers=none]{include/script.R}
+  \lstinputlisting[frame=single,language={},numbers=none,firstline=2]{include/script.Rout}
+  \caption[Fichier de script et ligne de commande R]{Fichier de script
+    (en haut) et ligne de commande R dans laquelle les expressions R
+    ont été exécutées (en bas). Les lignes débutant par \code{\#} dans
+    le fichier de script sont des commentaires ignorés par
+    l'interpréteur de commandes.}
   \label{fig:presentation:script}
 \end{figure}
 
@@ -275,10 +294,11 @@ vous utiliserez cette seconde approche d'interaction avec R.
     quitte à les réévaluer par la suite pour obtenir les valeurs
     correspondantes.
   \end{enumerate}
-  La seconde, surement{\dots} Or, sauvegarder l'espace de travail R
-  dans un fichier \code{.RData} (l'approche «objets réels, code
-  virtuel») correspond à la première option, alors que sauvegarder
-  le code source des fichiers de script correspond à la seconde.
+  La seconde, assurément{\dots} Or, sauvegarder %
+  l'\Index{espace de travail}espace de travail %
+  R dans un fichier \code{.RData} (l'approche «objets réels, code
+  virtuel») correspond à la première option, alors que sauvegarder le
+  code source des fichiers de script correspond à la seconde.
 
   Là où l'analogie est boiteuse, la raison pour laquelle on n'a
   jamais à se poser la question avec un tableur, c'est que le
@@ -325,7 +345,8 @@ d'autres. Voici quelques bons choix.
   \begin{figure}[t]
     \centering
     \includegraphics[width=0.9\textwidth]{images/rstudio-screenshot}
-    \caption{Fenêtre de RStudio sous macOS dans sa configuration par
+    \caption[Fenêtre de RStudio sous macOS dans sa configuration par
+    défaut]{Fenêtre de RStudio sous macOS dans sa configuration par
       défaut. Dans le sens des aiguilles d'une montre, on y retrouve:
       le fichier de script de la \autoref{fig:presentation:script}; la
       liste des objets de l'environnement (vide, ici); une interface
@@ -354,10 +375,11 @@ d'autres. Voici quelques bons choix.
   \begin{figure}[t]
     \centering
     \includegraphics[width=0.9\textwidth]{images/emacs-screenshot}
-    \caption{Fenêtre de GNU Emacs sous macOS en mode d'édition de code
-      R. Dans la partie du haut, on retrouve le fichier de script de
-      la \autoref{fig:presentation:script} et dans la partie du
-      bas, la ligne de commande R.}
+    \caption[Fenêtre de GNU Emacs sous macOS en mode d'édition de code
+    R]{Fenêtre de GNU Emacs sous macOS en mode d'édition de code R.
+      Dans la partie du haut, on retrouve le fichier de script de la
+      \autoref{fig:presentation:script} et dans la partie du bas, la
+      ligne de commande R.}
     \label{fig:presentation:emacs}
   \end{figure}
 
@@ -414,9 +436,25 @@ Dans ses grandes lignes, une session de travail avec R comporte les
   différente dans GNU~Emacs; voir l'\autoref{chap:emacs+ess}.
 \end{enumerate}
 Les étapes 1 et 2 sont interchangeables, tout comme les étapes 4, 5 et
-6. L'\autoref{chap:emacs+ess} explique plus en détails la procédure à
-suivre lorsque l'on utilise GNU~Emacs. L'\autoref{chap:rstudio} fait de
-même lorsque l'on utilise l'environnement intégré RStudio.
+6. Consultez l'\autoref{chap:emacs+ess} pour la procédure à suivre
+détaillée lorsque l'on utilise GNU~Emacs, ou l'\autoref{chap:rstudio}
+pour l'environnement intégré RStudio.
+
+\gotorbox{C'est le temps de vous lancer dans une première session de
+  travail R. %
+  \hypertarget{goto:presentation}\relax
+  \hypertarget{goto:presentation:fin}\relax
+
+  Le fichier de script \code{\scriptfilename} livré avec le présent
+  document et reproduit à la \autoref{sec:presentation:exemples}
+  contient du code qui passe en revue quelques unes des
+  fonctionnalités de R. Ouvrez ce fichier dans votre éditeur de texte,
+  puis exécutez les lignes une par une en prenant bien soin de lire
+  les commentaires et d'examiner les résultats.
+
+  Poursuivez la lecture une fois la session de travail terminée. (En
+  consultation électronique, les symboles {\gotorsign} insérés dans le
+  code informatique permettent de revenir ici directement.)}
 
 
 \section{Répertoire de travail}
@@ -426,7 +464,8 @@ même lorsque l'on utilise l'environnement intégré RStudio.
 
 Le répertoire de travail (\emph{workspace}) de R est le répertoire par
 défaut dans lequel le logiciel, d'une part, recherche des fichiers de
-script ou de données et, d'autre part, sauvegarde l'espace de travail
+script ou de données et, d'autre part, sauvegarde %
+l'\index{espace de travail}espace de travail %
 dans le fichier \code{.RData}. Le répertoire de travail est déterminé
 au lancement de R. La fonction \Icode{getwd} permet affiche le
 répertoire de travail courant de R.
@@ -505,10 +544,8 @@ programmation en R plutôt que sur ses applications statistiques.
 \section{Exemples}
 \label{sec:presentation:exemples}
 
-\def\scriptfilename{presentation.R}
-
 \scriptfile{\scriptfilename}
-\lstinputlisting[firstline=13]{\scriptfilename}
+\lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
 
 
 \section{Exercices}
@@ -553,7 +590,7 @@ q()
 \end{exercice}
 
 %%% Local Variables:
-%%% mode: noweb
+%%% mode: latex
 %%% TeX-engine: xetex
 %%% TeX-master: "programmer-avec-r"
 %%% coding: utf-8

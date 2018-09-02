@@ -12,7 +12,7 @@
 ## https://creativecommons.org/licenses/by-sa/4.0/
 
 ###
-### DONNÉES ET PROCÉDURES FONDAMENTALES
+### DONNÉES ET PROCÉDURES FONDAMENTALES  `\labelline{premiers:fondamentales}`
 ###
 
 ## Nombres. Tous les nombres réels sont stockés en double
@@ -77,8 +77,48 @@ length("foobar")           # longueur de 1
 c("foo", "bar")            # *deux* chaines de 3 caractères
 length(c("foo", "bar"))    # longueur de 2
 
+## L'opérateur modulo retourne le reste d'une division.
+5 %% 2                     # 5/2 = 2 reste 1
+5 %% 1:5                   # remarquer la périodicité
+10 %% 1:15                 # x %% y = x si x < y
+
+## Un nombre 'x' est pair si 'x mod 2 = 0' et il est impair si
+## 'x mod 2 = 1'.
+a <- c("Impair", "Pair")
+x <- c(2, 3, 6, 8, 9, 11, 12)
+x %% 2                     # pair ou impair?
+2 - x %% 2                 # observer priorité des opérations
+a[2 - x %% 2]              # indiçage à répétition
+
+## La division entière retourne la partie entière de la
+## division d'un nombre par un autre.
+5 %/% 1:5
+10 %/% 1:15
+
+## L'opérateur à utiliser pour vérifier si deux valeurs sont
+## égales est '==', et non '='. Utiliser le mauvais opérateur
+## est une erreur commune --- et qui peut être difficile à
+## détecter --- lorsque l'on programme en R.
+5 = 2                      # erreur de syntaxe
+5 == 2                     # comparaison
+y = 2                      # pas un test...
+y                          # ... plutôt une affectation
+
+## Attention, toutefois: '==' vérifie l'égalité bit pour bit
+## dans la représentation interne des nombres dans
+## l'ordinateur. Ça fonctionne bien pour les entiers ou les
+## valeurs booléennes, mais pas pour les nombres réels ou,
+## plus insidieux, pour les nombres entiers provenant d'un
+## calcul et qui ne sont entiers qu'en apparence.
+##
+## [Pour en savoir (un peu) plus:
+##  http://floating-point-gui.de/formats/fp/]
+1.2 + 1.4 + 2.8            # 5.4 en apparence
+1.2 + 1.4 + 2.8 == 5.4     # non?!?
+0.3/0.1 == 3               # à gauche: faux entier `\labelline{premiers:fondamentales:fin}`
+
 ###
-### COMMANDES R
+### COMMANDES R            `\labelline{premiers:commandes}`
 ###
 
 ## Les expressions entrées à la ligne de commande sont
@@ -128,10 +168,10 @@ x <- 5;                    # éviter les ';' superflus
     y <- 2                 # seconde expression du groupe
     x + y                  # dernière expression du groupe
 }                          # fin du groupe et résultat
-{x <- 5; y <- 2; x + y}    # valide, mais redondant
+{x <- 5; y <- 2; x + y}    # valide, mais redondant `\labelline{premiers:commandes:fin}`
 
 ###
-### OBJETS R
+### OBJETS R               `\labelline{premiers:objets}`
 ###
 
 ## NOMS D'OBJETS
@@ -210,10 +250,10 @@ attr(cars, "class")        # extraction d'un seul attribut
 ## d'un vecteur.
 x <- 1:24                  # un vecteur
 names(x) <- letters[1:24]  # attribution d'étiquettes
-x                          # identification facilitée
+x                          # identification facilitée `\labelline{premiers:objets:fin}`
 
 ###
-### VECTEURS
+### VECTEURS               `\labelline{premiers:vecteurs}`
 ###
 
 ## La fonction de base pour créer des vecteurs est 'c'. Il
@@ -337,140 +377,11 @@ c(5, 3) + c(TRUE, FALSE)   # équivalent à c(5, 3) + c(1, 0)
 ## traité comme FALSE et tous les autres nombres comme TRUE.
 0:5 & 5:0
 0:5 | 5:0
-!0:5
+!0:5                       #-*- `\labelline{premiers:vecteurs:fin}`
 
 ###
-### FONCTIONS
+### APPEL D'UNE FONCTION   `\labelline{premiers:appel}`
 ###
-
-### PROGRAMMATION FONCTIONNELLE
-
-## Les fonctions sont des objets comme les autres dans R. Cela
-## signifie que:
-##
-## - le contenu d'une fonction (son code source) est toujours
-##   accessible;
-## - une fonction peut accepter en argument une autre
-##   fonction;
-## - une fonction peut retourner une fonction comme résultat;
-## - l'utilisateur peut définir de nouvelles fonctions.
-seq                        # contenu est le code source
-mode(seq)                  # mode est "function"
-rep(seq(5), 3)             # fonction argument d'une fonction
-lapply(1:5, seq)           # idem
-mode(ecdf(rpois(100, 1)))  # résultat de ecdf est une fonction
-ecdf(rpois(100, 1))(5)     # évaluation en un point
-c(seq, rep)                # vecteur de fonctions!
-
-### DÉFINITION D'UNE FONCTION
-
-## On définit une nouvelle fonction avec la syntaxe suivante:
-##
-##   <nom> <- function(<arguments>) <corps>
-##
-## où
-##
-## - 'nom' est le nom de la fonction;
-## - 'arguments' est la liste des arguments, séparés par des
-##    virgules;
-## - 'corps' est le corps de la fonction, soit une expression
-##   ou un groupe d'expressions réunies par des accolades { }.
-##
-## Une fonction retourne toujours la valeur de la *dernière*
-## expression de celle-ci.
-##
-## Voici un exemple trivial.
-square <- function(x) x * x
-square(10)
-
-## Supposons que l'on veut écrire une fonction pour calculer
-##
-##   f(x, y) = x (1 + xy)^2 + y (1 - y) + (1 + xy)(1 - y).
-##
-## Deux termes sont répétés dans cette expression. On a donc
-##
-##   a = 1 + xy
-##   b = 1 - y
-##
-## et f(x, y) = x a^2 + yb + ab.
-##
-## Une manière élégante de procéder au calcul de f(x, y) qui
-## adopte l'approche fonctionnelle fait appel à une fonction
-## intermédiaire à l'intérieur de la première fonction. (Il y
-## a ici des enjeux de «portée lexicale» sur lesquels nous
-## reviendrons en détail au chapitre 4.)
-f <- function(x, y)
-{
-    g <- function(a, b)
-        x * a^2 + y * b + a * b
-    g(1 + x * y, 1 - y)
-}
-f(2, 3)
-
-### Fonction anonyme
-
-## Comme le nom du concept l'indique, une fonction anonyme est
-## une fonction qui n'a pas de nom. C'est parfois utile pour
-## des fonctions courtes utilisées dans une autre fonction.
-##
-## Reprenons l'exemple précédent en généralisant les
-## expressions des termes 'a' et 'b'. La fonction 'f'
-## pourrait maintenant prendre en arguments 'x', 'y' et des
-## fonctions pour calculer 'a' et 'b'.
-f <- function(x, y, fa, fb)
-{
-    g <- function(a, b)
-        x * a^2 + y * b + a * b
-    g(fa(x, y), fb(x, y))
-}
-
-## Plutôt que de définir deux fonctions pour les arguments
-## 'fa' et 'fb', on passe directement des fonctions anonymes
-## en argument.
-f(2, 3,
-  function(x, y) 1 + x * y,
-  function(x, y) 1 - y)
-
-### Valeur par défaut d'un argument
-
-## La fonction suivante calcule la distance entre deux points
-## dans l'espace euclidien à 'n' dimensions, par défaut par
-## rapport à l'origine.
-##
-## Remarquez comment nous spécifions une valeur par défaut,
-## l'origine, pour l'argument 'y'.
-##
-## (Note: la fonction 'sum'... somme tous les éléments d'un
-## vecteur.)
-dist <- function(x, y = 0) sum((x - y)^2)
-
-## Quelques calculs de distances.
-dist(c(1, 1))                # (1, 1) par rapport à l'origine
-dist(c(1, 1, 1), c(3, 1, 2)) # entre (1, 1, 1) et (3, 1, 2)
-
-### Argument '...'
-
-## Nous illustrons l'utilisation de l'argument '...' de la
-## manière suivante pour le moment. Nous utiliserons davantage
-## cet argument avec les fonctions d'application.
-##
-## La fonction 'curve' prend en argument une expression
-## mathématique et trace la fonction pour un intervalle donné.
-curve(x^2, from = 0, to = 2)
-
-## Nous souhaitons, pour une raison quelconque, que tous nos
-## graphiques de ce type (et seulement de ce type) soient
-## tracés en orange.
-curve(x^2, from = 0, to = 2, col = "orange")
-
-## Plutôt que de redéfinir entièrement la fonction 'curve'
-## avec tous ses arguments (et il y en a plusieurs), nous
-## pouvons écrire une petite fonction qui, grâce à l'argument
-## '...', accepte tous les arguments de 'curve'.
-ocurve <- function(...) curve(..., col = "orange")
-ocurve(x^2, from = 0, to = 2)
-
-### APPEL D'UNE FONCTION
 
 ## L'interpréteur R reconnait un appel de fonction au fait que
 ## le nom de l'objet est suivi de parenthèses ( ).
@@ -512,4 +423,143 @@ matrix(1:12, 3, 4)
 matrix(1:12, ncol = 4, nrow = 3)
 matrix(nrow = 3, ncol = 4, data = 1:12)
 matrix(nrow = 3, ncol = 4, byrow = FALSE, 1:12)
-matrix(nrow = 3, ncol = 4, 1:12, FALSE)
+matrix(nrow = 3, ncol = 4, 1:12, FALSE) #-*- `\labelline{premiers:appel:fin}`
+
+###
+### QUELQUES FONCTIONS INTERNES UTILES  `\labelline{premiers:internes}`
+###
+
+## Pour les exemples qui suivent, on se donne un vecteur non
+## ordonné.
+x <- c(50, 30, 10, 20, 60, 30, 20, 40)
+
+## SUITES ET RÉPÉTITION
+
+## La fonction 'seq' sert à générer des suites générales. Ses
+## principaux arguments sont 'from', 'to' et 'by'.
+seq(from = 1, to = 10)       # équivalent à 1:10
+seq(10)                      # idem
+seq(1, 10, by = 2)           # avec incrément autre que 1
+seq(-10, 10, length.out = 5) # incrément automatique
+
+## La fonction 'seq_len' génère une suite de longueur 'n' à
+## partir de 1. C'est une version simplifiée et plus rapide de
+## 'seq(..., length.out = n)'. De plus, elle est plus robuste
+## lorsque l'argument est 0.
+seq(10)                    # suite 1, 2, ..., 10
+seq(1, length.out = 10)    # idem robuste
+seq_len(10)                # équivalent et plus rapide
+seq(0)                     # pas ce que l'on penserait!
+seq(1, length.out = 0)     # plus prudent
+seq_len(0)                 # plus simple
+
+## La fonction 'seq_along' génère une suite de la longueur du
+## vecteur en argument à partir de 1. C'est une version
+## simplifiée et plus rapide de 'seq(..., along = x)' et de
+## 'seq_len(length(x))'.
+seq(1, along = x)            # suite de la longueur de x
+seq_len(length(x))           # idem, mais deux fonctions
+seq_along(x)                 # plus rapide, plus simple
+
+## La fonction 'rep' permet de répéter des vecteurs de
+## plusieurs manières différentes.
+rep(1, 10)                  # utilisation de base
+rep(x, 2)                   # répéter un vecteur
+rep(x, each = 4)            # répéter chaque élément
+rep(x, times = 2, each = 4) # combinaison des arguments
+rep(x, length.out = 20)     # résultat de longueur déterminée
+rep(x, times = 1:8)         # nombre de répétitions différent
+                            # pour chaque élément de 'x'
+
+## Pour les deux types de répétitions les plus usuels, il y a
+## les fonctions 'rep.int' et 'rep_len' qui sont plus rapides
+## que 'rep'.
+rep.int(x, 2)              # seulement répétition 'times'
+rep_len(x, 10)             # seulement répétition 'length.out'
+
+## EXTRACTION DU DÉBUT ET DE LA FIN D'UN OBJET
+
+## L'idée des fonctions 'head' et 'tail', c'est que l'on se
+## positionne en tête ou en queue d'un objet pour effectuer
+## des extractions ou des suppressions de composantes.
+##
+## Avec un argument positif, les fonctions extraient des
+## composantes depuis la tête ou la queue de l'objet. Avec un
+## argument négatif, elles suppriment des composantes à
+## l'«autre bout» de l'objet.
+head(x, 3)                 # trois premiers éléments
+head(x, -2)                # tous sauf les deux derniers
+tail(x, 3)                 # trois derniers éléments
+tail(x, -2)                # tous sauf les deux premiers
+
+## Les fonctions sont aussi valides sur les matrices et les
+## data frames. Elles extraient ou suppriment alors des lignes
+## entières.
+m <- matrix(1:30, 5, 6)    # matrice 5 x 6
+head(m, 3)                 # trois premières lignes
+tail(m, -2)                # sans les deux premières lignes
+
+## ARRONDI
+(x <- c(-21.2, -pi, -1.5, -0.2, 0, 0.2, 1.7823, 315))
+round(x)                   # arrondi à l'entier
+round(x, 2)                # arrondi à la seconde décimale
+round(x, -1)               # arrondi aux dizaines
+ceiling(x)                 # plus petit entier supérieur
+floor(x)                   # plus grand entier inférieur
+trunc(x)                   # troncature des décimales
+
+## TESTS LOGIQUES
+
+## Les fonctions 'any' et 'all' prennent en argument un
+## vecteur booléen et elles indiquent, respectivement, si au
+## moins une ou si toutes les valeurs sont TRUE.
+any(c(TRUE, FALSE, FALSE))  # au moins une valeur TRUE
+any(c(FALSE, FALSE, FALSE)) # aucune valeur TRUE
+all(c(TRUE, TRUE, TRUE))    # toutes les valeurs TRUE
+all(c(TRUE, FALSE, TRUE))   # aucune valeur TRUE
+
+## Les fonctions sont des compléments l'une de l'autre: si
+## 'any(x)' est TRUE, alors 'all(!x)' est FALSE, et
+## vice-versa.
+any(c(TRUE, FALSE, FALSE))   # TRUE
+all(!c(TRUE, FALSE, FALSE))  # complément: FALSE
+any(c(FALSE, FALSE, FALSE))  # FALSE
+all(!c(FALSE, FALSE, FALSE)) # complément: TRUE
+
+## Les fonctions sont habituellement utilisées avec une
+## expression logique en argument.
+x                          # rappel
+x > 50                     # valeurs > 50?
+x <= 50                    # valeurs <= 50?
+any(x > 50)                # y a-t-il des valeurs > 50?
+all(x <= 50)               # complément
+all(x > 50)                # toutes les valeurs > 50?
+any(x <= 50)               # complément
+
+## SOMMAIRES ET STATISTIQUES DESCRIPTIVES
+sum(x)                     # somme des éléments
+prod(x)                    # produit des éléments
+diff(x)                    # x[2] - x[1], x[3] - x[2], etc.
+mean(x)                    # moyenne des éléments
+mean(x, trim = 0.125)      # moyenne sans minimum et maximum
+var(x)                     # variance (sans biais)
+sd(x)                      # écart type
+max(x)                     # maximum
+min(x)                     # minimum
+range(x)                   # c(min(x), max(x))
+diff(range(x))             # étendue de 'x'
+median(x)                  # médiane (50e quantile) empirique
+quantile(x)                # quantiles empiriques
+quantile(x, 1:10/10)       # on peut spécifier les quantiles
+summary(x)                 # plusieurs des résultats ci-dessus
+
+## SOMMAIRES CUMULATIFS ET COMPARAISONS ÉLÉMENT PAR ÉLÉMENT
+(x <- sample(1:20, 6))
+(y <- sample(1:20, 6))
+cumsum(x)                  # somme cumulative de 'x'
+cumprod(y)                 # produit cumulatif de 'y'
+rev(cumprod(rev(y)))       # produit cumulatif renversé
+cummin(x)                  # minimum cumulatif
+cummax(y)                  # maximum cumulatif
+pmin(x, y)                 # minimum élément par élément
+pmax(x, y)                 # maximum élément par élément `\labelline{premiers:internes:fin}`
