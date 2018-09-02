@@ -380,6 +380,7 @@
   %%% =======
   \newcommand{\bfhyperpage}[1]{\textbf{\hyperpage{#1}}}
   \renewcommand{\preindexhook}{%
+    \label{chap:index}
     Les numéros de page en caractères gras indiquent les pages où les
     concepts sont introduits, définis ou expliqués.\vskip\onelineskip}
   \newcommand{\Index}[1]{\index{#1|bfhyperpage}}
@@ -418,7 +419,7 @@
     puis-que
   }
 
-%  \includeonly{presentation,premiers,fonctions,implementation}
+%  \includeonly{donnees}
 
 \begin{document}
 
@@ -434,12 +435,12 @@
 
 \pagestyle{companion}
 
-%\include{introduction}
+\include{introduction}
 
 \tableofcontents*
-\clearpage
+\cleartorecto
 \listoftables*
-\clearpage
+\cleartorecto
 \listoffigures*
 
 %% Vignette tirée de xkcd.com
