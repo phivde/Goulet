@@ -238,14 +238,14 @@ insertionsort(x)
   \begin{sol}
     L'algorithme \emph{selectionsort} déplace graduellement vers
     l'avant la plus petite valeur du vecteur, la deuxième plus petite
-    valeur, et ainsi de suite.Deux boucles sont encore nécessaires:
+    valeur, et ainsi de suite. Deux boucles sont encore nécessaires:
     une pour passer à travers toutes les positions du vecteur et un
     autre pour, à chaque itération de la première boucle, trouver le
     minimum dans les valeurs restantes du vecteur.
 
     La fonction \icode{selectionsort} de la
     \autoref{fig:algorithmique:selectionsort} constitue une mise en
-    œuvre de l'algorithme en R. Dans plusieurs langages de
+    œuvre de l'algorithme en R. Dans la majorité des langages de
     programmation, l'échange de deux éléments d'un vecteur nécessite
     une variable tampon (temporaire), comme ceci:
     \begin{Schunk}
@@ -376,6 +376,7 @@ bubblesort(x)
       \caption{Mise en œuvre en R de l'algorithme \emph{countingsort}}
       \label{fig:algorithmique:countingsort}
     \end{figure}
+    \enlargethispage{5mm}
 
 <<echo=FALSE>>=
 source("include/countingsort.R")
@@ -385,8 +386,8 @@ source("include/countingsort.R")
 countingsort(x, 10, 20)
 @
 
-    La seconde mise en œuvre ci-dessous triche un peu: elle
-    utilise la fonction \icode{table} de R qui retourne justement le
+    La seconde mise en œuvre, ci-dessous, triche un peu: elle
+    a recours à la fonction \icode{table} de R qui retourne justement le
     tableau de fréquence de chaque valeur d'un vecteur.
     Résultat: plus de boucle! Cela dit, c'est un exercice bien
     artificiel puisque \code{table} elle-même trie les données\dots

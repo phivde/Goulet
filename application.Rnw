@@ -29,8 +29,9 @@ options(width=52)
 
 Nous savons déjà que certains types de calculs répétitifs sont
 automatiquement pris en charge par le langage R via une couche
-d'abstraction que nous avons appelée l'arithmétique vectorielle
-(\autoref{sec:premiers:vecteurs:arithmetique}). Pour les autres cas,
+d'abstraction que nous avons appelée l'\emph{arithmétique vectorielle}
+(\autoref{sec:premiers:vecteurs:arithmetique}). Pour les cas où
+l'arithmétique vectorielle ne saurait s'appliquer,
 le langage prévoit les boucles et autres %
 \index{structure de contrôle}structures de contrôle
 (\autoref{sec:fonctions:controle}). Or, à moins que le code ne soit
@@ -629,7 +630,7 @@ rpareto <- function(n, shape, scale)
     tailles $100$, $150$, $200$, $250$ et $300$ d'une loi de Pareto
     avec $\alpha = 2$ et $\lambda = \nombre{5000}$. Les échantillons
     aléatoires devraient être stockés dans une liste.
-  \item Vous disposez de l'exemple suivant d'utilisation de la
+  \item On vous fournit l'exemple suivant d'utilisation de la
     fonction \icode{paste}:
 <<echo=TRUE>>=
 paste("a", 1:5, sep = "")

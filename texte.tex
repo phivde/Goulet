@@ -534,10 +534,10 @@ $ awk '(state == 0) && /^# / { state = 1; next } \
       moins une occurrence de «\verb=b=», suivi de zéro ou une
       occurrence de «\verb=c=». Les choix 1 et 3 satisfont ces
       conditions.
-    \item L'expression régulière recherche «\verb=a=», suivi d'un
-      caractère quelconque (incluant «\verb=b=» ou «\verb=c=»), suivi
-      d'au moins une occurrence de «\verb=b=» ou de «\verb=c=». Les
-      choix 1, 2, 3, 4 et 6 satisfont ces conditions.
+    \item L'expression régulière recherche «\verb=a=», suivi de
+      n'importe quel caractère (incluant «\verb=b=» ou «\verb=c=»),
+      suivi d'au moins une occurrence de «\verb=b=» ou de «\verb=c=».
+      Les choix 1, 2, 3, 4 et 6 satisfont ces conditions.
     \item L'expression régulière recherche «\verb=abc=» ou
       «\verb=xyz=». Les choix 1 et 2 satisfont la condition. Le
       troisième choix n'est pas valide puisque l'expression ne
@@ -637,9 +637,9 @@ $ sed 's/\./,/' 100metres.data > 100metres-dec.data
     temps réalisés au mois d'août.
   \item Extraire les informations des temps de moins de 10~secondes.
   \item Extraire les lignes du fichier satisfaisant les deux
-    conditions ci-dessus. Vous pouvez utiliser l'opérateur de
-    redirection \verb=|= de Unix (\autoref{sec:informatique:os:unix})
-    pour combiner les deux commandes précédentes.
+    conditions précédentes. Vous pouvez avoir recours à l'opérateur de
+    redirection \verb=|= (\autoref{sec:cli:flux}) pour
+    combiner les commandes des parties a) et b).
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
