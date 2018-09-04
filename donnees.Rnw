@@ -59,7 +59,7 @@ spécialisées pour l'analyse de données.
 R étant un langage spécialisé dans les calculs mathématiques, il
 supporte tout naturellement et de manière intuitive --- à une
 exception près, comme nous le verrons --- les
-\capsule{https://youtu.be/JtMfLfdHojw}{matrices et tableaux}. Dans la
+\capsule{https://youtu.be/6P2cFe3DBfw}{matrices et tableaux}. Dans la
 terminologie de R, une matrice est un tableau rectangulaire de nombres
 à deux dimensions, alors qu'un tableau (\emph{array}) est la
 généralisation à plus de deux dimensions\footnote{%

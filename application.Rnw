@@ -106,7 +106,7 @@ apply(x, 1, sum)
 apply(x, 2, sum)
 @
 
-La \capsule{https://youtu.be/12Uy8_SJQzA}{fonction \Icode{apply}}
+La \capsule{https://youtu.be/1sNAMWiPs4E}{fonction \Icode{apply}}
 s'utilise autant avec les matrices qu'avec les tableaux. Sa syntaxe
 complète est la suivante:
 \begin{Schunk}

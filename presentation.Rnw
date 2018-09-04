@@ -117,7 +117,7 @@ R est un environnement intégré de manipulation de données, de calcul
 et de préparation de graphiques. Toutefois, ce n'est pas seulement un
 «autre» environnement statistique (comme SPSS ou SAS, par exemple),
 mais aussi un %
-\capsule{https://www.youtube.com/watch?v=2Y6y-quo_50}{langage de programmation} %
+\capsule{https://youtu.be/FnoMjJ9Knl0}{langage de programmation} %
 complet et autonome.
 
 Tel que mentionné précédemment, le R est un langage principalement
