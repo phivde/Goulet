@@ -4,7 +4,7 @@
 
 > Seuls les étudiants de l'Université Laval inscrits au cours IFT-1902 disposent des droits en écriture requis pour effectuer la procédure décrite ci-dessous.
 
-> Ce guide est également disponible en [vidéo](https://youtu.be/ag48IGh8eo).
+> Ce guide est également disponible en [vidéo](https://youtu.be/nag48IGh8eo).
 
 La version de développement du projet [Programmer avec R](https://vigou3.gitlab.io/programmer-avec-r) est hébergée dans un [dépôt Git public](https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-develop) de la Faculté des sciences et de génie de l'Université Laval.
 
