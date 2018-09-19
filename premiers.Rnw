@@ -1334,10 +1334,11 @@ max(abs(x - y))
 \end{exercice}
 
 \begin{exercice}
-  Une fonction R est définie ainsi:
+  On vous donne la définition d'une fonction R:
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
-f <- function(x = 0, y = NULL, z) \meta{corps}
+> f
+function(x = 0, y = NULL, z) \meta{corps}
 \end{Verbatim}
 \end{Schunk}
   Déterminer la valeur des arguments \code{x}, \code{y} et \code{z}
@@ -1379,6 +1380,9 @@ f <- function(x, y)
 <<echo=TRUE>>=
 f
 @
+  Vous aurez compris que le corps de la fonction \code{f} contient la
+  définition d'une fonction \code{g} (nous étudierons la
+  syntaxe de la définition des fonctions au \autoref{chap:fonctions}).
   Évaluer les résultats des appels ci-dessous.
   \begin{enumerate}
   \item \code{f(1, 1)}
@@ -1386,6 +1390,15 @@ f
   \item \code{f(1, f(f(1, 1), 1))}
   \end{enumerate}
   \begin{sol}
+    Cet exercice fait quelque peu appel à votre intuition pour
+    déterminer les valeurs des objets \code{x} et \code{y} à
+    l'intérieur de la fonction \code{g}. Sans doute avez-vous utilisé
+    les valeurs déjà définies dans la fonction \code{f}, ce qui est
+    juste en vertu des règles de \index{portee lexicale@portée
+      lexicale}\emph{portée lexicale} de R. Celles-ci font l'objet de
+    la \autoref{sec:implementation:portee}. Dans certains langages de
+    programmation, les objets seraient indéfinis et les appels de
+    fonction résulteraient tous en une erreur.
     \begin{enumerate}
     \item
 <<echo=FALSE>>=
