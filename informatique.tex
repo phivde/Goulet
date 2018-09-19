@@ -829,11 +829,11 @@ connaitre les quelques «Unix-ismes» ci-dessous.
 \item La barre oblique (\code{/}) est utilisée pour séparer les
   dossiers dans les chemins d'accès aux fichiers.
 \item Tout utilisateur dispose d'un espace disque réservé identifié
-  comme le \index{répertoire personnel}\emph{répertoire personnel} ou
-  le \index{dossier de départ|see{répertoire personnel}}\emph{dossier
-    de départ} (\emph{home directory}). Ce répertoire est situé dans
-  \code{/Users} sous macOS et habituellement dans \code{/home} sous
-  Linux.
+  comme le \index{repertoire personnel@répertoire
+    personnel}\emph{répertoire personnel} ou le \index{dossier de
+    départ|see{répertoire personnel}}\emph{dossier de départ}
+  (\emph{home directory}). Ce répertoire est situé dans \code{/Users}
+  sous macOS et habituellement dans \code{/home} sous Linux.
 \item À la ligne de commande et dans la configuration de plusieurs
   applications, le caractère \,\verb=~=\, représente le répertoire
   personnel.
@@ -846,6 +846,10 @@ connaitre les quelques «Unix-ismes» ci-dessous.
 \end{itemize}
 La section suivante fournit des détails additionnels sur le système de
 fichiers de Unix.
+
+\osxbox{Dans le Finder, le \index{repertoire personnel@répertoire
+    personnel}répertoire personnel, ou \emph{home directory} en
+  anglais, est représenté par\dots\ une maison.}
 
 
 \section{Systèmes de fichiers}
@@ -861,7 +865,7 @@ quelques grands principes de l'organisation des données dans un
 ordinateur.
 
 Les fichiers sont regroupés dans des
-\index{répertoire}\emph{répertoires} (ou dossiers). Ceux-ci
+\index{repertoire@répertoire}\emph{répertoires} (ou dossiers). Ceux-ci
 contiennent eux-mêmes des fichiers ou des sous-répertoires. Ce schéma
 se répète sans limite pratique. Il en résulte une classification sous
 forme d'arbre dont la \emph{racine} est le répertoire contenant
@@ -938,7 +942,7 @@ présente des fenêtres types de ces deux applications.
 \subsection{Particularités du système de fichiers de Windows}
 \label{sec:informatique:fs:windows}
 
-Sous Windows, chaque lecteur physique ou lecteur réseau dispose de son
+Dans Windows, chaque lecteur physique ou lecteur réseau dispose de son
 propre arbre de fichiers. La racine est identifiée par une lettre. Le
 premier disque dur est \code{C}\footnote{%
   La nomenclature des lecteurs date d'une époque où les ordinateurs
@@ -947,6 +951,19 @@ premier disque dur est \code{C}\footnote{%
   les lettres \code{A} et \code{B}.}. %
 Si le système comporte plus d'un disque, l'utilisateur doit savoir sur
 quel disque retrouver ou enregistrer ses données.
+
+Depuis au moins la version~7 de Windows, le répertoire (ou dossier)
+personnel des utilisateurs se retrouve sous
+\code{C:{\bs}Users}\footnote{%
+  Ce répertoire est affiché sous le nom \code{Utilisateurs} dans la
+  version française du système d'exploitation.}, %
+tel qu'illustré à la \autoref{fig:informatique:fs}. Ainsi, la
+véritable position du dossier \code{Documents} d'Alexandre dans le
+système de fichiers est \code{C:{\bs}Users{\bs}Alexandre{\bs}Documents}.
+
+\importantbox{Le répertoire personnel n'est pas affiché par défaut
+  dans l'Explorateur Windows. Pour y accéder, ouvrir l'arborescence
+  «Ce PC» ou «Ordinateur».}
 
 Le système de fichiers de Windows est insensible à la casse,
 c'est-à-dire qu'il ne fait aucune distinction entre \code{Program
@@ -974,6 +991,10 @@ de l'organisation physique des disques.
 \osxbox{Sous macOS, les clés USB, disques durs externes ou disques
   réseau sont montés dans le répertoire \code{/Volumes}. Le répertoire
   n'existe pas lorsqu'aucun disque externe n'est connecté.}
+
+Tel que mentionné à la section précédente, dans les système Unix le
+répertoire personnel des utilisateurs se trouve sous
+\code{/Users} (macOS) ou \code{/home} (Linux).
 
 Le système de fichiers sous Unix est généralement sensible à la casse.
 La barre oblique \code{/} sépare les noms de répertoires dans les
