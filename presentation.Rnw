@@ -467,7 +467,7 @@ défaut dans lequel le logiciel, d'une part, recherche des fichiers de
 script ou de données et, d'autre part, sauvegarde %
 l'\index{espace de travail}espace de travail %
 dans le fichier \code{.RData}. Le répertoire de travail est déterminé
-au lancement de R. La fonction \Icode{getwd} permet affiche le
+au lancement de R. La fonction \Icode{getwd} permet d'afficher le
 répertoire de travail courant de R.
 <<echo=TRUE, eval=FALSE>>=
 getwd()
