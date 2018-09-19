@@ -75,12 +75,12 @@ y
 @
 
 Les questions ci-dessus trouvent leurs réponses dans les concepts
-d'environnement et de portée lexicale de R. Maitriser ces concepts
-permet à la fois de simplifier notre code et de réduire
-significativement les sources de bogues. Le chapitre traite également
-du concept d'évaluation paresseuse auquel les programmeurs sont moins
-souvent directement confrontés, mais qui permet aussi de coder plus
-efficacement.
+d'environnement et de \index{portee lexicale@portée lexicale}portée
+lexicale de R. Maitriser ces concepts permet à la fois de simplifier
+notre code et de réduire significativement les sources de bogues. Le
+chapitre traite également du concept d'évaluation paresseuse auquel
+les programmeurs sont moins souvent directement confrontés, mais qui
+permet aussi de coder plus efficacement.
 
 \gotorbox{Étudiez les lignes \reflines{implementation:contexte} du
   fichier de script \code{\scriptfilename} reproduit à la
@@ -273,8 +273,9 @@ prochaine section.
 Qu'arrive-t-il lorsqu'une variable n'est pas définie dans
 l'environnement d'évaluation\index{environnement!d'évaluation} d'une
 fonction? C'est là qu'entrent en jeu les très importantes règles de
-\emph{portée lexicale}\index{portée lexicale} (\emph{lexical scoping})
-de R. Celles-ci établissent comment R recherche un symbole.
+\emph{portée lexicale}\Index{portee lexicale@portée lexicale}
+(\emph{lexical scoping}) de R. Celles-ci établissent comment R
+recherche un symbole.
 
 \begin{itemize}
 \item En premier lieu, R recherche le symbole dans le dictionnaire de
@@ -367,15 +368,15 @@ f(10)
   toutes les valeurs dont une fonction qui est appelée depuis l'espace
   de travail peut avoir besoin.}
 
-La portée lexicale de R est un outil puissant et, comme tous les
-outils puissants, il peut s'avérer dangereux. La mise en garde
-ci-dessus enjoint de ne pas se fier à la portée lexicale dans les
-fonctions conçues pour être appelées depuis la ligne de commande. Par
-contre, la portée lexicale est très utile pour simplifier le code des
-fonctions créées à l'intérieur d'autres fonctions puisque nous pouvons
-faire l'économie de passer tous les arguments d'une fonction à
-l'autre. Vous trouverez un exemple complet dans le code informatique
-de la \autoref{sec:implementation:exemples}.
+La \index{portee lexicale@portée lexicale}portée lexicale de R est un
+outil puissant et, comme tous les outils puissants, il peut s'avérer
+dangereux. La mise en garde ci-dessus enjoint de ne pas se fier à la
+portée lexicale dans les fonctions conçues pour être appelées depuis
+la ligne de commande. Par contre, la portée lexicale est très utile
+pour simplifier le code des fonctions créées à l'intérieur d'autres
+fonctions puisque nous pouvons faire l'économie de passer tous les
+arguments d'une fonction à l'autre. Vous trouverez un exemple complet
+dans le code informatique de la \autoref{sec:implementation:exemples}.
 
 \gotorbox{Étudiez les lignes \reflines{implementation:portee}
   du fichier de script \code{\scriptfilename} reproduit à la
