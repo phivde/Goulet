@@ -847,9 +847,10 @@ connaitre les quelques «Unix-ismes» ci-dessous.
 La section suivante fournit des détails additionnels sur le système de
 fichiers de Unix.
 
-\osxbox{Dans le Finder, le \index{repertoire personnel@répertoire
-    personnel}répertoire personnel, ou \emph{home directory} en
-  anglais, est représenté par\dots\ une maison.}
+\osxbox{Vous savez désormais pourquoi le \index{repertoire
+    personnel@répertoire personnel}répertoire personnel, ou \emph{home
+    directory}, est représenté par une maison dans le Finder et que le
+  raccourci clavier pour y accéder est \code{\shiftkey\,\cmdkey\,H}.}
 
 
 \section{Systèmes de fichiers}
@@ -938,6 +939,10 @@ présente des fenêtres types de ces deux applications.
   \label{fig:informatique:explorer+finder}
 \end{figure}
 
+\tipbox{Pour accéder à la racine du système de fichiers dans
+  l'Explorateur Windows, il faut ouvrir l'arborescence sous «Ce PC» ou
+  «Ordinateur». Dans le Finder de macOS, on atteint la racine en
+  sélectionnant «Macintosh~HD» dans la barre latérale.}
 
 \subsection{Particularités du système de fichiers de Windows}
 \label{sec:informatique:fs:windows}
@@ -962,8 +967,8 @@ véritable position du dossier \code{Documents} d'Alexandre dans le
 système de fichiers est \code{C:{\bs}Users{\bs}Alexandre{\bs}Documents}.
 
 \importantbox{Le répertoire personnel n'est pas affiché par défaut
-  dans l'Explorateur Windows. Pour y accéder, ouvrir l'arborescence
-  «Ce PC» ou «Ordinateur».}
+  dans l'Explorateur Windows. Pour y accéder, partir de la racine du
+  système de fichiers dans «Ce PC» ou «Ordinateur».}
 
 Le système de fichiers de Windows est insensible à la casse,
 c'est-à-dire qu'il ne fait aucune distinction entre \code{Program
@@ -1109,6 +1114,15 @@ réponse se trouve à une requête près dans un moteur de recherche.
     \item $A \times (B + C \div D)$
     \end{enumerate}
   \end{sol}
+\end{exercice}
+
+\begin{exercice}[nosol]
+  Les répertoires \code{Documents} et \code{Desktop} (\code{Bureau}
+  dans la version française) existent par défaut dans le
+  \index{repertoire personnel@répertoire personnel}répertoire
+  personnel des utilisateurs dans macOS ainsi que dans Windows.
+  Localiser ces deux répertoires dans le système de fichier à partir
+  de la racine.
 \end{exercice}
 
 \Closesolutionfile{solutions}
