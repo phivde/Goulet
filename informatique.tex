@@ -795,26 +795,26 @@ communes. D'abord, ils sont intrinsèquement multitâches et
 multiutilisateurs. Ensuite, la
 \Index{Unix!philosophie}\link{https://fr.wikipedia.org/wiki/Philosophie_d\%27Unix}{philosophie
   Unix} commande la modularité: le système d'exploitation fournit aux
-utilisateurs (via un interpréteur de commandes, ou \emph{shell}) et
-aux applications une multitude de petits outils très spécialisés qui
-ne réalisent à peu près qu'une seule tâche. Le système rend ensuite
-simple, via un mécanisme dit de transfert de données («tuyau»,
-\emph{pipe}) de les combiner pour effectuer des opérations plus
-complexes.
+utilisateurs et aux applications une multitude de petits outils très
+spécialisés qui ne réalisent à peu près qu'une seule tâche. Le système
+rend ensuite simple, via un mécanisme dit de transfert de données
+(«tuyau», \emph{pipe}), de les combiner pour effectuer des opérations
+plus complexes; nous y reviendrons à la \autoref{sec:cli:flux}.
 
 Par exemple, pour extraire le mot \emph{tuyau} du code source
 contenant le précédent paragraphe, nous pourrions utiliser l'outil
 \code{grep} pour extraire la ligne où se trouve le mot, puis l'outil
-\code{cut} pour isoler le mot qui nous intéresse et, enfin, l'outil
-\code{tr} pour supprimer la parenthèse ouvrante, les guillemets et la
+\icode{cut} pour isoler le mot qui nous intéresse et, enfin, l'outil
+\icode{tr} pour supprimer la parenthèse ouvrante, les guillemets et la
 virgule autour du mot.\footnote{%
-  \index{{"|}@\code{\textbar} (Bash)} %
-  \index{cut@\code{cut}} %
-  \index{tr@\code{tr}} %
-  Dans la mesure où le mot que l'on recherche est le quatrième de la
-  ligne dans le fichier source \code{informatique.tex}, la commande
-  résultante est: \code{grep "«tuyau»" informatique.tex | cut -d " "
-    -f 4 | tr -d \bs(«»,}\,.}
+  En supposant que le mot recherché est le quatrième de la ligne dans
+  le fichier source \code{informatique.tex}, la commande résultante
+  est: \code{grep "«tuyau»" informatique.tex | cut -d " " -f 4 | tr -d
+    \bs(«»,}\,. Le symbole %
+  \index{{"|}@\string\code{\string\textbar} (Bash)}\code{\textbar} %
+  est l'opérateur de transfert de données de Unix.%
+  %% utilisation de \string: https://tex.stackexchange.com/a/254505
+}
 
 À l'exception notable des Mac, \index{Unix}Unix demeure assez peu
 répandu sur les ordinateurs personnels. En revanche le système
@@ -1117,12 +1117,12 @@ réponse se trouve à une requête près dans un moteur de recherche.
 \end{exercice}
 
 \begin{exercice}[nosol]
-  Les répertoires \code{Documents} et \code{Desktop} (\code{Bureau}
+  Les répertoires \code{Documents} et \code{Desktop} (ou \code{Bureau}
   dans la version française) existent par défaut dans le
   \index{repertoire personnel@répertoire personnel}répertoire
-  personnel des utilisateurs dans macOS ainsi que dans Windows.
+  personnel des utilisateurs tant dans macOS que dans Windows.
   Localiser ces deux répertoires dans le système de fichier à partir
-  de la racine.
+  de la racine avec l'Explorateur Windows ou le Finder.
 \end{exercice}
 
 \Closesolutionfile{solutions}
