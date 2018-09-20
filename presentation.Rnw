@@ -568,10 +568,10 @@ q()
 
 \begin{exercice}[nosol]
   Ouvrir dans un éditeur de texte le fichier de script
-  {\scriptfilename} reproduit à la section précédente. Exécuter le
-  code ligne par ligne et observer les résultats. Répéter l'exercice
-  avec un ou deux autres éditeurs de texte afin de les comparer et de
-  vous permettre d'en choisir un pour la suite.
+  \code{\scriptfilename} reproduit à la section précédente. Exécuter
+  le code ligne par ligne et observer les résultats. Répéter
+  l'exercice avec un ou deux autres éditeurs de texte afin de les
+  comparer et de vous permettre d'en choisir un pour la suite.
 \end{exercice}
 
 \begin{exercice}[nosol]
@@ -586,7 +586,8 @@ q()
   \index{repertoire@répertoire de travail}%
   Identifier le répertoire de travail de votre session de travail R,
   puis localiser ce répertoire dans le système de fichier de votre
-  ordinateur.
+  poste de travail. Changer ensuite le répertoire de travail de R pour
+  un autre répertoire.
 \end{exercice}
 
 \begin{exercice}[nosol]
