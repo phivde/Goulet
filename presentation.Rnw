@@ -458,7 +458,7 @@ pour l'environnement intégré RStudio.
 
 
 \section{Répertoire de travail}
-\index{repertoire@répertoire de travail}
+\Index{repertoire@répertoire de travail}
 \index{dossier de travail|see{répertoire de travail}}
 \label{sec:presentation:workspace}
 
@@ -567,11 +567,11 @@ q()
 \end{exercice}
 
 \begin{exercice}[nosol]
-  Ouvrir dans un éditeur de texte le fichier de script contenant le
-  code de la section précédente. Exécuter le code ligne par ligne et
-  observer les résultats. Répéter l'exercice avec un ou deux autres
-  éditeurs de texte afin de les comparer et de vous permettre d'en
-  choisir un pour la suite.
+  Ouvrir dans un éditeur de texte le fichier de script
+  {\scriptfilename} reproduit à la section précédente. Exécuter le
+  code ligne par ligne et observer les résultats. Répéter l'exercice
+  avec un ou deux autres éditeurs de texte afin de les comparer et de
+  vous permettre d'en choisir un pour la suite.
 \end{exercice}
 
 \begin{exercice}[nosol]
@@ -580,6 +580,13 @@ q()
   les rubriques d'aide sont structurées --- elles sont toutes
   identiques --- puis exécuter quelques expressions tirées des sections
   d'exemples.
+\end{exercice}
+
+\begin{exercice}[nosol]
+  \index{repertoire@répertoire de travail}%
+  Identifier le répertoire de travail de votre session de travail R,
+  puis localiser ce répertoire dans le système de fichier de votre
+  ordinateur.
 \end{exercice}
 
 \begin{exercice}[nosol]
