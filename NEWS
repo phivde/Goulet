@@ -4,8 +4,22 @@
 
 # (en développement)
 
+## Nouveautés
+
+- Détails additionnels sur le répertoire personnel et sa position dans
+  le système de fichiers, en particulier sous Windows. Les sections
+  touchées sont 1.4.2, 1.5.1 et 1.5.2.
+- Nouvel exercice 1.3 sur la position des répertoires Documents et
+  Desktop dans le système de fichiers.
+- Nouvel exercice 2.4 sur l'identification et la localisation du
+  répertoire de travail de R. L'ancien exercice 2.4 est maintenant
+  l'exercice 2.5.
+
 ## Autres changements
 
+- Ajout d'une référence à la section 10.4 lors de la mention de
+  l'opérateur de redirection à la section 1.4.2. Entrée d'index pour
+  l'opérateur `|` dans la note de bas de page.  
 - Détails additionnels dans l'énoncé de l'exercice 3.5 ainsi que dans
   la solution.
 - URL de la vidéo «Collaborer au projet» corrigée dans le fichier
