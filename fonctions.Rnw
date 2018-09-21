@@ -39,7 +39,7 @@ pour utiliser les éléments composés. La possibilité qu'offre R
 de définir des objets contenant des valeurs constitue une première
 technique. La définition de \emph{fonctions} (le nom que nous
 donnons dorénavant au concept de procédure) est une technique
-d'abstration encore plus puissante, puisqu'elle permet de faire
+d'abstraction encore plus puissante, puisqu'elle permet de faire
 référence par un seul nom à toute une suite d'opérations.
 
 \section{Programmation fonctionnelle}
