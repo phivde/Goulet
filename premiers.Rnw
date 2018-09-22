@@ -858,7 +858,7 @@ passées.
 \section{Quelques fonctions internes utiles}
 \label{sec:premiers:internes}
 
-Cette section présente quelques fonctions internes souvent utilisés
+Cette section présente quelques fonctions internes souvent utilisées
 pour programmer en R et pour manipuler des données. Elle reviendra à
 intervalles réguliers dans le document au fur à mesure que nous
 découvrirons de nouvelles fonctionnalités du langage.
