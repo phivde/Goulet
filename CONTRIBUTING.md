@@ -43,7 +43,9 @@ git status
 git add <fichier>
 git commit -m "<commentaire>"
 ```
-	
+
+> À ce stade, Git vous demandera peut-être de vous authentifier. Utilisez votre IDUL et votre NIP.
+
 4. Publiez ensuite la branche avec les modifications dans le dépôt BitBucket:
 
 ```
@@ -53,3 +55,11 @@ git push -u origin <nom_de_branche>
 5. Finalement, connectez-vous à l'interface graphique de BitBucket à l'adresse <https://projets.fsg.ulaval.ca/git/login> avec votre IDUL/NIP et faites une demande de tirage (*pull request*) vers la branche `master` en sélectionnant l'option correspondante dans la barre latérale.
 
 Pour des instructions plus détaillées, consultez les [excellents tutoriels](https://www.atlassian.com/git/tutorials) de Atlassian, en particulier celui sur le processus de collaboration [*Gitflow Workflow*](https://www.atlassian.com/git/tutorials/comparing-workflows#gitflow-workflow).
+
+# CFR (contributions fréquemment refusées)
+
+Les corrections mentionnées ci-dessous ont été refusées à répétition dans le passé. Elle ne peuvent donner droit à un point boni dans le cours IFT-1902 Informatique pour actuaires.
+
+- S'agissant du caractère typographique, «espace» est un mot féminin. L'expression «suivi d'une espace» est donc correctement orthographiée.
+
+- Le document est rédigé au moins en partie selon les règles de la [nouvelle orthographe](http://www.orthographe-recommandee.info), en particulier pour ce qui a trait à l'[accent circonflexe](http://www.orthographe-recommandee.info/regles4.htm). Alors «connait», «reconnait», «apparait» sont toutes des graphies correctes.
