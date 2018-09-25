@@ -796,8 +796,8 @@ une petite fonction \code{foo} qui calcule la quantité
   d = \sum_{i = 1}^n |x_i - y_i|^p
 \end{equation*}
 pour deux vecteurs $\mat{x} = (x_1, \dots, x_n)$ et
-$\mat{y} = (y_1, \dots, y_n)$ et une valeur $p$. La définition --- ou
-le \index{prototype}prototype --- de la fonction apparait ci-dessous.
+$\mat{y} = (y_1, \dots, y_n)$ et une valeur $p$. La définition de la
+fonction apparait ci-dessous.
 <<echo=FALSE>>=
 foo <- function(x, y = 0, p = 2) sum(abs(x - y)^p)
 @
