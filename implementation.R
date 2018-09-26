@@ -196,12 +196,6 @@ f(2, 4)                    #-*- `\labelline{implementation:portee:fin}`
 ## objet inexistant en argument à une fonction sans que cela
 ## ne cause d'erreur... à condition que l'argument ne soit
 ## jamais utilisé dans la fonction.
-##
-## (Nous n'avons pas encore étudié les expressions
-## conditionnelles, mais l'exemple ci-dessous devrait malgré
-## tout être simple à suivre: la fonction 'f' retourne le
-## carré de l'argument 'x' si celui-ci est supérieur à
-## 0 et la valeur de l'argument 'y' sinon.)
 f <- function(x, y)
     if (x > 0) x * x else y
 f(5, does_not_exist)       # argument 'y' jamais utilisé

@@ -23,6 +23,8 @@
 - Détails additionnels dans l'énoncé de l'exercice 3.5 ainsi que dans
   la solution.
 - Suppression du terme «prototype» au chapitre 3 qui était mal utilisé.
+- Suppression des lignes 199-204 du fichier `implementation.R`
+  devenues obsolètes avec la révision de 2018.
 - URL de la vidéo «Collaborer au projet» corrigée dans le fichier
   `CONTRIBUTING.md`.
 
