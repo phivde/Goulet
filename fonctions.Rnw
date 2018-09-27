@@ -535,7 +535,7 @@ valeurs de la suite de Fibonacci sont données par la fonction
   f(n) & = f(n - 1) + f(n - 2), \quad n \geq 2.
 \end{align*}
 Le quotient de deux termes successifs converge vers
-$\phi = (1 + \sqrt{5})/2$, le nombre d'or\footnote{%
+$\phi = (1 + \sqrt{5})/2$, le nombre d'or.\footnote{%
   On prête au nombre d'or toutes sortes de propriétés, certaines même
   d'ordre mystique. Il est en tout cas au cœur d'un des romans les
   plus vendus de tous les temps, \emph{Da~Vinci Code} (Dan Brown,
