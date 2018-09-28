@@ -1276,16 +1276,8 @@ x[-c(6, 7, 12)]
   Soit $\mat{x} = (x_1, \dots, x_n)$ et $\mat{y} = y_1, \dots, y_n$
   deux vecteurs de nombres réels. Composer des expressions R pour
   effectuer les calculs mathématiques ci-dessous. Vous pouvez utiliser
-  les fonctions R suivantes:
-  \begin{itemize}
-  \item \icode{sum} pour calculer la somme des éléments d'un
-    vecteur;
-  \item \icode{prod} pour calculer le produit des éléments d'un
-    vecteur;
-  \item \icode{max} pour calculer le maximum d'un vecteur;
-  \item \icode{abs} pour calculer la valeur absolue de chacun des
-    éléments d'un vecteur.
-  \end{itemize}
+  les fonctions R suivantes: \icode{sum}, \icode{prod}, \icode{max},
+  \icode{abs}.
   \begin{enumerate}
   \item $3 (\mat{x} + \mat{y})$
   \item $n^{-1} \sum_{i = 1}^n x_i$ (moyenne arithmétique de $\mat{x}$)

@@ -17,9 +17,12 @@
 
 ## Autres changements
 
-- Ajout d'une référence à la section 10.4 lors de la mention de
+- Ajout d'une référence vers la section 10.4 lors de la mention de
   l'opérateur de redirection à la section 1.4.2. Entrée d'index pour
-  l'opérateur `|` dans la note de bas de page.  
+  l'opérateur `|` dans la note de bas de page.
+- Le calcul effectué par les fonctions `sum`, `prod`, `max` et `abs`
+  n'est plus expliqué à l'exercice 3.3 puisque ces fonctions sont
+  maintenant présentées dans le chapitre.
 - Détails additionnels dans l'énoncé de l'exercice 3.5 ainsi que dans
   la solution.
 - Suppression du terme «prototype» au chapitre 3 qui était mal utilisé.
