@@ -20,12 +20,14 @@
 - Ajout d'une référence vers la section 10.4 lors de la mention de
   l'opérateur de redirection à la section 1.4.2. Entrée d'index pour
   l'opérateur `|` dans la note de bas de page.
+- Suppression du terme «prototype» au chapitre 3 qui était mal utilisé.
 - Le calcul effectué par les fonctions `sum`, `prod`, `max` et `abs`
   n'est plus expliqué à l'exercice 3.3 puisque ces fonctions sont
   maintenant présentées dans le chapitre.
 - Détails additionnels dans l'énoncé de l'exercice 3.5 ainsi que dans
   la solution.
-- Suppression du terme «prototype» au chapitre 3 qui était mal utilisé.
+- Correction d'une référence erronée dans la remarque importante de la
+  section 4.3.
 - Suppression des lignes 199-204 du fichier `implementation.R`
   devenues obsolètes avec la révision de 2018.
 - URL de la vidéo «Collaborer au projet» corrigée dans le fichier

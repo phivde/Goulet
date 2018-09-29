@@ -202,8 +202,8 @@ résultat de la fonction à un objet.
 
 \cautionbox{Il existe une fonction \icode{return} pour terminer
   immédiatement l'exécution d'une fonction et retourner un résultat;
-  nous l'étudierons plus formellement avec les structures de contrôle au
-  \autoref{chap:application}. Cependant, l'utilisation de
+  nous l'étudierons plus formellement avec les structures de contrôle
+  à la \autoref{sec:fonctions:controle}. Cependant, l'utilisation de
   \code{return} à la toute fin d'une fonction est tout à fait inutile
   et c'est considéré comme du mauvais style en R.}
 
