@@ -14,6 +14,9 @@
 - Nouvel exercice 2.4 sur l'identification et la localisation du
   répertoire de travail de R. L'ancien exercice 2.4 est maintenant
   l'exercice 2.5.
+- Dans la section 3.6 sur les fonctions internes utiles, ajout d'une
+  sous-section sur les fonctions mathématiques et trigonométriques.
+  Exemples correspondants dans `premiers.R`.
 - Indications sur la documentation minimale d'une fonction à la
   section 4.7.3 avec un exemple simple. Le texte vient appuyer ce qui
   se trouvait autrement uniquement illustré dans le code informatique

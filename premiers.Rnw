@@ -878,6 +878,47 @@ leurs options.
 
 \tipbox{Vraiment, consultez les rubriques d'aide.}
 
+\subsection{Fonctions mathématiques et trigonométriques}
+\label{sec:premiers:internes:math}
+
+\begin{ttscript}{factorial}
+\item[\Icode{exp}] fonction \index{exponentielle}exponentielle $e^x$
+<<echo=TRUE>>=
+exp(1)
+@
+\item[\Icode{log}] \index{logarithme}logarithme naturel ou dans une
+  base quelconque
+<<echo=TRUE>>=
+log(exp(1))
+log(9, base = 3)
+@
+\item[\Icode{sqrt}] \index{racine@racine carrée}racine carrée
+<<echo=TRUE>>=
+sqrt(9)
+@
+\item[\Icode{abs}] \index{valeur absolue}valeur absolue
+<<echo=TRUE>>=
+abs(c(-1, 0, 2))
+@
+\item[\Icode{gamma}] fonction \index{gamma}gamma $\Gamma(x) =
+  \int_0^\infty t^{x - 1} e^{-t}\, dt$ (et les fonctions apparentées
+  \icode{lgamma}, \icode{digamma}, \icode{trigamma})
+<<echo=TRUE>>=
+gamma(5)
+@
+\item[\Icode{factorial}] \index{factorielle}factorielle $x!$ (et la
+  fonction apparentée \icode{lfactorial})
+<<echo=TRUE>>=
+factorial(4)
+@
+\item[\Icode{cos}] \index{trigonometrie@trigonométrie}cosinus en radians
+  (et les autres fonctions trigonométriques: \icode{sin},
+  \icode{tan}, \icode{acos}, etc.)
+<<echo=TRUE>>=
+cos(pi/4)
+@
+\end{ttscript}
+
 \subsection{Suites et répétition}
 \label{sec:premiers:internes:seq}
 

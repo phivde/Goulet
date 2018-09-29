@@ -433,6 +433,24 @@ matrix(nrow = 3, ncol = 4, 1:12, FALSE) #-*- `\labelline{premiers:appel:fin}`
 ## ordonné.
 x <- c(50, 30, 10, 20, 60, 30, 20, 40)
 
+## FONCTIONS MATHÉMATIQUES ET TRIGONOMÉTRIQUES
+
+## R contient des fonctions pour calculer la plupart des
+## fonctions mathématiques et trigonométriques usuelles.
+exp(c(1, 2, -1))           # exponentielle
+log(exp(c(1, 2, -1)))      # logarithme naturel
+log10(c(1, 10, 100))       # logarithme en base 10
+log(c(1, 5, 25), base = 5) # logarithme en base quelconque
+sqrt(x)                    # racine carrée
+abs(x - mean(x))           # valeur absolue
+gamma(1:5)                 # fonction gamma
+factorial(0:4)             # factorielle
+?gamma                     # toutes les fonctions apparentées
+cos(seq(0, pi, by = pi/4)) # cosinus
+sin(seq(0, pi, by = pi/4)) # sinus
+tan(seq(0, pi, by = pi/4)) # tangente
+?Trig                      # toutes les fonctions apparentées
+
 ## SUITES ET RÉPÉTITION
 
 ## La fonction 'seq' sert à générer des suites générales. Ses
