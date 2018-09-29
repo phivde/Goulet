@@ -1109,6 +1109,39 @@ juste équilibre.
   rapportent, c'est probablement qu'il est temps de réviser le code.
 \end{itemize}
 
+À moins qu'une rubrique d'aide en bonne et due forme n'accompagne une
+fonction, sa définition devrait toujours être précédée d'un bloc de
+commentaires contenant au minimum: la
+\index{signature}\emph{signature} de la fonction (son nom suivi, entre
+parenthèses, de tous les arguments avec leur valeur par défaut, le cas
+échéant); une courte description de ce que fait la fonction; la liste
+des arguments, de leur signification et des valeurs admissibles; la
+valeur retournée par la fonction. Il s'agit de la structure générale
+des rubriques d'aide de R. La \autoref{fig:fonctions:doc} fournit un
+exemple de documentation pour une fonction simple.
+
+\begin{figure}
+\begin{Verbatim}[frame=single]
+###
+### square(x)
+###
+##  Élévation au carré.
+##
+##  Arguments
+##
+##  x: vecteur de nombres réels,
+##
+##  Valeur
+##
+##  Vecteur de nombres réels contenant les carrés
+##  des arguments.
+##
+square <- function(x) x * x
+\end{Verbatim}
+  \caption{Exemple de documentation pour une fonction simple}
+  \label{fig:fonctions:doc}
+\end{figure}
+
 Dans R, le symbole numéro \code{\#} --- ou carré --- marque le début
 d'un commentaire, et ce, peu importe où le symbole se trouve sur la
 ligne. Il est possible de combiner les \code{\#} pour développer une
@@ -1116,7 +1149,7 @@ forme de hiérarchie dans les commentaires ou pour délimiter
 différentes sections d'un fichier de script. Pour les fichiers
 d'exemples du présent document, j'ai utilisé la
 \link{https://www.gnu.org/software/emacs/manual/html_node/elisp/Comment-Tips.html}{%
-  convention de l'éditeur \index{Emacs}GNU~Emacs}:
+  convention de l'éditeur \index{Emacs}GNU~Emacs}.
 \begin{itemize}
 \item Les commentaires qui débutent par un seul carré, \code{\#}, sont
   alignés sur une colonne à droite du code source. Ils servent à
@@ -1143,8 +1176,9 @@ deux carrés, \code{\#\#}, etc.
 \gotorbox{Le fichier de script \code{\scriptfilename} reproduit à la
   \autoref{sec:premiers:exemples} contient, aux lignes
   \reflines{fonctions:pratiques}, un long exemple d'amélioration du
-  style et de la présentation du code d'une fonction. Vous y trouverez
-  même un cas de Syndrôme de la plaque à biscuits{\texttrademark}.}
+  style et de la présentation du code d'une fonction, ainsi qu'un
+  exemple de documentation d'une fonction. Vous y trouverez même un
+  cas de Syndrôme de la plaque à biscuits{\texttrademark}.}
 
 
 \section{Exemples}
