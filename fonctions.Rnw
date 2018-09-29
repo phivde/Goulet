@@ -102,8 +102,7 @@ L'expression ci-dessus peut se lire ainsi:
 \end{center}
 
 Nous pouvons ensuite utiliser la fonction \code{square} de manière
-intuitive comme n'importe quelle autre fonction dans R (nous
-reviendrons sur les règles d'appel d'une fonction un peu plus loin).
+intuitive comme n'importe quelle autre fonction dans R.
 <<echo=TRUE>>=
 square(5)
 @
