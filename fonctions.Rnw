@@ -1110,7 +1110,7 @@ juste équilibre.
 \end{itemize}
 
 Dans R, le symbole numéro \code{\#} --- ou carré --- marque le début
-d'un commentaire, et ce, peut importe où le symbole se trouve sur la
+d'un commentaire, et ce, peu importe où le symbole se trouve sur la
 ligne. Il est possible de combiner les \code{\#} pour développer une
 forme de hiérarchie dans les commentaires ou pour délimiter
 différentes sections d'un fichier de script. Pour les fichiers
