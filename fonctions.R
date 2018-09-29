@@ -335,7 +335,11 @@ sqrt <- function(x)
 }
 sqrt(9)
 sqrt(25)
-sqrt(3047)                              #-*- `\labelline{fonctions:controle:fin}`
+sqrt(3047)
+
+## Suppression de la fonction pour éviter qu'elle n'entre en
+## conflit avec celle de R.
+rm("sqrt")                              #-*- `\labelline{fonctions:controle:fin}`
 
 ###
 ### BONNES PRATIQUES DE LA PROGRAMMATION INFORMATIQUE  `\labelline{fonctions:pratiques}`

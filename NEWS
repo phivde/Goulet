@@ -32,6 +32,8 @@
   la solution.
 - Correction d'une référence erronée dans la remarque importante de la
   section 4.3.
+- Suppression de la fonction `sqrt` de l'espace de travail une fois la
+  démonstration terminée dans le code du fichier `fonctions.R`.
 - Suppression des lignes 199-204 du fichier `implementation.R`
   devenues obsolètes avec la révision de 2018.
 - URL de la vidéo «Collaborer au projet» corrigée dans le fichier
