@@ -1078,7 +1078,7 @@ des commentaires sans véritable utilité, mais elle surcharge également
 le code, le rendant de ce fait plus difficile à lire.
 
 Comme bien des choses en ce monde, la meilleure solution se trouve
-dans le juste milieu: commenter ni trop, ni trop peu. Les quelques
+dans le juste milieu: commentez ni trop, ni trop peu. Les quelques
 préceptes suivants, dont certains sont tirés de
 \citet{Kernighan:practice:1999}, devraient vous aider à trouver un
 juste équilibre.
