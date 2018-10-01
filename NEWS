@@ -21,6 +21,9 @@
   section 4.7.3 avec un exemple simple. Le texte vient appuyer ce qui
   se trouvait autrement uniquement illustré dans le code informatique
   du chapitre 4.
+- Le raccourci clavier recommandé pour le symbole d'affectation dans
+  RStudio sur un Mac est maintenant `Option =` afin de ne pas masquer
+  le caractère `|` (encadré dans la section A.4).
 
 ## Autres changements
 
