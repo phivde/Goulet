@@ -585,7 +585,7 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
 ##  rate: autre façon de spécifier l'échelle de la
 ##    distribution;
 ##  scale: paramètre d'échelle de la distribution (strictement
-##    positif);
+##    positif).
 ##
 ##  Valeur
 ##
