@@ -410,7 +410,7 @@ unlist(x)
 
 \gotorbox{La liste est une structure de données très importante en R.
   Prenez le temps de bien étudier les lignes
-  \reflines{donnees:matrice} du fichier de script
+  \reflines{donnees:liste} du fichier de script
   \code{\scriptfilename} reproduit à la
   \autoref{sec:donnees:exemples}.}
 

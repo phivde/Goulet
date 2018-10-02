@@ -42,6 +42,8 @@
   démonstration terminée dans le code du fichier `fonctions.R`.
 - Suppression des lignes 199-204 du fichier `implementation.R`
   devenues obsolètes avec la révision de 2018.
+- Correction des numéros de ligne dans la redirection vers les
+  exemples sur la liste à la fin de la section 7.3.
 - URL de la vidéo «Collaborer au projet» corrigée dans le fichier
   `CONTRIBUTING.md`.
 
