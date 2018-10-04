@@ -1285,6 +1285,7 @@ prod_mat <- function(A, B)
 \end{exercice}
 
 \begin{exercice}[nosol]
+  \label{ex:fonctions:rstudio-tab-width}
   Configurer votre éditeur de texte pour indenter le code R de quatre
   (4) caractères. Dans RStudio, ouvrir le panneau des options
   globales, sélectionner la catégorie \code{Code} et inscrire la
@@ -1293,7 +1294,7 @@ prod_mat <- function(A, B)
   \begin{figure}
     \centering
     \includegraphics{images/rstudio-tab-width}
-    \caption{Configuration de RStudio pour une indentation du code
+    \caption{Réglage de RStudio pour une indentation du code
       de quatre caractères}
     \label{fig:fonctions:rstudio-tab-width}
   \end{figure}

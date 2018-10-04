@@ -215,13 +215,14 @@ sont particulièrement utiles.
     le symbole d'affectation ne fonctionne pas avec le clavier
     canadien-français sur les Mac. Cette combinaison de touches sert
     déjà à insérer le symbole \textbar. C'est en fait un doublon
-    puisque ce symbole est principalement lié à la touche
+    puisque ce symbole est principalement associé à la touche
     {\optkey\,/}.
 
     Il est possible de régler le problème en redéfinissant le
     raccourci clavier associé au symbole d'affectation. Je recommande
-    d'utiliser la combinaison {\optkey\,=}, le caractère lié
-    normalement à cette touche (\code{¬}) n'étant d'aucune utilité dans R.
+    d'utiliser la combinaison {\optkey\,=} puisque le caractère lié
+    normalement à cette touche (\code{¬}) n'est d'aucune utilité dans
+    R.
 
     \begin{enumerate}
     \item Accéder à la fenêtre d'édition des raccourcis clavier via le
@@ -337,22 +338,40 @@ le menu \code{Tools|Global Options...} sous Windows et Linux, et par le
 menu standard \code{RStudio|Preferences} (\code{\cmdkey\,,})
 sous macOS.
 
-Nous recommandons de régler l'option
-\begin{quote}
-  \code{Save workspace to .RData on exit}
-\end{quote}
-à \code{Never} dans les options de configuration générales,
-tel qu'illustré à la \autoref{fig:rstudio:rstudiopreferences}. Avec ce
-réglage, l'espace de travail de R ne sera pas sauvegardé à la
-fermeture de RStudio.
+Je recommande d'effectuer les configurations suivantes.
+\begin{enumerate}
+\item Dans la catégorie des options de configuration générales, régler
+  l'option \code{Save workspace to .RData on exit} à \code{Never}, tel
+  qu'illustré à la \autoref{fig:rstudio:rstudio-on-exit}. Avec ce
+  réglage, l'espace de travail de R ne sera pas sauvegardé à la
+  fermeture de RStudio.
+\item Dans la catégorie \code{Code} et la sous-catégorie
+  \code{Editing}, régler l'option \code{Tab width} à \code{4} afin
+  d'indenter le code de quatre caractères par défaut. (Ce réglage fait
+  aussi l'objet de l'\autoref{ex:fonctions:rstudio-tab-width}.)
+\item Toujours dans la catégorie \code{Code}, mais dans la
+  sous-catégorie \code{Saving}, régler l'option \code{Default text
+    encoding} à \code{UTF-8}, tel qu'illustré à la
+  \autoref{fig:rstudio:rstudio-utf-8}. Les fichiers de script
+  contenant des accents et autres symboles seront ensuite sauvegardés
+  dans un format d'encodage standard sur toutes les plateformes
+  informatiques.
+\end{enumerate}
 
 \begin{figure}
   \centering
-  \includegraphics{images/rstudiopreferences-screenshot}
-  \caption[Réglage suggéré de RStudio]{Réglage suggéré de RStudio
-    (encadré en jaune) faisant en sorte que l'espace de travail de R
-    n'est jamais sauvegardé au moment de quitter l'application}
-  \label{fig:rstudio:rstudiopreferences}
+  \includegraphics{images/rstudio-on-exit}
+  \caption{Réglage de RStudio pour ne pas sauvegarder l'espace
+    de travail de R au moment de quitter l'application}
+  \label{fig:rstudio:rstudio-on-exit}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics{images/rstudio-utf-8}
+  \caption{Réglage de RStudio pour enregistrer les fichiers dans
+    l'encodage UTF-8}
+  \label{fig:rstudio:rstudio-utf-8}
 \end{figure}
 
 

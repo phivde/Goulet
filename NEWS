@@ -19,11 +19,16 @@
   Exemples correspondants dans `premiers.R`.
 - Indications sur la documentation minimale d'une fonction à la
   section 4.7.3 avec un exemple simple. Le texte vient appuyer ce qui
-  se trouvait autrement uniquement illustré dans le code informatique
-  du chapitre 4.
+  se trouvait autrement illustré dans le code informatique du chapitre
+  4.
 - Le raccourci clavier recommandé pour le symbole d'affectation dans
   RStudio sur un Mac est maintenant `Option =` afin de ne pas masquer
   le caractère `|` (encadré dans la section A.4).
+- Section A.6 sur la configuration de RStudio retravaillée pour y
+  regrouper les réglages recommandés: ne pas sauvegarder la session R
+  au moment de quitter (déjà là auparavant); indentation du code de 4
+  caractères (auparavant uniquement mentionné à l'exercice 4.3);
+  sauvegarder les fichiers dans l'encodage UTF-8 (nouveauté).
 
 ## Autres changements
 
@@ -42,6 +47,8 @@
   démonstration terminée dans le code du fichier `fonctions.R`.
 - Suppression des lignes 199-204 du fichier `implementation.R`
   devenues obsolètes avec la révision de 2018.
+- Correction de l'url vers la vidéo sur la fonction order au chapitre
+  6.
 - Correction des numéros de ligne dans la redirection vers les
   exemples sur la liste à la fin de la section 7.3.
 - URL de la vidéo «Collaborer au projet» corrigée dans le fichier
