@@ -467,7 +467,7 @@ apply(outer(1/(1 + i), n, "^"), 1, cumsum)
 \end{exercice}
 
 \begin{exercice}
-  \label{exercice:application:moyennes}
+  \label{ex:application:moyennes}
   Étant donné un vecteur d'observations $\mat{x} = (x_1, \dots, x_n)$
   et un vecteur de poids correspondants $\mat{w} = (w_1, \dots, w_n)$,
   calculer la moyenne pondérée des observations,
@@ -494,7 +494,7 @@ sum(x * w)/sum(w)
 \begin{exercice}
   Nous pouvons généraliser aux matrices et aux tableaux de données la
   définition de moyenne pondérée de
-  l'\autoref{exercice:application:moyennes}.
+  l'\autoref{ex:application:moyennes}.
 
   Dans le cas d'une matrice $n \times p$ d'observations $X_{ij}$ et
   poids $w_{ij}$ correspondant, on définit les moyennes pondérées
