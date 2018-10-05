@@ -1129,7 +1129,7 @@ exemple de documentation pour une fonction simple.
 ##
 ##  Arguments
 ##
-##  x: vecteur de nombres réels,
+##  x: vecteur de nombres réels.
 ##
 ##  Valeur
 ##
