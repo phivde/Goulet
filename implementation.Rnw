@@ -243,7 +243,7 @@ $\rho_0$. De plus, le dictionnaire contient la paire (\code{x}, $10$),
 soit le symbole et la valeur de l'argument de la fonction. La fonction
 \code{square} est donc évaluée dans l'environnement
 \begin{equation*}
-  \rho_1 = \{ x \mapsto 10; \rho_0 \}.
+  \rho_1 = \{ \code{x} \mapsto 10; \rho_0 \}.
 \end{equation*}
 Or, dans cet environnement, la valeur de \code{x} est $10$. C'est
 pourquoi l'expression \verb=x * x= retourne la valeur $100$.
