@@ -61,7 +61,7 @@ différentes notions, sans pour autant sacrifier les détails
 importants. Bref, un juste équilibre entre «algorithmique pour les
 nuls» et un livre plus théorique.
 
-Je vous invite donc à étudier les chapitre suivants de \emph{Essential
+Je vous invite donc à étudier les chapitres suivants de \emph{Essential
 Algorithms}:
 \begin{itemize}
 \item chapitre 6, pages 131--138, 145 (à partir de la section
