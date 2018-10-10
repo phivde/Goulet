@@ -32,6 +32,10 @@
 
 ## Autres changements
 
+- Dans les sections d'exemples, les hyperliens permettant de retourner
+  directement au point où la lecture du chapitre a été interrompue
+  sont maintenant les numéros de ligne concernés. Les symboles de
+  panneaux de signalisation ont donc disparu.  
 - Ajout d'une référence vers la section 10.4 lors de la mention de
   l'opérateur de redirection à la section 1.4.2. Entrée d'index pour
   l'opérateur `|` dans la note de bas de page.
@@ -61,7 +65,7 @@ est maintenant complété.
 
 # 2018.09a (2018-09-03)
 
-Seuls les liens vers des vidéos dans la chaine YouTube ont été mises à
+Seuls les liens vers des vidéos dans la chaine YouTube ont été mis à
 jour.
 
 # 2018.09 (2018-09-02)

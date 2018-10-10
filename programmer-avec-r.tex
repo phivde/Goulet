@@ -33,6 +33,7 @@
   \usepackage{awesomebox}              % boites info, important, etc.
   \usepackage{answers}                 % exercices et solutions
   \usepackage{listings}                % code informatique
+  \usepackage{refcount}                % numéros de ligne en surbrillance
   \usepackage{pgf}                     % transparence pour couverture avant
 
   %%% =============================
@@ -70,6 +71,7 @@
   \definecolor{citation}{rgb}{0,0.5,0}      % citations
   \definecolor{codebg}{named}{LightYellow1} % fond code R
   \definecolor{prob}{named}{orange}         % encadrés «problème»
+  \definecolor{lineno}{named}{gray}         % numéros de lignes
   \definecolor{rouge}{rgb}{0.85,0,0.07} % rouge bandeau identitaire
   \definecolor{or}{rgb}{1,0.8,0}        % or bandeau identitaire
 
@@ -155,28 +157,59 @@
 
   %%% =========================
   %%%  Sections de code source
-  %%% =========================
+  %%%  =========================
+
+  %% Syntaxe de R avec ajouts de quelques mots clés.
   \lstloadlanguages{R}
   \lstdefinelanguage{Renhanced}[]{R}{%
     morekeywords={colMeans,colSums,head,is.na,is.null,mapply,ms,na.rm,%
       nlmin,replicate,row.names,rowMeans,rowSums,sys.time,system.time,%
-      tail,which.max,which.min,letters,LETTERS},
+      tail,which.max,which.min,letters,LETTERS,Trig},
     deletekeywords={c,start},
     alsoletter={.\%},%
     alsoother={:_\$}}
-  \lstset{language=Renhanced,
+
+  %% Mise en forme du code source.
+  %%
+  %% Les numéros de lignes sont des hyperliens vers le point dans le
+  %% document où l'on y fait référence dans une boite \gotorbox (voir
+  %% plus loin).
+  %%
+  %% Pour y parvenir, j'utilise deux étiquettes pour une ligne: une
+  %% basée sur un "nom" utilisé dans la rédaction, et une autre
+  %% générée automatiquement à partir du numéro de chapitre et du
+  %% numéro de ligne.
+  %%
+  %% Solution basée sur https://tex.stackexchange.com/q/191771.
+  \lstset{%
+    language=Renhanced,
     extendedchars=true,
     basicstyle=\small\ttfamily\NoAutoSpacing,
     commentstyle=\color{comments}\slshape,
     keywordstyle=\mdseries,
     showstringspaces=false,
     numbers=left,
-    numberstyle=\color{gray}\tiny\ttfamily,
+    numberstyle={%
+      \color{lineno}\tiny\ttfamily%
+      \ifnum\value{lstnumber}=\getrefnumber{code:\thechapter:\thelstnumber}%
+        \renewcommand*\thelstnumber{\hyperlink{goto:\thechapter:\the\value{lstnumber}}{\bfseries\arabic{lstnumber}}}%
+      \fi},
     firstnumber=\scriptfirstline,
     escapechar=`,
     moredelim=[il]{\#-*-},
     index=[1][keywords],
     indexstyle=\indexcode}
+
+  %% Commandes pour créer les références et liens vers des numéros de
+  %% lignes.
+  \makeatletter
+  \newcommand\labelline[1]{%
+    \def\@currentlabel{\thelstnumber}%
+    \label{lst:#1}\label{code:\thechapter:\the\value{lstnumber}}}
+  \makeatother
+  \newcommand{\reflines}[1]{%
+    \hypertarget{goto:\thechapter:\getrefnumber{lst:#1}}{\ref{lst:#1}}--%
+    \hypertarget{goto:\thechapter:\getrefnumber{lst:#1:fin}}{\ref{lst:#1:fin}}}
 
   %% L'entête des fichiers de script n'est pas affiché dans le
   %% document.
@@ -327,13 +360,6 @@
       \href{#1}{#2~\raisebox{-0.1ex}{\smaller\faExternalLink}}%
     \fi
   }
-
-  %% Commandes pour les références et liens vers des numéros de lignes
-  %% dans le code informatique.
-  \newcommand{\labelline}[1]{%
-    \label{lst:#1}\hfill\hyperlink{goto:#1}{\small\gotorsign}}
-  \newcommand{\reflines}[1]{%
-    \hypertarget{goto:#1}{\ref{lst:#1}}--\hypertarget{goto:#1:fin}{\ref{lst:#1:fin}}}
 
   %% Indications de capsule vidéo
   \newcommand{\capsule}[2]{\href{#1}{#2}\marginpar{%
