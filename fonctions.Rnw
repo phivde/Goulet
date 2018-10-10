@@ -1111,14 +1111,19 @@ juste équilibre.
 
 À moins qu'une rubrique d'aide en bonne et due forme n'accompagne une
 fonction, sa définition devrait toujours être précédée d'un bloc de
-commentaires contenant au minimum: la
-\index{signature}\emph{signature} de la fonction (son nom suivi, entre
-parenthèses, de tous les arguments avec leur valeur par défaut, le cas
-échéant); une courte description de ce que fait la fonction; la liste
-des arguments, de leur signification et des valeurs admissibles; la
-valeur retournée par la fonction. Il s'agit de la structure générale
-des rubriques d'aide de R. La \autoref{fig:fonctions:doc} fournit un
-exemple de documentation pour une fonction simple.
+commentaires contenant au minimum:
+\begin{enumerate}
+\item la \index{signature}\emph{signature} de la fonction (son nom
+  suivi, entre parenthèses, de tous les arguments avec leur valeur par
+  défaut, le cas échéant);
+\item une courte description de ce que fait la fonction;
+\item la liste des arguments, de leur signification et des valeurs
+  admissibles;
+\item la valeur retournée par la fonction.
+\end{enumerate}
+Il s'agit de la structure générale des rubriques d'aide de R. La
+\autoref{fig:fonctions:doc} fournit un exemple de documentation pour
+une fonction simple.
 
 \begin{figure}
 \begin{Verbatim}[frame=single]
