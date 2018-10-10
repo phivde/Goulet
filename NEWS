@@ -36,6 +36,8 @@
   directement au point où la lecture du chapitre a été interrompue
   sont maintenant les numéros de ligne concernés. Les symboles de
   panneaux de signalisation ont donc disparu.  
+- Introduction retravaillée pour mieux expliquer les fonctionnalités
+  interactives du document.
 - Ajout d'une référence vers la section 10.4 lors de la mention de
   l'opérateur de redirection à la section 1.4.2. Entrée d'index pour
   l'opérateur `|` dans la note de bas de page.
