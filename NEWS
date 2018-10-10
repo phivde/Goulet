@@ -23,7 +23,8 @@
   4.
 - Le raccourci clavier recommandé pour le symbole d'affectation dans
   RStudio sur un Mac est maintenant `Option =` afin de ne pas masquer
-  le caractère `|` (encadré dans la section A.4).
+  le caractère `|` (encadré dans la section A.4). La vidéo explicative
+  a été mise à jour, ainsi que le lien qui y mène dans le document.
 - Section A.6 sur la configuration de RStudio retravaillée pour y
   regrouper les réglages recommandés: ne pas sauvegarder la session R
   au moment de quitter (déjà là auparavant); indentation du code de 4
