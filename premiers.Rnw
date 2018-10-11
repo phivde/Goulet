@@ -92,7 +92,7 @@ Les données fondamentales de R sont les suivantes:
 \item nombres complexes: \code{1 + 2i}.
 \end{itemize}
 La grande majorité des langages de programmation offrent les deux
-premiers type de données ci-dessus. Les autres types se révèlent très
+premiers types de données ci-dessus. Les autres types se révèlent très
 utiles pour la programmation mathématique et l'analyse de données.
 Nous reviendrons sur leurs caractéristiques à la
 \autoref{sec:premiers:objets}.
