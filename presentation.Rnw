@@ -383,8 +383,8 @@ d'autres. Voici quelques bons choix.
     \label{fig:presentation:emacs}
   \end{figure}
 
-  Emblème du logiciel libre, Emacs est disponible gratuitement et à
-  l'identique sur toutes les plateformes supportées par R, dont
+  Emblème du logiciel libre, Emacs est disponible gratuitement et est 
+  identique sur toutes les plateformes supportées par R, dont
   Windows, macOS et Linux. Consulter l'\autoref{chap:emacs+ess} pour
   en savoir plus sur GNU~Emacs et apprendre les commandes essentielles
   pour y faire ses premiers pas.
