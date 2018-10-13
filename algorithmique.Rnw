@@ -83,7 +83,7 @@ Quelques remarques pour vous aider dans votre lecture.
 \item Le livre fait ici et là référence au concept de \emph{library}.
   Une bibliothèque (le nom en français) est une collection de
   fonctions ou de sous-programmes que l'on peut utiliser dans nos
-  programmes. Certains langages de programmation sont constitué d'un
+  programmes. Certains langages de programmation sont constitués d'un
   noyau assez restreint auquel on ajoute plusieurs fonctionnalités
   standards (le tri ou la recherche, par exemple) par le biais de
   bibliothèques. C'est en partie le cas de R, mais le système de base
