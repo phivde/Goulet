@@ -622,7 +622,7 @@ dans R ne correspond pas tout à fait aux cas traités ci-dessus.
   celui-ci dans son \index{repertoire@répertoire de travail}répertoire
   de travail (\autoref{sec:presentation:workspace}). Si le fichier se
   trouve dans un autre répertoire, vous devez spécifier dans le nom le
-  \index{chemin d'accès}chemin d'accès complet
+  \index{chemin d'accès}chemin d'accès
   (\autoref{sec:informatique:fs:path}) vers le fichier.}
 
 %% nettoyage
