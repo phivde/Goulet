@@ -340,7 +340,7 @@ possible d'emboîter des listes, d'où le qualificatif de
 
 La liste est la structure de données par excellence pour réunir dans
 un objet plusieurs types d'objets différents. La fonction de base pour
-créer des listes est \Icode{list}:
+créer des listes est \Icode{list}.
 <<echo=TRUE>>=
 (x <- list(size = c(1, 5, 2), user = "Joe", new = TRUE))
 @ %
@@ -360,43 +360,46 @@ existe trois opérateurs d'indiçage: les crochets simples usuels
 \code{[~]}, les crochets doubles \code{[[~]]} et le signe de dollar
 \code{\$}.
 
-Les crochets simples\indexcode{[} fonctionnent avec la liste
-comme avec tout vecteur. Le résultat de l'indiçage avec \code{[~]} est
-une liste. Quand on y pense, c'est le seul résultat logique lorsque
-l'on indice une liste avec un vecteur. Par conséquent, le résultat de
-l'extraction d'un seul élément d'une liste avec les crochets simples
-est non pas l'objet en question, mais bien une liste d'un élément
-contenant l'objet. C'est rarement ce que l'on souhaite obtenir.
+\begin{itemize}
+\item Les crochets simples\indexcode{[} fonctionnent avec la liste
+  comme avec tout vecteur. Le résultat de l'indiçage avec \code{[~]}
+  est une liste. Quand on y pense, c'est le seul résultat logique
+  lorsque l'on indice une liste avec un vecteur. Par conséquent, le
+  résultat de l'extraction d'un seul élément d'une liste avec les
+  crochets simples est non pas l'objet en question, mais bien une
+  liste d'un élément contenant l'objet. C'est rarement ce que l'on
+  souhaite obtenir.
 <<echo=TRUE>>=
 x[1]
 x[-2]
 x[c(1, 3)]
 @
-
-Les crochets doubles\Indexcode{[[} permettent d'extraire un, et
-un seul, élément d'une liste à l'aide d'un entier positif ou d'une
-chaine de caractères. Le résultat est l'objet «sorti» de la liste.
+%
+\item Les crochets doubles\Indexcode{[[} permettent d'extraire un, et
+  un seul, élément d'une liste à l'aide d'un entier positif ou d'une
+  chaine de caractères. Le résultat est l'objet «sorti» de la liste.
 <<echo=TRUE>>=
 x[[1]]
 x[["size"]]
 @
 
-Petite fonctionnalité peu employée, mais élégante des crochets
-doubles: si l'indice est un vecteur d'entiers positifs, R utilisera
-les valeurs de celui-ci pour indicer récursivement la liste. Autrement
-dit, R sélectionnera la composante de la liste correspondant au
-premier élément du vecteur, puis l'élément de la composante
-correspondant au second élément du vecteur, et ainsi de suite.
+  Petite fonctionnalité peu employée, mais élégante des crochets
+  doubles: si l'indice est un vecteur d'entiers positifs, R utilisera
+  les valeurs de celui-ci pour indicer récursivement la liste. Autrement
+  dit, R sélectionnera la composante de la liste correspondant au
+  premier élément du vecteur, puis l'élément de la composante
+  correspondant au second élément du vecteur, et ainsi de suite.
 <<echo=TRUE>>=
 x[[c(1, 2)]]
 @
-
-Finalement, l'autre façon --- la meilleure, en fait --- de
-sélectionner un seul élément d'une liste est par son étiquette avec
-l'opérateur \Icode{\$}.
+%
+\item Finalement, l'autre façon --- la meilleure, en fait --- de
+  sélectionner un seul élément d'une liste est par son étiquette avec
+  l'opérateur \Icode{\$}.
 <<echo=TRUE>>=
 x$size
 @
+\end{itemize}
 
 Mentionnons en terminant la fonction \Icode{unlist} qui convertit une
 liste en un vecteur simple. Elle est surtout utile pour concaténer les
@@ -453,10 +456,10 @@ d'application.
 
 Le \Index{data frame|emph}\emph{data frame} est une structure de
 données de R sur laquelle reposent plusieurs procédures statistiques
---- pensons à la régression linéaire, par exemple. Un \emph{data
-  frame} est un hybride entre la matrice et la liste: c'est un tableau
-rectangulaire de données, mais dont chaque colonne peut être d'un mode
-différent. Pensons, par exemple, à un tableau avec des noms (mode
+comme la régression linéaire. Un \emph{data frame} est un
+hybride entre la matrice et la liste: c'est un tableau rectangulaire
+de données, mais dont chaque colonne peut être d'un mode différent.
+Pensons, par exemple, à un tableau avec des noms (mode
 \code{character}) dans une colonne et des notes (mode \code{numeric})
 dans une autre.
 
@@ -549,11 +552,11 @@ write(t(mat), file = "matrice.data", append = TRUE)
 
 Le plus simple jeu de données à transférer d'un système à un autre est
 un vecteur ou une matrice de données toutes du même mode. Pour ce
-genre d'applications, un fichier en format texte brut dans lequel les
-données sont disposées les unes à la suite des autres, sur une ou
-plusieurs lignes, convient parfaitement. Le fichier peut aussi
-contenir des commentaires, ceux-ci étant normalement délimités par un
-caractère spécial tel que \code{\#}, \code{\%} ou \code{;}\,. La
+genre d'applications, un fichier en format texte brut convient
+parfaitement. Les données y sont disposées les unes à la suite des
+autres sur une ou plusieurs lignes. Le fichier peut aussi contenir
+des commentaires, ceux-ci étant normalement délimités par un caractère
+spécial tel que \code{\#}, \code{\%} ou \code{;}\,. La
 \autoref{fig:donnees:scan} fournit deux exemples d'un tel fichier de
 données.
 
