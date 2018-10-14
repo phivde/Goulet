@@ -62,9 +62,9 @@ exception près, comme nous le verrons --- les
 \capsule{https://youtu.be/6P2cFe3DBfw}{matrices et tableaux}. Dans la
 terminologie de R, une matrice est un tableau rectangulaire de nombres
 à deux dimensions, alors qu'un tableau (\emph{array}) est la
-généralisation à plus de deux dimensions\footnote{%
+généralisation à plus de deux dimensions.\footnote{%
   Il est donc correct de dire qu'une matrice est un tableau à deux
-  dimensions.}. %
+  dimensions.} %
 
 Nous avons établi d'entrée de jeu à la \autoref{sec:premiers:vecteurs}
 qu'en R, tout est un vecteur. C'est aussi vrai pour les matrices et
@@ -78,7 +78,7 @@ de longueur $2$. La présence de cet attribut change implicitement la
 classe de l'objet et, de ce fait, son mode d'affichage (sous forme de
 tableau rectangulaire) et son interaction avec plusieurs opérateurs et
 fonctions, notamment les opérateurs d'indiçage. La fonction de base
-pour créer une matrice est \Icode{matrix}:
+pour créer une matrice est \Icode{matrix}.
 <<echo=TRUE>>=
 matrix(1:6, nrow = 2, ncol = 3)
 matrix(1:6, nrow = 2, ncol = 3, byrow = TRUE)
@@ -88,7 +88,7 @@ Tel que mentionné précédemment, la généralisation d'une matrice à plus
 de deux dimensions est un \Index{tableau}tableau. Le nombre de
 dimensions du tableau est toujours égal à la longueur de l'attribut
 \icode{dim}. La fonction de base pour créer des tableaux est
-\Icode{array}:
+\Icode{array}.
 <<echo=TRUE>>=
 array(1:24, dim = c(3, 4, 2))
 @
