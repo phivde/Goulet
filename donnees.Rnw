@@ -733,7 +733,7 @@ unlink("carburant.csv")
 R peut évidemment produire les types de fichiers mentionnés aux
 sections \ref{sec:donnees:import-export:scan} et
 \ref{sec:donnees:import-export:read.table} pour exporter ses données
-vers d'autres systèmes. Les exemples de cette section permettent
+vers d'autres systèmes. Les exemples de la présente section permettent
 d'ailleurs de recréer les fichiers des figures \ref{fig:donnees:scan}
 et \autoref{fig:donnees:read.table} (sans les commentaires).
 
