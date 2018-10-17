@@ -61,7 +61,7 @@ x * c(2, 3)                # produit par colonne
 ## vecteurs.
 x[1, 2]                    # élément en position (1, 2)
 x[1, -2]                   # 1ère rangée sans 2e colonne
-x[c(1, 3), ]               # 1ère et 3e rangées
+x[c(1, 2), ]               # 1ère et 2e rangées
 x[-1, ]                    # supprimer 1ère rangée
 x[, -2]                    # supprimer 2e colonne
 x[x[, 1] > 2, ]            # lignes avec 1er élément > 2
@@ -69,7 +69,7 @@ x[x[, 1] > 2, ]            # lignes avec 1er élément > 2
 ## Indicer la matrice ou le vecteur sous-jacent est
 ## équivalent. Utiliser l'approche la plus simple selon le
 ## contexte.
-x[1, 3]                    # l'élément en position (1, 3)...
+x[1, 2]                    # l'élément en position (1, 2)...
 x[7]                       # ... est le 7e élément du vecteur
 
 ## Détail additionnel sur l'indiçage des matrices et tableaux:
@@ -80,7 +80,7 @@ x[7]                       # ... est le 7e élément du vecteur
 ## Consulter au besoin la rubrique d'aide de la fonction '['
 ## (ou de 'Extract').
 x[rbind(c(1, 1), c(2, 2))] # éléments x[1, 1] et x[2, 2]
-x[cbind(1:3, 1:3)]         # éléments x[i, i] («diagonale»)
+x[cbind(1:2, 1:2)]         # éléments x[i, i] («diagonale»)
 diag(x)                    # idem et plus explicite
 
 ## Quelques fonctions pour travailler avec les dimensions des
