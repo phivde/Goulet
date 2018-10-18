@@ -26,7 +26,7 @@ dim(x)                     # deux dimensions
 
 ## Les matrices sont remplies par colonne par défaut. L'option
 ## 'byrow' permet de les remplir par ligne, si nécessaire.
-matrix(1:12, nrow = 3, ncol = 4, byrow = TRUE)
+(x <- matrix(1:12, nrow = 3, ncol = 4, byrow = TRUE))
 
 ## Il n'est pas nécessaire de préciser les deux dimensions de
 ## la matrice s'il est possible d'en déduire une à partir de
@@ -42,19 +42,6 @@ matrix(1:12, ncol = 4)
 matrix(1, nrow = 3, ncol = 4)
 matrix(1:3, nrow = 3, ncol = 4)
 matrix(1:4, nrow = 3, ncol = 4, byrow = TRUE)
-
-## Les matrices et les tableaux étant des vecteurs, ils sont
-## soumis aux règles usuelles de l'arithmétique vectorielle.
-## Certains des opérations qui en résultent ne sont pas
-## définies en algèbre linéaire usuelle.
-(x <- matrix(1:4, 2))      # matrice 2 x 2
-(y <- matrix(3:6, 2))      # autre matrice 2 x 2
-5 * x                      # multiplication par une constante
-x + y                      # addition matricielle
-x * y                      # produit *élément par élément*
-x %*% y                    # produit matriciel
-x / y                      # division *élément par élément*
-x * c(2, 3)                # produit par colonne
 
 ## Dans l'indiçage des matrices et tableaux, l'indice de
 ## chaque dimension obéit aux règles usuelles d'indiçage des
@@ -90,6 +77,20 @@ dim(x)[1]                  # idem
 ncol(x)                    # nombre de colonnes
 dim(x)[2]                  # idem
 
+## Les matrices et les tableaux étant des vecteurs, ils sont
+## soumis aux règles usuelles de l'arithmétique vectorielle.
+## Certains des opérations qui en résultent ne sont pas
+## définies en algèbre linéaire usuelle.
+(x <- matrix(1:4, 2))      # matrice 2 x 2
+(y <- matrix(3:6, 2))      # autre matrice 2 x 2
+5 * x                      # multiplication par une constante
+x + y                      # addition matricielle
+x * y                      # produit *élément par élément*
+x %*% y                    # produit matriciel
+x / y                      # division *élément par élément*
+x * c(2, 3)                # produit par colonne
+
+
 ## La fonction 'rbind' ("row bind") permet d'«empiler» des
 ## matrices comptant le même nombre de colonnes.
 ##
@@ -103,6 +104,7 @@ dim(x)[2]                  # idem
 x <- matrix(1:12, 3, 4)    # 'x' est une matrice 3 x 4
 y <- matrix(1:8, 2, 4)     # 'y' est une matrice 2 x 4
 z <- matrix(1:6, 3, 2)     # 'z' est une matrice 3 x 2
+
 rbind(x, 99)               # ajout d'une ligne à 'x'
 rbind(x, y)                # fusion verticale de 'x' et 'y'
 cbind(x, 99)               # ajout d'une colonne à 'x'
