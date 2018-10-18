@@ -26,7 +26,7 @@ dim(x)                     # deux dimensions
 
 ## Les matrices sont remplies par colonne par défaut. L'option
 ## 'byrow' permet de les remplir par ligne, si nécessaire.
-matrix(1:12, nrow = 3, ncol = 4, byrow = TRUE)
+(x <- matrix(1:12, nrow = 3, ncol = 4, byrow = TRUE))
 
 ## Il n'est pas nécessaire de préciser les deux dimensions de
 ## la matrice s'il est possible d'en déduire une à partir de
@@ -43,6 +43,40 @@ matrix(1, nrow = 3, ncol = 4)
 matrix(1:3, nrow = 3, ncol = 4)
 matrix(1:4, nrow = 3, ncol = 4, byrow = TRUE)
 
+## Dans l'indiçage des matrices et tableaux, l'indice de
+## chaque dimension obéit aux règles usuelles d'indiçage des
+## vecteurs.
+x[1, 2]                    # élément en position (1, 2)
+x[1, -2]                   # 1ère rangée sans 2e colonne
+x[c(1, 3), ]               # 1ère et 3e rangées
+x[-1, ]                    # supprimer 1ère rangée
+x[, -2]                    # supprimer 2e colonne
+x[x[, 1] > 2, ]            # lignes avec 1er élément > 2
+
+## Indicer la matrice ou le vecteur sous-jacent est
+## équivalent. Utiliser l'approche la plus simple selon le
+## contexte.
+x[1, 3]                    # l'élément en position (1, 3)...
+x[7]                       # ... est le 7e élément du vecteur
+
+## Détail additionnel sur l'indiçage des matrices et tableaux:
+## il est aussi possible de les indicer avec une matrice.
+## Chaque ligne de la matrice d'indiçage fournit alors la
+## position d'un élément à sélectionner.
+##
+## Consulter au besoin la rubrique d'aide de la fonction '['
+## (ou de 'Extract').
+x[rbind(c(1, 1), c(2, 2))] # éléments x[1, 1] et x[2, 2]
+x[cbind(1:3, 1:3)]         # éléments x[i, i] («diagonale»)
+diag(x)                    # idem et plus explicite
+
+## Quelques fonctions pour travailler avec les dimensions des
+## matrices.
+nrow(x)                    # nombre de lignes
+dim(x)[1]                  # idem
+ncol(x)                    # nombre de colonnes
+dim(x)[2]                  # idem
+
 ## Les matrices et les tableaux étant des vecteurs, ils sont
 ## soumis aux règles usuelles de l'arithmétique vectorielle.
 ## Certains des opérations qui en résultent ne sont pas
@@ -56,39 +90,6 @@ x %*% y                    # produit matriciel
 x / y                      # division *élément par élément*
 x * c(2, 3)                # produit par colonne
 
-## Dans l'indiçage des matrices et tableaux, l'indice de
-## chaque dimension obéit aux règles usuelles d'indiçage des
-## vecteurs.
-x[1, 2]                    # élément en position (1, 2)
-x[1, -2]                   # 1ère rangée sans 2e colonne
-x[c(1, 2), ]               # 1ère et 2e rangées
-x[-1, ]                    # supprimer 1ère rangée
-x[, -2]                    # supprimer 2e colonne
-x[x[, 1] > 2, ]            # lignes avec 1er élément > 2
-
-## Indicer la matrice ou le vecteur sous-jacent est
-## équivalent. Utiliser l'approche la plus simple selon le
-## contexte.
-x[1, 2]                    # l'élément en position (1, 2)...
-x[7]                       # ... est le 7e élément du vecteur
-
-## Détail additionnel sur l'indiçage des matrices et tableaux:
-## il est aussi possible de les indicer avec une matrice.
-## Chaque ligne de la matrice d'indiçage fournit alors la
-## position d'un élément à sélectionner.
-##
-## Consulter au besoin la rubrique d'aide de la fonction '['
-## (ou de 'Extract').
-x[rbind(c(1, 1), c(2, 2))] # éléments x[1, 1] et x[2, 2]
-x[cbind(1:2, 1:2)]         # éléments x[i, i] («diagonale»)
-diag(x)                    # idem et plus explicite
-
-## Quelques fonctions pour travailler avec les dimensions des
-## matrices.
-nrow(x)                    # nombre de lignes
-dim(x)[1]                  # idem
-ncol(x)                    # nombre de colonnes
-dim(x)[2]                  # idem
 
 ## La fonction 'rbind' ("row bind") permet d'«empiler» des
 ## matrices comptant le même nombre de colonnes.
@@ -103,6 +104,7 @@ dim(x)[2]                  # idem
 x <- matrix(1:12, 3, 4)    # 'x' est une matrice 3 x 4
 y <- matrix(1:8, 2, 4)     # 'y' est une matrice 2 x 4
 z <- matrix(1:6, 3, 2)     # 'z' est une matrice 3 x 2
+
 rbind(x, 99)               # ajout d'une ligne à 'x'
 rbind(x, y)                # fusion verticale de 'x' et 'y'
 cbind(x, 99)               # ajout d'une colonne à 'x'
