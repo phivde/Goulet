@@ -172,10 +172,10 @@ f()
 @
 
   Enfin, l'argument spécial `\Icode{...}' peut contenir un nombre
-  arbitraire d'arguments. La fonction y ayant recours se trouve donc à
+  arbitraire d'éléments. La fonction y ayant recours se trouve donc à
   accepter un nombre variable d'arguments. On utilise généralement
   `\code{...}' pour passer des arguments tels quels à une autre fonction
-  qui, elle, saura quoi faire de ces arguments. Vous trouverez un
+  qui, elle, saura quoi faire de ceux-ci. Vous trouverez un
   meilleur exemple à la \autoref{sec:fonctions:exemples} que ce que nous
   pourrions faire ici en quelques lignes.
 
@@ -293,7 +293,7 @@ if (\meta{condition 1})
     \meta{conséquence 1}
 else if (\meta{condition 2})
     \meta{conséquence 2}
-else
+velse
     \meta{alternative}
 \end{Verbatim}
 \end{Schunk}
