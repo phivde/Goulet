@@ -345,7 +345,7 @@ cat("# commentaire", x, file = "vecteur.data", sep = "\n")
 write(x, file = "matrice.data", ncolumns = 4)
 
 ## Pour insérer des commentaires au début du fichier créé avec
-## 'write', le plus consiste à procéder en deux étapes: on
+## 'write', le plus simple consiste à procéder en deux étapes: on
 ## crée d'abord un fichier ne contenant que le commentaire (et
 ## le retour à la ligne) avec 'cat', puis on y ajoute les
 ## données avec 'write' en spécifiant 'append = TRUE' pour
