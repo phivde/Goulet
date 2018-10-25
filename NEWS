@@ -6,6 +6,10 @@
 
 ## Nouveautés
 
+- Mention à la section A.3 que l'utilisation d'un projet dans RStudio
+  permet d'effectuer la gestion des versions avec Git directement
+  depuis l'éditeur.
+
 ## Autres changements
 
 - À la section 7.3, présentation des méthodes d'indiçage d'une liste
