@@ -521,7 +521,7 @@ factorial <- function(n)
   efficaces en R.}
 
 
-\section{Syndrôme de la plaque à biscuits}
+\section{Syndrome de la plaque à biscuits}
 \label{sec:fonctions:syndrome}
 
 La suite de Fibonacci est une suite de nombres entiers très connue.
@@ -619,9 +619,9 @@ vous changez le premier biscuit de plat et vous y rangez aussi le
 second biscuit. Arrivés au troisième biscuit, le petit manège
 recommence, et ainsi de suite jusqu'à ce que le plateau de biscuits
 soit épuisé. C'est ce que je nomme, non sans un sourire en coin, le
-Syndrôme de la plaque à
-biscuits{\texttrademark}\index{syndrome@Syndrôme de la plaque à
-  biscuits}\index{biscuits|see{Syndrôme de la plaque à biscuits}}.
+Syndrome de la plaque à
+biscuits{\texttrademark}\index{syndrome@Syndrome de la plaque à
+  biscuits}\index{biscuits|see{Syndrome de la plaque à biscuits}}.
 
 Le manège décrit ci-dessus se reproduit à l'identique dans la mémoire
 de l'ordinateur, l'odeur des biscuits chauds en moins. En effet,
@@ -635,7 +635,7 @@ Quand nous savons quelle sera la longueur finale d'un objet, comme
 c'est le cas dans cet exemple, il vaut mieux créer un contenant vide
 de la bonne longueur et le remplir par la suite. La fonction
 \code{fibonacci} de la \autoref{fig:application:fibonacci} évite le
-Syndrôme.
+Syndrome.
 
 \begin{figure}
 \begin{Verbatim}[frame=single]
@@ -653,7 +653,7 @@ fibonacci <- function(nterm)
 }
 \end{Verbatim}
   \caption{Fonction pour calculer les $n$ premiers termes de la suite
-    de Fibonacci ne souffrant pas du Syndrôme de la plaque à
+    de Fibonacci ne souffrant pas du Syndrome de la plaque à
     biscuits{\texttrademark}}
   \label{fig:application:fibonacci}
 \end{figure}
@@ -1183,7 +1183,7 @@ deux carrés, \code{\#\#}, etc.
   \reflines{fonctions:pratiques}, un long exemple d'amélioration du
   style et de la présentation du code d'une fonction, ainsi qu'un
   exemple de documentation d'une fonction. Vous y trouverez même un
-  cas de Syndrôme de la plaque à biscuits{\texttrademark}.}
+  cas de Syndrome de la plaque à biscuits{\texttrademark}.}
 
 
 \section{Exemples}

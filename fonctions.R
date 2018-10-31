@@ -522,7 +522,7 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
 ## fonctions internes...
 ##
 ## Si vous y regardez de très près, vous constaterez que la
-## fonction ci-dessus souffre du Syndrôme de la plaque à
+## fonction ci-dessus souffre du Syndrome de la plaque à
 ## biscuits(TM).
 ##
 ## En effet, les valeurs acceptées dans la simulation sont
