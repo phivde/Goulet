@@ -13,21 +13,42 @@
 %%% Page de titre
 %%%
 
+%% Normes de présentation visuelle 2018
+%%
+%% - grille de 8 unités de haut
+%% - 1 mesure = 1/8 d'unité
+%% - bande identitaire de 1 mesure placée au bas de la 7e unité
+%% - logo haut de 4 mesures avec blancs de deux mesures en haut et
+%%   en bas
+%% - blanc équivalent à la largeur du blason à droite du logo
+%% - bande or de la largeur du logo + blanc à droite
+%%
+%% Dimensions du logo UL
+%%
+%% hauteur: 128
+%% largeur totale: 310
+%% largeur blason: 100
+%% valeur clé: (310 + 100)/128 = 3.2031125
+%%
+%% Dimension de l'image
+%%
+%% hauteur: 55 mesures - 1pt (filet) = 54.9191919 mesures
+%% largeur: 8.5in
+%% ratio largeur/hauteur: 8.5/9.4392
+
 \begingroup
-\TPGrid{3}{36}
+\TPGrid{8.5}{64}
 \textblockorigin{0mm}{0mm}
 \setlength{\parindent}{0mm}
-\setlength{\imageheight}{29\TPVertModule}
-\setlength{\banderougewidth}{2\TPHorizModule}
+\setlength{\imageheight}{54.9191919\TPVertModule}
+\setlength{\logoheight}{4\TPVertModule}
+\setlength{\bandeorwidth}{3.203125\logoheight}
+\setlength{\banderougewidth}{\paperwidth}
+\addtolength{\banderougewidth}{-\bandeorwidth}
+\setlength{\bandeorheight}{\TPVertModule}
 \setlength{\banderougeheight}{\TPVertModule}
-\setlength{\bandeorwidth}{\TPHorizModule}
-\setlength{\bandeorheight}{\banderougeheight}
-\setlength{\logoheight}{2.5\TPVertModule}
-\setlength{\gapwidth}{1.5pt}
-\addtolength{\bandeorwidth}{-\gapwidth}
-\addtolength{\imageheight}{-\gapwidth}
-\setlength{\fboxrule}{3pt}
-\setlength{\fboxsep}{0pt}
+\setlength{\textwidth}{\paperwidth}
+\addtolength{\textwidth}{-2\TPHorizModule}
 
 \def\titlefmt{%
   \sffamily\bfseries\fontsize{52}{52}\selectfont\thetitle}
@@ -42,15 +63,13 @@
   Édition {\fullcaps\year}.\month}
 
 %% bandeau identitaire
-\begin{textblock*}{\paperwidth}[0,1](0mm,30\TPVertModule)
+\begin{textblock*}{\paperwidth}[0,1](0mm,56\TPVertModule)
   \textcolor{rouge}{\rule{\banderougewidth}{\banderougeheight}}% % bande rouge
-  \rule{\gapwidth}{0pt}%                                         % filet
   \textcolor{or}{\rule{\bandeorwidth}{\bandeorheight}}           % bande or
 \end{textblock*}
 
 %% logo UL
-\begin{textblock*}{\TPHorizModule}(2\TPHorizModule,31\TPVertModule)
-  \rule{\gapwidth}{0pt}%                                         % filet
+\begin{textblock*}{\bandeorwidth}(\banderougewidth,58\TPVertModule)
   \includegraphics[height=\logoheight,%
                    keepaspectratio=true]{images/ul_p}
 \end{textblock*}
@@ -59,16 +78,16 @@
 \begin{textblock*}{\paperwidth}(0mm,0mm)
   \includegraphics[height=\imageheight,%
                    width=\paperwidth,%
-                   trim=555 185 251 0,clip]{images/Xerus_inauris_1}
+                   trim=535 0 196 0,clip]{images/Xerus_inauris_1}
 \end{textblock*}
 
 %% titre
-\begin{textblock*}{\paperwidth}(0.35\TPHorizModule,3.7\TPVertModule)
+\begin{textblock*}{\textwidth}(\TPHorizModule,6\TPVertModule)
   \textcolor{black!10}{\titlefmt}
 \end{textblock*}
 
 %% auteur
-\begin{textblock*}{\paperwidth}(0.35\TPHorizModule,7.2\TPVertModule)
+\begin{textblock*}{\textwidth}(\TPHorizModule,11.5\TPVertModule)
   \textcolor{black!10}{\authorfmt}
 \end{textblock*}
 
@@ -79,22 +98,22 @@
 %%%
 
 %% titre
-\begin{textblock*}{\paperwidth}(0.35\TPHorizModule,3.7\TPVertModule)
+\begin{textblock*}{\textwidth}(\TPHorizModule,6\TPVertModule)
   \titlefmt
 \end{textblock*}
 
 %% auteur
-\begin{textblock*}{2\TPHorizModule}(0.35\TPHorizModule,7.2\TPVertModule)
+\begin{textblock*}{\textwidth}(\TPHorizModule,11.5\TPVertModule)
   \authorfmt
 \end{textblock*}
 
 %% affiliation
-\begin{textblock*}{2\TPHorizModule}(0.35\TPHorizModule,9.0\TPVertModule)
+\begin{textblock*}{\textwidth}(\TPHorizModule,15.5\TPVertModule)
   \affiliation
 \end{textblock*}
 
 %% édition
-\begin{textblock*}{1.7\TPHorizModule}(0.35\TPHorizModule,31\TPVertModule)
+\begin{textblock*}{\textwidth}(\TPHorizModule,58\TPVertModule)
   \edition
 \end{textblock*}
 \endgroup
