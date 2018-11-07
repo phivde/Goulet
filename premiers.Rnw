@@ -855,7 +855,7 @@ passées.
   reproduit à la \autoref{sec:premiers:exemples}.}
 
 
-\section{Quelques fonctions internes utiles}
+\section{Fonctions internes utiles}
 \label{sec:premiers:internes}
 
 Cette section présente quelques fonctions internes souvent utilisées
