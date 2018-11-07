@@ -393,7 +393,7 @@ ensuite les éléments capturés dans l'ordre souhaité avec des barres
 obliques \code{/} entre les éléments de dates. Comme le symbole
 \code{/} est utilisé dans la chaine de sortie, il faut utiliser un
 autre symbole pour séparer les champs de la commande \code{sed}. J'ai
-utilisé le symbole \code{~} ici.
+utilisé le symbole «\verb|~|» ici.
 \begin{Schunk}
 \begin{Verbatim}
 $ sed -E 's~(19|20)([0-9]{2})-([0-9]{2})-([0-9]{2})(.*)~'\
@@ -401,23 +401,21 @@ $ sed -E 's~(19|20)([0-9]{2})-([0-9]{2})-([0-9]{2})(.*)~'\
 \end{Verbatim}
 \end{Schunk}
 
-Amusons-nous maintenant avec le fichier \code{README.md} qui contient,
-regroupées à la fin du fichier, les notes de mise à jour des différentes
-versions du document. Les deux commandes suivantes dressent la liste
-des numéros de versions avec les variantes de base et étendue
-des expressions régulières.
+Amusons-nous maintenant avec le fichier \code{NEWS} qui contient
+l'historique des versions du document. La commande suivante dresse la
+liste des numéros de versions.
 \begin{Schunk}
 \begin{Verbatim}
-$ grep '^### [[:digit:]]' README.md
-$ grep -E '^#{3} [[:digit:]]' README.md
+$ grep '^# [[:digit:]]' NEWS
+$ grep -E '^# [[:digit:]]' NEWS
 \end{Verbatim}
 \end{Schunk}
 
 Terminons avec un exemple plus avancé. Nous souhaitons extraire du
-fichier \code{NEWS} contenant l'historique des versions du document
-les notes de mise à jour de la plus récente version. Si vous examinez
-le fichier, vous constaterez que les notes de mise à jour relatives à
-une version donnée débutent toujours à une ligne marqué par %
+fichier \code{NEWS} les notes de mise à jour de la plus récente
+version. Si vous examinez le fichier, vous constaterez que les notes
+de mise à jour relatives à une version donnée débutent toujours à une
+ligne marqué par %
 \verb*|# |. %
 Le meilleur outil pour effectuer des opérations sur plusieurs lignes
 d'un fichier est \icode{awk}, tel que mentionné à la
