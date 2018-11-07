@@ -6,6 +6,9 @@
 
 ## Nouveautés
 
+- Nouvelle section 11.3 sur les fonctions internes utiles de R pour la
+  recherche et remplacement de texte à l'aide d'expressions
+  régulières. 
 - Mention à la section A.3 que l'utilisation d'un projet dans RStudio
   permet d'effectuer la gestion des versions avec Git directement
   depuis l'éditeur.
@@ -14,8 +17,13 @@
 
 - Section 1.1.1: réduction de l'indentation de la seconde expression
   dans l'algorithme de la fonction Puissance.
+- Mot «Quelques» supprimé du titre de la section 3.6 afin
+  d'uniformiser le titre des sections de fonctions internes utiles
+  dans le document.
 - À la section 7.3, présentation des méthodes d'indiçage d'une liste
   sous forme de... liste à puces.
+- Correction de coquilles dans l'énoncé et dans la solution de
+  l'exercice 11.5.
 - «Syndrome» s'écrit sans accent circonflexe, contrairement à
   «symptôme». Je me suis fait prendre.
 - Utilisation des nouvelles normes de présentation visuelle de

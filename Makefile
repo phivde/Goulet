@@ -49,7 +49,6 @@ TEXFILES = \
 	algorithmique.tex \
 	paquetages.tex \
 	cli.tex \
-	texte.tex \
 	git.tex \
 	rstudio.tex \
 	emacs+ess.tex \

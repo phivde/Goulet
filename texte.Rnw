@@ -12,6 +12,10 @@
 \chapter{Analyse et contrôle de texte}
 \label{chap:texte}
 
+<<echo=FALSE>>=
+options(width=50)
+@
+
 \begin{objectifs}
 \item Déterminer si une chaine de caractères correspond ou non à une
   expression régulière donnée.
@@ -21,7 +25,7 @@
   communes à l'aide de \code{grep}.
 \item Rechercher et remplacer des chaines de caractères ayant des
   propriétés communes à l'aide de \code{sed}.
-\item Effectuer les opérations précédentes sur des chaînes de
+\item Effectuer les opérations précédentes sur des chaines de
   caractères divisées en champs logiques avec \code{awk}.
 \item Effectuer les opérations de recherche et de remplacement de
   texte à l'aide d'expressions régulières avec les divers outils de R.
@@ -157,7 +161,7 @@ Je vous invite donc à étudier les chapitres suivants du guide
 \item
   \link{https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/RegularExpressionsUnfettered/RegularExpressionsUnfettered.html}{\emph{Regular
       Expressions Unfettered}} jusqu'à la section \emph{Using
-    Modifiers}, inclusivement.
+    Modifiers}, inclusivement;
 \item
   \link{https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/Howawk-ward/Howawk-ward.html}{\emph{How
       AWK-ward}} jusqu'à la section \emph{Changing the Record and
@@ -167,6 +171,66 @@ Revenez ensuite ici pour des exemples additionnels et des exercices.
 
 \warningbox{Vous pouvez ignorer toutes les notions relatives à Perl
   exposées dans \emph{Shell Scripting Primer}.}
+
+
+\section{Fonctions internes utiles}
+\label{sec:texte:internes}
+
+Cette section présente quelques unes seulement des fonctions internes
+qu'offre R pour rechercher et remplacer du texte à l'aide
+d'expressions régulières. Consultez la rubrique d'aide (commune) de
+n'importe laquelle de celles-ci pour connaitre l'ensemble des
+fonctions disponibles et les détails concernant leur fonctionnement.
+Vous trouverez également dans la rubrique d'aide de nombreux exemples
+d'utilisation additionnels.
+
+Les exemples de cette section utilisent le vecteur \icode{state.name}
+fourni avec R et qui contient les noms des cinquante états des
+États-Unis.
+<<echo=FALSE>>=
+op <- options(width=55)                 # trois colonnes
+@
+<<echo=TRUE>>=
+state.name
+@
+<<echo=FALSE>>=
+options(op)                             # rétablir défaut
+@
+
+\warningbox{Rappelons qu'en R un vecteur de mode \icode{character} peut
+  contenir plusieurs chaines de caractères. Les fonctions ci-dessous
+  effectuent leur traitement sur chacune des chaines d'un vecteur.}
+
+\begin{ttscript}{regexpr}
+\item[\code{grep}] \Index{grep@\code{grep} (R)} recherche d'une
+  expression régulière dans un vecteur de chaines de caractères
+<<echo=TRUE>>=
+grep("na$", state.name)
+grep("na$", state.name, value = TRUE)
+@
+\item[\Icode{regexpr}] comme \index{grep@\code{grep} (R)}grep, mais
+  avec des informations additionnelles sur la position et la longueur
+  des appariements dans les résultats
+<<echo=TRUE>>=
+regexpr("na$", state.name)
+@
+\item[\Icode{sub}] recherche une expression régulière dans un vecteur
+  de chaines de caractères et remplace uniquement la première
+  occurence dans chaque chaine par une autre chaine
+<<echo=TRUE>>=
+sub("i", "*", state.name)
+@
+\item[\Icode{gsub}] comme \icode{sub}, mais remplace toutes les
+  occurences dans chaque chaine par une autre chaine
+<<echo=TRUE>>=
+gsub("i", "*", state.name)
+@
+\end{ttscript}
+
+\tipbox{Plusieurs langages de programmation contiennent des
+  utilitaires \code{grep}, \code{sub} et \code{gsub}. Par exemple,
+  dans \icode{awk} des fonctions \code{sub} et \code{gsub} permettent
+  d'effectuer des remplacements à l'intérieur des champs.}
 
 
 \section{Exemples additionnels}
@@ -633,7 +697,7 @@ $ sed 's/\./,/' 100metres.data > 100metres-dec.data
 
 \begin{exercice}
   \begin{enumerate}
-  \item Extraire du fichier \code{100metres.data} informations des
+  \item Extraire du fichier \code{100metres.data} les informations des
     temps réalisés au mois d'août.
   \item Extraire les informations des temps de moins de 10~secondes.
   \item Extraire les lignes du fichier satisfaisant les deux
@@ -643,7 +707,8 @@ $ sed 's/\./,/' 100metres.data > 100metres-dec.data
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-    \item C'est un travail pour \code{grep}. La solution la plus serait:
+    \item C'est un travail pour \code{grep}. La solution la plus
+      simple serait:
       \begin{Schunk}
 \begin{Verbatim}
 $ grep '-08-' 100metres.data
@@ -783,7 +848,7 @@ $ sed -E \
 \Closesolutionfile{solutions}
 
 %%% Local Variables:
-%%% mode: latex
+%%% mode: noweb
 %%% TeX-engine: xetex
 %%% TeX-master: "programmer-avec-r"
 %%% coding: utf-8
