@@ -411,11 +411,11 @@ $ grep -E '^# [[:digit:]]' NEWS
 \end{Verbatim}
 \end{Schunk}
 
-Terminons avec un exemple plus avancé. Nous souhaitons extraire du
-fichier \code{NEWS} les notes de mise à jour de la plus récente
-version. Si vous examinez le fichier, vous constaterez que les notes
-de mise à jour relatives à une version donnée débutent toujours à une
-ligne marqué par %
+Un dernier exemple plus avancé. Nous souhaitons extraire du fichier
+\code{NEWS} les notes de mise à jour de la plus récente version. Si
+vous examinez le fichier, vous constaterez que les notes de mise à
+jour relatives à une version donnée débutent toujours à une ligne
+marqué par %
 \verb*|# |. %
 Le meilleur outil pour effectuer des opérations sur plusieurs lignes
 d'un fichier est \icode{awk}, tel que mentionné à la
