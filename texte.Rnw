@@ -795,11 +795,11 @@ $ sed -E 's/( |^)f\((.*), (.*)\)/fun(\3, \2)/' \
   \item Déterminer les positions, dans l'ordre alphabétique, des États
     dont le nom comporte deux «s» de suite.
   \item Extraire les États dont le nom comporte au moins trois fois la
-    lettre «s», qu'elles sont successives ou non.
+    lettre «s», qu'elles soient successives ou non.
   \item Extraire les États dont le nom comporte un double «s» parmi
-    les quatre premiers caractères, abréger leur nom après ce double
-    «s» et faire suivre d'un point. Par exemple: «Massachusetts»
-    devient «Mass.».
+    les quatre premiers caractères, puis abréger leur nom après ce
+    double «s» et faire suivre d'un point. Par exemple:
+    «Massachusetts» devient «Mass.».
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
