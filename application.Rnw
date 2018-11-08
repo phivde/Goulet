@@ -262,7 +262,7 @@ lapply(x, sort)
 Sœur siamoise de \code{lapply}, la fonction \Icode{sapply} retourne,
 lorsque c'est possible, son résultat sous forme de vecteur ou de
 matrice. Le résultat est donc \emph{simplifié} par rapport à celui de
-\code{lapply}, d'où le nom de la fonction. La syntaxe en change pas:
+\code{lapply}, d'où le nom de la fonction. La syntaxe ne change pas:
 \begin{Schunk}
 \begin{Verbatim}
 sapply(X, FUN, ...)
