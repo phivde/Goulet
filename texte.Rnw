@@ -701,8 +701,9 @@ $ sed 's/\./,/' 100metres.data > 100metres-dec.data
   \item Extraire les informations des temps de moins de 10~secondes.
   \item Extraire les lignes du fichier satisfaisant les deux
     conditions précédentes. Vous pouvez avoir recours à l'opérateur de
-    redirection \verb=|= (\autoref{sec:cli:flux}) pour
-    combiner les commandes des parties a) et b).
+    redirection \index{{"|}@\code{\textbar} (Bash)}%
+    «\code{\textbar}» (\autoref{sec:cli:flux}) pour combiner les
+    commandes des parties a) et b).
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
