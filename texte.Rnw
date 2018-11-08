@@ -788,16 +788,6 @@ $ sed -E 's/( |^)f\((.*), (.*)\)/fun(\3, \2)/' \
 \end{exercice}
 
 \begin{exercice}
-  Déterminer si la commande \code{print} est nécessaire ou non dans la
-  toute dernière commande \icode{awk} de la
-  \autoref{sec:texte:exemples}.
-  \begin{sol}
-    La commande \code{print} n'est pas nécessaire puisqu'il s'agit de
-    l'action implicite dans \code{awk}.
-  \end{sol}
-\end{exercice}
-
-\begin{exercice}
   Dans le code source du présent document\footnote{%
     Disponible en clonant avec Git le projet
     \url{https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-develop.git}.}, %
