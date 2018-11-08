@@ -185,8 +185,7 @@ Vous trouverez également dans la rubrique d'aide de nombreux exemples
 d'utilisation additionnels.
 
 Les exemples de cette section utilisent le vecteur \icode{state.name}
-fourni avec R et qui contient les noms des cinquante états des
-États-Unis.
+fourni avec R et qui contient les noms des cinquante États américains.
 <<echo=FALSE>>=
 op <- options(width=55)                 # trois colonnes
 @
@@ -545,6 +544,7 @@ $ awk '(state == 0) && /^# / { state = 1; next } \
       \item \verb~is.?~
       \end{multicols}
     \end{enumerate}
+    \pagebreak[4]
   \item \verb~/[a-zA-Z]*[^,]=/~
     \begin{enumerate}[1)]
       \begin{multicols}{3}
@@ -788,48 +788,48 @@ $ sed -E 's/( |^)f\((.*), (.*)\)/fun(\3, \2)/' \
 \end{exercice}
 
 \begin{exercice}
-  Dans le code source du présent document\footnote{%
-    Disponible en clonant avec Git le projet
-    \url{https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-develop.git}.}, %
-  le fichier \code{docs/index.md} contient une ligne de ce type
-  (affichée sur trois lignes ici pour des raisons de contraintes
-  horizontales):
-  \begin{Schunk}
-\begin{Verbatim}
-2017.11-2 ([notes de mise à jour]
-  ({{ site.github.repository_url }}
-  /releases/tag/v2017.11-2/))
-\end{Verbatim}
-  \end{Schunk}
-  Le numéro de version du document apparait donc deux fois sur la
-  ligne. Ce numéro de version est composé ainsi: année de publication;
-  un point; mois de publication; une portion optionnelle composée d'un
-  tiret, de un ou plusieurs chiffres et possiblement d'une lettre.
-  Autrement dit, les chaines de caractères suivantes constituent
-  toutes des numéros de versions valides: «2017.11», «2017.11-2»,
-  «2017.11-2a», «2017.11-42k».
-
-  Écrire une commande \code{sed} permettant de remplacer le numéro de
-  version qui se trouverait actuellement dans le fichier
-  \code{index.md}, quel qu'il fut, par le numéro de version
-  2017.12-1a.
+  Résoudre le présent exercice dans R en utilisant le vecteur interne
+  de données \icode{state.name}.
+  \begin{enumerate}
+  \item Déterminer les positions, dans l'ordre alphabétique, des États
+    dont le nom comporte deux «s» de suite.
+  \item Extraire les États dont le nom comporte au moins trois fois la
+    lettre «s», qu'elles sont successives ou non.
+  \item Extraire les États dont le nom comporte un double «s» parmi
+    les quatre premiers caractères, abréger leur nom après ce double
+    «s» et faire suivre d'un point. Par exemple: «Massachusetts»
+    devient «Mass.».
+  \end{enumerate}
   \begin{sol}
-    Invoquez \code{sed} avec l'option \code{-E} dans le cas présent
-    pour utiliser les expressions régulières «étendues» ou modernes
-    (l'opérateur \verb=?= n'existe pas dans la version de \code{sed}
-    qui utilise les expressions de base sous macOS). À noter dans la
-    réponse ci-dessous: l'expression régulière nécessaire et la
-    présence de la commande \code{g} pour remplacer toutes les
-    correspondances sur la ligne.
-    \begin{Schunk}
-\begin{Verbatim}
-$ sed -E \
-  's/[0-9]{4}\.[0-9]{2}(-[0-9]+[a-z]*)?/2017.12-1a/g' \
-  index.md
-\end{Verbatim}
-    \end{Schunk}
-    Le fichier \code{docs/Makefile} du projet contient une mise en
-    œuvre avec \code{awk} équivalente, mais plus robuste.
+    \begin{enumerate}
+    \item On utilise la fonction \icode{grep}. L'expression régulière
+      est très simple dans le cas présent. Avec l'argument
+      \code{value} à \code{FALSE} (la valeur par défaut), la fonction
+      retourne les positions dans le vecteur des chaines de caractères
+      qui correspondent à l'expression régulière. Comme le vecteur de
+      noms est trié, il s'agit des valeurs demandées.
+<<echo=TRUE,eval=FALSE>>=
+grep("ss", state.name)
+@
+    \item C'est toujours un travail pour \icode{grep}, mais
+      l'expression régulière est cette fois un peu plus complexe. Deux
+      solutions sont proposées ci-dessous. Il faut utiliser l'argument
+      \code{value = TRUE} pour obtenir les noms des États, et non
+      seulement leurs positions dans \code{state.name}.
+<<echo=TRUE,eval=FALSE>>=
+grep("(.*s){3,}", state.name, value = TRUE)
+grep(".*s.*s.*s", state.name, value = TRUE)
+@
+    \item Nous devons extraire les États avec \icode{grep}, puis
+      utiliser \icode{sub} pour remplacer les caractères après le
+      quatrième par un point. Ceci requiert de sauvegarder les
+      caractères jusqu'aux deux «s» successifs pour les réutiliser
+      dans la chaine de remplacement.
+<<echo=TRUE,eval=FALSE>>=
+sub("(^.{0,2}ss).*", "\\1.",
+    grep("(^.{0,2}ss)", state.name, value = TRUE))
+@
+    \end{enumerate}
   \end{sol}
 \end{exercice}
 
