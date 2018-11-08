@@ -128,6 +128,14 @@ parties suivantes de \emph{Pro Git}:
 \item chapitre 3, sections 3.1, 3.2 et 3.3.
 \end{itemize}
 
+\notebox{Hormis l'adaptation à la mise en page du présent document, la
+  conversion des chapitres en sections et des modifications mineures
+  visant à corriger les dépassements de texte dans la marge, je n'ai
+  apporté aucun changement au texte de \emph{Pro Git}. Les renvois
+  vers les sections du livre qui ne sont pas reproduites ici sont
+  remplacés par des liens vers la
+  \link{https://git-scm.com/book/fr/v2}{version en ligne}.}
+
 \begin{figure}[t]
   \begin{emphbox}{\mdseries Configuration de l'éditeur de texte pour
       les messages de Git}
@@ -169,23 +177,12 @@ $ git config --global core.editor open
       can I set up an editor to work with Git on Windows?},
     \link{https://stackoverflow.com/questions/3539594/change-the-default-editor-for-files-opened-in-the-terminal-e-g-set-it-to-text}{Change the default editor for files opened in the terminal?}
   \end{emphbox}
-  \label{fig:git:editeur}
+  \phantomsection\label{fig:git:editeur} % https://stackoverflow.com/q/2745731
 \end{figure}
 
 
 \section{Démarrage rapide avec Git}
 \label{sec:git:getting_started}
-
-{%
-  \itshape\noindent%
-  Hormis l'adaptation à la mise en page du présent document, la
-  conversion des chapitres en sections et des modifications mineures
-  visant à corriger les dépassements de texte dans la marge, je n'ai
-  apporté aucun changement au texte. Les renvois vers les sections du
-  livre qui ne sont pas reproduites ici sont remplacés par des liens
-  vers la \link{https://git-scm.com/book/fr/v2}{version en ligne}.
-}
-\medskip
 
 \begingroup
 \setkeys{Gin}{width=0.6\textwidth}
@@ -2091,8 +2088,7 @@ Nous aborderons ensuite tout ce que vous devez savoir pour faire tourner votre p
 
 \begin{exercice}[nosol]
   Configurer l'éditeur par défaut de Git sur votre poste de travail
-  tel qu'expliqué dans l'encadré de la
-  \autopageref{fig:git:editeur}.
+  tel qu'expliqué dans l'encadré de la \autopageref{fig:git:editeur}.
 \end{exercice}
 
 
