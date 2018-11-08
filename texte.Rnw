@@ -462,6 +462,7 @@ $ awk '(state == 0) && /^# / { state = 1; next } \
   configuration \code{Makefile} qui se trouve dans le
   \link{\reposurl}{code source} du document.}
 
+
 \section{Exercices}
 \label{sec:texte:exercices}
 

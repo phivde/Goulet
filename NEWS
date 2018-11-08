@@ -26,13 +26,15 @@
   dans le document.
 - À la section 7.3, présentation des méthodes d'indiçage d'une liste
   sous forme de... liste à puces.
-- Correction d'un paragraphe obsolète dans les exemples additionnels
-  du chapitre 11: c'est le fichier NEWS et non README.md qui contient
-  les notes de versions du document.
+- Correction d'un paragraphe dans les exemples additionnels du
+  chapitre 11: c'est le fichier NEWS et non README.md qui contient les
+  notes de versions du document.
 - Correction de coquilles dans l'énoncé et dans la solution de
   l'exercice 11.5.
 - «Syndrome» s'écrit sans accent circonflexe, contrairement à
   «symptôme». Je me suis fait prendre.
+- Les intraliens vers les encadrés (chapitres 1 et 12, annexes A et B)
+  fonctionnement maintenant correctement.
 - Utilisation des nouvelles normes de présentation visuelle de
   l'Université Laval pour les couvertures.
 
