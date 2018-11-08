@@ -9,6 +9,10 @@
 - Nouvelle section 11.3 sur les fonctions internes utiles de R pour la
   recherche et remplacement de texte à l'aide d'expressions
   régulières. 
+- Les exercices 11.7 et 11.8 des éditions précédentes ont été
+  supprimés car devenus obsolètes, puis remplacés par un nouvel
+  exercice 11.7 portant sur l'utilisation des expressions régulières
+  dans R.
 - Mention à la section A.3 que l'utilisation d'un projet dans RStudio
   permet d'effectuer la gestion des versions avec Git directement
   depuis l'éditeur.
@@ -22,6 +26,9 @@
   dans le document.
 - À la section 7.3, présentation des méthodes d'indiçage d'une liste
   sous forme de... liste à puces.
+- Correction d'un paragraphe obsolète dans les exemples additionnels
+  du chapitre 11: c'est le fichier NEWS et non README.md qui contient
+  les notes de versions du document.
 - Correction de coquilles dans l'énoncé et dans la solution de
   l'exercice 11.5.
 - «Syndrome» s'écrit sans accent circonflexe, contrairement à
