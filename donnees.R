@@ -360,7 +360,7 @@ write(x, file = "matrice.data", ncolumns = 4, append = TRUE)
 ## Les titres des lignes sont importants dans ce jeu de
 ## données puisqu'ils contiennent les noms des États. Par
 ## défaut, les fonctions exportent tant les titres de lignes
-## que les titre de colonnes.
+## que les titres de colonnes.
 ##
 ## 'write.table' utilise l'espace comme séparateur des champs
 ## et le point comme séparateur décimal.
