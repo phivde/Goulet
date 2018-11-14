@@ -58,22 +58,27 @@ L'interpréteur de commandes standard sous Windows est
 de programmes \code{Accessoires} sous le nom \code{Invite de
   commandes}. L'invite de commande par défaut est \verb=C:\>=. À la
 gauche du symbole \verb=>= se trouve le chemin d'accès du répertoire
-courant. Au lancement de l'interpréteur, celui-ci est donc la racine
-du système de fichiers.
+courant. Au lancement de l'interpréteur, le répertoire courant est
+donc la racine du système de fichiers.
 
 Les programmeurs qui souhaitent bénéficier de certains outils
 \index{Unix}Unix sous Windows peuvent installer les couches
 logicielles \index{MinGW}MinGW et \index{MSYS}MSYS --- je recommande à
 cet égard la distribution
 \link{http://www.msys2.org}{MSYS2}\index{MSYS2}. Le programme
-\code{MSYS} fournit un interpréteur de commandes \index{Bash}Bash
-\citep{bash} comme en standard sur les systèmes Unix. Un interpréteur
-Bash est également fourni avec \index{Git}
+\code{MSYS} fournit un puissant interpréteur de commandes
+\index{Bash}Bash \citep{bash} comme en standard sur les systèmes Unix.
+Un interpréteur Bash est également fourni avec \index{Git}
 \link{https://git-scm.com/downloads}{Git for Windows}: le programme
 est d'ailleurs nommé \index{Git~Bash}Git~Bash.
 
-À la ligne de commande \index{Unix}Unix sous Windows, on identifie la
-racine \code{C:\bs} du système de fichier d'un disque par \code{/c/}.
+Les fonctionnalités de \code{cmd.exe} étant plutôt limitées, je
+recommande fortement d'utiliser MSYS ou Git~Bash comme interpréteur de
+commandes sous Windows.
+
+\tipbox{À la ligne de commande \index{Unix}Unix sous Windows, on
+  identifie la racine \code{C:\bs} du système de fichier d'un disque
+  par \code{/c/}.}
 
 
 \section{Ligne de commande macOS}
@@ -99,9 +104,10 @@ l'utilisateur.
 
 Les programmeurs doivent connaitre les rudiments de la ligne de
 commande. Cela dit, comme nous ne pouvons nous étendre sur le sujet,
-limiterons la présentation aux commandes ci-dessous qui permettent de
-se déplacer dans le système de fichiers, d'afficher la liste des
-fichiers d'un répertoire et d'afficher le contenu d'un fichier.
+nous limiterons la présentation aux commandes ci-dessous qui
+permettent de se déplacer dans le système de fichiers, d'afficher la
+liste des fichiers d'un répertoire et d'afficher le contenu d'un
+fichier.
 
 \importantbox{Dans les exemples ci-dessous et pour le reste du
   document, l'invite de commande du système d'exploitation sera
@@ -142,7 +148,7 @@ fichiers d'un répertoire et d'afficher le contenu d'un fichier.
   seulement) Affiche les fichiers du répertoire donné en argument, ou
   les fichiers du répertoire courant sans aucun argument.
   \begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
+\begin{Verbatim}[commandchars=\\\{\},samepage=true]
 ~$ ls
 Desktop
 Documents
