@@ -209,7 +209,7 @@ f(0, 1/0)                  # argument 'y' utilisé
 ## retourne 'NA'.
 ##
 ## Nous pouvons généraliser la fonction 'sumsq' de la section
-## 4.5 pour faire en sorte qu'elle puisse retirer les
+## 5.5 pour faire en sorte qu'elle puisse retirer les
 ## éventuelles données manquantes d'un vecteur en argument
 ## avant de faire la somme des écarts au carré.
 ##
