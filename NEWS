@@ -9,6 +9,8 @@
 - Section 10.1 retravaillée légèrement pour mettre l'accent sur
   l'utilisation d'un interpréteur de commandes puissant comme Bash
   sous Windows.
+- Vignette tirée de XKCD.com sur les expressions régulières ajoutée à
+  l'introduction du chapitre 11.
 
 ## Autres changements
 

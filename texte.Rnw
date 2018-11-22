@@ -101,6 +101,15 @@ Un jour ou l'autre, vous aurez à traiter des chaines de caractères en
 programmation ou en analyse de données. Ce jour-là, connaitre les
 expressions régulières vous sauvera énormément de temps.
 
+\begin{figure}[t]
+  \centering
+  \begin{minipage}{0.9\linewidth}
+    \setkeys{Gin}{width=\textwidth}
+    \includegraphics{images/regular_expressions} \\
+    \footnotesize\sffamily%
+    Tiré de \href{http://xkcd.com/208/}{XKCD.com}
+  \end{minipage}
+\end{figure}
 
 \section{Outils d'analyse et de contrôle du texte}
 \label{sec:texte:outils}
