@@ -6,6 +6,10 @@
 
 ## Nouveautés
 
+- L'introduction a été révisée et bonifiée pour mieux présenter les
+  fonctionnalités interactives du document, expliquer l'utilisation
+  des couleurs et présenter la signification de chacun des blocs
+  signalétiques.  
 - Section 10.1 retravaillée légèrement pour mettre l'accent sur
   l'utilisation d'un interpréteur de commandes puissant comme Bash
   sous Windows.
@@ -16,8 +20,6 @@
 
 ## Autres changements
 
-- Révision de la présentation des fonctionnalités interactives du
-  document dans l'introduction.
 - Chapitre 12: correction de l'URL vers la vidéo sur le travail
   collaboratif avec Git.
 
