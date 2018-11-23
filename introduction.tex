@@ -48,55 +48,103 @@ en productivité, comme le système de gestion de version Git, les
 expressions régulières et divers utilitaires d'analyse et de contrôle
 de texte.
 
+\enlargethispage{5mm}
+
+Enfin, vous trouverez en annexe de brèves introductions à
+l'environnement de développement intégré RStudio et à l'éditeur de
+texte pour programmeurs GNU~Emacs, de même que les solutions complètes
+des exercices.
+
+\section*{Utilisation de l'ouvrage}
+
 L'ouvrage vise d'abord à vous exposer à un maximum de code, puis à
 vous faire pratiquer. C'est pourquoi plusieurs chapitres sont rédigés
 de manière synthétique et qu'ils comportent peu d'exemples au fil du
-texte. En revanche, vous serez appelé à lire et à exécuter le code
+texte.
+
+En revanche, vous serez appelé à lire et à exécuter le code
 informatique se trouvant dans les sections d'exemples à la fin de
 chacun des chapitres. Ce code, qui est distribué en version
-électronique avec ce document, et les commentaires qui l'accompagnent
+électronique avec le document, et les commentaires qui l'accompagnent
 reviennent sur l'essentiel des concepts du chapitre et les
-complémentent souvent. Je considère l'exercice d'«étude active»
-consistant à exécuter du code et à voir ses effet comme essentiel à
-l'apprentissage du langage R. Vous pouvez aussi inverser la
-proposition et étudier le code informatique avant le texte du chapitre
-correspondant si ce mode d'apprentissage vous convient mieux.
+complémentent souvent.
+
+Je considère l'exercice d'«étude active» consistant à exécuter du code
+et à voir ses effet comme essentiel à l'apprentissage du langage R.
+Vous pouvez aussi inverser la proposition et étudier le code
+informatique avant le texte du chapitre correspondant si ce mode
+d'apprentissage vous convient mieux.
+
+\section{Fonctionnalités interactives}
 
 En consultation électronique, ce document se trouve enrichi de
 plusieurs fonctionnalités interactives.
 \begin{itemize}
 \item Intraliens du texte vers une ligne précise d'une section de code
   informatique et, en sens inverse, du numéro de la ligne vers le
-  point de la référence dans le texte.
+  point de la référence dans le texte. Ces intraliens sont marqués par
+  la couleur \textcolor{link}{\rule{1.5em}{1.2ex}}.
 \item Intraliens entre le numéro d'un exercice et sa solution, et vice
-  versa.
+  versa. Ces intraliens sont aussi marqués par la couleur
+  \textcolor{link}{\rule{1.5em}{1.2ex}}.
 \item Intraliens entre les citations dans le texte et leur entrée dans
-  la bibliographie.
+  la bibliographie. Ces intraliens sont marqués par la couleur
+  \textcolor{citation}{\rule{1.5em}{1.2ex}}.
 \item Hyperliens vers des ressources externes marqués par le symbole
-  {\smaller\faExternalLink}.
-\item Liens vers des vidéos dans ma %
+  {\smaller\faExternalLink} et la couleur
+  \textcolor{url}{\rule{1.5em}{1.2ex}}.
+\item Hyperliens, marqués par un symbole de lecture vidéo
+  {\smaller\faYoutubePlay} dans la marge, vers des vidéos dans ma %
   \link{http://www.youtube.com/user/VincentGouletIntroR/videos}{chaine
-    YouTube} %
-  marqués par un symbole de lecture vidéo {\smaller\faYoutubePlay} dans la
-  marge.
+    YouTube}.
 \item Index comprenant, entre autres, les principaux mots clés du
   langage R et toutes leurs occurences dans le texte ainsi que
   dans le code informatique.
 \end{itemize}
 
-Vous trouverez également en annexe de brèves introductions à
-l'environnement de développement intégré RStudio et à l'éditeur de
-texte pour programmeurs GNU~Emacs, de même que les solutions complètes
-des exercices.
+\section{Blocs signalétiques}
+
+Le document est parsemé de divers types de blocs signalétiques
+inspirés de
+\link{https://asciidoctor.org/docs/user-manual/\#admonition}{AsciiDoc}
+qui visent à attirer votre attention sur une notion.
+
+\tipbox{Astuce! Ces blocs contiennent un truc, une astuce, ou tout
+  autre type d'information utile.}
+
+\warningbox{Avertissement! Ces blocs mettent l'emphase sur une notion
+  ou fournissent une information importante pour la suite.}
+
+\cautionbox{Attention! Vous risquez de vous brûler ---
+  métaphoriquement s'entend --- si vous ne suivez pas les
+  recommandations de ces blocs.}
+
+\importantbox{Important! Ces blocs contiennent les remarques les plus
+  importantes. Veillez à en tenir compte.}
+
+\notebox{Ces blocs contiennent des remarques additionnelles sur
+  la matière ou des informations amusantes, mais non essentielles.}
+
+\gotorbox{Ces blocs vous invitent à interrompre la lecture du texte
+  pour passer à l'étude du code R des sections d'exemples.}
+
+\osxbox{Remarques spécifiques à macOS.}
+
+\windowsbox{Remarques spécifiques à Windows.}
+
+\section{Document libre}
 
 Tout comme R et l'ensemble des outils présentés dans ce document, le
 projet «Programmer avec R» s'inscrit dans le mouvement de
 l'\link{https://www.gnu.org/philosophy/free-sw.html}{informatique
   libre}. Vous pouvez accéder à l'ensemble du code source en format
-{\LaTeX} en suivant le lien dans la page de copyright. Votre
-contribution à l'amélioration du document est également la bienvenue;
-consultez le fichier \code{CONTRIBUTING.md} fourni avec ce document
-et voyez votre nom ajouté au fichier \code{COLLABORATEURS}.
+{\LaTeX} en suivant le lien dans la page de copyright. Vous trouverez
+dans le fichier \code{README.md} toutes les informations utiles pour
+composer le document.
+
+Votre contribution à l'amélioration du document est également la
+bienvenue; consultez le fichier \code{CONTRIBUTING.md} fourni avec ce
+document et voyez votre nom ajouté au fichier \code{COLLABORATEURS}.
 
 Bonne lecture!
 
