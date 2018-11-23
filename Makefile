@@ -36,7 +36,7 @@ LICENSE = LICENSE
 
 ## Autres fichiers à inclure dans l'archive
 CONTRIBUTING = CONTRIBUTING.md
-OTHER = 100metres.data
+OTHER = 100metres.data gabarit-documentation-fonction.R
 
 ## Le document maître dépend de tous les fichiers .Rnw et des fichiers
 ## .tex et .R mentionnés ci-dessous.

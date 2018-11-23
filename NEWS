@@ -11,11 +11,15 @@
   sous Windows.
 - Vignette tirée de XKCD.com sur les expressions régulières ajoutée à
   l'introduction du chapitre 11.
+- Un gabarit pour la documentation des fonctions est maintenant livré
+  avec le document. Mention à la section 4.7.3.
 
 ## Autres changements
 
 - Révision de la présentation des fonctionnalités interactives du
   document dans l'introduction.
+- Chapitre 12: correction de l'URL vers la vidéo sur le travail
+  collaboratif avec Git.
 
 # 2018.11 (2018-11-07)
 

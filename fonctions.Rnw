@@ -1125,6 +1125,11 @@ Il s'agit de la structure générale des rubriques d'aide de R. La
 \autoref{fig:fonctions:doc} fournit un exemple de documentation pour
 une fonction simple.
 
+\tipbox{Le fichier \code{gabarit-documentation-fonction.R} livré avec
+  présent document contient un gabarit que vous pouvez utiliser pour
+  insérer rapidement dans vos fichiers de script la structure de base
+  de la documentation d'une fonction.}
+
 \begin{figure}
 \begin{Verbatim}[frame=single]
 ###
@@ -1156,18 +1161,20 @@ d'exemples du présent document, j'ai utilisé la
 \link{https://www.gnu.org/software/emacs/manual/html_node/elisp/Comment-Tips.html}{%
   convention de l'éditeur \index{Emacs}GNU~Emacs}.
 \begin{itemize}
-\item Les commentaires qui débutent par un seul carré, \code{\#}, sont
-  alignés sur une colonne à droite du code source. Ils servent à
-  expliquer ce qu'effectue une ligne de code.
-\item Les commentaires qui débutent par deux carrés, \code{\#\#}, sont
-  alignés sur le niveau d'indentation courant. Lorsqu'ils apparaissent à
-  l'intérieur d'une fonction, ils décrivent le rôle du bloc de code qui
-  suit ou l'état de la fonction à ce stade. À l'extérieur des
-  fonctions, ils marquent des sous-sections du code source.
-\item Les commentaires qui débutent par trois carrés, \code{\#\#\#},
+\item Les commentaires qui débutent par trois carrés, «\code{\#\#\#}»,
   sont toujours alignés sur la marge de gauche. Ils ne sont utilisés
   qu'à l'extérieur des fonctions. Ils marquent soit des sections, soit
   des entêtes de fonctions.
+\item Les commentaires qui débutent par deux carrés, «\code{\#\#}»,
+  sont alignés sur le niveau d'indentation courant. Lorsqu'ils
+  apparaissent à l'intérieur d'une fonction, ils décrivent le rôle du
+  bloc de code qui suit ou l'état de la fonction à ce stade. À
+  l'extérieur des fonctions, ils marquent des sous-sections du code
+  source.
+\item Les commentaires qui débutent par un seul carré, «\code{\#}»,
+  sont alignés sur une colonne à droite du code source. Ils servent à
+  clarifier, \emph{très succinctement}, ce qu'effectue une ligne de
+  code.
 \end{itemize}
 
 L'éditeur \index{RStudio}RStudio, de son côté, utilise par défaut les
