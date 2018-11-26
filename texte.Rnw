@@ -158,12 +158,6 @@ pour développeurs de Apple \citep{Apple:shellprimer} s'avère une
 référence idéale pour vous accompagner dans l'atteinte des objectifs
 d'apprentissage mentionnés au début du chapitre.
 
-\windowsbox{Utilisateurs de Windows: pas de souci! Bien qu'émanant de
-  Apple, le guide traite de procédures et d'outils Unix standards,
-  outils dont vous disposez si vous avez installé \index{Git}\emph{Git
-    for Windows} ou MSYS2\index{MSYS2}, tel qu'expliqué à la
-  \autoref{sec:cli:windows}.}
-
 Je vous invite donc à étudier les chapitres suivants du guide
 \emph{Shell Scripting Primer}:
 \begin{itemize}
@@ -180,6 +174,12 @@ Revenez ensuite ici pour des exemples additionnels et des exercices.
 
 \warningbox{Vous pouvez ignorer toutes les notions relatives à Perl
   exposées dans \emph{Shell Scripting Primer}.}
+
+\windowsbox{Utilisateurs de Windows: pas de souci! Bien qu'émanant de
+  Apple, \emph{Shell Scripting Primer} traite de procédures et
+  d'outils Unix standards. Or, tel qu'expliqué à la
+  \autoref{sec:cli:windows}, vous disposez de ces outils si vous avez
+  installé \index{Git}\emph{Git for Windows} ou MSYS2\index{MSYS2}.}
 
 
 \section{Fonctions internes utiles}
