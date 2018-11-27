@@ -505,6 +505,7 @@ $ awk '(state == 0) && /^# / { state = 1; next } \
       \item \verb~aabababa~
       \end{multicols}
     \end{enumerate}
+    \pagebreak[1]
   \item \verb~/ab+c?/~
     \begin{enumerate}[1)]
       \begin{multicols}{3}
@@ -517,6 +518,7 @@ $ awk '(state == 0) && /^# / { state = 1; next } \
       \item \verb~abcc~
       \end{multicols}
     \end{enumerate}
+    \pagebreak[1]
   \item \verb~/a.[bc]+/~
     \begin{enumerate}[1)]
       \begin{multicols}{3}
@@ -530,6 +532,7 @@ $ awk '(state == 0) && /^# / { state = 1; next } \
       \item \verb~asccbbbbcbcccc~
       \end{multicols}
     \end{enumerate}
+    \pagebreak[1]
   \item \verb~/abc|xyz/~
     \begin{enumerate}[1)]
       \begin{multicols}{3}
@@ -538,6 +541,7 @@ $ awk '(state == 0) && /^# / { state = 1; next } \
       \item \verb~abc|xyz~
       \end{multicols}
     \end{enumerate}
+    \pagebreak[1]
   \item \verb~/[a-z]+[\.\?!]/~
     \begin{enumerate}[1)]
       \begin{multicols}{3}
@@ -554,7 +558,7 @@ $ awk '(state == 0) && /^# / { state = 1; next } \
       \item \verb~is.?~
       \end{multicols}
     \end{enumerate}
-    \pagebreak[4]
+    \pagebreak[1]
   \item \verb~/[a-zA-Z]*[^,]=/~
     \begin{enumerate}[1)]
       \begin{multicols}{3}
@@ -568,6 +572,7 @@ $ awk '(state == 0) && /^# / { state = 1; next } \
       \item \verb~Other.=~
       \end{multicols}
     \end{enumerate}
+    \pagebreak[1]
   \item \verb~/[a-z][\.\?!]\s+[A-Z]/~
     \begin{enumerate}[1)]
       \begin{multicols}{3}
@@ -581,6 +586,7 @@ $ awk '(state == 0) && /^# / { state = 1; next } \
       \item \verb~k L~
       \end{multicols}
     \end{enumerate}
+    \pagebreak[1]
   \item \verb~/<[^>]+>/~
     \begin{enumerate}[1)]
       \begin{multicols}{2}
@@ -599,37 +605,42 @@ $ awk '(state == 0) && /^# / { state = 1; next } \
 
   \begin{sol}
     \begin{enumerate}
-    \item L'expression régulière recherche «\verb=a=», suivi zéro ou
-      plusieurs occurrences de «\verb=ab=», suivi de «\verb=b=». Les
-      choix 2 et 5 satisfont ces conditions.
-    \item L'expression régulière recherche «\verb=a=», suivi d'au
-      moins une occurrence de «\verb=b=», suivi de zéro ou une
-      occurrence de «\verb=c=». Les choix 1 et 3 satisfont ces
+    \item L'expression régulière identifie la lettre minuscule
+      «\verb=a=», suivie de zéro, une ou plusieurs occurrences des
+      lettres minuscules «\verb=ab=», suivies de la lettre minuscule
+      «\verb=b=». Les choix 2 et 5 satisfont ces conditions.
+    \item L'expression régulière identifie la lettre
+      «\verb=a=», suivie d'au moins une occurrence de la lettre
+      minuscule «\verb=b=», suivie de zéro ou une occurrence de la
+      lettre minuscule «\verb=c=». Les choix 1 et 3 satisfont ces
       conditions.
-    \item L'expression régulière recherche «\verb=a=», suivi de
-      n'importe quel caractère (incluant «\verb=b=» ou «\verb=c=»),
-      suivi d'au moins une occurrence de «\verb=b=» ou de «\verb=c=».
-      Les choix 1, 2, 3, 4 et 6 satisfont ces conditions.
-    \item L'expression régulière recherche «\verb=abc=» ou
-      «\verb=xyz=». Les choix 1 et 2 satisfont la condition. Le
-      troisième choix n'est pas valide puisque l'expression ne
-      recherche pas le symbole «\verb=|=».
-    \item L'expression régulière recherche au moins lettre minuscule
-      (à l'exclusion de tout autre symbole), suivi de l'un ou l'autre
-      des symboles «\verb=.=», «\verb=?=», «\verb=!=» (sans
+    \item L'expression régulière identifie la lettre minuscule
+      «\verb=a=», suivie de n'importe quel caractère (incluant les
+      lettres «\verb=b=» et «\verb=c=»), suivi d'au moins une
+      occurrence des lettres minuscules «\verb=b=» ou «\verb=c=». Les
+      choix 1, 2, 3, 4 et 6 satisfont ces conditions.
+    \item L'expression régulière identifie les suites de lettres
+      minuscules «\verb=abc=» ou «\verb=xyz=». Les choix 1 et 2
+      satisfont la condition. Le troisième choix n'est pas valide
+      puisque l'expression n'identifie pas le symbole «\verb=|=».
+    \item L'expression régulière identifie au moins une lettre
+      minuscule (à l'exclusion de tout autre symbole), suivie de l'un
+      ou l'autre des symboles «\verb=.=», «\verb=?=», «\verb=!=» (sans
       répétition). Les choix 1, 4 et 6 satisfont ces conditions.
-    \item L'expression régulière recherche zéro ou plusieurs lettres
-      minuscules ou majuscule (mais aucun autre symbole), suivi de
-      tout autre caractère qu'une virgule, suivi du symbole
+    \item L'expression régulière identifie zéro, une ou plusieurs
+      lettres minuscules ou majuscule (mais aucun autre symbole),
+      suivies de tout caractère autre qu'une virgule, suivi du symbole
       «\verb|=|». Les choix 1, 5 et 6 satisfont ces conditions.
-    \item L'expression régulière recherche une lettre minuscule, suivi
-      de l'un ou l'autre des symboles «\verb=.=», «\verb=?=»,
-      «\verb=!=» (sans répétition), suivi d'au moins une espace, suivi
-      d'une lettre majuscule. Les choix 4 et 5 satisfont ces
+    \item L'expression régulière identifie une lettre minuscule,
+      suivie de l'un ou l'autre des symboles «\verb=.=», «\verb=?=»,
+      «\verb=!=» (sans répétition), suivi d'au moins une espace,
+      suivie d'une lettre majuscule. Les choix 4 et 5 satisfont ces
       conditions.
-    \item L'expression régulière recherche un symbole «\verb=<=»,
+    \item L'expression régulière identifie le symbole «\verb=<=»,
       suivi d'au moins un symbole autre que «\verb=>=», suivi du symbole
-      «\verb=>=». Les choix 1, 3 et 5 satisfont ces conditions.
+      «\verb=>=». Les choix 1, 3 et 5 satisfont ces conditions. Dans
+      le choix 2, tant \verb~<opentag>~ que \verb~<closetag>~
+      satisfont la condition, mais pas les deux ensemble.
     \end{enumerate}
   \end{sol}
 \end{exercice}
@@ -656,7 +667,7 @@ $ awk '(state == 0) && /^# / { state = 1; next } \
     \end{minipage}
   \end{center}
   \begin{sol}
-    L'expression doit correspondre à la lettre minuscule «\verb=p=»
+    L'expression doit identifier la lettre minuscule «\verb=p=»
     précédée ou non d'une ou plusieurs lettres (ou symboles, ce n'est
     pas spécifié), suivie d'une (et une seule) lettre ou d'une espace,
     de la lettre «\verb=t=» et, enfin, de zéro ou de plusieurs
@@ -674,7 +685,7 @@ $ awk '(state == 0) && /^# / { state = 1; next } \
   fournies en majuscule ou en minuscule et l'espace entre le troisième
   et le quatrième symbole peut être présent ou non.
   \begin{sol}
-    \verb=[a-zA-z][0-9][a-zA-z]\s?[0-9][a-zA-z][0-9]=
+    L'expression \verb=[a-zA-z][0-9][a-zA-z]\s?[0-9][a-zA-z][0-9]=
     convient si l'on ne permet que zéro ou une espace entre les deux
     blocs. S'il n'y a pas de limite au nombre d'espaces, remplacer
     «\verb=?=» par «\verb=*=».
