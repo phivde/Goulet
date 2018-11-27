@@ -317,11 +317,11 @@ $ grep -E '( |^)g\(' *.R
 Tel que mentionné à la \autoref{sec:texte:outils}, la fonction
 \icode{sed} sert surtout pour rechercher et remplacer dans un fichier,
 et ce, ligne par ligne par défaut. Remplaçons les symboles de
-commentaires triples \code{\#\#\#} en début de ligne (à la Emacs) dans
-le fichier \code{implementation.R} par un symbole unique \code{\#} (à
+commentaires triples «\code{\#\#\#}» en début de ligne (à la Emacs) dans
+le fichier \code{implementation.R} par un symbole unique «\code{\#}» (à
 la RStudio). Pour faire bonne mesure, plaçons le résultat dans un
 nouveau fichier \code{implementation-new.R} à l'aide de l'opérateur de
-redirection \index{>@\code{>} (Bash)}\code{>}.
+redirection \index{>@\code{>} (Bash)}«\code{>}».
 \begin{Schunk}
 \begin{Verbatim}
 $ sed 's/^###/#/' implementation.R > implementation-new.R
