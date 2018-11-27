@@ -628,7 +628,7 @@ $ awk '(state == 0) && /^# / { state = 1; next } \
       d'une lettre majuscule. Les choix 4 et 5 satisfont ces
       conditions.
     \item L'expression régulière recherche un symbole «\verb=<=»,
-      suivi d'au moins symbole autre que «\verb=>=», suivi du symbole
+      suivi d'au moins un symbole autre que «\verb=>=», suivi du symbole
       «\verb=>=». Les choix 1, 3 et 5 satisfont ces conditions.
     \end{enumerate}
   \end{sol}
