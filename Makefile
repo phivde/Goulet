@@ -3,7 +3,7 @@
 ## Copyright (C) 2017 Vincent Goulet
 ##
 ## 'make pdf' crée les fichiers .tex à partir des fichiers .Rnw avec
-## Sweave et compile le document maître avec XeLaTeX.
+## Sweave et compile le document maitre avec XeLaTeX.
 ##
 ## 'make tex' crée les fichiers .tex à partir des fichiers .Rnw avec
 ## Sweave.
@@ -38,34 +38,18 @@ LICENSE = LICENSE
 CONTRIBUTING = CONTRIBUTING.md
 OTHER = 100metres.data gabarit-documentation-fonction.R
 
-## Le document maître dépend de tous les fichiers .Rnw et des fichiers
-## .tex et .R mentionnés ci-dessous.
+## Le document maitre dépend de: tous les fichiers .Rnw; tous les
+## fichiers .tex autres que lui-même qui n'ont pas de version .Rnw;
+## tous les fichiers .R qui ont un fichier .Rnw ou .tex correspondant.
 RNWFILES = $(wildcard *.Rnw)
-TEXFILES = \
-	couverture-avant.tex \
-	notices.tex \
-	introduction.tex \
-	informatique.tex \
-	algorithmique.tex \
-	paquetages.tex \
-	cli.tex \
-	git.tex \
-	rstudio.tex \
-	emacs+ess.tex \
-	solutions.tex \
-	colophon.tex \
-	couverture-arriere.tex
-SCRIPTS = \
-	presentation.R \
-	premiers.R \
-	fonctions.R \
-	implementation.R \
-	donnees.R \
-	application.R \
-	paquetages.R \
-	debogage.R
+TEXFILES = $(addsuffix .tex,\
+                       $(filter-out $(basename ${RNWFILES} ${MASTER} $(wildcard solutions-*.tex)),\
+                                    $(basename $(wildcard *.tex))))	
+SCRIPTS = $(addsuffix .R,\
+                      $(filter $(basename $(wildcard *.R)),\
+                               $(basename ${RNWFILES} ${TEXFILES})))
 
-## Informations de publication extraites du fichier maître
+## Informations de publication extraites du fichier maitre
 TITLE = $(shell grep "\\\\title" ${MASTER:.pdf=.tex} \
 	| cut -d { -f 2 | tr -d })
 REPOSURL = $(shell grep "newcommand{\\\\reposurl" ${MASTER:.pdf=.tex} \
