@@ -52,14 +52,33 @@
   %% Polices de caractères
   \usepackage{fontspec}
   \usepackage{unicode-math}
-  \defaultfontfeatures{Scale=0.92}
-  \setmainfont[Ligatures=TeX,Numbers=OldStyle]{Lucida Bright OT}
+  \defaultfontfeatures
+  {
+    Scale = 0.92
+  }
+  \setmainfont{Lucida Bright OT}
+  [
+    Ligatures = TeX,
+    Numbers = OldStyle
+  ]
   \setmathfont{Lucida Bright Math OT}
   \setmonofont{Lucida Grande Mono DK}
-  \setsansfont[Scale=1.0,Numbers=OldStyle,
-               BoldFont=Myriad Pro Semibold,
-               BoldItalicFont=Myriad Pro Semibold Italic]{Myriad Pro}
-  \newfontfamily\fullcaps[Scale=1.0,Numbers=Uppercase]{Myriad Pro}
+  \setsansfont{FiraSans}
+  [
+    Extension = .otf,
+    UprightFont = *-Book,
+    BoldFont = *-Medium,
+    BoldItalicFont = *-MediumItalic,
+    Scale = 1.0,
+    Numbers = OldStyle
+  ]
+  \newfontfamily\fullcaps{FiraSans}
+  [
+    Extension = .otf,
+    UprightFont = *-Book,
+    Scale = 1.0,
+    Numbers = Uppercase
+  ]
   \usepackage[babel=true]{microtype}
   \usepackage{icomma}
 
