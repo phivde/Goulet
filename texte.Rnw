@@ -287,14 +287,6 @@ $ grep -l matrix *.R
 \end{Verbatim}
 \end{Schunk}
 
-La commande suivante permet de savoir quel fichier d'exemples traite
-de la suite de Fibonacci.
-\begin{Schunk}
-\begin{Verbatim}
-$ grep -l fibonacci *.R
-\end{Verbatim}
-\end{Schunk}
-
 Pour connaitre les fichiers d'exemples dans lesquels apparaissent les
 objets \code{letters} et \code{LETTERS}, nous devons rechercher sans
 égard à la casse pour attraper les deux cas.
