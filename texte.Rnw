@@ -660,7 +660,7 @@ $ awk '(state == 0) && /^# / { state = 1; next } \
   \end{center}
   \begin{sol}
     L'expression doit identifier la lettre minuscule «\verb=p=»
-    précédée ou non d'une ou plusieurs lettres (ou symboles, ce n'est
+    précédée ou non d'une ou de plusieurs lettres (ou symboles, ce n'est
     pas spécifié), suivie d'une (et une seule) lettre ou d'une espace,
     de la lettre «\verb=t=» et, enfin, de zéro ou de plusieurs
     lettres. Il y a assurément plusieurs réponses valides. En voici
