@@ -54,6 +54,8 @@ git push -u origin <nom_de_branche>
 	
 5. Finalement, connectez-vous à l'interface graphique de BitBucket à l'adresse <https://projets.fsg.ulaval.ca/git/login> avec votre IDUL/NIP et faites une demande de tirage (*pull request*) vers la branche `master` en sélectionnant l'option correspondante dans la barre latérale.
 
+6. Si vous avez d'autres modifications à proposer, reprenez la procédure depuis le début en utilisant une **branche différente**. Autrement, vos modifications seront combinées en une seule requête et il devient difficile de les sélectionner séparément.
+
 Pour des instructions plus détaillées, consultez les [excellents tutoriels](https://www.atlassian.com/git/tutorials) de Atlassian, en particulier celui sur le processus de collaboration [*Gitflow Workflow*](https://www.atlassian.com/git/tutorials/comparing-workflows#gitflow-workflow).
 
 # CFR (contributions fréquemment refusées)
@@ -63,3 +65,5 @@ Les corrections mentionnées ci-dessous ont été refusées à répétition dans
 - S'agissant du caractère typographique, «espace» est un mot féminin. L'expression «suivi d'une espace» est donc correctement orthographiée.
 
 - Le document est rédigé au moins en partie selon les règles de la [nouvelle orthographe](http://www.orthographe-recommandee.info), en particulier pour ce qui a trait à l'[accent circonflexe](http://www.orthographe-recommandee.info/regles4.htm). Alors «connait», «reconnait», «apparait» sont toutes des graphies correctes.
+
+- Les sections 12.2 à 12.4 sont tirées du livre [Pro Git](https://git-scm.com/book/fr/v2). Proposez vos éventuelles corrections ou améliorations dans le [projet d'origine](https://github.com/progit/progit2-fr).
