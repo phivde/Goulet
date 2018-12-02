@@ -668,8 +668,6 @@ sapply(x, mean)
 \item
 <<echo=TRUE,eval=FALSE>>=
 lapply(x, function(x) sort(ppareto(x, 2, 5000)))
-lapply(lapply(x, sort), ppareto,
-       shape = 2, scale = 5000)
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
