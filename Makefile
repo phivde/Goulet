@@ -141,6 +141,8 @@ zip: ${MASTER} ${README} ${NEWS} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS
 
 check:
 	@echo ----- Checking status of working directory...
+	@if [ "master" != $(shell git branch --list | grep ^* | cut -d " " -f 2-) ]; then \
+	     echo "not on branch master"; exit 2; fi
 	@if [ -n "$(shell git status --porcelain | grep -v '^??')" ]; then \
 	     echo "uncommitted changes in repository; not creating release"; exit 2; fi
 	@if [ -n "$(shell git log origin/master..HEAD)" ]; then \
