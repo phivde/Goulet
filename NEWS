@@ -6,6 +6,10 @@
 
 ## Nouveautés
 
+- Ajout du fichier `gabarit-documentation-fonction.R` dans la
+  distribution. Il contient un gabarit de documentation pour les
+  fonctions. Mention à la section 4.7.3.
+
 ## Autres changements
 
 - Suppression de la seconde solution de la partie d) de l'exercice
