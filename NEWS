@@ -9,6 +9,10 @@
 - Ajout du fichier `gabarit-documentation-fonction.R` dans la
   distribution. Il contient un gabarit de documentation pour les
   fonctions. Mention à la section 4.7.3.
+- Mention de la fonctionnalité `Code|Reindent Lines` de RStudio à la
+  section 13.1.
+- Section 13.4 sur la méthode de débogage dite du «canard en
+  plastique».
 
 ## Autres changements
 
