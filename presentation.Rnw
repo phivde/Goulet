@@ -383,7 +383,7 @@ d'autres. Voici quelques bons choix.
     \label{fig:presentation:emacs}
   \end{figure}
 
-  Emblème du logiciel libre, Emacs est disponible gratuitement et est 
+  Emblème du logiciel libre, Emacs est disponible gratuitement et est
   identique sur toutes les plateformes supportées par R, dont
   Windows, macOS et Linux. Consulter l'\autoref{chap:emacs+ess} pour
   en savoir plus sur GNU~Emacs et apprendre les commandes essentielles
@@ -441,20 +441,19 @@ détaillée lorsque l'on utilise GNU~Emacs, ou l'\autoref{chap:rstudio}
 pour l'environnement intégré RStudio.
 
 \gotorbox{C'est le temps de vous lancer dans une première session de
-  travail R. %
-  \hypertarget{goto:presentation}\relax
-  \hypertarget{goto:presentation:fin}\relax
+  travail avec R.
 
   Le fichier de script \code{\scriptfilename} livré avec le présent
   document et reproduit à la \autoref{sec:presentation:exemples}
   contient du code qui passe en revue quelques unes des
   fonctionnalités de R. Ouvrez ce fichier dans votre éditeur de texte,
-  puis exécutez les lignes une par une en prenant bien soin de lire
-  les commentaires et d'examiner les résultats.
+  puis exécutez une par une les lignes \reflines{presentation} en
+  prenant bien soin de lire les commentaires et d'examiner les
+  résultats.
 
   Poursuivez la lecture une fois la session de travail terminée. (En
-  consultation électronique, les symboles {\gotorsign} insérés dans le
-  code informatique permettent de revenir ici directement.)}
+  consultation électronique, les numéros de lignes dans le code
+  informatique permettent de revenir ici directement.)}
 
 
 \section{Répertoire de travail}
