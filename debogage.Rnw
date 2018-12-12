@@ -546,10 +546,30 @@ Browse[2]> c
 \end{Verbatim}
 \end{Schunk}
 
-\tipbox{Les environnements de développement intégrés comme Emacs avec
-  le mode ESS ou RStudio facilitent l'utilisation du navigateur
-  d'environnement. Consultez la documentation de votre éditeur sous la
-  rubrique \emph{Debugging} pour en tirer le meilleur parti.}
+\tipbox{Les environnements de développement intégrés comme
+  \index{Emacs}Emacs avec le mode ESS ou \index{RStudio}RStudio
+  facilitent l'utilisation du navigateur d'environnement. Consultez la
+  documentation de votre éditeur sous la rubrique \emph{Debugging}
+  pour en tirer le meilleur parti.}
+
+
+\section{Méthode du canard en plastique}
+\label{sec:debogage:canard}
+
+Ce chapitre ne serait pas complet sans une mention de la méthode de
+débogage dite du
+\link{https://fr.wikipedia.org/wiki/Méthode_du_canard_en_plastique}{\emph{canard
+    en plastique}}. \citet[chapitre~3]{Hunt:pragmatic:1999}, encore
+eux, sont généralement considérés comme les pères de la méthode ou, du
+moins, de son appellation.
+
+La méthode du canard en plastique consiste simplement à expliquer
+méticuleusement son code source à une personne qui se contente de vous
+écouter en hochant la tête ou, de manière à peu près équivalente, à un
+objet inanimé comme un canard en plastique. L'important, c'est de le
+faire à voix haute et en explicitant chacune des hypothèses et chacune
+des étapes du programme. Le regard neuf que vous porterez au code peut
+vous permettre d'y déceler les problèmes.
 
 
 \section{Exemples}
