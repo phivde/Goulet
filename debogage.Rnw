@@ -99,11 +99,15 @@ sujet de \citet[chapitre~3]{Hunt:pragmatic:1999}.
 Un bon éditeur de texte va, entre autres choses, indenter le code
 automatiquement en fonction de ce qu'il contient, et non en fonction
 de ce que vous \emph{pensez} qu'il contient. J'utilise pour ma part
-l'éditeur GNU~Emacs depuis de nombreuses années pour des tâches
-d'édition de diverses natures et jamais je n'ai pris le moteur
+l'éditeur \index{Emacs}GNU~Emacs depuis de nombreuses années pour des
+tâches d'édition de diverses natures et jamais je n'ai pris le moteur
 d'indentation en défaut. En d'autres termes, quand Emacs ne dispose
 pas le code comme je pense qu'il devrait l'être, c'est moi qui ai fait
 une erreur quelque part. Pratique.
+
+Dans \index{RStudio}RStudio, pour obtenir une fonctionnalité
+équivalente, il suffit de réfaire l'indentation du code avec l'option
+\code{Reindent Lines} du menu \code{Code}.
 
 La simple édition du code de la \autoref{fig:debogage:rgamma_ar} avec
 un bon outil fait immédiatement ressortir un premier problème dans la
