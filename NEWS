@@ -2,20 +2,20 @@
 === Programmer avec R
 ===
 
-# (en développement)
+# 2018.12 (2018-12-12)
 
 ## Nouveautés
 
-- Explication dans l'introduction que les fichiers `.Rout` livrés avec
-  le document contiennent les résultats de l'évaluation non
-  interactive du fichier `.R` correspondant.  
 - Ajout du fichier `gabarit-documentation-fonction.R` dans la
   distribution. Il contient un gabarit de documentation pour les
   fonctions. Mention à la section 4.7.3.
+- Explication dans l'introduction que les fichiers `.Rout` livrés avec
+  le document contiennent les résultats de l'évaluation non
+  interactive du fichier `.R` correspondant.
 - Mention de la fonctionnalité `Code|Reindent Lines` de RStudio à la
   section 13.1.
 - Section 13.4 sur la méthode de débogage dite du «canard en
-  plastique».
+  plastique». Merci à David Beauchemin pour le tuyau.
 
 ## Autres changements
 
