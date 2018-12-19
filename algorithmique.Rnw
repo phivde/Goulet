@@ -198,8 +198,11 @@ sample(x, size, replace = FALSE)
 
 \end{Filesave}
 
+\noindent%
+Réaliser les mises en œuvre ci-dessous avec R.
+
 \begin{exercice}
-  Effectuer une mise en œuvre en R de l'algorithme
+  Effectuer une mise en œuvre de l'algorithme
   \index{insertionsort}\emph{insertionsort}.
   \begin{sol}
     L'algorithme \index{insertionsort}\emph{insertionsort} déplace
@@ -233,7 +236,7 @@ insertionsort(x)
 \end{exercice}
 
 \begin{exercice}
-  Effectuer une mise en œuvre en R de l'algorithme
+  Effectuer une mise en œuvre de l'algorithme
   \index{selectionsort}\emph{selectionsort}.
   \begin{sol}
     L'algorithme \emph{selectionsort} déplace graduellement vers
@@ -296,7 +299,7 @@ selectionsort(x)
 \end{exercice}
 
 \begin{exercice}
-  Effectuer une mise en œuvre en R de l'algorithme
+  Effectuer une mise en œuvre de l'algorithme
   \index{bubblesort}\emph{bubblesort}.
   \begin{sol}
     L'algorithme \emph{bubblesort} fait graduellement «remonter à la
@@ -354,7 +357,7 @@ bubblesort(x)
 \end{exercice}
 
 \begin{exercice}
-  Effectuer une mise en œuvre en R de l'algorithme
+  Effectuer une mise en œuvre de l'algorithme
   \index{countingsort}\emph{countingsort}.
   \begin{sol}
     L'algorithme \emph{countingsort} compte le nombre d'occurrences de
@@ -401,7 +404,7 @@ countingsort(x, 10, 20)
 \end{exercice}
 
 \begin{exercice}
-  Effectuer une mise en œuvre en R de l'algorithme \emph{linear search}.
+  Effectuer une mise en œuvre de l'algorithme \emph{linear search}.
   \begin{sol}
     L'algorithme \emph{linear search} compare une à une les valeurs du
     vecteur à celle qui est recherchée. Ceci requiert une boucle.
@@ -431,7 +434,7 @@ linsearch(21, x)
 \end{exercice}
 
 \begin{exercice}
-  Effectuer une mise en œuvre récursive en R de l'algorithme
+  Effectuer une mise en œuvre récursive de l'algorithme
   \emph{linear search}.
   \begin{sol}
     En version récursive, l'algorithme de recherche linéaire revient à
@@ -492,7 +495,7 @@ rlinsearch(21, x)
 \end{exercice}
 
 \begin{exercice}
-  Effectuer une mise en œuvre en R de l'algorithme \emph{binary search}.
+  Effectuer une mise en œuvre de l'algorithme \emph{binary search}.
   \begin{sol}
     L'algorithme \emph{binary search} coupe en deux l'intervalle dans
     lequel la valeur recherchée pourrait se trouver jusqu'à ce qu'il
@@ -528,7 +531,7 @@ binsearch(21, x)
 \end{exercice}
 
 \begin{exercice}
-  Effectuer une mise en œuvre récursive en R de l'algorithme
+  Effectuer une mise en œuvre récursive de l'algorithme
   \emph{binary search}.
   \begin{sol}
     La mise en œuvre récursive la plus simple de l'algorithme
@@ -559,7 +562,7 @@ rbinsearch(21, x)
 \end{exercice}
 
 \begin{exercice}
-  Effectuer une mise en œuvre récursive en R de la fonction
+  Effectuer une mise en œuvre récursive de la fonction
   factorielle.
   \begin{sol}
     Voir la \autoref{fig:presentation:scheme_vs_s}.
@@ -572,7 +575,7 @@ factorial(5)
 \end{exercice}
 
 \begin{exercice}
-  Effectuer une mise en œuvre récursive en R de la suite de Fibonacci.
+  Effectuer une mise en œuvre récursive de la suite de Fibonacci.
   \begin{sol}
     L'algorithme de base pour calculer un élément de la suite
     de Fibonnacci de manière récursive est très lent parce que
@@ -591,8 +594,6 @@ fibonacci(10)
 @
   \end{sol}
 \end{exercice}
-
-
 
 \begin{exercice}
   \label{ex:algorithmique:100metres}
