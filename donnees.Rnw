@@ -910,6 +910,35 @@ m[rowMeans(m) > 7, ]
 \end{exercice}
 
 \begin{exercice}
+  Écrire une fonction \code{sort.matrix} servant à ordonner les lignes
+  d'une matrice selon les valeurs des éléments de la première colonne.
+
+  Par défaut, la fonction trie en ordre croissant. Elle peut également
+  trier en ordre décroissant si son argument \code{decreasing} est
+  \code{TRUE}.
+
+<<echo=FALSE>>=
+sort.matrix <- function(m, decreasing = FALSE)
+    m[order(m[, 1], decreasing = decreasing), ]
+set.seed(4)
+m <- matrix(sample(1:10, 12, rep = TRUE), 3, 4)
+@
+<<echo=TRUE>>=
+m
+sort.matrix(m)
+sort.matrix(m, decreasing = TRUE)
+@
+
+  \begin{sol}
+    La solution repose sur l'utilisation judicieuse de la fonction
+    \code{order}.
+<<echo=TRUE>>=
+sort.matrix
+@
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
   \begin{enumerate}
   \item Écrire une expression R pour créer la liste suivante:
 <<echo=FALSE>>=
