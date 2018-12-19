@@ -6,6 +6,8 @@
 
 ## Nouveautés
 
+- Ajout d'une astuce au chapitre 7 sur l'utilisation de l'option
+  `encoding = "UTF-8"` dans les appels de `read.table`.
 - Ajout d'un exercice au chapitre 7.
 
 
