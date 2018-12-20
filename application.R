@@ -171,7 +171,7 @@ fun <- function(y, x) mean(x[x > y])
 ##
 ## avec la liste définie plus haut, il s'agit de nommer
 ## l'argument 'y' dans '...' de 'sapply'.
-sapply(x, y = 7)
+sapply(x, fun, y = 7)
 
 ## Décodons maintenant l'expression
 ##
