@@ -140,6 +140,15 @@
   \renewcommand{\cftfigureafterpnum}{\cftparfillskip}
   \setlength{\cftfigurenumwidth}{3.2em}
 
+  %% Création d'une «liste des vidéos» similaires à la
+  %% liste des tableaux et à la liste des figures.
+  \newcommand{\listvideosname}{Liste des vidéos}
+  \newlistof{listofvideos}{lov}{\listvideosname}
+  \renewcommand{\afterlovtitle}{%
+    \afterchaptertitle{\normalfont\normalsize Le numéro indiqué à
+      gauche est celui de la section dans laquelle se trouve le bloc
+      signalétique.\label{listofvideos}}\vspace{10pt}}
+
   %% Titres des chapitres
   \chapterstyle{hangnum}
   \renewcommand{\chaptitlefont}{\normalfont\Huge\sffamily\bfseries\raggedright}
@@ -379,12 +388,16 @@
     \fi
   }
 
-  %% Indications de capsule vidéo
-  \newcommand{\capsule}[2]{\href{#1}{#2}\marginpar{%
-      \href{#1}{\raisebox{-0.5em}[0em][0em]{\Huge\faYoutubePlay}}}}
+  %% Boite additionnelle (basée sur awesomebox.sty) pour liens vers
+  %% des vidéos et ajout à la liste des vidéos.
+  \newcounter{videos}[chapter]
+  \newcommand{\videobox}[2]{%
+    \refstepcounter{videos}
+    \addcontentsline{lov}{figure}{\protect\numberline{\thesection}\protect#1}
+    \awesomebox{\faYoutubePlay}{\aweboxrulewidth}{url}{#2}}
 
   %% Boites additionnelles (basées sur awesomebox.sty) pour remarques
-  %% spécifiques à macOS et Windows
+  %% spécifiques à macOS et Windows.
   \newcommand{\osxbox}[1]{%
     \awesomebox{\faApple}{\aweboxrulewidth}{black}{#1}}
   \newcommand{\windowsbox}[1]{%
@@ -392,9 +405,8 @@
 
   %% Boite additionnelle (basée sur awesomebox.sty) pour changements
   %% au fil de la lecture.
-  \def\gotorsign{\faMapSigns}   % symbole utilisé
   \newcommand{\gotorbox}[1]{%
-    \awesomebox{\gotorsign}{\aweboxrulewidth}{black}{#1}}
+    \awesomebox{\faMapSigns}{\aweboxrulewidth}{black}{#1}}
 
   %% Boite pour le nom du fichier de script correspondant au début des
   %% sections d'exemples.
@@ -489,6 +501,8 @@
 \listoftables*
 \cleartorecto
 \listoffigures*
+\cleartorecto
+\listofvideos*
 
 %% Vignette tirée de xkcd.com
 \cleartoverso

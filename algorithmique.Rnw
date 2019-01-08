@@ -112,12 +112,9 @@ sort(c(4, -1, 2, 6))
 <<echo=TRUE>>=
 rank(c(4, -1, 2, 6))
 @
-\item[\href{https://youtu.be/uC-zkzwsCVY}{\Icode{order}}] \index{ordre}ordre
-  \capsule{https://youtu.be/uC-zkzwsCVY}{} d'extraction des éléments d'un
+\item[\Icode{order}] \index{ordre}ordre d'extraction des éléments d'un
   vecteur pour les placer en ordre croissant ou décroissant
-<<echo=TRUE>>=
-order(c(4, -1, 2, 6))
-@
+  <<echo=TRUE>>= order(c(4, -1, 2, 6)) @
 \item[\Icode{rev}] vecteur \index{renverser}renversé
 <<echo=TRUE>>=
 rev(1:10)
@@ -127,6 +124,11 @@ rev(1:10)
 unique(c(2, 4, 2, 5, 9, 5, 0))
 @
 \end{ttscript}
+
+\videobox{\link{https://youtu.be/uC-zkzwsCVY}{Fonction \code{order}}}{%
+  Visionnez la \link{https://youtu.be/uC-zkzwsCVY}{vidéo sur
+    la fonction \icode{order}} qui explique plus en détails les
+  différences entre les fonctions \icode{sort}, \icode{order} et \icode{rank}.}
 
 \subsection{Recherche}
 \label{sec:internes:fonctions:recherche}

@@ -116,9 +116,7 @@ dans ces domaines, R devient, avec \index{Python}Python, la
 R est un environnement intégré de manipulation de données, de calcul
 et de préparation de graphiques. Toutefois, ce n'est pas seulement un
 «autre» environnement statistique (comme SPSS ou SAS, par exemple),
-mais aussi un %
-\capsule{https://youtu.be/FnoMjJ9Knl0}{langage de programmation} %
-complet et autonome.
+mais aussi un langage de programmation complet et autonome.
 
 Tel que mentionné précédemment, le R est un langage principalement
 inspiré de Scheme\index{Scheme} \citep{Sussman:scheme:1996} et du
@@ -150,6 +148,10 @@ particulièrement intéressantes, on note:
 \item programmes courts, en général quelques lignes de code seulement;
 \item temps de développement très court.
 \end{itemize}
+
+\videobox{\link{https://youtu.be/FnoMjJ9Knl0}{Présentation de R}}{%
+  Visionnez la vidéo de
+  \link{https://youtu.be/FnoMjJ9Knl0}{présentation de R}.}
 
 
 \section{Interfaces}
@@ -440,8 +442,8 @@ Les étapes 1 et 2 sont interchangeables, tout comme les étapes 4, 5 et
 détaillée lorsque l'on utilise GNU~Emacs, ou l'\autoref{chap:rstudio}
 pour l'environnement intégré RStudio.
 
-\gotorbox{C'est le temps de vous lancer dans une première session de
-  travail avec R.
+\gotorbox{C'est le temps de
+  vous lancer dans une première session de travail avec R.
 
   Le fichier de script \code{\scriptfilename} livré avec le présent
   document et reproduit à la \autoref{sec:presentation:exemples}

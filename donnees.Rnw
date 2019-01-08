@@ -58,11 +58,11 @@ spécialisées pour l'analyse de données.
 
 R étant un langage spécialisé dans les calculs mathématiques, il
 supporte tout naturellement et de manière intuitive --- à une
-exception près, comme nous le verrons --- les
-\capsule{https://youtu.be/6P2cFe3DBfw}{matrices et tableaux}. Dans la
-terminologie de R, une matrice est un tableau rectangulaire de nombres
-à deux dimensions, alors qu'un tableau (\emph{array}) est la
-généralisation à plus de deux dimensions.\footnote{%
+exception près, comme nous le verrons --- les matrices et les
+tableaux. Dans la terminologie de R, une matrice est un tableau
+rectangulaire de nombres à deux dimensions, alors qu'un tableau
+(\emph{array}) est la généralisation à plus de deux
+dimensions.\footnote{%
   Il est donc correct de dire qu'une matrice est un tableau à deux
   dimensions.} %
 
@@ -232,6 +232,13 @@ même nombre de lignes.
 n <- matrix(1:4, nrow = 2)
 cbind(m, n)
 @
+
+\videobox{\link{https://youtu.be/6P2cFe3DBfw}{Matrices et tableaux}}{%
+  Visionnez la vidéo sur les
+  \link{https://youtu.be/6P2cFe3DBfw}{matrices et tableaux} en
+  complément de la présentation ci-dessus. Grâce à des représentations
+  visuelles, elle facilite la compréhension des opérations de création
+  et d'indiçage des matrices et des tableaux.}
 
 \gotorbox{Étudiez les lignes \reflines{donnees:matrice}
   du fichier de script \code{\scriptfilename}
@@ -1056,11 +1063,15 @@ bucketsort <- function(x, max, nbuckets)
     bon format avec \code{matrix}. Remarquer comment l'on peut
     importer directement depuis Internet en spécifiant une adresse URL
     comme nom de fichier.
-<<echo=TRUE>>=
+<<echo=TRUE, eval=FALSE>>=
 x <- matrix(
     scan("http://lib.stat.cmu.edu/datasets/boston",
          skip = 22),
     ncol = 14, byrow = TRUE)
+@
+<<echo=FALSE, eval=TRUE>>=
+x <- matrix(scan("data/boston", skip = 22),
+            ncol = 14, byrow = TRUE)
 @
     Juste pour le plaisir, amusons-nous à extraire les
     noms des variables (colonnes) dans l'entête du fichier. Ils

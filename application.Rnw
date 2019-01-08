@@ -106,9 +106,8 @@ apply(x, 1, sum)
 apply(x, 2, sum)
 @
 
-La \capsule{https://youtu.be/1sNAMWiPs4E}{fonction \Icode{apply}}
-s'utilise autant avec les matrices qu'avec les tableaux. Sa syntaxe
-complète est la suivante:
+La fonction \Icode{apply} s'utilise autant avec les matrices qu'avec
+les tableaux. Sa syntaxe complète est la suivante:
 \begin{Schunk}
 \begin{Verbatim}
 apply(X, MARGIN, FUN, ...)
@@ -206,6 +205,11 @@ apply(x, c(1, 2), sum)
 apply(x, c(2, 3), sum)
 apply(x, c(1, 3), sum)
 @
+
+\videobox{\link{https://youtu.be/1sNAMWiPs4E}{Fonction \code{apply}}}{%
+  La vidéo sur la \link{https://youtu.be/1sNAMWiPs4E}{fonction
+    \icode{apply}} fournit une très utile représentation visuelle des
+  opérations d'application sur les matrices et les tableaux.}
 
 \tipbox{Truc mnémotechnique: la ou les dimensions figurant dans
   l'argument \code{MARGIN} sont celles retenues par le passage de
@@ -351,11 +355,10 @@ n'est pas la fonction la plus intuitive à utiliser, mais elle s'avère
 extrêmement utile pour effectuer plusieurs opérations en une seule
 expression tout en masquant les boucles implicites.
 
-La \capsule{https://youtu.be/cyPUAnieWHw}{fonction \Icode{outer}}
-calcule le \index{produit!extérieur}produit extérieur entre deux
-vecteurs, c'est à dire le résultat de \code{FUN(X[i], Y[j])} pour
-toutes les valeurs des indices \code{i} et \code{j}. La syntaxe de la
-fonction est la suivante:
+La fonction \Icode{outer} calcule le \index{produit!extérieur}produit
+extérieur entre deux vecteurs, c'est à dire le résultat de
+\code{FUN(X[i], Y[j])} pour toutes les valeurs des indices \code{i} et
+\code{j}. La syntaxe de la fonction est la suivante:
 \begin{Schunk}
 \begin{Verbatim}
 outer(X, Y, FUN, ...)
@@ -376,6 +379,11 @@ outer(c(1, 2, 5), c(2, 3, 6))
 @
 
 L'opérateur \Icode{\%o\%} est un raccourci de \code{outer(X, Y, "*")}.
+
+\videobox{\link{https://youtu.be/cyPUAnieWHw}{Fonction \code{outer}}}{%
+  Visionnez la vidéo sur la
+  \link{https://youtu.be/cyPUAnieWHw}{fonction \icode{outer}} pour
+  mieux comprendre le rôle de cette fonction.}
 
 \gotorbox{Étudiez les lignes \reflines{application:outer}
   du fichier de script \code{\scriptfilename}
