@@ -738,11 +738,10 @@ unlink("carburant.csv")
   des noms, par exemple. Si les accents n'apparaissent pas
   correctement dans R, c'est que le type d'encodage utilisé par R par
   défaut ne correspond pas à celui du fichier. Ce problème est
-  particulièrement fréquent sous Windows. Pour y remédier, ajoutez
-  l'option \code{encoding = "UTF-8"} aux appels des fonctions de la
-  famille \icode{read.table}.}
-
-
+  particulièrement fréquent sous Windows. Pour y remédier, utilisez
+  l'option \code{encoding} dans les appels des fonctions de la famille
+  \icode{read.table}. Par exemple, si le fichier de données est encodé
+  en UTF-8, ajoutez l'option \code{encoding = "UTF-8"}.}
 
 \subsection{Exportation de données}
 \label{sec:donnees:import-export:write}
