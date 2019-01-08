@@ -6,9 +6,20 @@
 
 ## Nouveautés
 
+- Ajout d'une liste des vidéos dans les pages frontispices. De plus,
+  les liens vers des vidéos sont maintenant présentés dans des blocs
+  signalétiques plutôt que par un symbole de lecture vidéo dans la
+  marge.
 - Ajout d'une astuce au chapitre 7 sur l'utilisation de l'option
   `encoding = "UTF-8"` dans les appels de `read.table`.
 - Ajout d'un exercice au chapitre 7.
+
+## Autres changements
+
+- La table des matières, la liste des tableaux, la liste des figures
+  et la (nouvelle) liste des vidéos apparaissent désormais dans la
+  table des matières. Ceci est surtout utile pour la table des
+  matières logique du document PDF.
 
 
 # 2018.12 (2018-12-12)
