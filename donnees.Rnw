@@ -838,7 +838,7 @@ unlink("carburant.csv")
 
 \begin{exercice}
   \index{indiçage!matrice}
-  Soit \code{x} une matrice $10 \times 7$ obtenue aléatoirement avec
+  Soit \code{x} une matrice $7 \times 10$ obtenue aléatoirement avec
 <<echo=TRUE,eval=FALSE>>=
 x <- matrix(sample(1:100, 70), 7, 10)
 @

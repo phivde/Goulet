@@ -209,7 +209,7 @@ résultat de la fonction à un objet.
 
 \gotorbox{Étudiez les lignes \reflines{fonctions:definition}
   du fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:premiers:exemples} pour des exemples
+  reproduit à la \autoref{sec:fonctions:exemples} pour des exemples
   additionnels de définitions de fonctions et, surtout, d'utilisation
   des fonctions anonymes et de l'argument `\code{...}`.}
 
@@ -492,7 +492,7 @@ de contrôler l'exécution d'une fonction.
 
 \gotorbox{Étudiez les lignes \reflines{fonctions:controle}
   du fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:premiers:exemples}.}
+  reproduit à la \autoref{sec:fonctions:exemples}.}
 
 
 \section{Récursivité}
@@ -1186,7 +1186,7 @@ carré, \code{\#}; les commentaires de deuxième niveau débutent par
 deux carrés, \code{\#\#}, etc.
 
 \gotorbox{Le fichier de script \code{\scriptfilename} reproduit à la
-  \autoref{sec:premiers:exemples} contient, aux lignes
+  \autoref{sec:fonctions:exemples} contient, aux lignes
   \reflines{fonctions:pratiques}, un long exemple d'amélioration du
   style et de la présentation du code d'une fonction, ainsi qu'un
   exemple de documentation d'une fonction. Vous y trouverez même un
