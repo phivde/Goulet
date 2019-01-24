@@ -12,9 +12,9 @@ Le dépôt utilise l'interface [Atlassian BitBucket Server](https://www.atlassia
 
 La branche `master` du dépôt est réservée en écriture au gestionnaire du projet.
 
-Pour collaborer au projet, vous devez publier vos modifications dans une nouvelle branche et effectuer une demande de tirage (*pull request*) vers la branche `master`. La procédure à suivre à partir d'une invite de commande (Git Bash sous Windows ou Terminal sous macOS) est la suivante.
+Pour collaborer au projet, vous devez publier vos modifications dans une nouvelle branche et effectuer une demande de tirage (*pull request*) vers la branche `master`. La procédure à suivre à partir d'une interface en ligne de commande (Git Bash sous Windows ou Terminal sous macOS) est la suivante.
 
-1. Si  vous travaillez sur le code source pour la première fois, déplacez-vous (avec la commande `cd` à la ligne de commande) dans le répertoire dans lequel vous voulez enregistrer le code source du projet (le répertoire `programmer-avec-r-develop` sera créé automatiquement), clonez le dépôt et déplacez-vous ensuite dans le dossier du code source:
+1. Si  vous travaillez sur le code source pour la première fois, déplacez-vous avec la commande `cd` dans le répertoire dans lequel vous voulez enregistrer le code source du projet (le répertoire `programmer-avec-r-develop` sera créé automatiquement), clonez le dépôt et déplacez-vous ensuite dans le dossier du code source:
 
 ```
 git clone https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-develop.git
@@ -23,7 +23,7 @@ cd programmer-avec-r-develop
 
 **OU**
 
-1. Si vous avez déjà cloné le dépôt dans le passé et que vous voulez reprendre le travail sur le code source, déplacez-vous (avec la commande `cd` à la ligne de commande) dans le répertoire du code source, puis mettez à jour votre copie locale du dépôt depuis la branche `master`:
+1. Si vous avez déjà cloné le dépôt dans le passé et que vous voulez reprendre le travail sur le code source, déplacez-vous avec la commande `cd` dans le répertoire du code source, puis mettez à jour votre copie locale du dépôt depuis la branche `master`:
 
 ```
 git checkout master
