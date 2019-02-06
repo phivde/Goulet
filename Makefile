@@ -23,7 +23,7 @@
 ## Auteur: Vincent Goulet
 ##
 ## Ce fichier fait partie du projet "Programmer avec R"
-## http://gitlab.com/vigou3/programmer-avec-r
+## https://gitlab.com/vigou3/programmer-avec-r
 
 
 ## Principaux fichiers
