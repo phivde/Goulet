@@ -89,19 +89,19 @@ all: pdf
 FORCE: ;
 
 %.tex: %.Rnw
-	$(SWEAVE) '$<'
+	${SWEAVE} '$<'
 
 %.Rout: %.R
 	echo "options(error=expression(NULL))" | cat - $< | \
 	  sed -e 's/`.*`//' \
 	      -e 's/ *#-\*-.*//' \
 	  > $<.tmp
-	$(RBATCH) $<.tmp $@
-	$(RM) $<.tmp
+	${RBATCH} $<.tmp $@
+	${RM} $<.tmp
 
-$(MASTER): ${MASTER:.pdf=.tex} ${RNWFILES:.Rnw=.tex} $(TEXFILES) $(SCRIPTS) \
+${MASTER}: ${MASTER:.pdf=.tex} ${RNWFILES:.Rnw=.tex} ${TEXFILES} ${SCRIPTS} \
 	   $(wildcard data/*) $(wildcard images/*)
-	$(TEXI2DVI) $(MASTER:.pdf=.tex)
+	${TEXI2DVI} ${MASTER:.pdf=.tex}
 
 ${COLLABORATEURS}: FORCE
 	git log --pretty="%an%n" | sort | uniq | \
@@ -110,11 +110,11 @@ ${COLLABORATEURS}: FORCE
 	       { print $$0 } \
 	       END { print "\n[1] Noms tels qu'\''ils figurent dans le journal du dépôt Git\n    ${REPOSURL}" }' > ${COLLABORATEURS}
 
-pdf: $(MASTER)
+pdf: ${MASTER}
 
-tex: $(RNWFILES:.Rnw=.tex)
+tex: ${RNWFILES:.Rnw=.tex}
 
-Rout: $(SCRIPTS:.R=.Rout)
+Rout: ${SCRIPTS:.R=.Rout}
 
 contrib: ${COLLABORATEURS}
 
@@ -197,8 +197,8 @@ publish:
 clean:
 	${RM} ${MASTER} \
 	      ${ARCHIVE} \
-	      $(RNWFILES:.Rnw=.tex) \
-	      $(SCRIPTS:.R=.Rout) \
+	      ${RNWFILES:.Rnw=.tex} \
+	      ${SCRIPTS:.R=.Rout} \
 	      ${COLLABORATEURS} \
 	      ${OTHER} \
 	      solutions-* \
