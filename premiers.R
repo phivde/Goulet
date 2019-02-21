@@ -112,7 +112,7 @@ y                          # ... plutôt une affectation
 ## calcul et qui ne sont entiers qu'en apparence.
 ##
 ## [Pour en savoir (un peu) plus:
-##  http://floating-point-gui.de/formats/fp/]
+##  https://floating-point-gui.de/formats/fp/]
 1.2 + 1.4 + 2.8            # 5.4 en apparence
 1.2 + 1.4 + 2.8 == 5.4     # non?!?
 0.3/0.1 == 3               # à gauche: faux entier `\labelline{premiers:fondamentales:fin}`

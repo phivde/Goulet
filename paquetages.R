@@ -53,7 +53,7 @@ library("MASS")
 ## qu'elle apparait dans le résultat de '.libPaths()',
 ## ci-dessus, le paquetage sera automatiquement installé dans
 ## celle-ci.
-install.packages("actuar", repos = "http://cran.ca.r-project.org")
+install.packages("actuar", repos = "https://cran.ca.r-project.org")
 
 ## Chargement du paquetage dans la session de travail. R
 ## recherche le paquetage dans toutes les bibliothèques de

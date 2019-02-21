@@ -40,15 +40,15 @@ La compilation du document requiert les polices de caractères suivantes:
 
 - [Lucida Bright OT, Lucida Math OT et Lucida Mono DK](https://tug.org/store/lucida/). Ces polices de très grande qualité sont payantes. La Bibliothèque de l'Université Laval détient une licence d'utilisation des polices Lucida. Les étudiants et le personnel de l'Université peuvent s'en procurer une copie gratuitement en écrivant à <lucida@bibl.ulaval.ca>.
 - [Fira Sans](https://www.fontsquirrel.com/fonts/fira-sans) (les versions OpenType de Mozilla) en graisses *Book*, *Semi Bold*, *Book Italic* et *Semi Bold Italic*.
-- [Font Awesome](http://fontawesome.io/). Cette police fournit une multitude d'icônes et de symboles. Téléchargez la plus récente version de la distribution et installez la police `fontawesome-webfont.ttf` du dossier `fonts`.
+- [Font Awesome](https://fontawesome.com/). Cette police fournit une multitude d'icônes et de symboles. Téléchargez la plus récente version de la distribution et installez la police `fontawesome-webfont.ttf` du dossier `fonts`.
 
 ### Outils Unix additionnels (Windows)
 
 La composition du document de référence est rendue plus facile par l'utilisation de l'outil Unix standard `make` qui n'est pas livré avec Windows. 
 
-Il y a différentes manières d'installer des outils Unix sous Windows. Je recommande l'environnement de compilation [MSYS2](http://www.msys2.org/). (Vous devez savoir si vous disposez d'[une version 32 ou 64 bits de Windows](https://support.microsoft.com/fr-ca/help/15056/windows-7-32-64-bit-faq) et choisir la distribution de MSYS2 en conséquence.)
+Il y a différentes manières d'installer des outils Unix sous Windows. Je recommande l'environnement de compilation [MSYS2](https://www.msys2.org/). (Vous devez savoir si vous disposez d'[une version 32 ou 64 bits de Windows](https://support.microsoft.com/fr-ca/help/15056/windows-7-32-64-bit-faq) et choisir la distribution de MSYS2 en conséquence.)
 
-- [Télécharger MSYS2](http://www.msys2.org/) (Windows seulement)
+- [Télécharger MSYS2](https://www.msys2.org/) (Windows seulement)
 
 Une fois l'installation de MSYS2 complétée (bien lire les instructions sur la page du projet), démarrez l'invite de commande MSYS et entrez
 

@@ -1393,7 +1393,7 @@ function(x = 0, y = NULL, z) \meta{corps}
     \item \code{x = 4}, \code{y = 3}, \code{z = 2}
     \item \code{x = 0}, \code{y = NULL}, \code{z = 2}
     \item \code{x = 3}, \code{y = 4}, \code{z = 2}
-    \item \link{http://i0.kym-cdn.com/entries/icons/original/000/000/157/itsatrap.jpg}{C'est un piège!} %
+    \item \link{https://i0.kym-cdn.com/entries/icons/original/000/000/157/itsatrap.jpg}{C'est un piège!} %
       Cet appel n'est pas valide puisque l'argument \code{z} est
       manquant.
     \end{enumerate}

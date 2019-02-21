@@ -168,7 +168,7 @@ principale.
 
 Dès les débuts de R, les développeurs et utilisateurs ont mis sur pied
 le dépôt central de paquetages
-\link{http://cran.r-project.org}{\emph{Comprehensive R Archive
+\link{https://cran.r-project.org}{\emph{Comprehensive R Archive
     Network}} (CRAN). Ce site compte aujourd'hui des milliers de
 paquetages et le nombre ne cesse de croitre.
 
