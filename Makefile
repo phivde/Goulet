@@ -145,7 +145,7 @@ zip: ${MASTER} ${README} ${NEWS} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS
 check-url:
 	@echo ----- Checking urls in sources...
 	$(eval url=$(shell grep -E -o -h 'https?:\/\/[^./]+(?:\.[^./]+)+(?:\/[^ ]*)?' \
-	                   ${MASTER:.pdf=.tex} ${RNWFILES:.Rnw=.tex} ${TEXFILES} ${SCRIPTS} \
+	                   ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES} ${SCRIPTS} \
 		   | cut -d \} -f 1 \
 		   | sort | uniq))
 	for u in ${url}; \
