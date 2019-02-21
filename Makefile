@@ -87,7 +87,7 @@ TAGNAME = v${VERSION}
 
 all: pdf
 
-.PHONY: pdf tex Rout contrib zip release upload create-release publish clean
+.PHONY: pdf tex Rout contrib zip release check-status upload create-release publish check-url clean
 
 FORCE: ;
 
