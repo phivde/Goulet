@@ -17,6 +17,9 @@
 ## 'make release' crée une nouvelle version dans GitLab, téléverse le
 ## fichier .zip et modifie les liens de la page web.
 ##
+## 'make check-url' vérifie la validité de toutes les url présentes
+## dans les sources du document.
+##
 ## 'make all' est équivalent à 'make pdf' question d'éviter les
 ## publications accidentelles.
 ##
@@ -118,7 +121,7 @@ Rout: ${SCRIPTS:.R=.Rout}
 
 contrib: ${COLLABORATEURS}
 
-release: zip check upload create-release publish
+release: zip check-status upload create-release publish
 
 zip: ${MASTER} ${README} ${NEWS} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS} ${CONTRIBUTING}
 	if [ -d ${BUILDDIR} ]; then ${RM} ${BUILDDIR}; fi
@@ -139,7 +142,21 @@ zip: ${MASTER} ${README} ${NEWS} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS
 	if [ -e ${COLLABORATEURS} ]; then ${RM} ${COLLABORATEURS}; fi
 	${RM} ${BUILDDIR}
 
-check:
+check-url:
+	@echo ----- Checking urls in sources...
+	$(eval url=$(shell grep -E -o -h 'https?:\/\/[^./]+(?:\.[^./]+)+(?:\/[^ ]*)?' \
+	                   ${MASTER:.pdf=.tex} \
+		   | cut -d \} -f 1 \
+		   | sort | uniq))
+	for u in ${url}; \
+	    do if curl --output /dev/null --silent --head --fail --max-time 5 $$u; then \
+	        echo "URL exists: $$u"; \
+	    else \
+		echo "URL does not exist (or times out): $$u"; \
+	    fi; \
+	done
+
+check-status:
 	@echo ----- Checking status of working directory...
 	@if [ "master" != $(shell git branch --list | grep ^* | cut -d " " -f 2-) ]; then \
 	     echo "not on branch master"; exit 2; fi
