@@ -142,20 +142,6 @@ zip: ${MASTER} ${README} ${NEWS} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS
 	if [ -e ${COLLABORATEURS} ]; then ${RM} ${COLLABORATEURS}; fi
 	${RM} ${BUILDDIR}
 
-check-url:
-	@echo ----- Checking urls in sources...
-	$(eval url=$(shell grep -E -o -h 'https?:\/\/[^./]+(?:\.[^./]+)+(?:\/[^ ]*)?' \
-	                   ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES} ${SCRIPTS} \
-		   | cut -d \} -f 1 \
-		   | sort | uniq))
-	for u in ${url}; \
-	    do if curl --output /dev/null --silent --head --fail --max-time 5 $$u; then \
-	        echo "URL exists: $$u"; \
-	    else \
-		echo "URL does not exist (or times out): $$u"; \
-	    fi; \
-	done
-
 check-status:
 	@echo ----- Checking status of working directory...
 	@if [ "master" != $(shell git branch --list | grep ^* | cut -d " " -f 2-) ]; then \
@@ -210,6 +196,21 @@ publish:
 	  ${MAKE} && \
 	  git checkout master
 	@echo ----- Done publishing
+
+check-url: ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES} ${SCRIPTS}
+	@echo ----- Checking urls in sources...
+	$(eval url=$(shell grep -E -o -h 'https?:\/\/[^./]+(?:\.[^./]+)+(?:\/[^ ]*)?' $? \
+		   | cut -d \} -f 1 \
+		   | cut -d ] -f 1 \
+		   | cut -d '"' -f 1 \
+		   | sort | uniq))
+	for u in ${url}; \
+	    do if curl --output /dev/null --silent --head --fail --max-time 5 $$u; then \
+	        echo "URL exists: $$u"; \
+	    else \
+		echo "URL does not exist (or times out): $$u"; \
+	    fi; \
+	done
 
 clean:
 	${RM} ${MASTER} \
