@@ -87,8 +87,6 @@ TAGNAME = v${VERSION}
 
 all: pdf
 
-.PHONY: pdf tex Rout contrib zip release check-status upload create-release publish check-url clean
-
 FORCE: ;
 
 %.tex: %.Rnw
@@ -113,16 +111,22 @@ ${COLLABORATEURS}: FORCE
 	       { print $$0 } \
 	       END { print "\n[1] Noms tels qu'\''ils figurent dans le journal du dépôt Git\n    ${REPOSURL}" }' > ${COLLABORATEURS}
 
+.PHONY: pdf
 pdf: ${MASTER}
 
+.PHONY: tex
 tex: ${RNWFILES:.Rnw=.tex}
 
+.PHONY: Rout
 Rout: ${SCRIPTS:.R=.Rout}
 
+.PHONY: contrib
 contrib: ${COLLABORATEURS}
 
+.PHONY: release
 release: zip check-status upload create-release publish
 
+.PHONY: zip
 zip: ${MASTER} ${README} ${NEWS} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS} ${CONTRIBUTING}
 	if [ -d ${BUILDDIR} ]; then ${RM} ${BUILDDIR}; fi
 	mkdir -p ${BUILDDIR}
@@ -142,6 +146,7 @@ zip: ${MASTER} ${README} ${NEWS} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS
 	if [ -e ${COLLABORATEURS} ]; then ${RM} ${COLLABORATEURS}; fi
 	${RM} ${BUILDDIR}
 
+.PHONY: check-status
 check-status:
 	@echo ----- Checking status of working directory...
 	@if [ "master" != $(shell git branch --list | grep ^* | cut -d " " -f 2-) ]; then \
@@ -152,6 +157,7 @@ check-status:
 	    echo "unpushed commits in repository; pushing to origin"; \
 	     git push; fi
 
+.PHONY: upload
 upload:
 	@echo ----- Uploading archive to GitLab...
 	$(eval upload_url_markdown=$(shell curl --form "file=@${ARCHIVE}" \
@@ -163,6 +169,7 @@ upload:
 	@echo "${upload_url_markdown}"
 	@echo ----- Done uploading files
 
+.PHONY: create-release
 create-release:
 	@echo ----- Creating release on GitLab...
 	if [ -e relnotes.in ]; then ${RM} relnotes.in; fi
@@ -190,6 +197,7 @@ create-release:
 	${RM} relnotes.in
 	@echo ----- Done creating the release
 
+.PHONY: publish
 publish:
 	@echo ----- Publishing the web page...
 	git checkout pages && \
@@ -197,6 +205,7 @@ publish:
 	  git checkout master
 	@echo ----- Done publishing
 
+.PHONY: check-url
 check-url: ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES} ${SCRIPTS}
 	@echo ----- Checking urls in sources...
 	$(eval url=$(shell grep -E -o -h 'https?:\/\/[^./]+(?:\.[^./]+)+(?:\/[^ ]*)?' $? \
@@ -212,6 +221,7 @@ check-url: ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES} ${SCRIPTS}
 	    fi; \
 	done
 
+.PHONY: clean
 clean:
 	${RM} ${MASTER} \
 	      ${ARCHIVE} \
