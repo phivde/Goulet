@@ -40,7 +40,7 @@ La compilation du document requiert les polices de caractères suivantes:
 
 - [Lucida Bright OT, Lucida Math OT et Lucida Mono DK](https://tug.org/store/lucida/). Ces polices de très grande qualité sont payantes. La Bibliothèque de l'Université Laval détient une licence d'utilisation des polices Lucida. Les étudiants et le personnel de l'Université peuvent s'en procurer une copie gratuitement en écrivant à <lucida@bibl.ulaval.ca>.
 - [Fira Sans](https://www.fontsquirrel.com/fonts/fira-sans) (les versions OpenType de Mozilla) en graisses *Book*, *Semi Bold*, *Book Italic* et *Semi Bold Italic*.
-- [Font Awesome](https://fontawesome.com/). Cette police fournit une multitude d'icônes et de symboles. Téléchargez la plus récente version de la distribution et installez la police `fontawesome-webfont.ttf` du dossier `fonts`.
+- [Font Awesome](https://fontawesome.com/). Cette police fournit une multitude d'icônes et de symboles. Téléchargez [version 4.7.0](https://fontawesome.com/4.7.0 ) de la distribution et installez la police `fontawesome-webfont.ttf` du dossier `fonts`.
 
 ### Outils Unix additionnels (Windows)
 
