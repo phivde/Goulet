@@ -44,14 +44,20 @@ files:
 	cd content && \
 	  awk 'BEGIN { FS = "/"; OFS = "/" } \
 	       /^## Édition/ { print; getline; print; getline; \
-	                       gsub(/[0-9]{4}\.[0-9]{2}(-[0-9]*)?([a-z]*)?/, "${VERSION}") } \
+	                       gsub(/[0-9]{4}\.[0-9]{2}(-[0-9]*[a-z]*)?/, "${VERSION}") } \
 	       1' \
 	      _index.md > tmpfile && \
 	  mv tmpfile _index.md
 	cd layouts/partials && \
 	  awk 'BEGIN { FS = "/"; OFS = "/" } \
-	       /${url}\/uploads/ { $$7 = "${file_id}" } \
-	       /${url}\/tags/ { $$7 = "${TAGNAME}" } 1' \
+	       /${url}\/uploads/ { if (NF != 8) { \
+		                       print "invalid number of fields in the uploads url" > "/dev/stderr"; \
+				       exit 1; } \
+				   $$7 = "${file_id}" } \
+	       /${url}\/tags/ { if (NF != 8) { \
+		                    print "invalid number of fields in the tags url" > "/dev/stderr"; \
+				    exit 1; } \
+		                $$7 = "${TAGNAME}" } 1' \
 	       site-header.html > tmpfile && \
 	  mv tmpfile site-header.html
 
