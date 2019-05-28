@@ -90,6 +90,8 @@
   \definecolor{codebg}{named}{LightYellow1} % fond code R
   \definecolor{prob}{named}{orange}         % encadrés «problème»
   \definecolor{lineno}{named}{gray}         % numéros de lignes
+  \colorlet{TFFrameColor}{black}            % encadrés (cadre)
+  \colorlet{TFTitleColor}{white}            % encadrés (titre)
   \definecolor{rouge}{rgb}{0.85,0,0.07} % rouge bandeau identitaire
   \definecolor{or}{rgb}{1,0.8,0}        % or bandeau identitaire
 
@@ -270,8 +272,6 @@
   %% Liste d'objectifs au début des chapitres dans un encadré
   %% basé sur titled-frame, ci-dessus.
   \newenvironment{objectifs}{%
-    \colorlet{TFFrameColor}{black}%
-    \colorlet{TFTitleColor}{white}%
     \begin{titled-frame}{\rule[-7pt]{0pt}{20pt}\sffamily Objectifs du chapitre}
       \setlength{\parindent}{0pt}
       \small\sffamily
