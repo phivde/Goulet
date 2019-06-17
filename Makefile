@@ -8,6 +8,9 @@
 ## 'make tex' crée les fichiers .tex à partir des fichiers .Rnw avec
 ## Sweave.
 ##
+## 'make script' crée les fichiers .R à partir des fichiers .Rnw avec
+## Sweave (et Stangle).
+##
 ## 'make contrib' crée le fichier COLLABORATEURS.
 ##
 ## 'make Rout' crée les fichiers .Rout avec R CMD BATCH.
@@ -48,9 +51,7 @@ RNWFILES = $(wildcard *.Rnw)
 TEXFILES = $(addsuffix .tex,\
                        $(filter-out $(basename ${RNWFILES} ${MASTER} $(wildcard solutions-*.tex)),\
                                     $(basename $(wildcard *.tex))))	
-SCRIPTS = $(addsuffix .R,\
-                      $(filter $(basename $(wildcard *.R)),\
-                               $(basename ${RNWFILES} ${TEXFILES})))
+SCRIPTS = ${RNWFILES:.Rnw=.R}
 
 ## Informations de publication extraites du fichier maitre
 TITLE = $(shell grep "\\\\title" ${MASTER:.pdf=.tex} \
@@ -89,8 +90,17 @@ all: pdf
 
 FORCE: ;
 
-%.tex: %.Rnw
+## Stangle insère une ligne qui débute par 'getOption' lorsque
+## l'entête du bloc de code contient une option additionnelle. Il faut
+## supprimer cette ligne. Stangle insère aussi deux lignes blanches
+## entre chaque bloc de code, alors qu'une seule suffit. La commande
+## 'sed' apporte les correctifs.
+%.tex %.R: %.Rnw
 	${SWEAVE} '$<'
+	sed -i "" \
+	    -e '/^getOption/d' \
+	    -e 'N;/^\n$$/D;P;D;' \
+	    ${<:.Rnw=.R}
 
 %.Rout: %.R
 	echo "options(error=expression(NULL))" | cat - $< | \
@@ -100,7 +110,7 @@ FORCE: ;
 	${RBATCH} $<.tmp $@
 	${RM} $<.tmp
 
-${MASTER}: ${MASTER:.pdf=.tex} ${RNWFILES:.Rnw=.tex} ${TEXFILES} ${SCRIPTS} \
+${MASTER}: ${MASTER:.pdf=.tex} ${RNWFILES:.Rnw=.tex} ${TEXFILES} \
 	   $(wildcard data/*) $(wildcard images/*)
 	${TEXI2DVI} ${MASTER:.pdf=.tex}
 
@@ -116,6 +126,9 @@ pdf: ${MASTER}
 
 .PHONY: tex
 tex: ${RNWFILES:.Rnw=.tex}
+
+.PHONY: script
+script: ${SCRIPTS}
 
 .PHONY: Rout
 Rout: ${SCRIPTS:.R=.Rout}
