@@ -1,0 +1,56 @@
+## Copyright (C) 2019 Vincent Goulet
+##
+## Ce fichier fait partie du projet
+## «Programmer avec R»
+## https://gitlab.com/vigou3/programmer-avec-r
+##
+## Cette création est mise à disposition sous licence
+## Attribution-Partage dans les mêmes conditions 4.0
+## International de Creative Commons.
+## https://creativecommons.org/licenses/by-sa/4.0/
+
+## Longueur des lignes pour l'affichage avec Sweave
+options(width=52)
+
+## Hook de Sweave pour complètement ignorer les erreurs dans un bloc
+## de code lors de l'étape Stangle. Évite de devoir utiliser 'eval =
+## FALSE' qui placerait le code en commentaires.
+options(SweaveHooks = list(ignore = function() options(error = expression(NULL),
+                                                       show.error.messages = FALSE)))
+
+###
+### getSourceName()
+###
+##  Extrait le nom du fichier source utilisé dans la commande 'Sweave'.
+##
+##  Valeur
+##
+##  Nom du fichier sous forme de chaine de caractères
+##
+getSourceName <- function()
+{
+    args <- commandArgs(TRUE)
+    args <- strsplit(args, 'nextArg', fixed = TRUE)[[1L]]
+    tail(args, 1L)
+}
+
+###
+### renameTangled(file)
+###
+##  supprime le suffixe "-script" du nom du fichier produit par
+##  Stangle sur le fichier 'file'.
+##
+##  Arguments
+##
+##  file: nom du fichier .Rnw
+##
+##  Valeur
+##
+##  Celle de 'file.rename'
+##
+renameTangled <- function(file)
+{
+    filebase <- sub(".Rnw", "", file)
+    file.rename(paste0(filebase, "-script.R"),
+                paste0(filebase, ".R"))
+}
