@@ -275,7 +275,7 @@ a[2 - x %% 2]              # indiçage à répétition
 ## Attention à cette erreur commune --- et parfois difficile à
 ## détecter: '=' n'est PAS l'opérateur de comparaison entre
 ## deux valeurs.
-##! 5 = 2                      # erreur de syntaxe
+##-!- 5 = 2                      # erreur de syntaxe
 
 ## L'opérateur de comparaison est plutôt '=='.
 5 == 2                     # comparaison
@@ -769,8 +769,8 @@ foo <- 5                   # valide
 foo.123 <- 5               # valide
 foo_123 <- 5               # valide
 .foo <- 5                  # valide
-##! 123foo <- 5                # invalide; commence par un chiffre
-##! .123foo <- 5               # invalide; point suivi d'un chiffre
+##-!- 123foo <- 5                # invalide; commence par un chiffre
+##-!- .123foo <- 5               # invalide; point suivi d'un chiffre
 
 ## Liste des objets dans l'espace de travail. Les objets dont
 ## le nom commence par un point sont cachés, comme à la ligne
@@ -780,8 +780,8 @@ ls(all.names = TRUE)       # objets cachés aussi affichés
 
 ## R est sensible à la casse
 foo <- 1
-##! Foo
-##! FOO
+##-!- Foo
+##-!- FOO
 
 ## MODES ET TYPES DE DONNÉES
 
@@ -828,7 +828,7 @@ x[1] <- 1                  # définition du permier élément
 
 ## Si un objet n'existe pas au préalable, il est impossible
 ## d'affecter directement la valeur d'un élément.
-##! X[1] <- 1                  # impossible, 'X' n'existe pas
+##-!- X[1] <- 1                  # impossible, 'X' n'existe pas
 
 ## ATTRIBUTS
 
@@ -1622,11 +1622,11 @@ sqrt(x)                    # racine carrée
 abs(x - mean(x))           # valeur absolue
 gamma(1:5)                 # fonction gamma
 factorial(0:4)             # factorielle
-##! ?gamma                     # toutes les fonctions apparentées
+##-!- ?gamma                     # toutes les fonctions apparentées
 cos(seq(0, pi, by = pi/4)) # cosinus
 sin(seq(0, pi, by = pi/4)) # sinus
 tan(seq(0, pi, by = pi/4)) # tangente
-##! ?Trig                      # toutes les fonctions apparentées
+##-!- ?Trig                      # toutes les fonctions apparentées
 
 ## SUITES ET RÉPÉTITION
 

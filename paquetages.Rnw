@@ -217,7 +217,7 @@ search()
 ## Liste de tous les packages installés sur votre système.
 ## Noter que MASS en fait partie. C'est un paquetage livré
 ## avec R, mais qui n'est pas chargé par défaut.
-##! library()
+##-!- library()
 
 ###
 ### UTILISATION D'UN PAQUETAGE
@@ -247,7 +247,7 @@ library("MASS")
 ## qu'elle apparait dans le résultat de '.libPaths()',
 ## ci-dessus, le paquetage sera automatiquement installé dans
 ## celle-ci.
-##! install.packages("actuar", repos = "https://cloud.r-project.org")
+##-!- install.packages("actuar", repos = "https://cloud.r-project.org")
 
 ## Chargement du paquetage dans la session de travail. R
 ## recherche le paquetage dans toutes les bibliothèques de

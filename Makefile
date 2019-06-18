@@ -230,11 +230,10 @@ clean:
 	${RM} ${MASTER} \
 	      ${ARCHIVE} \
 	      ${RNWFILES:.Rnw=.tex} \
+	      ${SCRIPTS} \
 	      ${SCRIPTS:.R=.Rout} \
 	      ${COLLABORATEURS} \
 	      ${OTHER} \
 	      solutions-* \
 	      *-[0-9][0-9][0-9].pdf \
 	      *.aux *.log  *.blg *.bbl *.out *.rel *~ Rplots* .RData
-
-

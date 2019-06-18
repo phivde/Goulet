@@ -602,33 +602,33 @@ vous permettre d'y déceler les problèmes.
 ## pour programmeur. Cela devrait immédiatement faire
 ## ressortir qu'il manque une parenthèse dans l'appel à la
 ## fonction 'Ginv', à l'intérieur de la boucle 'while'.
-##! rgamma_ar <- function(n, shape, rate = 1; scale = 1/rate)
-##! {
-##!     if (shape <= 0 | shape >= 1)
-##!         stop("valeur de shape inadmissible")
-##!
-##!     ratio <- function(x)
-##!         if (x <= 1) exp(-x) else x^(shape - 1)
-##!
-##!     Ginv <- function(x)
-##!     {
-##!         k <- 1 + shape * exp(-1)
-##!         if (x <= 1/k)
-##!             (k * x)^(1/shape)
-##!         else
-##!             -log(((1/shape) + exp(-1)) * (1 - x))
-##!     }
-##!
-##!     x <- numeric(n)
-##!     i <- 1
-##!     while (i < n)
-##!     {
-##!         y <- Ginv(runif(1)
-##!         if (runif(1) <= ratio(y))
-##!             x[i <- i + 1] <- y
-##!     }
-##!     x * scale
-##! }
+##-!- rgamma_ar <- function(n, shape, rate = 1; scale = 1/rate)
+##-!- {
+##-!-     if (shape <= 0 | shape >= 1)
+##-!-         stop("valeur de shape inadmissible")
+##-!-
+##-!-     ratio <- function(x)
+##-!-         if (x <= 1) exp(-x) else x^(shape - 1)
+##-!-
+##-!-     Ginv <- function(x)
+##-!-     {
+##-!-         k <- 1 + shape * exp(-1)
+##-!-         if (x <= 1/k)
+##-!-             (k * x)^(1/shape)
+##-!-         else
+##-!-             -log(((1/shape) + exp(-1)) * (1 - x))
+##-!-     }
+##-!-
+##-!-     x <- numeric(n)
+##-!-     i <- 1
+##-!-     while (i < n)
+##-!-     {
+##-!-         y <- Ginv(runif(1)
+##-!-         if (runif(1) <= ratio(y))
+##-!-             x[i <- i + 1] <- y
+##-!-     }
+##-!-     x * scale
+##-!- }
 
 ## La parenthèse manquante a été ajoutée dans la définition
 ## ci-dessous.
@@ -637,33 +637,33 @@ vous permettre d'y déceler les problèmes.
 ## L'interpréteur R devrait attraper l'erreur de syntaxe à la
 ## toute première ligne, soit le ';' en lieu et place d'une
 ## ','.
-##! rgamma_ar <- function(n, shape, rate = 1; scale = 1/rate)
-##! {
-##!     if (shape <= 0 | shape >= 1)
-##!         stop("valeur de shape inadmissible")
-##!
-##!     ratio <- function(x)
-##!         if (x <= 1) exp(-x) else x^(shape - 1)
-##!
-##!     Ginv <- function(x)
-##!     {
-##!         k <- 1 + shape * exp(-1)
-##!         if (x <= 1/k)
-##!             (k * x)^(1/shape)
-##!         else
-##!             -log(((1/shape) + exp(-1)) * (1 - x))
-##!     }
-##!
-##!     x <- numeric(n)
-##!     i <- 1
-##!     while (i < n)
-##!     {
-##!         y <- Ginv(runif(1))
-##!         if (runif(1) <= ratio(y))
-##!             x[i <- i + 1] <- y
-##!     }
-##!     x * scale
-##! }
+##-!- rgamma_ar <- function(n, shape, rate = 1; scale = 1/rate)
+##-!- {
+##-!-     if (shape <= 0 | shape >= 1)
+##-!-         stop("valeur de shape inadmissible")
+##-!-
+##-!-     ratio <- function(x)
+##-!-         if (x <= 1) exp(-x) else x^(shape - 1)
+##-!-
+##-!-     Ginv <- function(x)
+##-!-     {
+##-!-         k <- 1 + shape * exp(-1)
+##-!-         if (x <= 1/k)
+##-!-             (k * x)^(1/shape)
+##-!-         else
+##-!-             -log(((1/shape) + exp(-1)) * (1 - x))
+##-!-     }
+##-!-
+##-!-     x <- numeric(n)
+##-!-     i <- 1
+##-!-     while (i < n)
+##-!-     {
+##-!-         y <- Ginv(runif(1))
+##-!-         if (runif(1) <= ratio(y))
+##-!-             x[i <- i + 1] <- y
+##-!-     }
+##-!-     x * scale
+##-!- }
 
 ## L'erreur de syntaxe est maintenant corrigée.
 rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
@@ -866,11 +866,11 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
 
 ## Évaluer l'appel de fonction ci-dessous. Il y aura une
 ## erreur.
-##! rgamma_ar(5, 0.5, 1)
+##-!- rgamma_ar(5, 0.5, 1)
 
 ## Afficher la pile des appels de fonctions. On voit que c'est
 ## l'appel à 'Ginv' qui cause problème.
-##! traceback()
+##-!- traceback()
 
 ###
 ### NAVIGATEUR D'ENVIRONNEMENT
@@ -922,7 +922,7 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
     }
     x * scale
 }
-##! rgamma_ar(5, 0.5, 1)
+##-!- rgamma_ar(5, 0.5, 1)
 
 ###
 ### EXEMPLE ADDITIONNEL
@@ -940,22 +940,22 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
 ## bogues. (Afin de préserver cet exemple, copiez le code
 ## erroné plus bas ou dans un autre fichier avant d'y faire
 ## les corrections.)
-##! fibonaci <- function(nb)
-##! {
-##!     x <- 0
-##!     x1 _ 0
-##!     x2 <- 1
-##!     while (n > 0))
-##! x <- x1 + x2
-##! x2 <- x1
-##! x1 <- x
-##! n <- n - 1
-##! }
-##! fibonaci(1)                # devrait donner 0
-##! fibonaci(2)                # devrait donner 1
-##! fibonaci(5)                # devrait donner 3
-##! fibonaci(10)               # devrait donner 34
-##! fibonaci(20)               # devrait donner 4181
+##-!- fibonaci <- function(nb)
+##-!- {
+##-!-     x <- 0
+##-!-     x1 _ 0
+##-!-     x2 <- 1
+##-!-     while (n > 0))
+##-!- x <- x1 + x2
+##-!- x2 <- x1
+##-!- x1 <- x
+##-!- n <- n - 1
+##-!- }
+##-!- fibonaci(1)                # devrait donner 0
+##-!- fibonaci(2)                # devrait donner 1
+##-!- fibonaci(5)                # devrait donner 3
+##-!- fibonaci(10)               # devrait donner 34
+##-!- fibonaci(20)               # devrait donner 4181
 @
 
 \gotorbox{Étudiez le fichier de script \code{\scriptfilename}

@@ -436,7 +436,7 @@ tapply(x$score, x$couleur, mean)
 ##
 ## Somme «interne» des éléments d'une liste.
 (x <- list(1:10, c(-2, 5, 6), matrix(3, 4, 5)))
-##! sum(x)                     # erreur
+##-!- sum(x)                     # erreur
 lapply(x, sum)             # sommes internes (liste)
 sapply(x, sum)             # sommes internes (vecteur)
 
@@ -578,7 +578,7 @@ mapply(mean, x, 0:3/10)
 ## Le jeu de données 'airquality' livré avec R contient les
 ## mesures quotidiennes de la qualité de l'air à New York
 ## Daily entre mai et septembre 1973.
-##! ?airquality                # rubrique d'aide du jeu de données
+##-!- ?airquality                # rubrique d'aide du jeu de données
 
 ## La colonne 'Temp' contient la température du jour et la
 ## colonne 'Month', le mois (sous forme d'entier de 5 à 9).

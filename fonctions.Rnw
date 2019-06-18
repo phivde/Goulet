@@ -1570,25 +1570,25 @@ deux carrés, \code{\#\#}, etc.
 ## La première version du code ne respecte pas les règles de
 ## base d'indentation et d'«aération» du code. Résultat: un
 ## fouillis difficile à consulter.
-##! rgamma_ar<-function(n,shape,rate=1,scale=1/rate)
-##! { if(shape<=0|shape>=1)
-##! stop("valeur de shape inadmissible")
-##!   ratio<-function(x)
-##!      if(x<=1) exp(-x)else x^(shape-1)
-##! Ginv<-function(x) {
-##!   k<-1+shape*exp(-1)
-##!   if(x<=1/k) (k*x)^(1/shape)
-##!   else -log(((1/shape)+exp(-1))*(1-x))   }
-##!
-##!   i<-0
-##!   while(i<n) {
-##!     y<-Ginv(runif(1))
-##!     if(runif(1)<=ratio(y))
-##!     {x<-c(x,y)
-##!         i<-i+1
-##!  }
-##! x*scale
-##! }
+##-!- rgamma_ar<-function(n,shape,rate=1,scale=1/rate)
+##-!- { if(shape<=0|shape>=1)
+##-!- stop("valeur de shape inadmissible")
+##-!-   ratio<-function(x)
+##-!-      if(x<=1) exp(-x)else x^(shape-1)
+##-!- Ginv<-function(x) {
+##-!-   k<-1+shape*exp(-1)
+##-!-   if(x<=1/k) (k*x)^(1/shape)
+##-!-   else -log(((1/shape)+exp(-1))*(1-x))   }
+##-!-
+##-!-   i<-0
+##-!-   while(i<n) {
+##-!-     y<-Ginv(runif(1))
+##-!-     if(runif(1)<=ratio(y))
+##-!-     {x<-c(x,y)
+##-!-         i<-i+1
+##-!-  }
+##-!- x*scale
+##-!- }
 
 ## Réviser seulement l'indentation permet déjà d'y voir plus
 ## clair. Tous les bons éditeurs de texte pour programmeurs
@@ -1602,32 +1602,32 @@ deux carrés, \code{\#\#}, etc.
 ## Dans Emacs, l'indentation se fait automatiquement au fur et
 ## à mesure que l'on entre du code ou, autrement, en appuyant
 ## sur la touche de tabulation.
-##! rgamma_ar<-function(n,shape,rate=1,scale=1/rate)
-##! {
-##!     if(shape<=0|shape>=1)
-##!         stop("valeur de shape inadmissible")
-##!     ratio<-function(x)
-##!         if(x<=1) exp(-x)else x^(shape-1)
-##!     Ginv<-function(x)
-##!     {
-##!         k<-1+shape*exp(-1)
-##!         if(x<=1/k)
-##!             (k*x)^(1/shape)
-##!         else
-##!             -log(((1/shape)+exp(-1))*(1-x))
-##!     }
-##!
-##!     i<-0
-##!     while(i<n)
-##!     {
-##!         y<-Ginv(runif(1))
-##!         if(runif(1)<=ratio(y))
-##!         {
-##!             x<-c(x,y)
-##!             i<-i+1
-##!         }
-##!         x*scale
-##!     }
+##-!- rgamma_ar<-function(n,shape,rate=1,scale=1/rate)
+##-!- {
+##-!-     if(shape<=0|shape>=1)
+##-!-         stop("valeur de shape inadmissible")
+##-!-     ratio<-function(x)
+##-!-         if(x<=1) exp(-x)else x^(shape-1)
+##-!-     Ginv<-function(x)
+##-!-     {
+##-!-         k<-1+shape*exp(-1)
+##-!-         if(x<=1/k)
+##-!-             (k*x)^(1/shape)
+##-!-         else
+##-!-             -log(((1/shape)+exp(-1))*(1-x))
+##-!-     }
+##-!-
+##-!-     i<-0
+##-!-     while(i<n)
+##-!-     {
+##-!-         y<-Ginv(runif(1))
+##-!-         if(runif(1)<=ratio(y))
+##-!-         {
+##-!-             x<-c(x,y)
+##-!-             i<-i+1
+##-!-         }
+##-!-         x*scale
+##-!-     }
 
 ## La simple indentation du code nous permet déjà de découvrir
 ## un bogue dans le code: il manque une accolade fermante } à

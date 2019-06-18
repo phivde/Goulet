@@ -353,8 +353,8 @@ rbind(x, 99)               # ajout d'une ligne à 'x'
 rbind(x, y)                # fusion verticale de 'x' et 'y'
 cbind(x, 99)               # ajout d'une colonne à 'x'
 cbind(x, z)                # concaténation de 'x' et 'z'
-##! rbind(x, z)                # dimensions incompatibles
-##! cbind(x, y)                # dimensions incompatibles
+##-!- rbind(x, z)                # dimensions incompatibles
+##-!- cbind(x, y)                # dimensions incompatibles
 rbind(1:3)                 # vecteur ligne
 cbind(1:3)                 # vecteur colonne
 
@@ -790,7 +790,7 @@ data.frame(Nom = c("Pierre", "Jean", "Jacques"),
 
 ## R est livré avec plusieurs jeux de données, la plupart sous
 ## forme de data frames.
-##! data()                     # liste complète
+##-!- data()                     # liste complète
 
 ## Nous allons illustrer certaines manipulations des data
 ## frames avec le jeu de données 'USArrests'.

@@ -558,7 +558,7 @@ m %*% solve(m)           # produit de m avec son inverse
 round(m %*% solve(m))    # l'arrondi donne la matrice identité
 
 ## Consulter la rubrique d'aide de la fonction 'solve'.
-##! ?solve
+##-!- ?solve
 
 ## Liste des objets dans l'espace de travail.
 ls()

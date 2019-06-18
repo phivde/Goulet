@@ -87,7 +87,7 @@ renameTangled <- function(file)
 ##
 ##  - supprime une des deux lignes blanches entre chaque bloc de code;
 ##  - active les expressions déactivées par les marques de
-##    commentaires spéciales '##!'
+##    commentaires spéciales '##-!-'
 ##
 ##  Arguments
 ##
@@ -100,7 +100,7 @@ renameTangled <- function(file)
 processLines <- function(file)
 {
     cmd <- paste("sed -E -i ''",
-                 "-e 's/##![ ]//'",
+                 "-e 's/##-!-[ ]?//'",
                  "-e 'N;/^\\n$/D;P;D;'",
                  file)
     system(cmd)
