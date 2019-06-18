@@ -1,6 +1,6 @@
 ### -*-Makefile-*- pour préparer "Programmer avec R"
 ##
-## Copyright (C) 2017 Vincent Goulet
+## Copyright (C) 2019 Vincent Goulet
 ##
 ## 'make pdf' crée les fichiers .tex à partir des fichiers .Rnw avec
 ## Sweave et compile le document maitre avec XeLaTeX.
@@ -44,14 +44,17 @@ LICENSE = LICENSE
 CONTRIBUTING = CONTRIBUTING.md
 OTHER = 100metres.data gabarit-documentation-fonction.R
 
-## Le document maitre dépend de: tous les fichiers .Rnw; tous les
-## fichiers .tex autres que lui-même qui n'ont pas de version .Rnw;
-## tous les fichiers .R qui ont un fichier .Rnw ou .tex correspondant.
+## Le document maitre dépend de tous les fichiers .Rnw et de tous les
+## fichiers .tex autres que lui-même qui n'ont pas de version .Rnw.
 RNWFILES = $(wildcard *.Rnw)
-TEXFILES = $(addsuffix .tex,\
+TEXFILES = $(addsuffix .tex, \
                        $(filter-out $(basename ${RNWFILES} ${MASTER} $(wildcard solutions-*.tex)),\
-                                    $(basename $(wildcard *.tex))))	
-SCRIPTS = $(filter-out algorithmique.R texte.R, ${RNWFILES:.Rnw=.R})
+                                    $(basename $(wildcard *.tex))))
+
+## Les fichiers de script sont tous extraits des fichiers .Rnw.
+## Certains fichiers .Rnw ne contiennent pas de fichier de script.
+SCRIPTS = $(filter-out algorithmique.R texte.R, \
+	               ${RNWFILES:.Rnw=.R})
 
 ## Informations de publication extraites du fichier maitre
 TITLE = $(shell grep "\\\\title" ${MASTER:.pdf=.tex} \
@@ -227,13 +230,18 @@ check-url: ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES} ${SCRIPTS}
 
 .PHONY: clean
 clean:
+	${RM} ${SCRIPTS:.R=.Rout} \
+	      ${COLLABORATEURS} \
+	      *-[0-9][0-9][0-9].R \
+	      *.log *.blg *.out *.rel *~ Rplots* .RData
+
+.PHONY: clean-all
+clean-all: clean
 	${RM} ${MASTER} \
 	      ${ARCHIVE} \
 	      ${RNWFILES:.Rnw=.tex} \
 	      ${SCRIPTS} \
-	      ${SCRIPTS:.R=.Rout} \
-	      ${COLLABORATEURS} \
 	      ${OTHER} \
 	      solutions-* \
 	      *-[0-9][0-9][0-9].pdf \
-	      *.aux *.log  *.blg *.bbl *.out *.rel *~ Rplots* .RData
+	      *.aux *.bbl
