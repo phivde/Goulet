@@ -20,6 +20,7 @@
 solutions-*
 Rplots.pdf
 .RData
+.Rhistory
 auto/
 auto/*
 COLLABORATEURS
