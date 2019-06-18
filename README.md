@@ -17,7 +17,7 @@ Prière de passer par ce dépôt pour proposer des modifications; consulter le f
 ## Composition du document
 
 La production du document repose sur la programmation lettrée avec LaTeX et
-[Sweave](https://stat.ethz.ch/R-manual/R-devel/library/utils/doc/Sweave.pdf). Consulter les diapositives de ma conférence [«Gérer ses documents efficacement avec la programmation lettrée»](https://gitlab.com/vigou3/raquebec-programmation-lettree/-/releases) pour en savoir un peu plus long sur ma stratégie.
+[Sweave](https://stat.ethz.ch/R-manual/R-devel/library/utils/doc/Sweave.pdf). Consulter les diapositives de ma conférence [«Gérer ses documents efficacement avec la programmation lettrée»](https://gitlab.com/vigou3/raquebec-programmation-lettree/-/releases) pour en savoir un peu plus long sur ma stratégie d'intégration du texte du document et du code informatique des fichiers de script.
 
 La composition du document, c'est-à-dire la transformation du code source vers le format PDF, requiert les outils ci-dessous.
 
@@ -72,7 +72,7 @@ J'ai automatisé le processus de compilation avec l'outil Unix standard `make`. 
 
 - `pdf` crée les fichiers `.tex` à partir des fichiers `.Rnw` avec Sweave et compile le document maitre avec XeLaTeX;
 
-- `zip` crée l'archive contenant le document et le code source des sections d'exemples;
+- `zip` crée l'archive contenant notamment le document et les fichiers de script;
 
 - `release` crée une nouvelle version (*tag*) dans GitLab, téléverse le fichier `.zip` et modifie les liens de la page web.
 
