@@ -77,6 +77,9 @@ RBATCH = R CMD BATCH --no-timing
 CP = cp -p
 RM = rm -rf
 
+## Indiquer à TeX de rechercher des fichiers dans texmf
+export TEXINPUTS := ./texmf//:${TEXINPUTS}
+
 ## Dossier temporaire pour construire l'archive
 BUILDDIR = tmpdir
 
