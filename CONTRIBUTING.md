@@ -36,7 +36,7 @@ git pull
 git checkout -b <nom_de_branche>
 ```
 	
-3. Effectuez maintenant vos modifications. Il y a un fichier par chapitre et son nom, avec une extension `.tex` ou `.Rnw`, a un lien évident avec le titre du chapitre. Le code de la section d'exemples du chapitre se trouve dans un fichier du même nom avec une extension `.R`. On ne fait des modifications que dans un seul fichier à la fois! Une fois les modifications terminées, publiez le fichier modifié dans votre dépôt local avec un commentaire utile, mais bref, sur la nature des modifications:
+3. Effectuez maintenant vos modifications. Il y a un fichier par chapitre et son nom, avec une extension `.tex` ou `.Rnw`, a un lien évident avec le titre du chapitre. Ne faites des modifications que dans un seul fichier à la fois! Une fois les modifications terminées, publiez le fichier modifié dans votre dépôt local avec un commentaire utile sur la nature des modifications:
     
 ```
 git status
@@ -58,7 +58,7 @@ git push -u origin <nom_de_branche>
 
 Pour des instructions plus détaillées, consultez les [excellents tutoriels](https://www.atlassian.com/git/tutorials) de Atlassian, en particulier celui sur le processus de collaboration [*Gitflow Workflow*](https://www.atlassian.com/git/tutorials/comparing-workflows#gitflow-workflow).
 
-# CFR (contributions fréquemment refusées)
+# Contributions fréquemment refusées
 
 Les corrections mentionnées ci-dessous ont été refusées à répétition dans le passé. Elle ne peuvent donner droit à un point boni dans le cours IFT-1902 Informatique pour actuaires.
 

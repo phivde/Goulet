@@ -17,7 +17,9 @@ Prière de passer par ce dépôt pour proposer des modifications; consulter le f
 ## Composition du document
 
 La production du document repose sur la programmation lettrée avec LaTeX et
-[Sweave](https://stat.ethz.ch/R-manual/R-devel/library/utils/doc/Sweave.pdf). La composition du document, c'est-à-dire la transformation du code source vers le format PDF, requiert les outils ci-dessous.
+[Sweave](https://stat.ethz.ch/R-manual/R-devel/library/utils/doc/Sweave.pdf). Consulter les diapositives de ma conférence [«Gérer ses documents efficacement avec la programmation lettrée»](https://gitlab.com/vigou3/raquebec-programmation-lettree/-/releases) pour en savoir un peu plus long sur ma stratégie.
+
+La composition du document, c'est-à-dire la transformation du code source vers le format PDF, requiert les outils ci-dessous.
 
 ### LaTeX
 
@@ -68,7 +70,7 @@ puis suivez les instructions.
 
 J'ai automatisé le processus de compilation avec l'outil Unix standard `make`. Le fichier `Makefile` fournit les recettes principales suivantes:
 
-- `pdf` crée les fichiers `.tex` à partir des fichiers `.Rnw` avec Sweave et compile le document maître avec XeLaTeX;
+- `pdf` crée les fichiers `.tex` à partir des fichiers `.Rnw` avec Sweave et compile le document maitre avec XeLaTeX;
 
 - `zip` crée l'archive contenant le document et le code source des sections d'exemples;
 
