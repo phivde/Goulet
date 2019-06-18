@@ -51,7 +51,7 @@ RNWFILES = $(wildcard *.Rnw)
 TEXFILES = $(addsuffix .tex,\
                        $(filter-out $(basename ${RNWFILES} ${MASTER} $(wildcard solutions-*.tex)),\
                                     $(basename $(wildcard *.tex))))	
-SCRIPTS = ${RNWFILES:.Rnw=.R}
+SCRIPTS = $(filter-out algorithmique.R texte.R, ${RNWFILES:.Rnw=.R})
 
 ## Informations de publication extraites du fichier maitre
 TITLE = $(shell grep "\\\\title" ${MASTER:.pdf=.tex} \
