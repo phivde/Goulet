@@ -90,17 +90,8 @@ all: pdf
 
 FORCE: ;
 
-## Stangle insère une ligne qui débute par 'getOption' lorsque
-## l'entête du bloc de code contient une option additionnelle. Il faut
-## supprimer cette ligne. Stangle insère aussi deux lignes blanches
-## entre chaque bloc de code, alors qu'une seule suffit. La commande
-## 'sed' apporte les correctifs.
 %.tex %.R: %.Rnw
 	${SWEAVE} '$<'
-	sed -i "" \
-	    -e '/^getOption/d' \
-	    -e 'N;/^\n$$/D;P;D;' \
-	    ${<:.Rnw=.R}
 
 %.Rout: %.R
 	echo "options(error=expression(NULL))" | cat - $< | \

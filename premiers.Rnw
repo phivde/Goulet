@@ -15,19 +15,19 @@
 \def\scriptfilename{\currfilebase.R}
 \SweaveOpts{echo=FALSE}
 
-<<echo=FALSE>>=
+<<echo=FALSE, results=hide>>=
 ## configuration pour Sweave et définition des fonctions
-## 'getSourceName' et 'renameTangled'
+## 'getSourceName' et 'postStangle'
 source(".Sweaveprofile")
-                           #
+
 ## nom du présent fichier
 file <- getSourceName()
 
 ## extraction du fichier de script
 Stangle(file, encoding = "utf-8", annotate = FALSE, split = TRUE)
 
-## suppression de "-script" dans le nom du fichier de script
-renameTangled(file)
+## traitement du fichier créé par Stangle
+postStangle(file)
 @
 <<script>>=
 ## Copyright (C) 2019 Vincent Goulet
@@ -197,7 +197,7 @@ division entière.
 @
 \end{ttscript}
 
-<<script>>=
+<<script, results=hide>>=
 ###
 ### DONNÉES ET PROCÉDURES FONDAMENTALES  `\labelline{premiers:fondamentales}`
 ###
@@ -282,21 +282,22 @@ a[2 - x %% 2]              # indiçage à répétition
 5 %/% 1:5
 10 %/% 1:15
 
-## L'opérateur à utiliser pour vérifier si deux valeurs sont
-## égales est '==', et non '='. Utiliser le mauvais opérateur
-## est une erreur commune --- et qui peut être difficile à
-## détecter --- lorsque l'on programme en R.
-5 = 2                      # erreur de syntaxe
+## Attention à cette erreur commune --- et parfois difficile à
+## détecter: '=' n'est PAS l'opérateur de comparaison entre
+## deux valeurs.
+##! 5 = 2                      # erreur de syntaxe
+
+## L'opérateur de comparaison est plutôt '=='.
 5 == 2                     # comparaison
 y = 2                      # pas un test...
 y                          # ... plutôt une affectation
 
-## Attention, toutefois: '==' vérifie l'égalité bit pour bit
-## dans la représentation interne des nombres dans
-## l'ordinateur. Ça fonctionne bien pour les entiers ou les
-## valeurs booléennes, mais pas pour les nombres réels ou,
-## plus insidieux, pour les nombres entiers provenant d'un
-## calcul et qui ne sont entiers qu'en apparence.
+## L'opérateur '==' vérifie l'égalité bit pour bit dans la
+## représentation interne des nombres dans l'ordinateur. Ça
+## fonctionne bien pour les entiers ou les valeurs booléennes,
+## mais pas pour les nombres réels ou, plus insidieux, pour
+## les nombres entiers provenant d'un calcul et qui ne sont
+## entiers qu'en apparence.
 ##
 ## [Pour en savoir (un peu) plus:
 ##  https://floating-point-gui.de/formats/fp/]
@@ -430,7 +431,7 @@ retournée ni affichée à l'écran.
 }
 @
 
-<<script>>=
+<<script, results=hide>>=
 ###
 ### COMMANDES R            `\labelline{premiers:commandes}`
 ###
@@ -766,7 +767,7 @@ attr(x, "methode") <- NULL
 attributes(x)
 @
 
-<<script>>=
+<<script, results=hide>>=
 ###
 ### OBJETS R               `\labelline{premiers:objets}`
 ###
@@ -777,9 +778,9 @@ attributes(x)
 foo <- 5                   # valide
 foo.123 <- 5               # valide
 foo_123 <- 5               # valide
-123foo <- 5                # invalide; commence par un chiffre
 .foo <- 5                  # valide
-.123foo <- 5               # invalide; point suivi d'un chiffre
+##! 123foo <- 5                # invalide; commence par un chiffre
+##! .123foo <- 5               # invalide; point suivi d'un chiffre
 
 ## Liste des objets dans l'espace de travail. Les objets dont
 ## le nom commence par un point sont cachés, comme à la ligne
@@ -789,8 +790,8 @@ ls(all.names = TRUE)       # objets cachés aussi affichés
 
 ## R est sensible à la casse
 foo <- 1
-Foo
-FOO
+##! Foo
+##! FOO
 
 ## MODES ET TYPES DE DONNÉES
 
@@ -833,8 +834,11 @@ length(x)
 ## mais qui existe.
 (x <- numeric(0))          # création du contenant
 length(x)                  # l'objet 'x' existe...
-x[1] <- 1                  # possible, 'x' existe
-X[1] <- 1                  # impossible, 'X' n'existe pas
+x[1] <- 1                  # définition du permier élément
+
+## Si un objet n'existe pas au préalable, il est impossible
+## d'affecter directement la valeur d'un élément.
+##! X[1] <- 1                  # impossible, 'X' n'existe pas
 
 ## ATTRIBUTS
 
@@ -1037,7 +1041,7 @@ l'inverse, dans les opérations logiques, $0$ est converti en
 c(0, 5, -1) & TRUE
 @
 
-<<script>>=
+<<script, results=hide>>=
 ###
 ### VECTEURS               `\labelline{premiers:vecteurs}`
 ###
@@ -1251,7 +1255,7 @@ foo(c(3, 2), p = 3)
 pairage entre les arguments d'une fonction et des valeurs qui lui sont
 passées.
 
-<<script>>=
+<<script, results=hide>>=
 ###
 ### APPEL D'UNE FONCTION   `\labelline{premiers:appel}`
 ###
@@ -1607,7 +1611,7 @@ pmax(x, c(16, 23,  4, 12,  3))
 @
 \end{ttscript}
 
-<<script>>=
+<<script, results=hide>>=
 ###
 ### QUELQUES FONCTIONS INTERNES UTILES  `\labelline{premiers:internes}`
 ###
@@ -1628,11 +1632,11 @@ sqrt(x)                    # racine carrée
 abs(x - mean(x))           # valeur absolue
 gamma(1:5)                 # fonction gamma
 factorial(0:4)             # factorielle
-?gamma                     # toutes les fonctions apparentées
+##! ?gamma                     # toutes les fonctions apparentées
 cos(seq(0, pi, by = pi/4)) # cosinus
 sin(seq(0, pi, by = pi/4)) # sinus
 tan(seq(0, pi, by = pi/4)) # tangente
-?Trig                      # toutes les fonctions apparentées
+##! ?Trig                      # toutes les fonctions apparentées
 
 ## SUITES ET RÉPÉTITION
 

@@ -1,3 +1,5 @@
+### Emacs: -*- mode: R; -*-
+##
 ## Copyright (C) 2019 Vincent Goulet
 ##
 ## Ce fichier fait partie du projet
@@ -10,13 +12,7 @@
 ## https://creativecommons.org/licenses/by-sa/4.0/
 
 ## Longueur des lignes pour l'affichage avec Sweave
-options(width=52)
-
-## Hook de Sweave pour complètement ignorer les erreurs dans un bloc
-## de code lors de l'étape Stangle. Évite de devoir utiliser 'eval =
-## FALSE' qui placerait le code en commentaires.
-options(SweaveHooks = list(ignore = function() options(error = expression(NULL),
-                                                       show.error.messages = FALSE)))
+options(width = 52)
 
 ###
 ### getSourceName()
@@ -35,9 +31,34 @@ getSourceName <- function()
 }
 
 ###
+### postStangle(file)
+###
+##  Effectue le traitement nécessaire après l'étape Stangle:
+##
+##  - suppression de "-script" dans le nom du fichier de script;
+##  - suppression de lignes blanches;
+##  - activation d'expressions invalides qui auraient causé problème
+##    dans Sweave.
+##  Arguments
+##
+##  file: nom du fichier .Rnw
+##
+##  Valeur
+##
+##  Si l'opération réussit: le nom du nouveau fichier; sinon: FALSE
+postStangle <- function(file)
+{
+    script <- renameTangled(file)
+    if (is.character(script))
+        processLines(script)
+    else
+        stop("error renaming the script file")
+}
+
+###
 ### renameTangled(file)
 ###
-##  supprime le suffixe "-script" du nom du fichier produit par
+##  Supprime le suffixe "-script" du nom du fichier produit par
 ##  Stangle sur le fichier 'file'.
 ##
 ##  Arguments
@@ -46,11 +67,41 @@ getSourceName <- function()
 ##
 ##  Valeur
 ##
-##  Celle de 'file.rename'
+##  Si l'opération réussit: le nom du nouveau fichier; sinon: FALSE
 ##
 renameTangled <- function(file)
 {
     filebase <- sub(".Rnw", "", file)
-    file.rename(paste0(filebase, "-script.R"),
-                paste0(filebase, ".R"))
+    script <- paste0(filebase, ".R")
+    out <- file.rename(paste0(filebase, "-script.R"), script)
+    if (out)
+        out <- script
+    out
+}
+
+###
+### processLines(file)
+###
+##  Effectue avec 'sed' les opérations de «nettoyage» suivantes sur le
+##  fichier de script produit par Stangle:
+##
+##  - supprime une des deux lignes blanches entre chaque bloc de code;
+##  - active les expressions déactivées par les marques de
+##    commentaires spéciales '##!'
+##
+##  Arguments
+##
+##  file: nom du fichier .R
+##
+##  Valeur
+##
+##  La valeur de 'system'.
+##
+processLines <- function(file)
+{
+    cmd <- paste("sed -E -i ''",
+                 "-e 's/##![ ]//'",
+                 "-e 'N;/^\\n$/D;P;D;'",
+                 file)
+    system(cmd)
 }
