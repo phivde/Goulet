@@ -8,7 +8,7 @@
 ## 'make tex' crée les fichiers .tex à partir des fichiers .Rnw avec
 ## Sweave.
 ##
-## 'make script' crée les fichiers .R à partir des fichiers .Rnw avec
+## 'make scripts' crée les fichiers .R à partir des fichiers .Rnw avec
 ## Sweave (et Stangle).
 ##
 ## 'make contrib' crée le fichier COLLABORATEURS.
@@ -101,7 +101,7 @@ FORCE: ;
 	${RBATCH} $<.tmp $@
 	${RM} $<.tmp
 
-${MASTER}: ${MASTER:.pdf=.tex} ${RNWFILES:.Rnw=.tex} ${TEXFILES} \
+${MASTER}: ${MASTER:.pdf=.tex} ${RNWFILES:.Rnw=.tex} ${TEXFILES} ${SCRIPTS} \
 	   $(wildcard data/*) $(wildcard images/*)
 	${TEXI2DVI} ${MASTER:.pdf=.tex}
 
@@ -118,8 +118,8 @@ pdf: ${MASTER}
 .PHONY: tex
 tex: ${RNWFILES:.Rnw=.tex}
 
-.PHONY: script
-script: ${SCRIPTS}
+.PHONY: scripts
+scripts: ${SCRIPTS}
 
 .PHONY: Rout
 Rout: ${SCRIPTS:.R=.Rout}
