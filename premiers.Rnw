@@ -16,18 +16,8 @@
 \SweaveOpts{echo=FALSE}
 
 <<echo=FALSE, results=hide>>=
-## configuration pour Sweave et définition des fonctions
-## 'getSourceName' et 'postStangle'
-source(".Sweaveprofile")
-
-## nom du présent fichier
-file <- getSourceName()
-
-## extraction du fichier de script
-Stangle(file, encoding = "utf-8", annotate = FALSE, split = TRUE)
-
-## traitement du fichier créé par Stangle
-postStangle(file)
+source(".Sweaveprofile")   # configuration
+source("Stangle.R")        # lancement de Stangle
 @
 <<script>>=
 ## Copyright (C) 2019 Vincent Goulet
