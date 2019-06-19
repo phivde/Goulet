@@ -1464,7 +1464,9 @@ commentaires contenant au minimum:
 \item la \index{signature}\emph{signature} de la fonction (son nom
   suivi, entre parenthèses, de tous les arguments avec leur valeur par
   défaut, le cas échéant);
-\item une courte description de ce que fait la fonction;
+\item une courte description de ce que fait la fonction (en mode
+  infinitif, de manière à compléter la phrase «Cette fonction permet
+  de\dots»);
 \item la liste des arguments, de leur signification et des valeurs
   admissibles;
 \item la valeur retournée par la fonction.
@@ -1483,7 +1485,7 @@ une fonction simple.
 ###
 ### square(x)
 ###
-##  Élévation au carré.
+##  Éléver au carré.
 ##
 ##  Arguments
 ##
