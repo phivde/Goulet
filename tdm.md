@@ -1,3 +1,105 @@
+# Table des matières révisée de l'édition 2019
+
+> Intégrer l'algorithmique dans le document plutôt que de rediriger
+> vers une ressource externe.
+
+> Mettre l'accent sur l'algorithmique tôt dans l'apprentissage ainsi
+> que dans les exercices.
+
+> Mettre de l'avant la programmation fonctionnelle et les fonctions
+> d'application en repoussant l'étude des boucles.
+
+> Étudier les algorithmes classiques dans un deuxième temps, avec les
+> boucles.
+
+> Supprimer le matériel sur la ligne de commande et sur Git, qui sera
+> désormais couvert dans un laboratoire.
+
+## Chapitre 1 - Éléments d’informatique pour programmeurs
+
+- algorithme: outre la définition, déplacer le matériel vers le
+  nouveau chapitre 3
+
+## Chapitre 2 - Présentation de R
+
++ revoir le contenu de la session de travail type, qui fait trop appel
+  à des notions de statistique
+
+## Chapitre 3 - Bases d'algorithmique
+
++ ordre de grandeur des opérations
++ matériel de la section 1.2.1
++ exemples additionnels d'algorithmes simples
++ conditions (if/else)
++ concept d'application (mapping)
++ ouverture sur calculs répétitifs avec des boucles couvert plus loin
+
+## Chapitre 4 - Premiers pas avec R
+
++ notion d'environnement tel que présenté dans SICP
++ exécution conditionnelle (voir aussi SICP)
++ intégrer ancienne section 4.1 sur programmation fonctionnelle dans
+  l'introduction du chapitre
++ définition d'une fonction (section 4.2)
++ retourner des résultats (section 4.3)
++ exécution conditionnelle (section 4.4.1)
++ `return`, `stop`, `warning` (section 4.4.3)
++ révision des exercices pour y intégrer l'algorithmique
+
+## Chapitre 5 - Structures de données
+
+- importation et exportation de données
+
+## Chapitre 6 - Fonctions d'application
+
++ probablement une introduction révisée pour tenir compte du fait que
+  les boucles n'ont pas encore été couvertes
+
+## Chapitre 7 - Bonnes pratiques de la programmation
+
++ nouveau chapitre
++ matériel de la section 4.7
++ exemple plus simple que `rgamma_ar`
+
+## Chapitre 8 - Algorithmes classiques et structures de contrôle
+
++ nouveau chapitre construit sur le chapitre 6
++ adaptation de Stephens (2013)
+
+## Chapitre 9 - Débogage
+
++ vidéo sur l'utilisation de `browser`
++ exemple de débogage d'une fonction plus simple que `rgamma_ar`
+
+## Chapitre 10 - Importation et exportation de données
+
++ nouveau chapitre
++ matériel de la section 7.6
+
+## Chapitre 11 - Bibliothèques et paquetages
+
+aucun changement
+
+## Chapitre 12 - Expressions régulières
+
++ adaptation en français du guide de Apple?
++ (si le point précédent est fait) intégration des exemples
+  additionnels dans le texte du chapitre
+
+## Chapitre 13 - Environnement, portée lexicale et évaluation paresseuse
+
++ revoir le titre du chapitre 5?
++ exemple de type MLE pour illustrer les dangers de compter sur la
+  portée lexicale
+  
+## Chapitres supprimés
+
+- Fonctions (matériel réparti ailleurs)
+- Ligne de commande (laboratoire)
+- Travail collaboratif avec Git (laboratoire)
+
+
+
 # Table des matières révisée de l'édition 2018
 
 > Guider le lecteur à l'intérieur d'un chapitre au lieu de présenter
