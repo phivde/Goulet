@@ -1061,8 +1061,8 @@ Il en va du code informatique comme de la prose: si le style peut
 varier d'un auteur à l'autre, l'œuvre doit toujours être à la fois
 agréable à lire et facile à comprendre. Bref, les meilleurs
 programmeurs préfèrent la \emph{lisibilité} de leur code aux effets de
-style qui n'auraient pour seul mérite d'afficher leur maitrise du
-langage.
+style qui auraient pour seul mérite de faire étalage de leur maitrise
+du langage.
 
 Tout programmeur devrait constamment garder en tête les trois
 objectifs suivants en effectuant son travail: simplicité, clarté,
@@ -1110,10 +1110,9 @@ length_of_x <- length(x)
   divers styles s'affrontent: \code{variable.name},
   \code{variable\_name}, \code{variableName}, \code{VariableName},
   etc. Assurez-vous simplement de suivre le standard en vigueur dans
-  votre équipe de travail, le cas échéant, et, par-dessus tout, soyez
-  constant. Ma préférence, qui concorde avec une grande partie du
-  code source de R, va aux noms d'objets courts et entièrement en
-  minuscules.
+  votre équipe de travail, et, par-dessus tout, soyez constant. Ma
+  préférence, qui concorde avec une grande partie du code source de R,
+  va aux noms d'objets courts et entièrement en minuscules.
   %
 \item Dès qu'elles sont disponibles, utilisez les fonctions internes
   de R au lieu de reprogrammer certaines procédures. Non seulement
@@ -1139,9 +1138,9 @@ mean(x)
   propos, \citet{Oualline:C:1997} ramène la quinzaine de règles de
   priorité des opérations (du langage C) à seulement deux:
   \begin{enumerate}
-  \item La multiplication et la division précèdent l'addition et la
-    soustraction.
-  \item Placer tout le reste entre parenthèses.
+  \item la multiplication et la division précèdent l'addition et la
+    soustraction;
+  \item placer tout le reste entre parenthèses.
   \end{enumerate}
   %
 \item Évitez les expressions logiques complexes, surtout celles
@@ -1475,9 +1474,9 @@ Il s'agit de la structure générale des rubriques d'aide de R. La
 une fonction simple.
 
 \tipbox{Le fichier \code{gabarit-documentation-fonction.R} livré avec
-  présent document contient un gabarit que vous pouvez utiliser pour
-  insérer rapidement dans vos fichiers de script la structure de base
-  de la documentation d'une fonction.}
+  le présent document contient un gabarit que vous pouvez utiliser
+  pour insérer rapidement dans vos fichiers de script la structure de
+  base de la documentation d'une fonction.}
 
 \begin{figure}
 \begin{Verbatim}[frame=single]
