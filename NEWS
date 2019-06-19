@@ -2,6 +2,25 @@
 === Programmer avec R
 ===
 
+# (en développement)
+
+## Nouveautés
+
+
+
+## Changements dans le processus de création du document
+
+- Question de tirer encore davantage profit de la programmation
+  lettrée, le contenu des fichiers de script est maintenant intégré au
+  texte des chapitres. Le fichier `README.md` contient un lien vers
+  une présentation qui explique ma stratégie. La nouvelle règle `make
+  scripts` permet de créer les fichiers de script.
+- Le paquetage LaTeX `applekeys.sty` et ses fichiers afférents est
+  maintenant placé dans un sous-répertoire `texmf`. La `Makefile`
+  définit (ou modifie) la variable d'environnement `TEXINPUTS` pour
+  que LaTeX trouve les fichiers.
+
+
 # 2019.01 (2019-01-08)
 
 ## Nouveautés
