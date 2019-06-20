@@ -61,10 +61,9 @@ getSourceName <- function()
 postStangle <- function(file)
 {
     script <- renameTangled(file)
-    if (is.character(script))
-        processLines(script)
-    else
+    if (!is.character(script))
         stop("error renaming the script file")
+    processLines(script)
 }
 
 ###
