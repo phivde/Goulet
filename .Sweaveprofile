@@ -17,7 +17,8 @@ options(width = 52)
 ###
 ### getSourceName()
 ###
-##  Extrait le nom du fichier source utilisé dans la commande 'Sweave'.
+##  Extraire le nom du fichier source utilisé dans la commande
+##  'Sweave' qui appelle cette fonction.
 ##
 ##  Valeur
 ##
@@ -26,6 +27,14 @@ options(width = 52)
 getSourceName <- function()
 {
     args <- commandArgs(TRUE)
+
+    ## Quand Sweave est appelé avec l'argument 'encoding="utf-8"', sur
+    ## le fichier 'foo.Rnw', l'objet 'args' est une chaine de
+    ## caractères de la forme
+    ##
+    ##   nextArg--encoding=utf-8nextArgfoo.Rnw
+    ##
+    ## Il s'agit d'extraire 'foo.Rnw' de cette chaine.
     args <- strsplit(args, 'nextArg', fixed = TRUE)[[1L]]
     tail(args, 1L)
 }
@@ -33,19 +42,22 @@ getSourceName <- function()
 ###
 ### postStangle(file)
 ###
-##  Effectue le traitement nécessaire après l'étape Stangle:
+##  Effectuer le traitement nécessaire dans le fichier 'foo-script.R'
+##  après l'étape Stangle effectuée sur 'foo.Rnw':
 ##
-##  - suppression de "-script" dans le nom du fichier de script;
-##  - suppression de lignes blanches;
-##  - activation d'expressions invalides qui auraient causé problème
-##    dans Sweave.
+##  - supprimer "-script" dans le nom du fichier;
+##  - activer les expressions invalides désactivées car elles auraient
+##    causé problème dans Sweave.
+##  - supprimer les lignes blanches insérées par Stangle;
+##
 ##  Arguments
 ##
 ##  file: nom du fichier .Rnw
 ##
 ##  Valeur
 ##
-##  Si l'opération réussit: le nom du nouveau fichier; sinon: FALSE
+##  La valeur de 'system(..., intern = FALSE).
+##
 postStangle <- function(file)
 {
     script <- renameTangled(file)
@@ -58,7 +70,7 @@ postStangle <- function(file)
 ###
 ### renameTangled(file)
 ###
-##  Supprime le suffixe "-script" du nom du fichier produit par
+##  Supprimer le suffixe "-script" du nom du fichier produit par
 ##  Stangle sur le fichier 'file'.
 ##
 ##  Arguments
@@ -82,12 +94,12 @@ renameTangled <- function(file)
 ###
 ### processLines(file)
 ###
-##  Effectue avec 'sed' les opérations de «nettoyage» suivantes sur le
-##  fichier de script produit par Stangle:
+##  Effectuer avec 'sed' les opérations de «nettoyage» suivantes sur
+##  le fichier de script produit par Stangle:
 ##
-##  - supprime une des deux lignes blanches entre chaque bloc de code;
-##  - active les expressions déactivées par les marques de
+##  - activer les expressions déactivées par les marques de
 ##    commentaires spéciales '##-!-'
+##  - supprimer une des deux lignes blanches entre chaque bloc de code;
 ##
 ##  Arguments
 ##
@@ -95,7 +107,7 @@ renameTangled <- function(file)
 ##
 ##  Valeur
 ##
-##  La valeur de 'system'.
+##  La valeur de 'system(..., intern = FALSE)'.
 ##
 processLines <- function(file)
 {
