@@ -15,6 +15,9 @@
   En particulier, les Unix-ismes sont déplacés de la section «Systèmes
   d'exploitation» vers la section «Systèmes de fichiers».
   Simplification de l'exemple sur la combinaison d'utilitaires Unix.
+- À partir de la version 2019 de TeX Live, le paquetage awesomebox
+  utilise la version 5.x des polices fontawesome. Le code source est
+  adapté en conséquence et certaines icônes ont changé légèrement.
 
 ## Changements dans le processus de création du document
 
