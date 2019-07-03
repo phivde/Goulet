@@ -270,12 +270,6 @@ nos expressions R et le code de nos fonctions personnelles. Par
 convention, on donne aux fichiers de script un nom se terminant avec
 l'extension \code{.R}.
 
-\importantbox{Dans les fichiers de script comme à la ligne de commande, le
-  caractère \code{\#} marque le début d'un
-  \index{commentaire}commentaire dans R. Ainsi, tout ce qui est inclus
-  entre ce caractère et le saut à la ligne suivant est complètement
-  ignoré par l'interpréteur.}
-
 Avec cette approche, les objets sont créés au besoin en exécutant le
 code des fichiers de script. Comment? Simplement en copiant le code du
 fichier de script et en le collant dans la ligne de commande de R. La
@@ -321,6 +315,12 @@ vous utiliserez cette seconde approche d'interaction avec R.
   jamais à se poser la question avec un tableur, c'est que le
   progiciel évalue constamment et en temps réel les formules pour
   afficher les résultats dans les cellules.}
+
+\importantbox{Dans les fichiers de script comme à la ligne de commande, le
+  caractère \code{\#} marque le début d'un
+  \index{commentaire}commentaire dans R. Ainsi, tout ce qui est inclus
+  entre ce caractère et le saut à la ligne suivant est complètement
+  ignoré par l'interpréteur.}
 
 
 \section{Éditeurs de texte et environnements intégrés}
