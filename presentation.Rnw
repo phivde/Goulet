@@ -378,16 +378,37 @@ d'autres. Voici quelques bons choix.
   vénérable et très puissant éditeur pour programmeur
   GNU~Emacs\index{Emacs}. À la question~6.2 de la foire aux questions
   de R \citep{R-FAQ}, «Devrais-je utiliser R à l'intérieur de
-  Emacs?»\index{Emacs}, la réponse est: «Oui, absolument.»
+  Emacs?»\index{Emacs}, la réponse est: «Oui, absolument.» En effet,
+  combiné avec le mode ESS\index{Emacs!mode ESS} (\emph{Emacs Speaks
+    Statistics}), Emacs offre un environnement de développement
+  particulièrement riche et efficace. Il a d'ailleurs servi
+  d'inspiration à RStudio à maints égards, notamment pour la
+  disposition du fichier de script et de la ligne de commande R dans
+  une seule fenêtre. La \autoref{fig:presentation:emacs} présente une
+  fenêtre de GNU Emacs en mode d'édition de code R.
 
-  En effet, combiné avec le mode ESS\index{Emacs!mode ESS}
-  (\emph{Emacs Speaks Statistics}), Emacs offre un environnement de
-  développement aussi riche qu'efficace. Entre autres fonctionnalités
-  uniques à cet éditeur, le fichier de script et la ligne de commande
-  R sont regroupés dans la même fenêtre, comme on peut le voir à la
-  \autoref{fig:presentation:emacs}. Emacs est toutefois un logiciel
-  difficile à apprivoiser, surtout pour les personnes moins à l'aise
-  avec l'informatique.
+  Emblème du logiciel libre, Emacs est disponible gratuitement et est
+  identique sur toutes les plateformes supportées par R, dont
+  Windows, macOS et Linux. Consulter l'\autoref{chap:emacs+ess} pour
+  en savoir plus sur GNU~Emacs et apprendre les commandes essentielles
+  pour y faire ses premiers pas.
+
+  Le principal avantage de Emacs par rapport à RStudio réside dans le
+  fait qu'il s'agit d'un éditeur pour programmeur généraliste qui sait
+  s'adapter à n'importe quel langage --- y compris R. Cela permet
+  d'utiliser un seul et même outil pour toutes ses tâches de
+  programmation, tel que recommandé par
+  \citet[chapitre~3]{Hunt:pragmatic:1999}:
+  \begin{quote}
+    Utilisez un seul éditeur et utilisez-le bien. Votre éditeur
+    devrait devenir une extension de votre main; assurez-vous qu'il
+    est configurable, extensible et programmable.
+  \end{quote}
+
+  \warningbox{La puissance de Emacs a toutefois un coût: c'est un
+    logiciel difficile à apprivoiser, surtout pour les personnes moins
+    à l'aise avec l'informatique. C'est pourquoi RStudio demeure un
+    meilleur choix pour débuter à programmer avec R.}
 
   \begin{figure}[t]
     \centering
@@ -399,12 +420,6 @@ d'autres. Voici quelques bons choix.
       ligne de commande R.}
     \label{fig:presentation:emacs}
   \end{figure}
-
-  Emblème du logiciel libre, Emacs est disponible gratuitement et est
-  identique sur toutes les plateformes supportées par R, dont
-  Windows, macOS et Linux. Consulter l'\autoref{chap:emacs+ess} pour
-  en savoir plus sur GNU~Emacs et apprendre les commandes essentielles
-  pour y faire ses premiers pas.
 \item Il existe plusieurs autres options pour éditer efficacement du
   code R --- et le Bloc-notes de Windows n'en fait \emph{pas} partie!
   Je recommande plutôt:
