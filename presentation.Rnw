@@ -427,11 +427,11 @@ d'autres. Voici quelques bons choix.
     devrait devenir une extension de votre main; assurez-vous qu'il
     est configurable, extensible et programmable.
   \end{quote}
-
-  \warningbox{La puissance de Emacs a toutefois un coût: c'est un
-    logiciel difficile à apprivoiser, surtout pour les personnes moins
-    à l'aise avec l'informatique. C'est pourquoi RStudio demeure un
-    meilleur choix pour débuter à programmer avec R.}
+  Emacs satisfait les trois conditions ci-dessus. Cependant, la
+  puissance de l'éditeur a un coût: Emacs est un logiciel difficile à
+  apprivoiser, surtout pour les personnes moins à l'aise avec
+  l'informatique. Si vous en êtes à votre première expérience avec un
+  éditeur de texte, optez pour RStudio.
 
   \begin{figure}[t]
     \centering
