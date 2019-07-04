@@ -140,16 +140,39 @@ dont l'\index{APL}APL et le \index{Lisp}Lisp (encore lui). Comme tous
 ses prédécesseurs, R est un langage interprété\index{interprété
   (langage)}. Par conséquent, le programme que l'on lance lorsque l'on
 exécute R est en fait l'interpréteur. Celui-ci attend que l'on lui
-soumette des commandes dans le langage R, commandes qu'il exécutera
-immédiatement, une à une et en séquence.
+soumette des commandes dans le langage R --- dans la suite nous dirons
+que ces commandes forment une \index{expression}\emph{expression}.
+L'interpréteur évalue immédiatement l'expression pour ensuite afficher
+le résultat.
 
-Par analogie, \index{Excel}Excel est certes un logiciel de
-manipulation de données, de mise en forme et de préparation de
-graphiques, mais c'est aussi au sens large un langage de programmation
-interprété. Pensez-y: nous utilisons le langage de programmation
-lorsque nous entrons des commandes dans une cellule d'une feuille de
-calcul, puis l'interpréteur exécute les commandes et affiche les
-résultats dans la cellule.
+Par exemple, si l'on entre simplement un nombre à la ligne de commande
+(identifiée ci-dessous par le caractère \code{>}), l'interpréteur
+retourne la valeur de ce nombre.
+<<echo=TRUE>>=
+42
+@
+
+Nous pouvons aussi composer des expressions plus élaborées qui
+combinent des nombres et des opérateurs mathématiques standards.
+<<echo=TRUE>>=
+2 + 3
+1000 - 334
+5 * 7
+10/5
+2.7 + 12.8
+@
+
+L'un des buts de cet ouvrage consiste justement à apprendre à
+construire des suites d'expressions qui forment des programmes et qui
+permettent de réaliser une tâche donnée.
+
+Risquons une analogie avec le tableur \index{Excel}Excel, qui est
+aussi un logiciel de manipulation de données, de mise en forme et de
+préparation de graphiques. Or, au sens large, Excel est également un
+langage de programmation interprété! Pensez-y: nous utilisons le
+langage de programmation lorsque nous entrons des commandes dans une
+cellule d'une feuille de calcul, puis l'interpréteur exécute les
+commandes et affiche les résultats dans la cellule.
 
 Le R est un langage particulièrement puissant pour les applications
 mathématiques et statistiques, chose peu surprenante puisqu'il a
@@ -739,7 +762,7 @@ q()
 \end{exercice}
 
 %%% Local Variables:
-%%% mode: latex
+%%% mode: noweb
 %%% TeX-engine: xetex
 %%% TeX-master: "programmer-avec-r"
 %%% coding: utf-8
