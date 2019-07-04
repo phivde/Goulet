@@ -125,10 +125,11 @@ utiliserons \verb=~/R/library=, où \verb=~= représente le dossier de
 départ (\autoref{sec:informatique:os:unix}).
 
 \osxbox{Sous macOS, le dossier tout indiqué pour la bibliothèque
-  personnelle est \verb=~/Library/R/library=. Toutefois, le dossier
-  \verb=~/Library= est caché dans le Finder. Pour y accéder, cliquez
-  sur le menu \code{Aller} en appuyant simultanément sur la touche
-  Option (\optkey), puis sélectionnez \code{Bibliothèque}.}
+  personnelle est \code{\string~/Library/R/library}. Toutefois, le
+  dossier \code{\string~/Library} est caché dans le Finder. Pour y
+  accéder, cliquez sur le menu \code{Aller} en appuyant simultanément
+  sur la touche Option (\optkey), puis sélectionnez
+  \code{Bibliothèque}.}
 
 Au démarrage, R lit le fichier de configuration \verb=~/.Renviron=,
 s'il existe. C'est dans ce fichier que l'on indique à R l'existence

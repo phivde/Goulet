@@ -429,7 +429,7 @@ else
 
 \warningbox{Il tombe sous le sens que «vrai» est vrai, n'est-ce pas?
   Prenez donc garde de ne pas écrire des expressions qui reviennent à
-  tester \verb|if (TRUE == TRUE)|. Oui, j'ai souvent rencontré
+  tester \code{if (TRUE == TRUE)}. Oui, j'ai souvent rencontré
   de telles constructions!}
 
 Pour choisir entre plus de deux possibilités, il est possible

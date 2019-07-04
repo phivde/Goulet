@@ -166,11 +166,11 @@ Ils sont accompagnés d'une description succincte.
   \end{tabular}
 \end{table}
 
-\tipbox{Les opérateurs de puissance \verb|^| et d'affectation
+\tipbox{Les opérateurs de puissance \code{\string^} et d'affectation
   \icode{<-} sont évalués de droite à gauche; tous les autres le sont
-  de gauche à droite. Ainsi, \verb|2^2^3| est \verb|2^8|, et non
-  \verb|4^3|, alors que \verb|1 - 1 - 1| vaut \verb|-1|, et non
-  \verb|1|.}
+  de gauche à droite. Ainsi, \code{2\string^2\string^3} est \code{2\string^8}, et non
+  \code{4\string^3}, alors que \code{1 - 1 - 1} vaut \code{-1}, et non
+  \code{1}.}
 
 Comme la définition de la grande majorité des opérateurs coule de
 source, illustrons ici uniquement les opérateurs de modulo et de
