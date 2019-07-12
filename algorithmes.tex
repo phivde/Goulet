@@ -1,0 +1,287 @@
+%%% Copyright (C) 2019 Vincent Goulet
+%%%
+%%% Ce fichier fait partie du projet
+%%% «Programmer avec R»
+%%% https://gitlab.com/vigou3/programmer-avec-r
+%%%
+%%% Cette création est mise à disposition sous licence
+%%% Attribution-Partage dans les mêmes conditions 4.0
+%%% International de Creative Commons.
+%%% https://creativecommons.org/licenses/by-sa/4.0/
+
+\chapter{Algorithmes et algorithmique}
+\label{chap:algorithmes}
+
+\def\scriptfilename{\currfilebase.R}
+
+\begin{objectifs}
+\item Expliquer les algorithmes classiques de tri et de recherche;
+  comparer leurs avantages et inconvénients.
+\item Exprimer une méthode de résolution de problème sous la forme
+  d'un algorithme à l'aide de pseudo-code.
+\item Effectuer la mise en oeuvre d'un algorithme donné dans le
+  langage R.
+\end{objectifs}
+
+Marianne et Alexandre doivent fournir une solution logicielle à un
+problème donné. Sitôt la lecture de l'énoncé du problème complétée,
+ils se précipitent sur le clavier pour coder leur solution. Rapidement
+bloqués, pensant qu'ils butent sur un problème de syntaxe ou
+d'utilisation d'une fonction, ils demandent de l'aide. Lorsqu'on leur
+demande qu'est-ce qu'ils essaient de faire, quelle est la nature de leur
+solution, ils ne peuvent répondre que par un long silence.
+
+Dans mon rôle de professeur, j'ai été témoin de la scène ci-dessus à
+de nombreuses reprises. Marianne et Alexandre font une erreur commune
+chez les programmeurs --- et pas que chez les débutants: commencer à
+coder sans avoir au préalable suffisamment réfléchi à la solution. Il
+manque un plan clair des étapes à suivre pour résoudre le problème.
+Or, ce plan, ou la recette à suivre --- nous reviendrons sur cette
+analogie culinaire dans la suite --- pour transformer les entrants
+d'un problème en une solution, c'est l'algorithme. Travailler sans
+algorithme, c'est comme naviguer sans boussole.
+
+Si programmer requiert des algorithmes, l'étude de la programmation
+doit donc nécessairement s'accompagner de notions
+d'\index{algorithmique}algorithmique, la science qui étudie les
+algorithmes et les structures de données. L'algorithmique est une
+discipline riche en techniques ingénieuses et en analyses
+mathématiques poussées. Connaitre ses principes de base et étudier
+certains algorithmes classiques vous permettra de mieux planifier vos
+méthodes de résolution de problème. En effet, un bon algorithme permet
+de résoudre en quelques secondes un problème qui pourrait autrement
+prendre des années.
+
+L'étude des algorithmes s'accompagne habituellement de celle des
+structures de données ou, en d'autres termes, de la manière
+d'organiser les données dans un ordinateur. Comme nous le verrons au
+chapitre \autoref{chap:donnees}, il existe bien différentes structures
+de données en R, mais leur réelle mise en œuvre demeure tout à fait
+transparente pour les programmeuses et les programmeurs. C'est
+pourquoi nous ferons l'impasse sur des notions que l'on retrouve dans
+tous les ouvrages classiques d'algorithmique, comme le tableau
+(\emph{array}), la liste chainée (\emph{list}), l'arbre (\emph{tree})
+ou la table de hachage (\emph{hashtable}).
+
+Le présent chapitre est inspiré de l'excellent ouvrage \emph{Essential
+  Algorithms} de \citet{Stephens:algorithms:2013}.
+
+
+\subsection{Algorithme}
+\label{sec:informatique:concepts:algorithme}
+
+Vous avez probablement déjà trié une liste de mots à l'aide d'un
+ordinateur. Pourtant, l'ordinateur n'a aucune connaissance du concept
+d'ordre alphabétique. Et même s'il «connaissait» cet ordre, comment au
+juste réalise-t-il l'opération de tri? Ce genre de questions relève
+d'une pierre d'assise de l'informatique:
+l'\index{algorithmique}algorithmique, la science qui étudie les
+algorithmes et les structures de données.
+
+Un \index{algorithme}\emph{algorithme} est une procédure de calcul
+permettant de résoudre un problème bien spécifié. En cela,
+l'algorithme explique comment, à partir d'entrants, obtenir l'extrant
+solution du problème. Quand on y pense, ce n'est pas très différent
+d'une recette culinaire où les entrants sont les ingrédients, la
+procédure les étapes de la recette et les extrants, le mets.
+
+À titre d'exemple, supposons que vous devez calculer, pour un jeu de
+données quelconque, l'écart moyen des données supérieures à $12$ par
+rapport à cette valeur. Un premier algorithme de très haut niveau
+permettant de résoudre ce problème irait comme suit.
+
+\begin{Schunk}
+  \begin{enumerate}
+  \item Sélectionner les données supérieures à $12$.
+  \item Soustraire $12$ de chaque valeur retenue à la première étape.
+  \item Effectuer la moyenne des valeurs obtenues à la seconde étape.
+  \end{enumerate}
+\end{Schunk}
+
+Apportons une toute petite modification à l'algorithme ci-dessus.
+
+\begin{Schunk}
+  \begin{enumerate}
+  \item Sélectionner les données supérieures à $12$.
+  \item Effectuer la moyenne des valeurs obtenues à la première étape.
+  \item Soustraire $12$ de la valeur retenue à la seconde étape.
+  \end{enumerate}
+\end{Schunk}
+
+Mathématiquement, les deux approches sont tout à fait équivalentes.
+Cependant, avec la première approche, nous effectuons une soustraction
+pour chaque valeur supérieure à $12$ que compte le jeu de données. Avec
+la seconde approche, nous n'effectuons qu'une seule soustraction. Si
+le jeu de données compte un million d'entrées supérieures à $12$,
+c'est un million de soustractions contre une seule. En temps de
+calcul, cela ne représente qu'un écart de quelques centièmes de
+secondes sur un ordinateur moderne, mais ces fractions de secondes
+peuvent finir par faire une différence importante lorsque la taille
+des jeux de données augmente ou lorsque l'opération se répète de
+nombreuses fois.
+
+Attardons-nous à un second exemple intéressant: l'élévation d'une
+valeur $b$ à la puissance $n$. Un premier algorithme, écrit cette fois
+en \index{pseudo-langage}\emph{pseudo-langage}, pourrait se lire
+ainsi.
+
+\begin{Schunk}
+\begin{Verbatim}
+Puissance(nombre réel b, entier n)
+  Si n = 0, retourner 1.
+  Retourner b * Puissance(b, n - 1).
+Fin Puissance
+\end{Verbatim}
+\end{Schunk}
+
+Cet algorithme est \index{algorithme!récursif}\emph{récursif}: la
+procédure \code{Puissance} s'appelle elle-même à répétition jusqu'à
+l'obtention du résultat désiré. Mathématiquement, l'algorithme revient
+à calculer $b^n$ de la manière la plus simple et intuitive qui soit:
+\begin{equation*}
+  b^n = b (b (b \cdots (b))).
+\end{equation*}
+Cela peut convenir lorsque $n$ est petit, mais peut-on faire mieux
+pour une «grande» valeur de $n$? Imaginez que vous ne disposez que
+d'une calculatrice munie des opérations arithmétiques de base et du
+carré, et que vous devez élever un nombre à la puissance, disons,
+$21$. Comment feriez-vous pour réduire le nombre d'opérations à entrer
+au clavier?
+
+\notebox{Cet exemple est moins fantaisiste qu'il n'y parait! Jusqu'au
+  milieu des années 1990, les étudiants en actuariat ne disposaient
+  que de ce type de calculatrice pour les examens professionnels. Il
+  s'agissait d'un modèle de Texas Instruments affectueusement surnommé
+  «TI-0».}
+
+Vous avez pensé à un «algorithme»? Votre idée consiste fort
+probablement à diviser la puissance par deux autant de fois que
+possible et à élever au carré par la suite. Dans notre exemple, cela
+donne
+\begin{align*}
+  b^{21}
+  &= b (b^{20}) \\
+  & = b (b^{10})^2 \\
+  &= b ((b^5)^2)^2 \\
+  & = b ((b (b^4))^2)^2 \\
+  &= b ((b (b^2)^2)^2)^2.
+\end{align*}
+Ce calcul se traduit en algorithme comme suit.
+
+\begin{Schunk}
+\begin{Verbatim}
+Puissance(nombre réel b, entier n)
+  Si n = 0, retourner 1.
+    Si n est pair, retourner (Puissance(b, n/2))^2.
+    Si n est impair, retourner b * Puissance(b, n - 1).
+Fin Puissance
+\end{Verbatim}
+\end{Schunk}
+
+Pour élever un nombre à la puissance $21$, le premier algorithme
+requiert $20$ opérations et le second, seulement $6$. Le dénombrement
+du nombre d'opérations requis par un algorithme est un aspect
+important de leur analyse. Il se fait généralement en notation $O()$
+qui signifie «de l'ordre de». Dans le premier algorithme de calcul de
+$b^n$, le nombre d'opérations est directement proportionnel à $n$,
+donc on dit que l'algorithme est $O(n)$. Dans le second algorithme où
+la puissance est divisée par deux à répétition, le nombre d'opérations
+est proportionnel au logarithme (en base deux) de $n$, d'où un
+algorithme $O(\log n)$. Pour en savoir plus, consultez
+\citet[chapitre~1]{Stephens:algorithms:2013}, qui explique à la fois
+très clairement et de manière concise les principes de base du
+dénombrement des opérations d'un algorithme.
+
+\citet{Kernighan:practice:1999} font remarquer, fort à propos:
+\begin{quote}
+  Tous les programmes reposent sur des algorithmes et des structures
+  de données, mais très peu de programmes exigent d'en concevoir de
+  nouveaux.
+\end{quote}
+Autrement dit, aussi complexe soit-il, un programme repose souvent sur
+quelques algorithmes fondamentaux bien connus et bien établis. À ce
+titre, les algorithmes de tri et de recherche jouent un rôle
+particulièrement important: on estime que 25~\% du temps de calcul des
+ordinateurs dans le monde est consacré au tri et à la recherche! Ce
+n'est pas pour rien que Donald Knuth consacre un volume entier de son
+œuvre monumentale \emph{The Art of Computer Programming} à ce seul
+sujet \citep{Knuth:ACP:vol1:1997}.
+
+L'étude des algorithmes classiques de tri et de recherche fera l'objet
+du \autoref{chap:algorithmique}.
+
+
+
+\section{Algorithmes classiques}
+\label{sec:algorithmique:tri}
+
+Pour l'étude des algorithmes classiques, je m'en remets à l'excellent
+ouvrage \emph{Essential Algorithms} de
+\citet{Stephens:algorithms:2013}. Rédigé dans un style clair et
+direct, le manuscrit va juste assez loin pour nos besoins dans les
+différentes notions, sans pour autant sacrifier les détails
+importants. Bref, un juste équilibre entre «algorithmique pour les
+nuls» et un livre plus théorique.
+
+Je vous invite donc à étudier les chapitres suivants de \emph{Essential
+Algorithms}:
+\begin{itemize}
+\item chapitre 6, pages 131--138, 145 (à partir de la section
+  \emph{Quicksort})--148 et 156--160;
+\item chapitre 7, pages 163--168;
+\item chapitre 9, pages 185--193.
+\end{itemize}
+
+Quelques remarques pour vous aider dans votre lecture.
+\begin{itemize}
+\item Partout où vous lirez \emph{array}, pensez tout simplement à un
+  vecteur dans R.
+\item Tel que mentionné au chapitre~1 de
+  \citet{Stephens:algorithms:2013}, l'auteur a pris le parti d'indicer
+  les vecteurs comme dans plusieurs langages de programmation, soit de
+  $0$ à $n - 1$ pour un vecteur de longueur $n$. Vous devrez adapter
+  les algorithmes en conséquence pour la programmation en R où les
+  vecteurs sont plutôt indicés de $1$ à $n$.
+\item Le livre fait ici et là référence au concept de \emph{library}.
+  Une bibliothèque (le nom en français) est une collection de
+  fonctions ou de sous-programmes que l'on peut utiliser dans nos
+  programmes. Certains langages de programmation sont constitués d'un
+  noyau assez restreint auquel on ajoute plusieurs fonctionnalités
+  standards (le tri ou la recherche, par exemple) par le biais de
+  bibliothèques. C'est en partie le cas de R, mais le système de base
+  contient déjà un grand nombre de fonctionnalités.
+\end{itemize}
+
+
+\section{Exercices}
+\label{sec:algorithmique:exercices}
+
+\Opensolutionfile{solutions}[solutions-algorithmique]
+
+\begin{Filesave}{solutions}
+\section*{Chapitre \ref*{chap:algorithmes}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:algorithmes}}
+
+\begingroup
+%% modifications locales au style des listings
+\lstset{%
+  frame=single,
+  numbers=none,
+  basicstyle=\normalfont\ttfamily\NoAutoSpacing}
+
+\end{Filesave}
+
+
+
+\begin{Filesave}{solutions}
+\endgroup                               % fin de \lstset local
+\end{Filesave}
+
+\Closesolutionfile{solutions}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-engine: xetex
+%%% TeX-master: "programmer-avec-r"
+%%% coding: utf-8
+%%% End:
