@@ -120,7 +120,9 @@ s'arrête ensuite à l'étape~2. Le plus grand commun diviseur de $544$
 et $119$ est $17$.
 
 Selon \citet[section~1.1]{Knuth:ACP:vol1:1997}, un algorithme devrait
-réunir cinq caractéristiques.
+réunir cinq caractéristiques.\footnote{%
+  Liste adaptée de la version française fournie par
+  \citet{Wikipedia:Algorithme}.}
 \begin{enumerate}
 \item \emph{Finitude}. Un algorithme doit toujours se terminer après
   un nombre fini d’étapes. Ce nombre peut toutefois devenir très
@@ -141,7 +143,7 @@ réunir cinq caractéristiques.
   soit la valeur $n$ de l'étape~2, le plus grand commun diviseur des
   entrées.
 \item \emph{Efficacité}. On s'attend généralement d'un algorithme
-  qu'il soit \emph{efficace} dans ce sens où toutes les opérations
+  qu'il soit \emph{efficace} dans le sens où toutes les opérations
   qu'il doit accomplir sont suffisamment élémentaires pour pouvoir
   être en principe réalisées dans une durée finie par une personne
   munie de papier et d'un crayon.
@@ -150,25 +152,36 @@ réunir cinq caractéristiques.
 Pour bien comprendre la nature et la portée d'un algorithme, il est
 assez utile de le comparer à une recette de cuisine. Dans une recette,
 les entrées sont les ingrédients, la procédure les diverses étapes et
-la sortie, le plat préparé. Comme un algorithme, une recette repose
-sur un certain nombre d'instructions élémentaires qui se passent
-d'explication, comme saisir, mijoter, mélanger, etc. Surtout, surtout,
-une recette explique les étapes à suivre pour obtenir le plat voulu,
-mais, sauf peut-être pour certaines opérations plus délicates, elle
-n'explique pas \emph{comment} réaliser chaque étape. S'il faut ajouter
-du lait dans un mélange à gateau, la recette n'indique pas où se
-procurer le lait, de vérifier si la date de péremption est passée ou
-comment mesurer la bonne quantité.
+la sortie, le plat préparé.
 
-On s'attend toutefois généralement à ce qu'un algorithme, qui est
-destiné à un ordinateur, soit plus précis qu'une recette. En effet, un
+Comme un algorithme, une recette repose sur un certain nombre
+d'instructions élémentaires qui se passent d'explication, comme
+saisir, mijoter, mélanger, etc. La recette est indépendante des
+ustensiles utilisés comme l'algorithme l'est du langage de
+programmation.
+
+Surtout, surtout, une recette explique les étapes à suivre pour
+obtenir le plat voulu, mais, sauf peut-être pour certaines opérations
+plus délicates, elle n'explique pas \emph{comment} réaliser chaque
+étape. S'il faut ajouter du lait dans un mélange à gateau, la recette
+n'indique pas de sortir le lait du réfrigérateur, de vérifier la date
+de péremption et de verser le lait dans la tasse à mesurer jusqu'à la
+ligne correpondant à la quantité voulue. Un algorithme ne contient pas
+plus d'instructions pour vérifier la validité des entrées ou pour
+effectuer des opérations de base comme les opérations arithmétiques,
+la lecture de données, l'indiçage d'un vecteur, etc.
+
+En revanche, on s'attend généralement d'un algorithme, qui est destiné
+à un ordinateur, qu'il soit plus précis qu'une recette. En effet, un
 ordinateur éprouverait beaucoup de difficulté avec une instruction
 comme «saler et poivrer au goût»!
 
 \tipbox{C'est une erreur commune dans la rédaction d'un algorithme de
-  fournir des détails de mise en œuvre superflus. Lorsque vous écrirez
-  un algorithme, demandez-vous si vous êtes en train d'expliquer
-  comment mesurer une tasse de lait.}
+  fournir des détails de mise en œuvre superflus, de surcroit dans un
+  langage de programmation donné. Lorsque vous écrirez un algorithme,
+  demandez-vous si vous êtes en train d'expliquer comment mesurer une
+  quantité de lait avec une tasse de marque ACME.}
+
 
 \section{Pseudocode}
 \label{sec:algorithmes:pseudocode}
