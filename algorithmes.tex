@@ -35,11 +35,11 @@ Dans mon rôle de professeur, j'ai été témoin de la scène ci-dessus à
 de nombreuses reprises. Marianne et Alexandre font une erreur commune
 chez les programmeurs --- et pas que chez les débutants: commencer à
 coder sans avoir au préalable suffisamment réfléchi à la solution. Il
-manque un plan clair des étapes à suivre pour résoudre le problème.
-Or, ce plan, ou la recette à suivre --- nous reviendrons sur cette
-analogie culinaire dans la suite --- pour transformer les entrants
-d'un problème en une solution, c'est l'algorithme. Travailler sans
-algorithme, c'est comme naviguer sans boussole.
+leur manque un plan clair des étapes à suivre pour résoudre le
+problème. Or, ce plan, ou la recette à suivre --- nous reviendrons sur
+cette analogie culinaire dans la suite --- pour transformer les
+entrants d'un problème en une solution, c'est l'algorithme. Travailler
+sans algorithme, c'est comme naviguer sans boussole.
 
 Si programmer requiert des algorithmes, l'étude de la programmation
 doit donc nécessairement s'accompagner de notions
@@ -55,16 +55,134 @@ prendre des années.
 L'étude des algorithmes s'accompagne habituellement de celle des
 structures de données ou, en d'autres termes, de la manière
 d'organiser les données dans un ordinateur. Comme nous le verrons au
-chapitre \autoref{chap:donnees}, il existe bien différentes structures
-de données en R, mais leur réelle mise en œuvre demeure tout à fait
+\autoref{chap:donnees}, il existe bien différentes structures de
+données en R, mais leur réelle mise en œuvre demeure tout à fait
 transparente pour les programmeuses et les programmeurs. C'est
 pourquoi nous ferons l'impasse sur des notions que l'on retrouve dans
 tous les ouvrages classiques d'algorithmique, comme le tableau
 (\emph{array}), la liste chainée (\emph{list}), l'arbre (\emph{tree})
 ou la table de hachage (\emph{hashtable}).
 
-Le présent chapitre est inspiré de l'excellent ouvrage \emph{Essential
-  Algorithms} de \citet{Stephens:algorithms:2013}.
+Le présent chapitre est inspiré de \emph{Essential Algorithms} de
+\citet{Stephens:algorithms:2013}, un excellent ouvrage rédigé dans un
+style clair et direct.
+
+\section{Définition et analogie}
+\label{sec:algorithmes:definition}
+
+Un \index{algorithme}\emph{algorithme} est une procédure de calcul
+permettant de résoudre un problème bien spécifié. L'algorithme
+explique, de manière non ambigüe et dans un nombre d'opérations fini,
+comment, à partir d'entrants, obtenir l'extrant solution du problème.
+
+Pour se mériter un algorithme, un problème doit renfermer une dose
+minimale de complexité: personne n'écrit un algorithme pour extraire
+le quatrième élément d'un vecteur de données. On suppose que cela fait
+partie de la définition de vecteur et que vous savez comment effectuer
+l'opération dès lors que vous connaissez le langage de programmation
+sous-jacent.
+
+Dans la même veine, un algorithme ne dépend pas du langage de
+programmation employé car il fournit les étapes pour résoudre un
+problème, non pas leur mise en œuvre. En d'autres termes, un
+algorithme explique \emph{ce qu'il faut faire} pour résoudre un
+problème et non \emph{comment le faire}.
+
+Illustrons le concept d'algorithme par l'un de ses plus illustres
+représentants: l'algorithme d'Euclide (c.~300 av. J.-C.), une procédure
+de calcul du plus grand commun diviseur (PGCD) de deux nombres entiers
+$m$ et $n$. L'algorithme repose sur l'idée que le PGCD de $m$ et $n$
+est aussi le PGCD de $n$ et du reste de la division de $m$ par $n$.
+
+\begin{algorithme}[Algorithme d'Euclide]
+  \label{algo:algorithmes:euclide}
+  Calculer le plus grand commun diviseur de deux entiers positifs $m$
+  et $n$ avec, sans perte de généralité, $n < m$.
+  \begin{enumerate}
+  \item Diviser $m$ par $n$ et poser $r$ égal au reste de la division.
+    (Nous avons alors $0 \leq r < n$.)
+  \item Si $r = 0$, retourner la valeur $n$.
+  \item Poser $m \leftarrow n$ et $n \leftarrow r$, puis retourner à
+    l'étape 1. \qed
+  \end{enumerate}
+\end{algorithme}
+
+Suivons les étapes de l'algorithme d'Euclide avec $m = 544$ et
+$n = 119$. À l'étape~1, nous déterminons que $544/119 = 4 + 68/119$,
+donc nous posons $r \leftarrow 68$. Puisque $r \neq 0$, l'étape~2 de
+l'algorithme ne s'applique pas. Nous passons donc à l'étape~3 et nous
+posons $m \leftarrow 119$ et $n \leftarrow 68$. De retour à l'étape~1,
+nous déterminons cette fois que $r \leftarrow 51$, ce qui mène encore
+à l'étape~3 et $m \leftarrow 68$ et $n \leftarrow 51$. Après un autre
+cycle, nous en sommes à $m \leftarrow 51$ et $n \leftarrow 17$. Cette
+fois, nous posons $r \leftarrow 0$ à l'étape~1 et la procédure
+s'arrête ensuite à l'étape~2. Le plus grand commun diviseur de $544$
+et $119$ est $17$.
+
+Selon \citet[section~1.1]{Knuth:ACP:vol1:1997}, un algorithme devrait
+réunir cinq caractéristiques.
+\begin{enumerate}
+\item \emph{Finitude}. Un algorithme doit toujours se terminer après
+  un nombre fini d’étapes. Ce nombre peut toutefois devenir très
+  grand.
+\item \emph{Définition précise}. Chaque étape d'un algorithme doit
+  être définie précisément; les actions à réaliser doivent être
+  spécifiées rigoureusement et sans ambigüité pour chaque cas.
+\item \emph{Entrées}. Un algorithme comporte aucune, une ou plusieurs
+  \emph{entrées}, des quantités fournies à l'algorithme avant qu'il ne
+  commence ou qui sont allouées dynamiquement durant son exécution.
+  Ces entrées proviennent d'un ensemble d'objets bien spécifié. Par
+  exemple, l'\autoref{algo:algorithmes:euclide} comporte deux entrées,
+  les nombres $m$ et $n$, provenant de l'ensemble des entiers
+  positifs.
+\item \emph{Sorties}. Un algorithme comporte une ou plusieurs
+  \emph{sorties}: des quantités ayant une relation spécifiée avec les
+  entrées. L'\autoref{algo:algorithmes:euclide} a une seule sortie,
+  soit la valeur $n$ de l'étape~2, le plus grand commun diviseur des
+  entrées.
+\item \emph{Efficacité}. On s'attend généralement d'un algorithme
+  qu'il soit \emph{efficace} dans ce sens où toutes les opérations
+  qu'il doit accomplir sont suffisamment élémentaires pour pouvoir
+  être en principe réalisées dans une durée finie par une personne
+  munie de papier et d'un crayon.
+\end{enumerate}
+
+Pour bien comprendre la nature et la portée d'un algorithme, il est
+assez utile de le comparer à une recette de cuisine. Dans une recette,
+les entrées sont les ingrédients, la procédure les diverses étapes et
+la sortie, le plat préparé. Comme un algorithme, une recette repose
+sur un certain nombre d'instructions élémentaires qui se passent
+d'explication, comme saisir, mijoter, mélanger, etc. Surtout, surtout,
+une recette explique les étapes à suivre pour obtenir le plat voulu,
+mais, sauf peut-être pour certaines opérations plus délicates, elle
+n'explique pas \emph{comment} réaliser chaque étape. S'il faut ajouter
+du lait dans un mélange à gateau, la recette n'indique pas où se
+procurer le lait, de vérifier si la date de péremption est passée ou
+comment mesurer la bonne quantité.
+
+On s'attend toutefois généralement à ce qu'un algorithme, qui est
+destiné à un ordinateur, soit plus précis qu'une recette. En effet, un
+ordinateur éprouverait beaucoup de difficulté avec une instruction
+comme «saler et poivrer au goût»!
+
+\tipbox{C'est une erreur commune dans la rédaction d'un algorithme de
+  fournir des détails de mise en œuvre superflus. Lorsque vous écrirez
+  un algorithme, demandez-vous si vous êtes en train d'expliquer
+  comment mesurer une tasse de lait.}
+
+\section{Pseudocode}
+\label{sec:algorithmes:pseudocode}
+
+\section{Exécution conditionnelle}
+\label{sec:algorithmes:if-else}
+
+\section{Itération et récursivité}
+\label{sec:algorithmes:iteration}
+
+\section{Nombre d'opérations}
+\label{sec:algorithmes:bigO}
+
+
 
 
 \subsection{Algorithme}

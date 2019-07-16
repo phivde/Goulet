@@ -121,9 +121,9 @@
   %% blancs apparaissent dès que la commande \selectlanguage est
   %% utilisée... comme dans la bibliographie, par exemple.
   \addto\extrasfrench{%
+    \def\algorithmeautorefname{algorithme}%
     \def\appendixautorefname{annexe}%
     \def\figureautorefname{figure}%
-    \def\exempleautorefname{exemple}%
     \def\exerciceautorefname{exercice}%
     \def\subfigureautorefname{figure}%
     \def\subsectionautorefname{section}%
@@ -248,10 +248,9 @@
   %%%  Nouveaux environnements
   %%% =========================
 
-  %% Environnements d'exemples et al.
-  \theoremstyle{remark}
-  \newtheorem*{rem}{Remarque}
-  \newtheorem*{rems}{Remarques}
+  %% Environnements de type théorème
+  \theoremstyle{definition}
+  \newtheorem{algorithme}{Algorithme}[chapter]
 
   %% Redéfinition de l'environnement titled-frame de framed.sty avec
   %% deux modifications: épaisseur des filets réduite de 2pt à 1pt;
@@ -470,7 +469,7 @@
     puis-que
   }
 
-%  \includeonly{}
+  \includeonly{algorithmes}
 
 \begin{document}
 
