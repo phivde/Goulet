@@ -18,7 +18,7 @@
 \item Expliquer les algorithmes classiques de tri et de recherche;
   comparer leurs avantages et inconvénients.
 \item Exprimer une méthode de résolution de problème sous la forme
-  d'un algorithme à l'aide de pseudo-code.
+  d'un algorithme à l'aide de pseudocode.
 \item Effectuer la mise en oeuvre d'un algorithme donné dans le
   langage R.
 \end{objectifs}
@@ -178,13 +178,87 @@ comme «saler et poivrer au goût»!
 
 \tipbox{C'est une erreur commune dans la rédaction d'un algorithme de
   fournir des détails de mise en œuvre superflus, de surcroit dans un
-  langage de programmation donné. Lorsque vous écrirez un algorithme,
-  demandez-vous si vous êtes en train d'expliquer comment mesurer une
-  quantité de lait avec une tasse de marque ACME.}
+  langage de programmation bien précis. Lorsque vous écrirez un
+  algorithme, demandez-vous si vous êtes en train d'expliquer comment
+  mesurer une quantité de lait avec une tasse à mesurer de marque
+  ACME.}
 
 
 \section{Pseudocode}
 \label{sec:algorithmes:pseudocode}
+
+Puisqu'il s'agissait du premier exemple d'algorithme complet, j'ai
+choisi de présenter l'\autoref{algo:algorithmes:euclide} dans un
+format très près du langage naturel.
+
+Une autre manière très populaire d'exprimer les algorithmes consiste à
+utiliser du \index{pseudocode}\emph{pseudocode}, un «langage»
+similaire à un langage de programmation, mais toujours sans référence
+à un langage en particulier. L'écriture en pseudocode permet parfois
+de mieux prendre la mesure de la structure et des détails d'un
+algorithme avant d'en attaquer la mise en œuvre.
+
+Il n'existe pas réellement de normes de composition pour le
+pseudocode.
+
+Voici de nouveau l'algorithme d'Euclide, présenté cette fois en
+pseudocode. Portez-y une attention toute particulière puisqu'il ne
+s'agit pas d'une transcription directe de
+l'\autoref{algo:algorithmes:euclide}. Vérifiez que les deux versions
+de l'algorithme retournent bien le même résultat.
+
+\begingroup
+\renewcommand{\thealgorithme}{\ref*{algo:algorithmes:euclide}a}
+\begin{algorithme}[Algorithme d'Euclide, version en pseudocode]
+  \label{algo:algorithmes:euclide:pseudo}
+  Calculer le plus grand commun diviseur de deux entiers positifs $m$
+  et $n$ avec, sans perte de généralité, $n < m$.
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+PGCD(entier m, entier n)
+  Tant que (n \neq 0)
+    r \leftarrow m mod n
+    m \leftarrow n
+    n \leftarrow r
+  Fin Tant que
+  Retourner m
+Fin PGCD
+\end{Verbatim}
+\end{Schunk}
+  \qed
+\end{algorithme}
+\endgroup
+
+\tipbox{L'opération \index{modulo}modulo, notée en mathématiques
+  $m \mod n$, représente le reste de la division de $m$ par $n$. Par
+  exemple, $544 \mod 119 = 68$, tel que calculé précédemment.}
+
+L'\autoref{algo:algorithmes:euclide:pseudo} reprend quelques unes des
+conventions les plus usuelles pour le pseudocode.
+
+La procédure de calcul faisant l'objet de l'algorithme est rédigée
+sous forme d'une fonction\footnote{%
+  C'est la terminologie de R. Une unité de code qui effectue un
+  traitement donné porte différents noms selon le langage de
+  programmation: routine, sous-routine, méthode, procédure,
+  sous-procédure\dots}. %
+L'algorithme débute par la \index{signature}\emph{signature} de la
+fonction (son nom avec le nom et le type de tous les arguments). Le
+code est indenté (décalé vers la droite) après la signature de la
+fonction pour montrer qu'il fait partie du corps de la fonction.
+
+Le bloc délimité par les instructions \code{Tant que
+  (\meta{condition})} et \code{Fin Tant que} forme une
+\index{boucle}\emph{boucle} dont le contenu --- lui aussi indenté ---
+est exécuté tant et aussi longtemps que \meta{condition} est vraie.
+
+L'instruction \code{Retourner} met immédiatement fin à la fonction,
+ici en retournant la valeur \code{m}.
+
+Enfin, on présente le pseudocode comme du code informatique dans une
+police non proportionnelle qui préserve l'alignement vertical des
+caractères.
+
 
 \section{Exécution conditionnelle}
 \label{sec:algorithmes:if-else}
