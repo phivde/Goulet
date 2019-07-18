@@ -103,7 +103,7 @@ est aussi le PGCD de $n$ et du reste de la division de $m$ par $n$.
     (Nous avons alors $0 \leq r < n$.)
   \item Si $r = 0$, retourner la valeur $n$.
   \item Poser $m \leftarrow n$ et $n \leftarrow r$, puis retourner à
-    l'étape 1. \qed
+    l'étape 1.
   \end{enumerate}
 \end{algorithme}
 
@@ -208,6 +208,7 @@ l'\autoref{algo:algorithmes:euclide}. Vérifiez que les deux versions
 de l'algorithme retournent bien le même résultat.
 
 \begingroup
+\addtocounter{algorithme}{-1}
 \renewcommand{\thealgorithme}{\ref*{algo:algorithmes:euclide}a}
 \begin{algorithme}[Algorithme d'Euclide, version en pseudocode]
   \label{algo:algorithmes:euclide:pseudo}
@@ -225,7 +226,6 @@ PGCD(entier m, entier n)
 Fin PGCD
 \end{Verbatim}
 \end{Schunk}
-  \qed
 \end{algorithme}
 \endgroup
 
@@ -250,7 +250,7 @@ fonction pour montrer qu'il fait partie du corps de la fonction.
 Le bloc délimité par les instructions \code{Tant que
   (\meta{condition})} et \code{Fin Tant que} forme une
 \index{boucle}\emph{boucle} dont le contenu --- lui aussi indenté ---
-est exécuté tant et aussi longtemps que \meta{condition} est vraie.
+est exécuté tant et aussi longtemps que la \meta{condition} est vraie.
 
 L'instruction \code{Retourner} met immédiatement fin à la fonction,
 ici en retournant la valeur \code{m}.
@@ -260,8 +260,211 @@ police non proportionnelle qui préserve l'alignement vertical des
 caractères.
 
 
-\section{Exécution conditionnelle}
+\section{Évaluation conditionnelle}
 \label{sec:algorithmes:if-else}
+
+Plusieurs algorithmes, même les plus simples, nécessitent de pouvoir
+effectuer des opérations différentes selon le résultat d'un test. Par
+exemple, pour effectuer le banal calcul de la valeur absolue d'un
+nombre, nous devons vérifier si le nombre est positif, négatif ou nul
+pour retourner un résultat différent en fonction de la règle suivante:
+\begin{equation*}
+  \lvert x \rvert =
+  \begin{cases}
+    x, & \text{si } x > 0 \\
+    0, & \text{si } x = 0 \\
+    -x, & \text{si } x < 0.
+  \end{cases}
+\end{equation*}
+
+De telles constructions requièrent des \emph{instructions
+  conditionnelles} qui permettent d'effectuer différents calculs selon
+le résultat d'une condition booléenne (vraie ou fausse). Il en existe
+quatre grands types.
+
+\begin{itemize}
+\item Les instructions conditionnelles à un volet de la forme
+  \begin{quote}
+    Si \meta{condition}, alors \meta{conséquence}
+  \end{quote}
+  Dans cette construction, la \meta{conséquence} est évaluée seulement
+  lorsque la \meta{condition} est vraie. Dans le cas contraire, il ne
+  se passe rien et le déroulement de l'algorithme se poursuit
+  normalement. Nous avons utilisé une telle instruction conditionnelle
+  à l'étape~2 de l'\autoref{algo:algorithmes:euclide}. La locution
+  «alors» est souvent omise dans les algorithmes comme, d'ailleurs,
+  dans la syntaxe de plusieurs langages de programmation.
+\item Les instructions conditionnelles à deux volets de la forme
+  \begin{quote}
+    Si \meta{condition}, alors \meta{conséquence}, \\
+    sinon \meta{alternative}
+  \end{quote}
+  Cette construction permet d'effectuer un choix entre deux actions:
+  ou bien la \meta{condition} est vraie et la \meta{conséquence} est
+  évaluée, ou bien la \meta{condition} est fausse et c'est alors
+  l'\meta{alternative} qui est évaluée. Le déroulement de l'algorithme
+  se poursuit après l'exécution de l'une ou l'autre des deux actions.
+\item Les instructions conditionnelles imbriquées de la forme
+  \begin{quote}
+    Si \meta{condition$_1$}, alors \meta{conséquence$_1$}, \\
+    sinon si \meta{condition$_2$}, alors \meta{conséquence$_2$}, \\
+    sinon \meta{alternative}
+  \end{quote}
+  Une instruction conditionnelle imbriquée permet de choisir entre
+  trois actions: la \meta{conséquence$_1$} est évaluée lorsque la
+  \meta{condition$_1$} est vraie; la \meta{conséquence$_2$} est évaluée
+  lorsque la \meta{condition$_1$} est fausse et que la
+  \meta{condition$_2$} est vraie; l'\meta{alternative} est évaluée
+  lorsque la \meta{condition$_1$} et la \meta{condition$_2$} sont toutes
+  les deux fausses. Pour choisir entre plus de trois actions
+  possibles, il suffit d'ajouter des clauses «sinon si\dots, alors\dots».
+\item Une variante de l'instruction précédente qui facilite la lecture
+  lorsqu'il y a un grand nombre d'actions possibles:
+  \begin{quote}
+    Selon que \\
+    \meta{condition$_1$}, alors \meta{action$_1$}; \\
+    \meta{condition$_2$}, alors \meta{action$_2$}; \\
+    \meta{condition$_3$}, alors \meta{action$_3$}; \\
+    \dots \\
+    autrement, \meta{action par défaut}
+  \end{quote}
+  Seule l'\meta{action} correspondant à la \meta{condition} vraie est
+  exécutée. Si aucune \meta{condition} n'est vraie, c'est
+  l'\meta{action par défaut} qui est exécutée. La terminologie
+  française que j'utilise ci-dessus est plutôt rare dans la
+  littérature. Dans les langages de programmation, le mot-clé utilisé
+  pour ce type de construction est généralement \icode{switch},
+  \code{case} ou \code{cond}.
+\end{itemize}
+
+Afin d'illustrer ce qui précède, exprimons le calcul de la valeur
+absolue sous forme d'algorithme. Je fournis d'un coup les versions en
+langage naturel et en pseudocode.
+
+\begin{algorithme}
+  \label{algo:algorithmes:abs}
+  Calculer la valeur absolue d'un nombre réel $x$.
+
+  \noindent
+  \begin{minipage}[t]{0.48\linewidth}
+    \begin{enumerate}
+    \item Si $x > 0$, retourner $x$; sinon si $x = 0$, retourner $0$;
+      sinon retourner $-x$.
+    \end{enumerate}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.48\linewidth}
+    \begin{Schunk}
+\begin{Verbatim}
+abs(réel x)
+  Si (x > 0)
+    Retourner x
+  Sinon si (x = 0)
+    Retourner 0
+  Sinon
+    Retourner -x
+Fin abs
+\end{Verbatim}
+    \end{Schunk}
+  \end{minipage}
+\end{algorithme}
+
+Pouvons-nous simplifier un peu tout cela? Vous aurez sans doute
+remarqué que le cas $x = 0$ ne nécessite pas vraiment de traitement
+particulier. Il peut être combiné avec le cas $x > 0$ ou avec le cas
+$x < 0$ sans changer le résultat. C'est une leçon que vous devez
+retenir: un algorithme simple et efficace ne correspond pas toujours
+directement à une formule mathématique.
+
+Voici une version simplifiée --- et à la logique inversée --- de
+l'algorithme du calcul de la valeur absolue.
+
+\begingroup
+\addtocounter{algorithme}{-1}
+\renewcommand{\thealgorithme}{\ref*{algo:algorithmes:abs}a}
+\begin{algorithme}
+  \label{algo:algorithmes:abs:simplifie}
+  Calculer la valeur absolue d'un nombre réel $x$.
+
+  \noindent
+  \begin{minipage}[t]{0.48\linewidth}
+    \begin{enumerate}
+    \item Si $x < 0$, retourner $-x$; sinon retourner $x$.
+    \end{enumerate}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.48\linewidth}
+    \begin{Schunk}
+\begin{Verbatim}
+abs(réel x)
+  Si (x < 0)
+    Retourner -x
+  Sinon
+    Retourner x
+Fin abs
+\end{Verbatim}
+    \end{Schunk}
+  \end{minipage}
+\end{algorithme}
+\endgroup
+
+Nous pouvons aussi voir la fonction valeur absolue comme une fonction
+identité (qui retourne son argument inchangé), sauf lorsque l'argument
+est négatif. Ceci résulte en une autre version de l'algorithme qui se
+passe d'une clause «sinon».\footnote{%
+  Pensez-y: la clause «sinon» n'est jamais nécessaire lorsque la
+  \meta{condition} d'une instruction conditionnelle à deux volets
+  contient une instruction «Retourner».}
+
+\begingroup
+\addtocounter{algorithme}{-1}
+\renewcommand{\thealgorithme}{\ref*{algo:algorithmes:abs}a}
+\begin{algorithme}
+  \label{algo:algorithmes:abs:simplifie}
+  Calculer la valeur absolue d'un nombre réel $x$.
+
+  \noindent
+  \begin{minipage}[t]{0.48\linewidth}
+    \begin{enumerate}
+    \item Si $x < 0$, retourner $-x$.
+    \item Retourner $x$.
+    \end{enumerate}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.48\linewidth}
+    \begin{Schunk}
+\begin{Verbatim}
+abs(réel x)
+  Si (x < 0)
+    Retourner -x
+  Retourner x
+Fin abs
+\end{Verbatim}
+    \end{Schunk}
+  \end{minipage}
+\end{algorithme}
+\endgroup
+
+Jusqu'à maintenant, nous avons réussi à énoncer la \meta{condition}
+des instructions conditionnelles uniquement à partir d'opérateurs
+mathématiques simples comme $<$, $=$ et $>$. Pour construire des
+conditions composées, il faut avoir recours aux opérateurs logiques
+ET, OU et NON.
+\begin{itemize}
+\item \meta{e$_1$} ET \meta{e$_2$} est vraie lorsque les expressions
+  \meta{e$_1$} et \meta{e$_2$} sont toutes deux vraies; sinon la
+  condition est fausse.
+\item \meta{e$_1$} OU \meta{e$_2$} est vraie lorsque l'une ou l'autre
+  des expressions \meta{e$_1$} et \meta{e$_2$} est vraie; la condition
+  est fausse lorsque \meta{e$_1$} et \meta{e$_2$} sont toutes deux
+  fausses.
+\item NON \meta{e} est vraie lorsque l'expression \meta{e} est fausse,
+  et vraie autrement.
+\end{itemize}
+
+Par exemple, la condition que l'on écrit mathématiquement $5 < x < 10$
+s'exprime ainsi en algorithmique: $x > 5$ ET $x < 10$.
+
 
 \section{Itération et récursivité}
 \label{sec:algorithmes:iteration}
@@ -476,7 +679,11 @@ Quelques remarques pour vous aider dans votre lecture.
 
 \end{Filesave}
 
+%  Pourquoi la clause «sinon» n'est jamais nécessaire lorsque la
+%   \meta{condition} d'une instruction conditionnelle à deux volets
+%   contient une instruction «Retourner».
 
+% Clauses logiques ET, OU, NON
 
 \begin{Filesave}{solutions}
 \endgroup                               % fin de \lstset local
