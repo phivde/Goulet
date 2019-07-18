@@ -207,10 +207,7 @@ s'agit pas d'une transcription directe de
 l'\autoref{algo:algorithmes:euclide}. Vérifiez que les deux versions
 de l'algorithme retournent bien le même résultat.
 
-\begingroup
-\addtocounter{algorithme}{-1}
-\renewcommand{\thealgorithme}{\ref*{algo:algorithmes:euclide}a}
-\begin{algorithme}[Algorithme d'Euclide, version en pseudocode]
+\begin{algorithmebis}[Algorithme d'Euclide, version en pseudocode]
   \label{algo:algorithmes:euclide:pseudo}
   Calculer le plus grand commun diviseur de deux entiers positifs $m$
   et $n$ avec, sans perte de généralité, $n < m$.
@@ -226,8 +223,7 @@ PGCD(entier m, entier n)
 Fin PGCD
 \end{Verbatim}
 \end{Schunk}
-\end{algorithme}
-\endgroup
+\end{algorithmebis}
 
 \tipbox{L'opération \index{modulo}modulo, notée en mathématiques
   $m \mod n$, représente le reste de la division de $m$ par $n$. Par
@@ -379,10 +375,7 @@ directement à une formule mathématique.
 Voici une version simplifiée --- et à la logique inversée --- de
 l'algorithme du calcul de la valeur absolue.
 
-\begingroup
-\addtocounter{algorithme}{-1}
-\renewcommand{\thealgorithme}{\ref*{algo:algorithmes:abs}a}
-\begin{algorithme}
+\begin{algorithmebis}
   \label{algo:algorithmes:abs:simplifie}
   Calculer la valeur absolue d'un nombre réel $x$.
 
@@ -405,8 +398,7 @@ Fin abs
 \end{Verbatim}
     \end{Schunk}
   \end{minipage}
-\end{algorithme}
-\endgroup
+\end{algorithmebis}
 
 Nous pouvons aussi voir la fonction valeur absolue comme une fonction
 identité (qui retourne son argument inchangé), sauf lorsque l'argument
@@ -416,10 +408,7 @@ passe d'une clause «sinon».\footnote{%
   \meta{condition} d'une instruction conditionnelle à deux volets
   contient une instruction «Retourner».}
 
-\begingroup
-\addtocounter{algorithme}{-1}
-\renewcommand{\thealgorithme}{\ref*{algo:algorithmes:abs}a}
-\begin{algorithme}
+\begin{algorithmebis}
   \label{algo:algorithmes:abs:simplifie}
   Calculer la valeur absolue d'un nombre réel $x$.
 
@@ -442,8 +431,7 @@ Fin abs
 \end{Verbatim}
     \end{Schunk}
   \end{minipage}
-\end{algorithme}
-\endgroup
+\end{algorithmebis}
 
 Jusqu'à maintenant, nous avons réussi à énoncer la \meta{condition}
 des instructions conditionnelles uniquement à partir d'opérateurs

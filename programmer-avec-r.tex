@@ -122,6 +122,7 @@
   %% utilisée... comme dans la bibliographie, par exemple.
   \addto\extrasfrench{%
     \def\algorithmeautorefname{algorithme}%
+    \def\algorithmebisautorefname{algorithme}%
     \def\appendixautorefname{annexe}%
     \def\figureautorefname{figure}%
     \def\exerciceautorefname{exercice}%
@@ -251,6 +252,8 @@
   %% Environnements de type théorème
   \theoremstyle{definition}
   \newtheorem{algorithme}{Algorithme}[chapter]
+  \newtheorem{algorithmebis}{Algorithme}[algorithme]
+  \renewcommand{\thealgorithmebis}{\thealgorithme\alph{algorithmebis}}
 
   %% Redéfinition de l'environnement titled-frame de framed.sty avec
   %% deux modifications: épaisseur des filets réduite de 2pt à 1pt;
