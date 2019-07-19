@@ -89,10 +89,11 @@ algorithme explique \emph{ce qu'il faut faire} pour résoudre un
 problème et non \emph{comment le faire}.
 
 Illustrons le concept d'algorithme par l'un de ses plus illustres
-représentants: l'algorithme d'Euclide (c.~300 av. J.-C.), une procédure
-de calcul du plus grand commun diviseur (PGCD) de deux nombres entiers
-$m$ et $n$. L'algorithme repose sur l'idée que le PGCD de $m$ et $n$
-est aussi le PGCD de $n$ et du reste de la division de $m$ par $n$.
+représentants: l'\Index{Euclide@Euclide (algorithme)}algorithme
+d'Euclide (c.~300 av. J.-C.), une procédure de calcul du plus grand
+commun diviseur (PGCD) de deux nombres entiers $m$ et $n$.
+L'algorithme repose sur l'idée que le PGCD de $m$ et $n$ est aussi le
+PGCD de $n$ et du reste de la division de $m$ par $n$.
 
 \begin{algorithme}[Algorithme d'Euclide]
   \label{algo:algorithmes:euclide}
@@ -107,17 +108,17 @@ est aussi le PGCD de $n$ et du reste de la division de $m$ par $n$.
   \end{enumerate}
 \end{algorithme}
 
-Suivons les étapes de l'algorithme d'Euclide avec $m = 544$ et
-$n = 119$. À l'étape~1, nous déterminons que $544/119 = 4 + 68/119$,
-donc nous posons $r \leftarrow 68$. Puisque $r \neq 0$, l'étape~2 de
-l'algorithme ne s'applique pas. Nous passons donc à l'étape~3 et nous
-posons $m \leftarrow 119$ et $n \leftarrow 68$. De retour à l'étape~1,
-nous déterminons cette fois que $r \leftarrow 51$, ce qui mène encore
-à l'étape~3 et $m \leftarrow 68$ et $n \leftarrow 51$. Après un autre
-cycle, nous en sommes à $m \leftarrow 51$ et $n \leftarrow 17$. Cette
-fois, nous posons $r \leftarrow 0$ à l'étape~1 et la procédure
-s'arrête ensuite à l'étape~2. Le plus grand commun diviseur de $544$
-et $119$ est $17$.
+Suivons les étapes de l'\index{Euclide@Euclide (algorithme)}algorithme
+d'Euclide avec $m = 544$ et $n = 119$. À l'étape~1, nous déterminons
+que $544/119 = 4 + 68/119$, donc nous posons $r \leftarrow 68$.
+Puisque $r \neq 0$, l'étape~2 de l'algorithme ne s'applique pas. Nous
+passons donc à l'étape~3 et nous posons $m \leftarrow 119$ et
+$n \leftarrow 68$. De retour à l'étape~1, nous déterminons cette fois
+que $r \leftarrow 51$, ce qui mène encore à l'étape~3 et
+$m \leftarrow 68$ et $n \leftarrow 51$. Après un autre cycle, nous en
+sommes à $m \leftarrow 51$ et $n \leftarrow 17$. Cette fois, nous
+posons $r \leftarrow 0$ à l'étape~1 et la procédure s'arrête ensuite à
+l'étape~2. Le plus grand commun diviseur de $544$ et $119$ est $17$.
 
 Selon \citet[section~1.1]{Knuth:ACP:vol1:1997}, un algorithme devrait
 réunir cinq caractéristiques.\footnote{%
@@ -201,13 +202,13 @@ algorithme avant d'en attaquer la mise en œuvre.
 Il n'existe pas réellement de normes de composition pour le
 pseudocode.
 
-Voici de nouveau l'algorithme d'Euclide, présenté cette fois en
-pseudocode. Portez-y une attention toute particulière puisqu'il ne
-s'agit pas d'une transcription directe de
-l'\autoref{algo:algorithmes:euclide}. Vérifiez que les deux versions
-de l'algorithme retournent bien le même résultat.
+Voici de nouveau l'\index{Euclide@Euclide (algorithme)}algorithme
+d'Euclide, présenté cette fois en pseudocode. Portez-y une attention
+toute particulière puisqu'il ne s'agit pas d'une transcription directe
+de l'\autoref{algo:algorithmes:euclide}. Vérifiez que les deux
+versions de l'algorithme retournent bien le même résultat.
 
-\begin{algorithmebis}[Algorithme d'Euclide, version en pseudocode]
+\begin{algorithme}[Algorithme d'Euclide, version en pseudocode]
   \label{algo:algorithmes:euclide:pseudo}
   Calculer le plus grand commun diviseur de deux entiers positifs $m$
   et $n$ avec, sans perte de généralité, $n < m$.
@@ -223,7 +224,7 @@ PGCD(entier m, entier n)
 Fin PGCD
 \end{Verbatim}
 \end{Schunk}
-\end{algorithmebis}
+\end{algorithme}
 
 \tipbox{L'opération \index{modulo}modulo, notée en mathématiques
   $m \mod n$, représente le reste de la division de $m$ par $n$. Par
@@ -454,7 +455,7 @@ Par exemple, la condition que l'on écrit mathématiquement $5 < x < 10$
 s'exprime ainsi en algorithmique: $x > 5$ ET $x < 10$.
 
 
-\section{Itération et récursivité}
+\section{Itération et récursion}
 \label{sec:algorithmes:iteration}
 
 La plupart des tâches que nous confions à des ordinateurs sont
@@ -463,9 +464,10 @@ contrairement aux humains, ils ne se lassent jamais de répéter
 toujours la même opération.
 
 Il existe deux grands types de processus répétitifs: les processus
-\emph{itératifs} (ou qui utilisent l'\index{itération}itération) et
-les processus \emph{récursifs} (ou qui utilisent la
-\index{recursivite@récursivité}récursivité).
+\emph{itératifs} (ou qui utilisent
+l'\index{iteration@itération}itération) et les processus
+\emph{récursifs} (ou qui utilisent la
+\index{recursion@récursion}\index{recursivite@récursivité|see{récursion}}récursion).
 
 Sortons un instant du contexte de la programmation informatique pour
 illustrer chaque type de processus. Nous voulons indiquer à une
@@ -501,8 +503,8 @@ La \autoref{fig:algorithmes:peinture-iter} illustre le processus itératif.
 \end{figure}
 
 L'approche récursive est plus difficile à bien saisir. Une vieille
-blague dit que pour comprendre la récursivité, il faut d'abord
-comprendre la récursivité! Dans cette approche, les instructions pour
+blague dit que pour comprendre la récursion, il faut d'abord
+comprendre la récursion! Dans cette approche, les instructions pour
 peinturer une clôture de $n$ planches sont à l'effet que la personne
 doit appliquer de la peinture sur la première planche et peinturer une
 clôture de $n - 1$ planches, et ce, tant qu'il y a des planches à
@@ -555,16 +557,142 @@ aussi fournir des informations --- qu'elle a mémorisées --- sur
 l'«état» dans lequel elle se trouvait au moment d'interrompre son
 travail.
 
+À ce stade, vous pourriez vous demander pourquoi donc parler de
+\index{recursion@récursion}récursion puisque ça semble si compliqué,
+voire inefficace. Le fait est que la solution de plusieurs problème
+s'exprime beaucoup plus simplement de manière récursive que de manière
+itérative. Pensez au tri d'une main de cartes: il s'agit de placer la
+plus petite carte au début de la main, puis de trier le reste de la
+main, et ainsi de suite jusqu'à ce que la main soit triée au complet.
+L'\index{Euclide@Euclide (algorithme)}algorithme d'Euclide est
+également récursif. Examinez de nouveau
+l'\autoref{algo:algorithmes:euclide}: l'étape~2 n'est rien d'autre que
+le critère d'arrêt et l'étape~3, le rappel de la procédure avec des
+arguments différents.
 
+Dans l'absolu, les procédures récursives sont moins efficaces en
+termes de temps de calcul et de consommation de ressources, notamment
+parce qu'elles nécessitent une \index{pile}pile (\emph{stack}) pour
+accumuler les informations durant la phase d'expansion. En pratique,
+toutefois, ces inconvénients tendent à diminuer ou à disparaitre avec
+l'optimisation des compilateurs de plusieurs langage de programmation.
+De plus, la propriété de
+\index{recursion@récursion!terminale}récursion terminale
+(\emph{tail-recursion}) de certains langages, dont
+\index{Scheme}Scheme, fait en sorte que certaines procédures
+récursives sont en tous points équivalentes à des procédures
+itératives. Nous n'irons pas plus loin, mais si le sujet vous
+intéresse, je vous recommande de lire la section~1.2.1 de
+\citet{Sussman:scheme:1996}. L'article de
+\citet{Wikipedia:Recursion_terminale} constitue également un bon point
+de départ pour explorer le sujet plus en profondeur.
 
+Je ne pourrais prétendre avoir écrit un ouvrage d'introduction à la
+programmation sans traiter de l'exemple classique quand il s'agit de
+comparer \index{iteration@itération}itération et
+\index{recursion@récursion}récursion: le calcul de la
+\Index{factorielle}factorielle. La fonction factorielle est définie
+par
+\begin{equation*}
+  n! = n \cdot (n - 1) \cdot (n - 2) \cdots 3 \cdot 2 \cdot 1.
+\end{equation*}
+Or, puisque
+\begin{equation*}
+  n! = n \cdot [(n - 1) \cdot (n - 2) \dots 3 \cdot 2 \cdot 1] =
+  n \cdot (n - 1)!,
+\end{equation*}
+la fonction est récursive et une manière toute naturelle de calculer
+la factorielle d'un nombre utilise la récursion. Exprimons ceci sous
+forme d'algorithme. Le pseudocode sied un peu mieux aux algorithmes
+récursifs.
 
+\begin{algorithme}[Factorielle, approche récursive]
+  Calculer la \index{factorielle}factorielle d'un entier positif $n$.
+  \begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+factorial(entier n)
+  Si (n = 1)
+    Retourner 1
+  Retourner n \times factorial(n - 1)
+Fin factorial
+\end{Verbatim}
+  \end{Schunk}
+\end{algorithme}
 
+La \autoref{fig:algorithmes:factorial} illustre le processus de calcul
+récursif de la valeur de $6!$. Remarquez comme la structure est
+similaire à celle du processus de peinture d'une clôture de la
+\autoref{fig:algorithmes:peinture-recursive}.
 
+\begin{figure}
+  \centering
+  \begin{minipage}{0.67\linewidth}
+\begin{Verbatim}[commandchars=\\\{\}]
+factorial(6)
+6 \times factorial(5)
+6 \times (5 \times factorial(4))
+6 \times (5 \times (4 \times factorial(3)))
+6 \times (5 \times (4 \times (3 \times factorial(2))))
+6 \times (5 \times (4 \times (3 \times (2 \times factorial(1)))))
+6 \times (5 \times (4 \times (3 \times (2 \times 1))))
+6 \times (5 \times (4 \times (3 \times 2)))
+6 \times (5 \times (4 \times 6))
+6 \times (5 \times 24)
+6 \times 120
+720
+\end{Verbatim}
+  \end{minipage}
+  \caption{Processus récursif du calcul de $6!$}
+  \label{fig:algorithmes:factorial}
+\end{figure}
+
+Nous pouvons également voir $n!$ comme le résultat du produit de $1$
+par $2$, puis le produit du résultat par $3$, puis par $4$, et ainsi
+de suite jusqu'à $n$. Avec cette approche, nous devons enregistrer le
+résultat courant du produit ainsi qu'un
+\index{compteur}\emph{compteur} qui nous permet de savoir où nous en
+sommes dans le calcul. Cela devrait vous rappeler l'approche itérative
+de la peinture d'une clôture, car c'est bien ce dont il s'agit: le
+calcul de la \index{factorielle}factorielle de manière itérative.
+Exprimons cette fois l'algorithme en langage naturel.
+
+\begin{algorithme}[Factorielle, approche itérative]
+  Calculer la \index{factorielle}factorielle d'un entier positif $n$.
+  \begin{enumerate}
+  \item Poser $p \leftarrow i \leftarrow 1$.
+  \item Si $i = n$, retourner la valeur $p$.
+  \item Augmenter le compteur $i$: $i \leftarrow i + 1$.
+  \item Poser $p \leftarrow p \times i$, puis retourner à l'étape 2.
+  \end{enumerate}
+\end{algorithme}
+
+La \autoref{fig:algorithmes:fact-iter} illustre le processus de calcul
+itératif de la valeur de $6!$. Sa structure est cette fois similaire à
+celle de \autoref{fig:algorithmes:peinture-iter}. Remarquez comment
+les valeurs de $p$ et de $i$ enregistrent l'état du processus, ce qui
+nous permettrait de l'interrompre et de le relancer à tout moment.
+
+\begin{figure}
+  \centering
+  \begin{minipage}{0.25\linewidth}
+\begin{Verbatim}[commandchars=\\\{\}]
+factorial(6)
+i \leftarrow 1; p \leftarrow 1
+i \leftarrow 2; p \leftarrow 2
+i \leftarrow 3; p \leftarrow 6
+i \leftarrow 4; p \leftarrow 24
+i \leftarrow 5; p \leftarrow 120
+i \leftarrow 6; p \leftarrow 720
+720
+\end{Verbatim}
+  \end{minipage}
+  \caption{Processus récursif du calcul de $6!$}
+  \label{fig:algorithmes:fact-iter}
+\end{figure}
 
 
 \section{Nombre d'opérations}
 \label{sec:algorithmes:bigO}
-
 
 
 
@@ -776,7 +904,9 @@ Quelques remarques pour vous aider dans votre lecture.
 %   \meta{condition} d'une instruction conditionnelle à deux volets
 %   contient une instruction «Retourner».
 
-% Clauses logiques ET, OU, NON
+%   Clauses logiques ET, OU, NON
+
+% Exprimer PGCD récursif en pseudocode
 
 \begin{Filesave}{solutions}
 \endgroup                               % fin de \lstset local
