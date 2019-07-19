@@ -227,7 +227,7 @@ Fin PGCD
 
 \tipbox{L'opération \index{modulo}modulo, notée en mathématiques
   $m \mod n$, représente le reste de la division de $m$ par $n$. Par
-  exemple, $544 \mod 119 = 68$, tel que calculé précédemment.}
+  exemple, tel que calculé précédemment, $544 \mod 119 = 68$.}
 
 L'\autoref{algo:algorithmes:euclide:pseudo} reprend quelques unes des
 conventions les plus usuelles pour le pseudocode.
@@ -456,6 +456,109 @@ s'exprime ainsi en algorithmique: $x > 5$ ET $x < 10$.
 
 \section{Itération et récursivité}
 \label{sec:algorithmes:iteration}
+
+La plupart des tâches que nous confions à des ordinateurs sont
+répétitives. Après tout, c'est ce dans quoi ils excellent puisque,
+contrairement aux humains, ils ne se lassent jamais de répéter
+toujours la même opération.
+
+Il existe deux grands types de processus répétitifs: les processus
+\emph{itératifs} (ou qui utilisent l'\index{itération}itération) et
+les processus \emph{récursifs} (ou qui utilisent la
+\index{recursivite@récursivité}récursivité).
+
+Sortons un instant du contexte de la programmation informatique pour
+illustrer chaque type de processus. Nous voulons indiquer à une
+personne la procédure à suivre pour peinturer une clôture longue de
+$n$ planches. (Pour simplifier, nous allons omettre de peinturer les
+supports horizontaux.)
+
+Dans l'approche itérative, nous supposons que les planches sont
+numérotées de $1$ à $n$, puis nous indiquons à la personne d'appliquer
+de la peinture sur la planche $i$, pour $i$ allant de $1$ à $n$.
+Transcrites en pseudocode, les instructions vont comme suit.
+\begin{Schunk}
+\begin{Verbatim}
+Peinturer(n)
+  Pour i de 1 à n
+    AppliquerPeintureSurPlanche(i)
+  Fin Pour
+Fin Peinturer
+\end{Verbatim}
+\end{Schunk}
+
+La \autoref{fig:algorithmes:peinture-iter} illustre le processus itératif.
+
+\begin{figure}
+  \centering
+  \setlength{\unitlength}{1.1mm}
+  \input{include/peinture-newsavebox}
+  \input{include/peinture-savebox}
+  \input{include/peinture-iter}
+  \caption{Illustration d'un processus itératif de peinture d'une
+    clôture}
+  \label{fig:algorithmes:peinture-iter}
+\end{figure}
+
+L'approche récursive est plus difficile à bien saisir. Une vieille
+blague dit que pour comprendre la récursivité, il faut d'abord
+comprendre la récursivité! Dans cette approche, les instructions pour
+peinturer une clôture de $n$ planches sont à l'effet que la personne
+doit appliquer de la peinture sur la première planche et peinturer une
+clôture de $n - 1$ planches, et ce, tant qu'il y a des planches à
+peinturer. Examinez bien le pseudocode correspondant ci-dessous.
+\begin{Schunk}
+\begin{Verbatim}
+Peinturer(n)
+  Si (n = 0)
+    Travail terminé
+  AppliquerPeintureSurPlanche(1) ET Peinturer(n - 1)
+Fin Peinturer
+\end{Verbatim}
+\end{Schunk}
+
+La personne qui suit les instructions récursives ne peut commencer à
+appliquer de la peinture tant qu'elle n'a pas rencontré la condition
+d'arrêt (l'extrémité de la clôture) puisque la description du travail
+à effectuer dépend d'elle-même. Une fois arrivée au critère d'arrêt,
+la personne dispose finalement de toutes les informations pour faire
+son travail, qu'elle effectue finalement à rebours. Les processus
+récursifs se caractérisent par ces phases d'\index{expansion}expansion
+(ou d'accumulation d'information) et de \index{contraction}contraction
+(ou d'exécution des instructions). La
+\autoref{fig:algorithmes:peinture-recursive} illustre le processus
+récursif.
+
+\begin{figure}
+  \centering
+  \setlength{\unitlength}{1.0mm}
+  \input{include/peinture-savebox}
+  \input{include/peinture-recursive}
+  \caption{Illustration d'un processus récursif de peinture d'une
+    clôture}
+  \label{fig:algorithmes:peinture-recursive}
+\end{figure}
+
+Nous pouvons aussi comparer les deux types de processus en observant
+ce qui se passerait si la personne devait interrompre son travail pour
+le confier à quelqu'un d'autre. Dans l'approche itérative, elle
+pourrait simplement indiquer qu'elle en était à appliquer de la
+peinture sur la planche $m$ dans le processus de peinturer une clôture
+de $n$ planches. Le travail pourrait ensuite se poursuivre à partir de
+la planche $m + 1$. Dans l'approche récursive, cependant, la personne
+ne pourrait uniquement dire qu'elle en était à peinturer une clôture
+de $m$ planches, car elle aurait aussi bien pu se trouver dans la
+phase d'expansion que dans celle de contraction. Elle devrait donc
+aussi fournir des informations --- qu'elle a mémorisées --- sur
+l'«état» dans lequel elle se trouvait au moment d'interrompre son
+travail.
+
+
+
+
+
+
+
 
 \section{Nombre d'opérations}
 \label{sec:algorithmes:bigO}
