@@ -37,14 +37,14 @@ de nombreuses reprises. Marianne et Alexandre font une erreur commune
 chez les programmeurs --- et pas que chez les débutants: commencer à
 coder sans avoir au préalable suffisamment réfléchi à la solution. Il
 leur manque un plan clair des étapes à suivre pour résoudre le
-problème. Or, ce plan, ou la recette à suivre --- nous reviendrons sur
-cette analogie culinaire dans la suite --- pour transformer les
-entrants d'un problème en une solution, c'est l'algorithme. Travailler
-sans algorithme, c'est comme naviguer sans boussole.
+problème. Or, ce plan, ou la recette à suivre pour transformer les
+entrants d'un problème en une solution, c'est
+l'\index{algorithme}\emph{algorithme}. Travailler sans algorithme,
+c'est comme naviguer sans boussole.
 
-Si programmer requiert des algorithmes, l'étude de la programmation
-doit donc nécessairement s'accompagner de notions de base
-d'\index{algorithmique}algorithmique, la science qui étudie les
+Puisque programmer requiert des algorithmes, l'étude de la
+programmation doit par conséquent s'accompagner de notions
+d'\index{algorithmique}\emph{algorithmique}, la science qui étudie les
 algorithmes et les structures de données. L'algorithmique est une
 discipline riche en techniques ingénieuses et en analyses
 mathématiques poussées. Connaitre ses principes de base et étudier
@@ -71,7 +71,7 @@ Le présent chapitre est inspiré de \citet{Sussman:scheme:1996},
 \section{Définition et analogie}
 \label{sec:algorithmes:definition}
 
-Un \index{algorithme}\emph{algorithme} est une procédure de calcul
+Un \index{algorithme}algorithme est une procédure de calcul
 permettant de résoudre un problème bien spécifié. L'algorithme
 explique, de manière non ambigüe et dans un nombre d'opérations fini,
 comment, à partir d'entrants, obtenir l'extrant solution du problème.
@@ -158,7 +158,7 @@ la sortie, le plat préparé.
 
 Comme un algorithme, une recette repose sur un certain nombre
 d'instructions élémentaires qui se passent d'explication, comme
-saisir, mijoter, mélanger, etc. La recette est indépendante des
+saisir, mijoter, mélanger, etc. La recette est aussi indépendante des
 ustensiles utilisés comme l'algorithme l'est du langage de
 programmation.
 
@@ -168,7 +168,7 @@ plus délicates, elle n'explique pas \emph{comment} réaliser chaque
 étape. S'il faut ajouter du lait dans un mélange à gateau, la recette
 n'indique pas de sortir le lait du réfrigérateur, de vérifier la date
 de péremption et de verser le lait dans la tasse à mesurer jusqu'à la
-ligne correpondant à la quantité voulue. Un algorithme ne contient pas
+ligne correpondant à la quantité voulue! Un algorithme ne contient pas
 plus d'instructions pour vérifier la validité des entrées ou pour
 effectuer des opérations de base comme les opérations arithmétiques,
 la lecture de données, l'indiçage d'un vecteur, etc.
@@ -200,9 +200,6 @@ similaire à un langage de programmation, mais toujours sans référence
 de mieux prendre la mesure de la structure et des détails d'un
 algorithme avant d'en attaquer la mise en œuvre.
 
-Il n'existe pas réellement de normes de composition pour le
-pseudocode.
-
 Voici de nouveau l'\index{Euclide@Euclide (algorithme)}algorithme
 d'Euclide, présenté cette fois en pseudocode. Portez-y une attention
 toute particulière puisqu'il ne s'agit pas d'une transcription directe
@@ -231,19 +228,21 @@ Fin PGCD
   $m \mod n$, représente le reste de la division de $m$ par $n$. Par
   exemple, tel que calculé précédemment, $544 \mod 119 = 68$.}
 
-L'\autoref{algo:algorithmes:euclide:pseudo} reprend quelques unes des
-conventions les plus usuelles pour le pseudocode.
+Il n'existe pas réellement de normes de composition pour le
+pseudocode. L'\autoref{algo:algorithmes:euclide:pseudo} reprend
+toutefois quelques unes des conventions les plus usuelles.
 
 La procédure de calcul faisant l'objet de l'algorithme est rédigée
 sous forme d'une fonction\footnote{%
   C'est la terminologie de R. Une unité de code qui effectue un
   traitement donné porte divers noms selon le langage de
   programmation: fonction, routine, sous-routine, méthode, procédure,
-  sous-procédure.}. %
+  sous-procédure\dots}. %
 L'algorithme débute par la \index{signature}\emph{signature} de la
 fonction (son nom avec le nom et le type de tous les arguments). Le
-code est indenté (décalé vers la droite) après la signature de la
-fonction pour montrer qu'il fait partie du corps de la fonction.
+code est \index{indentation}indenté (décalé vers la droite) après la
+signature de la fonction pour montrer qu'il fait partie du corps de la
+fonction.
 
 Le bloc délimité par les instructions \code{Tant que
   (\meta{condition})} et \code{Fin Tant que} forme une
@@ -374,8 +373,10 @@ $x < 0$ sans changer le résultat. C'est une leçon que vous devez
 retenir: un algorithme simple et efficace ne correspond pas toujours
 directement à une formule mathématique.
 
-Voici une version simplifiée --- et à la logique inversée --- de
-l'algorithme du calcul de la valeur absolue.
+Voici une version simplifiée de l'algorithme du calcul de la valeur
+absolue. J'en ai inversé la logique. Présenté ainsi, l'algorithme met
+l'accent sur le fait qu'un traitement ne doit être effectué que pour
+les nombres négatifs.
 
 \begin{algorithmebis}
   \label{algo:algorithmes:abs:simplifie}
@@ -446,8 +447,8 @@ ET, OU et NON.
   condition est fausse.
 \item \meta{e$_1$} OU \meta{e$_2$} est vraie lorsque l'une ou l'autre
   des expressions \meta{e$_1$} et \meta{e$_2$} est vraie; la condition
-  est fausse lorsque \meta{e$_1$} et \meta{e$_2$} sont toutes deux
-  fausses.
+  est fausse uniquement lorsque \meta{e$_1$} et \meta{e$_2$} sont
+  toutes deux fausses.
 \item NON \meta{e} est vraie lorsque l'expression \meta{e} est fausse,
   et vraie autrement.
 \end{itemize}
@@ -466,9 +467,9 @@ toujours la même opération.
 
 Il existe deux grands types de processus répétitifs: les processus
 \emph{itératifs} (ou qui utilisent
-l'\index{iteration@itération}itération) et les processus
+l'\Index{iteration@itération}itération) et les processus
 \emph{récursifs} (ou qui utilisent la
-\index{recursion@récursion}\index{recursivite@récursivité|see{récursion}}récursion).
+\Index{recursion@récursion}\index{recursivite@récursivité|see{récursion}}récursion).
 
 Sortons un instant du contexte de la programmation informatique pour
 illustrer chaque type de processus. Nous voulons indiquer à une
@@ -503,12 +504,12 @@ La \autoref{fig:algorithmes:peinture-iter} illustre le processus itératif.
   \label{fig:algorithmes:peinture-iter}
 \end{figure}
 
-L'approche récursive est plus difficile à bien saisir. Une vieille
-blague dit que pour comprendre la récursion, il faut d'abord
-comprendre la récursion! Dans cette approche, les instructions pour
-peinturer une clôture de $n$ planches sont à l'effet que la personne
-doit appliquer de la peinture sur la première planche et peinturer une
-clôture de $n - 1$ planches, et ce, tant qu'il y a des planches à
+L'approche récursive est plus difficile à bien saisir de prime abord.
+Une vieille blague dit d'ailleurs que pour comprendre la récursion, il
+faut d'abord comprendre la récursion! Dans cette approche, le
+processus de peinturer une clôture de $n$ planches est découpé en deux
+étapes: appliquer de la peinture sur la première planche et peinturer
+une clôture de $n - 1$ planches, et ce, tant qu'il y a des planches à
 peinturer. Examinez bien le pseudocode correspondant ci-dessous.
 \begin{Schunk}
 \begin{Verbatim}
@@ -737,7 +738,7 @@ une seule. En temps de calcul, cela ne représente qu'un écart de
 quelques centièmes de secondes sur un ordinateur moderne, mais ces
 fractions de secondes peuvent finir par faire une différence
 importante lorsque la taille des jeux de données augmente ou lorsque
-l'opération se répète de nombreuses fois.
+l'opération se répète un très grand nombre de fois.
 
 Le dénombrement du nombre d'opérations requis par un algorithme est un
 aspect important de leur analyse. Il se fait généralement en notation
@@ -759,11 +760,11 @@ ce qui mène à un premier algorithme.
   \label{algo:algorithmes:puissance}
   Élever un nombre $b$ à la puissance entière positive $n$.
   \begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
 Puissance(nombre réel b, entier positif n)
   Si (n = 0)
     Retourner 1
-  Retourner b * Puissance(b, n - 1)
+  Retourner b \times Puissance(b, n - 1)
 Fin Puissance
 \end{Verbatim}
   \end{Schunk}
@@ -806,14 +807,14 @@ Ce calcul se traduit en un nouvel algorithme récursif comme suit.
   \label{algo:algorithmes:puissance:bis}
   Élever un nombre $b$ à la puissance entière positive $n$.
   \begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
 Puissance(nombre réel b, entier positif n)
   Si (n = 0)
     Retourner 1
   Si (n est pair)
     Retourner (Puissance(b, n/2))^2
   Si (n est impair)
-   Retourner b * Puissance(b, n - 1)
+   Retourner b \times Puissance(b, n - 1)
 Fin Puissance
 \end{Verbatim}
   \end{Schunk}
@@ -848,7 +849,7 @@ d'ordre $O(n^3)$ est tout à fait acceptable.
   $O(\log n)$ survient dès lors que la taille du problème est divisée
   par deux à chaque étape.
 \item $O(\sqrt{n})$. Les algorithmes d'ordre $O(\sqrt{n})$ sont rares.
-  La fonctions racine carrée croit lentement, mais néanmoins plus
+  La fonction racine carrée croit lentement, mais néanmoins plus
   rapidement que la fonction logarithme.
 \item $O(n)$. Nous avons rencontré un exemple d'algorithme $O(n)$
   ci-dessus. Les algorithmes avec cette performance demeurent
