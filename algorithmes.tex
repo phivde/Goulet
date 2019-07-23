@@ -104,7 +104,7 @@ PGCD de $n$ et du reste de la division de $m$ par $n$.
   \item Diviser $m$ par $n$ et poser $r$ égal au reste de la division.
     (Nous avons alors $0 \leq r < n$.)
   \item Si $r = 0$, retourner la valeur $n$.
-  \item Poser $m \leftarrow n$ et $n \leftarrow r$, puis retourner à
+  \item Poser $m \leftarrow n$, $n \leftarrow r$, puis retourner à
     l'étape 1.
   \end{enumerate}
 \end{algorithme}
@@ -120,6 +120,14 @@ $m \leftarrow 68$ et $n \leftarrow 51$. Après un autre cycle, nous en
 sommes à $m \leftarrow 51$ et $n \leftarrow 17$. Cette fois, nous
 posons $r \leftarrow 0$ à l'étape~1 et la procédure s'arrête ensuite à
 l'étape~2. Le plus grand commun diviseur de $544$ et $119$ est $17$.
+
+\warningbox{L'ordre des opérations à l'étape~3 de
+  l'\autoref{algo:algorithmes:euclide} est important. En effet,
+  l'action «Poser $m \leftarrow n$, $n \leftarrow r$» est très
+  différente de «Poser $n \leftarrow r$, $m \leftarrow n$» puisque
+  dans cette dernière, la valeur de $n$ est perdue après la première
+  réaffectation. La seconde action est équivalente à «Poser
+  $n \leftarrow r$, $m \leftarrow r$».}
 
 Selon \citet[section~1.1]{Knuth:ACP:vol1:1997}, un algorithme devrait
 réunir cinq caractéristiques.\footnote{%
@@ -998,6 +1006,28 @@ Si \meta{condition}
 \end{exercice}
 
 \begin{exercice}
+  Plusieurs algorithmes comportent une étape d'échange de deux
+  valeurs, que l'on pourrait symboliser par $m \leftrightarrow n$.
+  \begin{enumerate}
+  \item Expliquer comment effectuer l'opération $m \leftrightarrow n$
+    sans perdre l'une ou l'autre des valeurs $m$ et $n$.
+    \emph{Indice}: il faut avoir recours à une troisième variable
+    temporaire, disons $t$.
+  \item Expliquer comment réordonner les valeurs $(a, b, c, d)$ en
+    $(b, c, d, a)$ en effectuant un minimum de remplacements.
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+    \item Les étapes à suivre sont, dans l'ordre: $t \leftarrow m$, $m
+      \leftarrow n$, $n \leftarrow t$.
+    \item Une solution qui ne requiert que cinq remplacements est:
+      $t \leftarrow a$, $a \leftarrow b$, $b \leftarrow c$,
+      $c \leftarrow d$, $d \leftarrow t$.
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
   Soit $p$ et $q$ des expressions logiques. Compléter les tables de
   vérité ci-dessous.
   \begin{enumerate}
@@ -1202,6 +1232,8 @@ Fin PGCD
     terriblement inefficace puisqu'il répète plusieurs calculs un
     grand nombre de fois. Pour vous en convaincre, écrivez au long
     tous les calculs requis pas l'algorithme pour calculer $f(5)$.
+  \item Proposer un algorithme itératif en langage naturel pour
+    calculer les nombres de Fibonacci.
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
@@ -1213,16 +1245,13 @@ Fin PGCD
           (suite)}Fibonacci pour un entier non négatif $n$.
         \begin{Schunk}
 \begin{Verbatim}
-Fib(entier n)
-  Si (n = 0), retourner 0
-  Si (n = 1), retourner 1
-  Retourner Fib(n - 2) + Fib(n - 1)
-Fin Fib
+Fib(entier n) Si (n = 0), retourner 0 Si (n = 1), retourner 1
+Retourner Fib(n - 2) + Fib(n - 1) Fin Fib
 \end{Verbatim}
         \end{Schunk}
       \end{algorithme}
-    \item Les 10 permiers nombres de Fibonacci sont: $0, 1, 1, 2, 3,
-      5, 8, 13, 21, 34$.
+    \item Les 10 permiers nombres de Fibonacci sont:
+      $0, 1, 1, 2, 3, 5, 8, 13, 21, 34$.
     \item En décomposant la méthode de calcul des nombres de Fibonacci
       employée par l'\autoref{algo:algorithmes:Fibonacci}, on obtient:
       \begin{align*}
@@ -1239,32 +1268,25 @@ Fin Fib
       égalité ci-dessus n'est qu'une reprise d'un calcul effectué par
       ailleurs. En fait, cet algorithme est souvent utilisé comme cas
       pathologique dans les ouvrages d'algorithmique.
+    \item L'algorithme ci-dessous permet de calculer les nombres de
+      Fibonacci de manière récursive.
+      \begin{algorithme}[Suite de Fibonacci]
+        \label{algo:algorithmes:Fibonacci-iter}
+        Calculer la valeur $f(n)$ de la suite de \index{Fibonacci
+          (suite)}Fibonacci pour un entier non négatif $n$.
+        \begin{enumerate}[1.]
+        \item Poser $a \leftarrow 0$, $b \leftarrow 1$ et
+          $i \leftarrow 2$.
+        \item Si $n = 0$, retourner $a$.
+        \item Si $n = 1$, retourner $b$.
+        \item Poser $r \leftarrow a + b$.
+        \item Si $i = n$, retourner la valeur $r$.
+        \item Poser $a \leftarrow b$ et $b \leftarrow r$,
+        \item Incrémenter le compteur $i$: $i \leftarrow i + 1$, puis
+          retouner à l'étape 4.
+        \end{enumerate}
+      \end{algorithme}
     \end{enumerate}
-  \end{sol}
-\end{exercice}
-
-\begin{exercice}
-  Proposer un algorithme itératif en langage naturel pour calculer les
-  nombres de Fibonacci.
-  \begin{sol}
-    L'algorithme ci-dessous permet de calculer les nombres de
-    Fibonacci de manière récursive.
-    \begin{algorithme}[Suite de Fibonacci]
-      \label{algo:algorithmes:Fibonacci-iter}
-      Calculer la valeur $f(n)$ de la suite de \index{Fibonacci
-        (suite)}Fibonacci pour un entier non négatif $n$.
-      \begin{enumerate}[1.]
-      \item Poser $a \leftarrow 0$, $b \leftarrow 1$ et
-        $i \leftarrow 2$.
-      \item Si $n = 0$, retourner $a$.
-      \item Si $n = 1$, retourner $b$.
-      \item Poser $r \leftarrow a + b$.
-      \item Si $i = n$, retourner la valeur $r$.
-      \item Poser $a \leftarrow b$ et $b \leftarrow r$,
-      \item Incrémenter le compteur $i$: $i \leftarrow i + 1$, puis
-        retouner à l'étape 4.
-      \end{enumerate}
-    \end{algorithme}
   \end{sol}
 \end{exercice}
 
@@ -1336,16 +1358,11 @@ Fin A
 
 \begin{exercice}
   Soit un algorithme avec $n$ entrées qui génère des valeurs pour
-<<<<<<< HEAD
   chacun des cubes unitaires sur le pourtour d'un cube
-=======
-  chacun des carrés unitaires sur les bords d'un cube
->>>>>>> 9e8670430194be30a13c1d5ca3998c9a57fd7b2a
   $n \times n \times n$, tel qu'illustré à la
   \autoref{fig:algorithmes:cubes-pourtour}. Calculer la performance de
   l'algorithme. %
   \citep[Tiré de][]{Stephens:algorithms:2013}
-<<<<<<< HEAD
   \begin{sol}
     Le cube $n \times n \times n$ compte $8$ coins et $12$ côtés. La
     longueur de chaque côté en excluant les extrémités est $n - 2$. Le
@@ -1355,8 +1372,6 @@ Fin A
     remarquant que l'algorithme doit en définitive calculer une
     longueur.
   \end{sol}
-=======
->>>>>>> 9e8670430194be30a13c1d5ca3998c9a57fd7b2a
 
   \begin{figure}
     \centering
