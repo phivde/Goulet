@@ -408,7 +408,7 @@ identité (qui retourne son argument inchangé), sauf lorsque l'argument
 est négatif. Ceci résulte en une autre version de l'algorithme qui se
 passe d'une clause «sinon».\footnote{%
   Pensez-y: la clause «sinon» n'est jamais nécessaire lorsque la
-  \meta{condition} d'une instruction conditionnelle à deux volets
+  \meta{conséquence} d'une instruction conditionnelle à deux volets
   contient une instruction «Retourner».}
 
 \begin{algorithmebis}
@@ -894,9 +894,9 @@ au \autoref{chap:tri}.
 
 
 \section{Exercices}
-\label{sec:algorithmique:exercices}
+\label{sec:algorithmes:exercices}
 
-\Opensolutionfile{solutions}[solutions-algorithmique]
+\Opensolutionfile{solutions}[solutions-algorithmes]
 
 \begin{Filesave}{solutions}
 \section*{Chapitre \ref*{chap:algorithmes}}
@@ -904,23 +904,439 @@ au \autoref{chap:tri}.
 
 \begingroup
 %% modifications locales au style des listings
-\lstset{%
-  frame=single,
-  numbers=none,
-  basicstyle=\normalfont\ttfamily\NoAutoSpacing}
+% \lstset{%
+%   frame=single,
+%   numbers=none,
+%   basicstyle=\normalfont\ttfamily\NoAutoSpacing}
 
 \end{Filesave}
 
-%  Pourquoi la clause «sinon» n'est jamais nécessaire lorsque la
-%   \meta{condition} d'une instruction conditionnelle à deux volets
-%   contient une instruction «Retourner».
+\begin{exercice}
+  Écrire l'algorithme d'une fonction \code{quadroots} qui prend en
+  arguments les coefficients (réels) $a$, $b$ et $c$ d'un polynôme du
+  second degré $a x^2 + b x + c$ et qui calcule les racines du
+  polynôme avec la formule bien connue
+  \begin{equation*}
+    \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}.
+  \end{equation*}
+  La fonction doit retourner deux, une ou aucune racine selon que le
+  discriminant $b^2 - 4ac$ est positif, nul ou négatif, dans l'ordre.
+  \begin{sol}
+    Voici des versions en langage naturel et en pseudocode.
 
-%   Clauses logiques ET, OU, NON
+    \begin{algorithme}
+      Calculer les racines du polynôme $a x^2 + b x + c$ à partir des
+      coefficients réels $a$, $b$ et $c$.
+      \begin{enumerate}
+      \item Poser $d \leftarrow b^2 - 4ac$.
+      \item Si $d < 0$, retourner un résultat vide.
+      \item Si $d = 0$, retourner $-b/(2a)$.
+      \item Retourner $(-b - \sqrt{d})/(2a)$ et
+        $(-b + \sqrt{d})/(2a)$.
+      \end{enumerate}
+    \end{algorithme}
 
-%   Exprimer PGCD récursif en pseudocode
+    \begin{algorithme}
+      Calculer les racines du polynôme $a x^2 + b x + c$ à partir des
+      coefficients réels $a$, $b$ et $c$.
+      \begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+quadroots(réel a, réel b, réel c)
+  d \leftarrow b^2 - 4 \times a \times c
+  Si (d < 0)
+    Retourner NULL
+  Si (d = 0)
+    Retourner -b/(2 \times a)
+  x \leftarrow (-b - sqrt(d))/(2 \times a)
+  y \leftarrow (-b + sqrt(d))/(2 \times a)
+  Retourner x et y
+Fin quadroots
+\end{Verbatim}
+      \end{Schunk}
+    \end{algorithme}
+  \end{sol}
+\end{exercice}
 
-% Comparer graphiquement le rythme de croissance des fonctions $\log
-% n$, $\sqrt{n}$, $n$, $n \log n$, $n^2$ et $n!$.
+\begin{exercice}
+  Expliquer dans vos mots pourquoi la clause «sinon» n'est jamais
+  nécessaire lorsque la \meta{conséquence} d'une instruction
+  conditionnelle à deux volets contient une instruction «Retourner».
+  \begin{sol}
+    Si la \meta{conséquence} d'une instruction conditionnelle est
+    vraie, la fonction se termine avec l'instruction «Retourner».
+    Toutes les instructions qui suivent la clause «Si
+    \meta{condition}, alors \dots» ne peuvent donc être évaluées que
+    lorsque la \meta{condition} est fausse. Inutile de les protéger
+    par une clause «sinon».
+
+    Par exemple, supposons qu'une fonction contient les instructions
+    suivantes:
+    \begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+Si \meta{condition}
+  \meta{conséquence}
+sinon
+  \meta{alternative}
+\meta{instruction}
+\end{Verbatim}
+    \end{Schunk}
+    Avec une telle structure, l'\meta{instruction} sera évaluée en
+    tout temps, que la \meta{condition} soit vraie ou fausse. Or, si la
+    \meta{conséquence} contient «Retourner», tant l'\meta{alternative}
+    que l'\meta{instruction} ne seront évaluée que lorsque la
+    \meta{condition} est fausse. La formulation ci-dessous est donc
+    tout à fait équivalente.
+    \begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+Si \meta{condition}
+  \meta{conséquence}
+\meta{alternative}
+\meta{instruction}
+\end{Verbatim}
+    \end{Schunk}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Soit $p$ et $q$ des expressions logiques. Compléter les tables de
+  vérité ci-dessous.
+  \begin{enumerate}
+    \begin{multicols}{2}
+    \item
+      \begin{tabular}{ccc}
+        \toprule
+        $p$ & $q$ & $p$ ET $q$ \\
+        \midrule
+        V & V \\
+        V & F \\
+        F & V \\
+        F & F \\
+        \bottomrule
+      \end{tabular}
+      \columnbreak
+    \item
+      \begin{tabular}{ccc}
+        \toprule
+        $p$ & $q$ & $p$ OU $q$ \\
+        \midrule
+        V & V \\
+        V & F \\
+        F & V \\
+        F & F \\
+        \bottomrule
+      \end{tabular}
+    \end{multicols}
+  \end{enumerate}
+  \begin{sol}
+    Nous pouvons compléter les tables de vérité directement à partir
+    des définitions des opérateurs ET et OU fournies à la
+    \autoref{sec:algorithmes:if-else}:
+    \begin{multicols}{2}
+      \begin{enumerate}
+      \item
+        \begin{tabular}{ccc}
+          \toprule
+          $p$ & $q$ & $p$ ET $q$ \\
+          \midrule
+          V & V & V \\
+          V & F & F \\
+          F & V & F \\
+          F & F & F \\
+          \bottomrule
+        \end{tabular}
+        \columnbreak
+      \item
+        \begin{tabular}{ccc}
+          \toprule
+          $p$ & $q$ & $p$ OU $q$ \\
+          \midrule
+          V & V & V \\
+          V & F & V \\
+          F & V & V \\
+          F & F & F \\
+          \bottomrule
+        \end{tabular}
+      \end{enumerate}
+    \end{multicols}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  La notation en algèbre booléenne est plus compacte et lisible que
+  celle utilisée à la \autoref{sec:algorithmes:if-else}. Si $p$ et $q$
+  sont des expressions logiques, on représente généralement $p$ ET $q$
+  par $p \wedge q$, $p$ OU $q$ par $p \vee q$, et NON $p$ par
+  $\overline{p}$.
+
+  Soit $p$, $q$ et $r$ des expressions logiques. Démontrer à l'aide de
+  tables de vérité les identités logiques suivantes.
+  \begin{enumerate}
+  \item $p \wedge (q \vee r) = (p \wedge q) \vee (p \wedge r)$
+  \item $p \vee (q \wedge r) = (p \vee q) \wedge (p \vee r)$
+  \item $\overline{p \wedge q} = \overline{p} \vee \overline{q}$
+  \item $\overline{p \vee q} = \overline{p} \wedge \overline{q}$
+  \item $(p \wedge q) \vee (\overline{p} \wedge r) = (p \wedge q) \vee (\overline{p} \wedge
+    r) \vee (q \wedge r)$
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+    \item
+      \begin{tabularx}{\linewidth}{*{7}{c}>{\centering\arraybackslash}X}
+        \toprule
+        $p$ & $q$ & $r$ & $p \wedge q$ & $p \wedge r$ & $q \vee r$ & $p \wedge (q \vee r)$ & $(p \wedge q) \newline\vee (p \wedge r)$
+        \\
+        \midrule
+        V & V & V & V & V & V & V & V \\
+        V & V & F & V & F & V & V & V \\
+        V & F & V & F & V & V & V & V \\
+        V & F & F & F & F & F & F & F \\
+        F & V & V & F & F & V & F & F \\
+        F & V & F & F & F & V & F & F \\
+        F & F & V & F & F & V & F & F \\
+        F & F & F & F & F & F & F & F \\
+        \bottomrule
+      \end{tabularx}
+    \item
+      \begin{tabularx}{\linewidth}{*{7}{c}>{\centering\arraybackslash}X}
+        \toprule
+        $p$ & $q$ & $r$ & $p \vee q$ & $p \vee r$ & $q \wedge r$ & $p \vee (q \wedge r)$ & $(p \vee q) \newline\wedge (p \vee r)$
+        \\
+        \midrule
+        V & V & V & V & V & V & V & V \\
+        V & V & F & V & V & F & V & V \\
+        V & F & V & V & V & F & V & V \\
+        V & F & F & V & V & F & V & V \\
+        F & V & V & V & V & V & V & V \\
+        F & V & F & V & F & F & F & F \\
+        F & F & V & F & V & F & F & F \\
+        F & F & F & F & F & F & F & F \\
+        \bottomrule
+      \end{tabularx}
+    \item
+      \begin{tabular}{*{6}{c}}
+        \toprule
+        $p$ & $q$ & $\overline{p}$ & $\overline{q}$ & $\overline{p \wedge q}$ & $\overline{p} \vee \overline{q}$ \\
+        \midrule
+        V & V & F & F & F & F \\
+        V & F & F & V & V & V \\
+        F & V & V & F & V & V \\
+        F & F & V & V & V & V \\
+        \bottomrule
+      \end{tabular}
+    \item
+      \begin{tabular}{*{6}{c}}
+        \toprule
+        $p$ & $q$ & $\overline{p}$ & $\overline{q}$ & $\overline{p \vee q}$ & $\overline{p} \wedge \overline{q}$ \\
+        \midrule
+        V & V & F & F & F & F \\
+        V & F & F & V & F & F \\
+        F & V & V & F & F & F \\
+        F & F & V & V & V & V \\
+        \bottomrule
+      \end{tabular}
+    \item
+      \begin{tabularx}{\linewidth}{*{6}{c}>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+        \toprule
+        $p$ & $q$ & $r$ & $p \wedge q$ & $\overline{p} \wedge r$ & $q \wedge r$ & $(p \wedge q) \newline\vee (\overline{p} \wedge r)$ & $(p \wedge q) \newline\vee (\overline{p} \wedge r) \newline\vee (q \wedge r)$
+        \\
+        \midrule
+        V & V & V & V & F & V & V & V \\
+        V & V & F & V & F & F & V & V \\
+        V & F & V & F & F & F & F & F \\
+        V & F & F & F & F & F & F & F \\
+        F & V & V & F & V & V & V & V \\
+        F & V & F & F & F & F & F & F \\
+        F & F & V & F & V & F & V & V \\
+        F & F & F & F & F & F & F & F \\
+        \bottomrule
+      \end{tabularx}
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Écrire une version récursive présentée en pseudocode de l'algorithme
+  d'\index{Euclide}Euclide.
+  \begin{sol}
+    Tel que mentionné à la \autoref{sec:algorithmes:iteration}, les
+    algorithmes récusifs s'expriment généralement mieux en pseudocode.
+    L'algorithme d'\index{Euclide}Euclide est particulièrement simple
+    exprimé ainsi.
+    \begin{Schunk}
+\begin{Verbatim}
+PGCD(entier m, entier n)
+  Si (n = 0) retourner m
+  Retourner PGCD(n, m mod n)
+Fin PGCD
+\end{Verbatim}
+    \end{Schunk}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Soit un algorithme avec $n$ entrées qui génère des valeurs pour
+  chacun des carrés unitaires à la surface d'un cube
+  $n \times n \times n$. Calculer la performance de l'algorithme. %
+  \citep[Tiré de][]{Stephens:algorithms:2013}
+\end{exercice}
+
+\begin{exercice}
+  Soit un algorithme avec $n$ entrées qui génère des valeurs pour
+  chacun des carrés unitaires sur les bords d'un cube
+  $n \times n \times n$, tel qu'illustré à la
+  \autoref{fig:algorithmes:cubes-pourtour}. Calculer la performance de
+  l'algorithme. %
+  \citep[Tiré de][]{Stephens:algorithms:2013}
+
+  \begin{figure}
+    \centering
+    \setlength{\unitlength}{5mm}
+    \thicklines
+    \newsavebox{\cube}
+    \input{include/cube}
+    \begin{picture}(11,3.9)(-4.5,0)
+      \multiput(1.0,0.6)(1,0){3}{\usebox{\cube}}
+      \multiput(0.5,0.3)(2,0){2}{\usebox{\cube}}
+      \multiput(0.0,0.0)(1,0){3}{\usebox{\cube}}
+
+      \multiput(1.0,1.6)(2,0){2}{\usebox{\cube}}
+      \multiput(0.0,1.0)(2,0){2}{\usebox{\cube}}
+
+      \multiput(1.0,2.6)(1,0){3}{\usebox{\cube}}
+      \multiput(0.5,2.3)(2,0){2}{\usebox{\cube}}
+      \multiput(0.0,2.0)(1,0){3}{\usebox{\cube}}
+
+      \put(-4.5,1.5){\makebox(0,0)[l]{$n = 3$}}
+    \end{picture} \\
+    \bigskip
+    \begin{picture}(11,5.2)(-4,0)
+      \multiput(1.5,0.9)(1,0){4}{\usebox{\cube}}
+      \multiput(1.0,0.6)(3,0){2}{\usebox{\cube}}
+      \multiput(0.5,0.3)(3,0){2}{\usebox{\cube}}
+      \multiput(0.0,0.0)(1,0){4}{\usebox{\cube}}
+
+      \multiput(1.5,1.9)(3,0){2}{\usebox{\cube}}
+      \multiput(0.0,1.0)(3,0){2}{\usebox{\cube}}
+
+      \multiput(1.5,2.9)(3,0){2}{\usebox{\cube}}
+      \multiput(0.0,2.0)(3,0){2}{\usebox{\cube}}
+
+      \multiput(1.5,3.9)(1,0){4}{\usebox{\cube}}
+      \multiput(1.0,3.6)(3,0){2}{\usebox{\cube}}
+      \multiput(0.5,3.3)(3,0){2}{\usebox{\cube}}
+      \multiput(0.0,3.0)(1,0){4}{\usebox{\cube}}
+
+      \put(-4,2){\makebox(0,0)[l]{$n = 4$}}
+    \end{picture} \\
+    \bigskip
+    \begin{picture}(11,6.5)(-3.5,0)
+      \multiput(2.0,1.2)(1,0){5}{\usebox{\cube}}
+      \multiput(1.5,0.9)(4,0){2}{\usebox{\cube}}
+      \multiput(1.0,0.6)(4,0){2}{\usebox{\cube}}
+      \multiput(0.5,0.3)(4,0){2}{\usebox{\cube}}
+      \multiput(0.0,0.0)(1,0){5}{\usebox{\cube}}
+
+      \multiput(2.0,2.2)(4,0){2}{\usebox{\cube}}
+      \multiput(0.0,1.0)(4,0){2}{\usebox{\cube}}
+
+      \multiput(2.0,3.2)(4,0){2}{\usebox{\cube}}
+      \multiput(0.0,2.0)(4,0){2}{\usebox{\cube}}
+
+      \multiput(2.0,4.2)(4,0){2}{\usebox{\cube}}
+      \multiput(0.0,3.0)(4,0){2}{\usebox{\cube}}
+
+      \multiput(2.0,5.2)(1,0){5}{\usebox{\cube}}
+      \multiput(1.5,4.9)(4,0){2}{\usebox{\cube}}
+      \multiput(1.0,4.6)(4,0){2}{\usebox{\cube}}
+      \multiput(0.5,4.3)(4,0){2}{\usebox{\cube}}
+      \multiput(0.0,4.0)(1,0){5}{\usebox{\cube}}
+
+      \put(-3.5,2.5){\makebox(0,0)[l]{$n = 5$}}
+    \end{picture}
+    \caption{Illustrations pour un algorithme qui génère des valeurs
+      sur le pourtour d'un cube}
+    \label{fig:algorithmes:cubes-pourtour}
+  \end{figure}
+\end{exercice}
+
+\begin{exercice}
+  Soit un algorithme avec $n$ entrées qui génère des valeurs pour
+  chacun des carrés unitaires d'une pyramide comme dans le jeu
+  classique \link{https://fr.wikipedia.org/wiki/Q*bert}{Q*bert}, tel
+  qu'illustré à la \autoref{fig:algorithmes:q*bert}. Supposer que les
+  cubes invisibles sont présents de telle sorte que les structures
+  sont pleines. Calculer la performance de l'algorithme. %
+  \citep[Tiré de][]{Stephens:algorithms:2013}
+
+  \begin{figure}
+    \centering
+    \setlength{\unitlength}{8mm}
+    \thicklines
+    \input{include/cube}
+    \begin{minipage}{0.48\linewidth}
+      \begin{picture}(7,1.3)(-3,0)
+        \put(0.0,0.0){\usebox{\cube}}
+
+        \put(-3.0,0.5){\makebox(0,0)[l]{$n = 1$}}
+      \end{picture}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\linewidth}
+      \begin{picture}(7,2.6)(-2,0)
+        \multiput(0.0,0.0)(1.5,0.3){2}{\usebox{\cube}}
+        \multiput(0.5,1.3)(1.5,0.3){1}{\usebox{\cube}}
+
+        \put(-2.0,1.3){\makebox(0,0)[l]{$n = 2$}}
+      \end{picture}
+    \end{minipage} \\
+    \bigskip
+    \begin{minipage}{0.48\linewidth}
+      \begin{picture}(7,3.9)(-2,0)
+        \multiput(0.0,0.0)(1.5,0.3){3}{\usebox{\cube}}
+        \multiput(0.5,1.3)(1.5,0.3){2}{\usebox{\cube}}
+        \multiput(1.0,2.6)(1.5,0.3){1}{\usebox{\cube}}
+
+        \put(-2.0,1.8){\makebox(0,0)[l]{$n = 3$}}
+      \end{picture}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\linewidth}
+      \begin{picture}(7,5.2)(-1,0)
+        \multiput(0.0,0.0)(1.5,0.3){4}{\usebox{\cube}}
+        \multiput(0.5,1.3)(1.5,0.3){3}{\usebox{\cube}}
+        \multiput(1.0,2.6)(1.5,0.3){2}{\usebox{\cube}}
+        \multiput(1.5,3.9)(1.5,0.3){1}{\usebox{\cube}}
+
+        \put(-1.0,2.6){\makebox(0,0)[l]{$n = 4$}}
+      \end{picture}
+    \end{minipage}
+    \caption{Illustrations pour un algorithme qui génère des valeurs
+      pour une pyramide comme dans le jeu Q*bert}
+    \label{fig:algorithmes:q*bert}
+  \end{figure}
+\end{exercice}
+
+\begin{exercice}
+  Comparer à l'aide d'un graphique pour $n \in (0, 20)$ le rythme de
+  croissance des fonctions $\log n$, $\sqrt{n}$, $n$, $n \log n$,
+  $n^2$ et $n!$.
+  \begin{sol}
+    Vous pouvez tracer un graphique regroupant toutes les fonctions
+    dans R avec les expressions suivantes.
+    \begin{Schunk}
+\begin{Sinput}
+> plot(0:20, 0:20, type = "n")
+> curve(log(x), add = TRUE, col = 1)
+> curve(sqrt(x), add = TRUE, col = 2)
+> curve(I(x), add = TRUE, col = 3)
+> curve(x * log(x), add = TRUE, col = 4)
+> curve(x^2, add = TRUE, col = 5)
+> curve(factorial(x), add = TRUE, col = 6)
+\end{Sinput}
+    \end{Schunk}
+  \end{sol}
+\end{exercice}
+
 
 \begin{Filesave}{solutions}
 \endgroup                               % fin de \lstset local
