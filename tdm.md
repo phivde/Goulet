@@ -25,7 +25,7 @@
 + revoir le contenu de la session de travail type, qui fait trop appel
   à des notions de statistique
 
-## Chapitre 3 - Bases d'algorithmique
+## Chapitre 3 - Algorithmes et algorithmique
 
 + ordre de grandeur des opérations
 + matériel de la section 1.2.1
@@ -34,7 +34,7 @@
 + concept d'application (mapping)
 + ouverture sur calculs répétitifs avec des boucles couvert plus loin
 
-## Chapitre 4 - Premiers pas avec R
+## Chapitre 4 - Bases de la programmation
 
 + notion d'environnement tel que présenté dans SICP
 + exécution conditionnelle (voir aussi SICP)
