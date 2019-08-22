@@ -9,8 +9,8 @@
 %%% International de Creative Commons.
 %%% https://creativecommons.org/licenses/by-sa/4.0/
 
-\chapter{Premiers pas avec R}
-\label{chap:premiers}
+\chapter{Bases de la programmation}
+\label{chap:bases}
 
 \def\scriptfilename{\currfilebase.R}
 \SweaveOpts{echo=FALSE}
@@ -85,7 +85,7 @@ apprentissages.
 
 
 \section{Données et procédures fondamentales}
-\label{sec:premiers:fondamentales}
+\label{sec:bases:fondamentales}
 
 À sa plus simple expression, la programmation est un exercice de
 manipulation de \emph{données} à l'aide de \emph{procédures}. Un
@@ -110,7 +110,7 @@ La grande majorité des langages de programmation offrent les deux
 premiers types de données ci-dessus. Les autres types se révèlent très
 utiles pour la programmation mathématique et l'analyse de données.
 Nous reviendrons sur leurs caractéristiques à la
-\autoref{sec:premiers:objets}.
+\autoref{sec:bases:objets}.
 
 Nous pouvons classer les procédures fondamentales --- ou
 \index{opérateurs}\emph{opérateurs} --- en quatre grandes catégories:
@@ -125,7 +125,7 @@ complexes, alors que les opérations logiques ne sont applicables
 qu'aux valeurs booléennes. Nous traitons de l'opération d'affectation
 en détail à la section suivante.
 
-Le \autoref{tab:premiers:operateurs} présente les opérateurs les plus
+Le \autoref{tab:bases:operateurs} présente les opérateurs les plus
 fréquemment employés en ordre décroissant de priorité des opérations.
 Ils sont accompagnés d'une description succincte.
 
@@ -134,7 +134,7 @@ Ils sont accompagnés d'une description succincte.
   \renewcommand{\arraystretch}{1.1}
   \caption[Principaux opérateurs du langage R]{Principaux opérateurs
     du langage R, en ordre décroissant de priorité}
-  \label{tab:premiers:operateurs}
+  \label{tab:bases:operateurs}
   \begin{tabular}{lp{8cm}}
     \toprule
     Opérateur  & Fonction \\
@@ -189,7 +189,7 @@ division entière.
 
 <<script, results=hide>>=
 ###
-### DONNÉES ET PROCÉDURES FONDAMENTALES  `\labelline{premiers:fondamentales}`
+### DONNÉES ET PROCÉDURES FONDAMENTALES  `\labelline{bases:fondamentales}`
 ###
 
 ## Nombres. Tous les nombres réels sont stockés en double
@@ -293,16 +293,16 @@ y                          # ... plutôt une affectation
 ##  https://floating-point-gui.de/formats/fp/]
 1.2 + 1.4 + 2.8            # 5.4 en apparence
 1.2 + 1.4 + 2.8 == 5.4     # non?!?
-0.3/0.1 == 3               # à gauche: faux entier `\labelline{premiers:fondamentales:fin}`
+0.3/0.1 == 3               # à gauche: faux entier `\labelline{bases:fondamentales:fin}`
 @
 
-\gotorbox{Étudiez les lignes \reflines{premiers:fondamentales}
+\gotorbox{Étudiez les lignes \reflines{bases:fondamentales}
   du fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:premiers:exemples}.}
+  reproduit à la \autoref{sec:bases:exemples}.}
 
 
 \section{Commandes R}
-\label{sec:premiers:commandes}
+\label{sec:bases:commandes}
 
 Nous l'avons déjà vu, l'interaction avec l'interpréteur R se fait par
 l'intermédiaire de commandes entrées à la ligne de commande. Or, toute
@@ -310,7 +310,7 @@ commande R est soit une \emph{expression}\index{expression}, soit une
 \emph{affectation}\index{affectation}.
 
 \subsection{Expression}
-\label{sec:premiers:commandes:expression}
+\label{sec:bases:commandes:expression}
 
 Une \index{expression}expression R est une combinaison de symboles
 (noms de variables) et de procédures. Toute expression a une valeur.
@@ -346,7 +346,7 @@ d'évaluation, comme en mathématiques.
 @
 
 \subsection{Affectation}
-\label{sec:premiers:commandes:affectation}
+\label{sec:bases:commandes:affectation}
 
 Dans une \index{affectation}affectation, une expression est évaluée,
 mais le résultat est stocké dans un \emph{objet} (ou \emph{variable})
@@ -387,7 +387,7 @@ est rarement utilisé.
   point.}
 
 \subsection{Regroupement de commandes}
-\label{sec:premiers:commandes:regroupement}
+\label{sec:bases:commandes:regroupement}
 
 Dans les fichiers de script ou à la ligne de commande, on sépare
 généralement les commandes R les unes des autres par un retour à la
@@ -423,7 +423,7 @@ retournée ni affichée à l'écran.
 
 <<script, results=hide>>=
 ###
-### COMMANDES R            `\labelline{premiers:commandes}`
+### COMMANDES R            `\labelline{bases:commandes}`
 ###
 
 ## Les expressions entrées à la ligne de commande sont
@@ -473,384 +473,16 @@ x <- 5;                    # éviter les ';' superflus
     y <- 2                 # seconde expression du groupe
     x + y                  # dernière expression du groupe
 }                          # fin du groupe et résultat
-{x <- 5; y <- 2; x + y}    # valide, mais redondant `\labelline{premiers:commandes:fin}`
+{x <- 5; y <- 2; x + y}    # valide, mais redondant `\labelline{bases:commandes:fin}`
 @
 
-\gotorbox{Étudiez les lignes \reflines{premiers:commandes}
+\gotorbox{Étudiez les lignes \reflines{bases:commandes}
   du fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:premiers:exemples}.}
-
-
-\section{Objets R}
-\label{sec:premiers:objets}
-
-Tout dans le langage R est un objet: les variables contenant des
-données, les fonctions, les opérateurs, même le symbole représentant
-le nom d'un objet est lui-même un objet. Les objets possèdent au
-minimum un \emph{mode} et une \emph{longueur} et certains peuvent
-être dotés d'un ou de plusieurs \emph{attributs}.
-
-\subsection{Règles pour les noms d'objets}
-\label{sec:premiers:objets:noms}
-
-Les caractères permis pour les noms d'objets sont les lettres
-minuscules a--z et majuscules A--Z, les chiffres 0--9, le point «.» et
-le caractère de soulignement «\_». Selon l'environnement linguistique
-de l'ordinateur, il peut être permis d'utiliser des lettres accentuées
-dans les noms d'objet, mais je recommande fortement d'éviter cette
-pratique qui nuit à la portabilité du code. Le nom d'un objet ne peut
-débuter par un chiffre. Si le nom débute par un point, alors le second
-caractère ne peut être un chiffre.
-
-\warningbox{R est sensible à la casse, ce qui signifie que \code{foo},
-  \code{Foo} et \code{FOO} sont trois objets distincts.}
-
-Certains noms sont utilisés par le système R, aussi vaut-il mieux
-éviter de les utiliser comme nom de variable ou de fonction. En
-particulier, évitez:
-\begin{quote}
-  \code{c}, \code{q}, \code{t}, \code{C}, \code{D},
-  \code{I}, \code{diff}, \code{length}, \code{mean},
-  \code{pi}, \code{range}, \code{var}.
-\end{quote}
-De plus, certains mots sont réservés et il est interdit de les
-utiliser comme nom d'objet. Les mots réservés pour le système sont:
-\begin{quote}
-  \code{break}, \code{else}, \code{for}, \code{function}, \code{if},
-  \code{in}, \code{next}, \code{repeat}, \code{return}, \code{while}, \\
-  \code{TRUE}, \code{FALSE}, \\
-  \code{Inf}, \code{NA}, \code{NaN}, \code{NULL}, \\
-  \verb|NA_integer_|, \verb|NA_real_|, \verb|NA_complex_|,
-  \verb|NA_character_|, \\
-  \code{...}, \code{..1}, \code{..2}, etc.
-\end{quote}
-Oui, `\code{...}' (\emph{point-point-point}) est véritablement un nom
-d'objet dans R! Son usage est expliqué à la
-\autoref{sec:fonctions:definition}.
-
-Les variables \code{T}\index{T@\code{T}|see{\code{TRUE}}} et
-\code{F}\index{F@\code{F}|see{\code{FALSE}}} prennent par défaut les
-valeurs \icode{TRUE} et \icode{FALSE}, respectivement, mais peuvent
-être réaffectées.
-<<echo=TRUE>>=
-T
-F
-@
-\begin{Schunk}
-\begin{Sinput}
-> TRUE <- 3
-\end{Sinput}
-\begin{Soutput}
-Error in TRUE <- 3 : membre gauche de l'assignation
-(do_set) incorrect
-\end{Soutput}
-\end{Schunk}
-<<echo=TRUE>>=
-(T <- 3)
-@
-<<echo=FALSE>>=
-rm(T)
-@
-
-\tipbox{Écrivez toujours les valeurs booléennes \code{TRUE} et
-  \code{FALSE} au long pour éviter des bogues difficiles à détecter.}
-
-
-\subsection{Modes et types de données}
-\label{sec:premiers:objets:mode}
-
-Le mode\Index{mode} prescrit ce qu'un objet peut contenir. À ce titre,
-un objet ne peut avoir qu'un seul mode. Le \autoref{tab:premiers:modes}
-contient la liste des principaux modes disponibles en R. À chacun de
-ces modes correspond une fonction du même nom servant à créer un objet
-de ce mode. Le mode d'un objet est obtenu avec la fonction
-\Icode{mode}.
-<<echo=TRUE>>=
-v <- c(1, 2, 5, 9)
-mode(v)
-@
-
-\begin{table}
-  \centering
-  \caption{Modes disponibles et contenus correspondants}
-  \label{tab:premiers:modes}
-  \begin{tabular}{ll}
-    \toprule
-    Mode              & Contenu de l'objet \\
-    \midrule
-    \icode{numeric}    & nombres réels \\
-    \icode{complex}    & nombres complexes \\
-    \icode{logical}    & valeurs booléennes \\
-    \icode{character}  & chaines de caractères \\
-    \icode{function}   & fonction \\
-    \icode{list}       & liste \\
-    \icode{expression} & expressions non évaluées \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-Les objets de mode \code{numeric}, \code{complex},
-\code{logical} et \code{character} sont des objets \emph{simples}
-(\emph{atomic}) qui contiennent des données d'un seul type. En
-revanche, les objets de mode \code{list} ou \code{expression} sont
-des objets \emph{récursifs} qui peuvent contenir d'autres objets. Par
-exemple, une liste peut contenir une ou plusieurs autres listes; nous
-y reviendrons au \autoref{chap:donnees}.
-
-\tipbox{La fonction \Icode{typeof} permet d'obtenir une description
-  plus précise de la représentation interne d'un objet (c'est-à-dire
-  au niveau de la mise en {\oe}uvre en C). Le mode et le type d'un
-  objet sont souvent identiques.}
-
-Plusieurs opérations --- notamment la création de vecteurs ou les
-opérations arithmétiques et logiques --- entrainent ce que l'on
-appelle la \emph{conversion forcée} (\emph{coercion}) d'un mode vers
-un autre. Nous y revenons plus loin.
-
-
-\subsection{Longueur}
-\label{sec:premiers:objets:longueur}
-
-La longueur\Index{longueur} d'un objet est égale au nombre d'éléments
-qu'il contient. La longueur d'un objet est obtenue avec la fonction
-\Icode{length}.
-<<echo=TRUE>>=
-v <- c(1, 2, 5, 9)
-length(v)
-@
-
-\tipbox{Il est permis --- et parfois utile --- de créer un objet de
-  longueur nulle, c'est-à-dire un objet qui existe, mais qui est
-  vide.}
-
-Au sens R du terme, la longueur d'une chaine de caractères est
-toujours $1$. Un objet de mode \code{character} doit contenir
-plusieurs chaines de caractères pour que sa longueur soit supérieure à
-$1$. Il faut utiliser la fonction \Icode{nchar} pour obtenir le
-nombre de caractères dans une chaine.
-<<echo=TRUE>>=
-v1 <- "actuariat"
-length(v1)
-nchar(v1)
-@
-<<echo=TRUE>>=
-v2 <- c("a", "c", "t", "u", "a", "r", "i", "a", "t")
-length(v2)
-nchar(v2)
-@
-
-\subsection{Valeurs spéciales}
-\label{sec:premiers:objets:NA_et_al}
-
-Les objets valeur manquante (\code{NA}), infini (\code{Inf},
-\code{-Inf}), valeur indéterminée (\code{NaN}) et néant (\code{NULL})
-permettent de représenter de manière intuitive des quantités souvent
-utilisées dans les applications statistiques et en analyse de données.
-Pour pleinement tirer profit de ces objets, il faut connaitre leurs
-caractéristiques spéciales.
-
-L'objet \code{NA} sert à représenter une donnée manquante. Chose
-quelque peu surprenante, c'est un objet de mode \icode{logical}. Cependant,
-\code{NA} ne peut être considéré ni \code{TRUE}, ni \code{FALSE}.
-<<echo=TRUE>>=
-mode(NA)
-length(NA)
-NA == TRUE
-NA == FALSE
-@
-Toute opération, y compris la comparaison, impliquant la valeur
-\code{NA} a comme résultat \code{NA}. Par conséquent, la valeur
-\code{NA} n'est égale à aucune autre, pas même elle-même! Pour tester
-si une valeur est manquante, il faut avoir recours à la fonction
-\Icode{is.na}.
-<<echo=TRUE>>=
-x <- NA
-x == NA
-is.na(NA)
-@
-
-Les objets \code{Inf}, \code{-Inf} et \code{NaN} permettent de
-représenter les valeurs mathématiques spéciales prévues dans la norme
-IEEE~754 régissant la représentation interne des nombres dans un
-ordinateur \citep{IEEE:754}. De manière intuitive, l'objet \icode{Inf}
-représente $+\infty$, \code{-Inf} représente $-\infty$ et \icode{NaN}
-(\emph{Not a Number}) représente une forme indéterminée du type
-$\frac{0}{0}$ ou $\infty - \infty$. Les fonctions
-\Icode{is.infinite}, \Icode{is.finite} et \Icode{is.nan}
-fournissent des manières robustes de tester ces valeurs.
-<<echo=TRUE>>=
-is.infinite(1/0)
-is.finite(-1/0)
-is.nan(0/0)
-is.nan(Inf - Inf)
-@
-
-Enfin, l'objet spécial \icode{NULL} représente «rien», ou le vide. Son
-mode est \code{NULL} et sa longueur est $0$. Il est toutefois
-différent d'un objet vide: un objet de longueur $0$ est un contenant
-vide, alors que \code{NULL} est «pas de contenant».
-<<echo=TRUE>>=
-mode(NULL)
-length(NULL)
-1 + NULL
-@
-Ajouter \code{NULL} à un objet n'ajoute rien. Par ailleurs, la seule
-façon de tester si un objet est \code{NULL} est avec la fonction
-\Icode{is.null}.
-<<echo=TRUE>>=
-c(3, NULL)
-x <- NULL
-x == NULL
-is.null(NULL)
-@
-
-
-\subsection{Attributs}
-\label{sec:premiers:objets:attributs}
-
-Les attributs\Index{attribut} d'un objet sont des éléments
-d'information additionnels attachés à cet objet. Le
-\autoref{tab:attributs} fournit la liste des attributs les plus
-fréquemment utilisés. À chacun des attributs du tableau correspond une
-fonction du même nom servant à extraire l'attribut d'un objet.
-
-\begin{table}
-  \centering
-  \caption{Attributs les plus usuels d'un objet}
-  \label{tab:attributs}
-  \begin{tabular}{ll}
-    \toprule
-    Attribut            & Utilisation \\
-    \midrule
-    \icode{class}    &
-    affecte le comportement d'un objet \\
-    \icode{dim}      &
-    dimensions\index{dimension} des matrices et tableaux \\
-    \icode{dimnames} &
-    étiquettes\index{etiquette@étiquette} des dimensions des matrices
-    et tableaux \\
-    \icode{names}    &
-    étiquettes des éléments d'un objet \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-La fonction \Icode{attributes} permet d'extraire ou de modifier la
-liste des attributs d'un objet, alors que la fonction \Icode{attr}
-permet de travailler sur un seul attribut à la fois. Les programmeurs
-peuvent ajouter à peu près n'importe quoi à la liste des attributs
-d'un objet. Par exemple, nous pourrions vouloir attacher au résultat
-d'un calcul la méthode de calcul utilisée.
-<<echo=TRUE>>=
-x <- 3
-attr(x, "methode") <- "au pif"
-attributes(x)
-@
-
-L'extraction d'un attribut qui n'existe pas retourne \icode{NULL},
-alors qu'à l'inverse, affecter à un attribut la valeur \code{NULL}
-efface cet attribut.
-<<echo=TRUE>>=
-attributes(x)
-dim(x)
-attr(x, "methode") <- NULL
-attributes(x)
-@
-
-<<script, results=hide>>=
-###
-### OBJETS R               `\labelline{premiers:objets}`
-###
-
-## NOMS D'OBJETS
-
-## Quelques exemples de noms valides et invalides.
-foo <- 5                   # valide
-foo.123 <- 5               # valide
-foo_123 <- 5               # valide
-.foo <- 5                  # valide
-##-!- 123foo <- 5                # invalide; commence par un chiffre
-##-!- .123foo <- 5               # invalide; point suivi d'un chiffre
-
-## Liste des objets dans l'espace de travail. Les objets dont
-## le nom commence par un point sont cachés, comme à la ligne
-## de commande Unix.
-ls()                       # l'objet '.foo' n'est pas affiché
-ls(all.names = TRUE)       # objets cachés aussi affichés
-
-## R est sensible à la casse
-foo <- 1
-##-!- Foo
-##-!- FOO
-
-## MODES ET TYPES DE DONNÉES
-
-## Le mode d'un objet détermine ce qu'il peut contenir. Les
-## vecteurs simples ("atomic") contiennent des données d'un
-## seul type.
-mode(c(1, 4.1, pi))        # nombres réels
-mode(c(2, 1 + 5i))         # nombres complexes
-mode(c(TRUE, FALSE, TRUE)) # valeurs booléennes
-mode("foobar")             # chaînes de caractères
-
-## La plupart des autres types d'objets sont récursifs. Voici
-## quelques autres modes.
-mode(seq)                  # une fonction
-mode(list(5, "foo", TRUE)) # une liste
-mode(expression(x <- 5))   # une expression non évaluée
-
-## LONGUEUR
-
-## La longueur d'un vecteur est égale au nombre d'éléments
-## dans le vecteur.
-(x <- 1:4)
-length(x)
-
-## Une chaîne de caractères ne compte que pour un seul
-## élément.
-(x <- "foobar")
-length(x)
-
-## Pour obtenir la longueur de la chaîne, il faut utiliser
-## nchar().
-nchar(x)
-
-## Un objet peut néanmoins contenir plusieurs chaînes de
-## caractères.
-(x <- c("f", "o", "o", "b", "a", "r"))
-length(x)
-
-## La longueur peut être 0, auquel cas on a un objet vide,
-## mais qui existe.
-(x <- numeric(0))          # création du contenant
-length(x)                  # l'objet 'x' existe...
-x[1] <- 1                  # définition du permier élément
-
-## Si un objet n'existe pas au préalable, il est impossible
-## d'affecter directement la valeur d'un élément.
-##-!- X[1] <- 1                  # impossible, 'X' n'existe pas
-
-## ATTRIBUTS
-
-## Les objets peuvent être dotés d'un ou plusieurs attributs.
-data(cars)                 # jeu de données intégré
-attributes(cars)           # liste de tous les attributs
-attr(cars, "class")        # extraction d'un seul attribut
-
-## L'attribut 'names' conserve les étiquettes des éléments
-## d'un vecteur.
-x <- 1:24                  # un vecteur
-names(x) <- letters[1:24]  # attribution d'étiquettes
-x                          # identification facilitée `\labelline{premiers:objets:fin}`
-@
-
-\gotorbox{Étudiez les lignes \reflines{premiers:objets}
-  du fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:premiers:exemples}.}
+  reproduit à la \autoref{sec:bases:exemples}.}
 
 
 \section{Vecteurs}
-\label{sec:premiers:vecteurs}
+\label{sec:bases:vecteurs}
 
 En R, pratiquement, \emph{tout} est un
 vecteur\index{vecteur}. C'est aussi l'unité de base dans les calculs.
@@ -858,7 +490,7 @@ Nous nous restreignons pour le moment aux vecteurs simples (atomiques)
 dans lesquels tous les éléments sont du même mode.
 
 \subsection{Création de vecteurs}
-\label{sec:premiers:vecteurs:creation}
+\label{sec:bases:vecteurs:creation}
 
 La fonction de base pour créer un vecteur est la fonction de
 concaténation \Icode{c}.
@@ -903,7 +535,7 @@ c(2, FALSE, "a")
 @
 
 \subsection{Indiçage}
-\label{sec:premiers:vecteurs:indicage}
+\label{sec:bases:vecteurs:indicage}
 
 L'indiçage\Index{indiçage!vecteur} des vecteurs est une procédure
 beaucoup utilisée dans le langage R, aussi est-il important d'en
@@ -965,13 +597,13 @@ x[]
   dans l'ordre.}
 
 \subsection{Arithmétique vectorielle}
-\label{sec:premiers:vecteurs:arithmetique}
+\label{sec:bases:vecteurs:arithmetique}
 
 L'arithmétique vectorielle de R constitue l'une des grandes forces du
 langage. Elle permet de réaliser une grande variété de calculs sans
 avoir recours à des procédures itératives (boucles).
 
-Les procédures fondamentales de la \autoref{sec:premiers:fondamentales}
+Les procédures fondamentales de la \autoref{sec:bases:fondamentales}
 peuvent toutes opérer sur les vecteurs en effectuant les opérations
 \emph{élément par élément}. C'est la première règle de base de
 l'arithmétique vectorielle dans R.
@@ -1033,7 +665,7 @@ c(0, 5, -1) & TRUE
 
 <<script, results=hide>>=
 ###
-### VECTEURS               `\labelline{premiers:vecteurs}`
+### VECTEURS               `\labelline{bases:vecteurs}`
 ###
 
 ## La fonction de base pour créer des vecteurs est 'c'. Il
@@ -1157,18 +789,18 @@ c(5, 3) + c(TRUE, FALSE)   # équivalent à c(5, 3) + c(1, 0)
 ## traité comme FALSE et tous les autres nombres comme TRUE.
 0:5 & 5:0
 0:5 | 5:0
-!0:5                       #-*- `\labelline{premiers:vecteurs:fin}`
+!0:5                       #-*- `\labelline{bases:vecteurs:fin}`
 @
 
 \gotorbox{La présente section est très importante pour la suite.
   Étudiez donc en y portant une attention toute particulière les
-  lignes \reflines{premiers:vecteurs} du fichier de script
+  lignes \reflines{bases:vecteurs} du fichier de script
   \code{\scriptfilename} reproduit à la
-  \autoref{sec:premiers:exemples}.}
+  \autoref{sec:bases:exemples}.}
 
 
 \section{Appel d'une fonction}
-\label{sec:premiers:appel}
+\label{sec:bases:appel}
 
 Au-delà des opérateurs de base, le langage R compte un très grand
 nombre (des milliers!) de fonctions internes. Cette section passe en
@@ -1247,7 +879,7 @@ passées.
 
 <<script, results=hide>>=
 ###
-### APPEL D'UNE FONCTION   `\labelline{premiers:appel}`
+### APPEL D'UNE FONCTION   `\labelline{bases:appel}`
 ###
 
 ## L'interpréteur R reconnait un appel de fonction au fait que
@@ -1290,16 +922,16 @@ matrix(1:12, 3, 4)
 matrix(1:12, ncol = 4, nrow = 3)
 matrix(nrow = 3, ncol = 4, data = 1:12)
 matrix(nrow = 3, ncol = 4, byrow = FALSE, 1:12)
-matrix(nrow = 3, ncol = 4, 1:12, FALSE) #-*- `\labelline{premiers:appel:fin}`
+matrix(nrow = 3, ncol = 4, 1:12, FALSE) #-*- `\labelline{bases:appel:fin}`
 @
 
-\gotorbox{Étudiez les lignes \reflines{premiers:appel}
+\gotorbox{Étudiez les lignes \reflines{bases:appel}
   du fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:premiers:exemples}.}
+  reproduit à la \autoref{sec:bases:exemples}.}
 
 
 \section{Fonctions internes utiles}
-\label{sec:premiers:internes}
+\label{sec:bases:internes}
 
 Cette section présente quelques fonctions internes souvent utilisées
 pour programmer en R et pour manipuler des données. Elle reviendra à
@@ -1315,14 +947,14 @@ rubrique.
 Pour chaque fonction présentée dans cette section, je fournis un ou
 deux exemples d'utilisation. Ces exemples sont loin de couvrir toutes
 les utilisations possibles d'une fonction. La
-\autoref{sec:premiers:exemples} fournit des exemples additionnels.
+\autoref{sec:bases:exemples} fournit des exemples additionnels.
 Consultez les rubriques d'aide des fonctions pour connaître toutes
 leurs options.
 
 \tipbox{Vraiment, consultez les rubriques d'aide.}
 
 \subsection{Fonctions mathématiques et trigonométriques}
-\label{sec:premiers:internes:math}
+\label{sec:bases:internes:math}
 
 \begin{ttscript}{factorial}
 \item[\Icode{exp}] fonction \index{exponentielle}exponentielle $e^x$
@@ -1363,7 +995,7 @@ cos(pi/4)
 \end{ttscript}
 
 \subsection{Suites et répétition}
-\label{sec:premiers:internes:seq}
+\label{sec:bases:internes:seq}
 
 \begin{ttscript}{seqmalong}
 \item[\Icode{seq}] suite de nombres générale
@@ -1411,7 +1043,7 @@ rep_len(1:3, 10)
   malencontreusement le vecteur \code{c(1, 0)}.}
 
 \subsection{Extraction du début et de la fin d'un objet}
-\label{sec:premiers:internes:head}
+\label{sec:bases:internes:head}
 
 \begin{ttscript}{head}
 \item[\Icode{head}] avec second argument $n > 0$ ($n = 6$ par défaut):
@@ -1439,7 +1071,7 @@ tail(1:10, -3)
 \end{ttscript}
 
 \subsection{Arrondi}
-\label{sec:premiers:internes:arrondi}
+\label{sec:bases:internes:arrondi}
 
 Les exemples de cette sous-section utilisent le vecteur suivant.
 <<echo=FALSE>>=
@@ -1473,7 +1105,7 @@ trunc(x)
 \end{ttscript}
 
 \subsection{Tests logiques}
-\label{sec:premiers:internes:tests}
+\label{sec:bases:internes:tests}
 
 Les exemples de cette sous-section utilisent toujours le vecteur suivant.
 <<echo=FALSE>>=
@@ -1500,7 +1132,7 @@ all(x > -5)
 \end{ttscript}
 
 \subsection{Sommaires et statistiques descriptives}
-\label{sec:premiers:internes:sommaires}
+\label{sec:bases:internes:sommaires}
 
 Les exemples de cette sous-section utilisent le vecteur suivant.
 <<echo=FALSE>>=
@@ -1562,7 +1194,7 @@ summary(x)
 
 
 \subsection{Sommaires cumulatifs et comparaisons élément par élément}
-\label{sec:premiers:internes:cumulatifs}
+\label{sec:bases:internes:cumulatifs}
 
 Les exemples de cette sous-section utilisent le vecteur suivant.
 <<echo=FALSE>>=
@@ -1603,7 +1235,7 @@ pmax(x, c(16, 23,  4, 12,  3))
 
 <<script, results=hide>>=
 ###
-### QUELQUES FONCTIONS INTERNES UTILES  `\labelline{premiers:internes}`
+### QUELQUES FONCTIONS INTERNES UTILES  `\labelline{bases:internes}`
 ###
 
 ## Pour les exemples qui suivent, on se donne un vecteur non
@@ -1757,31 +1389,31 @@ rev(cumprod(rev(y)))       # produit cumulatif renversé
 cummin(x)                  # minimum cumulatif
 cummax(y)                  # maximum cumulatif
 pmin(x, y)                 # minimum élément par élément
-pmax(x, y)                 # maximum élément par élément `\labelline{premiers:internes:fin}`
+pmax(x, y)                 # maximum élément par élément `\labelline{bases:internes:fin}`
 @
 
 \gotorbox{Vous trouverez plusieurs exemples additionnels d'utilisation des
   fonctions présentées dans cette section dans le code des lignes
-  \reflines{premiers:internes}
+  \reflines{bases:internes}
   du fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:premiers:exemples}.}
+  reproduit à la \autoref{sec:bases:exemples}.}
 
 
 \section{Exemples}
-\label{sec:premiers:exemples}
+\label{sec:bases:exemples}
 
 \scriptfile{\scriptfilename}
 \lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
 
 
 \section{Exercices}
-\label{sec:premiers:exercices}
+\label{sec:bases:exercices}
 
-\Opensolutionfile{solutions}[solutions-premiers]
+\Opensolutionfile{solutions}[solutions-bases]
 
 \begin{Filesave}{solutions}
-\section*{Chapitre \ref*{chap:premiers}}
-\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:premiers}}
+\section*{Chapitre \ref*{chap:bases}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:bases}}
 
 \end{Filesave}
 
@@ -1801,8 +1433,6 @@ sont de peu d'intérêt autrement.)
   \item \verb|-1:1/0|
   \item \verb|length(c("a", "abc", "ab"))|
   \item \verb|x <- c(-1, -2, -3); length(x)|
-  \item \verb|mode(c(45.44, pi, TRUE))|
-  \item \verb|mode(c(5, "5", "cinq"))|
   \item \verb|length(c(c(1, 3, 6, 7), NULL))|
   \end{enumerate}
   \begin{sol}
@@ -1831,7 +1461,7 @@ c(-1, 2, 4)^(3:-2)
 c(TRUE, FALSE, FALSE) & c(TRUE, TRUE, FALSE)
 @
      \item Attention à la priorité des opérations! En vertu des
-       priorités énoncées au \autoref{tab:premiers:operateurs}, les
+       priorités énoncées au \autoref{tab:bases:operateurs}, les
        opérations sont effectuées dans cet ordre: inégalité
        (\verb=<=), négation logique (\verb=!=) , «ou» logique
        (\verb=|=).
@@ -1851,14 +1481,6 @@ length(c("a", "abc", "ab"))
      \item
 <<echo=FALSE>>=
 x <- c(-1, -2, -3); length(x)
-@
-     \item La valeur booléenne est convertie en nombre réel.
-<<echo=FALSE>>=
-mode(c(45.44, pi, TRUE))
-@
-     \item Le nombre réel est converti en chaine de caractères.
-<<echo=FALSE>>=
-mode(c(5, "5", "cinq"))
 @
      \item Concaténer \code{NULL} à un vecteur n'ajoute rien (ou du
        vide, qui n'a pas de longueur).
@@ -1915,7 +1537,7 @@ x[-c(6, 7, 12)]
 \end{exercice}
 
 \begin{exercice}
-  \label{ex:premiers:moyennes}
+  \label{ex:bases:moyennes}
   Soit $\mat{x} = (x_1, \dots, x_n)$ et $\mat{y} = y_1, \dots, y_n$
   deux vecteurs de nombres réels. Composer des expressions R pour
   effectuer les calculs mathématiques ci-dessous. Vous pouvez utiliser
