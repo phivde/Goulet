@@ -120,6 +120,27 @@ $m \leftarrow 68$ et $n \leftarrow 51$. Après un autre cycle, nous en
 sommes à $m \leftarrow 51$ et $n \leftarrow 17$. Cette fois, nous
 posons $r \leftarrow 0$ à l'étape~1 et la procédure s'arrête ensuite à
 l'étape~2. Le plus grand commun diviseur de $544$ et $119$ est $17$.
+Le \autoref{tab:algorithmes:euclide} dresse le sommaire des opérations
+ci-dessus.
+
+\begin{table}
+  \centering
+  \caption{Calcul du plus grand commun diviseur de $544$ et $119$ avec
+    l'algorithme d'Euclide}
+  \label{tab:algorithmes:euclide}
+  \begin{tabular}{crrr}
+    \toprule
+    \text{Étape} & $m$ & $n$ & $r$ \\
+    \midrule
+    $1$ & $544$ & $119$ & $68$ \\
+    $3$ & $119$ & $ 68$ & $68$ \\
+    $1$ & $119$ & $ 68$ & $51$ \\
+    $3$ & $ 68$ & $ 51$ & $51$ \\
+    $1$ & $ 51$ & $ 17$ & $ 0$ \\
+    $2$ &   --- & $ 17$ &  --- \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 \warningbox{L'ordre des opérations à l'étape~3 de
   l'\autoref{algo:algorithmes:euclide} est important. En effet,
