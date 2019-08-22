@@ -232,8 +232,8 @@ Les objets valeur manquante (\code{NA}), infini (\code{Inf},
 \code{-Inf}), valeur indéterminée (\code{NaN}) et néant (\code{NULL})
 permettent de représenter de manière intuitive des quantités souvent
 utilisées dans les applications statistiques et en analyse de données.
-Pour pleinement tirer profit de ces objets, il faut connaitre leurs
-caractéristiques spéciales.
+Vous devriez connaitre les caractéristiques spéciales de ces objets
+afin d'en tirer pleinement profit.
 
 L'objet \code{NA} sert à représenter une donnée manquante. Chose
 quelque peu surprenante, c'est un objet de mode \icode{logical}. Cependant,
@@ -241,13 +241,13 @@ quelque peu surprenante, c'est un objet de mode \icode{logical}. Cependant,
 <<echo=TRUE>>=
 mode(NA)
 length(NA)
-NA == TRUE
-NA == FALSE
+isTRUE(NA)
+isFALSE(NA)
 @
 Toute opération, y compris la comparaison, impliquant la valeur
 \code{NA} a comme résultat \code{NA}. Par conséquent, la valeur
 \code{NA} n'est égale à aucune autre, pas même elle-même! Pour tester
-si une valeur est manquante, il faut avoir recours à la fonction
+si une valeur est manquante, vosu devez avoir recours à la fonction
 \Icode{is.na}.
 <<echo=TRUE>>=
 x <- NA
@@ -261,9 +261,9 @@ IEEE~754 régissant la représentation interne des nombres dans un
 ordinateur \citep{IEEE:754}. De manière intuitive, l'objet \icode{Inf}
 représente $+\infty$, \code{-Inf} représente $-\infty$ et \icode{NaN}
 (\emph{Not a Number}) représente une forme indéterminée du type
-$\frac{0}{0}$ ou $\infty - \infty$. Les fonctions
-\Icode{is.infinite}, \Icode{is.finite} et \Icode{is.nan}
-fournissent des manières robustes de tester ces valeurs.
+$\frac{0}{0}$ ou $\infty - \infty$. Utilisez les fonctions
+\Icode{is.infinite}, \Icode{is.finite} et \Icode{is.nan} pour tester
+de manière robuste ces valeurs.
 <<echo=TRUE>>=
 is.infinite(1/0)
 is.finite(-1/0)
@@ -379,6 +379,19 @@ mode(c(2, 1 + 5i))         # nombres complexes
 mode(c(TRUE, FALSE, TRUE)) # valeurs booléennes
 mode("foobar")             # chaînes de caractères
 
+## Par défaut, tous les nombres sont représentés en double
+## précision dans R. Il n'y a donc pas de différence entre
+## un nombre entier et un nombre réel.
+typeof(486)                # nombre réel en double précision
+typeof(0.3324)             # idem
+
+## Il est possible de définir des «vrais» entiers dans R en
+## faisant suivre la valeur immédiatement de la lettre «L»,
+## sans espace. Le mode de ces valeurs est toujours "numeric",
+## mais leur type (ou représentation interne) est "integer".
+mode(486L)                 # nombre...
+typeof(486L)               # ... entier
+
 ## La plupart des autres types d'objets sont récursifs. Voici
 ## quelques autres modes.
 mode(seq)                  # une fonction
@@ -415,6 +428,29 @@ x[1] <- 1                  # définition du permier élément
 ## Si un objet n'existe pas au préalable, il est impossible
 ## d'affecter directement la valeur d'un élément.
 ##-!- X[1] <- 1                  # impossible, 'X' n'existe pas
+
+## VALEURS SPÉCIALES
+
+## Donnée manquante. 'NA' est un nom réservé pour représenter
+## une donnée manquante.
+c(65, NA, 72, 88)          # traité comme une valeur
+NA + 2                     # tout calcul avec 'NA' donne NA
+is.na(c(65, NA))           # test si les données sont NA
+
+## Valeurs infinies et indéterminée. 'Inf', '-Inf' et 'NaN'
+## sont des noms réservés.
+1/0                        # +infini
+-1/0                       # -infini
+0/0                        # indétermination
+x <- c(65, Inf, NaN, 88)   # s'utilisent comme des valeurs
+is.finite(x)               # quels sont les nombres réels?
+is.nan(x)                  # lesquels sont indéterminés?
+
+## Valeur "néant". 'NULL' est un nom réservé pour représenter
+## le néant, rien.
+mode(NULL)                 # le mode de 'NULL' est NULL
+length(NULL)               # longueur nulle
+c(NULL, NULL)              # du néant ne résulte que le néant
 
 ## ATTRIBUTS
 

@@ -110,7 +110,7 @@ La grande majorité des langages de programmation offrent les deux
 premiers types de données ci-dessus. Les autres types se révèlent très
 utiles pour la programmation mathématique et l'analyse de données.
 Nous reviendrons sur leurs caractéristiques à la
-\autoref{sec:bases:objets}.
+\autoref{sec:donnees:objets}.
 
 Nous pouvons classer les procédures fondamentales --- ou
 \index{opérateurs}\emph{opérateurs} --- en quatre grandes catégories:
@@ -120,10 +120,11 @@ Nous pouvons classer les procédures fondamentales --- ou
 \item indiçage: \verb=[ ] $=\,;
 \item affectation: \verb|<-|\,.
 \end{itemize}
-Les opérations arithmétiques sont applicables aux nombres réels ou
-complexes, alors que les opérations logiques ne sont applicables
-qu'aux valeurs booléennes. Nous traitons de l'opération d'affectation
-en détail à la section suivante.
+Les opérateurs arithmétiques sont applicables aux nombres réels ou
+complexes, alors que les opérateurs logiques ne sont applicables
+qu'aux valeurs booléennes. Nous traitons de l'opérateur d'affectation
+en détail à la section suivante et de l'indiçage à la
+\autoref{sec:bases:vecteurs}.
 
 Le \autoref{tab:bases:operateurs} présente les opérateurs les plus
 fréquemment employés en ordre décroissant de priorité des opérations.
@@ -172,133 +173,141 @@ Ils sont accompagnés d'une description succincte.
   \code{4\string^3}, alors que \code{1 - 1 - 1} vaut \code{-1}, et non
   \code{1}.}
 
-Comme la définition de la grande majorité des opérateurs coule de
-source, illustrons ici uniquement les opérateurs de modulo et de
-division entière.
-
-\begin{ttscript}{\%/\%}
-\item[\code{\%\%}] modulo (reste d'une division)
-<<echo=TRUE>>=
-5 %% 3
-@
-\item[\code{\%/\%}] division entière (partie entière d'une division)
-<<echo=TRUE>>=
-5 %/% 3
-@
-\end{ttscript}
+\gotorbox{Le fichier de script \code{\scriptfilename} reproduit à la
+  \autoref{sec:bases:exemples} fournit des détails additionnels sur
+  les données fondamentales de R ainsi que des exemples d'utilisation
+  de la plupart des opérateurs ci-dessus. Étudiez attentivement les
+  lignes \reflines{bases:fondamentales}.}
 
 <<script, results=hide>>=
 ###
 ### DONNÉES ET PROCÉDURES FONDAMENTALES  `\labelline{bases:fondamentales}`
 ###
 
-## Nombres. Tous les nombres réels sont stockés en double
-## précision dans R, entiers comme fractionnaires.
+## NOMBRES ET OPÉRATEURS ARITHMÉTIQUES
+
+## Tous les nombres réels sont stockés en double précision
+## dans R, entiers comme fractionnaires. R permet aussi de
+## définir des nombres en notation scientifique et des nombres
+## complexes.
 486                        # nombre réel entier
 0.3324                     # nombre réel fractionnaire
 2e-3                       # notation scientifique
 1 + 2i                     # nombre complexe
 
-## Tout objet en R comporte au minimum un mode et une
-## longueur.
-mode(486)                  # pas de différence entre entier...
-mode(0.3324)               # ... et nombre réel
-length(486)                # vecteur de longueur 1
-mode(1 + 2i)               # nombre complexe
+## La définition des opérateurs arithmétiques standards coule
+## de source.
+137 + 349                  # addition
+1000 - 334                 # soustraction
+5 * 42                     # multiplication
+10/4                       # division
+2^3                        # puissance
+-42                        # changement de signe
 
-## Valeurs booléennes. 'TRUE' et 'FALSE' sont des noms
-## réservés pour identifier les valeurs booléennes
-## correspondantes.
+## Les opérateurs de comparaison (égalité et inégalité)
+## retournent une valeur booléenne.
+486 < 521                  # plus petit
+486 >= 521                 # plus grand ou égal
+486 != 521                 # différent de
+
+## Attention à cette erreur commune --- et parfois difficile à
+## détecter: '=' n'est PAS l'opérateur de comparaison de
+## l'égalité entre deux valeurs.
+##-!- 5 = 2                      # erreur de syntaxe
+
+## L'opérateur de comparaison est plutôt '=='.
+486 == 486                 # comparaison
+y = 486                    # pas un test...
+y                          # ... plutôt une affectation
+
+## Les opérateurs '==' et '!=' vérifient l'égalité (ou non)
+## bit pour bit dans la représentation interne des nombres
+## dans l'ordinateur. Ça fonctionne bien pour les entiers ou
+## les valeurs booléennes, mais pas pour les nombres réels ou,
+## plus insidieux, pour les nombres entiers provenant d'un
+## calcul et qui ne sont entiers qu'en apparence.
+##
+## [Pour en savoir (un peu) plus:
+##  https://floating-point-gui.de/formats/fp/]
+1.2 + 1.4 + 2.8            # 5.4 en apparence
+1.2 + 1.4 + 2.8 == 5.4     # non?!?
+0.3/0.1 == 3               # à gauche: faux entier
+
+## L'opérateur ':' est très utile pour générer des suites de
+## nombres avec un pas fixe de 1 entre chaque nombre.
+1:10                       # entiers de 1 à 10
+5:-2                       # entiers de 5 à -2
+
+## L'opérateur modulo retourne le reste d'une division.
+544 %% 119                 # 544/119 = 4 reste 68
+119 %% 544                 # x %% y = x si x < y
+
+## La division entière est l'opération duale du modulo: elle
+## retourne la partie entière d'une division.
+544 %/% 119                # 544/119 = 4 reste 68
+119 %/% 544                # x %/% y = 0 si x < y
+
+## L'opérateur modulo est souvent utilisé pour déterminer si
+## un nombre est pair ou impair. Un nombre 'x' est pair si 'x
+## mod 2 = 0' et il est impair si 'x mod 2 = 1'.
+554 %% 2                   # pair
+119 %% 2                   # impair
+
+## CHAINES DE CARACTÈRES
+
+## On crée une chaine de caractères en l'entourant de
+## guillemets doubles " ".
+"a"                        # chaine de 1 caractère
+"foobar"                   # chaine de 6 caractères
+"486"                      # chaine de 3 caractères
+
+## Les opérateurs de comparaison sont également définis pour
+## les chaines de caractères en fonction de l'ordre
+## lexicographique. Attention: c'est un terrain miné selon la
+## langue utilisée; consultez la rubrique d'aide de
+## 'Comparison' au besoin (qui vous dira de ne pas faire
+## d'hypothèses sur l'ordre lexicographique entre deux chaines
+## de caractères). Quelques exemples simples.
+"a" < "d"                  # ordre alphabétique
+"a" < "A"                  # minuscules avant majuscules
+"1" < "a"                  # chiffres avant lettres
+
+## VALEURS BOOLÉENNES
+
+## 'TRUE' et 'FALSE' sont des noms réservés pour identifier
+## les valeurs booléennes correspondantes.
 TRUE                       # vrai
 FALSE                      # faux
-mode(TRUE)                 # mode "logical"
-! c(TRUE, FALSE)           # négation logique
+!TRUE                      # négation logique
 TRUE & FALSE               # ET logique
 TRUE | FALSE               # OU logique
 
-## [Détails additionnels sur les expressions logiques. Les
-## expressions suivantes construisent un «tableau de vérité»
-## entre deux énoncés 'p' et 'q' qui peuvent chacun être
-## «vrai» ou «faux». Le ET logique est vrai seulement lorsque
-## les deux énoncés sont vrais, alors que le OU logique est
-## faux seulement lorsque les deux énoncés sont faux.]
+## [Les expressions suivantes (qui anticipent sur la suite)
+## construisent les tables de vérité du Et logique et du OU
+## logique.]
 p <- c(TRUE, TRUE, FALSE, FALSE)
 q <- c(TRUE, FALSE, TRUE, FALSE)
-cbind("p" = p, "q" = q, "p ET q" = p & q, "p OU q" = p | q)
+cbind("p" = p, "q" = q, "p ET q" = p & q)
+cbind("p" = p, "q" = q, "p OU q" = p | q)
+
+## AUTRES DONNÉES FONDAMENTALES DE R
 
 ## Donnée manquante. 'NA' est un nom réservé pour représenter
 ## une donnée manquante.
-c(65, NA, 72, 88)          # traité comme une valeur
+NA                         # valeur admissible
 NA + 2                     # tout calcul avec 'NA' donne NA
-is.na(c(65, NA))           # test si les données sont NA
 
 ## Valeurs infinies et indéterminée. 'Inf', '-Inf' et 'NaN'
 ## sont des noms réservés.
 1/0                        # +infini
 -1/0                       # -infini
 0/0                        # indétermination
-x <- c(65, Inf, NaN, 88)   # s'utilisent comme des valeurs
-is.finite(x)               # quels sont les nombres réels?
-is.nan(x)                  # lesquels sont indéterminés?
 
 ## Valeur "néant". 'NULL' est un nom réservé pour représenter
 ## le néant, rien.
-mode(NULL)                 # le mode de 'NULL' est NULL
-length(NULL)               # longueur nulle
-c(NULL, NULL)              # du néant ne résulte que le néant
-
-## Chaines de caractères. On crée une chaine de caractères en
-## l'entourant de guillemets doubles " ".
-"foobar"                   # *une* chaine de 6 caractères
-length("foobar")           # longueur de 1
-c("foo", "bar")            # *deux* chaines de 3 caractères
-length(c("foo", "bar"))    # longueur de 2
-
-## L'opérateur modulo retourne le reste d'une division.
-5 %% 2                     # 5/2 = 2 reste 1
-5 %% 1:5                   # remarquer la périodicité
-10 %% 1:15                 # x %% y = x si x < y
-
-## Un nombre 'x' est pair si 'x mod 2 = 0' et il est impair si
-## 'x mod 2 = 1'.
-a <- c("Impair", "Pair")
-x <- c(2, 3, 6, 8, 9, 11, 12)
-x %% 2                     # pair ou impair?
-2 - x %% 2                 # observer priorité des opérations
-a[2 - x %% 2]              # indiçage à répétition
-
-## La division entière retourne la partie entière de la
-## division d'un nombre par un autre.
-5 %/% 1:5
-10 %/% 1:15
-
-## Attention à cette erreur commune --- et parfois difficile à
-## détecter: '=' n'est PAS l'opérateur de comparaison entre
-## deux valeurs.
-##-!- 5 = 2                      # erreur de syntaxe
-
-## L'opérateur de comparaison est plutôt '=='.
-5 == 2                     # comparaison
-y = 2                      # pas un test...
-y                          # ... plutôt une affectation
-
-## L'opérateur '==' vérifie l'égalité bit pour bit dans la
-## représentation interne des nombres dans l'ordinateur. Ça
-## fonctionne bien pour les entiers ou les valeurs booléennes,
-## mais pas pour les nombres réels ou, plus insidieux, pour
-## les nombres entiers provenant d'un calcul et qui ne sont
-## entiers qu'en apparence.
-##
-## [Pour en savoir (un peu) plus:
-##  https://floating-point-gui.de/formats/fp/]
-1.2 + 1.4 + 2.8            # 5.4 en apparence
-1.2 + 1.4 + 2.8 == 5.4     # non?!?
-0.3/0.1 == 3               # à gauche: faux entier `\labelline{bases:fondamentales:fin}`
+NULL                       # valeur admissible
+NULL + 2                   # aucun calcul possible avec néant `\labelline{bases:fondamentales:fin}`
 @
-
-\gotorbox{Étudiez les lignes \reflines{bases:fondamentales}
-  du fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:bases:exemples}.}
 
 
 \section{Commandes R}
@@ -674,6 +683,11 @@ x <- c(A = -1, B = 2, C = 8, D = 10) # création d'un vecteur
 names(x)                             # extraire les noms
 names(x) <- letters[1:length(x)]     # changer les noms
 x                                    # nouveau vecteur
+
+length("foobar")           # *une* chaine de 6 caractères
+c("foo", "bar")            # *deux* chaines de 3 caractères
+length(c("foo", "bar"))    # longueur de 2
+
 
 ## La fonction 'vector' sert à initialiser des vecteurs avec
 ## des valeurs prédéterminées. Elle compte deux arguments: le
