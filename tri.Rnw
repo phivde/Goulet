@@ -9,8 +9,8 @@
 %%% International de Creative Commons.
 %%% https://creativecommons.org/licenses/by-sa/4.0/
 
-\chapter{Algorithmique}
-\label{chap:algorithmique}
+\chapter{Tri et recherche}
+\label{chap:tri}
 
 \def\scriptfilename{\currfilebase.R}
 <<echo=FALSE>>=
@@ -211,12 +211,12 @@ n'est pas pour rien que Donald Knuth consacre un volume entier de son
 sujet \citep{Knuth:ACP:vol1:1997}.
 
 L'étude des algorithmes classiques de tri et de recherche fera l'objet
-du \autoref{chap:algorithmique}.
+du \autoref{chap:tri}.
 
 
 
 \section{Algorithmes classiques}
-\label{sec:algorithmique:tri}
+\label{sec:tri:tri}
 
 Pour l'étude des algorithmes classiques, je m'en remets à l'excellent
 ouvrage \emph{Essential Algorithms} de
@@ -256,8 +256,299 @@ Quelques remarques pour vous aider dans votre lecture.
 \end{itemize}
 
 
+\subsection{Boucles itératives}
+\label{sec:fonctions:controle:boucles}
+
+Il existe deux grandes manières de répéter des calculs en
+programmation: par \index{iteration@itération}itération ou par
+\index{recursivite@récursivité}récursivité. Une procédure itérative
+répète un bloc d'instructions, habituellement avec un léger changement
+d'état, jusqu'à ce qu'un nombre de répétitions soit atteint ou qu'une
+condition soit satisfaite. C'est ce que l'on appelle communément une
+\emph{boucle} (\emph{loop}). Très intuitives, les boucles itératives
+sont particulièrement utilisées en programmation impérative.
+
+La procédure récursive, quant à elle, est caractérisée par le fait
+qu'elle s'invoque elle-même jusqu'à ce qu'une condition d'arrêt soit
+satisfaite. Moins intuitive, mais généralement jugée plus élégante,
+elle est particulièrement répandue en programmation fonctionnelle et
+en intelligence artificielle.\footnote{%
+  Si l'on définit plus largement l'itération comme la répétition d'un
+  bloc d'instructions, alors la récursivité n'est qu'une forme
+  d'itération. Il est toutefois d'usage en informatique de distinguer
+  les procédures itératives des procédures récursives comme je le
+  fais ici.}
+
+Nous reviendrons sur la récursivité à la
+\autoref{sec:fonctions:recursivite}. La présente section étudie les
+structures de contrôles itératives de R. Elles sont de trois types: la
+boucle à contrôle par dénombrement (boucle \code{for}), la boucle à
+pré-condition «tant que» (boucle \code{while}) et la boucle à
+condition d'arrêt (boucle \code{repeat}).
+
+La boucle à dénombrement \Icode{for} sert pour répéter une procédure
+un nombre prédéterminé de fois. La syntaxe de la boucle \code{for} est
+la suivante, dans R:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+for (\meta{variable} in \meta{suite})
+    \meta{expression}
+\end{Verbatim}
+\end{Schunk}
+\begin{itemize}
+\item \meta{variable} est un \emph{compteur} ou, plus spécifiquement,
+  un \emph{itérateur} qui prend successivement les valeurs contenues
+  dans \meta{suite}. La variable est habituellement --- mais pas
+  nécessairement --- utilisée dans les calculs à l'intérieur de la
+  boucle.
+\item \meta{suite} est un vecteur de valeurs. À noter que \meta{suite}
+  n'a pas à être composée de nombres consécutifs, ni même de nombres,
+  en fait.
+\item \meta{expression} est le contenu de la boucle à proprement
+  parler. Comme d'habitude, si le contenu est constitué de plusieurs
+  expressions, elles doivent être regroupées des accolades \verb={ }=.
+\end{itemize}
+
+La boucle à pré-condition \Icode{while} exécute une procédure tant
+qu'une condition est satisfaite. La condition étant vérifiée avant
+d'entrer dans la boucle, celle-ci peut ne jamais s'exécuter. La
+syntaxe de la boucle \code{while} est la suivante:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+while(\meta{condition})
+    \meta{expression}
+\end{Verbatim}
+\end{Schunk}
+\begin{itemize}
+\item \meta{condition} est une expression dont le résultat est une
+  valeur \code{TRUE} ou \code{FALSE} unique.
+\item \meta{expression} est une expression ou un groupe d'expressions
+  entre accolades \verb={ }= qui sont exécutées tant que
+  \meta{condition} est \code{TRUE}.
+\end{itemize}
+
+Plusieurs langages de programmation comportent une structure itérative
+à post-condition «tant que» (boucle \code{do ... while}) ou «jusqu'à
+ce que» (boucle \code{do ... until}), voire les deux. Dans R, la
+boucle à post-condition prend plutôt la forme d'une boucle à condition
+d'arrêt \Icode{repeat}. La syntaxe de cette boucle est on ne peut plus
+simple:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+repeat
+    \meta{expression}
+\end{Verbatim}
+\end{Schunk}
+\begin{itemize}
+\item \meta{expression} est l'expression ou le groupe d'expressions à
+  répéter. En pratique, pour éviter que la boucle ne se répète indéfiniment,
+  \meta{expression} est toujours un groupe d'expressions comportant un
+  test d'arrêt.
+\end{itemize}
+
+Le test d'arrêt d'une boucle \icode{repeat} utilise habituellement la
+commande \icode{break} (\autoref{sec:fonctions:controle:flux}) pour
+forcer la sortie de la boucle. Puisque le test se trouve à l'intérieur
+de la boucle --- généralement à ou vers la fin ---, une boucle
+\code{repeat} est toujours exécutée au moins une fois.
+
+\subsection{Contrôle du flux}
+\label{sec:fonctions:controle:flux}
+
+Les commandes de contrôle du flux permettent d'infléchir le
+déroulement normal d'une boucle.
+
+\begin{ttscript}{break}
+\item[\Icode{break}] Force la sortie de la boucle courante. La
+  commande \code{break} peut être utilisée dans les boucles
+  \icode{for} ou \icode{while}, mais elle est presque indissociable de
+  la boucle \icode{repeat}. Si l'on assemble les morceaux des sections
+  précédentes, une boucle \icode{repeat} est généralement construite
+  ainsi:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\[\]]
+repeat
+{
+    \meta[expression]
+    if (\meta[condition])
+        break
+}
+\end{Verbatim}
+\end{Schunk}
+\item[\Icode{next}] Force le passage à la prochaine itération de la
+  boucle \icode{for}, \icode{while} ou \icode{repeat}. Comme
+  \icode{break}, la commande est généralement utilisée à l'intérieur
+  d'une structure conditionnelle.
+\end{ttscript}
+
+
+
+\section{Syndrome de la plaque à biscuits}
+\label{sec:fonctions:syndrome}
+
+La suite de Fibonacci est une suite de nombres entiers très connue.
+Les deux premiers termes de la suite sont $0$ et $1$ et tous les
+autres sont la somme des deux termes précédents. Mathématiquement, les
+valeurs de la suite de Fibonacci sont données par la fonction
+\begin{align*}
+  f(0) &= 0 \\
+  f(1) &= 1 \\
+  f(n) & = f(n - 1) + f(n - 2), \quad n \geq 2.
+\end{align*}
+Le quotient de deux termes successifs converge vers
+$\phi = (1 + \sqrt{5})/2$, le nombre d'or.\footnote{%
+  On prête au nombre d'or toutes sortes de propriétés, certaines même
+  d'ordre mystique. Il est en tout cas au cœur d'un des romans les
+  plus vendus de tous les temps, \emph{Da~Vinci Code} (Dan Brown,
+  2003).} %
+
+Le calcul du $n${\ieme} terme de la suite de Fibonacci se prête tout
+naturellement à une mise en œuvre récursive, tel qu'expliqué dans
+\citet[chapitre~9]{Stephens:algorithms:2013}.
+
+Nous nous penchons ici sur un problème légèrement différent: calculer
+les $n$ premiers termes de la suite de Fibonacci. Il est plus simple
+de procéder par itération pour résoudre ce problème. La fonction
+\code{fibonacci0}, dont la définition se trouve à la
+\autoref{fig:application:fibonacci0}, propose une première solution.
+
+\begin{figure}
+\begin{Verbatim}[frame=single]
+fibonacci0 <- function(nterm)
+{
+    if (nterm < 1)
+        stop("'nterm' doit être supérieur ou égal à 1")
+    if (nterm == 1)
+        return(0)
+    x <- c(0, 1)
+    for (i in seq_len(nterm - 2))
+        x[i + 2] <- x[i + 1] + x[i]
+    x
+}
+\end{Verbatim}
+  \caption{Première version d'une fonction pour calculer les $n$
+    premiers termes de la suite de Fibonacci}
+  \label{fig:application:fibonacci0}
+\end{figure}
+
+Avant d'aller plus loin, quelques commentaires sur \code{fibonacci0}.
+\begin{itemize}
+\item La fonction n'étant valide que pour un argument \code{nterm}
+  supérieur ou égal à $1$, elle affiche un message d'erreur si ce
+  n'est pas le cas.
+\item La fonction intercepte le cas trivial \code{nterm == 1} dès le
+  départ.
+\item Lors de sa création, l'objet \code{x} contient déjà le résultat
+  du cas \code{nterm == 2}. La fonction devra donc éviter de faire
+  d'autres calculs pour ce cas.
+\item En créant la suite de la boucle \icode{for} avec
+  \code{seq\_len}, la boucle ne s'exécute pas lorsque \code{nterm ==
+    2} puisque le résultat \code{seq\_len(0)} est un vecteur vide.
+\item La seule expression de la boucle \code{for} ajoute
+  successivement un terme au vecteur \code{x}.
+\end{itemize}
+
+<<echo=FALSE>>=
+fibonacci0 <- function(nterm)
+{
+    if (nterm < 1)
+        stop("'nterm' doit être supérieur ou égal à 1")
+    if (nterm == 1)
+        return(0)
+    x <- c(0, 1)
+    for (i in seq_len(nterm - 2))
+        x[i + 2] <- x[i + 1] + x[i]
+    x
+}
+@
+<<echo=TRUE>>=
+fibonacci0(1)
+fibonacci0(2)
+fibonacci0(5)
+@
+
+Bien que valide --- comme les exemples d'utilisation de la fonction le
+démontrent --- la fonction \code{fibonacci0} souffre d'un gros défaut:
+la taille de l'objet \code{x} doit constamment augmenter pour stocker
+une nouvelle valeur de la suite de Fibonacci.
+
+Tentons une analogie alimentaire pour cette manière de procéder. Pour
+ranger des biscuits frais sortis du four, vous prenez un premier
+biscuit et vous le rangez dans un plat ne pouvant contenir qu'un seul
+biscuit. Arrivés au second biscuit, constatant que le contenant n'est
+pas assez grand, vous sortez un plat pouvant contenir deux biscuits,
+vous changez le premier biscuit de plat et vous y rangez aussi le
+second biscuit. Arrivés au troisième biscuit, le petit manège
+recommence, et ainsi de suite jusqu'à ce que le plateau de biscuits
+soit épuisé. C'est ce que je nomme, non sans un sourire en coin, le
+Syndrome de la plaque à
+biscuits{\texttrademark}\index{syndrome@Syndrome de la plaque à
+  biscuits}\index{biscuits|see{Syndrome de la plaque à biscuits}}.
+
+Le manège décrit ci-dessus se reproduit à l'identique dans la mémoire
+de l'ordinateur, l'odeur des biscuits chauds en moins. En effet,
+l'ordinateur doit constamment allouer de la nouvelle mémoire et
+déplacer les termes déjà sauvegardés au fur et à mesure que le vecteur
+\code{x} grandit. Vous aurez compris qu'une telle façon de faire est à
+éviter absolument lorsque c'est possible --- et ça l'est la plupart du
+temps.
+
+Quand nous savons quelle sera la longueur finale d'un objet, comme
+c'est le cas dans cet exemple, il vaut mieux créer un contenant vide
+de la bonne longueur et le remplir par la suite. La fonction
+\code{fibonacci} de la \autoref{fig:application:fibonacci} évite le
+Syndrome.
+
+\begin{figure}
+\begin{Verbatim}[frame=single]
+fibonacci <- function(nterm)
+{
+    if (nterm < 1)
+        stop("'nterm' doit être supérieur ou égal à 1")
+    if (nterm == 1)
+        return(0)
+    x <- numeric(nterm)  # création du contenant
+    x[2] <- 1            # x[1] vaut déjà 0
+    for (i in seq_len(nterm - 2))
+        x[i + 2] <- x[i + 1] + x[i]
+    x
+}
+\end{Verbatim}
+  \caption{Fonction pour calculer les $n$ premiers termes de la suite
+    de Fibonacci ne souffrant pas du Syndrome de la plaque à
+    biscuits{\texttrademark}}
+  \label{fig:application:fibonacci}
+\end{figure}
+
+<<echo=FALSE>>=
+fibonacci <- function(nterm)
+{
+    if (nterm < 1)
+        stop("'nterm' doit être supérieur ou égal à 1")
+    if (nterm == 1)
+        return(0)
+    x <- numeric(nterm)  # création du contenant
+    x[2] <- 1            # x[1] vaut déjà 0
+    for (i in seq_len(nterm - 2))
+        x[i + 2] <- x[i + 1] + x[i]
+    x
+}
+@
+<<echo=TRUE>>=
+fibonacci(1)
+fibonacci(2)
+fibonacci(5)
+@
+
+Avons-nous vraiment gagné en efficacité? Le code informatique de la
+\autoref{sec:application:exemples} permet de vérifier que la seconde
+fonction est de trois à cinq fois plus rapide que la première!
+
+
+
+
 \section{Fonctions internes utiles}
-\label{sec:algorithmique:internes}
+\label{sec:tri:internes}
 
 Le tri et la recherche sont des opérations de base dans l'analyse de
 données. Il ne faut donc pas se surprendre que R comporte des
@@ -335,13 +626,13 @@ match(2, x)
 
 
 \section{Exercices}
-\label{sec:algorithmique:exercices}
+\label{sec:tri:exercices}
 
 \Opensolutionfile{solutions}[solutions-algorithmique]
 
 \begin{Filesave}{solutions}
-\section*{Chapitre \ref*{chap:algorithmique}}
-\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:algorithmique}}
+\section*{Chapitre \ref*{chap:tri}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:tri}}
 
 Nous allons tester nos fonctions avec des vecteurs aléatoires obtenus
 avec la fonction \Icode{sample} qui tire un échantillon aléatoire
@@ -382,7 +673,7 @@ Réaliser les mises en œuvre ci-dessous avec R.
     parmi les valeurs déjà triées, chaque valeur doit se retrouver.
 
     La fonction \icode{insertionsort} de la
-    \autoref{fig:algorithmique:insertionsort} constitue une mise en
+    \autoref{fig:tri:insertionsort} constitue une mise en
     œuvre de l'algorithme en R. L'expression à l'intérieur de la
     clause \icode{if} repositionne les éléments du vecteur dans le bon
     ordre.
@@ -391,7 +682,7 @@ Réaliser les mises en œuvre ci-dessous avec R.
       \lstinputlisting{include/insertionsort.R}
       \caption{Mise en œuvre en R de l'algorithme
         \emph{insertionsort}}
-      \label{fig:algorithmique:insertionsort}
+      \label{fig:tri:insertionsort}
     \end{figure}
 
 <<echo=FALSE>>=
@@ -416,7 +707,7 @@ insertionsort(x)
     minimum dans les valeurs restantes du vecteur.
 
     La fonction \icode{selectionsort} de la
-    \autoref{fig:algorithmique:selectionsort} constitue une mise en
+    \autoref{fig:tri:selectionsort} constitue une mise en
     œuvre de l'algorithme en R. Dans la majorité des langages de
     programmation, l'échange de deux éléments d'un vecteur nécessite
     une variable tampon (temporaire), comme ceci:
@@ -433,7 +724,7 @@ x[j] <- tmp
     \begin{figure}
       \lstinputlisting{include/selectionsort.R}
       \caption{Mise en œuvre en R de l'algorithme \emph{selectionsort}}
-      \label{fig:algorithmique:selectionsort}
+      \label{fig:tri:selectionsort}
     \end{figure}
 
 <<echo=FALSE>>=
@@ -447,14 +738,14 @@ selectionsort(x)
     La fonction \icode{which.min} retourne l'indice du minimum
     dans un vecteur. Nous pouvons l'utiliser pour éliminer la
     seconde boucle dans la mise en œuvre de la
-    \autoref{fig:algorithmique:selectionsort}; voir la fonction de la
-    \autoref{fig:algorithmique:selectionsort-which}.
+    \autoref{fig:tri:selectionsort}; voir la fonction de la
+    \autoref{fig:tri:selectionsort-which}.
 
     \begin{figure}
       \lstinputlisting{include/selectionsort-which.R}
       \caption{Mise en œuvre en R de l'algorithme \emph{selectionsort}
         utilisant la fonction \code{which.min}}
-      \label{fig:algorithmique:selectionsort-which}
+      \label{fig:tri:selectionsort-which}
     \end{figure}
 
 <<echo=FALSE>>=
@@ -479,13 +770,13 @@ selectionsort(x)
     que le vecteur n'est pas trié.
 
     Une première version de la mise en œuvre, à la
-    \autoref{fig:algorithmique:bubblesort-while}, colle de près à
+    \autoref{fig:tri:bubblesort-while}, colle de près à
     l'algorithme de \citet{Stephens:algorithms:2013}.
 
     \begin{figure}
       \lstinputlisting{include/bubblesort-while.R}
       \caption{Mise en œuvre en R de l'algorithme \emph{bubblesort}}
-      \label{fig:algorithmique:bubblesort-while}
+      \label{fig:tri:bubblesort-while}
     \end{figure}
 
 <<echo=FALSE>>=
@@ -497,12 +788,12 @@ bubblesort(x)
 @
 
     Dans la version de \icode{bubblesort} de la
-    \autoref{fig:algorithmique:bubblesort-while}, il faut changer la
+    \autoref{fig:tri:bubblesort-while}, il faut changer la
     variable indicatrice \code{not\_sorted} plusieurs fois, dont une pour
     s'assurer d'effectuer la boucle \code{while} au moins une fois.
 
     Une seconde mise œuvre, à la
-    \autoref{fig:algorithmique:bubblesort-repeat}, est rendue plus facile à
+    \autoref{fig:tri:bubblesort-repeat}, est rendue plus facile à
     suivre par l'utilisation d'une boucle \code{repeat}, qui est
     toujours exécutée au moins une fois. Au passage, j'inverse
     également le rôle de la variable indicatrice pour éviter
@@ -512,7 +803,7 @@ bubblesort(x)
       \lstinputlisting{include/bubblesort-repeat.R}
       \caption{Mise en œuvre en R de l'algorithme \emph{bubblesort}
         utilisant une boucle \code{repeat}}
-      \label{fig:algorithmique:bubblesort-repeat}
+      \label{fig:tri:bubblesort-repeat}
     \end{figure}
 
 <<echo=FALSE>>=
@@ -534,7 +825,7 @@ bubblesort(x)
     bon ordre et le bon nombre de fois.
 
     La mise en œuvre d'une fonction \icode{countingsort} à
-    la \autoref{fig:algorithmique:countingsort} utilise une boucle
+    la \autoref{fig:tri:countingsort} utilise une boucle
     pour passer à travers toutes les valeurs du vecteur. Elle est un
     peu plus générale que l'algorithme de
     \citet{Stephens:algorithms:2013} dans la mesure où elle fonctionne
@@ -546,7 +837,7 @@ bubblesort(x)
     \begin{figure}
       \lstinputlisting{include/countingsort.R}
       \caption{Mise en œuvre en R de l'algorithme \emph{countingsort}}
-      \label{fig:algorithmique:countingsort}
+      \label{fig:tri:countingsort}
     \end{figure}
     \enlargethispage{5mm}
 
@@ -579,7 +870,7 @@ countingsort(x, 10, 20)
     vecteur à celle qui est recherchée. Ceci requiert une boucle.
 
     La fonction \icode{linsearch} présentée à la
-    \autoref{fig:algorithmique:linsearch} retourne \code{NA}
+    \autoref{fig:tri:linsearch} retourne \code{NA}
     plutôt que $-1$ lorsque la valeur n'est pas trouvée, comme c'est
     l'usage en R.
 
@@ -587,7 +878,7 @@ countingsort(x, 10, 20)
       \lstinputlisting{include/linsearch.R}
       \caption{Mise en œuvre en R de l'algorithme
         \emph{linear search}}
-      \label{fig:algorithmique:linsearch}
+      \label{fig:tri:linsearch}
     \end{figure}
 
 <<echo=FALSE>>=
@@ -612,7 +903,7 @@ linsearch(21, x)
     suivante du vecteur.
 
     Je propose deux mises en œuvre. La première, à la
-    \autoref{fig:algorithmique:rlinsearch}, a recours à une fonction
+    \autoref{fig:tri:rlinsearch}, a recours à une fonction
     auxiliaire qui garde le compte de la progression dans le vecteur.
     Remarquez comment la portée lexicale de R
     (\autoref{sec:implementation:portee}) fait en sorte que nous
@@ -623,7 +914,7 @@ linsearch(21, x)
       \lstinputlisting{include/rlinsearch.R}
       \caption{Mise en œuvre récursive en R de l'algorithme
         \emph{linear search}}
-      \label{fig:algorithmique:rlinsearch}
+      \label{fig:tri:rlinsearch}
     \end{figure}
 
 <<echo=FALSE>>=
@@ -637,7 +928,7 @@ rlinsearch(21, x)
 @
 
     La seconde mise en œuvre, à la
-    \autoref{fig:algorithmique:rlinsearch-na} est un peu plus simple,
+    \autoref{fig:tri:rlinsearch-na} est un peu plus simple,
     mais, comme la position de la valeur recherchée dans le vecteur
     est calculée, elle repose sur le fait que tout calcul avec
     \code{NA} retourne \code{NA}, ce qui ne constitue sans doute pas
@@ -648,7 +939,7 @@ rlinsearch(21, x)
       \caption{Mise en œuvre récursive en R de l'algorithme
         \emph{linear search} utilisant une propriété de la valeur
         \code{NA}}
-      \label{fig:algorithmique:rlinsearch-na}
+      \label{fig:tri:rlinsearch-na}
     \end{figure}
 
 <<echo=FALSE>>=
@@ -678,13 +969,13 @@ rlinsearch(21, x)
     \icode{as.integer} ou, plus simplement, en calculant la partie
     entière du résultat avec \icode{floor}. C'est ce qu'utilise la
     fonction \icode{binsearch} de la
-    \autoref{fig:algorithmique:binsearch}.
+    \autoref{fig:tri:binsearch}.
 
     \begin{figure}
       \lstinputlisting{include/binsearch.R}
       \caption{Mise en œuvre en R de l'algorithme
         \emph{binary search}}
-      \label{fig:algorithmique:binsearch}
+      \label{fig:tri:binsearch}
     \end{figure}
 
 <<echo=FALSE>>=
@@ -705,7 +996,7 @@ binsearch(21, x)
   \begin{sol}
     La mise en œuvre récursive la plus simple de l'algorithme
     \emph{binary search}, à la figure
-    \autoref{fig:algorithmique:rbinsearch}, utilise une fonction
+    \autoref{fig:tri:rbinsearch}, utilise une fonction
     auxiliaire. Remarquez comment une fonction récursive (\code{fun}
     dans le cas présent) doit toujours --- normalement dès le départ
     --- contenir un critère d'arrêt des récursions. Autrement, le
@@ -715,7 +1006,7 @@ binsearch(21, x)
       \lstinputlisting{include/rbinsearch.R}
       \caption{Mise en œuvre récursive en R de l'algorithme
         \emph{binary search}}
-      \label{fig:algorithmique:rbinsearch}
+      \label{fig:tri:rbinsearch}
     \end{figure}
 
 <<echo=FALSE>>=
@@ -765,7 +1056,7 @@ fibonacci(10)
 \end{exercice}
 
 \begin{exercice}
-  \label{ex:algorithmique:100metres}
+  \label{ex:tri:100metres}
   On vous donne la liste et la date des 31 meilleurs temps enregistrés
   au 100~mètres homme entre 1964 et 2005.
 <<echo=TRUE, eval=TRUE>>=

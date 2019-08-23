@@ -362,6 +362,74 @@ ocurve(x^2, from = 0, to = 2)           #-*- `\labelline{fonctions:definition:fi
   des fonctions anonymes et de l'argument `\code{...}`.}
 
 
+\section{Produit extérieur}
+\label{sec:application:outer}
+
+J'étire quelque peu le concept de fonction d'application pour
+discuter ici de la fonction de produit extérieur \code{outer}. Ce
+n'est pas la fonction la plus intuitive à utiliser, mais elle s'avère
+extrêmement utile pour effectuer plusieurs opérations en une seule
+expression tout en masquant les boucles implicites.
+
+La fonction \Icode{outer} calcule le \index{produit!extérieur}produit
+extérieur entre deux vecteurs, c'est à dire le résultat de
+\code{FUN(X[i], Y[j])} pour toutes les valeurs des indices \code{i} et
+\code{j}. La syntaxe de la fonction est la suivante:
+\begin{Schunk}
+\begin{Verbatim}
+outer(X, Y, FUN, ...)
+\end{Verbatim}
+\end{Schunk}
+\begin{itemize}
+\item \code{X} et \code{Y} sont deux objets, normalement des vecteurs
+  ou des matrices.
+\item \code{FUN} est la fonction à appliquer (\code{"*"} par défaut)
+  entre chacun des éléments de \code{X} et chacun des éléments de
+  \code{Y}. Lorsque \code{FUN} est un opérateur arithmétique du
+  \autoref{tab:premiers:operateurs}, il faut placer le symbole entre
+  guillemets: \code{"*"}, \code{"+"}, \code{"<="}, etc.
+\end{itemize}
+La dimension du résultat de \code{outer} est \code{c(dim(X), dim(Y))}.
+<<echo=TRUE>>=
+outer(c(1, 2, 5), c(2, 3, 6))
+@
+
+L'opérateur \Icode{\%o\%} est un raccourci de \code{outer(X, Y, "*")}.
+
+\videobox{\link{https://youtu.be/cyPUAnieWHw}{Fonction \code{outer}}}{%
+  Visionnez la vidéo sur la
+  \link{https://youtu.be/cyPUAnieWHw}{fonction \icode{outer}} pour
+  mieux comprendre le rôle de cette fonction.}
+
+<<script, results=hide>>=
+###
+### FONCTION 'outer'  `\labelline{application:outer}`
+###
+
+## La fonction 'outer' applique une fonction (le produit par
+## défaut, d'où le nom de la fonction, dérivé de «produit
+## extérieur») à toutes les combinaisons des éléments de ses
+## deux premiers arguments.
+x <- c(1, 2, 4, 7, 10, 12)
+y <- c(2, 3, 6, 7, 9, 11)
+outer(x, y)                # produit extérieur
+x %o% y                    # équivalent plus court
+
+## Pour effectuer un calcul autre que le produit, on spécifie
+## la fonction à appliquer en troisième argument. Si la
+## fonction est un des opérateurs arithmétiques de base, il
+## faut placer le symbole entre guillemets " ".
+outer(x, y, "+")           # «somme extérieure»
+outer(x, y, "<=")          # toutes les comparaisons possibles
+outer(x, y, function(x, y) x + 2 * y) # fonction quelconque  `\labelline{application:outer:fin}`
+@
+
+\gotorbox{Étudiez les lignes \reflines{application:outer}
+  du fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:application:exemples}.}
+
+
+
 \section{Structures de contrôle}
 \label{sec:fonctions:controle}
 
@@ -497,130 +565,9 @@ rapides. En particulier, la rubrique d'aide de la fonction souligne
 que la structure \code{if ... else ...} est beaucoup plus efficace si
 \meta{test} est un vecteur de longueur $1$.
 
-\subsection{Boucles itératives}
-\label{sec:fonctions:controle:boucles}
 
-Il existe deux grandes manières de répéter des calculs en
-programmation: par \index{iteration@itération}itération ou par
-\index{recursivite@récursivité}récursivité. Une procédure itérative
-répète un bloc d'instructions, habituellement avec un léger changement
-d'état, jusqu'à ce qu'un nombre de répétitions soit atteint ou qu'une
-condition soit satisfaite. C'est ce que l'on appelle communément une
-\emph{boucle} (\emph{loop}). Très intuitives, les boucles itératives
-sont particulièrement utilisées en programmation impérative.
-
-La procédure récursive, quant à elle, est caractérisée par le fait
-qu'elle s'invoque elle-même jusqu'à ce qu'une condition d'arrêt soit
-satisfaite. Moins intuitive, mais généralement jugée plus élégante,
-elle est particulièrement répandue en programmation fonctionnelle et
-en intelligence artificielle.\footnote{%
-  Si l'on définit plus largement l'itération comme la répétition d'un
-  bloc d'instructions, alors la récursivité n'est qu'une forme
-  d'itération. Il est toutefois d'usage en informatique de distinguer
-  les procédures itératives des procédures récursives comme je le
-  fais ici.}
-
-Nous reviendrons sur la récursivité à la
-\autoref{sec:fonctions:recursivite}. La présente section étudie les
-structures de contrôles itératives de R. Elles sont de trois types: la
-boucle à contrôle par dénombrement (boucle \code{for}), la boucle à
-pré-condition «tant que» (boucle \code{while}) et la boucle à
-condition d'arrêt (boucle \code{repeat}).
-
-La boucle à dénombrement \Icode{for} sert pour répéter une procédure
-un nombre prédéterminé de fois. La syntaxe de la boucle \code{for} est
-la suivante, dans R:
-\begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
-for (\meta{variable} in \meta{suite})
-    \meta{expression}
-\end{Verbatim}
-\end{Schunk}
-\begin{itemize}
-\item \meta{variable} est un \emph{compteur} ou, plus spécifiquement,
-  un \emph{itérateur} qui prend successivement les valeurs contenues
-  dans \meta{suite}. La variable est habituellement --- mais pas
-  nécessairement --- utilisée dans les calculs à l'intérieur de la
-  boucle.
-\item \meta{suite} est un vecteur de valeurs. À noter que \meta{suite}
-  n'a pas à être composée de nombres consécutifs, ni même de nombres,
-  en fait.
-\item \meta{expression} est le contenu de la boucle à proprement
-  parler. Comme d'habitude, si le contenu est constitué de plusieurs
-  expressions, elles doivent être regroupées des accolades \verb={ }=.
-\end{itemize}
-
-La boucle à pré-condition \Icode{while} exécute une procédure tant
-qu'une condition est satisfaite. La condition étant vérifiée avant
-d'entrer dans la boucle, celle-ci peut ne jamais s'exécuter. La
-syntaxe de la boucle \code{while} est la suivante:
-\begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
-while(\meta{condition})
-    \meta{expression}
-\end{Verbatim}
-\end{Schunk}
-\begin{itemize}
-\item \meta{condition} est une expression dont le résultat est une
-  valeur \code{TRUE} ou \code{FALSE} unique.
-\item \meta{expression} est une expression ou un groupe d'expressions
-  entre accolades \verb={ }= qui sont exécutées tant que
-  \meta{condition} est \code{TRUE}.
-\end{itemize}
-
-Plusieurs langages de programmation comportent une structure itérative
-à post-condition «tant que» (boucle \code{do ... while}) ou «jusqu'à
-ce que» (boucle \code{do ... until}), voire les deux. Dans R, la
-boucle à post-condition prend plutôt la forme d'une boucle à condition
-d'arrêt \Icode{repeat}. La syntaxe de cette boucle est on ne peut plus
-simple:
-\begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
-repeat
-    \meta{expression}
-\end{Verbatim}
-\end{Schunk}
-\begin{itemize}
-\item \meta{expression} est l'expression ou le groupe d'expressions à
-  répéter. En pratique, pour éviter que la boucle ne se répète indéfiniment,
-  \meta{expression} est toujours un groupe d'expressions comportant un
-  test d'arrêt.
-\end{itemize}
-
-Le test d'arrêt d'une boucle \icode{repeat} utilise habituellement la
-commande \icode{break} (\autoref{sec:fonctions:controle:flux}) pour
-forcer la sortie de la boucle. Puisque le test se trouve à l'intérieur
-de la boucle --- généralement à ou vers la fin ---, une boucle
-\code{repeat} est toujours exécutée au moins une fois.
-
-\subsection{Contrôle du flux}
-\label{sec:fonctions:controle:flux}
-
-Les commandes de contrôle du flux permettent d'infléchir le
-déroulement normal d'une boucle.
-
-\begin{ttscript}{break}
-\item[\Icode{break}] Force la sortie de la boucle courante. La
-  commande \code{break} peut être utilisée dans les boucles
-  \icode{for} ou \icode{while}, mais elle est presque indissociable de
-  la boucle \icode{repeat}. Si l'on assemble les morceaux des sections
-  précédentes, une boucle \icode{repeat} est généralement construite
-  ainsi:
-\begin{Schunk}
-\begin{Verbatim}[commandchars=\\\[\]]
-repeat
-{
-    \meta[expression]
-    if (\meta[condition])
-        break
-}
-\end{Verbatim}
-\end{Schunk}
-\item[\Icode{next}] Force le passage à la prochaine itération de la
-  boucle \icode{for}, \icode{while} ou \icode{repeat}. Comme
-  \icode{break}, la commande est généralement utilisée à l'intérieur
-  d'une structure conditionnelle.
-\end{ttscript}
+\subsection{Contrôle de l'éxécution}
+\label{sec:fonctions:controle:execution}
 
 Bien qu'elles ne soient pas à proprement parler des commandes de
 contrôle de flux, les trois fonctions ci-dessous permettent néanmoins
@@ -844,8 +791,8 @@ rm("sqrt")                              #-*- `\labelline{fonctions:controle:fin}
   reproduit à la \autoref{sec:fonctions:exemples}.}
 
 
-\section{Récursivité}
-\label{sec:fonctions:recursivite}
+\section{Récursion}
+\label{sec:fonctions:recursion}
 
 En tant que langage de programmation fonctionnel, R admet tout
 naturellement les procédures récursives. Lorsque la fonction récursive
@@ -866,170 +813,8 @@ factorial <- function(n)
 
 \warningbox{Le temps système requis pour la création des
   environnements lors de chaque appel de fonction
-  (\autoref{chap:implementation}) rend les fonctions récursives peu
+  (\autoref{chap:environnement}) rend les fonctions récursives peu
   efficaces en R.}
-
-
-\section{Syndrome de la plaque à biscuits}
-\label{sec:fonctions:syndrome}
-
-La suite de Fibonacci est une suite de nombres entiers très connue.
-Les deux premiers termes de la suite sont $0$ et $1$ et tous les
-autres sont la somme des deux termes précédents. Mathématiquement, les
-valeurs de la suite de Fibonacci sont données par la fonction
-\begin{align*}
-  f(0) &= 0 \\
-  f(1) &= 1 \\
-  f(n) & = f(n - 1) + f(n - 2), \quad n \geq 2.
-\end{align*}
-Le quotient de deux termes successifs converge vers
-$\phi = (1 + \sqrt{5})/2$, le nombre d'or.\footnote{%
-  On prête au nombre d'or toutes sortes de propriétés, certaines même
-  d'ordre mystique. Il est en tout cas au cœur d'un des romans les
-  plus vendus de tous les temps, \emph{Da~Vinci Code} (Dan Brown,
-  2003).} %
-
-Le calcul du $n${\ieme} terme de la suite de Fibonacci se prête tout
-naturellement à une mise en œuvre récursive, tel qu'expliqué dans
-\citet[chapitre~9]{Stephens:algorithms:2013}.
-
-Nous nous penchons ici sur un problème légèrement différent: calculer
-les $n$ premiers termes de la suite de Fibonacci. Il est plus simple
-de procéder par itération pour résoudre ce problème. La fonction
-\code{fibonacci0}, dont la définition se trouve à la
-\autoref{fig:application:fibonacci0}, propose une première solution.
-
-\begin{figure}
-\begin{Verbatim}[frame=single]
-fibonacci0 <- function(nterm)
-{
-    if (nterm < 1)
-        stop("'nterm' doit être supérieur ou égal à 1")
-    if (nterm == 1)
-        return(0)
-    x <- c(0, 1)
-    for (i in seq_len(nterm - 2))
-        x[i + 2] <- x[i + 1] + x[i]
-    x
-}
-\end{Verbatim}
-  \caption{Première version d'une fonction pour calculer les $n$
-    premiers termes de la suite de Fibonacci}
-  \label{fig:application:fibonacci0}
-\end{figure}
-
-Avant d'aller plus loin, quelques commentaires sur \code{fibonacci0}.
-\begin{itemize}
-\item La fonction n'étant valide que pour un argument \code{nterm}
-  supérieur ou égal à $1$, elle affiche un message d'erreur si ce
-  n'est pas le cas.
-\item La fonction intercepte le cas trivial \code{nterm == 1} dès le
-  départ.
-\item Lors de sa création, l'objet \code{x} contient déjà le résultat
-  du cas \code{nterm == 2}. La fonction devra donc éviter de faire
-  d'autres calculs pour ce cas.
-\item En créant la suite de la boucle \icode{for} avec
-  \code{seq\_len}, la boucle ne s'exécute pas lorsque \code{nterm ==
-    2} puisque le résultat \code{seq\_len(0)} est un vecteur vide.
-\item La seule expression de la boucle \code{for} ajoute
-  successivement un terme au vecteur \code{x}.
-\end{itemize}
-
-<<echo=FALSE>>=
-fibonacci0 <- function(nterm)
-{
-    if (nterm < 1)
-        stop("'nterm' doit être supérieur ou égal à 1")
-    if (nterm == 1)
-        return(0)
-    x <- c(0, 1)
-    for (i in seq_len(nterm - 2))
-        x[i + 2] <- x[i + 1] + x[i]
-    x
-}
-@
-<<echo=TRUE>>=
-fibonacci0(1)
-fibonacci0(2)
-fibonacci0(5)
-@
-
-Bien que valide --- comme les exemples d'utilisation de la fonction le
-démontrent --- la fonction \code{fibonacci0} souffre d'un gros défaut:
-la taille de l'objet \code{x} doit constamment augmenter pour stocker
-une nouvelle valeur de la suite de Fibonacci.
-
-Tentons une analogie alimentaire pour cette manière de procéder. Pour
-ranger des biscuits frais sortis du four, vous prenez un premier
-biscuit et vous le rangez dans un plat ne pouvant contenir qu'un seul
-biscuit. Arrivés au second biscuit, constatant que le contenant n'est
-pas assez grand, vous sortez un plat pouvant contenir deux biscuits,
-vous changez le premier biscuit de plat et vous y rangez aussi le
-second biscuit. Arrivés au troisième biscuit, le petit manège
-recommence, et ainsi de suite jusqu'à ce que le plateau de biscuits
-soit épuisé. C'est ce que je nomme, non sans un sourire en coin, le
-Syndrome de la plaque à
-biscuits{\texttrademark}\index{syndrome@Syndrome de la plaque à
-  biscuits}\index{biscuits|see{Syndrome de la plaque à biscuits}}.
-
-Le manège décrit ci-dessus se reproduit à l'identique dans la mémoire
-de l'ordinateur, l'odeur des biscuits chauds en moins. En effet,
-l'ordinateur doit constamment allouer de la nouvelle mémoire et
-déplacer les termes déjà sauvegardés au fur et à mesure que le vecteur
-\code{x} grandit. Vous aurez compris qu'une telle façon de faire est à
-éviter absolument lorsque c'est possible --- et ça l'est la plupart du
-temps.
-
-Quand nous savons quelle sera la longueur finale d'un objet, comme
-c'est le cas dans cet exemple, il vaut mieux créer un contenant vide
-de la bonne longueur et le remplir par la suite. La fonction
-\code{fibonacci} de la \autoref{fig:application:fibonacci} évite le
-Syndrome.
-
-\begin{figure}
-\begin{Verbatim}[frame=single]
-fibonacci <- function(nterm)
-{
-    if (nterm < 1)
-        stop("'nterm' doit être supérieur ou égal à 1")
-    if (nterm == 1)
-        return(0)
-    x <- numeric(nterm)  # création du contenant
-    x[2] <- 1            # x[1] vaut déjà 0
-    for (i in seq_len(nterm - 2))
-        x[i + 2] <- x[i + 1] + x[i]
-    x
-}
-\end{Verbatim}
-  \caption{Fonction pour calculer les $n$ premiers termes de la suite
-    de Fibonacci ne souffrant pas du Syndrome de la plaque à
-    biscuits{\texttrademark}}
-  \label{fig:application:fibonacci}
-\end{figure}
-
-<<echo=FALSE>>=
-fibonacci <- function(nterm)
-{
-    if (nterm < 1)
-        stop("'nterm' doit être supérieur ou égal à 1")
-    if (nterm == 1)
-        return(0)
-    x <- numeric(nterm)  # création du contenant
-    x[2] <- 1            # x[1] vaut déjà 0
-    for (i in seq_len(nterm - 2))
-        x[i + 2] <- x[i + 1] + x[i]
-    x
-}
-@
-<<echo=TRUE>>=
-fibonacci(1)
-fibonacci(2)
-fibonacci(5)
-@
-
-Avons-nous vraiment gagné en efficacité? Le code informatique de la
-\autoref{sec:application:exemples} permet de vérifier que la seconde
-fonction est de trois à cinq fois plus rapide que la première!
 
 
 \section{Bonnes pratiques de la programmation informatique}
@@ -1219,8 +1004,8 @@ z <- sapply(x, mean)
   %
 \item Enfin, utilisez \icode{return} uniquement pour provoquer la
   sortie anticipée d'une fonction, habituellement à l'intérieur d'une
-  clause \code{if}. En d'autres termes, \code{return} n'a pas sa
-  place, en R, à la toute fin d'une fonction.
+  clause \code{if}. En d'autres termes, en R \code{return} n'a pas sa
+  place à la toute fin d'une fonction.
 \end{itemize}
 
 \subsection{Présentation du code}

@@ -88,9 +88,13 @@ apprentissages.
 \label{sec:bases:fondamentales}
 
 À sa plus simple expression, la programmation est un exercice de
-manipulation de \emph{données} à l'aide de \emph{procédures}. Un
-langage de programmation fournit au programmeur des données et des
-procédures fondamentales (ou \emph{génériques}), des manières de les
+manipulation de \emph{données} à l'aide de \emph{procédures}. Les
+données représentent ce que nous voulons manipuler et les procédures,
+les descriptions des règles pour manipuler les données.
+
+Tout langage de programmation moindrement puissant fournit au
+programmeur des expressions primitives ou \emph{génériques} (les
+unités de traitement les plus simples du langage), des manières de les
 combiner pour former des éléments composés, ainsi qu'un mécanisme
 d'abstraction permettant de nommer et de manipuler ces éléments
 composés.
@@ -98,7 +102,8 @@ composés.
 Les données fondamentales de R sont les suivantes:
 \begin{itemize}
 \item nombres réels: \code{0, 1, 2, 78.42, -1.39}, \dots;
-\item chaines de caractères: \code{"a"}, \code{"abc"}, \dots;
+\item chaines de caractères: \code{"a"}, \code{"foo"},
+  \code{"Foobar"}, \dots;
 \item valeurs booléennes: \Icode{TRUE}, \Icode{FALSE};
 \item donnée manquante: \Icode{NA};
 \item infini positif et négatif: \Icode{Inf}, \code{-Inf};
@@ -313,9 +318,10 @@ NULL + 2                   # aucun calcul possible avec néant `\labelline{bases
 \section{Commandes R}
 \label{sec:bases:commandes}
 
-Nous l'avons déjà vu, l'interaction avec l'interpréteur R se fait par
-l'intermédiaire de commandes entrées à la ligne de commande. Or, toute
-commande R est soit une \emph{expression}\index{expression}, soit une
+Nous l'avons déjà vu au \autoref{chap:presentation}, l'interaction
+avec l'interpréteur R se fait par l'intermédiaire de commandes entrées
+à la ligne de commande. Or, toute commande R est soit une
+\emph{expression}\index{expression}, soit une
 \emph{affectation}\index{affectation}.
 
 \subsection{Expression}
