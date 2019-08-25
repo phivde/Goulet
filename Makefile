@@ -53,7 +53,7 @@ TEXFILES = $(addsuffix .tex, \
 
 ## Les fichiers de script sont tous extraits des fichiers .Rnw.
 ## Certains fichiers .Rnw ne contiennent pas de fichier de script.
-SCRIPTS = $(filter-out algorithmique.R texte.R, \
+SCRIPTS = $(filter-out texte.R, \
 	               ${RNWFILES:.Rnw=.R})
 
 ## Informations de publication extraites du fichier maitre
