@@ -437,6 +437,17 @@ c(65, NA, 72, 88)          # traité comme une valeur
 NA + 2                     # tout calcul avec 'NA' donne NA
 is.na(c(65, NA))           # test si les données sont NA
 
+## Il arrive souvent de vouloir indicer spécifiquement les
+## données manquantes d'un vecteur (pour les éliminer ou pour
+## les remplacer par une autre valeur, par exemple).
+##
+## Pour ce faire, on utilise la fonction 'is.na' et l'indiçage
+## par un vecteur booléen.
+x <- c(NA, 12, 55, NA, 4)  # vecteur contenant des NA
+is.na(x)                   # positions des données manquantes
+x[!is.na(x)]               # suppression des données manquantes
+x[is.na(x)] <- 0; x        # remplacement des NA par des 0
+
 ## Valeurs infinies et indéterminée. 'Inf', '-Inf' et 'NaN'
 ## sont des noms réservés.
 1/0                        # +infini

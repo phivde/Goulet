@@ -614,13 +614,62 @@ x <- 5;                    # éviter les ';' superflus
 @
 
 
-\section{Vecteurs}
+\section{Vecteurs et arithmétique vectorielle}
 \label{sec:bases:vecteurs}
 
-En R, pratiquement, \emph{tout} est un
-vecteur\index{vecteur}. C'est aussi l'unité de base dans les calculs.
+Nous interrompons notre programmation régulière pour vous présenter
+une émission spéciale sur un type de donnée --- ou d'objet --- qui
+joue un rôle fondamental dans R: le \Index{vecteur}vecteur. Cet objet
+constitue la véritable unité de traitement de base dans le langage R.
+De plus, le langage contient des règles d'arithmétique spécifiques
+pour le vecteur qui permettent de prendre automatiquement en charge un
+vaste éventail de calculs répétitifs.
+
+Si vous avez étudié l'algèbre linéaire, vous connaissez déjà le
+concept mathématique de \index{vecteur}vecteur: un $n$-uplet de
+valeurs, souvent des coordonnées un plan cartésien. Dans R, la
+définition du vecteur est encore plus large. En fait, \emph{tout} est
+un vecteur dans R et il s'agit simplement d'une collection de données
+contigües (numériques ou non) auxquelles il est possible d'accéder
+directement par une opération d'\index{indiçage}indiçage. La
+\autoref{fig:bases:vecteur} représente schématiquement un vecteur dans
+R.
+
+\begin{figure}
+  \centering
+  \setlength{\unitlength}{5.5mm}
+  \begin{picture}(8,3)
+    \ttfamily
+    \thicklines
+    \put(1,2){\framebox(7,1){}}
+    \multiput(2,2)(1,0){6}{\line(0,1){1}}
+
+    \put(1.5,2.5){\makebox(0,0){12}}
+    \put(2.5,2.5){\makebox(0,0){8}}
+    \put(3.5,2.5){\makebox(0,0){0}}
+    \put(4.5,2.5){\makebox(0,0){19}}
+    \put(5.5,2.5){\makebox(0,0){6}}
+    \put(6.5,2.5){\makebox(0,0){19}}
+    \put(7.5,2.5){\makebox(0,0){13}}
+
+    \put(0.5,2.5){\makebox(0,0){x}}
+
+    \put(5.5,0.5){\makebox(0,0){x[5]}}
+
+    \thinlines
+    \put(5.5,1.0){\vector(0,1){0.9}}
+  \end{picture}
+  \caption{Représentation d'un vecteur et de l'opération d'indiçage}
+  \label{fig:bases:vecteur}
+\end{figure}
+
 Nous nous restreignons pour le moment aux vecteurs simples (atomiques)
-dans lesquels tous les éléments sont du même mode.
+dans lesquels tous les éléments sont du même type ou, plus
+précisément, du même \index{mode}\emph{mode}\footnote{%
+  Nous reviendrons sur le concept de mode à la
+  \autoref{sec:donnees:objets:mode}.}. %
+Les vecteurs plus généraux feront leur entrée au
+\autoref{chap:donnees}.
 
 \subsection{Création de vecteurs}
 \label{sec:bases:vecteurs:creation}
@@ -631,11 +680,11 @@ concaténation \Icode{c}.
 (x <- c(2, 5.1, 42))
 @
 
-Les fonctions \Icode{numeric}, \Icode{logical} et
-\Icode{character} permettent également de créer des vecteurs du
-mode correspondant. Les fonctions prennent en argument la longueur du
-vecteur à créer. Celui-ci contiendra des valeurs initiales
-prédéterminées.
+Les fonctions \Icode{numeric}, \Icode{logical} et \Icode{character}
+permettent également de créer des vecteurs de données numériques,
+booléennes et alphanumériques, respectivement.. Les fonctions prennent
+en argument la longueur du vecteur à créer. Celui-ci contiendra des
+valeurs initiales prédéterminées.
 <<echo=TRUE>>=
 numeric(5)
 logical(7)
@@ -643,25 +692,25 @@ character(10)
 @
 
 Il est possible --- et souvent souhaitable --- de nommer les éléments
-d'un vecteur; on dit qu'on leur attribue une \emph{étiquette}. Les
-étiquettes sont enregistrées dans l'attribut \icode{names} du
-vecteur. Il y a deux grandes façons de procéder: en spécificant les
-noms dès la création du vecteur, ou à posteriori en ajoutant
-l'attribut au vecteur.
+d'un vecteur; on dit qu'on leur attribue une \emph{étiquette}. Il y a
+deux grandes façons de procéder: en spécificant les noms dès la
+création du vecteur, ou à posteriori en ajoutant l'attribut au vecteur
+à l'aide de la fonction \Icode{names}. Celle-ci permet aussi
+d'extraire les étiquettes du vecteur.
 <<echo=TRUE>>=
-(v <- c(a = 1, b = 2, c = 5))
-names(v)
+(x <- c(a = 1, b = 2, c = 5))
+names(x)
 @
 <<echo=TRUE>>=
-(v <- c(1, 2, 5))
-names(v) <- c("a", "b", "c")
-v
+(x <- c(1, 2, 5))
+names(x) <- c("a", "b", "c")
+x
 @
 
-Si l'on tente de créer un vecteur simple avec des objets de modes
+Si vous tentez de créer un vecteur simple avec des données de modes
 différents, R effectuera une \index{conversion forcée}conversion
-forcée vers un \index{mode}mode unique. Celui-ci est choisi pour
-minimiser la perte d'information sur les objets originaux.
+forcée vers un mode unique. Celui-ci est choisi pour minimiser la
+perte d'information sur les objets originaux.
 <<echo=TRUE>>=
 c(2, TRUE, FALSE)
 c(2, FALSE, "a")
@@ -681,39 +730,40 @@ Dans un cas comme dans l'autre, il faut d'abord indicer le vecteur. Il
 existe cinq façons de le faire, toujours à l'intérieur de crochets
 \code{[~]}.
 \begin{enumerate}
-\item Avec un vecteur d'entiers positifs (extraction par position).
-  Les éléments se trouvant aux positions correspondant aux entiers
-  sont extraits du vecteur, dans l'ordre. C'est la technique la plus
-  courante.
+\item \textbf{Extraction par position} avec un vecteur d'entiers
+  positifs. Les éléments se trouvant aux positions correspondant aux
+  entiers sont extraits du vecteur, dans l'ordre. C'est la technique
+  la plus courante.
 <<echo=TRUE>>=
 x <- c(A = 2, B = 4, C = -1, D = -5, E = 8)
+x[2]
 x[c(1, 3)]
 @
-\item Avec un vecteur d'entiers négatifs (suppression par position).
-  Les éléments se trouvant aux positions correspondant aux entiers
-  négatifs sont \emph{éliminés} du vecteur.
+\item \textbf{Suppression par position} avec un vecteur d'entiers
+  négatifs. Les éléments se trouvant aux positions correspondant aux
+  entiers négatifs sont \emph{éliminés} du vecteur.
 <<echo=TRUE>>=
 x[c(-2, -3)]
 @
-\item Avec un vecteur booléen (extraction par critère). Le vecteur
-  d'indiçage doit alors être de la même longueur que le vecteur
-  indicé. Les éléments correspondant à une valeur \code{TRUE} sont
-  extraits du vecteur, alors que ceux correspondant à \code{FALSE}
-  sont éliminés.
+\item \textbf{Extraction par critère} avec un vecteur booléen. Le
+  vecteur d'indiçage doit alors être de la même longueur que le
+  vecteur indicé. Les éléments correspondant à une valeur \code{TRUE}
+  sont extraits du vecteur, alors que ceux correspondant à
+  \code{FALSE} sont éliminés.
 <<echo=TRUE>>=
 x > 0
 x[x > 0]
 @
-\item Avec un vecteur de chaines de caractères (extraction par nom).
-  Les éléments dont l'étiquette correspond à l'une des chaines sont
-  extraits du vecteur. Ce mode d'indiçage par le nom a comme principal
-  avantage de permettre l'extraction d'éléments d'un vecteur
-  indépendamment de leur position dans celui-ci.
+\item \textbf{Extraction par nom} avec un vecteur de chaines de
+  caractères. Les éléments dont l'étiquette correspond à l'une des
+  chaines sont extraits du vecteur. Cette méthode d'indiçage a
+  comme principal avantage de permettre l'extraction d'éléments d'un
+  vecteur indépendamment de leur position dans celui-ci.
 <<echo=TRUE>>=
 x[c("B", "D")]
 @
-\item L'indice est laissé vide. Tous les éléments du vecteur sont
-  alors sélectionnés.
+\item \textbf{Sélection de tous les éléments} en laissant l'indice
+  vide.
 <<echo=TRUE>>=
 x[]
 @
@@ -734,7 +784,10 @@ x[]
 
 L'arithmétique vectorielle de R constitue l'une des grandes forces du
 langage. Elle permet de réaliser une grande variété de calculs sans
-avoir recours à des procédures itératives (boucles).
+avoir recours à des procédures itératives ou récursives. En soi, il
+s'agit d'une couche d'abstraction directement intégrée au langage.
+Pour prétendre savoir programmer en R, vous devez absolument tirer
+profit de l'arithmétique vectorielle.
 
 Les procédures fondamentales de la \autoref{sec:bases:fondamentales}
 peuvent toutes opérer sur les vecteurs en effectuant les opérations
@@ -782,8 +835,8 @@ taille d'un objet plus court
   valide ne signifie donc pas qu'elle effectue le bon calcul!}
 
 Il tombe sous le sens que les opérations arithmétiques sont conçues
-pour des arguments de \index{mode}mode \icode{numeric} et les
-opérations logiques, pour des arguments de mode \icode{logical}. Si un
+pour des arguments numériques et les
+opérations logiques, pour des arguments booléens. Si un
 argument n'est pas du bon mode, R effectuera une \index{conversion
   forcée}conversion forcée vers le mode approprié. En particulier, les
 valeurs booléennes \code{TRUE} et \code{FALSE} se verront converties
@@ -795,6 +848,12 @@ l'inverse, dans les opérations logiques, $0$ est converti en
 2 + c(TRUE, FALSE)
 c(0, 5, -1) & TRUE
 @
+
+\gotorbox{La présente section est très importante pour la suite.
+  Étudiez donc en y portant une attention toute particulière les
+  lignes \reflines{bases:vecteurs} du fichier de script
+  \code{\scriptfilename} reproduit à la
+  \autoref{sec:bases:exemples}.}
 
 <<script, results=hide>>=
 ###
@@ -808,10 +867,13 @@ names(x)                             # extraire les noms
 names(x) <- letters[1:length(x)]     # changer les noms
 x                                    # nouveau vecteur
 
+## Attention aux chaines de caractères! Dans R, une chaine de
+## caractères n'est pas un vecteur de caractères. Une chaine
+## est un vecteur de longueur 1 comptant plusieurs caractères.
+## Un vecteur peut contenir plusieurs chaines de caractères.
 length("foobar")           # *une* chaine de 6 caractères
 c("foo", "bar")            # *deux* chaines de 3 caractères
 length(c("foo", "bar"))    # longueur de 2
-
 
 ## La fonction 'vector' sert à initialiser des vecteurs avec
 ## des valeurs prédéterminées. Elle compte deux arguments: le
@@ -854,22 +916,6 @@ x["c"]                     # extraction par nom
 x[]                        # tous les éléments
 x[numeric(0)]              # différent d'indice vide
 
-## Pour le prochain bloc d'exemples, nous remplaçons deux
-## données du vecteur 'x' par NA avec la construction 'x[i] <-
-## y'.
-x[c(1, 4)] <- NA           # manière usuelle
-"[<-"(x, c(1, 4), NA)      # idem, mais très peu usité
-
-## Il arrive souvent de vouloir indicer spécifiquement les
-## données manquantes d'un vecteur (pour les éliminer ou pour
-## les remplacer par une autre valeur, par exemple).
-##
-## Pour ce faire, on utilise la fonction 'is.na' et l'indiçage
-## par un vecteur booléen.
-is.na(x)                   # positions des données manquantes
-x[!is.na(x)]               # suppression des données manquantes
-x[is.na(x)] <- 0; x        # remplacement des NA par des 0
-
 ## Laissons tomber les noms de l'objet.
 names(x) <- NULL           # suppression de l'attribut 'names'
 
@@ -898,8 +944,8 @@ x[2.6]                     # fractions tronquées vers 0
 c(2, 6, 8) + c(1, 4, 9)    # addition de deux vecteurs
 c(0, 3, -1, 4)^2           # élévation à une puissance
 
-## Dans les règles de l'arithmétique vectorielle, les
-## longueurs des vecteurs doivent toujours concorder.
+## Dans les règles de l'algèbre vectorielle, les longueurs des
+## vecteurs doivent toujours concorder.
 ##
 ## R permet plus de flexibilité en recyclant les vecteurs les
 ## plus courts dans une opération.
@@ -929,12 +975,6 @@ c(5, 3) + c(TRUE, FALSE)   # équivalent à c(5, 3) + c(1, 0)
 0:5 | 5:0
 !0:5                       #-*- `\labelline{bases:vecteurs:fin}`
 @
-
-\gotorbox{La présente section est très importante pour la suite.
-  Étudiez donc en y portant une attention toute particulière les
-  lignes \reflines{bases:vecteurs} du fichier de script
-  \code{\scriptfilename} reproduit à la
-  \autoref{sec:bases:exemples}.}
 
 
 \section{Appel d'une fonction}
