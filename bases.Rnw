@@ -357,8 +357,97 @@ faire une expression composée. Celle-ci est évaluée de gauche à
 droite, à moins que des parenthèses ne viennent changer l'ordre
 d'évaluation, comme en mathématiques.
 <<echo=TRUE>>=
-(2 + ((2 + 4 * 6) * (3 + 5 + 7)))/2
+(2 + ((2 + (4 * 6)) * (3 + 5)))/2
 @
+
+Examinons un peu plus en détail comment sont évaluées les expressions
+composées. L'exercice permet de faire appel aux notions d'algorithmique
+du \autoref{chap:algorithmes}. Pour évaluer une expression composée,
+l'interpréteur R doit suivre la procédure suivante:
+\begin{enumerate}
+\item Évaluer les sous-expressions de l'expression composée.
+\item Appliquer de gauche à droite sur la sous-expression l'opération
+  qui prend les autres sous-expressions en opérandes.
+\end{enumerate}
+
+Vous aurez reconnu ici une procédure
+\index{recursion@récursion}récursive puisque la première étape
+consiste à appliquer la procédure elle-même sur les sous-expressions.
+Reprenons l'expression composée ci-dessus. Nous pouvons représenter
+graphiquement la procédure d'évaluation à l'aide d'un arbre, comme à
+la \autoref{fig:bases:evaluation}. Chaque combinaison y est
+représentée par un nœud, alors que les branches qui partent d'un nœud
+correpondent à l'opérateur et aux opérandes de la combinaison. Les
+nœuds terminaux --- desquels ne partent aucune branche ---
+représentent des nombres ou des opérateurs. En examinant l'arbre de la
+\autoref{fig:bases:evaluation}, vous pouvez aisément imaginer que les
+opérations percolent du bas vers le haut.
+
+\tipbox{Une manière alternative de concevoir l'ordre d'évaluation
+  d'une expression composée est: de l'intérieur vers l'extérieur. En
+  général, les opérations les plus basses dans l'arbre d'évaluation
+  sont également situées vers le centre de l'expression.}
+
+\begin{figure}
+  \centering
+  \setlength{\unitlength}{4mm}
+  \begin{picture}(14,22)
+    \thicklines
+    \put(4,0){\makebox(0,1){\texttt{4}}}
+    \put(6,0){\makebox(0,1){\texttt{*}}}
+    \put(8,0){\makebox(0,1){\texttt{6}}}
+    \put (6,2.9){\circle*{0.3}}
+    \Line(6,2.9)(4,1.1)
+    \Line(6,2.9)(6,1.1)
+    \Line(6,2.9)(8,1.1)
+
+    \put(2,3){\makebox(0,1){\texttt{2}}}
+    \put(4,3){\makebox(0,1){\texttt{+}}}
+    \put(6,3){\makebox(0,1){\texttt{24}}}
+    \put (4,5.9){\circle*{0.3}}
+    \Line(4,5.9)(2,4.1)
+    \Line(4,5.9)(4,4.1)
+    \Line(4,5.9)(6,4.1)
+
+    \put(10,3){\makebox(0,1){\texttt{3}}}
+    \put(12,3){\makebox(0,1){\texttt{+}}}
+    \put(14,3){\makebox(0,1){\texttt{5}}}
+    \put (12,5.9){\circle*{0.3}}
+    \Line(12,5.9)(10,4.1)
+    \Line(12,5.9)(12,4.1)
+    \Line(12,5.9)(14,4.1)
+
+    \put( 4,6){\makebox(0,1){\texttt{26}}}
+    \put( 8,6){\makebox(0,1){\texttt{*}}}
+    \put(12,6){\makebox(0,1){\texttt{8}}}
+    \put (8,9.9){\circle*{0.3}}
+    \Line(8,9.9)( 4,7.1)
+    \Line(8,9.9)( 8,7.1)
+    \Line(8,9.9)(12,7.1)
+
+    \put(0,10){\makebox(0,1){\texttt{2}}}
+    \put(4,10){\makebox(0,1){\texttt{+}}}
+    \put(8,10){\makebox(0,1){\texttt{208}}}
+    \put (4,14.9){\circle*{0.3}}
+    \Line(4,14.9)(0,11.1)
+    \Line(4,14.9)(4,11.1)
+    \Line(4,14.9)(8,11.1)
+
+    \put( 4,15){\makebox(0,1){\texttt{210}}}
+    \put(10,15){\makebox(0,1){\texttt{/}}}
+    \put(16,15){\makebox(0,1){\texttt{2}}}
+    \put (10,20.9){\circle*{0.3}}
+    \Line(10,20.9)( 4,16.1)
+    \Line(10,20.9)(10,16.1)
+    \Line(10,20.9)(16,16.1)
+
+    \put(10,21){\makebox(0,1){\texttt{105}}}
+  \end{picture}
+  \caption{Représentation en arbre de l'évaluation d'une expression
+    composée}
+  \label{fig:bases:evaluation}
+\end{figure}
+
 
 \subsection{Affectation}
 \label{sec:bases:commandes:affectation}
@@ -368,18 +457,18 @@ mais le résultat est stocké dans un \emph{objet} (ou \emph{variable})
 dans %
 l'\index{espace de travail}espace de travail %
 et rien n'est affiché à l'écran. Tel que mentionné précédemment, le
-symbole d'affectation est \icode{<-} --- c'est-à-dire les deux
-caractères \verb|<| et \verb|-| placés obligatoirement l'un à la suite
-de l'autre --- et le symbole est évalué de droite à gauche. Ainsi,
-toute expression est évaluée avant que son résultat ne soit placé dans
-l'objet.
+symbole d'affectation est \icode{<-}, c'est-à-dire les deux caractères
+\verb|<| et \verb|-| placés obligatoirement l'un à la suite de
+l'autre, et l'opération d'affectation est évaluée de droite à gauche.
+Ainsi, toute expression est évaluée avant que son résultat ne soit
+placé dans l'objet.
 <<echo=TRUE>>=
 a <- 5
 a
 b <- a
 b
-x <- 2 + 3
-x
+circ <- 2 * pi * 10
+circ
 @
 
 Pour affecter le résultat d'un calcul dans un objet et simultanément
@@ -388,7 +477,7 @@ parenthèses pour ainsi créer une nouvelle expression\footnote{%
   En fait, cela devient un appel à l'opérateur \code{"("} qui ne fait
   que retourner son argument.}.
 <<echo=TRUE>>=
-(a <- 2 + 3)
+(circ <- 2 * pi * 10)
 @
 
 Le symbole d'affectation inversé \icode{->} existe aussi, mais il
@@ -400,6 +489,31 @@ est rarement utilisé.
     valeur} dans les appels de fonction. Les règles de syntaxe de R
   commandent d'utiliser l'opérateur \code{<-} pour l'affectation,
   point.}
+
+J'ai mentionné au début de la \autoref{sec:bases:fondamentales} qu'un
+langage de programmation doit fournir un mécanisme d'abstraction pour
+utiliser les éléments composés. Une première technique d'abstraction
+de R --- la plus simple en fait --- est cette possibilité de définir
+un objet qui contient le résultat d'une expression. Par exemple, une
+fois que nous avons calculé la circonférence d'un cercle et stocké sa
+valeur dans un objet \code{circ}, comme ci-dessus, nous pouvons en
+quelque sorte «oublier» comment nous avons obtenu cette valeur pour
+nous concentrer sur l'utilisation de celle-ci à l'intérieur d'une
+autre procédure, et ainsi de suite jusqu'à obtenir un programme très
+complexe. Par sa nature interactive, R encourage un tel développement
+pas à pas des programmes. Cette approche fait aussi en sorte qu'un
+programme (ou script) R contient souvent plusieurs objets et
+procédures.
+
+L'interpréteur R doit à tout moment associer correctement les valeurs
+et les noms d'objets. Il y arrive par le biais d'un
+\index{dictionnaire}dictionnaire et d'un
+\index{environnement}environnement. La mécanique d'appariement demeure
+généralement transparente, mais au fur et à mesure que vous
+progresserez de votre apprentissage du langage, le rôle de
+l'environnement deviendra plus important. Nous étudierons le concept
+au \autoref{chap:environnement}.
+
 
 \subsection{Regroupement de commandes}
 \label{sec:bases:commandes:regroupement}
@@ -417,11 +531,11 @@ point-virgule.
 a <- 5; a + 2
 @
 
-On peut regrouper plusieurs commandes en une seule expression en les
-entourant d'accolades \Icode{\{~\}}. Le résultat du regroupement
-est la valeur de la \emph{dernière} commande. Par conséquent, si le
-regroupement se termine par une affectation, aucune valeur n'est
-retournée ni affichée à l'écran.
+Pour regrouper plusieurs commandes et en former une seule expression,
+il faut entourer les commandes d'accolades \Icode{\{~\}}. Le résultat
+du regroupement est la valeur de la \emph{dernière} commande. Par
+conséquent, si le regroupement se termine par une affectation, aucune
+valeur n'est retournée ni affichée à l'écran.
 <<echo=TRUE>>=
 {
     a <- 2 + 3
@@ -435,6 +549,14 @@ retournée ni affichée à l'écran.
     b <- a
 }
 @
+
+Les accolades joueront un rôle très important dans la construction des
+fonctions et des structures de contrôle. Je vous renverrai ici en
+temps et lieu pour vous rappeler les règles de leur utilisation.
+
+\gotorbox{Étudiez les lignes \reflines{bases:commandes}
+  du fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:bases:exemples}.}
 
 <<script, results=hide>>=
 ###
@@ -462,7 +584,7 @@ gamma(5)                   # fonction gamma
 pi                         # constante numérique intégrée
 letters                    # chaîne de caractères intégrée
 LETTERS                    # version en majuscules
-matrix                     # fonction
+matrix                     # fonction interne
 
 ## On crée des nouveaux objets en leur affectant une valeur
 ## avec l'opérateur '<-'. *Ne pas* utiliser '=' pour
@@ -490,10 +612,6 @@ x <- 5;                    # éviter les ';' superflus
 }                          # fin du groupe et résultat
 {x <- 5; y <- 2; x + y}    # valide, mais redondant `\labelline{bases:commandes:fin}`
 @
-
-\gotorbox{Étudiez les lignes \reflines{bases:commandes}
-  du fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:bases:exemples}.}
 
 
 \section{Vecteurs}
