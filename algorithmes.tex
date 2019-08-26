@@ -441,7 +441,7 @@ passe d'une clause «sinon».\footnote{%
   contient une instruction «Retourner».}
 
 \begin{algorithmebis}
-  \label{algo:algorithmes:abs:simplifie}
+  \label{algo:algorithmes:abs:simplifie:bis}
   Calculer la valeur absolue d'un nombre réel $x$.
 
   \noindent
@@ -1266,8 +1266,11 @@ Fin PGCD
           (suite)}Fibonacci pour un entier non négatif $n$.
         \begin{Schunk}
 \begin{Verbatim}
-Fib(entier n) Si (n = 0), retourner 0 Si (n = 1), retourner 1
-Retourner Fib(n - 2) + Fib(n - 1) Fin Fib
+Fib(entier n)
+  Si (n = 0), retourner 0
+  Si (n = 1), retourner 1
+  Retourner Fib(n - 2) + Fib(n - 1)
+Fin Fib
 \end{Verbatim}
         \end{Schunk}
       \end{algorithme}
