@@ -47,8 +47,8 @@ source("Stangle.R")        # lancement de Stangle
 \end{objectifs}
 
 C'est dans ce chapitre que nous débutons réellement l'apprentissage de
-la programmation. Je l'avoue d'entrée de jeu: la présentation a
-fortement été influencée par l'ouvrage magistral de
+la programmation. Je l'avoue d'entrée de jeu, la présentation est
+fortement influencée par l'ouvrage magistral de
 \cite{Sussman:scheme:1996}.
 
 Les humains créent des programmes informatiques pour contrôler, à
@@ -72,16 +72,8 @@ que l'on appelle couramment une «expression intraduisible».
 Le langage de programmation étudié ici est le R. Sa syntaxe, celle du
 langage \index{S}S, s'apparente au \index{C}C. En revanche, la
 sémantique de R s'inspire du paradigme de la programmation
-fonctionnelle, ce qui lui confère de plus grandes affinités avec le
+fonctionnelle, ce qui lui confère plus d'affinités avec le
 \index{Lisp}Lisp et \index{APL}l'APL.
-
-Ce chapitre introduit des notions de base du langage R telles que
-l'expression, l'affectation, et l'objet. Le concept de vecteur se
-trouvant au cœur du langage, nous faisons une large place à la
-création et à la manipulation des vecteurs. Après avoir présenté les
-règles d'appels d'une fonction, le chapitre se termine par
-l'introduction de fonctions internes utiles à ce stade de vos
-apprentissages.
 
 
 \section{Données et procédures fondamentales}
@@ -682,7 +674,7 @@ concaténation \Icode{c}.
 
 Les fonctions \Icode{numeric}, \Icode{logical} et \Icode{character}
 permettent également de créer des vecteurs de données numériques,
-booléennes et alphanumériques, respectivement.. Les fonctions prennent
+booléennes et alphanumériques, respectivement. Les fonctions prennent
 en argument la longueur du vecteur à créer. Celui-ci contiendra des
 valeurs initiales prédéterminées.
 <<echo=TRUE>>=
@@ -714,6 +706,24 @@ perte d'information sur les objets originaux.
 <<echo=TRUE>>=
 c(2, TRUE, FALSE)
 c(2, FALSE, "a")
+@
+
+Vous pouvez aussi forcer la conversion d'un vecteur d'un mode vers un
+autre avec les fonctions \Icode{as.numeric}, \Icode{as.logical} et
+\Icode{as.character}.
+<<echo=TRUE>>=
+as.logical(1)
+as.numeric(FALSE)
+as.character(42)
+@
+
+Dans le même ordre d'idées, les fonctions \Icode{is.numeric},
+\Icode{is.logical} et \Icode{is.character} permettent de valider si un
+vecteur est d'un certain mode.
+<<echo=TRUE>>=
+is.numeric(c(42, NA, 3))
+is.logical(c(42, NA, 3))
+is.character(c("42", NA, "3"))
 @
 
 \subsection{Indiçage}
@@ -834,9 +844,9 @@ taille d'un objet plus court
   très peu d'erreurs de longueur dans R. Qu'une expression soit
   valide ne signifie donc pas qu'elle effectue le bon calcul!}
 
-Il tombe sous le sens que les opérations arithmétiques sont conçues
+Il tombe sous le sens que les opérateurs arithmétiques sont conçus
 pour des arguments numériques et les
-opérations logiques, pour des arguments booléens. Si un
+opérateurs logiques, pour des arguments booléens. Si un
 argument n'est pas du bon mode, R effectuera une \index{conversion
   forcée}conversion forcée vers le mode approprié. En particulier, les
 valeurs booléennes \code{TRUE} et \code{FALSE} se verront converties
@@ -896,6 +906,12 @@ c(5, TRUE, FALSE)          # conversion en mode 'numeric'
 c(5, "z")                  # conversion en mode 'character'
 c(TRUE, "z")               # conversion en mode 'character'
 c(5, TRUE, "z")            # conversion en mode 'character'
+
+## Les fonctions 'as.numeric', 'as.logical' et 'as.character' sont
+## utiles pour forcer la conversion d'un mode vers un autre.
+as.logical(1)              # conversion en booléen
+as.numeric(TRUE)           # conversion en numérique
+as.character(1)            # conversion en chaine de caractères
 
 ### INDIÇAGE
 
@@ -977,14 +993,213 @@ c(5, 3) + c(TRUE, FALSE)   # équivalent à c(5, 3) + c(1, 0)
 @
 
 
-\section{Appel d'une fonction}
-\label{sec:bases:appel}
+\section{Fonctions}
+\label{sec:bases:fonctions}
 
-Au-delà des opérateurs de base, le langage R compte un très grand
-nombre (des milliers!) de fonctions internes. Cette section passe en
-revue les règles d'appel d'une fonction. Nous étudierons au
-\autoref{chap:fonctions} comment composer vos propres fonctions.
-Celles-ci obéiront aux mêmes règles d'appel.
+À ce stade, nous savons comment utiliser les opérateurs de base du
+\autoref{tab:bases:operateurs} ainsi que l'arithmétique vectorielle.
+Le langage R serait toutefois très restreint s'il ne nous donnait pas
+aussi accès à des fonctions\footnote{%
+  Le nom que nous donnons dorénavant au concept de procédure.} %
+plus élaborées. Or, le langage R compte justement un très grand nombre
+(des milliers!) de fonctions internes. Vous en avez déjà rencontré
+quelques unes dans les exemples, comme \icode{exp} ou \icode{cos}, et vous
+en découvrirez de nouvelles à la \autoref{sec:bases:internes}. Chose
+plus importante, R nous permet aussi de définir nos propres fonctions.
+C'est là l'une des techniques d'abstraction les plus puissantes du
+langage puisqu'elle permet de faire référence par un seul nom à toute
+une suite d'opérations.
+
+Cette section explique comment définir vos propres fonctions et
+retourner des résultats, puis comment faire appel à vos fonctions ou
+aux fonctions internes.
+
+\subsection{Programmation fonctionnelle}
+\label{sec:bases:fonctions:paradigme}
+
+Nous adoptons en bonne partie avec le langage R le paradigme de la
+programmation fonctionnelle. Tel qu'expliqué sommairement à la
+\autoref{sec:informatique:concepts:paradigmes}, dans ce paradigme un programme
+est constitué d'une suite d'appels de fonctions.
+
+L'approche de programmation fonctionnelle dans R fait aussi en sorte
+qu'une fonction est traitée comme n'importe quel autre objet. Entre
+autres choses, cela signifie que:
+\begin{itemize}
+\item le contenu d'une fonction (son code source) est toujours
+  accessible;
+\item une fonction peut accepter en argument une autre fonction;
+\item une fonction peut retourner une fonction comme résultat;
+\item l'utilisateur peut définir de nouvelles fonctions.
+\end{itemize}
+
+Étudions un exemple très simple, pas véritablement utile en pratique
+au-delà de ses vertus pédagogiques. Nous voulons élever un
+nombre au carré. Pour faire ce calcul à répétition et de manière
+abstraite --- c'est-à-dire, sans avoir à se demander à chaque fois
+comment le calcul est fait ---, nous définissons une nouvelle
+fonction \code{square}.
+<<echo=TRUE>>=
+square <- function(x) x * x
+@
+
+L'expression ci-dessus peut se lire ainsi:
+
+\begin{center}
+  \setlength{\unitlength}{7mm}
+  \begin{picture}(18,4.2)
+    \linethickness{1pt}
+
+    \put(0,1){\code{square}}     \put(0,3.5){\code{square}}
+    \put(2.2,1){est}             \put(2.3,3.5){\code{<-}}
+    \put(3.2,1){une fonction}    \put(3.5,3.5){\code{function}}
+    \put(6.6,1){
+      \begin{minipage}[t]{5.714\unitlength} % ~= 40mm
+        \centering
+        qui prend en argument
+        une valeur \code{x}
+      \end{minipage}}           \put(8.9,3.5){\code{( x )}}
+    \put(12.8,1){%
+      \begin{minipage}[t]{4.571\unitlength} % ~= 32mm
+        \centering
+        et la multiplie par elle-même.
+      \end{minipage}}           \put(14.4,3.5){\code{x * x}}
+
+    \put(0.9,3.2){\vector(0,-1){1.6}}
+    \put(2.6,3.2){\vector(0,-1){1.6}}
+    \put(4.6,3.2){\vector(0,-1){1.6}}
+    \put(9.7,3.2){\vector(0,-1){1.6}}
+    \put(15.2,3.2){\vector(0,-1){1.6}}
+  \end{picture}
+\end{center}
+
+Nous pouvons ensuite utiliser la fonction \code{square} de manière
+intuitive comme n'importe quelle autre fonction dans R (nous verrons
+les règles d'appel en détail à la
+\autoref{sec:bases:fonctions:appel}).
+<<echo=TRUE>>=
+square(5)
+@
+
+L'approche de programmation fonctionnelle fait en sorte que les appels
+de fonctions peuvent être placés les uns à la suite des autres, comme
+la composition de fonctions $g \circ f$ en mathématiques. Pour élever
+un nombre à la puissance $4$, nous pouvons appliquer deux fois la
+fonction \code{square} à un argument.
+<<echo=TRUE>>=
+square(square(5))
+@
+
+\subsection{Définition d'une fonction}
+\label{sec:bases:fonctions:definition}
+
+Comme nous l'avons vu dans l'exemple ci-dessus, on définit une
+nouvelle \index{fonction!définition}fonction dans R à l'aide de la
+fonction \Icode{function}. La syntaxe exacte de la définition d'une
+fonction est la suivante:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+\meta{nom} <- function(\meta{arguments}) \meta{corps}
+\end{Verbatim}
+\end{Schunk}
+
+\begin{itemize}
+\item \meta{nom} est le nom de la fonction (les règles pour les noms
+  de fonctions sont les mêmes que celles présentées à la
+  \autoref{sec:donnees:objets:noms} pour tout autre objet).
+
+  Nous souhaitons généralement attribuer un nom à une fonction, ne
+  serait-ce que pour pouvoir la réutiliser. Cela dit, c'est tout à
+  fait optionnel. En effet, l'appel à \icode{function} retourne déjà
+  une fonction et si aucun nom n'est attribué à cet objet, on obtient
+  ce qui est appelé une \index{fonction!anonyme}\emph{fonction
+    anonyme}. Les fonctions anonymes sont particulièrement utiles avec
+  les fonctions d'application (\autoref{chap:donnees}).
+
+\item \meta{arguments} est la liste des arguments formels de la
+  fonction, séparés par des virgules.
+
+  Une fonction peut n'avoir aucun \index{fonction!argument
+    formel}argument formel ou plusieurs. Il n'y a pas de limite
+  pratique au nombre d'arguments formels que peut avoir une fonction.
+  Les arguments peuvent être des symboles, des constructions de la
+  forme \code{symbole = défaut}, ou encore l'argument formel spécial
+  `\icode{...}'.
+
+  Lorsqu'un symbole seul est utilisé comme argument, il indique le nom
+  de celui-ci. L'objet de ce nom sera disponible à l'intérieur de la
+  fonction.
+<<echo=TRUE>>=
+f <- function(x) 2 * x + 1
+f(2)
+@
+
+  La construction \code{symbole = défaut} indique la valeur par défaut
+  de l'argument \code{symbole}, c'est-à-dire la valeur de l'argument si
+  aucune n'est spécifiée dans l'appel de la fonction.
+<<echo=TRUE>>=
+f <- function(x = 0) 2 * x + 1
+f(2)
+f()
+@
+
+  Enfin, l'argument spécial `\Icode{...}' peut contenir un nombre
+  arbitraire d'éléments. La fonction y ayant recours se trouve donc à
+  accepter un nombre variable d'arguments. On utilise généralement
+  `\code{...}' pour passer des arguments tels quels à une autre fonction
+  qui, elle, saura quoi faire de ceux-ci. Vous trouverez un
+  meilleur exemple à la \autoref{sec:bases:exemples} que ce que nous
+  pourrions faire ici en quelques lignes.
+
+\item \meta{corps} est une expression ou un groupe d'expressions
+  réunies par des accolades, tel qu'expliqué à la
+  \autoref{sec:bases:commandes:regroupement}.
+\end{itemize}
+
+\subsection{Retourner des résultats}
+\label{sec:bases:fonctions:resultats}
+
+La plupart des fonctions sont écrites dans le but de retourner un
+\index{fonction!résultat}résultat. Or, les règles d'interprétation
+d'un regroupement d'expressions présentées à la
+\autoref{sec:bases:commandes:regroupement} s'appliquent ici au corps
+de la fonction: une fonction retourne tout simplement le résultat de
+sa \emph{dernière expression}.
+
+Ainsi, on évitera que la dernière expression soit une affectation. En
+effet, la fonction ne retournerait alors rien et nous ne pourrions
+utiliser une construction de la forme \code{x <- f()} pour affecter le
+résultat de la fonction à un objet.
+
+Les fonctions suivantes permettent retourner un résultat, un
+avertissement ou un message d'erreur avant même la fin d'une fonction.
+Vous les utiliserez à peu près exclusivement à l'intérieur
+d'expressions conditionnelles.
+\begin{ttscript}{warning}
+\item[\Icode{return}] Force la sortie immédiate de la fonction et
+  retourne l'objet en argument.
+\item[\Icode{stop}] Force la sortie immédiate de la fonction avec le
+  message d'\index{erreur}erreur donné en argument.
+\item[\Icode{warning}] Envoie le message
+  d'\index{avertissement}avertissement donné en argument à R.
+  L'exécution de la fonction se poursuit normalement. L'effet dépend
+  de la valeur de \code{options("warn")}. Par défaut, tous les
+  avertissements sont affichés à la console après l'exécution de la
+  fonction.
+\end{ttscript}
+
+\cautionbox{L'utilisation de \code{return} à la toute fin d'une
+  fonction est tout à fait inutile et c'est considéré comme du mauvais
+  style en R.}
+
+
+\subsection{Appel d'une fonction}
+\label{sec:bases:fonctions:appel}
+
+Je m'en suis remis à votre bonne intuition jusqu'ici lorsqu'il
+s'agissait d'appeler une fonction dans R. Précisons maintenant les
+règles d'appel, règles auxquelles obéissent autant les fonctions
+internes que vos propres fonctions.
 
 Un \index{fonction!appel}appel de fonction est constitué du nom de
 l'objet suivi obligatoirement de parenthèses \code{(~)} et, le cas
@@ -995,30 +1210,27 @@ l'objet suivi obligatoirement de parenthèses \code{(~)} et, le cas
 \end{Verbatim}
 \end{Schunk}
 
-Regardons cela de plus près. À des fins d'illustration, j'ai défini
-une petite fonction \code{foo} qui calcule la quantité
+Regardons cela de plus près. À des fins d'illustration, je définis
+une petite fonction \code{dist} qui calcule la quantité
 \begin{equation*}
   d = \sum_{i = 1}^n |x_i - y_i|^p
 \end{equation*}
 pour deux vecteurs $\mat{x} = (x_1, \dots, x_n)$ et
-$\mat{y} = (y_1, \dots, y_n)$ et une valeur $p$. La définition de la
-fonction apparait ci-dessous.
-<<echo=FALSE>>=
-foo <- function(x, y = 0, p = 2) sum(abs(x - y)^p)
-@
+$\mat{y} = (y_1, \dots, y_n)$ et une valeur $p$.
 <<echo=TRUE>>=
-foo
+dist <- function(x, y = 0, p = 2) sum(abs(x - y)^p)
 @
 
 Vous remarquerez que la fonction fait elle-même appel à deux fonctions
 internes (\icode{sum} et \icode{abs}) ainsi qu'à deux opérateurs de base
-(\code{-} et \verb|^|).
+(\code{-} et \code{\string^}). Elle repose également sur l'arithmétique
+vectorielle pour calculer toutes les différences $x_i - y_i$.
 
 La fonction compte trois arguments nommés \code{x}, \code{y} et
 \code{p}. La construction \code{symbole = défaut} indique la valeur
 par défaut de l'argument \code{symbole}, c'est-à-dire la valeur de
 l'argument si aucune n'est spécifiée dans l'appel de la fonction.
-Ainsi, seul le premier argument de \code{foo} n'a pas de valeur par
+Ainsi, seul le premier argument de \code{dist} n'a pas de valeur par
 défaut. La valeur par défaut de l'argument \code{y} est $0$ et celle
 de l'argument \code{p} est $2$.
 
@@ -1038,27 +1250,163 @@ Il est beaucoup plus prudent et \emph{fortement recommandé} de
 spécifier les arguments par leur nom, surtout après les deux ou trois
 premiers arguments.
 <<echo=TRUE>>=
-foo(c(3, 2), c(1, 1), 2)
-foo(y = c(1, 1), c(3, 2), 2)
-foo(y = c(1, 1), p = 2, c(3, 2))
+dist(c(3, 2), c(1, 1), 2)
+dist(y = c(1, 1), c(3, 2), 2)
+dist(y = c(1, 1), p = 2, c(3, 2))
 @
 
 Il n'est pas nécessaire de spécifier une valeur pour un argument
 disposant d'une valeur par défaut. Cependant, si l'on omet un tel
 argument, il faudra nommer les arguments qui suivent, le cas échéant.
 <<echo=TRUE>>=
-foo(c(3, 2))
-foo(c(3, 2), p = 3)
+dist(c(3, 2))
+dist(c(3, 2), p = 3)
 @
 
-\citet[section~4.3.2]{R-lang} fournit les détails sur le mécanisme de
-pairage entre les arguments d'une fonction et des valeurs qui lui sont
+Le manuel officiel \emph{R Language Definition}
+\citep[section~4.3.2]{R-lang} fournit les détails sur le mécanisme de
+pairage entre les arguments d'une fonction et les valeurs qui lui sont
 passées.
+
+\gotorbox{Étudiez les lignes \reflines{bases:fonctions} du fichier de
+  script \code{\scriptfilename} reproduit à la
+  \autoref{sec:bases:exemples} pour des exemples additionnels de
+  définitions de fonctions et, surtout, d'utilisation des fonctions
+  anonymes et de l'argument `\code{...}`.}
 
 <<script, results=hide>>=
 ###
-### APPEL D'UNE FONCTION   `\labelline{bases:appel}`
+### FONCTIONS  `\labelline{bases:fonctions}`
 ###
+
+## PROGRAMMATION FONCTIONNELLE
+
+## Les fonctions sont des objets comme les autres dans R. Cela
+## signifie que:
+##
+## - le contenu d'une fonction (son code source) est toujours
+##   accessible;
+## - une fonction peut accepter en argument une autre
+##   fonction;
+## - une fonction peut retourner une fonction comme résultat;
+## - l'utilisateur peut définir de nouvelles fonctions.
+seq                        # contenu est le code source
+mode(seq)                  # mode est "function"
+rep(seq(5), 3)             # fonction argument d'une fonction
+lapply(1:5, seq)           # idem
+mode(ecdf(rpois(100, 1)))  # résultat de ecdf est une fonction
+ecdf(rpois(100, 1))(5)     # évaluation en un point
+c(seq, rep)                # vecteur de fonctions!
+
+## DÉFINITION D'UNE FONCTION
+
+## On définit une nouvelle fonction avec la syntaxe suivante:
+##
+##   <nom> <- function(<arguments>) <corps>
+##
+## où
+##
+## - 'nom' est le nom de la fonction;
+## - 'arguments' est la liste des arguments, séparés par des
+##    virgules;
+## - 'corps' est le corps de la fonction, soit une expression
+##   ou un groupe d'expressions réunies par des accolades { }.
+##
+## Une fonction retourne toujours la valeur de la *dernière*
+## expression de celle-ci.
+##
+## Voici un exemple trivial.
+square <- function(x) x * x
+square(10)
+
+## Supposons que l'on veut écrire une fonction pour calculer
+##
+##   f(x, y) = x (1 + xy)^2 + y (1 - y) + (1 + xy)(1 - y).
+##
+## Deux termes sont répétés dans cette expression. On a donc
+##
+##   a = 1 + xy
+##   b = 1 - y
+##
+## et f(x, y) = x a^2 + yb + ab.
+##
+## Une manière élégante de procéder au calcul de f(x, y) qui
+## adopte l'approche fonctionnelle fait appel à une fonction
+## intermédiaire à l'intérieur de la première fonction. (Il y
+## a ici des enjeux de «portée lexicale» sur lesquels nous
+## reviendrons en détail dans un chapitre ultérieur.)
+f <- function(x, y)
+{
+    g <- function(a, b)
+        x * a^2 + y * b + a * b
+    g(1 + x * y, 1 - y)
+}
+f(2, 3)
+
+## FONCTION ANONYME
+
+## Comme le nom du concept l'indique, une fonction anonyme est
+## une fonction qui n'a pas de nom. C'est parfois utile pour
+## des fonctions courtes utilisées dans une autre fonction.
+##
+## Reprenons l'exemple précédent en généralisant les
+## expressions des termes 'a' et 'b'. La fonction 'f'
+## pourrait maintenant prendre en arguments 'x', 'y' et des
+## fonctions pour calculer 'a' et 'b'.
+f <- function(x, y, fa, fb)
+{
+    g <- function(a, b)
+        x * a^2 + y * b + a * b
+    g(fa(x, y), fb(x, y))
+}
+
+## Plutôt que de définir deux fonctions pour les arguments
+## 'fa' et 'fb', on passe directement des fonctions anonymes
+## en argument.
+f(2, 3,
+  function(x, y) 1 + x * y,
+  function(x, y) 1 - y)
+
+## VALEUR PAR DÉFAUT D'UN ARGUMENT
+
+## La fonction suivante calcule la distance entre deux points
+## dans l'espace euclidien à 'n' dimensions, par défaut par
+## rapport à l'origine.
+##
+## Remarquez comment nous spécifions une valeur par défaut,
+## l'origine, pour l'argument 'y'.
+##
+## (Note: la fonction 'sum' effectue... la somme de tous les
+## éléments d'un vecteur.)
+dist <- function(x, y = 0) sum((x - y)^2)
+
+## Quelques calculs de distances.
+dist(c(1, 1))                # (1, 1) par rapport à l'origine
+dist(c(1, 1, 1), c(3, 1, 2)) # entre (1, 1, 1) et (3, 1, 2)
+
+## ARGUMENT '...'
+
+## Nous illustrons l'utilisation de l'argument '...' de la
+## manière suivante pour le moment. Nous utiliserons davantage
+## cet argument avec les fonctions d'application.
+##
+## La fonction 'curve' prend en argument une expression
+## mathématique et trace la fonction pour un intervalle donné.
+curve(x^2, from = 0, to = 2)
+
+## Nous souhaitons, pour une raison quelconque, que tous nos
+## graphiques de ce type (et seulement de ce type) soient
+## tracés en orange.
+curve(x^2, from = 0, to = 2, col = "orange")
+
+## Plutôt que de redéfinir entièrement la fonction 'curve'
+## avec tous ses arguments (et il y en a plusieurs), nous
+## pouvons écrire une petite fonction qui, grâce à l'argument
+## '...', accepte tous les arguments de 'curve'.
+ocurve <- function(...) curve(..., col = "orange")
+ocurve(x^2, from = 0, to = 2)
+
+## APPEL D'UNE FONCTION
 
 ## L'interpréteur R reconnait un appel de fonction au fait que
 ## le nom de l'objet est suivi de parenthèses ( ).
@@ -1100,12 +1448,310 @@ matrix(1:12, 3, 4)
 matrix(1:12, ncol = 4, nrow = 3)
 matrix(nrow = 3, ncol = 4, data = 1:12)
 matrix(nrow = 3, ncol = 4, byrow = FALSE, 1:12)
-matrix(nrow = 3, ncol = 4, 1:12, FALSE) #-*- `\labelline{bases:appel:fin}`
+matrix(nrow = 3, ncol = 4, 1:12, FALSE) #-*- `\labelline{bases:fonctions:fin}`
 @
 
-\gotorbox{Étudiez les lignes \reflines{bases:appel}
-  du fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:bases:exemples}.}
+
+\section{Expressions conditionnelles}
+\label{sec:bases:if-else}
+
+Le langage R permet d'écrire des expressions conditionnelles dont la
+syntaxe se rapproche beaucoup des constructions que nous avons
+étudiées à la \autoref{sec:algorithmes:if-else}.
+
+La structure \Indexcode{if}\Indexcode{else}\code{if ... else ...}
+permet d'exécuter une expression conditionnelle à un ou deux volets,
+selon que la clause alternative soit présente ou non. Les
+syntaxes des deux formulations sont les suivantes:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+if (\meta{condition})
+    \meta{conséquence}
+\end{Verbatim}
+\end{Schunk}
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+if (\meta{condition})
+    \meta{conséquence}
+else
+    \meta{alternative}
+\end{Verbatim}
+\end{Schunk}
+\begin{itemize}
+\item \meta{condition} est une expression dont le résultat est une
+  valeur \code{TRUE} ou \code{FALSE} \emph{unique}. Une erreur
+  fréquente consiste à construire un test de telle sorte que
+  \meta{condition} est un vecteur, ce qui n'a guère de sens. Les
+  fonctions \icode{any}, \icode{all}
+  (\autoref{sec:bases:internes:tests}) et \icode{isTRUE} se
+  révèlent utiles dans les clauses \code{if} pour réduire les vecteurs
+  booléens à une valeur unique.
+\item \meta{conséquence} est une expression, ou un groupe
+  d'expressions regroupées entre accolades \verb={ }=, qui sont
+  exécutées lorsque \meta{condition} est \texttt{TRUE}.
+\item \meta{alternative} est une expression, ou un groupe
+  d'expressions regroupées entre accolades \verb={ }=, qui sont
+  exécutées lorsque \meta{condition} est \texttt{FALSE}.
+\end{itemize}
+
+\warningbox{Il tombe sous le sens que «vrai» est vrai, n'est-ce pas?
+  Prenez donc garde de ne pas écrire des expressions qui reviennent à
+  tester \code{if (TRUE == TRUE)} ou \code{if (TRUE != FALSE)}. Oui,
+  j'ai souvent rencontré de telles constructions!}
+
+Pour choisir entre plus de deux possibilités, vous pouvez simplement
+imbriquer les structures \code{if ... else ...} les unes dans les
+autres.
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+if (\meta{condition\textsubscript{\upshape{}1}})
+    \meta{conséquence\textsubscript{\upshape{}1}}
+else if (\meta{condition\textsubscript{\upshape{}2}})
+    \meta{conséquence\textsubscript{\upshape{}2}}
+else
+    \meta{alternative}
+\end{Verbatim}
+\end{Schunk}
+
+Les constructions de type «Selon que» se concoivent en R avec la
+fonction \Icode{switch}. Sa syntaxe est la suivante:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+switch(\meta{expression}, \meta{cas\textsubscript{\upshape{}1}} = \meta{action\textsubscript{\upshape{}1}},
+                     \meta{cas\textsubscript{\upshape{}2}} = \meta{action\textsubscript{\upshape{}2}}, ...)
+\end{Verbatim}
+\end{Schunk}
+La fonction évalue d'abord \meta{expression}. Si le résultat est une
+valeur numérique $k$, alors \meta{action$_k$} est exécutée. Si le
+résultat de \meta{expression} est l'une des chaines de caractères
+\meta{cas$_1$}, \meta{cas$_2$}, \dots, alors c'est l'action correspondante
+qui est exécutée.
+<<echo=TRUE>>=
+switch(2, 2 + 3, mean(1:10), 5:1)
+switch("foo", foo = 2 + 3, bar = mean(1:10))
+@
+
+\tipbox{Les fonctions \icode{return}, \icode{stop} et \icode{warning}
+  mentionnées à la \autoref{sec:bases:fonctions:resultats} se
+  retrouvent habituellement dans la \meta{conséquence} ou dans
+  l'\meta{alternative} d'une expression conditionnelle, en particulier
+  dans des tests de validité des arguments d'une fonction.}
+
+Enfin, la fonction \Icode{ifelse} --- une sorte de version vectorielle
+de la structure \code{if ... else ...} --- permet de calculer des
+valeurs selon les résultats d'un test sur un vecteur. Sa syntaxe est
+la suivante:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+ifelse(\meta{test}, \meta{oui}, \meta{non})
+\end{Verbatim}
+\end{Schunk}
+\begin{itemize}
+\item \meta{test} est un vecteur booléen.
+\item \meta{oui} est un vecteur de la même longueur que \meta{test}
+  duquel sont extraites les valeurs correspondant à des éléments
+  \code{TRUE} dans \meta{test}.
+\item \meta{non} est aussi un vecteur de la même longueur que
+  \meta{test}, mais duquel sont extraites les valeurs correspondant à
+  des éléments \code{FALSE} dans \meta{test}.
+\end{itemize}
+<<echo=TRUE>>=
+x <- c(-2, 3, -1, 0, 5, 1)
+ifelse(x < 0, -x, x)
+@
+
+Une fois que l'on a compris son fonctionnement, la fonction
+\icode{ifelse} peut apparaitre comme un outil de choix dans notre
+arsenal de fonctions R, en particulier pour la programmation de
+fonctions mathématiques définies par branches. En réalité, c'est plus
+ou moins le cas car \code{ifelse} est une fonction très lente. Dans la
+plupart des cas, il vaut mieux lui préférer des constructions moins
+élégantes, mais bien plus rapides. En particulier, la rubrique d'aide
+de la fonction souligne que la structure \code{if ... else ...} est
+beaucoup plus efficace si \meta{test} est un vecteur de longueur $1$.
+
+\gotorbox{Étudiez les lignes \reflines{bases:if-else} du fichier de
+  script \code{\scriptfilename} reproduit à la
+  \autoref{sec:bases:exemples}.}
+
+<<script, results=hide>>=
+###
+### EXPRESSIONS CONDITIONNELLES  `\labelline{bases:if-else}`
+###
+
+## Débutons par deux petits exemples qui démontrent un usage
+## adéquat de 'if'.
+x <- c(-1, 2, 3)
+if (any(x < 0)) print("il y a des nombres négatifs")
+if (all(x > 0)) print("tous les nombres sont positifs")
+
+## Première erreur fréquente dans l'utilisation de 'if': la
+## condition en argument n'est pas une valeur unique.
+##
+## Portez bien attention au message d'avertissement de R: le
+## test a été effectué, mais uniquement avec la première
+## valeur du vecteur booléen 'x < 0'. Comme, dans le présent
+## exemple, la première valeur de 'x' est négative,
+## l'expression 'print' est exécutée.
+if (x < 0)  print("il y a des nombres négatifs")
+
+## Seconde erreur fréquente: tester que vrai est vrai. (Ce
+## n'est pas une «erreur» au sens propre puisque la syntaxe
+## est valide, mais c'est un non-sens sémantique, une forme de
+## pléonasme comme «monter en haut» ou «deux jumeaux».)
+##
+## Voici un exemple de construction avec un test inutile. Le
+## résultat de 'any' est déjà TRUE ou FALSE, alors pas besoin
+## de vérifier si TRUE == TRUE ou si FALSE == TRUE. Comparez
+## avec la version sémantiquement correcte, ci-dessus.
+if (any(x < 0) == TRUE) print("il y a des nombres négatifs")
+
+## Voici trois mises en oeuvre de la fonction valeur absolue
+## accompagnées de leur algorithme. Elles vont de la plus
+## (inutilement) compliquée à la plus simple (sans
+## aller jusqu'à utiliser la fonction interne 'abs').
+##
+## Attention: ces fonctions ne sont pas vectorielles.
+## (Pourquoi?)
+##
+## Algorithme 1 (trois clauses)
+##   abs(réel x)
+##     Si (x > 0)
+##       Retourner x
+##     Sinon si (x = 0)
+##       Retourner 0
+##     Sinon
+##       Retourner -x
+##   Fin abs
+abs <- function(x)
+{
+    if (x > 0)
+        x
+    else if (x == 0)
+        0
+    else
+        -x
+}
+abs(5)
+abs(0)
+abs(-2)
+
+## Algorithme 2 (deux clauses)
+##   abs(réel x)
+##     Si (x < 0)
+##       Retourner -x
+##     Sinon
+##       Retourner x
+##   Fin abs
+abs <- function(x)
+{
+    if (x < 0)
+        -x
+    else
+        x
+}
+abs(5)
+abs(0)
+abs(-2)
+
+## Algorithme 3 (une seule clause; requiert 'return')
+##   abs(réel x)
+##     Si (x < 0)
+##       Retourner -x
+##     Retourner x
+##   Fin abs
+abs <- function(x)
+{
+    if (x < 0)
+        return(-x)
+    x
+}
+abs(5)
+abs(0)
+abs(-2)
+
+## Détail intéressant sur la structure 'if ... else ...': il
+## est possible de l'utiliser comme une fonction normale,
+## c'est-à-dire d'affecter le résultat de la structure à une
+## variable.
+##
+## D'abord, le style de programmation le plus usuel:
+## l'affectation est effectuée à l'intérieur des clauses 'if'
+## et 'else'.
+f <- function(y)
+{
+    if (y < 0)
+        x <- "rouge"
+    else
+        x <- "jaune"
+    paste("la couleur est:", x)
+}
+f(-2)
+f(3)
+
+## Ensuite, la version où le résultat de 'if ... else ...' est
+## directement affecté dans la variable. C'est plus compact et
+## très lisible si la conséquence et l'alternative sont des
+## expressions courtes.
+f <- function(y)
+{
+    x <- if (y < 0) "rouge" else "jaune"
+    paste("la couleur est:", x)
+}
+f(-2)
+f(3)
+
+## De l'inefficacité de 'ifelse'.
+##
+## Supposons que l'on veut une fonction *vectorielle* pour calculer
+##
+##   f(x) = x + 2, si x < 0
+##        = x^2,   si x >= 0.
+##
+## On se tourne naturellement vers ifelse() pour ce genre de
+## calcul. Voyons voir le temps de calcul.
+x <- sample(-10:10, 1e6, replace = TRUE)
+system.time(ifelse(x < 0, x + 2, x^2))
+
+## Solution alternative n'ayant pas recours à ifelse(). C'est
+## plus long à programmer, mais l'exécution est néanmoins plus
+## rapide.
+f <- function(x)
+{
+   y <- numeric(length(x)) # contenant
+   w <- x < 0              # x < 0 ou non
+   y[w] <- x[w] + 2        # calcul pour les x < 0
+   w <- !w                 # x >= 0 ou non
+   y[w] <- x[w]^2          # calcul pour les x >= 0
+   y
+}
+system.time(f(x))          #-*- `\labelline{bases:if-else:fin}`
+@
+
+\section{Récursion}
+\label{sec:fonctions:recursion}
+
+En tant que langage de programmation fonctionnel, R admet tout
+naturellement les procédures récursives. Lorsque la fonction récursive
+s'invoque elle-même, nous pouvons remplacer le nom de la fonction par
+\Icode{Recall}. Cela rend l'appel récursif indépendant du nom de la
+fonction, ce qui peut s'avérer bien utile en cas de changement du nom
+de la fonction.
+
+Par exemple, nous pouvons réécrire ainsi la mise en œuvre récursive de
+la fonction factorielle de la \autoref{fig:presentation:scheme_vs_s},
+à la \autopageref{fig:presentation:scheme_vs_s}:
+\begin{Schunk}
+\begin{Sinput}
+factorial <- function(n)
+    if (n == 1) 1 else n * Recall(n - 1)
+\end{Sinput}
+\end{Schunk}
+
+\warningbox{Le temps système requis pour la création des
+  environnements lors de chaque appel de fonction
+  (\autoref{chap:environnement}) rend les fonctions récursives peu
+  efficaces en R.}
 
 
 \section{Fonctions internes utiles}
@@ -1117,8 +1763,8 @@ intervalles réguliers dans le document au fur et à mesure que nous
 découvrirons de nouvelles fonctionnalités du langage.
 
 La liste de fonctions ci-dessous est évidemment loin d'être
-exhaustive. Un des meilleurs endroits pour découvrir de nouvelles
-fonctions demeure la section \code{See Also} des rubriques d'aide, qui
+exhaustive. Un des meilleurs endroits pour découvrir des fonctions
+demeure la section \code{See Also} des rubriques d'aide. Celle-ci
 offre des hyperliens vers des fonctions apparentées au sujet de la
 rubrique.
 
@@ -1217,7 +1863,7 @@ rep_len(1:3, 10)
   \meta{n}. C'est généralement équivalent à \code{seq(\meta{n})} ou
   \code{1:\meta{n}}, sauf lorsque \meta{n} vaut $0$. En effet,
   \code{seq\_len(0)} résulte en un vecteur de longueur nulle, alors
-  que le résultat de \code{seq(0)} et \code{1:0} est
+  que le résultat de \code{seq(0)} et de \code{1:0} est
   malencontreusement le vecteur \code{c(1, 0)}.}
 
 \subsection{Extraction du début et de la fin d'un objet}
@@ -1573,8 +2219,7 @@ pmax(x, y)                 # maximum élément par élément `\labelline{bases:i
 \gotorbox{Vous trouverez plusieurs exemples additionnels d'utilisation des
   fonctions présentées dans cette section dans le code des lignes
   \reflines{bases:internes}
-  du fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:bases:exemples}.}
+  du fichier de script \code{\scriptfilename}.}
 
 
 \section{Exemples}
@@ -1831,7 +2476,7 @@ f
     les valeurs déjà définies dans la fonction \code{f}, ce qui est
     juste en vertu des règles de \index{portee lexicale@portée
       lexicale}\emph{portée lexicale} de R. Celles-ci font l'objet de
-    la \autoref{sec:implementation:portee}. Dans certains langages de
+    la \autoref{sec:environnement:portee}. Dans certains langages de
     programmation, les objets seraient indéfinis et les appels de
     fonction résulteraient tous en une erreur.
     \begin{enumerate}
@@ -2009,7 +2654,7 @@ cumprod(1:10)
   Trouver une relation entre \code{x}, \code{y} (\code{y != 0}),
   \code{x \%\% y} (modulo) et \code{x \%/\% y} (division entière).
   \begin{sol}
-    \verb|x == (x %% y) + y * (x %/% y)|
+    \code{x == (x \%\% y) + y * (x \%/\% y)}
   \end{sol}
 \end{exercice}
 
@@ -2044,6 +2689,41 @@ mean(head(x, 5))
 mean(x[16:20])
 mean(tail(x, 5))
 @
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Le fichier de script \code{\scriptfilename} propose des exemples de
+  mises en œuvre des algorithmes \ref{algo:algorithmes:abs},
+  \ref{algo:algorithmes:abs:simplifie} et
+  \ref{algo:algorithmes:abs:simplifie:bis} pour le calcul de la valeur
+  absolue.
+  \begin{enumerate}
+  \item Pourquoi les fonctions \code{abs} de \code{\scriptfilename} ne
+    sont-elles pas vectorielles, alors que la fonction \icode{abs} de
+    R, elle, l'est?
+  \item Pourquoi la mise en œuvre de
+    l'\autoref{algo:algorithmes:abs:simplifie:bis} doit-elle avoir
+    recours à la fonction \icode{return}, et pas celles des
+    algorithmes \ref{algo:algorithmes:abs} et
+    \ref{algo:algorithmes:abs:simplifie}?
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+    \item Les fonctions \code{abs} de \code{\scriptfilename} utilisent
+      la structure \code{if ... else ...} qui n'est pas vectorielle.
+    \item Dans les mises en œuvre des algorithmes
+      \ref{algo:algorithmes:abs} et
+      \ref{algo:algorithmes:abs:simplifie}, le résultat de la fonction
+      est directement le résultat d'une expression conditionnelle. La
+      mise en œuvre de l'\autoref{algo:algorithmes:abs:simplifie:bis},
+      de son côté, contient une expression après la clause \code{if}.
+      Si nous ne forçions pas la sortie de la fonction avec
+      \icode{return} à l'intérieur de la condition, l'évaluation de la
+      fonction se poursuivrait et le résultat ne serait pas celui
+      attendu. <<echo=TRUE>>= abs <- function(x) { if (x < 0) -x x }
+      abs(-5) @
     \end{enumerate}
   \end{sol}
 \end{exercice}

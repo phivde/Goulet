@@ -9,7 +9,7 @@
 %%% International de Creative Commons.
 %%% https://creativecommons.org/licenses/by-sa/4.0/
 
-\chapter{Structures de données de R}
+\chapter{Structures de données de R et fonctions d'application}
 \label{chap:donnees}
 
 \def\scriptfilename{\currfilebase.R}
@@ -1768,6 +1768,75 @@ subset(USArrests, Murder > 10, select = Assault) #-*- `\labelline{donnees:facteu
 
 \section{Dates}
 \label{sec:donnees:dates}
+
+
+
+\section{Produit extérieur}
+\label{sec:application:outer}
+
+J'étire quelque peu le concept de fonction d'application pour
+discuter ici de la fonction de produit extérieur \code{outer}. Ce
+n'est pas la fonction la plus intuitive à utiliser, mais elle s'avère
+extrêmement utile pour effectuer plusieurs opérations en une seule
+expression tout en masquant les boucles implicites.
+
+La fonction \Icode{outer} calcule le \index{produit!extérieur}produit
+extérieur entre deux vecteurs, c'est à dire le résultat de
+\code{FUN(X[i], Y[j])} pour toutes les valeurs des indices \code{i} et
+\code{j}. La syntaxe de la fonction est la suivante:
+\begin{Schunk}
+\begin{Verbatim}
+outer(X, Y, FUN, ...)
+\end{Verbatim}
+\end{Schunk}
+\begin{itemize}
+\item \code{X} et \code{Y} sont deux objets, normalement des vecteurs
+  ou des matrices.
+\item \code{FUN} est la fonction à appliquer (\code{"*"} par défaut)
+  entre chacun des éléments de \code{X} et chacun des éléments de
+  \code{Y}. Lorsque \code{FUN} est un opérateur arithmétique du
+  \autoref{tab:premiers:operateurs}, il faut placer le symbole entre
+  guillemets: \code{"*"}, \code{"+"}, \code{"<="}, etc.
+\end{itemize}
+La dimension du résultat de \code{outer} est \code{c(dim(X), dim(Y))}.
+<<echo=TRUE>>=
+outer(c(1, 2, 5), c(2, 3, 6))
+@
+
+L'opérateur \Icode{\%o\%} est un raccourci de \code{outer(X, Y, "*")}.
+
+\videobox{\link{https://youtu.be/cyPUAnieWHw}{Fonction \code{outer}}}{%
+  Visionnez la vidéo sur la
+  \link{https://youtu.be/cyPUAnieWHw}{fonction \icode{outer}} pour
+  mieux comprendre le rôle de cette fonction.}
+
+<<script, results=hide>>=
+###
+### FONCTION 'outer'  `\labelline{application:outer}`
+###
+
+## La fonction 'outer' applique une fonction (le produit par
+## défaut, d'où le nom de la fonction, dérivé de «produit
+## extérieur») à toutes les combinaisons des éléments de ses
+## deux premiers arguments.
+x <- c(1, 2, 4, 7, 10, 12)
+y <- c(2, 3, 6, 7, 9, 11)
+outer(x, y)                # produit extérieur
+x %o% y                    # équivalent plus court
+
+## Pour effectuer un calcul autre que le produit, on spécifie
+## la fonction à appliquer en troisième argument. Si la
+## fonction est un des opérateurs arithmétiques de base, il
+## faut placer le symbole entre guillemets " ".
+outer(x, y, "+")           # «somme extérieure»
+outer(x, y, "<=")          # toutes les comparaisons possibles
+outer(x, y, function(x, y) x + 2 * y) # fonction quelconque  `\labelline{application:outer:fin}`
+@
+
+\gotorbox{Étudiez les lignes \reflines{application:outer}
+  du fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:application:exemples}.}
+
 
 
 
