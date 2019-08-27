@@ -2394,8 +2394,8 @@ max(abs(x - y))
 \end{exercice}
 
 \begin{exercice}
-  Pour chacun des exercices b)--g) de l'exercice précédent, composer
-  une fonction R pour effectuer le calcul demandé. Nommer les
+  Pour chacune des parties b)--g) de l'\autoref{ex:bases:moyennes},
+  composer une fonction R pour effectuer le calcul demandé. Nommer les
   fonctions %
   \code{amean}, %
   \code{gmean}, %
@@ -2527,6 +2527,41 @@ is.odd
 \end{exercice}
 
 \begin{exercice}
+  Le fichier de script \code{\scriptfilename} propose des exemples de
+  mises en œuvre des algorithmes \ref{algo:algorithmes:abs},
+  \ref{algo:algorithmes:abs:simplifie} et
+  \ref{algo:algorithmes:abs:simplifie:bis} pour le calcul de la valeur
+  absolue.
+  \begin{enumerate}
+  \item Pourquoi les fonctions \code{abs} de \code{\scriptfilename} ne
+    sont-elles pas vectorielles, alors que la fonction \icode{abs} de
+    R, elle, l'est?
+  \item Pourquoi la mise en œuvre de
+    l'\autoref{algo:algorithmes:abs:simplifie:bis} doit-elle avoir
+    recours à la fonction \icode{return}, et pas celles des
+    algorithmes \ref{algo:algorithmes:abs} et
+    \ref{algo:algorithmes:abs:simplifie}?
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+    \item Les fonctions \code{abs} de \code{\scriptfilename} utilisent
+      la structure \code{if ... else ...} qui n'est pas vectorielle.
+    \item Dans les mises en œuvre des algorithmes
+      \ref{algo:algorithmes:abs} et
+      \ref{algo:algorithmes:abs:simplifie}, le résultat de la fonction
+      est directement le résultat d'une expression conditionnelle. La
+      mise en œuvre de l'\autoref{algo:algorithmes:abs:simplifie:bis},
+      de son côté, contient une expression après la clause \code{if}.
+      Si nous ne forçions pas la sortie de la fonction avec
+      \icode{return} à l'intérieur de la condition, l'évaluation de la
+      fonction se poursuivrait et le résultat ne serait pas celui
+      attendu. <<echo=TRUE>>= abs <- function(x) { if (x < 0) -x x }
+      abs(-5) @
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
   Soit $b$ un nombre réel et $n$, un entier positif. Composer deux
   versions d'une fonction \code{pow} pour calculer $b^n$, l'une
   utilisant l'\autoref{algo:algorithmes:puissance} et l'autre,
@@ -2565,6 +2600,67 @@ pow2 <- function(b, n)
 <<echo=TRUE>>=
 pow
 @
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Le plus petit commun multiple (PPCM) de deux entiers positifs $m$ et
+  $n$ est égal à $m n/d$, où $d$ est le plus grand commun diviseur
+  (PGCD) de $m$ et $n$.
+  \begin{enumerate}
+  \item Composer un algorithme pour effectuer le calcul du plus petit
+    commun multiple de deux entiers.
+  \item Composer une fonction \code{PPCM} qui permet d'effectuer ce
+    calcul. La fonction devrait retourner la réponse sans effectuer
+    aucun calcul pour les cas triviaux suivants:
+    \begin{enumerate}[1.]
+    \item si $m = 0$ ou $n = 0$, le PPCM est $0$;
+    \item si $n = 1$, le PPCM est $m$ (et vice-versa);
+    \item si $m = n$, le PPCM est $m$.
+    \end{enumerate}
+    Composer toutes les fonctions intermédiaires, le cas échéant.
+  \end{enumerate}
+  \begin{sol}
+<<echo=FALSE>>=
+PGCD <- function(m, n)
+{
+    if (n == 0) return(m)
+    Recall(n, m %% n)
+}
+
+PPCM <- function(m, n)
+{
+    if (any(c(m, n) == 0))
+        return(0)
+    if (any(c(m, n) == 1))
+        return(max(c(m, n)))
+    if (m == n)
+        return(m)
+    (m * n)/PGCD(m, n)
+}
+@
+    \begin{enumerate}
+    \item L'algorithme demandé est une variante de
+      l'\Index{Euclide@Euclide (algorithme)}algorithme d'Euclide.
+      \begin{enumerate}[1.]
+      \item Poser $d$ égal au plus grand commun diviseur de $m$ et $n$.
+      \item Retourner $m n/d$.
+      \end{enumerate}
+    \item L'algorithme nécessite de calculer le PGCD, chose que l'on
+      peut faire de manière récursive avec l'algorithme d'Euclide.
+      C'est là une bonne occasion d'effectuer une mise en œuvre
+      \code{PGCD} de l'\autoref{algo:algorithmes:euclide}. Débutons
+      avec cette fonction.
+<<echo=TRUE>>=
+PGCD
+@
+      La fonction \code{PPCM} est ensuite très simple à programmer.
+      L'essentiel du code est consacré à la vérification des cas
+      triviaux pour éviter les calculs inutiles.
+<<echo=TRUE>>=
+PPCM
+@
+    \end{enumerate}
   \end{sol}
 \end{exercice}
 
@@ -2794,7 +2890,8 @@ rep(-2:2, each = 2)
 \begin{exercice}
   Sans utiliser les fonctions \icode{factorial}, \icode{lfactorial},
   \icode{gamma} ou \icode{lgamma}, générer la suite
-  $1!, 2!, \dots, 10!$.
+  $1!, 2!, \dots, 10!$, où $n! = n(n - 1)(n - 2) \cdots 2 \cdot 1$ est
+  la fonction factorielle.
   \begin{sol}
 <<echo=TRUE, eval=FALSE>>=
 cumprod(1:10)
@@ -2841,41 +2938,6 @@ mean(head(x, 5))
 mean(x[16:20])
 mean(tail(x, 5))
 @
-    \end{enumerate}
-  \end{sol}
-\end{exercice}
-
-\begin{exercice}
-  Le fichier de script \code{\scriptfilename} propose des exemples de
-  mises en œuvre des algorithmes \ref{algo:algorithmes:abs},
-  \ref{algo:algorithmes:abs:simplifie} et
-  \ref{algo:algorithmes:abs:simplifie:bis} pour le calcul de la valeur
-  absolue.
-  \begin{enumerate}
-  \item Pourquoi les fonctions \code{abs} de \code{\scriptfilename} ne
-    sont-elles pas vectorielles, alors que la fonction \icode{abs} de
-    R, elle, l'est?
-  \item Pourquoi la mise en œuvre de
-    l'\autoref{algo:algorithmes:abs:simplifie:bis} doit-elle avoir
-    recours à la fonction \icode{return}, et pas celles des
-    algorithmes \ref{algo:algorithmes:abs} et
-    \ref{algo:algorithmes:abs:simplifie}?
-  \end{enumerate}
-  \begin{sol}
-    \begin{enumerate}
-    \item Les fonctions \code{abs} de \code{\scriptfilename} utilisent
-      la structure \code{if ... else ...} qui n'est pas vectorielle.
-    \item Dans les mises en œuvre des algorithmes
-      \ref{algo:algorithmes:abs} et
-      \ref{algo:algorithmes:abs:simplifie}, le résultat de la fonction
-      est directement le résultat d'une expression conditionnelle. La
-      mise en œuvre de l'\autoref{algo:algorithmes:abs:simplifie:bis},
-      de son côté, contient une expression après la clause \code{if}.
-      Si nous ne forçions pas la sortie de la fonction avec
-      \icode{return} à l'intérieur de la condition, l'évaluation de la
-      fonction se poursuivrait et le résultat ne serait pas celui
-      attendu. <<echo=TRUE>>= abs <- function(x) { if (x < 0) -x x }
-      abs(-5) @
     \end{enumerate}
   \end{sol}
 \end{exercice}
