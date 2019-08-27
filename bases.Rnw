@@ -2240,12 +2240,9 @@ pmax(x, y)                 # maximum élément par élément `\labelline{bases:i
 
 \end{Filesave}
 
-Il est possible de compléter tous les exercices ci-dessous sans avoir
-recours à R, sinon pour vérifier vos réponses. (En fait, les exercices
-sont de peu d'intérêt autrement.)
-
 \begin{exercice}
-  Évaluer les expressions suivantes comme le ferait l'interpréteur R.
+  Évaluer «à la main» les expressions suivantes comme le ferait
+  l'interpréteur R.
   \begin{enumerate}
   \item \verb|1:5 * c(0, 1, 0, 1, 0)|
   \item \verb|c(2, 7, 1, 4) > 3|
@@ -2254,9 +2251,6 @@ sont de peu d'intérêt autrement.)
   \item \verb|c(TRUE, FALSE, FALSE) & c(TRUE, TRUE, FALSE)|
   \item \verb=c(TRUE, FALSE, FALSE) | !2 < 3=
   \item \verb|-1:1/0|
-  \item \verb|length(c("a", "abc", "ab"))|
-  \item \verb|x <- c(-1, -2, -3); length(x)|
-  \item \verb|length(c(c(1, 3, 6, 7), NULL))|
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
@@ -2296,27 +2290,13 @@ c(TRUE, FALSE, FALSE) | !2 < 3
 <<echo=FALSE>>=
 -1:1/0
 @
-     \item Vecteur de trois chaines de caractères, peu importe leur
-       longueur.
-<<echo=FALSE>>=
-length(c("a", "abc", "ab"))
-@
-     \item
-<<echo=FALSE>>=
-x <- c(-1, -2, -3); length(x)
-@
-     \item Concaténer \code{NULL} à un vecteur n'ajoute rien (ou du
-       vide, qui n'a pas de longueur).
-<<echo=FALSE>>=
-length(c(c(1, 3, 6, 7), NULL))
-@
      \end{enumerate}
   \end{sol}
 \end{exercice}
 
 \begin{exercice}
   \index{indiçage!vecteur}
-  Soit \code{x} un vecteur contenant les valeurs d'un échantillon:
+  Soit \code{x} un vecteur contenant un jeu de données:
   \begin{center}
 <<echo=FALSE>>=
 x <- c(18, 11, 10, 2, 19, 9, 12, 15, 13, 12, 1, 6)
@@ -2326,12 +2306,12 @@ x
 @
   \end{center}
   Écrire des expressions R pour créer ce vecteur dans l'espace de
-  travail et pour extraire les éléments suivants.
+  travail, puis pour extraire les données suivantes.
   \begin{enumerate}
-  \item Le deuxième élément de l'échantillon.
-  \item Les cinq premiers éléments de l'échantillon.
-  \item Les éléments strictement supérieurs à $14$.
-  \item Tous les éléments sauf ceux en positions $6$, $7$ et $12$.
+  \item La deuxième donnée du vecteur.
+  \item Les cinq premières données du vecteur.
+  \item Les données strictement supérieures à $14$.
+  \item Toutes les données sauf la sixième, la septième et la douzième.
   \end{enumerate}
   \begin{sol}
     On crée d'abord le vecteur avec
@@ -2414,6 +2394,181 @@ max(abs(x - y))
 \end{exercice}
 
 \begin{exercice}
+  Pour chacun des exercices b)--g) de l'exercice précédent, composer
+  une fonction R pour effectuer le calcul demandé. Nommer les
+  fonctions %
+  \code{amean}, %
+  \code{gmean}, %
+  \code{hmean}, %
+  \code{pscal}, %
+  \code{norm1} et %
+  \code{normINF}, %
+  dans l'ordre.
+  \begin{sol}
+    \begin{enumerate}
+      \stepcounter{enumi}
+    \item
+<<echo=TRUE, eval=FALSE>>=
+amean <- function(x) sum(x)/length(x)
+@
+    \item
+<<echo=TRUE, eval=FALSE>>=
+gmean <- function(x) prod(x)^(1/length(x))
+@
+    \item
+<<echo=TRUE, eval=FALSE>>=
+hmean <- function(x) 1/prod(1/x)
+@
+    \item
+<<echo=TRUE, eval=FALSE>>=
+pscal <- function(x, y) sum(x * y)
+@
+    \item
+<<echo=TRUE, eval=FALSE>>=
+norm1 <- function(x, y) sum(abs(x - y))
+@
+    \item
+<<echo=TRUE, eval=FALSE>>=
+normINF <- function(x, y) max(abs(x - y))
+@
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  En vous basant sur l'\autoref{algo:algorithmes:emrl:bis}, composer
+  une fonction \code{mrl} pour calculer l'espérance résiduelle
+  empirique d'un vecteur \code{x} à un seuil \code{d}.
+  \begin{sol}
+    La solution repose sur l'indiçage pour effectuer la première étape
+    de l'\autoref{algo:algorithmes:emrl:bis} et sur l'utilisation de
+    la fonction interne \icode{mean} pour la seconde étape.
+<<echo=TRUE, eval=FALSE>>=
+mrl <- function(x, d) mean(x[x > d]) - d
+@
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  \label{ex:bases:is.odd}
+  L'algorithme suivant permet de vérifier si un nombre entier $n$ est
+  impair ou non.
+  \begin{enumerate}[1.]
+  \item Diviser $n$ par $2$ et poser $r$ égal au reste de la division.
+  \item Si $r = 1$, retourner «vrai», sinon retourner «faux».
+  \end{enumerate}
+  La fonction \code{is.odd} ci-dessous est une mise en œuvre de cet
+  algorithme.
+<<echo=FALSE>>=
+is.odd <- function(x)
+{
+    r <- x %% 2
+    if (r == 0)
+        FALSE
+    else
+        TRUE
+}
+@
+<<echo=TRUE>>=
+is.odd
+@
+  Cette mise en œuvre est en fait de très mauvaise qualité.
+  Proposer une version plus simple, vectorielle et qui
+  tire profit des caractéristiques du langage R étudiées dans ce
+  chapitre.
+  \begin{sol}
+    Voici déjà deux améliorations que nous pouvons apporter à la mise
+    en œuvre proposée dans l'énoncé:
+    \begin{enumerate}[1.]
+    \item inverser la logique tordue de l'expression conditionnelle
+      afin que la fonction retourne plutôt \code{TRUE} lorsque la
+      condition est vraie, et vice versa;
+    \item le reste de la division étant nécessairement $0$ ou $1$,
+      utiliser directement le résultat dans la clause \code{if} en
+      tirant profit de la conversion automatique.
+    \end{enumerate}
+<<echo=FALSE>>=
+is.odd <- function(x)
+{
+    r <- x %% 2
+    if (r)
+        TRUE
+    else
+        FALSE
+}
+@
+<<echo=TRUE>>=
+is.odd
+@
+    Nous pouvons encore améliorer la fonction. En effet, les
+    constructions de la forme
+    \begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+if (\meta{condition})
+    TRUE
+else
+    FALSE
+\end{Verbatim}
+    \end{Schunk}
+    sont complètement inutiles car la \meta{condition} étant
+    nécessairement vraie ou fausse, le test est redondant. Il suffit
+    de retourner la valeur de la \meta{condition}. En supprimant
+    complètement l'expression conditionnelle de la fonction
+    \code{is.odd}, nous en arrivons à la version ci-dessous, beaucoup
+    plus simple et vectorielle de surcroit (\code{as.logical} sert à
+    retourner une valeur booléenne plutôt qu'une valeur numérique).
+<<echo=FALSE>>=
+is.odd <- function(x) as.logical(x %% 2)
+@
+<<echo=TRUE>>=
+is.odd
+@
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Soit $b$ un nombre réel et $n$, un entier positif. Composer deux
+  versions d'une fonction \code{pow} pour calculer $b^n$, l'une
+  utilisant l'\autoref{algo:algorithmes:puissance} et l'autre,
+  l'\autoref{algo:algorithmes:puissance:bis} et la fonction
+  \code{is.odd} de l'\autoref{ex:bases:is.odd}.
+  \begin{sol}
+    Les deux algorithmes étant récursifs, les fonctions le sont aussi.
+    Tel qu'expliqué à la \autoref{sec:fonctions:recursion}, il est
+    préférable d'utiliser \icode{Recall} pour invoquer la fonction à
+    l'intérieur d'elle-même sans avoir à se soucier de son nom.
+
+    Tout d'abord, la mise en œuvre de l'\autoref{algo:algorithmes:puissance}.
+<<echo=FALSE>>=
+pow <- function(b, n)
+{
+    if (n == 0)
+        return(1)
+    b * Recall(b, n - 1)
+}
+@
+<<echo=TRUE>>=
+pow
+@
+    Ensuite, celle de l'\autoref{algo:algorithmes:puissance:bis}.
+<<echo=FALSE>>=
+pow2 <- function(b, n)
+{
+    if (n == 0)
+        return(1)
+    if (n %% 2)
+        b * Recall(b, n - 1)
+    else
+        Recall(b, n/2)^2
+}
+@
+<<echo=TRUE>>=
+pow
+@
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
   On vous donne la définition d'une fonction R:
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2460,9 +2615,6 @@ f <- function(x, y)
 <<echo=TRUE>>=
 f
 @
-  Vous aurez compris que le corps de la fonction \code{f} contient la
-  définition d'une fonction \code{g} (nous étudierons la
-  syntaxe de la définition des fonctions au \autoref{chap:fonctions}).
   Évaluer les résultats des appels ci-dessous.
   \begin{enumerate}
   \item \code{f(1, 1)}

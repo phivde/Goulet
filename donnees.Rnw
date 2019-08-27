@@ -1861,12 +1861,29 @@ outer(x, y, function(x, y) x + 2 * y) # fonction quelconque  `\labelline{applica
 \begin{exercice}
   Évaluer les expressions suivantes comme le ferait l'interpréteur R.
   \begin{enumerate}
+  \item \verb|length(c("a", "abc", "ab"))|
+  \item \verb|x <- c(-1, -2, -3); length(x)|
+  \item \verb|length(c(c(1, 3, 6, 7), NULL))|
   \item \verb|mode(c(45.44, pi, TRUE))|
   \item \verb|mode(c(5, "5", "cinq"))|
   \item ...
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
+     \item Vecteur de trois chaines de caractères, peu importe leur
+       longueur.
+<<echo=FALSE>>=
+length(c("a", "abc", "ab"))
+@
+     \item
+<<echo=FALSE>>=
+x <- c(-1, -2, -3); length(x)
+@
+     \item Concaténer \code{NULL} à un vecteur n'ajoute rien (ou du
+       vide, qui n'a pas de longueur).
+<<echo=FALSE>>=
+length(c(c(1, 3, 6, 7), NULL))
+@
      \item La valeur booléenne est convertie en nombre réel.
 <<echo=FALSE>>=
 mode(c(45.44, pi, TRUE))
