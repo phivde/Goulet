@@ -270,7 +270,7 @@ library("actuar")
 \section{Exercices}
 \label{sec:paquetages:exercices}
 
-\Opensolutionfile{solutions}[solutions-internes]
+\Opensolutionfile{solutions}[solutions-paquetages]
 
 \begin{Filesave}{solutions}
 \section*{Chapitre \ref*{chap:paquetages}}

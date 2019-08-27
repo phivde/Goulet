@@ -485,7 +485,7 @@ commentaires contenant au minimum:
 \item la valeur retournée par la fonction.
 \end{enumerate}
 Il s'agit de la structure générale des rubriques d'aide de R. La
-\autoref{fig:fonctions:doc} fournit un exemple de documentation pour
+\autoref{fig:pratiques:doc} fournit un exemple de documentation pour
 une fonction simple.
 
 \tipbox{Le fichier \code{gabarit-documentation-fonction.R} livré avec
@@ -512,7 +512,7 @@ une fonction simple.
 square <- function(x) x * x
 \end{Verbatim}
   \caption{Exemple de documentation pour une fonction simple}
-  \label{fig:fonctions:doc}
+  \label{fig:pratiques:doc}
 \end{figure}
 
 Dans R, le symbole numéro \code{\#} --- ou carré --- marque le début
@@ -549,7 +549,7 @@ carré, \code{\#}; les commentaires de deuxième niveau débutent par
 deux carrés, \code{\#\#}, etc.
 
 \gotorbox{Le fichier de script \code{\scriptfilename} reproduit à la
-  \autoref{sec:fonctions:exemples} contient, aux lignes
+  \autoref{sec:pratiques:exemples} contient, aux lignes
   \reflines{fonctions:pratiques}, un long exemple d'amélioration du
   style et de la présentation du code d'une fonction, ainsi qu'un
   exemple de documentation d'une fonction. Vous y trouverez même un
@@ -845,67 +845,25 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
 
 
 \section{Exemples}
-\label{sec:fonctions:exemples}
+\label{sec:pratiques:exemples}
 
 \scriptfile{\scriptfilename}
 \lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
 
 
 \section{Exercices}
-\label{sec:fonctions:exercices}
+\label{sec:pratiques:exercices}
 
-\Opensolutionfile{solutions}[solutions-fonctions]
+\Opensolutionfile{solutions}[solutions-pratiques]
 
 \begin{Filesave}{solutions}
-\section*{Chapitre \ref*{chap:fonctions}}
-\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:fonctions}}
+\section*{Chapitre \ref*{chap:pratiques}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:pratiques}}
 
 \end{Filesave}
 
 \begin{exercice}
-  Pour chacun des exercices b)--g) de
-  l'\autoref{ex:premiers:moyennes}, composer une fonction R pour
-  effectuer le calcul demandé. Nommer les fonctions %
-  \code{amean}, %
-  \code{gmean}, %
-  \code{hmean}, %
-  \code{pscal}, %
-  \code{norm1} et %
-  \code{normINF}, %
-  dans l'ordre.
-  \begin{sol}
-    \begin{enumerate}
-      \stepcounter{enumi}
-    \item
-<<echo=TRUE, eval=FALSE>>=
-amean <- function(x) sum(x)/length(x)
-@
-    \item
-<<echo=TRUE, eval=FALSE>>=
-gmean <- function(x) prod(x)^(1/length(x))
-@
-    \item
-<<echo=TRUE, eval=FALSE>>=
-hmean <- function(x) 1/prod(1/x)
-@
-    \item
-<<echo=TRUE, eval=FALSE>>=
-pscal <- function(x, y) sum(x * y)
-@
-    \item
-<<echo=TRUE, eval=FALSE>>=
-norm1 <- function(x, y) sum(abs(x - y))
-@
-    \item
-<<echo=TRUE, eval=FALSE>>=
-normINF <- function(x, y) max(abs(x - y))
-@
-    \end{enumerate}
-  \end{sol}
-\end{exercice}
-
-\begin{exercice}
-  \label{ex:fonctions:prodmat}
+  \label{ex:pratiques:prodmat}
   Le produit matriciel entre deux matrices
   $\mat{A} = [a_{ij}]_{m \times p}$ et
   $\mat{B} = [b_{ij}]_{p \times n}$ est une matrice $m \times n$ dont
@@ -924,7 +882,7 @@ normINF <- function(x, y) max(abs(x - y))
   boucles. Comparer le résultat avec celui de l'opérateur
   \code{\%*\%}.
   \begin{sol}
-\begin{Schunk}
+    \begin{Schunk}
 \begin{Verbatim}
 prod_mat <- function(A, B)
 {
@@ -943,34 +901,33 @@ prod_mat <- function(A, B)
     res
 }
 \end{Verbatim}
-\end{Schunk}
+    \end{Schunk}
   \end{sol}
 \end{exercice}
 
 \begin{exercice}[nosol]
-  \label{ex:fonctions:rstudio-tab-width}
+  \label{ex:pratiques:rstudio-tab-width}
   Configurer votre éditeur de texte pour indenter le code R de quatre
   (4) caractères. Dans RStudio, ouvrir le panneau des options
   globales, sélectionner la catégorie \code{Code} et inscrire la
   valeur \code{4} dans le champs \code{Tab width} (voir la
-  \autoref{fig:fonctions:rstudio-tab-width}).
+  \autoref{fig:pratiques:rstudio-tab-width}).
   \begin{figure}
     \centering
     \includegraphics{images/rstudio-tab-width}
     \caption{Réglage de RStudio pour une indentation du code
       de quatre caractères}
-    \label{fig:fonctions:rstudio-tab-width}
+    \label{fig:pratiques:rstudio-tab-width}
   \end{figure}
 \end{exercice}
 
 \begin{exercice}
   Présenter le code ci-dessous selon les normes d'espacement,
   d'indentation et de positionnement des accolades mentionnées à la
-  \autoref{sec:fonctions:pratiques}. Pour ajuster
+  \autoref{sec:pratiques:pratiques}. Pour ajuster
   automatiquement l'indentation avec RStudio, sélectionner le bloc de
   code et choisir dans les menus \code{Code|Reformat Code}.
-
-\begin{Schunk}
+  \begin{Schunk}
 \begin{Verbatim}
 f <- function(x){
   if(all(x>=0)|| all(x<=0))
@@ -983,12 +940,12 @@ i<-1/Re(r)[abs(Im(r))< .Machine$double.eps^0.5]-1
 i[i > -1]
 }
 \end{Verbatim}
-\end{Schunk}
-\begin{sol}
-  La présentation correcte comporte des espaces autour de tous les
-  opérateurs, une indentation de quatre (4) caractères et des
-  accolades ouvrante et fermante placées sur leur propre ligne.
-\begin{Schunk}
+  \end{Schunk}
+  \begin{sol}
+    La présentation correcte comporte des espaces autour de tous les
+    opérateurs, une indentation de quatre (4) caractères et des
+    accolades ouvrante et fermante placées sur leur propre ligne.
+    \begin{Schunk}
 \begin{Verbatim}[fontsize=\relsize{-1}]
 tri <- function(x)
 {
@@ -1003,8 +960,8 @@ tri <- function(x)
     i[i > -1]
 }
 \end{Verbatim}
-\end{Schunk}
-\end{sol}
+    \end{Schunk}
+  \end{sol}
 \end{exercice}
 
 \Closesolutionfile{solutions}
