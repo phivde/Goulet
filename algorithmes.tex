@@ -1252,7 +1252,7 @@ Fin PGCD
   \item L'algorithme récursif direct de la suite de Fibonacci est
     terriblement inefficace puisqu'il répète plusieurs calculs un
     grand nombre de fois. Pour vous en convaincre, écrivez au long
-    tous les calculs requis pas l'algorithme pour calculer $f(5)$.
+    tous les calculs requis par l'algorithme pour calculer $f(5)$.
   \item Proposer un algorithme itératif en langage naturel pour
     calculer les nombres de Fibonacci.
   \end{enumerate}
@@ -1315,15 +1315,12 @@ Fin Fib
 \end{exercice}
 
 \begin{exercice}
-  L'\autoref{algo:algorithmes:ackermann} ci-dessous permet de calculer
-  la fonction d'Ackermann telle que définie dans
+  L'algorithme suivant permet de calculer la valeur de la fonction de
+  \index{Ackermann (fonction)}Ackermann $A(x, y)$ pour des entiers non
+  négatifs $x$ et $y$ telle que définie dans
   \citet{Sussman:scheme:1996}.
 
-  \begin{algorithme}[Fonction de Ackermann]
-    \label{algo:algorithmes:ackermann}
-    Calculer la valeur de la fonction de Ackermann $A(x, y)$ pour des
-    entiers non négatifs $x$ et $y$.
-    \begin{Schunk}
+  \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
 A(entier x, entier y)
   Si (y = 0)
@@ -1336,8 +1333,7 @@ A(entier x, entier y)
     Retourner A(x - 1, A(x, y - 1))
 Fin A
 \end{Verbatim}
-    \end{Schunk}
-  \end{algorithme}
+  \end{Schunk}
 
   Calculer la valeur de $A(1, 10)$.
   \begin{sol}
