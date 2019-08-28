@@ -792,12 +792,13 @@ x[]
 \subsection{Arithmétique vectorielle}
 \label{sec:bases:vecteurs:arithmetique}
 
-L'arithmétique vectorielle de R constitue l'une des grandes forces du
-langage. Elle permet de réaliser une grande variété de calculs sans
-avoir recours à des procédures itératives ou récursives. En soi, il
-s'agit d'une couche d'abstraction directement intégrée au langage.
-Pour prétendre savoir programmer en R, vous devez absolument tirer
-profit de l'arithmétique vectorielle.
+L'\Index{arithmetique@arithmétique vectorielle}arithmétique
+vectorielle de R constitue l'une des grandes forces du langage. Elle
+permet de réaliser une grande variété de calculs sans avoir recours à
+des procédures itératives ou récursives. En soi, il s'agit d'une
+couche d'abstraction directement intégrée au langage. Pour prétendre
+savoir programmer en R, vous devez absolument tirer profit de
+l'arithmétique vectorielle.
 
 Les procédures fondamentales de la \autoref{sec:bases:fondamentales}
 peuvent toutes opérer sur les vecteurs en effectuant les opérations
@@ -997,18 +998,19 @@ c(5, 3) + c(TRUE, FALSE)   # équivalent à c(5, 3) + c(1, 0)
 \label{sec:bases:fonctions}
 
 À ce stade, nous savons comment utiliser les opérateurs de base du
-\autoref{tab:bases:operateurs} ainsi que l'arithmétique vectorielle.
-Le langage R serait toutefois très restreint s'il ne nous donnait pas
-aussi accès à des fonctions\footnote{%
+\autoref{tab:bases:operateurs} ainsi que
+l'\index{arithmetique@arithmétique vectorielle}arithmétique
+vectorielle. Le langage R serait toutefois très restreint s'il ne nous
+donnait pas aussi accès à des fonctions\footnote{%
   Le nom que nous donnons dorénavant au concept de procédure.} %
 plus élaborées. Or, le langage R compte justement un très grand nombre
 (des milliers!) de fonctions internes. Vous en avez déjà rencontré
-quelques unes dans les exemples, comme \icode{exp} ou \icode{cos}, et vous
-en découvrirez de nouvelles à la \autoref{sec:bases:internes}. Chose
-plus importante, R nous permet aussi de définir nos propres fonctions.
-C'est là l'une des techniques d'abstraction les plus puissantes du
-langage puisqu'elle permet de faire référence par un seul nom à toute
-une suite d'opérations.
+quelques unes dans les exemples, comme \icode{exp} ou \icode{cos}, et
+vous en découvrirez de nouvelles à la \autoref{sec:bases:internes}.
+Chose plus importante, R nous permet aussi de définir nos propres
+fonctions. C'est là l'une des techniques d'abstraction les plus
+puissantes du langage puisqu'elle permet de faire référence par un
+seul nom à toute une suite d'opérations.
 
 Cette section explique comment définir vos propres fonctions et
 retourner des résultats, puis comment faire appel à vos fonctions ou
@@ -1222,8 +1224,9 @@ dist <- function(x, y = 0, p = 2) sum(abs(x - y)^p)
 @
 
 Vous remarquerez que la fonction fait elle-même appel à deux fonctions
-internes (\icode{sum} et \icode{abs}) ainsi qu'à deux opérateurs de base
-(\code{-} et \code{\string^}). Elle repose également sur l'arithmétique
+internes (\icode{sum} et \icode{abs}) ainsi qu'à deux opérateurs de
+base (\code{-} et \code{\string^}). Elle repose également sur
+l'\index{arithmetique@arithmétique vectorielle}arithmétique
 vectorielle pour calculer toutes les différences $x_i - y_i$.
 
 La fonction compte trois arguments nommés \code{x}, \code{y} et
