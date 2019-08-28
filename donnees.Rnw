@@ -44,6 +44,11 @@ source("Stangle.R")        # lancement de Stangle
   d'autres outils.
 \end{objectifs}
 
+Ce chapitre regroupe deux sujets bien distincts d'un point de vue
+conceptuel, mais intimement reliés d'un point de vue fonctionnel: les
+structures de données de R et les fonctions d'application
+correspondantes.
+
 Une structure de données est une manière d'organiser les données dans
 un ordinateur afin de pouvoir les traiter efficacement. L'étude des
 structures de données va généralement de pair avec celle des
@@ -53,23 +58,40 @@ programme performant et un autre trop lent ou inapte à traiter des
 grandes quantités de données.
 
 Le modèle de données de R repose sur des structures abstraites et
-spécialisées que nous avons appelées des \emph{objets}. Jusqu'à
-maintenant, nous n'avons étudié que le vecteur simple (\emph{atomic}).
-Il existe d'autres structures de données en R, mais leur mise en œuvre
-demeure tout à fait transparente pour les programmeuses et les
-programmeurs. Cet ouvrage fera donc l'impasse sur les notions de
-tableau (\emph{array}), de liste chainée (\emph{linked list}), d'arbre
-(\emph{tree}) ou de table de hachage (\emph{hashtable}) dont traitent
-habituellement les ouvrages d'algorithmique et de programmation.
+spécialisées appelées \emph{objets}. Jusqu'ici, nous n'avons étudié
+que le vecteur simple (\emph{atomic}). Il existe d'autres structures
+de données en R, mais leur mise en œuvre demeure tout à fait
+transparente pour les programmeuses et les programmeurs. Nous ferons
+donc l'impasse sur les notions de tableau (\emph{array}), de liste
+chainée (\emph{linked list}), d'arbre (\emph{tree}) ou de table de
+hachage (\emph{hashtable}) dont traitent habituellement les ouvrages
+d'algorithmique et de programmation.
 
 Le vecteur, la matrice, le tableau et la liste sont les types d'objets
-les plus fréquemment utilisés en programmation en R. Le facteur et le
-\emph{data frame} sont davantage des structures de données
-spécialisées pour l'analyse de données.
+les plus fréquemment utilisés en programmation en R. Le facteur, le
+tableau de données (\emph{data frame}) et la date sont davantage des
+structures de données spécialisées pour l'analyse de données.
+
+Vous savez déjà que certains types de calculs répétitifs sont
+automatiquement pris en charge par R via la couche d'abstraction de
+l'\index{arithmetique@arithmétique vectorielle}arithmétique
+vectorielle (\autoref{sec:bases:vecteurs:arithmetique}). Pour les cas
+où l'arithmétique vectorielle ne s'applique pas, un large pan des
+calculs répétitifs peut être réduit à quelques fonctions abstraites
+dites d'\emph{application} (\emph{mapping}, un autre concept hérité du
+\index{Lisp}Lisp). Les fonctions d'\index{application}application
+permettent de masquer, par une nouvelle couche d'abstraction, les
+calculs répétitifs sur les dimensions des matrices et des tableaux,
+ainsi que ceux sur les éléments d'un vecteur ou d'une liste. De plus,
+elles se prêtent tout naturellement à la programmation vectorielle.
 
 
 \section{Objets R}
 \label{sec:donnees:objets}
+
+Cette section passe en revue certains détails sur les objets R que
+nous avons jusqu'à maintenant laissé dans l'ombre par souci de
+simplicité.
 
 Tout dans le langage R est un objet: les variables contenant des
 données, les fonctions, les opérateurs, même le symbole représentant
@@ -104,16 +126,15 @@ De plus, certains mots sont réservés et il est interdit de les
 utiliser comme nom d'objet. Les mots réservés pour le système sont:
 \begin{quote}
   \code{break}, \code{else}, \code{for}, \code{function}, \code{if},
-  \code{in}, \code{next}, \code{repeat}, \code{return}, \code{while}, \\
+  \code{in}, \code{next}, \code{repeat}, \code{while}, \\
   \code{TRUE}, \code{FALSE}, \\
-  \code{Inf}, \code{NA}, \code{NaN}, \code{NULL}, \\
-  \verb|NA_integer_|, \verb|NA_real_|, \verb|NA_complex_|,
+  \code{Inf}, \code{NaN}, \code{NULL}, \\
+  \code{NA}, \verb|NA_integer_|, \verb|NA_real_|, \verb|NA_complex_|,
   \verb|NA_character_|, \\
   \code{...}, \code{..1}, \code{..2}, etc.
 \end{quote}
-Oui, `\code{...}' (\emph{point-point-point}) est véritablement un nom
-d'objet dans R! Son usage est expliqué à la
-\autoref{sec:fonctions:definition}.
+Oui, l'argument spécial `\icode{...}' rencontré à la
+\autoref{sec:bases:fonctions:definition} est un objet dans R!
 
 Les variables \code{T}\index{T@\code{T}|see{\code{TRUE}}} et
 \code{F}\index{F@\code{F}|see{\code{FALSE}}} prennent par défaut les
@@ -181,18 +202,12 @@ Les objets de mode \code{numeric}, \code{complex},
 revanche, les objets de mode \code{list} ou \code{expression} sont
 des objets \emph{récursifs} qui peuvent contenir d'autres objets. Par
 exemple, une liste peut contenir une ou plusieurs autres listes; nous
-y reviendrons au \autoref{chap:donnees}.
+y reviendrons plus loin.
 
 \tipbox{La fonction \Icode{typeof} permet d'obtenir une description
   plus précise de la représentation interne d'un objet (c'est-à-dire
   au niveau de la mise en {\oe}uvre en C). Le mode et le type d'un
   objet sont souvent identiques.}
-
-Plusieurs opérations --- notamment la création de vecteurs ou les
-opérations arithmétiques et logiques --- entrainent ce que l'on
-appelle la \emph{conversion forcée} (\emph{coercion}) d'un mode vers
-un autre. Nous y revenons plus loin.
-
 
 \subsection{Longueur}
 \label{sec:donnees:objets:longueur}
@@ -204,10 +219,6 @@ qu'il contient. La longueur d'un objet est obtenue avec la fonction
 v <- c(1, 2, 5, 9)
 length(v)
 @
-
-\tipbox{Il est permis --- et parfois utile --- de créer un objet de
-  longueur nulle, c'est-à-dire un objet qui existe, mais qui est
-  vide.}
 
 Au sens R du terme, la longueur d'une chaine de caractères est
 toujours $1$. Un objet de mode \code{character} doit contenir
@@ -225,6 +236,10 @@ length(v2)
 nchar(v2)
 @
 
+\tipbox{Il est permis --- et parfois utile --- de créer un objet de
+  longueur nulle, c'est-à-dire un objet qui existe, mais qui est
+  vide.}
+
 \subsection{Valeurs spéciales}
 \label{sec:donnees:objets:NA_et_al}
 
@@ -236,8 +251,9 @@ Vous devriez connaitre les caractéristiques spéciales de ces objets
 afin d'en tirer pleinement profit.
 
 L'objet \code{NA} sert à représenter une donnée manquante. Chose
-quelque peu surprenante, c'est un objet de mode \icode{logical}. Cependant,
-\code{NA} ne peut être considéré ni \code{TRUE}, ni \code{FALSE}.
+quelque peu surprenante, c'est un objet de mode \icode{logical}. Chose
+encore plus surprenante, \code{NA} n'est cependant ni \code{TRUE}, ni
+\code{FALSE}.
 <<echo=TRUE>>=
 mode(NA)
 length(NA)
@@ -246,9 +262,9 @@ isFALSE(NA)
 @
 Toute opération, y compris la comparaison, impliquant la valeur
 \code{NA} a comme résultat \code{NA}. Par conséquent, la valeur
-\code{NA} n'est égale à aucune autre, pas même elle-même! Pour tester
-si une valeur est manquante, vosu devez avoir recours à la fonction
-\Icode{is.na}.
+\code{NA} n'est égale à aucune autre, \emph{pas même elle-même}! Pour
+tester si une valeur est manquante, vous devez avoir recours à la
+fonction \Icode{is.na}.
 <<echo=TRUE>>=
 x <- NA
 x == NA
@@ -342,6 +358,10 @@ dim(x)
 attr(x, "methode") <- NULL
 attributes(x)
 @
+
+\gotorbox{Étudiez les lignes \reflines{donnees:objets}
+  du fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:donnees:exemples}.}
 
 <<script, results=hide>>=
 ###
@@ -477,11 +497,6 @@ names(x) <- letters[1:24]  # attribution d'étiquettes
 x                          # identification facilitée `\labelline{donnees:objets:fin}`
 @
 
-\gotorbox{Étudiez les lignes \reflines{donnees:objets}
-  du fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:donnees:exemples}.}
-
-
 
 \section{Matrice et tableau}
 \label{sec:donnees:matrice}
@@ -496,12 +511,11 @@ dimensions.\footnote{%
   Il est donc correct de dire qu'une matrice est un tableau à deux
   dimensions.} %
 
-Nous avons établi d'entrée de jeu à la \autoref{sec:premiers:vecteurs}
+Nous avons établi d'entrée de jeu à la \autoref{sec:bases:vecteurs}
 qu'en R, tout est un vecteur. C'est aussi vrai pour les matrices et
 tableaux, qui ne sont rien d'autre que des vecteurs dotés d'un
-attribut \icode{dim} (\autoref{sec:premiers:objets:attributs}). Ces
-objets sont donc stockés, et peuvent être manipulés, exactement comme
-des vecteurs simples.
+attribut \icode{dim}. Ces objets sont donc stockés, et peuvent être
+manipulés, exactement comme des vecteurs simples.
 
 Une \Index{matrice}matrice est un vecteur avec un attribut \icode{dim}
 de longueur $2$. La présence de cet attribut change implicitement la
@@ -536,19 +550,19 @@ qu'un vecteur simple n'a pas d'attribut \code{dim}.
 
   La fonction \icode{matrix} possède un argument \code{byrow} qui
   permet d'inverser l'ordre de remplissage, mais il vaut mieux
-  vous habituer à la convention de R qu'essayer constamment de la
+  vous habituer à la convention de R que d'essayer constamment de la
   contourner.}
 
-L'ordre de remplissage inhabituel des tableaux rend leur manipulation
-difficile si on ne les visualise pas correctement. Imaginons un
-tableau de dimensions $3 \times 4 \times 5$: il faut voir le tableau
-comme cinq matrices $3 \times 4$ (remplies par colonne!) les unes
-\emph{derrière} les autres. Autrement dit, le tableau est un prisme
-rectangulaire haut de $3$ unités, large de $4$ et profond de $5$. Si
-l'on ajoute une quatrième dimension, cela revient à aligner des
-prismes les uns derrière les autres, et ainsi de suite. La
+L'ordre de remplissage inhabituel des tableaux vous causera des maux
+de tête si vous ne les visualisez pas correctement. Prenez le cas d'un
+tableau de dimensions $3 \times 4 \times 5$: il vous faut voir le
+tableau comme cinq matrices $3 \times 4$ (remplies par colonne!) les
+unes \emph{derrière} les autres. Autrement dit, le tableau est un
+prisme rectangulaire haut de $3$ unités, large de $4$ et profond de
+$5$. Si l'on ajoute une quatrième dimension, cela revient à aligner
+des prismes les uns derrière les autres, et ainsi de suite. La
 \autoref{fig:donnees:tableaux} fournit une représentation schématique
-des tableaux à trois et quatre dimensions.
+des tableaux à trois et à quatre dimensions.
 
 \begin{figure}[t]
   \centering
@@ -607,16 +621,14 @@ des tableaux à trois et quatre dimensions.
   \label{fig:donnees:tableaux}
 \end{figure}
 
-L'indiçage\Index{indiçage!matrice} des matrices et tableaux se fait
+L'indiçage\Index{indiçage!matrice} des matrices et des tableaux se fait
 avec les crochets \code{[~]}\indexcode{[}, comme pour les vecteurs
 simples. D'ailleurs, l'ensemble des règles d'indiçage de la
-\autoref{sec:premiers:vecteurs:indicage} s'appliquent à l'identique aux
+\autoref{sec:bases:vecteurs:indicage} s'appliquent à l'identique aux
 matrices et tableaux, sinon qu'il faut maintenant préciser des
 indices pour chaque dimension, séparés par des virgules.
-
 Par exemple, on extrait un élément d'une matrice en précisant sa
 position dans chaque dimension de celle-ci.
-
 <<echo=TRUE>>=
 (m <- matrix(c(40, 80, 45, 21, 55, 32), nrow = 2))
 m[1, 2]
@@ -636,9 +648,10 @@ m[c(FALSE, TRUE), c(FALSE, TRUE, TRUE)]
 @
 
 En vertu de la cinquième règle d'indiçage de la
-\autoref{sec:premiers:vecteurs:indicage}, lorsqu'une dimension est
+\autoref{sec:bases:vecteurs:indicage}, lorsqu'une dimension est
 laissée vide dans les crochets, tous les éléments de cette dimension
-sont extraits.
+sont extraits. C'est ainsi que nous pouvons extraire une ligne ou une
+colonne entière, par exemple.
 <<echo=TRUE>>=
 m[2, ]
 m[, 1]
@@ -669,6 +682,10 @@ cbind(m, n)
   complément de la présentation ci-dessus. Grâce à des représentations
   visuelles, elle facilite la compréhension des opérations de création
   et d'indiçage des matrices et des tableaux.}
+
+\gotorbox{Étudiez les lignes \reflines{donnees:matrice}
+  du fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:donnees:exemples}.}
 
 <<script, results=hide>>=
 ###
@@ -800,9 +817,6 @@ x[1, , 1]                  # carotte de gauche à droite
 x[1, 1, 1]                 # donnée unique  `\labelline{donnees:matrice:fin}`
 @
 
-\gotorbox{Étudiez les lignes \reflines{donnees:matrice}
-  du fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:donnees:exemples}.}
 
 \section{Application pour les matrices et les tableaux}
 \label{sec:donnees:apply}
@@ -824,46 +838,64 @@ Une analyste souhaite connaitre le nombre total de réclamations par
 entreprise, d'une part, et par année, d'autre part. Cela consiste à
 calculer les sommes par ligne et par colonne de la matrice, dans
 l'ordre. Or, aucun opérateur usuel de R ne permet d'effectuer
-directement de tels calculs. Notre analyste pourrait s'en sortir en
-écrivant des fonctions itératives pour effectuer les calculs.
+directement de tels calculs. Notre analyste prend donc le temps de
+concevoir les algorithmes des procédures qu'elle devrait suivre pour
+effectuer ses calculs. (Par fantaisie, elle en écrit un en langage
+naturel et l'autre en pseudocode.)
 
-<<echo=TRUE>>=
-rowsum <- function(x)
-{
-    n <- nrow(x)
-    res <- numeric(n)
-    for (i in seq_len(n))
-        res[i] <- sum(x[i, ])
-    res
-}
-colsum <- function(x)
-{
-    n <- ncol(x)
-    res <- numeric(n)
-    for (j in seq_len(n))
-        res[j] <- sum(x[, j])
-    res
-}
-@
-<<echo=TRUE>>=
-rowsum(x)
-colsum(x)
-@
+\begin{algorithme}
+  Calculer les sommes par ligne d'une matrice $\mat{A}$.
+  \begin{enumerate}
+  \item Poser $n$ égal au nombre de lignes de $\mat{A}$.
+  \item Définir un vecteur $\mat{s}$ de longueur $n$.
+  \item Poser l'élément $i$ de $\mat{s}$ égal à la somme des éléments
+    de la ligne $i$ de $\mat{A}$, $i = 1, 2, \dots, n$.
+  \item Retourner $\mat{s}$.
+  \end{enumerate}
+\end{algorithme}
 
-L'analyste devrait utiliser ce genre de procédure pour tout calcul de
-sommaire par ligne ou par colonne d'une matrice. Pourtant, seule la
-fonction de sommaire (\icode{sum} dans notre exemple) changerait d'une
-fois à l'autre. En fait, ce que souhaite l'analyste, c'est pouvoir
-facilement \emph{appliquer} une fonction quelconque sur l'une ou
-l'autre des deux dimensions d'une matrice. C'est exactement ce que
-permet de faire la fonction \icode{apply}.
+\begin{algorithme}
+  Calculer les sommes par colonne d'une matrice $\mat{A}$.
+  \begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+colsum(matrice A)
+  n \leftarrow nombre de colonnes de A
+  Sommes \leftarrow vecteur de longueur n
+  Pour i = 1, 2, ..., n
+    y \leftarrow colonne i de la matrice A
+    Sommes[i] \leftarrow somme des éléments y
+  Fin Pour
+  Retourner Sommes
+Fin colsum
+\end{Verbatim}
+  \end{Schunk}
+\end{algorithme}
+
+Vous pouvez vérifier que les résultats de ces algorithmes sont %
+$\Sexpr{paste("(", paste(rowSums(x), collapse = ", "), ")", sep = "")}$ %
+et
+$\Sexpr{paste("(", paste(colSums(x), collapse = ", "), ")", sep = "")}$, %
+dans l'ordre.
+
+L'analyste réalise ensuite rapidement qu'elle devrait utiliser ce
+genre de procédures pour tout calcul de sommaire par ligne ou par
+colonne d'une matrice. Par exemple, pour calculer le nombre moyen de
+réclamations par entreprise et par année, le seul changement qu'elle
+devrait apporter aux algorithmes ci-dessus consisterait à remplacer la
+somme des éléments (d'une ligne ou d'une colonne) par la moyenne. Elle
+se dit alors que tout ce qu'elle souhaite, c'est pouvoir facilement
+\emph{appliquer} une fonction quelconque sur l'une ou l'autre des deux
+dimensions d'une matrice. Si vous avez bien suivi l'analyste dans son
+raisonnement, vous avez compris le concept d'application!
+
+La fonction d'application pour les matrices et les tableaux est la
+bien nommée \icode{apply}.
 <<echo=TRUE>>=
 apply(x, 1, sum)
 apply(x, 2, sum)
 @
 
-La fonction \Icode{apply} s'utilise autant avec les matrices qu'avec
-les tableaux. Sa syntaxe complète est la suivante:
+La syntaxe complète de \icode{apply} est la suivante:
 \begin{Schunk}
 \begin{Verbatim}
 apply(X, MARGIN, FUN, ...)
@@ -886,7 +918,7 @@ apply(X, MARGIN, FUN, ...)
 
 Le quatrième argument de \code{apply} est l'argument formel spécial
 `\icode{...}' dont nous avons traité à la
-\autoref{sec:fonctions:definition}. Il devient très utile, ici,
+\autoref{sec:bases:fonctions:definition}. Il devient très utile, ici,
 lorsque la fonction \code{FUN} prend plus d'un argument.
 
 Pour illustrer, reprenons l'exemple précédent en supposant maintenant
@@ -933,8 +965,8 @@ longueur de \code{MARGIN} est $1$, on applique \code{FUN} sur les
 est $2$, on applique plutôt \code{FUN} à des «carottes» tirées de
 \code{X} (des vecteurs).
 
-Nous allons illustrer ces propos à partir du tableau
-$3 \times 4 \times 2$ ci-dessous.
+Illustrons ces propos à partir du tableau
+$3 \times 4 \times 2$ suivant.
 <<echo=FALSE>>=
 x <- array(sample(0:10, 24, rep = TRUE), c(3, 4, 2))
 @
@@ -942,7 +974,7 @@ x <- array(sample(0:10, 24, rep = TRUE), c(3, 4, 2))
 x
 @
 
-Les expressions suivantes calculent, dans l'ordre:
+Les expressions ci-dessous calculent, dans l'ordre:
 \begin{enumerate}
 \item les sommes des trois tranches horizontales (de l'avant vers
   l'arrière) dans le tableau;
@@ -972,9 +1004,13 @@ apply(x, c(1, 3), sum)
   \icode{apply}. En d'autres termes, les dimensions du résultat de
   \code{apply} sont \code{dim(X)[\code{MARGIN}]}.}
 
+\gotorbox{Étudiez les lignes \reflines{donnees:apply}
+  du fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:donnees:exemples}.}
+
 <<script, results=hide>>=
 ###
-### FONCTION 'apply'  `\labelline{application:apply}`
+### APPLICATION POUR LES MATRICES ET LES TABLEAUX  `\labelline{donnees:apply}`
 ###
 
 ## La fonction 'apply' applique une fonction sur une ou
@@ -1035,134 +1071,14 @@ apply(x, c(2, 3), sum) # sommes des 6 carottes verticales
 sum(x[, 1, 1])         # équivalent pour la première somme
 
 apply(x, c(1, 3), sum) # sommes des 8 carottes transversales
-sum(x[1, , 1])         # équivalent pour la première somme  `\labelline{application:apply:fin}`
+sum(x[1, , 1])         # équivalent pour la première somme  `\labelline{donnees:apply:fin}`
 @
-
-\gotorbox{Étudiez les lignes \reflines{application:apply}
-  du fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:donnees:exemples}.}
-
-
-\section{Fonctions internes utiles}
-\label{sec:donnees:internes}
-
-Cette section présente les fonctions internes couramment utilisées
-pour les opérations sur les matrices. Les exemples utilisent la
-matrice suivante.
-<<echo=FALSE>>=
-x <- matrix(c(2, 1, 4, 3), 2)
-@
-<<echo=TRUE>>=
-x
-@
-
-\begin{ttscript}{rowMeans}
-\item[\Icode{nrow}] \index{matrice!nombre de
-    lignes}nombre de lignes
-<<echo=TRUE>>=
-nrow(x)
-@
-\item[\Icode{ncol}] nombre de \index{matrice!nombre de
-    colonnes}colonnes
-<<echo=TRUE>>=
-ncol(x)
-@
-\item[\Icode{rowSums}] \index{matrice!sommes par ligne}sommes par
-  ligne
-<<echo=TRUE>>=
-rowSums(x)
-@
-\item[\Icode{colSums}] \index{matrice!sommes par colonne}sommes par
-  colonne
-<<echo=TRUE>>=
-colSums(x)
-@
-\item[\Icode{rowMeans}] \index{matrice!moyennes par ligne}moyennes par
-  ligne
-<<echo=TRUE>>=
-rowMeans(x)
-@
-\item[\Icode{colMeans}] \index{matrice!moyennes par colonne}moyennes
-  par colonne
-<<echo=TRUE>>=
-colMeans(x)
-@
-\item[\code{\%*\%}] \index{matrice!produit}produit matriciel
-<<echo=TRUE>>=
-x %*% x
-@
-\item[\Icode{t}] \index{matrice!transposée}transposée
-<<echo=TRUE>>=
-t(x)
-@
-\item[\Icode{det}] \index{matrice!déterminant}déterminant
-<<echo=TRUE>>=
-det(x)
-@
-\item[\Icode{solve}] avec un seul argument (une matrice carrée):
-  \index{matrice!inverse}inverse
-<<echo=TRUE>>=
-solve(x)
-@
-  avec deux arguments (une matrice
-  carrée et un vecteur): solution du système d'équations linéaires
-  $\mat{A} \mat{x} = \mat{b}$
-<<echo=TRUE>>=
-solve(x, c(1, 2))
-@
-\item[\Icode{diag}] avec une matrice en argument:
-  \index{matrice!diagonale}diagonale de la matrice
-<<echo=TRUE>>=
-diag(x)
-@
-  avec un vecteur en
-  argument: matrice diagonale formée avec le vecteur
-<<echo=TRUE>>=
-diag(c(5, 1))
-@
-  avec un scalaire
-  $p$ en argument: \index{matrice!identité}matrice identité
-  $p \times p$
-<<echo=TRUE>>=
-diag(2)
-@
-\end{ttscript}
-
-<<script, results=hide>>=
-###
-### FONCTIONS INTERNES UTILES  `\labelline{donnees:internes}`
-###
-
-## On se donne un vecteur de 16 éléments.
-(A <- sample(1:10, 16, replace = TRUE))
-
-## Opérations sur les matrices.
-dim(A) <- c(4, 4)          # conversion en une matrice 4 x 4
-b <- c(10, 5, 3, 1)        # vecteur quelconque
-A                          # matrice 'A'
-t(A)                       # transposée
-solve(A)                   # inverse
-solve(A, b)                # solution de Ax = b
-A %*% solve(A, b)          # vérification de la réponse
-diag(A)                    # extraction de la diagonale de 'A'
-diag(b)                    # matrice diagonale formée avec 'b'
-diag(4)                    # matrice identité 4 x 4
-(A <- cbind(A, b))         # matrice 4 x 5
-nrow(A)                    # nombre de lignes de 'A'
-ncol(A)                    # nombre de colonnes de 'A'
-rowSums(A)                 # sommes par ligne
-colSums(A)                 # sommes par colonne  `\labelline{donnees:internes:fin}`
-@
-
-\gotorbox{Étudiez les lignes \reflines{donnees:internes}
-  du fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:donnees:exemples}.}
 
 
 \section{Liste}
 \label{sec:donnees:liste}
 
-La liste\index{liste} est la structure de données la plus générale et
+La liste\Index{liste} est la structure de données la plus générale et
 polyvalente du langage R. Si les éléments d'un vecteur simple doivent
 tous être du même mode, ceux de la liste peuvent être de n'importe
 quel mode, y compris le mode \icode{list}. Par conséquent, il est
@@ -1189,7 +1105,9 @@ L'indiçage\Index{indiçage!liste} des listes recèle quelques subtilités
 auxquelles il faut porter une attention particulière. Tout d'abord, il
 existe trois opérateurs d'indiçage: les crochets simples usuels
 \code{[~]}, les crochets doubles \code{[[~]]} et le signe de dollar
-\code{\$}.
+\code{\$} (ces deux derniers opérateurs figurent au
+\autoref{tab:bases:operateurs}, mais nous n'en avions pas parlé
+jusqu'ici).
 
 \begin{itemize}
 \item Les crochets simples\indexcode{[} fonctionnent avec la liste
@@ -1241,6 +1159,12 @@ la liste est importante.
 <<echo=TRUE>>=
 unlist(x)
 @
+
+\gotorbox{La liste est une structure de données très importante en R.
+  Prenez le temps de bien étudier les lignes
+  \reflines{donnees:liste} du fichier de script
+  \code{\scriptfilename} reproduit à la
+  \autoref{sec:donnees:exemples}.}
 
 <<script, results=hide>>=
 ###
@@ -1316,17 +1240,12 @@ unlist(x, recursive = FALSE) # ne pas appliquer aux sous-listes
 unlist(x, use.names = FALSE) # éliminer les étiquettes  `\labelline{donnees:liste:fin}`
 @
 
-\gotorbox{La liste est une structure de données très importante en R.
-  Prenez le temps de bien étudier les lignes
-  \reflines{donnees:liste} du fichier de script
-  \code{\scriptfilename} reproduit à la
-  \autoref{sec:donnees:exemples}.}
 
 \section{Application pour les listes et les vecteurs}
 \label{sec:donnees:lapply}
 
-Les idées de la sous-section précédente se transposent sans mal aux
-listes et aux vecteurs. En effet, il n'y a pas d'arithmétique
+Les idées de la \autoref{sec:donnees:apply} se transposent sans mal
+aux listes et aux vecteurs. En effet, il n'y a pas d'arithmétique
 vectorielle qui tienne pour les listes. Pour effectuer une opération
 sur chaque élément d'une liste, il faut utiliser une procédure
 itérative, procédure que R masque avec des fonctions d'application.
@@ -1351,13 +1270,14 @@ lapply(X, FUN, ...)
   n'aient préséance.
 \end{itemize}
 
-Nous avons déjà rencontré la fonction \icode{sample} qui permet de
-tirer un échantillon aléatoire parmi un ensemble de valeurs. Le
-premier argument de \code{sample} est \code{x}, l'ensemble de valeurs.
-Le second argument est \code{size}, la taille de l'échantillon. Les
-expressions ci-dessous permettent de créer une liste formée de quatre
-vecteurs aléatoires de taille $5$, $6$, $7$ et $8$; de calculer la
-somme de chacun de ces vecteurs; de trier chacun des vecteurs.
+Vous avez déjà rencontré dans les exemples la fonction \icode{sample}
+qui permet de tirer un échantillon aléatoire parmi un ensemble de
+valeurs. Le premier argument de \code{sample} est \code{x}, l'ensemble
+de valeurs. Le second argument est \code{size}, la taille de
+l'échantillon. Les expressions ci-dessous permettent, dans l'ordre: de
+créer une liste formée de quatre vecteurs aléatoires de taille $5$,
+$6$, $7$ et $8$; de calculer la somme de chacun de ces vecteurs; de
+trier chacun des vecteurs.
 <<echo=TRUE>>=
 (x <- lapply(5:8, sample, x = 1:10))
 lapply(x, sum)
@@ -1377,7 +1297,7 @@ sapply(X, FUN, ...)
 \item Si les résultats de l'application sont tous des vecteurs de
   longueur $1$, alors \code{sapply} retourne un vecteur.
 \item Si les résultats de l'application sont des vecteurs de la même
-  longueur supérieure à $a$, alors \code{sapply} retourne une
+  longueur supérieure à $1$, alors \code{sapply} retourne une
   matrice, remplie comme toujours par colonne.
 \item Si les résultats de l'application sont des vecteurs de longueurs
   différentes, alors \code{sapply} est identique à \code{lapply}.
@@ -1394,10 +1314,11 @@ sapply(x, sort)
   vecteur avec \code{sapply}, ou modifier \code{f} pour y intégrer un
   appel à \code{sapply}.}
 
-\importantbox{Dans un grand nombre de cas, il est possible de
-  remplacer les boucles \icode{for} par des applications avec
-  \icode{lapply} ou \icode{sapply}. On ne saurait donc trop insister
-  sur l'importance de ces deux fonctions.}
+\importantbox{Outre l'\index{arithmetique@arithmétique
+    vectorielle}algèbre vectorielle, l'application avec \icode{lapply}
+  et \icode{sapply} constitue le principal moyen d'effectuer des
+  calculs répétitifs dans R. On ne saurait donc trop insister sur
+  l'importance de ces deux fonctions.}
 
 Autre membre de la famille des fonctions d'application sur les listes
 et les vecteurs, \Icode{mapply} est une version multidimensionnelle de
@@ -1411,74 +1332,21 @@ Le résultat de \code{mapply} est l'application de la fonction
 \code{FUN} aux premiers éléments de tous les arguments contenus dans
 `\code{...}', puis à tous les seconds éléments, et ainsi de suite.
 
-Ainsi, si \code{v} et \code{w} sont des vecteurs, \code{mapply(FUN, v,
-  w)} retourne sous forme de liste, de vecteur ou de matrice, selon le
-cas, \code{FUN(v[1], w[1])}, \code{FUN(v[2], w[2])}, etc.
+Par exemple, si \code{v} et \code{w} sont des vecteurs,
+\code{mapply(FUN, v, w)} retourne sous forme de liste, de vecteur ou
+de matrice, selon le cas, \code{FUN(v[1], w[1])}, \code{FUN(v[2],
+  w[2])}, \code{FUN(v[3], w[3])}, etc.
 
-
-\section{Facteur}
-\label{sec:donnees:facteur}
-
-Il est très courant en analyse de données de travailler avec des
-catégories comme la couleur («rouge», «vert», «bleu»), la taille
-(«petit», «moyen», «grand») ou la position géographique (pays,
-province, état). Bien sûr, un vecteur de mode \code{character} suffit
-pour stocker ce genre de données. Cependant, R propose une structure
-de données dédiée pour les données catégorielles qui permet
-d'automatiser plusieurs traitements: le facteur.
-
-Un facteur est un vecteur de données correspondant à des catégories. À
-ce titre, il devrait normalement afficher un fort taux de redondance:
-inutile de définir des catégories s'il y en a une différente pour
-chaque donnée, n'est-ce pas?
-
-Les fonctions de base pour créer et manipuler des facteurs sont
-\Icode{factor} et \Icode{levels}. R représente les données sous forme
-de chaine de caractères, mais il les stocke et les traite à l'interne
-comme un vecteur d'entiers.
-<<echo=TRUE>>=
-(grandeurs <- factor(c("S", "S", "L", "XL",
-                       "M", "M", "L", "L")))
-levels(grandeurs)
-@
-
-En programmation, les facteurs sont assez peu utilisés en tant que
-structure de données. Par contre, ils servent implicitement dans les
-calculs par catégorie de données; nous y reviendrons au
-\autoref{chap:donnees} quand nous traiterons des fonctions
-d'application.
-
-
-\section{Application pour les groupes de données}
-\label{sec:donnees:tapply}
-
-La fonction \Icode{tapply} applique une fonction à chacun des groupes
-de données définis par les catégories d'un facteur ou d'une
-combinaison de facteurs. Pour mieux comprendre, étudions la syntaxe de
-la fonction:
-\begin{Schunk}
-\begin{Verbatim}
-tapply(X, INDEX, FUN, ...)
-\end{Verbatim}
-\end{Schunk}
-\begin{itemize}
-\item \code{X} est un vecteur.
-\item \code{INDEX} est un facteur ou une liste de facteurs, chacun de la
-  même longueur que \code{X}.
-\item \code{FUN} est la fonction à appliquer à chacun des groupes de
-  données définis par les catégories des facteurs dans \code{INDEX}.
-\end{itemize}
-<<echo=TRUE>>=
-x <- data.frame(couleur=c("r", "v", "r", "r", "v"),
-                score=c(2, 0, 4, 3, 10))
-str(x)
-tapply(x$score, x$couleur, mean)
-@
+\gotorbox{Étudiez les lignes \reflines{donnees:lsmapply}
+  du fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:donnees:exemples}.}
 
 <<script, results=hide>>=
 ###
-### FONCTIONS 'lapply' ET 'sapply'  `\labelline{application:lstapply}`
+### APPLICATION POUR LES LISTES ET LES VECTEURS  `\labelline{donnees:lsmapply}`
 ###
+
+## FONCTIONS 'lapply' ET 'sapply'
 
 ## La fonction 'lapply' applique une fonction à tous les
 ## éléments d'un vecteur ou d'une liste et retourne une liste,
@@ -1624,57 +1492,45 @@ x <- lapply(rep(12, 4), sample, x = 1:100)
 
 ## Moyennes tronquées à 0, 10, 20 et 30 %, respectivement, de
 ## ces quatre échantillons aléatoires.
-mapply(mean, x, 0:3/10)
-
-## FONCTION 'tapply'
-
-## Le jeu de données 'airquality' livré avec R contient les
-## mesures quotidiennes de la qualité de l'air à New York
-## Daily entre mai et septembre 1973.
-##-!- ?airquality                # rubrique d'aide du jeu de données
-
-## La colonne 'Temp' contient la température du jour et la
-## colonne 'Month', le mois (sous forme d'entier de 5 à 9).
-##
-## La fonction 'tapply' permet de calculer facilement la
-## température moyenne par mois.
-tapply(airquality$Temp, airquality$Month, mean)
-
-## Équivalent (sauf pour la présentation des résultats).
-by(airquality$Temp, airquality$Month, mean) #-*- `\labelline{application:lstapply:fin}`
+mapply(mean, x, 0:3/10)    #-*- `\labelline{donnees:lsmapply:fin}`
 @
 
-\gotorbox{Étudiez les lignes \reflines{application:lstapply}
-  du fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:donnees:exemples}.}
 
-
-\section{\emph{Data frames}}
+\section{Tableau de données}
 \label{sec:donnees:dataframes}
 
-Le \Index{data frame|emph}\emph{data frame} est une structure de
-données de R sur laquelle reposent plusieurs procédures statistiques
-comme la régression linéaire. Un \emph{data frame} est un
-hybride entre la matrice et la liste: c'est un tableau rectangulaire
-de données, mais dont chaque colonne peut être d'un mode différent.
-Pensons, par exemple, à un tableau avec des noms (mode
-\code{character}) dans une colonne et des notes (mode \code{numeric})
-dans une autre.
+Le \Index{tableau de données}\index{data frame|see{tableau de
+    données}}tableau de données (\emph{data frame}\footnote{%
+  Il n'y a pas de traduction française universelle pour \emph{data
+    frame}, mais «tableau de données» semble la plus répandue. Ne vous
+  surprenez pas de voir tout bonnement «data frame» dans les messages
+  français de R. Comme c'est souvent le cas, des nuances se perdent
+  dans la traduction puisque ce n'est pas pour rien si la structure de
+  données s'appelle \emph{data frame} et non \emph{data table}.
+  Discuter de la raison est toutefois hors de la portée de cet
+  ouvrage.}) %
+est une structure de données de R sur laquelle reposent plusieurs
+procédures statistiques comme la régression linéaire. Un tableau de
+données est un hybride entre la matrice et la liste: il s'agit d'un
+tableau rectangulaire de données, mais dont chaque colonne peut être
+d'un mode différent. Pensons, par exemple, à un tableau avec des noms
+(mode \code{character}) dans une colonne et des notes (mode
+\code{numeric}) dans une autre.
 
-Plus formellement, un \emph{data frame} est une liste de classe
-\code{data.frame} dont tous les éléments sont de la même longueur (ou
-comptent le même nombre de lignes, si les éléments sont des matrices).
-Chaque élément de la liste correspond à une colonne du \emph{data
-  frame}. On crée un \emph{data frame} avec la fonction
-\Icode{data.frame} ou, pour convertir un autre type d'objet en
-\emph{data frame}, avec \Icode{as.data.frame}.
+Plus formellement, un \index{tableau de données}tableau de données est
+une liste de classe \code{data.frame} dont tous les éléments sont de
+la même longueur (ou comptent le même nombre de lignes, si les
+éléments sont des matrices). Chaque élément de la liste correspond à
+une colonne du tableau. On crée un tableau de données avec la fonction
+\Icode{data.frame} ou, pour convertir un autre type d'objet en tableau
+de données (notamment les matrices), avec \Icode{as.data.frame}.
 <<echo=TRUE>>=
 (x <- data.frame(Nom = c("Pierre", "Jean", "Jacques"),
                  Age = c(42, 34, 19),
                  Fumeur = c(TRUE, TRUE, FALSE)))
 @
 
-Le \emph{data frame} peut être indicé à la fois comme une liste (pour
+Le tableau de données peut être indicé à la fois comme une liste (pour
 l'extraction des colonnes) et comme une matrice (pour l'extraction des
 lignes ou des colonnes).
 <<echo=TRUE>>=
@@ -1683,47 +1539,31 @@ x[, 1]
 x$Age
 @
 
+Il est possible d'ajouter des lignes ou des colonnes à un tableau de
+données avec les fonctions \icode{rbind} et \icode{cbind}.
+
 \tipbox{Vous remarquerez, ci-dessus, que les données de la colonne
   \code{Nom} sont considérées comme des facteurs. C'est une
   caractéristique de la fonction \code{data.frame} de convertir
   automatiquement les chaines de caractères en facteurs. L'option
   \code{stringAsFactors = FALSE} permet d'éviter la conversion
-  automatique.}
+  forcée.}
 
-Il est possible d'ajouter des lignes ou des colonnes à un \emph{data
-  frame} avec les fonctions \icode{rbind} et \icode{cbind}.
+\gotorbox{Étudiez les quelques exemples de tableaux de données
+  présentés aux lignes \reflines{donnees:dataframe} du fichier de
+  script \code{\scriptfilename} reproduit à la
+  \autoref{sec:donnees:exemples}.}
 
 <<script, results=hide>>=
 ###
-### FACTEUR  `\labelline{donnees:facteur+df}`
+### TABLEAU DE DONNÉES  `\labelline{donnees:dataframe}`
 ###
 
-## Les facteurs jouent un rôle important en analyse de
-## données, surtout pour classer des données en diverses
-## catégories. Les données d'un facteur devraient normalement
-## afficher un fort taux de redondance.
-##
-## Reprenons l'exemple du chapitre.
-(grandeurs <-
-     factor(c("S", "S", "L", "XL", "M", "M", "L", "L")))
-levels(grandeurs)          # catégories
-as.integer(grandeurs)      # représentation interne
-
-## Dans le présent exemple, nous pourrions souhaiter que R
-## reconnaisse le fait que S < M < L < XL. C'est possible avec
-## les facteurs *ordonnés*.
-factor(c("S", "S", "L", "XL", "M", "M", "L", "L"),
-       levels = c("S", "M", "L", "XL"),
-       ordered = TRUE)
-
-###
-### DATA FRAME
-###
-
-## Un data frame est une liste dont les éléments sont tous de
-## la même longueur. Il comporte un attribut 'dim', ce qui fait
-## qu'il est représenté comme une matrice. Cependant, les
-## colonnes peuvent être de modes différents.
+## Un tableau de données (data frame) est une liste dont les
+## éléments sont tous de la même longueur. Il comporte un
+## attribut 'dim', ce qui fait qu'il est représenté comme une
+## matrice. Cependant, les colonnes peuvent être de modes
+## différents.
 ##
 ## Nous créons ici le même data frame que dans l'exemple du
 ## chapitre, mais avec l'option 'stringsAsFactors = FALSE'
@@ -1759,31 +1599,268 @@ USArrests[1, ]             # première ligne
 ## Par exemple, nous pouvons extraire ainsi le nombre
 ## d'assauts dans les états comptant un taux de meurtre
 ## supérieur à 10.
-subset(USArrests, Murder > 10, select = Assault) #-*- `\labelline{donnees:facteur+df:fin}`
+subset(USArrests, Murder > 10, select = Assault) #-*- `\labelline{donnees:dataframe:fin}`
 @
 
-\gotorbox{Étudiez les lignes \reflines{donnees:facteur+df}
+
+\section{Facteur}
+\label{sec:donnees:facteur}
+
+Il est très courant en analyse de données de travailler avec des
+catégories comme la couleur («rouge», «vert», «bleu»), la taille
+(«petit», «moyen», «grand») ou la position géographique (pays,
+province, état). Bien sûr, un vecteur de mode \code{character} suffit
+pour stocker ce genre de données. Cependant, R propose une structure
+de données dédiée pour les données catégorielles qui permet
+d'automatiser plusieurs traitements: le facteur.
+
+Un facteur est un vecteur de données correspondant à des catégories. À
+ce titre, il devrait normalement afficher un fort taux de redondance:
+inutile de définir des catégories s'il y en a une différente pour
+chaque donnée, n'est-ce pas?
+
+Les fonctions de base pour créer et manipuler des facteurs sont
+\Icode{factor} et \Icode{levels}. R représente les données sous forme
+de chaine de caractères, mais il les stocke et les traite à l'interne
+comme un vecteur d'entiers.
+<<echo=TRUE>>=
+(grandeurs <- factor(c("S", "S", "L", "XL",
+                       "M", "M", "L", "L")))
+levels(grandeurs)
+@
+
+Les facteurs sont assez peu utilisés en tant que structure de données
+en programmation. Par contre, ils s'avèrent essentiels pour les
+calculs par groupe de données à l'aide d'une fonction
+d'application.
+
+
+\section{Application pour les groupes de données}
+\label{sec:donnees:tapply}
+
+La fonction \Icode{tapply} applique une fonction à chacun des groupes
+de données définis par les catégories d'un facteur ou d'une
+combinaison de facteurs. Pour mieux comprendre, étudions la syntaxe de
+la fonction:
+\begin{Schunk}
+\begin{Verbatim}
+tapply(X, INDEX, FUN, ...)
+\end{Verbatim}
+\end{Schunk}
+\begin{itemize}
+\item \code{X} est un vecteur.
+\item \code{INDEX} est un facteur ou une liste de facteurs, chacun de la
+  même longueur que \code{X}.
+\item \code{FUN} est la fonction à appliquer à chacun des groupes de
+  données définis par les catégories des facteurs dans \code{INDEX}.
+\end{itemize}
+<<echo=TRUE>>=
+x <- data.frame(couleur=c("r", "v", "r", "r", "v"),
+                score=c(2, 0, 4, 3, 10))
+str(x)
+tapply(x$score, x$couleur, mean)
+@
+
+\gotorbox{Étudiez les lignes \reflines{donnees:facteur}
   du fichier de script \code{\scriptfilename}
   reproduit à la \autoref{sec:donnees:exemples}.}
+
+<<script, results=hide>>=
+###
+### FACTEUR  `\labelline{donnees:facteur}`
+###
+
+## Les facteurs jouent un rôle important en analyse de
+## données, surtout pour classer des données en diverses
+## catégories. Les données d'un facteur devraient normalement
+## afficher un fort taux de redondance.
+##
+## Reprenons l'exemple du chapitre.
+(grandeurs <-
+     factor(c("S", "S", "L", "XL", "M", "M", "L", "L")))
+levels(grandeurs)          # catégories
+as.integer(grandeurs)      # représentation interne
+
+## Dans le présent exemple, nous pourrions souhaiter que R
+## reconnaisse le fait que S < M < L < XL. C'est possible avec
+## les facteurs *ordonnés*.
+factor(c("S", "S", "L", "XL", "M", "M", "L", "L"),
+       levels = c("S", "M", "L", "XL"),
+       ordered = TRUE)
+
+###
+### APPLICATION POUR LES GROUPES DE DONNÉES
+###
+
+## Le jeu de données 'airquality' livré avec R contient les
+## mesures quotidiennes de la qualité de l'air à New York
+## entre mai et septembre 1973.
+##-!- ?airquality                # rubrique d'aide du jeu de données
+
+## La colonne 'Temp' contient la température du jour et la
+## colonne 'Month', le mois (sous forme d'entier de 5 à 9).
+##
+## La fonction 'tapply' permet de calculer facilement la
+## température moyenne par mois.
+tapply(airquality$Temp, airquality$Month, mean)
+
+## Équivalent (sauf pour la présentation des résultats).
+by(airquality$Temp, airquality$Month, mean) #-*- `\labelline{application:lstapply:fin}`
+@
+
 
 \section{Dates}
 \label{sec:donnees:dates}
 
+Vous devez travailler avec des dates. Leur traitement est complexe
+dans n'importe quel langage ou outil d'analyse. Pensez seulement: il
+faut tenir compte du nombre variable de jours par mois, des années
+bissextiles, des secondes intercalaires, des fuseaux horaires, du
+type de calendrier. R contient dans le système de base tout ce dont
+vous aurez besoin pour manipuler les dates: stockage dans divers
+formats, tri, comparaison, génération de suites, etc. Comme point de
+départ, consultez la rubrique d'aide de DateTimeClasses. Plusieurs
+paquetages externes offrent des outils pour faciliter le
+traitement des dates, mais aucun n'est requis pour compléter le
+travail.
+
+
+\gotorbox{Étudiez les lignes \reflines{application:dates}
+  du fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:donnees:exemples}.}
+
+
+\section{Fonctions internes utiles}
+\label{sec:donnees:internes}
+
+Cette section présente les fonctions internes couramment utilisées
+pour les opérations sur les matrices. Les exemples utilisent la
+matrice suivante.
+<<echo=FALSE>>=
+x <- matrix(c(2, 1, 4, 3), 2)
+@
+<<echo=TRUE>>=
+x
+@
+
+\begin{ttscript}{rowMeans}
+\item[\Icode{nrow}] \index{matrice!nombre de
+    lignes}nombre de lignes
+<<echo=TRUE>>=
+nrow(x)
+@
+\item[\Icode{ncol}] nombre de \index{matrice!nombre de
+    colonnes}colonnes
+<<echo=TRUE>>=
+ncol(x)
+@
+\item[\Icode{rowSums}] \index{matrice!sommes par ligne}sommes par
+  ligne
+<<echo=TRUE>>=
+rowSums(x)
+@
+\item[\Icode{colSums}] \index{matrice!sommes par colonne}sommes par
+  colonne
+<<echo=TRUE>>=
+colSums(x)
+@
+\item[\Icode{rowMeans}] \index{matrice!moyennes par ligne}moyennes par
+  ligne
+<<echo=TRUE>>=
+rowMeans(x)
+@
+\item[\Icode{colMeans}] \index{matrice!moyennes par colonne}moyennes
+  par colonne
+<<echo=TRUE>>=
+colMeans(x)
+@
+\item[\code{\%*\%}] \index{matrice!produit}produit matriciel
+<<echo=TRUE>>=
+x %*% x
+@
+\item[\Icode{t}] \index{matrice!transposée}transposée
+<<echo=TRUE>>=
+t(x)
+@
+\item[\Icode{det}] \index{matrice!déterminant}déterminant
+<<echo=TRUE>>=
+det(x)
+@
+\item[\Icode{solve}] avec un seul argument (une matrice carrée):
+  \index{matrice!inverse}inverse
+<<echo=TRUE>>=
+solve(x)
+@
+  avec deux arguments (une matrice
+  carrée et un vecteur): solution du système d'équations linéaires
+  $\mat{A} \mat{x} = \mat{b}$
+<<echo=TRUE>>=
+solve(x, c(1, 2))
+@
+\item[\Icode{diag}] avec une matrice en argument:
+  \index{matrice!diagonale}diagonale de la matrice
+<<echo=TRUE>>=
+diag(x)
+@
+  avec un vecteur en
+  argument: matrice diagonale formée avec le vecteur
+<<echo=TRUE>>=
+diag(c(5, 1))
+@
+  avec un scalaire
+  $p$ en argument: \index{matrice!identité}matrice identité
+  $p \times p$
+<<echo=TRUE>>=
+diag(2)
+@
+\end{ttscript}
+
+\gotorbox{Étudiez les lignes \reflines{donnees:internes}
+  du fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:donnees:exemples}.}
+
+<<script, results=hide>>=
+###
+### FONCTIONS INTERNES UTILES  `\labelline{donnees:internes}`
+###
+
+## On se donne un vecteur de 16 éléments.
+(A <- sample(1:10, 16, replace = TRUE))
+
+## Opérations sur les matrices.
+dim(A) <- c(4, 4)          # conversion en une matrice 4 x 4
+b <- c(10, 5, 3, 1)        # vecteur quelconque
+A                          # matrice 'A'
+t(A)                       # transposée
+solve(A)                   # inverse
+solve(A, b)                # solution de Ax = b
+A %*% solve(A, b)          # vérification de la réponse
+diag(A)                    # extraction de la diagonale de 'A'
+diag(b)                    # matrice diagonale formée avec 'b'
+diag(4)                    # matrice identité 4 x 4
+(A <- cbind(A, b))         # matrice 4 x 5
+nrow(A)                    # nombre de lignes de 'A'
+ncol(A)                    # nombre de colonnes de 'A'
+rowSums(A)                 # sommes par ligne
+colSums(A)                 # sommes par colonne  `\labelline{donnees:internes:fin}`
+@
 
 
 \section{Produit extérieur}
 \label{sec:application:outer}
 
-J'étire quelque peu le concept de fonction d'application pour
-discuter ici de la fonction de produit extérieur \code{outer}. Ce
-n'est pas la fonction la plus intuitive à utiliser, mais elle s'avère
-extrêmement utile pour effectuer plusieurs opérations en une seule
-expression tout en masquant les boucles implicites.
+En étirant un peu le concept, la fonction de produit extérieur
+\code{outer} peut être considérée comme une fonction d'application.
+Son utilisation, du moins, est très similaire aux fonctions
+d'application. Je la présente seulement ici car son résultat est une
+matrice ou un tableau.
 
-La fonction \Icode{outer} calcule le \index{produit!extérieur}produit
-extérieur entre deux vecteurs, c'est à dire le résultat de
-\code{FUN(X[i], Y[j])} pour toutes les valeurs des indices \code{i} et
-\code{j}. La syntaxe de la fonction est la suivante:
+La fonction \Index{outer} est très utile pour effectuer plusieurs
+opérations en une seule expression. Elle calcule le
+\index{produit!extérieur}produit extérieur entre deux vecteurs, c'est
+à dire le résultat de \code{FUN(X[i], Y[j])} pour toutes les valeurs
+des indices \code{i} et \code{j}. La syntaxe de la fonction est la
+suivante:
 \begin{Schunk}
 \begin{Verbatim}
 outer(X, Y, FUN, ...)
@@ -1792,11 +1869,11 @@ outer(X, Y, FUN, ...)
 \begin{itemize}
 \item \code{X} et \code{Y} sont deux objets, normalement des vecteurs
   ou des matrices.
-\item \code{FUN} est la fonction à appliquer (\code{"*"} par défaut)
-  entre chacun des éléments de \code{X} et chacun des éléments de
-  \code{Y}. Lorsque \code{FUN} est un opérateur arithmétique du
-  \autoref{tab:premiers:operateurs}, il faut placer le symbole entre
-  guillemets: \code{"*"}, \code{"+"}, \code{"<="}, etc.
+\item \code{FUN} est la fonction à appliquer (\code{"*"}, ou le
+  produit, par défaut) entre chacun des éléments de \code{X} et chacun
+  des éléments de \code{Y}. Lorsque \code{FUN} est un opérateur
+  arithmétique du \autoref{tab:bases:operateurs}, il faut placer le
+  symbole entre guillemets: \code{"*"}, \code{"+"}, \code{"<="}, etc.
 \end{itemize}
 La dimension du résultat de \code{outer} est \code{c(dim(X), dim(Y))}.
 <<echo=TRUE>>=
@@ -1809,6 +1886,9 @@ L'opérateur \Icode{\%o\%} est un raccourci de \code{outer(X, Y, "*")}.
   Visionnez la vidéo sur la
   \link{https://youtu.be/cyPUAnieWHw}{fonction \icode{outer}} pour
   mieux comprendre le rôle de cette fonction.}
+
+\gotorbox{Étudiez les lignes \reflines{donnees:outer}
+  du fichier de script \code{\scriptfilename}.}
 
 <<script, results=hide>>=
 ###
@@ -1830,14 +1910,8 @@ x %o% y                    # équivalent plus court
 ## faut placer le symbole entre guillemets " ".
 outer(x, y, "+")           # «somme extérieure»
 outer(x, y, "<=")          # toutes les comparaisons possibles
-outer(x, y, function(x, y) x + 2 * y) # fonction quelconque  `\labelline{application:outer:fin}`
+outer(x, y, function(x, y) x + 2 * y) # fonction quelconque  `\labelline{donnees:outer:fin}`
 @
-
-\gotorbox{Étudiez les lignes \reflines{application:outer}
-  du fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:application:exemples}.}
-
-
 
 
 \section{Exemples}
