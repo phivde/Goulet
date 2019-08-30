@@ -42,10 +42,10 @@ source("Stangle.R")        # lancement de Stangle
 question et ses multiples variantes est assurément l'une des plus
 fréquemment posées par les utilisateurs de R. La réponse courte: oui,
 c'est possible d'importer (c'est la terminologie correcte) des données
-de source externe dans R. La réponse longue, cependant: oui, c'est
-possible, mais c'est souvent compliqué. Il en va de même pour la
-procédure inverse consistant à exporter des données de R pour usage
-dans une autre application.
+de source externe dans R. La réponse longue: oui, c'est possible, mais
+c'est souvent compliqué. Il en va de même pour la procédure inverse
+consistant à exporter des données de R pour usage dans une autre
+application.
 
 Ce qui rend souvent ardu l'échange de données entre différents
 systèmes et logiciels, c'est le nombre de facteurs qui influencent
@@ -67,11 +67,11 @@ données sous forme de fichiers en format texte brut\footnote{%
 \tipbox{Il existe de multiples autres façons de travailler avec des
   données externes, notamment l'importation de fichiers de tableurs
   comme Excel ou, encore mieux, l'interaction directe avec une base de
-  données depuis R. Consultez le manuel \emph{R Data Import/Export}
-  pour en savoir plus.}
+  données depuis R. Consultez \emph{R Data Import/Export} pour en
+  savoir plus.}
 
 
-\subsection{Importation de vecteurs de données}
+\section{Importation de vecteurs de données}
 \label{sec:import-export:scan}
 
 %% création des fichiers vecteur.data et matrice.data
@@ -125,7 +125,7 @@ writeLines(readLines("matrice.data"))
   \label{fig:import-export:scan}
 \end{figure}
 
-La fonction \Icode{scan} permet d'importer de telles données dans R.
+La fonction \Icode{scan} permet d'importer des données brutes dans R.
 Elle lit l'intégralité des données du fichier dont le nom est donné en
 premier argument, ligne par ligne, puis retourne un vecteur. Seul
 l'ordre des données dans le fichier est pris en compte, leur
@@ -166,7 +166,8 @@ unlink("vecteur.data")
 unlink("matrice.data")
 @
 
-\subsection{Importation de tableaux de données}
+
+\section{Importation de tableaux de données}
 \label{sec:import-export:read.table}
 
 %% création des fichiers carburant.txt et carburant.csv
@@ -185,8 +186,8 @@ write.csv(carb, file = "carburant.csv", row.names = FALSE)
 Les données des tableurs et des bases de données sont habituellement
 organisées en tableau rectangulaire où chaque ligne représente un
 «sujet», ou une «entrée», et chaque colonne représente une
-caractéristique observée chez les sujets. On reconnait là la structure
-du \emph{data frame} dans R.
+caractéristique observée chez les sujets. Vous aurez reconnu la
+structure du tableau de données (\emph{data frame}) dans R.
 
 Les tableurs, les bases de données et les différents logiciels
 statistiques peuvent exporter leurs tableaux de données sous forme de
@@ -271,16 +272,15 @@ unlink("carburant.csv")
   \icode{read.table}. Par exemple, si le fichier de données est encodé
   en UTF-8, ajoutez l'option \code{encoding = "UTF-8"}.}
 
-\subsection{Exportation de données}
+
+\section{Exportation de données}
 \label{sec:import-export:write}
 
 R peut évidemment produire les types de fichiers mentionnés aux
-sections \ref{sec:import-export:scan} et
-\ref{sec:import-export:read.table} pour exporter ses données vers
-d'autres systèmes. Les exemples de la présente section permettent
-d'ailleurs de recréer les fichiers des figures
-\ref{fig:import-export:scan} et \autoref{fig:import-export:read.table}
-(sans les commentaires).
+sections précédentes pour exporter ses données vers d'autres systèmes.
+Les exemples de la présente section permettent d'ailleurs de recréer
+les fichiers des figures \ref{fig:import-export:scan} et
+\ref{fig:import-export:read.table} (sans les commentaires).
 
 L'exportation d'un vecteur simple dans un fichier en format texte brut
 passe par la fonction \Icode{cat}. Les principaux arguments de la
@@ -340,11 +340,12 @@ unlink("carburant.txt")
 unlink("carburant.csv")
 @
 
-<<script, results=hide>>=
-###
-### IMPORTATION ET EXPORTATION DE DONNÉES  `\labelline{donnees:import-export}`
-###
+\gotorbox{Les exemples interactifs du fichier de script
+  \code{\scriptfilename} reproduit à la section suivante vous
+  permettrons de mieux comprendre le fonctionnement des fonctions
+  d'importation et d'exportation.}
 
+<<script, results=hide>>=
 ## Pour illustrer les procédures d'importation et
 ## d'exportation de données, nous allons d'abord exporter des
 ## données dans des fichiers pour ensuite les importer.
@@ -448,20 +449,16 @@ read.csv2("USArrests.csv2")
 ## spécifiés en argument, ici ceux créés précédemment dans le
 ## répertoire de travail.
 unlink(c("vecteur.data", "matrice.data",
-         "USArrests.txt", "USArrests.csv", "USArrests.csv2")) #-*- `\labelline{donnees:import-export:fin}`
+         "USArrests.txt", "USArrests.csv", "USArrests.csv2"))
 @
 
-\gotorbox{Des exemples interactifs vous permettrons de mieux
-  comprendre le fonctionnement des fonctions d'importation et
-  d'exportation. Étudiez les lignes \reflines{donnees:import-export}
-  du fichier de script \code{\scriptfilename} reproduit à la
-  \autoref{sec:import-export:exemples}.}
 
 \section{Exemples}
 \label{sec:import-export:exemples}
 
 \scriptfile{\scriptfilename}
 \lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
+
 
 \section{Exercices}
 \label{sec:import-export:exercices}
@@ -476,15 +473,15 @@ unlink(c("vecteur.data", "matrice.data",
 
 \begin{exercice}
   Importer dans R les données \code{boston} du dépôt de jeux de
-  données de \link{http://lib.stat.cmu.edu/datasets}{StatLib}.
-  Remarquer que les données commencent à la ligne $23$ du fichier. De
-  plus, chaque entrée du fichier compte $14$ variables, mais leurs
-  valeurs sont chaque fois réparties sur deux lignes à raison de $11$
-  variables sur une ligne et $3$ sur l'autre.
+  données de \link{http://lib.stat.cmu.edu/datasets}{StatLib}. Les
+  données débutent à la ligne $23$ du fichier. De plus, chaque entrée
+  du fichier compte $14$ variables, mais leurs valeurs sont chaque
+  fois réparties sur deux lignes à raison de $11$ variables sur une
+  ligne et $3$ sur l'autre.
   \begin{sol}
     Avec les données réparties sur deux lignes, le plus simple demeure
     d'importer les données avec \code{scan} et les replacer dans le
-    bon format avec \code{matrix}. Remarquer comment l'on peut
+    bon format avec \code{matrix}. Remarquez comment l'on peut
     importer directement depuis Internet en spécifiant une adresse URL
     comme nom de fichier.
 <<echo=TRUE, eval=FALSE>>=
