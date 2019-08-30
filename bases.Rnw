@@ -2439,15 +2439,16 @@ normINF <- function(x, y) max(abs(x - y))
 \end{exercice}
 
 \begin{exercice}
+  \label{ex:bases:emrl}
   En vous basant sur l'\autoref{algo:algorithmes:emrl:bis}, composer
-  une fonction \code{mrl} pour calculer l'espérance résiduelle
+  une fonction \code{emrl} pour calculer l'espérance résiduelle
   empirique d'un vecteur \code{x} à un seuil \code{d}.
   \begin{sol}
     La solution repose sur l'indiçage pour effectuer la première étape
     de l'\autoref{algo:algorithmes:emrl:bis} et sur l'utilisation de
     la fonction interne \icode{mean} pour la seconde étape.
 <<echo=TRUE, eval=FALSE>>=
-mrl <- function(x, d) mean(x[x > d]) - d
+emrl <- function(x, d) mean(x[x > d]) - d
 @
   \end{sol}
 \end{exercice}
