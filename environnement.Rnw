@@ -42,29 +42,29 @@ source("Stangle.R")        # lancement de Stangle
   simplifier les fonctions R.
 \end{objectifs}
 
-
-\section{Mise en contexte}
-\label{sec:environnement:contexte}
-
-Au chapitre précédent, nous avons défini une fonction très simple pour
-élever un nombre au carré.
+Ce chapitre vise à expliquer plusieurs règles d'évaluation et de
+portée des variables que nous avons jusqu'ici un peu laissées dans
+l'ombre pour en appeler plutôt à votre bonne intuition. Pour
+illustrer, reprenons l'un de nos tous premiers exemples de fonction au
+\autoref{chap:bases}, celui du calcul du carré d'un nombre avec la
+fonction \code{square}.
 <<echo=TRUE>>=
 square <- function(x) x * x
 @
 
-Intuitivement, la valeur de \code{x} à l'intérieur de la fonction
-\code{square} doit être celle passée en argument, et non celle d'un
-objet \code{x} qui existerait déjà dans l'espace de travail. De plus,
-si un tel objet \code{x} devait exister dans l'espace de travail,
-l'exécution de la fonction \code{square} ne devrait pas modifier sa
-valeur.
+Nous n'avons jamais remis en doute que la valeur de \code{x} à
+l'intérieur de la fonction \code{square} doit être celle passée en
+argument, et non celle d'un objet \code{x} qui existerait déjà dans
+l'espace de travail. De plus, si un tel objet \code{x} devait exister
+dans l'espace de travail, l'exécution de la fonction \code{square} ne
+devrait pas modifier sa valeur.
 <<echo=TRUE>>=
 x <- 5
 square(10)
 x
 @
 
-Examinons maintenant cet exemple quelque peu artificiel, mais
+Examinons maintenant cet autre exemple quelque peu artificiel, mais
 néanmoins instructif, tiré de \citet{Ihaka:R:1996}. Une fonction
 \code{f} calcule le carré d'un nombre, puis affiche le résultat à
 l'écran par le biais d'une autre fonction \code{g}.
@@ -77,12 +77,12 @@ f <- function(x)
 }
 @
 
-On remarquera que l'objet \code{y} n'est pas un argument de la
-fonction, mais qu'il est défini dans \code{f}. De plus, la fonction
-\code{g} utilise \code{y} sans que cet objet ne soit un de ses
-arguments. Dans les circonstances, quels seront, selon vous, les
-résultats des expressions suivantes et, surtout, pourquoi? Allez les
-essayer, je vous attends ici.
+On remarquera que l'objet \code{y} n'est pas un argument de \code{f},
+mais qu'il est défini dans la fonction. De plus, la fonction \code{g}
+utilise \code{y} sans que cet objet ne soit un de ses arguments. Dans
+les circonstances, quels seront, selon vous, les résultats des
+expressions suivantes et, surtout, pourquoi? Allez les essayer, je
+vous attends ici.
 <<echo=TRUE, eval=FALSE>>=
 y <- 123
 f(10)
@@ -97,11 +97,14 @@ chapitre traite également du concept d'évaluation paresseuse auquel
 les programmeurs sont moins souvent directement confrontés, mais qui
 permet aussi de coder plus efficacement.
 
-<<script, results=hide>>=
-###
-### MISE EN CONTEXTE  `\labelline{environnement:contexte}`
-###
+\gotorbox{Avant d'aller plus loin, passez en revue les lignes
+  \reflines{environnement:contexte} du fichier de script
+  \code{\scriptfilename} reproduit à la
+  \autoref{sec:environnement:exemples}. Je vous invite
+  particulièrement à tenter de répondre à la colle de la ligne
+  \ref{lst:environnement:contexte:fin}.}
 
+<<script, results=hide>>=
 ## La portée (domaine où un objet existe et comporte une
 ## valeur) des arguments d'une fonction et de tout objet
 ## défini à l'intérieur de celle-ci se limite à la fonction.
@@ -117,12 +120,6 @@ square(x)                    # passer valeur de 'x' à 'square'
 square(x = x)                # colle... signification?  `\labelline{environnement:contexte:fin}`
 @
 
-\gotorbox{Étudiez les lignes \reflines{environnement:contexte} du
-  fichier de script \code{\scriptfilename} reproduit à la
-  \autoref{sec:environnement:exemples}. Je vous invite
-  particulièrement à tenter de répondre à la colle de la ligne
-  \ref{lst:environnement:contexte:fin}.}
-
 
 \section{Environnement}
 \label{sec:environnement:environnement}
@@ -132,7 +129,8 @@ spécial formé de deux composantes: un
 \emph{dictionnaire}\Index{dictionnaire}\footnote{La traduction
   littérale du terme \emph{frame} utilisé dans la documentation de R
   serait \emph{cadre}, mais ce terme est moins explicite que
-  «dictionnaire».} %
+  «dictionnaire». Oui, il s'agit bien du même \emph{frame} que l'on
+  retrouve dans \emph{data frame}.} %
 constitué de couples symbole-valeur, et un pointeur vers
 l'\emph{environnement englobant}\Index{environnement!englobant}. La
 \autoref{fig:environnement:environnement} propose une
@@ -218,10 +216,6 @@ fonctions. Nous en avons déjà utilisé trois ci-dessus.
   défaut)
 \end{ttscript}
 
-Le code informatique de la \autoref{sec:environnement:exemples}
-contient des exemples plus élaborés de manipulation de l'environnement
-d'une fonction.
-
 \tipbox{La fonction \Icode{ls.str} permet d'afficher en une seule
   commande la liste des objets d'un environnement et les valeurs de
   ceux-ci.}
@@ -295,6 +289,11 @@ prochaine section.
   pour tous les appels de fonctions fait en sorte que ceux-ci coûtent
   cher en temps et en ressources système. C'est pour cette raison que
   le calcul récursif est plutôt inefficace en R.}
+
+\gotorbox{Étudiez les exemples additionnels des lignes
+  \reflines{environnement:environnement} du fichier de script
+  \code{\scriptfilename} reproduit à la
+  \autoref{sec:environnement:exemples}.}
 
 <<script, results=hide>>=
 ###
@@ -381,11 +380,6 @@ ls.str(envir = environment(g))
 g(10)                      #-*- `\labelline{environnement:environnement:fin}`
 @
 
-\gotorbox{Avant d'aller plus loin, passez en revue les exemples des
-  lignes \reflines{environnement:environnement} du fichier de script
-  \code{\scriptfilename} reproduit à la
-  \autoref{sec:environnement:exemples}.}
-
 
 \section{Portée lexicale}
 \label{sec:environnement:portee}
@@ -422,8 +416,7 @@ search()
 \end{itemize}
 
 Les règles de portée lexicale méritent une bonne illustration.
-Reprenons le second exemple de la
-\autoref{sec:environnement:contexte}.
+Reprenons le second exemple de l'introduction du chapitre.
 <<echo=TRUE>>=
 y <- 123
 f <- function(x)
@@ -462,10 +455,9 @@ Celle-ci se voit automatiquement munie d'un environnement dont
 l'environnement englobant est $\rho_1$.
 
 Toujours à l'intérieur de la fonction \code{f}, l'appel \code{g()}
-fait en sorte qu'est créé un nouvel environnement d'évaluation
-$\rho_2$ pour la fonction \code{g}. L'environnement englobant est
-$\rho_1$ et, comme cette fonction n'a aucun argument, son dictionnaire
-est vide:
+crée un nouvel environnement d'évaluation $\rho_2$ pour la fonction
+\code{g}. L'environnement englobant est $\rho_1$ et, comme cette
+fonction n'a aucun argument, son dictionnaire est vide:
 \begin{equation*}
   \rho_2 = \{ ; \rho_1 \}.
 \end{equation*}
@@ -498,6 +490,10 @@ fonctions puisque nous pouvons faire l'économie de passer tous les
 arguments d'une fonction à l'autre. Vous trouverez un exemple complet
 dans le code informatique de la \autoref{sec:environnement:exemples}.
 
+\gotorbox{Étudiez les lignes \reflines{environnement:portee}
+  du fichier de script \code{\scriptfilename} reproduit à la
+  \autoref{sec:environnement:exemples}.}
+
 <<script, results=hide>>=
 ###
 ### PORTÉE LEXICALE  `\labelline{environnement:portee}`
@@ -525,7 +521,8 @@ dans le code informatique de la \autoref{sec:environnement:exemples}.
 ##
 ##   f(x, y) = x (1 + xy)^2 + y (1 - y) + (1 + xy)(1 - y).
 ##
-## Deux termes sont répétés dans cette expression. On a donc
+## Deux termes sont répétés dans cette expression. Nous avons
+## donc
 ##
 ##   a = 1 + xy
 ##   b = 1 - y
@@ -570,10 +567,6 @@ f(2, 3)
 f(2, 4)                    #-*- `\labelline{environnement:portee:fin}`
 @
 
-\gotorbox{Étudiez les lignes \reflines{environnement:portee}
-  du fichier de script \code{\scriptfilename} reproduit à la
-  \autoref{sec:environnement:exemples}.}
-
 
 \section{Évaluation paresseuse}
 \label{sec:environnement:lazy}
@@ -605,6 +598,9 @@ dans l'appel de \code{sumsq}, et ce, seulement au moment d'effectuer
 le calcul \code{y - about}. D'autre part, la valeur de \code{y} sera
 connue au moment d'effectuer ce calcul. Joli, non?
 
+\gotorbox{Étudiez les lignes \reflines{environnement:lazy} du fichier
+  de script \code{\scriptfilename}.}
+
 <<script, results=hide>>=
 ###
 ### ÉVALUATION PARESSEUSE  `\labelline{environnement:lazy}`
@@ -629,13 +625,13 @@ f(0, 1/0)                  # argument 'y' utilisé
 ## Voici un autre exemple plus intéressant tiré de Ihaka et
 ## Gentleman (1996).
 ##
-## Nous savons que tout calcul avec des données manquantes
+## Vous savez que tout calcul avec des données manquantes
 ## retourne 'NA'.
 ##
-## Nous pouvons généraliser la fonction 'sumsq' de la section
-## 5.5 pour faire en sorte qu'elle puisse retirer les
-## éventuelles données manquantes d'un vecteur en argument
-## avant de faire la somme des écarts au carré.
+## Nous pouvons généraliser la fonction 'sumsq' présentée dans
+## le texte du chapitre pour faire en sorte qu'elle puisse
+## retirer les éventuelles données manquantes d'un vecteur en
+## argument avant de faire la somme des écarts au carré.
 ##
 ## Grâce à l'évaluation paresseuse, les données manquantes
 ## seront également supprimées *avant* le calcul de la moyenne
@@ -649,10 +645,6 @@ sumsq <- function(y, about = mean(y), na.rm = FALSE)
 }
 sumsq(c(10, 0, NA, -10), na.rm = TRUE) #-*- `\labelline{environnement:lazy:fin}`
 @
-
-\gotorbox{Étudiez les lignes \reflines{environnement:lazy}
-  du fichier de script \code{\scriptfilename} reproduit à la
-  \autoref{sec:environnement:exemples}.}
 
 
 \section{Exemples}
