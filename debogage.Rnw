@@ -53,19 +53,56 @@ peuvent accélérer la résolution des problèmes. Je présente dans les
 sections suivantes trois techniques de débogage que j'utilise
 régulièrement, de la plus simple à la plus puissante.
 
-Au cours du chapitre, nous allons tâcher de déboguer la fonction dont
-le code se trouve à la \autoref{fig:debogage:rgamma_ar}. Il s'agit de
-la fonction \code{rgamma\_ar} des exemples du
-\autoref{chap:fonctions} (sans les commentaires) dans laquelle
-j'ai inséré quelques petites anomalies. Voyons voir si nous pouvons
-les trouver --- autrement que par comparaison avec une version
-antérieure, bien sûr!
+Au cours du chapitre, nous allons tâcher de déboguer une fonction de
+simulation de nombres aléatoires issus de la distribution gamma avec
+fonction de densité de probabilité
+\begin{equation*}
+  f(x) = \frac{\lambda^\alpha}{\Gamma(\alpha)}\,
+  x^{\alpha - 1} e^{-\lambda x},
+  \quad x > 0, 0 < \alpha < 1, \lambda > 0.
+\end{equation*}
+basée sur l'algorithme d'acceptation-rejet suivant.
+
+\begin{algorithme}
+  \label{algo:debogage:rgamma}
+  Simuler un nombre issu d'une distribution gamma de paramètres
+  $0 < \alpha < 1$ et $\lambda > 0$.
+  \begin{enumerate}
+  \item Simuler $u$, $v$ d'une distribution uniforme sur $(0, 1)$.
+  \item Calculer $y = G^{-1}(u)$, où
+    \begin{equation*}
+      G^{-1}(x) =
+      \begin{cases}
+        \left( \dfrac{\alpha + e}{e}\, x \right)^{1/\alpha},
+        & 0 \leq x \leq e/(\alpha + e) \\
+        - \ln [((1/\alpha) + (1/e))(1 - x)],
+        & e/(\alpha + e) < x \leq 1.
+      \end{cases}
+    \end{equation*}
+  \item Si
+    \begin{displaymath}
+      v \leq
+      \begin{cases}
+        e^{-y},        & 0 \leq y \leq 1 \\
+        y^{\alpha - 1}, & y > 1,
+      \end{cases}
+    \end{displaymath}
+    alors poser $x \leftarrow y$. Sinon, retourner à l'étape 1.
+  \item Retourner $\lambda x$.
+  \end{enumerate}
+\end{algorithme}
+
+La fonction \code{rgamma} qui se trouve à la
+\autoref{fig:debogage:rgamma} est une mise en œuvre directe de
+l'algorithme, à la différence près qu'elle permet de simuler $n$
+valeurs plutôt qu'une seule. Surtout, j'y ai également inséré quelques
+petites anomalies. Voyons voir si nous pouvons les trouver.
 
 \begin{figure}[t]
   \renewcommand{\theFancyVerbLine}{%
     \textcolor{gray}{\tiny\ttfamily\arabic{FancyVerbLine}}}
 \begin{Verbatim}[frame=single, numbers=left, numbersep=3pt]
-rgamma_ar <- function(n, shape, rate = 1; scale = 1/rate)
+rgamma <- function(n, shape, rate = 1; scale = 1/rate)
 {
     if (shape <= 0 | shape >= 1)
         stop("valeur de shape inadmissible")
@@ -94,7 +131,7 @@ rgamma_ar <- function(n, shape, rate = 1; scale = 1/rate)
 }
 \end{Verbatim}
   \caption{Code d'une fonction à déboguer}
-  \label{fig:debogage:rgamma_ar}
+  \label{fig:debogage:rgamma}
 \end{figure}
 
 
@@ -125,7 +162,7 @@ Dans \index{RStudio}RStudio, pour obtenir une fonctionnalité
 équivalente, il suffit de réfaire l'indentation du code avec l'option
 \code{Reindent Lines} du menu \code{Code}.
 
-La simple édition du code de la \autoref{fig:debogage:rgamma_ar} avec
+La simple édition du code de la \autoref{fig:debogage:rgamma} avec
 un bon outil fait immédiatement ressortir un premier problème dans la
 boucle \code{while} (lignes 20--25), qui se retrouve indentée comme
 ci-dessous.
@@ -157,7 +194,7 @@ la fonction.
 \begin{Schunk}
 \begin{Verbatim}
 Erreur : ';' inattendu(e) in
-"rgamma_ar <- function(n, shape, rate = 1;"
+"rgamma <- function(n, shape, rate = 1;"
 \end{Verbatim}
 \end{Schunk}
 
@@ -165,7 +202,7 @@ Avec ces deux erreurs maintenant corrigées, nous pouvons définir la
 fonction dans l'espace de travail et l'utiliser sans erreur
 d'exécution.
 <<echo=FALSE>>=
-rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
+rgamma <- function(n, shape, rate = 1, scale = 1/rate)
 {
     if (shape <= 0 | shape >= 1)
         stop("valeur de shape inadmissible")
@@ -194,7 +231,7 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
 }
 @
 <<echo=TRUE>>=
-rgamma_ar(5, 0.5, 1)
+rgamma(5, 0.5, 1)
 @
 
 Les personnes un tant soit peu familières avec la distribution gamma
@@ -207,11 +244,11 @@ Une des premières choses à investiguer lorsqu'un bogue survient, c'est
 s'il est \emph{reproductible}, tant avec les mêmes conditions d'entrée
 (les valeurs des arguments) que sous d'autres conditions. Voyons voir.
 <<echo=TRUE>>=
-rgamma_ar(5, 0.5, 1)
-rgamma_ar(5, 0.8, 1)
-rgamma_ar(5, 0.5, 2)
-rgamma_ar(10, 0.5, 1)
-rgamma_ar(1, 0.5, 1)
+rgamma(5, 0.5, 1)
+rgamma(5, 0.8, 1)
+rgamma(5, 0.5, 2)
+rgamma(10, 0.5, 1)
+rgamma(1, 0.5, 1)
 @
 
 Il semble y avoir une constante, ici: c'est toujours la première
@@ -235,7 +272,7 @@ stratégiques dans la fonction de façon à pouvoir suivre les valeurs
 prises par les différents objets. Dans notre exemple, nous aimerions
 suivre les valeurs du vecteur \code{x}, du compteur \code{i} et de
 l'objet \code{y}. Pour ce faire, nous remplaçons les lignes 20 à 25 de
-la \autoref{fig:debogage:rgamma_ar} par l'extrait de code
+la \autoref{fig:debogage:rgamma} par l'extrait de code
 ci-dessous\footnote{%
   Le code modifié est fourni en exemple dans la
   \autoref{sec:debogage:exemples}.}, %
@@ -255,7 +292,7 @@ while (i < n)
 \end{Verbatim}
 \end{Schunk}
 <<echo=FALSE>>=
-rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
+rgamma <- function(n, shape, rate = 1, scale = 1/rate)
 {
     if (shape <= 0 | shape >= 1)
         stop("valeur de shape inadmissible")
@@ -285,7 +322,7 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
 }
 @
 <<echo=TRUE>>=
-rgamma_ar(5, 0.5, 1)
+rgamma(5, 0.5, 1)
 @
 
 Les résultats précédents nous apprennent que lorsque la première
@@ -293,13 +330,13 @@ valeur \code{y} est acceptée, elle est placée en seconde position dans
 le vecteur \code{x}. Le coupable est donc notre compteur \code{i}! En
 y regardant de plus près, nous réalisons, en effet, qu'il est
 initialisé à la valeur $1$ à l'extérieur de la boucle \code{while}
-(ligne 19 de la \autoref{fig:debogage:rgamma_ar}) et qu'il est ensuite
+(ligne 19 de la \autoref{fig:debogage:rgamma}) et qu'il est ensuite
 incrémenté \emph{avant} que l'affectation dans \code{x} ne soit
 effectuée dans la clause \code{if} (ligne 24). Le correctif est donc
 facile à appliquer: initialiser \code{i} avec la valeur $0$. Ceci
 fait, la fonction retourne maintenant des valeurs plausibles.
 <<echo=FALSE>>=
-rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
+rgamma <- function(n, shape, rate = 1, scale = 1/rate)
 {
     if (shape <= 0 | shape >= 1)
         stop("valeur de shape inadmissible")
@@ -329,12 +366,12 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
 }
 @
 <<echo=TRUE>>=
-rgamma_ar(5, 0.5, 1)
+rgamma(5, 0.5, 1)
 @
 
-En l'état, la fonction \code{rgamma\_ar} semble valide. Je vous
+En l'état, la fonction \code{rgamma} semble valide. Je vous
 rappelle la mise en garde de la
-\autoref{sec:premiers:vecteurs:arithmetique}: avec le recyclage des
+\autoref{sec:bases:vecteurs:arithmetique}: avec le recyclage des
 vecteurs dans R, ce n'est pas parce qu'une expression --- ou une
 fonction --- s'exécute sans erreur apparente que le calcul effectué
 est bon pour autant. Il faut vérifier l'exactitude des calculs à
@@ -355,7 +392,7 @@ l'aide de tests de contrôle. Le sujet ne sera pas étudié plus en détail ici.
 
 La technique d'affichage de résultats intermédiaires s'est avérée
 suffisante pour trouver et corriger les bogues de la fonction
-\code{rgamma\_ar}, à la section précédente. Ce n'est toutefois pas
+\code{rgamma}, à la section précédente. Ce n'est toutefois pas
 toujours ainsi.
 
 Une autre méthode de débogage simple à mettre en œuvre avec les
@@ -379,7 +416,7 @@ pas-à-pas le code d'une fonction. Voici comment procéder.
 Vous trouverez ci-dessous la transcription d'une session de débogage
 par la méthode pas-à-pas pour l'exemple de la section précédente.
 Remarquez comment je n'ai pas évalué les lignes 1--2 et 20--21 de la
-\autoref{fig:debogage:rgamma_ar}. J'ai également placé le nombre
+\autoref{fig:debogage:rgamma}. J'ai également placé le nombre
 aléatoire issu de l'expression \code{runif(1)} dans la clause
 \code{if} dans un objet \code{u} afin de pouvoir valider le test. Au
 final, la technique permet de détecter le problème de compteur mal
@@ -503,13 +540,13 @@ importantes; consultez la rubrique d'aide de la fonction
 
 Reprenons l'exemple de la section précédente en supposant que nous
 avons inséré la commande \code{browser()} à la ligne 17 de la
-\autoref{fig:debogage:rgamma_ar}. La transcription d'une séance
+\autoref{fig:debogage:rgamma}. La transcription d'une séance
 d'utilisation du navigateur d'environnement suit.
 
 \begin{Schunk}
 \begin{Verbatim}
-> rgamma_ar(5, 0.5, 1)
-Called from: rgamma_ar(5, 0.5, 1)
+> rgamma(5, 0.5, 1)
+Called from: rgamma(5, 0.5, 1)
 Browse[1]> n
 debug à #18 :x <- numeric(n)
 Browse[2]> n
@@ -587,6 +624,9 @@ faire à voix haute et en explicitant chacune des hypothèses et chacune
 des étapes du programme. Le regard neuf que vous porterez au code peut
 vous permettre d'y déceler les problèmes.
 
+\gotorbox{Étudiez le fichier de script \code{\scriptfilename}
+  reproduit à la \autoref{sec:paquetages:exemples}.}
+
 <<script, results=hide>>=
 ## Ce fichier fournit le code utile pour refaire les exemples
 ## du chapitre.
@@ -595,14 +635,14 @@ vous permettre d'y déceler les problèmes.
 ### VÉRIFICATION DE LA SYNTAXE
 ###
 
-## Code de la fonction 'rgamma_ar' avec des bogues, tel que
+## Code de la fonction 'rgamma' avec des bogues, tel que
 ## présenté à la figure 10.1.
 ##
 ## Refaire l'indentation de la fonction avec votre éditeur
 ## pour programmeur. Cela devrait immédiatement faire
 ## ressortir qu'il manque une parenthèse dans l'appel à la
 ## fonction 'Ginv', à l'intérieur de la boucle 'while'.
-##-!- rgamma_ar <- function(n, shape, rate = 1; scale = 1/rate)
+##-!- rgamma <- function(n, shape, rate = 1; scale = 1/rate)
 ##-!- {
 ##-!-     if (shape <= 0 | shape >= 1)
 ##-!-         stop("valeur de shape inadmissible")
@@ -637,7 +677,7 @@ vous permettre d'y déceler les problèmes.
 ## L'interpréteur R devrait attraper l'erreur de syntaxe à la
 ## toute première ligne, soit le ';' en lieu et place d'une
 ## ','.
-##-!- rgamma_ar <- function(n, shape, rate = 1; scale = 1/rate)
+##-!- rgamma <- function(n, shape, rate = 1; scale = 1/rate)
 ##-!- {
 ##-!-     if (shape <= 0 | shape >= 1)
 ##-!-         stop("valeur de shape inadmissible")
@@ -666,7 +706,7 @@ vous permettre d'y déceler les problèmes.
 ##-!- }
 
 ## L'erreur de syntaxe est maintenant corrigée.
-rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
+rgamma <- function(n, shape, rate = 1, scale = 1/rate)
 {
     if (shape <= 0 | shape >= 1)
         stop("valeur de shape inadmissible")
@@ -697,15 +737,15 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
 ## Nous ne sommes pas sortis du bois: l'appel de la fonction
 ## ci-dessous retourne une valeur de 0, ce qui n'est pas une
 ## valeur admissible pour une distribution gamma.
-rgamma_ar(5, 0.5, 1)
+rgamma(5, 0.5, 1)
 
 ## Vérification avec d'autres valeurs des arguments. Le bogue
 ## est aisément reproductible.
-rgamma_ar(5, 0.5, 1)
-rgamma_ar(5, 0.8, 1)
-rgamma_ar(5, 0.5, 2)
-rgamma_ar(10, 0.5, 1)
-rgamma_ar(1, 0.5, 1)
+rgamma(5, 0.5, 1)
+rgamma(5, 0.8, 1)
+rgamma(5, 0.5, 2)
+rgamma(10, 0.5, 1)
+rgamma(1, 0.5, 1)
 
 ###
 ### AFFICHAGE DE RÉSULTATS INTERMÉDIAIRES
@@ -713,7 +753,7 @@ rgamma_ar(1, 0.5, 1)
 
 ## Afin de découvrir le bogue de la fonction, nous ajoutons
 ## une commande 'print' à l'intérieur de la boucle 'while'.
-rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
+rgamma <- function(n, shape, rate = 1, scale = 1/rate)
 {
     if (shape <= 0 | shape >= 1)
         stop("valeur de shape inadmissible")
@@ -750,11 +790,11 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
 ## est placée en deuxième position dans le vecteur des
 ## résultats 'x'. Ah! Ha! Le compteur 'i' est soit incrémenté
 ## trop tôt, soit initialisé une unité trop haut.
-rgamma_ar(5, 0.5, 1)
+rgamma(5, 0.5, 1)
 
 ## Nous corrigeons la fonction ainsi: le compteur 'i' est
 ## initialisé à 0 plutôt qu'à 1.
-rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
+rgamma <- function(n, shape, rate = 1, scale = 1/rate)
 {
     if (shape <= 0 | shape >= 1)
         stop("valeur de shape inadmissible")
@@ -790,7 +830,7 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
 ## les arguments de la fonction dans l'espace de travail, puis
 ## à exécuter le corps de la fonction ligne par ligne.
 ##
-## Évaluons l'équivalent de l'appel 'rgamma_ar(5, 0.5, 1)'
+## Évaluons l'équivalent de l'appel 'rgamma(5, 0.5, 1)'
 ## pas-à-pas avec le bogue 'i <- 1' remis en place.
 ##
 ## Explorez les valeurs des objets 'x', 'i' et 'y' après
@@ -800,7 +840,7 @@ n <- 5
 shape <- 0.5
 scale <- 1
 
-## rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
+## rgamma <- function(n, shape, rate = 1, scale = 1/rate)
 ## {
     if (shape <= 0 | shape >= 1)
         stop("valeur de shape inadmissible")
@@ -834,8 +874,8 @@ scale <- 1
 ###
 
 ## J'ai inséré un bogue additionnel dans la fonction interne
-## 'Ginv' de 'rgamma_ar', ci-dessous. Définir la fonction.
-rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
+## 'Ginv' de 'rgamma', ci-dessous. Définir la fonction.
+rgamma <- function(n, shape, rate = 1, scale = 1/rate)
 {
     if (shape <= 0 | shape >= 1)
         stop("valeur de shape inadmissible")
@@ -866,7 +906,7 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
 
 ## Évaluer l'appel de fonction ci-dessous. Il y aura une
 ## erreur.
-##-!- rgamma_ar(5, 0.5, 1)
+##-!- rgamma(5, 0.5, 1)
 
 ## Afficher la pile des appels de fonctions. On voit que c'est
 ## l'appel à 'Ginv' qui cause problème.
@@ -876,7 +916,7 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
 ### NAVIGATEUR D'ENVIRONNEMENT
 ###
 
-## La définition de la fonction 'rgamma_ar' ci-dessous
+## La définition de la fonction 'rgamma' ci-dessous
 ## contient un appel à la fonction 'browser'.
 ##
 ## L'appel à la fonction qui suit provoquera l'entrée dans le
@@ -895,7 +935,7 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
 ## Également, consultez la rubrique d'aide de 'browser' pour
 ## connaitre les commandes disponibles à l'invite du
 ## navigateur.
-rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
+rgamma <- function(n, shape, rate = 1, scale = 1/rate)
 {
     if (shape <= 0 | shape >= 1)
         stop("valeur de shape inadmissible")
@@ -922,17 +962,16 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
     }
     x * scale
 }
-##-!- rgamma_ar(5, 0.5, 1)
+##-!- rgamma(5, 0.5, 1)
 
 ###
 ### EXEMPLE ADDITIONNEL
 ###
 
-## Variation sur le thème de la suite de Fibonacci abordée
-## dans le fichier 'algorithmique.R' livré avec le document:
-## une fonction pour calculer non pas les 'n' premières
-## valeurs de la suite de Fibonacci, mais uniquement la
-## 'n'ième valeur.
+## Variation sur le thème de la suite de Fibonacci: une
+## fonction pour calculer non pas les 'n' premières valeurs
+## de la suite de Fibonacci, mais uniquement la 'n'ième
+## valeur.
 ##
 ## Mais il y a un mais: la fonction 'fibonaci', à l'instar de
 ## son nom même, est truffée d'erreurs (de syntaxe,
@@ -958,8 +997,6 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
 ##-!- fibonaci(20)               # devrait donner 4181
 @
 
-\gotorbox{Étudiez le fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:paquetages:exemples}.}
 
 \section{Exemples}
 \label{sec:debogage:exemples}
@@ -1100,49 +1137,6 @@ param <- function (moyenne, variance, loi)
     stop("La loi doit etre une de \"normale\",
 \"gamma\" ou \"pareto\"")
 }
-\end{verbatim}
-    \end{Schunk}
-  \end{sol}
-\end{exercice}
-
-\begin{exercice}
-  \index{matrice}
-  Vous devez calculer la note finale d'un groupe d'étudiants à partir
-  de deux informations:
-  \begin{enumerate}[1)]
-  \item une matrice contenant la note sur $100$ des étudiants à
-    chacune des évaluations, et
-  \item un vecteur contenant la pondération des évaluations.
-  \end{enumerate}
-  Un de vos collègues a composé la fonction \code{notes.finales}
-  ci-dessous afin de faire le calcul de la note finale pour chacun de
-  ses étudiants. Votre collègue vous mentionne toutefois que sa
-  fonction est plutôt lente et inefficace pour de grands groupes
-  d'étudiants. Modifiez la fonction afin d'en réduire le nombre
-  d'opérations et faire en sorte qu'elle n'utilise aucune boucle.
-  \begin{Schunk}
-\begin{verbatim}
-notes.finales <- function(notes, p)
-{
-    netud <- nrow(notes)
-    neval <- ncol(notes)
-    final <- (1:netud) * 0
-    for(i in 1:netud)
-    {
-        for(j in 1:neval)
-        {
-            final[i] <- final[i] + notes[i, j] * p[j]
-        }
-    }
-    final
-}
-\end{verbatim}
-  \end{Schunk}
-  \begin{sol}
-    Le calcul à faire n'est qu'un simple produit matriciel, donc:
-    \begin{Schunk}
-\begin{verbatim}
-notes.finales <- function(notes, p) notes %*% p
 \end{verbatim}
     \end{Schunk}
   \end{sol}
