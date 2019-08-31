@@ -43,6 +43,16 @@ source("Stangle.R")        # lancement de Stangle
 \item Créer, modifier et sauvegarder ses propres fichiers de script R.
 \end{objectifs}
 
+R est un environnement intégré de manipulation de données, de calcul
+et de préparation de graphiques. Toutefois, ce n'est pas seulement un
+«autre» environnement statistique (comme SPSS ou SAS, par exemple),
+mais aussi un langage de programmation complet et autonome. Le présent
+ouvrage met l'accent sur l'apprentissage du langage de programmation.
+Néanmoins, vous devrez l'utiliser à l'intérieur de l'interface de
+l'environnement statistique. Ce chapitre vise à vous familiariser avec
+celle-ci, avec les fichiers de script et avec l'utilisation d'un
+éditeur de texte ou d'un environnement de développement intégré.
+
 
 \section{Bref historique}
 \label{sec:presentation:historique}
@@ -128,18 +138,13 @@ dans ces domaines, R devient, avec \index{Python}Python, la
 \section{Description sommaire de R}
 \label{sec:presentation:description}
 
-R est un environnement intégré de manipulation de données, de calcul
-et de préparation de graphiques. Toutefois, ce n'est pas seulement un
-«autre» environnement statistique (comme SPSS ou SAS, par exemple),
-mais aussi un langage de programmation complet et autonome.
-
 Tel que mentionné précédemment, le R est un langage principalement
 inspiré de Scheme\index{Scheme} \citep{Sussman:scheme:1996} et du
 \index{S}S. Ce dernier était à son tour inspiré de plusieurs langages,
 dont l'\index{APL}APL et le \index{Lisp}Lisp (encore lui). Comme tous
-ses prédécesseurs, R est un langage interprété\index{interprété
-  (langage)}. Par conséquent, le programme que l'on lance lorsque l'on
-exécute R est en fait l'interpréteur. Celui-ci attend que l'on lui
+ses prédécesseurs, R est un langage interprété. Par conséquent, le
+programme que l'on lance lorsque l'on exécute R est en fait
+l'\index{interpréteur}interpréteur. Celui-ci attend que l'on lui
 soumette des commandes dans le langage R --- dans la suite nous dirons
 que ces commandes forment une \index{expression}\emph{expression}.
 L'interpréteur évalue immédiatement l'expression pour ensuite afficher
@@ -171,8 +176,9 @@ aussi un logiciel de manipulation de données, de mise en forme et de
 préparation de graphiques. Or, au sens large, Excel est également un
 langage de programmation interprété! Pensez-y: nous utilisons le
 langage de programmation lorsque nous entrons des commandes dans une
-cellule d'une feuille de calcul, puis l'interpréteur exécute les
-commandes et affiche les résultats dans la cellule.
+cellule d'une feuille de calcul, puis
+l'\index{interpréteur}interpréteur exécute les commandes et affiche
+les résultats dans la cellule.
 
 Le R est un langage particulièrement puissant pour les applications
 mathématiques et statistiques, chose peu surprenante puisqu'il a
