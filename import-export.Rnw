@@ -523,7 +523,7 @@ head(x)
 \end{exercice}
 
 \begin{exercice}[nosol]
-  Créer une tableau de données dans R, l'exporter en format CSV et
+  Créer une tableau de données dans R, l'exporter en format CSV, puis
   ouvrir le fichier dans un tableur. Vérifier que le transfert des
   données s'est effectué correctement.
 \end{exercice}
