@@ -531,8 +531,8 @@ rnorm                      # fonction
 ###
 ### EXEMPLE DE SESSION DE TRAVAIL
 ###
-### (Inspiré de l'annexe A du manuel «An Introduction to R», R
-### Core Team, 2017.)
+### (Inspiré de l'annexe A du manuel «An Introduction to R»
+### livré avec R.)
 ###
 
 ## Afficher le répertoire de travail de R.
