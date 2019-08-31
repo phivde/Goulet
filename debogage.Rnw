@@ -515,7 +515,7 @@ Quand l'interpréteur atteint la commande \code{browser()}, il
 interrompt le déroulement de la fonction et il vous remet le contrôle
 dans un mode d'interaction spécial nommé «navigateur d'environnement».
 Celui-ci vous permet d'explorer à loisir l'environnement d'évaluation
-(\autoref{chap:implementation}) de la fonction en ce point. Vous
+(\autoref{chap:environnement}) de la fonction en ce point. Vous
 pouvez également poursuivre l'exécution de la fonction ligne par ligne
 comme dans la technique d'évaluation pas-à-pas. Avantage non
 négligeable: le navigateur peut entrer récursivement dans
