@@ -776,8 +776,8 @@ linsearch(21, x)
     Je propose deux mises en œuvre. La première, à la
     \autoref{fig:tri:rlinsearch}, a recours à une fonction
     auxiliaire qui garde le compte de la progression dans le vecteur.
-    Remarquez comment la portée lexicale de R
-    (\autoref{sec:implementation:portee}) fait en sorte que nous
+    Les règles de portée lexicale de R
+    (\autoref{sec:environnement:portee}) font en sorte que nous
     n'avons pas à passer les variables \code{x}, \code{target} et
     \code{xlen} à la fonction auxiliaire.
 
