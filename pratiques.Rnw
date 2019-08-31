@@ -57,17 +57,18 @@ interagir avec le code à un stade ou à un autre. Une grande part du
 travail de programmation consiste à corriger, à mettre à jour ou à
 améliorer du code existant. Dans ce contexte, l'adhésion à un certain
 nombre de normes et de bonnes pratiques permet de faciliter le travail
-de tous les intervenants et de réduire les risques d'erreurs. Cette
-section présente quelques unes de ces bonnes pratiques à adopter en
+de tous les intervenants et de réduire les risques d'erreurs. Ce
+chapitre présente quelques unes de ces bonnes pratiques à adopter en
 matière de style de programmation, de présentation du code et de
 documentation.
 
 \tipbox{Je me suis efforcé de respecter les bonnes pratiques
-  ci-dessous dans le code informatique des sections d'exemples. Prêtez
-  donc attention à la manière dont le code qui vous est fourni est
-  construit et présenté.}
+  ci-dessous dans les ficheirs de script fournis avec l'ouvrage.
+  Prêtez donc attention à la manière dont le code qui vous est fourni
+  est construit et présenté.}
 
-\subsection{Style}
+
+\section{Style}
 \label{sec:pratiques:style}
 
 Il en va du code informatique comme de la prose: si le style peut
@@ -144,7 +145,7 @@ mean(x)
   \end{Schunk}
   %
 \item Connaitre sur le bout des doigts la priorité des opérateurs du
-  \autoref{tab:premiers:operateurs}, c'est bien; rendre explicite l'ordre
+  \autoref{tab:bases:operateurs}, c'est bien; rendre explicite l'ordre
   des opérations dans une expression à l'aide de parenthèses, c'est
   mieux. N'hésitez pas à utiliser des parenthèses dès que l'ombre d'un
   doute pourrait planer sur l'ordre des opérations. D'ailleurs, à ce
@@ -188,7 +189,7 @@ if (!any(is.na(x)))
 
   De plus, le conseil précédent sur la priorité des opérations est
   particulièrement indiqué avec les opérations logiques. Sauriez-vous
-  confirmer, sans consulter le \autoref{tab:premiers:operateurs}, l'ordre
+  confirmer, sans consulter le \autoref{tab:bases:operateurs}, l'ordre
   des opérations dans l'expression logique suivante?\footnote{%
     C'est \code{(!p) | (q \& r)}.}
   \begin{Schunk}
@@ -197,10 +198,12 @@ if (!any(is.na(x)))
 \end{Verbatim}
   \end{Schunk}
   %
-\item Lorsque vous les connaitrez, utilisez les fonctions
-  d'application (\autoref{chap:application}) plutôt que des boucles
-  explicites. Une expression ayant recours à une fonction
-  d'application est plus concise et plus simple à décoder. Comparez
+\item Utilisez des fonctions d'application plutôt que des boucles
+  explicites (nous étudierons les boucles au \autoref{chap:tri}). Une
+  expression ayant recours à une fonction d'application est plus
+  concise et plus simple à décoder. Même si vous ne connaissez pas
+  encore la syntaxe exacte des boucles, vous pouvez d'ores et déjà
+  apprécier la différence de lisibilité entre
   \begin{Schunk}
 \begin{Verbatim}
 z <- numeric(n)
@@ -215,7 +218,7 @@ z <- sapply(x, mean)
 \end{Verbatim}
   \end{Schunk}
 
-  Encore ici, évitez de pousser la logique trop loin. Si une boucle
+  Encore ici, évitez de pousser la logique trop loin. Si boucle
   est plus naturelle et plus simple à comprendre qu'une fonction
   d'application, optez pour la boucle. En particulier, une
   fonction d'application \icode{sapply} à l'intérieur d'une autre
@@ -236,7 +239,8 @@ z <- sapply(x, mean)
   place à la toute fin d'une fonction.
 \end{itemize}
 
-\subsection{Présentation du code}
+
+\section{Présentation du code}
 \label{sec:pratiques:presentation}
 
 Le code bien mis en forme est plus facile et agréable à consulter. Il
@@ -409,7 +413,8 @@ dans son domaine et de demeurer constant au fil de son code.
   le niveau d'indentation. Consultez la documentation de votre
   éditeur.}
 
-\subsection{Commentaires}
+
+\section{Commentaires}
 \label{sec:pratiques:commentaires}
 
 Les \index{commentaires}commentaires dans le code servent à guider le
@@ -474,7 +479,7 @@ juste équilibre.
 fonction, sa définition devrait toujours être précédée d'un bloc de
 commentaires contenant au minimum:
 \begin{enumerate}
-\item la \index{signature}\emph{signature} de la fonction (son nom
+\item la \Index{signature}\emph{signature} de la fonction (son nom
   suivi, entre parenthèses, de tous les arguments avec leur valeur par
   défaut, le cas échéant);
 \item une courte description de ce que fait la fonction (en mode
@@ -489,7 +494,7 @@ Il s'agit de la structure générale des rubriques d'aide de R. La
 une fonction simple.
 
 \tipbox{Le fichier \code{gabarit-documentation-fonction.R} livré avec
-  le présent document contient un gabarit que vous pouvez utiliser
+  cet ouvrage contient un gabarit que vous pouvez utiliser
   pour insérer rapidement dans vos fichiers de script la structure de
   base de la documentation d'une fonction.}
 
@@ -548,64 +553,59 @@ les commentaires de premier niveau sont ceux qui débutent par un seul
 carré, \code{\#}; les commentaires de deuxième niveau débutent par
 deux carrés, \code{\#\#}, etc.
 
-\gotorbox{Le fichier de script \code{\scriptfilename} reproduit à la
-  \autoref{sec:pratiques:exemples} contient, aux lignes
-  \reflines{fonctions:pratiques}, un long exemple d'amélioration du
-  style et de la présentation du code d'une fonction, ainsi qu'un
-  exemple de documentation d'une fonction. Vous y trouverez même un
-  cas de Syndrome de la plaque à biscuits{\texttrademark}.}
+\gotorbox{Le fichier de script \code{\scriptfilename} reproduit
+  ci-dessous contient un long exemple d'amélioration du style et de la
+  présentation du code d'une fonction, ainsi qu'un exemple de
+  documentation.}
 
 <<script, results=hide>>=
 ## Afin d'illustrer l'utilité de bien présenter et de
-## commenter le code, nous allons prendre une fonction dans un
-## état assez pitoyable et l'améliorer graduellement.
+## commenter son code, nous allons prendre une fonction dans
+## un état assez pitoyable et l'améliorer graduellement.
 ##
-## La fonction 'rgamma_ar' sert à générer des nombres
-## aléatoires de la distribution gamma dont le paramètre de
-## forme se trouve dans l'intervalle (0, 1) par la méthode de
-## simulation dite d'«acceptation-rejet».
+## Bien qu'il existe une fonction 'sqrt' dans R pour calculer
+## la racine carrée d'un nombre, nous allons programmer notre
+## propre version. Elle est basée sur la méthode des
+## approximations successives de Newton dont l'algorithme est
+## le suivant:
 ##
-## L'algorithme de simulation d'un nombre 'x' issu d'une
-## distribution Gamma(a, 1), 0 < a < 1, est le suivant:
+## ALGORITHME Calculer la racine carrée d'un nombre x,
+## c'est-à-dire la valeur y tel que y >= 0 et y^2 = x.
 ##
-## 1. Simuler u, v d'une distribution U(0, 1).
-## 2. Calculer y = G^{-1}(u), où
+## 1. Poser y égal à une valeur de départ quelconque.
+## 2. Si |y^2 - x| < e, retourner la valeur y.
+## 3. Poser y <- (y + x/y)/2 et retourner à l'étape 2.
 ##
-##      G^{-1}(x) = ((a + e)/e * x)^(1/a),
-##                            si 0 <= x <= e/(a + e)
-##                = - log(((1/a) + (1/e)) * (1 - x),
-##                            si e/(a + e) < x <= 1.
-## 3. Si
+## La valeur 'e' dans l'algorithme représente la précision de
+## l'approximation. Dans notre mise en oeuvre ci-dessous, nous
+## utiliserons e = 0.001. Quant à la valeur de départ de
+## l'étape 1, nous utiliserons y = 1.
 ##
-##      v <= exp(-y),    si 0 <= y <= 1
-##        <= y^(a - 1),  si y > 1,
+## Notre mise en oeuvre de l'algorithme est itérative. Elle
+## repose sur l'idée de répéter l'étape 3 «tant que» la
+## condition de l'étape 2 n'est pas remplie. Ceci se traduit
+## en langage informatique en boucle 'while'. Nous n'avons pas
+## encore formellement étudié cette structure de contrôle,
+## mais vous devriez néanmoins pouvoir suivre l'exemple
+## aisément.
 ##
-##    alors retourner x = y. Sinon retourner à l'étape 1.
+## Dernière chose: notre fonction 'sqrt' fait appel à une
+## seconde fonction interne pour effectuer le calcul de
+## l'étape 3 de l'algorithme.
 
 ### PRÉSENTATION DU CODE
 
 ## La première version du code ne respecte pas les règles de
 ## base d'indentation et d'«aération» du code. Résultat: un
 ## fouillis difficile à consulter.
-##-!- rgamma_ar<-function(n,shape,rate=1,scale=1/rate)
-##-!- { if(shape<=0|shape>=1)
-##-!- stop("valeur de shape inadmissible")
-##-!-   ratio<-function(x)
-##-!-      if(x<=1) exp(-x)else x^(shape-1)
-##-!- Ginv<-function(x) {
-##-!-   k<-1+shape*exp(-1)
-##-!-   if(x<=1/k) (k*x)^(1/shape)
-##-!-   else -log(((1/shape)+exp(-1))*(1-x))   }
-##-!-
-##-!-   i<-0
-##-!-   while(i<n) {
-##-!-     y<-Ginv(runif(1))
-##-!-     if(runif(1)<=ratio(y))
-##-!-     {x<-c(x,y)
-##-!-         i<-i+1
-##-!-  }
-##-!- x*scale
-##-!- }
+##-!- sqrt<-function(x)
+##-!- {if(x<0)
+##-!- stop("x doit être un nombre positif")
+##-!-  improve<-function(guess,x)
+##-!-  mean(c(guess,x/guess))
+##-!- y<-1
+##-!- while(!abs(y^2-x)>=0.001)y<-improve(y, x)
+##-!-                    return(y)
 
 ## Réviser seulement l'indentation permet déjà d'y voir plus
 ## clair. Tous les bons éditeurs de texte pour programmeurs
@@ -619,108 +619,74 @@ deux carrés, \code{\#\#}, etc.
 ## Dans Emacs, l'indentation se fait automatiquement au fur et
 ## à mesure que l'on entre du code ou, autrement, en appuyant
 ## sur la touche de tabulation.
-##-!- rgamma_ar<-function(n,shape,rate=1,scale=1/rate)
-##-!- {
-##-!-     if(shape<=0|shape>=1)
-##-!-         stop("valeur de shape inadmissible")
-##-!-     ratio<-function(x)
-##-!-         if(x<=1) exp(-x)else x^(shape-1)
-##-!-     Ginv<-function(x)
-##-!-     {
-##-!-         k<-1+shape*exp(-1)
-##-!-         if(x<=1/k)
-##-!-             (k*x)^(1/shape)
-##-!-         else
-##-!-             -log(((1/shape)+exp(-1))*(1-x))
-##-!-     }
-##-!-
-##-!-     i<-0
-##-!-     while(i<n)
-##-!-     {
-##-!-         y<-Ginv(runif(1))
-##-!-         if(runif(1)<=ratio(y))
-##-!-         {
-##-!-             x<-c(x,y)
-##-!-             i<-i+1
-##-!-         }
-##-!-         x*scale
-##-!-     }
+##-!- sqrt<-function(x)
+##-!- {if(x<0)
+##-!-      stop("x doit être un nombre positif")
+##-!-      improve<-function(guess,x)
+##-!-          mean(c(guess,x/guess))
+##-!-      y<-1
+##-!-      while(!abs(y^2-x)>=0.001)y<-improve(y, x)
+##-!-      return(y)
 
 ## La simple indentation du code nous permet déjà de découvrir
 ## un bogue dans le code: il manque une accolade fermante } à
 ## la fin de la fonction.
 ##
-## En examinant le code de plus près, nous réalisons que
-## l'expression 'x * scale', qui sert à retourner le résultat
-## de la fonction, devrait se trouver à l'extérieur de la
-## boucle 'while'. En fait, l'accolade fermante manquante est
-## celle qui termine la clause 'if' à l'intérieur de la boucle.
-##
 ## Corrigeons déjà le code.
-rgamma_ar<-function(n,shape,rate=1,scale=1/rate)
-{
-    if(shape<=0|shape>=1)
-        stop("valeur de shape inadmissible")
-    ratio<-function(x)
-        if(x<=1) exp(-x)else x^(shape-1)
-    Ginv<-function(x)
-    {
-        k<-1+shape*exp(-1)
-        if(x<=1/k)
-            (k*x)^(1/shape)
-        else
-            -log(((1/shape)+exp(-1))*(1-x))
-    }
-
-    i<-0
-    while(i<n)
-    {
-        y<-Ginv(runif(1))
-        if(runif(1)<=ratio(y))
-        {
-            x<-c(x,y)
-            i<-i+1
-        }
-    }
-    x*scale
+sqrt<-function(x)
+{if(x<0)
+     stop("x doit être un nombre positif")
+     improve<-function(guess,x)
+         mean(c(guess,x/guess))
+     y<-1
+     while(!abs(y^2-x)>=0.001)y<-improve(y, x)
+     return(y)
 }
 
 ## Les normes usuelles de présentation du code informatique
-## exigent également d'aérer le code avec des espaces autour
-## des opérateurs et des structures de contrôle, après les
-## virgules, etc. Comme pour du texte normal, les espaces
-## rendent le code plus facile à lire.
+## exigent également de placer les accolades ouvrantes et
+## fermantes seules sur leur ligne et d'aérer le code avec des
+## espaces autour des opérateurs et des structures de
+## contrôle, après les virgules, etc. Comme pour du texte
+## normal, les espaces rendent le code plus facile à lire.
 ##
 ## Dans RStudio, vous pouvez parvenir à la présentation
 ## ci-dessous avec la commande du menu Code|Reformat Code.
-rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
+sqrt <- function(x)
 {
-    if (shape <= 0 | shape >= 1)
-        stop("valeur de shape inadmissible")
+    if (x < 0)
+        stop("x doit être un nombre positif")
+    improve <- function(guess, x)
+        mean(c(guess, x/guess))
+    y <- 1
+    while (!abs(y^2 - x) < 0.001)
+        y <- improve(y, x)
+    return(y)
+}
 
-    ratio <- function(x)
-        if (x <= 1) exp(-x) else x^(shape - 1)
+## Je recommande d'ajouter des lignes blanches additionnelles
+## dans le code afin de bien séparer les blocs logiques. Dans
+## le cas présent, ces blocs sont:
+##
+## 1. le test de validité de l'argument;
+## 2. la définition de la fonction interne 'improve';
+## 3. l'affectation de la valeur de départ;
+## 4. les approximations successives;
+## 5. la valeur finale.
+sqrt <- function(x)
+{
+    if (x < 0)
+        stop("x doit être un nombre positif")
 
-    Ginv <- function(x)
-    {
-        k <- 1 + shape * exp(-1)
-        if (x <= 1/k)
-            (k * x)^(1/shape)
-        else
-            -log(((1/shape) + exp(-1)) * (1 - x))
-    }
+    improve <- function(guess, x)
+        mean(c(guess, x/guess))
 
-    i <- 0
-    while (i < n)
-    {
-        y <- Ginv(runif(1))
-        if (runif(1) <= ratio(y))
-        {
-            x <- c(x, y)
-            i <- i + 1
-        }
-    }
-    x * scale
+    y <- 1
+
+    while (!abs(y^2 - x) < 0.001)
+        y <- improve(y, x)
+
+    return(y)
 }
 
 ### STYLE
@@ -728,50 +694,38 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
 ## Il y a quelque chose à redire sur le style de cette
 ## fonction? Pourtant, les noms d'objets sont raisonnables, le
 ## coeur de la fonction n'est pas inutilement placé dans une
-## clause 'else' après le test de validité de l'argument
-## 'shape', deux calculs plus lourds sont relégués à des
-## fonctions internes...
+## clause 'else' après le test de validité de l'argument 'x',
+## le calcul de la nouvelle approximation est placé sous une
+## couche d'abstraction dans une dans une fonction interne...
 ##
-## Si vous y regardez de très près, vous constaterez que la
-## fonction ci-dessus souffre du Syndrome de la plaque à
-## biscuits(TM).
+## Il reste tout de même deux choses à améliorer.
 ##
-## En effet, les valeurs acceptées dans la simulation sont
-## placées à la suite du vecteur 'x' dans l'expression 'x <-
-## c(x, y)', le faisant constamment croître.
+## Tout d'abord, l'expression logique dans la clause 'while'
+## qui utilise une formulation «n'est pas plus petite que
+## 0.001» est inutilement compliquée. De plus, elle repose sur
+## la priorité des opérations: la négation logique a-t-elle
+## bel et bien une priorité plus faible que l'inégalité? Il
+## suffit de réécrire l'expression sous la forme «est plus
+## grand ou égal à 0.001» et tout sera plus clair.
 ##
-## Pour régler ce problème, il faut définir un contenant et y
-## placer les valeurs simulées au fur et à mesure qu'elles
-## sont acceptées.
+## Ensuite, il y a ce 'return' à la dernière ligne de la
+## fonction. Ça, c'est un gros non en R.
 ##
-## Nous en profitons pour combiner les opérations, assez
-## communes, d'affectation et d'incrémentation du compteur.
-rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
+## Améliorons le style.
+sqrt <- function(x)
 {
-    if (shape <= 0 | shape >= 1)
-        stop("valeur de shape inadmissible")
+    if (x < 0)
+        stop("x doit être un nombre positif")
 
-    ratio <- function(x)
-        if (x <= 1) exp(-x) else x^(shape - 1)
+    improve <- function(guess, x)
+        mean(c(guess, x/guess))
 
-    Ginv <- function(x)
-    {
-        k <- 1 + shape * exp(-1)
-        if (x <= 1/k)
-            (k * x)^(1/shape)
-        else
-            -log(((1/shape) + exp(-1)) * (1 - x))
-    }
+    y <- 1
 
-    x <- numeric(n)
-    i <- 0
-    while (i < n)
-    {
-        y <- Ginv(runif(1))
-        if (runif(1) <= ratio(y))
-            x[i <- i + 1] <- y
-    }
-    x * scale
+    while (abs(y^2 - x) >= 0.001)
+        y <- improve(y, x)
+
+    y
 }
 
 ### COMMENTAIRES
@@ -782,65 +736,41 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
 ## code inspiré de la struture des rubriques d'aide de R.
 
 ###
-### rgamma_ar(n, shape, rate = 1, scale = 1/rate)
+### sqrt(x)
 ###
-##  Simule des observations de la distribution gamma avec
-##  paramètre de forme entre 0 et 1 par la méthode
-##  d'acceptation-rejet.
+##  Calculer la racine carrée d'un nombre.
 ##
-##  Arguments
+##  Argument
 ##
-##  n: nombre d'observations à simuler;
-##  shape: paramètre de forme de la distribution;
-##    0 < shape < 1;
-##  rate: autre façon de spécifier l'échelle de la
-##    distribution;
-##  scale: paramètre d'échelle de la distribution (strictement
-##    positif).
+##  x: nombre réel positif.
 ##
 ##  Valeur
 ##
-##  Vecteur d'observations d'une distribution gamma.
+##  Nombre y tel que y^2 = x.
 ##
-rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
+sqrt <- function(x)
 {
-    ## Vérification de la validité de 'shape'
-    if (shape <= 0 | shape >= 1)
-        stop("valeur de shape inadmissible")
+    ## Vérification de la validité de 'x'.
+    if (x < 0)
+        stop("x doit être un nombre positif")
 
-    ## Fonction pour calculer la valeur du ratio f(x)/(c g(x))
-    ## utilisé dans le test d'acceptation-rejet.
-    ratio <- function(x)
-        if (x <= 1) exp(-x) else x^(shape - 1)
+    ## Fonction pour calculer la prochaine approximation selon
+    ## la méthode de Newton. Si 'y' est l'approximation
+    ## actuelle de la racine carrée de 'x', alors la nouvelle
+    ## approximation est '(y + x/y)/2'.
+    improve <- function(guess, x)
+        mean(c(guess, x/guess))
 
-    ## Fonction pour générer une valeur y à partir d'un nombre
-    ## uniforme u.
-    Ginv <- function(x)
-    {
-        k <- 1 + shape * exp(-1)
-        if (x <= 1/k)
-            (k * x)^(1/shape)
-        else
-            -log(((1/shape) + exp(-1)) * (1 - x))
-    }
+    ## Valeur de départ de la procédure itérative.
+    y <- 1
 
-    ## La méthode d'acceptation-rejet commande d'utiliser une
-    ## boucle 'while' puisque nous ne savons pas d'avance
-    ## combien de valeurs simulées seront acceptées.
-    x <- numeric(n)  # contenant pour les valeurs simulées
-    i <- 0           # compteur du nombre de valeurs acceptées
-    while (i < n)
-    {
-        y <- Ginv(runif(1))
-        if (runif(1) <= ratio(y))
-            x[i <- i + 1] <- y
-    }
+    ## Approximations successives.
+    while (abs(y^2 - x) >= 0.001)
+        y <- improve(y, x)
 
-    ## Les valeurs dans 'x' proviennent d'une distribution
-    ## Gamma(shape, 1). Il faut les retourner sur la bonne
-    ## échelle.
-    x * scale
-}                                       #-*- `\labelline{fonctions:pratiques:fin}`
+    ## Retourner la valeur tel que y^2 - x < 0.001.
+    y
+}
 @
 
 
@@ -862,49 +792,6 @@ rgamma_ar <- function(n, shape, rate = 1, scale = 1/rate)
 
 \end{Filesave}
 
-\begin{exercice}
-  \label{ex:pratiques:prodmat}
-  Le produit matriciel entre deux matrices
-  $\mat{A} = [a_{ij}]_{m \times p}$ et
-  $\mat{B} = [b_{ij}]_{p \times n}$ est une matrice $m \times n$ dont
-  l'élément en position $(i, j)$ est
-  \begin{equation*}
-    \sum_{k = 1}^p a_{ik} b_{kj}.
-  \end{equation*}
-
-  Sans utiliser l'opérateur \code{\%*\%}, écrire une fonction
-  \code{prod\_mat} qui effectuera le produit matriciel entre deux
-  matrices seulement si les dimensions de celles-ci le permettent.
-  Cette fonction aura deux arguments (\code{A} et \code{B}) et devra
-  tout d'abord vérifier si le produit matriciel est possible. Si
-  celui-ci est impossible, la fonction retourne un message d'erreur.
-  Utiliser une structure de contrôle \code{if ... else ...} et deux
-  boucles. Comparer le résultat avec celui de l'opérateur
-  \code{\%*\%}.
-  \begin{sol}
-    \begin{Schunk}
-\begin{Verbatim}
-prod_mat <- function(A, B)
-{
-    if (ncol(A) != nrow(B))
-        stop("dimensions incompatibles")
-
-    res <- matrix(0, nrow = nrow(A),
-                  ncol = ncol(B))
-    for (i in seq_len(nrow(A)))
-    {
-        for (j in seq_len(ncol(B)))
-        {
-            res[i, j] <- sum(A[i, ] * B[, j])
-        }
-    }
-    res
-}
-\end{Verbatim}
-    \end{Schunk}
-  \end{sol}
-\end{exercice}
-
 \begin{exercice}[nosol]
   \label{ex:pratiques:rstudio-tab-width}
   Configurer votre éditeur de texte pour indenter le code R de quatre
@@ -923,10 +810,10 @@ prod_mat <- function(A, B)
 
 \begin{exercice}
   Présenter le code ci-dessous selon les normes d'espacement,
-  d'indentation et de positionnement des accolades mentionnées à la
-  \autoref{sec:pratiques:pratiques}. Pour ajuster
-  automatiquement l'indentation avec RStudio, sélectionner le bloc de
-  code et choisir dans les menus \code{Code|Reformat Code}.
+  d'indentation et de positionnement des accolades mentionnées dans ce
+  chapitre. Pour ajuster automatiquement l'indentation avec RStudio,
+  sélectionner le bloc de code et choisir dans les menus
+  \code{Code|Reformat Code}.
   \begin{Schunk}
 \begin{Verbatim}
 f <- function(x){
