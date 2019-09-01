@@ -1176,7 +1176,7 @@ résultat de la fonction à un objet.
 Les fonctions suivantes permettent retourner un résultat, un
 avertissement ou un message d'erreur avant même la fin d'une fonction.
 Vous les utiliserez à peu près exclusivement à l'intérieur
-d'expressions conditionnelles.
+d'expressions conditionnelles (\autoref{sec:bases:if-else}.
 \begin{ttscript}{warning}
 \item[\Icode{return}] Force la sortie immédiate de la fonction et
   retourne l'objet en argument.
@@ -1460,7 +1460,10 @@ matrix(nrow = 3, ncol = 4, 1:12, FALSE) #-*- `\labelline{bases:fonctions:fin}`
 
 Le langage R permet d'écrire des expressions conditionnelles dont la
 syntaxe se rapproche beaucoup des constructions que nous avons
-étudiées à la \autoref{sec:algorithmes:if-else}.
+étudiées à la \autoref{sec:algorithmes:if-else}. Les structures
+conditionnelles sont les premières structures de contrôle du flux d'un
+programme que nous étudierons. Les boucles itératives feront l'objet
+de la \autoref{sec:tri:boucles}.
 
 La structure \Indexcode{if}\Indexcode{else}\code{if ... else ...}
 permet d'exécuter une expression conditionnelle à un ou deux volets,
@@ -1483,7 +1486,7 @@ else
 \begin{itemize}
 \item \meta{condition} est une expression dont le résultat est une
   valeur \code{TRUE} ou \code{FALSE} \emph{unique}. Une erreur
-  fréquente consiste à construire un test de telle sorte que
+  fréquente consiste à construire un test de telle sorte que la
   \meta{condition} est un vecteur, ce qui n'a guère de sens. Les
   fonctions \icode{any}, \icode{all}
   (\autoref{sec:bases:internes:tests}) et \icode{isTRUE} se
@@ -1491,10 +1494,10 @@ else
   booléens à une valeur unique.
 \item \meta{conséquence} est une expression, ou un groupe
   d'expressions regroupées entre accolades \verb={ }=, qui sont
-  exécutées lorsque \meta{condition} est \texttt{TRUE}.
+  exécutées lorsque la \meta{condition} est \texttt{TRUE}.
 \item \meta{alternative} est une expression, ou un groupe
   d'expressions regroupées entre accolades \verb={ }=, qui sont
-  exécutées lorsque \meta{condition} est \texttt{FALSE}.
+  exécutées lorsque la \meta{condition} est \texttt{FALSE}.
 \end{itemize}
 
 \warningbox{Il tombe sous le sens que «vrai» est vrai, n'est-ce pas?
@@ -1524,9 +1527,9 @@ switch(\meta{expression}, \meta{cas\textsubscript{\upshape{}1}} = \meta{action\t
                      \meta{cas\textsubscript{\upshape{}2}} = \meta{action\textsubscript{\upshape{}2}}, ...)
 \end{Verbatim}
 \end{Schunk}
-La fonction évalue d'abord \meta{expression}. Si le résultat est une
-valeur numérique $k$, alors \meta{action$_k$} est exécutée. Si le
-résultat de \meta{expression} est l'une des chaines de caractères
+La fonction évalue d'abord l'\meta{expression}. Si le résultat est une
+valeur numérique $k$, alors l'\meta{action$_k$} est exécutée. Si le
+résultat de l'\meta{expression} est l'une des chaines de caractères
 \meta{cas$_1$}, \meta{cas$_2$}, \dots, alors c'est l'action correspondante
 qui est exécutée.
 <<echo=TRUE>>=
