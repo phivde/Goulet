@@ -33,11 +33,9 @@ source("Stangle.R")        # lancement de Stangle
 @
 
 \begin{objectifs}
-\item Décrire le concept d'environnement d'évaluation de R.
-\item Identifier la valeur associée à un symbole en fonction de la
-  portée lexicale de R.
-\item Extraire des valeurs de l'environnement d'une fonction ou y en
-  assigner de nouvelles.
+\item Décrire les concepts d'environnement d'une fonction et
+  d'environnement d'évaluation de R.
+\item Comprendre comment R associe des symboles à des valeurs.
 \item Utiliser la portée lexicale et l'évaluation paresseuse pour
   simplifier les fonctions R.
 \end{objectifs}
@@ -105,6 +103,10 @@ permet aussi de coder plus efficacement.
   \ref{lst:environnement:contexte:fin}.}
 
 <<script, results=hide>>=
+###
+### CONTEXTE  `\labelline{environnement:contexte}`
+###
+
 ## La portée (domaine où un objet existe et comporte une
 ## valeur) des arguments d'une fonction et de tout objet
 ## défini à l'intérieur de celle-ci se limite à la fonction.

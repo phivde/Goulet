@@ -33,14 +33,10 @@ source("Stangle.R")        # lancement de Stangle
 @
 
 \begin{objectifs}
-\item Comprendre ce qu'est un langage de programmation interprété.
 \item Connaitre la provenance du langage R et les principes ayant
   guidé son développement.
-\item Mettre en place sur son poste de travail un environnement de
-  développement en R.
-\item Démarrer une session R et exécuter des commandes simples.
-\item Utiliser des fichiers de script R de manière interactive.
-\item Créer, modifier et sauvegarder ses propres fichiers de script R.
+\item Utiliser R de manière interactive.
+\item Créer, modifier et utiliser des fichiers de script R.
 \end{objectifs}
 
 R est un environnement intégré de manipulation de données, de calcul

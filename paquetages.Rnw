@@ -270,21 +270,10 @@ library("actuar")
 \section{Exercices}
 \label{sec:paquetages:exercices}
 
-\Opensolutionfile{solutions}[solutions-paquetages]
-
-\begin{Filesave}{solutions}
-\section*{Chapitre \ref*{chap:paquetages}}
-\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:paquetages}}
-
-\end{Filesave}
-
 \begin{exercice}[nosol]
   Installer un paquetage disponible dans CRAN dans une bibliothèque
   personnelle sur votre poste de travail.
 \end{exercice}
-
-\Closesolutionfile{solutions}
-
 
 %%% Local Variables:
 %%% mode: noweb

@@ -463,7 +463,7 @@ unlink(c("vecteur.data", "matrice.data",
 \section{Exercices}
 \label{sec:import-export:exercices}
 
-\Opensolutionfile{solutions}[solutions-donnees]
+\Opensolutionfile{solutions}[solutions-import-export]
 
 \begin{Filesave}{solutions}
 \section*{Chapitre \ref*{chap:import-export}}

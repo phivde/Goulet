@@ -33,17 +33,12 @@ source("Stangle.R")        # lancement de Stangle
 @
 
 \begin{objectifs}
-\item Écrire et interpréter la syntaxe et la sémantique du langage R.
-\item Utiliser l'arithmétique vectorielle du langage R dans les
-  calculs.
-\item Créer et manipuler des vecteurs simples («atomiques»).
-\item Utiliser les divers modes des vecteurs (en particulier
-  \code{numeric}, \code{character} et \code{logical}) et la conversion
-  forcée de l'un à l'autre.
-\item Extraire des données d'un vecteur simple ou y affecter de
-  nouvelles valeurs à l'aide des méthodes d'indiçage.
-\item Appeler une fonction R; concevoir comment les arguments sont
-  passés à la fonction et le traitement des valeurs par défaut.
+\item Écrire et interpréter des expressions R.
+\item Utiliser les vecteurs et l'arithmétique vectorielle du langage R
+  dans les calculs.
+\item Extraire des données d'un vecteur ou y affecter de nouvelles
+  valeurs à l'aide des méthodes d'indiçage.
+\item Définir et appeler une fonction R.
 \end{objectifs}
 
 C'est dans ce chapitre que nous débutons réellement l'apprentissage de

@@ -35,55 +35,316 @@ source("Stangle.R")        # lancement de Stangle
 \begin{objectifs}
 \item Expliquer les algorithmes classiques de tri et de recherche;
   comparer leurs avantages et inconvénients.
-\item Exprimer une méthode de résolution de problème sous la forme
-  d'un algorithme à l'aide de pseudo-code.
-\item Effectuer la mise en oeuvre d'un algorithme donné dans le
+\item Concevoir une boucle itérative dans R.
+\item Effectuer la mise en oeuvre d'un algorithme itératif dans le
   langage R.
 \end{objectifs}
 
-Marianne et Alexandre doivent fournir une solution logicielle à un
-problème donné. Sitôt la lecture de l'énoncé du problème complétée,
-ils se précipitent sur le clavier pour coder leur solution. Rapidement
-bloqués, pensant qu'ils butent sur un problème de syntaxe ou
-d'utilisation d'une fonction, ils demandent de l'aide. Lorsqu'on leur
-demande qu'est-ce qu'ils essaient de faire, quelle est la nature de leur
-solution, ils ne peuvent répondre que par un long silence.
+\citet{Kernighan:practice:1999} font remarquer, fort à propos:
+\begin{quote}
+  Tous les programmes reposent sur des algorithmes et des structures
+  de données, mais très peu de programmes exigent d'en concevoir de
+  nouveaux.
+\end{quote}
+Autrement dit, aussi complexe soit-il, un programme repose souvent sur
+quelques algorithmes fondamentaux bien connus et bien établis. À ce
+titre, les algorithmes de tri et de recherche jouent un rôle
+particulièrement important: on estime que 25~\% du temps de calcul des
+ordinateurs dans le monde est consacré au tri et à la recherche! Ce
+n'est pas pour rien que Donald Knuth consacre un volume entier de son
+œuvre monumentale \emph{The Art of Computer Programming} à ce seul
+sujet \citep{Knuth:ACP:vol3:1997}.
 
-Dans mon rôle de professeur, j'ai été témoin de la scène ci-dessus à
-de nombreuses reprises. Marianne et Alexandre font une erreur commune
-chez les programmeurs --- et pas que chez les débutants: commencer à
-coder sans avoir au préalable suffisamment réfléchi à la solution. Il
-manque un plan clair des étapes à suivre pour résoudre le problème.
-Or, ce plan, ou la recette à suivre --- nous reviendrons sur cette
-analogie culinaire dans la suite --- pour transformer les entrants
-d'un problème en une solution, c'est l'algorithme. Travailler sans
-algorithme, c'est comme naviguer sans boussole.
+Nous reviendrons sur les algorithmes classiques de tri et de recherche
+au \autoref{chap:tri}.
 
-Si programmer requiert des algorithmes, l'étude de la programmation
-doit donc nécessairement s'accompagner de notions
-d'\index{algorithmique}algorithmique, la science qui étudie les
-algorithmes et les structures de données. L'algorithmique est une
-discipline riche en techniques ingénieuses et en analyses
-mathématiques poussées. Connaitre ses principes de base et étudier
-certains algorithmes classiques vous permettra de mieux planifier vos
-méthodes de résolution de problème. En effet, un bon algorithme permet
-de résoudre en quelques secondes un problème qui pourrait autrement
-prendre des années.
 
-L'étude des algorithmes s'accompagne habituellement de celle des
-structures de données ou, en d'autres termes, de la manière
-d'organiser les données dans un ordinateur. Comme nous le verrons au
-chapitre \autoref{chap:donnees}, il existe bien différentes structures
-de données en R, mais leur réelle mise en œuvre demeure tout à fait
-transparente pour les programmeuses et les programmeurs. C'est
-pourquoi nous ferons l'impasse sur des notions que l'on retrouve dans
-tous les ouvrages classiques d'algorithmique, comme le tableau
-(\emph{array}), la liste chainée (\emph{list}), l'arbre (\emph{tree})
-ou la table de hachage (\emph{hashtable}).
+\section{Boucles itératives}
+\label{sec:fonctions:boucles}
 
-Le présent chapitre est inspiré de l'excellent ouvrage \emph{Essential
-  Algorithms} de \citet{Stephens:algorithms:2013}.
+Comme nous l'avons déjà vu au \autoref{chap:algorithmes}, il existe
+deux grandes manières de répéter des calculs en programmation: par
+\index{iteration@itération}itération ou par
+\index{recursion@récursion}récursion. La récursion est très simple à
+mettre en œuvre dans un langage fonctionnel comme R puisqu'il suffit
+de faire en sorte qu'une fonction s'invoque elle-même, idéalement,
+dans R, avec la fonction \icode{Recall}
+(\autoref{sec:bases:recursion}).
 
+Une procédure itérative répète un bloc d'instructions, habituellement
+avec un léger changement d'état, jusqu'à ce qu'un nombre de
+répétitions soit atteint ou qu'une condition soit satisfaite. C'est ce
+que l'on appelle communément une \emph{boucle} (\emph{loop}). La
+présente section étudie les structures de contrôles itératives de R.
+Elles sont de trois types: la boucle à contrôle par dénombrement
+(boucle \code{for}), la boucle à précondition «tant que» (boucle
+\code{while}) et la boucle à condition d'arrêt (boucle \code{repeat}).
+
+\subsection{Boucle à dénombrement}
+\label{sec:tri:boucle:for}
+
+La boucle à dénombrement \Icode{for} sert pour répéter une procédure
+un nombre prédéterminé de fois. La syntaxe de la boucle \code{for} est
+la suivante dans R:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+for (\meta{variable} in \meta{suite})
+    \meta{expression}
+\end{Verbatim}
+\end{Schunk}
+\begin{itemize}
+\item \meta{variable} est un \emph{compteur} ou, plus spécifiquement,
+  un \emph{itérateur} qui prend successivement les valeurs contenues
+  dans \meta{suite}. La variable est habituellement --- mais pas
+  nécessairement --- utilisée dans les calculs à l'intérieur de la
+  boucle.
+\item \meta{suite} est un vecteur de valeurs. À noter que la
+  \meta{suite} n'a pas à être composée de nombres consécutifs, ni même
+  de nombres, en fait.
+\item \meta{expression} est le contenu de la boucle à proprement
+  parler. L'itérateur \meta{variable} apparait habituellement dans
+  l'\meta{expression}. Comme toujours, si le contenu est constitué de
+  plusieurs expressions, elles doivent être regroupées dans des
+  accolades \verb={ }=.
+\end{itemize}
+
+La fonction ci-dessous est une mise en œuvre de
+l'\autoref{algo:algorithmes:factorielle-iterative} du calcul de la
+factorielle qui utilise une boucle \icode{for}. Remarquez comment la
+boucle n'est exécutée que pour $n \geq 2$ afin d'éviter d'effectuer le
+produit $1 \times 1$ dans le calcul de $1!$.
+\begin{Schunk}
+\begin{Verbatim}
+factorial <- function(n)
+{
+    p <- 1
+    for (i in seq(from = 2, length.out = n - 1))
+        p <- p * i
+    p
+}
+\end{Verbatim}
+\end{Schunk}
+
+\subsection{Boucle à précondition}
+\label{sec:tri:boucle:while}
+
+La boucle à précondition \Icode{while} exécute une procédure tant
+qu'une condition est satisfaite. La condition étant vérifiée avant
+d'entrer dans la boucle, celle-ci peut ne jamais s'exécuter. La
+syntaxe de la boucle \code{while} est la suivante:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+while(\meta{condition})
+    \meta{expression}
+\end{Verbatim}
+\end{Schunk}
+\begin{itemize}
+\item \meta{condition} est une expression dont le résultat est une
+  valeur \code{TRUE} ou \code{FALSE} unique.
+\item \meta{expression} est une expression ou un groupe d'expressions
+  entre accolades \verb={ }= qui sont exécutées tant que la
+  \meta{condition} est \code{TRUE}.
+\end{itemize}
+
+Vous avez déjà rencontré la structure «tant que» dans la version en
+pseudocode de l'algorithme d'Euclide
+(\autoref{algo:algorithmes:euclide:pseudo}). Voici la mise en œuvre
+correspondante avec une boucle \icode{while}.
+\begin{Schunk}
+\begin{Verbatim}
+PGCD <- function(m, n)
+{
+    while (n != 0)
+    {
+        r <- m %% n
+        m <- n
+        n <- r
+    }
+    m
+}
+\end{Verbatim}
+\end{Schunk}
+
+\subsection{Boucle à condition d'arrêt}
+\label{sec:tri:boucle:repeat}
+
+Plusieurs langages de programmation comportent une structure itérative
+à postcondition «répéter, tant que» (boucle \code{do ... while}) ou
+«répéter, jusqu'à ce que» (boucle \code{do ... until}), voire les
+deux. Dans R, la boucle à postcondition prend plutôt la forme d'une
+boucle à condition d'arrêt \Icode{repeat}. La syntaxe de cette boucle
+est on ne peut plus simple:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+repeat
+    \meta{expression}
+\end{Verbatim}
+\end{Schunk}
+\begin{itemize}
+\item \meta{expression} est l'expression ou le groupe d'expressions à
+  répéter. En pratique, pour éviter que la boucle ne se répète
+  indéfiniment, l'\meta{expression} est toujours un groupe
+  d'expressions comportant un test d'arrêt.
+\end{itemize}
+
+Le test d'arrêt d'une boucle \icode{repeat} utilise habituellement la
+commande \icode{break} (\autoref{sec:tri:boucles:flux}) pour forcer
+la sortie de la boucle. Puisque le test se trouve à l'intérieur de la
+boucle --- généralement à ou vers la fin ---, une boucle \icode{repeat}
+est toujours exécutée au moins une fois. C'est d'ailleurs la grande
+différence entre une boucle \icode{while} et une boucle \icode{repeat}.
+
+Le fichier de script du \autoref{chap:pratiques} propose une fonction
+\code{sqrt} pour calculer la racine carrée d'un nombre par
+approximations successives. Elle a recours à une boucle à précondition
+\icode{while}. Voici une variante qui utilise plutôt une boucle à
+critère d'arrêt \icode{repeat}.
+\begin{Schunk}
+\begin{Verbatim}
+sqrt <- function(x)
+{
+    y <- 1
+    repeat
+    {
+        y <- (y + x/y)/2
+        if (abs(y^2 - x) < 0.001)
+            break
+    }
+    y
+}
+\end{Verbatim}
+\end{Schunk}
+
+\subsection{Contrôle du flux}
+\label{sec:tri:boucle:flux}
+
+Les commandes de contrôle du flux permettent d'infléchir le
+déroulement normal d'une boucle.
+
+\begin{ttscript}{break}
+\item[\Icode{break}] Force la sortie de la boucle courante. La
+  commande \code{break} peut être utilisée dans les boucles
+  \icode{for} ou \icode{while}, mais elle est presque indissociable de
+  la boucle \icode{repeat}, tel qu'illustré à la
+  \autoref{sec:tri:boucles:repeat}.
+\item[\Icode{next}] Force le passage à la prochaine itération de la
+  boucle \icode{for}, \icode{while} ou \icode{repeat}. Comme
+  \icode{break}, la commande est généralement utilisée à l'intérieur
+  d'une structure conditionnelle.
+\end{ttscript}
+
+\gotorbox{Les lignes \reflines{tri:boucles} du fichier de script
+  \code{\scriptfilename} reproduit à la \autoref{sec:tri:exemples}
+  proposent un exemple additionnel de fonction ayant recours à une
+  boucle itérative.}
+
+<<script, results=hide>>=
+###
+### BOUCLES ITÉRATIVES  `\labelline{tri:boucles}`
+###
+
+## Nous allons illustrer l'utilisation des boucles avec la
+## méthode du point fixe. On dit qu'une valeur x est un «point
+## fixe» d'une fonction f si cette valeur satisfait l'équation
+##
+##   x = f(x).
+##
+## La méthode numérique de recherche du point fixe d'une
+## fonction f est simple et puissante: elle consiste à choisir
+## une valeur de départ, puis à évaluer successivement f(x),
+## f(f(x)), f(f(f(x))), ... jusqu'à ce que la valeur change
+## «peu».
+##
+## L'algorithme est donc très simple:
+##
+## 1. Choisir une valeur de départ y.
+## 2. Calculer x = f(y)
+## 3. Si |x - y|/|x| >= e, poser y <- x et retourner à
+##    l'étape 2.
+## 4. Retourner x.
+##
+## Avant de poursuivre votre lecture, tentez d'identifier le
+## meilleur type de boucle ('for', 'while' ou 'repeat') à
+## utiliser pour programmer cet algorithme.
+
+## La méthode de Newton du calcul de la racine carrée par
+## approximations successives est un cas spécial de la méthode
+## du point fixe. En effet, la racine carrée d'un nombre est
+## la valeur positive de y satisfaisant l'équation y^2 = x.
+## Cette équation peut se réécrire sous forme de point fixe
+## ainsi:
+##
+##   y = (y + x/y)/2.
+##
+## Voici une nouvelle mise en oeuvre de la fonction 'sqrt' qui
+## utilise la méthode du point fixe. Le critère d'arrêt y est
+## exprimé non plus en fonction de l'écart entre 'y'^2 et 'x',
+## mais plutôt en fonction de l'écart entre deux
+## approximations successives. De plus, la valeur de départ et
+## l'erreur d'approximation sont passés en argument à la
+## fonction.
+##
+## Puisqu'il faut au minimum vérifier si la valeur initiale
+## est un point fixe, nous utilisons une boucle 'repeat'.
+sqrt <- function(x, start = 1, TOL = 1E-10)
+{
+    repeat
+    {
+        y <- (start + x/start)/2
+        if (abs(y - start)/y < TOL)
+            break
+        start <- y
+    }
+    y
+}
+
+## Vérifions la validité de la fonction.
+sqrt(9, 1)
+sqrt(225, 1)
+sqrt(3047, 50)
+
+## Formidable. Toutefois, si nous voulions utiliser la méthode
+## du point fixe pour résoudre une autre équation, il faudrait
+## écrire une nouvelle fonction qui serait pour l'essentiel
+## identique, sinon pour le calcul de la fonction
+## (mathématique) f(x) pour laquelle nous cherchons le point
+## fixe.
+##
+## Créons donc une fonction de point fixe générale qui prendra
+## la fonction mathématique f(x) en argument.
+fixed_point <- function(FUN, start, TOL = 1E-10)
+{
+    repeat
+    {
+        x <- FUN(start)
+        if (abs(x - start)/x < TOL)
+            break
+        start <- x
+    }
+    x
+}
+
+## Nous pouvons ensuite écrire une nouvelle fonction 'sqrt'
+## qui utilise 'fixed_point'. Nous y ajoutons un test de
+## validité de l'argument, pour faire bonne mesure.
+sqrt <- function(x)
+{
+    if (x < 0)
+        stop("cannot compute square root of negative value")
+
+    fixed_point(function(y) (y + x/y)/2, start = 1)
+}
+
+## Validation. Nous obtenons les mêmes résultats que
+## précédemment.
+sqrt(9)
+sqrt(25)
+sqrt(3047)
+
+## Suppression de la fonction pour éviter qu'elle n'entre en
+## conflit avec celle de R.
+rm("sqrt")                              #-*- `\labelline{tri:boucles:fin}`
+@
 
 
 \section{Algorithmes classiques}
@@ -127,130 +388,6 @@ Quelques remarques pour vous aider dans votre lecture.
 \end{itemize}
 
 
-\subsection{Boucles itératives}
-\label{sec:fonctions:controle:boucles}
-
-Il existe deux grandes manières de répéter des calculs en
-programmation: par \index{iteration@itération}itération ou par
-\index{recursivite@récursivité}récursivité. Une procédure itérative
-répète un bloc d'instructions, habituellement avec un léger changement
-d'état, jusqu'à ce qu'un nombre de répétitions soit atteint ou qu'une
-condition soit satisfaite. C'est ce que l'on appelle communément une
-\emph{boucle} (\emph{loop}). Très intuitives, les boucles itératives
-sont particulièrement utilisées en programmation impérative.
-
-La procédure récursive, quant à elle, est caractérisée par le fait
-qu'elle s'invoque elle-même jusqu'à ce qu'une condition d'arrêt soit
-satisfaite. Moins intuitive, mais généralement jugée plus élégante,
-elle est particulièrement répandue en programmation fonctionnelle et
-en intelligence artificielle.\footnote{%
-  Si l'on définit plus largement l'itération comme la répétition d'un
-  bloc d'instructions, alors la récursivité n'est qu'une forme
-  d'itération. Il est toutefois d'usage en informatique de distinguer
-  les procédures itératives des procédures récursives comme je le
-  fais ici.}
-
-Nous reviendrons sur la récursivité à la
-\autoref{sec:fonctions:recursivite}. La présente section étudie les
-structures de contrôles itératives de R. Elles sont de trois types: la
-boucle à contrôle par dénombrement (boucle \code{for}), la boucle à
-pré-condition «tant que» (boucle \code{while}) et la boucle à
-condition d'arrêt (boucle \code{repeat}).
-
-La boucle à dénombrement \Icode{for} sert pour répéter une procédure
-un nombre prédéterminé de fois. La syntaxe de la boucle \code{for} est
-la suivante, dans R:
-\begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
-for (\meta{variable} in \meta{suite})
-    \meta{expression}
-\end{Verbatim}
-\end{Schunk}
-\begin{itemize}
-\item \meta{variable} est un \emph{compteur} ou, plus spécifiquement,
-  un \emph{itérateur} qui prend successivement les valeurs contenues
-  dans \meta{suite}. La variable est habituellement --- mais pas
-  nécessairement --- utilisée dans les calculs à l'intérieur de la
-  boucle.
-\item \meta{suite} est un vecteur de valeurs. À noter que \meta{suite}
-  n'a pas à être composée de nombres consécutifs, ni même de nombres,
-  en fait.
-\item \meta{expression} est le contenu de la boucle à proprement
-  parler. Comme d'habitude, si le contenu est constitué de plusieurs
-  expressions, elles doivent être regroupées des accolades \verb={ }=.
-\end{itemize}
-
-La boucle à pré-condition \Icode{while} exécute une procédure tant
-qu'une condition est satisfaite. La condition étant vérifiée avant
-d'entrer dans la boucle, celle-ci peut ne jamais s'exécuter. La
-syntaxe de la boucle \code{while} est la suivante:
-\begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
-while(\meta{condition})
-    \meta{expression}
-\end{Verbatim}
-\end{Schunk}
-\begin{itemize}
-\item \meta{condition} est une expression dont le résultat est une
-  valeur \code{TRUE} ou \code{FALSE} unique.
-\item \meta{expression} est une expression ou un groupe d'expressions
-  entre accolades \verb={ }= qui sont exécutées tant que
-  \meta{condition} est \code{TRUE}.
-\end{itemize}
-
-Plusieurs langages de programmation comportent une structure itérative
-à post-condition «tant que» (boucle \code{do ... while}) ou «jusqu'à
-ce que» (boucle \code{do ... until}), voire les deux. Dans R, la
-boucle à post-condition prend plutôt la forme d'une boucle à condition
-d'arrêt \Icode{repeat}. La syntaxe de cette boucle est on ne peut plus
-simple:
-\begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
-repeat
-    \meta{expression}
-\end{Verbatim}
-\end{Schunk}
-\begin{itemize}
-\item \meta{expression} est l'expression ou le groupe d'expressions à
-  répéter. En pratique, pour éviter que la boucle ne se répète indéfiniment,
-  \meta{expression} est toujours un groupe d'expressions comportant un
-  test d'arrêt.
-\end{itemize}
-
-Le test d'arrêt d'une boucle \icode{repeat} utilise habituellement la
-commande \icode{break} (\autoref{sec:fonctions:controle:flux}) pour
-forcer la sortie de la boucle. Puisque le test se trouve à l'intérieur
-de la boucle --- généralement à ou vers la fin ---, une boucle
-\code{repeat} est toujours exécutée au moins une fois.
-
-\subsection{Contrôle du flux}
-\label{sec:fonctions:controle:flux}
-
-Les commandes de contrôle du flux permettent d'infléchir le
-déroulement normal d'une boucle.
-
-\begin{ttscript}{break}
-\item[\Icode{break}] Force la sortie de la boucle courante. La
-  commande \code{break} peut être utilisée dans les boucles
-  \icode{for} ou \icode{while}, mais elle est presque indissociable de
-  la boucle \icode{repeat}. Si l'on assemble les morceaux des sections
-  précédentes, une boucle \icode{repeat} est généralement construite
-  ainsi:
-\begin{Schunk}
-\begin{Verbatim}[commandchars=\\\[\]]
-repeat
-{
-    \meta[expression]
-    if (\meta[condition])
-        break
-}
-\end{Verbatim}
-\end{Schunk}
-\item[\Icode{next}] Force le passage à la prochaine itération de la
-  boucle \icode{for}, \icode{while} ou \icode{repeat}. Comme
-  \icode{break}, la commande est généralement utilisée à l'intérieur
-  d'une structure conditionnelle.
-\end{ttscript}
 
 
 
@@ -1031,7 +1168,7 @@ bucketsort <- function(x, max, nbuckets)
 \Closesolutionfile{solutions}
 
 %%% Local Variables:
-%%% mode: latex
+%%% mode: noweb
 %%% TeX-engine: xetex
 %%% TeX-master: "programmer-avec-r"
 %%% coding: utf-8

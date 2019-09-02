@@ -33,15 +33,13 @@ source("Stangle.R")        # lancement de Stangle
 @
 
 \begin{objectifs}
-\item Distinguer les caractéristiques des structures de données
-  suivantes de R: le vecteur simple, la matrice, le tableau, la liste,
-  le \emph{data frame} et le facteur.
-\item Créer et manipuler chacune des structures de données ci-dessus.
+\item Créer et manipuler les structures de données suivantes de R:
+  vecteur, matrice, tableau, liste, tableau de données, facteur et
+  date.
 \item Extraire des données des divers types d'objet ou y affecter de
   nouvelles valeurs à l'aide des méthodes d'indiçage.
-\item Importer dans R des données provenant de sources externes.
-\item Exporter des données de R vers un format exploitable par
-  d'autres outils.
+\item Utiliser les fonctions d'application pour effectuer des
+  sommaires ou réduire des structures de données de R.
 \end{objectifs}
 
 Ce chapitre regroupe deux sujets bien distincts d'un point de vue

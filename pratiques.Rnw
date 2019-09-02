@@ -33,19 +33,10 @@ source("Stangle.R")        # lancement de Stangle
 @
 
 \begin{objectifs}
-\item Définir une fonction R, ses divers arguments et, le cas échéant,
-  les valeurs par défaut de ceux-ci.
-\item Utiliser et définir des fonctions R ayant un nombre variable
-  d'arguments.
-\item Utiliser la fonction \code{if} pour l’exécution conditionnelle
-  d'expressions R.
-\item Distinguer la construction \code{if ... else ...} de la fonction
-  \code{ifelse}.
-\item Concevoir une boucle dans R.
-\item Choisir entre les opérateurs \code{for}, \code{while} et
-  \code{repeat} lors de la construction d'une boucle R.
-\item Employer les normes de programmation reconnues en matière de
-  segmentation du code, de style et de documentation.
+\item Adopter des bonnes pratiques de programmation en contexte de
+  travail collaboratif.
+\item Respecter les normes de programmation reconnues en matière de
+  style, de présentation du code et de documentation.
 \end{objectifs}
 
 De manière générale, le développement et la maintenance de code
@@ -808,6 +799,7 @@ sqrt <- function(x)
   \end{figure}
 \end{exercice}
 
+\enlargethispage{5mm}
 \begin{exercice}
   Présenter le code ci-dessous selon les normes d'espacement,
   d'indentation et de positionnement des accolades mentionnées dans ce

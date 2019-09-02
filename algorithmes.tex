@@ -15,6 +15,10 @@
 \def\scriptfilename{\currfilebase.R}
 
 \begin{objectifs}
+  \item Définir le concept d'algorithme.
+\item Comparer la performance d'algorithmes à l'aide de la notation
+  $O()$.
+
 \item Résoudre un problème sous la forme d'un algorithme en langage
   naturel ou en pseudocode.
 \item Utiliser des instructions conditionnelles dans un algorithme.
@@ -638,6 +642,7 @@ forme d'algorithme. Le pseudocode sied un peu mieux aux algorithmes
 récursifs.
 
 \begin{algorithme}[Factorielle, approche récursive]
+  \label{algo:algorithmes:factorielle-recursive}
   Calculer la \index{factorielle}factorielle d'un entier positif $n$.
   \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -688,6 +693,7 @@ calcul de la \index{factorielle}factorielle de manière itérative.
 Exprimons cette fois l'algorithme en langage naturel.
 
 \begin{algorithme}[Factorielle, approche itérative]
+  \label{algo:algorithmes:factorielle-iterative}
   Calculer la \index{factorielle}factorielle d'un entier positif $n$.
   \begin{enumerate}
   \item Poser $p \leftarrow i \leftarrow 1$.
@@ -1281,9 +1287,9 @@ Fin Fib
       \begin{align*}
         f(5)
         &= f(4) + f(3) \\
-        &= (f(3) + f(2)) + (f(2) + f(1)) \\
+        &= (f(3) + f(2)) + (f(2) + f(1)) \displaybreak[0]\\
         &= ((f(2) + f(1)) + (f(1) + f(0))) \\
-        &\phantom{=} + ((f(1) + f(0)) + f(1)) \\
+        &\phantom{=} + ((f(1) + f(0)) + f(1)) \displaybreak[0]\\
         &= (((f(1) + f(0)) + f(1)) + (f(1) + f(0))) \\
         &\phantom{=} + ((f(1) + f(0)) + f(1)).
       \end{align*}

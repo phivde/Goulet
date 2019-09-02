@@ -17,17 +17,11 @@ options(width=50)
 @
 
 \begin{objectifs}
-\item Déterminer si une chaine de caractères correspond ou non à une
-  expression régulière donnée.
-\item Écrire une expression régulière correspondant à une chaine de
-  caractères donnée.
-\item Identifier les lignes d'un fichier de texte ayant des propriétés
-  communes à l'aide de \code{grep}.
-\item Rechercher et remplacer des chaines de caractères ayant des
-  propriétés communes à l'aide de \code{sed}.
-\item Effectuer les opérations précédentes sur des chaines de
-  caractères divisées en champs logiques avec \code{awk}.
-\item Effectuer les opérations de recherche et de remplacement de
+\item Utiliser les expressions régulières pour décrire ou identifier
+  une chaine de caractères.
+\item Effectuer l'analyse et le contrôle de texte à l'aide des outils
+  informatiques standards \code{grep}, \code{sed} et \code{awk}.
+\item Effectuer des opérations de recherche et de remplacement de
   texte à l'aide d'expressions régulières avec les divers outils de R.
 \end{objectifs}
 
