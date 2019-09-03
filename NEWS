@@ -2,12 +2,42 @@
 === Programmer avec R
 ===
 
-# (en développement)
+# 2019.09 (2019-09-03)
+
+Révision majeure du document préparée pour la troisième itération du
+cours IFT-1902 Programmation avec R pour l'analyse de données.
 
 ## Nouveautés
 
 - Chapitre 1: ajout d'un exercice sur la configuration du Finder sous
   macOS pour afficher le répertoire personnel dans la barre latérale.
+- Chapitre 3: tout nouveau chapitre sur les algorithmes et
+  l'algorithmique.
+- Chapitres 4, 5 et 6: réorganisation de la séquence «premiers pas,
+  fonctions, données» en «bases de la programmation, données et
+  fonctions d'application, bonnes pratiques». Un changement important
+  est de voir les fonctions d'application avant les boucles itératives
+  et directement en lien avec leurs structure de données
+  correspondantes.
+- Chapitre 5: ajout de la structure de données «date».
+- Chapitre 6: nouveau chapitre créé à partir d'une section du chapitre
+  4 de la version 2018.
+- Chapitre 7: nouveau chapitre qui remplacera à terme le chapitre sur
+  l'algorithmique de la version 2018. Intègre les boucles itératives.
+  Ce chapitre est en cours de réécriture afin de ne plus renvoyer vers
+  Stephens.
+- Chapitre 8: ancien chapitre 13 qui remonte dans l'ordre de
+  présentation.
+- Chapitre 9: nouveau chapitre créé à partir d'une section du chapitre
+  7 de la version 2018.
+- Chapitre 10: ancien chapitre 9 de la version 2018. Aucun changement
+  majeur.
+- Chapitre 11: aucun changement majeur. Chapitre en cours de
+  réécriture pour ne plus renvoyer vers Shell Scripting Guide.
+- Chapitre 12: ancien chapitre 5 qui descend dans l'ordre de
+  présentation.
+- Chapitres supprimés: ligne de commande et travail collaboratif avec
+  Git.
 
 ## Autres changements
 
