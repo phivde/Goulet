@@ -1456,9 +1456,9 @@ matrix(nrow = 3, ncol = 4, 1:12, FALSE) #-*- `\labelline{bases:fonctions:fin}`
 Le langage R permet d'écrire des expressions conditionnelles dont la
 syntaxe se rapproche beaucoup des constructions que nous avons
 étudiées à la \autoref{sec:algorithmes:if-else}. Les structures
-conditionnelles sont les premières structures de contrôle du flux d'un
-programme que nous étudierons. Les boucles itératives feront l'objet
-de la \autoref{sec:tri:boucles}.
+conditionnelles sont les premières structures de contrôle que nous
+étudierons. Les boucles itératives feront l'objet de la
+\autoref{sec:tri:boucles}.
 
 La structure \Indexcode{if}\Indexcode{else}\code{if ... else ...}
 permet d'exécuter une expression conditionnelle à un ou deux volets,
@@ -1730,7 +1730,7 @@ system.time(f(x))          #-*- `\labelline{bases:if-else:fin}`
 @
 
 \section{Récursion}
-\label{sec:fonctions:recursion}
+\label{sec:bases:recursion}
 
 En tant que langage de programmation fonctionnel, R admet tout
 naturellement les procédures récursives. Lorsque la fonction récursive
@@ -2571,7 +2571,7 @@ is.odd
   \code{is.odd} de l'\autoref{ex:bases:is.odd}.
   \begin{sol}
     Les deux algorithmes étant récursifs, les fonctions le sont aussi.
-    Tel qu'expliqué à la \autoref{sec:fonctions:recursion}, il est
+    Tel qu'expliqué à la \autoref{sec:bases:recursion}, il est
     préférable d'utiliser \icode{Recall} pour invoquer la fonction à
     l'intérieur d'elle-même sans avoir à se soucier de son nom.
 

@@ -186,7 +186,7 @@ Autrement dit, dès que nous définissons une fonction, R lui attribue
 un environnement. Lorsque la fonction est créée dans l'espace de
 travail, son environnement englobant est l'\emph{environnement
   global}\Index{environnement!global}, représenté par le symbole
-\Index{GlobalEnv@\code{.GlobalEnv}}\code{.GlobalEnv}, et son
+\index{GlobalEnv@\code{.GlobalEnv}|bfhyperpage}\code{.GlobalEnv}, et son
 dictionnaire contient tous les objets se trouvant dans l'espace de
 travail. (Les expressions ci-dessous sont exécutées dans un espace de
 travail vide au préalable.)

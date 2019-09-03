@@ -503,7 +503,8 @@ Le langage \index{C}C a été inventé en 1972 chez Bell Labs par Ken
 Thompson et Dennis Ritchie afin de réécrire le système d'exploitation
 UNIX (\autoref{sec:informatique:os:unix}). Il demeure beaucoup utilisé
 pour la programmation système: le noyau de systèmes d'exploitation
-comme Windows et Linux sont développés en grande partie en C.
+comme \index{Windows}Windows et \index{Linux}Linux sont développés en
+grande partie en C.
 
 Le C est un langage de programmation généraliste considéré, selon les
 standards actuels, comme de bas niveau. Pour illustrer, l'utilisateur
@@ -608,15 +609,16 @@ système d'exploitation pour fonctionner.
 
 Il existe une grande variété de systèmes d'exploitation. Les plus
 connus aujourd'hui sont, pour les ordinateurs personnels et les
-serveurs, Windows de Microsoft, macOS de Apple et Linux, un logiciel
-libre créé et toujours administré par Linus Torvalds. Pour les
-appareils mobiles, deux systèmes d'exploitation se partagent
-l'essentiel du marché: iOS et Android. Le premier est dérivé de macOS
-et le second, de Linux.
+serveurs, \index{Windows}Windows de Microsoft, \index{macOS}macOS de
+Apple et \index{Linux}Linux, un logiciel libre créé et toujours
+administré par Linus Torvalds. Pour les appareils mobiles, deux
+systèmes d'exploitation se partagent l'essentiel du marché: iOS et
+Android. Le premier est dérivé de macOS et le second, de Linux.
 
-Les systèmes macOS et Linux appartiennent à la famille des systèmes
-\index{Unix}Unix. Cela ne laisse donc en fait que deux grandes classes
-de systèmes d'exploitation couramment utilisés: Windows et Unix.
+Les systèmes \index{macOS}macOS et \index{Linux}Linux appartiennent à
+la famille des systèmes \index{Unix}Unix. Cela ne laisse donc en fait
+que deux grandes classes de systèmes d'exploitation couramment
+utilisés: Windows et Unix.
 
 \subsection{Windows}
 \label{sec:informatique:os:windows}
@@ -626,19 +628,19 @@ près de 90~\% des ordinateurs personnels dans le monde. Dans les
 circonstances, rares sont les personnes qui n'ont jamais utilisé le
 système, ne serait-ce qu'à petites doses.
 
-À l'origine, en 1985, Windows n'était qu'une interface graphique
-superposée au véritable système d'exploitation des ordinateurs de type
-«compatibles IBM PC», le DOS. Les versions grand public depuis
-Windows~2000 sont plutôt basées sur le noyau de Windows~NT, un système
-conçu à partir de zéro et lancé au milieu des années 1990 en tant que
-système pour les entreprises.
+À l'origine, en 1985, \index{Windows}Windows n'était qu'une interface
+graphique superposée au véritable système d'exploitation des
+ordinateurs de type «compatibles IBM PC», le DOS. Les versions grand
+public depuis Windows~2000 sont plutôt basées sur le noyau de
+Windows~NT, un système conçu à partir de zéro et lancé au milieu des
+années 1990 en tant que système pour les entreprises.
 
-Le plus grand avantage de Windows est son ubiquité. À peu près toutes
-les applications, sauf peut-être celles s'adressant à un segment de
-marché très précis, sont disponibles sous Windows, que ce soit en code
-natif, via un port depuis \index{Unix}Unix, ou encore par
-l'intermédiaire d'une couche logicielle d'émulation comme Cygwin ou
-\index{MinGW}MinGW.
+Le plus grand avantage de \index{Windows}Windows est son ubiquité. À
+peu près toutes les applications, sauf peut-être celles s'adressant à
+un segment de marché très précis, sont disponibles sous Windows, que
+ce soit en code natif, via un port depuis \index{Unix}Unix, ou encore
+par l'intermédiaire d'une couche logicielle d'émulation comme Cygwin
+ou \index{MinGW}MinGW.
 
 Un système d'exploitation multiutilisateur prend pour acquis que
 plusieurs utilisateurs se partageront les ressources de l'ordinateur,
@@ -649,18 +651,18 @@ l'administrateur peut installer ou supprimer des applications) et
 d'accès aux ressources des autres utilisateurs (Marianne n'a pas
 accès aux fichiers d'Alexandre et vice-versa).
 
-Les versions de Windows multiutilisateurs sont apparues relativement
-tard sur le marché grand public, et ce, sans que le paradigme ne soit
-imposé aux utilisateurs. Résultat: la plupart des utilisateurs de
-Windows s'octroient à la ronde les droits d'administrateur et, pire,
-plusieurs applications requièrent toujours un accès total au système.
-C'est par ces failles que se propagent virus et autres logiciels
-malveillants sur la plateforme.
+Les versions de \index{Windows}Windows multiutilisateurs sont apparues
+relativement tard sur le marché grand public, et ce, sans que le
+paradigme ne soit imposé aux utilisateurs. Résultat: la plupart des
+utilisateurs de Windows s'octroient à la ronde les droits
+d'administrateur et, pire, plusieurs applications requièrent toujours
+un accès total au système. C'est par ces failles que se propagent
+virus et autres logiciels malveillants sur la plateforme.
 
-Les systèmes Windows sont livrés avec une trousse de développement
-très restreinte. Les programmeurs doivent donc installer les outils
-nécessaires, souvent sous forme de suites logicielles monolithiques,
-ce qui entraine dédoublements et, parfois, conflits.
+Les systèmes \index{Windows}Windows sont livrés avec une trousse de
+développement très restreinte. Les programmeurs doivent donc installer
+les outils nécessaires, souvent sous forme de suites logicielles
+monolithiques, ce qui entraine dédoublements et, parfois, conflits.
 
 \subsection{Unix}
 \label{sec:informatique:os:unix}
@@ -671,17 +673,16 @@ une marque déposée de \link{https://www.opengroup.org/unix}{Open Group}
 premier système Unix développé chez Bell Labs dans les années 1970 par
 Kenneth Thompson, Dennis Ritchie et plusieurs autres.
 
-Les systèmes Unix partagent un certain nombre de caractéristiques
-communes. D'abord, ils sont intrinsèquement multitâches et
-multiutilisateurs. Il existe donc une séparation très nette entre les
-droits accordés à \index{administrateur systeme@administrateur
-  système}l'administrateur système (communément appelé
-\emph{superuser} ou \emph{root}) et ceux dévolus aux utilisateurs
-normaux. Ceux-ci ne peuvent écrire que dans l'espace disque qui leur
-est réservé, identifié comme le \index{repertoire personnel@répertoire
-  personnel}\emph{répertoire personnel} ou le \index{dossier de
-  départ|see{répertoire personnel}}\emph{dossier de départ}
-(\emph{home directory}).
+Les systèmes \index{Unix}Unix partagent un certain nombre de
+caractéristiques communes. D'abord, ils sont intrinsèquement
+multitâches et multiutilisateurs. Il existe donc une séparation très
+nette entre les droits accordés à l'administrateur système
+(communément appelé \emph{superuser} ou \emph{root}) et ceux dévolus
+aux utilisateurs normaux. Ceux-ci ne peuvent écrire que dans l'espace
+disque qui leur est réservé, identifié comme le %
+\index{repertoire personnel@répertoire personnel}\emph{répertoire
+  personnel} ou le \index{dossier de départ|see{répertoire
+    personnel}}\emph{dossier de départ} (\emph{home directory}).
 
 Ensuite, la
 \Index{Unix!philosophie}\link{https://fr.wikipedia.org/wiki/Philosophie_d\%27Unix}{philosophie
@@ -700,8 +701,8 @@ de ponctuation qui seraient accolés au mot.
 
 À l'exception notable des Mac, \index{Unix}Unix demeure assez peu
 répandu sur les ordinateurs personnels. En revanche le système
-d'exploitation, en particulier sa variante libre Linux, équipe
-l'immense majorité des stations de travail, des serveurs et des
+d'exploitation, en particulier sa variante libre \index{Linux}Linux,
+équipe l'immense majorité des stations de travail, des serveurs et des
 supercalculateurs. De plus, bon nombre d'applications scientifiques et
 de langages de programmation sont d'abord développés sur des systèmes
 Unix. Pour ces raisons, j'estime que tout programmeur devrait
@@ -709,10 +710,11 @@ connaitre quelques uns des principaux «Unix-ismes». Nous les passerons
 en revue à la section suivante avec les détails additionnels sur le
 système de fichiers de Unix.
 
-\osxbox{Vous savez désormais pourquoi le \index{repertoire
-    personnel@répertoire personnel}répertoire personnel, ou \emph{home
-    directory}, est représenté par une maison dans le \index{Finder}Finder et que le
-  raccourci clavier pour y accéder est \code{\shiftkey\,\cmdkey\,H}.}
+\osxbox{Vous savez désormais pourquoi le %
+  \index{repertoire personnel@répertoire personnel}répertoire
+  personnel, ou \emph{home directory}, est représenté par une maison
+  dans le \index{Finder}Finder et que le raccourci clavier pour y
+  accéder est \code{\shiftkey\,\cmdkey\,H}.}
 
 
 \section{Systèmes de fichiers}
@@ -727,13 +729,14 @@ fichiers. Seulement, les programmeurs doivent être familiers avec
 quelques grands principes de l'organisation des données dans un
 ordinateur.
 
-Les fichiers sont regroupés dans des
+Les fichiers sont regroupés dans des %
 \index{repertoire@répertoire}\emph{répertoires} (ou dossiers). Ceux-ci
 contiennent eux-mêmes des fichiers ou des sous-répertoires. Ce schéma
 se répète sans limite pratique. Il en résulte une classification sous
 forme d'arbre dont la \emph{racine} est le répertoire contenant
 l'intégralité des fichiers. La \autoref{fig:informatique:fs} présente
-des extraits des arbres de fichiers usuels de Windows et de macOS.
+des extraits des arbres de fichiers usuels de \index{Windows}Windows
+et de \index{macOS}macOS.
 
 \begin{figure}
   \begin{minipage}[t]{0.45\linewidth}
@@ -782,10 +785,11 @@ des extraits des arbres de fichiers usuels de Windows et de macOS.
 
 Les interfaces graphiques des systèmes d'exploitation contiennent
 toutes une application pour naviguer à l'intérieur du système de
-fichiers. Sous Windows, il s'agit de l'\index{Explorateur
-  Windows}Explorateur Windows. Sous macOS, l'outil de navigation est
-le \index{Finder}Finder. La \autoref{fig:informatique:explorer+finder}
-présente des fenêtres types de ces deux applications.
+fichiers. Sous \index{Windows}Windows, il s'agit de %
+l'\index{Explorateur Windows}Explorateur Windows. Sous
+\index{macOS}macOS, l'outil de navigation est le \index{Finder}Finder.
+La \autoref{fig:informatique:explorer+finder} présente des fenêtres
+types de ces deux applications.
 
 \begin{figure}
   \begin{minipage}{0.48\linewidth}
@@ -811,9 +815,9 @@ présente des fenêtres types de ces deux applications.
 \subsection{Particularités du système de fichiers de Windows}
 \label{sec:informatique:fs:windows}
 
-Dans Windows, chaque lecteur physique ou lecteur réseau dispose de son
-propre arbre de fichiers. La racine est identifiée par une lettre. Le
-premier disque dur est \code{C}\footnote{%
+Dans \index{Windows}Windows, chaque lecteur physique ou lecteur réseau
+dispose de son propre arbre de fichiers. La racine est identifiée par
+une lettre. Le premier disque dur est \code{C}\footnote{%
   La nomenclature des lecteurs date d'une époque où les ordinateurs
   personnels n'étaient pas tous équipés d'un disque dur, mais plutôt
   d'un ou deux lecteurs de disquettes. Ceux-ci étaient identifiés par
@@ -821,25 +825,26 @@ premier disque dur est \code{C}\footnote{%
 Si le système comporte plus d'un disque, l'utilisateur doit savoir sur
 quel disque retrouver ou enregistrer ses données.
 
-Depuis au moins la version~7 de Windows, le répertoire (ou dossier)
-personnel des utilisateurs se retrouve sous
+Depuis au moins la version~7 de \index{Windows}Windows, le répertoire
+(ou dossier) personnel des utilisateurs se retrouve sous
 \code{C:{\bs}Users}\footnote{%
   Ce répertoire est affiché sous le nom \code{Utilisateurs} dans la
   version française du système d'exploitation.}, %
 tel qu'illustré à la \autoref{fig:informatique:fs}. Ainsi, la
 véritable position du dossier \code{Documents} d'Alexandre dans le
-système de fichiers est \code{C:{\bs}Users{\bs}Alexandre{\bs}Documents}.
+système de fichiers est
+\code{C:{\bs}Users{\bs}Alexandre{\bs}Documents}.
 
-Le système de fichiers de Windows est insensible à la casse,
-c'est-à-dire qu'il ne fait aucune distinction entre \code{Program
-  Files}, \code{program files} et \code{PROGRAM FILES}. Dans les
-chemins d'accès (voir ci-dessous), la barre oblique inversée
+Le système de fichiers de \index{Windows}Windows est insensible à la
+casse, c'est-à-dire qu'il ne fait aucune distinction entre
+\code{Program Files}, \code{program files} et \code{PROGRAM FILES}.
+Dans les chemins d'accès (voir ci-dessous), la barre oblique inversée
 «{\bs}» sépare les noms de répertoires.
 
-\windowsbox{Le répertoire personnel n'est pas affiché par défaut
-  dans l'Explorateur Windows. Pour y accéder, vous devez naviguer à
-  partir de la racine du système de fichiers dans «Ce PC» ou
-  «Ordinateur».}
+\windowsbox{Le répertoire personnel n'est pas affiché par défaut dans
+  l'\index{Explorateur Windows}Explorateur Windows. Pour y accéder,
+  vous devez naviguer à partir de la racine du système de fichiers
+  dans «Ce PC» ou «Ordinateur».}
 
 \subsection{Particularités du système de fichiers de Unix}
 \label{sec:informatique:fs:unix}
@@ -860,22 +865,22 @@ n'a donc jamais à se préoccuper de l'organisation physique des
 disques.
 
 Tel que mentionné à la section précédente, il existe dans les systèmes
-Unix une stricte séparation entre les fichiers du système (modifiables
-uniquement par l'\index{administrateur systeme@administrateur
-  système}administrateur système) et ceux des utilisateurs. Ceux-ci ne
-peuvent créer et modifier des fichiers que dans leur \index{repertoire
-  personnel@répertoire personnel}répertoire personnel. Ce répertoire
-est situé dans \code{/Users} sous macOS et habituellement dans
-\code{/home} sous Linux.
+\index{Unix}Unix une stricte séparation entre les fichiers du système
+(modifiables uniquement par l'administrateur système) et ceux des
+utilisateurs. Ceux-ci ne peuvent créer et modifier des fichiers que
+dans leur %
+\index{repertoire personnel@répertoire personnel}répertoire personnel.
+Ce répertoire est situé dans \code{/Users} sous \index{macOS}macOS et
+habituellement dans \code{/home} sous \index{Linux}Linux.
 
 À la ligne de commande et dans la configuration de plusieurs
 applications, le caractère %
 \index{\string~@\verb=~= (Unix)|bfhyperpage}«\verb=~=» %
 représente le répertoire personnel.
 
-Le système de fichiers sous Unix est généralement sensible à la casse.
-La barre oblique «\code{/}» sépare les noms de répertoires dans les
-chemins d'accès aux fichiers.
+Le système de fichiers sous \index{Unix}Unix est généralement sensible
+à la casse. La barre oblique «\code{/}» sépare les noms de répertoires
+dans les chemins d'accès aux fichiers.
 
 Les fichiers dont le nom débute par un point «\verb=.=» sont des
 fichiers cachés. À moins de demander explicitement de les afficher,
@@ -884,9 +889,10 @@ ligne de commande ou dans les interfaces graphiques. Les fichiers
 cachés servent généralement à stocker les options de configuration des
 applications en format texte brut.
 
-\osxbox{Sous macOS, les clés USB, les disques durs externes et les
-  disques réseau sont montés dans le répertoire \code{/Volumes}. Ce
-  répertoire n'existe pas lorsqu'aucun disque externe n'est connecté.}
+\osxbox{Sous \index{macOS}macOS, les clés USB, les disques durs
+  externes et les disques réseau sont montés dans le répertoire
+  \code{/Volumes}. Ce répertoire n'existe pas lorsqu'aucun disque
+  externe n'est connecté.}
 
 
 \subsection{Chemin d'accès}
@@ -901,7 +907,7 @@ fichiers. Un chemin d'accès peut être absolu ou relatif.
   chemin d'accès demeure valide depuis n'importe quel point dans le
   système de fichier.
 
-  Dans l'extrait de système de fichier Windows de la
+  Dans l'extrait de système de fichier \index{Windows}Windows de la
   \autoref{fig:informatique:fs}, le chemin d'accès absolu vers le
   fichier \code{synthese-1.doc} est:
 \begin{Schunk}
@@ -916,7 +922,7 @@ C:\Users\Alexandre\Documents\synthese-1.doc
   (un niveau supérieur dans l'arbre des fichiers).
 
   Par exemple, à partir du répertoire \code{Documents/Cours} de
-  Marianne dans le système de fichier Unix de la
+  Marianne dans le système de fichier \index{Unix}Unix de la
   \autoref{fig:informatique:fs}, le chemin d'accès relatif vers le
   fichier \code{freestyle.txt} est:
 \begin{Schunk}
@@ -929,8 +935,10 @@ C:\Users\Alexandre\Documents\synthese-1.doc
 La notion de chemin d'accès fait également référence à la liste des
 répertoires dans lesquels le système d'exploitation recherche une
 application lorsqu'elle est appelée. Cette liste est conservée dans
-une variable d'environnement nommée \verb=%PATH%= sous Windows
-et \verb=$PATH= sous \index{Unix}Unix. Il est hors de la portée de cet
+une variable d'environnement nommée \verb=%PATH%= sous
+\index{Windows}Windows
+et
+\verb=$PATH= sous \index{Unix}Unix. Il est hors de la portée de cet
 ouvrage d'expliquer comment modifier la variable d'environnement. La
 réponse se trouve à une requête près dans un moteur de recherche.
 
@@ -997,20 +1005,20 @@ réponse se trouve à une requête près dans un moteur de recherche.
 
 \begin{exercice}[nosol]
   Les répertoires \code{Documents} et \code{Desktop} (ou \code{Bureau}
-  dans la version française) existent par défaut dans le
+  dans la version française) existent par défaut dans le %
   \index{repertoire personnel@répertoire personnel}répertoire
-  personnel des utilisateurs tant dans Windows que dans macOS.
-  Localiser ces deux répertoires dans le système de fichier à partir
-  de la racine avec l'\index{Explorateur Windows}Explorateur Windows
-  ou avec le \index{Finder}Finder.
+  personnel des utilisateurs tant dans \index{Windows}Windows que dans
+  \index{macOS}macOS. Localiser ces deux répertoires dans le système
+  de fichier à partir de la racine avec l'\index{Explorateur
+    Windows}Explorateur Windows ou avec le \index{Finder}Finder.
 \end{exercice}
 
 \begin{exercice}[nosol]
   (Utilisateurs de Mac seulement.) Dans les versions modernes de
-  macOS, le \index{Finder}Finder n'affiche plus par défaut le dossier
-  personnel dans la barre latérale. C'est pourtant pratique de pouvoir
-  y accéder directement. Effectuer les opérations suivantes pour
-  afficher le raccourci vers le répertoire personnel.
+  \index{macOS}macOS, le \index{Finder}Finder n'affiche plus par
+  défaut le dossier personnel dans la barre latérale. C'est pourtant
+  pratique de pouvoir y accéder directement. Effectuer les opérations
+  suivantes pour afficher le raccourci vers le répertoire personnel.
   \begin{enumerate}[1.]
   \item Ouvrir une fenêtre du Finder et accéder aux options de
     configuration par le menu standard \code{Finder|Preferences}

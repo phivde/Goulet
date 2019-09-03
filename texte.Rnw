@@ -173,9 +173,9 @@ Revenez ensuite ici pour des exemples additionnels et des exercices.
 
 \windowsbox{Utilisateurs de Windows: pas de souci! Bien qu'émanant de
   Apple, \emph{Shell Scripting Primer} traite de procédures et
-  d'outils Unix standards. Or, tel qu'expliqué à la
-  \autoref{sec:cli:windows}, vous disposez de ces outils si vous avez
-  installé \index{Git}\emph{Git for Windows} ou MSYS2\index{MSYS2}.}
+  d'outils Unix standards. Or, vous disposez de ces outils si vous
+  avez installé \index{Git}\emph{Git for Windows} ou
+  MSYS2\index{MSYS2}.}
 
 
 \section{Fonctions internes utiles}
@@ -206,8 +206,8 @@ options(op)                             # rétablir défaut
   effectuent leur traitement sur chacune des chaines d'un vecteur.}
 
 \begin{ttscript}{regexpr}
-\item[\code{grep}] \Index{grep@\code{grep} (R)} recherche d'une
-  expression régulière dans un vecteur de chaines de caractères
+\item[\code{grep}] \index{grep@\code{grep} (R)|bfhyperpage} recherche
+  d'une expression régulière dans un vecteur de chaines de caractères
 <<echo=TRUE>>=
 grep("na$", state.name)
 grep("na$", state.name, value = TRUE)

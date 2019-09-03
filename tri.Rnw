@@ -63,7 +63,7 @@ Le sujet se prête donc bien à la revue des boucles itératives.
 
 
 \section{Boucles itératives}
-\label{sec:fonctions:boucles}
+\label{sec:tri:boucles}
 
 Comme nous l'avons déjà vu, il existe deux grandes manières de répéter
 des calculs en programmation: par \index{iteration@itération}itération
@@ -89,7 +89,7 @@ Elles sont de trois types: la boucle à contrôle par dénombrement
   claire et plus efficace.}
 
 \subsection{Boucle à dénombrement}
-\label{sec:tri:boucle:for}
+\label{sec:tri:boucles:for}
 
 La boucle à dénombrement \Icode{for} sert pour répéter une procédure
 un nombre prédéterminé de fois. La syntaxe de la boucle \code{for} est
@@ -134,7 +134,7 @@ factorial <- function(n)
 \end{Schunk}
 
 \subsection{Boucle à précondition}
-\label{sec:tri:boucle:while}
+\label{sec:tri:boucles:while}
 
 La boucle à précondition \Icode{while} exécute une procédure tant
 qu'une condition est satisfaite. La condition étant vérifiée avant
@@ -174,7 +174,7 @@ PGCD <- function(m, n)
 \end{Schunk}
 
 \subsection{Boucle à condition d'arrêt}
-\label{sec:tri:boucle:repeat}
+\label{sec:tri:boucles:repeat}
 
 Plusieurs langages de programmation comportent une structure itérative
 à postcondition «répéter, tant que» (boucle \code{do ... while}) ou
@@ -224,7 +224,7 @@ sqrt <- function(x)
 \end{Schunk}
 
 \subsection{Contrôle du flux}
-\label{sec:tri:boucle:flux}
+\label{sec:tri:boucles:flux}
 
 Les commandes de contrôle du flux permettent d'infléchir le
 déroulement normal d'une boucle.
@@ -242,7 +242,7 @@ déroulement normal d'une boucle.
 \end{ttscript}
 
 \subsection{Syndrome de la plaque à biscuits}
-\label{sec:tri:boucle:syndrome}
+\label{sec:tri:boucles:syndrome}
 
 Il arrive souvent que les fonctions itératives calculent un à un les
 éléments d'un vecteur. Une erreur fréquente consiste à utiliser une
@@ -515,7 +515,7 @@ données. Il ne faut donc pas se surprendre que R comporte des
 fonctions internes pour ces opérations.
 
 \subsection{Tri et opérations apparentées}
-\label{sec:internes:fonctions:tri}
+\label{sec:tri:internes:tri}
 
 \begin{ttscript}{unique}
 \item[\Icode{sort}] \index{tri}tri en ordre croissant ou
@@ -549,7 +549,7 @@ unique(c(2, 4, 2, 5, 9, 5, 0))
   différences entre les fonctions \icode{sort}, \icode{order} et \icode{rank}.}
 
 \subsection{Recherche}
-\label{sec:internes:fonctions:recherche}
+\label{sec:tri:internes:recherche}
 
 Les exemples de cette sous-section utilisent le vecteur suivant.
 <<echo=FALSE>>=

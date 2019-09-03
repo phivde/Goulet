@@ -156,7 +156,7 @@ R_LIBS_USER="~/R/library"
 Une fois la configuration terminée et après un redémarrage de R, le
 chemin vers la bibliothèque personnelle devrait apparaitre dans les
 résultats de la commande
-\Index{libPaths@\code{.libPaths}}\code{.libPaths}.
+\index{libPaths@\code{.libPaths}}\code{.libPaths}.
 \begin{Schunk}
 \begin{Sinput}
 > .libPaths()
