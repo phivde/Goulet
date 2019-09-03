@@ -125,10 +125,11 @@ utiliserons \verb=~/R/library=, où \verb=~= représente le dossier de
 départ (\autoref{sec:informatique:os:unix}).
 
 \osxbox{Sous macOS, le dossier tout indiqué pour la bibliothèque
-  personnelle est \verb=~/Library/R/library=. Toutefois, le dossier
-  \verb=~/Library= est caché dans le Finder. Pour y accéder, cliquez
-  sur le menu \code{Aller} en appuyant simultanément sur la touche
-  Option (\optkey), puis sélectionnez \code{Bibliothèque}.}
+  personnelle est \code{\string~/Library/R/library}. Toutefois, le
+  dossier \code{\string~/Library} est caché dans le Finder. Pour y
+  accéder, cliquez sur le menu \code{Aller} en appuyant simultanément
+  sur la touche Option (\optkey), puis sélectionnez
+  \code{Bibliothèque}.}
 
 Au démarrage, R lit le fichier de configuration \verb=~/.Renviron=,
 s'il existe. C'est dans ce fichier que l'on indique à R l'existence
@@ -155,7 +156,7 @@ R_LIBS_USER="~/R/library"
 Une fois la configuration terminée et après un redémarrage de R, le
 chemin vers la bibliothèque personnelle devrait apparaitre dans les
 résultats de la commande
-\Index{libPaths@\code{.libPaths}}\code{.libPaths}.
+\index{libPaths@\code{.libPaths}}\code{.libPaths}.
 \begin{Schunk}
 \begin{Sinput}
 > .libPaths()
@@ -269,21 +270,10 @@ library("actuar")
 \section{Exercices}
 \label{sec:paquetages:exercices}
 
-\Opensolutionfile{solutions}[solutions-internes]
-
-\begin{Filesave}{solutions}
-\section*{Chapitre \ref*{chap:paquetages}}
-\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:paquetages}}
-
-\end{Filesave}
-
 \begin{exercice}[nosol]
   Installer un paquetage disponible dans CRAN dans une bibliothèque
   personnelle sur votre poste de travail.
 \end{exercice}
-
-\Closesolutionfile{solutions}
-
 
 %%% Local Variables:
 %%% mode: noweb

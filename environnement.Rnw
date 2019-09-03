@@ -9,8 +9,8 @@
 %%% International de Creative Commons.
 %%% https://creativecommons.org/licenses/by-sa/4.0/
 
-\chapter{Détails d'implémentation du langage R}
-\label{chap:implementation}
+\chapter{Environnement et règles d'évaluation}
+\label{chap:environnement}
 
 \def\scriptfilename{\currfilebase.R}
 \SweaveOpts{echo=FALSE}
@@ -33,38 +33,36 @@ source("Stangle.R")        # lancement de Stangle
 @
 
 \begin{objectifs}
-\item Décrire le concept d'environnement d'évaluation de R.
-\item Identifier la valeur associée à un symbole en fonction de la
-  portée lexicale de R.
-\item Extraire des valeurs de l'environnement d'une fonction ou y en
-  assigner de nouvelles.
+\item Décrire les concepts d'environnement d'une fonction et
+  d'environnement d'évaluation de R.
+\item Comprendre comment R associe des symboles à des valeurs.
 \item Utiliser la portée lexicale et l'évaluation paresseuse pour
   simplifier les fonctions R.
 \end{objectifs}
 
-
-\section{Mise en contexte}
-\label{sec:implementation:contexte}
-
-Au chapitre précédent, nous avons défini une fonction très simple pour
-élever un nombre au carré.
+Ce chapitre vise à expliquer plusieurs règles d'évaluation et de
+portée des variables que nous avons jusqu'ici un peu laissées dans
+l'ombre pour en appeler plutôt à votre bonne intuition. Pour
+illustrer, reprenons l'un de nos tous premiers exemples de fonction au
+\autoref{chap:bases}, celui du calcul du carré d'un nombre avec la
+fonction \code{square}.
 <<echo=TRUE>>=
 square <- function(x) x * x
 @
 
-Intuitivement, la valeur de \code{x} à l'intérieur de la fonction
-\code{square} doit être celle passée en argument, et non celle d'un
-objet \code{x} qui existerait déjà dans l'espace de travail. De plus,
-si un tel objet \code{x} devait exister dans l'espace de travail,
-l'exécution de la fonction \code{square} ne devrait pas modifier sa
-valeur.
+Nous n'avons jamais remis en doute que la valeur de \code{x} à
+l'intérieur de la fonction \code{square} doit être celle passée en
+argument, et non celle d'un objet \code{x} qui existerait déjà dans
+l'espace de travail. De plus, si un tel objet \code{x} devait exister
+dans l'espace de travail, l'exécution de la fonction \code{square} ne
+devrait pas modifier sa valeur.
 <<echo=TRUE>>=
 x <- 5
 square(10)
 x
 @
 
-Examinons maintenant cet exemple quelque peu artificiel, mais
+Examinons maintenant cet autre exemple quelque peu artificiel, mais
 néanmoins instructif, tiré de \citet{Ihaka:R:1996}. Une fonction
 \code{f} calcule le carré d'un nombre, puis affiche le résultat à
 l'écran par le biais d'une autre fonction \code{g}.
@@ -77,12 +75,12 @@ f <- function(x)
 }
 @
 
-On remarquera que l'objet \code{y} n'est pas un argument de la
-fonction, mais qu'il est défini dans \code{f}. De plus, la fonction
-\code{g} utilise \code{y} sans que cet objet ne soit un de ses
-arguments. Dans les circonstances, quels seront, selon vous, les
-résultats des expressions suivantes et, surtout, pourquoi? Allez les
-essayer, je vous attends ici.
+On remarquera que l'objet \code{y} n'est pas un argument de \code{f},
+mais qu'il est défini dans la fonction. De plus, la fonction \code{g}
+utilise \code{y} sans que cet objet ne soit un de ses arguments. Dans
+les circonstances, quels seront, selon vous, les résultats des
+expressions suivantes et, surtout, pourquoi? Allez les essayer, je
+vous attends ici.
 <<echo=TRUE, eval=FALSE>>=
 y <- 123
 f(10)
@@ -97,9 +95,16 @@ chapitre traite également du concept d'évaluation paresseuse auquel
 les programmeurs sont moins souvent directement confrontés, mais qui
 permet aussi de coder plus efficacement.
 
+\gotorbox{Avant d'aller plus loin, passez en revue les lignes
+  \reflines{environnement:contexte} du fichier de script
+  \code{\scriptfilename} reproduit à la
+  \autoref{sec:environnement:exemples}. Je vous invite
+  particulièrement à tenter de répondre à la colle de la ligne
+  \ref{lst:environnement:contexte:fin}.}
+
 <<script, results=hide>>=
 ###
-### MISE EN CONTEXTE  `\labelline{implementation:contexte}`
+### CONTEXTE  `\labelline{environnement:contexte}`
 ###
 
 ## La portée (domaine où un objet existe et comporte une
@@ -114,28 +119,23 @@ x <- 5                       # objet dans l'espace de travail
 square(10)                   # dans 'square' x vaut 10
 x                            # valeur inchangée
 square(x)                    # passer valeur de 'x' à 'square'
-square(x = x)                # colle... signification?  `\labelline{implementation:contexte:fin}`
+square(x = x)                # colle... signification?  `\labelline{environnement:contexte:fin}`
 @
-
-\gotorbox{Étudiez les lignes \reflines{implementation:contexte} du
-  fichier de script \code{\scriptfilename} reproduit à la
-  \autoref{sec:implementation:exemples}. Je vous invite
-  particulièrement à tenter de répondre à la colle de la ligne
-  \ref{lst:implementation:contexte:fin}.}
 
 
 \section{Environnement}
-\label{sec:implementation:environnement}
+\label{sec:environnement:environnement}
 
 Un \emph{environnement}\Index{environnement} dans R est un objet
 spécial formé de deux composantes: un
 \emph{dictionnaire}\Index{dictionnaire}\footnote{La traduction
   littérale du terme \emph{frame} utilisé dans la documentation de R
   serait \emph{cadre}, mais ce terme est moins explicite que
-  «dictionnaire».} %
+  «dictionnaire». Oui, il s'agit bien du même \emph{frame} que l'on
+  retrouve dans \emph{data frame}.} %
 constitué de couples symbole-valeur, et un pointeur vers
 l'\emph{environnement englobant}\Index{environnement!englobant}. La
-\autoref{fig:implementation:environnement} propose une
+\autoref{fig:environnement:environnement} propose une
 représentation schématique de l'environnement.
 
 \begin{figure}
@@ -158,7 +158,7 @@ représentation schématique de l'environnement.
     \put(0,29){environnement englobant}
   \end{picture}
   \caption{Représentation schématique d'un environnement dans R}
-  \label{fig:implementation:environnement}
+  \label{fig:environnement:environnement}
 \end{figure}
 
 La notion, plutôt abstraite, devient plus concrète dans le contexte de
@@ -186,7 +186,7 @@ Autrement dit, dès que nous définissons une fonction, R lui attribue
 un environnement. Lorsque la fonction est créée dans l'espace de
 travail, son environnement englobant est l'\emph{environnement
   global}\Index{environnement!global}, représenté par le symbole
-\Index{GlobalEnv@\code{.GlobalEnv}}\code{.GlobalEnv}, et son
+\index{GlobalEnv@\code{.GlobalEnv}|bfhyperpage}\code{.GlobalEnv}, et son
 dictionnaire contient tous les objets se trouvant dans l'espace de
 travail. (Les expressions ci-dessous sont exécutées dans un espace de
 travail vide au préalable.)
@@ -218,16 +218,12 @@ fonctions. Nous en avons déjà utilisé trois ci-dessus.
   défaut)
 \end{ttscript}
 
-Le code informatique de la \autoref{sec:implementation:exemples}
-contient des exemples plus élaborés de manipulation de l'environnement
-d'une fonction.
-
 \tipbox{La fonction \Icode{ls.str} permet d'afficher en une seule
   commande la liste des objets d'un environnement et les valeurs de
   ceux-ci.}
 
 \section{Environnement d'évaluation}
-\label{sec:implementation:evaluation}
+\label{sec:environnement:evaluation}
 
 Dans R, tout appel de fonction entraine implicitement la création d'un
 \emph{environnement d'évaluation}\Index{environnement!d'évaluation},
@@ -296,9 +292,14 @@ prochaine section.
   cher en temps et en ressources système. C'est pour cette raison que
   le calcul récursif est plutôt inefficace en R.}
 
+\gotorbox{Étudiez les exemples additionnels des lignes
+  \reflines{environnement:environnement} du fichier de script
+  \code{\scriptfilename} reproduit à la
+  \autoref{sec:environnement:exemples}.}
+
 <<script, results=hide>>=
 ###
-### ENVIRONNEMENT ET ENVIRONNEMENT D'ÉVALUATION  `\labelline{implementation:environnement}`
+### ENVIRONNEMENT ET ENVIRONNEMENT D'ÉVALUATION  `\labelline{environnement:environnement}`
 ###
 
 ## Un environnement est un objet spécial qui contient un lien
@@ -378,17 +379,12 @@ f <- function(x)
 }
 g <- f(2)
 ls.str(envir = environment(g))
-g(10)                      #-*- `\labelline{implementation:environnement:fin}`
+g(10)                      #-*- `\labelline{environnement:environnement:fin}`
 @
-
-\gotorbox{Avant d'aller plus loin, passez en revue les exemples des
-  lignes \reflines{implementation:environnement} du fichier de script
-  \code{\scriptfilename} reproduit à la
-  \autoref{sec:implementation:exemples}.}
 
 
 \section{Portée lexicale}
-\label{sec:implementation:portee}
+\label{sec:environnement:portee}
 
 Qu'arrive-t-il lorsqu'une variable n'est pas définie dans
 l'environnement d'évaluation\index{environnement!d'évaluation} d'une
@@ -422,8 +418,7 @@ search()
 \end{itemize}
 
 Les règles de portée lexicale méritent une bonne illustration.
-Reprenons le second exemple de la
-\autoref{sec:implementation:contexte}.
+Reprenons le second exemple de l'introduction du chapitre.
 <<echo=TRUE>>=
 y <- 123
 f <- function(x)
@@ -447,7 +442,7 @@ environnement est $\rho_0$.
 L'évaluation de \code{f} en une certaine valeur entraine la création
 d'une cascade d'environnements. Tout d'abord, l'appel de la fonction
 crée, comme dans l'exemple de la
-\autoref{sec:implementation:evaluation}, l'environnement d'évaluation
+\autoref{sec:environnement:evaluation}, l'environnement d'évaluation
 \begin{equation*}
   \rho_1 = \{ \code{x} \mapsto 10; \rho_0 \}.
 \end{equation*}
@@ -462,10 +457,9 @@ Celle-ci se voit automatiquement munie d'un environnement dont
 l'environnement englobant est $\rho_1$.
 
 Toujours à l'intérieur de la fonction \code{f}, l'appel \code{g()}
-fait en sorte qu'est créé un nouvel environnement d'évaluation
-$\rho_2$ pour la fonction \code{g}. L'environnement englobant est
-$\rho_1$ et, comme cette fonction n'a aucun argument, son dictionnaire
-est vide:
+crée un nouvel environnement d'évaluation $\rho_2$ pour la fonction
+\code{g}. L'environnement englobant est $\rho_1$ et, comme cette
+fonction n'a aucun argument, son dictionnaire est vide:
 \begin{equation*}
   \rho_2 = \{ ; \rho_1 \}.
 \end{equation*}
@@ -496,11 +490,15 @@ la ligne de commande. Par contre, la portée lexicale est très utile
 pour simplifier le code des fonctions créées à l'intérieur d'autres
 fonctions puisque nous pouvons faire l'économie de passer tous les
 arguments d'une fonction à l'autre. Vous trouverez un exemple complet
-dans le code informatique de la \autoref{sec:implementation:exemples}.
+dans le code informatique de la \autoref{sec:environnement:exemples}.
+
+\gotorbox{Étudiez les lignes \reflines{environnement:portee}
+  du fichier de script \code{\scriptfilename} reproduit à la
+  \autoref{sec:environnement:exemples}.}
 
 <<script, results=hide>>=
 ###
-### PORTÉE LEXICALE  `\labelline{implementation:portee}`
+### PORTÉE LEXICALE  `\labelline{environnement:portee}`
 ###
 
 ## Tout appel de fonction dans R crée un environnement
@@ -525,7 +523,8 @@ dans le code informatique de la \autoref{sec:implementation:exemples}.
 ##
 ##   f(x, y) = x (1 + xy)^2 + y (1 - y) + (1 + xy)(1 - y).
 ##
-## Deux termes sont répétés dans cette expression. On a donc
+## Deux termes sont répétés dans cette expression. Nous avons
+## donc
 ##
 ##   a = 1 + xy
 ##   b = 1 - y
@@ -567,16 +566,12 @@ f <- function(x, y)
     g(1 + x * y, 1 - y)
 }
 f(2, 3)
-f(2, 4)                    #-*- `\labelline{implementation:portee:fin}`
+f(2, 4)                    #-*- `\labelline{environnement:portee:fin}`
 @
-
-\gotorbox{Étudiez les lignes \reflines{implementation:portee}
-  du fichier de script \code{\scriptfilename} reproduit à la
-  \autoref{sec:implementation:exemples}.}
 
 
 \section{Évaluation paresseuse}
-\label{sec:implementation:lazy}
+\label{sec:environnement:lazy}
 
 R utilise par défaut une technique d'évaluation des arguments des
 fonctions appelée %
@@ -605,9 +600,12 @@ dans l'appel de \code{sumsq}, et ce, seulement au moment d'effectuer
 le calcul \code{y - about}. D'autre part, la valeur de \code{y} sera
 connue au moment d'effectuer ce calcul. Joli, non?
 
+\gotorbox{Étudiez les lignes \reflines{environnement:lazy} du fichier
+  de script \code{\scriptfilename}.}
+
 <<script, results=hide>>=
 ###
-### ÉVALUATION PARESSEUSE  `\labelline{implementation:lazy}`
+### ÉVALUATION PARESSEUSE  `\labelline{environnement:lazy}`
 ###
 
 ## L'évaluation paresseuse est une technique par laquelle un
@@ -629,13 +627,13 @@ f(0, 1/0)                  # argument 'y' utilisé
 ## Voici un autre exemple plus intéressant tiré de Ihaka et
 ## Gentleman (1996).
 ##
-## Nous savons que tout calcul avec des données manquantes
+## Vous savez que tout calcul avec des données manquantes
 ## retourne 'NA'.
 ##
-## Nous pouvons généraliser la fonction 'sumsq' de la section
-## 5.5 pour faire en sorte qu'elle puisse retirer les
-## éventuelles données manquantes d'un vecteur en argument
-## avant de faire la somme des écarts au carré.
+## Nous pouvons généraliser la fonction 'sumsq' présentée dans
+## le texte du chapitre pour faire en sorte qu'elle puisse
+## retirer les éventuelles données manquantes d'un vecteur en
+## argument avant de faire la somme des écarts au carré.
 ##
 ## Grâce à l'évaluation paresseuse, les données manquantes
 ## seront également supprimées *avant* le calcul de la moyenne
@@ -647,29 +645,25 @@ sumsq <- function(y, about = mean(y), na.rm = FALSE)
         y <- y[!is.na(y)]
     sum((y - about)^2)
 }
-sumsq(c(10, 0, NA, -10), na.rm = TRUE) #-*- `\labelline{implementation:lazy:fin}`
+sumsq(c(10, 0, NA, -10), na.rm = TRUE) #-*- `\labelline{environnement:lazy:fin}`
 @
-
-\gotorbox{Étudiez les lignes \reflines{implementation:lazy}
-  du fichier de script \code{\scriptfilename} reproduit à la
-  \autoref{sec:implementation:exemples}.}
 
 
 \section{Exemples}
-\label{sec:implementation:exemples}
+\label{sec:environnement:exemples}
 
 \scriptfile{\scriptfilename}
 \lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
 
 
 \section{Exercices}
-\label{sec:implementation:exercices}
+\label{sec:environnement:exercices}
 
-\Opensolutionfile{solutions}[solutions-implementation]
+\Opensolutionfile{solutions}[solutions-environnement]
 
 \begin{Filesave}{solutions}
-\section*{Chapitre \ref*{chap:implementation}}
-\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:implementation}}
+\section*{Chapitre \ref*{chap:environnement}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:environnement}}
 
 \end{Filesave}
 

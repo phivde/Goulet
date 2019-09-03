@@ -17,6 +17,7 @@
   \usepackage{amsmath,amsthm}
   \usepackage[noae]{Sweave}
   \usepackage{graphicx}
+  \usepackage{pict2e}                  % dessin de la clôture
   \usepackage{currfile}                % pour noms fichiers de script
   \usepackage{actuarialangle}          % \angl et al.
   \usepackage{framed}                  % env. snugshade*, oframed
@@ -29,7 +30,7 @@
   \usepackage{metalogo}                % \XeLaTeX logo
   \usepackage{applekeys}               % touches Mac
   \usepackage{dirtree}                 % arborescence de fichiers
-  \usepackage{fontawesome}             % icônes \fa*
+  \usepackage{fontawesome5}             % icônes \fa*
   \usepackage{awesomebox}              % boites info, important, etc.
   \usepackage{answers}                 % exercices et solutions
   \usepackage{listings}                % code informatique
@@ -83,7 +84,7 @@
 
   %% Couleurs
   \usepackage{xcolor}
-  \definecolor{comments}{rgb}{0.7,0,0}      % commentaires
+  \definecolor{comments}{rgb}{0.5,0.55,0.6} % commentaires
   \definecolor{link}{rgb}{0,0.4,0.6}        % liens internes
   \definecolor{url}{rgb}{0.6,0,0}           % liens externes
   \definecolor{citation}{rgb}{0,0.5,0}      % citations
@@ -121,9 +122,10 @@
   %% blancs apparaissent dès que la commande \selectlanguage est
   %% utilisée... comme dans la bibliographie, par exemple.
   \addto\extrasfrench{%
+    \def\algorithmeautorefname{algorithme}%
+    \def\algorithmebisautorefname{algorithme}%
     \def\appendixautorefname{annexe}%
     \def\figureautorefname{figure}%
-    \def\exempleautorefname{exemple}%
     \def\exerciceautorefname{exercice}%
     \def\subfigureautorefname{figure}%
     \def\subsectionautorefname{section}%
@@ -248,10 +250,11 @@
   %%%  Nouveaux environnements
   %%% =========================
 
-  %% Environnements d'exemples et al.
-  \theoremstyle{remark}
-  \newtheorem*{rem}{Remarque}
-  \newtheorem*{rems}{Remarques}
+  %% Environnements de type théorème
+  \theoremstyle{definition}
+  \newtheorem{algorithme}{Algorithme}[chapter]
+  \newtheorem{algorithmebis}{Algorithme}[algorithme]
+  \renewcommand{\thealgorithmebis}{\thealgorithme\alph{algorithmebis}}
 
   %% Redéfinition de l'environnement titled-frame de framed.sty avec
   %% deux modifications: épaisseur des filets réduite de 2pt à 1pt;
@@ -374,9 +377,9 @@
   \newcommand{\link}[2]{%
     \def\param{#2}%
     \ifx\param\empty
-      \href{#1}{\nolinkurl{#1}~\raisebox{-0.1ex}{\smaller\faExternalLink}}%
+      \href{#1}{\nolinkurl{#1}~{\smaller\faExternalLink*}}%
     \else
-      \href{#1}{#2~\raisebox{-0.1ex}{\smaller\faExternalLink}}%
+      \href{#1}{#2~{\smaller\faExternalLink*}}%
     \fi
   }
 
@@ -386,19 +389,19 @@
   \newcommand{\videobox}[2]{%
     \refstepcounter{videos}
     \addcontentsline{lov}{figure}{\protect\numberline{\thesection}\protect#1}
-    \awesomebox{\faYoutubePlay}{\aweboxrulewidth}{url}{#2}}
+    \awesomebox[url]{\aweboxrulewidth}{\faYoutube}{url}{#2}}
 
   %% Boites additionnelles (basées sur awesomebox.sty) pour remarques
   %% spécifiques à macOS et Windows.
   \newcommand{\osxbox}[1]{%
-    \awesomebox{\faApple}{\aweboxrulewidth}{black}{#1}}
+    \awesomebox{\aweboxrulewidth}{\faApple}{black}{#1}}
   \newcommand{\windowsbox}[1]{%
-    \awesomebox{\faWindows}{\aweboxrulewidth}{black}{#1}}
+    \awesomebox{\aweboxrulewidth}{\faWindows}{black}{#1}}
 
   %% Boite additionnelle (basée sur awesomebox.sty) pour changements
   %% au fil de la lecture.
   \newcommand{\gotorbox}[1]{%
-    \awesomebox{\faMapSigns}{\aweboxrulewidth}{black}{#1}}
+    \awesomebox{\aweboxrulewidth}{\faMapSigns}{black}{#1}}
 
   %% Boite pour le nom du fichier de script correspondant au début des
   %% sections d'exemples.
@@ -470,7 +473,7 @@
     puis-que
   }
 
-%  \includeonly{}
+%  \includeonly{algorithmes,bases,donnees,solutions}
 
 \begin{document}
 
@@ -513,18 +516,16 @@
 
 \include{informatique}
 \include{presentation}
-\include{premiers}
-\include{fonctions}
-\include{implementation}
-\include{algorithmique}
+\include{algorithmes}
+\include{bases}
 \include{donnees}
-\include{application}
-\include{paquetages}
-\include{cli}
-\include{texte}
-\include{git}
+\include{pratiques}
+\include{tri}
 \include{debogage}
-%\include{oop}
+\include{import-export}
+\include{paquetages}
+\include{texte}
+\include{environnement}
 
 \appendix
 \include{rstudio}

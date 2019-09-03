@@ -1,0 +1,31 @@
+%% planche non peinturée
+\savebox{\planche}(2,12)[bl]{%
+  \color{gray}
+  \polygon*(0,2)(0,3.5)(4,3.5)(4,2)
+  \polygon*(0,7.5)(0,9)(4,9)(4,7.5)
+  \color{lightgray}
+  \moveto(1,0)
+  \lineto(1,11)
+  \lineto(2,12)
+  \lineto(3,11)
+  \lineto(3,0)
+  \closepath
+  \fillpath}
+
+%% planche peinturée
+\savebox{\planchep}(2,12)[bl]{%
+  \color{gray}
+  \polygon*(0,2)(0,3.5)(4,3.5)(4,2)
+  \polygon*(0,7.5)(0,9)(4,9)(4,7.5)
+  \color[RGB]{204,76,57}
+  \moveto(1,0)
+  \lineto(1,11)
+  \lineto(2,12)
+  \lineto(3,11)
+  \lineto(3,0)
+  \closepath
+  \fillpath}
+
+%% peintre
+\savebox{\peintre}{%
+  \reflectbox{\includegraphics[height=16\unitlength,keepaspectratio]{images/peintre}}}

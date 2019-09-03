@@ -33,15 +33,21 @@ source("Stangle.R")        # lancement de Stangle
 @
 
 \begin{objectifs}
-\item Comprendre ce qu'est un langage de programmation interprété.
 \item Connaitre la provenance du langage R et les principes ayant
   guidé son développement.
-\item Mettre en place sur son poste de travail un environnement de
-  développement en R.
-\item Démarrer une session R et exécuter des commandes simples.
-\item Utiliser des fichiers de script R de manière interactive.
-\item Créer, modifier et sauvegarder ses propres fichiers de script R.
+\item Utiliser R de manière interactive.
+\item Créer, modifier et utiliser des fichiers de script R.
 \end{objectifs}
+
+R est un environnement intégré de manipulation de données, de calcul
+et de préparation de graphiques. Toutefois, ce n'est pas seulement un
+«autre» environnement statistique (comme SPSS ou SAS, par exemple),
+mais aussi un langage de programmation complet et autonome. Le présent
+ouvrage met l'accent sur l'apprentissage du langage de programmation.
+Néanmoins, vous devrez l'utiliser à l'intérieur de l'interface de
+l'environnement statistique. Ce chapitre vise à vous familiariser avec
+celle-ci, avec les fichiers de script et avec l'utilisation d'un
+éditeur de texte ou d'un environnement de développement intégré.
 
 
 \section{Bref historique}
@@ -128,28 +134,47 @@ dans ces domaines, R devient, avec \index{Python}Python, la
 \section{Description sommaire de R}
 \label{sec:presentation:description}
 
-R est un environnement intégré de manipulation de données, de calcul
-et de préparation de graphiques. Toutefois, ce n'est pas seulement un
-«autre» environnement statistique (comme SPSS ou SAS, par exemple),
-mais aussi un langage de programmation complet et autonome.
-
 Tel que mentionné précédemment, le R est un langage principalement
 inspiré de Scheme\index{Scheme} \citep{Sussman:scheme:1996} et du
 \index{S}S. Ce dernier était à son tour inspiré de plusieurs langages,
 dont l'\index{APL}APL et le \index{Lisp}Lisp (encore lui). Comme tous
-ses prédécesseurs, R est un langage interprété\index{interprété
-  (langage)}. Par conséquent, le programme que l'on lance lorsque l'on
-exécute R est en fait l'interpréteur. Celui-ci attend que l'on lui
-soumette des commandes dans le langage R, commandes qu'il exécutera
-immédiatement, une à une et en séquence.
+ses prédécesseurs, R est un langage interprété. Par conséquent, le
+programme que l'on lance lorsque l'on exécute R est en fait
+l'\index{interpréteur}interpréteur. Celui-ci attend que l'on lui
+soumette des commandes dans le langage R --- dans la suite nous dirons
+que ces commandes forment une \index{expression}\emph{expression}.
+L'interpréteur évalue immédiatement l'expression pour ensuite afficher
+le résultat.
 
-Par analogie, \index{Excel}Excel est certes un logiciel de
-manipulation de données, de mise en forme et de préparation de
-graphiques, mais c'est aussi au sens large un langage de programmation
-interprété. Pensez-y: nous utilisons le langage de programmation
-lorsque nous entrons des commandes dans une cellule d'une feuille de
-calcul, puis l'interpréteur exécute les commandes et affiche les
-résultats dans la cellule.
+Par exemple, si l'on entre simplement un nombre à la ligne de commande
+(identifiée ci-dessous par le caractère \code{>}), l'interpréteur
+retourne la valeur de ce nombre.
+<<echo=TRUE>>=
+42
+@
+
+Nous pouvons aussi composer des expressions plus élaborées qui
+combinent des nombres et des opérateurs mathématiques standards.
+<<echo=TRUE>>=
+2 + 3
+1000 - 334
+5 * 7
+10/5
+2.7 + 12.8
+@
+
+L'un des buts de cet ouvrage consiste justement à apprendre à
+construire des suites d'expressions qui forment des programmes et qui
+permettent de réaliser une tâche donnée.
+
+Risquons une analogie avec le tableur \index{Excel}Excel, qui est
+aussi un logiciel de manipulation de données, de mise en forme et de
+préparation de graphiques. Or, au sens large, Excel est également un
+langage de programmation interprété! Pensez-y: nous utilisons le
+langage de programmation lorsque nous entrons des commandes dans une
+cellule d'une feuille de calcul, puis
+l'\index{interpréteur}interpréteur exécute les commandes et affiche
+les résultats dans la cellule.
 
 Le R est un langage particulièrement puissant pour les applications
 mathématiques et statistiques, chose peu surprenante puisqu'il a
@@ -189,7 +214,7 @@ par ailleurs aux capacités d'édition plutôt réduites.
 
 Sous Windows, l'interface graphique fournie avec R est plutôt
 rudimentaire. Elle facilite certaines opérations tel que
-l'installation de packages externes, mais elle n'offre autrement que
+l'installation de paquetages externes, mais elle n'offre autrement que
 peu de fonctionnalités pour l'édition de code R.
 
 L'interface graphique de R sous macOS est la plus élaborée. Outre la
@@ -270,12 +295,6 @@ nos expressions R et le code de nos fonctions personnelles. Par
 convention, on donne aux fichiers de script un nom se terminant avec
 l'extension \code{.R}.
 
-\importantbox{Dans les fichiers de script comme à la ligne de commande, le
-  caractère \code{\#} marque le début d'un
-  \index{commentaire}commentaire dans R. Ainsi, tout ce qui est inclus
-  entre ce caractère et le saut à la ligne suivant est complètement
-  ignoré par l'interpréteur.}
-
 Avec cette approche, les objets sont créés au besoin en exécutant le
 code des fichiers de script. Comment? Simplement en copiant le code du
 fichier de script et en le collant dans la ligne de commande de R. La
@@ -322,6 +341,12 @@ vous utiliserez cette seconde approche d'interaction avec R.
   progiciel évalue constamment et en temps réel les formules pour
   afficher les résultats dans les cellules.}
 
+\importantbox{Dans les fichiers de script comme à la ligne de commande, le
+  caractère \code{\#} marque le début d'un
+  \index{commentaire}commentaire dans R. Ainsi, tout ce qui est inclus
+  entre ce caractère et le saut à la ligne suivant est complètement
+  ignoré par l'interpréteur.}
+
 
 \section{Éditeurs de texte et environnements intégrés}
 \label{sec:presentation:editeurs}
@@ -367,7 +392,7 @@ d'autres. Voici quelques bons choix.
       défaut. Dans le sens des aiguilles d'une montre, on y retrouve:
       le fichier de script de la \autoref{fig:presentation:script}; la
       liste des objets de l'environnement (vide, ici); une interface
-      pour charger des packages; la ligne de commande R.}
+      pour charger des paquetages; la ligne de commande R.}
     \label{fig:presentation:rstudio}
   \end{figure}
 
@@ -378,16 +403,37 @@ d'autres. Voici quelques bons choix.
   vénérable et très puissant éditeur pour programmeur
   GNU~Emacs\index{Emacs}. À la question~6.2 de la foire aux questions
   de R \citep{R-FAQ}, «Devrais-je utiliser R à l'intérieur de
-  Emacs?»\index{Emacs}, la réponse est: «Oui, absolument.»
+  Emacs?»\index{Emacs}, la réponse est: «Oui, absolument.» En effet,
+  combiné avec le mode ESS\index{Emacs!mode ESS} (\emph{Emacs Speaks
+    Statistics}), Emacs offre un environnement de développement
+  particulièrement riche et efficace. Il a d'ailleurs servi
+  d'inspiration à RStudio à maints égards, notamment pour la
+  disposition du fichier de script et de la ligne de commande R dans
+  une seule fenêtre. La \autoref{fig:presentation:emacs} présente une
+  fenêtre de GNU Emacs en mode d'édition de code R.
 
-  En effet, combiné avec le mode ESS\index{Emacs!mode ESS}
-  (\emph{Emacs Speaks Statistics}), Emacs offre un environnement de
-  développement aussi riche qu'efficace. Entre autres fonctionnalités
-  uniques à cet éditeur, le fichier de script et la ligne de commande
-  R sont regroupés dans la même fenêtre, comme on peut le voir à la
-  \autoref{fig:presentation:emacs}. Emacs est toutefois un logiciel
-  difficile à apprivoiser, surtout pour les personnes moins à l'aise
-  avec l'informatique.
+  Emblème du logiciel libre, Emacs est disponible gratuitement et est
+  identique sur toutes les plateformes supportées par R, dont
+  Windows, macOS et Linux. Consulter l'\autoref{chap:emacs+ess} pour
+  en savoir plus sur GNU~Emacs et apprendre les commandes essentielles
+  pour y faire ses premiers pas.
+
+  Le principal avantage de Emacs par rapport à RStudio réside dans le
+  fait qu'il s'agit d'un éditeur pour programmeur généraliste qui sait
+  s'adapter à n'importe quel langage --- y compris R. Cela permet
+  d'utiliser un seul et même outil pour toutes ses tâches de
+  programmation, tel que recommandé par
+  \citet[chapitre~3]{Hunt:pragmatic:1999}:
+  \begin{quote}
+    Utilisez un seul éditeur et utilisez-le bien. Votre éditeur
+    devrait devenir une extension de votre main; assurez-vous qu'il
+    est configurable, extensible et programmable.
+  \end{quote}
+  Emacs satisfait les trois conditions ci-dessus. Cependant, la
+  puissance de l'éditeur a un coût: Emacs est un logiciel difficile à
+  apprivoiser, surtout pour les personnes moins à l'aise avec
+  l'informatique. Si vous en êtes à votre première expérience avec un
+  éditeur de texte, optez pour RStudio.
 
   \begin{figure}[t]
     \centering
@@ -399,12 +445,6 @@ d'autres. Voici quelques bons choix.
       ligne de commande R.}
     \label{fig:presentation:emacs}
   \end{figure}
-
-  Emblème du logiciel libre, Emacs est disponible gratuitement et est
-  identique sur toutes les plateformes supportées par R, dont
-  Windows, macOS et Linux. Consulter l'\autoref{chap:emacs+ess} pour
-  en savoir plus sur GNU~Emacs et apprendre les commandes essentielles
-  pour y faire ses premiers pas.
 \item Il existe plusieurs autres options pour éditer efficacement du
   code R --- et le Bloc-notes de Windows n'en fait \emph{pas} partie!
   Je recommande plutôt:
@@ -487,8 +527,8 @@ rnorm                      # fonction
 ###
 ### EXEMPLE DE SESSION DE TRAVAIL
 ###
-### (Inspiré de l'annexe A du manuel «An Introduction to R», R
-### Core Team, 2017.)
+### (Inspiré de l'annexe A du manuel «An Introduction to R»
+### livré avec R.)
 ###
 
 ## Afficher le répertoire de travail de R.
@@ -724,7 +764,7 @@ q()
 \end{exercice}
 
 %%% Local Variables:
-%%% mode: latex
+%%% mode: noweb
 %%% TeX-engine: xetex
 %%% TeX-master: "programmer-avec-r"
 %%% coding: utf-8

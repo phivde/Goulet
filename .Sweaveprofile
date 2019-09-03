@@ -97,8 +97,8 @@ renameTangled <- function(file)
 ##  le fichier de script produit par Stangle:
 ##
 ##  - activer les expressions déactivées par les marques de
-##    commentaires spéciales '##-!-'
-##  - supprimer une des deux lignes blanches entre chaque bloc de code;
+##    commentaires spéciales '##-!-';
+##  - supprimer une des deux lignes blanches entre chaque bloc de code.
 ##
 ##  Arguments
 ##

@@ -1,0 +1,538 @@
+%%% Copyright (C) 2019 Vincent Goulet
+%%%
+%%% Ce fichier fait partie du projet
+%%% «Programmer avec R»
+%%% https://gitlab.com/vigou3/programmer-avec-r
+%%%
+%%% Cette création est mise à disposition sous licence
+%%% Attribution-Partage dans les mêmes conditions 4.0
+%%% International de Creative Commons.
+%%% https://creativecommons.org/licenses/by-sa/4.0/
+
+\chapter{Importation et exportation de données}
+\label{chap:import-export}
+
+\def\scriptfilename{\currfilebase.R}
+\SweaveOpts{echo=FALSE}
+
+<<echo=FALSE, results=hide>>=
+source(".Sweaveprofile")   # configuration
+source("Stangle.R")        # lancement de Stangle
+@
+<<script>>=
+## Copyright (C) 2019 Vincent Goulet
+##
+## Ce fichier fait partie du projet
+## «Programmer avec R»
+## https://gitlab.com/vigou3/programmer-avec-r
+##
+## Cette création est mise à disposition sous licence
+## Attribution-Partage dans les mêmes conditions 4.0
+## International de Creative Commons.
+## https://creativecommons.org/licenses/by-sa/4.0/
+@
+
+\begin{objectifs}
+\item Importer dans R des données provenant de sources externes.
+\item Exporter des données de R vers un format exploitable par
+  d'autres outils.
+\end{objectifs}
+
+«Est-ce que je peux transférer mes données de Excel à R?» Cette
+question et ses multiples variantes est assurément l'une des plus
+fréquemment posées par les utilisateurs de R. La réponse courte: oui,
+c'est possible d'importer (c'est la terminologie correcte) des données
+de source externe dans R. La réponse longue: oui, c'est possible, mais
+c'est souvent compliqué. Il en va de même pour la procédure inverse
+consistant à exporter des données de R pour usage dans une autre
+application.
+
+Ce qui rend souvent ardu l'échange de données entre différents
+systèmes et logiciels, c'est le nombre de facteurs qui influencent
+l'importation et l'exportation: le type de fichier (en format texte
+brut ou en format binaire), l'encodage des caractères (ASCII pur,
+UTF-8 ou autre), la disposition des données dans le fichier (notamment
+les matrices et tableaux), le caractère utilisé pour séparer les
+champs (espace, virgule ou autre), le format du fichier (Excel, SAS ou
+autre), etc. Difficile, dans les circonstances, de proposer une
+procédure universelle. C'est d'ailleurs pourquoi la documentation
+officielle de R consacre le manuel \emph{R Data Import/Export}
+\citep{R-data} à ce seul sujet.
+
+Nous ne traitons, ici, que de l'importation et de l'exportation de
+données sous forme de fichiers en format texte brut\footnote{%
+  C'est-à-dire sans aucune mise en forme, comme les fichiers de
+  script.}.
+
+\tipbox{Il existe de multiples autres façons de travailler avec des
+  données externes, notamment l'importation de fichiers de tableurs
+  comme Excel ou, encore mieux, l'interaction directe avec une base de
+  données depuis R. Consultez \emph{R Data Import/Export} pour en
+  savoir plus.}
+
+
+\section{Importation de vecteurs de données}
+\label{sec:import-export:scan}
+
+%% création des fichiers vecteur.data et matrice.data
+<<echo=FALSE>>=
+set.seed(1)
+vec <- sample(4200:4300, 5)
+mat <- matrix(sample(101:200, 15), 3, 5)
+cat(file = "vecteur.data", "# Vecteur de données",
+    vec, sep = "\n")
+cat(file = "matrice.data", "# Données d'une matrice 3 x 5\n")
+write(t(mat), file = "matrice.data", append = TRUE)
+@
+
+Le plus simple jeu de données à transférer d'un système à un autre est
+un vecteur ou une matrice de données toutes du même mode. Pour ce
+genre d'applications, un fichier en format texte brut convient
+parfaitement. Les données y sont disposées les unes à la suite des
+autres sur une ou plusieurs lignes. Le fichier peut aussi contenir
+des commentaires, ceux-ci étant normalement délimités par un caractère
+spécial tel que «\code{\#}», «\code{\%}» ou «\code{;}». La
+\autoref{fig:import-export:scan} fournit deux exemples d'un tel fichier de
+données.
+
+\begin{figure}
+  \lstset{frame=single,language={},numbers=none}
+  \begin{minipage}{1.0\linewidth}
+    \begin{minipage}[t]{0.48\linewidth}
+\begin{lstlisting}
+<<echo=FALSE, results=tex>>=
+writeLines(readLines("vecteur.data"))
+@
+\end{lstlisting}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.48\linewidth}
+\begin{lstlisting}
+<<echo=FALSE, results=tex>>=
+writeLines(readLines("matrice.data"))
+@
+\end{lstlisting}
+    \end{minipage} \\
+    \mbox{}
+  \end{minipage}
+  \caption[Exemples de fichiers contenant des vecteurs de données en
+  texte brut]{Exemples de fichiers contenant des vecteurs de données
+    en texte brut. Gauche: fichier de données \code{vecteur.data}
+    contenant un vecteur de données à raison d'une donnée par ligne.
+    Droite: fichier \code{matrice.data} contenant les données d'une
+    matrice. Dans les deux cas, le caractère \# indique que le reste
+    du texte sur la ligne est un commentaire.}
+  \label{fig:import-export:scan}
+\end{figure}
+
+La fonction \Icode{scan} permet d'importer des données brutes dans R.
+Elle lit l'intégralité des données du fichier dont le nom est donné en
+premier argument, ligne par ligne, puis retourne un vecteur. Seul
+l'ordre des données dans le fichier est pris en compte, leur
+disposition n'a aucune importance. La fonction ignore tout texte qui
+suit le caractère spécifié via l'argument \Icode{comment.char}.
+<<echo=TRUE>>=
+scan("vecteur.data", comment.char = "#")
+@
+
+Alternative à \code{comment.char}, l'argument \code{skip} permet de
+sauter un certain nombre de lignes au début du fichier lors de
+l'importation.
+<<echo=TRUE>>=
+scan("vecteur.data", skip = 1)
+@
+
+Pour recréer à l'identique dans R une matrice importée avec
+\code{scan}, il faut s'assurer de la remplir par ligne.
+<<echo=TRUE>>=
+matrix(scan("matrice.data", comment.char = "#"),
+       nrow = 3, byrow = TRUE)
+@
+
+La fonction \code{scan} compte de nombreux autres arguments; consulter
+sa rubrique d'aide si la structure du fichier de données à importer
+dans R ne correspond pas tout à fait aux cas traités ci-dessus.
+
+\importantbox{Dès qu'il s'agit d'accéder à un fichier, R recherche
+  celui-ci dans son \index{repertoire@répertoire de travail}répertoire
+  de travail (\autoref{sec:presentation:workspace}). Si le fichier se
+  trouve dans un autre répertoire, vous devez spécifier dans le nom le
+  \index{chemin d'accès}chemin d'accès
+  (\autoref{sec:informatique:fs:path}) vers le fichier.}
+
+%% nettoyage
+<<echo=FALSE>>=
+unlink("vecteur.data")
+unlink("matrice.data")
+@
+
+
+\section{Importation de tableaux de données}
+\label{sec:import-export:read.table}
+
+%% création des fichiers carburant.txt et carburant.csv
+<<echo=FALSE>>=
+carb <- matrix(c(16.9, 8, 350, 155, 4.360,
+                 15.5, 8, 351, 142, 4.054,
+                 19.2, 8, 267, 125, 3.605,
+                 18.5, 8, 360, 150, 3.940,
+                 30.0, 4, 98,  68,  2.155),
+               nrow = 5, byrow = TRUE,
+               dimnames = list(NULL, c("mpg", "nbcyl", "cylindree", "cv", "poids")))
+write.table(carb, file = "carburant.txt", row.names = FALSE)
+write.csv(carb, file = "carburant.csv", row.names = FALSE)
+@
+
+Les données des tableurs et des bases de données sont habituellement
+organisées en tableau rectangulaire où chaque ligne représente un
+«sujet», ou une «entrée», et chaque colonne représente une
+caractéristique observée chez les sujets. Vous aurez reconnu la
+structure du tableau de données (\emph{data frame}) dans R.
+
+Les tableurs, les bases de données et les différents logiciels
+statistiques peuvent exporter leurs tableaux de données sous forme de
+fichier texte dans lequel les champs sont séparés par un caractère
+quelconque, souvent une espace. Le format le plus universel utilise
+toutefois comme séparateur la virgule ou le point-virgule; c'est le
+format de fichier CSV (\emph{comma-separated values}). La
+\autoref{fig:import-export:read.table} présente le même jeu de données dans
+deux formats différents.
+
+\begin{figure}
+  \lstset{frame=single,language={},numbers=none}
+\begin{lstlisting}
+<<echo=FALSE, results=tex>>=
+writeLines(readLines("carburant.txt"))
+@
+\end{lstlisting}
+\begin{lstlisting}
+<<echo=FALSE, results=tex>>=
+writeLines(readLines("carburant.csv"))
+@
+\end{lstlisting}
+  \caption[Exemples de tableaux de données en texte brut]{Exemples de
+    tableaux de données en texte brut. Haut: fichier
+    \code{carburant.txt} contenant un jeu de données rectangulaire
+    dont les champs sont séparés par des espaces. Bas: fichier
+    \code{carburant.csv} contenant le même jeu de données avec une
+    virgule comme séparateur. Dans les deux fichiers, la première
+    ligne contient les titres des colonnes.}
+  \label{fig:import-export:read.table}
+\end{figure}
+
+Les deux principales fonctions d'importation de tableaux de données
+dans R sont \Icode{read.table} et \Icode{read.csv}. On choisira l'une
+ou l'autre selon le format du fichier de données: \code{read.table} si
+le séparateur des champs est une espace et \code{read.csv} si c'est
+une virgule. Les nombreux arguments de ces fonctions permettent de
+spécifier si les titres des lignes ou des colonnes apparaissent ou non
+dans le fichier, le mode de chaque colonne, le séparateur décimal,
+l'encodage, etc. La rubrique d'aide fournit les détails.
+<<echo=TRUE>>=
+read.table("carburant.txt", header = TRUE)
+read.csv("carburant.csv", header = TRUE)
+@
+
+D'autres variantes de \icode{read.table} existent pour des formats de
+fichiers courants. Elles diffèrent uniquement par le séparateur des
+champs et le séparateur décimal; consulter le
+\autoref{tab:import-export:read.table}.
+
+\begin{table}
+  \centering
+  \caption{Caractéristiques des fonctions de la famille
+    \code{read.table}}
+  \label{tab:import-export:read.table}
+  \begin{tabular}{lcc}
+    \toprule
+             & Séparateur & Séparateur \\
+    Fonction & des champs & décimal \\
+    \midrule
+    \icode{read.table}  & espace     & \code{.} \\
+    \icode{read.csv}    & \code{,}   & \code{.} \\
+    \icode{read.csv2}   & \code{;}   & \code{,} \\
+    \icode{read.delim}  & tabulation & \code{.} \\
+    \icode{read.delim2} & tabulation & \code{,} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+%% nettoyage
+<<echo=FALSE>>=
+unlink("carburant.txt")
+unlink("carburant.csv")
+@
+
+\tipbox{Les données à importer comportent parfois des accents --- dans
+  des noms, par exemple. Si les accents n'apparaissent pas
+  correctement dans R, c'est que le type d'encodage utilisé par R par
+  défaut ne correspond pas à celui du fichier. Ce problème est
+  particulièrement fréquent sous Windows. Pour y remédier, utilisez
+  l'option \code{encoding} dans les appels des fonctions de la famille
+  \icode{read.table}. Par exemple, si le fichier de données est encodé
+  en UTF-8, ajoutez l'option \code{encoding = "UTF-8"}.}
+
+
+\section{Exportation de données}
+\label{sec:import-export:write}
+
+R peut évidemment produire les types de fichiers mentionnés aux
+sections précédentes pour exporter ses données vers d'autres systèmes.
+Les exemples de la présente section permettent d'ailleurs de recréer
+les fichiers des figures \ref{fig:import-export:scan} et
+\ref{fig:import-export:read.table} (sans les commentaires).
+
+L'exportation d'un vecteur simple dans un fichier en format texte brut
+passe par la fonction \Icode{cat}. Les principaux arguments de la
+fonction sont: le ou les objets à exporter; le nom du fichier; le
+séparateur entre les éléments du vecteur dans le fichier. Le
+séparateur par défaut est une espace, ce qui fait en sorte que les
+éléments du vecteur se retrouvent sur une seule ligne dans le fichier
+d'exportation. Pour placer les éléments sur des lignes différentes, il
+faut utiliser un retour à la ligne, symbolisé par \verb="\n"=, comme
+séparateur.
+<<echo=FALSE>>=
+x <- vec
+@
+<<echo=TRUE>>=
+x
+cat(x, file = "vecteur.data", sep = "\n")
+@
+
+La fonction \Icode{write} joue le même rôle que \icode{cat}, sauf que
+les données sont disposées sous forme de tableau rectangulaire (de
+cinq colonnes par défaut) dans le fichier d'exportation. Elle est donc
+mieux appropriée pour exporter les matrices. Étant donné que R remplit
+les matrices par colonne, il faut prendre soin de les transposer avant
+de les exporter.
+<<echo=FALSE>>=
+x <- mat
+@
+<<echo=TRUE>>=
+x
+write(t(x), file = "matrice.data", ncolumns = 5)
+@
+
+%% nettoyage
+<<echo=FALSE>>=
+unlink("vecteur.data")
+unlink("matrice.data")
+@
+
+Enfin, les pendants d'exportation des fonctions \icode{read.table},
+\icode{read.csv} et \icode{read.csv2} sont \Icode{write.table},
+\Icode{write.csv} et \icode{write.csv2}, dans l'ordre. Divers
+arguments permettent de contrôler les informations à transférer du
+\emph{data frame} au fichier d'exportation ainsi que le format de ce
+dernier.
+<<echo=FALSE>>=
+x <- as.data.frame(carb)
+@
+<<echo=TRUE>>=
+x
+write.table(x, file = "carburant.txt", row.names = FALSE)
+write.csv(x, file = "carburant.csv", row.names = FALSE)
+@
+
+%% nettoyage
+<<echo=FALSE>>=
+unlink("carburant.txt")
+unlink("carburant.csv")
+@
+
+\gotorbox{Les exemples interactifs du fichier de script
+  \code{\scriptfilename} reproduit à la section suivante vous
+  permettrons de mieux comprendre le fonctionnement des fonctions
+  d'importation et d'exportation.}
+
+<<script, results=hide>>=
+## Pour illustrer les procédures d'importation et
+## d'exportation de données, nous allons d'abord exporter des
+## données dans des fichiers pour ensuite les importer.
+##
+## Les fichiers seront créés dans le répertoire de travail de
+## R. La commande
+##
+##   getwd()
+##
+## affiche le nom de ce répertoire.
+##
+## Après chaque création de fichier d'exportation, ci-dessous,
+## ouvrir le fichier correspondant dans votre éditeur pour
+## voir les résultats.
+##
+## Débutons par l'exportation d'un vecteur simple créé à
+## partir d'un échantillon aléatoire des nombres de 1 à 100.
+(x <- sample(1:100, 20))
+
+## Exportation avec la fonction 'cat' sans commentaires dans
+## le fichier, les données les unes à la suite des autres sur
+## une seule ligne.
+cat(x, file = "vecteur.data")
+
+## Pour placer des commentaires au début du fichier, il suffit
+## d'exporter deux objets: la chaine de caractères contenant
+## le commentaire et le vecteur. Ici, nous insérons un retour
+## à la ligne entre chaque élément.
+cat("# commentaire", x, file = "vecteur.data", sep = "\n")
+
+## La fonction 'write' permet de disposer les données
+## exportées en colonnes (cinq par défaut), un peu comme une
+## matrice. Exportons exactement le même vecteur de données en
+## lui donnant l'apparence d'une matrice 5 x 4 (remplie par
+## ligne).
+write(x, file = "matrice.data", ncolumns = 4)
+
+## Pour insérer des commentaires au début du fichier créé avec
+## 'write', le plus simple consiste à procéder en deux étapes:
+## on crée d'abord un fichier ne contenant que le commentaire
+## (et le retour à la ligne) avec 'cat', puis on y ajoute les
+## données avec 'write' en spécifiant 'append = TRUE' pour
+## éviter d'écraser le contenu du fichier.
+cat("# commentaire\n", file = "matrice.data")
+write(x, file = "matrice.data", ncolumns = 4, append = TRUE)
+
+## Pour illustrer l'exportation avec 'write.table',
+## 'write.csv' et 'write.csv2', nous allons exporter le jeu de
+## données 'USArrests' utilisé précédemment.
+##
+## Les titres des lignes sont importants dans ce jeu de
+## données puisqu'ils contiennent les noms des États. Par
+## défaut, les fonctions exportent tant les titres de lignes
+## que les titres de colonnes.
+##
+## 'write.table' utilise l'espace comme séparateur des champs
+## et le point comme séparateur décimal.
+write.table(USArrests, "USArrests.txt")
+
+## 'write.csv' utilise la virgule comme séparateur des champs
+## et le point comme séparateur décimal.
+write.csv(USArrests, "USArrests.csv")
+
+## 'write.csv2' utilise le point-virgule comme séparateur des
+## champs et la virgule comme séparateur décimal.
+write.csv2(USArrests, "USArrests.csv2")
+
+## Importons maintenant toutes ces données dans notre espace
+## de travail.
+##
+## Les données de 'vecteur.data' (en passant, l'extension dans
+## le nom de fichier n'a aucune importance) sont lues et
+## importées avec la fonction 'scan'.
+##
+## Nous devons indiquer à la fonction que la ligne débutant
+## par un # est un commentaire.
+(x <- scan("vecteur.data", comment.char = "#"))
+
+## La fonction 'scan' permet aussi de lire les données de
+## 'matrice.data'. La disposition des données dans le fichier
+## n'a aucune importance pour 'scan'. Il faut donc en recréer
+## la structure dans R.
+##
+## Cette fois, nous sautons simplement la ligne du fichier
+## pour omettre le commentaire.
+(x <- matrix(scan("matrice.data", skip = 1),
+             nrow = 5, ncol = 4, byrow = TRUE))
+
+## L'importation des données de 'USArrests.txt',
+## 'USArrests.csv' et 'USArrests.csv2' est très simple avec
+## les fonctions 'read.table', 'read.csv' et 'read.csv2'.
+##
+## Prenez toutefois note: l'importation de données n'est pas
+## toujours aussi simple. Il faut souvent avoir recours aux
+## multiples autres arguments de 'read.table'
+read.table("USArrests.txt")
+read.csv("USArrests.csv")
+read.csv2("USArrests.csv2")
+
+## Nettoyage: la fonction 'unlink' supprime les fichiers
+## spécifiés en argument, ici ceux créés précédemment dans le
+## répertoire de travail.
+unlink(c("vecteur.data", "matrice.data",
+         "USArrests.txt", "USArrests.csv", "USArrests.csv2"))
+@
+
+
+\section{Exemples}
+\label{sec:import-export:exemples}
+
+\scriptfile{\scriptfilename}
+\lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
+
+
+\section{Exercices}
+\label{sec:import-export:exercices}
+
+\Opensolutionfile{solutions}[solutions-import-export]
+
+\begin{Filesave}{solutions}
+\section*{Chapitre \ref*{chap:import-export}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:import-export}}
+
+\end{Filesave}
+
+\begin{exercice}
+  Importer dans R les données \code{boston} du dépôt de jeux de
+  données de \link{http://lib.stat.cmu.edu/datasets}{StatLib}. Les
+  données débutent à la ligne $23$ du fichier. De plus, chaque entrée
+  du fichier compte $14$ variables, mais leurs valeurs sont chaque
+  fois réparties sur deux lignes à raison de $11$ variables sur une
+  ligne et $3$ sur l'autre.
+  \begin{sol}
+    Avec les données réparties sur deux lignes, le plus simple demeure
+    d'importer les données avec \code{scan} et les replacer dans le
+    bon format avec \code{matrix}. Remarquez comment l'on peut
+    importer directement depuis Internet en spécifiant une adresse URL
+    comme nom de fichier.
+<<echo=TRUE, eval=FALSE>>=
+x <- matrix(
+    scan("http://lib.stat.cmu.edu/datasets/boston",
+         skip = 22),
+    ncol = 14, byrow = TRUE)
+@
+<<echo=FALSE, eval=TRUE>>=
+x <- matrix(scan("data/boston", skip = 22),
+            ncol = 14, byrow = TRUE)
+@
+    Juste pour le plaisir, amusons-nous à extraire les
+    noms des variables (colonnes) dans l'entête du fichier. Ils
+    forment le premier champ de mode caractère des lignes 8 à 21,
+    inclusivement.
+<<echo=FALSE, results=hide>>=
+## copier (temporairement) le fichier de données du sous-dossier 'data' vers le  dossier de travail courant pour le bloc de code suivant
+file.copy("data/boston", ".")
+@
+<<echo=TRUE>>=
+(xnames <- scan("boston", skip = 7, nlines = 14,
+                what = "character", flush = TRUE))
+@
+<<echo=FALSE, results=hide>>=
+## supprimer le fichier de données
+file.remove("boston")
+@
+    Nous pouvons ensuite ajouter les noms de colonne à notre matrice
+    de données, puis convertir en \emph{data frame} pour un traitement
+    statistique ultérieur. La fonction \icode{head} permet d'afficher
+    les six premières lignes de l'objet.
+<<echo=TRUE>>=
+colnames(x) <- xnames
+x <- as.data.frame(x)
+head(x)
+@
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}[nosol]
+  Créer une tableau de données dans R, l'exporter en format CSV, puis
+  ouvrir le fichier dans un tableur. Vérifier que le transfert des
+  données s'est effectué correctement.
+\end{exercice}
+
+\Closesolutionfile{solutions}
+
+%%% Local Variables:
+%%% mode: noweb
+%%% TeX-engine: xetex
+%%% TeX-master: "programmer-avec-r"
+%%% coding: utf-8
+%%% End:

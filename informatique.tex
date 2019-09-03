@@ -13,20 +13,11 @@
 \label{chap:informatique}
 
 \begin{objectifs}
-\item Expliquer la nature de la programmation informatique et le rôle
-  des langages.
-\item Définir le concept d'algorithme.
-\item Comparer la performance d'algorithmes à l'aide de la notation
-  $O()$.
-\item Identifier les principaux paradigmes de programmation.
-\item Distinguer les concepts de syntaxe et de sémantique d'un langage
+\item Connaitre les grands jalons de l'histoire des langages
   de programmation.
-\item Distinguer les concepts de langage compilé et de langage
-  interprété.
-\item Nommer et ordonner les grands jalons de l'histoire des langages
-  de programmation.
-\item Comprendre la structure du système de fichiers d'un ordinateur
-  et identifier le chemin d'accès vers une ressource dans celui-ci.
+\item Identifier les éléments distinctifs des langages de
+  programmation.
+\item Utiliser le système de fichiers d'un ordinateur.
 \end{objectifs}
 
 Vous savez programmer.
@@ -54,6 +45,19 @@ fondamentalement rien: vous programmez. Cet ouvrage vise simplement à
 vous faire atteindre un niveau de sophistication bien plus grand, un
 niveau qui fera réellement de vous des programmeuses et des
 programmeurs informatiques.
+
+Larry Wall est célèbre pour avoir inventé le langage \index{Perl}Perl,
+mais également pour avoir formulé que la première des trois plus
+grandes vertus du programmeur est\dots la paresse. En effet, c'est
+grâce à cette qualité --- car ça en devient une dans le contexte ---
+que nous travaillons très fort pour dépenser le moins d'énergie
+possible. Nous concevons donc des programmes qui nous feront
+èconomiser du temps et que d'autres trouveront utiles. Nous les
+documentons aussi de manière adéquate de telle sorte que nous n'aurons
+pas à répondre à des questions à leur sujet.\footnote{%
+  Les deux autres vertus sont l'impatience --- ne pas tolérer
+  d'attendre après l'ordinateur --- et l'orgueil --- concevoir des
+  programmes de bonne qualité \citep{Wall:Perl:1996}.}
 
 
 \section{Qu'est-ce que programmer?}
@@ -88,6 +92,7 @@ la diversité des langages de programmation à la lecture de la
 \autoref{sec:informatique:historique} qui retrace les grands jalons de
 leur histoire.
 
+
 \section{Quelques concepts fondamentaux}
 \label{sec:informatique:concepts}
 
@@ -99,153 +104,27 @@ dans l'ouvrage.
 \subsection{Algorithme}
 \label{sec:informatique:concepts:algorithme}
 
-Vous avez probablement déjà trié une liste de mots à l'aide d'un
-ordinateur. Pourtant, l'ordinateur n'a aucune connaissance du concept
-d'ordre alphabétique. Et même s'il «connaissait» cet ordre, comment au
-juste réalise-t-il l'opération de tri? Ce genre de questions relève
-d'une pierre d'assise de l'informatique:
+Vous avez probablement déjà trié une liste de mots ou de noms à l'aide
+d'un ordinateur. Pourtant, l'ordinateur n'a aucune connaissance du
+concept d'ordre alphabétique. Et même s'il «connaissait» cet ordre,
+comment au juste réalise-t-il l'opération de tri? Si vous doutez qu'il
+existe plusieurs manières de le faire, comparez votre technique pour
+trier une main de cartes à celle de quelques autres personnes. Le
+résultat pourrait vous surprendre!
+
+Les techniques de tri de données dans un ordinateur relève d'une
+pierre d'assise de l'informatique:
 l'\index{algorithmique}algorithmique, la science qui étudie les
-algorithmes et les structures de données.
+algorithmes et les structures de données. Un
+\index{algorithme}\emph{algorithme} est une procédure de calcul
+permettant de résoudre un problème bien spécifié, un peu comme une
+recette de cuisine explique comment produire un mets à partir d'une
+liste d'ingrédients.
 
-Un \index{algorithme}\emph{algorithme} est une procédure de calcul
-permettant de résoudre un problème bien spécifié. En cela,
-l'algorithme explique comment, à partir d'entrants, obtenir l'extrant
-solution du problème. Quand on y pense, ce n'est pas très différent
-d'une recette culinaire où les entrants sont les ingrédients, la
-procédure les étapes de la recette et les extrants, le mets.
-
-L'algorithmique est une discipline riche en techniques ingénieuses et
-en analyses mathématiques poussées. Connaitre ses principes de base et
-les algorithmes classiques permet de mieux planifier ses méthodes de
-résolution de problème. En effet, un bon algorithme permet de résoudre
-en quelques secondes un problème qui pourrait autrement prendre des
-années.
-
-À titre d'exemple, supposons que vous devez calculer, pour un jeu de
-données quelconque, l'écart moyen des données supérieures à $12$ par
-rapport à cette valeur. Un premier algorithme de très haut niveau
-permettant de résoudre ce problème irait comme suit.
-
-\begin{Schunk}
-  \begin{enumerate}
-  \item Sélectionner les données supérieures à $12$.
-  \item Soustraire $12$ de chaque valeur retenue à la première étape.
-  \item Effectuer la moyenne des valeurs obtenues à la seconde étape.
-  \end{enumerate}
-\end{Schunk}
-
-Apportons une toute petite modification à l'algorithme ci-dessus.
-
-\begin{Schunk}
-  \begin{enumerate}
-  \item Sélectionner les données supérieures à $12$.
-  \item Effectuer la moyenne des valeurs obtenues à la première étape.
-  \item Soustraire $12$ de la valeur retenue à la seconde étape.
-  \end{enumerate}
-\end{Schunk}
-
-Mathématiquement, les deux approches sont tout à fait équivalentes.
-Cependant, avec la première approche, nous effectuons une soustraction
-pour chaque valeur supérieure à $12$ que compte le jeu de données. Avec
-la seconde approche, nous n'effectuons qu'une seule soustraction. Si
-le jeu de données compte un million d'entrées supérieures à $12$,
-c'est un million de soustractions contre une seule. En temps de
-calcul, cela ne représente qu'un écart de quelques centièmes de
-secondes sur un ordinateur moderne, mais ces fractions de secondes
-peuvent finir par faire une différence importante lorsque la taille
-des jeux de données augmente ou lorsque l'opération se répète de
-nombreuses fois.
-
-Attardons-nous à un second exemple intéressant: l'élévation d'une
-valeur $b$ à la puissance $n$. Un premier algorithme, écrit cette fois
-en \index{pseudo-langage}\emph{pseudo-langage}, pourrait se lire
-ainsi.
-
-\begin{Schunk}
-\begin{Verbatim}
-Puissance(nombre réel b, entier n)
-  Si n = 0, retourner 1.
-  Retourner b * Puissance(b, n - 1).
-Fin Puissance
-\end{Verbatim}
-\end{Schunk}
-
-Cet algorithme est \index{algorithme!récursif}\emph{récursif}: la
-procédure \code{Puissance} s'appelle elle-même à répétition jusqu'à
-l'obtention du résultat désiré. Mathématiquement, l'algorithme revient
-à calculer $b^n$ de la manière la plus simple et intuitive qui soit:
-\begin{equation*}
-  b^n = b (b (b \cdots (b))).
-\end{equation*}
-Cela peut convenir lorsque $n$ est petit, mais peut-on faire mieux
-pour une «grande» valeur de $n$? Imaginez que vous ne disposez que
-d'une calculatrice munie des opérations arithmétiques de base et du
-carré, et que vous devez élever un nombre à la puissance, disons,
-$21$. Comment feriez-vous pour réduire le nombre d'opérations à entrer
-au clavier?
-
-\notebox{Cet exemple est moins fantaisiste qu'il n'y parait! Jusqu'au
-  milieu des années 1990, les étudiants en actuariat ne disposaient
-  que de ce type de calculatrice pour les examens professionnels. Il
-  s'agissait d'un modèle de Texas Instruments affectueusement surnommé
-  «TI-0».}
-
-Vous avez pensé à un «algorithme»? Votre idée consiste fort
-probablement à diviser la puissance par deux autant de fois que
-possible et à élever au carré par la suite. Dans notre exemple, cela
-donne
-\begin{align*}
-  b^{21}
-  &= b (b^{20}) \\
-  & = b (b^{10})^2 \\
-  &= b ((b^5)^2)^2 \\
-  & = b ((b (b^4))^2)^2 \\
-  &= b ((b (b^2)^2)^2)^2.
-\end{align*}
-Ce calcul se traduit en algorithme comme suit.
-
-\begin{Schunk}
-\begin{Verbatim}
-Puissance(nombre réel b, entier n)
-  Si n = 0, retourner 1.
-    Si n est pair, retourner (Puissance(b, n/2))^2.
-    Si n est impair, retourner b * Puissance(b, n - 1).
-Fin Puissance
-\end{Verbatim}
-\end{Schunk}
-
-Pour élever un nombre à la puissance $21$, le premier algorithme
-requiert $20$ opérations et le second, seulement $6$. Le dénombrement
-du nombre d'opérations requis par un algorithme est un aspect
-important de leur analyse. Il se fait généralement en notation $O()$
-qui signifie «de l'ordre de». Dans le premier algorithme de calcul de
-$b^n$, le nombre d'opérations est directement proportionnel à $n$,
-donc on dit que l'algorithme est $O(n)$. Dans le second algorithme où
-la puissance est divisée par deux à répétition, le nombre d'opérations
-est proportionnel au logarithme (en base deux) de $n$, d'où un
-algorithme $O(\log n)$. Pour en savoir plus, consultez
-\citet[chapitre~1]{Stephens:algorithms:2013}, qui explique à la fois
-très clairement et de manière concise les principes de base du
-dénombrement des opérations d'un algorithme.
-
-\citet{Kernighan:practice:1999} font remarquer, fort à propos:
-\begin{quote}
-  Tous les programmes reposent sur des algorithmes et des structures
-  de données, mais très peu de programmes exigent d'en concevoir de
-  nouveaux.
-\end{quote}
-Autrement dit, aussi complexe soit-il, un programme repose souvent sur
-quelques algorithmes fondamentaux bien connus et bien établis. À ce
-titre, les algorithmes de tri et de recherche jouent un rôle
-particulièrement important: on estime que 25~\% du temps de calcul des
-ordinateurs dans le monde est consacré au tri et à la recherche! Ce
-n'est pas pour rien que Donald Knuth consacre un volume entier de son
-œuvre monumentale \emph{The Art of Computer Programming} à ce seul
-sujet \citep{Knuth:ACP:vol1:1997}.
-
-L'étude des algorithmes classiques de tri et de recherche fera l'objet
-du \autoref{chap:algorithmique}.
-
+L'apprentissage de la programmation va de pair avec l'étude des
+principes de base de l'algorithmique et des algorithmes classiques,
+notamment ceux de tri et de recherche. C'est ce que nous ferons aux
+chapitres \ref{chap:algorithmes} et \ref{chap:tri}.
 
 \subsection{Sémantique et syntaxe}
 \label{sec:informatique:concepts:semantique}
@@ -624,7 +503,8 @@ Le langage \index{C}C a été inventé en 1972 chez Bell Labs par Ken
 Thompson et Dennis Ritchie afin de réécrire le système d'exploitation
 UNIX (\autoref{sec:informatique:os:unix}). Il demeure beaucoup utilisé
 pour la programmation système: le noyau de systèmes d'exploitation
-comme Windows et Linux sont développés en grande partie en C.
+comme \index{Windows}Windows et \index{Linux}Linux sont développés en
+grande partie en C.
 
 Le C est un langage de programmation généraliste considéré, selon les
 standards actuels, comme de bas niveau. Pour illustrer, l'utilisateur
@@ -729,15 +609,16 @@ système d'exploitation pour fonctionner.
 
 Il existe une grande variété de systèmes d'exploitation. Les plus
 connus aujourd'hui sont, pour les ordinateurs personnels et les
-serveurs, Windows de Microsoft, macOS de Apple et Linux, un logiciel
-libre créé et toujours administré par Linus Torvalds. Pour les
-appareils mobiles, deux systèmes d'exploitation se partagent
-l'essentiel du marché: iOS et Android. Le premier est dérivé de macOS
-et le second, de Linux.
+serveurs, \index{Windows}Windows de Microsoft, \index{macOS}macOS de
+Apple et \index{Linux}Linux, un logiciel libre créé et toujours
+administré par Linus Torvalds. Pour les appareils mobiles, deux
+systèmes d'exploitation se partagent l'essentiel du marché: iOS et
+Android. Le premier est dérivé de macOS et le second, de Linux.
 
-Les systèmes macOS et Linux appartiennent à la famille des systèmes
-Unix. Cela ne laisse donc en fait que deux grandes classes de systèmes
-d'exploitation couramment utilisés: Windows et Unix.
+Les systèmes \index{macOS}macOS et \index{Linux}Linux appartiennent à
+la famille des systèmes \index{Unix}Unix. Cela ne laisse donc en fait
+que deux grandes classes de systèmes d'exploitation couramment
+utilisés: Windows et Unix.
 
 \subsection{Windows}
 \label{sec:informatique:os:windows}
@@ -747,18 +628,19 @@ près de 90~\% des ordinateurs personnels dans le monde. Dans les
 circonstances, rares sont les personnes qui n'ont jamais utilisé le
 système, ne serait-ce qu'à petites doses.
 
-À l'origine, en 1985, Windows n'était qu'une interface graphique
-superposée au véritable système d'exploitation des ordinateurs de type
-«compatibles IBM PC», le DOS. Les versions grand public depuis
-Windows~2000 sont plutôt basées sur le noyau de Windows~NT, un système
-conçu à partir de zéro et lancé au milieu des années 1990 en tant que
-système pour les entreprises.
+À l'origine, en 1985, \index{Windows}Windows n'était qu'une interface
+graphique superposée au véritable système d'exploitation des
+ordinateurs de type «compatibles IBM PC», le DOS. Les versions grand
+public depuis Windows~2000 sont plutôt basées sur le noyau de
+Windows~NT, un système conçu à partir de zéro et lancé au milieu des
+années 1990 en tant que système pour les entreprises.
 
-Le plus grand avantage de Windows est son ubiquité. À peu près toutes
-les applications, sauf peut-être celles s'adressant à un segment de
-marché très précis, sont disponibles sous Windows, que ce soit en code
-natif, via un port depuis Unix, ou encore par l'intermédiaire d'une
-couche logicielle d'émulation comme Cygwin ou \index{MinGW}MinGW.
+Le plus grand avantage de \index{Windows}Windows est son ubiquité. À
+peu près toutes les applications, sauf peut-être celles s'adressant à
+un segment de marché très précis, sont disponibles sous Windows, que
+ce soit en code natif, via un port depuis \index{Unix}Unix, ou encore
+par l'intermédiaire d'une couche logicielle d'émulation comme Cygwin
+ou \index{MinGW}MinGW.
 
 Un système d'exploitation multiutilisateur prend pour acquis que
 plusieurs utilisateurs se partageront les ressources de l'ordinateur,
@@ -769,89 +651,70 @@ l'administrateur peut installer ou supprimer des applications) et
 d'accès aux ressources des autres utilisateurs (Marianne n'a pas
 accès aux fichiers d'Alexandre et vice-versa).
 
-Les versions de Windows multiutilisateurs sont apparues relativement
-tard sur le marché grand public, et ce, sans que le paradigme ne soit
-imposé aux utilisateurs. Résultat: la plupart des utilisateurs de
-Windows s'octroient à la ronde les droits d'administrateur et, pire,
-plusieurs applications nécessitent toujours un accès total au système.
-C'est par ces failles que se propagent virus et autres logiciels
-malveillants sur la plateforme.
+Les versions de \index{Windows}Windows multiutilisateurs sont apparues
+relativement tard sur le marché grand public, et ce, sans que le
+paradigme ne soit imposé aux utilisateurs. Résultat: la plupart des
+utilisateurs de Windows s'octroient à la ronde les droits
+d'administrateur et, pire, plusieurs applications requièrent toujours
+un accès total au système. C'est par ces failles que se propagent
+virus et autres logiciels malveillants sur la plateforme.
 
-Les systèmes Windows sont livrés avec une trousse de développement
-très restreinte. Les programmeurs doivent donc installer les outils
-nécessaires, souvent sous forme de suites logicielles monolithiques,
-ce qui entraine dédoublements et, parfois, conflits.
+Les systèmes \index{Windows}Windows sont livrés avec une trousse de
+développement très restreinte. Les programmeurs doivent donc installer
+les outils nécessaires, souvent sous forme de suites logicielles
+monolithiques, ce qui entraine dédoublements et, parfois, conflits.
 
 \subsection{Unix}
 \label{sec:informatique:os:unix}
 
-Le terme \index{Unix}\emph{Unix} --- ou UNIX qui, en majuscules, est
+Le terme \Index{Unix}\emph{Unix} --- ou UNIX qui, en majuscules, est
 une marque déposée de \link{https://www.opengroup.org/unix}{Open Group}
 --- recoupe une famille de systèmes d'exploitation dérivant tous du
 premier système Unix développé chez Bell Labs dans les années 1970 par
 Kenneth Thompson, Dennis Ritchie et plusieurs autres.
 
-Les systèmes Unix partagent un certain nombre de caractéristiques
-communes. D'abord, ils sont intrinsèquement multitâches et
-multiutilisateurs. Ensuite, la
+Les systèmes \index{Unix}Unix partagent un certain nombre de
+caractéristiques communes. D'abord, ils sont intrinsèquement
+multitâches et multiutilisateurs. Il existe donc une séparation très
+nette entre les droits accordés à l'administrateur système
+(communément appelé \emph{superuser} ou \emph{root}) et ceux dévolus
+aux utilisateurs normaux. Ceux-ci ne peuvent écrire que dans l'espace
+disque qui leur est réservé, identifié comme le %
+\index{repertoire personnel@répertoire personnel}\emph{répertoire
+  personnel} ou le \index{dossier de départ|see{répertoire
+    personnel}}\emph{dossier de départ} (\emph{home directory}).
+
+Ensuite, la
 \Index{Unix!philosophie}\link{https://fr.wikipedia.org/wiki/Philosophie_d\%27Unix}{philosophie
   Unix} commande la modularité: le système d'exploitation fournit aux
 utilisateurs et aux applications une multitude de petits outils très
 spécialisés qui ne réalisent à peu près qu'une seule tâche. Le système
 rend ensuite simple, via un mécanisme dit de transfert de données
 («tuyau», \emph{pipe}), de les combiner pour effectuer des opérations
-plus complexes; nous y reviendrons à la \autoref{sec:cli:flux}.
+plus complexes.
 
-Par exemple, pour extraire le mot \emph{tuyau} du code source
-contenant le précédent paragraphe, nous pourrions utiliser l'outil
-\code{grep} pour extraire la ligne où se trouve le mot, puis l'outil
-\icode{cut} pour isoler le mot qui nous intéresse et, enfin, l'outil
-\icode{tr} pour supprimer la parenthèse ouvrante, les guillemets et la
-virgule autour du mot.\footnote{%
-  En supposant que le mot recherché est le quatrième de la ligne dans
-  le fichier source \code{informatique.tex}, la commande résultante
-  est: \code{grep "«tuyau»" informatique.tex | cut -d " " -f 4 | tr -d
-    \bs(«»,}\,. Le symbole %
-  \index{{"|}@\string\code{\string\textbar} (Bash)}\code{\textbar} %
-  est l'opérateur de transfert de données de Unix.%
-  %% utilisation de \string: https://tex.stackexchange.com/a/254505
-}
+Par exemple, pour extraire un mot précis d'une phrase, un utilisateur
+pourrait avoir recours à l'outil \icode{grep} pour extraire la ligne
+entière où se trouve le mot, puis l'outil \icode{cut} pour isoler le
+mot visé puis, enfin, l'outil \icode{tr} pour supprimer des symboles
+de ponctuation qui seraient accolés au mot.
 
 À l'exception notable des Mac, \index{Unix}Unix demeure assez peu
 répandu sur les ordinateurs personnels. En revanche le système
-d'exploitation, en particulier sa variante libre Linux, équipe
-l'immense majorité des stations de travail, des serveurs et des
+d'exploitation, en particulier sa variante libre \index{Linux}Linux,
+équipe l'immense majorité des stations de travail, des serveurs et des
 supercalculateurs. De plus, bon nombre d'applications scientifiques et
 de langages de programmation sont d'abord développés sur des systèmes
-Unix. Pour ces raisons, j'estime utile pour des programmeurs de
-connaitre les quelques «Unix-ismes» ci-dessous.
+Unix. Pour ces raisons, j'estime que tout programmeur devrait
+connaitre quelques uns des principaux «Unix-ismes». Nous les passerons
+en revue à la section suivante avec les détails additionnels sur le
+système de fichiers de Unix.
 
-\begin{itemize}
-\item La barre oblique (\code{/}) est utilisée pour séparer les
-  dossiers dans les chemins d'accès aux fichiers.
-\item Tout utilisateur dispose d'un espace disque réservé identifié
-  comme le \index{repertoire personnel@répertoire
-    personnel}\emph{répertoire personnel} ou le \index{dossier de
-    départ|see{répertoire personnel}}\emph{dossier de départ}
-  (\emph{home directory}). Ce répertoire est situé dans \code{/Users}
-  sous macOS et habituellement dans \code{/home} sous Linux.
-\item À la ligne de commande et dans la configuration de plusieurs
-  applications, le caractère \,\verb=~=\, représente le répertoire
-  personnel.
-\item Toujours à la ligne de commande, il est possible d'appuyer sur
-  \code{TAB} pour compléter les noms de fichiers, de répertoires ou de
-  commandes.
-\item Plusieurs applications permettent de stocker des options de
-  configuration sous forme de texte brut dans des fichiers dont le nom
-  débute généralement par un point «\verb=.=»\,.
-\end{itemize}
-La section suivante fournit des détails additionnels sur le système de
-fichiers de Unix.
-
-\osxbox{Vous savez désormais pourquoi le \index{repertoire
-    personnel@répertoire personnel}répertoire personnel, ou \emph{home
-    directory}, est représenté par une maison dans le Finder et que le
-  raccourci clavier pour y accéder est \code{\shiftkey\,\cmdkey\,H}.}
+\osxbox{Vous savez désormais pourquoi le %
+  \index{repertoire personnel@répertoire personnel}répertoire
+  personnel, ou \emph{home directory}, est représenté par une maison
+  dans le \index{Finder}Finder et que le raccourci clavier pour y
+  accéder est \code{\shiftkey\,\cmdkey\,H}.}
 
 
 \section{Systèmes de fichiers}
@@ -866,13 +729,14 @@ fichiers. Seulement, les programmeurs doivent être familiers avec
 quelques grands principes de l'organisation des données dans un
 ordinateur.
 
-Les fichiers sont regroupés dans des
+Les fichiers sont regroupés dans des %
 \index{repertoire@répertoire}\emph{répertoires} (ou dossiers). Ceux-ci
 contiennent eux-mêmes des fichiers ou des sous-répertoires. Ce schéma
 se répète sans limite pratique. Il en résulte une classification sous
 forme d'arbre dont la \emph{racine} est le répertoire contenant
 l'intégralité des fichiers. La \autoref{fig:informatique:fs} présente
-des extraits des arbres de fichiers usuels de Windows et de macOS.
+des extraits des arbres de fichiers usuels de \index{Windows}Windows
+et de \index{macOS}macOS.
 
 \begin{figure}
   \begin{minipage}[t]{0.45\linewidth}
@@ -920,11 +784,12 @@ des extraits des arbres de fichiers usuels de Windows et de macOS.
 \end{figure}
 
 Les interfaces graphiques des systèmes d'exploitation contiennent
-toutes une application pour naviger à l'intérieur du système de
-fichiers. Sous Windows, il s'agit de l'\index{Explorateur
-  Windows}Explorateur Windows. Sous macOS, l'outil de navigation est
-le \index{Finder}Finder. La \autoref{fig:informatique:explorer+finder}
-présente des fenêtres types de ces deux applications.
+toutes une application pour naviguer à l'intérieur du système de
+fichiers. Sous \index{Windows}Windows, il s'agit de %
+l'\index{Explorateur Windows}Explorateur Windows. Sous
+\index{macOS}macOS, l'outil de navigation est le \index{Finder}Finder.
+La \autoref{fig:informatique:explorer+finder} présente des fenêtres
+types de ces deux applications.
 
 \begin{figure}
   \begin{minipage}{0.48\linewidth}
@@ -936,21 +801,23 @@ présente des fenêtres types de ces deux applications.
   \end{minipage}
   \caption[Interfaces graphiques de navigation dans le système de
   fichiers]{Interfaces graphiques de navigation dans le système de
-    fichiers: Explorateur Windows (à gauche) et Finder (à droite)}
+    fichiers: Explorateur Windows (à gauche) et Finder de macOS (à
+    droite)}
   \label{fig:informatique:explorer+finder}
 \end{figure}
 
 \tipbox{Pour accéder à la racine du système de fichiers dans
-  l'Explorateur Windows, il faut ouvrir l'arborescence sous «Ce PC» ou
-  «Ordinateur». Dans le Finder de macOS, on atteint la racine en
-  sélectionnant «Macintosh~HD» dans la barre latérale.}
+  l'\index{Explorateur Windows}Explorateur Windows, il faut ouvrir
+  l'arborescence sous «Ce PC» ou «Ordinateur». Dans le
+  \index{Finder}Finder de macOS, on atteint la racine en sélectionnant
+  «Macintosh~HD» dans la barre latérale.}
 
 \subsection{Particularités du système de fichiers de Windows}
 \label{sec:informatique:fs:windows}
 
-Dans Windows, chaque lecteur physique ou lecteur réseau dispose de son
-propre arbre de fichiers. La racine est identifiée par une lettre. Le
-premier disque dur est \code{C}\footnote{%
+Dans \index{Windows}Windows, chaque lecteur physique ou lecteur réseau
+dispose de son propre arbre de fichiers. La racine est identifiée par
+une lettre. Le premier disque dur est \code{C}\footnote{%
   La nomenclature des lecteurs date d'une époque où les ordinateurs
   personnels n'étaient pas tous équipés d'un disque dur, mais plutôt
   d'un ou deux lecteurs de disquettes. Ceux-ci étaient identifiés par
@@ -958,59 +825,75 @@ premier disque dur est \code{C}\footnote{%
 Si le système comporte plus d'un disque, l'utilisateur doit savoir sur
 quel disque retrouver ou enregistrer ses données.
 
-Depuis au moins la version~7 de Windows, le répertoire (ou dossier)
-personnel des utilisateurs se retrouve sous
+Depuis au moins la version~7 de \index{Windows}Windows, le répertoire
+(ou dossier) personnel des utilisateurs se retrouve sous
 \code{C:{\bs}Users}\footnote{%
   Ce répertoire est affiché sous le nom \code{Utilisateurs} dans la
   version française du système d'exploitation.}, %
 tel qu'illustré à la \autoref{fig:informatique:fs}. Ainsi, la
 véritable position du dossier \code{Documents} d'Alexandre dans le
-système de fichiers est \code{C:{\bs}Users{\bs}Alexandre{\bs}Documents}.
+système de fichiers est
+\code{C:{\bs}Users{\bs}Alexandre{\bs}Documents}.
 
-\windowsbox{Le répertoire personnel n'est pas affiché par défaut
-  dans l'Explorateur Windows. Pour y accéder, vous devez naviguer à
-  partir de la racine du système de fichiers dans «Ce PC» ou
-  «Ordinateur».}
-
-Le système de fichiers de Windows est insensible à la casse,
-c'est-à-dire qu'il ne fait aucune distinction entre \code{Program
-  Files}, \code{program files} et \code{PROGRAM FILES}. Dans les
-chemins d'accès (voir ci-dessous), la barre oblique inversée
+Le système de fichiers de \index{Windows}Windows est insensible à la
+casse, c'est-à-dire qu'il ne fait aucune distinction entre
+\code{Program Files}, \code{program files} et \code{PROGRAM FILES}.
+Dans les chemins d'accès (voir ci-dessous), la barre oblique inversée
 «{\bs}» sépare les noms de répertoires.
+
+\windowsbox{Le répertoire personnel n'est pas affiché par défaut dans
+  l'\index{Explorateur Windows}Explorateur Windows. Pour y accéder,
+  vous devez naviguer à partir de la racine du système de fichiers
+  dans «Ce PC» ou «Ordinateur».}
 
 \subsection{Particularités du système de fichiers de Unix}
 \label{sec:informatique:fs:unix}
 
-La racine du système de fichiers est toujours identifiée par le
-symbole «\code{/}» sous \index{Unix}Unix. Les disques, physiques ou
+Sous \index{Unix}Unix, la racine du système de fichiers est toujours
+identifiée par le symbole «\code{/}» et les lecteurs, physiques ou
 réseau, sont accessibles par divers \emph{points de montage} dans le
-système de fichiers.
+système.
 
-Pour illustrer, supposons qu'un ordinateur dispose de deux disques
-durs; le premier est réservé au système d'exploitation et aux
-applications partagées, alors que le second renferme les fichiers
-personnels des utilisateurs. Dans un tel scénario, le premier disque
-sera monté sur le répertoire \code{/} et le second, sur le répertoire
-\code{/home}. Le système de fichier dirigera automatiquement les
-requêtes vers le bon disque. L'utilisateur n'a jamais à se préoccuper
-de l'organisation physique des disques.
+Pour illustrer, supposons que le système d'exploitation d'une station
+de travail réside sur le disque dur de l'ordinateur, mais que les
+fichiers personnels des utilisateurs se trouvent sur un disque réseau.
+Dans un tel scénario, le lecteur de disque dur de l'ordinateur sera
+monté sur le répertoire \code{/} et le lecteur réseau, sur le
+répertoire \code{/home}. Le système de fichier dirigera
+automatiquement les requêtes vers le lecteur approprié. L'utilisateur
+n'a donc jamais à se préoccuper de l'organisation physique des
+disques.
 
-\osxbox{Sous macOS, les clés USB, disques durs externes ou disques
-  réseau sont montés dans le répertoire \code{/Volumes}. Le répertoire
-  n'existe pas lorsqu'aucun disque externe n'est connecté.}
+Tel que mentionné à la section précédente, il existe dans les systèmes
+\index{Unix}Unix une stricte séparation entre les fichiers du système
+(modifiables uniquement par l'administrateur système) et ceux des
+utilisateurs. Ceux-ci ne peuvent créer et modifier des fichiers que
+dans leur %
+\index{repertoire personnel@répertoire personnel}répertoire personnel.
+Ce répertoire est situé dans \code{/Users} sous \index{macOS}macOS et
+habituellement dans \code{/home} sous \index{Linux}Linux.
 
-Tel que mentionné à la section précédente, dans les système Unix le
-répertoire personnel des utilisateurs se trouve sous
-\code{/Users} (macOS) ou \code{/home} (Linux).
+À la ligne de commande et dans la configuration de plusieurs
+applications, le caractère %
+\index{\string~@\verb=~= (Unix)|bfhyperpage}«\verb=~=» %
+représente le répertoire personnel.
 
-Le système de fichiers sous Unix est généralement sensible à la casse.
-La barre oblique «\code{/}» sépare les noms de répertoires dans les
-chemins d'accès.
+Le système de fichiers sous \index{Unix}Unix est généralement sensible
+à la casse. La barre oblique «\code{/}» sépare les noms de répertoires
+dans les chemins d'accès aux fichiers.
 
 Les fichiers dont le nom débute par un point «\verb=.=» sont des
 fichiers cachés. À moins de demander explicitement de les afficher,
-ils n'apparaissent donc pas dans la liste des fichiers à la ligne de
-commande ou dans les interfaces graphiques.
+ces fichiers n'apparaissent donc pas dans la liste des fichiers à la
+ligne de commande ou dans les interfaces graphiques. Les fichiers
+cachés servent généralement à stocker les options de configuration des
+applications en format texte brut.
+
+\osxbox{Sous \index{macOS}macOS, les clés USB, les disques durs
+  externes et les disques réseau sont montés dans le répertoire
+  \code{/Volumes}. Ce répertoire n'existe pas lorsqu'aucun disque
+  externe n'est connecté.}
+
 
 \subsection{Chemin d'accès}
 \label{sec:informatique:fs:path}
@@ -1024,7 +907,7 @@ fichiers. Un chemin d'accès peut être absolu ou relatif.
   chemin d'accès demeure valide depuis n'importe quel point dans le
   système de fichier.
 
-  Dans l'extrait de système de fichier Windows de la
+  Dans l'extrait de système de fichier \index{Windows}Windows de la
   \autoref{fig:informatique:fs}, le chemin d'accès absolu vers le
   fichier \code{synthese-1.doc} est:
 \begin{Schunk}
@@ -1035,11 +918,11 @@ C:\Users\Alexandre\Documents\synthese-1.doc
 \item[Chemin relatif] \index{chemin d'accès!relatif} La position d'un
   fichier est donnée à partir d'un endroit précis dans le système de
   fichier autre que la racine. Le chemin dépend donc du répertoire
-  courant. On a recours au nom fictif «\verb=..=» pour identifier le
-  répertoire parent (un niveau supérieur dans l'arbre des fichiers).
+  courant. Le nom fictif «\verb=..=» identifie le répertoire parent
+  (un niveau supérieur dans l'arbre des fichiers).
 
   Par exemple, à partir du répertoire \code{Documents/Cours} de
-  Marianne dans le système de fichier Unix de la
+  Marianne dans le système de fichier \index{Unix}Unix de la
   \autoref{fig:informatique:fs}, le chemin d'accès relatif vers le
   fichier \code{freestyle.txt} est:
 \begin{Schunk}
@@ -1052,9 +935,11 @@ C:\Users\Alexandre\Documents\synthese-1.doc
 La notion de chemin d'accès fait également référence à la liste des
 répertoires dans lesquels le système d'exploitation recherche une
 application lorsqu'elle est appelée. Cette liste est conservée dans
-une variable d'environnement nommée \verb=%PATH%= sous Windows
-et \verb=$PATH= sous \index{Unix}Unix. Il est hors de la portée de ce
-document d'expliquer comment modifier la variable d'environnement. La
+une variable d'environnement nommée \verb=%PATH%= sous
+\index{Windows}Windows
+et
+\verb=$PATH= sous \index{Unix}Unix. Il est hors de la portée de cet
+ouvrage d'expliquer comment modifier la variable d'environnement. La
 réponse se trouve à une requête près dans un moteur de recherche.
 
 
@@ -1120,11 +1005,39 @@ réponse se trouve à une requête près dans un moteur de recherche.
 
 \begin{exercice}[nosol]
   Les répertoires \code{Documents} et \code{Desktop} (ou \code{Bureau}
-  dans la version française) existent par défaut dans le
+  dans la version française) existent par défaut dans le %
   \index{repertoire personnel@répertoire personnel}répertoire
-  personnel des utilisateurs tant dans macOS que dans Windows.
-  Localiser ces deux répertoires dans le système de fichier à partir
-  de la racine avec l'Explorateur Windows ou le Finder.
+  personnel des utilisateurs tant dans \index{Windows}Windows que dans
+  \index{macOS}macOS. Localiser ces deux répertoires dans le système
+  de fichier à partir de la racine avec l'\index{Explorateur
+    Windows}Explorateur Windows ou avec le \index{Finder}Finder.
+\end{exercice}
+
+\begin{exercice}[nosol]
+  (Utilisateurs de Mac seulement.) Dans les versions modernes de
+  \index{macOS}macOS, le \index{Finder}Finder n'affiche plus par
+  défaut le dossier personnel dans la barre latérale. C'est pourtant
+  pratique de pouvoir y accéder directement. Effectuer les opérations
+  suivantes pour afficher le raccourci vers le répertoire personnel.
+  \begin{enumerate}[1.]
+  \item Ouvrir une fenêtre du Finder et accéder aux options de
+    configuration par le menu standard \code{Finder|Preferences}
+    (\code{\cmdkey\,,}).
+  \item Dans l'entête de la fenêtre de configuration, sélectionner la
+    catégorie \code{Barre latérale}.
+  \item Dans la liste des favoris, cocher le répertoire personnel
+    identifié par une maison et votre nom d'utilisateur.
+  \end{enumerate}
+  La \autoref{fig:informatique:finder-preferences} illustre cette
+  configuration.
+
+  \begin{figure}
+    \centering
+    \includegraphics{images/finder-preferences}
+    \caption{Réglage du Finder de macOS pour afficher le raccourci
+      vers le répertoire personnel}
+    \label{fig:informatique:finder-preferences}
+  \end{figure}
 \end{exercice}
 
 \Closesolutionfile{solutions}

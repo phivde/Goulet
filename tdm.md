@@ -25,7 +25,7 @@
 + revoir le contenu de la session de travail type, qui fait trop appel
   à des notions de statistique
 
-## Chapitre 3 - Bases d'algorithmique
+## Chapitre 3 - Algorithmes et algorithmique
 
 + ordre de grandeur des opérations
 + matériel de la section 1.2.1
@@ -34,59 +34,54 @@
 + concept d'application (mapping)
 + ouverture sur calculs répétitifs avec des boucles couvert plus loin
 
-## Chapitre 4 - Premiers pas avec R
+## Chapitre 4 - Bases de la programmation
 
 + notion d'environnement tel que présenté dans SICP
-+ exécution conditionnelle (voir aussi SICP)
-+ intégrer ancienne section 4.1 sur programmation fonctionnelle dans
-  l'introduction du chapitre
-+ définition d'une fonction (section 4.2)
-+ retourner des résultats (section 4.3)
-+ exécution conditionnelle (section 4.4.1)
-+ `return`, `stop`, `warning` (section 4.4.3)
 + révision des exercices pour y intégrer l'algorithmique
 
-## Chapitre 5 - Structures de données
+## Chapitre 5 - Fonctions et bonnes pratiques
 
+- boucles itératives
+- syndrôme de la plaque à biscuits
++ produit extérieur
++ bonnes pratiques: exemple plus simple que `rgamma_ar`
+
+## Chapitre 6 - Structures de données et fonctions d'application
+
++ fonctions d'application après le type de donnée correspondante
 - importation et exportation de données
-
-## Chapitre 6 - Fonctions d'application
-
 + probablement une introduction révisée pour tenir compte du fait que
   les boucles n'ont pas encore été couvertes
+- produit extérieur
 
-## Chapitre 7 - Bonnes pratiques de la programmation
-
-+ nouveau chapitre
-+ matériel de la section 4.7
-+ exemple plus simple que `rgamma_ar`
-
-## Chapitre 8 - Algorithmes classiques et structures de contrôle
+## Chapitre 7 - Tri et recherche
 
 + nouveau chapitre construit sur le chapitre 6
 + adaptation de Stephens (2013)
++ boucles itératives
++ syndrôme de la plaque à biscuits
 
-## Chapitre 9 - Débogage
+## Chapitre 8 - Débogage
 
 + vidéo sur l'utilisation de `browser`
 + exemple de débogage d'une fonction plus simple que `rgamma_ar`
 
-## Chapitre 10 - Importation et exportation de données
+## Chapitre 9 - Importation et exportation de données
 
 + nouveau chapitre
 + matériel de la section 7.6
 
-## Chapitre 11 - Bibliothèques et paquetages
+## Chapitre 10 - Bibliothèques et paquetages
 
 aucun changement
 
-## Chapitre 12 - Expressions régulières
+## Chapitre 11 - Expressions régulières
 
 + adaptation en français du guide de Apple?
 + (si le point précédent est fait) intégration des exemples
   additionnels dans le texte du chapitre
 
-## Chapitre 13 - Environnement, portée lexicale et évaluation paresseuse
+## Chapitre 12 - Environnement, portée lexicale et évaluation paresseuse
 
 + revoir le titre du chapitre 5?
 + exemple de type MLE pour illustrer les dangers de compter sur la
@@ -94,7 +89,6 @@ aucun changement
   
 ## Chapitres supprimés
 
-- Fonctions (matériel réparti ailleurs)
 - Ligne de commande (laboratoire)
 - Travail collaboratif avec Git (laboratoire)
 

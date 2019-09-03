@@ -1,0 +1,853 @@
+%%% Copyright (C) 2019 Vincent Goulet
+%%%
+%%% Ce fichier fait partie du projet
+%%% «Programmer avec R»
+%%% https://gitlab.com/vigou3/programmer-avec-r
+%%%
+%%% Cette création est mise à disposition sous licence
+%%% Attribution-Partage dans les mêmes conditions 4.0
+%%% International de Creative Commons.
+%%% https://creativecommons.org/licenses/by-sa/4.0/
+
+\chapter{Bonnes pratiques de la programmation}
+\label{chap:pratiques}
+
+\def\scriptfilename{\currfilebase.R}
+\SweaveOpts{echo=FALSE}
+
+<<echo=FALSE, results=hide>>=
+source(".Sweaveprofile")   # configuration
+source("Stangle.R")        # lancement de Stangle
+@
+<<script>>=
+## Copyright (C) 2019 Vincent Goulet
+##
+## Ce fichier fait partie du projet
+## «Programmer avec R»
+## https://gitlab.com/vigou3/programmer-avec-r
+##
+## Cette création est mise à disposition sous licence
+## Attribution-Partage dans les mêmes conditions 4.0
+## International de Creative Commons.
+## https://creativecommons.org/licenses/by-sa/4.0/
+@
+
+\begin{objectifs}
+\item Adopter des bonnes pratiques de programmation en contexte de
+  travail collaboratif.
+\item Respecter les normes de programmation reconnues en matière de
+  style, de présentation du code et de documentation.
+\end{objectifs}
+
+De manière générale, le développement et la maintenance de code
+informatique repose sur la contribution de plusieurs personnes. En
+effet, il est plutôt rare, dans le milieu professionnel, d'être appelé
+à concevoir un programme informatique à partir d'une page blanche et
+en complète autarcie, c'est-à-dire sans que quiconque n'ait à
+interagir avec le code à un stade ou à un autre. Une grande part du
+travail de programmation consiste à corriger, à mettre à jour ou à
+améliorer du code existant. Dans ce contexte, l'adhésion à un certain
+nombre de normes et de bonnes pratiques permet de faciliter le travail
+de tous les intervenants et de réduire les risques d'erreurs. Ce
+chapitre présente quelques unes de ces bonnes pratiques à adopter en
+matière de style de programmation, de présentation du code et de
+documentation.
+
+\tipbox{Je me suis efforcé de respecter les bonnes pratiques
+  ci-dessous dans les ficheirs de script fournis avec l'ouvrage.
+  Prêtez donc attention à la manière dont le code qui vous est fourni
+  est construit et présenté.}
+
+
+\section{Style}
+\label{sec:pratiques:style}
+
+Il en va du code informatique comme de la prose: si le style peut
+varier d'un auteur à l'autre, l'œuvre doit toujours être à la fois
+agréable à lire et facile à comprendre. Bref, les meilleurs
+programmeurs préfèrent la \emph{lisibilité} de leur code aux effets de
+style qui auraient pour seul mérite de faire étalage de leur maitrise
+du langage.
+
+Tout programmeur devrait constamment garder en tête les trois
+objectifs suivants en effectuant son travail: simplicité, clarté,
+concision. Ces objectifs entrent souvent en conflit les uns avec les
+autres! Tout l'art de la bonne programmation consiste donc à trouver
+un juste équilibre entre les trois pôles.
+
+\citet{Kernighan:practice:1999},
+\citet{Oualline:C:1997,Oualline:C++:2003},
+\citet{Kernighan:style:1978} proposent d'excellents chapitres sur le
+style en programmation. Je ne saurais être aussi exhaustif que ces
+auteurs établis. Néanmoins, je vous incite à porter une attention
+particulière aux quelques points de style livrés en vrac, ci-dessous.
+
+\begin{itemize}
+\item Utilisez des noms de variables significatifs. Ne soyez pas ce
+  collègue qui nomme les variables d'un programme \code{x}, \code{xx}
+  et \code{xxx} (cas vécu). Attention, toutefois, de ne pas pousser le
+  concept trop loin. Ici comme ailleurs, la clarté peut provenir de la
+  concision; la terminologie\footnote{%
+    Vous remarquerez que je préfère utiliser l'anglais pour les
+    noms d'objets, question d'uniformité avec les identificateurs du
+    langage. Chose certaine, évitez à tout prix les accents dans les
+    noms d'objets.}
+  \begin{Schunk}
+\begin{Verbatim}
+xlen <- length(x)
+\end{Verbatim}
+  \end{Schunk}
+  est aussi claire que
+  \begin{Schunk}
+\begin{Verbatim}
+length_of_x <- length(x)
+\end{Verbatim}
+  \end{Schunk}
+  et bien plus simple à utiliser au fil d'un programme.
+
+  Certains noms d'objets sans réelle signification sont tellement
+  usuels qu'il est contre productif de leur préférer des versions plus
+  explicites. Pensons, ici, à \code{x} comme premier argument d'une
+  fonction R ou à \code{i}, \code{j} et \code{k} comme compteurs dans
+  les boucles \icode{for}.
+
+  Quant à la composition des noms d'objets formés de plusieurs mots,
+  divers styles s'affrontent: \code{variable.name},
+  \code{variable\_name}, \code{variableName}, \code{VariableName},
+  etc. Assurez-vous simplement de suivre le standard en vigueur dans
+  votre équipe de travail, et, par-dessus tout, soyez constant. Ma
+  préférence, qui concorde avec une grande partie du code source de R,
+  va aux noms d'objets courts et entièrement en minuscules.
+  %
+\item Dès qu'elles sont disponibles, utilisez les fonctions internes
+  de R au lieu de reprogrammer certaines procédures. Non seulement
+  bénéficierez-vous de l'optimisation des fonctions internes, mais
+  votre code gagnera également en lisibilité. Comparez
+  \begin{Schunk}
+\begin{Verbatim}
+sum(x)/length(x)
+\end{Verbatim}
+  \end{Schunk}
+  à
+  \begin{Schunk}
+\begin{Verbatim}
+mean(x)
+\end{Verbatim}
+  \end{Schunk}
+  %
+\item Connaitre sur le bout des doigts la priorité des opérateurs du
+  \autoref{tab:bases:operateurs}, c'est bien; rendre explicite l'ordre
+  des opérations dans une expression à l'aide de parenthèses, c'est
+  mieux. N'hésitez pas à utiliser des parenthèses dès que l'ombre d'un
+  doute pourrait planer sur l'ordre des opérations. D'ailleurs, à ce
+  propos, \citet{Oualline:C:1997} ramène la quinzaine de règles de
+  priorité des opérations (du langage C) à seulement deux:
+  \begin{enumerate}
+  \item la multiplication et la division précèdent l'addition et la
+    soustraction;
+  \item placer tout le reste entre parenthèses.
+  \end{enumerate}
+  %
+\item Évitez les expressions logiques complexes, surtout celles
+  reposant sur la double négation. Par exemple, pour exécuter une
+  expression si un vecteur contient des données manquantes, la
+  condition
+  \begin{Schunk}
+\begin{Verbatim}
+if (any(is.na(x)))
+\end{Verbatim}
+  \end{Schunk}
+  est beaucoup plus facile à déchiffrer que la version équivalente
+  d'un point de vue logique
+  \begin{Schunk}
+\begin{Verbatim}
+if (!all(!is.na(x)))
+\end{Verbatim}
+  \end{Schunk}
+  En revanche, s'il s'agit plutôt d'exécuter une expression quand un
+  vecteur ne contient aucune donnée manquante, alors
+  \begin{Schunk}
+\begin{Verbatim}
+if (all(!is.na(x)))
+\end{Verbatim}
+  \end{Schunk}
+  est plus simple que
+  \begin{Schunk}
+\begin{Verbatim}
+if (!any(is.na(x)))
+\end{Verbatim}
+  \end{Schunk}
+
+  De plus, le conseil précédent sur la priorité des opérations est
+  particulièrement indiqué avec les opérations logiques. Sauriez-vous
+  confirmer, sans consulter le \autoref{tab:bases:operateurs}, l'ordre
+  des opérations dans l'expression logique suivante?\footnote{%
+    C'est \code{(!p) | (q \& r)}.}
+  \begin{Schunk}
+\begin{Verbatim}
+!p | q & r
+\end{Verbatim}
+  \end{Schunk}
+  %
+\item Utilisez des fonctions d'application plutôt que des boucles
+  explicites (nous étudierons les boucles au \autoref{chap:tri}). Une
+  expression ayant recours à une fonction d'application est plus
+  concise et plus simple à décoder. Même si vous ne connaissez pas
+  encore la syntaxe exacte des boucles, vous pouvez d'ores et déjà
+  apprécier la différence de lisibilité entre
+  \begin{Schunk}
+\begin{Verbatim}
+z <- numeric(n)
+for (i in seq_len(n))
+    z[i] <- mean(x[[i]])
+\end{Verbatim}
+  \end{Schunk}
+  et
+  \begin{Schunk}
+\begin{Verbatim}
+z <- sapply(x, mean)
+\end{Verbatim}
+  \end{Schunk}
+
+  Encore ici, évitez de pousser la logique trop loin. Si boucle
+  est plus naturelle et plus simple à comprendre qu'une fonction
+  d'application, optez pour la boucle. En particulier, une
+  fonction d'application \icode{sapply} à l'intérieur d'une autre
+  fonction \code{sapply}, ce n'est généralement ni plus efficace, ni
+  plus simple à déchiffrer qu'une double boucle \icode{for}.
+  %
+\item Adoptez la
+  \link{https://fr.wikipedia.org/wiki/Philosophie_d\%27Unix}{philosophie
+    Unix}, notamment le précepte qui appelle à créer des programmes
+  qui effectuent une seule chose et qui le font bien. Lorsqu'une
+  fonction devient «longue» --- cela dépend du contexte, mais
+  généralement dès une vingtaine de lignes en R --- il convient de la
+  scinder en plusieurs blocs logiques.
+  %
+\item Enfin, utilisez \icode{return} uniquement pour provoquer la
+  sortie anticipée d'une fonction, habituellement à l'intérieur d'une
+  clause \code{if}. En d'autres termes, en R \code{return} n'a pas sa
+  place à la toute fin d'une fonction.
+\end{itemize}
+
+
+\section{Présentation du code}
+\label{sec:pratiques:presentation}
+
+Le code bien mis en forme est plus facile et agréable à consulter. Il
+existe plusieurs chapelles dans le monde des programmeurs quant à la
+«bonne façon» de présenter et, surtout, d'indenter le code
+informatique.
+
+Voyons d'abord ce qui rallie tout le monde.
+
+En premier lieu, veillez à limiter la longueur des lignes de code à
+environ 80 caractères. Ce standard remonte à l'époque des terminaux en
+format texte qui ne pouvaient afficher de l'information que sur 80
+colonnes. Pourquoi s'y tenir encore aujourd'hui, alors que nos écrans
+d'ordinateur sont très larges? Parce que les longues lignes de texte
+sont difficiles à suivre, notre œil ayant tendance à sauter à la ligne
+inférieure en se déplaçant de la gauche vers la droite\footnote{%
+  C'est pourquoi les journaux et les magazines sont composés en
+  colonnes de texte étroites.}. %
+Profitez donc plutôt de l'espace horizontal à l'écran pour afficher
+des fenêtres côte-à-côte.
+
+Si de multiples niveaux d'indentation (voir plus bas) font en sorte
+qu'il manque de place à droite pour écrire du code, le problème n'est
+peut-être pas tant la limite sur la longueur des lignes que la
+conception même du programme. Simplifiez l'algorithme ou scindez le
+programme en plusieurs fonctions.
+
+Ensuite, aérez le code avec des lignes blanches entre les blocs
+logiques et, surtout, avec des espaces. Les espaces en programmation
+jouent le même rôle que dans du texte normal: elles facilitent la
+lecture. En particulier, utilisez des espaces dans les circonstances
+suivantes:
+\begin{itemize}
+\item de part et d'autre du symbole d'affectation \icode{<-}; ces
+  espaces sont ajoutées automatiquement avec les raccourcis clavier
+  des éditeurs spécialisés GNU~Emacs\index{Emacs}
+  (\autoref{sec:emacs+ess:commandes:script}) et \index{RStudio}RStudio
+  (\autoref{sec:rstudio:commandes});
+\item de part et d'autre de tous les opérateurs\footnote{%
+    Sauf peut-être la division: je préfère \code{(x + y)/z} à \code{(x
+      + y) / z}.};
+\item après les virgules;
+\item avant la parenthèse ouvrante \code{(}, sauf dans les appels de
+  fonction.
+\end{itemize}
+Comparez les deux blocs de code de la
+\autoref{fig:collaboration:espaces}. Vous serez sans doute d'accord
+que celui qui respecte les indications ci-dessus s'avère bien plus
+lisible.
+
+\begin{figure}
+  \begin{minipage}{0.48\linewidth}
+\begin{Verbatim}[frame=single]
+f<-function(x,y)
+{
+    if(y<0)
+        y<--y
+    x*(1+x*y)^2
+}
+\end{Verbatim}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.48\linewidth}
+\begin{Verbatim}[frame=single]
+f <- function(x, y)
+{
+    if (y < 0)
+        y <- -y
+    x * (1 + x * y)^2
+}
+\end{Verbatim}
+  \end{minipage}
+  \caption[Blocs de code sans et avec les espaces appropriées]{Blocs
+    de code sans (à gauche) et avec (à droite) les espaces
+    appropriées. Le code de droite est plus lisible.}
+  \label{fig:collaboration:espaces}
+\end{figure}
+
+Passons maintenant au dossier chaud parmi les programmeurs:
+\index{indentation}l'indentation du code et la position des accolades.
+Tous s'entendent au moins sur un point: il est absolument essentiel
+d'indenter les blocs de code pour mettre la structure d'un programme
+en évidence. En clair, cela signifie que toute expression --- ou
+groupe d'expressions entre accolades --- doit être placée en retrait de
+la marge de gauche dès lors qu'elle fait partie d'une structure de
+contrôle ou de la définition d'une fonction. Le code de la
+\autoref{fig:collaboration:espaces} est correctement indenté.
+
+\importantbox{Ne pas du tout indenter son code est passible de la
+  peine capitale, d'excommunication, de bannissement de la Terre du
+  Milieu\dots\ choisissez votre châtiment.}
+
+La source des insolubles débats se situe, comme souvent, dans les
+détails: le nombre d'espaces dont il convient d'indenter le code et la
+position des accolades, surtout l'accolade ouvrante. À titre
+d'exemples, l'éditeur GNU~Emacs\index{Emacs} reconnaît et supporte au
+moins les styles d'indentation suivants:
+
+\vspace{\topsep}\noindent
+\begin{minipage}{\linewidth}
+  \begin{minipage}[t]{0.48\linewidth}
+    C++
+    \begin{Schunk}
+\begin{Verbatim}
+for (i in 1:10)
+{
+    expression
+}
+\end{Verbatim}
+    \end{Schunk}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.48\linewidth}
+    K\&R (1TBS\footnotemark)
+    \begin{Schunk}
+\begin{Verbatim}
+for (i in 1:10){
+     expression
+}
+\end{Verbatim}
+    \end{Schunk}
+  \end{minipage}
+\end{minipage}
+\footnotetext{\emph{One True Bracing Style}. C'est dire
+  combien les amateurs de ce style le tiennent en haute estime.}
+
+\vspace{\topsep}\noindent
+\begin{minipage}{\linewidth}
+  \begin{minipage}[t]{0.48\linewidth}
+    Whitesmith
+    \begin{Schunk}
+\begin{Verbatim}
+for (i in 1:10)
+     {
+     expression
+     }
+\end{Verbatim}
+    \end{Schunk}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.48\linewidth}
+    GNU
+    \begin{Schunk}
+\begin{Verbatim}
+for (i in 1:10)
+  {
+    expression
+  }
+\end{Verbatim}
+    \end{Schunk}
+  \end{minipage}
+\end{minipage}
+\vspace{\topsep}
+
+Le code source de R est entièrement composé dans un style analogue aux
+style C++, ci-dessus, ou RRR du \index{Emacs!mode ESS}mode ESS de Emacs:
+\begin{itemize}
+\item le code est indenté de quatre (4) espaces;
+\item les accolades ouvrante et fermante sont placées sur leurs
+  propres lignes.
+\end{itemize}
+Ce style peut être  considéré comme standard pour la programmation en
+R.
+
+En définitive, le style d'indentation utilisé n'a pas tellement
+d'importance. Ce qui compte, c'est de se conformer au style en vigueur
+dans son domaine et de demeurer constant au fil de son code.
+
+\tipbox{Les bons éditeurs pour programmeurs permettent de configurer
+  le niveau d'indentation. Consultez la documentation de votre
+  éditeur.}
+
+
+\section{Commentaires}
+\label{sec:pratiques:commentaires}
+
+Les \index{commentaires}commentaires dans le code servent à guider le
+lecteur --- peut-être vous-même, quelque temps après la rédaction ---
+dans la lecture d'un programme. Le niveau de détails que devraient
+comporter les commentaires fait, comme le style d'indentation, l'objet
+de vifs débats.
+
+Certains affirment qu'un bon programme se passe d'explications et que,
+par conséquent, les commentaires sont en grande partie inutiles. Or,
+comme le mentionne \citet{Oualline:C:1997}, un programme sans
+commentaires constitue une bombe en attente d'exploser. Un jour ou
+l'autre, quelqu'un devra modifier ledit programme et l'absence de
+commentaires rendra la tâche beaucoup plus ardue que nécessaire.
+
+À l'autre bout du spectre, on trouve les tenants du tout, tout
+commenter, jusqu'à l'évidence.
+\begin{Schunk}
+\begin{Verbatim}
+## calculer la somme de x
+z <- sum(x)
+\end{Verbatim}
+\end{Schunk}
+Cette pratique s'avère plus souvent qu'autrement contre productive:
+non seulement force-t-elle le programmeur à passer du temps à rédiger
+des commentaires sans véritable utilité, mais elle surcharge également
+le code, le rendant de ce fait plus difficile à lire.
+
+Comme bien des choses en ce monde, la meilleure solution se trouve
+dans le juste milieu: commentez ni trop, ni trop peu. Les quelques
+préceptes suivants, dont certains sont tirés de
+\citet{Kernighan:practice:1999}, devraient vous aider à trouver un
+juste équilibre.
+
+\begin{itemize}
+\item Documentez non pas ce que \emph{fait} le programme, mais
+  \emph{pourquoi} il le fait. Lire qu'un bloc de code effectue tel
+  calcul s'avère de peu de secours si l'on ne sait pas dans quel but
+  le calcul est effectué.
+\item N'enfoncez pas de portes ouvertes. Indiquer que l'expression
+  \code{i <- i + 1} incrémente le compteur \code{i} n'est pas utile.
+  Les commentaires doivent fournir de l'information qui ne saute pas
+  aux yeux ou qui se trouve éparpillée dans le code.
+\item Définissez ce que fait chaque fonction, la nature de ses
+  arguments et la valeur retournée. Si une fonction R fait partie d'un
+  paquetage, vous devrez nécessairement placer ces informations dans
+  l'obligatoire rubrique d'aide de la fonction. Autrement, placez ces
+  informations en commentaires avant la définition de la fonction.
+  Vous devriez pouvoir expliquer ce que fait une fonction en une
+  phrase.
+\item Éclairez les zones d'ombre, ne les rendez pas plus opaques. Des
+  commentaires confus, imprécis ou qui entrent carrément en
+  contradiction avec le code nuisent davantage qu'ils n'aident. Soyez
+  concis et gardez toujours à l'esprit de fournir au lecteur des
+  informations justes et pertinentes.
+\item Ne documentez pas du mauvais code, réécrivez-le. Si les
+  commentaires sont beaucoup plus longs que le code auxquels ils se
+  rapportent, c'est probablement qu'il est temps de réviser le code.
+\end{itemize}
+
+À moins qu'une rubrique d'aide en bonne et due forme n'accompagne une
+fonction, sa définition devrait toujours être précédée d'un bloc de
+commentaires contenant au minimum:
+\begin{enumerate}
+\item la \Index{signature}\emph{signature} de la fonction (son nom
+  suivi, entre parenthèses, de tous les arguments avec leur valeur par
+  défaut, le cas échéant);
+\item une courte description de ce que fait la fonction (en mode
+  infinitif, de manière à compléter la phrase «Cette fonction permet
+  de\dots»);
+\item la liste des arguments, de leur signification et des valeurs
+  admissibles;
+\item la valeur retournée par la fonction.
+\end{enumerate}
+Il s'agit de la structure générale des rubriques d'aide de R. La
+\autoref{fig:pratiques:doc} fournit un exemple de documentation pour
+une fonction simple.
+
+\tipbox{Le fichier \code{gabarit-documentation-fonction.R} livré avec
+  cet ouvrage contient un gabarit que vous pouvez utiliser
+  pour insérer rapidement dans vos fichiers de script la structure de
+  base de la documentation d'une fonction.}
+
+\begin{figure}
+\begin{Verbatim}[frame=single]
+###
+### square(x)
+###
+##  Éléver au carré.
+##
+##  Arguments
+##
+##  x: vecteur de nombres réels.
+##
+##  Valeur
+##
+##  Vecteur de nombres réels contenant les carrés
+##  des arguments.
+##
+square <- function(x) x * x
+\end{Verbatim}
+  \caption{Exemple de documentation pour une fonction simple}
+  \label{fig:pratiques:doc}
+\end{figure}
+
+Dans R, le symbole numéro \code{\#} --- ou carré --- marque le début
+d'un commentaire, et ce, peu importe où le symbole se trouve sur la
+ligne. Il est possible de combiner les \code{\#} pour développer une
+forme de hiérarchie dans les commentaires ou pour délimiter
+différentes sections d'un fichier de script. Pour les fichiers
+d'exemples du présent document, j'ai utilisé la
+\link{https://www.gnu.org/software/emacs/manual/html_node/elisp/Comment-Tips.html}{%
+  convention de l'éditeur \index{Emacs}GNU~Emacs}.
+\begin{itemize}
+\item Les commentaires qui débutent par trois carrés, «\code{\#\#\#}»,
+  sont toujours alignés sur la marge de gauche. Ils ne sont utilisés
+  qu'à l'extérieur des fonctions. Ils marquent soit des sections, soit
+  des entêtes de fonctions.
+\item Les commentaires qui débutent par deux carrés, «\code{\#\#}»,
+  sont alignés sur le niveau d'indentation courant. Lorsqu'ils
+  apparaissent à l'intérieur d'une fonction, ils décrivent le rôle du
+  bloc de code qui suit ou l'état de la fonction à ce stade. À
+  l'extérieur des fonctions, ils marquent des sous-sections du code
+  source.
+\item Les commentaires qui débutent par un seul carré, «\code{\#}»,
+  sont alignés sur une colonne à droite du code source. Ils servent à
+  clarifier, \emph{très succinctement}, ce qu'effectue une ligne de
+  code.
+\end{itemize}
+
+L'éditeur \index{RStudio}RStudio, de son côté, utilise par défaut les
+niveaux de titres du langage de balisage
+\link{https://daringfireball.net/projects/markdown/syntax}{Markdown},
+dont la hiérarchie est exactement l'inverse de celle de Emacs. Ainsi,
+les commentaires de premier niveau sont ceux qui débutent par un seul
+carré, \code{\#}; les commentaires de deuxième niveau débutent par
+deux carrés, \code{\#\#}, etc.
+
+\gotorbox{Le fichier de script \code{\scriptfilename} reproduit
+  ci-dessous contient un long exemple d'amélioration du style et de la
+  présentation du code d'une fonction, ainsi qu'un exemple de
+  documentation.}
+
+<<script, results=hide>>=
+## Afin d'illustrer l'utilité de bien présenter et de
+## commenter son code, nous allons prendre une fonction dans
+## un état assez pitoyable et l'améliorer graduellement.
+##
+## Bien qu'il existe une fonction 'sqrt' dans R pour calculer
+## la racine carrée d'un nombre, nous allons programmer notre
+## propre version. Elle est basée sur la méthode des
+## approximations successives de Newton dont l'algorithme est
+## le suivant:
+##
+## ALGORITHME Calculer la racine carrée d'un nombre x,
+## c'est-à-dire la valeur y tel que y >= 0 et y^2 = x.
+##
+## 1. Poser y égal à une valeur de départ quelconque.
+## 2. Si |y^2 - x| < e, retourner la valeur y.
+## 3. Poser y <- (y + x/y)/2 et retourner à l'étape 2.
+##
+## La valeur 'e' dans l'algorithme représente la précision de
+## l'approximation. Dans notre mise en oeuvre ci-dessous, nous
+## utiliserons e = 0.001. Quant à la valeur de départ de
+## l'étape 1, nous utiliserons y = 1.
+##
+## Notre mise en oeuvre de l'algorithme est itérative. Elle
+## repose sur l'idée de répéter l'étape 3 «tant que» la
+## condition de l'étape 2 n'est pas remplie. Ceci se traduit
+## en langage informatique en boucle 'while'. Nous n'avons pas
+## encore formellement étudié cette structure de contrôle,
+## mais vous devriez néanmoins pouvoir suivre l'exemple
+## aisément.
+##
+## Dernière chose: notre fonction 'sqrt' fait appel à une
+## seconde fonction interne pour effectuer le calcul de
+## l'étape 3 de l'algorithme.
+
+### PRÉSENTATION DU CODE
+
+## La première version du code ne respecte pas les règles de
+## base d'indentation et d'«aération» du code. Résultat: un
+## fouillis difficile à consulter.
+##-!- sqrt<-function(x)
+##-!- {if(x<0)
+##-!- stop("x doit être un nombre positif")
+##-!-  improve<-function(guess,x)
+##-!-  mean(c(guess,x/guess))
+##-!- y<-1
+##-!- while(!abs(y^2-x)>=0.001)y<-improve(y, x)
+##-!-                    return(y)
+
+## Réviser seulement l'indentation permet déjà d'y voir plus
+## clair. Tous les bons éditeurs de texte pour programmeurs
+## sont capables d'indenter le code pour vous, que ce soit à
+## la volée ou de manière asynchrone.
+##
+## Vous pouvez arriver au résultat ci-dessous avec RStudio en
+## sélectionnant le code ci-dessus et en exécutant l'option du
+## menu Code|Reindent Lines.
+##
+## Dans Emacs, l'indentation se fait automatiquement au fur et
+## à mesure que l'on entre du code ou, autrement, en appuyant
+## sur la touche de tabulation.
+##-!- sqrt<-function(x)
+##-!- {if(x<0)
+##-!-      stop("x doit être un nombre positif")
+##-!-      improve<-function(guess,x)
+##-!-          mean(c(guess,x/guess))
+##-!-      y<-1
+##-!-      while(!abs(y^2-x)>=0.001)y<-improve(y, x)
+##-!-      return(y)
+
+## La simple indentation du code nous permet déjà de découvrir
+## un bogue dans le code: il manque une accolade fermante } à
+## la fin de la fonction.
+##
+## Corrigeons déjà le code.
+sqrt<-function(x)
+{if(x<0)
+     stop("x doit être un nombre positif")
+     improve<-function(guess,x)
+         mean(c(guess,x/guess))
+     y<-1
+     while(!abs(y^2-x)>=0.001)y<-improve(y, x)
+     return(y)
+}
+
+## Les normes usuelles de présentation du code informatique
+## exigent également de placer les accolades ouvrantes et
+## fermantes seules sur leur ligne et d'aérer le code avec des
+## espaces autour des opérateurs et des structures de
+## contrôle, après les virgules, etc. Comme pour du texte
+## normal, les espaces rendent le code plus facile à lire.
+##
+## Dans RStudio, vous pouvez parvenir à la présentation
+## ci-dessous avec la commande du menu Code|Reformat Code.
+sqrt <- function(x)
+{
+    if (x < 0)
+        stop("x doit être un nombre positif")
+    improve <- function(guess, x)
+        mean(c(guess, x/guess))
+    y <- 1
+    while (!abs(y^2 - x) < 0.001)
+        y <- improve(y, x)
+    return(y)
+}
+
+## Je recommande d'ajouter des lignes blanches additionnelles
+## dans le code afin de bien séparer les blocs logiques. Dans
+## le cas présent, ces blocs sont:
+##
+## 1. le test de validité de l'argument;
+## 2. la définition de la fonction interne 'improve';
+## 3. l'affectation de la valeur de départ;
+## 4. les approximations successives;
+## 5. la valeur finale.
+sqrt <- function(x)
+{
+    if (x < 0)
+        stop("x doit être un nombre positif")
+
+    improve <- function(guess, x)
+        mean(c(guess, x/guess))
+
+    y <- 1
+
+    while (!abs(y^2 - x) < 0.001)
+        y <- improve(y, x)
+
+    return(y)
+}
+
+### STYLE
+
+## Il y a quelque chose à redire sur le style de cette
+## fonction? Pourtant, les noms d'objets sont raisonnables, le
+## coeur de la fonction n'est pas inutilement placé dans une
+## clause 'else' après le test de validité de l'argument 'x',
+## le calcul de la nouvelle approximation est placé sous une
+## couche d'abstraction dans une dans une fonction interne...
+##
+## Il reste tout de même deux choses à améliorer.
+##
+## Tout d'abord, l'expression logique dans la clause 'while'
+## qui utilise une formulation «n'est pas plus petite que
+## 0.001» est inutilement compliquée. De plus, elle repose sur
+## la priorité des opérations: la négation logique a-t-elle
+## bel et bien une priorité plus faible que l'inégalité? Il
+## suffit de réécrire l'expression sous la forme «est plus
+## grand ou égal à 0.001» et tout sera plus clair.
+##
+## Ensuite, il y a ce 'return' à la dernière ligne de la
+## fonction. Ça, c'est un gros non en R.
+##
+## Améliorons le style.
+sqrt <- function(x)
+{
+    if (x < 0)
+        stop("x doit être un nombre positif")
+
+    improve <- function(guess, x)
+        mean(c(guess, x/guess))
+
+    y <- 1
+
+    while (abs(y^2 - x) >= 0.001)
+        y <- improve(y, x)
+
+    y
+}
+
+### COMMENTAIRES
+
+## Dernier élément manquant dans notre code: les commentaires.
+##
+## Vous trouverez ci-dessous un modèle de documentation du
+## code inspiré de la struture des rubriques d'aide de R.
+
+###
+### sqrt(x)
+###
+##  Calculer la racine carrée d'un nombre.
+##
+##  Argument
+##
+##  x: nombre réel positif.
+##
+##  Valeur
+##
+##  Nombre y tel que y^2 = x.
+##
+sqrt <- function(x)
+{
+    ## Vérification de la validité de 'x'.
+    if (x < 0)
+        stop("x doit être un nombre positif")
+
+    ## Fonction pour calculer la prochaine approximation selon
+    ## la méthode de Newton. Si 'y' est l'approximation
+    ## actuelle de la racine carrée de 'x', alors la nouvelle
+    ## approximation est '(y + x/y)/2'.
+    improve <- function(guess, x)
+        mean(c(guess, x/guess))
+
+    ## Valeur de départ de la procédure itérative.
+    y <- 1
+
+    ## Approximations successives.
+    while (abs(y^2 - x) >= 0.001)
+        y <- improve(y, x)
+
+    ## Retourner la valeur tel que y^2 - x < 0.001.
+    y
+}
+@
+
+
+\section{Exemples}
+\label{sec:pratiques:exemples}
+
+\scriptfile{\scriptfilename}
+\lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
+
+
+\section{Exercices}
+\label{sec:pratiques:exercices}
+
+\Opensolutionfile{solutions}[solutions-pratiques]
+
+\begin{Filesave}{solutions}
+\section*{Chapitre \ref*{chap:pratiques}}
+\addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:pratiques}}
+
+\end{Filesave}
+
+\begin{exercice}[nosol]
+  \label{ex:pratiques:rstudio-tab-width}
+  Configurer votre éditeur de texte pour indenter le code R de quatre
+  (4) caractères. Dans RStudio, ouvrir le panneau des options
+  globales, sélectionner la catégorie \code{Code} et inscrire la
+  valeur \code{4} dans le champs \code{Tab width} (voir la
+  \autoref{fig:pratiques:rstudio-tab-width}).
+  \begin{figure}
+    \centering
+    \includegraphics{images/rstudio-tab-width}
+    \caption{Réglage de RStudio pour une indentation du code
+      de quatre caractères}
+    \label{fig:pratiques:rstudio-tab-width}
+  \end{figure}
+\end{exercice}
+
+\enlargethispage{5mm}
+\begin{exercice}
+  Présenter le code ci-dessous selon les normes d'espacement,
+  d'indentation et de positionnement des accolades mentionnées dans ce
+  chapitre. Pour ajuster automatiquement l'indentation avec RStudio,
+  sélectionner le bloc de code et choisir dans les menus
+  \code{Code|Reformat Code}.
+  \begin{Schunk}
+\begin{Verbatim}
+f <- function(x){
+  if(all(x>=0)|| all(x<=0))
+  { stop("all x are the same sign")
+  }
+  if (sum(diff(sign(x[x!=0]))!=0)>1)
+  warning("more than one sign change")
+ r<-polyroot(x)
+i<-1/Re(r)[abs(Im(r))< .Machine$double.eps^0.5]-1
+i[i > -1]
+}
+\end{Verbatim}
+  \end{Schunk}
+  \begin{sol}
+    La présentation correcte comporte des espaces autour de tous les
+    opérateurs, une indentation de quatre (4) caractères et des
+    accolades ouvrante et fermante placées sur leur propre ligne.
+    \begin{Schunk}
+\begin{Verbatim}[fontsize=\relsize{-1}]
+tri <- function(x)
+{
+    if (all(x >= 0) || all(x <= 0))
+    {
+        stop("all x are the same sign")
+    }
+    if (sum(diff(sign(x[x != 0])) != 0) > 1)
+        warning("more than one sign change")
+    r <- polyroot(x)
+    i <- 1/Re(r)[abs(Im(r)) < .Machine$double.eps^0.5] - 1
+    i[i > -1]
+}
+\end{Verbatim}
+    \end{Schunk}
+  \end{sol}
+\end{exercice}
+
+\Closesolutionfile{solutions}
+
+%%% Local Variables:
+%%% mode: noweb
+%%% TeX-engine: xetex
+%%% TeX-master: "programmer-avec-r"
+%%% coding: utf-8
+%%% End:
