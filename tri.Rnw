@@ -40,7 +40,9 @@ source("Stangle.R")        # lancement de Stangle
   langage R.
 \end{objectifs}
 
-\citet{Kernighan:practice:1999} font remarquer, fort à propos:
+Nous nous sommes penchés sur le concept d'algorithme et sur les
+principes de base de l'algorithmique au \autoref{chap:algorithmes}.
+Or, \citet{Kernighan:practice:1999} font remarquer, fort à propos:
 \begin{quote}
   Tous les programmes reposent sur des algorithmes et des structures
   de données, mais très peu de programmes exigent d'en concevoir de
@@ -55,20 +57,20 @@ n'est pas pour rien que Donald Knuth consacre un volume entier de son
 œuvre monumentale \emph{The Art of Computer Programming} à ce seul
 sujet \citep{Knuth:ACP:vol3:1997}.
 
-Nous reviendrons sur les algorithmes classiques de tri et de recherche
-au \autoref{chap:tri}.
+Ce chapitre est consacré à l'étude des algorithmes classiques de tri
+et de recherche. Ces opérations sont par nature répétitives.
+Le sujet se prête donc bien à la revue des boucles itératives.
 
 
 \section{Boucles itératives}
 \label{sec:fonctions:boucles}
 
-Comme nous l'avons déjà vu au \autoref{chap:algorithmes}, il existe
-deux grandes manières de répéter des calculs en programmation: par
-\index{iteration@itération}itération ou par
-\index{recursion@récursion}récursion. La récursion est très simple à
-mettre en œuvre dans un langage fonctionnel comme R puisqu'il suffit
-de faire en sorte qu'une fonction s'invoque elle-même, idéalement,
-dans R, avec la fonction \icode{Recall}
+Comme nous l'avons déjà vu, il existe deux grandes manières de répéter
+des calculs en programmation: par \index{iteration@itération}itération
+ou par \index{recursion@récursion}récursion. La récursion est très
+simple à mettre en œuvre dans un langage fonctionnel comme R puisqu'il
+suffit de faire en sorte qu'une fonction s'invoque elle-même,
+idéalement, dans R, avec la fonction \icode{Recall}
 (\autoref{sec:bases:recursion}).
 
 Une procédure itérative répète un bloc d'instructions, habituellement
@@ -79,6 +81,12 @@ présente section étudie les structures de contrôles itératives de R.
 Elles sont de trois types: la boucle à contrôle par dénombrement
 (boucle \code{for}), la boucle à précondition «tant que» (boucle
 \code{while}) et la boucle à condition d'arrêt (boucle \code{repeat}).
+
+\warningbox{Les boucles sont beaucoup moins utilisées dans R que dans
+  la plupart des autres langages de programmation. Avant d'utiliser
+  une boucle, demandez-vous si l'arithmétique vectorielle ou une
+  fonction d'application ne pourrait faire le travail de manière plus
+  claire et plus efficace.}
 
 \subsection{Boucle à dénombrement}
 \label{sec:tri:boucle:for}
@@ -233,6 +241,64 @@ déroulement normal d'une boucle.
   d'une structure conditionnelle.
 \end{ttscript}
 
+\subsection{Syndrome de la plaque à biscuits}
+\label{sec:tri:boucle:syndrome}
+
+Il arrive souvent que les fonctions itératives calculent un à un les
+éléments d'un vecteur. Une erreur fréquente consiste à utiliser une
+construction comme celle-ci pour effectuer les calculs.
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\+*]
+{
+    ...
+    x <- numeric(0)
+    for (i in seq_len(n))
+        x <- c(x, \meta+calcul*)
+    ...
+}
+\end{Verbatim}
+\end{Schunk}
+
+Le code ci-dessus est tout à fait valide. Pourquoi parler d'une
+erreur, alors? Parce qu'il souffre du gros défaut suivant: la taille
+du vecteur doit constamment augmenter pour stocker un résultat
+additionnel.
+
+Tentons une (autre) analogie alimentaire pour cette manière de
+procéder. Pour ranger des biscuits frais sortis du four, vous prenez
+un premier biscuit et vous le rangez dans un plat ne pouvant contenir
+qu'un seul biscuit. Au second biscuit, constatant que le contenant
+n'est pas assez grand, vous sortez un plat pouvant contenir deux
+biscuits, vous changez le premier biscuit de plat et vous y rangez
+aussi le second biscuit. Au troisième biscuit, le petit manège
+recommence, et ainsi de suite jusqu'à ce que le plateau de biscuits
+soit épuisé. C'est ce que je nomme, non sans un sourire en coin, le
+Syndrome de la plaque à
+biscuits{\texttrademark}\index{syndrome@Syndrome de la plaque à
+  biscuits}\index{biscuits|see{Syndrome de la plaque à biscuits}}.
+
+Le manège décrit ci-dessus se reproduit à l'identique dans la mémoire
+de l'ordinateur, l'odeur des biscuits chauds en moins. En effet,
+l'ordinateur doit constamment allouer de la nouvelle mémoire et
+déplacer les termes déjà sauvegardés au fur et à mesure qu'un vecteur
+grandit. Vous aurez compris qu'une telle façon de faire est à éviter
+absolument lorsque c'est possible --- et ça l'est la plupart du temps.
+
+Quand vous savez quelle sera la longueur finale d'un objet, il vaut
+mieux créer un contenant vide de la bonne longueur et le remplir par
+la suite avec une construction comme ci-dessous.
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\+*]
+{
+    ...
+    x <- numeric(n)
+    for (i in seq_len(n))
+        x[i] <- \meta+calcul*
+    ...
+}
+\end{Verbatim}
+\end{Schunk}
+
 \gotorbox{Les lignes \reflines{tri:boucles} du fichier de script
   \code{\scriptfilename} reproduit à la \autoref{sec:tri:exemples}
   proposent un exemple additionnel de fonction ayant recours à une
@@ -343,7 +409,60 @@ sqrt(3047)
 
 ## Suppression de la fonction pour éviter qu'elle n'entre en
 ## conflit avec celle de R.
-rm("sqrt")                              #-*- `\labelline{tri:boucles:fin}`
+rm("sqrt")
+
+## SYNDROME DE LA PLAQUE À BISCUITS
+
+## La fonction ci-dessous calcule les 'nterm' premiers termes
+## de la suite de Fibonacci. Elle souffre toutefois du
+## Syndrome de la plaque à biscuits. (Identifiez pourquoi.)
+fibonacci0 <- function(nterm)
+{
+    if (nterm < 1)
+        stop("'nterm' doit être supérieur ou égal à 1")
+    if (nterm == 1)
+        return(0)
+    x <- c(0, 1)
+    for (i in seq_len(nterm - 2))
+        x[i + 2] <- x[i + 1] + x[i]
+    x
+}
+
+## Validation de la fonction
+fibonacci0(1)
+fibonacci0(2)
+fibonacci0(5)
+
+## Une seconde version de la fonction prend garde de d'abord
+## créer un vecteur de la bonne longueur pour stocker tous les
+## résultats, puis de le remplir graduellemen. (Le premier
+## terme du vecteur est déjà 0 suite à l'initialisation avec
+## 'numeric'.)
+fibonacci <- function(nterm)
+{
+    if (nterm < 1)
+        stop("'nterm' doit être supérieur ou égal à 1")
+    if (nterm == 1)
+        return(0)
+    x <- numeric(nterm)
+    x[2] <- 1
+    for (i in seq_len(nterm - 2))
+        x[i + 2] <- x[i + 1] + x[i]
+    x
+}
+
+## Validation de la fonction
+fibonacci(1)
+fibonacci(2)
+fibonacci(5)
+
+## Avons-nous vraiment gagné en efficacité? En comparant le
+## temps requis pour calculer plusieurs valeurs de la suite de
+## Fibonacci pour chaque fonction, vous pourrez constater que
+## la seconde version est entre trois et quatre fois plus
+## rapide!
+system.time(fibonacci0(1e6))
+system.time(fibonacci(1e6))   #-*- `\labelline{tri:boucles:fin}`
 @
 
 
@@ -386,173 +505,6 @@ Quelques remarques pour vous aider dans votre lecture.
   bibliothèques. C'est en partie le cas de R, mais le système de base
   contient déjà un grand nombre de fonctionnalités.
 \end{itemize}
-
-
-
-
-
-\section{Syndrome de la plaque à biscuits}
-\label{sec:fonctions:syndrome}
-
-La suite de Fibonacci est une suite de nombres entiers très connue.
-Les deux premiers termes de la suite sont $0$ et $1$ et tous les
-autres sont la somme des deux termes précédents. Mathématiquement, les
-valeurs de la suite de Fibonacci sont données par la fonction
-\begin{align*}
-  f(0) &= 0 \\
-  f(1) &= 1 \\
-  f(n) & = f(n - 1) + f(n - 2), \quad n \geq 2.
-\end{align*}
-Le quotient de deux termes successifs converge vers
-$\phi = (1 + \sqrt{5})/2$, le nombre d'or.\footnote{%
-  On prête au nombre d'or toutes sortes de propriétés, certaines même
-  d'ordre mystique. Il est en tout cas au cœur d'un des romans les
-  plus vendus de tous les temps, \emph{Da~Vinci Code} (Dan Brown,
-  2003).} %
-
-Le calcul du $n${\ieme} terme de la suite de Fibonacci se prête tout
-naturellement à une mise en œuvre récursive, tel qu'expliqué dans
-\citet[chapitre~9]{Stephens:algorithms:2013}.
-
-Nous nous penchons ici sur un problème légèrement différent: calculer
-les $n$ premiers termes de la suite de Fibonacci. Il est plus simple
-de procéder par itération pour résoudre ce problème. La fonction
-\code{fibonacci0}, dont la définition se trouve à la
-\autoref{fig:application:fibonacci0}, propose une première solution.
-
-\begin{figure}
-\begin{Verbatim}[frame=single]
-fibonacci0 <- function(nterm)
-{
-    if (nterm < 1)
-        stop("'nterm' doit être supérieur ou égal à 1")
-    if (nterm == 1)
-        return(0)
-    x <- c(0, 1)
-    for (i in seq_len(nterm - 2))
-        x[i + 2] <- x[i + 1] + x[i]
-    x
-}
-\end{Verbatim}
-  \caption{Première version d'une fonction pour calculer les $n$
-    premiers termes de la suite de Fibonacci}
-  \label{fig:application:fibonacci0}
-\end{figure}
-
-Avant d'aller plus loin, quelques commentaires sur \code{fibonacci0}.
-\begin{itemize}
-\item La fonction n'étant valide que pour un argument \code{nterm}
-  supérieur ou égal à $1$, elle affiche un message d'erreur si ce
-  n'est pas le cas.
-\item La fonction intercepte le cas trivial \code{nterm == 1} dès le
-  départ.
-\item Lors de sa création, l'objet \code{x} contient déjà le résultat
-  du cas \code{nterm == 2}. La fonction devra donc éviter de faire
-  d'autres calculs pour ce cas.
-\item En créant la suite de la boucle \icode{for} avec
-  \code{seq\_len}, la boucle ne s'exécute pas lorsque \code{nterm ==
-    2} puisque le résultat \code{seq\_len(0)} est un vecteur vide.
-\item La seule expression de la boucle \code{for} ajoute
-  successivement un terme au vecteur \code{x}.
-\end{itemize}
-
-<<echo=FALSE>>=
-fibonacci0 <- function(nterm)
-{
-    if (nterm < 1)
-        stop("'nterm' doit être supérieur ou égal à 1")
-    if (nterm == 1)
-        return(0)
-    x <- c(0, 1)
-    for (i in seq_len(nterm - 2))
-        x[i + 2] <- x[i + 1] + x[i]
-    x
-}
-@
-<<echo=TRUE>>=
-fibonacci0(1)
-fibonacci0(2)
-fibonacci0(5)
-@
-
-Bien que valide --- comme les exemples d'utilisation de la fonction le
-démontrent --- la fonction \code{fibonacci0} souffre d'un gros défaut:
-la taille de l'objet \code{x} doit constamment augmenter pour stocker
-une nouvelle valeur de la suite de Fibonacci.
-
-Tentons une analogie alimentaire pour cette manière de procéder. Pour
-ranger des biscuits frais sortis du four, vous prenez un premier
-biscuit et vous le rangez dans un plat ne pouvant contenir qu'un seul
-biscuit. Arrivés au second biscuit, constatant que le contenant n'est
-pas assez grand, vous sortez un plat pouvant contenir deux biscuits,
-vous changez le premier biscuit de plat et vous y rangez aussi le
-second biscuit. Arrivés au troisième biscuit, le petit manège
-recommence, et ainsi de suite jusqu'à ce que le plateau de biscuits
-soit épuisé. C'est ce que je nomme, non sans un sourire en coin, le
-Syndrome de la plaque à
-biscuits{\texttrademark}\index{syndrome@Syndrome de la plaque à
-  biscuits}\index{biscuits|see{Syndrome de la plaque à biscuits}}.
-
-Le manège décrit ci-dessus se reproduit à l'identique dans la mémoire
-de l'ordinateur, l'odeur des biscuits chauds en moins. En effet,
-l'ordinateur doit constamment allouer de la nouvelle mémoire et
-déplacer les termes déjà sauvegardés au fur et à mesure que le vecteur
-\code{x} grandit. Vous aurez compris qu'une telle façon de faire est à
-éviter absolument lorsque c'est possible --- et ça l'est la plupart du
-temps.
-
-Quand nous savons quelle sera la longueur finale d'un objet, comme
-c'est le cas dans cet exemple, il vaut mieux créer un contenant vide
-de la bonne longueur et le remplir par la suite. La fonction
-\code{fibonacci} de la \autoref{fig:application:fibonacci} évite le
-Syndrome.
-
-\begin{figure}
-\begin{Verbatim}[frame=single]
-fibonacci <- function(nterm)
-{
-    if (nterm < 1)
-        stop("'nterm' doit être supérieur ou égal à 1")
-    if (nterm == 1)
-        return(0)
-    x <- numeric(nterm)  # création du contenant
-    x[2] <- 1            # x[1] vaut déjà 0
-    for (i in seq_len(nterm - 2))
-        x[i + 2] <- x[i + 1] + x[i]
-    x
-}
-\end{Verbatim}
-  \caption{Fonction pour calculer les $n$ premiers termes de la suite
-    de Fibonacci ne souffrant pas du Syndrome de la plaque à
-    biscuits{\texttrademark}}
-  \label{fig:application:fibonacci}
-\end{figure}
-
-<<echo=FALSE>>=
-fibonacci <- function(nterm)
-{
-    if (nterm < 1)
-        stop("'nterm' doit être supérieur ou égal à 1")
-    if (nterm == 1)
-        return(0)
-    x <- numeric(nterm)  # création du contenant
-    x[2] <- 1            # x[1] vaut déjà 0
-    for (i in seq_len(nterm - 2))
-        x[i + 2] <- x[i + 1] + x[i]
-    x
-}
-@
-<<echo=TRUE>>=
-fibonacci(1)
-fibonacci(2)
-fibonacci(5)
-@
-
-Avons-nous vraiment gagné en efficacité? Le code informatique de la
-\autoref{sec:application:exemples} permet de vérifier que la seconde
-fonction est de trois à cinq fois plus rapide que la première!
-
-
 
 
 \section{Fonctions internes utiles}
@@ -631,6 +583,13 @@ match(2, x)
 -1:2 %in% x
 @
 \end{ttscript}
+
+
+\section{Exemples}
+\label{sec:tri:exemples}
+
+\scriptfile{\scriptfilename}
+\lstinputlisting[firstline=\scriptfirstline]{\scriptfilename}
 
 
 \section{Exercices}
