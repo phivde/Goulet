@@ -96,7 +96,7 @@ renameTangled <- function(file)
 ##  Effectuer avec 'sed' les opérations de «nettoyage» suivantes sur
 ##  le fichier de script produit par Stangle:
 ##
-##  - activer les expressions déactivées par les marques de
+##  - activer les expressions désactivées par les marques de
 ##    commentaires spéciales '##-!-';
 ##  - supprimer une des deux lignes blanches entre chaque bloc de code.
 ##
