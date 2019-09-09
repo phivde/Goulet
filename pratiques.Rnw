@@ -478,7 +478,9 @@ commentaires contenant au minimum:
   de\dots»);
 \item la liste des arguments, de leur signification et des valeurs
   admissibles;
-\item la valeur retournée par la fonction.
+\item la valeur retournée par la fonction;
+\item un ou plusieurs exemples d'utilisation de la fonction, selon le
+  niveau de complexité de celle-ci.
 \end{enumerate}
 Il s'agit de la structure générale des rubriques d'aide de R. La
 \autoref{fig:pratiques:doc} fournit un exemple de documentation pour
@@ -504,6 +506,10 @@ une fonction simple.
 ##
 ##  Vecteur de nombres réels contenant les carrés
 ##  des arguments.
+##
+##  Exemples
+##
+##  square(2)
 ##
 square <- function(x) x * x
 \end{Verbatim}

@@ -13,3 +13,7 @@
 ##  <type (vecteur, liste, etc.) et valeur retournée par la
 ##   fonction>
 ##
+##  Exemples
+##
+##  <expression(s) démontrant l'utilisation de la fonction>
+##
