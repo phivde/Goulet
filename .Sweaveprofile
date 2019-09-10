@@ -40,12 +40,13 @@ getSourceName <- function()
 }
 
 ###
-### postStangle(file)
+### postStangle(file, ...)
 ###
-##  Effectuer le traitement nécessaire dans le fichier 'foo-script.R'
+##  Effectuer le traitement nécessaire dans le fichier 'foo-suffix.R'
 ##  après l'étape Stangle effectuée sur 'foo.Rnw':
 ##
-##  - supprimer "-script" dans le nom du fichier;
+##  - supprimer "-suffix" dans le nom du fichier et, possiblement,
+##    changer l'extension ".R" pour autre chose;
 ##  - activer les expressions invalides désactivées car elles auraient
 ##    causé problème dans Sweave.
 ##  - supprimer les lignes blanches insérées par Stangle;
@@ -53,24 +54,27 @@ getSourceName <- function()
 ##  Arguments
 ##
 ##  file: nom du fichier .Rnw
+##  ...: arguments additionnels passés à 'renameTangled'
 ##
 ##  Valeur
 ##
 ##  La valeur de 'system(..., intern = FALSE).
 ##
-postStangle <- function(file)
+postStangle <- function(file, ...)
 {
-    script <- renameTangled(file)
+    script <- renameTangled(file, ...)
     if (!is.character(script))
         stop("error renaming the script file")
     processLines(script)
+    cleanup(file)
 }
 
 ###
-### renameTangled(file)
+### renameTangled(file, suffix, new.ext = ".R")
 ###
-##  Supprimer le suffixe "-script" du nom du fichier produit par
-##  Stangle sur le fichier 'file'.
+##  Supprimer le suffixe "-suffix" du nom du fichier produit par
+##  Stangle sur le fichier 'file' et changer l'extension du fichier
+##  de ".R" à "new.ext".
 ##
 ##  Arguments
 ##
@@ -80,11 +84,11 @@ postStangle <- function(file)
 ##
 ##  Si l'opération réussit: le nom du nouveau fichier; sinon: FALSE
 ##
-renameTangled <- function(file)
+renameTangled <- function(file, suffix, new.ext = ".R")
 {
     filebase <- sub(".Rnw", "", file)
-    script <- paste0(filebase, ".R")
-    out <- file.rename(paste0(filebase, "-script.R"), script)
+    script <- paste0(filebase, new.ext)
+    out <- file.rename(paste0(filebase, "-", suffix, ".R"), script)
     if (out)
         out <- script
     out
@@ -115,4 +119,35 @@ processLines <- function(file)
                  "-e 'N;/^\\n$/D;P;D;'",
                  file)
     system(cmd)
+}
+
+###
+### cleanup(file)
+###
+##  Supprimer les fichiers de la forme foo-001.R, foo-002.R, etc.
+##  créés par Stangle sur le fichier foo.Rnw.
+##
+##  Arguments
+##
+##  file: nom du fichier .Rnw
+##
+##  Valeur
+##
+##  Comme 'system(..., intern = FALSE)': invisible(0) si tous les
+##  fichiers ont été supprimés; invisible(127) et un avertissement
+##  sinon.
+##
+cleanup <- function(file)
+{
+    filebase <- sub(".Rnw", "", file)
+    pat <- paste0(filebase, "-[0-9]{3}", ".R")
+    scripts <- list.files(pattern = pat)
+    ok <- file.remove(scripts)
+    if (all(ok))
+        invisible(0)
+    else
+    {
+        warning(paste(file(s), scripts[!ok], "not removed"))
+        invisible(127)
+    }
 }

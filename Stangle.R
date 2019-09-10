@@ -16,4 +16,4 @@ file <- getSourceName()
 Stangle(file, encoding = "utf-8", annotate = FALSE, split = TRUE)
 
 ## Traitement du fichier créé par Stangle
-postStangle(file)
+postStangle(file, "script")
