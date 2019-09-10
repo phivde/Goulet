@@ -34,6 +34,10 @@ TAGNAME = v${VERSION}
 
 all: files commit
 
+## Release links API
+## changement à apporter à l'expression pour file_id:
+## changer ${APIURL}/repository/tags/${TAGNAME}
+## pour    ${APIURL}/releases/${TAGNAME}/assets/links
 files:
 	$(eval url=$(subst /,\/,$(patsubst %/,%,${REPOSURL})))
 	$(eval file_id=$(shell curl --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
