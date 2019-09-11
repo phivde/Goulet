@@ -20,6 +20,10 @@
 
 - Suppression de deux objectifs du chapitre 3, un obsolète et un
   doublon.
+- L'ouvrage est maintenant publié sous forme de *release* dans GitLab.
+  Principal changement pour les utilisateurs: le lien vers l'archive
+  `programmer-avec-r.zip` dans les notes de versions se trouve
+  maintenant tout en haut, sous *Assets*.
 
 
 # 2019.09 (2019-09-03)
