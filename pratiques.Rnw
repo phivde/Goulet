@@ -405,7 +405,7 @@ dans son domaine et de demeurer constant au fil de son code.
   éditeur.}
 
 
-\section{Commentaires}
+\section{Commentaires et documentation}
 \label{sec:pratiques:commentaires}
 
 Les \index{commentaires}commentaires dans le code servent à guider le
@@ -450,10 +450,11 @@ juste équilibre.
   Les commentaires doivent fournir de l'information qui ne saute pas
   aux yeux ou qui se trouve éparpillée dans le code.
 \item Définissez ce que fait chaque fonction, la nature de ses
-  arguments et la valeur retournée. Si une fonction R fait partie d'un
-  paquetage, vous devrez nécessairement placer ces informations dans
-  l'obligatoire rubrique d'aide de la fonction. Autrement, placez ces
-  informations en commentaires avant la définition de la fonction.
+  arguments et la valeur retournée. Fournissez aussi des exemples
+  d'utilisation utiles et pertinents. Si une fonction R fait partie
+  d'un paquetage, vous devrez nécessairement placer ces informations
+  dans l'obligatoire rubrique d'aide de la fonction. Autrement, placez
+  ces informations en commentaires avant la définition de la fonction.
   Vous devriez pouvoir expliquer ce que fait une fonction en une
   phrase.
 \item Éclairez les zones d'ombre, ne les rendez pas plus opaques. Des
@@ -468,7 +469,7 @@ juste équilibre.
 
 À moins qu'une rubrique d'aide en bonne et due forme n'accompagne une
 fonction, sa définition devrait toujours être précédée d'un bloc de
-commentaires contenant au minimum:
+documentation contenant au minimum:
 \begin{enumerate}
 \item la \Index{signature}\emph{signature} de la fonction (son nom
   suivi, entre parenthèses, de tous les arguments avec leur valeur par
@@ -483,8 +484,8 @@ commentaires contenant au minimum:
   niveau de complexité de celle-ci.
 \end{enumerate}
 Il s'agit de la structure générale des rubriques d'aide de R. La
-\autoref{fig:pratiques:doc} fournit un exemple de documentation pour
-une fonction simple.
+\autoref{fig:pratiques:doc} fournit un exemple pour une fonction
+simple.
 
 \tipbox{Le fichier \code{gabarit-documentation-fonction.R} livré avec
   cet ouvrage contient un gabarit que vous pouvez utiliser
@@ -582,9 +583,8 @@ deux carrés, \code{\#\#}, etc.
 ## repose sur l'idée de répéter l'étape 3 «tant que» la
 ## condition de l'étape 2 n'est pas remplie. Ceci se traduit
 ## en langage informatique en boucle 'while'. Nous n'avons pas
-## encore formellement étudié cette structure de contrôle,
-## mais vous devriez néanmoins pouvoir suivre l'exemple
-## aisément.
+## encore étudié cette structure de contrôle, mais vous
+## devriez néanmoins pouvoir suivre l'exemple aisément.
 ##
 ## Dernière chose: notre fonction 'sqrt' fait appel à une
 ## seconde fonction interne pour effectuer le calcul de
@@ -596,8 +596,7 @@ deux carrés, \code{\#\#}, etc.
 ## base d'indentation et d'«aération» du code. Résultat: un
 ## fouillis difficile à consulter.
 ##-!- sqrt<-function(x)
-##-!- {if(x<0)
-##-!- stop("x doit être un nombre positif")
+##-!- {if(x<0)   stop("x doit être un nombre positif")
 ##-!-  improve<-function(guess,x)
 ##-!-  mean(c(guess,x/guess))
 ##-!- y<-1
@@ -617,8 +616,7 @@ deux carrés, \code{\#\#}, etc.
 ## à mesure que l'on entre du code ou, autrement, en appuyant
 ## sur la touche de tabulation.
 ##-!- sqrt<-function(x)
-##-!- {if(x<0)
-##-!-      stop("x doit être un nombre positif")
+##-!- {if(x<0)   stop("x doit être un nombre positif")
 ##-!-      improve<-function(guess,x)
 ##-!-          mean(c(guess,x/guess))
 ##-!-      y<-1
@@ -631,8 +629,7 @@ deux carrés, \code{\#\#}, etc.
 ##
 ## Corrigeons déjà le code.
 sqrt<-function(x)
-{if(x<0)
-     stop("x doit être un nombre positif")
+{if(x<0)   stop("x doit être un nombre positif")
      improve<-function(guess,x)
          mean(c(guess,x/guess))
      y<-1
@@ -725,12 +722,10 @@ sqrt <- function(x)
     y
 }
 
-### COMMENTAIRES
+### COMMENTAIRES ET DOCUMENTATION
 
-## Dernier élément manquant dans notre code: les commentaires.
-##
-## Vous trouverez ci-dessous un modèle de documentation du
-## code inspiré de la struture des rubriques d'aide de R.
+## Dernier élément manquant dans notre code: les commentaires
+## et la documentation.
 
 ###
 ### sqrt(x)
@@ -744,6 +739,10 @@ sqrt <- function(x)
 ##  Valeur
 ##
 ##  Nombre y tel que y^2 = x.
+##
+##  Exemples
+##
+##  sqrt(9)
 ##
 sqrt <- function(x)
 {

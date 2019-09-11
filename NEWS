@@ -8,11 +8,19 @@
 
 - Ajout d'une page «Comment (vraiment) bien utiliser ce document» dans
   les pages frontispices.
+- Changement du titre de la section 6.3 pour «Commentaires et
+  documentation».
+- À la section 6.3, ajout d'une cinquième composante dans la
+  documentation minimale recommandée pour une fonction: des exemples
+  d'utilisation de la fonction. La figure 6.2, le fichier de script du
+  chapitre et le fichier d'accompagnement
+  `gabarit-documentation-fonction.R` ont été modifiés en conséquence.
 
 ## Autres changements
 
 - Suppression de deux objectifs du chapitre 3, un obsolète et un
   doublon.
+
 
 # 2019.09 (2019-09-03)
 
