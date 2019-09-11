@@ -31,6 +31,8 @@
 ## Ce fichier fait partie du projet "Programmer avec R"
 ## https://gitlab.com/vigou3/programmer-avec-r
 
+## Bash requis pour 'process substitution'
+SHELL := /bin/bash
 
 ## Principaux fichiers
 MASTER = programmer-avec-r.pdf
@@ -170,13 +172,13 @@ check-status:
 .PHONY: upload
 upload:
 	@echo ----- Uploading archive to GitLab...
-	$(eval upload_url_markdown=$(shell curl --form "file=@${ARCHIVE}" \
+	$(eval upload_url=$(shell curl --form "file=@${ARCHIVE}" \
 	                                        --header "PRIVATE-TOKEN: ${OAUTHTOKEN}"	\
 	                                        --silent \
 	                                        ${APIURL}/uploads \
-	                                   | awk -F '"' '{ print $$12 }'))
-	@echo Markdown ready url to file:
-	@echo "${upload_url_markdown}"
+	                                   | awk -F '"' '{ print $$8 }'))
+	@echo url to file:
+	@echo "${upload_url}"
 	@echo ----- Done uploading files
 
 .PHONY: create-release
@@ -184,26 +186,26 @@ create-release:
 	@echo ----- Creating release on GitLab...
 	if [ -e relnotes.in ]; then ${RM} relnotes.in; fi
 	touch relnotes.in
-	$(eval FILESIZE = $(shell du -h ${ARCHIVE} | cut -f1 | sed 's/\([KMG]\)/ \1o/'))
 	awk 'BEGIN { ORS = " "; print "{\"tag_name\": \"${TAGNAME}\"," } \
 	      /^$$/ { next } \
 	      (state == 0) && /^# / { \
 		state = 1; \
 		out = $$2; \
 	        for(i = 3; i <= NF; i++) { out = out" "$$i }; \
-	        printf "\"description\": \"# Édition %s\\n", out; \
+	        printf "\"name\": \"Édition %s\", \"description\":\"", out; \
 	        next } \
 	      (state == 1) && /^# / { exit } \
 	      state == 1 { printf "%s\\n", $$0 } \
-	      END { print "\\n## Télécharger la distribution\\n${upload_url_markdown} (${FILESIZE})\"}" }' \
+	      END { print "\",\"assets\": { \"links\": [{ \"name\": \"${ARCHIVE}\", \"url\": \"${REPOSURL}${upload_url}\" }] }}" }' \
 	     ${NEWS} >> relnotes.in
 	curl --request POST \
 	     --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
 	     "${APIURL}/repository/tags?tag_name=${TAGNAME}&ref=master"
-	curl --data @relnotes.in \
+	curl --request POST \
+	     --data @relnotes.in \
 	     --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
 	     --header "Content-Type: application/json" \
-	     ${APIURL}/repository/tags/${TAGNAME}/release
+	     ${APIURL}/releases
 	${RM} relnotes.in
 	@echo ----- Done creating the release
 
