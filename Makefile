@@ -34,15 +34,11 @@ TAGNAME = v${VERSION}
 
 all: files commit
 
-## Release links API
-## changement à apporter à l'expression pour file_id:
-## changer ${APIURL}/repository/tags/${TAGNAME}
-## pour    ${APIURL}/releases/${TAGNAME}/assets/links
 files:
 	$(eval url=$(subst /,\/,$(patsubst %/,%,${REPOSURL})))
 	$(eval file_id=$(shell curl --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
 	                             --silent \
-	                             ${APIURL}/repository/tags/${TAGNAME} \
+	                             ${APIURL}/releases/${TAGNAME}/assets/links \
 	                        | grep -o "/uploads/[a-z0-9]*/" \
 	                        | cut -d/ -f3))
 	cd content && \
@@ -57,11 +53,7 @@ files:
 	       /${url}\/uploads/ { if (NF != 8) { \
 		                       print "invalid number of fields in the uploads url" > "/dev/stderr"; \
 				       exit 1; } \
-				   $$7 = "${file_id}" } \
-	       /${url}\/tags/ { if (NF != 8) { \
-		                    print "invalid number of fields in the tags url" > "/dev/stderr"; \
-				    exit 1; } \
-		                $$7 = "${TAGNAME}" } 1' \
+				   $$7 = "${file_id}" } 1' \
 	       site-header.html > tmpfile && \
 	  mv tmpfile site-header.html
 
