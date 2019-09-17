@@ -512,7 +512,7 @@ de la peinture sur la planche $i$, pour $i$ allant de $1$ à $n$.
 Transcrites en pseudocode, les instructions vont comme suit.
 \begin{Schunk}
 \begin{Verbatim}
-Peinturer(n)
+Peinturer(entier n)
   Pour i de 1 à n
     AppliquerPeintureSurPlanche(i)
   Fin Pour
@@ -542,7 +542,7 @@ une clôture de $n - 1$ planches, et ce, tant qu'il y a des planches à
 peinturer. Examinez bien le pseudocode correspondant ci-dessous.
 \begin{Schunk}
 \begin{Verbatim}
-Peinturer(n)
+Peinturer(entier n)
   Si (n = 0)
     Travail terminé
   AppliquerPeintureSurPlanche(1) ET Peinturer(n - 1)
