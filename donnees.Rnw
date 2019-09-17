@@ -245,7 +245,7 @@ Les objets valeur manquante (\code{NA}), infini (\code{Inf},
 \code{-Inf}), valeur indéterminée (\code{NaN}) et néant (\code{NULL})
 permettent de représenter de manière intuitive des quantités souvent
 utilisées dans les applications statistiques et en analyse de données.
-Vous devriez connaitre les caractéristiques spéciales de ces objets
+Vous devez connaitre les caractéristiques spéciales de ces objets
 afin d'en tirer pleinement profit.
 
 L'objet \code{NA} sert à représenter une donnée manquante. Chose
