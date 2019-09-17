@@ -260,9 +260,9 @@ isFALSE(NA)
 @
 Toute opération, y compris la comparaison, impliquant la valeur
 \code{NA} a comme résultat \code{NA}. Par conséquent, la valeur
-\code{NA} n'est égale à aucune autre, \emph{pas même elle-même}! Pour
-tester si une valeur est manquante, vous devez avoir recours à la
-fonction \Icode{is.na}.
+\code{NA} n'est égale à aucune autre, \emph{pas même à elle-même}! Pour
+tester si une valeur est manquante, vous devez nécessairement avoir
+recours à la fonction \Icode{is.na}.
 <<echo=TRUE>>=
 x <- NA
 x == NA
