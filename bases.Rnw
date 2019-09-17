@@ -1514,7 +1514,7 @@ else
 \end{Verbatim}
 \end{Schunk}
 
-Les constructions de type «Selon que» se concoivent en R avec la
+Les constructions de type «Selon que» se conçoivent en R avec la
 fonction \Icode{switch}. Sa syntaxe est la suivante:
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
