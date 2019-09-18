@@ -54,7 +54,7 @@ matière de style de programmation, de présentation du code et de
 documentation.
 
 \tipbox{Je me suis efforcé de respecter les bonnes pratiques
-  ci-dessous dans les ficheirs de script fournis avec l'ouvrage.
+  ci-dessous dans les fichiers de script fournis avec l'ouvrage.
   Prêtez donc attention à la manière dont le code qui vous est fourni
   est construit et présenté.}
 
