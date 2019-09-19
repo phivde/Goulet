@@ -719,8 +719,8 @@ programmation en R plutôt que sur ses applications statistiques.
 
 \begin{exercice}[nosol]
   Démarrer une session R et entrer une à une les expressions
-  ci-dessus à la ligne de commande. Observer les résultats.
-<<eval=FALSE>>=
+  ci-dessous à la ligne de commande. Observer les résultats.
+<<echo=TRUE, eval=FALSE>>=
 ls()
 pi
 (v <- c(1, 5, 8))
