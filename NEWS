@@ -2,6 +2,19 @@
 === Programmer avec R
 ===
 
+# (en développement)
+
+## Corrections
+
+- Exercice 2.1: les expressions à entrer à la ligne de commande
+  figurent maintenant dans la question.
+
+## Changements
+
+- Section 3.4: ajout du type de l'argument `n` (un entier) dans le
+  pseudocode de la procédure `Peinturer`.
+
+
 # 2019.09-1 (2019-09-11)
 
 ## Nouveautés
