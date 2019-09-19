@@ -719,7 +719,7 @@ programmation en R plutôt que sur ses applications statistiques.
 
 \begin{exercice}[nosol]
   Démarrer une session R et entrer une à une les expressions
-  ci-dessous à la ligne de commande. Observer les résultats.
+  ci-dessus à la ligne de commande. Observer les résultats.
 <<eval=FALSE>>=
 ls()
 pi
