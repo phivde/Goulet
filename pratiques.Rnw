@@ -690,7 +690,7 @@ sqrt <- function(x)
 ## coeur de la fonction n'est pas inutilement placé dans une
 ## clause 'else' après le test de validité de l'argument 'x',
 ## le calcul de la nouvelle approximation est placé sous une
-## couche d'abstraction dans une dans une fonction interne...
+## couche d'abstraction dans une fonction interne...
 ##
 ## Il reste tout de même deux choses à améliorer.
 ##
