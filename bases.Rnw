@@ -1168,7 +1168,7 @@ effet, la fonction ne retournerait alors rien et nous ne pourrions
 utiliser une construction de la forme \code{x <- f()} pour affecter le
 résultat de la fonction à un objet.
 
-Les fonctions suivantes permettent retourner un résultat, un
+Les fonctions suivantes permettent de retourner un résultat, un
 avertissement ou un message d'erreur avant même la fin d'une fonction.
 Vous les utiliserez à peu près exclusivement à l'intérieur
 d'expressions conditionnelles (\autoref{sec:bases:if-else}.
