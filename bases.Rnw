@@ -614,7 +614,7 @@ vaste éventail de calculs répétitifs.
 
 Si vous avez étudié l'algèbre linéaire, vous connaissez déjà le
 concept mathématique de \index{vecteur}vecteur: un $n$-uplet de
-valeurs, souvent des coordonnées un plan cartésien. Dans R, la
+valeurs, souvent des coordonnées d'un plan cartésien. Dans R, la
 définition du vecteur est encore plus large. En fait, \emph{tout} est
 un vecteur dans R et il s'agit simplement d'une collection de données
 contigües (numériques ou non) auxquelles il est possible d'accéder
