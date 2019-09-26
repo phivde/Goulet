@@ -1796,7 +1796,7 @@ log(9, base = 3)
 <<echo=TRUE>>=
 sqrt(9)
 @
-\item[\Icode{abs}] \index{valeur absolue}valeur absolue
+\item[\Icode{abs}] \index{valeur absolue}valeur absolue (ERREUR ICI ABS VECTEUR=(1,0,2))
 <<echo=TRUE>>=
 abs(c(-1, 0, 2))
 @
