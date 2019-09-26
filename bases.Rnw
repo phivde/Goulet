@@ -614,7 +614,7 @@ vaste éventail de calculs répétitifs.
 
 Si vous avez étudié l'algèbre linéaire, vous connaissez déjà le
 concept mathématique de \index{vecteur}vecteur: un $n$-uplet de
-valeurs, souvent des coordonnées un plan cartésien. Dans R, la
+valeurs, souvent des coordonnées d'un plan cartésien. Dans R, la
 définition du vecteur est encore plus large. En fait, \emph{tout} est
 un vecteur dans R et il s'agit simplement d'une collection de données
 contigües (numériques ou non) auxquelles il est possible d'accéder
@@ -1168,7 +1168,7 @@ effet, la fonction ne retournerait alors rien et nous ne pourrions
 utiliser une construction de la forme \code{x <- f()} pour affecter le
 résultat de la fonction à un objet.
 
-Les fonctions suivantes permettent retourner un résultat, un
+Les fonctions suivantes permettent de retourner un résultat, un
 avertissement ou un message d'erreur avant même la fin d'une fonction.
 Vous les utiliserez à peu près exclusivement à l'intérieur
 d'expressions conditionnelles (\autoref{sec:bases:if-else}.
