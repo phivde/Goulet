@@ -364,7 +364,7 @@ Reprenons l'expression composée ci-dessus. Nous pouvons représenter
 graphiquement la procédure d'évaluation à l'aide d'un arbre, comme à
 la \autoref{fig:bases:evaluation}. Chaque combinaison y est
 représentée par un nœud, alors que les branches qui partent d'un nœud
-correpondent à l'opérateur et aux opérandes de la combinaison. Les
+correspondent à l'opérateur et aux opérandes de la combinaison. Les
 nœuds terminaux --- desquels ne partent aucune branche ---
 représentent des nombres ou des opérateurs. En examinant l'arbre de la
 \autoref{fig:bases:evaluation}, vous pouvez aisément imaginer que les
