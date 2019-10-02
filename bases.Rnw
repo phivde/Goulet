@@ -1841,7 +1841,7 @@ seq_len(10)
 \item[\Icode{\protect seq\_along}] suite de nombres de la longueur du
   vecteur en argument à partir de $1$ (plus rapide que \code{seq})
 <<echo=TRUE>>=
-seq_along(10)
+seq_along(c(-1, 0, 2))
 @
 \item[\Icode{rep}] \index{repetition@répétition}répétition de
   vecteurs, de chaque élément d'un vecteur ou d'une combinaison des
