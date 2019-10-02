@@ -2,6 +2,16 @@
 === Programmer avec R
 ===
 
+# (en développement)
+
+## Changements
+
+- L'exemple de la fonction `seq_along` à la section 4.7.2 n'était pas
+  très bon: il utilisait un vecteur de longueur 1, ce qui ne
+  permettait pas de bien comprendre le fonctionnement de la fonction.
+  L'argument est remplacé par un vecteur de longueur 3.
+
+
 # 2019.09-2 (2019-09-19)
 
 ## Corrections
