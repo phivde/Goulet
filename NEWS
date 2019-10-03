@@ -4,12 +4,25 @@
 
 # (en développement)
 
+## Nouveautés
+
+- Exemples additionnels utilisant les opérateurs logiques dans la
+  section sur l'arithmétique vectorielle.
+- Dans les exemples du chapitre 4: ajout d'une explication du calcul
+  d'inégalités doubles à l'aide des opérateurs «et» et «ou» logique.
+
 ## Changements
 
+- Inversion des sections 4.3.2 Indiçage et 4.3.3 Arithmétique
+  vectorielle afin de permettre des exemples d'indiçage utilisant
+  l'arithmétique vectorielle.
 - L'exemple de la fonction `seq_along` à la section 4.7.2 n'était pas
   très bon: il utilisait un vecteur de longueur 1, ce qui ne
   permettait pas de bien comprendre le fonctionnement de la fonction.
   L'argument est remplacé par un vecteur de longueur 3.
+- Dans les exemples du chapitre 4: uniformisation de l'écriture de
+  «et» logique et «ou» logique avec des guillemets plutôt qu'en
+  majuscules.
 
 
 # 2019.09-2 (2019-09-19)
