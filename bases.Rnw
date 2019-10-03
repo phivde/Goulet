@@ -739,6 +739,7 @@ l'arithmétique vectorielle dans R.
 <<echo=TRUE>>=
 c(1, 2, 3) + c(4, 5, 6)
 1:3 * 4:6
+c(TRUE, TRUE, FALSE, FALSE) & c(TRUE, FALSE, TRUE, FALSE)
 @
 
 La seconde règle de base se rapporte aux opérations entre des vecteurs
@@ -796,9 +797,9 @@ c(0, 5, -1) & TRUE
 \label{sec:bases:vecteurs:indicage}
 
 L'indiçage\Index{indiçage!vecteur} des vecteurs est une procédure
-beaucoup utilisée dans le langage R, aussi est-il important d'en
-maitriser toutes les subtilités. L'opération sert principalement à
-deux choses: extraire des éléments d'un objet avec la construction
+beaucoup utilisée dans R, aussi est-il important d'en maitriser toutes
+les subtilités. L'opération sert principalement à deux choses:
+extraire des éléments d'un objet avec la construction
 \verb|x[i]|\indexcode{[}, ou remplacer des éléments avec la
 construction \verb|x[i] <- y|\Indexcode{[<-}.
 
@@ -1006,7 +1007,7 @@ x[0]                       # extraction de rien
 x[0] <- 1; x               # affectation de rien
 x[c(0, 1, 2)]              # indice 0 ignoré
 x[c(1, NA, 5)]             # indice NA retourne NA
-x[2.6]                     # fractions tronquées vers 0  `\labelline{bases:vecteurs:fin}`
+x[2.6]                     # fractions tronquées vers 0 `\labelline{bases:vecteurs:fin}`
 @
 
 
