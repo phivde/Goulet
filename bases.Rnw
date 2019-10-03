@@ -271,12 +271,12 @@ y                          # ... plutôt une affectation
 TRUE                       # vrai
 FALSE                      # faux
 !TRUE                      # négation logique
-TRUE & FALSE               # ET logique
-TRUE | FALSE               # OU logique
+TRUE & FALSE               # «et» logique
+TRUE | FALSE               # «ou» logique
 
 ## [Les expressions suivantes (qui anticipent sur la suite)
-## construisent les tables de vérité du Et logique et du OU
-## logique.]
+## construisent les tables de vérité du «et» logique et du
+## «ou» logique.]
 p <- c(TRUE, TRUE, FALSE, FALSE)
 q <- c(TRUE, FALSE, TRUE, FALSE)
 cbind("p" = p, "q" = q, "p ET q" = p & q)
@@ -924,6 +924,7 @@ x[1]                       # extraction par position
 "["(x, 1)                  # idem avec la fonction '['
 x[-2]                      # suppression par position
 x[x > 5]                   # extraction par critère
+x[x > 0 & x < 10]          # autre extraction par critère
 x["c"]                     # extraction par nom
 x[]                        # tous les éléments
 x[numeric(0)]              # différent d'indice vide
@@ -955,6 +956,19 @@ x[2.6]                     # fractions tronquées vers 0
 5 * c(2, 3, 8, 10)         # multiplication par une constante
 c(2, 6, 8) + c(1, 4, 9)    # addition de deux vecteurs
 c(0, 3, -1, 4)^2           # élévation à une puissance
+c(0, 3, -1, 4) > 0         # inégalité
+
+## Il n'est pas possible d'écrire des inégalités doubles du
+## type 0 < x < 10 en R (comme, par ailleurs, dans la plupart
+## des langages de programmation). L'inégalité précédente se
+## lit: «x > 0 ET x < 10». Pour calculer l'inégalité double,
+## il s'agit donc de calculer les deux inégalités et de les
+## relier par un «et» logique.
+x <- c(-2, 3, 0, -1, 12, 8) # vecteur
+0 < x                       # première inégalité
+x < 10                      # seconde inégalité
+0 < x & x < 10              # inégalité double
+x <= 0 | x >= 10            # négation de l'inégalité
 
 ## Dans les règles de l'algèbre vectorielle, les longueurs des
 ## vecteurs doivent toujours concorder.
@@ -970,6 +984,8 @@ c(0, 3, -1, 4)^2           # élévation à une puissance
 8 + 1:10                   # 8 est recyclé 10 fois
 c(2, 5) * 1:10             # c(2, 5) est recyclé 5 fois
 c(-2, 3, -1, 4)^(1:4)      # quatre puissances différentes
+c(-2, 3, -1, 4) <= 1:4     # quatre inégalités différentes
+c(TRUE, FALSE) | FALSE     # deux «ou» logiques
 
 ## Dans les opérations arithmétiques (ou, plus généralement,
 ## les opérations conçues pour travailler avec des nombres),
