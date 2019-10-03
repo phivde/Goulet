@@ -721,69 +721,6 @@ is.logical(c(42, NA, 3))
 is.character(c("42", NA, "3"))
 @
 
-\subsection{Indiçage}
-\label{sec:bases:vecteurs:indicage}
-
-L'indiçage\Index{indiçage!vecteur} des vecteurs est une procédure
-beaucoup utilisée dans le langage R, aussi est-il important d'en
-maitriser toutes les subtilités. L'opération sert principalement à
-deux choses: extraire des éléments d'un objet avec la construction
-\verb|x[i]|\indexcode{[}, ou remplacer des éléments avec la
-construction \verb|x[i] <- y|\Indexcode{[<-}.
-
-Dans un cas comme dans l'autre, il faut d'abord indicer le vecteur. Il
-existe cinq façons de le faire, toujours à l'intérieur de crochets
-\code{[~]}.
-\begin{enumerate}
-\item \textbf{Extraction par position} avec un vecteur d'entiers
-  positifs. Les éléments se trouvant aux positions correspondant aux
-  entiers sont extraits du vecteur, dans l'ordre. C'est la technique
-  la plus courante.
-<<echo=TRUE>>=
-x <- c(A = 2, B = 4, C = -1, D = -5, E = 8)
-x[2]
-x[c(1, 3)]
-@
-\item \textbf{Suppression par position} avec un vecteur d'entiers
-  négatifs. Les éléments se trouvant aux positions correspondant aux
-  entiers négatifs sont \emph{éliminés} du vecteur.
-<<echo=TRUE>>=
-x[c(-2, -3)]
-@
-\item \textbf{Extraction par critère} avec un vecteur booléen. Le
-  vecteur d'indiçage doit alors être de la même longueur que le
-  vecteur indicé. Les éléments correspondant à une valeur \code{TRUE}
-  sont extraits du vecteur, alors que ceux correspondant à
-  \code{FALSE} sont éliminés.
-<<echo=TRUE>>=
-x > 0
-x[x > 0]
-@
-\item \textbf{Extraction par nom} avec un vecteur de chaines de
-  caractères. Les éléments dont l'étiquette correspond à l'une des
-  chaines sont extraits du vecteur. Cette méthode d'indiçage a
-  comme principal avantage de permettre l'extraction d'éléments d'un
-  vecteur indépendamment de leur position dans celui-ci.
-<<echo=TRUE>>=
-x[c("B", "D")]
-@
-\item \textbf{Sélection de tous les éléments} en laissant l'indice
-  vide.
-<<echo=TRUE>>=
-x[]
-@
-  Cette méthode est essentiellement utilisée avec les matrices et
-  tableaux pour sélectionner tous les éléments d'une dimension; nous y
-  reviendrons au \autoref{chap:donnees}. Laisser l'indice vide est
-  différent d'indicer avec un vecteur vide. Cette dernière opération
-  retourne un vecteur vide.
-\end{enumerate}
-
-\tipbox{Il n'est pas inutile de savoir que les opérations d'extraction
-  et de remplacement sont en fait traduites par l'interpréteur R en
-  des appels à des fonctions nommées \icode{[} et \icode{[<-},
-  dans l'ordre.}
-
 \subsection{Arithmétique vectorielle}
 \label{sec:bases:vecteurs:arithmetique}
 
@@ -855,16 +792,82 @@ l'inverse, dans les opérations logiques, $0$ est converti en
 c(0, 5, -1) & TRUE
 @
 
+\subsection{Indiçage}
+\label{sec:bases:vecteurs:indicage}
+
+L'indiçage\Index{indiçage!vecteur} des vecteurs est une procédure
+beaucoup utilisée dans le langage R, aussi est-il important d'en
+maitriser toutes les subtilités. L'opération sert principalement à
+deux choses: extraire des éléments d'un objet avec la construction
+\verb|x[i]|\indexcode{[}, ou remplacer des éléments avec la
+construction \verb|x[i] <- y|\Indexcode{[<-}.
+
+Dans un cas comme dans l'autre, il faut d'abord indicer le vecteur. Il
+existe cinq façons de le faire, toujours à l'intérieur de crochets
+\code{[~]}.
+\begin{enumerate}
+\item \textbf{Extraction par position} avec un vecteur d'entiers
+  positifs. Les éléments se trouvant aux positions correspondant aux
+  entiers sont extraits du vecteur, dans l'ordre. C'est la technique
+  la plus courante.
+<<echo=TRUE>>=
+x <- c(A = 2, B = 4, C = -1, D = -5, E = 8)
+x[2]
+x[c(1, 3)]
+@
+\item \textbf{Suppression par position} avec un vecteur d'entiers
+  négatifs. Les éléments se trouvant aux positions correspondant aux
+  entiers négatifs sont \emph{éliminés} du vecteur.
+<<echo=TRUE>>=
+x[c(-2, -3)]
+@
+\item \textbf{Extraction par critère} avec un vecteur booléen. Le
+  vecteur d'indiçage doit alors être de la même longueur que le
+  vecteur indicé. Les éléments correspondant à une valeur \code{TRUE}
+  sont extraits du vecteur, alors que ceux correspondant à
+  \code{FALSE} sont éliminés.
+<<echo=TRUE>>=
+x > 0
+x[x > 0]
+@
+\item \textbf{Extraction par nom} avec un vecteur de chaines de
+  caractères. Les éléments dont l'étiquette correspond à l'une des
+  chaines sont extraits du vecteur. Cette méthode d'indiçage a
+  comme principal avantage de permettre l'extraction d'éléments d'un
+  vecteur indépendamment de leur position dans celui-ci.
+<<echo=TRUE>>=
+x[c("B", "D")]
+@
+\item \textbf{Sélection de tous les éléments} en laissant l'indice
+  vide.
+<<echo=TRUE>>=
+x[]
+@
+  Cette méthode est essentiellement utilisée avec les matrices et
+  tableaux pour sélectionner tous les éléments d'une dimension; nous y
+  reviendrons au \autoref{chap:donnees}. Laisser l'indice vide est
+  différent d'indicer avec un vecteur vide. Cette dernière opération
+  retourne un vecteur vide.
+\end{enumerate}
+
+\tipbox{Il n'est pas inutile de savoir que les opérations d'extraction
+  et de remplacement sont en fait traduites par l'interpréteur R en
+  des appels à des fonctions nommées \icode{[} et \icode{[<-},
+  dans l'ordre.}
+
 \gotorbox{La présente section est très importante pour la suite.
   Étudiez donc en y portant une attention toute particulière les
   lignes \reflines{bases:vecteurs} du fichier de script
   \code{\scriptfilename} reproduit à la
   \autoref{sec:bases:exemples}.}
 
+
 <<script, results=hide>>=
 ###
 ### VECTEURS               `\labelline{bases:vecteurs}`
 ###
+
+## CRÉATION DE VECTEURS
 
 ## La fonction de base pour créer des vecteurs est 'c'. Il
 ## peut s'avérer utile de nommer les éléments d'un vecteur.
@@ -903,43 +906,12 @@ c(5, "z")                  # conversion en mode 'character'
 c(TRUE, "z")               # conversion en mode 'character'
 c(5, TRUE, "z")            # conversion en mode 'character'
 
-## Les fonctions 'as.numeric', 'as.logical' et 'as.character' sont
-## utiles pour forcer la conversion d'un mode vers un autre.
+## Les fonctions 'as.numeric', 'as.logical' et 'as.character'
+## sont utiles pour forcer la conversion d'un mode vers un
+## autre.
 as.logical(1)              # conversion en booléen
 as.numeric(TRUE)           # conversion en numérique
 as.character(1)            # conversion en chaine de caractères
-
-### INDIÇAGE
-
-## L'indiçage est une opération importante et beaucoup
-## utilisée. Elle sert à extraire des éléments d'un vecteur
-## avec la construction 'x[i]', ou à les remplacer avec la
-## construction 'x[i] <- y'. Les fonctions sous-jacentes sont
-## '[' et '[<-'.
-##
-## Les expressions suivantes illustrent les cinq méthodes
-## d'indiçage.
-x                          # le vecteur
-x[1]                       # extraction par position
-"["(x, 1)                  # idem avec la fonction '['
-x[-2]                      # suppression par position
-x[x > 5]                   # extraction par critère
-x[x > 0 & x < 10]          # autre extraction par critère
-x["c"]                     # extraction par nom
-x[]                        # tous les éléments
-x[numeric(0)]              # différent d'indice vide
-
-## Laissons tomber les noms de l'objet.
-names(x) <- NULL           # suppression de l'attribut 'names'
-
-## Quelques cas spéciaux d'indiçage.
-length(x)                  # rappel de la longueur
-x[1:8]                     # vecteur allongé avec des NA
-x[0]                       # extraction de rien
-x[0] <- 1; x               # affectation de rien
-x[c(0, 1, 2)]              # indice 0 ignoré
-x[c(1, NA, 5)]             # indice NA retourne NA
-x[2.6]                     # fractions tronquées vers 0
 
 ## ARITHMÉTIQUE VECTORIELLE
 
@@ -963,7 +935,8 @@ c(0, 3, -1, 4) > 0         # inégalité
 ## des langages de programmation). L'inégalité précédente se
 ## lit: «x > 0 ET x < 10». Pour calculer l'inégalité double,
 ## il s'agit donc de calculer les deux inégalités et de les
-## relier par un «et» logique.
+## relier par un «et» logique qui fera le calcul élément par
+## élément.
 x <- c(-2, 3, 0, -1, 12, 8) # vecteur
 0 < x                       # première inégalité
 x < 10                      # seconde inégalité
@@ -1001,7 +974,39 @@ c(5, 3) + c(TRUE, FALSE)   # équivalent à c(5, 3) + c(1, 0)
 ## traité comme FALSE et tous les autres nombres comme TRUE.
 0:5 & 5:0
 0:5 | 5:0
-!0:5                       #-*- `\labelline{bases:vecteurs:fin}`
+!0:5
+
+## INDIÇAGE
+
+## L'indiçage est une opération importante et beaucoup
+## utilisée. Elle sert à extraire des éléments d'un vecteur
+## avec la construction 'x[i]', ou à les remplacer avec la
+## construction 'x[i] <- y'. Les fonctions sous-jacentes sont
+## '[' et '[<-'.
+##
+## Les expressions suivantes illustrent les cinq méthodes
+## d'indiçage.
+x                          # le vecteur
+x[1]                       # extraction par position
+"["(x, 1)                  # idem avec la fonction '['
+x[-2]                      # suppression par position
+x[x > 5]                   # extraction par critère
+x[0 < x & x < 10]          # autre extraction par critère
+x["c"]                     # extraction par nom
+x[]                        # tous les éléments
+x[numeric(0)]              # différent d'indice vide
+
+## Laissons tomber les noms de l'objet.
+names(x) <- NULL           # suppression de l'attribut 'names'
+
+## Quelques cas spéciaux d'indiçage.
+length(x)                  # rappel de la longueur
+x[1:8]                     # vecteur allongé avec des NA
+x[0]                       # extraction de rien
+x[0] <- 1; x               # affectation de rien
+x[c(0, 1, 2)]              # indice 0 ignoré
+x[c(1, NA, 5)]             # indice NA retourne NA
+x[2.6]                     # fractions tronquées vers 0  `\labelline{bases:vecteurs:fin}`
 @
 
 
