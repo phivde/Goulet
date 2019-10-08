@@ -23,6 +23,11 @@
 - Exemples du chapitre 4: uniformisation de l'écriture de «et» logique
   et «ou» logique avec des guillemets plutôt qu'en majuscules.
 
+# Corrections
+
+- Fichier `CONTRIBUTING.md`: suppression de la remarque obsolète sur
+  les sections tirées de Pro Git.
+
 
 # 2019.09-2 (2019-09-19)
 

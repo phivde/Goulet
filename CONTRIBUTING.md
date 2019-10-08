@@ -65,5 +65,3 @@ Les corrections mentionnées ci-dessous ont été refusées à répétition dans
 - S'agissant du caractère typographique, «espace» est un mot féminin. L'expression «suivi d'une espace» est donc correctement orthographiée.
 
 - Le document est rédigé au moins en partie selon les règles de la [nouvelle orthographe](https://www.orthographe-recommandee.info), en particulier pour ce qui a trait à l'[accent circonflexe](https://www.orthographe-recommandee.info/regles4.htm). Alors «connait», «reconnait», «apparait» sont toutes des graphies correctes.
-
-- Les sections 12.2 à 12.4 sont tirées du livre [Pro Git](https://git-scm.com/book/fr/v2). Proposez vos éventuelles corrections ou améliorations dans le [projet d'origine](https://github.com/progit/progit2-fr).
