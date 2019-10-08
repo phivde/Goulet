@@ -2369,7 +2369,7 @@ x[-c(6, 7, 12)]
 
 \begin{exercice}
   \label{ex:bases:moyennes}
-  Soit $\mat{x} = (x_1, \dots, x_n)$ et $\mat{y} = (y_1, \dots, y_n$)
+  Soit $\mat{x} = (x_1, \dots, x_n)$ et $\mat{y} = (y_1, \dots, y_n)$
   deux vecteurs de nombres réels. Composer des expressions R pour
   effectuer les calculs mathématiques ci-dessous. Vous pouvez utiliser
   les fonctions R suivantes: \icode{sum}, \icode{prod}, \icode{max},
