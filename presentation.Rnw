@@ -368,7 +368,7 @@ Un éditeur de texte pour programmeur saura en plus reconnaitre la
 syntaxe d'un langage de programmation et assister à sa mise en forme:
 indentation automatique du code, marquage des mots-clés, manipulation
 d'objets, etc. Enfin, un éditeur compatible avec R réduira, entre
-autres, l'opération de copier-coller à un simple raccourci clavier.
+autres, l'opération de copier-coller à un simple raccourci-clavier.
 
 Vous pouvez utiliser le logiciel de votre choix pour l'édition de code
 R. Certains éditeurs offrent simplement plus de fonctionnalités que

@@ -266,7 +266,7 @@ lecture. En particulier, utilisez des espaces dans les circonstances
 suivantes:
 \begin{itemize}
 \item de part et d'autre du symbole d'affectation \icode{<-}; ces
-  espaces sont ajoutées automatiquement avec les raccourcis clavier
+  espaces sont ajoutées automatiquement avec les raccourcis-clavier
   des éditeurs spécialisés GNU~Emacs\index{Emacs}
   (\autoref{sec:emacs+ess:commandes:script}) et \index{RStudio}RStudio
   (\autoref{sec:rstudio:commandes});
