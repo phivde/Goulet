@@ -675,11 +675,11 @@ cbind(m, n)
 @
 
 \videobox{\link{https://youtu.be/6P2cFe3DBfw}{Matrices et tableaux}}{%
-  Visionnez la vidéo sur les
+  Quand il s'agit de bien comprendre les opérations de création et
+  d'indiçage des matrices et des tableaux, une image vaut mille mots.
+  Visionnez donc la vidéo sur les
   \link{https://youtu.be/6P2cFe3DBfw}{matrices et tableaux} en
-  complément de la présentation ci-dessus. Grâce à des représentations
-  visuelles, elle facilite la compréhension des opérations de création
-  et d'indiçage des matrices et des tableaux.}
+  complément de la présentation ci-dessus.}
 
 \gotorbox{Étudiez les lignes \reflines{donnees:matrice}
   du fichier de script \code{\scriptfilename}
