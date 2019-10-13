@@ -803,8 +803,8 @@ x[19]                      # ... est le 19e élément du vecteur
 ## de haut, 4 de large et 5 de profond. Indicer ce prisme avec
 ## un seul indice équivaut à en extraire des «tranches», alors
 ## qu'utiliser deux indices équivaut à en tirer des «carottes»
-## (au sens géologique du terme). Il est laissé en exercice de
-## généraliser à plus de dimensions...
+## (au sens géologique du terme) ou des tubes. Il est laissé
+## en exercice de généraliser à plus de dimensions...
 x                          # les cinq matrices
 x[, , 1]                   # tranche transversale
 x[, 1, ]                   # tranche verticale
@@ -960,8 +960,10 @@ ou un tableau, selon le contenu de l'argument \code{MARGIN}. Par
 exemple, si \code{X} est un tableau à trois dimensions et que la
 longueur de \code{MARGIN} est $1$, on applique \code{FUN} sur les
 «tranches» de \code{X} (des matrices). Si la longueur de \code{MARGIN}
-est $2$, on applique plutôt \code{FUN} à des «carottes» tirées de
-\code{X} (des vecteurs).
+est $2$, on applique plutôt \code{FUN} à des «carottes»\footnote{%
+  Un terme que j'emprunte à la géologie, où une carotte est un
+  échantillon de roche cylindrique extrait d'un sol par forage.} %
+tirées de \code{X} (des vecteurs).
 
 Illustrons ces propos à partir du tableau
 $3 \times 4 \times 2$ suivant.
