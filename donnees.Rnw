@@ -1067,10 +1067,10 @@ sum(x[, , 1])         # équivalent pour la première somme
 apply(x, c(1, 2), sum) # sommes des 12 carottes horizontales
 sum(x[1, 1, ])         # équivalent pour la première somme
 
-apply(x, c(2, 3), sum) # sommes des 6 carottes verticales
+apply(x, c(2, 3), sum) # sommes des 8 carottes verticales
 sum(x[, 1, 1])         # équivalent pour la première somme
 
-apply(x, c(1, 3), sum) # sommes des 8 carottes transversales
+apply(x, c(1, 3), sum) # sommes des 6 carottes transversales
 sum(x[1, , 1])         # équivalent pour la première somme  `\labelline{donnees:apply:fin}`
 @
 
