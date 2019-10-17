@@ -612,9 +612,9 @@ des tableaux à trois et à quatre dimensions.
       \put(7.7,0.7){\vector(1,1){6.3}}
     \end{picture}
   \end{minipage}
-  \caption[Représentation schématique de tableaux à trois et à quatre
+  \caption[Représentations schématiques de tableaux à trois et à quatre
   dimensions]{%
-    Représentation schématique de tableaux à trois dimensions (gauche)
+    Représentations schématiques de tableaux à trois dimensions (gauche)
     et à quatre dimensions (droite). Les chiffres encerclés
     identifient l'ordre de remplissage.}
   \label{fig:donnees:tableaux}
@@ -721,9 +721,11 @@ et d'un tableau à trois dimensions.
       \put(2,2){\usebox{\ccarre}}
     \end{picture}
   \end{minipage}
-  \caption{Représentations schématiques d'opérations d'indiçage sur
-    une matrice: sélection d'une ligne, d'une colonne et d'un élément
-    unique}
+  \caption[Représentations schématiques d'opérations d'indiçage sur
+  une matrice]{%
+    Représentations schématiques d'opérations d'indiçage sur une
+    matrice. De gauche à droite: matrice complète; sélection d'une
+    ligne; sélection d'une colonne; sélection d'un élément unique.}
   \label{fig:donnees:indicage:matrice}
 \end{figure}
 
@@ -813,9 +815,12 @@ et d'un tableau à trois dimensions.
       \multiput(0.0,2.0)(1,0){5}{\usebox{\cube}}
     \end{picture}
   \end{minipage}
-  \caption{Représentations schématiques d'opérations d'indiçage sur
-    un tableau à trois dimensions: sélection d'une tranche
-    horizontale, d'une carotte transversale et d'un élément unique}
+  \caption[Représentations schématiques d'opérations d'indiçage sur un
+  tableau à trois dimensions]{%
+    Représentations schématiques d'opérations d'indiçage sur un
+    tableau à trois dimensions. De gauche à droite: tableau
+    complet; sélection d'une tranche horizontale; sélection d'une carotte
+    transversale; sélection d'un élément unique.}
   \label{fig:donnees:indicage:tableau}
 \end{figure}
 
