@@ -209,7 +209,7 @@ z <- sapply(x, mean)
 \end{Verbatim}
   \end{Schunk}
 
-  Encore ici, évitez de pousser la logique trop loin. Si la boucle
+  Encore ici, évitez de pousser la logique trop loin. Si une boucle
   est plus naturelle et plus simple à comprendre qu'une fonction
   d'application, optez pour la boucle. En particulier, une
   fonction d'application \icode{sapply} à l'intérieur d'une autre
