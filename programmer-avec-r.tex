@@ -88,9 +88,12 @@
   \definecolor{link}{rgb}{0,0.4,0.6}        % liens internes
   \definecolor{url}{rgb}{0.6,0,0}           % liens externes
   \definecolor{citation}{rgb}{0,0.5,0}      % citations
-  \definecolor{codebg}{named}{LightYellow1} % fond code R
-  \definecolor{prob}{named}{orange}         % encadrés «problème»
-  \definecolor{lineno}{named}{gray}         % numéros de lignes
+  \colorlet{codebg}{LightYellow1}           % fond code R
+  \colorlet{indexedface}{PaleGreen2}        % cellule indexée (2D et 3D)
+  \colorlet{indexedtop}{PaleGreen3}         % cellule indexée (3D, dessus)
+  \colorlet{indexedside}{PaleGreen4}        % cellule indexée (3D, côté)
+  \colorlet{prob}{orange}                   % encadrés «problème»
+  \colorlet{lineno}{gray}                   % numéros de lignes
   \colorlet{TFFrameColor}{black}            % encadrés (cadre)
   \colorlet{TFTitleColor}{white}            % encadrés (titre)
   \definecolor{rouge}{rgb}{0.90,0,0.1}      % rouge bandeau UL
@@ -448,6 +451,18 @@
   %%% Sous-figures
   \newsubfloat{figure}
 
+  %% Boites utilisées pour la construction d'images
+  \newsavebox{\planche}
+  \newsavebox{\planchep}
+  \newsavebox{\supports}
+  \newsavebox{\peintre}
+  \newsavebox{\carre}
+  \newsavebox{\ccarre}
+  \newsavebox{\matrice}
+  \newsavebox{\cube}
+  \newsavebox{\ccube}
+  \newsavebox{\tableau}
+
   %%% Style de la bibliographie
   \bibliographystyle{francais}
 
@@ -476,6 +491,8 @@
 %  \includeonly{algorithmes,bases,donnees,solutions}
 
 \begin{document}
+
+
 
 \frontmatter
 
