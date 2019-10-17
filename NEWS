@@ -10,8 +10,11 @@
   dans la section sur l'arithmétique vectorielle.
 - Exemples du chapitre 4: ajout d'une explication du calcul
   d'inégalités doubles à l'aide des opérateurs «et» et «ou» logique.
-- Section 5.3: ajout d'une note de bas de page pour définir
-  succinctement le terme «carotte» emprunté à la géologie.
+- Section 5.2: ajout de représentations schématiques des opérations
+  d'indiçage d'une matrice et d'un tableau à trois dimensions. Les
+  notions de «tranche» et de «carotte» sont également introduites dès
+  cette section plutôt qu'à la section suivante sur l'application.
+- Termes «tranche» et «carotte» ajoutés à l'index.
 
 ## Changements
 
@@ -24,6 +27,10 @@
   L'argument est remplacé par un vecteur de longueur 3.
 - Exemples du chapitre 4: uniformisation de l'écriture de «et» logique
   et «ou» logique avec des guillemets plutôt qu'en majuscules.
+- Section 5.3: ajout d'une précision sur le concept d'application
+  avant l'introduction de la fonction `apply`. Aussi: référence aux
+  concepts de tranche et de carotte introduits à la section 5.2 au
+  moment de parler d'application sur des tableaux à trois dimensions.
 
 # Corrections
 
@@ -34,6 +41,7 @@
   langue française. Devient «raccourcis-clavier» au pluriel.
 - Exercice 3.2: le mot `<conséquence>` au début de la solution de
   l'exercice a été remplacé par `<condition>` comme il se doit.
+- Plusieurs coquilles relevées par les étudiantes et les étudiants.
 
 
 # 2019.09-2 (2019-09-19)
