@@ -224,12 +224,12 @@ plusieurs chaines de caractères pour que sa longueur soit supérieure à
 $1$. Il faut utiliser la fonction \Icode{nchar} pour obtenir le
 nombre de caractères dans une chaine.
 <<echo=TRUE>>=
-v1 <- "actuariat"
+v1 <- "foobar"
 length(v1)
 nchar(v1)
 @
 <<echo=TRUE>>=
-v2 <- c("a", "c", "t", "u", "a", "r", "i", "a", "t")
+v2 <- c("f", "o", "o", "b", "a", "r")
 length(v2)
 nchar(v2)
 @
@@ -662,15 +662,17 @@ m[, -3]
 @
 
 Dans un tableau à trois dimensions, l'indiçage sur une seule dimension
-sélectionne des «tranches» du tableau, alors que l'indiçage sur deux
-dimensions simultanément sélectionne des «carottes»\footnote{%
+sélectionne des \Index{tranche}«tranches» du tableau, alors que
+l'indiçage sur deux dimensions simultanément sélectionne des
+\Index{carotte}«carottes»\footnote{%
   Un terme que j'emprunte à la géologie, où une carotte est un
   échantillon de roche cylindrique extrait d'un sol par forage.} %
-ou des tubes. Ces idées se généralisent aisément à des tableaux à plus
-de trois dimensions. Les figures~\ref{fig:donnees:indicage:matrice} et
+ou des \index{tube|see{carotte}}tubes. Ces idées se généralisent
+aisément à des tableaux à plus de trois dimensions. Les
+figures~\ref{fig:donnees:indicage:matrice} et
 \ref{fig:donnees:indicage:tableau} proposent respectivement des
-représentations schématiques des opérations d'indiçage d'une matrice et
-d'un tableau à trois dimensions.
+représentations schématiques des opérations d'indiçage d'une matrice
+et d'un tableau à trois dimensions.
 
 \begin{figure}
   \setlength{\unitlength}{5mm}
@@ -1044,10 +1046,13 @@ somme des éléments (d'une ligne ou d'une colonne) par la moyenne. Elle
 se dit alors que tout ce qu'elle souhaite, c'est pouvoir facilement
 \emph{appliquer} une fonction quelconque sur l'une ou l'autre des deux
 dimensions d'une matrice. Si vous avez bien suivi l'analyste dans son
-raisonnement, vous avez compris le concept d'application!
+raisonnement, vous avez compris le concept d'application, soit:
+utiliser à répétition une même fonction sur les sous-ensembles d'une
+structure de données.
 
-La fonction d'application pour les matrices et les tableaux est la
-bien nommée \icode{apply}.
+La fonction d'application pour les matrices et les tableaux est
+\icode{apply}. Utilisée sur une matrice, elle permet d'effectuer des
+calculs sur les lignes ou les colonnes de celle-ci.
 <<echo=TRUE>>=
 apply(x, 1, sum)
 apply(x, 2, sum)
@@ -1116,14 +1121,13 @@ apply(x, 2, sum, na.rm = TRUE)
 
 Lorsque l'on applique une fonction à un tableau à plus de deux
 dimensions, l'objet passé à la fonction peut s'avérer être une matrice
-ou un tableau, selon le contenu de l'argument \code{MARGIN}. Par
-exemple, si \code{X} est un tableau à trois dimensions et que la
+ou un tableau, selon le contenu de l'argument \code{MARGIN}. Tel que
+mentionné à la section précédente lorsque nous discutions d'indiçage
+des tableaux, si \code{X} est un tableau à trois dimensions et que la
 longueur de \code{MARGIN} est $1$, on applique \code{FUN} sur les
-«tranches» de \code{X} (des matrices). Si la longueur de \code{MARGIN}
-est $2$, on applique plutôt \code{FUN} à des «carottes»\footnote{%
-  Un terme que j'emprunte à la géologie, où une carotte est un
-  échantillon de roche cylindrique extrait d'un sol par forage.} %
-tirées de \code{X} (des vecteurs).
+\index{tranche}tranches de \code{X} (des matrices). Si la longueur de
+\code{MARGIN} est $2$, on applique plutôt \code{FUN} aux
+\index{carotte}carottes tirées de \code{X} (des vecteurs).
 
 Illustrons ces propos à partir du tableau
 $3 \times 4 \times 2$ suivant.
@@ -1136,14 +1140,15 @@ x
 
 Les expressions ci-dessous calculent, dans l'ordre:
 \begin{enumerate}
-\item les sommes des trois tranches horizontales (de l'avant vers
-  l'arrière) dans le tableau;
-\item les sommes des quatre tranches verticales (du haut vers le bas);
-\item les sommes des deux tranches transversales (de la gauche vers la
-  droite);
-\item les sommes des douze carottes horizontales;
-\item les sommes des huit carottes verticales.
-\item les sommes des six carottes transversales;
+\item les sommes des trois \index{tranche}tranches horizontales (de
+  l'avant vers l'arrière) dans le tableau;
+\item les sommes des quatre \index{tranche}tranches verticales (du
+  haut vers le bas);
+\item les sommes des deux \index{tranche}tranches transversales (de la
+  gauche vers la droite);
+\item les sommes des douze \index{carotte}carottes horizontales;
+\item les sommes des huit \index{carotte}carottes verticales.
+\item les sommes des six \index{carotte}carottes transversales;
 \end{enumerate}
 <<echo=TRUE>>=
 apply(x, 1, sum)
