@@ -3,10 +3,23 @@
   \color{white}
   \polygon*(0,0)(0,1)(1,1)(1,0)
   \color{black}
-  \polyline(0,0)(0,1)(1,1)(1,0)(0,0)}
+  \moveto(0,0)
+  \lineto(0,1) \lineto(1,1) \lineto(1,0)
+  \closepath
+  \strokepath
+}
 \savebox{\ccarre}(1,1)[bl]{%
   \roundjoin
   \color{indexedface}
   \polygon*(0,0)(0,1)(1,1)(1,0)
   \color{black}
-  \polyline(0,0)(0,1)(1,1)(1,0)(0,0)}
+  \moveto(0,0)
+  \lineto(0,1) \lineto(1,1) \lineto(1,0)
+  \closepath
+  \strokepath
+}
+\savebox{\matrice}(5,3)[bl]{
+  \multiput(0.0,2.0)(1,0){5}{\usebox{\carre}}
+  \multiput(0.0,1.0)(1,0){5}{\usebox{\carre}}
+  \multiput(0.0,0.0)(1,0){5}{\usebox{\carre}}
+}

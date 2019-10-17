@@ -678,11 +678,6 @@ et d'un tableau à trois dimensions.
   \setlength{\unitlength}{5mm}
   \thicklines
   \input{include/carre}
-  \savebox{\matrice}(5,3)[bl]{
-    \multiput(0.0,2.0)(1,0){5}{\usebox{\carre}}
-    \multiput(0.0,1.0)(1,0){5}{\usebox{\carre}}
-    \multiput(0.0,0.0)(1,0){5}{\usebox{\carre}}}
-
   \begin{minipage}{0.22\linewidth}
     \centering
     \code{x} \\
@@ -733,22 +728,6 @@ et d'un tableau à trois dimensions.
   \setlength{\unitlength}{4mm}
   \thicklines
   \input{include/cube}
-  \savebox{\tableau}(7,4.2)[bl]{
-    \multiput(1.5,0.9)(1,0){5}{\usebox{\cube}}
-    \multiput(1.0,0.6)(1,0){5}{\usebox{\cube}}
-    \multiput(0.5,0.3)(1,0){5}{\usebox{\cube}}
-    \multiput(0.0,0.0)(1,0){5}{\usebox{\cube}}
-
-    \multiput(1.5,1.9)(1,0){5}{\usebox{\cube}}
-    \multiput(1.0,1.6)(1,0){5}{\usebox{\cube}}
-    \multiput(0.5,1.3)(1,0){5}{\usebox{\cube}}
-    \multiput(0.0,1.0)(1,0){5}{\usebox{\cube}}
-
-    \multiput(1.5,2.9)(1,0){5}{\usebox{\cube}}
-    \multiput(1.0,2.6)(1,0){5}{\usebox{\cube}}
-    \multiput(0.5,2.3)(1,0){5}{\usebox{\cube}}
-    \multiput(0.0,2.0)(1,0){5}{\usebox{\cube}}}
-
   \begin{minipage}{0.22\linewidth}
     \centering
     \code{x} \\
