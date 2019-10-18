@@ -120,7 +120,7 @@ R gagne rapidement en popularité là même où S-PLUS avait acquis ses
 lettres de noblesse, soit dans les milieux académiques. De simple
 dérivé «\emph{not unlike S}», R devient un concurrent sérieux à
 S-PLUS, puis le surpasse lorsque les efforts de développement se
-rangent massivement derrière le projet libre. D'ailleurs John Chambers
+rangent massivement derrière le projet libre. D'ailleurs, John Chambers
 place aujourd'hui ses efforts de réflexion et de développement dans le
 projet R \citep{Chambers:R:2008}.
 
