@@ -2739,7 +2739,7 @@ sapply(x, mean)
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
-lapply(x, function(x) sort(ppareto(x, 2, 5000)))
+lapply(m, function(m, shape, scale) sort(1 - (scale/(m + scale))^shape), shape = 2, scale = 5000 ) ## ppareto n'exsite pas!!
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
