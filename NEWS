@@ -2,6 +2,24 @@
 === Programmer avec R
 ===
 
+# (en développement)
+
+## Nouveautés
+
+
+
+## Changements
+
+
+
+## Corrections
+
+- Exercice 5.11: il manquait à la solution une définition de la
+  fonction `ppareto` pour calculer la fonction de répartition de la
+  loi de Pareto (dans la mesure où le paquetage actuar n'est pas
+  chargé).
+
+
 # 2019.10 (2019-10-17)
 
 ## Nouveautés
