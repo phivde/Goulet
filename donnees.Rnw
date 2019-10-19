@@ -2669,12 +2669,10 @@ unlist(lapply(10:1, seq, to = 1))
   issu d'une distribution de Pareto de paramètres
   $\alpha = \text{\texttt{shape}}$ et
   $\lambda = \text{\texttt{scale}}$:
-\begin{Schunk}
-\begin{Verbatim}
+<<echo=TRUE>>=
 rpareto <- function(n, shape, scale)
     scale * (runif(n)^(-1/shape) - 1)
-\end{Verbatim}
-\end{Schunk}
+@
   \begin{enumerate}
   \item Écrire une expression R utilisant la fonction \code{rpareto}
     ci-dessus qui permet de simuler cinq échantillons aléatoires de
@@ -2701,9 +2699,6 @@ paste("a", 1:5, sep = "")
   \begin{sol}
     \begin{enumerate}
 \item
-<<echo=FALSE>>=
-library(actuar)
-@
 <<echo=TRUE>>=
 x <- lapply(seq(100, 300, by = 50), rpareto,
             shape = 2, scale = 5000)
@@ -2713,10 +2708,16 @@ x <- lapply(seq(100, 300, by = 50), rpareto,
 names(x) <- paste("sample", 1:5, sep = "")
 @
 \item
-<<echo=TRUE>>=
+<<echo=TRUE,eval=FALSE>>=
 sapply(x, mean)
 @
-\item
+\item Définissons d'abord une fonction pour calculer la fonction de
+  répartition de la loi de Pareto.
+<<echo=TRUE>>=
+ppareto <- function(q, shape, scale)
+    1 - (scale/(q + scale))^shape
+@
+  Nous pouvons ensuite effectuer le calcul demandé.
 <<echo=TRUE,eval=FALSE>>=
 lapply(x, function(x) sort(ppareto(x, 2, 5000)))
 @
