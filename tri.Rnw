@@ -435,7 +435,7 @@ fibonacci0(5)
 
 ## Une seconde version de la fonction prend garde de d'abord
 ## créer un vecteur de la bonne longueur pour stocker tous les
-## résultats, puis de le remplir graduellemen. (Le premier
+## résultats, puis de le remplir graduellement. (Le premier
 ## terme du vecteur est déjà 0 suite à l'initialisation avec
 ## 'numeric'.)
 fibonacci <- function(nterm)
