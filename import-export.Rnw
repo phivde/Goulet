@@ -50,7 +50,7 @@ application.
 Ce qui rend souvent ardu l'échange de données entre différents
 systèmes et logiciels, c'est le nombre de facteurs qui influencent
 l'importation et l'exportation: le type de fichier (en format texte
-brut ou en format binaire), l'encodage des caractères (ASCII pur,
+brut ou en format binaire), le codage des caractères (ASCII pur,
 UTF-8 ou autre), la disposition des données dans le fichier (notamment
 les matrices et tableaux), le caractère utilisé pour séparer les
 champs (espace, virgule ou autre), le format du fichier (Excel, SAS ou
@@ -227,7 +227,7 @@ le séparateur des champs est une espace et \code{read.csv} si c'est
 une virgule. Les nombreux arguments de ces fonctions permettent de
 spécifier si les titres des lignes ou des colonnes apparaissent ou non
 dans le fichier, le mode de chaque colonne, le séparateur décimal,
-l'encodage, etc. La rubrique d'aide fournit les détails.
+le codage, etc. La rubrique d'aide fournit les détails.
 <<echo=TRUE>>=
 read.table("carburant.txt", header = TRUE)
 read.csv("carburant.csv", header = TRUE)
@@ -265,11 +265,11 @@ unlink("carburant.csv")
 
 \tipbox{Les données à importer comportent parfois des accents --- dans
   des noms, par exemple. Si les accents n'apparaissent pas
-  correctement dans R, c'est que le type d'encodage utilisé par R par
+  correctement dans R, c'est que le type de codage utilisé par R par
   défaut ne correspond pas à celui du fichier. Ce problème est
   particulièrement fréquent sous Windows. Pour y remédier, utilisez
   l'option \code{encoding} dans les appels des fonctions de la famille
-  \icode{read.table}. Par exemple, si le fichier de données est encodé
+  \icode{read.table}. Par exemple, si le fichier de données est codé
   en UTF-8, ajoutez l'option \code{encoding = "UTF-8"}.}
 
 
