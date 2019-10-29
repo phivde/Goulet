@@ -2739,7 +2739,7 @@ sapply(x, mean)
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
-lapply(x, function(x) sort(rpareto(x, 2, 5000)))
+lapply(x, function(x) sort(ppareto(x, 2, 5000)))
 @
 \item
 <<echo=TRUE,eval=FALSE>>=
