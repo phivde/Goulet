@@ -240,7 +240,7 @@ ci-dessus: la distribution étant strictement positive, elle ne peut
 générer la valeur $0$ que l'on retrouve en première position du
 vecteur.
 
-Une des premières choses à investiguer lorsqu'un bogue survient, c'est
+Une des premières choses à examiner lorsqu'un bogue survient, c'est
 s'il est \emph{reproductible}, tant avec les mêmes conditions d'entrée
 (les valeurs des arguments) que sous d'autres conditions. Voyons voir.
 <<echo=TRUE>>=
