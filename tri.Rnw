@@ -51,16 +51,114 @@ Or, \citet{Kernighan:practice:1999} font remarquer, fort à propos:
 Autrement dit, aussi complexe soit-il, un programme repose souvent sur
 quelques algorithmes fondamentaux bien connus et bien établis. À ce
 titre, les algorithmes de tri et de recherche jouent un rôle
-particulièrement important: on estime que 25~\% du temps de calcul des
-ordinateurs dans le monde est consacré au tri et à la recherche! Ce
-n'est pas pour rien que Donald Knuth consacre un volume entier de son
-œuvre monumentale \emph{The Art of Computer Programming} à ce seul
-sujet \citep{Knuth:ACP:vol3:1997}.
+particulièrement important. Donald Knuth consacre d'ailleurs un volume
+entier de son œuvre monumentale \emph{The Art of Computer Programming}
+à ce seul sujet \citep{Knuth:ACP:vol3:1997}.
+
+Dans l'introduction de son chapitre~5, Knuth rapporte que les grands
+fabricants d'ordinateurs estimaient dès les années 1960 que 25~\% du
+temps de calcul de leurs ordinateurs était consacré au tri! Dans
+certaines applications, cela dépassait même la part de 50~\% du temps
+de calcul. Selon Knuth, de telles statistiques signifient ou bien
+qu'il existe plusieurs applications importantes du tri; ou bien que
+plusieurs personnes trient sans que ne soit nécessaire; ou bien que
+les algorithmes employés sont inefficaces. Il y a sans doute une part
+de vérité dans chacune de ces hypothèses, mais le fait est que le tri
+s'avère, d'un point de vue pratique, un sujet d'étude important.
 
 Ce chapitre est consacré à l'étude des algorithmes classiques de tri
 et de recherche. Ces opérations sont par nature répétitives.
 Le sujet se prête donc bien à la revue des boucles itératives.
 
+
+\section{Expérience de tri}
+\label{sec:tri:experience}
+
+Avant de vous lancer dans l'étude des algorithmes de tri, prenez le
+temps de réaliser la petite expérience suivante:
+\begin{quote}
+  Choisir au hasard cinq cartes à jouer d'une même
+  enseigne.\footnote{%
+    Les quatre enseignes d'un jeu de carte de standard sont piques,
+    cœurs, carreaux et trèfles.}%
+  \textsuperscript{,}%
+  \footnote{%
+    Si vous n'avez pas de jeu de carte à portée de la main, une simple
+    liste de nombres tirés aléatoirement de votre cerveau fertile et
+    inscrits sur une feuille de papier fera l'affaire.} %
+  Déterminer un algorithme ou une procédure pas-à-pas pour trier les
+  cartes en ordre croissant. Comparer votre méthode de tri avec celles
+  d'autres personnes de votre entourage\footnote{%
+    À défaut d'entourage apte à trier des cartes, déterminer une ou
+    deux autres procédures de tri de votre cru.}.
+\end{quote}
+
+Si vous en êtes à ce point sans avoir complété l'expérience, je vous
+encourage à rebrousser chemin. L'expérience en vaut le coup pour la
+suite.
+
+La procédure de tri que vous avez utilisée est fort probablement de
+l'un ou l'autre des types suivants
+\citep[section~5.2]{Knuth:ACP:vol3:1997}:
+\begin{enumerate}[i)]
+\item tri par insertion, où chaque carte de la main est évaluée tour à
+  tour et placée au bon endroit dans la liste des cartes déjà triées;
+\item tri par échange, où deux cartes qui se sont pas dans le bon
+  ordre sont échangées, le procédé étant répété tant et aussi
+  longtemps que les cartes ne sont pas entièrement triées;
+\item tri par sélection, où la plus petite carte est identifiée et
+  placée au début de la main, puis la seconde plus grande, et ainsi de
+  suite;
+\item tri par dénombrement, où l'on compte le nombre de cartes plus
+  petites qu'une carte donnée pour déterminer son rang dans la main
+  triée;
+\item tri par une méthode \emph{ad hoc} qui fonctionne pour une main
+  de cinq cartes, mais qui en saurait se généraliser à un problème de
+  plus grande taille;
+\item tri paresseux, qui consiste à ne pas faire l'expérience
+  recommandée.
+\end{enumerate}
+
+
+\section{Algorithmes classiques}
+\label{sec:tri:tri}
+
+Pour l'étude des algorithmes classiques, je m'en remets à l'excellent
+ouvrage \emph{Essential Algorithms} de
+\citet{Stephens:algorithms:2013}. Rédigé dans un style clair et
+direct, le manuscrit va juste assez loin pour nos besoins dans les
+différentes notions, sans pour autant sacrifier les détails
+importants. Bref, un juste équilibre entre «algorithmique pour les
+nuls» et un livre plus théorique.
+
+Je vous invite donc à étudier les chapitres suivants de \emph{Essential
+Algorithms}:
+\begin{itemize}
+\item chapitre 6, pages 131--138, 145 (à partir de la section
+  \emph{Quicksort})--148 et 156--160;
+\item chapitre 7, pages 163--168;
+\item chapitre 9, pages 185--193.
+\end{itemize}
+
+Quelques remarques pour vous aider dans votre lecture.
+\begin{itemize}
+\item Partout où vous lirez \emph{array}, pensez tout simplement à un
+  vecteur dans R.
+\item Tel que mentionné au chapitre~1 de
+  \citet{Stephens:algorithms:2013}, l'auteur a pris le parti d'indicer
+  les vecteurs comme dans plusieurs langages de programmation, soit de
+  $0$ à $n - 1$ pour un vecteur de longueur $n$. Vous devrez adapter
+  les algorithmes en conséquence pour la programmation en R où les
+  vecteurs sont plutôt indicés de $1$ à $n$.
+\item Le livre fait ici et là référence au concept de \emph{library}.
+  Une bibliothèque (le nom en français) est une collection de
+  fonctions ou de sous-programmes que l'on peut utiliser dans nos
+  programmes. Certains langages de programmation sont constitués d'un
+  noyau assez restreint auquel on ajoute plusieurs fonctionnalités
+  standards (le tri ou la recherche, par exemple) par le biais de
+  bibliothèques. C'est en partie le cas de R, mais le système de base
+  contient déjà un grand nombre de fonctionnalités.
+\end{itemize}
 
 \section{Boucles itératives}
 \label{sec:tri:boucles}
@@ -464,47 +562,6 @@ fibonacci(5)
 system.time(fibonacci0(1e6))
 system.time(fibonacci(1e6))   #-*- `\labelline{tri:boucles:fin}`
 @
-
-
-\section{Algorithmes classiques}
-\label{sec:tri:tri}
-
-Pour l'étude des algorithmes classiques, je m'en remets à l'excellent
-ouvrage \emph{Essential Algorithms} de
-\citet{Stephens:algorithms:2013}. Rédigé dans un style clair et
-direct, le manuscrit va juste assez loin pour nos besoins dans les
-différentes notions, sans pour autant sacrifier les détails
-importants. Bref, un juste équilibre entre «algorithmique pour les
-nuls» et un livre plus théorique.
-
-Je vous invite donc à étudier les chapitres suivants de \emph{Essential
-Algorithms}:
-\begin{itemize}
-\item chapitre 6, pages 131--138, 145 (à partir de la section
-  \emph{Quicksort})--148 et 156--160;
-\item chapitre 7, pages 163--168;
-\item chapitre 9, pages 185--193.
-\end{itemize}
-
-Quelques remarques pour vous aider dans votre lecture.
-\begin{itemize}
-\item Partout où vous lirez \emph{array}, pensez tout simplement à un
-  vecteur dans R.
-\item Tel que mentionné au chapitre~1 de
-  \citet{Stephens:algorithms:2013}, l'auteur a pris le parti d'indicer
-  les vecteurs comme dans plusieurs langages de programmation, soit de
-  $0$ à $n - 1$ pour un vecteur de longueur $n$. Vous devrez adapter
-  les algorithmes en conséquence pour la programmation en R où les
-  vecteurs sont plutôt indicés de $1$ à $n$.
-\item Le livre fait ici et là référence au concept de \emph{library}.
-  Une bibliothèque (le nom en français) est une collection de
-  fonctions ou de sous-programmes que l'on peut utiliser dans nos
-  programmes. Certains langages de programmation sont constitués d'un
-  noyau assez restreint auquel on ajoute plusieurs fonctionnalités
-  standards (le tri ou la recherche, par exemple) par le biais de
-  bibliothèques. C'est en partie le cas de R, mais le système de base
-  contient déjà un grand nombre de fonctionnalités.
-\end{itemize}
 
 
 \section{Fonctions internes utiles}
