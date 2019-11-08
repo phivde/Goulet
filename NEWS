@@ -12,6 +12,9 @@
 
 - Terme «encodage» changé pour «codage de caractères» tel que
   recommandé par l'Office québécois de la langue française.
+- Section 2.7: quelques détails additionnels sur la gestion du
+  répertoire de travail, notamment quant à l'utilisation de la
+  fonction `setwd`.
 
 ## Corrections
 

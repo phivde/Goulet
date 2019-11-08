@@ -635,22 +635,39 @@ l'\index{espace de travail}espace de travail %
 dans le fichier \code{.RData}. Le répertoire de travail est déterminé
 au lancement de R. La fonction \Icode{getwd} permet d'afficher le
 répertoire de travail courant de R.
-<<echo=TRUE, eval=FALSE>>=
-getwd()
-@
+\begin{Schunk}
+\begin{Sinput}
+> getwd()
+\end{Sinput}
+\begin{Soutput}
+[1] "/Users/vincent"
+\end{Soutput}
+\end{Schunk}
 
-Les interfaces graphiques de R démarrent avec un répertoire de travail
-par défaut. Il est possible de le changer avec la commande
-\Icode{setwd} ou à partir du menu \texttt{Fichier} (Windows) ou
-\texttt{Divers} (macOS). Consulter aussi les foires aux questions
-spécifiques aux interfaces graphiques \citep{Rw-FAQ,RMacOSX-FAQ} pour
-des détails additionnels sur la gestion des répertoires de travail.
+Il est possible de changer le répertoire de travail depuis la ligne de
+commande avec \Icode{setwd}:
+\begin{Schunk}
+\begin{Sinput}
+> setwd("~/Documents/programmer-avec-r")
+> getwd()
+\end{Sinput}
+\begin{Soutput}
+[1] "/Users/vincent/Documents/programmer-avec-r"
+\end{Soutput}
+\end{Schunk}
 
-Dans RStudio, on change le répertoire de travail via le menu
-\code{Session}.
+Les interfaces graphiques de R et les environnements de développement
+intégrés démarrent généralement avec un répertoire de travail par
+défaut. On change le répertoire de travail à partir du menu \texttt{Fichier} (Windows) ou
+\texttt{Divers} (macOS) des interfaces graphiques. Dans
+\index{RStudio}RStudio, c'est via le menu \code{Session|Set Working Directory}.
 
-Avec GNU~Emacs, la situation est un peu plus simple puisque l'on doit
-spécifier un répertoire de travail au lancement d'un processus R; ceci
+Les foires aux questions spécifiques aux interfaces graphiques
+\citep{Rw-FAQ,RMacOSX-FAQ} contiennent des détails additionnels sur la
+gestion du répertoire de travail.
+
+Avec GNU~Emacs, la situation est un peu plus simple puisqu'on
+spécifie le répertoire de travail dès le lancement d'un processus R; ceci
 est expliqué plus en détail à l'\autoref{chap:emacs+ess}.
 
 
