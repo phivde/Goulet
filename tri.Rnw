@@ -602,7 +602,7 @@ unique(c(2, 4, 2, 5, 9, 5, 0))
 
 \videobox{\link{https://youtu.be/uC-zkzwsCVY}{Fonction \code{order}}}{%
   Visionnez la \link{https://youtu.be/uC-zkzwsCVY}{vidéo sur
-    la fonction \icode{order}} qui explique plus en détails les
+    la fonction \icode{order}} qui explique plus en détail les
   différences entre les fonctions \icode{sort}, \icode{order} et \icode{rank}.}
 
 \subsection{Recherche}
