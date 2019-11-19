@@ -443,12 +443,12 @@ Dans une \index{affectation}affectation, une expression est évaluée,
 mais le résultat est stocké dans un \emph{objet} (ou \emph{variable})
 dans %
 l'\index{espace de travail}espace de travail %
-et rien n'est affiché à l'écran. Tel que mentionné précédemment, le
-symbole d'affectation est \icode{<-}, c'est-à-dire les deux caractères
-\verb|<| et \verb|-| placés obligatoirement l'un à la suite de
-l'autre, et l'opération d'affectation est évaluée de droite à gauche.
-Ainsi, toute expression est évaluée avant que son résultat ne soit
-placé dans l'objet.
+et rien n'est affiché à l'écran. Tel que mentionné précédemment,
+l'opérateur d'affectation est \icode{<-}, c'est-à-dire les deux
+caractères \verb|<| et \verb|-| placés obligatoirement l'un à la suite
+de l'autre, et l'opération d'affectation est évaluée de droite à
+gauche. Ainsi, toute expression est évaluée avant que son résultat ne
+soit placé dans l'objet.
 <<echo=TRUE>>=
 a <- 5
 a
@@ -460,14 +460,16 @@ circ
 
 Pour affecter le résultat d'un calcul dans un objet et simultanément
 afficher ce résultat, il suffit de placer l'affectation entre
-parenthèses pour ainsi créer une nouvelle expression\footnote{%
-  En fait, cela devient un appel à l'opérateur \code{"("} qui ne fait
-  que retourner son argument.}.
+parenthèses pour ainsi créer une nouvelle expression.\footnote{%
+  En fait, l'opérateur d'affectation \code{<-} retourne un résultat
+  --- la valeur affectée ---, mais de manière \emph{invisible}. Une
+  affectation placée entre parenthèses devient un appel à l'opérateur
+  \code{"("} qui, lui, ne fait que retourner son argument.}
 <<echo=TRUE>>=
 (circ <- 2 * pi * 10)
 @
 
-Le symbole d'affectation inversé \icode{->} existe aussi, mais il
+L'opérateur d'affectation inversé \icode{->} existe aussi, mais il
 est rarement utilisé.
 
 \cautionbox{Évitez d'utiliser l'opérateur \,\icode{=}\, pour
@@ -582,6 +584,7 @@ x                          # voir le contenu
 (x <- 5)                   # affectation et affichage
 y <- x                     # affecter la valeur de 'x' à 'y'
 x <- y <- 5                # idem, en une seule expression
+x <- (y <- 5)              # équivalent
 y                          # 5
 x <- 0                     # changer la valeur de 'x'...
 y                          # ... ne change pas celle de 'y'
@@ -1185,10 +1188,11 @@ d'un regroupement d'expressions présentées à la
 de la fonction: une fonction retourne tout simplement le résultat de
 sa \emph{dernière expression}.
 
-Ainsi, on évitera que la dernière expression soit une affectation. En
-effet, la fonction ne retournerait alors rien et nous ne pourrions
-utiliser une construction de la forme \code{x <- f()} pour affecter le
-résultat de la fonction à un objet.
+Sous peine de causer bien des interrogations, évitez que la dernière
+expression d'une fonction soit une affectation. En effet, pour les
+raisons mentionnées à la \autoref{sec:bases:commandes:affectation}, la
+fonction ne retournerait alors aucun résultat \emph{visible}
+susceptible d'être affiché à l'écran.
 
 Les fonctions suivantes permettent de retourner un résultat, un
 avertissement ou un message d'erreur avant même la fin d'une fonction.
