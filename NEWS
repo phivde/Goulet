@@ -15,9 +15,17 @@
 - Section 2.7: quelques détails additionnels sur la gestion du
   répertoire de travail, notamment quant à l'utilisation de la
   fonction `setwd`.
+- Section 4.2.2: dans la note de bas de page, ajout de détails
+  additionnels sur le fait que l'opérateur d'affectation retourne un
+  résultat de manière invisible. Aussi, remplacement de «symbole
+  d'affectation» par «opérateur d'affectation».
 
 ## Corrections
 
+- Section 4.4.3: une fonction qui se termine par une affectation
+  retourne quelque chose, mais de manière invisible, et ce, pour la
+  raison mentionnée dans la modification à la section 4.2.2. Le
+  paragraphe à cet effet a été révisé.
 - Exercice 5.11: il manquait à la solution une définition de la
   fonction `ppareto` pour calculer la fonction de répartition de la
   loi de Pareto (dans la mesure où le paquetage actuar n'est pas
