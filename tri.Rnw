@@ -1050,7 +1050,7 @@ cat(temps, file = "100metres.data", labels = names(temps), fill = 1)
 @
   Les données se trouvent dans le fichier
   \code{100metres.data} distribué avec ce document. Les dates se
-  trouvent la première colonne du fichier et les temps, dans la
+  trouvent dans la première colonne du fichier et les temps, dans la
   seconde. La commande \icode{scan} utilisée avec l'argument
   \code{what = list("", 1)} permet d'importer ces données dans R.
 
