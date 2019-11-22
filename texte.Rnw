@@ -25,10 +25,9 @@ options(width=50)
   texte à l'aide d'expressions régulières avec les divers outils de R.
 \end{objectifs}
 
-
-Peut-être vous êtes-vous déjà demandé comment s'effectue la validation
-de certains champs comme le code postal ou l'adresse de courrier
-électronique dans les formulaires électroniques. Sûrement pas en
+Vous êtes-vous déjà demandé comment s'effectue la validation de
+certains champs comme le code postal ou l'adresse de courrier
+électronique dans les formulaires électroniques? Sûrement pas en
 vérifiant si l'entrée figure dans la liste des quelques 17,5 millions
 de codes postaux possibles au Canada ou, pire, parmi les milliards
 d'adresse de courriel que les
@@ -66,15 +65,6 @@ régulières.
   fautes d'orthographe comme, par exemple, «je transfert» plutôt que
   «je transfère», ou encore les multiples variations autour du verbe
   «appeler»: appel, appelle, appellent, appeler, appelez, etc.
-\item Remplacer le nom d'une commande par un autre lorsque la commande
-  s'étend de part et d'autre d'un argument qui, lui, change d'une fois
-  à l'autre. Par exemple, dans le système de mise en page {\LaTeX}, la
-  syntaxe des commandes est la suivante:
-  \cmdprint{\cmd}\oarg{option}\marg{arg}. Pour remplacer toutes les
-  utilisations d'une commande \cmdprint{\foo} par \cmdprint{\bar}, il
-  faut pouvoir tenir compte de la présence possible d'un argument
-  optionnel \oarg{option} ainsi que de l'argument \marg{arg} qui
-  change d'une utilisation de la commande à une autre.
 \item Extraire les coordonnées géographiques d'un lieu (latitude et
   longitude) de l'URL d'une carte Google Maps. Par exemple, l'%
   \link{https://www.google.ca/maps/place/Universite+Laval/@46.7817463,-71.2769311,17z/data=!3m1!4b1!4m5!3m4!1s0x4cb896c469ff32f9:0x15feb853bd2f8247!8m2!3d46.7817463!4d-71.2747424}{URL
@@ -90,11 +80,28 @@ https://www.google.ca/maps/place/Universite+Laval/
   dont on décode que le lieu se trouve à une latitude de
   $\nombre{46,7817463}$ et à une longitude de $\nombre{-71.2769311}$
   en degrés décimaux.
+\item Mettre en italique tous les mots d'un texte qui se trouvent
+  entre guillemets (mais pas les guillemets eux-mêmes).
 \end{itemize}
 
 Un jour ou l'autre, vous aurez à traiter des chaines de caractères en
 programmation ou en analyse de données. Ce jour-là, connaitre les
 expressions régulières vous sauvera énormément de temps.
+
+Pour les exemples de ce chapitre, nous utiliserons le texte de la
+chanson «La journée qui s'en vient est flambant neuve» de l'album
+\emph{Astronomie} (2012) du groupe québécois Avec pas d'casque. Le
+texte est fourni avec le présent document dans le fichier
+\code{chanson.txt}. Pour référence, il est également reproduit à la
+\autoref{fig:texte:chanson}.
+
+\begin{figure}
+  \centering
+  \lstinputlisting[frame=single,numbers=none]{chanson.txt}
+  \caption{Texte de la chanson «La journée qui s'en vient est flambant
+    neuve» de Avec pas d'casque}
+  \label{fig:texte:chanson}
+\end{figure}
 
 \begin{figure}[t]
   \centering
@@ -106,42 +113,88 @@ expressions régulières vous sauvera énormément de temps.
   \end{minipage}
 \end{figure}
 
+
 \section{Outils d'analyse et de contrôle du texte}
 \label{sec:texte:outils}
 
-L'expression régulière ne constitue qu'un langage de description d'une
-chaine de texte. Pour exploiter ce langage, des outils sont
-nécessaires. Aux fins de cet ouvrage, j'ai choisi de concentrer notre
-étude sur les utilitaires Unix standards en ligne de commande
-\code{grep}, \code{sed} et \code{awk}. Ils font partie intégrante des
-systèmes d'exploitation macOS et Linux et, sous Windows, ils sont
-livrés avec les interpréteurs de commande MSYS de
+L'expression régulière n'est qu'un langage de description d'une chaine
+de texte. Pour exploiter ce langage, des outils sont nécessaires. Aux
+fins de cet ouvrage, j'ai choisi de concentrer notre étude sur les
+utilitaires Unix standards en ligne de commande \icode{grep},
+\icode{sed} et \icode{awk}. Ils font partie intégrante des systèmes
+d'exploitation macOS et Linux et, sous Windows, ils sont livrés avec
+les interpréteurs de commande \index{MSYS}MSYS de
 \index{MSYS2}\link{https://www.msys2.org}{MSYS2} et
 \index{Git~Bash}Git~Bash de \link{https://git-scm.com/downloads}{Git
   for Windows}.
 
-Comme la plupart des utilitaires Unix, \Icode{grep}, \Icode{sed} et
-\Icode{awk} prennent en entrée un flux de texte ou un ou plusieurs
+Il va sans dire que les utilitaires \icode{grep}, \icode{sed} et
+\icode{awk} s'utilisent depuis une ligne de commande \index{Unix}Unix:
+dans le \index{Terminal}Terminal sous macOS, ou dans
+\index{Git~Bash}Git~Bash ou MSYS sous Windows. Si vous n'êtes pas
+familier avec la ligne de commande,
+\citet{Goulet:laboratoire-cli-git:2019} offre une rapide introduction
+suffisante pour suivre la matière de ce chapitre. Nous reviendrons à R
+à la \autoref{sec:texte:internes} lorsque nous étudierons les
+fonctions internes de R aux fonctionnalités équivalentes à \code{grep}
+et \code{sed}.
+
+Comme la plupart des utilitaires Unix, \icode{grep}, \icode{sed} et
+\icode{awk} prennent en entrée un flux de texte ou un ou plusieurs
 fichiers en format texte brut et ils opèrent sur cette entrée ligne
-par ligne. Le résultat du traitement est affiché à la ligne de
-commande, envoyé à un autre programme ou redirigé vers un fichier. Les
-outils diffèrent quant au type de traitement qu'ils peuvent effectuer.
+par ligne. Le résultat du traitement est affiché dans le terminal,
+envoyé à un autre programme ou redirigé vers un fichier. Les outils
+diffèrent quant au type de traitement qu'ils peuvent effectuer.
 \begin{description}
 \item[\code{grep}] sélectionne les lignes en entrée correspondant à
   une expression régulière;
 \item[\code{sed}] sert surtout pour rechercher et remplacer du texte;
-\item[\code{awk}] permet de traiter aisément du texte séparé en champs
-  ainsi que du texte réparti sur plusieurs lignes.
+\item[\code{awk}] permet de traiter aisément du texte séparé en
+  champs, ainsi que du texte réparti sur plusieurs lignes.
 \end{description}
 
-\warningbox{Il existe plusieurs versions différentes de ces outils,
-  parfois avec des différences importantes, notamment en ce qui a
-  trait à \code{sed}. Les versions sous Linux, \index{MSYS2}MSYS2 et
-  \index{Git~Bash}Git~Bash sont généralement celles du
-  \link{https://www.gnu.org/}{projet GNU}. Dans macOS, elles
-  proviennent de
-  \link{https://en.wikipedia.org/wiki/Berkeley_Software_Distribution}{BSD}.}
+Puisque nous utiliserons les utilitaires \icode{grep} et \icode{sed} à
+profusion dans la présentation sur les expressions régulières à la
+\autoref{sec:texte:regex}, prenons un moment pour apprendre comment
+les utiliser. L'utilitaire \icode{awk}, quant à lui, fera l'objet
+de la \autoref{sec:texte:awk}.
 
+\warningbox{Il existe plusieurs versions différentes de \icode{grep},
+  \icode{sed} et \icode{awk}, parfois avec des différences
+  importantes, surtout dans le cas de \code{sed}. Les versions sous
+  Linux, \index{MSYS2}MSYS2 et \index{Git~Bash}Git~Bash sont
+  généralement celles du \link{https://www.gnu.org/}{projet GNU}. Dans
+  macOS, elles proviennent de
+  \link{https://en.wikipedia.org/wiki/Berkeley_Software_Distribution}{BSD}.
+  J'ai tâché de fournir ici des expressions universelles qui
+  fonctionnent dans ces deux principales variantes.}
+
+\subsection{Extraction de lignes avec \code{grep}}
+\label{sec:texte:outils:grep}
+
+L'utilitaire standard \Icode{grep} prend en argument une expression
+régulière, lit l'entrée standard ou une liste de fichiers ligne par
+ligne, puis retourne sur la sortie standard les lignes qui contiennent
+des correspondances avec l'expression régulière. C'est très utile pour
+savoir si un fichier contient --- ou quels fichiers contiennent --- un
+mot ou une expression, assez pour que le nom de l'utilitaire soit
+devenu un verbe dans le %
+\link{http://www.catb.org/jargon/html/G/grep.html}{jargon informatique} %
+en anglais (\texttt{to grep}).
+
+Par exemple,
+
+
+
+
+\notebox{Lorsqu'il est question d'expressions régulières dans
+  la littérature informatique, le langage de programmation
+  \index{Perl}Perl est habituellement mentionné. En effet, Perl a été
+  créé par Larry Wall en 1987 pour traiter facilement du texte. Le
+  langage prend en charge les expressions régulières dans sa syntaxe
+  même et il comporte plusieurs extensions aux expressions prises en
+  charge par \icode{grep} et \icode{sed}. Nous ne traiterons pas
+  davantage de \icode{Perl} dans cet ouvrage.}
 
 \section{Expressions régulières}
 \label{sec:texte:regex}
