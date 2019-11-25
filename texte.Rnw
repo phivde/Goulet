@@ -172,13 +172,19 @@ de la \autoref{sec:texte:awk}.
 \subsection{Extraction de lignes avec \code{grep}}
 \label{sec:texte:outils:grep}
 
-L'utilitaire \Icode{grep} prend en argument une expression régulière,
-lit l'entrée standard ou une liste de fichiers ligne par ligne, puis
-retourne sur la sortie standard les lignes qui contiennent des
-correspondances avec l'expression régulière. C'est très utile pour
-savoir si un fichier contient --- ou quels fichiers contiennent --- un
-mot ou une expression, assez pour que le nom de l'utilitaire soit
-devenu un verbe dans le %
+L'utilitaire \Icode{grep}\footnote{%
+  Le nom de l'utilitaire provient de la commande \code{:g/re/p} de
+  l'antédiluvien éditeur de texte \icode{ed} qui permet de rechercher
+  globalement (\code{g}) une expression régulière (\emph{regular
+    expression}, \code{re}) et d'afficher les lignes qui correspndent
+  (\emph{print}, \code{p}).} %
+prend en argument une expression régulière, lit l'entrée standard ou
+une liste de fichiers ligne par ligne, puis retourne sur la sortie
+standard les lignes qui contiennent des correspondances avec
+l'expression régulière. C'est très utile pour savoir si un fichier
+contient --- ou quels fichiers contiennent --- un mot ou une
+expression, assez pour que le nom de l'utilitaire soit devenu un verbe
+dans le %
 \link{http://www.catb.org/jargon/html/G/grep.html}{jargon
   informatique} %
 en anglais (\emph{to grep}).
@@ -243,6 +249,8 @@ Nous avons l'outil
 
 \end{Verbatim}
 \end{Schunk}
+
+
 
 
 \notebox{Lorsqu'il est question d'expressions régulières dans
