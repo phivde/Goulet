@@ -176,7 +176,7 @@ L'utilitaire \Icode{grep}\footnote{%
   Le nom de l'utilitaire provient de la commande \code{:g/re/p} de
   l'antédiluvien éditeur de texte \icode{ed} qui permet de rechercher
   globalement (\code{g}) une expression régulière (\emph{regular
-    expression}, \code{re}) et d'afficher les lignes qui correspndent
+    expression}, \code{re}) et d'afficher les lignes qui correspondent
   (\emph{print}, \code{p}).} %
 prend en argument une expression régulière, lit l'entrée standard ou
 une liste de fichiers ligne par ligne, puis retourne sur la sortie
@@ -200,6 +200,8 @@ contient le mot «chat» (aucune\footnote{%
 $ grep "temps" chanson.txt
 Le temps qui s'appelle hier
 \end{Verbatim}
+\end{Schunk}
+\begin{Schunk}
 \begin{Verbatim}
 $ grep "^M" chanson.txt
 Mes bras désolés
@@ -207,6 +209,8 @@ Même si le mouvement
 Meurt mieux qu'il ne se charge
 Même si la fatigue
 \end{Verbatim}
+\end{Schunk}
+\begin{Schunk}
 \begin{Verbatim}
 $ grep "chat" chanson.txt
 $
@@ -233,11 +237,11 @@ $ grep -c "flambant" chanson.txt
 \end{Verbatim}
 \end{Schunk}
 
-L'option \code{-v} de \icode{grep} permet d'inverser les résultats,
-c'est-à-dire d'extraire les lignes qui ne contiennent aucune
-correspondance ave l'expression régulière. La commande ci-dessous
-permet d'extraire les strophes qui ne contiennent pas la lettre «e»
-(ce qui inclut les lignes blanches dans le fichier).
+L'option \code{-v} de \icode{grep} permet d'inverser les résultats ou,
+autrement dit, d'extraire les lignes qui ne contiennent aucune
+correspondance avec l'expression régulière. Par exemple, la commande
+ci-dessous permet d'extraire les strophes qui ne contiennent pas la
+lettre «e» (ce qui inclut les lignes blanches dans le fichier).
 \begin{Schunk}
 \begin{Verbatim}
 $ grep -v "e" chanson.txt
@@ -248,19 +252,119 @@ Nous avons l'outil
 
 
 \end{Verbatim}
+\end{Schunk} %$
+
+\subsection{Recherche et remplacement avec \code{sed}}
+\label{sec:texte:outils:sed}
+
+L'utilitaire \Icode{sed}\footnote{Pour \emph{stream editor}, ou
+  éditeur de flux de texte. Comme \code{grep}, \code{sed} tire son
+  origine de l'éditeur \icode{ed}.} %
+est en quelque sorte un éditeur de texte qui opère sur un texte une
+ligne à la fois et de manière non-interactive. L'éventail des
+traitements que \icode{sed} peut appliquer à un texte est très vaste,
+mais la syntaxe des commandes qu'il faut entrer pour y arriver est
+particulièrement ésotérique. Nous nous attarderons donc à une seule
+commande de \icode{sed}, celle qui permet de rechercher et de
+remplacer à l'intérieur d'un texte. Sa syntaxe est la suivante:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+s/\meta{motif}/\meta{remplacement}/\meta{modificateur}
+\end{Verbatim}
+\end{Schunk}
+
+\begin{itemize}
+\item \code{s} est le nom de la commande \icode{sed} qui sert à
+  rechercher et remplacer.
+\item \meta{motif} est une expression régulière qui définit le texte à
+  rechercher.
+\item \meta{remplacement} est le texte qui sert à remplacer le texte
+  qui correspond à \meta{motif}.
+\item \meta{modificateur} est un symbole qui permet de modifier le
+  comportement de la commande; nous utiliserons uniquement le
+  modificateur \code{g} (pour «global») qui indique de remplacer
+  toutes les correspondances de \meta{motif} sur une ligne, et non
+  seulement la première.
+\item \code{/} est un symbole qui sert à délimiter les différentes
+  parties de la commande; n'importe quel symbole (qui ne se trouve pas
+  autrement dans la commande) fait l'affaire, mais \code{/} est le
+  symbole le plus couramment utilisé.
+\end{itemize}
+
+La commande de remplacement est fournie en argument à \icode{sed}, qui
+lit ensuite l'entrée standard ou une liste de fichiers ligne par
+ligne, puis retourne sur la sortie standard le texte modifié (sans
+modifier le fichier d'origine).
+
+Les trois exemples ci-dessous permettent de faire les changements
+suivants dans le texte du fichier \code{chanson.txt}, dans l'ordre:
+remplacer «Oh» par «Ah»; remplacer «mm» par «MM»; remplacer toutes les
+occurrences de «promet» sur une ligne par «jure». (J'ai abrégé les
+sorties des commandes pour économiser de l'espace.)
+\begin{Schunk}
+\begin{Verbatim}
+$ sed 's/Oh/Ah/' chanson.txt
+Ah comme il est lourd
+Le temps qui s'appelle hier
+...
+\end{Verbatim}
+\end{Schunk}
+
+\begin{Schunk}
+\begin{Verbatim}
+$ sed "s/mm/MM/" chanson.txt
+Oh coMMe il est lourd
+Le temps qui s'appelle hier
+...
+Mes bras désolés
+Rampent coMMe des chiens
+...
+Gave-moi de ton amour
+Pour shiMMer l'Univers
+...
+\end{Verbatim}
+\end{Schunk}
+
+\begin{Schunk}
+\begin{Verbatim}
+$ sed "s/promets/jure/g" chanson.txt
+...
+Dans ma tête il est pour toi
+Je jure, je jure que
+la journée qui s'en vient est flambant neuve
+...
+Rampent comme des chiens
+Je jure, je jure que
+la journée qui s'en vient est flambant neuve
+...
+Voudrait que tu deviennes
+Je jure, je jure que
+la journée qui s'en vient est flambant neuve
+...
+Il manque la manière
+Je jure, je jure que
+la journée qui s'en vient est flambant neuve
+...
+Pour shimmer l'Univers
+Je jure, je jure que
+la journée qui s'en vient est flambant neuve
+...
+Nos plus beaux accidents
+Je jure, je jure que
+la journée qui s'en vient est flambant neuve
+\end{Verbatim}
 \end{Schunk}
 
 
 
-
-\notebox{Lorsqu'il est question d'expressions régulières dans
-  la littérature informatique, le langage de programmation
+\notebox{Lorsqu'il est question d'expressions régulières dans la
+  littérature informatique, le langage de programmation
   \index{Perl}Perl est habituellement mentionné. En effet, Perl a été
   créé par Larry Wall en 1987 pour traiter facilement du texte. Le
   langage prend en charge les expressions régulières dans sa syntaxe
   même et il comporte plusieurs extensions aux expressions prises en
-  charge par \icode{grep} et \icode{sed}. Nous ne traiterons pas
-  davantage de \icode{Perl} dans cet ouvrage.}
+  charge par \icode{grep} et \icode{sed}. Cet ouvrage ne traite pas de
+  \icode{Perl}.}
 
 \section{Expressions régulières}
 \label{sec:texte:regex}
