@@ -172,19 +172,77 @@ de la \autoref{sec:texte:awk}.
 \subsection{Extraction de lignes avec \code{grep}}
 \label{sec:texte:outils:grep}
 
-L'utilitaire standard \Icode{grep} prend en argument une expression
-régulière, lit l'entrée standard ou une liste de fichiers ligne par
-ligne, puis retourne sur la sortie standard les lignes qui contiennent
-des correspondances avec l'expression régulière. C'est très utile pour
+L'utilitaire \Icode{grep} prend en argument une expression régulière,
+lit l'entrée standard ou une liste de fichiers ligne par ligne, puis
+retourne sur la sortie standard les lignes qui contiennent des
+correspondances avec l'expression régulière. C'est très utile pour
 savoir si un fichier contient --- ou quels fichiers contiennent --- un
 mot ou une expression, assez pour que le nom de l'utilitaire soit
 devenu un verbe dans le %
-\link{http://www.catb.org/jargon/html/G/grep.html}{jargon informatique} %
-en anglais (\texttt{to grep}).
+\link{http://www.catb.org/jargon/html/G/grep.html}{jargon
+  informatique} %
+en anglais (\emph{to grep}).
 
-Par exemple,
+Les trois exemples ci-dessous permettent, dans l'ordre, d'extraire du
+fichier \code{chanson.txt}: la strophe de la chanson qui contient le
+mot «temps»; les strophes qui débutent par «M»; la strophe qui
+contient le mot «chat» (aucune\footnote{%
+  Sachez que la \link{https://youtu.be/eR_44AzYIZs}{vidéo} de la
+  chanson est, elle, emplie de chatons très mignons.}).
+\begin{Schunk}
+\begin{Verbatim}
+$ grep "temps" chanson.txt
+Le temps qui s'appelle hier
+\end{Verbatim}
+\begin{Verbatim}
+$ grep "^M" chanson.txt
+Mes bras désolés
+Même si le mouvement
+Meurt mieux qu'il ne se charge
+Même si la fatigue
+\end{Verbatim}
+\begin{Verbatim}
+$ grep "chat" chanson.txt
+$
+\end{Verbatim}
+\end{Schunk}
+
+En combinant \icode{grep} avec l'utilitaire \Icode{wc} (\emph{word
+  count}), nous pouvons obtenir le nombre de lignes, de mots et de
+caractères des strophes dans lesquelles le mot «flambant» apparait
+dans la chanson.
+\begin{Schunk}
+\begin{Verbatim}
+$ grep "flambant" chanson.txt | wc
+       6      48     276
+\end{Verbatim}
+\end{Schunk}
+
+L'option \code{-c} de \icode{grep} donne encore plus rapidement accès
+au nombre de lignes qui correspondent à l'expression régulière.
+\begin{Schunk}
+\begin{Verbatim}
+$ grep -c "flambant" chanson.txt
+6
+\end{Verbatim}
+\end{Schunk}
+
+L'option \code{-v} de \icode{grep} permet d'inverser les résultats,
+c'est-à-dire d'extraire les lignes qui ne contiennent aucune
+correspondance ave l'expression régulière. La commande ci-dessous
+permet d'extraire les strophes qui ne contiennent pas la lettre «e»
+(ce qui inclut les lignes blanches dans le fichier).
+\begin{Schunk}
+\begin{Verbatim}
+$ grep -v "e" chanson.txt
 
 
+
+Nous avons l'outil
+
+
+\end{Verbatim}
+\end{Schunk}
 
 
 \notebox{Lorsqu'il est question d'expressions régulières dans
