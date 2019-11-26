@@ -159,15 +159,14 @@ profusion dans la présentation sur les expressions régulières à la
 les utiliser. L'utilitaire \icode{awk}, quant à lui, fera l'objet
 de la \autoref{sec:texte:awk}.
 
-\warningbox{Il existe plusieurs versions différentes de \icode{grep},
-  \icode{sed} et \icode{awk}, parfois avec des différences
-  importantes, surtout dans le cas de \code{sed}. Les versions sous
-  Linux, \index{MSYS2}MSYS2 et \index{Git~Bash}Git~Bash sont
-  généralement celles du \link{https://www.gnu.org/}{projet GNU}. Dans
-  macOS, elles proviennent de
-  \link{https://en.wikipedia.org/wiki/Berkeley_Software_Distribution}{BSD}.
-  J'ai tâché de fournir ici des expressions universelles qui
-  fonctionnent dans ces deux principales variantes.}
+\notebox{Lorsqu'il est question d'expressions régulières dans la
+  littérature informatique, le langage de programmation
+  \index{Perl}Perl est habituellement mentionné. En effet, Perl a été
+  créé par Larry Wall en 1987 pour traiter facilement du texte. Le
+  langage prend en charge les expressions régulières dans sa syntaxe
+  même et il comporte plusieurs extensions aux expressions prises en
+  charge par \icode{grep} et \icode{sed}. Cet ouvrage ne traite pas de
+  \icode{Perl}.}
 
 \subsection{Extraction de lignes avec \code{grep}}
 \label{sec:texte:outils:grep}
@@ -190,20 +189,20 @@ dans le %
 en anglais (\emph{to grep}).
 
 Les trois exemples ci-dessous permettent, dans l'ordre, d'extraire du
-fichier \code{chanson.txt}: la strophe de la chanson qui contient le
-mot «temps»; les strophes qui débutent par «M»; la strophe qui
-contient le mot «chat» (aucune\footnote{%
+fichier \code{chanson.txt}: le vers de la chanson qui contient le mot
+«temps»; les vers qui débutent par «M»; le vers qui contient le mot
+«chat» (aucun\footnote{%
   Sachez que la \link{https://youtu.be/eR_44AzYIZs}{vidéo} de la
   chanson est, elle, emplie de chatons très mignons.}).
 \begin{Schunk}
 \begin{Verbatim}
-$ grep "temps" chanson.txt
+$ grep 'temps' chanson.txt
 Le temps qui s'appelle hier
 \end{Verbatim}
 \end{Schunk}
 \begin{Schunk}
 \begin{Verbatim}
-$ grep "^M" chanson.txt
+$ grep '^M' chanson.txt
 Mes bras désolés
 Même si le mouvement
 Meurt mieux qu'il ne se charge
@@ -212,18 +211,18 @@ Même si la fatigue
 \end{Schunk}
 \begin{Schunk}
 \begin{Verbatim}
-$ grep "chat" chanson.txt
+$ grep 'chat' chanson.txt
 $
 \end{Verbatim}
 \end{Schunk}
 
 En combinant \icode{grep} avec l'utilitaire \Icode{wc} (\emph{word
-  count}), nous pouvons obtenir le nombre de lignes, de mots et de
-caractères des strophes dans lesquelles le mot «flambant» apparait
-dans la chanson.
+  count}), nous pouvons obtenir le nombre total de lignes, de mots et
+de caractères des vers dans lesquels le mot «flambant» apparait dans
+la chanson.
 \begin{Schunk}
 \begin{Verbatim}
-$ grep "flambant" chanson.txt | wc
+$ grep 'flambant' chanson.txt | wc
        6      48     276
 \end{Verbatim}
 \end{Schunk}
@@ -232,7 +231,7 @@ L'option \code{-c} de \icode{grep} donne encore plus rapidement accès
 au nombre de lignes qui correspondent à l'expression régulière.
 \begin{Schunk}
 \begin{Verbatim}
-$ grep -c "flambant" chanson.txt
+$ grep -c 'flambant' chanson.txt
 6
 \end{Verbatim}
 \end{Schunk}
@@ -240,11 +239,11 @@ $ grep -c "flambant" chanson.txt
 L'option \code{-v} de \icode{grep} permet d'inverser les résultats ou,
 autrement dit, d'extraire les lignes qui ne contiennent aucune
 correspondance avec l'expression régulière. Par exemple, la commande
-ci-dessous permet d'extraire les strophes qui ne contiennent pas la
-lettre «e» (ce qui inclut les lignes blanches dans le fichier).
+ci-dessous permet d'extraire les vers qui ne contiennent pas la
+lettre «e» (ce qui inclut les lignes blanches entre les strophes).
 \begin{Schunk}
 \begin{Verbatim}
-$ grep -v "e" chanson.txt
+$ grep -v 'e' chanson.txt
 
 
 
@@ -252,7 +251,7 @@ Nous avons l'outil
 
 
 \end{Verbatim}
-\end{Schunk} %$
+\end{Schunk}
 
 \subsection{Recherche et remplacement avec \code{sed}}
 \label{sec:texte:outils:sed}
@@ -264,9 +263,12 @@ est en quelque sorte un éditeur de texte qui opère sur un texte une
 ligne à la fois et de manière non-interactive. L'éventail des
 traitements que \icode{sed} peut appliquer à un texte est très vaste,
 mais la syntaxe des commandes qu'il faut entrer pour y arriver est
-particulièrement ésotérique. Nous nous attarderons donc à une seule
-commande de \icode{sed}, celle qui permet de rechercher et de
-remplacer à l'intérieur d'un texte. Sa syntaxe est la suivante:
+particulièrement ésotérique\footnote{%
+  Jugez-en: la commande pour supprimer l'une de deux lignes blanches
+  consécutives dans un texte est \code{N;/\string^\bs n\$/D;P;D;}.}. %
+Nous nous attarderons donc à une seule commande de \icode{sed}, celle
+qui permet de rechercher et de remplacer à l'intérieur d'un texte. La
+syntaxe de cette commande est la suivante:
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
 s/\meta{motif}/\meta{remplacement}/\meta{modificateur}
@@ -291,15 +293,15 @@ s/\meta{motif}/\meta{remplacement}/\meta{modificateur}
   symbole le plus couramment utilisé.
 \end{itemize}
 
-La commande de remplacement est fournie en argument à \icode{sed}, qui
-lit ensuite l'entrée standard ou une liste de fichiers ligne par
-ligne, puis retourne sur la sortie standard le texte modifié (sans
-modifier le fichier d'origine).
+La commande de remplacement est fournie en argument à \icode{sed}.
+L'utilitaire lit ensuite l'entrée standard ou une liste de fichiers
+ligne par ligne, puis retourne sur la sortie standard le texte modifié
+(sans modifier le fichier d'origine).
 
 Les trois exemples ci-dessous permettent de faire les changements
 suivants dans le texte du fichier \code{chanson.txt}, dans l'ordre:
 remplacer «Oh» par «Ah»; remplacer «mm» par «MM»; remplacer toutes les
-occurrences de «promet» sur une ligne par «jure». (J'ai abrégé les
+occurrences de «promets» sur une ligne par «jure». (J'ai abrégé les
 sorties des commandes pour économiser de l'espace.)
 \begin{Schunk}
 \begin{Verbatim}
@@ -312,7 +314,7 @@ Le temps qui s'appelle hier
 
 \begin{Schunk}
 \begin{Verbatim}
-$ sed "s/mm/MM/" chanson.txt
+$ sed 's/mm/MM/' chanson.txt
 Oh coMMe il est lourd
 Le temps qui s'appelle hier
 ...
@@ -327,7 +329,7 @@ Pour shiMMer l'Univers
 
 \begin{Schunk}
 \begin{Verbatim}
-$ sed "s/promets/jure/g" chanson.txt
+$ sed 's/promets/jure/g' chanson.txt
 ...
 Dans ma tête il est pour toi
 Je jure, je jure que
@@ -355,16 +357,21 @@ la journée qui s'en vient est flambant neuve
 \end{Verbatim}
 \end{Schunk}
 
+Il n'est pas tout à fait exact de dire que \icode{sed} traite une
+seule ligne à la fois. En effet, il est également possible d'appliquer
+des commandes sur un intervalle de lignes par le biais d'une mémoire
+tampon (\emph{hold space}). Nous n'aurons pas recours à la mémoire
+tampon de \icode{sed} dans le présent ouvrage.
 
-
-\notebox{Lorsqu'il est question d'expressions régulières dans la
-  littérature informatique, le langage de programmation
-  \index{Perl}Perl est habituellement mentionné. En effet, Perl a été
-  créé par Larry Wall en 1987 pour traiter facilement du texte. Le
-  langage prend en charge les expressions régulières dans sa syntaxe
-  même et il comporte plusieurs extensions aux expressions prises en
-  charge par \icode{grep} et \icode{sed}. Cet ouvrage ne traite pas de
-  \icode{Perl}.}
+\warningbox{Il existe plusieurs versions différentes de \icode{grep},
+  \icode{sed} et \icode{awk}, parfois avec des différences
+  importantes, surtout dans le cas de \code{sed}. Les versions sous
+  Linux, \index{MSYS2}MSYS2 et \index{Git~Bash}Git~Bash sont
+  généralement celles du \link{https://www.gnu.org/}{projet GNU}. Dans
+  macOS, elles proviennent de
+  \link{https://en.wikipedia.org/wiki/Berkeley_Software_Distribution}{BSD}.
+  J'ai tâché de fournir ici des expressions universelles qui
+  fonctionnent dans ces deux principales variantes.}
 
 \section{Expressions régulières}
 \label{sec:texte:regex}
