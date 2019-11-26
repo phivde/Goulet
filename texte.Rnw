@@ -291,9 +291,9 @@ s/\meta{motif}/\meta{remplacement}/\meta{modificateur}
   modificateur \code{g} (pour «global») qui indique de remplacer
   toutes les correspondances de \meta{motif} sur une ligne, et non
   seulement la première.
-\item \code{/} est un symbole qui sert à délimiter les différentes
+\item «\code{/}» est un symbole qui sert à délimiter les différentes
   parties de la commande; n'importe quel symbole (qui ne se trouve pas
-  autrement dans la commande) fait l'affaire, mais \code{/} est le
+  autrement dans la commande) fait l'affaire, mais «\code{/}» est le
   symbole le plus couramment utilisé.
 \end{itemize}
 
@@ -397,11 +397,38 @@ au début du chapitre, je me suis inspiré de l'excellent guide
 \link{https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/}{\emph{Shell
     Scripting Primer}} de la bibliothèque pour développeurs de Apple
 \citep{Apple:shellprimer}. Si vous souhaitez étudier les expressions
-régulières en profondeur, je vous recommande
-\citet{Friedl:regex:2006}, ou ouvrage de référence classique.
+régulières vraiment en profondeur, je vous recommande l'ouvrage de
+référence classique de \citet{Friedl:regex:2006}.
 
 \subsection{Types d'expressions régulières}
 \label{sec:texte:regex:types}
+
+Avant d'aller plus loin, vous devez absolument savoir qu'il existe
+trois grands types d'expressions régulières: les expressions
+régulières basiques ou classiques (\emph{Basic Regular Expressions},
+BRE), les expressions régulières étendues (\emph{Extended Regular
+  Expressions}, ERE) et les expressions régulières de Perl (\emph{Perl
+  Compatible Regular Expressions}, PCRE). Les utilitaires \icode{grep}
+et \icode{sed} utilisent les expressions régulières basiques par défaut.
+
+Les principales différences entre les expressions régulières basiques
+et étendues sont les suivantes.
+\begin{itemize}
+\item Dans les expressions régulières étendues, les symboles
+  «\code{+}» et «\code{?}» sont des opérateurs de répétition. Dans les
+  expressions régulières basiques, ce sont des caractères ordinaires
+  et il n'existe aucun équivalent pour leur fonctionnalité respective.
+\item Dans les expressions régulières étendues, le symbole «\code{|}»
+  est un opérateur de choix entre plusieurs possibilités. Dans les
+  expressions régulières basiques, c'est un caractère ordinaire et il
+  n'existe aucun équivalent pour sa fonctionnalité.
+\item Dans les expressions régulières basiques, les accolades \code{\{
+    \}} et les parenthèses \code{( )} sont des caractères ordinaires
+  et il faut les précéder du symbole \code{\bs} pour les convertir,
+  respectivement, en opérateurs de quantificateur borné et de
+  regroupement. C'est l'inverse dans les expressions régulières
+  étendues.
+\end{itemize}
 
 
 
