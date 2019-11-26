@@ -68,7 +68,7 @@ régulières.
 \item Extraire les coordonnées géographiques d'un lieu (latitude et
   longitude) de l'URL d'une carte Google Maps. Par exemple, l'%
   \link{https://www.google.ca/maps/place/Universite+Laval/@46.7817463,-71.2769311,17z/data=!3m1!4b1!4m5!3m4!1s0x4cb896c469ff32f9:0x15feb853bd2f8247!8m2!3d46.7817463!4d-71.2747424}{URL
-    correspondant} à la recherche «Université Laval» est
+    correspondant à la recherche «Université Laval»} est
   \begin{Schunk}
 \begin{Verbatim}
 https://www.google.ca/maps/place/Universite+Laval/
@@ -81,7 +81,11 @@ https://www.google.ca/maps/place/Universite+Laval/
   $\nombre{46,7817463}$ et à une longitude de $\nombre{-71.2769311}$
   en degrés décimaux.
 \item Mettre en italique tous les mots d'un texte qui se trouvent
-  entre guillemets (mais pas les guillemets eux-mêmes).
+  entre guillemets (mais pas les guillemets eux-mêmes), et ce, quels
+  que soient les mots.
+\item Déterminer par programmation si un dépôt Git contient une
+  branche autre que \code{master} en examinant le résultat de la
+  commande \code{git branch}.
 \end{itemize}
 
 Un jour ou l'autre, vous aurez à traiter des chaines de caractères en
@@ -376,36 +380,35 @@ tampon de \icode{sed} dans le présent ouvrage.
 \section{Expressions régulières}
 \label{sec:texte:regex}
 
-Il existe une multitude de tutoriels et de documents de référence sur
-les expressions régulières et sur les utilitaires \icode{grep},
-\icode{sed} et \icode{awk}, que ce soit dans Internet ou sous forme de
-livre. Or, le guide \link{https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/}{\emph{Shell Scripting Primer}} de la bibliothèque
-pour développeurs de Apple \citep{Apple:shellprimer} s'avère une
-référence idéale pour vous accompagner dans l'atteinte des objectifs
-d'apprentissage mentionnés au début du chapitre.
+Tel que mentionné dans l'introduction de ce chapitre, une expression
+régulière, ou expression rationnelle, est un langage, muni d'une
+syntaxe précise, qui permet de décrire un ensemble de chaines de
+caractères possibles. Vous avez rencontré quelques expressions
+régulières très simples et intuitives à la section précédente. Ainsi,
+l'expression régulière \regex{chat} décrit la chaine «chat», mais
+aussi «chats», «chaton» ou «achat». Nous verrons dans la suite comment
+restreindre l'expression au seul mot «chat».
 
-Je vous invite donc à étudier les chapitres suivants du guide
-\emph{Shell Scripting Primer}:
-\begin{itemize}
-\item
-  \link{https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/RegularExpressionsUnfettered/RegularExpressionsUnfettered.html}{\emph{Regular
-      Expressions Unfettered}} jusqu'à la section \emph{Using
-    Modifiers}, inclusivement;
-\item
-  \link{https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/Howawk-ward/Howawk-ward.html}{\emph{How
-      AWK-ward}} jusqu'à la section \emph{Changing the Record and
-    Field Separators in AWK Scripts}, inclusivement.
-\end{itemize}
-Revenez ensuite ici pour des exemples additionnels et des exercices.
+Cette section propose une introduction au langage des expressions
+régulières. Il existe une multitude de tutoriels et de documents de
+référence sur le sujet dans Internet et sous forme de livre. Pour vous
+accompagner dans l'atteinte des objectifs d'apprentissage mentionnés
+au début du chapitre, je me suis inspiré de l'excellent guide
+\link{https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/}{\emph{Shell
+    Scripting Primer}} de la bibliothèque pour développeurs de Apple
+\citep{Apple:shellprimer}. Si vous souhaitez étudier les expressions
+régulières en profondeur, je vous recommande
+\citet{Friedl:regex:2006}, ou ouvrage de référence classique.
 
-\warningbox{Vous pouvez ignorer toutes les notions relatives à Perl
-  exposées dans \emph{Shell Scripting Primer}.}
+\subsection{Types d'expressions régulières}
+\label{sec:texte:regex:types}
 
-\windowsbox{Utilisateurs de Windows: pas de souci! Bien qu'émanant de
-  Apple, \emph{Shell Scripting Primer} traite de procédures et
-  d'outils Unix standards. Or, vous disposez de ces outils si vous
-  avez installé \index{Git}\emph{Git for Windows} ou
-  MSYS2\index{MSYS2}.}
+
+
+
+\section{Traitement de texte divisé en champs avec \code{awk}}
+\label{sec:texte:awk}
+
 
 
 \section{Fonctions internes utiles}
