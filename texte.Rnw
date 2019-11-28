@@ -36,30 +36,30 @@ permettent de concevoir! Non, ce qu'il faut, c'est un «langage» qui
 permet de décrire \emph{comment} une chaine de caractères peut être
 composée, sans toutefois en fixer la composition exacte. Un tel
 langage existe: ce sont les \emph{expressions régulières} ou
-expressions relationnelles.
+expressions rationnelles.
 
-Une expression régulière (\emph{regular expression}, ou regex ou
-regexp) est une chaine de caractères qui décrit, selon une syntaxe
-précise, un ensemble de chaines de caractères possibles
-\citep{Wikipedia:Expression_reguliere}.
+Une \index{expression régulière}expression régulière (\emph{regular
+  expression}, ou regex ou regexp) est une chaine de caractères qui
+décrit, selon une syntaxe précise, un ensemble de chaines de
+caractères possibles \citep{Wikipedia:Expression_reguliere}.
 
 Par exemple, les plaques d'immatriculation récentes distribuées par la
 Société d'assurance automobile du Québec (SAAQ) sont composées ainsi:
 une lettre, deux chiffres, une espace, trois lettres. Les lettres
 \textsf{O}, \textsf{I} et \textsf{U} ne sont pas utilisées à cause de
 leur similitude avec, respectivement, le chiffre {\fullcaps 0}, le
-chiffre {\fullcaps 1} et la lettre \textsf{V}. L'expression régulière
-suivante permet de décrire l'ensemble des numéros de plaques possibles
-(y compris les combinaisons de lettres exclues comme \code{LSD} ou
-\code{SEX}):
+chiffre {\fullcaps 1} et la lettre \textsf{V}. L'\index{expression
+  régulière}expression régulière suivante permet de décrire l'ensemble
+des numéros de plaques possibles (y compris les combinaisons de
+lettres exclues comme \code{LSD} ou \code{SEX}):
 \begin{Schunk}
 \begin{Verbatim}
 [A-HJ-NP-TV-Z][0-9]{2} [A-HJ-NP-TV-Z]{3}
 \end{Verbatim}
 \end{Schunk}
 
-Voici quelques autres utilisations possibles des expressions
-régulières.
+Voici quelques autres utilisations possibles des \index{expression
+  régulière}expressions régulières.
 \begin{itemize}
 \item Rechercher du texte pouvant contenir des variations ou des
   fautes d'orthographe comme, par exemple, «je transfert» plutôt que
@@ -121,16 +121,16 @@ texte est fourni avec le présent document dans le fichier
 \section{Outils d'analyse et de contrôle du texte}
 \label{sec:texte:outils}
 
-L'expression régulière n'est qu'un langage de description d'une chaine
-de texte. Pour exploiter ce langage, des outils sont nécessaires. Aux
-fins de cet ouvrage, j'ai choisi de concentrer notre étude sur les
-utilitaires Unix standards en ligne de commande \icode{grep},
-\icode{sed} et \icode{awk}. Ils font partie intégrante des systèmes
-d'exploitation macOS et Linux et, sous Windows, ils sont livrés avec
-les interpréteurs de commande \index{MSYS}MSYS de
-\index{MSYS2}\link{https://www.msys2.org}{MSYS2} et
-\index{Git~Bash}Git~Bash de \link{https://git-scm.com/downloads}{Git
-  for Windows}.
+L'\index{expression régulière}expression régulière n'est qu'un langage
+de description d'une chaine de texte. Pour exploiter ce langage, des
+outils sont nécessaires. Aux fins de cet ouvrage, j'ai choisi de
+concentrer notre étude sur les utilitaires Unix standards en ligne de
+commande \icode{grep}, \icode{sed} et \icode{awk}. Ils font partie
+intégrante des systèmes d'exploitation macOS et Linux et, sous
+Windows, ils sont livrés avec les interpréteurs de commande
+\index{MSYS}MSYS de \index{MSYS2}\link{https://www.msys2.org}{MSYS2}
+et \index{Git~Bash}Git~Bash de
+\link{https://git-scm.com/downloads}{Git for Windows}.
 
 Il va sans dire que les utilitaires \icode{grep}, \icode{sed} et
 \icode{awk} s'utilisent depuis une ligne de commande \index{Unix}Unix:
@@ -151,7 +151,7 @@ envoyé à un autre programme ou redirigé vers un fichier. Les outils
 diffèrent quant au type de traitement qu'ils peuvent effectuer.
 \begin{description}
 \item[\code{grep}] sélectionne les lignes en entrée correspondant à
-  une expression régulière;
+  une \index{expression régulière}expression régulière;
 \item[\code{sed}] sert surtout pour rechercher et remplacer du texte;
 \item[\code{awk}] permet de traiter aisément du texte séparé en
   champs, ainsi que du texte réparti sur plusieurs lignes.
@@ -163,14 +163,14 @@ profusion dans la présentation sur les expressions régulières à la
 les utiliser. L'utilitaire \icode{awk}, quant à lui, fera l'objet
 de la \autoref{sec:texte:awk}.
 
-\notebox{Lorsqu'il est question d'expressions régulières dans la
-  littérature informatique, le langage de programmation
-  \index{Perl}Perl est habituellement mentionné. En effet, Perl a été
-  créé par Larry Wall en 1987 pour traiter facilement du texte. Le
-  langage prend en charge les expressions régulières dans sa syntaxe
-  même et il comporte plusieurs extensions aux expressions prises en
-  charge par \icode{grep} et \icode{sed}. Cet ouvrage ne traite pas de
-  \icode{Perl}.}
+\notebox{Lorsqu'il est question d'\index{expression
+    régulière}expressions régulières dans la littérature informatique,
+  le langage de programmation \index{Perl}Perl est habituellement
+  mentionné. En effet, Perl a été créé par Larry Wall en 1987 pour
+  traiter facilement du texte. Le langage prend en charge les
+  expressions régulières dans sa syntaxe même et il comporte plusieurs
+  extensions aux expressions prises en charge par \icode{grep} et
+  \icode{sed}. Cet ouvrage ne traite pas de \icode{Perl}.}
 
 \subsection{Extraction de lignes avec \code{grep}}
 \label{sec:texte:outils:grep}
@@ -181,13 +181,13 @@ L'utilitaire \Icode{grep}\footnote{%
   globalement (\code{g}) une expression régulière (\emph{regular
     expression}, \code{re}) et d'afficher les lignes qui correspondent
   (\emph{print}, \code{p}).} %
-prend en argument une expression régulière, lit l'entrée standard ou
-une liste de fichiers ligne par ligne, puis retourne sur la sortie
-standard les lignes qui contiennent des correspondances avec
-l'expression régulière. C'est très utile pour savoir si un fichier
-contient --- ou quels fichiers contiennent --- un mot ou une
-expression, assez pour que le nom de l'utilitaire soit devenu un verbe
-dans le %
+prend en argument une \index{expression régulière}expression
+régulière, lit l'entrée standard ou une liste de fichiers ligne par
+ligne, puis retourne sur la sortie standard les lignes qui contiennent
+des correspondances avec l'expression régulière. C'est très utile pour
+savoir si un fichier contient --- ou quels fichiers contiennent --- un
+mot ou une expression, assez pour que le nom de l'utilitaire soit
+devenu un verbe dans le %
 \link{http://www.catb.org/jargon/html/G/grep.html}{jargon
   informatique} %
 en anglais (\emph{to grep}).
@@ -232,7 +232,8 @@ $ grep 'flambant' chanson.txt | wc
 \end{Schunk}
 
 L'option \code{-c} de \icode{grep} donne encore plus rapidement accès
-au nombre de lignes qui correspondent à l'expression régulière.
+au nombre de lignes qui correspondent à l'\index{$expression
+  régulière$}expression régulière.
 \begin{Schunk}
 \begin{Verbatim}
 $ grep -c 'flambant' chanson.txt
@@ -242,9 +243,10 @@ $ grep -c 'flambant' chanson.txt
 
 L'option \code{-v} de \icode{grep} permet d'inverser les résultats ou,
 autrement dit, d'extraire les lignes qui ne contiennent aucune
-correspondance avec l'expression régulière. Par exemple, la commande
-ci-dessous permet d'extraire les vers qui ne contiennent pas la
-lettre «e» (ce qui inclut les lignes blanches entre les strophes).
+correspondance avec l'\index{$expression
+  régulière$}expression régulière. Par exemple, la commande ci-dessous
+permet d'extraire les vers qui ne contiennent pas la lettre «e» (ce
+qui inclut les lignes blanches entre les strophes).
 \begin{Schunk}
 \begin{Verbatim}
 $ grep -v 'e' chanson.txt
@@ -282,8 +284,8 @@ s/\meta{motif}/\meta{remplacement}/\meta{modificateur}
 \begin{itemize}
 \item \code{s} est le nom de la commande \icode{sed} qui sert à
   rechercher et remplacer.
-\item \meta{motif} est une expression régulière qui définit le texte à
-  rechercher.
+\item \meta{motif} est une \index{expression régulière}expression
+  régulière qui définit le texte à rechercher.
 \item \meta{remplacement} est le texte qui sert à remplacer le texte
   qui correspond à \meta{motif}.
 \item \meta{modificateur} est un symbole qui permet de modifier le
@@ -380,14 +382,15 @@ tampon de \icode{sed} dans le présent ouvrage.
 \section{Expressions régulières}
 \label{sec:texte:regex}
 
-Tel que mentionné dans l'introduction de ce chapitre, une expression
-régulière, ou expression rationnelle, est un langage, muni d'une
-syntaxe précise, qui permet de décrire un ensemble de chaines de
-caractères possibles. Vous avez rencontré quelques expressions
-régulières très simples et intuitives à la section précédente. Ainsi,
-l'expression régulière \regex{chat} décrit la chaine «chat», mais
-aussi «chats», «chaton» ou «achat». Nous verrons dans la suite comment
-restreindre l'expression au seul mot «chat».
+Tel que mentionné dans l'introduction de ce chapitre, une
+\Index{expression régulière}expression régulière, ou expression
+rationnelle, est un langage, muni d'une syntaxe précise, qui permet de
+décrire un ensemble de chaines de caractères possibles. Vous avez
+rencontré quelques expressions régulières très simples et intuitives à
+la section précédente. Ainsi, l'expression régulière \regex{chat}
+décrit la chaine «chat», mais aussi «chats», «chaton» ou «achat». Nous
+verrons dans la suite comment restreindre l'expression au seul mot
+«chat».
 
 Cette section propose une introduction au langage des expressions
 régulières. Il existe une multitude de tutoriels et de documents de
@@ -404,15 +407,19 @@ référence classique de \citet{Friedl:regex:2006}.
 \label{sec:texte:regex:types}
 
 Avant d'aller plus loin, vous devez absolument savoir qu'il existe
-trois grands types d'expressions régulières: les expressions
+trois grands types d'\index{expression régulière}expressions
+régulières: les \index{expression régulière!basique}expressions
 régulières basiques ou classiques (\emph{Basic Regular Expressions},
-BRE), les expressions régulières étendues (\emph{Extended Regular
-  Expressions}, ERE) et les expressions régulières de Perl (\emph{Perl
-  Compatible Regular Expressions}, PCRE). Les utilitaires \icode{grep}
-et \icode{sed} utilisent les expressions régulières basiques par défaut.
+\index{BRE}BRE), les \index{expression régulière!étendue}expressions
+régulières étendues (\emph{Extended Regular Expressions},
+\index{ERE}ERE) et les \index{expression régulière!Perl}expressions
+régulières de Perl (\emph{Perl Compatible Regular Expressions},
+\index{PCRE}PCRE). Les utilitaires \icode{grep} et \icode{sed}
+utilisent les expressions régulières basiques par défaut.
 
-Les principales différences entre les expressions régulières basiques
-et étendues sont les suivantes.
+Les principales différences entre les \index{expression
+  régulière!basique}expressions régulières basiques et
+\index{expression régulière!étendue}étendues sont les suivantes.
 \begin{itemize}
 \item Dans les expressions régulières étendues, les symboles
   «\code{+}» et «\code{?}» sont des opérateurs de répétition. Dans les
@@ -422,15 +429,43 @@ et étendues sont les suivantes.
   est un opérateur de choix entre plusieurs possibilités. Dans les
   expressions régulières basiques, c'est un caractère ordinaire et il
   n'existe aucun équivalent pour sa fonctionnalité.
-\item Dans les expressions régulières basiques, les accolades \code{\{
-    \}} et les parenthèses \code{( )} sont des caractères ordinaires
-  et il faut les précéder du symbole \code{\bs} pour les convertir,
-  respectivement, en opérateurs de quantificateur borné et de
-  regroupement. C'est l'inverse dans les expressions régulières
-  étendues.
+\item Dans les expressions régulières étendues, les accolades \code{\{
+    \}} et les parenthèses \code{( )} sont, respectivement, des
+  opérateurs de quantificateur borné et de regroupement. Dans les
+  expressions régulières basiques, ce sont des caractères ordinaires
+  et il faut les précéder d'une barre oblique inversée «\code{\bs}»
+  pour les convertir en opérateurs.
 \end{itemize}
 
+Dans la suite, lorsqu'il existe une différence entre les expressions
+régulières basiques et les expressions régulières étendues, nous
+utiliserons toujours ces dernières. Pour indiquer à \icode{grep} et à
+\icode{sed} d'utiliser la syntaxe des \index{expression
+  régulière!étendue}expressions régulières étendues, il suffit de leur
+ajouter l'option \code{-E}. Dans le premier exemple ci-dessous, le
+motif est une \index{expression régulière basique}expression régulière
+basique qui ne reconnait donc aucune ligne du fichier
+\code{chanson.txt}. Dans le second exemple, le motif est une
+expression régulière étendue dans laquelle l'opérateur  «\code{|}»
+permet de reconnaitre «chien» ou «chat».
+\begin{Schunk}
+\begin{Verbatim}
+$ grep 'chien|chat' chanson.txt
+$
+\end{Verbatim}
+\end{Schunk}
 
+\begin{Schunk}
+\begin{Verbatim}
+$ grep -E 'chien|chat' chanson.txt
+Rampent comme des chiens
+\end{Verbatim}
+\end{Schunk}
+
+\tipbox{Dans le doute, utilisez simplement toujours \icode{grep} et
+  \icode{sed} avec l'option \code{-E}. La plupart des systèmes
+  fournissent aussi un utilitaire \icode{egrep} en tous points
+  équivalent à \code{grep -E}.}
 
 
 \section{Traitement de texte divisé en champs avec \code{awk}}
