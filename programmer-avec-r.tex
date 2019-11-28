@@ -31,6 +31,7 @@
   \usepackage{dirtree}                 % arborescence de fichiers
   \usepackage{fontawesome5}            % icônes \fa*
   \usepackage{awesomebox}              % boites info, important, etc.
+  \usepackage{ullrcorners}             % expressions régulières
   \usepackage{answers}                 % exercices et solutions
   \usepackage{listings}                % code informatique
   \usepackage{refcount}                % numéros de ligne en surbrillance
@@ -88,6 +89,7 @@
   \definecolor{link}{rgb}{0,0.4,0.6}        % liens internes
   \definecolor{url}{rgb}{0.6,0,0}           % liens externes
   \definecolor{citation}{rgb}{0,0.5,0}      % citations
+  \definecolor{regex}{rgb}{0,0.5,0}         % coins des regex
   \colorlet{codebg}{LightYellow1}           % fond code R
   \colorlet{indexedface}{PaleGreen2}        % cellule indexée (2D et 3D)
   \colorlet{indexedtop}{PaleGreen3}         % cellule indexée (3D, dessus)
@@ -373,6 +375,10 @@
   \newcommand{\code}[1]{\texttt{#1}}
   \newcommand{\pkg}[1]{\textbf{#1}}
 
+  %% Expressions régulières; utilise le paquetage local
+  %% ullrcorners pour tracer les coins autour de l'expression
+  \newcommand{\regex}[1]{\ullrcorners{regex}{\code{#1}}}
+
   %% Hyperlien avec symbole de lien externe juste après; second
   %% argument peut être vide pour afficher l'url comme lien
   %% [https://tex.stackexchange.com/q/53068/24355 pour procédure de
@@ -488,7 +494,7 @@
     puis-que
   }
 
-%  \includeonly{algorithmes,bases,donnees,solutions}
+  \includeonly{texte}
 
 \begin{document}
 

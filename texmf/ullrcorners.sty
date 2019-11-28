@@ -1,0 +1,70 @@
+%% Copyright (C) 2019 Vincent Goulet
+%%
+%% This file may be distributed and/or modified under the conditions
+%% of the LaTeX Project Public License, either version 1.3c of this
+%% license or (at your option) any later version. The latest version
+%% of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 2006/05/20 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is Vincent Goulet
+%% <vincent.goulet@act.ulaval.ca>.
+%%
+%% This package provides a command \ullrcorner to draw small corners
+%% on the upper left and lower right sides of a word. The syntax is
+%%
+%%   \ullrcorners<color><text>
+%%
+%% where <color> is the color to use for the corners and <text> is,
+%% well, the text to surround.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ullrcorners}[2019/11/28 (Dr. Vincent Goulet)]
+
+% Lengths
+\newlength{\ullrc@cornerlinewidth}
+\newlength{\ullrc@cornershortlength}
+\newlength{\ullrc@cornerlonglength}
+\newlength{\ullrc@cornervgap}
+\newlength{\ullrc@cornerhgap}
+\setlength{\ullrc@cornerlinewidth}{0.8pt}
+\setlength{\ullrc@cornershortlength}{0.6ex}
+\setlength{\ullrc@cornerlonglength}{1.5\ullrc@cornershortlength}
+\setlength{\ullrc@cornervgap}{\ullrc@cornerlinewidth}
+\setlength{\ullrc@cornerhgap}{2\ullrc@cornervgap}
+
+\def\ullrcorners#1#2{%
+  \setbox\z@\hbox{\kern\ullrc@cornerhgap #2\kern\ullrc@cornerhgap}%
+  \dimen\z@=\dimexpr\ullrc@cornerlinewidth+\ullrc@cornervgap+\dp\z@
+  \setbox\@ne\hbox to\wd\z@{%
+    \hfil%
+    \vbox{%
+      \color{#1}%
+      \hbox to\ullrc@cornershortlength{%
+        \hfil\vrule \@height\ullrc@cornerlonglength \@width\ullrc@cornerlinewidth%
+      }%
+      \hrule \@height\ullrc@cornerlinewidth
+    }%
+  }%
+  \dimen\@ne=\dimexpr\ullrc@cornervgap-\ullrc@cornerlonglength
+  \vbox{%
+    \offinterlineskip
+    \vbox{%
+      \color{#1}%
+      \hrule \@height\ullrc@cornerlinewidth
+      \hbox to\ullrc@cornershortlength{%
+        \vrule \@height\ullrc@cornerlonglength \@width\ullrc@cornerlinewidth
+      }%
+    }
+    \kern\dimen\@ne
+    \box\z@%
+    \kern\dimen\@ne
+    \hbox{\raise -\dimen\z@\box\@ne}%
+  }%
+}
+\endinput
