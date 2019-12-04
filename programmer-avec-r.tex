@@ -100,7 +100,7 @@
   \definecolor{or}{rgb}{1,0.8,0}            % or bandeau UL
 
   %% Hyperliens
-  \usepackage{hyperref}
+  \usepackage[backref=page]{hyperref}
   \hypersetup{%
     pdfauthor = \theauthor,
     pdftitle = \thetitle,
@@ -111,6 +111,15 @@
     citecolor = {citation},
     pdfpagemode = {UseOutlines},
     pdfstartview = {Fit}}
+  \renewcommand*{\backrefalt}[4]{%
+    \ifcase #1 %
+      Aucune citation.%
+    \or
+      Cité à la page #2.%
+    \else
+      Cité aux pages #2.%
+    \fi
+  }
   \setlength{\XeTeXLinkMargin}{1pt}
 
   %% Affichage de la table des matières du PDF
@@ -488,7 +497,7 @@
     puis-que
   }
 
-%  \includeonly{algorithmes,bases,donnees,solutions}
+%  \includeonly{texte}
 
 \begin{document}
 
