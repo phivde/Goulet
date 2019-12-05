@@ -2001,6 +2001,22 @@ auj >= d                   # après le 2000-02-29?
 (dixsem <- seq(Sys.Date(), length.out = 10, by = "1 week"))
 ##-!- ?seq.Date                  # voir les autres possibilités
 
+## Attention: dans la génération de suites par mois, le jour du mois
+## ne change pas sauf si cela résulte en un jour invalide. Cela arrive
+## seulement si la date de départ est le 31 du mois. Dans ce cas,
+## c'est le jour du mois suivant qui est utilisé.
+seq(as.Date("2042-05-31"), length.out = 4, by = "+1 month")
+
+## Un truc pour se prémunir contre cet éventuel problème consiste à
+## ajouter un jour à la date de départ avant de générer la suite, puis
+## à soustraire un jour ensuite.
+##
+## Comme ça, si la date de départ est un 31, on génère la suite à
+## partir du 1er du mois suivant pour revenir ensuite en arrière; si
+## la date de départ est n'importe quel autre jour dans le mois, ça ne
+## change rien.
+seq(as.Date("2042-05-31") + 1, length.out = 4, by = "+1 month") - 1
+
 ## Quelques fonctions d'extraction utiles.
 weekdays(dixsem)           # jours de la semaine
 months(dixsem)             # mois
