@@ -6,7 +6,13 @@
 
 ## Nouveautés
 
-
+- Section 4.7: sous-section 4.7.8 sur les fonctions utiles pour la
+  manipulation de chaines de caractères (et exemples correspondants
+  dans `bases.R`).
+- Exemples de la section 5.9: utilisation de `seq` avec une date (donc
+  de `seq.Date`) à partir du 31 du mois pour illustrer le passage au
+  mois suivant en cas de date invalide; présentation d'une astuce
+  pour contourner le problème.
 
 ## Changements
 

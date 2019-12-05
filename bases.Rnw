@@ -2089,6 +2089,40 @@ pmax(x, c(16, 23,  4, 12,  3))
 @
 \end{ttscript}
 
+\subsection{Manipulation de chaines de caractères}
+\label{sec:bases:internes:texte}
+
+\begin{ttscript}{strsplit}
+\item[\Icode{paste}] \index{chaine de caratères!concaténation}
+  concaténation de vecteurs après les avoir convertis en chaines de
+  caractères, séparés par défaut par des espaces
+<<echo=TRUE>>=
+paste(c("Camille", "Marianne", "Alexandre"),
+      "porte le numéro", c(8, 7, 2))
+@
+\item[\Icode{paste0}] comme \icode{paste}, mais sans séparateur entre
+  les éléments
+<<echo=TRUE>>=
+paste0(1:5, c("er", rep("e", 4)))
+@
+\item[\Icode{nchar}] \index{chaine de caratères!nombre de caractères}
+  nombre de caractères dans une chaine de caractères
+<<echo=TRUE>>=
+nchar(c("foo", "foobar"))
+@
+\item[\Icode{substr}] \index{chaine de caratères!sous-chaine}
+  sous-chaine (partie) d'une chaine de caractères
+<<echo=TRUE>>=
+substr("abcdef", 2, 4)
+@
+\item[\Icode{strsplit}] \index{chaine de caratères!séparation}
+  séparation d'une chaine de caractères en parties sur un caractère
+  quelconque
+<<echo=TRUE>>=
+strsplit("Luc va à l'école", " ")
+@
+\end{ttscript}
+
 <<script, results=hide>>=
 ###
 ### QUELQUES FONCTIONS INTERNES UTILES  `\labelline{bases:internes}`
@@ -2245,7 +2279,30 @@ rev(cumprod(rev(y)))       # produit cumulatif renversé
 cummin(x)                  # minimum cumulatif
 cummax(y)                  # maximum cumulatif
 pmin(x, y)                 # minimum élément par élément
-pmax(x, y)                 # maximum élément par élément `\labelline{bases:internes:fin}`
+pmax(x, y)                 # maximum élément par élément
+
+## MANIPULATION DE CHAINES DE CARACTÈRES
+
+## Une chaine de caractères est un regroupement entre
+## guillemets " " de 0, 1 ou plusieurs caractères. Puisque
+## tout objet dans R est un vecteur, une chaine de caractères
+## seule est un vecteur contenant une seule chaine de
+## caractères. Un vecteur peut également contenir plusieurs
+## chaines de caractères de longueurs différentes.
+"foo"                      # vecteur d'une seule chaine
+c("", "foo", "foobar")     # vecteur de 3 chaines
+
+## Les fonctions ci-dessous permettent de manipuler une chaine
+## de caractères. Elles sont vectorielles, c'est-à-dire
+## qu'elles peuvent effectuer leur traitement sur chaque
+## chaine d'un vecteur.
+s <- c("Programmation", "analyse", "données")
+paste(1:3, "-", s)         # création de 3 chaines
+paste0(1:3, "-", s)        # idem, sans espace
+paste0(s, collapse = " ")  # concaténation des 3 chaines
+nchar(s)                   # nombres de caractères
+substr(s, 2, 5)            # sous-chaines
+strsplit("2001-05", "-")   # séparation en sous-chaines  `\labelline{bases:internes:fin}`
 @
 
 \gotorbox{Vous trouverez plusieurs exemples additionnels d'utilisation des
