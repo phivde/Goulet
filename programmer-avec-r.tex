@@ -89,7 +89,7 @@
   \definecolor{link}{rgb}{0,0.4,0.6}        % liens internes
   \definecolor{url}{rgb}{0.6,0,0}           % liens externes
   \definecolor{citation}{rgb}{0,0.5,0}      % citations
-  \definecolor{regex}{rgb}{0,0.5,0}         % coins des regex
+  \colorlet{regex}{DarkOrange1}             % coins des regex
   \colorlet{codebg}{LightYellow1}           % fond code R
   \colorlet{indexedface}{PaleGreen2}        % cellule indexée (2D et 3D)
   \colorlet{indexedtop}{PaleGreen3}         % cellule indexée (3D, dessus)
@@ -378,6 +378,28 @@
   %% Expressions régulières; utilise le paquetage local
   %% ullrcorners pour tracer les coins autour de l'expression
   \newcommand{\regex}[1]{\ullrcorners{regex}{\code{#1}}}
+
+  %% J'ai besoin d'afficher le symbole d'espace de \verb* à
+  %% l'intérieur d'expressions régulières, donc en argument à \regex.
+  %% Pour ce faire, le symbole est sauvegardé à l'intérieur d'une
+  %% boite. [https://tex.stackexchange.com/a/50805]
+  \newsavebox{\spacebox}
+  \begin{lrbox}{\spacebox}
+    \verb*! !
+  \end{lrbox}
+  \newcommand{\aspace}{\usebox{\spacebox}}
+  \newcommand{\NLsymbol}{%
+    \fbox{\makebox[0.15em]{%
+        \sffamily\tiny
+        \raisebox{0.5ex}{N}%
+        \kern-1pt%
+        \raisebox{-0.2ex}{L}}}}
+  \newcommand{\CRsymbol}{%
+    \fbox{\makebox[0.15em]{%
+        \sffamily\tiny
+        \raisebox{0.5ex}{C}%
+        \kern-0.5pt%
+        \raisebox{-0.2ex}{R}}}}
 
   %% Hyperlien avec symbole de lien externe juste après; second
   %% argument peut être vide pour afficher l'url comme lien

@@ -92,12 +92,32 @@ Un jour ou l'autre, vous aurez à traiter des chaines de caractères en
 programmation ou en analyse de données. Ce jour-là, connaitre les
 expressions régulières vous sauvera énormément de temps.
 
-Pour les exemples de ce chapitre, nous utiliserons le texte de la
-chanson «La journée qui s'en vient est flambant neuve» de l'album
-\emph{Astronomie} (2012) du groupe québécois Avec pas d'casque. Le
-texte est fourni avec le présent document dans le fichier
-\code{chanson.txt}. Pour référence, il est également reproduit à la
-\autoref{fig:texte:chanson}.
+
+\section{Conventions typographiques et texte des exemples}
+\label{sec:texte:conventions}
+
+La présentation des expressions régulières exige souvent de devoir
+clairement délimiter une expression et d'afficher certains caractères
+invisibles, comme les espaces ou les retours à la ligne. Pour ce
+chapitre, lorsque le contexte l'exige:
+\begin{itemize}
+\item les expressions régulières sont encadrées de «coins» de couleur
+  contrastante, comme \regex{ceci} \citep[une notation que j'emprunte
+  à][]{Friedl:regex:2006};
+\item les espaces sont représentées par le symbole \aspace, ce qui
+  permet, par exemple, de bien discerner que l'expression régulière
+  \regex{\#\aspace\aspace\aspace\aspace A} compte quatre espaces entre
+  \code{\#} et \code{A};
+\item le caractère de retour à la ligne (\emph{newline}) est
+  représenté par {\NLsymbol} et celui de retour chariot (\emph{carriage
+    return}) est représenté par \CRsymbol.
+\end{itemize}
+
+Dans les exemples, nous utiliserons le texte de la chanson «La journée
+qui s'en vient est flambant neuve» de l'album \emph{Astronomie} (2012)
+du groupe québécois Avec pas d'casque. Le texte est fourni avec le
+présent document dans le fichier \code{chanson.txt}. Pour référence,
+il est également reproduit à la \autoref{fig:texte:chanson}.
 
 \begin{figure}
   \centering
@@ -400,8 +420,8 @@ au début du chapitre, je me suis inspiré de l'excellent guide
 \link{https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/}{\emph{Shell
     Scripting Primer}} de la bibliothèque pour développeurs de Apple
 \citep{Apple:shellprimer}. Si vous souhaitez étudier les expressions
-régulières vraiment en profondeur, je vous recommande l'ouvrage de
-référence classique de \citet{Friedl:regex:2006}.
+régulières vraiment en profondeur, je vous recommande l'ouvrage
+classique de \citet{Friedl:regex:2006}.
 
 \subsection{Types d'expressions régulières}
 \label{sec:texte:regex:types}
