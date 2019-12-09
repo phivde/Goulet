@@ -14,6 +14,16 @@
 
 <<echo=FALSE>>=
 options(width=50)
+
+##
+## Affiche une commande exécutée par le système et son résultat.
+##
+exec <- function(command, args)
+{
+    cmd <- paste("$", command, paste(args, collapse = " "))
+    res <- system2(command, args, stdout = TRUE)
+    cat(paste(cmd, paste(res, collapse = "\n"), sep = "\n"))
+}
 @
 
 \begin{objectifs}
@@ -92,14 +102,24 @@ Un jour ou l'autre, vous aurez à traiter des chaines de caractères en
 programmation ou en analyse de données. Ce jour-là, connaitre les
 expressions régulières vous sauvera énormément de temps.
 
+\begin{figure}[t]
+  \centering
+  \begin{minipage}{0.9\linewidth}
+    \setkeys{Gin}{width=\textwidth}
+    \includegraphics{images/regular_expressions} \\
+    \footnotesize\sffamily%
+    Tiré de \href{https://xkcd.com/208/}{XKCD.com}
+  \end{minipage}
+\end{figure}
+
 
 \section{Conventions typographiques et texte des exemples}
 \label{sec:texte:conventions}
 
-La présentation des expressions régulières exige souvent de devoir
-clairement délimiter une expression et d'afficher certains caractères
-invisibles, comme les espaces ou les retours à la ligne. Pour ce
-chapitre, lorsque le contexte l'exige:
+La présentation des expressions régulières exige souvent de clairement
+délimiter une expression et d'afficher certains caractères invisibles,
+comme les espaces ou les retours à la ligne. Pour ce chapitre, lorsque
+le contexte l'exige:
 \begin{itemize}
 \item les expressions régulières sont encadrées de «coins» de couleur
   contrastante, comme \regex{ceci} \citep[une notation que j'emprunte
@@ -125,16 +145,6 @@ il est également reproduit à la \autoref{fig:texte:chanson}.
   \caption{Texte de la chanson «La journée qui s'en vient est flambant
     neuve» de Avec pas d'casque}
   \label{fig:texte:chanson}
-\end{figure}
-
-\begin{figure}[t]
-  \centering
-  \begin{minipage}{0.9\linewidth}
-    \setkeys{Gin}{width=\textwidth}
-    \includegraphics{images/regular_expressions} \\
-    \footnotesize\sffamily%
-    Tiré de \href{https://xkcd.com/208/}{XKCD.com}
-  \end{minipage}
 \end{figure}
 
 
@@ -183,10 +193,10 @@ profusion dans la présentation sur les expressions régulières à la
 les utiliser. L'utilitaire \icode{awk}, quant à lui, fera l'objet
 de la \autoref{sec:texte:awk}.
 
-\notebox{Lorsqu'il est question d'\index{expression
-    régulière}expressions régulières dans la littérature informatique,
-  le langage de programmation \index{Perl}Perl est habituellement
-  mentionné. En effet, Perl a été créé par Larry Wall en 1987 pour
+\notebox{Dans la littérature informatique, la présentation des
+  \index{expression régulière}expressions régulières s'accompagne
+  généralement de celle du langage de programmation \index{Perl}Perl.
+  En effet, Perl a été créé par Larry Wall en 1987 justement pour
   traiter facilement du texte. Le langage prend en charge les
   expressions régulières dans sa syntaxe même et il comporte plusieurs
   extensions aux expressions prises en charge par \icode{grep} et
@@ -218,66 +228,40 @@ fichier \code{chanson.txt}: le vers de la chanson qui contient le mot
 «chat» (aucun\footnote{%
   Sachez que la \link{https://youtu.be/eR_44AzYIZs}{vidéo} de la
   chanson est, elle, emplie de chatons très mignons.}).
-\begin{Schunk}
-\begin{Verbatim}
-$ grep 'temps' chanson.txt
-Le temps qui s'appelle hier
-\end{Verbatim}
-\end{Schunk}
-\begin{Schunk}
-\begin{Verbatim}
-$ grep '^M' chanson.txt
-Mes bras désolés
-Même si le mouvement
-Meurt mieux qu'il ne se charge
-Même si la fatigue
-\end{Verbatim}
-\end{Schunk}
-\begin{Schunk}
-\begin{Verbatim}
-$ grep 'chat' chanson.txt
-$
-\end{Verbatim}
-\end{Schunk}
+<<echo=FALSE>>=
+exec("grep", c("'temps'", "chanson.txt"))
+@
+<<echo=FALSE>>=
+exec("grep", c("'^M'", "chanson.txt"))
+@
+<<echo=FALSE>>=
+exec("grep", c("'chat'", "chanson.txt"))
+@
 
 En combinant \icode{grep} avec l'utilitaire \Icode{wc} (\emph{word
   count}), nous pouvons obtenir le nombre total de lignes, de mots et
 de caractères des vers dans lesquels le mot «flambant» apparait dans
 la chanson.
-\begin{Schunk}
-\begin{Verbatim}
-$ grep 'flambant' chanson.txt | wc
-       6      48     276
-\end{Verbatim}
-\end{Schunk}
+<<echo=FALSE>>=
+exec("grep", c("'flambant'", "chanson.txt", "| wc"))
+@
 
 L'option \code{-c} de \icode{grep} donne encore plus rapidement accès
 au nombre de lignes qui correspondent à l'\index{$expression
   régulière$}expression régulière.
-\begin{Schunk}
-\begin{Verbatim}
-$ grep -c 'flambant' chanson.txt
-6
-\end{Verbatim}
-\end{Schunk}
+<<echo=FALSE>>=
+exec("grep", c("-c", "'flambant'", "chanson.txt"))
+@
 
 L'option \code{-v} de \icode{grep} permet d'inverser les résultats ou,
-autrement dit, d'extraire les lignes qui ne contiennent aucune
-correspondance avec l'\index{$expression
-  régulière$}expression régulière. Par exemple, la commande ci-dessous
-permet d'extraire les vers qui ne contiennent pas la lettre «e» (ce
-qui inclut les lignes blanches entre les strophes).
-\begin{Schunk}
-\begin{Verbatim}
-$ grep -v 'e' chanson.txt
-
-
-
-Nous avons l'outil
-
-
-\end{Verbatim}
-\end{Schunk}
+autrement dit, d'extraire les lignes qui ne contiennent \emph{aucune}
+correspondance avec \index{expression régulière}l'expression
+régulière. Par exemple, la commande ci-dessous permet d'extraire les
+vers qui ne contiennent pas la lettre «e» (ce qui inclut les lignes
+blanches entre les strophes).
+<<echo=FALSE, strip.white=false>>=
+exec("grep", c("-v", "'e'", "chanson.txt"))
+@
 
 \subsection{Recherche et remplacement avec \code{sed}}
 \label{sec:texte:outils:sed}
@@ -785,6 +769,13 @@ $ awk '(state == 0) && /^# / { state = 1; next } \
 \addcontentsline{toc}{section}{Chapitre \protect\ref*{chap:texte}}
 
 \end{Filesave}
+
+\begin{exercice}
+  Données BIXI:
+  - déterminer si une station sur rue Unetelle
+  - déterminer comment identifier ligne des titres de colonnes
+  - sélectionner seulement certaines locations
+\end{exercice}
 
 \begin{exercice}
   Dans chacun des cas ci-dessous, déterminer à laquelle ou auxquelles
