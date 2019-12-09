@@ -18,6 +18,8 @@
 
 ## Changements
 
+- Terme «étiquette» utilisé plus systématiquement en lieu et place de
+  «nom» lorsqu'il s'agit de l'attribut d'un vecteur ou d'une liste.
 - Terme «encodage» changé pour «codage de caractères» tel que
   recommandé par l'Office québécois de la langue française.
 - Section 2.7: quelques détails additionnels sur la gestion du

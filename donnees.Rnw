@@ -325,12 +325,12 @@ fonction du même nom servant à extraire l'attribut d'un objet.
     \icode{class}    &
     affecte le comportement d'un objet \\
     \icode{dim}      &
-    dimensions\index{dimension} des matrices et tableaux \\
+    \index{dimension}dimensions des matrices et tableaux \\
     \icode{dimnames} &
-    étiquettes\index{etiquette@étiquette} des dimensions des matrices
+    \index{etiquette@étiquette}étiquettes des dimensions des matrices
     et tableaux \\
     \icode{names}    &
-    étiquettes des éléments d'un objet \\
+    \index{etiquette@étiquette}étiquettes des éléments d'un objet \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -1246,10 +1246,10 @@ créer des listes est \Icode{list}.
 vecteur de mode \code{numeric}, le second un vecteur de mode
 \code{character} et le troisième, un vecteur de mode \code{logical}.)
 
-\tipbox{Nommez les éléments des listes puisqu'il peut s'avérer
+\tipbox{Étiquetez les éléments des listes puisqu'il peut s'avérer
   difficile autrement de les identifier. De plus, comme nous le
   verrons ci-dessous, il est très simple d'extraire les éléments d'une
-  liste par leur étiquette.}
+  liste par leur \index{etiquette@étiquette}étiquette.}
 
 L'indiçage\Index{indiçage!liste} des listes recèle quelques subtilités
 auxquelles il faut porter une attention particulière. Tout d'abord, il
@@ -1263,11 +1263,11 @@ jusqu'ici).
 \item Les crochets simples\indexcode{[} fonctionnent avec la liste
   comme avec tout vecteur. Le résultat de l'indiçage avec \code{[~]}
   est une liste. Quand on y pense, c'est le seul résultat logique
-  lorsque l'on indice une liste avec un vecteur. Par conséquent, le
-  résultat de l'extraction d'un seul élément d'une liste avec les
-  crochets simples est non pas l'objet en question, mais bien une
-  liste d'un élément contenant l'objet. C'est rarement ce que l'on
-  souhaite obtenir.
+  lorsque l'on indice une liste avec un vecteur. Toutefois, cette
+  règle fait en sorte que le résultat de l'extraction d'un seul
+  élément d'une liste avec les crochets simples est non pas l'objet en
+  question, mais bien une liste d'un élément contenant l'objet. C'est
+  rarement ce que l'on souhaite obtenir.
 <<echo=TRUE>>=
 x[1]
 x[-2]

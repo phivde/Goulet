@@ -685,13 +685,14 @@ character(10)
 @
 
 Il est possible --- et souvent souhaitable --- de nommer les éléments
-d'un vecteur; on dit qu'on leur attribue une \emph{étiquette}. Le
-résultat est un \Index{vecteur!étiqueté}\emph{vecteur étiqueté}, ou
-\Index{vecteur!nommé}\emph{vecteur nommé}. Il y a
-deux grandes façons de procéder: en spécificant les noms dès la
-création du vecteur, ou à posteriori en ajoutant l'attribut au vecteur
-à l'aide de la fonction \Icode{names}. Celle-ci permet aussi
-d'extraire les étiquettes du vecteur.
+d'un vecteur; on dit qu'on leur attribue une
+\Index{etiquette@étiquette}\emph{étiquette}. Le résultat est un
+\Index{vecteur!étiqueté}\emph{vecteur étiqueté}, ou
+\Index{vecteur!nommé}\emph{vecteur nommé}. Il y a deux grandes façons
+de procéder: en spécificant les noms dès la création du vecteur, ou à
+posteriori en ajoutant l'attribut au vecteur à l'aide de la fonction
+\Icode{names}. Celle-ci permet aussi d'extraire les
+\index{etiquette@étiquette}étiquettes du vecteur.
 <<echo=TRUE>>=
 (x <- c(a = 1, b = 2, c = 5))
 names(x)
@@ -841,11 +842,12 @@ x[c(-2, -3)]
 x > 0
 x[x > 0]
 @
-\item \textbf{Extraction par nom} avec un vecteur de chaines de
-  caractères. Les éléments dont l'étiquette correspond à l'une des
-  chaines sont extraits du vecteur. Cette méthode d'indiçage a
-  comme principal avantage de permettre l'extraction d'éléments d'un
-  vecteur indépendamment de leur position dans celui-ci.
+\item \textbf{Extraction par étiquette} avec un vecteur de chaines de
+  caractères. Les éléments dont \index{etiquette@étiquette}l'étiquette
+  correspond à l'une des chaines sont extraits du vecteur. Cette
+  méthode d'indiçage a comme principal avantage de permettre
+  l'extraction d'éléments d'un vecteur indépendamment de leur position
+  dans celui-ci.
 <<echo=TRUE>>=
 x[c("B", "D")]
 @
@@ -1003,7 +1005,7 @@ x[1]                       # extraction par position
 x[-2]                      # suppression par position
 x[x > 5]                   # extraction par critère
 x[0 < x & x < 10]          # autre extraction par critère
-x["c"]                     # extraction par nom
+x["c"]                     # extraction par étiquette
 x[]                        # tous les éléments
 x[numeric(0)]              # différent d'indice vide
 
