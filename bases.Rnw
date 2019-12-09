@@ -622,8 +622,8 @@ définition du vecteur est encore plus large. En fait, \emph{tout} est
 un vecteur dans R et il s'agit simplement d'une collection de données
 contigües (numériques ou non) auxquelles il est possible d'accéder
 directement par une opération d'\index{indiçage}indiçage. La
-\autoref{fig:bases:vecteur} représente schématiquement un vecteur
-simple dans R.
+\autoref{fig:bases:vecteur} représente schématiquement un
+\index{vecteur!simple}vecteur simple dans R.
 
 \begin{figure}
   \centering
@@ -653,9 +653,11 @@ simple dans R.
   \label{fig:bases:vecteur}
 \end{figure}
 
-Nous allons nous restreindre pour le moment aux vecteurs simples
-(atomiques) dans lesquels tous les éléments sont du même type ou, plus
-précisément, du même \index{mode}\emph{mode}\footnote{%
+Nous allons nous restreindre pour le moment aux
+\index{vecteur!simple}vecteurs simples
+(\index{vecteur!atomique}atomiques) dans lesquels tous les éléments
+sont du même type ou, plus précisément, du même
+\index{mode}\emph{mode}\footnote{%
   Nous reviendrons sur le concept de mode à la
   \autoref{sec:donnees:objets:mode}.}. %
 Les vecteurs plus généraux feront leur entrée au
@@ -665,7 +667,8 @@ Les vecteurs plus généraux feront leur entrée au
 \label{sec:bases:vecteurs:creation}
 
 La fonction de base pour créer un vecteur est la fonction de
-concaténation \Icode{c}.
+\index{vecteur!concaténation}\index{concaténation}concaténation
+\Icode{c}.
 <<echo=TRUE>>=
 (x <- c(2, 5.1, 42))
 @
@@ -682,7 +685,9 @@ character(10)
 @
 
 Il est possible --- et souvent souhaitable --- de nommer les éléments
-d'un vecteur; on dit qu'on leur attribue une \emph{étiquette}. Il y a
+d'un vecteur; on dit qu'on leur attribue une \emph{étiquette}. Le
+résultat est un \Index{vecteur!étiqueté}\emph{vecteur étiqueté}, ou
+\Index{vecteur!nommé}\emph{vecteur nommé}. Il y a
 deux grandes façons de procéder: en spécificant les noms dès la
 création du vecteur, ou à posteriori en ajoutant l'attribut au vecteur
 à l'aide de la fonction \Icode{names}. Celle-ci permet aussi
@@ -697,10 +702,11 @@ names(x) <- c("a", "b", "c")
 x
 @
 
-Si vous tentez de créer un vecteur simple avec des données de modes
-différents, R effectuera une \index{conversion forcée}conversion
-forcée (\emph{coercion}) vers un mode unique. Celui-ci est choisi pour
-minimiser la perte d'information sur les objets originaux.
+Si vous tentez de créer un \index{vecteur!simple}vecteur simple avec
+des données de modes différents, R effectuera une \index{conversion
+  forcée}conversion forcée (\emph{coercion}) vers un mode unique.
+Celui-ci est choisi pour minimiser la perte d'information sur les
+objets originaux.
 <<echo=TRUE>>=
 c(2, TRUE, FALSE)
 c(2, FALSE, "a")
@@ -747,9 +753,9 @@ c(TRUE, TRUE, FALSE, FALSE) & c(TRUE, FALSE, TRUE, FALSE)
 
 La seconde règle de base se rapporte aux opérations entre des vecteurs
 de longueurs différentes. Dans de tels cas, les vecteurs les plus
-courts sont \emph{recyclés} autant de fois que nécessaire pour
-correspondre au plus long vecteur. Cette règle est particulièrement
-apparente avec les vecteurs de longueur $1$.
+courts sont \Index{recyclage}\emph{recyclés} autant de fois que
+nécessaire pour correspondre au plus long vecteur. Cette règle est
+particulièrement apparente avec les vecteurs de longueur $1$.
 <<echo=TRUE>>=
 1:10 + 2
 @
@@ -760,10 +766,10 @@ autres vecteurs, ces derniers sont recyclés un nombre entier de fois.
 1:10 + 1:5 + c(2, 4)
 @
 
-Autrement, le plus court vecteur est recyclé un nombre fractionnaire
-de fois, mais comme ce résultat est rarement celui souhaité et qu'il
-provient généralement d'une erreur de programmation, un avertissement
-est affiché.
+Autrement, le plus court vecteur est \index{recyclage}recyclé un
+nombre fractionnaire de fois, mais comme ce résultat est rarement
+celui souhaité et qu'il provient généralement d'une erreur de
+programmation, un avertissement est affiché.
 \begin{Schunk}
 \begin{Sinput}
 > 1:10 + c(2, 4, 6)
@@ -777,9 +783,10 @@ taille d'un objet plus court
 \end{Soutput}
 \end{Schunk}
 
-\cautionbox{La règle de recyclage des vecteurs fait en sorte qu'il y a
-  très peu d'erreurs de longueur dans R. Qu'une expression soit
-  valide ne signifie donc pas qu'elle effectue le bon calcul!}
+\cautionbox{La règle de \index{recyclage}recyclage des vecteurs fait
+  en sorte qu'il y a très peu d'erreurs de longueur dans R. Qu'une
+  expression soit valide ne signifie donc pas qu'elle effectue le bon
+  calcul!}
 
 Il tombe sous le sens que les opérateurs arithmétiques sont conçus
 pour des arguments numériques et les
@@ -856,7 +863,7 @@ x[]
 
 \tipbox{Il n'est pas inutile de savoir que les opérations d'extraction
   et de remplacement sont en fait traduites par l'interpréteur R en
-  des appels à des fonctions nommées \icode{[} et \icode{[<-},
+  des appels à des fonctions nommées «\icode{[}» et «\icode{[<-}»,
   dans l'ordre.}
 
 \gotorbox{La présente section est très importante pour la suite.
@@ -2094,8 +2101,9 @@ pmax(x, c(16, 23,  4, 12,  3))
 
 \begin{ttscript}{strsplit}
 \item[\Icode{paste}] \index{chaine de caratères!concaténation}
-  concaténation de vecteurs après les avoir convertis en chaines de
-  caractères, séparés par défaut par des espaces
+  \index{concaténation}concaténation de vecteurs après les avoir
+  convertis en chaines de caractères, séparés par défaut par des
+  espaces
 <<echo=TRUE>>=
 paste(c("Camille", "Marianne", "Alexandre"),
       "porte le numéro", c(8, 7, 2))

@@ -6,6 +6,8 @@
 
 ## Nouveautés
 
+- Section 4.3: mention explicite qu'un vecteur dont les éléments sont
+  étiquetés, ou nommés, est un «vecteur étiqueté» ou «vecteur nommé».
 - Section 4.7: sous-section 4.7.8 sur les fonctions utiles pour la
   manipulation de chaines de caractères (et exemples correspondants
   dans `bases.R`).
@@ -25,6 +27,7 @@
   additionnels sur le fait que l'opérateur d'affectation retourne un
   résultat de manière invisible. Aussi, remplacement de «symbole
   d'affectation» par «opérateur d'affectation».
+- Ajout d'entrées d'index.
 
 ## Corrections
 

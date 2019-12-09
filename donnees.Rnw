@@ -194,13 +194,13 @@ mode(v)
   \end{tabular}
 \end{table}
 
-Les objets de mode \code{numeric}, \code{complex},
-\code{logical} et \code{character} sont des objets \emph{simples}
+Les objets de mode \code{numeric}, \code{complex}, \code{logical} et
+\code{character} sont des objets \index{vecteur!simple}\emph{simples}
 (\emph{atomic}) qui contiennent des données d'un seul type. En
-revanche, les objets de mode \code{list} ou \code{expression} sont
-des objets \emph{récursifs} qui peuvent contenir d'autres objets. Par
-exemple, une liste peut contenir une ou plusieurs autres listes; nous
-y reviendrons plus loin.
+revanche, les objets de mode \code{list} ou \code{expression} sont des
+objets \index{vecteur!récursif}\emph{récursifs} qui peuvent contenir
+d'autres objets. Par exemple, une liste peut contenir une ou plusieurs
+autres listes; nous y reviendrons plus loin.
 
 \tipbox{La fonction \Icode{typeof} permet d'obtenir une description
   plus précise de la représentation interne d'un objet (c'est-à-dire
@@ -1228,11 +1228,12 @@ sum(x[1, , 1])         # équivalent pour la première somme  `\labelline{donnee
 \label{sec:donnees:liste}
 
 La liste\Index{liste} est la structure de données la plus générale et
-polyvalente du langage R. Si les éléments d'un vecteur simple doivent
-tous être du même mode, ceux de la liste peuvent être de n'importe
-quel mode, y compris le mode \icode{list}. Par conséquent, il est
-possible d'emboîter des listes, d'où le qualificatif de
-\emph{récursif} pour ce type d'objet.
+polyvalente du langage R. Si les éléments d'un
+\index{vecteur!simple}vecteur simple doivent tous être du même mode,
+ceux de la liste peuvent être de n'importe quel mode, y compris le
+mode \icode{list}. Par conséquent, il est possible d'emboîter des
+listes, d'où le qualificatif de
+\index{vecteur!récursif}\emph{récursif} pour ce type d'objet.
 
 La liste est la structure de données par excellence pour réunir dans
 un objet plusieurs types d'objets différents. La fonction de base pour
