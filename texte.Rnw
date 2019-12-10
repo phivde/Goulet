@@ -247,8 +247,8 @@ exec("grep", c("'flambant'", "chanson.txt", "| wc"))
 @
 
 L'option \code{-c} de \icode{grep} donne encore plus rapidement accès
-au nombre de lignes qui correspondent à l'\index{$expression
-  régulière$}expression régulière.
+au nombre de lignes qui correspondent à l'\index{expression
+  régulière}expression régulière.
 <<echo=FALSE>>=
 exec("grep", c("-c", "'flambant'", "chanson.txt"))
 @
@@ -320,7 +320,7 @@ Ah comme il est lourd
 Le temps qui s'appelle hier
 ...
 \end{Verbatim}
-\end{Schunk}
+\end{Schunk} %$
 
 \begin{Schunk}
 \begin{Verbatim}
@@ -335,7 +335,7 @@ Gave-moi de ton amour
 Pour shiMMer l'Univers
 ...
 \end{Verbatim}
-\end{Schunk}
+\end{Schunk} %$
 
 \begin{Schunk}
 \begin{Verbatim}
@@ -365,7 +365,7 @@ Nos plus beaux accidents
 Je jure, je jure que
 la journée qui s'en vient est flambant neuve
 \end{Verbatim}
-\end{Schunk}
+\end{Schunk} %$
 
 Il n'est pas tout à fait exact de dire que \icode{sed} traite une
 seule ligne à la fois. En effet, il est également possible d'appliquer
@@ -387,7 +387,7 @@ tampon de \icode{sed} dans le présent ouvrage.
 \label{sec:texte:regex}
 
 Tel que mentionné dans l'introduction de ce chapitre, une
-\Index{expression régulière}expression régulière, ou expression
+\index*{expression régulière}expression régulière, ou expression
 rationnelle, est un langage, muni d'une syntaxe précise, qui permet de
 décrire un ensemble de chaines de caractères possibles. Vous avez
 rencontré quelques expressions régulières très simples et intuitives à
@@ -400,7 +400,7 @@ Cette section propose une introduction au langage des expressions
 régulières. Il existe une multitude de tutoriels et de documents de
 référence sur le sujet dans Internet et sous forme de livre. Pour vous
 accompagner dans l'atteinte des objectifs d'apprentissage mentionnés
-au début du chapitre, je me suis inspiré de l'excellent guide
+au début du chapitre, je me suis inspiré de l'excellent
 \link{https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/}{\emph{Shell
     Scripting Primer}} de la bibliothèque pour développeurs de Apple
 \citep{Apple:shellprimer}. Si vous souhaitez étudier les expressions
@@ -426,15 +426,17 @@ Les principales différences entre les \index{expression
 \index{expression régulière!étendue}étendues sont les suivantes.
 \begin{itemize}
 \item Dans les expressions régulières étendues, les symboles
-  «\code{+}» et «\code{?}» sont des opérateurs de répétition. Dans les
-  expressions régulières basiques, ce sont des caractères ordinaires
-  et il n'existe aucun équivalent pour leur fonctionnalité respective.
-\item Dans les expressions régulières étendues, le symbole «\code{|}»
-  est un opérateur de choix entre plusieurs possibilités. Dans les
+  «\icode[regex]{+}» et «\icode[regex]{?}» sont des opérateurs de
+  répétition. Dans les expressions régulières basiques, ce sont des
+  caractères ordinaires et il n'existe aucun équivalent pour leur
+  fonctionnalité respective.
+\item Dans les expressions régulières étendues, le symbole
+  \index{{"|}@\code{\textbar} (regex)}«\code{\textbar}» est un
+  opérateur de choix entre plusieurs possibilités. Dans les
   expressions régulières basiques, c'est un caractère ordinaire et il
   n'existe aucun équivalent pour sa fonctionnalité.
-\item Dans les expressions régulières étendues, les accolades \code{\{
-    \}} et les parenthèses \code{( )} sont, respectivement, des
+\item Dans les expressions régulières étendues, les accolades
+  «\code{\{~\}}» et les parenthèses «\code{(~)}» sont, respectivement, des
   opérateurs de quantificateur borné et de regroupement. Dans les
   expressions régulières basiques, ce sont des caractères ordinaires
   et il faut les précéder d'une barre oblique inversée «\code{\bs}»
@@ -450,26 +452,99 @@ ajouter l'option \code{-E}. Dans le premier exemple ci-dessous, le
 motif est une \index{expression régulière basique}expression régulière
 basique qui ne reconnait donc aucune ligne du fichier
 \code{chanson.txt}. Dans le second exemple, le motif est une
-expression régulière étendue dans laquelle l'opérateur  «\code{|}»
-permet de reconnaitre «chien» ou «chat».
-\begin{Schunk}
-\begin{Verbatim}
-$ grep 'chien|chat' chanson.txt
-$
-\end{Verbatim}
-\end{Schunk}
-
-\begin{Schunk}
-\begin{Verbatim}
-$ grep -E 'chien|chat' chanson.txt
-Rampent comme des chiens
-\end{Verbatim}
-\end{Schunk}
+expression régulière étendue dans laquelle l'opérateur
+«\index{{"|}@\code{\textbar} (regex)}\code{\textbar}» permet de
+reconnaitre «chien» ou «chat».
+<<echo=FALSE>>=
+exec("grep", c("'chien|chat'", "chanson.txt"))
+@
+<<echo=FALSE>>=
+exec("grep", c("-E", "'chien|chat'", "chanson.txt"))
+@
 
 \tipbox{Dans le doute, utilisez simplement toujours \icode{grep} et
   \icode{sed} avec l'option \code{-E}. La plupart des systèmes
   fournissent aussi un utilitaire \icode{egrep} en tous points
   équivalent à \code{grep -E}.}
+
+\subsection{Syntaxe de base}
+\label{sec:texte:regex:syntaxe}
+
+Comme mentionné précédemment, une \index{expression
+  régulière}expression régulière décrit une chaine de texte. Elle est
+composée de caractères littéraux (dont la «valeur» correspond au
+symbole lui-même) et de caractères spéciaux qui font office
+d'opérateurs\footnote{%
+  Les opérateurs ou caractères spéciaux des expressions régulières
+  sont aussi parfois appelés \emph{métacaractères}.}. %
+La syntaxe obéit à quelques règles fondamentales assez simples.
+\begin{enumerate}
+\item Un caractère littéral correspond à la \emph{première} occurrence
+  de ce caractère dans la chaine de texte. Par exemple, \regex{a}
+  correspond au «a» qui suit le «G» dans «Gave-moi de ton amour». Que
+  la lettre se trouve à l'intérieur d'un mot n'a pas d'importance.
+\item Une expression régulière peut être formée par
+  \index{concaténation}concaténation de deux ou plusieurs expressions
+  régulières. Elle correspond alors à toute chaine de texte qui
+  correspond aux sous-expressions. Pour reprendre l'exemple précédent,
+  l'expression \regex{am} signifie «la lettre a immédiatement suivie
+  de la lettre m», ce qui correspond aux deux premières lettres du mot
+  «amour».
+\item Une douzaine d'opérateurs permettent de rechercher dans une
+  chaine de texte autre chose que des caractères littéraux.
+\end{enumerate}
+
+\tipbox{En d'autres termes, la seconde règle ci-dessus dit que toutes
+  les composantes d'une expression régulière sont par défaut reliées
+  par une clause «et».}
+
+Le \autoref{tab:texte:operateurs} présente les opérateurs des
+expressions régulières avec un exemple simple pour chacun. Nous
+reviendrons plus en détail sur ces opérateurs dans la suite.
+Entretemps, gardez en tête qu'un opérateur s'applique uniquement à
+l'expression (ou la sous-expression) qui le précède.
+
+\begin{table}
+  \centering
+  \renewcommand{\arraystretch}{1.1}
+  \caption{Principaux opérateurs des expressions régulières}
+  \label{tab:texte:operateurs}
+  \begin{tabular}{cp{9cm}}
+    \toprule
+    Opérateur  & Fonction \\
+    \midrule
+    \index{{"|}@\code{\textbar} (regex)}\code{\textbar} & choix entre
+                                                          deux
+                                                          sous-expressions
+                                                          («ou») \\
+    \index{\string^@\verb=^= (regex)}\verb=^= & début de la ligne;
+                                                négation (à
+                                                l'intérieur d'une
+                                                classe) \\
+    \index{\string$@\verb=$= (regex)}\verb=$= & fin de la ligne \\
+    \icode[regex]{.} & tout caractère \\
+    \icode[regex]{*} & zéro, une ou plusieurs occurrences \\
+    \icode[regex]{?} & zéro ou une occurrence \\
+    \icode[regex]{+} & une ou plusieurs occurrences \\
+    \icode[regex]{(~)} & groupe de caractères \\
+    \icode[regex]{[~]} & classe de caractères \\
+    \index{\string\@\code{\bs} (regex)}\code{\bs} & caractère d'échappement \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+\subsection{Début et fin de ligne}
+\label{sec:texte:regex:bol-eol}
+
+\subsection{Caractères de remplacement et de répétition}
+\label{sec:texte:regex:wildcards}
+
+\subsection{Classes de caractères}
+\label{sec:texte:regex:classes}
+
+
+
 
 
 \section{Traitement de texte divisé en champs avec \code{awk}}

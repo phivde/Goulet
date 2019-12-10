@@ -521,7 +521,7 @@ a <- 5; a + 2
 @
 
 Pour regrouper plusieurs commandes et en former une seule expression,
-il faut entourer les commandes d'accolades \Icode{\{~\}}. Le résultat
+il faut entourer les commandes d'accolades «\code{\{~\}}». Le résultat
 du regroupement est la valeur de la \emph{dernière} commande. Par
 conséquent, si le regroupement se termine par une affectation, aucune
 valeur n'est retournée ni affichée à l'écran.
@@ -1514,10 +1514,10 @@ else
   révèlent utiles dans les clauses \code{if} pour réduire les vecteurs
   booléens à une valeur unique.
 \item \meta{conséquence} est une expression, ou un groupe
-  d'expressions regroupées entre accolades \verb={ }=, qui sont
+  d'expressions regroupées entre accolades «\code{\{~\}}», qui sont
   exécutées lorsque la \meta{condition} est \texttt{TRUE}.
 \item \meta{alternative} est une expression, ou un groupe
-  d'expressions regroupées entre accolades \verb={ }=, qui sont
+  d'expressions regroupées entre accolades «\code{\{~\}}», qui sont
   exécutées lorsque la \meta{condition} est \texttt{FALSE}.
 \end{itemize}
 
