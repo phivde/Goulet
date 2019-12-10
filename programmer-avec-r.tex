@@ -466,10 +466,24 @@
     Les numéros de page en caractères gras indiquent les pages où les
     concepts sont introduits, définis ou expliqués.\vskip\onelineskip}
   \newcommand{\Index}[1]{\index{#1|bfhyperpage}}
-  \newcommand{\indexcode}[1]{\index{#1@\code{#1}}}
-  \newcommand{\Indexcode}[1]{\Index{#1@\code{#1}}}
-  \newcommand{\icode}[1]{\indexcode{#1}\code{#1}}
-  \newcommand{\Icode}[1]{\Indexcode{#1}\code{#1}}
+  \newcommand{\indexcode}[2][]{
+    \def\param{#1}%
+    \ifx\param\empty
+      \index{#2@\code{#2}}%
+    \else
+      \index{#2@\code{#2} (#1)}%
+    \fi
+  }
+  \newcommand{\Indexcode}[2][]{%
+    \def\param{#1}%
+    \ifx\param\empty
+      \Index{#2@\code{#2}}%
+    \else
+      \Index{#2@\code{#2} (#1)}%
+    \fi
+  }
+  \newcommand{\icode}[2][]{\indexcode[#1]{#2}\code{#2}}
+  \newcommand{\Icode}[2][]{\Indexcode[#1]{#2}\code{#2}}
   \makeindex
 
   %%% =======
