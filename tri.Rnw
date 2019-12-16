@@ -347,7 +347,7 @@ la suite avec une construction comme ci-dessous.
 ## exprimé non plus en fonction de l'écart entre 'y'^2 et 'x',
 ## mais plutôt en fonction de l'écart entre deux
 ## approximations successives. De plus, la valeur de départ et
-## l'erreur d'approximation sont passés en argument à la
+## l'erreur d'approximation sont passées en argument à la
 ## fonction.
 ##
 ## Puisqu'il faut au minimum vérifier si la valeur initiale
