@@ -466,7 +466,7 @@
     Les numéros de page en caractères gras indiquent les pages où les
     concepts sont introduits, définis ou expliqués.\vskip\onelineskip}
   \newcommand{\Index}[1]{\index{#1|bfhyperpage}}
-  \newcommand{\indexcode}[2][]{
+  \newcommand{\indexcode}[2][]{%
     \def\param{#1}%
     \ifx\param\empty
       \index{#2@\code{#2}}%
