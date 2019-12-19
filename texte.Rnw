@@ -52,25 +52,14 @@ Une \index{expression régulière}expression régulière (\emph{regular
   expression}, ou regex ou regexp) est une suite de caractères
 typographiques qui décrit, selon une syntaxe précise, un ensemble de
 chaines de caractères possibles
-\citep{Wikipedia:Expression_reguliere}. L'expression est souvent
-appelée un \index{motif}«motif» (\emph{pattern}).
+\citep{Wikipedia:Expression_reguliere}. L'expression elle-même est
+souvent appelée un \index{motif}«motif» (\emph{pattern}). Les
+expressions régulières s'avèrent particulièrement utiles dans
+l'analyse de données textuelles et dans le traitement de la langue
+naturelle (\emph{natural language processing}, NLP), une branche
+importante de l'intelligence artificielle.
 
-Par exemple, les plaques d'immatriculation récentes distribuées par la
-Société d'assurance automobile du Québec (SAAQ) sont composées ainsi:
-une lettre, deux chiffres, une espace, trois lettres. Les lettres
-\textsf{O}, \textsf{I} et \textsf{U} ne sont pas utilisées à cause de
-leur similitude avec, respectivement, le chiffre {\fullcaps 0}, le
-chiffre {\fullcaps 1} et la lettre \textsf{V}. Le \index{motif}motif
-suivant permet de décrire l'ensemble des numéros de plaques possibles
-(y compris les combinaisons de lettres exclues comme \code{LSD} ou
-\code{SEX}):
-\begin{Schunk}
-\begin{Verbatim}
-[A-HJ-NP-TV-Z][0-9]{2} [A-HJ-NP-TV-Z]{3}
-\end{Verbatim}
-\end{Schunk}
-
-Voici quelques autres utilisations possibles des \index{expression
+Voici quelques utilisations possibles des \index{expression
   régulière}expressions régulières.
 \begin{itemize}
 \item Rechercher du texte pouvant contenir des variations ou des
@@ -92,12 +81,16 @@ https://www.google.ca/maps/place/Universite+Laval/
   dont on décode que le lieu se trouve à une latitude de
   $\nombre{46,7817463}$ et à une longitude de $\nombre{-71.2769311}$
   en degrés décimaux.
-\item Mettre en italique tous les mots d'un texte qui se trouvent
-  entre guillemets (mais pas les guillemets eux-mêmes), et ce, quels
-  que soient les mots.
+\item Extraire d'une base de données les adresses se trouvant sur une
+  rue ou une avenue numérotée («1{\iere} Avenue» ou «4{\ieme} Rue»).
+\item Sélectionner les entrées d'une base de données qui débutent ou
+  qui se terminent par un caractère spécifique.
 \item Déterminer par programmation si un dépôt Git contient une
   branche autre que \code{master} en examinant le résultat de la
   commande \code{git branch}.
+\item Mettre en italique tous les mots d'un texte qui se trouvent
+  entre guillemets (mais pas les guillemets eux-mêmes), et ce, quels
+  que soient les mots.
 \end{itemize}
 
 Un jour ou l'autre, vous aurez à traiter des chaines de caractères en
@@ -180,15 +173,17 @@ Comme la plupart des utilitaires Unix, \icode{grep}, \icode{sed} et
 fichiers en format texte brut. Ils opèrent ensuite sur cette entrée
 \emph{ligne par ligne}. Le résultat du traitement est affiché à la
 sortie standard (le terminal), transféré à un autre programme avec le
-tuyau \index{{"|}@\code{\textbar} (tuyau Bash)} «\code{\textbar}», ou
-encore redirigé vers un fichier avec l'opérateur «\code{>}». Ce flux
-des données est illustré à la \autoref{fig:texte:flux-cli}.
+tuyau \index{{"|}@\code{\textbar} (tuyau Unix)} «\code{\textbar}», ou
+encore redirigé vers un fichier avec l'opérateur «\code{>}». La
+\autoref{fig:texte:flux-cli}, reprise de
+\citet{Goulet:laboratoire-cli-git:2019} avec quelques simplifications,
+illustre ce flux des données.
 
 \begin{figure}
   \centering
   \setlength{\unitlength}{4mm}
   \small
-  \begin{picture}(31.25,9)(-0.25,-1.5)
+  \begin{picture}(31.25,8.5)(-0.25,0)
     \thicklines
     \put(3,6){\makebox(0,0)[t]{\parbox{6.5\unitlength}{
           \centering{\LARGE\faStream~\faFile*[regular]} \\[4pt]
@@ -208,14 +203,13 @@ des données est illustré à la \autoref{fig:texte:flux-cli}.
           \centering{\LARGE\faStream} \\[4pt]
           sortie standard}}}
     \put(23.75,3){\vector(1,0){2.75}}
-    \put(25,3.5){\makebox(0,0)[b]{\parbox{4.5\unitlength}{
-          \centering\code{>}}}}
+    \put(25,3.75){\makebox(0,0){\color{regex}\code{>}}}
     \put(28,4){\makebox(0,0)[t]{\parbox{4\unitlength}{
           \centering{\LARGE\faFile*[regular]} \\[4pt]
             fichier}}}
     \Line(21,0.75)(21,0)(3,0)
     \put(3,0){\vector(0,1){1.5}}
-    \put(12,-1){\makebox(0,0){\code{\textbar} (tuyau)}}
+    \put(16.25,0.75){\makebox(0,0){\color{regex}\code{\textbar}}}
   \end{picture}
   \caption{Flux des données à la ligne de commande Unix}
   \label{fig:texte:flux-cli}
@@ -223,13 +217,13 @@ des données est illustré à la \autoref{fig:texte:flux-cli}.
 
 Les outils \icode{grep}, \icode{sed} et \icode{awk} diffèrent quant au
 type de traitement qu'ils peuvent effectuer.
-\begin{description}
+\begin{ttscript}{grep}
 \item[\code{grep}] sélectionne les lignes en entrée correspondant à
   une \index{expression régulière}expression régulière;
 \item[\code{sed}] sert surtout pour rechercher et remplacer du texte;
 \item[\code{awk}] permet de traiter aisément du texte séparé en
   champs, ainsi que du texte réparti sur plusieurs lignes.
-\end{description}
+\end{ttscript}
 
 Puisque nous utiliserons les utilitaires \icode{grep} et \icode{sed} à
 profusion dans la présentation sur les expressions régulières à la
@@ -261,10 +255,10 @@ ligne, puis retourne sur la sortie standard les lignes qui contiennent
 des correspondances avec l'expression régulière. C'est très utile pour
 savoir si un fichier contient --- ou quels fichiers contiennent --- un
 mot ou une expression, assez pour que le nom de l'utilitaire soit
-devenu un verbe dans le %
+devenu, en anglais, un verbe dans le %
 \link{http://www.catb.org/jargon/html/G/grep.html}{jargon
   informatique} %
-en anglais (\emph{to grep}).
+(\emph{to grep}).
 
 Les trois exemples ci-dessous permettent, dans l'ordre, d'extraire du
 fichier \code{chanson.txt}: le vers de la chanson qui contient le mot
@@ -730,7 +724,7 @@ commentaires triples «\code{\#\#\#}» en début de ligne (à la Emacs) dans
 le fichier \code{pratiques.R} par un symbole unique «\code{\#}» (à
 la RStudio). Pour faire bonne mesure, plaçons le résultat dans un
 nouveau fichier \code{pratiques-new.R} à l'aide de l'opérateur de
-redirection de Bash \index{>@\code{>} (Bash)}«\code{>}».
+redirection Unix \index{>@\code{>} (Unix)}«\code{>}».
 \begin{Schunk}
 \begin{Verbatim}
 $ sed 's/^###/#/' pratiques.R > pratiques-new.R
@@ -751,8 +745,8 @@ $ cat 100metres.data
 
 Effectuons dans un premier temps l'extraction des temps des records
 (second champ). La première commande utilise un transfert de données
-du programme \icode{cat} vers \icode{awk} avec le tuyau de Bash
-\index{{"|}@\code{\textbar} (tuyau Bash)} «\code{\textbar}», alors que
+du programme \icode{cat} vers \icode{awk} avec le tuyau Unix
+\index{{"|}@\code{\textbar} (tuyau Unix)} «\code{\textbar}», alors que
 la seconde, plus usuelle et tout à fait équivalente, emploie un
 fichier en entrée.
 \begin{Schunk}
@@ -1137,7 +1131,7 @@ $ sed 's/\./,/' 100metres.data > 100metres-dec.data
   \item Extraire les informations des temps de moins de 10~secondes.
   \item Extraire les lignes du fichier satisfaisant les deux
     conditions précédentes. Vous pouvez avoir recours à l'opérateur de
-    tuyau de Bash \index{{"|}@\code{\textbar} (tuyau Bash)}%
+    tuyau Unix \index{{"|}@\code{\textbar} (tuyau Unix)}%
     «\code{\textbar}» pour combiner les commandes des parties a) et
     b).
   \end{enumerate}
