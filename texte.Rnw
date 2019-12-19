@@ -49,19 +49,21 @@ langage existe: ce sont les \emph{expressions régulières} ou
 expressions rationnelles.
 
 Une \index{expression régulière}expression régulière (\emph{regular
-  expression}, ou regex ou regexp) est une chaine de caractères qui
-décrit, selon une syntaxe précise, un ensemble de chaines de
-caractères possibles \citep{Wikipedia:Expression_reguliere}.
+  expression}, ou regex ou regexp) est une suite de caractères
+typographiques qui décrit, selon une syntaxe précise, un ensemble de
+chaines de caractères possibles
+\citep{Wikipedia:Expression_reguliere}. L'expression est souvent
+appelée un \index{motif}«motif» (\emph{pattern}).
 
 Par exemple, les plaques d'immatriculation récentes distribuées par la
 Société d'assurance automobile du Québec (SAAQ) sont composées ainsi:
 une lettre, deux chiffres, une espace, trois lettres. Les lettres
 \textsf{O}, \textsf{I} et \textsf{U} ne sont pas utilisées à cause de
 leur similitude avec, respectivement, le chiffre {\fullcaps 0}, le
-chiffre {\fullcaps 1} et la lettre \textsf{V}. L'\index{expression
-  régulière}expression régulière suivante permet de décrire l'ensemble
-des numéros de plaques possibles (y compris les combinaisons de
-lettres exclues comme \code{LSD} ou \code{SEX}):
+chiffre {\fullcaps 1} et la lettre \textsf{V}. Le \index{motif}motif
+suivant permet de décrire l'ensemble des numéros de plaques possibles
+(y compris les combinaisons de lettres exclues comme \code{LSD} ou
+\code{SEX}):
 \begin{Schunk}
 \begin{Verbatim}
 [A-HJ-NP-TV-Z][0-9]{2} [A-HJ-NP-TV-Z]{3}
@@ -117,15 +119,15 @@ expressions régulières vous sauvera énormément de temps.
 \label{sec:texte:conventions}
 
 La présentation des expressions régulières exige souvent de clairement
-délimiter une expression et d'afficher certains caractères invisibles,
-comme les espaces ou les retours à la ligne. Pour ce chapitre, lorsque
-le contexte l'exige:
+délimiter un \index{motif}motif et d'afficher certains caractères
+invisibles, comme les espaces ou les retours à la ligne. Pour ce
+chapitre, lorsque le contexte l'exige:
 \begin{itemize}
-\item les expressions régulières sont encadrées de «coins» de couleur
-  contrastante, comme \regex{ceci} \citep[une notation que j'emprunte
+\item les motifs sont encadrés de «coins» de couleur contrastante,
+  comme \regex{ceci} \citep[une notation que j'emprunte
   à][]{Friedl:regex:2006};
 \item les espaces sont représentées par le symbole \aspace, ce qui
-  permet, par exemple, de bien discerner que l'expression régulière
+  permet, par exemple, de bien discerner que le motif
   \regex{\#\aspace\aspace\aspace\aspace A} compte quatre espaces entre
   \code{\#} et \code{A};
 \item le caractère de retour à la ligne (\emph{newline}) est
@@ -175,10 +177,52 @@ et \code{sed}.
 
 Comme la plupart des utilitaires Unix, \icode{grep}, \icode{sed} et
 \icode{awk} prennent en entrée un flux de texte ou un ou plusieurs
-fichiers en format texte brut et ils opèrent sur cette entrée ligne
-par ligne. Le résultat du traitement est affiché dans le terminal,
-envoyé à un autre programme ou redirigé vers un fichier. Les outils
-diffèrent quant au type de traitement qu'ils peuvent effectuer.
+fichiers en format texte brut. Ils opèrent ensuite sur cette entrée
+\emph{ligne par ligne}. Le résultat du traitement est affiché à la
+sortie standard (le terminal), transféré à un autre programme avec le
+tuyau \index{{"|}@\code{\textbar} (tuyau Bash)} «\code{\textbar}», ou
+encore redirigé vers un fichier avec l'opérateur «\code{>}». Ce flux
+des données est illustré à la \autoref{fig:texte:flux-cli}.
+
+\begin{figure}
+  \centering
+  \setlength{\unitlength}{4mm}
+  \small
+  \begin{picture}(31.25,9)(-0.25,-1.5)
+    \thicklines
+    \put(3,6){\makebox(0,0)[t]{\parbox{6.5\unitlength}{
+          \centering{\LARGE\faStream~\faFile*[regular]} \\[4pt]
+          entrée standard ou fichier}}}
+    \put(6,5){\vector(1,0){3.5}}
+    \put(12,6){\makebox(0,0)[t]{\parbox{6\unitlength}{
+          \centering{\LARGE\faCogs} \\[4pt]
+          \code{grep}, \code{sed}, \code{awk}}}}
+    \put(14.75,5){\line(1,0){1.5}}
+    \put(16.25,7){\line(0,-1){4}}
+    \put(16.25,7){\vector(1,0){1.75}}
+    \put(16.25,3){\vector(1,0){1.75}}
+    \put(21,8){\makebox(0,0)[t]{\parbox{6.5\unitlength}{
+          \centering{\LARGE\faStream} \\[4pt]
+          erreur standard}}}
+    \put(21,4){\makebox(0,0)[t]{\parbox{6\unitlength}{
+          \centering{\LARGE\faStream} \\[4pt]
+          sortie standard}}}
+    \put(23.75,3){\vector(1,0){2.75}}
+    \put(25,3.5){\makebox(0,0)[b]{\parbox{4.5\unitlength}{
+          \centering\code{>}}}}
+    \put(28,4){\makebox(0,0)[t]{\parbox{4\unitlength}{
+          \centering{\LARGE\faFile*[regular]} \\[4pt]
+            fichier}}}
+    \Line(21,0.75)(21,0)(3,0)
+    \put(3,0){\vector(0,1){1.5}}
+    \put(12,-1){\makebox(0,0){\code{\textbar} (tuyau)}}
+  \end{picture}
+  \caption{Flux des données à la ligne de commande Unix}
+  \label{fig:texte:flux-cli}
+\end{figure}
+
+Les outils \icode{grep}, \icode{sed} et \icode{awk} diffèrent quant au
+type de traitement qu'ils peuvent effectuer.
 \begin{description}
 \item[\code{grep}] sélectionne les lignes en entrée correspondant à
   une \index{expression régulière}expression régulière;
@@ -471,25 +515,28 @@ exec("grep", c("-E", "'chien|chat'", "chanson.txt"))
 \label{sec:texte:regex:syntaxe}
 
 Comme mentionné précédemment, une \index{expression
-  régulière}expression régulière décrit une chaine de texte. Elle est
-composée de caractères littéraux (dont la «valeur» correspond au
-symbole lui-même) et de caractères spéciaux qui font office
+  régulière}expression régulière est une suite de caractères
+typographiques --- communément appelée \index{motif}motif
+(\emph{pattern}) --- qui décrit une chaine de texte. Elle est composée
+de caractères littéraux (dont la «valeur» correspond au symbole
+lui-même) et de caractères spéciaux qui font office
 d'opérateurs\footnote{%
   Les opérateurs ou caractères spéciaux des expressions régulières
   sont aussi parfois appelés \emph{métacaractères}.}. %
-La syntaxe obéit à quelques règles fondamentales assez simples.
+La syntaxe obéit à quelques règles fondamentales en définitive assez
+simples.
 \begin{enumerate}
 \item Un caractère littéral correspond à la \emph{première} occurrence
-  de ce caractère dans la chaine de texte. Par exemple, \regex{a}
-  correspond au «a» qui suit le «G» dans «Gave-moi de ton amour». Que
-  la lettre se trouve à l'intérieur d'un mot n'a pas d'importance.
+  de ce caractère dans la chaine de texte. Par exemple, le motif
+  \regex{a} correspond uniquement au «a» qui suit le «G» dans
+  «Gave-moi de ton amour». Que la lettre se trouve à l'intérieur d'un
+  mot n'a pas d'importance.
 \item Une expression régulière peut être formée par
   \index{concaténation}concaténation de deux ou plusieurs expressions
   régulières. Elle correspond alors à toute chaine de texte qui
   correspond aux sous-expressions. Pour reprendre l'exemple précédent,
-  l'expression \regex{am} signifie «la lettre a immédiatement suivie
-  de la lettre m», ce qui correspond aux deux premières lettres du mot
-  «amour».
+  le motif \regex{am} correspond à la lettre «a» immédiatement suivie
+  de la lettre «m», soit les deux premières lettres du mot «amour».
 \item Une douzaine d'opérateurs permettent de rechercher dans une
   chaine de texte autre chose que des caractères littéraux.
 \end{enumerate}
@@ -704,10 +751,10 @@ $ cat 100metres.data
 
 Effectuons dans un premier temps l'extraction des temps des records
 (second champ). La première commande utilise un transfert de données
-du programme \icode{cat} vers \icode{awk} avec l'opérateur de
-transfert de données de Bash \index{{"|}@\code{\textbar} (Bash)}
-«\code{\textbar}», alors que la seconde, plus usuelle et tout à fait
-équivalente, emploie un fichier en entrée.
+du programme \icode{cat} vers \icode{awk} avec le tuyau de Bash
+\index{{"|}@\code{\textbar} (tuyau Bash)} «\code{\textbar}», alors que
+la seconde, plus usuelle et tout à fait équivalente, emploie un
+fichier en entrée.
 \begin{Schunk}
 \begin{Verbatim}
 $ cat 100metres.data | awk '{ print $2 }'
@@ -1090,7 +1137,7 @@ $ sed 's/\./,/' 100metres.data > 100metres-dec.data
   \item Extraire les informations des temps de moins de 10~secondes.
   \item Extraire les lignes du fichier satisfaisant les deux
     conditions précédentes. Vous pouvez avoir recours à l'opérateur de
-    transfert de données de Bash \index{{"|}@\code{\textbar} (Bash)}%
+    tuyau de Bash \index{{"|}@\code{\textbar} (tuyau Bash)}%
     «\code{\textbar}» pour combiner les commandes des parties a) et
     b).
   \end{enumerate}
