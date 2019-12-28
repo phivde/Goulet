@@ -909,7 +909,7 @@ rgamma <- function(n, shape, rate = 1, scale = 1/rate)
 ##-!- rgamma(5, 0.5, 1)
 
 ## Afficher la pile des appels de fonctions. On voit que c'est
-## l'appel à 'Ginv' qui cause problème.
+## l'appel à 'Ginv' qui pose problème.
 ##-!- traceback()
 
 ###
