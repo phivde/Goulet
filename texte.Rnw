@@ -53,7 +53,7 @@ Une \index{expression régulière}expression régulière (\emph{regular
 typographiques qui décrit, selon une syntaxe précise, un ensemble de
 chaines de caractères possibles
 \citep{Wikipedia:Expression_reguliere}. L'expression elle-même est
-souvent appelée un \index{motif}«motif» (\emph{pattern}). Les
+souvent appelée un \Index{motif}«motif» (\emph{pattern}). Les
 expressions régulières s'avèrent particulièrement utiles dans
 l'analyse de données textuelles et dans le traitement de la langue
 naturelle (\emph{natural language processing}, NLP), une branche
@@ -308,10 +308,13 @@ L'utilitaire \Icode{sed}\footnote{Pour \emph{stream editor}, ou
   éditeur de flux de texte. Comme \code{grep}, \code{sed} tire son
   origine de l'éditeur \icode{ed}.} %
 est en quelque sorte un éditeur de texte qui opère sur un texte une
-ligne à la fois et de manière non-interactive. L'éventail des
-traitements que \icode{sed} peut appliquer à un texte est très vaste,
-mais la syntaxe des commandes qu'il faut entrer pour y arriver est
-particulièrement ésotérique\footnote{%
+ligne à la fois et de manière non-interactive. (Vous pourriez objecter
+que cela ne correspond en rien à l'idée que l'on se fait d'un éditeur
+de texte, mais il n'est reste pas moins que le programme effectue des
+tâches d'édition sur du texte.) L'éventail des traitements que
+\icode{sed} peut appliquer à un texte est très vaste, mais la syntaxe
+des commandes qu'il faut entrer pour y arriver est particulièrement
+ésotérique\footnote{%
   Jugez-en: la commande pour supprimer l'une de deux lignes blanches
   consécutives dans un texte est \code{N;/\string^\bs n\$/D;P;D;}.}. %
 Nous nous attarderons donc à une seule commande de \icode{sed}, celle
@@ -326,8 +329,8 @@ s/\meta{motif}/\meta{remplacement}/\meta{modificateur}
 \begin{itemize}
 \item \code{s} est le nom de la commande \icode{sed} qui sert à
   rechercher et remplacer.
-\item \meta{motif} est une \index{expression régulière}expression
-  régulière qui définit le texte à rechercher.
+\item \index{motif}\meta{motif} est une \index{expression
+    régulière}expression régulière qui définit le texte à rechercher.
 \item \meta{remplacement} est le texte qui sert à remplacer le texte
   qui correspond à \meta{motif}.
 \item \meta{modificateur} est un symbole qui permet de modifier le
@@ -425,14 +428,14 @@ tampon de \icode{sed} dans le présent ouvrage.
 \label{sec:texte:regex}
 
 Tel que mentionné dans l'introduction de ce chapitre, une
-\index*{expression régulière}expression régulière, ou expression
+\index{expression régulière}expression régulière, ou expression
 rationnelle, est un langage, muni d'une syntaxe précise, qui permet de
 décrire un ensemble de chaines de caractères possibles. Vous avez
 rencontré quelques expressions régulières très simples et intuitives à
 la section précédente. Ainsi, l'expression régulière \regex{chat}
-décrit la chaine «chat», mais aussi «chats», «chaton» ou «achat». Nous
-verrons dans la suite comment restreindre l'expression au seul mot
-«chat».
+correspond à la chaine «chat», mais aussi à «chats», «chaton» ou
+«achat». Nous verrons dans la suite comment restreindre l'expression
+au seul mot «chat».
 
 Cette section propose une introduction au langage des expressions
 régulières. Il existe une multitude de tutoriels et de documents de
@@ -448,20 +451,23 @@ classique de \citet{Friedl:regex:2006}.
 \subsection{Types d'expressions régulières}
 \label{sec:texte:regex:types}
 
-Avant d'aller plus loin, vous devez absolument savoir qu'il existe
-trois grands types d'\index{expression régulière}expressions
-régulières: les \index{expression régulière!basique}expressions
-régulières basiques ou classiques (\emph{Basic Regular Expressions},
-\index{BRE}BRE), les \index{expression régulière!étendue}expressions
-régulières étendues (\emph{Extended Regular Expressions},
-\index{ERE}ERE) et les \index{expression régulière!Perl}expressions
-régulières de Perl (\emph{Perl Compatible Regular Expressions},
-\index{PCRE}PCRE). Les utilitaires \icode{grep} et \icode{sed}
-utilisent les expressions régulières basiques par défaut.
+Avant d'aller plus loin, vous devez savoir qu'il existe trois grands
+types d'\index{expression régulière}expressions régulières: les
+\index{expression régulière!basique}expressions régulières basiques ou
+classiques (\emph{Basic Regular Expressions}, \index{BRE}BRE), les
+\index{expression régulière!étendue}expressions régulières étendues
+(\emph{Extended Regular Expressions}, \index{ERE}ERE) et les
+\index{expression régulière!Perl}expressions régulières de Perl
+(\emph{Perl Compatible Regular Expressions}, \index{PCRE}PCRE). Les
+utilitaires \icode{grep} et \icode{sed} utilisent les expressions
+régulières basiques par défaut.
 
-Les principales différences entre les \index{expression
+Voici les principales différences entre les \index{expression
   régulière!basique}expressions régulières basiques et
-\index{expression régulière!étendue}étendues sont les suivantes.
+\index{expression régulière!étendue}étendues. Si ce qui suit n'est pas
+tout à fait clair à la première lecture, ça le deviendra dès la
+prochaine section lorsque nous entamerons l'étude des opérateurs des
+expressions régulières.
 \begin{itemize}
 \item Dans les expressions régulières étendues, les symboles
   «\icode[regex]{+}» et «\icode[regex]{?}» sont des opérateurs de
@@ -473,12 +479,12 @@ Les principales différences entre les \index{expression
   opérateur de choix entre plusieurs possibilités. Dans les
   expressions régulières basiques, c'est un caractère ordinaire et il
   n'existe aucun équivalent pour sa fonctionnalité.
-\item Dans les expressions régulières étendues, les accolades
-  «\code{\{~\}}» et les parenthèses «\code{(~)}» sont, respectivement, des
-  opérateurs de quantificateur borné et de regroupement. Dans les
-  expressions régulières basiques, ce sont des caractères ordinaires
-  et il faut les précéder d'une barre oblique inversée «\code{\bs}»
-  pour les convertir en opérateurs.
+\item Dans les expressions régulières étendues, les parenthèses
+  «\icode[regex]{(~)}» et les accolades «\icode[regex]{\{~\}}» sont,
+  respectivement, des opérateurs de regroupement et de quantificateur
+  borné. Dans les expressions régulières basiques, ce sont des
+  caractères ordinaires et il faut les précéder du caractère
+  d'échappement «\code{\bs}» pour les convertir en opérateurs.
 \end{itemize}
 
 Dans la suite, lorsqu'il existe une différence entre les expressions
@@ -488,9 +494,10 @@ utiliserons toujours ces dernières. Pour indiquer à \icode{grep} et à
   régulière!étendue}expressions régulières étendues, il suffit de leur
 ajouter l'option \code{-E}. Dans le premier exemple ci-dessous, le
 motif est une \index{expression régulière basique}expression régulière
-basique qui ne reconnait donc aucune ligne du fichier
-\code{chanson.txt}. Dans le second exemple, le motif est une
-expression régulière étendue dans laquelle l'opérateur
+basique qui ne reconnait aucune ligne du fichier \code{chanson.txt}
+puisque le fichier ne contient pas la chaine «chien{\textbar}chat».
+Dans le second exemple, en revanche, le motif est une expression
+régulière étendue dans laquelle l'opérateur
 «\index{{"|}@\code{\textbar} (regex)}\code{\textbar}» permet de
 reconnaitre «chien» ou «chat».
 <<echo=FALSE>>=
@@ -500,21 +507,19 @@ exec("grep", c("'chien|chat'", "chanson.txt"))
 exec("grep", c("-E", "'chien|chat'", "chanson.txt"))
 @
 
-\tipbox{Dans le doute, utilisez simplement toujours \icode{grep} et
-  \icode{sed} avec l'option \code{-E}. La plupart des systèmes
-  fournissent aussi un utilitaire \icode{egrep} en tous points
-  équivalent à \code{grep -E}.}
+\tipbox{Pour effacer tout doute, utilisez simplement toujours
+  \icode{grep} et \icode{sed} avec l'option \code{-E}. La plupart des
+  systèmes fournissent aussi un utilitaire \icode{egrep} en tous
+  points équivalent à \code{grep -E}.}
 
 \subsection{Syntaxe de base}
 \label{sec:texte:regex:syntaxe}
 
 Comme mentionné précédemment, une \index{expression
   régulière}expression régulière est une suite de caractères
-typographiques --- communément appelée \index{motif}motif
-(\emph{pattern}) --- qui décrit une chaine de texte. Elle est composée
-de caractères littéraux (dont la «valeur» correspond au symbole
-lui-même) et de caractères spéciaux qui font office
-d'opérateurs\footnote{%
+typographiques qui décrit une chaine de texte. Elle est composée de
+caractères littéraux (dont la «valeur» correspond au symbole lui-même)
+et de caractères spéciaux qui font office d'opérateurs\footnote{%
   Les opérateurs ou caractères spéciaux des expressions régulières
   sont aussi parfois appelés \emph{métacaractères}.}. %
 La syntaxe obéit à quelques règles fondamentales en définitive assez
@@ -528,27 +533,25 @@ simples.
 \item Une expression régulière peut être formée par
   \index{concaténation}concaténation de deux ou plusieurs expressions
   régulières. Elle correspond alors à toute chaine de texte qui
-  correspond aux sous-expressions. Pour reprendre l'exemple précédent,
-  le motif \regex{am} correspond à la lettre «a» immédiatement suivie
-  de la lettre «m», soit les deux premières lettres du mot «amour».
+  correspond aux sous-expressions. Autrement dit, les composantes
+  d'une expression régulière sont par défaut reliées par une clause
+  «et». Pour reprendre l'exemple précédent, le motif \regex{am}
+  correspond à la lettre «a» immédiatement suivie de la lettre «m»,
+  soit les deux premières lettres du mot «amour».
 \item Une douzaine d'opérateurs permettent de rechercher dans une
   chaine de texte autre chose que des caractères littéraux.
 \end{enumerate}
 
-\tipbox{En d'autres termes, la seconde règle ci-dessus dit que toutes
-  les composantes d'une expression régulière sont par défaut reliées
-  par une clause «et».}
-
 Le \autoref{tab:texte:operateurs} présente les opérateurs des
-expressions régulières avec un exemple simple pour chacun. Nous
-reviendrons plus en détail sur ces opérateurs dans la suite.
-Entretemps, gardez en tête qu'un opérateur s'applique uniquement à
-l'expression (ou la sous-expression) qui le précède.
+expressions régulières étendues. Nous reviendrons plus en détail sur
+ces opérateurs dans la suite. Entretemps, gardez en tête qu'un
+opérateur s'applique uniquement à l'expression (ou la sous-expression)
+qui le précède.
 
 \begin{table}
   \centering
   \renewcommand{\arraystretch}{1.1}
-  \caption{Principaux opérateurs des expressions régulières}
+  \caption{Principaux opérateurs des expressions régulières étendues}
   \label{tab:texte:operateurs}
   \begin{tabular}{cp{9cm}}
     \toprule
@@ -569,14 +572,27 @@ l'expression (ou la sous-expression) qui le précède.
     \icode[regex]{+} & une ou plusieurs occurrences \\
     \icode[regex]{(~)} & groupe de caractères \\
     \icode[regex]{[~]} & classe de caractères \\
+    \icode[regex]{\{~\}} & quantificateur du nombre d'occurrences \\
     \index{\string\@\code{\bs} (regex)}\code{\bs} & caractère d'échappement \\
     \bottomrule
   \end{tabular}
-\end{table}
+\end{table} %$
 
-
-\subsection{Début et fin de ligne}
+\subsection{Marqueurs de position et drapeaux}
 \label{sec:texte:regex:bol-eol}
+
+Les marqueurs de position et les drapeaux permettent de modifier
+
+\regex{la} vs \regex{\string^la}
+
+\regex{que} vs \regex{que\$}
+
+\regex{\string^\$}
+
+grep: -o --only-matching, -v --invert-match
+
+sed: g
+
 
 \subsection{Caractères de remplacement et de répétition}
 \label{sec:texte:regex:wildcards}
@@ -591,7 +607,7 @@ l'expression (ou la sous-expression) qui le précède.
 \section{Traitement de texte divisé en champs avec \code{awk}}
 \label{sec:texte:awk}
 
-
+Noms des créateurs -> Kernighan -> syntaxe similaire au C. Véritable couteau suisse, souvent plus simple que sed, surtout s'il faut effectuer des opérations sur plusieurs lignes du texte à traiter. Caractéristique principale demeure le fait de séparer automatiquement une ligne de texte en champs et de faciliter les opérations sur ceux-ci.
 
 \section{Fonctions internes utiles}
 \label{sec:texte:internes}
