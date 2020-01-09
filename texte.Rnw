@@ -18,11 +18,16 @@ options(width=50)
 ##
 ## Affiche une commande exécutée par le système et son résultat.
 ##
-exec <- function(command, args)
+exec <- function(command, args, eval = TRUE)
 {
     cmd <- paste("$", command, paste(args, collapse = " "))
-    res <- system2(command, args, stdout = TRUE)
-    cat(paste(cmd, paste(res, collapse = "\n"), sep = "\n"))
+    if (eval)
+    {
+        res <- system2(command, args, stdout = TRUE)
+        cat(paste(cmd, paste(res, collapse = "\n"), sep = "\n"))
+    }
+    else
+        cat(cmd)
 }
 @
 
@@ -561,11 +566,11 @@ qui le précède.
                                                           deux
                                                           sous-expressions
                                                           («ou») \\
-    \index{\string^@\verb=^= (regex)}\verb=^= & début de la ligne;
+    \index{\string^@\code{\string^} (regex)}\code{\string^} & début de la ligne;
                                                 négation (à
                                                 l'intérieur d'une
                                                 classe) \\
-    \index{\string$@\verb=$= (regex)}\verb=$= & fin de la ligne \\
+    \index{\string$@\code{\$} (regex)}\code{\$} & fin de la ligne \\
     \icode[regex]{.} & caractère de remplacement \\
     \icode[regex]{*} & zéro, une ou plusieurs occurrences \\
     \icode[regex]{?} & zéro ou une occurrence \\
@@ -648,14 +653,14 @@ Enfin, les accolades «\Icode[regex]{\{~\}}» font office de
 quantificateurs bornés, c'est-à-dire qu'elles permettent de spécifier
 le nombre de répétitions souhaité. Il existe quatre manières de les
 utiliser. (Dans ce qui suit, $n$ et $m$ sont des entiers.)
-\begin{enumerate}
+\begin{itemize}
 \item «\code{\{$n$\}}» répète ce qui précède exactement
   $n$ fois.
 \item «\code{\{$n$,$m$\}}» répète ce qui précède entre $n$ et $m$
   fois.
 \item «\code{\{$n$,\}}» répète ce qui précède au moins $n$ fois.
 \item «\code{\{,$m$\}}» répète ce qui précède de zéro à $m$ fois.
-\end{enumerate}
+\end{itemize}
 Les opérateurs «\icode[regex]{*}», «\icode[regex]{?}» et
 «\icode[regex]{+}» sont donc simplement des raccourcis pour, dans
 l'ordre, «\code{\{0,\}}», «\code{\{0,1\}}» et «\code{\{1,\}}». Le
@@ -702,17 +707,75 @@ extension \code{.txt}, un motif approprié serait:
 \subsection{Marqueurs de position et drapeaux}
 \label{sec:texte:regex:bol-eol}
 
-Les marqueurs de position et les drapeaux permettent de modifier
+Les marqueurs de position et les drapeaux permettent de modifier la
+logique de correspondance d'une expression régulière.
 
-\regex{la} vs \regex{\string^la}
+En premier lieu, il existe deux marqueurs de position qui permettent
+de fixer une condition pour qu'un motif trouve un accord dans une
+chaine de caractères: le caret (ou accent circonflexe)
+«\code{\string^}» et le signe de dollar «\code{\$}». Ils identifient
+respectivement le début et la fin d'une ligne de texte.
 
-\regex{que} vs \regex{que\$}
+Par exemple, la première expression ci-dessous identifie uniquement
+les lignes qui contiennent «la» en début de ligne, alors que la
+seconde retient seulement les lignes qui contiennent «que» en fin de
+ligne\footnote{%
+  Cette formulation insiste sur le fait que le motif ne retient pas
+  les lignes qui contiennent «la» ou «que» ailleurs qu'en début ou en
+  fin de ligne. Nous aurions aussi pu mettre l'accent sur le fait que
+  la première expression retient uniquement les lignes débutant par
+  «la» et la seconde, celles se terminant par «que».}. %
+(Il est laissé en exercice de comparer avec les résultats sans les
+marqueurs de position.)
+<<echo=FALSE>>=
+exec("grep", c("'^la'", "chanson.txt"))
+@
+<<echo=FALSE>>=
+exec("grep", c("'que$'", "chanson.txt"))
+@
 
-\regex{\string^\$}
+Prenez la mesure du motif particulier suivant: \regex{\string^\$}. Il
+décrit un début de ligne suivi immédiatement d'une fin de ligne,
+soit\dots\ une ligne blanche! Nous verrons une utilisation de ce motif
+dans un instant.
 
-grep: -o --only-matching, -v --invert-match
+En second lieu, les drapeaux (\emph{flags}) modifient le comportement
+des outils comme \icode{grep} et \icode{sed}. Le premier compte un
+très grand nombre de drapeaux. Ils se présentent généralement en deux
+versions: courte sous forme d'une lettre unique précédée d'un tiret et
+longue sous forme d'un mot précédé de deux tirets. Vous connaissez
+déjà le drapeau \code{-E} qui active les expressions régulières
+étendues; sa version longue est \code{--extended-regexp}. Voici deux
+autres drapeaux de \icode{grep} particulièrement utiles.
 
-sed: g
+\begin{ttscript}{-o, --only-matching}
+\item[\code{-v, --invert-match}] sélectionne les lignes
+  qui ne correspondent \emph{pas} au motif
+\item[\code{-o, --only-matching}] retourne uniquement la
+  portion de la ligne qui correspond au motif
+\end{ttscript}
+
+Vous avez déjà rencontré une utilisation du drapeau \code{-v} à la fin
+de la \autoref{sec:texte:outils:grep} pour identifier les strophes de
+la chanson qui ne contiennent pas la lettre «e». Le drapeau est aussi
+très utile lorsque combiné au motif \regex{\string^\$}: la commande
+suivante supprime les lignes blanches du fichier \code{chanson.txt}.
+(Question d'économiser de l'espace en ces pages, je vous laisse le
+soin d'en faire la vérification.)
+<<echo=FALSE>>=
+exec("grep", c("-v", "'^$'", "chanson.txt"), eval = FALSE)
+@
+
+Pour illustrer le drapeau \code{-o}, reprenons un exemple de la
+\autoref{sec:texte:regex:wildcards} en restreignant cette fois
+l'affichage à la portion de chaque ligne qui correspond au motif.
+<<echo=FALSE>>=
+exec("grep", c("-o", "-E", "'Le .?e'", "chanson.txt"))
+@
+
+Du côté de l'utilitaire \icode{sed}, le seul drapeau que nous
+utiliserons est le modificateur \code{g} que nous avons déjà présenté
+à la \autoref{sec:texte:outils:sed}.
 
 
 \subsection{Classes de caractères}
