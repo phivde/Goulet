@@ -566,7 +566,7 @@ qui le précède.
                                                 l'intérieur d'une
                                                 classe) \\
     \index{\string$@\verb=$= (regex)}\verb=$= & fin de la ligne \\
-    \icode[regex]{.} & tout caractère \\
+    \icode[regex]{.} & caractère de remplacement \\
     \icode[regex]{*} & zéro, une ou plusieurs occurrences \\
     \icode[regex]{?} & zéro ou une occurrence \\
     \icode[regex]{+} & une ou plusieurs occurrences \\
@@ -577,6 +577,127 @@ qui le précède.
     \bottomrule
   \end{tabular}
 \end{table} %$
+
+\subsection{Caractères de remplacement et de répétition}
+\label{sec:texte:regex:wildcards}
+
+Nous avons établi que l'un des principes de base des expressions
+régulière est qu'un caractère littéral correspond à lui-même dans un
+motif. Ce qu'il nous manque pour augmenter considérablement l'éventail
+des motifs disponibles, c'est une façon de signifier «n'importe quel
+caractère». Or, c'est justement le rôle du \index{caractère de
+  remplacement}\index{wildcard@\emph{wildcard character}|see{caractère
+    de remplacement}}caractère de remplacement (\emph{wildcard
+  character}). Dans les expressions régulières, le point
+«\Icode[regex]{.}» est le caractère de remplacement.
+
+Par exemple, le motif \regex{le.} correspond à «le» suivi d'un
+caractère quelconque, \emph{y compris l'espace}. Par conséquent, tant
+«les» que «lent» ou «elle mange» correspondent à ce motif. Le motif
+\regex{ou. } permet, quant à lui, de rechercher les lignes du fichier
+\code{chanson.txt} qui contiennent un mot situé ailleurs qu'en fin de
+strophe --- puisqu'il est suivi d'une espace --- se terminant par «ou»
+et une lettre.
+<<echo=FALSE>>=
+exec("grep", c("'ou. '", "chanson.txt"))
+@
+
+Le caractère de remplacement est généralement accompagné d'un
+opérateur de répétition (ou de quantification) afin de décrire non
+plus seulement «n'importe quel caractère», mais plus largement
+«n'importe quelle suite de caractères». Comme le montre le
+\autoref{tab:texte:operateurs}, il existe quatre opérateurs de
+répétition dans les expressions régulières: les caractères réservés
+«\icode[regex]{*}», «\icode[regex]{?}» et «\icode[regex]{+}», ainsi
+que les accolades «\icode[regex]{\{~\}}».
+
+L'opérateur «\Icode[regex]{*}» signifie: «ce qui précède, zéro ou
+plusieurs fois». Ainsi le motif \regex{a*b} correspond, entre autres,
+aux chaines de caractères «b», «ab» ou «aaab». C'est le seul opérateur
+de répétition pris en charge par les expressions régulières basiques.
+
+L'opérateur «\Icode[regex]{?}» signifie: «ce qui précède, zéro ou une
+fois». Le motif \regex{a?b} correspond donc uniquement aux chaines «b»
+et «ab».
+
+Quant à l'opérateur «\Icode[regex]{+}», il signifie: «ce qui précède,
+une ou plusieurs fois». Ainsi le motif \regex{a+b} correspond aux
+chaines «ab» ou «aaab», mais pas à «b».
+
+Combinés avec le caractère de remplacement, les trois opérateurs de
+répétition ci-dessus permettent de décrire des chaines de caractères
+très générales puisque l'opération «n'importe quel caractère» s'en
+trouve repétée autant de fois que nécessaire. Ce sont les combinaisons
+d'opérateurs les plus utilisées dans les expressions régulières.
+\begin{itemize}
+\item \regex{.*} correspond à une chaine de caractères quelconques de
+  longueur arbitraire, y compris zéro.
+\item \regex{.?} correspond à aucun ou un seul caractère quelconque.
+\item \regex{.+} correspond à une chaine de caractères quelconques
+  longue d'au moins un caractère; équivalent à \regex{..*}.
+\end{itemize}
+Comparez attentivement les résultats des deux exemples ci-dessous.
+<<echo=FALSE>>=
+exec("grep", c("-E", "'Le .*e'", "chanson.txt"))
+@
+<<echo=FALSE>>=
+exec("grep", c("-E", "'Le .?e'", "chanson.txt"))
+@
+
+Enfin, les accolades «\Icode[regex]{\{~\}}» font office de
+quantificateurs bornés, c'est-à-dire qu'elles permettent de spécifier
+le nombre de répétitions souhaité. Il existe quatre manières de les
+utiliser. (Dans ce qui suit, $n$ et $m$ sont des entiers.)
+\begin{enumerate}
+\item «\code{\{$n$\}}» répète ce qui précède exactement
+  $n$ fois.
+\item «\code{\{$n$,$m$\}}» répète ce qui précède entre $n$ et $m$
+  fois.
+\item «\code{\{$n$,\}}» répète ce qui précède au moins $n$ fois.
+\item «\code{\{,$m$\}}» répète ce qui précède de zéro à $m$ fois.
+\end{enumerate}
+Les opérateurs «\icode[regex]{*}», «\icode[regex]{?}» et
+«\icode[regex]{+}» sont donc simplement des raccourcis pour, dans
+l'ordre, «\code{\{0,\}}», «\code{\{0,1\}}» et «\code{\{1,\}}». Le
+\autoref{tab:texte:accolades} fournit des exemples de correspondances
+pour chaque variante des accolades.
+
+\begin{table}
+  \centering
+  \caption{Comparaison des quatre variantes des quantificateurs
+    bornés}
+  \label{tab:texte:accolades}
+  \begin{tabular}{*{6}{l}}
+    Motif & \multicolumn{5}{c}{Correspondances} \\
+    \midrule
+    \regex{a\{2\}}   & «aa» \\
+    \regex{a\{2,4\}} & «aa» & «aaa» & «aaaa» \\
+    \regex{a\{2,\}}  & «aa» & «aaa» & «aaaa» & «aaaaa» & etc. \\
+    \regex{a\{,4\}}  & «»   & «a» & «aa» & «aaa» & «aaaa» \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Si les caractères «\code{*}», «\code{?}», «\code{+}», «\code{\{}» et
+«\code{\}}» ont une signification particulière dans les expressions
+régulières, comment alors rechercher ces caractères dans du texte?
+C'est là qu'entre en jeu le caractère d'échappement «\bs». Lorsqu'il
+précède un symbole, le caractère d'échappement désactive la
+signification spéciale de ce symbole. Par exemple, pour rechercher un
+nom de fichier long d'exactement huit caractères et suivi d'une
+extension \code{.txt}, un motif approprié serait:
+\regex{.\{8\}\bs.txt}.\footnote{%
+  Cet exemple très simplifié ne tient pas compte des éventuelles
+  règles de validité d'un nom de fichier.}
+
+\tipbox{Les quantificateurs des expressions régulières sont par défaut
+  gloutons (\emph{greedy}), c'est-à-dire qu'ils trouvent la plus
+  grande chaine possible qui correspond à un motif. Par exemple, dans
+  la chaine «Je le connais bien», le motif \regex{J.+e} correspond à
+  «Je le connais bie», et non seulement à «Je le». Sachez qu'il existe
+  aussi des quantificateurs non gloutons. Vous pourrez les rechercher
+  lorsque vous souhaiterez restreindre la portée d'un quantificateur à
+  la plus petite chaine possible --- et ça va arriver.}
 
 \subsection{Marqueurs de position et drapeaux}
 \label{sec:texte:regex:bol-eol}
@@ -593,9 +714,6 @@ grep: -o --only-matching, -v --invert-match
 
 sed: g
 
-
-\subsection{Caractères de remplacement et de répétition}
-\label{sec:texte:regex:wildcards}
 
 \subsection{Classes de caractères}
 \label{sec:texte:regex:classes}
