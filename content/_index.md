@@ -42,17 +42,16 @@ Vincent Goulet, professeur titulaire, [École d'actuariat](https://www.act.ulava
 
 1\. Éléments d'informatique pour programmeurs  
 2\. Présentation de R  
-3\. Premier pas avec R  
-4\. Fonctions  
-5\. Détails d'implémentation du langage R  
-6\. Algorithmique  
-7\. Structures de données de R  
-8\. Fonctions d'application  
-9\. Bibliothèques et paquetages  
-10\. Ligne de commande  
+3\. Algorithmes et algorithmique  
+4\. Bases de la programmation  
+5\. Structures de données de R et fonctions d'application  
+6\. Bonnes pratiques de la programmation  
+7\. Tri et recherche  
+8\. Débogage  
+9\. Importation et exportation de données  
+10\. Bibliothèques et paquetages  
 11\. Analyse et contrôle de texte  
-12\. Travail collaboratif  
-13\. Débogage  
+12\. Environnement et règles d'évaluation  
 A. RStudio: une introduction  
 B. GNU Emacs et ESS: la base  
 C. Solutions des exercices  
