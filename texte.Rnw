@@ -43,7 +43,7 @@ exec <- function(command, args, eval = TRUE)
 Vous êtes-vous déjà demandé comment s'effectue la validation de
 certains champs comme le code postal ou l'adresse de courrier
 électronique dans les formulaires électroniques? Sûrement pas en
-vérifiant si l'entrée figure dans la liste des quelques 17,5 millions
+vérifiant si l'entrée figure dans la liste des quelques 17,5~millions
 de codes postaux possibles au Canada ou, pire, parmi les milliards
 d'adresse de courriel que les
 \link{https://tools.ietf.org/html/rfc3696}{règles internationales}
@@ -100,7 +100,7 @@ https://www.google.ca/maps/place/Universite+Laval/
 
 Un jour ou l'autre, vous aurez à traiter des chaines de caractères en
 programmation ou en analyse de données. Ce jour-là, connaitre les
-expressions régulières vous sauvera énormément de temps.
+expressions régulières vous sera d'un grand secours.
 
 \begin{figure}[t]
   \centering
@@ -128,6 +128,13 @@ chapitre, lorsque le contexte l'exige:
   permet, par exemple, de bien discerner que le motif
   \regex{\#\aspace\aspace\aspace\aspace A} compte quatre espaces entre
   \code{\#} et \code{A};
+\item la chaine dans laquelle s'effectue une recherche est représentée
+  en police non proportionnelle et les correspondances d'un motif dans
+  celle-ci sont mis en surbrillance, comme dans l'exemple suivant:
+  \begin{center}
+    le motif \regex{chat} correspond à \chaine{Les \matches{chat}s
+      sont très mignons.}
+  \end{center}
 \item le caractère de retour à la ligne (\emph{newline}) est
   représenté par {\NLsymbol} et celui de retour chariot (\emph{carriage
     return}) est représenté par \CRsymbol.
@@ -252,15 +259,16 @@ L'utilitaire \Icode{grep}\footnote{%
   Le nom de l'utilitaire provient de la commande \code{:g/re/p} de
   l'antédiluvien éditeur de texte \icode{ed} qui permet de rechercher
   globalement (\code{g}) une expression régulière (\emph{regular
-    expression}, \code{re}) et d'afficher les lignes qui correspondent
-  (\emph{print}, \code{p}).} %
-prend en argument une \index{expression régulière}expression
-régulière, lit l'entrée standard ou une liste de fichiers ligne par
-ligne, puis retourne sur la sortie standard les lignes qui contiennent
-des correspondances avec l'expression régulière. C'est très utile pour
-savoir si un fichier contient --- ou quels fichiers contiennent --- un
-mot ou une expression, assez pour que le nom de l'utilitaire soit
-devenu, en anglais, un verbe dans le %
+    expression}, \code{re}) et d'afficher (\emph{print}, \code{p}) les
+  lignes qui correspondent à l'expression.} %
+prend en argument une \index{expression régulière}expression régulière
+entre guillemets (simples ou doubles), lit l'entrée standard ou une
+liste de fichiers ligne par ligne, puis retourne sur la sortie
+standard les lignes qui contiennent des correspondances avec
+l'expression régulière. C'est très utile pour savoir si un fichier
+contient --- ou quels fichiers contiennent --- un mot ou une
+expression, assez pour que le nom de l'utilitaire soit devenu, en
+anglais, un verbe dans le %
 \link{http://www.catb.org/jargon/html/G/grep.html}{jargon
   informatique} %
 (\emph{to grep}).
@@ -281,30 +289,26 @@ exec("grep", c("'^M'", "chanson.txt"))
 exec("grep", c("'chat'", "chanson.txt"))
 @
 
-En combinant \icode{grep} avec l'utilitaire \Icode{wc} (\emph{word
-  count}), nous pouvons obtenir le nombre total de lignes, de mots et
-de caractères des vers dans lesquels le mot «flambant» apparait dans
-la chanson.
-<<echo=FALSE>>=
-exec("grep", c("'flambant'", "chanson.txt", "| wc"))
-@
+Comme la plupart des utilitaires Unix, \icode{grep} accepte en
+argument des options (ou drapeaux) qui modifient son comportement. Les
+options se présentent généralement en deux versions: courte sous forme
+d'une seule lettre précédée d'un tiret, ou longue sous forme d'un mot
+(ou une expression) précédé de deux tirets. Les options de
+\icode{grep} sont très nombreuses; je n'en ai retenu que quelques unes
+ici.
 
-L'option \code{-c} de \icode{grep} donne encore plus rapidement accès
-au nombre de lignes qui correspondent à l'\index{expression
-  régulière}expression régulière.
-<<echo=FALSE>>=
-exec("grep", c("-c", "'flambant'", "chanson.txt"))
-@
+\begin{ttscript}{-E, --extended-regexp}
+\item[\code{-E, --extended-regexp}] interprète le motif comme une expression
+  régulière étendue
+\item[\code{-c, --count}] retourne seulement le nombre de lignes qui
+  correspondent au motif
+\item[\code{-o, --only-matching}] retourne uniquement la portion de la
+  ligne qui correspond au motif, plutôt que la ligne au complet
+\item[\code{-v, --invert-match}] sélectionne les lignes
+  qui ne correspondent \emph{pas} au motif
+\end{ttscript}
 
-L'option \code{-v} de \icode{grep} permet d'inverser les résultats ou,
-autrement dit, d'extraire les lignes qui ne contiennent \emph{aucune}
-correspondance avec \index{expression régulière}l'expression
-régulière. Par exemple, la commande ci-dessous permet d'extraire les
-vers qui ne contiennent pas la lettre «e» (ce qui inclut les lignes
-blanches entre les strophes).
-<<echo=FALSE, strip.white=false>>=
-exec("grep", c("-v", "'e'", "chanson.txt"))
-@
+Nous aurons l'occasion d'illustrer chacune de ces options dans la suite.
 
 \subsection{Recherche et remplacement avec \code{sed}}
 \label{sec:texte:outils:sed}
@@ -313,13 +317,13 @@ L'utilitaire \Icode{sed}\footnote{Pour \emph{stream editor}, ou
   éditeur de flux de texte. Comme \code{grep}, \code{sed} tire son
   origine de l'éditeur \icode{ed}.} %
 est en quelque sorte un éditeur de texte qui opère sur un texte une
-ligne à la fois et de manière non-interactive. (Vous pourriez objecter
-que cela ne correspond en rien à l'idée que l'on se fait d'un éditeur
-de texte, mais il n'est reste pas moins que le programme effectue des
-tâches d'édition sur du texte.) L'éventail des traitements que
-\icode{sed} peut appliquer à un texte est très vaste, mais la syntaxe
-des commandes qu'il faut entrer pour y arriver est particulièrement
-ésotérique\footnote{%
+seule ligne à la fois et de manière non-interactive. (Vous pourriez
+objecter que cela ne correspond en rien à l'idée que l'on se fait d'un
+éditeur de texte, mais il n'est reste pas moins que le programme
+effectue des tâches d'édition sur du texte.) L'éventail des
+traitements que \icode{sed} peut appliquer à un texte est très vaste,
+mais la syntaxe des commandes qu'il faut entrer pour y arriver est
+particulièrement ésotérique\footnote{%
   Jugez-en: la commande pour supprimer l'une de deux lignes blanches
   consécutives dans un texte est \code{N;/\string^\bs n\$/D;P;D;}.}. %
 Nous nous attarderons donc à une seule commande de \icode{sed}, celle
@@ -349,10 +353,11 @@ s/\meta{motif}/\meta{remplacement}/\meta{modificateur}
   symbole le plus couramment utilisé.
 \end{itemize}
 
-La commande de remplacement est fournie en argument à \icode{sed}.
-L'utilitaire lit ensuite l'entrée standard ou une liste de fichiers
-ligne par ligne, puis retourne sur la sortie standard le texte modifié
-(sans modifier le fichier d'origine).
+La commande de remplacement est fournie en argument à \icode{sed}
+entre guillemets (simples ou doubles). L'utilitaire lit ensuite
+l'entrée standard ou une liste de fichiers ligne par ligne, puis
+retourne sur la sortie standard le texte modifié (sans modifier le
+fichier d'origine).
 
 Les trois exemples ci-dessous permettent de faire les changements
 suivants dans le texte du fichier \code{chanson.txt}, dans l'ordre:
@@ -438,9 +443,10 @@ rationnelle, est un langage, muni d'une syntaxe précise, qui permet de
 décrire un ensemble de chaines de caractères possibles. Vous avez
 rencontré quelques expressions régulières très simples et intuitives à
 la section précédente. Ainsi, l'expression régulière \regex{chat}
-correspond à la chaine «chat», mais aussi à «chats», «chaton» ou
-«achat». Nous verrons dans la suite comment restreindre l'expression
-au seul mot «chat».
+correspond à \chaine{\matches{chat}}, mais aussi à
+\chaine{\matches{chat}s}, \chaine{\matches{chat}on} ou
+\chaine{a\matches{chat}}. Nous verrons dans la suite comment
+restreindre l'expression au seul mot «chat».
 
 Cette section propose une introduction au langage des expressions
 régulières. Il existe une multitude de tutoriels et de documents de
@@ -497,14 +503,18 @@ régulières basiques et les expressions régulières étendues, nous
 utiliserons toujours ces dernières. Pour indiquer à \icode{grep} et à
 \icode{sed} d'utiliser la syntaxe des \index{expression
   régulière!étendue}expressions régulières étendues, il suffit de leur
-ajouter l'option \code{-E}. Dans le premier exemple ci-dessous, le
-motif est une \index{expression régulière basique}expression régulière
-basique qui ne reconnait aucune ligne du fichier \code{chanson.txt}
-puisque le fichier ne contient pas la chaine «chien{\textbar}chat».
-Dans le second exemple, en revanche, le motif est une expression
-régulière étendue dans laquelle l'opérateur
-«\index{{"|}@\code{\textbar} (regex)}\code{\textbar}» permet de
-reconnaitre «chien» ou «chat».
+ajouter l'option \code{-E} mentionnée à la
+\autoref{sec:texte:outils:grep}.
+
+Dans le premier exemple ci-dessous, le motif \regex{chien|chat} est
+interprété par \icode{grep} comme une \index{expression régulière
+  basique}expression régulière basique dans laquelle le symbole
+«\code{|}» est un caractère comme les autres. Comme le fichier
+\code{chanson.txt} ne contient pas la chaine \chaine{chien|chat}, le
+motif ne correspond à aucune ligne. Dans le second exemple
+\icode{grep} est invoqué avec l'option \code{-E} et, par conséquent,
+le motif est interprété comme une expression régulière étendue qui
+signifie plutôt: \chaine{chien} \emph{ou} \chaine{chat}.
 <<echo=FALSE>>=
 exec("grep", c("'chien|chat'", "chanson.txt"))
 @
@@ -512,10 +522,10 @@ exec("grep", c("'chien|chat'", "chanson.txt"))
 exec("grep", c("-E", "'chien|chat'", "chanson.txt"))
 @
 
-\tipbox{Pour effacer tout doute, utilisez simplement toujours
-  \icode{grep} et \icode{sed} avec l'option \code{-E}. La plupart des
-  systèmes fournissent aussi un utilitaire \icode{egrep} en tous
-  points équivalent à \code{grep -E}.}
+\tipbox{Pour effacer tout doute, n'hésitez pas à simplement utiliser
+  toujours \icode{grep} et \icode{sed} avec l'option \code{-E}. La
+  plupart des systèmes fournissent d'ailleurs un utilitaire
+  \Icode{egrep} en tous points équivalent à \code{grep -E}.}
 
 \subsection{Syntaxe de base}
 \label{sec:texte:regex:syntaxe}
@@ -532,26 +542,29 @@ simples.
 \begin{enumerate}
 \item Un caractère littéral correspond à la \emph{première} occurrence
   de ce caractère dans la chaine de texte. Par exemple, le motif
-  \regex{a} correspond uniquement au «a» qui suit le «G» dans
-  «Gave-moi de ton amour». Que la lettre se trouve à l'intérieur d'un
-  mot n'a pas d'importance.
+  \regex{a} correspond à \chaine{G\matches{a}ve-moi de ton amour}. Que
+  la lettre se trouve à l'intérieur d'un mot n'a pas d'importance.
 \item Une expression régulière peut être formée par
   \index{concaténation}concaténation de deux ou plusieurs expressions
   régulières. Elle correspond alors à toute chaine de texte qui
   correspond aux sous-expressions. Autrement dit, les composantes
   d'une expression régulière sont par défaut reliées par une clause
-  «et». Pour reprendre l'exemple précédent, le motif \regex{am}
-  correspond à la lettre «a» immédiatement suivie de la lettre «m»,
-  soit les deux premières lettres du mot «amour».
+  «et». Dans l'exemple précédent, le motif \regex{am} correspond à
+  \chaine{Gave-moi de ton \matches{am}our}.
 \item Une douzaine d'opérateurs permettent de rechercher dans une
   chaine de texte autre chose que des caractères littéraux.
 \end{enumerate}
 
+\importantbox{L'espace est un «caractère» comme les autres dans les
+  expressions régulières. Le motif \regex{e} correspond donc à
+  \chaine{Gav\matches{e}-moi de ton amour}, alors que le motif
+  \regex{e\aspace} correspond plutôt à \chaine{Gave-moi
+    d\matches{e~}ton amour}.}
+
 Le \autoref{tab:texte:operateurs} présente les opérateurs des
-expressions régulières étendues. Nous reviendrons plus en détail sur
-ces opérateurs dans la suite. Entretemps, gardez en tête qu'un
-opérateur s'applique uniquement à l'expression (ou la sous-expression)
-qui le précède.
+expressions régulières étendues. Dans la suite, nous allons
+graduellement les intégrer dans les expressions régulières afin de
+sans cesse augmenter l'éventail des motifs disponibles.
 
 \begin{table}
   \centering
@@ -590,44 +603,57 @@ Nous avons établi que l'un des principes de base des expressions
 régulière est qu'un caractère littéral correspond à lui-même dans un
 motif. Ce qu'il nous manque pour augmenter considérablement l'éventail
 des motifs disponibles, c'est une façon de signifier «n'importe quel
-caractère». Or, c'est justement le rôle du \index{caractère de
-  remplacement}\index{wildcard@\emph{wildcard character}|see{caractère
-    de remplacement}}caractère de remplacement (\emph{wildcard
-  character}). Dans les expressions régulières, le point
-«\Icode[regex]{.}» est le caractère de remplacement.
+caractère» et «n'importe quelle suite de caractères». C'est le rôle du
+caractère de remplacement et des opérateurs de répétition.
 
-Par exemple, le motif \regex{le.} correspond à «le» suivi d'un
-caractère quelconque, \emph{y compris l'espace}. Par conséquent, tant
-«les» que «lent» ou «elle mange» correspondent à ce motif. Le motif
-\regex{ou. } permet, quant à lui, de rechercher les lignes du fichier
-\code{chanson.txt} qui contiennent un mot situé ailleurs qu'en fin de
-strophe --- puisqu'il est suivi d'une espace --- se terminant par «ou»
-et une lettre.
+Dans les expressions régulières, le point «\Icode[regex]{.}» est le
+\index{caractere de remplacement@caractère de remplacement}%
+\index{wildcard@\emph{wildcard character}|see{caractère de
+    remplacement}}caractère de remplacement (\emph{wildcard
+  character}). Par exemple, le motif \regex{le.} correspond à
+\chaine{le} suivi d'un caractère quelconque, \emph{y compris
+  l'espace}. Par conséquent, tant \chaine{\matches{les}} que
+\chaine{\matches{len}t} ou \chaine{el\matches{le~}mange} correspondent
+à ce motif.
+
+Effectuons une autre recherche dans le fichier \code{chanson.txt}: les
+lignes contenant un mot se terminant par \chaine{ou} et une lettre
+quelconque. Nous allons délimiter un mot en supposant que la chaine
+recherchée est suivie d'une espace --- ce qui a pour effet d'exclure
+les mots situés en fin de vers. Le motif approprié pour la recherche
+est \regex{ou.\aspace}.
 <<echo=FALSE>>=
 exec("grep", c("'ou. '", "chanson.txt"))
 @
 
-Le caractère de remplacement est généralement accompagné d'un
-opérateur de répétition (ou de quantification) afin de décrire non
-plus seulement «n'importe quel caractère», mais plus largement
-«n'importe quelle suite de caractères». Comme le montre le
+Affichons, à l'aide de l'option \code{-o} de \icode{grep}, la portion
+de chaque ligne qui correspond au motif dans l'exemple précédent.
+<<echo=FALSE>>=
+exec("grep", c("-o", "'ou. '", "chanson.txt"))
+@
+
+Les \index{operateur de repetition@opérateur de répétition}opérateurs
+de répétition (ou de quantification), quant à eux, permettent de
+décrire des suites de caractères. Comme le montre le
 \autoref{tab:texte:operateurs}, il existe quatre opérateurs de
-répétition dans les expressions régulières: les caractères réservés
-«\icode[regex]{*}», «\icode[regex]{?}» et «\icode[regex]{+}», ainsi
-que les accolades «\icode[regex]{\{~\}}».
+répétition dans les expressions régulières (étendues): les caractères
+réservés «\icode[regex]{*}», «\icode[regex]{?}» et «\icode[regex]{+}»,
+ainsi que les accolades «\icode[regex]{\{~\}}».
 
 L'opérateur «\Icode[regex]{*}» signifie: «ce qui précède, zéro ou
 plusieurs fois». Ainsi le motif \regex{a*b} correspond, entre autres,
-aux chaines de caractères «b», «ab» ou «aaab». C'est le seul opérateur
-de répétition pris en charge par les expressions régulières basiques.
+aux chaines \chaine{\matches{b}}, \chaine{\matches{ab}} ou
+\chaine{\matches{aaab}}. C'est le seul opérateur de répétition aussi
+pris en charge par les expressions régulières basiques.
 
 L'opérateur «\Icode[regex]{?}» signifie: «ce qui précède, zéro ou une
-fois». Le motif \regex{a?b} correspond donc uniquement aux chaines «b»
-et «ab».
+fois». Le motif \regex{a?b} correspond donc uniquement aux chaines
+\chaine{\matches{b}} et \chaine{\matches{ab}}.
 
 Quant à l'opérateur «\Icode[regex]{+}», il signifie: «ce qui précède,
 une ou plusieurs fois». Ainsi le motif \regex{a+b} correspond aux
-chaines «ab» ou «aaab», mais pas à «b».
+chaines \chaine{\matches{ab}} ou \chaine{\matches{aaab}}, mais pas à
+\chaine{b}.
 
 Combinés avec le caractère de remplacement, les trois opérateurs de
 répétition ci-dessus permettent de décrire des chaines de caractères
@@ -670,15 +696,17 @@ pour chaque variante des accolades.
 \begin{table}
   \centering
   \caption{Comparaison des quatre variantes des quantificateurs
-    bornés}
+    bornés. Les caractères «\chaine{//}» représentent une chaine de
+    caractères vide.}
   \label{tab:texte:accolades}
-  \begin{tabular}{*{6}{l}}
-    Motif & \multicolumn{5}{c}{Correspondances} \\
+  \begin{tabular}{*{7}{l}}
+    \toprule
+    Motif & \multicolumn{6}{c}{Correspondances} \\
     \midrule
-    \regex{a\{2\}}   & «aa» \\
-    \regex{a\{2,4\}} & «aa» & «aaa» & «aaaa» \\
-    \regex{a\{2,\}}  & «aa» & «aaa» & «aaaa» & «aaaaa» & etc. \\
-    \regex{a\{,4\}}  & «»   & «a» & «aa» & «aaa» & «aaaa» \\
+    \regex{a\{2\}}   & \chaine{//} & \chaine{a} & \chaine{\matches{aa}} & \chaine{aaa} & \chaine{aaaa} & \chaine{aaaaa} \\ \addlinespace[6pt]
+    \regex{a\{2,4\}} & \chaine{//} & \chaine{a} & \chaine{\matches{aa}} & \chaine{\matches{aaa}} & \chaine{\matches{aaaa}} & \chaine{aaaaa} \\ \addlinespace[6pt]
+    \regex{a\{2,\}}  & \chaine{//} & \chaine{a} & \chaine{\matches{aa}} & \chaine{\matches{aaa}} & \chaine{\matches{aaaa}} & \chaine{\matches{aaaaa}} \\ \addlinespace[6pt]
+    \regex{a\{,4\}}  & \chaine{\matches{//}} & \chaine{\matches{a}} & \chaine{\matches{aa}} & \chaine{\matches{aaa}} & \chaine{\matches{aaaa}} & \chaine{aaaaa} \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -686,47 +714,43 @@ pour chaque variante des accolades.
 Si les caractères «\code{*}», «\code{?}», «\code{+}», «\code{\{}» et
 «\code{\}}» ont une signification particulière dans les expressions
 régulières, comment alors rechercher ces caractères dans du texte?
-C'est là qu'entre en jeu le caractère d'échappement «\bs». Lorsqu'il
-précède un symbole, le caractère d'échappement désactive la
-signification spéciale de ce symbole. Par exemple, pour rechercher un
-nom de fichier long d'exactement huit caractères et suivi d'une
-extension \code{.txt}, un motif approprié serait:
-\regex{.\{8\}\bs.txt}.\footnote{%
+C'est là qu'entre en jeu le \index{caractere d'echappement@caractère
+  d'échappement}caractère d'échappement «\Index{\string\@\code{\bs}
+  (regex)}\bs». Lorsqu'il précède un symbole, le caractère
+d'échappement désactive la signification spéciale de ce symbole. Par
+exemple, le motif \regex{\bs.} trouve un accord avec le caractère
+«\chaine{.}». Pour rechercher un nom de fichier long d'exactement huit
+caractères et suivi d'une extension \code{.txt}, un motif
+approprié\footnote{%
   Cet exemple très simplifié ne tient pas compte des éventuelles
-  règles de validité d'un nom de fichier.}
+  règles de validité d'un nom de fichier.} %
+serait donc: \regex{.\{8\}\bs.txt}\,.
 
 \tipbox{Les quantificateurs des expressions régulières sont par défaut
   gloutons (\emph{greedy}), c'est-à-dire qu'ils trouvent la plus
-  grande chaine possible qui correspond à un motif. Par exemple, dans
-  la chaine «Je le connais bien», le motif \regex{J.+e} correspond à
-  «Je le connais bie», et non seulement à «Je le». Sachez qu'il existe
-  aussi des quantificateurs non gloutons. Vous pourrez les rechercher
-  lorsque vous souhaiterez restreindre la portée d'un quantificateur à
-  la plus petite chaine possible --- et ça va arriver.}
+  longue chaine possible en accord avec un motif. Par exemple, le
+  motif \regex{J.+e} correspond à \chaine{\matches{Je le connais
+      bie}n}, et non seulement à \chaine{\matches{Je le} connais
+    bien}. Sachez qu'il existe aussi des quantificateurs non gloutons.
+  Vous pourrez les rechercher lorsque vous souhaiterez restreindre la
+  portée d'un quantificateur à la plus petite chaine possible --- et
+  ça va arriver.}
 
-\subsection{Marqueurs de position et drapeaux}
-\label{sec:texte:regex:bol-eol}
 
-Les marqueurs de position et les drapeaux permettent de modifier la
-logique de correspondance d'une expression régulière.
+\subsection{Marqueurs de position}
+\label{sec:texte:regex:marqueurs}
 
-En premier lieu, il existe deux marqueurs de position qui permettent
-de fixer une condition pour qu'un motif trouve un accord dans une
-chaine de caractères: le caret (ou accent circonflexe)
+Les expressions régulières comportent deux marqueurs de position qui
+permettent de fixer une condition pour qu'un motif trouve un accord
+dans une chaine de caractères: le caret (ou accent circonflexe)
 «\code{\string^}» et le signe de dollar «\code{\$}». Ils identifient
 respectivement le début et la fin d'une ligne de texte.
 
-Par exemple, la première expression ci-dessous identifie uniquement
-les lignes qui contiennent «la» en début de ligne, alors que la
-seconde retient seulement les lignes qui contiennent «que» en fin de
-ligne\footnote{%
-  Cette formulation insiste sur le fait que le motif ne retient pas
-  les lignes qui contiennent «la» ou «que» ailleurs qu'en début ou en
-  fin de ligne. Nous aurions aussi pu mettre l'accent sur le fait que
-  la première expression retient uniquement les lignes débutant par
-  «la» et la seconde, celles se terminant par «que».}. %
-(Il est laissé en exercice de comparer avec les résultats sans les
-marqueurs de position.)
+Par exemple, la première commande ci-dessous identifie uniquement les
+lignes qui contiennent \chaine{la} en début de ligne, alors que la
+seconde retient seulement les lignes qui contiennent \chaine{que} en
+fin de ligne. (Il est laissé en exercice de comparer avec les
+résultats sans les marqueurs de position.)
 <<echo=FALSE>>=
 exec("grep", c("'^la'", "chanson.txt"))
 @
@@ -734,48 +758,28 @@ exec("grep", c("'^la'", "chanson.txt"))
 exec("grep", c("'que$'", "chanson.txt"))
 @
 
-Prenez la mesure du motif particulier suivant: \regex{\string^\$}. Il
-décrit un début de ligne suivi immédiatement d'une fin de ligne,
-soit\dots\ une ligne blanche! Nous verrons une utilisation de ce motif
-dans un instant.
+Combien de lignes de \code{chanson.txt} débutent par \chaine{la}?
+C'est un travail pour \icode{grep} muni de l'option \code{-c}.
+<<echo=FALSE>>=
+exec("grep", c("-c", "'^la'", "chanson.txt"))
+@
 
-En second lieu, les drapeaux (\emph{flags}) modifient le comportement
-des outils comme \icode{grep} et \icode{sed}. Le premier compte un
-très grand nombre de drapeaux. Ils se présentent généralement en deux
-versions: courte sous forme d'une lettre unique précédée d'un tiret et
-longue sous forme d'un mot précédé de deux tirets. Vous connaissez
-déjà le drapeau \code{-E} qui active les expressions régulières
-étendues; sa version longue est \code{--extended-regexp}. Voici deux
-autres drapeaux de \icode{grep} particulièrement utiles.
+Observez maintenant le motif particulier \regex{\string^\$} et prenez
+une minute pour déterminer à quoi il correspond.
 
-\begin{ttscript}{-o, --only-matching}
-\item[\code{-v, --invert-match}] sélectionne les lignes
-  qui ne correspondent \emph{pas} au motif
-\item[\code{-o, --only-matching}] retourne uniquement la
-  portion de la ligne qui correspond au motif
-\end{ttscript}
+Vous avez trouvé?
 
-Vous avez déjà rencontré une utilisation du drapeau \code{-v} à la fin
-de la \autoref{sec:texte:outils:grep} pour identifier les strophes de
-la chanson qui ne contiennent pas la lettre «e». Le drapeau est aussi
-très utile lorsque combiné au motif \regex{\string^\$}: la commande
-suivante supprime les lignes blanches du fichier \code{chanson.txt}.
+Le motif décrit un début de ligne suivi immédiatement d'une fin de
+ligne, soit\dots\ une ligne blanche! Ce motif est surtout utile
+lorsque combiné avec l'option \code{-v} de \icode{grep} qui permet
+d'inverser les résultats. Ainsi, la commande suivante retourne toutes
+les lignes du fichier \code{chanson.txt} qui ne sont \emph{pas} vides.
+Autrement dit, la commande supprime les lignes blanches du fichier.
 (Question d'économiser de l'espace en ces pages, je vous laisse le
 soin d'en faire la vérification.)
 <<echo=FALSE>>=
 exec("grep", c("-v", "'^$'", "chanson.txt"), eval = FALSE)
 @
-
-Pour illustrer le drapeau \code{-o}, reprenons un exemple de la
-\autoref{sec:texte:regex:wildcards} en restreignant cette fois
-l'affichage à la portion de chaque ligne qui correspond au motif.
-<<echo=FALSE>>=
-exec("grep", c("-o", "-E", "'Le .?e'", "chanson.txt"))
-@
-
-Du côté de l'utilitaire \icode{sed}, le seul drapeau que nous
-utiliserons est le modificateur \code{g} que nous avons déjà présenté
-à la \autoref{sec:texte:outils:sed}.
 
 
 \subsection{Classes de caractères}
