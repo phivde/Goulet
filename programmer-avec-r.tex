@@ -32,6 +32,7 @@
   \usepackage{fontawesome5}            % icônes \fa*
   \usepackage{awesomebox}              % boites info, important, etc.
   \usepackage{ullrcorners}             % expressions régulières
+  \usepackage{soul}                    % surbrillance (expressions régulières)
   \usepackage{answers}                 % exercices et solutions
   \usepackage{listings}                % code informatique
   \usepackage{refcount}                % numéros de ligne en surbrillance
@@ -89,7 +90,8 @@
   \definecolor{link}{rgb}{0,0.4,0.6}        % liens internes
   \definecolor{url}{rgb}{0.6,0,0}           % liens externes
   \definecolor{citation}{rgb}{0,0.5,0}      % citations
-  \colorlet{regex}{DarkOrange1}             % coins des regex
+  \colorlet{regex}{Snow4}                   % coins des regex
+  \colorlet{regexmatch}{Snow3}              % correspondances regex
   \colorlet{codebg}{LightYellow1}           % fond code R
   \colorlet{indexedface}{PaleGreen2}        % cellule indexée (2D et 3D)
   \colorlet{indexedtop}{PaleGreen3}         % cellule indexée (3D, dessus)
@@ -376,8 +378,11 @@
   \newcommand{\pkg}[1]{\textbf{#1}}
 
   %% Expressions régulières; utilise le paquetage local
-  %% ullrcorners pour tracer les coins autour de l'expression
+  %% ullrcorners pour tracer les coins autour de l'expression et le
+  %% paquetage soul pour mettre les correspondances en surbrillance.
   \newcommand{\regex}[1]{\ullrcorners{regex}{\code{#1}}}
+  \newcommand{\chaine}[1]{\code{#1}}
+  \newcommand{\matches}{\sethlcolor{regexmatch}\hl}
 
   %% J'ai besoin d'afficher le symbole d'espace de \verb* à
   %% l'intérieur d'expressions régulières, donc en argument à \regex.
