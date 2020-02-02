@@ -1,6 +1,6 @@
 ### -*-Makefile-*- pour préparer "Programmer avec R"
 ##
-## Copyright (C) 2019 Vincent Goulet
+## Copyright (C) 2020 Vincent Goulet
 ##
 ## 'make pdf' crée les fichiers .tex à partir des fichiers .Rnw avec
 ## Sweave et compile le document maitre avec XeLaTeX.
@@ -109,7 +109,7 @@ FORCE: ;
 	${RBATCH} $<.tmp $@
 	${RM} $<.tmp
 
-${MASTER}: ${MASTER:.pdf=.tex} ${RNWFILES:.Rnw=.tex} ${TEXFILES} ${SCRIPTS} \
+${MASTER}: ${MASTER:.pdf=.tex} ${RNWFILES:.Rnw=.tex} ${TEXFILES} \
 	   $(wildcard data/*) $(wildcard images/*)
 	${TEXI2DVI} ${MASTER:.pdf=.tex}
 
@@ -220,7 +220,7 @@ publish:
 	@echo ----- Done publishing
 
 .PHONY: check-url
-check-url: ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES} ${SCRIPTS}
+check-url: ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES}
 	@echo ----- Checking urls in sources...
 	$(eval url=$(shell grep -E -o -h 'https?:\/\/[^./]+(?:\.[^./]+)+(?:\/[^ ]*)?' $? \
 		   | cut -d \} -f 1 \
