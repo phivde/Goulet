@@ -571,7 +571,7 @@ gamma(5)                   # fonction gamma
 ## Entrer le nom d'un objet affiche son contenu. Pour une
 ## fonction, c'est son code source qui est affiché.
 pi                         # constante numérique intégrée
-letters                    # chaîne de caractères intégrée
+letters                    # chaine de caractères intégrée
 LETTERS                    # version en majuscules
 matrix                     # fonction interne
 
@@ -898,7 +898,7 @@ numeric(5)                 # équivalent
 numeric                    # en effet, voici la fonction
 logical(5)                 # initialisé avec FALSE
 complex(5)                 # initialisé avec 0 + 0i
-character(5)               # initialisé avec chaînes vides
+character(5)               # initialisé avec chaines vides
 
 ## Si l'on mélange dans un même vecteur des objets de mode
 ## différents, il y a conversion forcée vers le mode pour
@@ -1804,7 +1804,7 @@ Pour chaque fonction présentée dans cette section, je fournis un ou
 deux exemples d'utilisation. Ces exemples sont loin de couvrir toutes
 les utilisations possibles d'une fonction. La
 \autoref{sec:bases:exemples} fournit des exemples additionnels.
-Consultez les rubriques d'aide des fonctions pour connaître toutes
+Consultez les rubriques d'aide des fonctions pour connaitre toutes
 leurs options.
 
 \tipbox{Vraiment, consultez les rubriques d'aide.}

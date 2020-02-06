@@ -430,7 +430,7 @@ d'autres. Voici quelques bons choix.
     est configurable, extensible et programmable.
   \end{quote}
   Emacs satisfait les trois conditions ci-dessus. Cependant, la
-  puissance de l'éditeur a un coût: Emacs est un logiciel difficile à
+  puissance de l'éditeur a un cout: Emacs est un logiciel difficile à
   apprivoiser, surtout pour les personnes moins à l'aise avec
   l'informatique. Si vous en êtes à votre première expérience avec un
   éditeur de texte, optez pour RStudio.
@@ -520,7 +520,7 @@ gamma(5)                   # fonction gamma
 ## Taper le nom d'un objet affiche son contenu. Pour une
 ## fonction, c'est son code source qui est affiché.
 pi                         # constante numérique intégrée
-letters                    # chaîne de caractères intégrée
+letters                    # chaine de caractères intégrée
 LETTERS                    # version en majuscules
 rnorm                      # fonction
 

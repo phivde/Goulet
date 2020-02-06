@@ -327,7 +327,7 @@ contrôle ou de la définition d'une fonction. Le code de la
 La source des insolubles débats se situe, comme souvent, dans les
 détails: le nombre d'espaces dont il convient d'indenter le code et la
 position des accolades, surtout l'accolade ouvrante. À titre
-d'exemples, l'éditeur GNU~Emacs\index{Emacs} reconnaît et supporte au
+d'exemples, l'éditeur GNU~Emacs\index{Emacs} reconnait et supporte au
 moins les styles d'indentation suivants:
 
 \vspace{\topsep}\noindent

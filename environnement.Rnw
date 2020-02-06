@@ -288,7 +288,7 @@ Il y a toutefois plus à connaitre à ce sujet. C'est l'objet de la
 prochaine section.
 
 \warningbox{La mécanique de création d'environnements d'évaluation
-  pour tous les appels de fonctions fait en sorte que ceux-ci coûtent
+  pour tous les appels de fonctions fait en sorte que ceux-ci coutent
   cher en temps et en ressources système. C'est pour cette raison que
   le calcul récursif est plutôt inefficace en R.}
 

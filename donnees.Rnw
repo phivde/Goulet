@@ -395,7 +395,7 @@ foo <- 1
 mode(c(1, 4.1, pi))        # nombres réels
 mode(c(2, 1 + 5i))         # nombres complexes
 mode(c(TRUE, FALSE, TRUE)) # valeurs booléennes
-mode("foobar")             # chaînes de caractères
+mode("foobar")             # chaines de caractères
 
 ## Par défaut, tous les nombres sont représentés en double
 ## précision dans R. Il n'y a donc pas de différence entre
@@ -423,16 +423,16 @@ mode(expression(x <- 5))   # une expression non évaluée
 (x <- 1:4)
 length(x)
 
-## Une chaîne de caractères ne compte que pour un seul
+## Une chaine de caractères ne compte que pour un seul
 ## élément.
 (x <- "foobar")
 length(x)
 
-## Pour obtenir la longueur de la chaîne, il faut utiliser
+## Pour obtenir la longueur de la chaine, il faut utiliser
 ## nchar().
 nchar(x)
 
-## Un objet peut néanmoins contenir plusieurs chaînes de
+## Un objet peut néanmoins contenir plusieurs chaines de
 ## caractères.
 (x <- c("f", "o", "o", "b", "a", "r"))
 length(x)
@@ -1231,7 +1231,7 @@ La liste\Index{liste} est la structure de données la plus générale et
 polyvalente du langage R. Si les éléments d'un vecteur simple doivent
 tous être du même mode, ceux de la liste peuvent être de n'importe
 quel mode, y compris le mode \icode{list}. Par conséquent, il est
-possible d'emboîter des listes, d'où le qualificatif de
+possible d'emboiter des listes, d'où le qualificatif de
 \emph{récursif} pour ce type d'objet.
 
 La liste est la structure de données par excellence pour réunir dans
