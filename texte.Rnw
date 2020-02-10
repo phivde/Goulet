@@ -42,7 +42,7 @@ exec <- function(command, args, eval = TRUE)
 
 Vous êtes-vous déjà demandé comment s'effectue la validation de
 certains champs comme le code postal ou l'adresse de courrier
-électronique dans les formulaires électroniques? Sûrement pas en
+électronique dans les formulaires électroniques? Surement pas en
 vérifiant si l'entrée figure dans la liste des quelques 17,5~millions
 de codes postaux possibles au Canada ou, pire, parmi les milliards
 d'adresse de courriel que les
@@ -555,12 +555,6 @@ simples.
   chaine de texte autre chose que des caractères littéraux.
 \end{enumerate}
 
-\importantbox{L'espace est un «caractère» comme les autres dans les
-  expressions régulières. Le motif \regex{e} correspond donc à
-  \chaine{Gav\matches{e}-moi de ton amour}, alors que le motif
-  \regex{e\aspace} correspond plutôt à \chaine{Gave-moi
-    d\matches{e~}ton amour}.}
-
 Le \autoref{tab:texte:operateurs} présente les opérateurs des
 expressions régulières étendues. Dans la suite, nous allons
 graduellement les intégrer dans les expressions régulières afin de
@@ -595,6 +589,12 @@ sans cesse augmenter l'éventail des motifs disponibles.
     \bottomrule
   \end{tabular}
 \end{table} %$
+
+\importantbox{L'espace est un «caractère» comme les autres dans les
+  expressions régulières. Le motif \regex{e} correspond donc à
+  \chaine{Gav\matches{e}-moi de ton amour}, alors que le motif
+  \regex{e\aspace} correspond plutôt à \chaine{Gave-moi
+    d\matches{e~}ton amour}.}
 
 \subsection{Caractères de remplacement et de répétition}
 \label{sec:texte:regex:wildcards}
@@ -660,13 +660,13 @@ répétition ci-dessus permettent de décrire des chaines de caractères
 très générales puisque l'opération «n'importe quel caractère» s'en
 trouve repétée autant de fois que nécessaire. Ce sont les combinaisons
 d'opérateurs les plus utilisées dans les expressions régulières.
-\begin{itemize}
-\item \regex{.*} correspond à une chaine de caractères quelconques de
+\begin{ttscript}{\regex{mm}}
+\item[\regex{.*}] correspond à une chaine de caractères quelconques de
   longueur arbitraire, y compris zéro.
-\item \regex{.?} correspond à aucun ou un seul caractère quelconque.
-\item \regex{.+} correspond à une chaine de caractères quelconques
+\item[\regex{.?}] correspond à aucun ou un seul caractère quelconque.
+\item[\regex{.+}] correspond à une chaine de caractères quelconques
   longue d'au moins un caractère; équivalent à \regex{..*}.
-\end{itemize}
+\end{ttscript}
 Comparez attentivement les résultats des deux exemples ci-dessous.
 <<echo=FALSE>>=
 exec("grep", c("-E", "'Le .*e'", "chanson.txt"))
@@ -677,16 +677,17 @@ exec("grep", c("-E", "'Le .?e'", "chanson.txt"))
 
 Enfin, les accolades «\Icode[regex]{\{~\}}» font office de
 quantificateurs bornés, c'est-à-dire qu'elles permettent de spécifier
-le nombre de répétitions souhaité. Il existe quatre manières de les
-utiliser. (Dans ce qui suit, $n$ et $m$ sont des entiers.)
-\begin{itemize}
-\item «\code{\{$n$\}}» répète ce qui précède exactement
+le nombre minimal de répétitions \emph{requises} et, de manière
+optionnelle, le nombre maximal de répétitions \emph{permises}. Il
+existe trois manières de les utiliser. (Dans ce qui suit, $n$ et $m$
+sont des entiers et $m > n$.)
+\begin{ttscript}{\code{\{$n$,$m$\}}}
+\item[\code{\{$n$\}}] répète ce qui précède exactement
   $n$ fois.
-\item «\code{\{$n$,$m$\}}» répète ce qui précède entre $n$ et $m$
-  fois.
-\item «\code{\{$n$,\}}» répète ce qui précède au moins $n$ fois.
-\item «\code{\{,$m$\}}» répète ce qui précède de zéro à $m$ fois.
-\end{itemize}
+\item[\code{\{$n$,$m$\}}] répète ce qui précède au moins $n$ fois et
+  jusqu'à $m$ fois.
+\item[\code{\{$n$,\}}] répète ce qui précède au moins $n$ fois.
+\end{ttscript}
 Les opérateurs «\icode[regex]{*}», «\icode[regex]{?}» et
 «\icode[regex]{+}» sont donc simplement des raccourcis pour, dans
 l'ordre, «\code{\{0,\}}», «\code{\{0,1\}}» et «\code{\{1,\}}». Le
@@ -695,18 +696,15 @@ pour chaque variante des accolades.
 
 \begin{table}
   \centering
-  \caption{Comparaison des quatre variantes des quantificateurs
-    bornés. Les caractères «\chaine{//}» représentent une chaine de
-    caractères vide.}
+  \caption{Comparaison des trois variantes des quantificateurs bornés}
   \label{tab:texte:accolades}
   \begin{tabular}{*{7}{l}}
     \toprule
-    Motif & \multicolumn{6}{c}{Correspondances} \\
+    Motif & \multicolumn{5}{c}{Correspondances} \\
     \midrule
-    \regex{a\{2\}}   & \chaine{//} & \chaine{a} & \chaine{\matches{aa}} & \chaine{aaa} & \chaine{aaaa} & \chaine{aaaaa} \\ \addlinespace[6pt]
-    \regex{a\{2,4\}} & \chaine{//} & \chaine{a} & \chaine{\matches{aa}} & \chaine{\matches{aaa}} & \chaine{\matches{aaaa}} & \chaine{aaaaa} \\ \addlinespace[6pt]
-    \regex{a\{2,\}}  & \chaine{//} & \chaine{a} & \chaine{\matches{aa}} & \chaine{\matches{aaa}} & \chaine{\matches{aaaa}} & \chaine{\matches{aaaaa}} \\ \addlinespace[6pt]
-    \regex{a\{,4\}}  & \chaine{\matches{//}} & \chaine{\matches{a}} & \chaine{\matches{aa}} & \chaine{\matches{aaa}} & \chaine{\matches{aaaa}} & \chaine{aaaaa} \\
+    \regex{ah\{2\}}   & \chaine{ah} & \chaine{\matches{ahh}} & \chaine{\matches{ahh}h} & \chaine{\matches{ahh}hh} & \chaine{\matches{ahh}hhh} \\ \addlinespace[6pt]
+    \regex{ah\{2,4\}} & \chaine{ah} & \chaine{\matches{ahh}} & \chaine{\matches{ahhh}} & \chaine{\matches{ahhhh}} & \chaine{\matches{ahhhh}h} \\ \addlinespace[6pt]
+    \regex{ah\{2,\}}  & \chaine{ah} & \chaine{\matches{ahh}} & \chaine{a\matches{ahhh}} & \chaine{\matches{ahhhh}} & \chaine{\matches{ahhhhh}} \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -719,12 +717,12 @@ C'est là qu'entre en jeu le \index{caractere d'echappement@caractère
   (regex)}\bs». Lorsqu'il précède un symbole, le caractère
 d'échappement désactive la signification spéciale de ce symbole. Par
 exemple, le motif \regex{\bs.} trouve un accord avec le caractère
-«\chaine{.}». Pour rechercher un nom de fichier long d'exactement huit
+«\chaine{.}». Pour rechercher un nom de fichier long d'un à huit
 caractères et suivi d'une extension \code{.txt}, un motif
 approprié\footnote{%
   Cet exemple très simplifié ne tient pas compte des éventuelles
   règles de validité d'un nom de fichier.} %
-serait donc: \regex{.\{8\}\bs.txt}\,.
+serait donc: \regex{.\{1,8\}\bs.txt}\,.
 
 \tipbox{Les quantificateurs des expressions régulières sont par défaut
   gloutons (\emph{greedy}), c'est-à-dire qu'ils trouvent la plus
@@ -781,10 +779,56 @@ soin d'en faire la vérification.)
 exec("grep", c("-v", "'^$'", "chanson.txt"), eval = FALSE)
 @
 
-
 \subsection{Classes de caractères}
 \label{sec:texte:regex:classes}
 
+La rectification de l'orthographe du français --- ou
+\link{http://www.nouvelleorthographe.info}{nouvelle orthographe} --- a
+mené à la disparition de l'accent circonflexe sur les lettres \emph{i}
+et \emph{u}: «chaine» plutôt que «chaîne», «disparaitre» plutôt que
+«disparaître», «bruler» plutôt que «brûler», etc.\ Si vous devez
+rechercher l'une ou l'autre graphie dans un texte, vous souhaiterez
+pouvoir les décrire toutes les deux à l'aide d'une seule expression
+régulière. C'est le rôle des opérateurs «\Icode[regex]{[~]}» qui
+définissent ce que l'on appelle une \emph{classe de caractères}. Par
+exemple, \regex{cha[iî]ne} correspond à la fois à \matches{chaine} et
+à \matches{chaîne}.
+
+Rappelez-vous la seconde règle fondamentale de la syntaxe des expressions
+régulières énoncée à la \autoref{sec:texte:regex:syntaxe}: il y a un
+«et» implicite entre les composantes d'une expression régulière. À
+l'intérieur d'une classe de caractères, c'est l'inverse: les
+composantes de la classe sont reliées par un «ou».
+
+Voici un autre exemple pour lequel les classes de caractères sont
+souvent utilisées: permettre qu'un mot débute par une majuscule ou une
+minuscule.
+<<echo=FALSE>>=
+exec("grep", c("'[Mm]ême'", "chanson.txt"))
+@
+
+Une classe peut contenir autant de caractères que vous le souhaitez.
+Par exemple, \regex{[123456]} trouve une correspondance avec n'importe
+lequel des entiers de 1 à 6. Question de simplifier la composition de
+longues listes de caractères, le caractère «\Icode[regex]{-}» a une
+signification particulière lorsqu'il est employé à l'intérieur d'une
+classe: il définit une plage de caractères. Ainsi, \regex{[1-6]} est
+équivalent à l'exemple précédent. Les plages les plus fréquemment
+employées sont les suivantes.
+\begin{ttscript}{\regex{[abc]}}
+\item[\regex{[0-9]}] les entiers de 0 à 9
+\item[\regex{[a-z]}] les lettres minuscules de a à z, sans les lettres accentuées
+\item[\regex{[A-Z]}] les lettres majuscules de A à Z, sans les lettres accentuées
+\end{ttscript}
+
+
+\subsection{Alternance}
+\label{sec:texte:regex:alternance}
+
+
+
+\subsection{Groupes}
+\label{sec:texte:regex:groupes}
 
 
 
@@ -1328,7 +1372,7 @@ $ sed 's/\./,/' 100metres.data > 100metres-dec.data
 \begin{exercice}
   \begin{enumerate}
   \item Extraire du fichier \code{100metres.data} les informations des
-    temps réalisés au mois d'août.
+    temps réalisés au mois d'aout.
   \item Extraire les informations des temps de moins de 10~secondes.
   \item Extraire les lignes du fichier satisfaisant les deux
     conditions précédentes. Vous pouvez avoir recours à l'opérateur de
