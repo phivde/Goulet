@@ -596,7 +596,7 @@ sans cesse augmenter l'éventail des motifs disponibles.
   \regex{e\aspace} correspond plutôt à \chaine{Gave-moi
     d\matches{e~}ton amour}.}
 
-\subsection{Caractères de remplacement et de répétition}
+\subsection{Caractères de remplacement, de répétition et d'échappement}
 \label{sec:texte:regex:wildcards}
 
 Nous avons établi que l'un des principes de base des expressions
@@ -614,7 +614,7 @@ Dans les expressions régulières, le point «\Icode[regex]{.}» est le
 \chaine{le} suivi d'un caractère quelconque, \emph{y compris
   l'espace}. Par conséquent, tant \chaine{\matches{les}} que
 \chaine{\matches{len}t} ou \chaine{el\matches{le~}mange} correspondent
-à ce motif.
+à ce motif, mais pas \chaine{belle} placé en fin de ligne.
 
 Effectuons une autre recherche dans le fichier \code{chanson.txt}: les
 lignes contenant un mot se terminant par \chaine{ou} et une lettre
@@ -647,8 +647,9 @@ aux chaines \chaine{\matches{b}}, \chaine{\matches{ab}} ou
 pris en charge par les expressions régulières basiques.
 
 L'opérateur «\Icode[regex]{?}» signifie: «ce qui précède, zéro ou une
-fois». Le motif \regex{a?b} correspond donc uniquement aux chaines
-\chaine{\matches{b}} et \chaine{\matches{ab}}.
+fois». Le motif \regex{a?b} correspond donc aux chaines
+\chaine{\matches{b}} et \chaine{\matches{ab}}, mais à aucune variante
+contenant des répétitions de la lettre \chaine{a}.
 
 Quant à l'opérateur «\Icode[regex]{+}», il signifie: «ce qui précède,
 une ou plusieurs fois». Ainsi le motif \regex{a+b} correspond aux
@@ -665,7 +666,7 @@ d'opérateurs les plus utilisées dans les expressions régulières.
   longueur arbitraire, y compris zéro.
 \item[\regex{.?}] correspond à aucun ou un seul caractère quelconque.
 \item[\regex{.+}] correspond à une chaine de caractères quelconques
-  longue d'au moins un caractère; équivalent à \regex{..*}.
+  longue d'au moins un caractère; équivalent à \regex{..*}\,.
 \end{ttscript}
 Comparez attentivement les résultats des deux exemples ci-dessous.
 <<echo=FALSE>>=
@@ -690,7 +691,7 @@ sont des entiers et $m > n$.)
 \end{ttscript}
 Les opérateurs «\icode[regex]{*}», «\icode[regex]{?}» et
 «\icode[regex]{+}» sont donc simplement des raccourcis pour, dans
-l'ordre, «\code{\{0,\}}», «\code{\{0,1\}}» et «\code{\{1,\}}». Le
+l'ordre, \code{\{0,\}}, \code{\{0,1\}} et \code{\{1,\}}. Le
 \autoref{tab:texte:accolades} fournit des exemples de correspondances
 pour chaque variante des accolades.
 
@@ -709,6 +710,19 @@ pour chaque variante des accolades.
   \end{tabular}
 \end{table}
 
+\tipbox{Les quantificateurs des expressions régulières sont par défaut
+  gloutons (\emph{greedy}), c'est-à-dire qu'ils trouvent la plus
+  longue chaine possible en accord avec un motif. Par exemple, le
+  motif \regex{J.+e} correspond à \chaine{\matches{Je le connais
+      bie}n}, et non seulement à \chaine{\matches{Je le} connais
+    bien}. Sachez qu'il existe aussi des quantificateurs non gloutons.
+  Vous pourrez les rechercher lorsque vous souhaiterez restreindre la
+  portée d'un quantificateur à la plus petite chaine possible --- et
+  ça va arriver.}
+
+\subsection{Caractère d'échappement}
+\label{sec:texte:escape}
+
 Si les caractères «\code{*}», «\code{?}», «\code{+}», «\code{\{}» et
 «\code{\}}» ont une signification particulière dans les expressions
 régulières, comment alors rechercher ces caractères dans du texte?
@@ -723,17 +737,6 @@ approprié\footnote{%
   Cet exemple très simplifié ne tient pas compte des éventuelles
   règles de validité d'un nom de fichier.} %
 serait donc: \regex{.\{1,8\}\bs.txt}\,.
-
-\tipbox{Les quantificateurs des expressions régulières sont par défaut
-  gloutons (\emph{greedy}), c'est-à-dire qu'ils trouvent la plus
-  longue chaine possible en accord avec un motif. Par exemple, le
-  motif \regex{J.+e} correspond à \chaine{\matches{Je le connais
-      bie}n}, et non seulement à \chaine{\matches{Je le} connais
-    bien}. Sachez qu'il existe aussi des quantificateurs non gloutons.
-  Vous pourrez les rechercher lorsque vous souhaiterez restreindre la
-  portée d'un quantificateur à la plus petite chaine possible --- et
-  ça va arriver.}
-
 
 \subsection{Marqueurs de position}
 \label{sec:texte:regex:marqueurs}
