@@ -2060,71 +2060,71 @@ x
 
 \begin{ttscript}{rowMeans}
 \item[\Icode{nrow}] \index{matrice!nombre de
-    lignes}nombre de lignes
+    lignes}nombre de lignes.
 <<echo=TRUE>>=
 nrow(x)
 @
 \item[\Icode{ncol}] nombre de \index{matrice!nombre de
-    colonnes}colonnes
+    colonnes}colonnes.
 <<echo=TRUE>>=
 ncol(x)
 @
 \item[\Icode{rowSums}] \index{matrice!sommes par ligne}sommes par
-  ligne
+  ligne.
 <<echo=TRUE>>=
 rowSums(x)
 @
 \item[\Icode{colSums}] \index{matrice!sommes par colonne}sommes par
-  colonne
+  colonne.
 <<echo=TRUE>>=
 colSums(x)
 @
 \item[\Icode{rowMeans}] \index{matrice!moyennes par ligne}moyennes par
-  ligne
+  ligne.
 <<echo=TRUE>>=
 rowMeans(x)
 @
 \item[\Icode{colMeans}] \index{matrice!moyennes par colonne}moyennes
-  par colonne
+  par colonne.
 <<echo=TRUE>>=
 colMeans(x)
 @
-\item[\code{\%*\%}] \index{matrice!produit}produit matriciel
+\item[\code{\%*\%}] \index{matrice!produit}produit matriciel.
 <<echo=TRUE>>=
 x %*% x
 @
-\item[\Icode{t}] \index{matrice!transposée}transposée
+\item[\Icode{t}] \index{matrice!transposée}transposée.
 <<echo=TRUE>>=
 t(x)
 @
-\item[\Icode{det}] \index{matrice!déterminant}déterminant
+\item[\Icode{det}] \index{matrice!déterminant}déterminant.
 <<echo=TRUE>>=
 det(x)
 @
 \item[\Icode{solve}] avec un seul argument (une matrice carrée):
-  \index{matrice!inverse}inverse
+  \index{matrice!inverse}inverse;
 <<echo=TRUE>>=
 solve(x)
 @
   avec deux arguments (une matrice
   carrée et un vecteur): solution du système d'équations linéaires
-  $\mat{A} \mat{x} = \mat{b}$
+  $\mat{A} \mat{x} = \mat{b}$;
 <<echo=TRUE>>=
 solve(x, c(1, 2))
 @
 \item[\Icode{diag}] avec une matrice en argument:
-  \index{matrice!diagonale}diagonale de la matrice
+  \index{matrice!diagonale}diagonale de la matrice;
 <<echo=TRUE>>=
 diag(x)
 @
   avec un vecteur en
-  argument: matrice diagonale formée avec le vecteur
+  argument: matrice diagonale formée avec le vecteur;
 <<echo=TRUE>>=
 diag(c(5, 1))
 @
   avec un scalaire
   $p$ en argument: \index{matrice!identité}matrice identité
-  $p \times p$
+  $p \times p$.
 <<echo=TRUE>>=
 diag(2)
 @

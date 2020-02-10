@@ -207,15 +207,15 @@ Quelques fonctions permettent de manipuler les environnements de
 fonctions. Nous en avons déjà utilisé trois ci-dessus.
 \begin{ttscript}{environment}
 \item[\Icode{environment}] extraction ou modification de
-  l'environnement
+  l'environnement.
 \item[\icode{ls}] affichage de la liste des éléments
-  de l'environnement
+  de l'environnement.
 \item[\Icode{get}] extraction de la valeur associée à un symbole
-  dans l'environnement
+  dans l'environnement.
 \item[\Icode{assign}] affectation d'une nouvelle paire
-  symbole-valeur dans l'environnement
+  symbole-valeur dans l'environnement.
 \item[\Icode{new.env}] création d'un nouvel environnement (vide par
-  défaut)
+  défaut).
 \end{ttscript}
 
 \tipbox{La fonction \Icode{ls.str} permet d'afficher en une seule

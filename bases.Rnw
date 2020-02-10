@@ -1813,38 +1813,38 @@ leurs options.
 \label{sec:bases:internes:math}
 
 \begin{ttscript}{factorial}
-\item[\Icode{exp}] fonction \index{exponentielle}exponentielle $e^x$
+\item[\Icode{exp}] fonction \index{exponentielle}exponentielle $e^x$.
 <<echo=TRUE>>=
 exp(1)
 @
 \item[\Icode{log}] \index{logarithme}logarithme naturel ou dans une
-  base quelconque
+  base quelconque.
 <<echo=TRUE>>=
 log(exp(1))
 log(9, base = 3)
 @
-\item[\Icode{sqrt}] \index{racine@racine carrée}racine carrée
+\item[\Icode{sqrt}] \index{racine@racine carrée}racine carrée.
 <<echo=TRUE>>=
 sqrt(9)
 @
-\item[\Icode{abs}] \index{valeur absolue}valeur absolue
+\item[\Icode{abs}] \index{valeur absolue}valeur absolue.
 <<echo=TRUE>>=
 abs(c(-1, 0, 2))
 @
 \item[\Icode{gamma}] fonction \index{gamma}gamma $\Gamma(x) =
   \int_0^\infty t^{x - 1} e^{-t}\, dt$ (et les fonctions apparentées
-  \icode{lgamma}, \icode{digamma}, \icode{trigamma})
+  \icode{lgamma}, \icode{digamma}, \icode{trigamma}).
 <<echo=TRUE>>=
 gamma(5)
 @
 \item[\Icode{factorial}] \index{factorielle}factorielle $x!$ (et la
-  fonction apparentée \icode{lfactorial})
+  fonction apparentée \icode{lfactorial}).
 <<echo=TRUE>>=
 factorial(4)
 @
 \item[\Icode{cos}] \index{trigonometrie@trigonométrie}cosinus en radians
   (et les autres fonctions trigonométriques: \icode{sin},
-  \icode{tan}, \icode{acos}, etc.)
+  \icode{tan}, \icode{acos}, etc.).
 <<echo=TRUE>>=
 cos(pi/4)
 @
@@ -1854,36 +1854,36 @@ cos(pi/4)
 \label{sec:bases:internes:seq}
 
 \begin{ttscript}{seqmalong}
-\item[\Icode{seq}] suite de nombres générale
+\item[\Icode{seq}] suite de nombres générale.
 <<echo=TRUE>>=
 seq(1, 9, by = 2)
 @
 \item[\Icode{\protect seq\_len}] \index{suite}suite de nombres de la
   longueur donnée en argument à partir de $1$ (plus rapide que
-  \code{seq})
+  \code{seq}).
 <<echo=TRUE>>=
 seq_len(10)
 @
 \item[\Icode{\protect seq\_along}] suite de nombres de la longueur du
-  vecteur en argument à partir de $1$ (plus rapide que \code{seq})
+  vecteur en argument à partir de $1$ (plus rapide que \code{seq}).
 <<echo=TRUE>>=
 seq_along(c(-1, 0, 2))
 @
 \item[\Icode{rep}] \index{repetition@répétition}répétition de
   vecteurs, de chaque élément d'un vecteur ou d'une combinaison des
-  deux
+  deux.
 <<echo=TRUE>>=
 rep(2, 10)
 rep(c(1, 3), each = 4)
 rep(c(1, 3), times = 2, each = 4)
 @
 \item[\Icode{rep.int}] répétition de vecteurs complets uniquement
-  (plus rapide que \code{rep})
+  (plus rapide que \code{rep}).
 <<echo=TRUE>>=
 rep.int(2, 10)
 @
 \item[\Icode{rep\_len}] répétition de vecteurs jusqu'à une certaine
-  longueur (plus rapide que \code{rep})
+  longueur (plus rapide que \code{rep}).
 <<echo=TRUE>>=
 rep_len(1:3, 10)
 @
@@ -1904,12 +1904,12 @@ rep_len(1:3, 10)
 \begin{ttscript}{head}
 \item[\Icode{head}] avec second argument $n > 0$ ($n = 6$ par défaut):
   $n$ premières composantes d'un objet (éléments d'un vecteur, lignes
-  d'une matrice ou d'un \emph{data frame})
+  d'une matrice ou d'un \emph{data frame});
 <<echo=TRUE>>=
 head(1:10, 3)
 @
   avec second argument
-  $n < 0$: objet sans les $|n|$ dernières composantes
+  $n < 0$: objet sans les $|n|$ dernières composantes.
 <<echo=TRUE>>=
 head(1:10, -3)
 @
@@ -1920,7 +1920,7 @@ head(1:10, -3)
 tail(1:10, 3)
 @
   avec second argument $n < 0$: objet sans les $|n|$ premières
-  composantes
+  composantes.
 <<echo=TRUE>>=
 tail(1:10, -3)
 @
@@ -1939,22 +1939,22 @@ x
 
 \begin{ttscript}{ceiling}
 \item[\Icode{round}] \index{arrondi}arrondi à un nombre défini de
-  décimales ($0$ par défaut)
+  décimales ($0$ par défaut).
 <<echo=TRUE>>=
 round(x)
 round(x, 3)
 @
-\item[\Icode{floor}] plus grand entier inférieur ou égal à l'argument
+\item[\Icode{floor}] plus grand entier inférieur ou égal à l'argument.
 <<echo=TRUE>>=
 floor(x)
 @
 \item[\Icode{ceiling}] plus petit entier supérieur ou égal à
-  l'argument
+  l'argument.
 <<echo=TRUE>>=
 ceiling(x)
 @
 \item[\Icode{trunc}] troncature vers zéro; différent de \texttt{floor}
-  pour les nombres négatifs
+  pour les nombres négatifs.
 <<echo=TRUE>>=
 trunc(x)
 @
@@ -1973,13 +1973,13 @@ x
 
 \begin{ttscript}{any}
 \item[\Icode{any}] \index{any}vrai si au moins une valeur du vecteur
-  booléen en argument est vraie
+  booléen en argument est vraie.
 <<echo=TRUE>>=
 any(x < 0)
 any(x > 10)
 @
 \item[\Icode{all}] \index{all}vrai si toutes les valeurs du vecteur
-  booléen en argument sont vraies
+  booléen en argument sont vraies.
 <<echo=TRUE>>=
 all(x < 0)
 all(x > -5)
@@ -1999,50 +1999,50 @@ x
 @
 
 \begin{ttscript}{quantile}
-\item[\Icode{sum}] \index{somme}somme des éléments
+\item[\Icode{sum}] \index{somme}somme des éléments.
 <<echo=TRUE>>=
 sum(x)
 @
-\item[\Icode{prod}] \index{produit}produit des éléments
+\item[\Icode{prod}] \index{produit}produit des éléments.
 <<echo=TRUE>>=
 prod(x)
 @
 \item[\Icode{diff}] \index{différences}différences entre les éléments
-  (opérateur mathématique $\nabla$)
+  (opérateur mathématique $\nabla$).
 <<echo=TRUE>>=
 diff(x)
 @
-\item[\Icode{mean}] \index{moyenne}moyenne arithmétique
+\item[\Icode{mean}] \index{moyenne}moyenne arithmétique.
 <<echo=TRUE>>=
 mean(x)
 @
 \item[\Icode{var}] \index{variance}variance (et \index{ecart
-    type@écart type}écart type avec \Icode{sd})
+    type@écart type}écart type avec \Icode{sd}).
 <<echo=TRUE>>=
 var(x)
 @
-\item[\Icode{min}] \index{minimum!valeur}minimum
+\item[\Icode{min}] \index{minimum!valeur}minimum.
 <<echo=TRUE>>=
 min(x)
 @
-\item[\Icode{max}] \index{maximum!valeur}maximum
+\item[\Icode{max}] \index{maximum!valeur}maximum.
 <<echo=TRUE>>=
 max(x)
 @
 \item[\Icode{range}] \index{etendue@étendue}étendue (minimum et
-  maximum)
+  maximum).
 <<echo=TRUE>>=
 range(x)
 @
-\item[\Icode{median}] \index{mediane@médiane}médiane empirique
+\item[\Icode{median}] \index{mediane@médiane}médiane empirique.
 <<echo=TRUE>>=
 median(x)
 @
-\item[\Icode{quantile}] \index{quantile}quantiles empiriques
+\item[\Icode{quantile}] \index{quantile}quantiles empiriques.
 <<echo=TRUE>>=
 quantile(x)
 @
-\item[\Icode{summary}] principales statistiques descriptives
+\item[\Icode{summary}] principales statistiques descriptives.
 <<echo=TRUE>>=
 summary(x)
 @
@@ -2061,29 +2061,29 @@ x
 @
 
 \begin{ttscript}{cumprod}
-\item[\Icode{cumsum}] \index{somme!cumulative}somme cumulative
+\item[\Icode{cumsum}] \index{somme!cumulative}somme cumulative.
 <<echo=TRUE>>=
 cumsum(x)
 @
-\item[\Icode{cumprod}] \index{produit!cumulatif}produit cumulatif
+\item[\Icode{cumprod}] \index{produit!cumulatif}produit cumulatif.
 <<echo=TRUE>>=
 cumprod(x)
 @
-\item[\Icode{cummin}] \index{minimum!cumulatif}minimum cumulatif
+\item[\Icode{cummin}] \index{minimum!cumulatif}minimum cumulatif.
 <<echo=TRUE>>=
 cummin(x)
 @
-\item[\Icode{cummax}] \index{maximum!cumulatif}maximum cumulatif
+\item[\Icode{cummax}] \index{maximum!cumulatif}maximum cumulatif.
 <<echo=TRUE>>=
 cummax(x)
 @
 \item[\Icode{pmin}] \index{minimum!parallèle}minimum élément par
-  élément (en parallèle)
+  élément (en parallèle).
 <<echo=TRUE>>=
 pmin(x, 12)
 @
 \item[\Icode{pmax}] \index{maximum!parallèle}maximum élément par
-  élément (en parallèle)
+  élément (en parallèle).
 <<echo=TRUE>>=
 pmax(x, c(16, 23,  4, 12,  3))
 @
