@@ -231,8 +231,8 @@ Les outils \icode{grep}, \icode{sed} et \icode{awk} diffèrent quant au
 type de traitement qu'ils peuvent effectuer.
 \begin{ttscript}{grep}
 \item[\code{grep}] sélectionne les lignes en entrée correspondant à
-  une \index{expression régulière}expression régulière;
-\item[\code{sed}] sert surtout pour rechercher et remplacer du texte;
+  une \index{expression régulière}expression régulière.
+\item[\code{sed}] sert surtout pour rechercher et remplacer du texte.
 \item[\code{awk}] permet de traiter aisément du texte séparé en
   champs, ainsi que du texte réparti sur plusieurs lignes.
 \end{ttscript}
@@ -299,13 +299,13 @@ ici.
 
 \begin{ttscript}{-E, --extended-regexp}
 \item[\code{-E, --extended-regexp}] interprète le motif comme une expression
-  régulière étendue
+  régulière étendue.
 \item[\code{-c, --count}] retourne seulement le nombre de lignes qui
-  correspondent au motif
+  correspondent au motif.
 \item[\code{-o, --only-matching}] retourne uniquement la portion de la
-  ligne qui correspond au motif, plutôt que la ligne au complet
+  ligne qui correspond au motif, plutôt que la ligne au complet.
 \item[\code{-v, --invert-match}] sélectionne les lignes
-  qui ne correspondent \emph{pas} au motif
+  qui ne correspondent \emph{pas} au motif.
 \end{ttscript}
 
 Nous aurons l'occasion d'illustrer chacune de ces options dans la suite.
@@ -744,8 +744,9 @@ serait donc: \regex{.\{1,8\}\bs.txt}\,.
 Les expressions régulières comportent deux marqueurs de position qui
 permettent de fixer une condition pour qu'un motif trouve un accord
 dans une chaine de caractères: le caret (ou accent circonflexe)
-«\code{\string^}» et le signe de dollar «\code{\$}». Ils identifient
-respectivement le début et la fin d'une ligne de texte.
+\index{\string^@\code{\string^} (regex)}«\code{\string^}» et le signe
+de dollar \index{\string$@\code{\$} (regex)}«\code{\$}». Ils
+identifient respectivement le début et la fin d'une ligne de texte.
 
 Par exemple, la première commande ci-dessous identifie uniquement les
 lignes qui contiennent \chaine{la} en début de ligne, alors que la
@@ -813,16 +814,87 @@ exec("grep", c("'[Mm]ême'", "chanson.txt"))
 Une classe peut contenir autant de caractères que vous le souhaitez.
 Par exemple, \regex{[123456]} trouve une correspondance avec n'importe
 lequel des entiers de 1 à 6. Question de simplifier la composition de
-longues listes de caractères, le caractère «\Icode[regex]{-}» a une
+longues listes de caractères, le tiret «\Icode[regex]{-}» a une
 signification particulière lorsqu'il est employé à l'intérieur d'une
 classe: il définit une plage de caractères. Ainsi, \regex{[1-6]} est
 équivalent à l'exemple précédent. Les plages les plus fréquemment
 employées sont les suivantes.
 \begin{ttscript}{\regex{[abc]}}
-\item[\regex{[0-9]}] les entiers de 0 à 9
-\item[\regex{[a-z]}] les lettres minuscules de a à z, sans les lettres accentuées
-\item[\regex{[A-Z]}] les lettres majuscules de A à Z, sans les lettres accentuées
+\item[\regex{[0-9]}] les entiers de 0 à 9.
+\item[\regex{[a-z]}] les lettres minuscules de a à z, sans les lettres
+  accentuées.
+\item[\regex{[A-Z]}] les lettres majuscules de A à Z, sans les lettres
+  accentuées.
 \end{ttscript}
+
+Je dois immédiatement apporter une précision à ce qui précède: le
+\index{-@\code{-} (regex)}tiret devient un opérateur lorsqu'il est
+employé à l'intérieur d'une classe \emph{ailleurs que comme premier
+  caractère} de la classe. Comme il ne saurait définir une plage à cet
+endroit, il y conserve son rôle de caractère littéral. Cela permet
+ainsi d'inclure le tiret lui-même dans une classe de caractères:
+\regex{-A-F} recherche le tiret et les lettres majuscules de A à F.
+
+Il est parfois plus simple de définir une classe de caractères par la
+négative afin de rechercher des correspondances avec tous les
+caractères qui ne se trouvent \emph{pas} dans la classe. Les
+opérateurs pour de telles classes sont «[\string^ ]». Le sens du caret
+\index{\string^@\code{\string^} (regex)}«\code{\string^}» change donc
+complètement à l'intérieur des classes de caractères. L'expression
+ci-dessous permet d'identifier dans le fichier \code{chanson.txt} les
+occurrences de la \chaine{ou} qui se sont pas suivies des lettres
+\chaine{r} et \chaine{s}.
+<<echo=FALSE>>=
+exec("grep", c("'ou[^rs]'", "chanson.txt"))
+@
+
+Il y aurait encore une foule de petits détails à couvrir au sujet des
+classes de caractères, mais pour les fins de cet ouvrage je me
+contenterai de traiter brièvement des classes prédéfinies. Celles-ci
+peuvent s'avérer particulièrement utiles pour travailler avec des
+lettres accentuées ou des caractères invisibles. La liste des classes
+prédéfinies varie beaucoup d'un système d'expressions régulières à un
+autre. Je fournis, au \autoref{tab:texte:POSIXclasses}, uniquement les
+classes prédéfinies de ce qui constitue généralement le dénominateur
+commun, soit la norme \index{POSIX}POSIX.\footnote{%
+  J'ai tenté de contourner une source possible de confusion dans la
+  terminologie anglaise relative aux classes de caractères. La norme
+  POSIX --- déjà abordée au \autoref{chap:donnees} lorsqu'il
+  s'agissait de la représentation des dates --- nomme \emph{character
+    class} une classe prédéfinie. Une classe de caractères telle que
+  généralement entendue est plutôt nommée \emph{bracket expression}.}
+
+\begin{table}
+  \centering
+  \caption{Classes de caractères prédéfinies de la norme POSIX}
+  \label{tab:texte:POSIXclasses}
+  \begin{tabularx}{1.0\linewidth}{lX}
+    \toprule
+    Nom & Signification \\
+    \midrule
+    \code{[:alnum:]} & caractères alphabétiques et numériques \\
+    \code{[:alpha:]} & caractères alphabétiques selon les paramètres
+                       régionaux en vigueur \\
+    \code{[:blank:]} & espace et tabulation \\
+    \code{[:cntrl:]} & caractères de contrôle \\
+    \code{[:digit:]} & caractères numériques \\
+    \code{[:graph:]} & caractères visibles (tout sauf les espaces et les caractères de contrôle) \\
+    \code{[:lower:]} & minuscules \\
+    \code{[:print:]} & caractères et espaces visibles \\
+    \code{[:punct:]} & ponctuations et symboles \\
+    \code{[:space:]} & tous les caractères d'espacement, y compris les sauts de ligne \\
+    \code{[:upper:]} & majuscules \\
+    \code{[:xdigit:]} & caractères numériques hexadécimaux (0--9, a--f, A--Z) \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\tipbox{Les crochets font partie intégrante du nom des classes
+  prédéfinies. Comme nous utilisons celles-ci dans une classe de
+  caractères, y faut dédoubler les crochets. Par exemple, le motif
+  pour rechercher un caractère numérique à l'aide d'une classe
+  prédéfinie est \regex{[[:digit:]]}\,, alors que celui pour exclure
+  toute lettre majuscule est \regex{[\string^[:upper:]]}\,.}
 
 
 \subsection{Alternance}
@@ -870,25 +942,25 @@ options(op)                             # rétablir défaut
 
 \begin{ttscript}{regexpr}
 \item[\code{grep}] \index{grep@\code{grep} (R)|bfhyperpage} recherche
-  d'une expression régulière dans un vecteur de chaines de caractères
+  d'une expression régulière dans un vecteur de chaines de caractères.
 <<echo=TRUE>>=
 grep("na$", state.name)
 grep("na$", state.name, value = TRUE)
 @
 \item[\Icode{regexpr}] comme \index{grep@\code{grep} (R)}grep, mais
   avec des informations additionnelles sur la position et la longueur
-  des appariements dans les résultats
+  des appariements dans les résultats.
 <<echo=TRUE>>=
 regexpr("na$", state.name)
 @
 \item[\Icode{sub}] recherche une expression régulière dans un vecteur
   de chaines de caractères et remplace uniquement la première
-  occurence dans chaque chaine par une autre chaine
+  occurence dans chaque chaine par une autre chaine.
 <<echo=TRUE>>=
 sub("i", "*", state.name)
 @
 \item[\Icode{gsub}] comme \icode{sub}, mais remplace toutes les
-  occurences dans chaque chaine par une autre chaine
+  occurences dans chaque chaine par une autre chaine.
 <<echo=TRUE>>=
 gsub("i", "*", state.name)
 @
