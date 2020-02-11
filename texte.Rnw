@@ -555,6 +555,20 @@ simples.
   chaine de texte autre chose que des caractères littéraux.
 \end{enumerate}
 
+Vous pouvez visualiser le texte auquel un motif correspond à l'aide
+d'un testeur d'expressions régulières en ligne\footnote{%
+  Recherchez \emph{regular expression tester} pour en obtenir une
+  liste et choisissez votre favori.}, %
+ou encore simplement en remplaçant les correspondances par du texte
+quelconque avec \icode{sed}. Je vous laisse exécuter les deux
+commandes ci-dessous et en étudier attentivement les résultats.
+<<echo=FALSE>>=
+exec("sed", c("'s/a/!/'", "chanson.txt"), eval = FALSE)
+@
+<<echo=FALSE>>=
+exec("sed", c("'s/am/--/'", "chanson.txt"), eval = FALSE)
+@
+
 Le \autoref{tab:texte:operateurs} présente les opérateurs des
 expressions régulières étendues. Dans la suite, nous allons
 graduellement les intégrer dans les expressions régulières afin de
@@ -701,11 +715,11 @@ pour chaque variante des accolades.
   \label{tab:texte:accolades}
   \begin{tabular}{*{7}{l}}
     \toprule
-    Motif & \multicolumn{5}{c}{Correspondances} \\
+    Motif & \multicolumn{6}{c}{Correspondances} \\
     \midrule
-    \regex{ah\{2\}}   & \chaine{ah} & \chaine{\matches{ahh}} & \chaine{\matches{ahh}h} & \chaine{\matches{ahh}hh} & \chaine{\matches{ahh}hhh} \\ \addlinespace[6pt]
-    \regex{ah\{2,4\}} & \chaine{ah} & \chaine{\matches{ahh}} & \chaine{\matches{ahhh}} & \chaine{\matches{ahhhh}} & \chaine{\matches{ahhhh}h} \\ \addlinespace[6pt]
-    \regex{ah\{2,\}}  & \chaine{ah} & \chaine{\matches{ahh}} & \chaine{a\matches{ahhh}} & \chaine{\matches{ahhhh}} & \chaine{\matches{ahhhhh}} \\
+    \regex{ah\{2\}}   & \chaine{ah} & \chaine{\matches{ahh}} & \chaine{\matches{ahh}h} & \chaine{\matches{ahh}hh} & \chaine{\matches{ahh}hhh} & \chaine{\matches{ahh}hhhh} \\ \addlinespace[6pt]
+    \regex{ah\{2,4\}} & \chaine{ah} & \chaine{\matches{ahh}} & \chaine{\matches{ahhh}} & \chaine{\matches{ahhhh}} & \chaine{\matches{ahhhh}h} & \chaine{\matches{ahhhh}hh} \\ \addlinespace[6pt]
+    \regex{ah\{2,\}}  & \chaine{ah} & \chaine{\matches{ahh}} & \chaine{\matches{ahhh}} & \chaine{\matches{ahhhh}} & \chaine{\matches{ahhhhh}} & \chaine{\matches{ahhhhhh}} \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -828,41 +842,52 @@ employées sont les suivantes.
 \end{ttscript}
 
 Je dois immédiatement apporter une précision à ce qui précède: le
-\index{-@\code{-} (regex)}tiret devient un opérateur lorsqu'il est
-employé à l'intérieur d'une classe \emph{ailleurs que comme premier
-  caractère} de la classe. Comme il ne saurait définir une plage à cet
-endroit, il y conserve son rôle de caractère littéral. Cela permet
-ainsi d'inclure le tiret lui-même dans une classe de caractères:
-\regex{-A-F} recherche le tiret et les lettres majuscules de A à F.
+\index{-@\code{-} (regex)}tiret devient un opérateur à l'intérieur
+d'une classe de caractères seulement lorsqu'il est employé
+\emph{ailleurs que comme premier caractère} de la classe. Comme il ne
+saurait définir une plage en se trouvant au début de la classe, il
+conserve alors son rôle de caractère littéral. Cela permet d'inclure
+le tiret lui-même dans une classe de caractères: le motif \regex{-A-F}
+recherche le tiret en plus des lettres majuscules de A à F.
 
-Il est parfois plus simple de définir une classe de caractères par la
-négative afin de rechercher des correspondances avec tous les
-caractères qui ne se trouvent \emph{pas} dans la classe. Les
-opérateurs pour de telles classes sont «[\string^ ]». Le sens du caret
-\index{\string^@\code{\string^} (regex)}«\code{\string^}» change donc
-complètement à l'intérieur des classes de caractères. L'expression
-ci-dessous permet d'identifier dans le fichier \code{chanson.txt} les
-occurrences de la \chaine{ou} qui se sont pas suivies des lettres
-\chaine{r} et \chaine{s}.
+Lorsque le caret \index{\string^@\code{\string^}
+  (regex)}«\code{\string^}» suit immédiatement le crochet ouvrant
+d'une classe, la signification de celle-ci est renversée pour
+correspondre à tous les caractères qui ne se trouvent \emph{pas} dans
+la classe. Par exemple, le motif \regex{[\string^aeiouy]} correspond à
+toute consonne, ce qui est plus simple que de dresser la liste des
+vingt lettres. L'expression ci-dessous permet, quant à elle,
+d'identifier dans le fichier \code{chanson.txt} les occurrences de
+\chaine{ou} qui se sont suivies ni de la lettre \chaine{r}, ni de la
+lettre \chaine{s}.
 <<echo=FALSE>>=
 exec("grep", c("'ou[^rs]'", "chanson.txt"))
 @
 
+\tipbox{Comme vous pouvez le voir, les classes de caractères
+  comportent en quelque sorte leur propre syntaxe et leurs opérateurs
+  spécifiques. Il s'avère simplement que certains symboles --- en
+  particulier «\code{\string^}» --- jouent un rôle différent à
+  l'intérieur et à l'extérieur des classes de caractères.}
+
 Il y aurait encore une foule de petits détails à couvrir au sujet des
 classes de caractères, mais pour les fins de cet ouvrage je me
-contenterai de traiter brièvement des classes prédéfinies. Celles-ci
-peuvent s'avérer particulièrement utiles pour travailler avec des
-lettres accentuées ou des caractères invisibles. La liste des classes
-prédéfinies varie beaucoup d'un système d'expressions régulières à un
-autre. Je fournis, au \autoref{tab:texte:POSIXclasses}, uniquement les
-classes prédéfinies de ce qui constitue généralement le dénominateur
-commun, soit la norme \index{POSIX}POSIX.\footnote{%
+contenterai de traiter brièvement des classes prédéfinies.\footnote{%
   J'ai tenté de contourner une source possible de confusion dans la
-  terminologie anglaise relative aux classes de caractères. La norme
-  POSIX --- déjà abordée au \autoref{chap:donnees} lorsqu'il
-  s'agissait de la représentation des dates --- nomme \emph{character
-    class} une classe prédéfinie. Une classe de caractères telle que
-  généralement entendue est plutôt nommée \emph{bracket expression}.}
+  terminologie anglaise relative aux classes de caractères. Alors que
+  plusieurs auteurs les nomment tout simplement \emph{character
+    class}, la norme POSIX --- déjà abordée au \autoref{chap:donnees}
+  lorsqu'il s'agissait de la représentation des dates --- réserve
+  cette expression aux classes prédéfinies. Une classe de caractères
+  telle que généralement entendue est plutôt nommée \emph{bracket
+    expression}. Prenez garde à cette nuance si vous consultez de la
+  documentation en anglais.} %
+Celles-ci peuvent s'avérer particulièrement utiles pour travailler
+avec des lettres accentuées ou des caractères invisibles. La liste des
+classes prédéfinies varie beaucoup d'un système d'expressions
+régulières à un autre. Je fournis au \autoref{tab:texte:POSIXclasses}
+les classes prédéfinies de ce qui constitue généralement le
+dénominateur commun, soit la norme \index{POSIX}POSIX.
 
 \begin{table}
   \centering
@@ -889,9 +914,9 @@ commun, soit la norme \index{POSIX}POSIX.\footnote{%
   \end{tabularx}
 \end{table}
 
-\tipbox{Les crochets font partie intégrante du nom des classes
+\importantbox{Les crochets font partie intégrante du nom des classes
   prédéfinies. Comme nous utilisons celles-ci dans une classe de
-  caractères, y faut dédoubler les crochets. Par exemple, le motif
+  caractères, il faut dédoubler les crochets. Par exemple, le motif
   pour rechercher un caractère numérique à l'aide d'une classe
   prédéfinie est \regex{[[:digit:]]}\,, alors que celui pour exclure
   toute lettre majuscule est \regex{[\string^[:upper:]]}\,.}
