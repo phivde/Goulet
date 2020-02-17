@@ -583,9 +583,7 @@ sans cesse augmenter l'éventail des motifs disponibles.
     \toprule
     Opérateur  & Fonction \\
     \midrule
-    \index{{"|}@\code{\textbar} (regex)}\code{\textbar} & choix entre
-                                                          deux
-                                                          sous-expressions
+    \index{{"|}@\code{\textbar} (regex)}\code{\textbar} & alternance
                                                           («ou») \\
     \index{\string^@\code{\string^} (regex)}\code{\string^} & début de la ligne;
                                                 négation (à
@@ -757,7 +755,8 @@ serait donc: \regex{.\{1,8\}\bs.txt}\,.
 
 Les expressions régulières comportent deux marqueurs de position qui
 permettent de fixer une condition pour qu'un motif trouve un accord
-dans une chaine de caractères: le caret (ou accent circonflexe)
+dans une chaine de caractères: le
+\index{caret|see{\code{\string^} (regex)}}caret (ou accent circonflexe)
 \index{\string^@\code{\string^} (regex)}«\code{\string^}» et le signe
 de dollar \index{\string$@\code{\$} (regex)}«\code{\$}». Ils
 identifient respectivement le début et la fin d'une ligne de texte.
@@ -808,9 +807,10 @@ et \emph{u}: «chaine» plutôt que «chaîne», «disparaitre» plutôt que
 rechercher l'une ou l'autre graphie dans un texte, vous souhaiterez
 pouvoir les décrire toutes les deux à l'aide d'une seule expression
 régulière. C'est le rôle des opérateurs «\Icode[regex]{[~]}» qui
-définissent ce que l'on appelle une \emph{classe de caractères}. Par
-exemple, \regex{cha[iî]ne} correspond à la fois à \matches{chaine} et
-à \matches{chaîne}.
+définissent ce que l'on appelle une \index{classe de caracteres@classe
+  de caractères}\emph{classe de caractères}. Par exemple,
+\regex{cha[iî]ne} correspond à la fois à \matches{chaine} et à
+\matches{chaîne}.
 
 Rappelez-vous la seconde règle fondamentale de la syntaxe des expressions
 régulières énoncée à la \autoref{sec:texte:regex:syntaxe}: il y a un
@@ -850,16 +850,16 @@ conserve alors son rôle de caractère littéral. Cela permet d'inclure
 le tiret lui-même dans une classe de caractères: le motif \regex{-A-F}
 recherche le tiret en plus des lettres majuscules de A à F.
 
-Lorsque le caret \index{\string^@\code{\string^}
-  (regex)}«\code{\string^}» suit immédiatement le crochet ouvrant
-d'une classe, la signification de celle-ci est renversée pour
-correspondre à tous les caractères qui ne se trouvent \emph{pas} dans
-la classe. Par exemple, le motif \regex{[\string^aeiouy]} correspond à
-toute consonne, ce qui est plus simple que de dresser la liste des
-vingt lettres. L'expression ci-dessous permet, quant à elle,
-d'identifier dans le fichier \code{chanson.txt} les occurrences de
-\chaine{ou} qui se sont suivies ni de la lettre \chaine{r}, ni de la
-lettre \chaine{s}.
+Lorsque le caret %
+\index{\string^@\code{\string^} (regex)}«\code{\string^}» suit
+immédiatement le crochet ouvrant d'une classe, la signification de
+celle-ci est renversée pour correspondre à tous les caractères qui ne
+se trouvent \emph{pas} dans la classe. Par exemple, le motif
+\regex{[\string^aeiouy]} correspond à toute consonne, ce qui est plus
+simple que de dresser la liste des vingt lettres. L'expression
+ci-dessous permet, quant à elle, d'identifier dans le fichier
+\code{chanson.txt} les occurrences de \chaine{ou} qui se sont suivies
+ni de la lettre \chaine{r}, ni de la lettre \chaine{s}.
 <<echo=FALSE>>=
 exec("grep", c("'ou[^rs]'", "chanson.txt"))
 @
@@ -921,15 +921,108 @@ dénominateur commun, soit la norme \index{POSIX}POSIX.
   prédéfinie est \regex{[[:digit:]]}\,, alors que celui pour exclure
   toute lettre majuscule est \regex{[\string^[:upper:]]}\,.}
 
-
 \subsection{Alternance}
 \label{sec:texte:regex:alternance}
 
+Nous arrivons à l'un des derniers opérateurs du
+\autoref{tab:texte:operateurs}: le symbole %
+\Index{{"|}@\code{\textbar} (regex)}«\code{\textbar}» qui représente
+l'alternance, ou le choix, entre deux sous-expressions d'une
+expression régulière. Par exemple, tel que déjà mentionné à la
+\autoref{sec:texte:regex:types}, le motif \regex{chien|chat}
+correspond à \chaine{\matches{chien}} ou \chaine{\matches{chat}}.
+Voici un autre exemple ayant recours à notre fichier
+\code{chanson.txt}.\footnote{%
+  Rappelons que le caractère «\code{\textbar}» n'est un opérateur que
+  dans les expressions régulières étendues, ce qui nous oblige à
+  utiliser l'option \code{-E} dans \icode{grep} et \icode{sed}.}
+<<echo=FALSE>>=
+exec("grep", c("-E", "'mouvement|fatigue'", "chanson.txt"))
+@
 
+Retournons à notre exemple \regex{cha[iî]ne} de la
+\autoref{sec:texte:regex:classes}. Nous pouvons réécrire le motif
+ainsi: \regex{chaine|chaîne}\,, ou encore \regex{cha(i|î)ne}. Dans ce
+dernier cas, nous devons avoir recours aux parenthèses --- sur
+lesquelles nous élaborerons à la section suivante --- afin de limiter
+la portée de l'alternance. Attention, toutefois: \regex{cha[i|î]ne}
+n'est pas ce que nous voulons, car «\code{\textbar}» est un caractère
+littéral à l'intérieur d'une classe de caractères.
+
+À ce stade, vous devez faire la distinction entre les concepts
+d'alternance et de classe de caractère. La classe de caractère ne
+trouve des correspondances qu'avec \emph{un seul caractère} à
+l'intérieur de la classe. En revanche, chaque possibilité d'une
+alternance étant une expression régulière en soi, cette opération peut
+décrire une quantité de texte de longueur quelconque.
+
+Terminons cette section avec un exemple de remplacement de texte qui
+regroupe plusieurs concepts. Supposons que l'on souhaite remplacer les
+mots \emph{mouvement} et \emph{fatigue} dans «La journée qui s'en
+vient est flambant neuve» par \emph{pendule} (un choix complètement
+arbitraire). Le mot étant masculin, il faut également modifier le
+déterminant qui le précède. Comparons quatre commandes \icode{sed}
+pour effectuer le traitement. Avant de poursuivre la lecture, analysez
+les différences entre les variantes.
+%% les commandes sont trop longues et l'insfrastructure de la fonction
+%% 'exec' ne permet pas de les couper; j'inclus les commandes
+%% néanmoins afin de valider qu'elles fonctionnent correctement
+<<echo=FALSE, results=hide>>=
+exec("sed", c("-E", "'s/le mouvement|la fatigue/le pendule/'", "chanson.txt"))
+exec("sed", c("-E", "'s/l[e|a] (mouvement|fatigue)/le pendule/'", "chanson.txt"))
+exec("sed", c("-E", "'s/le|la mouvement|fatigue/le pendule/'", "chanson.txt"))
+exec("sed", c("-E", "'s/(le|la) (mouvement|fatigue)/le pendule/'", "chanson.txt"))
+@
+\begin{Schunk}
+\begin{Verbatim}
+sed -E 's/le mouvement|la fatigue/le pendule/' \
+chanson.txt
+\end{Verbatim}
+\end{Schunk}
+\begin{Schunk}
+\begin{Verbatim}
+sed -E 's/l[e|a] (mouvement|fatigue)/le pendule/' \
+chanson.txt
+\end{Verbatim}
+\end{Schunk}
+\begin{Schunk}
+\begin{Verbatim}
+sed -E 's/le|la mouvement|fatigue/le pendule/' \
+chanson.txt
+\end{Verbatim}
+\end{Schunk}
+\begin{Schunk}
+\begin{Verbatim}
+sed -E 's/(le|la) (mouvement|fatigue)/le pendule/' \
+chanson.txt
+\end{Verbatim}
+\end{Schunk}
+
+Étudions maintenant les commandes de plus près.
+\begin{itemize}
+\item La première commande utilise la syntaxe la plus directe pour
+  effectuer le traitement désiré. Le motif trouve des correspondances
+  avec \chaine{\matches{le mouvement}} ou avec \chaine{\matches{la
+      fatigue}} et le texte est remplacé par \chaine{le pendule}.
+\item Il faut lire le motif de la seconde commande ainsi: «\chaine{l}
+  suivi de \chaine{a} ou de \chaine{e}, suivi d'une espace, suivi de
+  \chaine{mouvement} ou de \chaine{fatigue}». Cela correpond bien au
+  texte que nous voulons remplacer par \chaine{le pendule}. À la
+  différence de la première variante, le motif correspondrait aussi à
+  \chaine{\matches{la mouvement}} ou à \chaine{\matches{le fatigue}}.
+  C'est sans conséquence ici.
+\item La troisième commande n'effectue pas le traitement attendu. En
+  l'absence de parenthèses pour limiter la portée de l'opérateur %
+  \index{{"|}@\code{\textbar} (regex)}«\code{\textbar}», le motif
+  correspond à \chaine{\matches{le}} ou à
+  \chaine{\matches{la mouvement}} ou à \chaine{\matches{fatigue}}.
+\item Par l'utilisation de parenthèses dans le motif, la quatrième
+  commande vient corriger la troisième. Elle est fonctionnellement
+  équivalente à la seconde commande.
+\end{itemize}
 
 \subsection{Groupes}
 \label{sec:texte:regex:groupes}
-
 
 
 
