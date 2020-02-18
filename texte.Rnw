@@ -13,18 +13,21 @@
 \label{chap:texte}
 
 <<echo=FALSE>>=
-options(width=50)
+options(width = 50)
 
 ##
 ## Affiche une commande exécutée par le système et son résultat.
 ##
-exec <- function(command, args, eval = TRUE)
+exec <- function(command, args, echo = TRUE, eval = TRUE)
 {
     cmd <- paste("$", command, paste(args, collapse = " "))
     if (eval)
     {
         res <- system2(command, args, stdout = TRUE)
-        cat(paste(cmd, paste(res, collapse = "\n"), sep = "\n"))
+        if (echo)
+            cat(paste(cmd, paste(res, collapse = "\n"), sep = "\n"))
+        else
+            cat(paste(res, collapse = "\n"))
     }
     else
         cat(cmd)
@@ -87,7 +90,9 @@ https://www.google.ca/maps/place/Universite+Laval/
   $\nombre{46,7817463}$ et à une longitude de $\nombre{-71.2769311}$
   en degrés décimaux.
 \item Extraire d'une base de données les adresses se trouvant sur une
-  rue ou une avenue numérotée («1{\iere} Avenue» ou «4{\ieme} Rue»).
+  rue ou une avenue numérotée («1{\iere} Avenue» ou «4{\ieme} Rue»),
+  et ce, peu importe comment est orthographié l'abréviation de
+  l'adjectif numéral ordinal («re» ou «ère», «e» ou «ième»).
 \item Sélectionner les entrées d'une base de données qui débutent ou
   qui se terminent par un caractère spécifique.
 \item Déterminer par programmation si un dépôt Git contient une
@@ -956,73 +961,174 @@ l'intérieur de la classe. En revanche, chaque possibilité d'une
 alternance étant une expression régulière en soi, cette opération peut
 décrire une quantité de texte de longueur quelconque.
 
-Terminons cette section avec un exemple de remplacement de texte qui
+Terminons cette section avec un exemple de substitution de texte qui
 regroupe plusieurs concepts. Supposons que l'on souhaite remplacer les
 mots \emph{mouvement} et \emph{fatigue} dans «La journée qui s'en
 vient est flambant neuve» par \emph{pendule} (un choix complètement
 arbitraire). Le mot étant masculin, il faut également modifier le
-déterminant qui le précède. Comparons quatre commandes \icode{sed}
-pour effectuer le traitement. Avant de poursuivre la lecture, analysez
-les différences entre les variantes.
+déterminant. Voici quatre commandes \icode{sed} pour effectuer le
+traitement. Analysez ces commandes attentivement et essayez
+d'identifier leurs différences, s'il y en a. Nous y reviendrons plus
+loin.
 %% les commandes sont trop longues et l'insfrastructure de la fonction
-%% 'exec' ne permet pas de les couper; j'inclus les commandes
-%% néanmoins afin de valider qu'elles fonctionnent correctement
+%% 'exec' ne permet pas de les couper; j'inclus néanmoins les
+%% commandes dans des blocs de code afin de valider qu'elles
+%% fonctionnent correctement
+\begin{Schunk}
+\begin{Verbatim}
+$ sed -E 's/le mouvement|la fatigue/le pendule/' \
+chanson.txt
 <<echo=FALSE, results=hide>>=
 exec("sed", c("-E", "'s/le mouvement|la fatigue/le pendule/'", "chanson.txt"))
+@
+\end{Verbatim}
+\end{Schunk}
+\begin{Schunk}
+\begin{Verbatim}
+$ sed -E 's/l[e|a] (mouvement|fatigue)/le pendule/' \
+chanson.txt
+<<echo=FALSE, results=hide>>=
 exec("sed", c("-E", "'s/l[e|a] (mouvement|fatigue)/le pendule/'", "chanson.txt"))
+@
+\end{Verbatim}
+\end{Schunk}
+\begin{Schunk}
+\begin{Verbatim}
+$ sed -E 's/le|la mouvement|fatigue/le pendule/' \
+chanson.txt
+<<echo=FALSE, results=hide>>=
 exec("sed", c("-E", "'s/le|la mouvement|fatigue/le pendule/'", "chanson.txt"))
+@
+\end{Verbatim}
+\end{Schunk}
+\begin{Schunk}
+\begin{Verbatim}
+$ sed -E 's/(le|la) (mouvement|fatigue)/le pendule/' \
+chanson.txt
+<<echo=FALSE, results=hide>>=
 exec("sed", c("-E", "'s/(le|la) (mouvement|fatigue)/le pendule/'", "chanson.txt"))
 @
-\begin{Schunk}
-\begin{Verbatim}
-sed -E 's/le mouvement|la fatigue/le pendule/' \
-chanson.txt
-\end{Verbatim}
-\end{Schunk}
-\begin{Schunk}
-\begin{Verbatim}
-sed -E 's/l[e|a] (mouvement|fatigue)/le pendule/' \
-chanson.txt
-\end{Verbatim}
-\end{Schunk}
-\begin{Schunk}
-\begin{Verbatim}
-sed -E 's/le|la mouvement|fatigue/le pendule/' \
-chanson.txt
-\end{Verbatim}
-\end{Schunk}
-\begin{Schunk}
-\begin{Verbatim}
-sed -E 's/(le|la) (mouvement|fatigue)/le pendule/' \
-chanson.txt
 \end{Verbatim}
 \end{Schunk}
 
-Étudions maintenant les commandes de plus près.
+\subsection{Groupes}
+\label{sec:texte:regex:groupes}
+
+Les parenthèses \Icode[regex]{(~)} sont des opérateurs de regroupement
+dans les expressions régulières étendues. Elles ont trois rôles
+principaux. Nous avons vu le premier à la section précédente, soit
+de limiter la portée de l'opérateur d'alternance %
+\index{{"|}@\code{\textbar} (regex)}«\code{\textbar}».
+
+Nous pouvons également utiliser les parenthèses pour créer un
+\index{groupe de caractères}%
+\index{groupe|see{\code{(~)} (regex)}}%
+groupe de caractères auquel sera appliqué un des opérateurs de
+répétition de la \autoref{sec:texte:regex:wildcards}. Cela permet de
+répéter autre chose qu'un caractère seul. Par exemple, le motif
+\regex{(co)\{2\}} permet d'identifier dans un dictionnaire
+français\footnote{%
+  Comme, par exemple, les
+  \link{https://extensions.libreoffice.org/extensions/dictionnaires-francais/}{dictionnaires
+    français} de la suite bureautique Libre~Office.} %
+des mots comme \chaine{\matches{coco}n}, \chaine{\matches{coco}tier}
+ou \chaine{ro\matches{coco}}.
+
+Enfin, les parenthèses permettent de créer des \index{groupe de
+  capture}groupes de capture numérotés. C'est une fonctionnalité à
+laquelle on a principalement recours avec \icode{sed}. Le texte qui
+correspond à un motif entre parenthèses est «capturé» --- ou mémorisé
+--- et devient disponible pour être réutilisé dans le texte de
+substitution sous un numéro: \code{\bs1} pour le premier groupe,
+\code{\bs2} pour le second groupe, etc.
+
+Clarifions le tout par un exemple. Tous les vers du fichier
+\code{chanson.txt} qui débutent par \chaine{Le} comptent exactement
+quatre mots après ce déterminant.
+<<echo=FALSE>>=
+exec("grep", c("'^Le'", "chanson.txt"))
+@
+
+Amusons-nous à créer des nouveaux vers en changeant l'ordre des mots.
+Pour ce faire, nous allons créer trois groupes: les deux mots qui
+suivent immédiatement \chaine{Le}; l'avant-dernier mot du vers; le
+dernier mot du vers. Le motif pour capturer ces trois groupes est
+\regex{Le (.*) (.*) (.*)}\,. Rappelez-vous: les opérateurs de
+répétition sont gloutons, donc le premier groupe capture deux mots
+pour ensuite laisser un mot à chacun des deux autres groupes.
+Confirmons d'abord le contenu de chacun des groupes.
+\begin{Schunk}
+\begin{Verbatim}
+$ grep '^Le' chanson.txt | \
+sed -E 's/Le (.*) (.*) (.*)/Premier groupe: \1/'
+<<echo=FALSE, results=tex>>=
+exec("grep", c("'^Le'", "chanson.txt", "| sed -E 's/Le (.*) (.*) (.*)/Premier groupe: \\1/'"), echo = FALSE)
+@
+
+\end{Verbatim}
+\end{Schunk}
+\begin{Schunk}
+\begin{Verbatim}
+$ grep '^Le' chanson.txt | \
+sed -E 's/Le (.*) (.*) (.*)/Deuxième groupe: \2/'
+<<echo=FALSE, results=tex>>=
+exec("grep", c("'^Le'", "chanson.txt", "| sed -E 's/Le (.*) (.*) (.*)/Deuxième groupe: \\2/'"), echo = FALSE)
+@
+
+\end{Verbatim}
+\end{Schunk}
+\begin{Schunk}
+\begin{Verbatim}
+$ grep '^Le' chanson.txt | \
+sed -E 's/Le (.*) (.*) (.*)/Troisième groupe: \3/'
+<<echo=FALSE, results=tex>>=
+exec("grep", c("'^Le'", "chanson.txt", "| sed -E 's/Le (.*) (.*) (.*)/Troisième groupe: \\3/'"), echo = FALSE)
+@
+
+\end{Verbatim}
+\end{Schunk}
+
+Nous sommes maintenant prêts à changer l'ordre des mots en réutilisant
+tous les groupes dans la chaine de substitution.
+\begin{Schunk}
+\begin{Verbatim}
+$ grep '^Le' chanson.txt | \
+sed -E 's/Le (.*) (.*) (.*)/Le \2 \3 \1/'
+<<echo=FALSE, results=tex>>=
+exec("grep", c("'^Le'", "chanson.txt", "| sed -E 's/Le (.*) (.*) (.*)/Le \\2 \\3 \\1/'"), echo = FALSE)
+@
+
+\end{Verbatim}
+\end{Schunk}
+
+Terminons cette très longue section sur les expressions régulières en
+revenant, comme promis, sur les quatre commandes de substitution de
+mots de la fin de la \autoref{sec:texte:regex:alternance}.
 \begin{itemize}
-\item La première commande utilise la syntaxe la plus directe pour
-  effectuer le traitement désiré. Le motif trouve des correspondances
+\item La première commande effectue le traitement désiré, de surcroit
+  avec la syntaxe la plus simple. Le motif trouve des correspondances
   avec \chaine{\matches{le mouvement}} ou avec \chaine{\matches{la
       fatigue}} et le texte est remplacé par \chaine{le pendule}.
 \item Il faut lire le motif de la seconde commande ainsi: «\chaine{l}
   suivi de \chaine{a} ou de \chaine{e}, suivi d'une espace, suivi de
   \chaine{mouvement} ou de \chaine{fatigue}». Cela correpond bien au
-  texte que nous voulons remplacer par \chaine{le pendule}. À la
-  différence de la première variante, le motif correspondrait aussi à
-  \chaine{\matches{la mouvement}} ou à \chaine{\matches{le fatigue}}.
+  texte que nous voulons remplacer par \chaine{le pendule}. Cependant,
+  à la différence de la première variante, le motif correspond aussi à
+  \chaine{\matches{la mouvement}} et à \chaine{\matches{le fatigue}}.
   C'est sans conséquence ici.
 \item La troisième commande n'effectue pas le traitement attendu. En
   l'absence de parenthèses pour limiter la portée de l'opérateur %
   \index{{"|}@\code{\textbar} (regex)}«\code{\textbar}», le motif
-  correspond à \chaine{\matches{le}} ou à
-  \chaine{\matches{la mouvement}} ou à \chaine{\matches{fatigue}}.
+  correspond à \chaine{\matches{le}} ou à \chaine{\matches{la
+      mouvement}} ou à \chaine{\matches{fatigue}}. Cette commande
+  remplacerait toutes les occurrences de \chaine{le} dans le texte de
+  la chanson --- y compris dans \chaine{Frôle} --- par la chaine
+  \chaine{le pendule}. Ce n'est certainement pas ce que nous voulons!
 \item Par l'utilisation de parenthèses dans le motif, la quatrième
   commande vient corriger la troisième. Elle est fonctionnellement
   équivalente à la seconde commande.
 \end{itemize}
 
-\subsection{Groupes}
-\label{sec:texte:regex:groupes}
 
 
 
