@@ -441,7 +441,7 @@ length(x)
 ## mais qui existe.
 (x <- numeric(0))          # création du contenant
 length(x)                  # l'objet 'x' existe...
-x[1] <- 1                  # définition du permier élément
+x[1] <- 1                  # définition du premier élément
 
 ## Si un objet n'existe pas au préalable, il est impossible
 ## d'affecter directement la valeur d'un élément.
