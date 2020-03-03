@@ -348,11 +348,14 @@ sous macOS.
 
 Je recommande d'effectuer les configurations suivantes.
 \begin{enumerate}
-\item Dans la catégorie des options de configuration générales, régler
-  l'option \code{Save workspace to .RData on exit} à \code{Never}, tel
-  qu'illustré à la \autoref{fig:rstudio:rstudio-on-exit}. Avec ce
-  réglage, l'espace de travail de R ne sera pas sauvegardé à la
-  fermeture de RStudio.
+\item Dans la catégorie des options de configuration générales,
+  désactiver l'option \code{Restore .RData into workspace at startup}
+  et régler l'option \code{Save workspace to .RData on exit} à
+  \code{Never}, tel qu'illustré à la
+  \autoref{fig:rstudio:rstudio-startup-and-exit}. Avec ces réglages,
+  RStudio démarre toujours avec une séance de travail vierge et ne
+  sauvegarde pas l'espace de travail de R à la fermeture de
+  l'application.
 \item Dans la catégorie \code{Code} et la sous-catégorie
   \code{Editing}, régler l'option \code{Tab width} à \code{4} afin
   d'indenter le code de quatre caractères par défaut. (Ce réglage fait
@@ -368,10 +371,10 @@ Je recommande d'effectuer les configurations suivantes.
 
 \begin{figure}
   \centering
-  \includegraphics{images/rstudio-on-exit}
+  \includegraphics{images/rstudio-startup-and-exit}
   \caption{Réglage de RStudio pour ne pas sauvegarder l'espace
     de travail de R au moment de quitter l'application}
-  \label{fig:rstudio:rstudio-on-exit}
+  \label{fig:rstudio:rstudio-startup-and-exit}
 \end{figure}
 
 \begin{figure}

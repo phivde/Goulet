@@ -15,6 +15,9 @@
   de `seq.Date`) à partir du 31 du mois pour illustrer le passage au
   mois suivant en cas de date invalide; présentation d'une astuce
   pour contourner le problème.
+- Section A.6: recommandation de désactiver l'option \code{Restore
+  .RData into workspace at startup} dans RStudio afin de toujours
+  démarrer avec une séance de travail vierge.
 
 ## Changements
 
@@ -30,6 +33,9 @@
   résultat de manière invisible. Aussi, remplacement de «symbole
   d'affectation» par «opérateur d'affectation».
 - Ajout d'entrées d'index.
+- Mise à jour des captures d'écran des options de configuration de
+  RStudio aux figures 6.3, A.2 et A.3 pour la version 1.2 de
+  l'éditeur.
 
 ## Corrections
 
