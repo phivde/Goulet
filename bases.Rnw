@@ -2698,7 +2698,7 @@ pow2 <- function(b, n)
 }
 @
 <<echo=TRUE>>=
-pow
+pow2
 @
   \end{sol}
 \end{exercice}
