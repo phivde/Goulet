@@ -15,10 +15,13 @@
 ##
 ## 'make Rout' crée les fichiers .Rout avec R CMD BATCH.
 ##
+## 'make update-copyright' met à jour l'année de copyright dans toutes
+## les sources du document
+##
 ## 'make zip' crée l'archive de la distribution.
 ##
-## 'make release' crée une nouvelle version dans GitLab, téléverse le
-## fichier .zip et modifie les liens de la page web.
+## 'make release' téléverse la distribution dans GitLab, crée une
+## nouvelle version et modifie les liens de la page web.
 ##
 ## 'make check-url' vérifie la validité de toutes les url présentes
 ## dans les sources du document.
@@ -136,7 +139,16 @@ Rout: ${SCRIPTS:.R=.Rout}
 contrib: ${COLLABORATEURS}
 
 .PHONY: release
-release: zip check-status upload create-release publish
+release: update-copyright zip check-status upload create-release publish
+
+.PHONY: update-copyright
+update-copyright: ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES} ${SCRIPTS}
+	for f in $?; \
+	    do sed -E '/^(#|%)* +Copyright \(C\)/s/20[0-9]{2}/${YEAR}/' \
+	           $$f > $$f.tmp && \
+	           ${CP} $$f.tmp $$f && \
+	           ${RM} $$f.tmp; \
+	done
 
 .PHONY: zip
 zip: ${MASTER} ${README} ${NEWS} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS} ${CONTRIBUTING}
