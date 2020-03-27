@@ -34,8 +34,6 @@
 ## Ce fichier fait partie du projet "Programmer avec R"
 ## https://gitlab.com/vigou3/programmer-avec-r
 
-## Bash requis pour 'process substitution'
-SHELL := /bin/bash
 
 ## Principaux fichiers
 MASTER = programmer-avec-r.pdf
