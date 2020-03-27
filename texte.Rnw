@@ -1130,12 +1130,89 @@ mots de la fin de la \autoref{sec:texte:regex:alternance}.
 \end{itemize}
 
 
-
-
 \section{Traitement de texte divisé en champs avec \code{awk}}
 \label{sec:texte:awk}
 
-Noms des créateurs -> Kernighan -> syntaxe similaire au C. Véritable couteau suisse, souvent plus simple que sed, surtout s'il faut effectuer des opérations sur plusieurs lignes du texte à traiter. Caractéristique principale demeure le fait de séparer automatiquement une ligne de texte en champs et de faciliter les opérations sur ceux-ci.
+\Index{AWK@AWK (langage)}AWK \citep{awk:1988} est un langage de programmation
+spécialisé dans le traitement de texte et l'extraction de données. Il a été développé à partir de 1977 chez Bell Labs. Le nom du langage
+provient des initiales de ses trois auteurs:  Alfred Aho, Peter
+Weinberger et Brian Kernighan. Ce dernier apparaissait déjà au \autoref{chap:informatique} comme l'un
+des auteurs du grand classique de l'informatique \emph{The C
+  Programming Language} \citep{KandR:1978}. La syntaxe de AWK
+s'apparente donc beaucoup à celle du \index{C}C.
+
+L'\index{interpréteur}interpréteur du langage AWK auquel nous allons
+nous intéresser est l'utilitaire \Icode{awk}. Comme
+\icode{grep} et \icode{sed}, \code{awk} est un utilitaire standard des
+systèmes Unix. Véritable couteau suisse, c'est un outil basé sur les
+expressions régulières qui est souvent plus simple à utiliser que
+\code{sed}, surtout s'il faut effectuer des opérations sur plusieurs
+lignes du texte à traiter.
+
+Pour vous convaincre d'entrée de jeu de la puissance et de l'utilité
+de \icode{awk}, imaginez le contexte suivant: vous devez extraire les
+deux premières colonnes d'une base de données en format \index{CSV}CSV
+qui compte un million d'enregistrements (lignes) et quelques dizaines
+de champs (colonnes). Votre premier réflexe sera sans doute d'importer
+le fichier CSV dans un tableur, de supprimer les colonnes autres que
+les deux premières, puis d'exporter la base de données en format CSV.
+Cette procédure est fastidieuse, lente --- surtout avec une grande
+base de données --- et désespérément manuelle. Sous peu, vous saurez
+remplacer de telles manipulations par un simple appel à \icode{awk}.
+En effet, la commande ci-dessous effectue le traitement requis \emph{en une
+fraction de seconde} et sans même avoir à lancer un lourd tableur.
+<<echo=FALSE>>=
+exec("awk", c("-F", "','", "'{ print $1\",\"$2 }'", "data.csv", "> data-new.csv"),
+     eval = FALSE)
+@
+
+\subsection{Concepts de base}
+\label{sec:texte:awk:base}
+
+\index{AWK@AWK (langage)}AWK est conçu autour du concept de séparation
+du texte à traiter en enregistrements (\emph{records}), puis en champs
+(\emph{fields}). Le séparateur d'enregistrement par défaut est le
+retour à la ligne. Dans la suite, nous ne ferons plus de différence
+entre une ligne du texte et un enregistrement.
+
+Lorsque \icode{awk} a terminé de lire une ligne du texte fourni en
+entrée, il sépare automatiquement celle-ci en champs. Le séparateur de
+champ par défaut est l'espace, mais il est facile de le changer pour
+tout autre caractère\footnote{%
+  C'est ce que «\code{-F ','}» permettait de faire dans
+  l'exemple au début de la section.}.
+
+Un script (ou programme) AWK est constitué d'une série de règles
+associées à des actions. Une fois que \icode{awk} a séparé un
+enregistrement en champs, il exécute les règles une par une. Les
+règles et les actions ont accès à des variables qui contiennent
+l'enregistrement complet et chacun des champs, ce qui facilite
+grandement les opérations sur une ligne et sur ses composantes. La
+variable \code{\$0} contient l'enregistrement complet, alors que les
+champs se trouvent dans des variables nommées \code{\$1}, \code{\$2},
+\code{\$3}, \dots.
+
+Illustrons ces concepts de base à l'aide de quelques exemples.
+\begin{itemize}
+\item En traitant le fichier \code{carburant.txt} présenté au haut de
+  la \autoref{fig:import-export:read.table}, \icode{awk} rend
+  disponible dans la variable \code{\$0} le contenu complet d'une
+  ligne et dans les variables \code{\$1}, \code{\$2}, \code{\$3},
+  \code{\$4} et \code{\$5} les données de chacune des colonnes. À la
+  première ligne, ces cinq variables contiennent les noms des
+  colonnes.
+\item Pour effectuer un traitement équivalent avec le fichier
+  \code{carburant.csv} présenté au bas de la
+  \autoref{fig:import-export:read.table}, il faudrait spécifier à
+  \icode{awk} d'utiliser la virgule «\code{,}» comme séparateur de
+  champ.
+\item Lorsque le texte du fichier \code{chanson.txt} de la
+  \autoref{fig:texte:chanson} est fourni à \code{awk}, chaque vers est
+  séparé en mots. Le nombre de champs est donc variable d'une ligne à
+  l'autre. Une règle \regex{/\string^M/} permet d'effectuer un
+  traitement uniquement sur les lignes qui débutent par «M».
+\end{itemize}
+
 
 \section{Fonctions internes utiles}
 \label{sec:texte:internes}
