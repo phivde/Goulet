@@ -194,7 +194,7 @@ statistiques peuvent exporter leurs tableaux de données sous forme de
 fichier texte dans lequel les champs sont séparés par un caractère
 quelconque, souvent une espace. Le format le plus universel utilise
 toutefois comme séparateur la virgule ou le point-virgule; c'est le
-format de fichier CSV (\emph{comma-separated values}). La
+format de fichier \index{CSV}CSV (\emph{comma-separated values}). La
 \autoref{fig:import-export:read.table} présente le même jeu de données dans
 deux formats différents.
 
