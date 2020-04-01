@@ -259,7 +259,6 @@ champs et le séparateur décimal; consulter le
 
 %% nettoyage
 <<echo=FALSE>>=
-unlink("carburant.txt")
 unlink("carburant.csv")
 @
 
@@ -336,7 +335,6 @@ write.csv(x, file = "carburant.csv", row.names = FALSE)
 
 %% nettoyage
 <<echo=FALSE>>=
-unlink("carburant.txt")
 unlink("carburant.csv")
 @
 
@@ -394,7 +392,7 @@ write(x, file = "matrice.data", ncolumns = 4, append = TRUE)
 
 ## Pour illustrer l'exportation avec 'write.table',
 ## 'write.csv' et 'write.csv2', nous allons exporter le jeu de
-## données 'USArrests' utilisé précédemment.
+## données 'USArrests' livré avec R.
 ##
 ## Les titres des lignes sont importants dans ce jeu de
 ## données puisqu'ils contiennent les noms des États. Par

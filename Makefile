@@ -45,7 +45,7 @@ LICENSE = LICENSE
 
 ## Autres fichiers à inclure dans l'archive
 CONTRIBUTING = CONTRIBUTING.md
-OTHER = 100metres.data gabarit-documentation-fonction.R chanson.txt
+OTHER = gabarit-documentation-fonction.R chanson.txt carburant.txt 100metres.data
 
 ## Le document maitre dépend de tous les fichiers .Rnw et de tous les
 ## fichiers .tex autres que lui-même qui n'ont pas de version .Rnw.
