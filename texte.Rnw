@@ -278,6 +278,23 @@ anglais, un verbe dans le %
   informatique} %
 (\emph{to grep}).
 
+Pour reprendre plus formellement ce qui précède, la syntaxe d'une
+commande \icode{grep} est:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+grep \meta{options} '\meta{motif}' \meta{fichiers}
+\end{Verbatim}
+\end{Schunk}
+\begin{itemize}
+\item \meta{options} est une liste facultative d'options (ou drapeaux)
+  qui modifient le comportement de \icode{grep}.
+\item \index{motif}\meta{motif} est une \index{expression
+    régulière}expression régulière qui définit le texte à rechercher.
+\item \meta{fichiers} est le ou les fichiers dans lesquels rechercher
+  le texte; si aucun fichier n'est spécifié, \icode{grep} recherche
+  dans l'entrée standard.
+\end{itemize}
+
 Les trois exemples ci-dessous permettent, dans l'ordre, d'extraire du
 fichier \code{chanson.txt}: le vers de la chanson qui contient le mot
 «temps»; les vers qui débutent par «M»; le vers qui contient le mot
@@ -294,13 +311,12 @@ exec("grep", c("'^M'", "chanson.txt"))
 exec("grep", c("'chat'", "chanson.txt"))
 @
 
-Comme la plupart des utilitaires Unix, \icode{grep} accepte en
-argument des options (ou drapeaux) qui modifient son comportement. Les
-options se présentent généralement en deux versions: courte sous forme
-d'une seule lettre précédée d'un tiret, ou longue sous forme d'un mot
-(ou une expression) précédé de deux tirets. Les options de
-\icode{grep} sont très nombreuses; je n'en ai retenu que quelques unes
-ici.
+Les \meta{options} mentionnées ci-dessus pour modifier le comportement
+de \icode{grep} se présentent généralement en deux versions: courte
+sous forme d'une seule lettre précédée d'un tiret, ou longue sous
+forme d'un mot (ou une expression) précédé de deux tirets. Les options
+de \icode{grep} sont très nombreuses; je n'en ai retenu que quelques
+unes ici.
 
 \begin{ttscript}{-E, --extended-regexp}
 \item[\code{-E, --extended-regexp}] interprète le motif comme une expression
@@ -333,14 +349,18 @@ particulièrement ésotérique\footnote{%
   consécutives dans un texte est \code{N;/\string^\bs n\$/D;P;D;}.}. %
 Nous nous attarderons donc à une seule commande de \icode{sed}, celle
 qui permet de rechercher et de remplacer à l'intérieur d'un texte. La
-syntaxe de cette commande est la suivante:
+commande est fournie en argument à \icode{sed} entre guillemets
+(simples ou doubles). L'utilitaire lit ensuite l'entrée standard ou
+une liste de fichiers ligne par ligne. La syntaxe est donc la suivante:
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
-s/\meta{motif}/\meta{remplacement}/\meta{modificateur}
+sed \meta{options} 's/\meta{motif}/\meta{remplacement}/\meta{modificateur}'
+    \meta{fichiers}
 \end{Verbatim}
 \end{Schunk}
-
 \begin{itemize}
+\item \meta{options} est une liste facultative d'options (ou drapeaux)
+  qui modifient le comportement de \icode{sed}.
 \item \code{s} est le nom de la commande \icode{sed} qui sert à
   rechercher et remplacer.
 \item \index{motif}\meta{motif} est une \index{expression
@@ -356,13 +376,22 @@ s/\meta{motif}/\meta{remplacement}/\meta{modificateur}
   parties de la commande; n'importe quel symbole (qui ne se trouve pas
   autrement dans la commande) fait l'affaire, mais «\code{/}» est le
   symbole le plus couramment utilisé.
+\item \meta{fichiers} est le ou les fichiers dans lesquels rechercher
+  le texte; si aucun fichier n'est spécifié, \icode{sed} recherche
+  dans l'entrée standard.
 \end{itemize}
 
-La commande de remplacement est fournie en argument à \icode{sed}
-entre guillemets (simples ou doubles). L'utilitaire lit ensuite
-l'entrée standard ou une liste de fichiers ligne par ligne, puis
-retourne sur la sortie standard le texte modifié (sans modifier le
-fichier d'origine).
+Contraitement à ce que l'on pourrait penser, \icode{sed} ne modifie
+pas le ou les fichiers d'origine. Le texte modifié est simplement
+affiché à la sortie standard. Pour sauvegarder ce texte modifié, vous
+devez rediriger la sortie standard vers un fichier avec l'opérateur de
+redirection «\code{>}» comme expliqué à la \autoref{sec:texte:outils}.
+Le nom de ce fichier doit être différent de celui que \icode{sed} est
+occupé à traiter.
+
+\tipbox{Il existe une option pour remplacer directement dans le
+  fichier d'origine, mais elle n'est pas standard dans toutes les
+  versions de \icode{sed}. Je vous recommande de ne pas vous y fier.}
 
 Les trois exemples ci-dessous permettent de faire les changements
 suivants dans le texte du fichier \code{chanson.txt}, dans l'ordre:
@@ -1133,38 +1162,51 @@ mots de la fin de la \autoref{sec:texte:regex:alternance}.
 \section{Traitement de texte divisé en champs avec \code{awk}}
 \label{sec:texte:awk}
 
-\Index{AWK@AWK (langage)}AWK \citep{awk:1988} est un langage de programmation
-spécialisé dans le traitement de texte et l'extraction de données. Il a été développé à partir de 1977 chez Bell Labs. Le nom du langage
-provient des initiales de ses trois auteurs:  Alfred Aho, Peter
-Weinberger et Brian Kernighan. Ce dernier apparaissait déjà au \autoref{chap:informatique} comme l'un
-des auteurs du grand classique de l'informatique \emph{The C
-  Programming Language} \citep{KandR:1978}. La syntaxe de AWK
-s'apparente donc beaucoup à celle du \index{C}C.
+\Index{AWK@AWK (langage)}AWK \citep{awk:1988} est un langage de
+programmation spécialisé dans le traitement de texte et l'extraction
+de données développé à partir de 1977 chez Bell Labs. Le nom du
+langage provient des initiales de ses trois auteurs: Alfred Aho, Peter
+Weinberger et Brian Kernighan. Ce dernier est l'un des auteurs du
+grand classique de l'informatique \emph{The C Programming Language}
+\citep{KandR:1978} que nous avons déjà mentionné au
+\autoref{chap:informatique}. La syntaxe de AWK s'apparente donc
+beaucoup à celle du \index{C}C.
 
 L'\index{interpréteur}interpréteur du langage AWK auquel nous allons
-nous intéresser est l'utilitaire \Icode{awk}. Comme
-\icode{grep} et \icode{sed}, \code{awk} est un utilitaire standard des
-systèmes Unix. Véritable couteau suisse, c'est un outil basé sur les
-expressions régulières qui est souvent plus simple à utiliser que
-\code{sed}, surtout s'il faut effectuer des opérations sur plusieurs
+nous intéresser est l'utilitaire \Icode{awk}. Comme \icode{grep} et
+\icode{sed}, \code{awk} est un utilitaire standard des systèmes Unix.
+Véritable couteau suisse, c'est un outil basé sur les expressions
+régulières qui est souvent plus simple à utiliser que \code{sed},
+surtout s'il faut effectuer des opérations complexes ou sur plusieurs
 lignes du texte à traiter.
 
 Pour vous convaincre d'entrée de jeu de la puissance et de l'utilité
-de \icode{awk}, imaginez le contexte suivant: vous devez extraire les
-deux premières colonnes d'une base de données en format \index{CSV}CSV
-qui compte un million d'enregistrements (lignes) et quelques dizaines
-de champs (colonnes). Votre premier réflexe sera sans doute d'importer
-le fichier CSV dans un tableur, de supprimer les colonnes autres que
-les deux premières, puis d'exporter la base de données en format CSV.
+de \icode{awk}, imaginez le contexte suivant. On vous fournit une base
+de données en format \index{CSV}CSV qui compte un million
+d'enregistrements (lignes) et quelques dizaines de champs (colonnes).
+Vous devez produire une nouvelle base de données composée des deux
+premières colonnes et d'une colonne contenant la somme des deux
+autres. Votre premier réflexe consistera sans doute à
+\begin{enumerate}
+\item importer le fichier CSV dans un tableur;
+\item supprimer les colonnes autres que les deux premières;
+\item ajouter dans une troisième colonne une formule pour calculer la
+  somme des deux premières colonne, puis copier cette formule dans
+  toutes les lignes;
+\item exporter la base de données en format CSV.
+\end{enumerate}
 Cette procédure est fastidieuse, lente --- surtout avec une grande
 base de données --- et désespérément manuelle. Sous peu, vous saurez
 remplacer de telles manipulations par un simple appel à \icode{awk}.
-En effet, la commande ci-dessous effectue le traitement requis \emph{en une
-fraction de seconde} et sans même avoir à lancer un lourd tableur.
-<<echo=FALSE>>=
-exec("awk", c("-F", "','", "'{ print $1\",\"$2 }'", "data.csv", "> data-new.csv"),
-     eval = FALSE)
-@
+En effet, la commande ci-dessous effectue le traitement requis
+\emph{en une fraction de seconde} et sans même avoir à lancer un lourd
+tableur.
+\begin{Schunk}
+\begin{Verbatim}
+$ awk -F ',' '{ print $1","$2","$1 + $2 }' data.csv \
+  > data-new.csv
+\end{Verbatim}
+\end{Schunk} %$$$$$
 
 \subsection{Concepts de base}
 \label{sec:texte:awk:base}
@@ -1209,9 +1251,43 @@ Illustrons ces concepts de base à l'aide de quelques exemples.
 \item Lorsque le texte du fichier \code{chanson.txt} de la
   \autoref{fig:texte:chanson} est fourni à \code{awk}, chaque vers est
   séparé en mots. Le nombre de champs est donc variable d'une ligne à
-  l'autre. Une règle \regex{/\string^M/} permet d'effectuer un
+  l'autre. Une règle \regex{/\string^M/} permettrait d'effectuer un
   traitement uniquement sur les lignes qui débutent par «M».
 \end{itemize}
+
+\subsection{Commande AWK simple}
+\label{sec:texte:awk:commande}
+
+L'\index{interpréteur}interpréteur \icode{awk} prend en argument le
+script \index{AWK}AWK entre guillemets simples\footnote{%
+  Les guillemets doubles sont aussi permis, mais ils risquent fort
+  d'entrer en conflit avec des guillemets dans le script. Je
+  recommande d'utiliser toujours des guillemets simples.}. %
+Comme \icode{grep} et \icode{sed}, \icode{awk} lit ensuite l’entrée
+standard ou une liste de fichiers ligne par ligne. La syntaxe d'une
+commande est donc:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+awk \meta{options} '\meta{script}' \meta{fichiers}
+\end{Verbatim}
+\end{Schunk}
+\begin{itemize}
+\item \meta{options} est une liste facultative d'options (ou drapeaux)
+  qui modifient le comportement de \icode{awk}.
+\item \meta{script} est un script AWK.
+\item \meta{fichiers} est le ou les fichiers à traiter; si aucun
+  fichier n'est spécifié, \icode{awk} opère sur l'entrée standard.
+\end{itemize}
+
+
+
+- Appel de awk et script simple
+  o pas de règle -> exécuté sur chaque ligne
+  o print implicite
+
+- Règles conditionnelles
+- Changer le RS et FS
+- Fonctions awk
 
 
 \section{Fonctions internes utiles}
