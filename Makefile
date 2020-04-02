@@ -45,7 +45,7 @@ LICENSE = LICENSE
 
 ## Autres fichiers à inclure dans l'archive
 CONTRIBUTING = CONTRIBUTING.md
-OTHER = gabarit-documentation-fonction.R chanson.txt carburant.txt 100metres.data
+OTHER = gabarit-documentation-fonction.R chanson.txt carburant.dat 100metres.data
 
 ## Le document maitre dépend de tous les fichiers .Rnw et de tous les
 ## fichiers .tex autres que lui-même qui n'ont pas de version .Rnw.
@@ -116,10 +116,9 @@ ${MASTER}: ${MASTER:.pdf=.tex} ${RNWFILES:.Rnw=.tex} ${TEXFILES} \
 
 ${COLLABORATEURS}: FORCE
 	git log --pretty="%an%n" | sort | uniq | \
-	  grep -v -E "${OMITAUTHORS}" | \
 	  awk 'BEGIN { print "Les personnes dont le nom [1] apparait ci-dessous ont contribué à\nl'\''amélioration de «${TITLE}»." } \
-	       { print $$0 } \
-	       END { print "\n[1] Noms tels qu'\''ils figurent dans le journal du dépôt Git\n    ${REPOSURL}" }' > ${COLLABORATEURS}
+	       $$0 !~ "${OMITAUTHORS}" \
+	       END { print "\n[1] Noms tels qu'\''ils figurent dans le journal du dépôt Git\n    ${REPOSURL}" }'
 
 .PHONY: pdf
 pdf: ${MASTER}
