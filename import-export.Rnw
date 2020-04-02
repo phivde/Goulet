@@ -195,8 +195,11 @@ fichier texte dans lequel les champs sont séparés par un caractère
 quelconque, souvent une espace. Le format le plus universel utilise
 toutefois comme séparateur la virgule ou le point-virgule; c'est le
 format de fichier \index{CSV}CSV (\emph{comma-separated values}). La
-\autoref{fig:import-export:read.table} présente le même jeu de données dans
-deux formats différents.
+\autoref{fig:import-export:read.table} présente le même jeu de
+données\footnote{%
+  Ce jeu de données est une version réduite et simplifiée des données
+  du fichier \code{carburant.dat} livré avec le présent ouvrage.} %
+dans deux formats différents.
 
 \begin{figure}
   \lstset{frame=single,language={},numbers=none}
@@ -259,6 +262,7 @@ champs et le séparateur décimal; consulter le
 
 %% nettoyage
 <<echo=FALSE>>=
+unlink("carburant.txt")
 unlink("carburant.csv")
 @
 
@@ -335,6 +339,7 @@ write.csv(x, file = "carburant.csv", row.names = FALSE)
 
 %% nettoyage
 <<echo=FALSE>>=
+unlink("carburant.txt")
 unlink("carburant.csv")
 @
 
