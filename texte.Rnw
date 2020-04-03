@@ -1217,10 +1217,10 @@ $ awk -F ',' '{ print $1","$2","$1 + $2 }' data.csv \
 \label{sec:texte:awk:base}
 
 \index{AWK@AWK}AWK est conçu autour du concept de séparation du texte
-à traiter en enregistrements (\emph{records}), puis en champs
-(\emph{fields}). Le séparateur d'enregistrement par défaut est le
-retour à la ligne. Dans la suite, nous ne ferons plus de différence
-entre une ligne du texte et un enregistrement.
+à traiter en \emph{enregistrements} (\emph{records}), puis en
+\emph{champs} (\emph{fields}). Le séparateur d'enregistrement par
+défaut est le retour à la ligne. Dans la suite, nous ne ferons plus de
+différence entre une ligne du texte et un enregistrement.
 
 Lorsque \icode{awk} a terminé de lire une ligne du texte fourni en
 entrée, il sépare automatiquement celle-ci en champs. Le séparateur de
@@ -1229,15 +1229,15 @@ tout autre caractère\footnote{%
   C'est ce que «\code{-F ','}» permettait de faire dans l'exemple au
   début de la section.}.
 
-Un programme (ou script) \icode{awk} est constitué d'une série de
-\index{regle@règle (\code{awk})}règles. Une fois que \icode{awk} a
-séparé un enregistrement en champs, il exécute les règles une par une.
-Les règles ont accès à des variables qui contiennent l'enregistrement
-complet et chacun des champs, ce qui facilite grandement les
-opérations sur une ligne et sur ses composantes. La variable
-\code{\$0} contient l'enregistrement complet, alors que les champs se
-trouvent dans des variables nommées \code{\$1}, \code{\$2},
-\code{\$3}, \dots.
+Un \emph{programme} (ou script) \icode{awk} est constitué d'une série
+de \index{regle@règle (\code{awk})}\emph{règles}. Une fois que
+\icode{awk} a séparé un enregistrement en champs, il exécute les
+règles une par une. Les règles ont accès à des variables qui
+contiennent l'enregistrement complet et chacun des champs, ce qui
+facilite grandement les opérations sur une ligne et sur ses
+composantes. La variable \code{\$0} contient l'enregistrement complet,
+alors que les champs se trouvent dans des variables nommées
+\code{\$1}, \code{\$2}, \code{\$3}, \dots.
 
 Illustrons ces concepts de base à l'aide de quelques exemples.
 \begin{itemize}
@@ -1256,7 +1256,7 @@ Illustrons ces concepts de base à l'aide de quelques exemples.
 \item Lorsque le texte du fichier \code{chanson.txt} de la
   \autoref{fig:texte:chanson} est fourni à \code{awk}, chaque vers est
   séparé en mots. Le nombre de champs est donc variable d'une ligne à
-  l'autre. Une règle ayant recours au motif \regex{/\string^M/}
+  l'autre. Une règle ayant recours au motif \regex{\string^M}
   permettrait d'effectuer un traitement uniquement sur les lignes qui
   débutent par «M».
 \end{itemize}
@@ -1268,7 +1268,7 @@ L'\index{interpréteur}interpréteur \icode{awk} prend en argument un
 programme entre guillemets simples\footnote{%
   Les guillemets doubles sont aussi permis, mais ils risquent fort
   d'entrer en conflit avec des guillemets dans le script. Je
-  recommande d'utiliser toujours des guillemets simples.}. %
+  recommande de toujours utiliser des guillemets simples.}. %
 Comme \icode{grep} et \icode{sed}, \icode{awk} lit ensuite l’entrée
 standard ou une liste de fichiers ligne par ligne. La syntaxe d'une
 commande est donc:
@@ -1280,20 +1280,22 @@ awk \meta{options} '\meta{programme}' \meta{fichiers}
 \begin{itemize}
 \item \meta{options} est une liste facultative d'options (ou drapeaux)
   qui modifient le comportement de \icode{awk}.
-\item \meta{programme} est un programme \icode{awk} formé de règles; voir
-  ci-dessous.
+\item \meta{programme} est un programme \icode{awk} formé de règles.
 \item \meta{fichiers} est le ou les fichiers à traiter; si aucun
-  fichier n'est spécifié, \icode{awk} opère sur l'entrée standard.
+  fichier n'est spécifié, \icode{awk} traite l'entrée standard.
 \end{itemize}
 
 Un programme \icode{awk} décrit le traitement à effectuer sur le texte
 en entrée. Tel que mentionné précédemment, il est constitué d'une
-série de \index{regle@règle (\code{awk})}\emph{règles}. Chaque règle
-est à son tour formée d'un \index{motif}\emph{motif} et d'une
-\index{action@action (\code{awk}}\emph{action}. Les actions sont
-placées entre accolades «\icode[awk]{\{~\}}» et les règles sont
-généralement séparées par des retours à la ligne, lorsqu'il y en a
-plus d'une. La forme générale d'un programme AWK est donc la suivante:
+série de règles. Chaque règle spécifie un motif à rechercher dans
+l'enregistrement courant et une action à exécuter lorsque le texte
+correspond au motif.
+
+Plus précisément, une \index{regle@règle (\code{awk})}règle est formée
+d'un \index{motif@motif (\code{awk})}\emph{motif} suivi d'une
+\index{action@action (\code{awk}}\emph{action}. L'action est placée
+entre accolades «\icode[awk]{\{~\}}» pour la séparer du motif. La
+forme générale d'un programme \icode{awk} est donc la suivante:
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
 \meta{motif} \{ \meta{action} \}
@@ -1301,25 +1303,20 @@ plus d'une. La forme générale d'un programme AWK est donc la suivante:
 ...
 \end{Verbatim}
 \end{Schunk}
-\begin{itemize}
-\item \index{motif}\meta{motif} est une combinaison d'expressions
-  régulières placées entre barres obliques «\icode[awk]{/}» et
-  d'expressions relationnelles. Si le motif est absent, l'action est
-  exécutée pour chaque enregistrement.
-\item \index{action@action (\code{awk}}\emph{action} est une série
-  d'instructions à exécuter lorsque le motif correspond, est non nul
-  ou n'est pas vide. Si l'action est absente, l'instruction
-  \icode[awk]{print} est exécutée implicitement.
-\end{itemize}
-Le motif
 
 Étudions quelques exemples pour mieux comprendre ces principes de la
-programmation \icode{awk}. Le premier affiche les lignes du fichier
-\code{chanson.txt} qui débutent par la lettre «M», comme le ferait
-\icode{grep}. Nous devons utiliser une expression régulière comme
-motif. Tel qu'expliqué à la \autoref{sec:texte:awk:base}, à
-l'intérieur d'une règle la variable \code{\$0} contient l'intégralité
-de l'enregistrement courant.
+programmation \icode{awk}. Nous reviendrons plus en détail sur la
+constructions de motifs et d'actions dans les sections suivantes.
+
+Le premier exemple effectue avec \icode{awk} une opération que nous
+avons déjà réalisée avec \icode{grep} à la
+\autoref{sec:texte:outils:grep}: afficher les lignes du fichier
+\code{chanson.txt} qui débutent par la lettre «M». Le motif à
+rechercher est l'expression régulière \regex{\string^M}\,. La syntaxe de
+\icode{awk} exige que les expressions régulières soient placées
+entre barres obliques «\icode[awk]{/}». Nous avons déjà vu à la
+\autoref{sec:texte:awk:base} qu'à l'intérieur d'une règle, la variable
+\code{\$0} contient l'intégralité de l'enregistrement courant.
 <<echo=FALSE>>=
 exec("awk", c("'/^M/ { print $0 }'", "chanson.txt"))
 @
@@ -1327,14 +1324,16 @@ exec("awk", c("'/^M/ { print $0 }'", "chanson.txt"))
 Vous aurez compris que la commande \icode[awk]{print} sert à afficher
 du texte en sortie. L'instruction \code{print} sans argument est
 équivalente à \code{print \$0}. Nous pourrions donc simplifier
-légèrement la commande ci-dessus.
-<<echo=FALSE>>=
-exec("awk", c("'/^M/ { print }'", "chanson.txt"))
-@
+légèrement la commande ci-dessus en remplaçant \code{print \$0} par
+\code{print}.
 
-Cependant, l'instruction \icode[awk]{print} étant implicite, nous
-pouvons aller encore plus loin dans la simplification de notre
-commande en omettant l'action.
+Cela dit, il est permis d'omettre le motif ou l'action dans une règle
+\icode{awk}, mais pas les deux. Si le motif est absent, l'action est
+exécutée pour chaque enregistrement. Si c'est l'action qui est
+absente, l'instruction \icode[awk]{print} est exécutée implicitement.
+
+Nous pouvons donc aller encore plus loin dans la simplification de la
+commande précédente en omettant l'action.
 <<echo=FALSE>>=
 exec("awk", c("'/^M/'", "chanson.txt"))
 @
@@ -1347,8 +1346,8 @@ exec("awk", c("'/^M/ { print $2 }'", "chanson.txt"))
 @
 
 Parce que la règle ne comporte pas de motif, la commande ci-dessous
-affiche le deuxième mot de chaque ligne du fichier \code{chanson.txt}.
-(Vérifiez par vous-même.)
+affiche plutôt le deuxième mot de chaque ligne du fichier
+\code{chanson.txt}. (Vérifiez par vous-même.)
 <<echo=FALSE>>=
 exec("awk", c("'{ print $2 }'", "chanson.txt"), max.lines = 6)
 @
@@ -1361,6 +1360,80 @@ automatiquement par \icode{awk} durant l'exécution des règles.
 <<echo=FALSE>>=
 exec("awk", c("'NR <= 5 { print $2 }'", "chanson.txt"))
 @
+
+Une autre variable fournie automatiquement par \icode{awk} est
+\icode[awk]{NF}, le nombre de champs dans l'enregistrement courant.
+Nous pouvons utiliser cette variable pour extraire les vers de la
+chanson qui comptent moins de quatre mots.
+<<echo=FALSE, strip.white=false>>=
+exec("awk", c("'NF < 4'", "chanson.txt"))
+@
+
+Vous aurez remarqué que la commande précédente a aussi extrait les
+lignes blanches du fichier. Pour ne pas en tenir compte, il suffit
+d'exiger aussi qu'un enregistrement compte au moins un champ.
+<<echo=FALSE>>=
+exec("awk", c("'NF > 0 && NF < 4'", "chanson.txt"))
+@
+
+Le prochain exemple est un petit peu plus élaboré. La commande
+\icode{awk} permet de calculer la longueur --- en caractères --- du
+plus cours vers de \code{chanson.txt}. Cela nécessite trois règles:
+\begin{itemize}
+\item la première initialise une variable \code{min} à la longueur du
+  premier enregistrement du fichier;
+\item la seconde met à jour la valeur de \code{min} si
+  l'enregistrement courant n'est pas une ligne blanche et si sa
+  longueur est inférieure à la valeur courante de \code{min};
+\item la troisième utilise le motif spécial \icode[awk]{END} qui
+  permet d'exécuter des instructions après la lecture de tous les
+  enregistrements, ici l'affichage de la valeur de \code{min}.
+\end{itemize}
+En plus d'étudier la commande, analysez attentivement l'algorithme.
+\begin{Schunk}
+\begin{Verbatim}
+$ awk 'NR == 1 { min = length($0) }
+       NF > 0 { if (length($0) < min) min = length($0) }
+       END { print min }' chanson.txt
+<<echo=FALSE, results=tex>>=
+exec("awk", c("'NR == 1 { min = length($0) } NF > 0 { if (length($0) < min) min = length($0) } END { print min }'", "chanson.txt"), echo = FALSE)
+@
+
+\end{Verbatim}
+\end{Schunk}
+
+Terminons avec un exemple basé sur des données divisées naturellement
+en enregistrements et en champs. Le fichier \code{carburant.dat} livré
+avec le présent ouvrage contient des données de consommation de
+carburant pour divers types de voitures.\footnote{%
+  Comme la présence marquée des antédiluviens moteurs 8~cylindres
+  l'indique, il s'agit d'un très vieux jeu de données!} %
+(Examinez le contenu du fichier dans votre éditeur de texte avant
+d'aller plus loin.) Nous pouvons facilement créer une nouvelle base de
+données ne contenant que les modèles de voitures 4~cyclindres sans
+passer par un tableur ou par R. La commande suivante converve les
+commentaires et les noms de colonnes en entête du fichier, ainsi que
+les enregistrements dont le second champ est égal à 4. (La validation
+du résultat vous est laissée en exercice.)
+<<echo=FALSE>>=
+exec("awk", c("'/^[#a-z]/ || $2 == 4'", "carburant.dat"), eval = FALSE)
+@
+
+Je vous invite à consulter aussi les exemples des sections 1.3 à 1.5
+de l'excellent ouvrage libre de \citet{gawk:5.0}.
+
+
+\begin{itemize}
+\item \index{motif}\meta{motif} est une combinaison d'expressions
+  régulières placées entre barres obliques «\icode[awk]{/}» et
+  d'expressions relationnelles. Si le motif est absent, l'action est
+  exécutée pour chaque enregistrement.
+\item \index{action@action (\code{awk}}\emph{action} est une série
+  d'instructions à exécuter lorsque le motif correspond, est non nul
+  ou n'est pas vide. Si l'action est absente, l'instruction
+  \icode[awk]{print} est exécutée implicitement.
+\end{itemize}
+
 
 Poussons maintenant un peu plus loin avec un exemple basé sur les
 données du fichier \code{carburant.dat} livré avec le présent ouvrage.
@@ -1413,19 +1486,16 @@ exec("awk", c("'/^[^#a-z]/ { $5 = $5*1000/2.20462 } 1'", "carburant.dat"),
   \icode{awk} --- le programme ne retournerait aucun résultat.
 \end{itemize}
 
-À ce stade, vous disposez déjà d'une bonne idée d'ensemble du
-fonctionnement de \icode{awk}. Les sections suivantes présentent
-rapidement quelques notions additionnelles qui vous permettront
-d'élargir l'éventail des traitements que vous pourrez réaliser avec
-l'utilitaire.
-
-- Appel de awk et script simple
-  o pas de règle -> exécuté sur chaque ligne
-  o print implicite
-
-- Règles conditionnelles
+- Motifs
+  - regexp
+  - expression
+  - étendues (?)
+  - BEGIN/END
+- Actions
+  - expressions (--> fonctions internes)
+  - structures de contrôle
+  - entrée et sortie
 - Changer le RS et FS
-- Fonctions awk
 
 
 \section{Fonctions internes utiles}
@@ -1620,7 +1690,7 @@ fichier, mais aussi les champs de la date. Ensuite, nous replaçons les
 champs dans l'ordre voulu avec les bons séparateurs. La fonction
 \index{substr@\code{substr} (awk)}\code{substr} de \code{awk} permet
 de sélectionner une partie d'une chaine de caractères
-\citep[section~9.1.3]{awk}.
+\citep[section~9.1.3]{gawk:5.0}.
 \begin{Schunk}
 \begin{Verbatim}
 $ awk 'BEGIN { FS = "[ -]" } \
