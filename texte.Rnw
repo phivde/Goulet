@@ -1191,7 +1191,7 @@ de données en format \index{CSV}CSV qui compte un million
 d'enregistrements (lignes) et quelques dizaines de champs (colonnes).
 Vous devez produire une nouvelle base de données composée des deux
 premières colonnes et d'une colonne contenant la somme des deux
-autres. Votre premier réflexe consistera sans doute à
+autres. Votre premier réflexe consistera sans doute à:
 \begin{enumerate}
 \item importer le fichier CSV dans un tableur;
 \item supprimer les colonnes autres que les deux premières;
@@ -1216,7 +1216,7 @@ $ awk -F ',' '{ print $1","$2","$1 + $2 }' data.csv \
 \subsection{Concepts de base}
 \label{sec:texte:awk:base}
 
-\index{AWK@AWK}AWK est conçu autour du concept de séparation du texte
+\index{AWK}AWK est conçu autour du concept de séparation du texte
 à traiter en \emph{enregistrements} (\emph{records}), puis en
 \emph{champs} (\emph{fields}). Le séparateur d'enregistrement par
 défaut est le retour à la ligne. Dans la suite, nous ne ferons plus de
@@ -1294,8 +1294,8 @@ correspond au motif.
 Plus précisément, une \index{regle@règle (\code{awk})}règle est formée
 d'un \index{motif@motif (\code{awk})}\emph{motif} suivi d'une
 \index{action@action (\code{awk}}\emph{action}. L'action est placée
-entre accolades «\icode[awk]{\{~\}}» pour la séparer du motif. La
-forme générale d'un programme \icode{awk} est donc la suivante:
+entre accolades «\icode[\code{awk}]{\{~\}}» pour la séparer du motif.
+La forme générale d'un programme \icode{awk} est donc la suivante:
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
 \meta{motif} \{ \meta{action} \}
@@ -1312,25 +1312,26 @@ Le premier exemple effectue avec \icode{awk} une opération que nous
 avons déjà réalisée avec \icode{grep} à la
 \autoref{sec:texte:outils:grep}: afficher les lignes du fichier
 \code{chanson.txt} qui débutent par la lettre «M». Le motif à
-rechercher est l'expression régulière \regex{\string^M}\,. La syntaxe de
-\icode{awk} exige que les expressions régulières soient placées
-entre barres obliques «\icode[awk]{/}». Nous avons déjà vu à la
+rechercher est l'expression régulière \regex{\string^M}\,. La syntaxe
+de \icode{awk} exige que les expressions régulières soient placées
+entre barres obliques «\icode[\code{awk}]{/}». Nous avons déjà vu à la
 \autoref{sec:texte:awk:base} qu'à l'intérieur d'une règle, la variable
 \code{\$0} contient l'intégralité de l'enregistrement courant.
 <<echo=FALSE>>=
 exec("awk", c("'/^M/ { print $0 }'", "chanson.txt"))
 @
 
-Vous aurez compris que la commande \icode[awk]{print} sert à afficher
-du texte en sortie. L'instruction \code{print} sans argument est
-équivalente à \code{print \$0}. Nous pourrions donc simplifier
+Vous aurez compris que la commande \icode[\code{awk}]{print} sert à
+afficher du texte en sortie. L'instruction \code{print} sans argument
+est équivalente à \code{print \$0}. Nous pourrions donc simplifier
 légèrement la commande ci-dessus en remplaçant \code{print \$0} par
 \code{print}.
 
 Cela dit, il est permis d'omettre le motif ou l'action dans une règle
 \icode{awk}, mais pas les deux. Si le motif est absent, l'action est
 exécutée pour chaque enregistrement. Si c'est l'action qui est
-absente, l'instruction \icode[awk]{print} est exécutée implicitement.
+absente, l'instruction \icode[\code{awk}]{print} est exécutée
+implicitement.
 
 Nous pouvons donc aller encore plus loin dans la simplification de la
 commande précédente en omettant l'action.
@@ -1354,17 +1355,18 @@ exec("awk", c("'{ print $2 }'", "chanson.txt"), max.lines = 6)
 
 Pour limiter le traitement ci-dessus aux cinq premières lignes du
 fichier, nous pouvons utiliser comme motif une expression
-relationnelle et la variable \icode[awk]{NR} qui contient le numéro de
-l'enregistrement courant. Celle-ci est une des variables fournies
-automatiquement par \icode{awk} durant l'exécution des règles.
+relationnelle et la variable \icode[\code{awk}]{NR} qui contient le
+numéro de l'enregistrement courant. Celle-ci est une des variables
+fournies automatiquement par \icode{awk} durant l'exécution des
+règles.
 <<echo=FALSE>>=
 exec("awk", c("'NR <= 5 { print $2 }'", "chanson.txt"))
 @
 
 Une autre variable fournie automatiquement par \icode{awk} est
-\icode[awk]{NF}, le nombre de champs dans l'enregistrement courant.
-Nous pouvons utiliser cette variable pour extraire les vers de la
-chanson qui comptent moins de quatre mots.
+\icode[\code{awk}]{NF}, le nombre de champs dans l'enregistrement
+courant. Nous pouvons utiliser cette variable pour extraire les vers
+de la chanson qui comptent moins de quatre mots.
 <<echo=FALSE, strip.white=false>>=
 exec("awk", c("'NF < 4'", "chanson.txt"))
 @
@@ -1385,8 +1387,8 @@ plus cours vers de \code{chanson.txt}. Cela nécessite trois règles:
 \item la seconde met à jour la valeur de \code{min} si
   l'enregistrement courant n'est pas une ligne blanche et si sa
   longueur est inférieure à la valeur courante de \code{min};
-\item la troisième utilise le motif spécial \icode[awk]{END} qui
-  permet d'exécuter des instructions après la lecture de tous les
+\item la troisième utilise le motif spécial \icode[\code{awk}]{END}
+  qui permet d'exécuter des instructions après la lecture de tous les
   enregistrements, ici l'affichage de la valeur de \code{min}.
 \end{itemize}
 En plus d'étudier la commande, analysez attentivement l'algorithme.
@@ -1402,22 +1404,68 @@ exec("awk", c("'NR == 1 { min = length($0) } NF > 0 { if (length($0) < min) min 
 \end{Verbatim}
 \end{Schunk}
 
-Terminons avec un exemple basé sur des données divisées naturellement
-en enregistrements et en champs. Le fichier \code{carburant.dat} livré
-avec le présent ouvrage contient des données de consommation de
-carburant pour divers types de voitures.\footnote{%
+Terminons avec deux exemples basés sur des données divisées
+naturellement en enregistrements et en champs. Le fichier
+\code{carburant.dat} livré avec le présent ouvrage contient des
+données de consommation de carburant pour divers types de
+voitures.\footnote{%
   Comme la présence marquée des antédiluviens moteurs 8~cylindres
   l'indique, il s'agit d'un très vieux jeu de données!} %
 (Examinez le contenu du fichier dans votre éditeur de texte avant
-d'aller plus loin.) Nous pouvons facilement créer une nouvelle base de
+d'aller plus loin.)
+
+Comme les résultats de ces deux exemples occupent
+plusieurs lignes, la validation des commandes vous est laissée en
+exercice.)
+
+En premier lieu, nous pouvons facilement créer une nouvelle base de
 données ne contenant que les modèles de voitures 4~cyclindres sans
-passer par un tableur ou par R. La commande suivante converve les
+passer par un tableur ou par R. La commande suivante conserve les
 commentaires et les noms de colonnes en entête du fichier, ainsi que
-les enregistrements dont le second champ est égal à 4. (La validation
-du résultat vous est laissée en exercice.)
+les enregistrements dont le second champ est égal à 4.
 <<echo=FALSE>>=
 exec("awk", c("'/^[#a-z]/ || $2 == 4'", "carburant.dat"), eval = FALSE)
 @
+
+En second lieu, la commande suivante ajoute une action afin de
+conserver uniquement les deux premiers champs des données de l'exemple
+précédent. La sélection doit évidemment s'effectuer uniquement sur les
+titres de colonnes et sur les données\footnote{%
+  J'ai choisi, pour ne pas compliquer indument l'exemple, de ne pas
+  toucher aux commentaires.}. %
+L'action fait appel à trois opérations de \icode{awk} que nous n'avons
+pas rencontrées auparavant:
+\begin{itemize}
+\item \index{\string~@\verb=~= (\code{awk})|bfhyperpage}«\verb=~=» est
+  un opérateur de relation qui retourne vrai lorsque la chaine de
+  caractère du côté gauche de l'opérateur correspond à l'expression
+  régulière du côté droit;
+\item «\Icode[\code{awk}]{?:}» est l'opérateur ternaire\footnote{%
+    On retrouve cet opérateur dans plusieurs langages de
+    programmation. Dans R, ce qui s'en approche le plus est la
+    fonction \icode{ifelse}.} %
+  qui permet d'écrire une expression conditionnelle de la forme
+  \begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+\meta{condition} ? \meta{expression\_si\_vrai} : \meta{expression\_si_faux}
+\end{Verbatim}
+  \end{Schunk}
+\item la concaténation de chaines de caractères, qui n'a pas
+  d'opérateur désigné; il suffit de placer les chaines de caractères
+  les unes à la suite des autres.
+\end{itemize}
+En assemblant tous ces morceaux, vous devriez pouvoir décoder que
+l'action dans la commande ci-dessous affiche le contenu complet de
+l'enregistrement lorsque celui-ci début par le symbole «\code{\#}», et
+les deux premiers champs séparés par une espace autrement.
+\begin{Schunk}
+\begin{Verbatim}
+$ awk '/^[#a-z]/ || $2 == 4
+       { print ($0 ~ /^#/) ? $0 : $1 \" \" $2 }' \
+       carburant.dat
+\end{Verbatim}
+\end{Schunk}
+
 
 Je vous invite à consulter aussi les exemples des sections 1.3 à 1.5
 de l'excellent ouvrage libre de \citet{gawk:5.0}.
@@ -1425,13 +1473,13 @@ de l'excellent ouvrage libre de \citet{gawk:5.0}.
 
 \begin{itemize}
 \item \index{motif}\meta{motif} est une combinaison d'expressions
-  régulières placées entre barres obliques «\icode[awk]{/}» et
+  régulières placées entre barres obliques «\icode[\code{awk}]{/}» et
   d'expressions relationnelles. Si le motif est absent, l'action est
   exécutée pour chaque enregistrement.
 \item \index{action@action (\code{awk}}\emph{action} est une série
   d'instructions à exécuter lorsque le motif correspond, est non nul
   ou n'est pas vide. Si l'action est absente, l'instruction
-  \icode[awk]{print} est exécutée implicitement.
+  \icode[\code{awk}]{print} est exécutée implicitement.
 \end{itemize}
 
 
@@ -1480,8 +1528,8 @@ exec("awk", c("'/^[^#a-z]/ { $5 = $5*1000/2.20462 } 1'", "carburant.dat"),
   l'enregistrement courant.
 \item Dans la seconde règle, le motif «\code{1}» est toujours vrai et
   comme il n'y a pas d'action, c'est l'instruction implicite
-  \icode[awk]{print} qui s'exécute. Résultat: cette règle ne fait
-  qu'afficher toutes les lignes du fichier après avoir modifié le
+  \icode[\code{awk}]{print} qui s'exécute. Résultat: cette règle ne
+  fait qu'afficher toutes les lignes du fichier après avoir modifié le
   cinquième champ. Sans cette règle --- un idiome du langage
   \icode{awk} --- le programme ne retournerait aucun résultat.
 \end{itemize}
