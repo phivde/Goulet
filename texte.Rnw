@@ -40,6 +40,8 @@ exec <- function(command, args, echo = TRUE, max.lines = NULL, eval = TRUE, ...)
 }
 @
 
+\epigraph{\emph{And now for something completely different}}{Monty Python}
+
 \begin{objectifs}
 \item Utiliser les expressions régulières pour décrire ou identifier
   une chaine de caractères.
@@ -340,9 +342,9 @@ Nous aurons l'occasion d'illustrer chacune de ces options dans la suite.
 \subsection{Recherche et remplacement avec \code{sed}}
 \label{sec:texte:outils:sed}
 
-L'utilitaire \Icode{sed}\footnote{Pour \emph{stream editor}, ou
-  éditeur de flux de texte. Comme \code{grep}, \code{sed} tire son
-  origine de l'éditeur \icode{ed}.} %
+L'utilitaire \Icode{sed}\footnote{%
+  Pour \emph{stream editor}, ou éditeur de flux de texte. Comme
+  \code{grep}, \code{sed} tire son origine de l'éditeur \icode{ed}.} %
 est en quelque sorte un éditeur de texte qui opère sur un texte une
 seule ligne à la fois et de manière non-interactive. (Vous pourriez
 objecter que cela ne correspond en rien à l'idée que l'on se fait d'un
@@ -357,7 +359,8 @@ Nous nous attarderons donc à une seule commande de \icode{sed}, celle
 qui permet de rechercher et de remplacer à l'intérieur d'un texte. La
 commande est fournie en argument à \icode{sed} entre guillemets
 (simples ou doubles). L'utilitaire lit ensuite l'entrée standard ou
-une liste de fichiers ligne par ligne. La syntaxe est donc la suivante:
+une liste de fichiers ligne par ligne. La syntaxe est donc la
+suivante:
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
 sed \meta{options} 's/\meta{motif}/\meta{remplacement}/\meta{modificateur}'
@@ -917,11 +920,10 @@ contenterai de traiter brièvement des classes prédéfinies.\footnote{%
   terminologie anglaise relative aux classes de caractères. Alors que
   plusieurs auteurs les nomment tout simplement \emph{character
     class}, la norme POSIX --- déjà abordée au \autoref{chap:donnees}
-  lorsqu'il s'agissait de la représentation des dates --- réserve
-  cette expression aux classes prédéfinies. Une classe de caractères
-  telle que généralement entendue est plutôt nommée \emph{bracket
-    expression}. Prenez garde à cette nuance si vous consultez de la
-  documentation en anglais.} %
+  lorsqu'il s'agissait de la représentation des dates --- les nomme
+  \emph{bracket expression}. La norme POSIX réserve le terme
+  \emph{character class} aux classes prédéfinies. Prenez garde à cette
+  nuance si vous consultez de la documentation en anglais.} %
 Celles-ci peuvent s'avérer particulièrement utiles pour travailler
 avec des lettres accentuées ou des caractères invisibles. La liste des
 classes prédéfinies varie beaucoup d'un système d'expressions
@@ -1405,18 +1407,17 @@ exec("awk", c("'NR == 1 { min = length($0) } NF > 0 { if (length($0) < min) min 
 \end{Schunk}
 
 Terminons avec deux exemples basés sur des données divisées
-naturellement en enregistrements et en champs. Le fichier
-\code{carburant.dat} livré avec le présent ouvrage contient des
-données de consommation de carburant pour divers types de
+naturellement en enregistrements et en champs. Comme les résultats de
+ces deux exemples occupent plusieurs lignes, la validation des
+commandes vous est laissée en exercice.
+
+Le fichier \code{carburant.dat} livré avec le présent ouvrage contient
+des données de consommation de carburant pour divers types de
 voitures.\footnote{%
   Comme la présence marquée des antédiluviens moteurs 8~cylindres
   l'indique, il s'agit d'un très vieux jeu de données!} %
-(Examinez le contenu du fichier dans votre éditeur de texte avant
-d'aller plus loin.)
-
-Comme les résultats de ces deux exemples occupent
-plusieurs lignes, la validation des commandes vous est laissée en
-exercice.)
+Examinez le contenu du fichier dans votre éditeur de texte avant
+d'aller plus loin.
 
 En premier lieu, nous pouvons facilement créer une nouvelle base de
 données ne contenant que les modèles de voitures 4~cyclindres sans
@@ -1427,37 +1428,13 @@ les enregistrements dont le second champ est égal à 4.
 exec("awk", c("'/^[#a-z]/ || $2 == 4'", "carburant.dat"), eval = FALSE)
 @
 
-En second lieu, la commande suivante ajoute une action afin de
-conserver uniquement les deux premiers champs des données de l'exemple
-précédent. La sélection doit évidemment s'effectuer uniquement sur les
-titres de colonnes et sur les données\footnote{%
+En second lieu, l'ajout d'une action à la commande précédente permet
+de conserver uniquement les deux premiers champs des données. La
+sélection doit évidemment s'effectuer uniquement sur les titres de
+colonnes et sur les données\footnote{%
   J'ai choisi, pour ne pas compliquer indument l'exemple, de ne pas
   toucher aux commentaires.}. %
-L'action fait appel à trois opérations de \icode{awk} que nous n'avons
-pas rencontrées auparavant:
-\begin{itemize}
-\item \index{\string~@\verb=~= (\code{awk})|bfhyperpage}«\verb=~=» est
-  un opérateur de relation qui retourne vrai lorsque la chaine de
-  caractère du côté gauche de l'opérateur correspond à l'expression
-  régulière du côté droit;
-\item «\Icode[\code{awk}]{?:}» est l'opérateur ternaire\footnote{%
-    On retrouve cet opérateur dans plusieurs langages de
-    programmation. Dans R, ce qui s'en approche le plus est la
-    fonction \icode{ifelse}.} %
-  qui permet d'écrire une expression conditionnelle de la forme
-  \begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
-\meta{condition} ? \meta{expression\_si\_vrai} : \meta{expression\_si_faux}
-\end{Verbatim}
-  \end{Schunk}
-\item la concaténation de chaines de caractères, qui n'a pas
-  d'opérateur désigné; il suffit de placer les chaines de caractères
-  les unes à la suite des autres.
-\end{itemize}
-En assemblant tous ces morceaux, vous devriez pouvoir décoder que
-l'action dans la commande ci-dessous affiche le contenu complet de
-l'enregistrement lorsque celui-ci début par le symbole «\code{\#}», et
-les deux premiers champs séparés par une espace autrement.
+Examinez la commande, les explications détaillées suivent.
 \begin{Schunk}
 \begin{Verbatim}
 $ awk '/^[#a-z]/ || $2 == 4
@@ -1465,10 +1442,49 @@ $ awk '/^[#a-z]/ || $2 == 4
        carburant.dat
 \end{Verbatim}
 \end{Schunk}
+L'action fait appel à deux opérateurs de \icode{awk} que nous n'avons
+pas rencontrés auparavant, ainsi qu'à la concaténation.
+\begin{ttscript}{?:}
+\item[\code{\string~}] \index{\string~@\code{\string~} (\code{awk})|bfhyperpage}
+  retourne vrai lorsque la chaine de caractères du côté gauche de
+  l'opérateur correspond à l'expression régulière du côté droit. La
+  version négative \index{!\string~@\code{!\string~}
+    (\code{awk})|bfhyperpage}\code{!\string~} existe aussi.
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+\meta{chaine} ~ /\meta{motif}/
+\meta{chaine} !~ /\meta{motif}/
+\end{Verbatim}
+  \end{Schunk}
+\item[\code{?:}] \Index{?:@\code{?:} \code{awk}} retourne le résultat
+  de l'expression en second ou en troisième argument selon que la
+  condition en premier argument est, respectivement, vraie ou
+  fausse.\footnote{%
+    Souvent appelé \emph{opérateur ternaire}, cet opérateur existe
+    dans plusieurs langages de programmation. Dans R, ce qui s'en
+    approche le plus est la fonction \icode{ifelse}.} %
+  \begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+\meta{condition} ? \meta{expression\_si\_vrai} : \meta{expression\_si_faux}
+\end{Verbatim}
+  \end{Schunk}
+\end{ttscript}
+Pour ce qui est de la concaténation de chaines de caractères, aussi
+étrange que cela puisse paraitre, il n'existe pas d'opérateur désigné
+dans \icode{awk}. Il suffit de placer les chaines de caractères les
+unes à la suite des autres pour en créer une nouvelle. L'action dans
+la commande ci-dessus affiche donc le contenu complet de
+l'enregistrement lorsque celui-ci débute par le symbole «\code{\#}»,
+et les deux premiers champs séparés par une espace autrement.
 
-
-Je vous invite à consulter aussi les exemples des sections 1.3 à 1.5
-de l'excellent ouvrage libre de \citet{gawk:5.0}.
+À ce stade, vous disposez déjà de connaissances suffisantes pour
+réaliser plusieurs tâches de manipulation de texte avec \icode{awk}.
+Les sections suivantes ne font qu'àjouter des détails sur l'écriture
+des règles et la configuration de l'outil. Si vous souhaitez étudier
+des exemples additionnels, je vous recommande ceux des sections 1.3 à
+1.5 de l'excellent
+\link{https://www.gnu.org/software/gawk/manual/}{guide d'utilisation
+  de GNU~Awk} \citep{gawk:5.0}.
 
 
 \begin{itemize}
