@@ -1300,9 +1300,9 @@ awk \meta{options} '\meta{programme}' \meta{fichiers}
 
 Un programme \icode{awk} décrit le traitement à effectuer sur le texte
 en entrée. Tel que mentionné précédemment, il est constitué d'une
-série de règles. Chaque règle spécifie un motif à rechercher dans
-l'enregistrement courant et une action à exécuter lorsque le texte
-correspond au motif.
+série de règles, souvent séparées par des retours à la ligne. Chaque
+règle spécifie un motif à rechercher dans l'enregistrement courant et
+une action à exécuter lorsque le texte correspond au motif.
 
 Plus précisément, une \index{regle@règle (\code{awk})}règle est formée
 d'un \index{motif@motif (\code{awk})}\emph{motif} suivi d'une
@@ -1457,10 +1457,11 @@ $ awk '/^[#a-z]/ || $2 == 4 {
 L'action fait appel à deux opérateurs de \icode{awk} que nous n'avons
 pas rencontrés auparavant, ainsi qu'à la concaténation.
 \begin{ttscript}{?:}
-\item[\code{\string~}] \index{\string~@\code{\string~} (\code{awk})|bfhyperpage}
-  retourne vrai lorsque la chaine de caractères du côté gauche de
-  l'opérateur correspond à l'expression régulière du côté droit. La
-  version négative \index{!\string~@\code{!\string~}
+\item[\code{\string~}] %
+  \index{\string~@\code{\string~} (\code{awk})|bfhyperpage} retourne
+  vrai lorsque la chaine de caractères du côté gauche de l'opérateur
+  (\code{\$0} par défaut) correspond à l'expression régulière du côté
+  droit. La version négative \index{!\string~@\code{!\string~}
     (\code{awk})|bfhyperpage}\code{!\string~} existe aussi.
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1499,17 +1500,123 @@ des exemples additionnels, je vous recommande ceux des sections 1.3 à
 \link{https://www.gnu.org/software/gawk/manual/}{guide d'utilisation
   de GNU~Awk} \citep{gawk:5.0}.
 
+\subsection{Motifs}
+\label{sec:texte:awk:motifs}
 
+Comme nous l'avons déjà vu, les motifs dans \icode{awk} contrôlent
+l'exécution des règles: l'action d'une règle est exécutée lorsque le
+motif correspond à l'enregistrement courant. Il existe six types de
+motifs dans \icode{awk}, dont quatre que nous avons déjà rencontrés
+dans les exemples de la section précédente.
+
+\begin{ttscript}{\code{\meta{expression}}}
+  \def\beginendlabel{%
+    \parbox[t][0pt]{\labelwidth}{\code{BEGIN} \\ \code{END}}}
+  \def\beginfileendfilelabel{%
+    \parbox[t][0pt]{\labelwidth}{\code{BEGINFILE} \\ \code{ENDFILE}}}
+\item[\code{/\meta{motif}/}] correspond lorsque l'expression régulière
+  correspond à l'enregistrement courant.
+\item[\meta{expression}] correspond lorsque la valeur de l'expression
+  \icode{awk} est non nulle (s'il s'agit d'une valeur numérique) ou
+  non vide (s'il s'agit d'une chaine de caractères).
+\item[\code{\meta{motif\_début}, \meta{motif\_fin}}] \mbox{}\\
+  correspond lorsque l'enregistrement courant se trouve dans l'étendue
+  définie par \meta{motif\_début} et \meta{motif\_fin}, inclusivement
+  (attention: la virgule «\code{,}» fait partie intégrante de la
+  l'instruction).
+\item[\beginendlabel] motifs spéciaux qui permettent
+  d'exécuter des actions avant la lecture du premier enregistrement
+  (\code{BEGIN}) et après la lecture du dernier (\code{END}).
+\item[\beginfileendfilelabel] motifs spéciaux qui permettent
+  d'exécuter des actions au début et à la fin de la lecture d'un
+  fichier, lorsqu'il y a plusieurs fichiers à traiter.
+\item[\meta{vide}] un motif vide correspond à tous les
+  enregistrements.
+\end{ttscript}
+\Index{BEGIN@\code{BEGIN} (\code{awk})}
+\Index{END@\code{END} (\code{awk})}
+\Index{BEGINFILE@\code{BEGINFILE} (\code{awk})}
+\Index{ENDFILE@\code{ENDFILE} (\code{awk})}
+
+Nous n'étudierons pas davantage les étendues d'enregistrements ni les
+motifs spéciaux \code{BEGINFILE} et \code{ENDFILE}.
+
+Toute expression \icode{awk} est valide en tant que motif. La
+définition d'expression \code{awk} est en tous points équivalente à
+celle d'expression R donnée à la
+\autoref{sec:bases:commandes:expression}. L'expression est réévaluée à
+chaque fois que la règle est testée pour un nouvel enregistrement. Si
+l'expression fait appel à la valeur d'un champ --- \code{\$1} par
+exemple ---, c'est celle de l'enregistrement courant qui prévaut.
+Autrement, la valeur de l'expression dépend de l'état du programme au
+moment de son évaluation.
+
+\tipbox{Puisque la valeur d'une expression \icode{awk} dépend de
+  l'état du programme, l'ordre dans lequel les règles apparaissent
+  dans le programme est important.}
+
+Les expressions logiques sont évidemment les plus souvent utilisées en
+tant que motifs. Les opérateurs arithmétiques et logiques de
+\icode{awk} sont, pour l'essentiel, les mêmes que les opérateurs de R
+figurant dans le \autoref{tab:bases:operateurs}. Principale
+différence: «\Icode[awk]{=}» est l'opérateur d'affectation d'une
+valeur à une variable dans \icode{awk}. À cette liste il faut aussi
+ajouter les opérateurs %
+\index{\string~@\code{\string~} (\code{awk})}\code{\string~} %
+et %
+\index{!\string~@\code{\string~} (\code{awk})}\code{!\string~} %
+mentionnés à la \autoref{sec:texte:awk:commandes}. Vous trouverez à la
+section~6.2 de \citet{gawk:5.0} une liste exhaustive des opérateurs de
+\icode{awk}.
+
+Illustrons certains des concepts ci-dessus, notamment l'importance de
+l'ordre des règles dans un programme, à l'aide d'un exemple. La
+commande suivante permet d'extraire les deux premiers couplets de «La
+journée qui s'en vient est flambant neuve». Ceux-ci sont délimités par
+des lignes blanches dans le fichier. La tâche consiste donc à extraire
+le texte jusqu'à la seconde ligne blanche.
+\begin{Schunk}
+\begin{Verbatim}
+$ awk '$0 ~ /^$/ && state == 1 { exit }
+       $0 ~ /^$/ { state = 1 }
+       { print }' chanson.txt
+<<echo=FALSE, results=tex>>=
+exec("awk", c("'$0 ~ /^$/ && state == 1 { exit } $0 ~ /^$/ { state = 1 } { print }'", "chanson.txt"), echo = FALSE)
+@
+\end{Verbatim}
+\end{Schunk}
+
+La seconde règle du programme affecte la valeur 1 à une variable
+d'«état» lorsque \icode{awk} rencontre la première ligne blanche. La
+première règle, quant à elle, cause la sortie du programme lorsque
+\code{awk} rencontre une autre ligne blanche et que la variable d'état
+est égale à 1, donc à la seconde ligne blanche. Tous les autres
+enregistrements sont extraits avec \icode[\code{awk}]{print}. Si l'ordre
+des deux premières règles était inversé, la commande n'extrairait que
+le premier couplet. (Déterminez pourquoi.)
+
+Question de parfaire notre style de programmation \icode{awk},
+apportons deux simplifications à la commande ci-dessus:
 \begin{itemize}
-\item \index{motif}\meta{motif} est une combinaison d'expressions
-  régulières placées entre barres obliques «\icode[\code{awk}]{/}» et
-  d'expressions relationnelles. Si le motif est absent, l'action est
-  exécutée pour chaque enregistrement.
-\item \index{action@action (\code{awk}}\emph{action} est une série
-  d'instructions à exécuter lorsque le motif correspond, est non nul
-  ou n'est pas vide. Si l'action est absente, l'instruction
-  \icode[\code{awk}]{print} est exécutée implicitement.
+\item l'expression \code{/\string^\$/} est équivalente à \code{\$0
+    \string~ /\string^\$/} puisque \code{\$0} est la valeur par défaut
+  de l'argument gauche de l'opérateur %
+  \index{\string~@\code{\string~} (\code{awk})}\code{\string~};
+\item l'instruction \icode[\code{awk}]{print} étant implicite
+  lorsqu'une action est absente, la troisième règle peut être
+  remplacée par un motif identité qui est toujours vrai.
 \end{itemize}
+\begin{Schunk}
+\begin{Verbatim}
+$ awk '$/^$/ && state == 1 { exit }
+       $/^$/ { state = 1 }
+       1' chanson.txt
+<<echo=FALSE, results=tex>>=
+exec("awk", c("'/^$/ && state == 1 { exit } /^$/ { state = 1 } 1'", "chanson.txt"), echo = FALSE)
+@
+\end{Verbatim}
+\end{Schunk}
+
 
 
 Poussons maintenant un peu plus loin avec un exemple basé sur les
