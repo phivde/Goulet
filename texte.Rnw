@@ -256,6 +256,15 @@ profusion dans la présentation sur les expressions régulières à la
 les utiliser. L'utilitaire \icode{awk}, quant à lui, fera l'objet
 de la \autoref{sec:texte:awk}.
 
+\index{\string\@\code{\bs} (Bash)}%
+\importantbox{L'espace horizontal étant compté dans un document en
+  format PDF, il est parfois nécessaire de scinder une commande sur
+  deux lignes ou plus. Vous remarquerez dans ces cas la présence du
+  symbole «\code{\bs}» en fin de ligne. C'est le symbole de
+  continuation de ligne de Bash qui permet d'écrire une commande sur
+  plus d'une ligne. Il ne fait pas partie de la syntaxe des
+  commandes.}
+
 \notebox{Dans la littérature informatique, la présentation des
   \index{expression régulière}expressions régulières s'accompagne
   généralement de celle du langage de programmation \index{Perl}Perl.
@@ -782,13 +791,13 @@ Si les caractères «\code{*}», «\code{?}», «\code{+}», «\code{\{}» et
 «\code{\}}» ont une signification particulière dans les expressions
 régulières, comment alors rechercher ces caractères dans du texte?
 C'est là qu'entre en jeu le \index{caractere d'echappement@caractère
-  d'échappement}caractère d'échappement «\Index{\string\@\code{\bs}
-  (regex)}\bs». Lorsqu'il précède un symbole, le caractère
-d'échappement désactive la signification spéciale de ce symbole. Par
-exemple, le motif \regex{\bs.} trouve un accord avec le caractère
-«\chaine{.}». Pour rechercher un nom de fichier long d'un à huit
-caractères et suivi d'une extension \code{.txt}, un motif
-approprié\footnote{%
+  d'échappement}caractère d'échappement %
+«\Index{\string\@\code{\bs} (regex)}\bs». %
+Lorsqu'il précède un symbole, le caractère d'échappement désactive la
+signification spéciale de ce symbole. Par exemple, le motif
+\regex{\bs.} trouve un accord avec le caractère «\chaine{.}». Pour
+rechercher un nom de fichier long d'un à huit caractères et suivi
+d'une extension \code{.txt}, un motif approprié\footnote{%
   Cet exemple très simplifié ne tient pas compte des éventuelles
   règles de validité d'un nom de fichier.} %
 serait donc: \regex{.\{1,8\}\bs.txt}\,.
@@ -1210,7 +1219,7 @@ En effet, la commande ci-dessous effectue le traitement requis
 tableur.
 \begin{Schunk}
 \begin{Verbatim}
-$ awk -F ',' '{ print $1","$2","$1 + $2 }' data.csv \
+$ awk -F ',' '{ print $1 "," $2 "," $1 + $2 }' data.csv \
   > data-new.csv
 \end{Verbatim}
 \end{Schunk} %$$$$$
@@ -1226,7 +1235,8 @@ différence entre une ligne du texte et un enregistrement.
 
 Lorsque \icode{awk} a terminé de lire une ligne du texte fourni en
 entrée, il sépare automatiquement celle-ci en champs. Le séparateur de
-champ par défaut est l'espace, mais il est facile de le changer pour
+champ par défaut est l'espace, mais, comme nous le verrons à la
+\autoref{sec:texte:awk:separateur} il est facile de le changer pour
 tout autre caractère\footnote{%
   C'est ce que «\code{-F ','}» permettait de faire dans l'exemple au
   début de la section.}.
@@ -1270,7 +1280,8 @@ L'\index{interpréteur}interpréteur \icode{awk} prend en argument un
 programme entre guillemets simples\footnote{%
   Les guillemets doubles sont aussi permis, mais ils risquent fort
   d'entrer en conflit avec des guillemets dans le script. Je
-  recommande de toujours utiliser des guillemets simples.}. %
+  recommande de toujours utiliser des guillemets simples pour
+  encadrer un programme \code{awk}.}. %
 Comme \icode{grep} et \icode{sed}, \icode{awk} lit ensuite l’entrée
 standard ou une liste de fichiers ligne par ligne. La syntaxe d'une
 commande est donc:
@@ -1380,9 +1391,9 @@ d'exiger aussi qu'un enregistrement compte au moins un champ.
 exec("awk", c("'NF > 0 && NF < 4'", "chanson.txt"))
 @
 
-Le prochain exemple est un petit peu plus élaboré. La commande
-\icode{awk} permet de calculer la longueur --- en caractères --- du
-plus cours vers de \code{chanson.txt}. Cela nécessite trois règles:
+Le prochain exemple est plus élaboré. La commande \icode{awk} permet
+de calculer la longueur --- en caractères --- du plus cours vers de
+\code{chanson.txt}. Cela nécessite trois règles:
 \begin{itemize}
 \item la première initialise une variable \code{min} à la longueur du
   premier enregistrement du fichier;
@@ -1421,9 +1432,10 @@ d'aller plus loin.
 
 En premier lieu, nous pouvons facilement créer une nouvelle base de
 données ne contenant que les modèles de voitures 4~cyclindres sans
-passer par un tableur ou par R. La commande suivante conserve les
-commentaires et les noms de colonnes en entête du fichier, ainsi que
-les enregistrements dont le second champ est égal à 4.
+passer par un tableur ou par R. La commande suivante conserve
+uniquement les commentaires et les noms de colonnes en entête du
+fichier, ainsi que les enregistrements dont le second champ est égal à
+4.
 <<echo=FALSE>>=
 exec("awk", c("'/^[#a-z]/ || $2 == 4'", "carburant.dat"), eval = FALSE)
 @
@@ -1434,12 +1446,12 @@ sélection doit évidemment s'effectuer uniquement sur les titres de
 colonnes et sur les données\footnote{%
   J'ai choisi, pour ne pas compliquer indument l'exemple, de ne pas
   toucher aux commentaires.}. %
-Examinez la commande, les explications détaillées suivent.
+Examinez d'abord la commande, les explications détaillées suivent.
 \begin{Schunk}
 \begin{Verbatim}
-$ awk '/^[#a-z]/ || $2 == 4
-       { print ($0 ~ /^#/) ? $0 : $1 \" \" $2 }' \
-       carburant.dat
+$ awk '/^[#a-z]/ || $2 == 4 {
+           print ($0 ~ /^#/) ? $0 : $1 " " $2
+       }' carburant.dat
 \end{Verbatim}
 \end{Schunk}
 L'action fait appel à deux opérateurs de \icode{awk} que nous n'avons
@@ -1475,7 +1487,8 @@ dans \icode{awk}. Il suffit de placer les chaines de caractères les
 unes à la suite des autres pour en créer une nouvelle. L'action dans
 la commande ci-dessus affiche donc le contenu complet de
 l'enregistrement lorsque celui-ci débute par le symbole «\code{\#}»,
-et les deux premiers champs séparés par une espace autrement.
+et les deux premiers champs séparés par une espace (la chaine
+«\code{"~"}») autrement.
 
 À ce stade, vous disposez déjà de connaissances suffisantes pour
 réaliser plusieurs tâches de manipulation de texte avec \icode{awk}.
@@ -1636,14 +1649,6 @@ un instant.
 Vous devez entrer les expressions ci-dessous à une ligne de commande
 du \index{Terminal}Terminal sous macOS, ou de \index{Git~Bash}Git~Bash
 ou MSYS sous Windows.
-
-\importantbox{L'espace horizontal étant compté dans un document en
-  format PDF, il est parfois nécessaire de scinder une commande sur
-  deux lignes ou plus. Pour ces cas, j'ai inséré le symbole de
-  continuation de ligne «\bs» de Bash à la fin des lignes. Vous pouvez
-  ainsi copier les commandes directement du document et les coller
-  dans une ligne de commande. Le symbole {\bs} ne fait \emph{pas}
-  partie des commandes.}
 
 En premier lieu, déplacez, à l'aide de la commande \icode{cd},
 l'invite de commande dans le répertoire où vous avez extrait les
