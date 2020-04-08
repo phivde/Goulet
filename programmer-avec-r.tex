@@ -31,6 +31,8 @@
   \usepackage{dirtree}                 % arborescence de fichiers
   \usepackage{fontawesome5}            % icônes \fa*
   \usepackage{awesomebox}              % boites info, important, etc.
+  \usepackage{ullrcorners}             % expressions régulières
+  \usepackage{soul}                    % surbrillance (expressions régulières)
   \usepackage{answers}                 % exercices et solutions
   \usepackage{listings}                % code informatique
   \usepackage{refcount}                % numéros de ligne en surbrillance
@@ -88,6 +90,8 @@
   \definecolor{link}{rgb}{0,0.4,0.6}        % liens internes
   \definecolor{url}{rgb}{0.6,0,0}           % liens externes
   \definecolor{citation}{rgb}{0,0.5,0}      % citations
+  \colorlet{regex}{Snow4}                   % coins des regex
+  \colorlet{regexmatch}{Snow3}              % correspondances regex
   \colorlet{codebg}{LightYellow1}           % fond code R
   \colorlet{indexedface}{PaleGreen2}        % cellule indexée (2D et 3D)
   \colorlet{indexedtop}{PaleGreen3}         % cellule indexée (3D, dessus)
@@ -382,6 +386,23 @@
   \newcommand{\code}[1]{\texttt{#1}}
   \newcommand{\pkg}[1]{\textbf{#1}}
 
+  %% Expressions régulières; utilise le paquetage local
+  %% ullrcorners pour tracer les coins autour de l'expression et le
+  %% paquetage soul pour mettre les correspondances en surbrillance.
+  \newcommand{\regex}[1]{\ullrcorners{regex}{\code{#1}}}
+  \newcommand{\chaine}[1]{\code{#1}}
+  \newcommand{\matches}{\sethlcolor{regexmatch}\hl}
+
+  %% J'ai besoin d'afficher le symbole d'espace de \verb* à
+  %% l'intérieur d'expressions régulières, donc en argument à \regex.
+  %% Pour ce faire, le symbole est sauvegardé à l'intérieur d'une
+  %% boite. [https://tex.stackexchange.com/a/50805]
+  \newsavebox{\spacebox}
+  \begin{lrbox}{\spacebox}
+    \verb*! !
+  \end{lrbox}
+  \newcommand{\aspace}{\usebox{\spacebox}}
+
   %% Hyperlien avec symbole de lien externe juste après; second
   %% argument peut être vide pour afficher l'url comme lien
   %% [https://tex.stackexchange.com/q/53068/24355 pour procédure de
@@ -447,10 +468,24 @@
     Les numéros de page en caractères gras indiquent les pages où les
     concepts sont introduits, définis ou expliqués.\vskip\onelineskip}
   \newcommand{\Index}[1]{\index{#1|bfhyperpage}}
-  \newcommand{\indexcode}[1]{\index{#1@\code{#1}}}
-  \newcommand{\Indexcode}[1]{\Index{#1@\code{#1}}}
-  \newcommand{\icode}[1]{\indexcode{#1}\code{#1}}
-  \newcommand{\Icode}[1]{\Indexcode{#1}\code{#1}}
+  \newcommand{\indexcode}[2][]{%
+    \def\param{#1}%
+    \ifx\param\empty
+      \index{#2@\code{#2}}%
+    \else
+      \index{#2@\code{#2} (#1)}%
+    \fi
+  }
+  \newcommand{\Indexcode}[2][]{%
+    \def\param{#1}%
+    \ifx\param\empty
+      \Index{#2@\code{#2}}%
+    \else
+      \Index{#2@\code{#2} (#1)}%
+    \fi
+  }
+  \newcommand{\icode}[2][]{\indexcode[#1]{#2}\code{#2}}
+  \newcommand{\Icode}[2][]{\Indexcode[#1]{#2}\code{#2}}
   \makeindex
 
   %%% =======

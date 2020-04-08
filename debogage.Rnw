@@ -379,7 +379,7 @@ l'aide de tests de contrôle. Le sujet ne sera pas étudié plus en détail ici.
 
 
 \tipbox{Lorsqu'une erreur survient, assurez-vous de bien lire les
-  messages d'erreur de R. Il faut parfois apprendre à les reconnaître.
+  messages d'erreur de R. Il faut parfois apprendre à les reconnaitre.
   Par exemple, le message assez fréquent «\code{valeur manquante là où
     TRUE / FALSE est requis}» provient d'une clause \code{if} dont
   l'argument vaut \code{NA} plutôt que \code{TRUE} ou \code{FALSE}. En
