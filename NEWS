@@ -4,9 +4,18 @@
 
 # (en développement)
 
+VG: as-tu vérifié les erreurs d'index?
+
 ## Nouveautés
 
-
+- Chapitre 11 sur l'analyse et le contrôle de texte entièrement révisé
+  pour ne plus dépendre de ressources externes. Les objectifs
+  d'apprentissage et la matière couverte demeurent sensiblement les
+  mêmes, mais la présentation est assez différente.
+- Fichier de données `carburant.data` inclus dans la distribution pour
+  les exemples du chapitre 11. Les données de la figure 9.2 étaient
+  tirées de ce jeu de données et c'est maintenant mentionné dans le
+  texte du chapitre 9.
 
 ## Changements
 
@@ -19,6 +28,12 @@
   additionnels sur le fait que l'opérateur d'affectation retourne un
   résultat de manière invisible. Aussi, remplacement de «symbole
   d'affectation» par «opérateur d'affectation».
+- Fichier de données `100metres.data` renommé `100metres.dat` par
+  symétrie avec le nouveau fichier de données `carburant.dat`.
+- Chapitre 7: ordre des exercices 7.11 et 7.12 inversé. Dans le
+  (nouvel) exercice 7.12, les données `100metres.dat` ne sont plus
+  présentées sous forme de code R, mais plutôt à l'intérieur d'une
+  figure.
 
 ## Corrections
 
