@@ -2698,13 +2698,9 @@ rpareto <- function(n, shape, scale)
     tailles $100$, $150$, $200$, $250$ et $300$ d'une loi de Pareto
     avec $\alpha = 2$ et $\lambda = \nombre{5000}$. Les échantillons
     aléatoires devraient être stockés dans une liste.
-  \item On vous fournit l'exemple suivant d'utilisation de la
-    fonction \icode{paste}:
-<<echo=TRUE>>=
-paste("a", 1:5, sep = "")
-@
-    Nommer les éléments de la liste créée en a) \code{sample1},
-    \code{sample2}, \dots, \code{sample5}.
+  \item Nommer les éléments de la liste créée en a) \code{sample1},
+    \code{sample2}, \dots, \code{sample5} à l'aide de la fonction
+    \icode{paste} présentée à la \autoref{sec:bases:internes:texte}.
   \item Calculer la moyenne de chacun des échantillons aléatoires
     obtenus en a). Retourner le résultat dans un vecteur.
   \item Évaluer la fonction de répartition de la loi de Pareto$(2,
