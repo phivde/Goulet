@@ -48,7 +48,7 @@ exec <- function(command, args, echo = TRUE, max.lines = NULL, eval = TRUE, ...)
 \item Effectuer l'analyse et le contrôle de texte à l'aide des outils
   informatiques standards \code{grep}, \code{sed} et \code{awk}.
 \item Effectuer des opérations de recherche et de remplacement de
-  texte à l'aide d'expressions régulières avec les divers outils de R.
+  texte à l'aide d'expressions régulières dans R.
 \end{objectifs}
 
 Vous êtes-vous déjà demandé comment s'effectue la validation de
@@ -65,9 +65,9 @@ langage existe: ce sont les \emph{expressions régulières} ou
 expressions rationnelles.
 
 Une \index{expression régulière}expression régulière (\emph{regular
-  expression}, ou regex ou regexp) est une suite de caractères
-typographiques qui décrit, selon une syntaxe précise, un ensemble de
-chaines de caractères possibles
+  expression}; souvent abrégé «regex» ou «regexp») est une suite de
+caractères typographiques qui décrit, selon une syntaxe précise, un
+ensemble de chaines de caractères possibles
 \citep{Wikipedia:Expression_reguliere}. L'expression elle-même est
 souvent appelée un \Index{motif}«motif» (\emph{pattern}). Les
 expressions régulières s'avèrent particulièrement utiles dans
@@ -114,6 +114,15 @@ https://www.google.ca/maps/place/Universite+Laval/
 Un jour ou l'autre, vous aurez à traiter des chaines de caractères en
 programmation ou en analyse de données. Ce jour-là, connaitre les
 expressions régulières vous sera d'un grand secours.
+
+\notebox{Dans la littérature informatique, la présentation des
+  \index{expression régulière}expressions régulières s'accompagne
+  généralement de celle du langage de programmation \index{Perl}Perl.
+  En effet, Perl a été créé par Larry Wall en 1987 justement pour
+  traiter facilement du texte. Le langage prend en charge les
+  expressions régulières dans sa syntaxe même et il comporte plusieurs
+  extensions aux expressions prises en charge par \icode{grep} et
+  \icode{sed}. Le présent ouvrage ne traite pas de \icode{Perl}.}
 
 \begin{figure}[t]
   \centering
@@ -261,15 +270,6 @@ de la \autoref{sec:texte:awk}.
   continuation de ligne de Bash qui permet d'écrire une commande sur
   plus d'une ligne. Il ne fait pas partie de la syntaxe des
   commandes.}
-
-\notebox{Dans la littérature informatique, la présentation des
-  \index{expression régulière}expressions régulières s'accompagne
-  généralement de celle du langage de programmation \index{Perl}Perl.
-  En effet, Perl a été créé par Larry Wall en 1987 justement pour
-  traiter facilement du texte. Le langage prend en charge les
-  expressions régulières dans sa syntaxe même et il comporte plusieurs
-  extensions aux expressions prises en charge par \icode{grep} et
-  \icode{sed}. Cet ouvrage ne traite pas de \icode{Perl}.}
 
 \subsection{Extraction de lignes avec \code{grep}}
 \label{sec:texte:outils:grep}
@@ -468,8 +468,8 @@ la journée qui s'en vient est flambant neuve
 \end{Schunk} %$
 
 Il n'est pas tout à fait exact de dire que \icode{sed} traite une
-seule ligne à la fois. En effet, il est également possible d'appliquer
-des commandes sur un intervalle de lignes par le biais d'une mémoire
+seule ligne à la fois. En effet, il est possible d'appliquer des
+commandes sur un intervalle de lignes par le biais d'une mémoire
 tampon (\emph{hold space}). Nous n'aurons pas recours à la mémoire
 tampon de \icode{sed} dans le présent ouvrage.
 
@@ -789,7 +789,7 @@ Si les caractères «\code{*}», «\code{?}», «\code{+}», «\code{\{}» et
 régulières, comment alors rechercher ces caractères dans du texte?
 C'est là qu'entre en jeu le \index{caractere d'echappement@caractère
   d'échappement}caractère d'échappement %
-«\Index{\string\@\code{\bs} (regex)}\bs». %
+\index{\string\@\code{\bs} (regex)|bfhyperpage}«\code{\bs}». %
 Lorsqu'il précède un symbole, le caractère d'échappement désactive la
 signification spéciale de ce symbole. Par exemple, le motif
 \regex{\bs.} trouve un accord avec le caractère «\chaine{.}». Pour
@@ -891,19 +891,18 @@ employées sont les suivantes.
 \end{ttscript}
 
 Je dois immédiatement apporter une précision à ce qui précède: le
-\index{-@\code{-} (regex)}tiret devient un opérateur à l'intérieur
-d'une classe de caractères seulement lorsqu'il est employé
-\emph{ailleurs que comme premier caractère} de la classe. Comme il ne
-saurait définir une plage en se trouvant au début de la classe, il
-conserve alors son rôle de caractère littéral. Cela permet d'inclure
-le tiret lui-même dans une classe de caractères: le motif \regex{-A-F}
+\indexcode[regex]{-}tiret devient un opérateur à l'intérieur d'une
+classe de caractères seulement lorsqu'il est employé \emph{ailleurs
+  que comme premier caractère} de la classe. Comme il ne saurait
+définir une plage en se trouvant au début de la classe, il conserve
+alors son rôle de caractère littéral. Cela permet d'inclure le tiret
+lui-même dans une classe de caractères: le motif \regex{-A-F}
 recherche le tiret en plus des lettres majuscules de A à F.
 
-Lorsque le caret %
-\index{\string^@\code{\string^} (regex)}«\code{\string^}» suit
-immédiatement le crochet ouvrant d'une classe, la signification de
-celle-ci est renversée pour correspondre à tous les caractères qui ne
-se trouvent \emph{pas} dans la classe. Par exemple, le motif
+Lorsque le caret \index{\string^@\code{\string^} (regex)}«\string^»
+suit immédiatement le crochet ouvrant d'une classe, la signification
+de celle-ci est renversée pour correspondre à tous les caractères qui
+ne se trouvent \emph{pas} dans la classe. Par exemple, le motif
 \regex{[\string^aeiouy]} correspond à toute consonne, ce qui est plus
 simple que de dresser la liste des vingt lettres. L'expression
 ci-dessous permet, quant à elle, d'identifier dans le fichier
@@ -921,7 +920,8 @@ exec("grep", c("'ou[^rs]'", "chanson.txt"))
 
 Il y aurait encore une foule de petits détails à couvrir au sujet des
 classes de caractères, mais pour les fins de cet ouvrage je me
-contenterai de traiter brièvement des classes prédéfinies.\footnote{%
+contenterai de traiter brièvement des \index{classe prédéfinie}classes
+prédéfinies.\footnote{%
   J'ai tenté de contourner une source possible de confusion dans la
   terminologie anglaise relative aux classes de caractères. Alors que
   plusieurs auteurs les nomment tout simplement \emph{character
@@ -962,21 +962,22 @@ dénominateur commun, soit la norme \index{POSIX}POSIX.
   \end{tabularx}
 \end{table}
 
-\importantbox{Les crochets font partie intégrante du nom des classes
-  prédéfinies. Comme nous utilisons celles-ci dans une classe de
-  caractères, il faut dédoubler les crochets. Par exemple, le motif
-  pour rechercher un caractère numérique à l'aide d'une classe
-  prédéfinie est \regex{[[:digit:]]}\,, alors que celui pour exclure
-  toute lettre majuscule est \regex{[\string^[:upper:]]}\,.}
+\importantbox{Les crochets font partie intégrante du nom des
+  \index{classe prédéfinie}classes prédéfinies. Comme nous utilisons
+  celles-ci dans une classe de caractères, il faut dédoubler les
+  crochets. Par exemple, le motif pour rechercher un caractère
+  numérique à l'aide d'une classe prédéfinie est
+  \regex{[[:digit:]]}\,, alors que celui pour exclure toute lettre
+  majuscule est \regex{[\string^[:upper:]]}\,.}
 
 \subsection{Alternance}
 \label{sec:texte:regex:alternance}
 
 Nous arrivons à l'un des derniers opérateurs du
 \autoref{tab:texte:operateurs}: le symbole %
-\Index{{"|}@\code{\textbar} (regex)}«\code{\textbar}» qui représente
-l'alternance, ou le choix, entre deux sous-expressions d'une
-expression régulière. Par exemple, tel que déjà mentionné à la
+\index{{"|}@\code{\textbar} (regex)|bfhyperpage}«\code{\textbar}» %
+qui représente l'alternance, ou le choix, entre deux sous-expressions
+d'une expression régulière. Par exemple, tel que déjà mentionné à la
 \autoref{sec:texte:regex:types}, le motif \regex{chien|chat}
 correspond à \chaine{\matches{chien}} ou \chaine{\matches{chat}}.
 Voici un autre exemple ayant recours à notre fichier
@@ -1244,9 +1245,7 @@ Lorsque \icode{awk} a terminé de lire une ligne du texte fourni en
 entrée, il sépare automatiquement celle-ci en champs. Le séparateur de
 champ par défaut est l'espace, mais, comme nous le verrons à la
 \autoref{sec:texte:awk:separateur} il est facile de le changer pour
-tout autre caractère\footnote{%
-  C'est ce que «\code{-F ','}» permettait de faire dans l'exemple au
-  début de la section.}.
+tout autre caractère.
 
 Un \emph{programme} (ou script) \icode{awk} est constitué d'une série
 de \index{regle@règle (\code{awk})}\emph{règles}. Une fois que
@@ -1381,6 +1380,14 @@ règles.
 exec("awk", c("'NR <= 5 { print $2 }'", "chanson.txt"))
 @
 
+L'instruction \icode[\code{awk}]{print} accepte également en argument
+une liste d'éléments à afficher en sortie, séparés par des
+\indexcode[\code{awk}]{,}virgules. Ils sont séparés par une espace
+dans la sortie de la commande.
+<<echo=FALSE>>=
+exec("awk", c("'NR <= 5 { print NR, \":\", $1, $2 }'", "chanson.txt"))
+@
+
 Une autre variable fournie automatiquement par \icode{awk} est
 \icode[\code{awk}]{NF}, le nombre de champs dans l'enregistrement
 courant. Nous pouvons utiliser cette variable pour extraire les vers
@@ -1429,9 +1436,9 @@ commandes vous est laissée en exercice.
 
 Le fichier \code{carburant.dat} livré avec le présent ouvrage contient
 des données de consommation de carburant pour divers types de
-voitures.\footnote{%
+voitures\footnote{%
   Comme la présence marquée des antédiluviens moteurs 8~cylindres
-  l'indique, il s'agit d'un très vieux jeu de données!} %
+  l'indique, il s'agit d'un très vieux jeu de données!}. %
 Examinez le contenu du fichier dans votre éditeur de texte avant
 d'aller plus loin.
 
@@ -1448,10 +1455,8 @@ exec("awk", c("'/^[#a-z]/ || $2 == 4'", "carburant.dat"), eval = FALSE)
 En second lieu, l'ajout d'une action à la commande précédente permet
 de conserver uniquement les deux premiers champs des données. La
 sélection doit évidemment s'effectuer uniquement sur les titres de
-colonnes et sur les données\footnote{%
-  J'ai choisi, pour ne pas compliquer indument l'exemple, de ne pas
-  toucher aux commentaires.}. %
-Examinez d'abord la commande, les explications détaillées suivent.
+colonnes et sur les données. Examinez d'abord la commande, les
+explications détaillées suivent.
 \begin{Schunk}
 \begin{Verbatim}
 $ awk '/^[#a-z]/ || $2 == 4 {
@@ -1463,19 +1468,20 @@ L'action fait appel à deux opérateurs de \icode{awk} que nous n'avons
 pas rencontrés auparavant, ainsi qu'à la concaténation.
 \begin{ttscript}{?:}
 \item[\code{\string~}] %
-  \index{\string~@\code{\string~} (\code{awk})|bfhyperpage} retourne
-  vrai lorsque la chaine de caractères du côté gauche de l'opérateur
-  (\code{\$0} par défaut) correspond à l'expression régulière du côté
-  droit. La version négative \index{!\string~@\code{!\string~}
-    (\code{awk})|bfhyperpage}\code{!\string~} existe aussi.
+  \index{\string~@\code{\string~} (\code{awk})|bfhyperpage}%
+  \index{"!\string~@\code{"!\string~} (\code{awk})|bfhyperpage}%
+  retourne vrai lorsque la chaine de caractères du côté gauche de
+  l'opérateur (\code{\$0} par défaut) correspond à l'expression
+  régulière du côté droit. La version négative
+  «!\string~» existe aussi.
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
 \meta{chaine} ~ /\meta{motif}/
 \meta{chaine} !~ /\meta{motif}/
 \end{Verbatim}
   \end{Schunk}
-\item[\code{?:}] \Index{?:@\code{?:} \code{awk}} retourne le résultat
-  de l'expression en second ou en troisième argument selon que la
+\item[\code{?:}] \Indexcode[\code{awk}]{?:} retourne le résultat de
+  l'expression en second ou en troisième argument selon que la
   condition en premier argument est, respectivement, vraie ou
   fausse.\footnote{%
     Souvent appelé \emph{opérateur ternaire}, cet opérateur existe
@@ -1492,15 +1498,16 @@ Pour ce qui est de la concaténation de chaines de caractères, aussi
 dans \icode{awk}. Il suffit de placer les chaines de caractères les
 unes à la suite des autres pour en créer une nouvelle. L'action dans
 la commande ci-dessus affiche donc le contenu complet de
-l'enregistrement lorsque celui-ci débute par le symbole «\code{\#}»,
-et les deux premiers champs séparés par une espace (la chaine
-«\code{"~"}») autrement.
+l'enregistrement (\code{\$0}) lorsque celui-ci débute par le symbole
+«\code{\#}», et les deux premiers champs séparés par une espace (la
+chaine «\code{"~"}») autrement.
 
 À ce stade, vous disposez déjà de connaissances suffisantes pour
 réaliser plusieurs tâches de manipulation de texte avec \icode{awk}.
 Les sections suivantes ne font qu'àjouter des détails sur l'écriture
-des règles et la configuration de l'outil. Pour des exemples
-additionnels, consultez \citet[sections~1.3 à 1.5]{gawk:5.0}.
+des règles et la configuration de l'outil. Si vous souhaitez étudier
+des exemples additionnels, consultez \citet[sections~1.3 à
+1.5]{gawk:5.0}.
 
 \subsection{Motifs}
 \label{sec:texte:awk:motifs}
@@ -1536,10 +1543,10 @@ dans les exemples de la section précédente.
 \item[\meta{vide}] un motif vide correspond à tous les
   enregistrements.
 \end{ttscript}
-\Index{BEGIN@\code{BEGIN} (\code{awk})}
-\Index{END@\code{END} (\code{awk})}
-\Index{BEGINFILE@\code{BEGINFILE} (\code{awk})}
-\Index{ENDFILE@\code{ENDFILE} (\code{awk})}
+\Indexcode[\code{awk}]{BEGIN}
+\Indexcode[\code{awk}]{END}
+\Indexcode[\code{awk}]{BEGINFILE}
+\Indexcode[\code{awk}]{ENDFILE}
 
 Nous n'étudierons pas davantage les étendues d'enregistrements ni les
 motifs spéciaux \code{BEGINFILE} et \code{ENDFILE}.
@@ -1563,10 +1570,10 @@ valeur à une variable dans \icode{awk}. Il faut aussi ajouter à cette
 liste les opérateurs %
 \index{\string~@\code{\string~} (\code{awk})}«\code{\string~}» %
 et %
-\index{!\string~@\code{\string~} (\code{awk})}«\code{!\string~}» %
-mentionnés à la \autoref{sec:texte:awk:commandes}. Vous trouverez à la
-section~6.2 de \citet{gawk:5.0} une liste exhaustive des opérateurs de
-\icode{awk}.
+\index{"!\string~@\code{"!\string~} (\code{awk})}«\code{!\string~}» %
+mentionnés à la \autoref{sec:texte:awk:commandes}. Vous trouverez une
+liste exhaustive des opérateurs de \icode{awk} dans
+\citet[section~6.2]{gawk:5.0}.
 
 \tipbox{Puisque la valeur d'une expression \icode{awk} dépend de
   l'état du programme, l'ordre dans lequel les règles apparaissent
@@ -1594,10 +1601,10 @@ d'«état» --- d'où le nom que j'ai choisi de lui donner --- lorsque
 \icode{awk} rencontre la première ligne blanche. La première règle,
 quant à elle, cause la sortie du programme lorsque \code{awk}
 rencontre une autre ligne blanche et que la variable d'état est égale
-à 1, donc à la seconde ligne blanche. Tous les autres enregistrements
-sont extraits avec \icode[\code{awk}]{print}. Si l'ordre des deux
-premières règles était inversé, la commande n'extrairait que le
-premier couplet. (Déterminez pourquoi.)
+à 1, donc à la \emph{seconde} ligne blanche. Tous les autres
+enregistrements sont extraits avec \icode[\code{awk}]{print}. Si
+l'ordre des deux premières règles était inversé, la commande
+n'extrairait que le premier couplet. (Déterminez pourquoi.)
 
 Question de parfaire notre style de programmation \icode{awk},
 apportons deux simplifications à la commande ci-dessus:
@@ -1606,9 +1613,9 @@ apportons deux simplifications à la commande ci-dessus:
   \code{\$0~\string~~/\string^\$/} puisque \code{\$0} est la valeur
   par défaut de l'argument gauche de l'opérateur %
   \index{\string~@\code{\string~} (\code{awk})}«\code{\string~}»;
-\item l'instruction \icode[\code{awk}]{print} étant implicite
-  lorsqu'une action est absente, la troisième règle peut être
-  remplacée par un simple motif identité qui est toujours vrai.
+\item la troisième règle peut être remplacée par un motif identité
+  («\code{1}») qui est toujours vrai et aucune action, l'instruction
+  \icode[\code{awk}]{print} étant implicite dans ce cas.
 \end{itemize}
 \begin{Schunk}
 \begin{Verbatim}
@@ -1748,15 +1755,16 @@ options(op)                             # rétablir défaut
   effectuent leur traitement sur chacune des chaines d'un vecteur.}
 
 \begin{ttscript}{regexpr}
-\item[\code{grep}] \index{grep@\code{grep} (R)|bfhyperpage} recherche
-  d'une expression régulière dans un vecteur de chaines de caractères.
+\item[\code{grep}] \Indexcode[R]{grep}%
+  recherche d'une expression régulière dans un vecteur de chaines de
+  caractères.
 <<echo=TRUE>>=
 grep("na$", state.name)
 grep("na$", state.name, value = TRUE)
 @
-\item[\Icode{regexpr}] comme \index{grep@\code{grep} (R)}grep, mais
-  avec des informations additionnelles sur la position et la longueur
-  des appariements dans les résultats.
+\item[\Icode{regexpr}] comme \code{grep}, mais avec des informations
+  additionnelles sur la position et la longueur des appariements dans
+  les résultats.
 <<echo=TRUE>>=
 regexpr("na$", state.name)
 @
@@ -1828,28 +1836,28 @@ Pour faire bonne mesure, plaçons le résultat dans un nouveau fichier
 exec("sed", c("'s/^###/#/'", "pratiques.R > pratiques-new.R"), eval = FALSE)
 @
 
-Le fichier \code{100metres.data} contient la liste des 31 meilleurs
+Le fichier \code{100metres.dat} contient la liste des 31 meilleurs
 temps enregistrés au 100~mètres homme entre 1964 et 2005 (voir
 l'\autoref{ex:tri:100metres}). Effectuons dans un premier temps
 l'extraction des temps des records. C'est le second champ du fichier.
 Voilà un travail tout désigné pour \icode{awj}.
 <<echo=FALSE>>=
-exec("awk", c("'{ print $2 }'", "100metres.data"), eval = FALSE)
+exec("awk", c("'{ print $2 }'", "100metres.dat"), eval = FALSE)
 @
 
 Nous pouvons aussi aisément inverser les deux colonnes du fichier avec
 \icode{awk}.
 <<echo=FALSE>>=
-exec("awk", c("'{ print $2, $1 }'", "100metres.data"), eval = FALSE)
+exec("awk", c("'{ print $2, $1 }'", "100metres.dat"), eval = FALSE)
 @
 
-Les colonnes du fichier \code{100metres.data} sont séparées par une
+Les colonnes du fichier \code{100metres.dat} sont séparées par une
 espace. Remplaçons ces espaces par des virgules pour convertir le
 fichier en format CSV. Je fournis deux solutions, avec \icode{awk} (la
 plus simple) et avec \icode{sed}.
 <<echo=FALSE>>=
-exec("awk", c("'{ print $1 \",\" $2 }'", "100metres.data"), eval = FALSE)
-exec("sed", c("'s/ /,/'", "100metres.data"), eval = FALSE)
+exec("awk", c("'{ print $1 \",\" $2 }'", "100metres.dat"), eval = FALSE)
+exec("sed", c("'s/ /,/'", "100metres.dat"), eval = FALSE)
 @
 
 Changeons maintenant le format de la date du format
@@ -1866,7 +1874,7 @@ partie d'une chaine de caractères \citep[section~9.1.3]{gawk:5.0}.
 \begin{Verbatim}
 $ awk 'BEGIN { FS = "[ -]" } \
        { print $2"/"$3"/"substr($1, 3), $4 }' \
-       100metres.data
+       100metres.dat
 \end{Verbatim}
 \end{Schunk}
 
@@ -1884,7 +1892,7 @@ les champs de la commande \code{sed}. J'ai utilisé le symbole
 \begin{Schunk}
 \begin{Verbatim}
 $ sed -E 's~(19|20)([0-9]{2})-([0-9]{2})-([0-9]{2})(.*)~'\
-'\3/\4/\2\5~' 100metres.data
+'\3/\4/\2\5~' 100metres.dat
 \end{Verbatim}
 \end{Schunk}
 
@@ -2148,25 +2156,25 @@ $ awk '(state == 1) && /^# / { exit }
 
 \begin{exercice}
   Écrire une commande \icode{sed} permettant de changer le séparateur
-  décimal dans les temps du fichier \code{100metres.data} pour une
+  décimal dans les temps du fichier \code{100metres.dat} pour une
   virgule.
   \begin{sol}
     \code{sed} est l'outil idéal pour de tels traitements simples à
     effectuer ligne par ligne.
 <<echo=FALSE>>=
-exec("sed", c("'s/\\./,/'", "100metres.data"), eval = FALSE)
+exec("sed", c("'s/\\./,/'", "100metres.dat"), eval = FALSE)
 @
     Pour placer le fichier modifié dans, disons,
     \code{100metres-dec.data}, utiliser
 <<echo=FALSE>>=
-exec("sed", c("'s/\\./,/'", "100metres.data > 100metres-dec.data"), eval = FALSE)
+exec("sed", c("'s/\\./,/'", "100metres.dat > 100metres-dec.data"), eval = FALSE)
 @
   \end{sol}
 \end{exercice}
 
 \begin{exercice}
   Utiliser les outils étudiés dans ce chapitre pour extraire les
-  informations suivantes du fichier \code{100metres.data}.
+  informations suivantes du fichier \code{100metres.dat}.
   \begin{enumerate}
   \item Les informations des temps réalisés au mois d'aout.
   \item Les informations des temps de moins de 10~secondes.
@@ -2181,7 +2189,7 @@ exec("sed", c("'s/\\./,/'", "100metres.data > 100metres-dec.data"), eval = FALSE
     \item C'est un travail pour \icode{grep}. La solution la plus
       simple serait:
 <<echo=FALSE>>=
-exec("grep", c("'-08-'", "100metres.data"), eval = FALSE)
+exec("grep", c("'-08-'", "100metres.dat"), eval = FALSE)
 @
       Cependant, \icode{grep} n'aime pas cette commande puisque le
       symbole \verb=-= est le préfixe des options. Dans de tels cas,
@@ -2189,18 +2197,18 @@ exec("grep", c("'-08-'", "100metres.data"), eval = FALSE)
       explicitement à \icode{grep} que ce qui suit est le motif à
       rechercher:
 <<echo=FALSE>>=
-exec("grep", c("-e", "'-08-'", "100metres.data"), eval = FALSE)
+exec("grep", c("-e", "'-08-'", "100metres.dat"), eval = FALSE)
 @
       Autrement, simplement ajouter quelque chose à chercher avant le
       tiret:
 <<echo=FALSE>>=
-exec("grep", c("'.*-08-'", "100metres.data"), eval = FALSE)
+exec("grep", c("'.*-08-'", "100metres.dat"), eval = FALSE)
 @
     \item Le plus simple, ici, consiste à utiliser \icode{awk} puisque
       les seconds champs --- les temps --- seront automatiquement
       disponibles.
 <<echo=FALSE>>=
-exec("awk", c("'$2 < 10'", "100metres.data"), eval = FALSE)
+exec("awk", c("'$2 < 10'", "100metres.dat"), eval = FALSE)
 @
       Malheureusement, cette commande risque de ne pas fonctionner sur
       certains systèmes qui traitent la virgule comme le séparateur
@@ -2208,26 +2216,26 @@ exec("awk", c("'$2 < 10'", "100metres.data"), eval = FALSE)
       cas, essayer plutôt:
       \begin{Schunk}
 \begin{Verbatim}
-$ LC_NUMERIC="en_US.UTF-8" awk '$2 < 10' 100metres.data
+$ LC_NUMERIC="en_US.UTF-8" awk '$2 < 10' 100metres.dat
 \end{Verbatim}
       \end{Schunk}
       Une solution avec \icode{grep} consisterait à rechercher
       «\code{9.}» après l'espace sur chaque ligne:
 <<echo=FALSE>>=
-exec("grep", c("' 9\\.'", "100metres.data"), eval = FALSE)
+exec("grep", c("' 9\\.'", "100metres.dat"), eval = FALSE)
 @
     \item Nous pouvons combiner les deux commandes ainsi:
 <<echo=FALSE>>=
-exec("grep", c("-e", "'-08-'", "100metres.data | awk '$2 < 10'"), eval = FALSE,
+exec("grep", c("-e", "'-08-'", "100metres.dat | awk '$2 < 10'"), eval = FALSE,
      env = "LC_NUMERIC=en_US.UTF-8")
 @
       ou
 <<echo=FALSE>>=
-exec("grep", c("-e", "'-08-'", "100metres.data | grep ' 9\\.'"), eval = FALSE)
+exec("grep", c("-e", "'-08-'", "100metres.dat | grep ' 9\\.'"), eval = FALSE)
 @
       C'est aussi possible de tout faire en un seul appel à \icode{awk}:
 <<echo=FALSE>>=
-exec("awk", c("'/-08-/ && $2 < 10'", "100metres.data"), eval = FALSE,
+exec("awk", c("'/-08-/ && $2 < 10'", "100metres.dat"), eval = FALSE,
      env = "LC_NUMERIC=en_US.UTF-8")
 @
     \end{enumerate}
@@ -2267,7 +2275,7 @@ environnement.R
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-    \item Utilisons la fonction \icode{grep}. Le motif de l'expression
+    \item Utilisons la fonction \icode[R]{grep}. Le motif de l'expression
       régulière est très simple dans ce cas. Avec l'argument
       \code{value} à \code{FALSE} (la valeur par défaut), la fonction
       retourne les positions dans le vecteur des chaines de caractères
@@ -2276,7 +2284,7 @@ environnement.R
 <<echo=TRUE,eval=FALSE>>=
 grep("ss", state.name)
 @
-    \item C'est toujours un travail pour \icode{grep}, mais
+    \item C'est toujours un travail pour \icode[R]{grep}, mais
       l'expression régulière est cette fois un peu plus complexe. Deux
       solutions sont proposées ci-dessous. Il faut utiliser l'argument
       \code{value = TRUE} pour obtenir les noms des États, et non
@@ -2285,7 +2293,7 @@ grep("ss", state.name)
 grep("(.*s){3,}", state.name, value = TRUE)
 grep(".*s.*s.*s", state.name, value = TRUE)
 @
-    \item Nous devons extraire les États avec \icode{grep}, puis
+    \item Nous devons extraire les États avec \icode[R]{grep}, puis
       utiliser \icode{sub} pour remplacer les caractères après le
       quatrième par un point. Ceci requiert de sauvegarder les
       caractères jusqu'aux deux «s» successifs pour les réutiliser
