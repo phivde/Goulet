@@ -131,26 +131,23 @@ expressions régulières vous sera d'un grand secours.
 
 La présentation des expressions régulières exige souvent de clairement
 délimiter un \index{motif}motif et d'afficher certains caractères
-invisibles, comme les espaces ou les retours à la ligne. Pour ce
-chapitre, lorsque le contexte l'exige:
+invisibles, comme les espaces ou les retours à la ligne. Ce chapitre
+utilise les conventions typographiques suivantes.
 \begin{itemize}
-\item les motifs sont encadrés de «coins» de couleur contrastante,
+\item Les motifs sont encadrés de «coins» de couleur contrastante,
   comme \regex{ceci} \citep[une notation que j'emprunte
-  à][]{Friedl:regex:2006};
-\item les espaces sont représentées par le symbole \aspace, ce qui
+  à][]{Friedl:regex:2006}.
+\item Les espaces sont représentées par le symbole \aspace, ce qui
   permet, par exemple, de bien discerner que le motif
   \regex{\#\aspace\aspace\aspace\aspace A} compte quatre espaces entre
-  \code{\#} et \code{A};
-\item la chaine dans laquelle s'effectue une recherche est représentée
+  \code{\#} et \code{A}.
+\item La chaine dans laquelle s'effectue une recherche est représentée
   en police non proportionnelle et les correspondances d'un motif dans
   celle-ci sont mis en surbrillance, comme dans l'exemple suivant:
   \begin{center}
     le motif \regex{chat} correspond à \chaine{Les \matches{chat}s
       sont très mignons.}
   \end{center}
-\item le caractère de retour à la ligne (\emph{newline}) est
-  représenté par {\NLsymbol} et celui de retour chariot (\emph{carriage
-    return}) est représenté par \CRsymbol.
 \end{itemize}
 
 Dans les exemples, nous utiliserons le texte de la chanson «La journée
