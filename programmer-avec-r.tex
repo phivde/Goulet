@@ -212,7 +212,7 @@
     morekeywords={colMeans,colSums,head,is.na,is.null,mapply,ms,na.rm,%
       nlmin,replicate,row.names,rowMeans,rowSums,sys.time,system.time,%
       tail,which.max,which.min,letters,LETTERS,Trig},
-    deletekeywords={c,start},
+    deletekeywords={c,start,q},
     alsoletter={.\%},%
     alsoother={:_\$}}
 
@@ -233,7 +233,7 @@
     extendedchars=true,
     basicstyle=\small\ttfamily\NoAutoSpacing,
     commentstyle=\color{comments}\slshape,
-    keywordstyle=\mdseries,
+    keywordstyle=\bfseries,
     showstringspaces=false,
     numbers=left,
     numberstyle={%
@@ -468,14 +468,25 @@
     Les numéros de page en caractères gras indiquent les pages où les
     concepts sont introduits, définis ou expliqués.\vskip\onelineskip}
   \newcommand{\Index}[1]{\index{#1|bfhyperpage}}
+
+  %% Les entrées d'index générées par listings avec \indexcode,
+  %% ci-dessous, causent problème lorsque le mot clé est suivi d'une
+  %% virgule. La redéfinition de \lst@nolig règle le problème.
+  %% https://tex.stackexchange.com/q/510104
+  \makeatletter
   \newcommand{\indexcode}[2][]{%
+    \begingroup
+    \def\lst@nolig{}%
     \def\param{#1}%
     \ifx\param\empty
       \index{#2@\code{#2}}%
     \else
       \index{#2@\code{#2} (#1)}%
     \fi
+    \endgroup
   }
+  \makeatother
+
   \newcommand{\Indexcode}[2][]{%
     \def\param{#1}%
     \ifx\param\empty
@@ -535,8 +546,6 @@
 %  \includeonly{texte}
 
 \begin{document}
-
-
 
 \frontmatter
 
