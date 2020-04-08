@@ -52,10 +52,12 @@ VG: as-tu vérifié les erreurs d'index?
   (nouvel) exercice 7.12, les données `100metres.dat` ne sont plus
   présentées sous forme de code R, mais plutôt à l'intérieur d'une
   figure.
-- Ajout d'entrées d'index.
+- Exercice 11.1: les choix de réponses sont maintenant disposés par
+  colonne plutôt que par ligne.
 - Mise à jour des captures d'écran des options de configuration de
   RStudio aux figures 6.3, A.2 et A.3 pour la version 1.2 de
   l'éditeur.
+- Ajout d'entrées d'index.
 
 ## Corrections
 

@@ -1840,13 +1840,13 @@ Le fichier \code{100metres.dat} contient la liste des 31 meilleurs
 temps enregistrés au 100~mètres homme entre 1964 et 2005 (voir
 l'\autoref{ex:tri:100metres}). Effectuons dans un premier temps
 l'extraction des temps des records. C'est le second champ du fichier.
-Voilà un travail tout désigné pour \icode{awj}.
+Voilà un travail tout désigné pour \icode{awk}.
 <<echo=FALSE>>=
 exec("awk", c("'{ print $2 }'", "100metres.dat"), eval = FALSE)
 @
 
-Nous pouvons aussi aisément inverser les deux colonnes du fichier avec
-\icode{awk}.
+Nous pouvons aussi aisément avec \icode{awk} inverser les deux
+colonnes du fichier.
 <<echo=FALSE>>=
 exec("awk", c("'{ print $2, $1 }'", "100metres.dat"), eval = FALSE)
 @
@@ -1902,37 +1902,37 @@ La commande suivante dresse la liste des numéros de versions.
 exec("grep", c("-E", "'^# [[:digit:]]'", "NEWS"), eval = FALSE)
 @
 
-Un dernier exemple similaire à celui de la
-\autoref{sec:texte:awk:motifs}. Nous souhaitons extraire du fichier
-\code{NEWS} les notes de mise à jour de la plus récente version. Si
-vous examinez le fichier, vous constaterez que les notes de mise à
-jour relatives à une version donnée débutent toujours à une ligne
-marqué par «\code{\#\aspace}». Le meilleur outil pour effectuer des
-opérations sur plusieurs lignes d'un fichier est \icode{awk}. Nous
+Nous souhaitons extraire du fichier \code{NEWS} les notes de mise à
+jour de la plus récente version. Les notes relatives à une version
+donnée débutent toujours à une ligne marqué par «\code{\#\aspace}». Le
+meilleur outil pour effectuer cette opération est \icode{awk}. Nous
 avons recours à une variable d'état pour identifier les lignes que
-vous souhaitons extraire.
+vous souhaitons extraire. De la manière dont les règles sont écrites
+dans la commande, leur ordre n'a pas d'importance. (Déterminez
+pourquoi en comparant avec l'exemple similaire de la
+\autoref{sec:texte:awk:motifs}.)
+
 \begin{Schunk}
 \begin{Verbatim}
-$ awk '(state == 1) && /^# / { exit }
-       (state == 0) && /^# / { state = 1; next }
+$ awk '(state == 0) && /^# / { state = 1; next }
+       (state == 1) && /^# / { exit }
        state' NEWS
 \end{Verbatim}
 \end{Schunk}
 
-\tipbox{Le motif dans la dernière règle dans la commande précédente
-  est équivalent à «\code{state~==~1}» ou «\code{state~!=~0}» puisque
+\tipbox{Le motif dans la dernière règle de la commande précédente est
+  équivalent à «\code{state~==~1}» ou «\code{state~!=~0}» puisque
   \icode{awk} évalue l'expression et détermine que le motif correspond
   si la valeur est non nulle.}
 
-\notebox{Les opérations de composition du présent document, de
-  publication dans GitLab et de mise à jour de la page web sont
-  entièrement automatisées à l'aide de
-  \link{https://fr.wikipedia.org/wiki/Make}{\code{make}}, un autre de
-  ces outils standards sur les systèmes Unix. Vous pouvez retrouver
-  une variante un peu plus élaborée de la commande \code{awk}
-  ci-dessus dans la règle \code{create-release} du fichier de
-  configuration \code{Makefile} qui se trouve dans le
-  \link{\reposurl}{code source} du document. Jetez-y un coup d'œil!}
+\notebox{Les opérations de composition de «\thetitle», de publication
+  dans GitLab et de mise à jour de la page web sont entièrement
+  automatisées à l'aide de
+  \link{https://fr.wikipedia.org/wiki/Make}{\code{make}}, un outil
+  standard des systèmes Unix. Le fichier de configuration
+  \code{Makefile} qui se trouve dans le \link{\reposurl}{code source
+    du projet} contient une variante plus élaborée de la commande
+  \code{awk} ci-dessus. Jetez-y un coup d'œil!}
 
 
 \section{Exercices}
@@ -1946,6 +1946,7 @@ $ awk '(state == 1) && /^# / { exit }
 
 \end{Filesave}
 
+\enlargethispage{3mm}
 \begin{exercice}
   Dans chacun des cas ci-dessous, déterminer à laquelle ou auxquelles
   des chaines de caractères correspond le motif de l'expression
@@ -1955,113 +1956,99 @@ $ awk '(state == 1) && /^# / { exit }
   \begin{enumerate}
     \setlength{\multicolsep}{2pt}
   \item \regex{a(ab)*a}
-    \begin{enumerate}[1)]
-      \begin{multicols}{3}
+    \begin{multicols}{3}
+      \begin{enumerate}[1)]
       \item \code{abababa}
       \item \code{aaba}
       \item \code{aabbaa}
-      \end{multicols}
-      \begin{multicols}{3}
       \item \code{aba}
       \item \code{aabababa}
-      \end{multicols}
-    \end{enumerate}
+      \item[\vspace{\fill}]
+      \end{enumerate}
+    \end{multicols}
     \pagebreak[1]
   \item \regex{ab+c?}
-    \begin{enumerate}[1)]
-      \begin{multicols}{3}
+    \begin{multicols}{3}
+      \begin{enumerate}[1)]
       \item \code{abc}
       \item \code{ac}
       \item \code{abbb}
-      \end{multicols}
-      \begin{multicols}{3}
       \item \code{bbc}
       \item \code{abcc}
-      \end{multicols}
-    \end{enumerate}
-    \pagebreak[1]
+      \item[\vspace{\fill}]
+      \end{enumerate}
+    \end{multicols}
   \item \regex{a.[bc]+}
-    \begin{enumerate}[1)]
-      \begin{multicols}{3}
+    \begin{multicols}{3}
+      \begin{enumerate}[1)]
       \item \code{abc}
       \item \code{abbbbbbbb}
       \item \code{azc}
-      \end{multicols}
-      \begin{multicols}{3}
       \item \code{abcbcbcbc}
       \item \code{ac}
       \item \code{asccbbbbcbcccc}
-      \end{multicols}
-    \end{enumerate}
+      \end{enumerate}
+    \end{multicols}
     \pagebreak[1]
   \item \regex{abc|xyz}
-    \begin{enumerate}[1)]
-      \begin{multicols}{3}
+    \begin{multicols}{3}
+      \begin{enumerate}[1)]
       \item \code{abc}
       \item \code{xyz}
       \item \code{abc|xyz}
-      \end{multicols}
-    \end{enumerate}
+      \end{enumerate}
+    \end{multicols}
     \pagebreak[1]
   \item \regex{[a-z]+[\bs.\bs?!]}
-    \begin{enumerate}[1)]
-      \begin{multicols}{3}
+    \begin{multicols}{3}
+      \begin{enumerate}[1)]
       \item \code{battle!}
       \item \code{Hot}
       \item \code{green}
-      \end{multicols}
-      \begin{multicols}{3}
       \item \code{swamping.}
       \item \code{jump~up.}
       \item \code{undulate?}
-      \end{multicols}
-      \begin{multicols}{3}
       \item \code{is.?}
-      \end{multicols}
-    \end{enumerate}
+      \item[\vspace{\fill}]
+      \item[\vspace{\fill}]
+      \end{enumerate}
+    \end{multicols}
     \pagebreak[1]
   \item \regex{[a-zA-Z]*[\string^,]=}
-    \begin{enumerate}[1)]
-      \begin{multicols}{3}
+    \begin{multicols}{3}
+      \begin{enumerate}[1)]
       \item \code{Butt=}
       \item \code{BotHEr,=}
       \item \code{Ample}
-      \end{multicols}
-      \begin{multicols}{3}
       \item \code{FIdDlE7h=}
       \item \code{Brittle~=}
       \item \code{Other.=}
-      \end{multicols}
-    \end{enumerate}
+      \end{enumerate}
+    \end{multicols}
     \pagebreak[1]
   \item \regex{[a-z][\bs.\bs?!][[:blank:]]+[A-Z]}
-    \begin{enumerate}[1)]
-      \begin{multicols}{3}
+    \begin{multicols}{3}
+      \begin{enumerate}[1)]
       \item \code{A.~B}
       \item \code{c!~d}
       \item \code{e~f}
-      \end{multicols}
-      \begin{multicols}{3}
       \item \code{g.~H}
       \item \code{i?~J}
       \item \code{k~L}
-      \end{multicols}
-    \end{enumerate}
+      \end{enumerate}
+    \end{multicols}
     \pagebreak[1]
   \item \regex{<[\string^>]+>}
-    \begin{enumerate}[1)]
-      \begin{multicols}{2}
+    \begin{multicols}{2}
+      \begin{enumerate}[1)]
       \item \code{<an~xml~tag>}
       \item \code{<opentag>~<closetag>}
-      \end{multicols}
-      \begin{multicols}{2}
       \item \code{</closetag>}
       \item \code{<>}
-      \end{multicols}
-      \begin{multicols}{2}
       \item \code{<with~attribute=”77”>}
-      \end{multicols}
-    \end{enumerate}
+      \item[\vspace{\fill}]
+      \end{enumerate}
+    \end{multicols}
   \end{enumerate}
 
   \begin{sol}
@@ -2316,7 +2303,7 @@ write.csv(matrix(x, ncol = 20), file = "data.csv")
   Produire une nouvelle base de données composée des deux premières
   colonnes et d'une colonne contenant la somme des deux autres,
   d'abord avec un tableur, puis avec \icode{awk}. (Vous aurez reconnu
-  le contexte de l'exemple au début de la \autoref{sec:texte:awk}.
+  le contexte de l'exemple au début de la \autoref{sec:texte:awk}.)
 \end{exercice}
 
 \Closesolutionfile{solutions}
