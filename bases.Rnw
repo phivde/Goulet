@@ -2577,15 +2577,15 @@ is.odd
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-    \item Les fonctions \code{abs} de \code{\scriptfilename} utilisent
-      la structure \code{if ... else ...} qui n'est pas vectorielle.
+    \item Les fonctions utilisent la structure \code{if ... else ...}
+      qui n'est pas vectorielle.
     \item Dans les mises en œuvre des algorithmes
       \ref{algo:algorithmes:abs} et
       \ref{algo:algorithmes:abs:simplifie}, le résultat de la fonction
       est directement le résultat d'une expression conditionnelle. La
       mise en œuvre de l'\autoref{algo:algorithmes:abs:simplifie:bis},
       de son côté, contient une expression après la clause \code{if}.
-      Si nous ne forçions pas la sortie de la fonction avec
+      Si nous ne forcions pas la sortie de la fonction avec
       \icode{return} à l'intérieur de la condition, l'évaluation de la
       fonction se poursuivrait et le résultat ne serait pas celui
       attendu. <<echo=TRUE>>= abs <- function(x) { if (x < 0) -x x }
