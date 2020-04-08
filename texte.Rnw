@@ -1942,178 +1942,167 @@ $ awk '(state == 1) && /^# / { exit }
 \end{Filesave}
 
 \begin{exercice}
-  Données BIXI:
-  - déterminer si une station sur rue Unetelle
-  - déterminer comment identifier ligne des titres de colonnes
-  - sélectionner seulement certaines locations
-\end{exercice}
-
-\begin{exercice}
   Dans chacun des cas ci-dessous, déterminer à laquelle ou auxquelles
-  des chaines de caractères correspond l'expression régulière donnée.
-  Les symboles \verb=/= ne servent qu'à délimiter le début et la fin
-  des expressions régulières. Ne pas tenir compte des espaces avant ou
-  après les chaines.\footnote{%
+  des chaines de caractères correspond le motif de l'expression
+  régulière (étendue).\footnote{%
     Exercice adapté de
     \url{https://regex.sketchengine.co.uk/extra_regexps.html}.}
   \begin{enumerate}
     \setlength{\multicolsep}{2pt}
-  \item \verb~/a(ab)*a/~
+  \item \regex{a(ab)*a}
     \begin{enumerate}[1)]
       \begin{multicols}{3}
-      \item \verb~abababa~
-      \item \verb~aaba~
-      \item \verb~aabbaa~
+      \item \code{abababa}
+      \item \code{aaba}
+      \item \code{aabbaa}
       \end{multicols}
       \begin{multicols}{3}
-      \item \verb~aba~
-      \item \verb~aabababa~
+      \item \code{aba}
+      \item \code{aabababa}
       \end{multicols}
     \end{enumerate}
     \pagebreak[1]
-  \item \verb~/ab+c?/~
+  \item \regex{ab+c?}
     \begin{enumerate}[1)]
       \begin{multicols}{3}
-      \item \verb~abc~
-      \item \verb~ac~
-      \item \verb~abbb~
+      \item \code{abc}
+      \item \code{ac}
+      \item \code{abbb}
       \end{multicols}
       \begin{multicols}{3}
-      \item \verb~bbc~
-      \item \verb~abcc~
+      \item \code{bbc}
+      \item \code{abcc}
       \end{multicols}
     \end{enumerate}
     \pagebreak[1]
-  \item \verb~/a.[bc]+/~
+  \item \regex{a.[bc]+}
     \begin{enumerate}[1)]
       \begin{multicols}{3}
-      \item \verb~abc~
-      \item \verb~abbbbbbbb~
-      \item \verb~azc~
+      \item \code{abc}
+      \item \code{abbbbbbbb}
+      \item \code{azc}
       \end{multicols}
       \begin{multicols}{3}
-      \item \verb~abcbcbcbc~
-      \item \verb~ac~
-      \item \verb~asccbbbbcbcccc~
+      \item \code{abcbcbcbc}
+      \item \code{ac}
+      \item \code{asccbbbbcbcccc}
       \end{multicols}
     \end{enumerate}
     \pagebreak[1]
-  \item \verb~/abc|xyz/~
+  \item \regex{abc|xyz}
     \begin{enumerate}[1)]
       \begin{multicols}{3}
-      \item \verb~abc~
-      \item \verb~xyz~
-      \item \verb~abc|xyz~
+      \item \code{abc}
+      \item \code{xyz}
+      \item \code{abc|xyz}
       \end{multicols}
     \end{enumerate}
     \pagebreak[1]
-  \item \verb~/[a-z]+[\.\?!]/~
+  \item \regex{[a-z]+[\bs.\bs?!]}
     \begin{enumerate}[1)]
       \begin{multicols}{3}
-      \item \verb~battle!~
-      \item \verb~Hot~
-      \item \verb~green~
+      \item \code{battle!}
+      \item \code{Hot}
+      \item \code{green}
       \end{multicols}
       \begin{multicols}{3}
-      \item \verb~swamping.~
-      \item \verb~jump up.~
-      \item \verb~undulate?~
+      \item \code{swamping.}
+      \item \code{jump~up.}
+      \item \code{undulate?}
       \end{multicols}
       \begin{multicols}{3}
-      \item \verb~is.?~
+      \item \code{is.?}
       \end{multicols}
     \end{enumerate}
     \pagebreak[1]
-  \item \verb~/[a-zA-Z]*[^,]=/~
+  \item \regex{[a-zA-Z]*[\string^,]=}
     \begin{enumerate}[1)]
       \begin{multicols}{3}
-      \item \verb~Butt=~
-      \item \verb~BotHEr,=~
-      \item \verb~Ample~
+      \item \code{Butt=}
+      \item \code{BotHEr,=}
+      \item \code{Ample}
       \end{multicols}
       \begin{multicols}{3}
-      \item \verb~FIdDlE7h=~
-      \item \verb~Brittle =~
-      \item \verb~Other.=~
+      \item \code{FIdDlE7h=}
+      \item \code{Brittle~=}
+      \item \code{Other.=}
       \end{multicols}
     \end{enumerate}
     \pagebreak[1]
-  \item \verb~/[a-z][\.\?!]\s+[A-Z]/~
+  \item \regex{[a-z][\bs.\bs?!][[:blank:]]+[A-Z]}
     \begin{enumerate}[1)]
       \begin{multicols}{3}
-      \item \verb~A. B~
-      \item \verb~c! d~
-      \item \verb~e f~
+      \item \code{A.~B}
+      \item \code{c!~d}
+      \item \code{e~f}
       \end{multicols}
       \begin{multicols}{3}
-      \item \verb~g. H~
-      \item \verb~i? J~
-      \item \verb~k L~
+      \item \code{g.~H}
+      \item \code{i?~J}
+      \item \code{k~L}
       \end{multicols}
     \end{enumerate}
     \pagebreak[1]
-  \item \verb~/<[^>]+>/~
+  \item \regex{<[\string^>]+>}
     \begin{enumerate}[1)]
       \begin{multicols}{2}
-      \item \verb~<an xml tag>~
-      \item \verb~<opentag> <closetag>~
+      \item \code{<an~xml~tag>}
+      \item \code{<opentag>~<closetag>}
       \end{multicols}
       \begin{multicols}{2}
-      \item \verb~</closetag>~
-      \item \verb~<>~
+      \item \code{</closetag>}
+      \item \code{<>}
       \end{multicols}
       \begin{multicols}{2}
-      \item \verb~<with attribute=”77”>~
+      \item \code{<with~attribute=”77”>}
       \end{multicols}
     \end{enumerate}
   \end{enumerate}
 
   \begin{sol}
     \begin{enumerate}
-    \item L'expression régulière identifie la lettre minuscule
-      «\verb=a=», suivie de zéro, une ou plusieurs occurrences des
-      lettres minuscules «\verb=ab=», suivies de la lettre minuscule
-      «\verb=b=». Les choix 2 et 5 satisfont ces conditions.
-    \item L'expression régulière identifie la lettre
-      «\verb=a=», suivie d'au moins une occurrence de la lettre
-      minuscule «\verb=b=», suivie de zéro ou une occurrence de la
-      lettre minuscule «\verb=c=». Les choix 1 et 3 satisfont ces
-      conditions.
-    \item L'expression régulière identifie la lettre minuscule
-      «\verb=a=», suivie de n'importe quel caractère (incluant les
-      lettres «\verb=b=» et «\verb=c=»), suivi d'au moins une
-      occurrence des lettres minuscules «\verb=b=» ou «\verb=c=». Les
-      choix 1, 2, 3, 4 et 6 satisfont ces conditions.
-    \item L'expression régulière identifie les suites de lettres
-      minuscules «\verb=abc=» ou «\verb=xyz=». Les choix 1 et 2
-      satisfont la condition. Le troisième choix n'est pas valide
-      puisque l'expression n'identifie pas le symbole «\verb=|=».
-    \item L'expression régulière identifie au moins une lettre
-      minuscule (à l'exclusion de tout autre symbole), suivie de l'un
-      ou l'autre des symboles «\verb=.=», «\verb=?=», «\verb=!=» (sans
+    \item Le motif identifie la lettre minuscule «\code{a}», suivie de
+      zéro, une ou plusieurs occurrences des lettres minuscules
+      «\code{ab}», suivies de la lettre minuscule «\code{b}». Les
+      choix 2 et 5 satisfont ces conditions.
+    \item Le motif identifie la lettre «\code{a}», suivie d'au moins
+      une occurrence de la lettre minuscule «\code{b}», suivie de zéro
+      ou une occurrence de la lettre minuscule «\code{c}». Les choix 1
+      et 3 satisfont ces conditions.
+    \item Le motif identifie la lettre minuscule «\code{a}», suivie de
+      n'importe quel caractère (incluant les lettres «\code{b}» et
+      «\code{c}»), suivi d'au moins une occurrence des lettres
+      minuscules «\code{b}» ou «\code{c}». Les choix 1, 2, 3, 4 et 6
+      satisfont ces conditions.
+    \item Le motif identifie les suites de lettres minuscules
+      «\code{abc}» ou «\code{xyz}». Les choix 1 et 2 satisfont la
+      condition. Le troisième choix n'est pas valide puisque
+      l'expression n'identifie pas le symbole «\code{|}».
+    \item Le motif identifie au moins une lettre minuscule (à
+      l'exclusion de tout autre symbole), suivie de l'un ou l'autre
+      des symboles «\code{.}», «\code{?}», «\code{!}» (sans
       répétition). Les choix 1, 4 et 6 satisfont ces conditions.
-    \item L'expression régulière identifie zéro, une ou plusieurs
-      lettres minuscules ou majuscule (mais aucun autre symbole),
-      suivies de tout caractère autre qu'une virgule, suivi du symbole
-      «\verb|=|». Les choix 1, 5 et 6 satisfont ces conditions.
-    \item L'expression régulière identifie une lettre minuscule,
-      suivie de l'un ou l'autre des symboles «\verb=.=», «\verb=?=»,
-      «\verb=!=» (sans répétition), suivi d'au moins une espace,
-      suivie d'une lettre majuscule. Les choix 4 et 5 satisfont ces
-      conditions.
-    \item L'expression régulière identifie le symbole «\verb=<=»,
-      suivi d'au moins un symbole autre que «\verb=>=», suivi du symbole
-      «\verb=>=». Les choix 1, 3 et 5 satisfont ces conditions. Dans
-      le choix 2, tant \verb~<opentag>~ que \verb~<closetag>~
-      satisfont la condition, mais pas les deux ensemble.
+    \item Le motif identifie zéro, une ou plusieurs lettres minuscules
+      ou majuscule (mais aucun autre symbole), suivies de tout
+      caractère autre qu'une virgule, suivi du symbole «\code{=}». Les
+      choix 1, 5 et 6 satisfont ces conditions.
+    \item Le motif identifie une lettre minuscule, suivie de l'un ou
+      l'autre des symboles «\code{.}», «\code{?}», «\code{!}» (sans
+      répétition), suivi d'au moins une espace, suivie d'une lettre
+      majuscule. Les choix 4 et 5 satisfont ces conditions.
+    \item Le motif identifie le symbole «\code{<}», suivi d'au moins
+      un symbole autre que «\code{>}», suivi du symbole «\code{>}».
+      Les choix 1, 3 et 5 satisfont ces conditions. Dans le choix 2,
+      tant \code{<opentag>} que \code{<closetag>} satisfont la
+      condition, mais pas les deux ensemble.
     \end{enumerate}
   \end{sol}
 \end{exercice}
 
 \begin{exercice}
-  Composer une expression régulière qui correspond à tous les mots de
-  la liste de gauche, ci-dessous, mais à aucun des mots de la liste de
-  droite.\footnote{%
+  Composer un motif d'expression régulière qui correspond à tous les
+  mots de la liste de gauche, ci-dessous, mais à aucun des mots de la
+  liste de droite.\footnote{%
     Exercice adapté de
     \url{https://regex.sketchengine.co.uk/cgi/ex1.cgi}.}
   \begin{center}
@@ -2132,126 +2121,118 @@ $ awk '(state == 1) && /^# / { exit }
     \end{minipage}
   \end{center}
   \begin{sol}
-    L'expression doit identifier la lettre minuscule «\verb=p=»
+    Le motif doit identifier la lettre minuscule «\code{p}»
     précédée ou non d'une ou de plusieurs lettres (ou symboles, ce n'est
     pas spécifié), suivie d'une (et une seule) lettre ou d'une espace,
-    de la lettre «\verb=t=» et, enfin, de zéro ou de plusieurs
+    de la lettre «\code{t}» et, enfin, de zéro ou de plusieurs
     lettres. Il y a assurément plusieurs réponses valides. En voici
-    une: \verb=/.*p[a-z ]t.*/=.
+    une: \regex{.*p[a-z~]t.*}.
   \end{sol}
 \end{exercice}
 
 \begin{exercice}
-  Composer une expression régulière qui permet de vérifier la validité
-  d'un code postal canadien dans un formulaire électronique. Ne pas
-  tenir compte des règles précises de composition d'un code postal,
-  mais bien seulement qu'il s'agit d'une suite de six caractères
-  alternant entre une lettre et un chiffre. Les lettres peuvent être
-  fournies en majuscule ou en minuscule et l'espace entre le troisième
-  et le quatrième symbole peut être présent ou non.
+  Composer un motif d'expression régulière qui permet de vérifier la
+  validité d'un code postal canadien dans un formulaire électronique.
+  Ne pas tenir compte des règles précises de composition d'un code
+  postal, mais bien seulement qu'il s'agit d'une suite de six
+  caractères alternant entre une lettre et un chiffre. Les lettres
+  peuvent être fournies en majuscule ou en minuscule et l'espace entre
+  le troisième et le quatrième symbole peut être présente ou non.
   \begin{sol}
-    L'expression \verb=[a-zA-z][0-9][a-zA-z]\s?[0-9][a-zA-z][0-9]=
+    Le motif
+    \begin{center}
+      \regex{[a-zA-z][0-9][a-zA-z][[:blank:]]?[0-9][a-zA-z][0-9]}
+    \end{center}
     convient si l'on ne permet que zéro ou une espace entre les deux
     blocs. S'il n'y a pas de limite au nombre d'espaces, remplacer
-    «\verb=?=» par «\verb=*=».
+    «\code{?}» par «\code{*}».
   \end{sol}
 \end{exercice}
 
 \begin{exercice}
-  Écrire une commande \code{sed} permettant de changer le séparateur
+  Écrire une commande \icode{sed} permettant de changer le séparateur
   décimal dans les temps du fichier \code{100metres.data} pour une
   virgule.
   \begin{sol}
     \code{sed} est l'outil idéal pour de tels traitements simples à
     effectuer ligne par ligne.
-    \begin{Schunk}
-\begin{Verbatim}
-$ sed 's/\./,/' 100metres.data
-\end{Verbatim}
-    \end{Schunk}
+<<echo=FALSE>>=
+exec("sed", c("'s/\\./,/'", "100metres.data"), eval = FALSE)
+@
     Pour placer le fichier modifié dans, disons,
     \code{100metres-dec.data}, utiliser
-    \begin{Schunk}
-\begin{Verbatim}
-$ sed 's/\./,/' 100metres.data > 100metres-dec.data
-\end{Verbatim}
-    \end{Schunk}
+<<echo=FALSE>>=
+exec("sed", c("'s/\\./,/'", "100metres.data > 100metres-dec.data"), eval = FALSE)
+@
   \end{sol}
 \end{exercice}
 
 \begin{exercice}
+  Utiliser les outils étudiés dans ce chapitre pour extraire les
+  informations suivantes du fichier \code{100metres.data}.
   \begin{enumerate}
-  \item Extraire du fichier \code{100metres.data} les informations des
-    temps réalisés au mois d'aout.
-  \item Extraire les informations des temps de moins de 10~secondes.
-  \item Extraire les lignes du fichier satisfaisant les deux
-    conditions précédentes. Vous pouvez avoir recours à l'opérateur de
-    tuyau Unix \index{{"|}@\code{\textbar} (tuyau Unix)}%
+  \item Les informations des temps réalisés au mois d'aout.
+  \item Les informations des temps de moins de 10~secondes.
+  \item Les informations des temps de moins de 10~secondes réalisés au
+    mois d'aout. Vous pouvez avoir recours au tuyau Unix
+    \index{{"|}@\code{\textbar} (tuyau Unix)}%
     «\code{\textbar}» pour combiner les commandes des parties a) et
     b).
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-    \item C'est un travail pour \code{grep}. La solution la plus
+    \item C'est un travail pour \icode{grep}. La solution la plus
       simple serait:
-      \begin{Schunk}
-\begin{Verbatim}
-$ grep '-08-' 100metres.data
-\end{Verbatim}
-      \end{Schunk}
-      Cependant, \code{grep} n'aime pas cette commande puisque le
-      symbole \verb=-= est utilisé pour passer des options. Dans ce
-      cas, il vaut mieux utiliser une option \verb=-e= pour déclarer
-      explicitement à \code{grep} que ce qui suit est l'expression à
+<<echo=FALSE>>=
+exec("grep", c("'-08-'", "100metres.data"), eval = FALSE)
+@
+      Cependant, \icode{grep} n'aime pas cette commande puisque le
+      symbole \verb=-= est le préfixe des options. Dans de tels cas,
+      il faut utiliser l'option «\code{-e}» pour déclarer
+      explicitement à \icode{grep} que ce qui suit est le motif à
       rechercher:
-      \begin{Schunk}
-\begin{Verbatim}
-$ grep -e '-08-' 100metres.data
-\end{Verbatim}
-      \end{Schunk}
-      Autrement, simplement ajouter quelque chose à chercher avant le tiret:
-      \begin{Schunk}
-\begin{Verbatim}
-$ grep '.*-08-' 100metres.data
-\end{Verbatim}
-      \end{Schunk}
-    \item Le plus simple, ici, consiste à utiliser \code{awk} puisque
+<<echo=FALSE>>=
+exec("grep", c("-e", "'-08-'", "100metres.data"), eval = FALSE)
+@
+      Autrement, simplement ajouter quelque chose à chercher avant le
+      tiret:
+<<echo=FALSE>>=
+exec("grep", c("'.*-08-'", "100metres.data"), eval = FALSE)
+@
+    \item Le plus simple, ici, consiste à utiliser \icode{awk} puisque
       les seconds champs --- les temps --- seront automatiquement
       disponibles.
-      \begin{Schunk}
-\begin{Verbatim}
-$ awk '$2 < 10 { print }' 100metres.data
-\end{Verbatim}
-      \end{Schunk} %$
+<<echo=FALSE>>=
+exec("awk", c("'$2 < 10'", "100metres.data"), eval = FALSE)
+@
       Malheureusement, cette commande risque de ne pas fonctionner sur
       certains systèmes qui traitent la virgule comme le séparateur
       décimal, notamment les Mac en configuration française. Dans ce
-      cas, essayer plutôt (j'ai supprimé la commande \verb={ print }=
-      ci-dessous puisqu'elle est implicite):
+      cas, essayer plutôt:
       \begin{Schunk}
 \begin{Verbatim}
 $ LC_NUMERIC="en_US.UTF-8" awk '$2 < 10' 100metres.data
 \end{Verbatim}
-      \end{Schunk} %$
-      Une solution avec \code{grep} consisterait à rechercher un
-      «\verb=9.=» après l'espace sur chaque ligne:
-      \begin{Schunk}
-\begin{Verbatim}
-$ grep ' 9\.' 100metres.data
-\end{Verbatim}
       \end{Schunk}
+      Une solution avec \icode{grep} consisterait à rechercher
+      «\code{9.}» après l'espace sur chaque ligne:
+<<echo=FALSE>>=
+exec("grep", c("' 9\\.'", "100metres.data"), eval = FALSE)
+@
     \item Nous pouvons combiner les deux commandes ainsi:
-      \begin{Schunk}
-\begin{Verbatim}
-$ grep -e '-08-' 100metres.data | awk '$2 < 10'
-\end{Verbatim}
-      \end{Schunk} %$
+<<echo=FALSE>>=
+exec("grep", c("-e", "'-08-'", "100metres.data | awk '$2 < 10'"), eval = FALSE,
+     env = "LC_NUMERIC=en_US.UTF-8")
+@
       ou
-      \begin{Schunk}
-\begin{Verbatim}
-$ grep -e '-08-' 100metres.data | grep ' 9\.'
-\end{Verbatim}
-      \end{Schunk}
+<<echo=FALSE>>=
+exec("grep", c("-e", "'-08-'", "100metres.data | grep ' 9\\.'"), eval = FALSE)
+@
+      C'est aussi possible de tout faire en un seul appel à \icode{awk}:
+<<echo=FALSE>>=
+exec("awk", c("'/-08-/ && $2 < 10'", "100metres.data"), eval = FALSE,
+     env = "LC_NUMERIC=en_US.UTF-8")
+@
     \end{enumerate}
   \end{sol}
 \end{exercice}
@@ -2259,18 +2240,18 @@ $ grep -e '-08-' 100metres.data | grep ' 9\.'
 \begin{exercice}
   Pour tous les appels à une fonction \code{f} comportant deux
   arguments dans le fichier \code{environnement.R} livré avec le
-  présent document, changer le nom de la fonction pour \code{fun} et
+  présent ouvrage, changer le nom de la fonction pour \code{fun} et
   inverser l'ordre des deux arguments.
   \begin{sol}
-    Ce traitement s'effectue bien avec \code{sed}:
+    Ce traitement s'effectue bien avec \icode{sed}:
     \begin{Schunk}
 \begin{Verbatim}
 $ sed -E 's/( |^)f\((.*), (.*)\)/fun(\3, \2)/' \
-  environnement.R
+environnement.R
 \end{Verbatim}
     \end{Schunk}
-    Le premier groupe \verb=( |^)= capture une espace avant \code{f}
-    ou le début de la ligne.
+    Le premier groupe «\code{(~|\string^)}» sert à capturer une espace
+    avant \code{f} ou le début de la ligne.
   \end{sol}
 \end{exercice}
 
@@ -2289,8 +2270,8 @@ $ sed -E 's/( |^)f\((.*), (.*)\)/fun(\3, \2)/' \
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-    \item On utilise la fonction \icode{grep}. L'expression régulière
-      est très simple dans le cas présent. Avec l'argument
+    \item Utilisons la fonction \icode{grep}. Le motif de l'expression
+      régulière est très simple dans ce cas. Avec l'argument
       \code{value} à \code{FALSE} (la valeur par défaut), la fonction
       retourne les positions dans le vecteur des chaines de caractères
       qui correspondent à l'expression régulière. Comme le vecteur de
@@ -2318,6 +2299,19 @@ sub("(^.{0,2}ss).*", "\\1.",
 @
     \end{enumerate}
   \end{sol}
+\end{exercice}
+
+\begin{exercice}[nosol]
+  Les commandes R suivantes créent une base de données \code{data.csv}
+  d'un million d'enregistrements et 20~champs.
+<<echo=TRUE, eval=FALSE>>=
+x <- sample(1:100, 20 * 1e6, replace = TRUE)
+write.csv(matrix(x, ncol = 20), file = "data.csv")
+@
+  Produire une nouvelle base de données composée des deux premières
+  colonnes et d'une colonne contenant la somme des deux autres,
+  d'abord avec un tableur, puis avec \icode{awk}. (Vous aurez reconnu
+  le contexte de l'exemple au début de la \autoref{sec:texte:awk}.
 \end{exercice}
 
 \Closesolutionfile{solutions}
