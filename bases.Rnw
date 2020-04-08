@@ -134,7 +134,7 @@ Ils sont accompagnés d'une description succincte.
     \midrule
     \icode{\$} & extraction d'une liste \\ %$
     \icode{[}\, \icode{[[} & indiçage \\
-    \verb|^|\index{\string^@\verb=^=} & puissance \\
+    \code{\string^}\index{\string^@\code{\string^}} & puissance \\
     \icode{-} & changement de signe \\
     {\NoAutoSpacing\verb|:|}\index{:@\NoAutoSpacing\verb=:=} & génération de suites \\
     \icode{\%*\%}\, \icode{\%\%}\, \icode{\%/\%} & produit matriciel,
@@ -143,24 +143,24 @@ Ils sont accompagnés d'une description succincte.
     \icode{*}\, \icode{/} & multiplication, division \\
     \icode{+}\, \icode{-} & addition, soustraction \\
     \icode{<}\, \icode{<=}\, \icode{==}\, \icode{>=}\,
-    \icode{>}\, \verb|!=|\index{"!=@\code{"!=}} & plus petit,
+    \icode{>}\, \code{!=}\index{"!=@\code{"!=}} & plus petit,
                                                   plus petit ou égal,
                                                   égal,
                                                   plus grand ou égal,
                                                   plus grand,
                                                   différent de \\
-    \verb=!=\index{"!@\code{"!}}  & négation logique \\
+    \code{!}\index{"!@\code{"!}}  & négation logique \\
     \icode{\&}\, \icode{\&\&} & «et» logique \\
     \code{\textbar}\index{{"|}@\code{\textbar}}\,
     \code{\textbar\textbar}\index{{"|"|}@\code{\textbar\textbar}} & «ou» logique \\
-    \icode{->}\, \verb|->>|\index{->>@\verb=->>=} & affectation \\
-    \icode{<-}\, \verb|<<-|\index{<<-@\verb=<<-=} & affectation \\
+    \icode{->}\, \code{->>}\index{->>@\code{->>}} & affectation \\
+    \icode{<-}\, \code{<<-}\index{<<-@\code{<<-}} & affectation \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 \tipbox{Les opérateurs de puissance «\code{\string^}» et d'affectation
-  \icode{<-} sont évalués de droite à gauche; tous les autres le sont
+  «\icode{<-}» sont évalués de droite à gauche; tous les autres le sont
   de gauche à droite. Ainsi, \code{2\string^2\string^3} est \code{2\string^8}, et non
   \code{4\string^3}, alors que \code{1 - 1 - 1} vaut \code{-1}, et non
   \code{1}.}
@@ -444,9 +444,9 @@ mais le résultat est stocké dans un \emph{objet} (ou \emph{variable})
 dans %
 l'\index{espace de travail}espace de travail %
 et rien n'est affiché à l'écran. Tel que mentionné précédemment,
-l'opérateur d'affectation est \icode{<-}, c'est-à-dire les deux
-caractères \verb|<| et \verb|-| placés obligatoirement l'un à la suite
-de l'autre, et l'opération d'affectation est évaluée de droite à
+l'opérateur d'affectation est «\icode{<-}», c'est-à-dire les deux
+caractères «\code{<}» et «\code{-}» placés obligatoirement l'un à la
+suite de l'autre, et l'opération d'affectation est évaluée de droite à
 gauche. Ainsi, toute expression est évaluée avant que son résultat ne
 soit placé dans l'objet.
 <<echo=TRUE>>=
@@ -461,15 +461,15 @@ circ
 Pour affecter le résultat d'un calcul dans un objet et simultanément
 afficher ce résultat, il suffit de placer l'affectation entre
 parenthèses pour ainsi créer une nouvelle expression.\footnote{%
-  En fait, l'opérateur d'affectation \code{<-} retourne un résultat
+  En fait, l'opérateur d'affectation «\code{<-}» retourne un résultat
   --- la valeur affectée ---, mais de manière \emph{invisible}. Une
   affectation placée entre parenthèses devient un appel à l'opérateur
-  \code{"("} qui, lui, ne fait que retourner son argument.}
+  «\code{(}» qui, lui, ne fait que retourner son argument.}
 <<echo=TRUE>>=
 (circ <- 2 * pi * 10)
 @
 
-L'opérateur d'affectation inversé \icode{->} existe aussi, mais il
+L'opérateur d'affectation inversé «\icode{->}» existe aussi, mais il
 est rarement utilisé.
 
 \cautionbox{Évitez d'utiliser l'opérateur \,\icode{=}\, pour
@@ -810,8 +810,8 @@ L'indiçage\Index{indiçage!vecteur} des vecteurs est une procédure
 beaucoup utilisée dans R, aussi est-il important d'en maitriser toutes
 les subtilités. L'opération sert principalement à deux choses:
 extraire des éléments d'un objet avec la construction
-\verb|x[i]|\indexcode{[}, ou remplacer des éléments avec la
-construction \verb|x[i] <- y|\Indexcode{[<-}.
+\code{x[i]}\indexcode{[}, ou remplacer des éléments avec la
+construction \code{x[i]~<-~y}\Indexcode{[<-}.
 
 Dans un cas comme dans l'autre, il faut d'abord indicer le vecteur. Il
 existe cinq façons de le faire, toujours à l'intérieur de crochets
@@ -2378,8 +2378,8 @@ c(TRUE, FALSE, FALSE) & c(TRUE, TRUE, FALSE)
      \item Attention à la priorité des opérations! En vertu des
        priorités énoncées au \autoref{tab:bases:operateurs}, les
        opérations sont effectuées dans cet ordre: inégalité
-       (\verb=<=), négation logique (\verb=!=) , «ou» logique
-       (\verb=|=).
+       (\code{<}), négation logique (\code{!}) , «ou» logique
+       (\code{|}).
 <<echo=FALSE>>=
 c(TRUE, FALSE, FALSE) | !2 < 3
 @
