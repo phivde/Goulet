@@ -1023,6 +1023,47 @@ fibonacci(10)
 \end{exercice}
 
 \begin{exercice}
+  Effectuer une mise en œuvre de l'algorithme \emph{Bucketsort} de
+  \citet[chapitre~6]{Stephens:algorithms:2013} permettant de trier des
+  entiers entre $1$ et $x_{\max}$. La fonction prend en argument le
+  vecteur des données à trier, la valeur de $x_{\max}$ et le nombre de
+  compartiments. Utiliser la fonction \icode{sort} pour trier les
+  compartiments.
+
+  \begin{sol}
+    La principale difficulté réside dans le fait que certains
+    compartiments peuvent demeurer vides (\code{NULL}). Or,
+    \icode{sort} ne peut prendre \code{NULL} en argument. Il faut donc
+    faire un test avant de trier les données.
+<<echo=TRUE, eval=FALSE>>=
+bucketsort <- function(x, max, nbuckets)
+{
+    ## création des compartiments
+    buck <- vector("list", nbuckets)
+    span <- max/nbuckets
+
+    ## répartition des données dans les compartiments
+    for (i in seq_along(x))
+    {
+        j <- ceiling(x[i]/span)
+        buck[[j]] <- c(buck[[j]], x[i])
+    }
+
+    ## tri des données dans chaque compartiment; on
+    ## effectue le tri seulement s'il y a des données
+    ## dans le compartiment
+    for (i in seq_len(nbuckets))
+        if (!is.null(buck[[i]]))
+            buck[[i]] <- sort(buck[[i]])
+
+    ## retourner le vecteur trié
+    unlist(buck)
+}
+@
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
   \label{ex:tri:100metres}
   Les fichier \code{100metres.dat} distribué avec cet ouvrage et
   reproduit à la \autoref{fig:tri:100metres} contient la date et le
@@ -1060,48 +1101,6 @@ unique(cummin(temps))
     vecteur.
 <<eval=TRUE>>=
 temps[match(unique(cummin(temps)), temps)]
-@
-  \end{sol}
-\end{exercice}
-
-
-\begin{exercice}
-  Effectuer une mise en œuvre de l'algorithme \emph{Bucketsort} de
-  \citet[chapitre~6]{Stephens:algorithms:2013} permettant de trier des
-  entiers entre $1$ et $x_{\max}$. La fonction prend en argument le
-  vecteur des données à trier, la valeur de $x_{\max}$ et le nombre de
-  compartiments. Utiliser la fonction \icode{sort} pour trier les
-  compartiments.
-
-  \begin{sol}
-    La principale difficulté réside dans le fait que certains
-    compartiments peuvent demeurer vides (\code{NULL}). Or,
-    \icode{sort} ne peut prendre \code{NULL} en argument. Il faut donc
-    faire un test avant de trier les données.
-<<echo=TRUE, eval=FALSE>>=
-bucketsort <- function(x, max, nbuckets)
-{
-    ## création des compartiments
-    buck <- vector("list", nbuckets)
-    span <- max/nbuckets
-
-    ## répartition des données dans les compartiments
-    for (i in seq_along(x))
-    {
-        j <- ceiling(x[i]/span)
-        buck[[j]] <- c(buck[[j]], x[i])
-    }
-
-    ## tri des données dans chaque compartiment; on
-    ## effectue le tri seulement s'il y a des données
-    ## dans le compartiment
-    for (i in seq_len(nbuckets))
-        if (!is.null(buck[[i]]))
-            buck[[i]] <- sort(buck[[i]])
-
-    ## retourner le vecteur trié
-    unlist(buck)
-}
 @
   \end{sol}
 \end{exercice}
