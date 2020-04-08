@@ -75,8 +75,7 @@ l'analyse de données textuelles et dans le traitement de la langue
 naturelle (\emph{natural language processing}, NLP), une branche
 importante de l'intelligence artificielle.
 
-Voici quelques utilisations possibles des \index{expression
-  régulière}expressions régulières.
+Voici quelques utilisations possibles des expressions régulières.
 \begin{itemize}
 \item Rechercher du texte pouvant contenir des variations ou des
   fautes d'orthographe comme, par exemple, «je transfert» plutôt que
@@ -116,13 +115,13 @@ programmation ou en analyse de données. Ce jour-là, connaitre les
 expressions régulières vous sera d'un grand secours.
 
 \notebox{Dans la littérature informatique, la présentation des
-  \index{expression régulière}expressions régulières s'accompagne
-  généralement de celle du langage de programmation \index{Perl}Perl.
-  En effet, Perl a été créé par Larry Wall en 1987 justement pour
-  traiter facilement du texte. Le langage prend en charge les
-  expressions régulières dans sa syntaxe même et il comporte plusieurs
-  extensions aux expressions prises en charge par \icode{grep} et
-  \icode{sed}. Le présent ouvrage ne traite pas de \icode{Perl}.}
+  expressions régulières s'accompagne généralement de celle du langage
+  de programmation \index{Perl}Perl. En effet, Perl a été créé par
+  Larry Wall en 1987 justement pour traiter facilement du texte. Le
+  langage prend en charge les expressions régulières dans sa syntaxe
+  même et il comporte plusieurs extensions aux expressions prises en
+  charge par \icode{grep} et \icode{sed}. Le présent ouvrage ne traite
+  pas de \icode{Perl}.}
 
 \begin{figure}[t]
   \centering
@@ -250,7 +249,7 @@ Les outils \icode{grep}, \icode{sed} et \icode{awk} diffèrent quant au
 type de traitement qu'ils peuvent effectuer.
 \begin{ttscript}{grep}
 \item[\code{grep}] sélectionne les lignes en entrée correspondant à
-  une \index{expression régulière}expression régulière.
+  une expression régulière.
 \item[\code{sed}] sert surtout pour rechercher et remplacer du texte.
 \item[\code{awk}] permet de traiter aisément du texte séparé en
   champs, ainsi que du texte réparti sur plusieurs lignes.
@@ -302,8 +301,9 @@ grep \meta{options} '\meta{motif}' \meta{fichiers}
 \begin{itemize}
 \item \meta{options} est une liste facultative d'options (ou drapeaux)
   qui modifient le comportement de \icode{grep}.
-\item \index{motif}\meta{motif} est une \index{expression
-    régulière}expression régulière qui définit le texte à rechercher.
+\item \index{motif}\meta{motif} est une %
+  \index{expression régulière}expression régulière qui définit le
+  texte à rechercher.
 \item \meta{fichiers} est le ou les fichiers dans lesquels rechercher
   le texte; si aucun fichier n'est spécifié, \icode{grep} recherche
   dans l'entrée standard.
@@ -378,8 +378,9 @@ sed \meta{options} 's/\meta{motif}/\meta{remplacement}/\meta{modificateur}'
   qui modifient le comportement de \icode{sed}.
 \item \code{s} est le nom de la commande \icode{sed} qui sert à
   rechercher et remplacer.
-\item \index{motif}\meta{motif} est une \index{expression
-    régulière}expression régulière qui définit le texte à rechercher.
+\item \index{motif}\meta{motif} est une %
+  \index{expression régulière}expression régulière qui définit le
+  texte à rechercher.
 \item \meta{remplacement} est le texte qui sert à remplacer le texte
   qui correspond à \meta{motif}.
 \item \meta{modificateur} est un symbole qui permet de modifier le
@@ -512,7 +513,7 @@ classique de \citet{Friedl:regex:2006}.
 \label{sec:texte:regex:types}
 
 Avant d'aller plus loin, vous devez savoir qu'il existe trois grands
-types d'\index{expression régulière}expressions régulières: les
+types d'expressions régulières: les
 \index{expression régulière!basique}expressions régulières basiques ou
 classiques (\emph{Basic Regular Expressions}, \index{BRE}BRE), les
 \index{expression régulière!étendue}expressions régulières étendues
@@ -522,12 +523,10 @@ classiques (\emph{Basic Regular Expressions}, \index{BRE}BRE), les
 utilitaires \icode{grep} et \icode{sed} utilisent les expressions
 régulières basiques par défaut.
 
-Voici les principales différences entre les \index{expression
-  régulière!basique}expressions régulières basiques et
-\index{expression régulière!étendue}étendues. Si ce qui suit n'est pas
-tout à fait clair à la première lecture, ça le deviendra dès la
-prochaine section lorsque nous entamerons l'étude des opérateurs des
-expressions régulières.
+Voici les principales différences entre les expressions régulières
+basiques et étendues. Si ce qui suit n'est pas tout à fait clair à la
+première lecture, ça le deviendra dès la prochaine section lorsque
+nous entamerons l'étude des opérateurs des expressions régulières.
 \begin{itemize}
 \item Dans les expressions régulières étendues, les symboles
   «\icode[regex]{+}» et «\icode[regex]{?}» sont des opérateurs de
@@ -550,20 +549,19 @@ expressions régulières.
 Dans la suite, lorsqu'il existe une différence entre les expressions
 régulières basiques et les expressions régulières étendues, nous
 utiliserons toujours ces dernières. Pour indiquer à \icode{grep} et à
-\icode{sed} d'utiliser la syntaxe des \index{expression
-  régulière!étendue}expressions régulières étendues, il suffit de leur
-ajouter l'option \code{-E} mentionnée à la
+\icode{sed} d'utiliser la syntaxe des %
+\index{expression régulière!étendue}expressions régulières étendues,
+il suffit de leur ajouter l'option \code{-E} mentionnée à la
 \autoref{sec:texte:outils:grep}.
 
 Dans le premier exemple ci-dessous, le motif \regex{chien|chat} est
-interprété par \icode{grep} comme une \index{expression régulière
-  basique}expression régulière basique dans laquelle le symbole
-«\code{|}» est un caractère comme les autres. Comme le fichier
-\code{chanson.txt} ne contient pas la chaine \chaine{chien|chat}, le
-motif ne correspond à aucune ligne. Dans le second exemple
-\icode{grep} est invoqué avec l'option \code{-E} et, par conséquent,
-le motif est interprété comme une expression régulière étendue qui
-signifie plutôt: \chaine{chien} \emph{ou} \chaine{chat}.
+interprété par \icode{grep} comme une expression régulière basique
+dans laquelle le symbole «\code{|}» est un caractère comme les autres.
+Comme le fichier \code{chanson.txt} ne contient pas la chaine
+\chaine{chien|chat}, le motif ne correspond à aucune ligne. Dans le
+second exemple \icode{grep} est invoqué avec l'option \code{-E} et,
+par conséquent, le motif est interprété comme une expression régulière
+étendue qui signifie plutôt: \chaine{chien} \emph{ou} \chaine{chat}.
 <<echo=FALSE>>=
 exec("grep", c("'chien|chat'", "chanson.txt"))
 @
@@ -579,11 +577,12 @@ exec("grep", c("-E", "'chien|chat'", "chanson.txt"))
 \subsection{Syntaxe de base}
 \label{sec:texte:regex:syntaxe}
 
-Comme mentionné précédemment, une \index{expression
-  régulière}expression régulière est une suite de caractères
-typographiques qui décrit une chaine de texte. Elle est composée de
-caractères littéraux (dont la «valeur» correspond au symbole lui-même)
-et de caractères spéciaux qui font office d'opérateurs\footnote{%
+Comme mentionné précédemment, une %
+\index{expression régulière}expression régulière est une suite de
+caractères typographiques qui décrit une chaine de texte. Elle est
+composée de caractères littéraux (dont la «valeur» correspond au
+symbole lui-même) et de caractères spéciaux qui font office
+d'opérateurs\footnote{%
   Les opérateurs ou caractères spéciaux des expressions régulières
   sont aussi parfois appelés \emph{métacaractères}.}. %
 La syntaxe obéit à quelques règles fondamentales en définitive assez
@@ -787,8 +786,9 @@ pour chaque variante des accolades.
 Si les caractères «\code{*}», «\code{?}», «\code{+}», «\code{\{}» et
 «\code{\}}» ont une signification particulière dans les expressions
 régulières, comment alors rechercher ces caractères dans du texte?
-C'est là qu'entre en jeu le \index{caractere d'echappement@caractère
-  d'échappement}caractère d'échappement %
+C'est là qu'entre en jeu le %
+\index{caractere d'echappement@caractère d'échappement}caractère
+d'échappement %
 \index{\string\@\code{\bs} (regex)|bfhyperpage}«\code{\bs}». %
 Lorsqu'il précède un symbole, le caractère d'échappement désactive la
 signification spéciale de ce symbole. Par exemple, le motif
@@ -856,10 +856,10 @@ et \emph{u}: «chaine» plutôt que «chaîne», «disparaitre» plutôt que
 rechercher l'une ou l'autre graphie dans un texte, vous souhaiterez
 pouvoir les décrire toutes les deux à l'aide d'une seule expression
 régulière. C'est le rôle des opérateurs «\Icode[regex]{[~]}» qui
-définissent ce que l'on appelle une \index{classe de caracteres@classe
-  de caractères}\emph{classe de caractères}. Par exemple,
-\regex{cha[iî]ne} correspond à la fois à \matches{chaine} et à
-\matches{chaîne}.
+définissent ce que l'on appelle une %
+\index{classe de caracteres@classe de caractères}\emph{classe de
+  caractères}. Par exemple, \regex{cha[iî]ne} correspond à la fois à
+\matches{chaine} et à \matches{chaîne}.
 
 Rappelez-vous la seconde règle fondamentale de la syntaxe des expressions
 régulières énoncée à la \autoref{sec:texte:regex:syntaxe}: il y a un
@@ -1078,13 +1078,13 @@ français\footnote{%
 des mots comme \chaine{\matches{coco}n}, \chaine{\matches{coco}tier}
 ou \chaine{ro\matches{coco}}.
 
-Enfin, les parenthèses permettent de créer des \index{groupe de
-  capture}groupes de capture numérotés. C'est une fonctionnalité à
-laquelle on a principalement recours avec \icode{sed}. Le texte qui
-correspond à un motif entre parenthèses est «capturé» --- ou mémorisé
---- et devient disponible pour être réutilisé dans le texte de
-substitution sous un numéro: \code{\bs1} pour le premier groupe,
-\code{\bs2} pour le second groupe, etc.
+Enfin, les parenthèses permettent de créer des %
+\index{groupe de capture}groupes de capture numérotés. C'est une
+fonctionnalité à laquelle on a principalement recours avec
+\icode{sed}. Le texte qui correspond à un motif entre parenthèses est
+«capturé» --- ou mémorisé --- et devient disponible pour être
+réutilisé dans le texte de substitution sous un numéro: \code{\bs1}
+pour le premier groupe, \code{\bs2} pour le second groupe, etc.
 
 Clarifions le tout par un exemple. Tous les vers du fichier
 \code{chanson.txt} qui débutent par \chaine{Le} comptent exactement
@@ -1331,7 +1331,7 @@ Le premier exemple effectue avec \icode{awk} une opération que nous
 avons déjà réalisée avec \icode{grep} à la
 \autoref{sec:texte:outils:grep}: afficher les lignes du fichier
 \code{chanson.txt} qui débutent par la lettre «M». Le motif à
-rechercher est l'expression régulière \regex{\string^M}\,. La syntaxe
+rechercher est l'\index{expression régulière}expression régulière \regex{\string^M}\,. La syntaxe
 de \icode{awk} exige que les expressions régulières soient placées
 entre barres obliques «\icode[\code{awk}]{/}». Nous avons déjà vu à la
 \autoref{sec:texte:awk:base} qu'à l'intérieur d'une règle, la variable
@@ -1346,7 +1346,8 @@ est équivalente à \code{print \$0}. Nous pourrions donc simplifier
 légèrement la commande ci-dessus en remplaçant «\code{print \$0}» par
 «\code{print}».
 
-Cela dit, il est permis d'omettre le motif ou l'action dans une règle
+Cela dit, il est permis d'omettre le %
+\index{motif@motif (\code{awk})}motif ou l'action dans une règle
 \icode{awk} --- mais pas les deux. Si le motif est absent, l'action
 est exécutée pour chaque enregistrement. Si c'est l'action qui est
 absente, l'instruction \icode[\code{awk}]{print} est exécutée
@@ -1471,9 +1472,9 @@ pas rencontrés auparavant, ainsi qu'à la concaténation.
   \index{\string~@\code{\string~} (\code{awk})|bfhyperpage}%
   \index{"!\string~@\code{"!\string~} (\code{awk})|bfhyperpage}%
   retourne vrai lorsque la chaine de caractères du côté gauche de
-  l'opérateur (\code{\$0} par défaut) correspond à l'expression
-  régulière du côté droit. La version négative
-  «!\string~» existe aussi.
+  l'opérateur (\code{\$0} par défaut) correspond à %
+  l'\index{expression régulière}expression régulière du côté droit. La
+  version négative «!\string~» existe aussi.
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
 \meta{chaine} ~ /\meta{motif}/
@@ -1524,8 +1525,8 @@ dans les exemples de la section précédente.
   \def\beginfileendfilelabel{%
     \parbox[t][0pt]{\labelwidth}{\code{BEGINFILE} \\ \code{ENDFILE}}}
 \item[\code{/\meta{expression régulière}/}]  \mbox{}\\
-  correspond lorsque l'expression régulière
-  correspond à l'enregistrement courant.
+  correspond lorsque l'\index{expression régulière}expression
+  régulière correspond à l'enregistrement courant.
 \item[\code{\meta{expression}}] correspond lorsque la valeur de l'expression
   \icode{awk} est non nulle (s'il s'agit d'une valeur numérique) ou
   non vide (s'il s'agit d'une chaine de caractères).
@@ -1694,8 +1695,9 @@ respectivement, le retour à la ligne et l'espace. Ces symboles sont
 stockés dans les variables prédéfinies \icode[\code{awk}]{RS}
 (\emph{record separator}) et \icode[\code{awk}]{FS} (\emph{field
   separator}). Pour changer l'un ou l'autre de ces séparateurs, il
-suffit d'affecter un nouveau symbole ou une expression régulière dans
-la variable correspondante, habituellement dans une règle spéciale
+suffit d'affecter un nouveau symbole ou une %
+\index{expression régulière}expression régulière dans la variable
+correspondante, habituellement dans une règle spéciale
 \icode[\code{awk}]{BEGIN}.
 
 Pour des raisons historiques, il est également possible de changer le
@@ -1732,11 +1734,11 @@ variables prédéfinies \icode[\code{awk}]{ORS} (\emph{output record
 
 Cette section présente quelques unes seulement des fonctions internes
 qu'offre R pour rechercher et remplacer du texte à l'aide
-d'expressions régulières. Consultez la rubrique d'aide (commune) de
-n'importe laquelle de celles-ci pour connaitre l'ensemble des
-fonctions disponibles et les détails concernant leur fonctionnement.
-Vous trouverez également dans la rubrique d'aide de nombreux exemples
-d'utilisation additionnels.
+d'\index{expression régulière}expressions régulières. Consultez la
+rubrique d'aide (commune) de n'importe laquelle de celles-ci pour
+connaitre l'ensemble des fonctions disponibles et les détails
+concernant leur fonctionnement. Vous trouverez également dans la
+rubrique d'aide de nombreux exemples d'utilisation additionnels.
 
 Les exemples de cette section utilisent le vecteur \icode{state.name}
 fourni avec R et qui contient les noms des cinquante États américains.

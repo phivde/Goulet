@@ -1464,11 +1464,12 @@ sapply(x, sort)
   vecteur avec \code{sapply}, ou modifier \code{f} pour y intégrer un
   appel à \code{sapply}.}
 
-\importantbox{Outre l'\index{arithmetique@arithmétique
-    vectorielle}algèbre vectorielle, l'application avec \icode{lapply}
-  et \icode{sapply} constitue le principal moyen d'effectuer des
-  calculs répétitifs dans R. On ne saurait donc trop insister sur
-  l'importance de ces deux fonctions.}
+\importantbox{Outre %
+  l'\index{arithmetique@arithmétique vectorielle}arithmétique
+  vectorielle, l'application avec \icode{lapply} et \icode{sapply}
+  constitue le principal moyen d'effectuer des calculs répétitifs dans
+  R. On ne saurait donc trop insister sur l'importance de ces deux
+  fonctions.}
 
 Autre membre de la famille des fonctions d'application sur les listes
 et les vecteurs, \Icode{mapply} est une version multidimensionnelle de
@@ -1649,8 +1650,9 @@ mapply(mean, x, 0:3/10)    #-*- `\labelline{donnees:lsmapply:fin}`
 \section{Tableau de données}
 \label{sec:donnees:dataframes}
 
-Le \Index{tableau de données}\index{data frame|see{tableau de
-    données}}tableau de données (\emph{data frame}\footnote{%
+Le \Index{tableau de données}%
+\index{data frame|see{tableau de données}}tableau de données
+(\emph{data frame}\footnote{%
   Il n'y a pas de traduction française universelle pour \emph{data
     frame}, mais «tableau de données» semble la plus répandue. Ne vous
   surprenez pas de voir tout bonnement «data frame» dans les messages
@@ -2076,13 +2078,13 @@ x
 @
 
 \begin{ttscript}{rowMeans}
-\item[\Icode{nrow}] \index{matrice!nombre de
-    lignes}nombre de lignes.
+\item[\Icode{nrow}] \index{matrice!nombre de lignes}nombre de
+  lignes.
 <<echo=TRUE>>=
 nrow(x)
 @
-\item[\Icode{ncol}] nombre de \index{matrice!nombre de
-    colonnes}colonnes.
+\item[\Icode{ncol}] \index{matrice!nombre de colonnes}nombre de
+  colonnes.
 <<echo=TRUE>>=
 ncol(x)
 @
