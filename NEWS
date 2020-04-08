@@ -2,15 +2,14 @@
 === Programmer avec R
 ===
 
-# (en développement)
+# 2020.04 (2020-04-08)
 
 ## Nouveautés majeures
 
-- Chapitre 11 sur l'analyse et le contrôle de
-  texte entièrement révisé pour ne plus dépendre de ressources
-  externes. Les objectifs d'apprentissage et la matière couverte
-  demeurent sensiblement les mêmes, mais la présentation est assez
-  différente.
+- Chapitre 11 sur l'analyse et le contrôle de texte entièrement révisé
+  pour ne plus dépendre de ressources externes. Les objectifs
+  d'apprentissage et la matière couverte demeurent sensiblement les
+  mêmes, mais la présentation est assez différente.  
 - Fichier de données `carburant.data` inclus dans la distribution pour
   les exemples du chapitre 11. Les données de la figure 9.2 étaient
   tirées de ce jeu de données et c'est maintenant mentionné dans le
@@ -55,7 +54,7 @@
 - Mise à jour des captures d'écran des options de configuration de
   RStudio aux figures 6.3, A.2 et A.3 pour la version 1.2 de
   l'éditeur.
-- Ajout d'entrées d'index.
+- Ajout d'entrées d'index et suppression de doublons.
 
 ## Corrections
 
@@ -66,7 +65,10 @@
 - Exercice 5.11: il manquait à la solution une définition de la
   fonction `ppareto` pour calculer la fonction de répartition de la
   loi de Pareto (dans la mesure où le paquetage actuar n'est pas
-  chargé).
+  chargé). De plus, l'exemple d'utilisaiton de la fonction `paste` à
+  la partie b) a été supprimé puisque la fonction est maintenant
+  présentée à la section 4.7.8.
+- Plusieurs coquilles relevées par les étudiantes et les étudiants.
 
 
 # 2019.10 (2019-10-17)
