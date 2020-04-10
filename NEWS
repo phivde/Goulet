@@ -9,6 +9,16 @@
 - Section 11.4.5: exemple de changement du séparateur de champs de
   sortie via la redéfinition de la variable OFS.
 
+- Chapitre 11: les exemples additionnels sont maintenant distribués
+  dans un fichier de script `texte.sh` reproduit à la section 11.6,
+  comme dans les autres chapitres.
+
+## Changements
+
+- Section 11.5: afin de raccourcir les résultats, les exemples
+  d'utilisation des fonctions R de recherche et remplacement de texte
+  utilisent seulement les 10 premiers noms de `state.name`.
+  
 
 # 2020.04 (2020-04-08)
 
