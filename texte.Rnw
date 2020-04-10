@@ -1390,7 +1390,7 @@ exec("awk", c("'NR <= 5 { print $2 }'", "chanson.txt"))
 L'instruction \icode[\code{awk}]{print} accepte également en argument
 une liste d'éléments à afficher en sortie, séparés par des
 \indexcode[\code{awk}]{,}virgules. Ils sont séparés par une espace
-dans la sortie de la commande.
+dans les résultats de la commande.
 <<echo=FALSE>>=
 exec("awk", c("'NR <= 5 { print NR, \":\", $1, $2 }'", "chanson.txt"))
 @
@@ -1733,10 +1733,19 @@ BEGIN { FS = "[ -]" }
 
 Chose intéressante, il est également possible de modifier les
 séparateurs d'enregistrements et de champs que \icode{awk} utilise
-lors de l'écriture des résultats. Ceux-ci sont stockés dans les
+lors de la sortie des résultats. Ceux-ci sont stockés dans les
 variables prédéfinies \icode[\code{awk}]{ORS} (\emph{output record
   separator}) et \icode[\code{awk}]{OFS} (\emph{output field
-  separator}).
+  separator}). Les séparateurs de sortie par défaut sont aussi le
+retour et la ligne et l'espace.
+
+Avec la règle suivante dans un programme \icode{awk}, les champs
+seront séparés par un point-virgule dans les résultats.
+\begin{Schunk}
+\begin{Verbatim}
+BEGIN { OFS = ";" }
+\end{Verbatim}
+\end{Schunk}
 
 
 \section{Fonctions internes utiles}

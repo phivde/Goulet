@@ -2,6 +2,14 @@
 === Programmer avec R
 ===
 
+# (en développement)
+
+## Nouveautés
+
+- Section 11.4.5: exemple de changement du séparateur de champs de
+  sortie via la redéfinition de la variable OFS.
+
+
 # 2020.04 (2020-04-08)
 
 ## Nouveautés majeures
