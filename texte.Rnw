@@ -1511,7 +1511,7 @@ chaine «\code{"~"}») autrement.
 
 À ce stade, vous disposez déjà de connaissances suffisantes pour
 réaliser plusieurs tâches de manipulation de texte avec \icode{awk}.
-Les sections suivantes ne font qu'àjouter des détails sur l'écriture
+Les sections suivantes ne font qu'ajouter des détails sur l'écriture
 des règles et la configuration de l'outil. Si vous souhaitez étudier
 des exemples additionnels, consultez \citet[sections~1.3 à
 1.5]{gawk:5.0}.
