@@ -354,7 +354,7 @@ L'utilitaire \Icode{sed}\footnote{%
 est en quelque sorte un éditeur de texte qui opère sur un texte une
 seule ligne à la fois et de manière non-interactive. (Vous pourriez
 objecter que cela ne correspond en rien à l'idée que l'on se fait d'un
-éditeur de texte, mais il n'est reste pas moins que le programme
+éditeur de texte, mais il n'en reste pas moins que le programme
 effectue des tâches d'édition sur du texte.) L'éventail des
 traitements que \icode{sed} peut appliquer à un texte est très vaste,
 mais la syntaxe des commandes qu'il faut entrer pour y arriver est
