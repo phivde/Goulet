@@ -1709,6 +1709,70 @@ abs(-2)
 ## en conflit avec la fonction interne de R du même nom.
 rm("abs")
 
+## L'exemple suivant vise à vous faire réaliser que les
+## valeurs booléennes constituent implicitement des résultats
+## de tests logiques.
+##
+## Nous voulons écrire une fonction 'is.odd' qui détermine si
+## les éléments d'un vecteur sont impairs ou non. Un nombre
+## est impair si le reste de sa division par 2 (le modulo) est
+## égal à 1.
+##
+## Voici une première mise en oeuvre naïve.
+is.odd <- function(x)
+{
+    if (x %% 2 == 1)
+        TRUE
+    else
+        FALSE
+}
+
+## Le résultat de 'x %% 2' est nécessairement 0 ou 1. Ces
+## valeurs étant automatiquement converties en FALSE et TRUE
+## dans une opération logique, nous pouvons les utiliser
+## directement à l'intérieur de la condition d'une clause 'if'
+## sans tester leur égalité avec 0 ou 1.
+##
+## De plus, comme le résultat d'une condition est
+## nécessairement TRUE ou FALSE, la construction ci-dessus
+## revient à dire: «si la condition est vraie, retourner VRAI,
+## sinon retourner FAUX». N'est-ce pas redondant?
+##
+## Enfin, la mise en oeuvre ci-dessus n'est pas vectorielle
+## puisqu'il ne peut y avoir qu'un seul test à l'intérieur de
+## la clause 'if'.
+##-!- is.odd(c(0, 4, 3, 6, 8, 9, 1))
+
+## Avant d'étudier une meilleure mise en oeuvre, voyons
+## comment ça aurait pu être pire en testant explicitement
+## 'TRUE == TRUE'.
+is.odd <- function(x)
+{
+    if ((x %% 2 == 1) == TRUE)
+        TRUE
+    else
+        FALSE
+}
+
+## Ou pire encore en utilisant une logique tordue ou l'on
+## retourne FAUX lorsque la condition est vraie et VRAI
+## lorsqu'elle est fausse! (Je n'invente rien, c'est un cas
+## rencontré.)
+is.odd <- function(x)
+{
+    if ((x %% 2 == 0) == TRUE)
+        FALSE
+    else
+        TRUE
+}
+
+## En fait, la solution simple, élégante et vectorielle
+## retourne simplement les résultats de l'opération modulo
+## convertis en valeurs booléennes, chacune constituant
+## implicitement le résultat d'un test logique.
+is.odd <- function(x) as.logical(x %% 2)
+is.odd(c(0, 4, 3, 6, 8, 9, 1))
+
 ## Détail intéressant sur la structure 'if ... else ...': il
 ## est possible de l'utiliser comme une fonction normale,
 ## c'est-à-dire d'affecter le résultat de la structure à une

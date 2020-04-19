@@ -6,6 +6,10 @@
 
 ## Nouveautés
 
+- Section 4.5: exemple de construction d'une fonction `is.odd` dans le
+  code informatique pour illustrer qu'une valeur booléenne constitue
+  implicitement le résultat d'un test logique.
+
 - Section 11.4.5: exemple de changement du séparateur de champs de
   sortie via la redéfinition de la variable OFS.
 
