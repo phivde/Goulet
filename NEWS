@@ -9,10 +9,8 @@
 - Section 4.5: exemple de construction d'une fonction `is.odd` dans le
   code informatique pour illustrer qu'une valeur booléenne constitue
   implicitement le résultat d'un test logique.
-
 - Section 11.4.5: exemple de changement du séparateur de champs de
   sortie via la redéfinition de la variable OFS.
-
 - Chapitre 11: les exemples additionnels sont maintenant distribués
   dans un fichier de script `texte.sh` reproduit à la section 11.6,
   comme dans les autres chapitres.
@@ -23,6 +21,14 @@
   d'utilisation des fonctions R de recherche et remplacement de texte
   utilisent seulement les 10 premiers noms de `state.name`.
   
+## Corrections
+
+- Section 11.3.7, dernier exemple de la section: dans la seconde
+  commande, il ne doit pas y avoir d'opérateur d'alternance à
+  l'intérieur de la classe de caractères (ou le symbole `|` n'est
+  d'ailleurs pas un opérateur). Merci à Laurence Boivert pour sa
+  vigilance.
+
 
 # 2020.04 (2020-04-08)
 
