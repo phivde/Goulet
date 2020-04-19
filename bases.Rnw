@@ -1539,10 +1539,10 @@ imbriquer les structures \code{if ... else ...} les unes dans les
 autres.
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
-if (\meta{condition\textsubscript{\upshape{}1}})
-    \meta{conséquence\textsubscript{\upshape{}1}}
-else if (\meta{condition\textsubscript{\upshape{}2}})
-    \meta{conséquence\textsubscript{\upshape{}2}}
+if (\meta{condition 1})
+    \meta{conséquence 1}
+else if (\meta{condition 2})
+    \meta{conséquence 2}
 else
     \meta{alternative}
 \end{Verbatim}
@@ -1552,14 +1552,14 @@ Les constructions de type «Selon que» se conçoivent en R avec la
 fonction \Icode{switch}. Sa syntaxe est la suivante:
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
-switch(\meta{expression}, \meta{cas\textsubscript{\upshape{}1}} = \meta{action\textsubscript{\upshape{}1}},
-                     \meta{cas\textsubscript{\upshape{}2}} = \meta{action\textsubscript{\upshape{}2}}, ...)
+switch(\meta{expression}, \meta{cas 1} = \meta{action 1},
+                     \meta{cas 2} = \meta{action 2}, ...)
 \end{Verbatim}
 \end{Schunk}
 La fonction évalue d'abord l'\meta{expression}. Si le résultat est une
-valeur numérique $k$, alors l'\meta{action$_k$} est exécutée. Si le
+valeur numérique $k$, alors l'\meta{action $k$} est exécutée. Si le
 résultat de l'\meta{expression} est l'une des chaines de caractères
-\meta{cas$_1$}, \meta{cas$_2$}, \dots, alors c'est l'action correspondante
+\meta{cas 1}, \meta{cas 2}, \dots, alors c'est l'action correspondante
 qui est exécutée.
 <<echo=TRUE>>=
 switch(2, 2 + 3, mean(1:10), 5:1)
