@@ -1047,10 +1047,10 @@ exec("sed", c("-E", "'s/le mouvement|la fatigue/le pendule/'", "chanson.txt"))
 \end{Schunk}
 \begin{Schunk}
 \begin{Verbatim}
-$ sed -E 's/l[e|a] (mouvement|fatigue)/le pendule/' \
+$ sed -E 's/l[ea] (mouvement|fatigue)/le pendule/' \
 chanson.txt
 <<echo=FALSE, results=hide>>=
-exec("sed", c("-E", "'s/l[e|a] (mouvement|fatigue)/le pendule/'", "chanson.txt"))
+exec("sed", c("-E", "'s/l[ea] (mouvement|fatigue)/le pendule/'", "chanson.txt"))
 @
 \end{Verbatim}
 \end{Schunk}
@@ -1347,7 +1347,7 @@ La forme générale d'un programme \icode{awk} est donc la suivante:
 
 Étudions quelques exemples pour mieux comprendre ces principes de la
 programmation \icode{awk}. Nous reviendrons plus en détail sur la
-constructions de motifs et d'actions dans les sections suivantes.
+construction de motifs et d'actions dans les sections suivantes.
 
 Le premier exemple effectue avec \icode{awk} une opération que nous
 avons déjà réalisée avec \icode{grep} à la
