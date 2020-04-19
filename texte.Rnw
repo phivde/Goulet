@@ -1050,7 +1050,7 @@ exec("sed", c("-E", "'s/le mouvement|la fatigue/le pendule/'", "chanson.txt"))
 $ sed -E 's/l[e|a] (mouvement|fatigue)/le pendule/' \
 chanson.txt
 <<echo=FALSE, results=hide>>=
-exec("sed", c("-E", "'s/l[e|a] (mouvement|fatigue)/le pendule/'", "chanson.txt"))
+exec("sed", c("-E", "'s/l[ea] (mouvement|fatigue)/le pendule/'", "chanson.txt"))
 @
 \end{Verbatim}
 \end{Schunk}
