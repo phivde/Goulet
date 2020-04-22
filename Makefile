@@ -35,12 +35,10 @@ TAGNAME = v${VERSION}
 all: files commit
 
 files:
-	$(eval url=$(subst /,\/,$(patsubst %/,%,${REPOSURL})))
 	$(eval file_id=$(shell curl --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
 	                             --silent \
 	                             ${APIURL}/releases/${TAGNAME}/assets/links \
-				| sed -E 's/.*\"direct_asset_url\":\"([^"]*)\".*/\1/' \
-				| cut -d/ -f7))
+	                       | sed -E 's/.*\"direct_asset_url\":\".*\/uploads\/([^\/]*)\/.*/\1/'))
 	cd content && \
 	  awk 'BEGIN { FS = "/"; OFS = "/" } \
 	       /^## Édition/ { print; getline; print; getline; \
@@ -50,10 +48,10 @@ files:
 	  mv tmpfile _index.md
 	cd layouts/partials && \
 	  awk 'BEGIN { FS = "/"; OFS = "/" } \
-	       /${url}\/uploads/ { if (NF != 8) { \
-		                       print "invalid number of fields in the uploads url" > "/dev/stderr"; \
-				       exit 1; } \
-				   $$7 = "${file_id}" } 1' \
+	       /uploads/ { if (NF != 8) { \
+		               print "invalid number of fields in the uploads url" > "/dev/stderr"; \
+			       exit 1; } \
+			   $$7 = "${file_id}" } 1' \
 	       site-header.html > tmpfile && \
 	  mv tmpfile site-header.html
 
