@@ -1798,7 +1798,7 @@ BEGIN { OFS = ";" }
 ##-!- ## fonction 'g' dans les fichiers d'exemples, c'est-à-dire la
 ##-!- ## chaine 'g(' précédée d'au moins une espace ou en début de
 ##-!- ## ligne.
-##-!- grep -E '( |^)g\\(' *.R
+##-!- grep -E '( |^)g\(' *.R
 ##-!-
 ##-!- ## Remplaçons maintenant les symboles de commentaires triples
 ##-!- ## '###' en début de ligne (à la Emacs) dans le fichier
@@ -1823,7 +1823,7 @@ BEGIN { OFS = ";" }
 ##-!- ## une espace. Remplaçons ces espaces par des virgules pour
 ##-!- ## convertir le fichier en format CSV. Je fournis deux
 ##-!- ## solutions, avec 'awk' (la plus simple) et avec 'sed'.
-##-!- awk '{ print $1 \",\" $2 }' 100metres.dat
+##-!- awk '{ print $1 "," $2 }' 100metres.dat
 ##-!- sed 's/ /,/' 100metres.dat
 ##-!-
 ##-!- ## Changeons maintenant le format de la date du format ISO
