@@ -14,12 +14,15 @@
 - Chapitre 11: les exemples additionnels sont maintenant distribués
   dans un fichier de script `texte.sh` reproduit à la section 11.6,
   comme dans les autres chapitres.
+- Annexe A: nouvelle section A.6 sur le terminal de RStudio et ajout
+  d'une configurationà la section A.7 (anciennement A.6) pour utiliser
+  Git Bash comme ligne de commande (Windows seulement).
 
 ## Changements
 
 - Section 11.5: afin de raccourcir les résultats, les exemples
-  d'utilisation des fonctions R de recherche et remplacement de texte
-  utilisent seulement les 10 premiers noms de `state.name`.
+  d'utilisation des fonctions R de recherche et de remplacement de
+  texte utilisent seulement les 10 premiers noms de `state.name`.
   
 ## Corrections
 

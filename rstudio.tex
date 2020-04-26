@@ -336,6 +336,30 @@ par les menus.
 \end{enumerate}
 
 
+\section{Terminal RStudio}
+\label{sec:rstudio:terminal}
+
+Le \index{terminal (RStudio)}terminal RStudio permet d'exécuter une
+ligne de commande du système d'exploitation à l'intérieur de
+l'interface familière de RStudio. C'est très utile pour exécuter des
+commande ou des scripts Bash.
+
+Le terminal se présente dans un onglet à côté de celui de la console
+R. Si aucun onglet n'apparait dans votre interface, vous pouvez
+démarrer un terminal depuis le menu \code{Tools|Terminal}.
+
+Lorsqu'un fichier de script avec l'extension \code{.sh} est ouvert
+dans RStudio, le raccourci clavier
+\code{Ctrl+Retour}~$\bullet$~\code{\cmdkey\,\returnkey} évalue la
+ligne sous le curseur dans le terminal plutôt que dans la console R.
+
+\windowsbox{Pour utiliser une ligne de commande \index{Bash}Bash dans
+  RStudio sous Windows, il faut au préalable installer l'interpréteur
+  \index{Git~Bash}Git~Bash de \link{https://git-scm.com/downloads}{Git
+    for Windows} sur le système et configurer l'éditeur tel
+  qu'expliqué à la \autoref{sec:rstudio:configuration}.}
+
+
 \section{Configuration de l'éditeur}
 \index{RStudio!configuration}
 \label{sec:rstudio:configuration}
@@ -348,14 +372,13 @@ sous macOS.
 
 Je recommande d'effectuer les configurations suivantes.
 \begin{enumerate}
-\item Dans la catégorie des options de configuration générales,
-  désactiver l'option \code{Restore .RData into workspace at startup}
-  et régler l'option \code{Save workspace to .RData on exit} à
-  \code{Never}, tel qu'illustré à la
-  \autoref{fig:rstudio:rstudio-startup-and-exit}. Avec ces réglages,
-  RStudio démarre toujours avec une séance de travail vierge et ne
-  sauvegarde pas l'espace de travail de R à la fermeture de
-  l'application.
+\item Dans la catégorie \code{General}, désactiver l'option
+  \code{Restore .RData into workspace at startup} et régler l'option
+  \code{Save workspace to .RData on exit} à \code{Never}, tel
+  qu'illustré à la \autoref{fig:rstudio:rstudio-startup-and-exit}.
+  Avec ces réglages, RStudio démarre toujours avec une séance de
+  travail vierge et ne sauvegarde pas l'espace de travail de R à la
+  fermeture de l'application.
 \item Dans la catégorie \code{Code} et la sous-catégorie
   \code{Editing}, régler l'option \code{Tab width} à \code{4} afin
   d'indenter le code de quatre caractères par défaut. (Ce réglage fait
@@ -367,6 +390,9 @@ Je recommande d'effectuer les configurations suivantes.
   contenant des accents et autres symboles seront ensuite sauvegardés
   dans un codage de caractères standard sur toutes les plateformes
   informatiques.
+\item (Windows seulement) Dans la catégorie \code{Terminal},
+  sélectionner \index{Git~Bash}\code{Git~Bash} dans le menu déroulant
+  de l'option \code{New Terminals open with}.
 \end{enumerate}
 
 \begin{figure}
