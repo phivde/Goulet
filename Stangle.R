@@ -1,4 +1,4 @@
-## Copyright (C) 2019 Vincent Goulet
+## Copyright (C) 2020 Vincent Goulet
 ##
 ## Ce fichier fait partie du projet
 ## «Programmer avec R»
@@ -16,4 +16,4 @@ file <- getSourceName()
 Stangle(file, encoding = "utf-8", annotate = FALSE, split = TRUE)
 
 ## Traitement du fichier créé par Stangle
-postStangle(file, "script")
+postStangle(file, "script", new.ext = if (file == "texte.Rnw") ".sh" else ".R")
