@@ -214,8 +214,12 @@
       nlmin,replicate,row.names,rowMeans,rowSums,sys.time,system.time,%
       tail,which.max,which.min,letters,LETTERS,Trig},
     deletekeywords={c,start,q},
-    alsoletter={.\%},%
-    alsoother={:_\$}}
+    alsoletter={.\%},
+    alsoother={:_\$},
+    moredelim=[il]{\#-*-}}
+  \lstdefinelanguage{shenhanced}[]{sh}{%
+    morekeywords={grep},
+    moredelim=[il]{\#-*-}}
 
   %% Mise en forme du code source.
   %%
@@ -244,7 +248,6 @@
       \fi},
     firstnumber=\scriptfirstline,
     escapechar=`,
-    moredelim=[il]{\#-*-},
     index=[1][keywords],
     indexstyle=\indexcode}
 
