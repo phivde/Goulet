@@ -4,22 +4,38 @@
 
 # (en développement)
 
-## Nouveautés
+## Nouveautés majeures
+
+- Chapitre 11: le chapitre est maintenant distribué avec des exemples
+  réunis dans un fichier de script `texte.sh` reproduit à la section
+  11.6, comme dans les autres chapitres. Il s'agit d'une version
+  beaucoup augmentée des exemples additionnels de l'édition
+  précédente.
+- Annexe A: nouvelle section A.6 sur le terminal de RStudio et ajout
+  d'une configuration à la section A.7 (anciennement A.6) pour utiliser
+  Git Bash comme ligne de commande (Windows seulement).
+
+## Autres nouveautés
 
 - Section 4.5: exemple de construction d'une fonction `is.odd` dans le
   code informatique pour illustrer qu'une valeur booléenne constitue
   implicitement le résultat d'un test logique.
 - Section 11.4.5: exemple de changement du séparateur de champs de
   sortie via la redéfinition de la variable OFS.
-- Chapitre 11: les exemples additionnels sont maintenant distribués
-  dans un fichier de script `texte.sh` reproduit à la section 11.6,
-  comme dans les autres chapitres.
-- Annexe A: nouvelle section A.6 sur le terminal de RStudio et ajout
-  d'une configurationà la section A.7 (anciennement A.6) pour utiliser
-  Git Bash comme ligne de commande (Windows seulement).
 
 ## Changements
 
+- Section 11.2: astuce sur l'option de 'sed' pour remplacer
+  directement dans le fichier d'origine transformée en simple note de
+  bas de page.
+- Section 11.3.3: titre de la section changé pour «Remplacement et
+  répétition», notamment parce que le caractère d'échappement fait
+  plutôt l'objet de la section 11.3.4.
+- Section 11.3.3: le paragraphe décrivant l'opérateur de répétition
+  `?` a été réécrit pour corriger une affirmation fausse.
+- Section 11.3.3: astuce sur les quantificateurs gloutons réécrite
+  avec un exemple différent et un renvoi vers les exemples qui
+  présentent une solution de contournement.
 - Section 11.5: afin de raccourcir les résultats, les exemples
   d'utilisation des fonctions R de recherche et de remplacement de
   texte utilisent seulement les 10 premiers noms de `state.name`.
@@ -132,7 +148,7 @@
   concepts de tranche et de carotte introduits à la section 5.2 au
   moment de parler d'application sur des tableaux à trois dimensions.
 
-# Corrections
+## Corrections
 
 - Fichier `CONTRIBUTING.md`: suppression de la remarque obsolète sur
   les sections tirées de Pro Git.
