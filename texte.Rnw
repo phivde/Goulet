@@ -60,7 +60,7 @@ exec <- function(command, args, echo = TRUE, max.lines = NULL, eval = TRUE, ...)
 ## Les exemples de ce fichier utilisent les fichiers suivants
 ## distribués avec le présent ouvrage:
 ##
-## - fichiers de script bases.R et donnees.R
+## - fichiers de script *.R
 ## - chanson.txt
 ## - 100metres.dat
 ## - carburant.dat
