@@ -45,7 +45,7 @@ git commit -m "<commentaire>"
 4. Publiez ensuite la branche avec les modifications dans le dépôt BitBucket:
 
 ```
-git push -u origin <nom_de_branche>
+git push -u origin <nom de branche>
 ```
 	
 > À ce stade, Git vous demandera peut-être de vous authentifier. Utilisez votre IDUL et votre NIP. 
@@ -56,13 +56,13 @@ git push -u origin <nom_de_branche>
 
 6. Si vous avez d'autres modifications à proposer, reprenez la procédure depuis le début **en utilisant une branche différente**. Autrement, vos modifications seront combinées en une seule requête et il devient difficile de les sélectionner séparément.
 
-7. Vérifiez l'état de votre demande de tirage dans l'interface graphique de BitBucket jusqu'à ce qu'elle soit acceptée ou refusée par le gestionnaire du projet.
+7. Vérifiez l'état de votre demande de tirage dans l'interface graphique de BitBucket jusqu'à ce que le gestionnaire du projet ait rendu sa décision.
 
 Pour des instructions plus détaillées, consultez les [excellents tutoriels](https://www.atlassian.com/git/tutorials) de Atlassian, en particulier celui sur le processus de collaboration [*Gitflow Workflow*](https://www.atlassian.com/git/tutorials/comparing-workflows#gitflow-workflow).
 
 # Contributions fréquemment refusées
 
-Les corrections mentionnées ci-dessous ont été refusées à répétition dans le passé. Elle ne peuvent donner droit à un point boni dans le cours IFT-1902 Informatique pour actuaires.
+Les corrections mentionnées ci-dessous ont été refusées à répétition dans le passé. Elle ne peuvent donner droit à un point boni dans le cours IFT-1902 Programmation avec R pour l'analyse de données.
 
 - S'agissant du caractère typographique, «espace» est un mot féminin. L'expression «suivi d'une espace» est donc correctement orthographiée.
 
