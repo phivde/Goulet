@@ -625,7 +625,7 @@ des étapes du programme. Le regard neuf que vous porterez au code peut
 vous permettre d'y déceler les problèmes.
 
 \gotorbox{Étudiez le fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:paquetages:exemples}.}
+  reproduit à la \autoref{sec:debogage:exemples}.}
 
 <<script, results=hide>>=
 ## Ce fichier fournit le code utile pour refaire les exemples
