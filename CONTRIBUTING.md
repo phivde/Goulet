@@ -2,17 +2,15 @@
 
 # Collaborer au projet *Programmer avec R*
 
-> Seuls les étudiants de l'Université Laval inscrits au cours IFT-1902 disposent des droits en écriture requis pour effectuer la procédure décrite ci-dessous.
+> Seuls les étudiants de l'Université Laval inscrits au cours IFT-1902 disposent des droits en écriture requis pour effectuer la procédure décrite ci-dessous. Les autres personnes qui souhaitent contribuer au projet doivent effectuer une [demande de fusion](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html) dans le [dépôt GitLab](https://gitlab.com/vigou3/programmer-avec-r).
 
 > Ce guide est également disponible en [vidéo](https://youtu.be/nag48IGh8eo).
 
-La version de développement du projet [Programmer avec R](https://vigou3.gitlab.io/programmer-avec-r) est hébergée dans un [dépôt Git public](https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-develop) de la Faculté des sciences et de génie de l'Université Laval.
-
-Le dépôt utilise l'interface [Atlassian BitBucket Server](https://www.atlassian.com/software/bitbucket/server).
+La version de développement du projet [Programmer avec R](https://vigou3.gitlab.io/programmer-avec-r) est hébergée dans un [dépôt Git public](https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-develop) de la Faculté des sciences et de génie de l'Université Laval. Le référentiel utilise [Atlassian BitBucket Server](https://www.atlassian.com/software/bitbucket/server).
 
 La branche `master` du dépôt est réservée en écriture au gestionnaire du projet.
 
-Pour collaborer au projet, vous devez publier vos modifications dans une nouvelle branche et effectuer une demande de tirage (*pull request*) vers la branche `master`. La procédure à suivre à partir d'une interface en ligne de commande (Git Bash sous Windows ou Terminal sous macOS) est la suivante.
+Pour collaborer au projet, vous devez publier vos modifications dans une nouvelle branche et effectuer une demande de tirage (*pull request*) vers la branche `master` tel qu'expliqué ci-dessous.
 
 1. Si  vous travaillez sur le code source pour la première fois, déplacez-vous avec la commande `cd` dans le répertoire dans lequel vous voulez enregistrer le code source du projet (le répertoire `programmer-avec-r-develop` sera créé automatiquement), clonez le dépôt et déplacez-vous ensuite dans le dossier du code source:
 
@@ -33,10 +31,10 @@ git pull
 2. Créez une branche (locale) pour vos modifications:
 
 ```
-git checkout -b <nom_de_branche>
+git checkout -b <nom de branche>
 ```
 	
-3. Effectuez maintenant vos modifications. Il y a un fichier par chapitre et son nom, avec une extension `.tex` ou `.Rnw`, a un lien évident avec le titre du chapitre. Ne faites des modifications que dans un seul fichier à la fois! Une fois les modifications terminées, publiez le fichier modifié dans votre dépôt local avec un commentaire utile sur la nature des modifications:
+3. Effectuez maintenant vos modifications. Il y a un fichier par chapitre et son nom, avec une extension `.tex` ou `.Rnw`, a un lien évident avec le titre du chapitre. Le code informatique de la section d'exemples d'un chapitre est intégré au texte du chapitre. Les solutions des exercices se trouvent avec le texte des exercices. Une fois les modifications terminées, publiez le fichier modifié dans votre dépôt local avec un commentaire utile sur la nature des modifications:
     
 ```
 git status
@@ -44,17 +42,21 @@ git add <fichier>
 git commit -m "<commentaire>"
 ```
 
-> À ce stade, Git vous demandera peut-être de vous authentifier. Utilisez votre IDUL et votre NIP.
-
 4. Publiez ensuite la branche avec les modifications dans le dépôt BitBucket:
 
 ```
 git push -u origin <nom_de_branche>
 ```
 	
-5. Finalement, connectez-vous à l'interface graphique de BitBucket à l'adresse <https://projets.fsg.ulaval.ca/git/login> avec votre IDUL/NIP et faites une demande de tirage (*pull request*) vers la branche `master` en sélectionnant l'option correspondante dans la barre latérale.
+> À ce stade, Git vous demandera peut-être de vous authentifier. Utilisez votre IDUL et votre NIP. 
 
-6. Si vous avez d'autres modifications à proposer, reprenez la procédure depuis le début en utilisant une **branche différente**. Autrement, vos modifications seront combinées en une seule requête et il devient difficile de les sélectionner séparément.
+> Si vous éprouvez des problèmes d'authentification, vérifiez vos informations d'authentification dans le *gestionnaire de mots de passe* de votre système d'exploitation ([Gestionnaire d'identification](https://support.microsoft.com/fr-ca/help/4026814/windows-accessing-credential-manager) sous Windows; [Trousseaux d'accès](https://support.apple.com/fr-ca/guide/keychain-access/welcome/mac) sous macOS).
+
+5. Finalement, connectez-vous à l'[interface graphique de BitBucket](https://projets.fsg.ulaval.ca/git/login) avec votre IDUL/NIP et faites une demande de tirage (*pull request*) vers la branche `master` en sélectionnant l'option correspondante dans la barre latérale.
+
+6. Si vous avez d'autres modifications à proposer, reprenez la procédure depuis le début **en utilisant une branche différente**. Autrement, vos modifications seront combinées en une seule requête et il devient difficile de les sélectionner séparément.
+
+7. Vérifiez l'état de votre demande de tirage dans l'interface graphique de BitBucket jusqu'à ce qu'elle soit acceptée ou refusée par le gestionnaire du projet.
 
 Pour des instructions plus détaillées, consultez les [excellents tutoriels](https://www.atlassian.com/git/tutorials) de Atlassian, en particulier celui sur le processus de collaboration [*Gitflow Workflow*](https://www.atlassian.com/git/tutorials/comparing-workflows#gitflow-workflow).
 
