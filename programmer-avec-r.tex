@@ -547,7 +547,7 @@
     puis-que
   }
 
-%  \includeonly{texte}
+%  \includeonly{}
 
 \begin{document}
 
@@ -556,7 +556,7 @@
 \pagestyle{empty}
 
 \input{couverture-avant}
-\null\cleardoublepage           % cf. section 2.2 textpos.pdf
+\null\cleartoverso              % cf. section 2.2 textpos.pdf
 
 \include{notices}
 \clearpage
@@ -575,7 +575,22 @@
 
 \include{comment}
 
-%% Vignette tirée de xkcd.com
+%% Citation de D.E. Knuth (recto)
+\cleartorecto
+\thispagestyle{empty}
+\begin{vplace}[0.45]
+  \begin{quote}
+    L'ultime test pour vérifier si je comprends quelque chose
+    consiste à l'expliquer à un ordinateur. Je peux vous dire quelque
+    chose et vous hocherez la tête, mais sans que je sois certain d'avoir
+    bien expliqué. L'ordinateur, lui, ne hoche pas la tête. Il répète
+    exactement ce que je lui ai dit. Vous pouvez faire illusion dans
+    plusieurs aspects de la vie, mais pas avec les ordinateurs.
+    \sourceatright{Donald E.~Knuth}
+  \end{quote}
+\end{vplace}
+
+%% Vignette tirée de xkcd.com (verso)
 \cleartoverso
 \thispagestyle{empty}
 \begin{vplace}[0.45]
