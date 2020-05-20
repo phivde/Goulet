@@ -2,6 +2,19 @@
 === Programmer avec R
 ===
 
+# (en développement)
+
+## Nouveautés
+
+- Ajout d'une page liminaire avec, au recto, une citation de D.E.
+  Knuth et, au verso, la vignette de XKCD. La référence de la citation
+  se trouve dans la page des notices.
+- Chapitre 10: amélioration des explications sur la création d'une
+  bibliothèque personnelle à la section 10.3. De plus, une procédure
+  entièrement depuis la ligne de commande (avec `dir.create` et
+  `writeLines`) a été ajoutée dans le fichier de script du chapitre.
+
+
 # 2020.05 (2020-04-29)
 
 ## Nouveautés majeures
