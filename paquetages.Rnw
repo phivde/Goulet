@@ -89,7 +89,7 @@ Packages dans la bibliothèque
 base           The R Base Package
 boot           Bootstrap Functions
                (Originally by Angelo Canty for S)
-\meta{...}
+...
 \end{Verbatim}
 \end{Schunk}
 
@@ -111,47 +111,57 @@ library("\meta{paquetage}")
 \label{sec:paquetages:library}
 
 Nous verrons à la \autoref{sec:paquetages:install} comment ajouter des
-paquetages au système de base. Je recommande fortement de prévoir une
-bibliothèque personnelle pour contenir ces nouveaux paquetages. Tout
-d'abord, cela permet d'éviter les éventuels problèmes d'accès en
+paquetages au système de base. Je vous recommande fortement de prévoir
+une bibliothèque personnelle pour contenir ces nouveaux paquetages.
+Tout d'abord, cela permet d'éviter les éventuels problèmes d'accès en
 écriture dans la bibliothèque principale, surtout sur des systèmes
 partagés. Ensuite, les paquetages placés dans une bibliothèque
 personnelle résistent mieux au processus de mise à jour de R que ceux
 ajoutés à la bibliothèque principale.
 
-Avant toute chose, il faut créer un répertoire dans son système de
-fichiers qui servira de bibliothèque personnelle. Dans la suite, nous
-utiliserons \verb=~/R/library=, où \verb=~= représente le dossier de
-départ (\autoref{sec:informatique:os:unix}).
+Avant toute chose, vous devez prévoir un emplacement dans votre
+système de fichiers pour accueillir la bibliothèque personnelle. Sous
+macOS, je recommande d'utiliser \code{\string~/Library/R/library}.
+Pour les autres systèmes d'exploitation, \code{\string~/R/library}
+devrait convenir. Ces emplacements n'existent probablement pas dans
+votre système de fichiers. Vous devez donc créer le répertoire
+\code{R} et, à l'intérieur de celui-ci, le répertoire \code{library}.
+(Dans ce qui précède, «\code{\string~}» représente le dossier de
+départ tel que mentionné à la \autoref{sec:informatique:os:unix}.)
 
-\osxbox{Sous macOS, le dossier tout indiqué pour la bibliothèque
-  personnelle est \code{\string~/Library/R/library}. Toutefois, le
-  dossier \code{\string~/Library} est caché dans le Finder. Pour y
-  accéder, cliquez sur le menu \code{Aller} en appuyant simultanément
-  sur la touche Option (\optkey), puis sélectionnez
+\osxbox{Le dossier \code{\string~/Library} est caché dans le Finder.
+  Pour y accéder, cliquez sur le menu \code{Aller} en appuyant
+  simultanément sur la touche Option (\optkey), puis sélectionnez
   \code{Bibliothèque}.}
 
-Au démarrage, R lit le fichier de configuration \verb=~/.Renviron=,
-s'il existe. C'est dans ce fichier que l'on indique à R l'existence
-d'une bibliothèque personnelle de même que l'endroit où elle se trouve
-dans le système de fichiers.
-
-À l'aide d'un éditeur de texte, ouvrir ou créer\footnote{Pour créer le
-  fichier dans RStudio, sélectionner \code{File|New File|Text
-    File}.} %
-le fichier \verb=~/.Renviron= et y ajouter la ligne ci-dessous. Au
-besoin, remplacer le chemin \verb=~/R/library= par celui du répertoire
-créé précédemment. Utiliser la barre oblique avant (\code{/}) pour
+Au démarrage, R lit le fichier de configuration
+\code{\string~/.Renviron}, s'il existe. C'est dans ce fichier que vous
+indiquez à R l'existence d'une bibliothèque personnelle de même que
+l'endroit où elle se trouve dans le système de fichiers. À l'aide d'un
+éditeur de texte, vous devez donc ouvrir\footnote{Pour afficher les
+  fichiers débutant par un point dans la boite de dialogue d'ouverture
+  de fichier d'une application comme RStudio sous macOS, appuyez sur
+  \shiftkey\cmdkey\code{.} (\shiftkey\cmdkey~«point»).} %
+ou créer\footnote{Pour créer le fichier dans RStudio, sélectionnez
+  \code{File|New File|Text File}.} %
+le fichier \code{\string~/.Renviron} et y ajouter la ligne ci-dessous
+en adaptant, au besoin, le chemin d'accès pour celui du répertoire
+créé précédemment. Utilisez la barre oblique avant («\code{/}») pour
 séparer les répertoires dans le chemin d'accès.
-\begin{Schunk}
-\begin{verbatim}
+\begin{trivlist}
+\item \textbf{macOS}
+  \begin{Schunk}
+\begin{Verbatim}
+R_LIBS_USER="~/Library/R/library"
+\end{Verbatim}
+  \end{Schunk}
+\item \textbf{autres systèmes d'exploitation}
+  \begin{Schunk}
+\begin{Verbatim}
 R_LIBS_USER="~/R/library"
-\end{verbatim}
-\end{Schunk}
-
-\osxbox{Pour afficher les fichiers débutant par un point dans la boite
-  de dialogue d'ouverture de fichier d'une application comme RStudio,
-  appuyez sur \shiftkey\cmdkey\code{.} (\shiftkey\cmdkey~«point»).}
+\end{Verbatim}
+  \end{Schunk}
+\end{trivlist}
 
 Une fois la configuration terminée et après un redémarrage de R, le
 chemin vers la bibliothèque personnelle devrait apparaitre dans les
@@ -178,6 +188,11 @@ principale.
   \index{libPaths@\code{.libPaths}}\code{.libPaths} pour la gestion
   des bibliothèques.}
 
+\gotorbox{Le fichier de script \code{\scriptfilename} reproduit à la
+  \autoref{sec:donnees:exemples} propose, aux lignes
+  \reflines{paquetages:library}, une procédure alternative --- et sans
+  doute plus simple --- pour créer une bibliothèque personnelle
+  entièrement depuis la ligne de commande de R.}
 
 \section{Installation de paquetages additionnels}
 \label{sec:paquetages:install}
@@ -229,13 +244,42 @@ search()
 library("MASS")
 
 ###
-### CRÉATION D'UNE BIBLIOTHÈQUE PERSONNELLE
+### CRÉATION D'UNE BIBLIOTHÈQUE PERSONNELLE `\labelline{paquetages:library}`
 ###
 
 ## Liste des bibliothèques consultées par R. Votre
 ## bibliothèque personnelle devrait y apparaitre si vous avez
 ## suivi la procédure expliquée dans le chapitre.
 .libPaths()
+
+## Comme alternative à la procédure du chapitre, il est
+## possible de créer le répertoire pour la bibliothèque
+## personnelle, puis d'inscrire son emplacement dans le
+## fichier ~/.Renviron directement depuis R.
+##
+## Tout d'abord, la commande 'dir.create' crée un répertoire
+## dans le système de fichier. Adaptez les chemins d'accès
+## selon vos besoins.
+##
+## Si vous êtes sous macOS, utilisez la commande suivante.
+##-!- dir.create("~/Library/R/library", recursive = TRUE)
+
+## Pour tous les autres systèmes d'exploitation, utilisez
+## plutôt la commande suivante.
+##-!- dir.create("~/R/library", recursive = TRUE) # autres OS
+
+## Ensuite, la commande 'writeLines' permet d'écrire
+## directement dans un fichier. Assurez-vous que le chemin
+## d'accès correspond à celui utilisé ci-dessus.
+##
+## Si vous êtes sous macOS, utilisez la commande suivante.
+##-!- writeLines('R_LIBS_USER="~/Library/R/library"',
+##-!-            con = "~/.Renviron")
+
+## Pour tous les autres systèmes d'exploitation, utilisez
+## plutôt la commande suivante.
+##-!- writeLines('R_LIBS_USER="~/R/library"',
+##-!-            con = "~/.Renviron")  `\labelline{paquetages:library:fin}`
 
 ###
 ### INSTALLATION DE PAQUETAGES ADDITIONNELS
