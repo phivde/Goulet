@@ -14,12 +14,11 @@
 
 \def\scriptfilename{\currfilebase.sh}
 \SweaveOpts{echo=FALSE}
+\SweaveInput{share/license-by-sa.nw}
 
 <<echo=FALSE, results=hide>>=
 source(".Sweaveprofile")   # configuration
 source("Stangle.R")        # lancement de Stangle
-
-#options(width = 50)
 
 ##
 ## Affiche une commande exécutée par le système et son résultat.
@@ -46,16 +45,7 @@ exec <- function(command, args, echo = TRUE, max.lines = NULL, eval = TRUE, ...)
 }
 @
 <<script>>=
-## Copyright (C) 2020 Vincent Goulet
-##
-## Ce fichier fait partie du projet
-## «Programmer avec R»
-## https://gitlab.com/vigou3/programmer-avec-r
-##
-## Cette création est mise à disposition sous licence
-## Attribution-Partage dans les mêmes conditions 4.0
-## International de Creative Commons.
-## https://creativecommons.org/licenses/by-sa/4.0/
+<<license-by-sa>>
 
 ## Les exemples de ce fichier utilisent les fichiers suivants
 ## distribués avec le présent ouvrage:

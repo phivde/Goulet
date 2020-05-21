@@ -21,7 +21,7 @@ source(".Sweaveprofile")   # configuration
 source("Stangle.R")        # lancement de Stangle
 @
 <<script>>=
-<<licence-by-sa>>
+<<license-by-sa>>
 @
 
 \begin{objectifs}
