@@ -9,10 +9,15 @@
 - Ajout d'une page liminaire avec, au recto, une citation de D.E.
   Knuth et, au verso, la vignette de XKCD. La référence de la citation
   se trouve dans la page des notices.
-- Chapitre 10: amélioration des explications sur la création d'une
-  bibliothèque personnelle à la section 10.3. De plus, une procédure
-  entièrement depuis la ligne de commande (avec `dir.create` et
-  `writeLines`) a été ajoutée dans le fichier de script du chapitre.
+- Chapitre 10: révision des explications sur la création d'une
+  bibliothèque personnelle à la section 10.3. Les instructions,
+  beaucoup simplifiées, ont maintenant recours à la ligne de commande
+  Unix. Ceci évite d'avoir à expliquer comment créer un fichier dans
+  RStudio, ou comment accéder à des fichiers ou des dossiers cachés.
+- Chapitre 10: dans la même veine que ci-dessus, une procédure de
+  création d'une bibliothèque personnelle entièrement depuis la ligne
+  de commande de R (avec `dir.create` et `writeLines`) a été ajoutée
+  dans le fichier de script du chapitre.
 
 
 # 2020.05 (2020-04-29)
