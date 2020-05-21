@@ -14,22 +14,14 @@
 
 \def\scriptfilename{\currfilebase.R}
 \SweaveOpts{echo=FALSE}
+\SweaveInput{share/license-by-sa.nw}
 
 <<echo=FALSE, results=hide>>=
 source(".Sweaveprofile")   # configuration
 source("Stangle.R")        # lancement de Stangle
 @
 <<script>>=
-## Copyright (C) 2020 Vincent Goulet
-##
-## Ce fichier fait partie du projet
-## «Programmer avec R»
-## https://gitlab.com/vigou3/programmer-avec-r
-##
-## Cette création est mise à disposition sous licence
-## Attribution-Partage dans les mêmes conditions 4.0
-## International de Creative Commons.
-## https://creativecommons.org/licenses/by-sa/4.0/
+<<licence-by-sa>>
 @
 
 \begin{objectifs}
@@ -93,6 +85,22 @@ boot           Bootstrap Functions
 \end{Soutput}
 \end{Schunk}
 
+<<script, results=hide>>=
+###
+### SYSTÈME DE BASE
+###
+
+## La fonction 'search' retourne la liste des environnements
+## dans lesquels R va chercher un objet (en particulier une
+## fonction). '.GlobalEnv' est l'environnement de travail.
+search()
+
+## Liste de tous les packages installés sur votre système.
+## Noter que MASS en fait partie. C'est un paquetage livré
+## avec R, mais qui n'est pas chargé par défaut.
+##-!- library()
+@
+
 
 \section{Utilisation d'un paquetage}
 \label{sec:paquetages:utilisation}
@@ -105,6 +113,16 @@ C'est là le principal rôle de la fonction \Icode{library}.
 library("\meta{paquetage}")
 \end{Verbatim}
 \end{Schunk}
+
+<<script, results=hide>>=
+###
+### UTILISATION D'UN PAQUETAGE
+###
+
+## Chargement du package MASS qui contient plusieurs
+## fonctions statistiques très utiles.
+##-!- library("MASS")
+@
 
 
 \section{Création d'une bibliothèque personnelle}
@@ -209,55 +227,7 @@ principale.
   tous points équivalente --- pour créer une bibliothèque personnelle
   entièrement depuis la ligne de commande de R.}
 
-\section{Installation de paquetages additionnels}
-\label{sec:paquetages:install}
-
-Dès les débuts de R, les développeurs et utilisateurs ont mis sur pied
-le dépôt central de paquetages
-\link{https://cran.r-project.org}{\emph{Comprehensive R Archive
-    Network}} (CRAN). Ce site compte aujourd'hui des milliers de
-paquetages et le nombre ne cesse de croitre.
-
-L'installation d'un paquetage distribué via CRAN est très simple avec
-la fonction \Icode{install.packages}. Celle-ci télécharge le paquetage
-spécifié en argument depuis CRAN et l'installe, par défaut, dans la
-première bibliothèque de
-\index{libPaths@\code{.libPaths}}\code{.libPaths}.
-\begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
-install.packages("\meta{paquetage}")
-\end{Verbatim}
-\end{Schunk}
-
-Pour utiliser le paquetage, il faut le charger en mémoire avec
-\icode{library}, tel qu'expliqué à la
-\autoref{sec:paquetages:utilisation}. R recherche le paquetage
-spécifié dans les bibliothèques de
-\index{libPaths@\code{.libPaths}}\code{.libPaths}.
-
 <<script, results=hide>>=
-###
-### SYSTÈME DE BASE
-###
-
-## La fonction 'search' retourne la liste des environnements
-## dans lesquels R va chercher un objet (en particulier une
-## fonction). '.GlobalEnv' est l'environnement de travail.
-search()
-
-## Liste de tous les packages installés sur votre système.
-## Noter que MASS en fait partie. C'est un paquetage livré
-## avec R, mais qui n'est pas chargé par défaut.
-##-!- library()
-
-###
-### UTILISATION D'UN PAQUETAGE
-###
-
-## Chargement du package MASS qui contient plusieurs
-## fonctions statistiques très utiles.
-library("MASS")
-
 ###
 ### CRÉATION D'UNE BIBLIOTHÈQUE PERSONNELLE `\labelline{paquetages:library}`
 ###
@@ -295,7 +265,40 @@ library("MASS")
 ## plutôt la commande suivante.
 ##-!- writeLines('R_LIBS_USER="~/R/library"',
 ##-!-            con = "~/.Renviron")  `\labelline{paquetages:library:fin}`
+@
 
+
+\section{Installation de paquetages additionnels}
+\label{sec:paquetages:install}
+
+Dès les débuts de R, les développeurs et utilisateurs ont mis sur pied
+le dépôt central de paquetages
+\link{https://cran.r-project.org}{\emph{Comprehensive R Archive
+    Network}} (CRAN). Ce site compte aujourd'hui des milliers de
+paquetages et le nombre ne cesse de croitre.
+
+L'installation d'un paquetage distribué via CRAN est très simple avec
+la fonction \Icode{install.packages}. Celle-ci télécharge le paquetage
+spécifié en argument depuis CRAN et l'installe, par défaut, dans la
+première bibliothèque de
+\index{libPaths@\code{.libPaths}}\code{.libPaths}.
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+install.packages("\meta{paquetage}")
+\end{Verbatim}
+\end{Schunk}
+
+Pour utiliser le paquetage, il faut le charger en mémoire avec
+\icode{library}, tel qu'expliqué à la
+\autoref{sec:paquetages:utilisation}. R recherche le paquetage
+spécifié dans les bibliothèques de
+\index{libPaths@\code{.libPaths}}\code{.libPaths}.
+
+\gotorbox{Étudiez l'intégralité du fichier de script
+  \code{\scriptfilename} reproduit à la
+  \autoref{sec:paquetages:exemples}.}
+
+<<script, results=hide>>=
 ###
 ### INSTALLATION DE PAQUETAGES ADDITIONNELS
 ###
@@ -314,9 +317,6 @@ library("MASS")
 ## '.libPaths()'.
 library("actuar")
 @
-
-\gotorbox{Étudiez le fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:paquetages:exemples}.}
 
 
 \section{Exemples}
