@@ -82,7 +82,7 @@ search()
 \begin{Sinput}
 > library()
 \end{Sinput}
-\begin{Verbatim}[commandchars=\\\{\}]
+\begin{Soutput}[commandchars=\\\{\}]
 Packages dans la bibliothèque
 ‘/Library/Frameworks/R.framework/\meta{...}/library’ :
 
@@ -90,7 +90,7 @@ base           The R Base Package
 boot           Bootstrap Functions
                (Originally by Angelo Canty for S)
 ...
-\end{Verbatim}
+\end{Soutput}
 \end{Schunk}
 
 
@@ -117,67 +117,82 @@ Tout d'abord, cela permet d'éviter les éventuels problèmes d'accès en
 écriture dans la bibliothèque principale, surtout sur des systèmes
 partagés. Ensuite, les paquetages placés dans une bibliothèque
 personnelle résistent mieux au processus de mise à jour de R que ceux
-ajoutés à la bibliothèque principale.
+ajoutés à la bibliothèque principale. Il s'agit d'un préréglage
+absolu\footnote{Le terme «préréglage absolu» a été proposé par
+  l'Office québécois de la langue française comme équivalent de
+  l'expression anglaise \emph{set and forget}.} %
+que vous aurez à effectuer une seule fois. L'investissement en temps
+--- minime --- en vaut largement la peine.
 
-Avant toute chose, vous devez prévoir un emplacement dans votre
-système de fichiers pour accueillir la bibliothèque personnelle. Sous
-macOS, je recommande d'utiliser \code{\string~/Library/R/library}.
-Pour les autres systèmes d'exploitation, \code{\string~/R/library}
-devrait convenir. Ces emplacements n'existent probablement pas dans
-votre système de fichiers. Vous devez donc créer le répertoire
-\code{R} et, à l'intérieur de celui-ci, le répertoire \code{library}.
-(Dans ce qui précède, «\code{\string~}» représente le dossier de
-départ tel que mentionné à la \autoref{sec:informatique:os:unix}.)
+La mise sur pied d'une bibliothèque personnelle consiste simplement à
+créer un répertoire dans son système de fichier pour accueillir la
+bibliothèque, puis à indiquer à R, via un fichier de configuration,
+l'existence et l'emplacement de cette bibliothèque.
 
-\osxbox{Le dossier \code{\string~/Library} est caché dans le Finder.
-  Pour y accéder, cliquez sur le menu \code{Aller} en appuyant
-  simultanément sur la touche Option (\optkey), puis sélectionnez
-  \code{Bibliothèque}.}
+Voici une procédure pas à pas pour compléter les opérations de
+création d'une bibliothèque personnelle depuis une une ligne de
+commande Unix (\index{Terminal}Terminal sous macOS; \index{MSYS}MSYS
+de \index{MSYS2}\link{https://www.msys2.org}{MSYS2} ou
+\index{Git~Bash}Git~Bash de \link{https://git-scm.com/downloads}{Git
+  for Windows} sous Windows; terminal RStudio
+(\autoref{sec:rstudio:terminal}).
 
-Au démarrage, R lit le fichier de configuration
-\code{\string~/.Renviron}, s'il existe. C'est dans ce fichier que vous
-indiquez à R l'existence d'une bibliothèque personnelle de même que
-l'endroit où elle se trouve dans le système de fichiers. À l'aide d'un
-éditeur de texte, vous devez donc ouvrir\footnote{Pour afficher les
-  fichiers débutant par un point dans la boite de dialogue d'ouverture
-  de fichier d'une application comme RStudio sous macOS, appuyez sur
-  \shiftkey\cmdkey\code{.} (\shiftkey\cmdkey~«point»).} %
-ou créer\footnote{Pour créer le fichier dans RStudio, sélectionnez
-  \code{File|New File|Text File}.} %
-le fichier \code{\string~/.Renviron} et y ajouter la ligne ci-dessous
-en adaptant, au besoin, le chemin d'accès pour celui du répertoire
-créé précédemment. Utilisez la barre oblique avant («\code{/}») pour
-séparer les répertoires dans le chemin d'accès.
-\begin{trivlist}
-\item \textbf{macOS}
-  \begin{Schunk}
+\begin{enumerate}
+\item Créer les répertoires dans votre système de fichiers pour
+  accueillir la bibliothèque personnelle. Sous macOS, je recommande
+  d'utiliser le répertoire \code{\string~/Library/R/library}. Pour les
+  autres systèmes d'exploitation, \code{\string~/R/library} devrait
+  convenir. (Ici, «\code{\string~}» représente le dossier de départ
+  tel qu'expliqué à la \autoref{sec:informatique:os:unix}.)
+  \begin{trivlist}
+  \item \textbf{macOS}
+    \begin{Schunk}
 \begin{Verbatim}
-R_LIBS_USER="~/Library/R/library"
+$ mkdir -p ~/Library/R/library
 \end{Verbatim}
-  \end{Schunk}
-\item \textbf{autres systèmes d'exploitation}
-  \begin{Schunk}
+    \end{Schunk}
+  \item \textbf{autres systèmes d'exploitation}
+    \begin{Schunk}
 \begin{Verbatim}
-R_LIBS_USER="~/R/library"
+$ mkdir -p ~/R/library
 \end{Verbatim}
-  \end{Schunk}
-\end{trivlist}
-
-Une fois la configuration terminée et après un redémarrage de R, le
-chemin vers la bibliothèque personnelle devrait apparaitre dans les
-résultats de la commande
-\index{libPaths@\code{.libPaths}}\code{.libPaths}.
-\begin{Schunk}
+    \end{Schunk}
+  \end{trivlist}
+\item Inscrire l'emplacement de la bibliothèque dans le fichier de
+  configuration \code{\string~/.Renviron} que R lit au démarrage.
+  \begin{trivlist}
+  \item \textbf{macOS}
+    \begin{Schunk}
+\begin{Verbatim}
+$ echo 'R_LIBS_USER="~/Library/R/library"' >> ~/.Renviron
+\end{Verbatim}
+    \end{Schunk}
+  \item \textbf{autres systèmes d'exploitation}
+    \begin{Schunk}
+\begin{Verbatim}
+$ echo 'R_LIBS_USER="~/R/library"' >> ~/.Renviron
+\end{Verbatim}
+    \end{Schunk}
+  \end{trivlist}
+  \warningbox{Les commandes ci-dessus utilisent des guillemets simples
+    «\code{'}» et doubles «\code{"}». Veillez à respecter leur nature
+    et leur position.}
+\item Redémarrer R et vérifier que le chemin vers la bibliothèque
+  personnelle apparait dans les résultats de la commande
+  \index{libPaths@\code{.libPaths}}\code{.libPaths}.
+  \begin{Schunk}
 \begin{Sinput}
 > .libPaths()
 \end{Sinput}
-\begin{Verbatim}[commandchars=\\\{\}]
+\begin{Soutput}[commandchars=\\\{\}]
 <<echo=FALSE, results=tex, strip.white=false>>=
 cat(paste0('"', sub("Versions/.*?/Resources", "\\\\meta{...}", .libPaths()), '"'),
     fill = TRUE, labels = c("[1]", "[2]"))
 @
-\end{Verbatim}
-\end{Schunk}
+\end{Soutput}
+  \end{Schunk}
+\item Il n'y a même pas de quatrième étape.
+\end{enumerate}
 
 La bibliothèque personnelle a toujours préséance sur la bibliothèque
 principale.
@@ -190,8 +205,8 @@ principale.
 
 \gotorbox{Le fichier de script \code{\scriptfilename} reproduit à la
   \autoref{sec:donnees:exemples} propose, aux lignes
-  \reflines{paquetages:library}, une procédure alternative --- et sans
-  doute plus simple --- pour créer une bibliothèque personnelle
+  \reflines{paquetages:library}, une procédure alternative --- et en
+  tous points équivalente --- pour créer une bibliothèque personnelle
   entièrement depuis la ligne de commande de R.}
 
 \section{Installation de paquetages additionnels}
