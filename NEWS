@@ -9,6 +9,10 @@
 - Ajout d'une page liminaire avec, au recto, une citation de D.E.
   Knuth et, au verso, la vignette de XKCD. La référence de la citation
   se trouve dans la page des notices.
+- Introduction: ajout d'une section expliquant l'importance dans
+  l'ouvrage de la ligne de commande Unix et des systèmes de gestion de
+  versions, avec un lien vers ma formation concomitante «Ligne de
+  commande et gestion de versions avec Git».
 - Chapitre 10: révision des explications sur la création d'une
   bibliothèque personnelle à la section 10.3. Les instructions,
   beaucoup simplifiées, ont maintenant recours à la ligne de commande
