@@ -26,27 +26,43 @@ options(width = 52)
 ##
 getSourceName <- function()
 {
-    args <- commandArgs(TRUE)
+    args <- commandArgs(FALSE)
 
-    ## Quand Sweave est appelé avec l'argument 'encoding="utf-8"', sur
-    ## le fichier 'foo.Rnw', l'objet 'args' est une chaine de
+    ## Si Sweave est lancé à partir de
+    ##
+    ##   R -e "Sweave('foo.Rnw', ...)"
+    ##
+    ## l'expression se retrouve parmi les arguments et il s'agit
+    ## ensuite d'en extraire le nom du fichier.
+    if (length(cmd <- grep("Sweave\\(", args, value = TRUE)))
+        return(regmatches(cmd,
+                          regexpr("(?<=Sweave\\(['\"]).*(?=['\"])",
+                                  cmd, perl = TRUE)))
+
+    ## Si Sweave est lancé à partir de
+    ##
+    ##   R CMD Sweave --encoding="utf-8" foo.Rnw
+    ##
+    ## l'argument qui contient l'information utile est une chaine de
     ## caractères de la forme
     ##
     ##   nextArg--encoding=utf-8nextArgfoo.Rnw
     ##
-    ## Il s'agit d'extraire 'foo.Rnw' de cette chaine.
-    args <- strsplit(args, 'nextArg', fixed = TRUE)[[1L]]
-    tail(args, 1L)
+    ## Les arguments sont dans l'ordre qu'ils ont été entrés à la
+    ## ligne de commande.
+    if (length(cmd <- grep("^nextArg", args, value = TRUE)))
+        return(grep("^--|^$", strsplit(cmd, 'nextArg', fixed = TRUE)[[1L]],
+                    invert = TRUE, value = TRUE))
 }
 
 ###
 ### postStangle(file, ...)
 ###
-##  Effectuer le traitement nécessaire dans le fichier 'foo-suffix.R'
-##  après l'étape Stangle effectuée sur 'foo.Rnw':
+##  Effectuer le traitement nécessaire dans le fichier 'file-suffix.R'
+##  après l'étape Stangle effectuée sur 'file.Rnw':
 ##
-##  - supprimer "-suffix" dans le nom du fichier et, possiblement,
-##    changer l'extension ".R" pour autre chose;
+##  - conserver uniquement 'suffix' dans le nom du fichier et,
+##    possiblement, changer l'extension ".R" pour autre chose;
 ##  - activer les expressions invalides désactivées car elles auraient
 ##    causé problème dans Sweave.
 ##  - supprimer les lignes blanches insérées par Stangle;
@@ -66,15 +82,14 @@ postStangle <- function(file, ...)
     if (!is.character(script))
         stop("error renaming the script file")
     processLines(script)
-    cleanup(file)
 }
 
 ###
 ### renameTangled(file, suffix, new.ext = ".R")
 ###
-##  Supprimer le suffixe "-suffix" du nom du fichier produit par
+##  Conserver uniquement 'suffix' du nom du fichier produit par
 ##  Stangle sur le fichier 'file' et changer l'extension du fichier
-##  de ".R" à "new.ext".
+##  de ".R" à 'new.ext'.
 ##
 ##  Arguments
 ##
@@ -86,9 +101,9 @@ postStangle <- function(file, ...)
 ##
 renameTangled <- function(file, suffix, new.ext = ".R")
 {
-    filebase <- sub(".Rnw", "", file)
-    script <- paste0(filebase, new.ext)
-    out <- file.rename(paste0(filebase, "-", suffix, ".R"), script)
+    basefile <- sub(".Rnw", "", file)
+    script <- paste0(suffix, new.ext)
+    out <- file.rename(paste0(basefile, "-", suffix, ".R"), script)
     if (out)
         out <- script
     out
@@ -110,44 +125,13 @@ renameTangled <- function(file, suffix, new.ext = ".R")
 ##
 ##  Valeur
 ##
-##  La valeur de 'system(..., intern = FALSE)'.
+##  La valeur de 'system2(..., stdout = FALSE)'.
 ##
 processLines <- function(file)
 {
-    cmd <- paste("sed -E -i ''",
-                 "-e 's/##-!-[ ]?//'",
-                 "-e 'N;/^\\n$/D;P;D;'",
-                 file)
-    system(cmd)
-}
-
-###
-### cleanup(file)
-###
-##  Supprimer les fichiers de la forme foo-001.R, foo-002.R, etc.
-##  créés par Stangle sur le fichier foo.Rnw.
-##
-##  Arguments
-##
-##  file: nom du fichier .Rnw
-##
-##  Valeur
-##
-##  Comme 'system(..., intern = FALSE)': invisible(0) si tous les
-##  fichiers ont été supprimés; invisible(127) et un avertissement
-##  sinon.
-##
-cleanup <- function(file)
-{
-    filebase <- sub(".Rnw", "", file)
-    pat <- paste0(filebase, "-[0-9]{3}", ".R")
-    scripts <- list.files(pattern = pat)
-    ok <- file.remove(scripts)
-    if (all(ok))
-        invisible(0)
-    else
-    {
-        warning(paste(file(s), scripts[!ok], "not removed"))
-        invisible(127)
-    }
+    args <- c("-E -i ''",
+              "-e 's/##-!- ?//'",
+              "-e 'N;/^\\n$/D;P;D;'",
+              file)
+    system2("sed", args, stdout = FALSE)
 }
