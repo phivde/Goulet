@@ -17,3 +17,8 @@ Stangle(file, encoding = "utf-8", annotate = FALSE, split = TRUE)
 
 ## Traitement du fichier créé par Stangle
 postStangle(file, "script", new.ext = if (file == "texte.Rnw") ".sh" else ".R")
+
+## Nettoyage
+basefile <- sub(".Rnw", "", file)
+pat <-paste0("^", basefile, r"(-([0-9]{3}|license.*)\.R$)")
+file.remove(list.files(pattern = pat))
