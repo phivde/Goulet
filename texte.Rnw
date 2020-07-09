@@ -1481,7 +1481,7 @@ Confirmons d'abord le contenu de chacun des groupes.
 $ grep '^Le' chanson.txt | \
 sed -E 's/Le (.*) (.*) (.*)/Premier groupe: \1/'
 <<echo=FALSE, results=tex>>=
-exec("grep", c("'^Le'", "chanson.txt", "| sed -E 's/Le (.*) (.*) (.*)/Premier groupe: \\1/'"), echo = FALSE)
+exec("grep", c("'^Le'", "chanson.txt", r"(| sed -E 's/Le (.*) (.*) (.*)/Premier groupe: \1/')"), echo = FALSE)
 @
 
 \end{Verbatim}
@@ -1491,7 +1491,7 @@ exec("grep", c("'^Le'", "chanson.txt", "| sed -E 's/Le (.*) (.*) (.*)/Premier gr
 $ grep '^Le' chanson.txt | \
 sed -E 's/Le (.*) (.*) (.*)/Deuxième groupe: \2/'
 <<echo=FALSE, results=tex>>=
-exec("grep", c("'^Le'", "chanson.txt", "| sed -E 's/Le (.*) (.*) (.*)/Deuxième groupe: \\2/'"), echo = FALSE)
+exec("grep", c("'^Le'", "chanson.txt", r"(| sed -E 's/Le (.*) (.*) (.*)/Deuxième groupe: \2/')"), echo = FALSE)
 @
 
 \end{Verbatim}
@@ -1501,7 +1501,7 @@ exec("grep", c("'^Le'", "chanson.txt", "| sed -E 's/Le (.*) (.*) (.*)/Deuxième 
 $ grep '^Le' chanson.txt | \
 sed -E 's/Le (.*) (.*) (.*)/Troisième groupe: \3/'
 <<echo=FALSE, results=tex>>=
-exec("grep", c("'^Le'", "chanson.txt", "| sed -E 's/Le (.*) (.*) (.*)/Troisième groupe: \\3/'"), echo = FALSE)
+exec("grep", c("'^Le'", "chanson.txt", r"(| sed -E 's/Le (.*) (.*) (.*)/Troisième groupe: \3/')"), echo = FALSE)
 @
 
 \end{Verbatim}
@@ -1514,7 +1514,7 @@ tous les groupes dans la chaine de substitution.
 $ grep '^Le' chanson.txt | \
 sed -E 's/Le (.*) (.*) (.*)/Le \2 \3 \1/'
 <<echo=FALSE, results=tex>>=
-exec("grep", c("'^Le'", "chanson.txt", "| sed -E 's/Le (.*) (.*) (.*)/Le \\2 \\3 \\1/'"), echo = FALSE)
+exec("grep", c("'^Le'", "chanson.txt", r"(| sed -E 's/Le (.*) (.*) (.*)/Le \2 \3 \1/')"), echo = FALSE)
 @
 
 \end{Verbatim}
@@ -2715,12 +2715,12 @@ exécuter depuis une ligne de commande \index{Unix}Unix.
     \code{sed} est l'outil idéal pour de tels traitements simples à
     effectuer ligne par ligne.
 <<echo=FALSE>>=
-exec("sed", c("'s/\\./,/'", "100metres.dat"), eval = FALSE)
+exec("sed", c(r"('s/\./,/')", "100metres.dat"), eval = FALSE)
 @
     Pour placer le fichier modifié dans, disons,
     \code{100metres-dec.data}, utiliser
 <<echo=FALSE>>=
-exec("sed", c("'s/\\./,/'", "100metres.dat > 100metres-dec.data"), eval = FALSE)
+exec("sed", c(r"('s/\./,/')", "100metres.dat > 100metres-dec.data"), eval = FALSE)
 @
   \end{sol}
 \end{exercice}
@@ -2775,7 +2775,7 @@ $ LC_NUMERIC="en_US.UTF-8" awk '$2 < 10' 100metres.dat
       Une solution avec \icode{grep} consisterait à rechercher
       «\code{9.}» après l'espace sur chaque ligne:
 <<echo=FALSE>>=
-exec("grep", c("' 9\\.'", "100metres.dat"), eval = FALSE)
+exec("grep", c(r"(' 9\.')", "100metres.dat"), eval = FALSE)
 @
     \item Nous pouvons combiner les deux commandes ainsi:
 <<echo=FALSE>>=
@@ -2784,7 +2784,7 @@ exec("grep", c("-e", "'-08-'", "100metres.dat | awk '$2 < 10'"), eval = FALSE,
 @
       ou
 <<echo=FALSE>>=
-exec("grep", c("-e", "'-08-'", "100metres.dat | grep ' 9\\.'"), eval = FALSE)
+exec("grep", c("-e", "'-08-'", r"(100metres.dat | grep ' 9\.')"), eval = FALSE)
 @
       C'est aussi possible de tout faire en un seul appel à \icode{awk}:
 <<echo=FALSE>>=
@@ -2851,8 +2851,8 @@ grep(".*s.*s.*s", state.name, value = TRUE)
       quatrième par un point. Ceci requiert de sauvegarder les
       caractères jusqu'aux deux «s» successifs pour les réutiliser
       dans la chaine de remplacement.
-<<echo=TRUE,eval=FALSE>>=
-sub("(^.{0,2}ss).*", "\\1.",
+<<echo=TRUE, eval=FALSE>>=
+sub("(^.{0,2}ss).*", r"(\1.)",
     grep("(^.{0,2}ss)", state.name, value = TRUE))
 @
     \end{enumerate}
