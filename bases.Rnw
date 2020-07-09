@@ -2157,7 +2157,7 @@ pmax(x, c(16, 23,  4, 12,  3))
 \label{sec:bases:internes:texte}
 
 \begin{ttscript}{strsplit}
-\item[\Icode{paste}] \index{chaine de caratères!concaténation}
+\item[\Icode{paste}] \index{chaine de caractères!concaténation}
   \index{concaténation}concaténation de vecteurs après les avoir
   convertis en chaines de caractères, séparés par défaut par des
   espaces
@@ -2170,17 +2170,17 @@ paste(c("Camille", "Marianne", "Alexandre"),
 <<echo=TRUE>>=
 paste0(1:5, c("er", rep("e", 4)))
 @
-\item[\Icode{nchar}] \index{chaine de caratères!nombre de caractères}
+\item[\Icode{nchar}] \index{chaine de caractères!nombre de caractères}
   nombre de caractères dans une chaine de caractères
 <<echo=TRUE>>=
 nchar(c("foo", "foobar"))
 @
-\item[\Icode{substr}] \index{chaine de caratères!sous-chaine}
+\item[\Icode{substr}] \index{chaine de caractères!sous-chaine}
   sous-chaine (partie) d'une chaine de caractères
 <<echo=TRUE>>=
 substr("abcdef", 2, 4)
 @
-\item[\Icode{strsplit}] \index{chaine de caratères!séparation}
+\item[\Icode{strsplit}] \index{chaine de caractères!séparation}
   séparation d'une chaine de caractères en parties sur un caractère
   quelconque
 <<echo=TRUE>>=
