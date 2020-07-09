@@ -23,6 +23,10 @@
   de commande de R (avec `dir.create` et `writeLines`) a été ajoutée
   dans le fichier de script du chapitre.
 
+## Corrections
+
+- Exemples du chapitre 11: suppression d'un symbole «\» en trop dans
+  une commande `grep`.
 
 # 2020.05 (2020-04-29)
 

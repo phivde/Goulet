@@ -1695,7 +1695,7 @@ mots de la fin de la \autoref{sec:texte:regex:alternance}.
 ##-!- ## de trouver toutes les utilisations de la fonction 'g' dans
 ##-!- ## les fichiers d'exemples, c'est-à-dire la chaine 'g('
 ##-!- ## précédée d'au moins une espace ou en début de ligne.
-##-!- grep -E '( |^)g\\(' *.R
+##-!- grep -E '( |^)g\(' *.R
 ##-!-
 ##-!- ## GROUPES
 ##-!-
