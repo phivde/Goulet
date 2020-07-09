@@ -61,8 +61,8 @@ getSourceName <- function()
 ##  Effectuer le traitement nécessaire dans le fichier 'file-suffix.R'
 ##  après l'étape Stangle effectuée sur 'file.Rnw':
 ##
-##  - conserver uniquement 'suffix' dans le nom du fichier et,
-##    possiblement, changer l'extension ".R" pour autre chose;
+##  - supprimer "-suffix" dans le nom du fichier et, possiblement,
+##    changer l'extension ".R" pour autre chose;
 ##  - activer les expressions invalides désactivées car elles auraient
 ##    causé problème dans Sweave.
 ##  - supprimer les lignes blanches insérées par Stangle;
@@ -87,9 +87,9 @@ postStangle <- function(file, ...)
 ###
 ### renameTangled(file, suffix, new.ext = ".R")
 ###
-##  Conserver uniquement 'suffix' du nom du fichier produit par
+##  Supprimer le suffixe "-suffix" du nom du fichier produit par
 ##  Stangle sur le fichier 'file' et changer l'extension du fichier
-##  de ".R" à 'new.ext'.
+##  de ".R" à "new.ext".
 ##
 ##  Arguments
 ##
@@ -102,7 +102,7 @@ postStangle <- function(file, ...)
 renameTangled <- function(file, suffix, new.ext = ".R")
 {
     basefile <- sub(".Rnw", "", file)
-    script <- paste0(suffix, new.ext)
+    script <- paste0(basefile, new.ext)
     out <- file.rename(paste0(basefile, "-", suffix, ".R"), script)
     if (out)
         out <- script
