@@ -12,7 +12,8 @@
 \chapter{Analyse et contrôle de texte}
 \label{chap:texte}
 
-\def\scriptfilename{\currfilebase.sh}
+\def\shscriptfilename{\currfilebase.sh}
+\def\rscriptfilename{\currfilebase.R}
 \SweaveOpts{echo=FALSE}
 \SweaveInput{share/license-by-sa.nw}
 
@@ -44,7 +45,7 @@ exec <- function(command, args, echo = TRUE, max.lines = NULL, eval = TRUE, ...)
     invisible(output)
 }
 @
-<<script>>=
+<<script-cli>>=
 <<license-by-sa>>
 
 ## Les exemples de ce fichier utilisent les fichiers suivants
@@ -63,6 +64,10 @@ exec <- function(command, args, echo = TRUE, max.lines = NULL, eval = TRUE, ...)
 ## quelles à une ligne de commande Unix, ou encore dans le
 ## terminal RStudio avec Bash (macOS) ou Git Bash (Windows)
 ## comme interpréteur de commandes.
+@
+
+<<script-r>>=
+<<license-by-sa>>
 @
 
 \epigraph{\emph{And now for something completely different}}{Monty Python}
@@ -508,8 +513,8 @@ tampon de \icode{sed} dans le présent ouvrage.
   J'ai tâché de fournir ici des expressions universelles qui
   fonctionnent dans ces deux principales variantes.}
 
-\gotorbox{Le fichier de script \code{\scriptfilename} reproduit à la
-  \autoref{sec:texte:exemples} contient des exemples d'utilisation de
+\gotorbox{Le fichier de script \code{\shscriptfilename} reproduit à la
+  \autoref{sec:texte:exemples-cli} contient des exemples d'utilisation de
   \icode{grep}, \icode{sed} et \icode{awk}. Vous pouvez ouvrir le
   fichier de script dans votre éditeur de texte pour facilement copier
   les commandes à la ligne de commande, ou encore évaluer celle-ci
@@ -517,7 +522,7 @@ tampon de \icode{sed} dans le présent ouvrage.
   \autoref{sec:rstudio:terminal}. Étudiez pour l'instant les lignes
   \reflines{texte:outils}.}
 
-<<script>>=
+<<script-cli>>=
 ##-!- ###
 ##-!- ### OUTILS D'ANALYSE ET DE CONTRÔLE DE TEXTE  `\labelline{texte:outils}`
 ##-!- ###
@@ -802,10 +807,10 @@ sans cesse augmenter l'éventail des motifs disponibles.
 \gotorbox{Avant de véritablement entrer dans le vif du sujet, prenez
   le temps d'étudier les quelques exemples d'expressions régulières
   qui se trouvent aux lignes \reflines{texte:regex:syntaxe} du fichier
-  de script \code{\scriptfilename} reproduit à la
-  \autoref{sec:texte:exemples}.}
+  de script \code{\shscriptfilename} reproduit à la
+  \autoref{sec:texte:exemples-cli}.}
 
-<<script>>=
+<<script-cli>>=
 ##-!- ###
 ##-!- ### EXPRESSIONS RÉGULIÈRES  `\labelline{texte:regex}`
 ##-!- ###
@@ -1015,10 +1020,10 @@ pour chaque variante des accolades.
   pourrez les rechercher lorsque vous souhaiterez restreindre la
   portée d'un quantificateur à la plus petite chaine possible. Vous
   trouverez également dans les exemples de la
-  \autoref{sec:texte:exemples} une solution de contournement.}
+  \autoref{sec:texte:exemples-cli} une solution de contournement.}
 
 \subsection{Caractère d'échappement}
-\label{sec:texte:escape}
+\label{sec:texte:regex:escape}
 
 Si les caractères «\code{*}»,  «\code{+}» ou «\code{?}» --- en fait,
 tous ceux du \autoref{tab:texte:operateurs} --- ont une signification
@@ -1085,9 +1090,9 @@ exec("grep", c("-v", "'^$'", "chanson.txt"), eval = FALSE)
 \gotorbox{Nous avons déjà couvert plusieurs éléments importants de la
   syntaxe des expressions régulières. Étudiez les lignes
   \reflines{texte:regex:wildcards-marqueurs} du fichier de script
-  \code{\scriptfilename} reproduit à la \autoref{sec:texte:exemples}.}
+  \code{\shscriptfilename} reproduit à la \autoref{sec:texte:exemples-cli}.}
 
-<<script>>=
+<<script-cli>>=
 ##-!- ## REMPLACEMENT ET RÉPÉTITION  `\labelline{texte:regex:wildcards-marqueurs}`
 ##-!-
 ##-!- ## Comme mentionné ci-dessus, le caractère «.» est le
@@ -1195,7 +1200,7 @@ exec("grep", c("-v", "'^$'", "chanson.txt"), eval = FALSE)
 ##-!-
 ##-!- ## Dans le même esprit, recherchons dans le fichier 'bases.R'
 ##-!- ## toutes les occurrences du caractère «?». Dans les
-##-!- ## expressions régulières étendues, c'est un symbole sprécial
+##-!- ## expressions régulières étendues, c'est un symbole spécial
 ##-!- ## qu'il faut désactiver avec le caractère d'échappement.
 ##-!- grep -E '\?' bases.R
 ##-!-
@@ -1549,10 +1554,10 @@ mots de la fin de la \autoref{sec:texte:regex:alternance}.
 \end{itemize}
 
 \gotorbox{Étudiez les lignes \reflines{texte:regex:classes-groupes}
-  du fichier de script \code{\scriptfilename} reproduit à la
-  \autoref{sec:texte:exemples}.}
+  du fichier de script \code{\shscriptfilename} reproduit à la
+  \autoref{sec:texte:exemples-cli}.}
 
-<<script>>=
+<<script-cli>>=
 ##-!- ## CLASSES DE CARACTÈRES  `\labelline{texte:regex:classes-groupes}`
 ##-!-
 ##-!- ## Les crochets '[ ]' définissent une classe de caractères
@@ -2299,12 +2304,12 @@ BEGIN { OFS = ";" }
 \end{Verbatim}
 \end{Schunk}
 
-\gotorbox{Le fichier de script \code{\scriptfilename} reproduit à la
-  \autoref{sec:texte:exemples} fournit des exemples additionnels
+\gotorbox{Le fichier de script \code{\shscriptfilename} reproduit à la
+  \autoref{sec:texte:exemples-cli} fournit des exemples additionnels
   d'utilisation de \code{awk}. Étudiez attentivement les lignes
   \reflines{texte:awk}.}
 
-<<script>>=
+<<script-cli>>=
 ##-!- ###
 ##-!- ### TRAITEMENT DE TEXTE DIVISÉ EN CHAMPS AVEC AWK  `\labelline{texte:awk}`
 ##-!- ###
@@ -2424,9 +2429,9 @@ BEGIN { OFS = ";" }
   dans GitLab et de mise à jour de la page web sont entièrement
   automatisées avec une combinaison des utilitaires de ce chapitre et
   de \link{https://fr.wikipedia.org/wiki/Make}{\code{make}}, un autre
-  outil standard des systèmes Unix. Jetez un coup d'œil au fichier de
-  configuration \code{Makefile} qui se trouve dans le
-  \link{\reposurl}{code source du projet}.}
+  outil standard des systèmes Unix. Je vous invite à jete un coup
+  d'œil au fichier de configuration \code{Makefile} qui se trouve dans
+  le \link{\reposurl}{code source du projet}.}
 
 
 \section{Fonctions internes utiles}
@@ -2489,17 +2494,179 @@ gsub("a", "*", state.name.10)
   dans \icode{awk}, des fonctions \code{sub} et \code{gsub} permettent
   d'effectuer des remplacements à l'intérieur des champs.}
 
+Les fonctions ci-dessus prennent toutes le motif de l'expression
+régulière en argument sous forme d'une chaine de caractères. Lorsque
+le motif contient un %
+\index{caractere d'echappement@caractère d'échappement}caractère
+d'échappement %
+\index{\string\@\code{\bs} (regex)|bfhyperpage}«\code{\bs}», il faut
+doubler celui-ci dans la chaine de caractère de R. Par exemple, pour
+fournir en argument à une fonction R le motif \regex{.\{1,8\}\bs.txt}
+rencontré à la \autoref{sec:texte:regex:escape}, il faut l'entrer sous
+la forme \code{".\{1,8\}\bs\bs.txt"}.
 
-\section{Exemples}
-\label{sec:texte:exemples}
+Depuis la version 4.0.0, R offre une alternative pour entrer plus
+aisément des chaines de caractères contenant, entre autres, des
+caractères d'échappement ou des guillemets. Il s'agit de \index{chaine
+  de caractères!brute}chaines de caractères brutes (\emph{raw strings}
+ou \emph{raw character constants}). La syntaxe pour créer une chaine
+brute est la suivante:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+r"(\meta{...})"
+\end{Verbatim}
+\end{Schunk}
+Ici, \code{\meta{...}} représente n'importe quelle suite de caractères
+qui ne se termine pas par «\code{)"}».
+
+Ainsi, pour passer le motif ci-dessus à une fonction R sans avoir à se
+soucier de doubler les caractères d'échappement, il est possible de
+l'entrer plutôt sous la forme \code{r"(.\{1,8\}\bs\bs.txt)"}.
+
+\gotorbox{Le fichier de script \code{\rscriptfilename} reproduit à la
+  \autoref{sec:texte:exemples-r} contient des exemples d'utilisation
+  de fonctions R utilisant les expressions régulières, de même que des
+  exemples additionnels de chaines de caractères brutes. Étudiez
+  l'entièreté du fichier.}
+
+<<script-r, results=hide>>=
+## Reprenons d'abord certains des exemples pour la ligne de
+## commande Unix effectués sur le fichier chanson.txt.
+##
+## Pour ce faire, il faut importer le contenu du fichier dans
+## R. La fonction 'readLines' lit un fichier et retourne un
+## vecteur de chaines de caractères, à raison d'une chaine par
+## ligne du fichier.
+##
+## Vous remarquerez que cela correspond au mode de
+## fonctionnement de 'grep', 'sed' et 'awk': une ligne à la
+## fois.
+chanson <- readLines("chanson.txt") # importer le fichier
+chanson                             # contenu du vecteur
+
+## Effectuons maintenant quelques recherches dans le vecteur
+## avec la fonction 'grep' de R. Le résultat est l'indice de
+## l'élément du vecteur contenant le motif.
+grep("temps", chanson)     # vers contenant le mot «temps»
+grep("chat", chanson)      # vers contenant le mot «chat»
+
+## Pour obtenir le texte de l'élément plutôt que sa position
+## dans le vecteur, il faut utiliser 'value = TRUE'.
+grep("temps", chanson, value = TRUE)
+
+## R utilise par défaut des expressions régulières étendues
+## (donc le symbole | est un opérateur d'alternance).
+grep("amour|mieux", chanson, value = TRUE)
+
+## Changeons un peu de jeu de données.
+##
+## La fonction 'data' retourne la liste des jeux de données
+## disponible dans la session R courante. Le résultat est une
+## liste de plusieurs éléments.
+##-!- data()
+
+## L'expression ci-dessus permet de ne conserver que les noms
+## d'objets.
+(nm <- data()$results[, "Item"])
+
+## Pour extraire de la liste les objets dont le nom comporte
+## un point «.», il faut désactiver le rôle spécial de ce
+## caractère dans l'expression régulière à l'aide du caractère
+## d'échappement.
+##-!- grep("\.", nm)             # erreur!
+
+## L'expression ci-dessus cause une erreur parce que R
+## interprète le caractère d'échappement à l'intérieur du
+## motif.
+##
+## Il existe deux solutions pour régler ce problème.
+##
+## La première consiste à doubler le caractère d'échappement.
+## Ça devient rapidement pénible s'il y a plusieurs caractères
+## à doubler.
+grep("\\.", nm, value = TRUE)
+
+## La seconde est disponible depuis la version 4.0.0 de R. Il
+## s'agit des chaines de caractères brutes. En gros, une
+## chaine de caractères brute se charge d'ajouter les
+## caractères d'échappement aux bons endroits et retourne une
+## chaine de caractères standard.
+##
+## On crée une chaine brute avec 'r"(...)"'.
+r"(\.)"                    # syntaxe d'une chaine brute
+r"(g.*\..*\()"             # autre exemple
+grep(r"(\.)", nm, value = TRUE) # utilisation dans 'grep'
+
+## L'expression suivante identifie les éléments (ou vers) de
+## 'chanson' qui débutent par «L» et qui contiennent un «i»
+## quelque part dans la chaine. Le résultat est un vecteur des
+## positions des éléments qui correspondent au motif.
+grep("^L.*i", chanson)     # positions des éléments
+
+## La fonction 'regexpr' retourne davantage d'informations sur
+## la position et la longueur des appariements du motif dans
+## la chaine de caractères.
+##
+## Le vecteur des résultats contient une valeur positive
+## correspondant à la position dans la chaine où débute chacun
+## des appariements, ou -1 si la chaine ne correspond pas au
+## motif. (Dans notre exemple, les nombres positifs sont tous
+## des 1 puisque nous recherchons précisément des appariement
+## dès le début de la ligne.)
+##
+## Le vecteur des résultats est également muni d'un attribut
+## qui contient la longueur des appariements.
+regexpr("^L.*i", chanson)  # plus d'informations
+
+## À partir des résultats de 'regexpr', il est possible
+## d'extraire uniquement les portions de texte qui
+## correspondent au motif, un peu comme avec l'option '-o' de
+## 'grep'.
+##
+## Ce travail, la fonction 'regmatches' le fait pour nous.
+regmatches(chanson, regexpr("^L.*i", chanson))
+
+## Les fonctions 'sub' et 'gsub' jouent en partie le rôle de
+## 'sed' dans R, soit remplacer des chaines de caractères.
+##
+## La fonction 'sub' remplace uniquement la première
+## occurrence dans une chaine de caractères, alors que 'gsub'
+## remplace toutes les occurences (comme 'sed' lorsque muni du
+## modificateur 'g').
+sub("Oh", "Ah", chanson)
+sub("promets", "jure", chanson)
+gsub("promets", "jure", chanson)
+
+## Plusieurs autres fonctions de R acceptent des expressions
+## régulières en argument.
+##
+## Par exemple, la fonction 'list.files' permet d'obtenir la
+## liste des fichiers (du répertoire de travail par défaut)
+## dont le nom correspond à un certain motif.
+##
+## Les expressions ci-dessous affichent la liste des fichiers
+## dont le nom se termine par l'extension ".R".
+list.files(pattern = "\\.R$")   # avec chaine standard
+list.files(pattern = r"(\.R$)") # avec chaine brute
+@
+
+\section{Exemples pour la ligne de commande Unix}
+\label{sec:texte:exemples-cli}
 
 Exceptionnellement, ce chapitre propose des exemples d'utilisation des
 outils \icode{grep}, \icode{sed} et \icode{awk} que vous devez
 exécuter depuis une ligne de commande \index{Unix}Unix.
 
 \medskip
-\scriptfile{\scriptfilename}
-\lstinputlisting[language=shenhanced,firstline=\scriptfirstline]{\scriptfilename}
+\scriptfile{\shscriptfilename}
+\lstinputlisting[language=shenhanced,firstline=\scriptfirstline]{\shscriptfilename}
+
+
+\section{Exemples pour les fonctions R}
+\label{sec:texte:exemples-r}
+
+\scriptfile{\rscriptfilename}
+\lstinputlisting[language=shenhanced,firstline=\scriptfirstline]{\rscriptfilename}
 
 
 \section{Exercices}

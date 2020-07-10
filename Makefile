@@ -56,7 +56,7 @@ TEXFILES = $(addsuffix .tex, \
 
 ## Les fichiers de script sont tous extraits des fichiers .Rnw. Celui
 ## d'un chapitre a une extension .sh.
-SCRIPTS = $(filter-out texte.R, ${RNWFILES:.Rnw=.R}) texte.sh
+SCRIPTS = ${RNWFILES:.Rnw=.R} texte.sh
 
 ## Informations de publication extraites du fichier maitre
 TITLE = $(shell grep "\\\\title" ${MASTER:.pdf=.tex} \

@@ -16,7 +16,13 @@ file <- getSourceName()
 Stangle(file, encoding = "utf-8", annotate = FALSE, split = TRUE)
 
 ## Traitement du fichier créé par Stangle
-postStangle(file, "script", new.ext = if (file == "texte.Rnw") ".sh" else ".R")
+if (file == "texte.Rnw") {
+    ## cas spécial, deux fichiers de script
+    postStangle(file, "script-cli", new.ext =  ".sh")
+    postStangle(file, "script-r")
+} else {
+    postStangle(file, "script")
+}
 
 ## Nettoyage
 basefile <- sub(".Rnw", "", file)

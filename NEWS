@@ -22,11 +22,19 @@
   création d'une bibliothèque personnelle entièrement depuis la ligne
   de commande de R (avec `dir.create` et `writeLines`) a été ajoutée
   dans le fichier de script du chapitre.
+- Section 11.5: explications sur la nécessité de doubler les
+  caractères d'échappement dans les motifs dans R, ainsi que sur les
+  nouvelles chaines de caractères brutes introduites dans R 4.0.0.
+- Chapitre 11: ajout d'une section et d'un fichier de script
+  d'exemples pour les fonctions R utilisant les expressions
+  régulières. Ce chapitre est donc exceptionnellement livré avec deux
+  fichiers de script.
 
 ## Corrections
 
-- Exemples du chapitre 11: suppression d'un symbole «\» en trop dans
-  une commande `grep`.
+- Exemples du chapitre 11 pour la ligne de commande: suppression d'un
+  symbole «\» en trop dans une commande `grep`.
+
 
 # 2020.05 (2020-04-29)
 
