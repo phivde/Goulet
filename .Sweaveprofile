@@ -85,24 +85,35 @@ postStangle <- function(file, ...)
 }
 
 ###
-### renameTangled(file, suffix, new.ext = ".R")
+### renameTangled(file, suffix, new.ext = ".R",
+###               remove.suffix = !keep.suffix, keep.suffix = FALSE)
 ###
-##  Supprimer le suffixe "-suffix" du nom du fichier produit par
-##  Stangle sur le fichier 'file' et changer l'extension du fichier
-##  de ".R" à "new.ext".
+##  Supprimer (ou conserver) le suffixe "-suffix" du nom du fichier
+##  produit par Stangle sur le fichier 'file' et changer l'extension
+##  du fichier de ".R" à "new.ext".
 ##
 ##  Arguments
 ##
-##  file: nom du fichier .Rnw
+##  file: nom du fichier .Rnw.
+##  suffix: suffixe à supprimer (ou conserver).
+##  new.ext: nouvelle extension (avec le point) du fichier renommé.
+##  remove.suffix: booléen; si TRUE le suffixe est supprimé du fichier
+##                 créé par Stangle.
+##  keep.suffix: booléen; si TRUE seul le suffixe du fichier créé par
+##               Stangle est conservé.
 ##
 ##  Valeur
 ##
 ##  Si l'opération réussit: le nom du nouveau fichier; sinon: FALSE
 ##
-renameTangled <- function(file, suffix, new.ext = ".R")
+renameTangled <- function(file, suffix, new.ext = ".R",
+                          remove.suffix = !keep.suffix, keep.suffix = FALSE)
 {
     basefile <- sub(".Rnw", "", file)
-    script <- paste0(basefile, new.ext)
+    script <- if (remove.suffix)
+                  paste0(basefile, new.ext)
+              else
+                  paste0(suffix, new.ext)
     out <- file.rename(paste0(basefile, "-", suffix, ".R"), script)
     if (out)
         out <- script
