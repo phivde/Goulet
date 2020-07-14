@@ -18,10 +18,10 @@ Stangle(file, encoding = "utf-8", annotate = FALSE, split = TRUE)
 ## Traitement du fichier créé par Stangle
 if (file == "texte.Rnw") {
     ## cas spécial, deux fichiers de script
-    postStangle(file, "script-cli", new.ext =  ".sh")
-    postStangle(file, "script-r")
+    postStangle(file, "script-cli", new.ext =  ".sh", remove.suffix = TRUE)
+    postStangle(file, "script-r", remove.suffix = TRUE)
 } else {
-    postStangle(file, "script")
+    postStangle(file, "script", remove.suffix = TRUE)
 }
 
 ## Nettoyage
