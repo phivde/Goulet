@@ -30,6 +30,11 @@
   régulières. Ce chapitre est donc exceptionnellement livré avec deux
   fichiers de script.
 
+## Changements
+
+- Section 11.4.3: amélioration de l'explication de l'exemple en
+  respectant l'ordre des règles du programme `awk`.
+
 ## Corrections
 
 - Exemples du chapitre 11 pour la ligne de commande: suppression d'un

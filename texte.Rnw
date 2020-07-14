@@ -2144,8 +2144,8 @@ liste exhaustive des opérateurs de \icode{awk} dans
   l'état du programme, l'ordre dans lequel les règles apparaissent
   dans le programme est important.}
 
-Illustrons certains des concepts ci-dessus, notamment l'importance de
-l'ordre des règles dans un programme, à l'aide d'un exemple. La
+Illustrons certains des concepts ci-dessus à l'aide d'un exemple,
+notamment l'importance de l'ordre des règles dans un programme. La
 commande suivante permet d'extraire les deux premiers couplets de «La
 journée qui s'en vient est flambant neuve». Ceux-ci sont délimités par
 des lignes blanches dans le fichier. La tâche consiste donc à extraire
@@ -2161,15 +2161,18 @@ exec("awk", c("'$0 ~ /^$/ && state == 1 { exit } $0 ~ /^$/ { state = 1 } { print
 \end{Verbatim}
 \end{Schunk}
 
-La seconde règle du programme affecte la valeur 1 à une variable
-d'«état» --- d'où le nom que j'ai choisi de lui donner --- lorsque
-\icode{awk} rencontre la première ligne blanche. La première règle,
-quant à elle, cause la sortie du programme lorsque \code{awk}
-rencontre une autre ligne blanche et que la variable d'état est égale
-à 1, donc à la \emph{seconde} ligne blanche. Tous les autres
-enregistrements sont extraits avec \icode[\code{awk}]{print}. Si
-l'ordre des deux premières règles était inversé, la commande
-n'extrairait que le premier couplet. (Déterminez pourquoi.)
+La première règle provoque la sortie du programme lorsque \icode{awk}
+rencontre une ligne blanche \emph{et} qu'une variable d'«état» ---
+d'où le nom que j'ai choisi de lui donner --- est égale à 1. Ici, vous
+devez savoir que tant qu'une valeur n'a pas été explicitement assignée
+à une variable, la valeur de celle-ci est 0. La seconde règle du
+programme affecte la valeur 1 à la variable d'état lorsque \icode{awk}
+rencontre la première ligne blanche. Enfin, la troisième règle extrait
+les enregistrements. En combinant les règles dans cet ordre, le
+programme se termine à la \emph{seconde} ligne blanche du fichier,
+donc après avoir extrait les deux premiers couplets. Si l'ordre des
+deux premières règles était inversé, la commande n'extrairait que le
+premier couplet. (Déterminez pourquoi.)
 
 Question de parfaire notre style de programmation \icode{awk},
 apportons deux simplifications à la commande ci-dessus:
@@ -2304,6 +2307,14 @@ BEGIN { OFS = ";" }
 \end{Verbatim}
 \end{Schunk}
 
+\notebox{Les opérations de composition de «\thetitle», de publication
+  dans GitLab et de mise à jour de la page web sont entièrement
+  automatisées avec une combinaison des utilitaires de ce chapitre et
+  de \link{https://fr.wikipedia.org/wiki/Make}{\code{make}}, un autre
+  outil standard des systèmes Unix. Je vous invite à jete un coup
+  d'œil au fichier de configuration \code{Makefile} qui se trouve dans
+  le \link{\reposurl}{code source du projet}.}
+
 \gotorbox{Le fichier de script \code{\shscriptfilename} reproduit à la
   \autoref{sec:texte:exemples-cli} fournit des exemples additionnels
   d'utilisation de \code{awk}. Étudiez attentivement les lignes
@@ -2424,14 +2435,6 @@ BEGIN { OFS = ";" }
 ##-!-      (state == 1) && /^# / { exit }
 ##-!-      state' NEWS	   #-*- `\labelline{texte:awk:fin}`
 @
-
-\notebox{Les opérations de composition de «\thetitle», de publication
-  dans GitLab et de mise à jour de la page web sont entièrement
-  automatisées avec une combinaison des utilitaires de ce chapitre et
-  de \link{https://fr.wikipedia.org/wiki/Make}{\code{make}}, un autre
-  outil standard des systèmes Unix. Je vous invite à jete un coup
-  d'œil au fichier de configuration \code{Makefile} qui se trouve dans
-  le \link{\reposurl}{code source du projet}.}
 
 
 \section{Fonctions internes utiles}
