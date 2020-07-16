@@ -152,8 +152,7 @@ création d'une bibliothèque personnelle depuis une une ligne de
 commande Unix (\index{Terminal}Terminal sous macOS; \index{MSYS}MSYS
 de \index{MSYS2}\link{https://www.msys2.org}{MSYS2} ou
 \index{Git~Bash}Git~Bash de \link{https://git-scm.com/downloads}{Git
-  for Windows} sous Windows; terminal RStudio
-(\autoref{sec:rstudio:terminal}).
+  for Windows} sous Windows; terminal RStudio).
 
 \begin{enumerate}
 \item Créer les répertoires dans votre système de fichiers pour
@@ -247,7 +246,7 @@ principale.
 ## selon vos besoins.
 ##
 ## Si vous êtes sous macOS, utilisez la commande suivante.
-##-!- dir.create("~/Library/R/library", recursive = TRUE)
+##-!- dir.create("~/Library/R/library", recursive = TRUE) # macOS
 
 ## Pour tous les autres systèmes d'exploitation, utilisez
 ## plutôt la commande suivante.
