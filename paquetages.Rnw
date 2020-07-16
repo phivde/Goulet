@@ -302,8 +302,8 @@ spécifié dans les bibliothèques de
 ### INSTALLATION DE PAQUETAGES ADDITIONNELS
 ###
 
-## Installation du paquetage actuar depuis le miroir canadien
-## de CRAN.
+## Installation du paquetage actuar depuis un site miroir de
+## CRAN sélectionné automatiquement.
 ##
 ## Si vous avez configuré une bibliothèque personnelle et
 ## qu'elle apparait dans le résultat de '.libPaths()',
