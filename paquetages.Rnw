@@ -107,7 +107,7 @@ search()
 
 Pour rendre disponibles les fonctionnalités d'un paquetage, peu
 importe sa provenance, il faut le charger dans la session de travail.
-C'est là le principal rôle de la fonction \Icode{library}.
+C'est le principal rôle de la fonction \Icode{library}.
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
 library("\meta{paquetage}")
@@ -136,8 +136,8 @@ Tout d'abord, cela permet d'éviter les éventuels problèmes d'accès en
 partagés. Ensuite, les paquetages placés dans une bibliothèque
 personnelle résistent mieux au processus de mise à jour de R que ceux
 ajoutés à la bibliothèque principale. Il s'agit d'un préréglage
-absolu\footnote{Le terme «préréglage absolu» a été proposé par
-  l'Office québécois de la langue française comme équivalent de
+absolu\footnote{L'expression «préréglage absolu» est celle proposée
+  par l'Office québécois de la langue française comme équivalent de
   l'expression anglaise \emph{set and forget}.} %
 que vous aurez à effectuer une seule fois. L'investissement en temps
 --- minime --- en vaut largement la peine.
