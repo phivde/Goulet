@@ -1337,7 +1337,7 @@ dénominateur commun, soit la norme \index{POSIX}POSIX.
     \code{[:punct:]} & ponctuations et symboles \\
     \code{[:space:]} & tous les caractères d'espacement, y compris les sauts de ligne \\
     \code{[:upper:]} & majuscules \\
-    \code{[:xdigit:]} & caractères numériques hexadécimaux (0--9, a--f, A--Z) \\
+    \code{[:xdigit:]} & caractères numériques hexadécimaux (0--9, a--f, A--F) \\
     \bottomrule
   \end{tabularx}
 \end{table}
