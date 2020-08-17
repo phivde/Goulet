@@ -18,8 +18,10 @@
 %% 2012/01/04 - Modified by Vincent Goulet to add 'width' specifications to
 %%              \includegraphics and use a subset of the symbols.
 %%
+%% 2020/07/16 - Modified again by Vincent Goulet to add tab symbol.
+%%
 \ProvidesPackage{applekeys}
-[2012/01/24 H.S.
+[2020/07/16 H.S./V.G.
 For inclusion of apple key graphics
 ]
 \RequirePackage{graphicx}
@@ -32,6 +34,7 @@ For inclusion of apple key graphics
 \DeclareRobustCommand{\openapplekey}{\raisebox{-0.01em}%
 							{\includegraphics[height=.90em,width=.78em]{apple_outline}}}
 \DeclareRobustCommand{\esckey}{\raisebox{-0.03em}{\includegraphics[height=.75em,width=.75em]{escape}}}
+\DeclareRobustCommand{\tabkey}{\raisebox{-0.02em}{\includegraphics[height=.75em,width=.96em]{tab}}}
 \DeclareRobustCommand{\returnkey}{\raisebox{-0.06em}{\includegraphics[height=.65em,width=.93em]{return}}}
 %%
 %% End of file `applekeys.sty'
