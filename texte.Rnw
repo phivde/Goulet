@@ -2614,7 +2614,7 @@ grep("^L.*i", chanson)     # positions des éléments
 ## correspondant à la position dans la chaine où débute chacun
 ## des appariements, ou -1 si la chaine ne correspond pas au
 ## motif. (Dans notre exemple, les nombres positifs sont tous
-## des 1 puisque nous recherchons précisément des appariement
+## des 1 puisque nous recherchons précisément des appariements
 ## dès le début de la ligne.)
 ##
 ## Le vecteur des résultats est également muni d'un attribut
@@ -2625,6 +2625,10 @@ regexpr("^L.*i", chanson)  # plus d'informations
 ## d'extraire uniquement les portions de texte qui
 ## correspondent au motif, un peu comme avec l'option '-o' de
 ## 'grep'.
+##
+## Il suffit, pour chaque appariement, d'extraire le texte de
+## la chaine à partir de la position initiale de l'appariement
+## et pour la longueur de celui-ci.
 ##
 ## Ce travail, la fonction 'regmatches' le fait pour nous.
 regmatches(chanson, regexpr("^L.*i", chanson))
