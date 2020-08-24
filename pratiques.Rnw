@@ -46,9 +46,9 @@ matière de style de programmation, de présentation du code et de
 documentation.
 
 \tipbox{Je me suis efforcé de respecter les bonnes pratiques
-  ci-dessous dans les fichiers de script fournis avec l'ouvrage.
-  Prêtez donc attention à la manière dont le code qui vous est fourni
-  est construit et présenté.}
+  présentées dans ce chapitre dans les fichiers de script fournis avec
+  l'ouvrage. Prêtez donc attention à la manière dont le code qui vous
+  est fourni est construit et présenté.}
 
 
 \section{Style}
@@ -72,7 +72,7 @@ un juste équilibre entre les trois pôles.
 \citet{Kernighan:style:1978} proposent d'excellents chapitres sur le
 style en programmation. Je ne saurais être aussi exhaustif que ces
 auteurs établis. Néanmoins, je vous incite à porter une attention
-particulière aux quelques points de style livrés en vrac, ci-dessous.
+particulière aux quelques points de style, livrés en vrac, ci-dessous.
 
 \begin{itemize}
 \item Utilisez des noms de variables significatifs. Ne soyez pas ce
@@ -201,7 +201,7 @@ z <- sapply(x, mean)
 \end{Verbatim}
   \end{Schunk}
 
-  Encore ici, évitez de pousser la logique trop loin. Si une boucle
+  Ici encore, évitez de pousser la logique trop loin. Si une boucle
   est plus naturelle et plus simple à comprendre qu'une fonction
   d'application, optez pour la boucle. En particulier, une
   fonction d'application \icode{sapply} à l'intérieur d'une autre
@@ -218,7 +218,7 @@ z <- sapply(x, mean)
   %
 \item Enfin, utilisez \icode{return} uniquement pour provoquer la
   sortie anticipée d'une fonction, habituellement à l'intérieur d'une
-  clause \code{if}. En d'autres termes, en R \code{return} n'a pas sa
+  clause \code{if}. En d'autres termes, en R, \code{return} n'a pas sa
   place à la toute fin d'une fonction.
 \end{itemize}
 
@@ -257,7 +257,7 @@ jouent le même rôle que dans du texte normal: elles facilitent la
 lecture. En particulier, utilisez des espaces dans les circonstances
 suivantes:
 \begin{itemize}
-\item de part et d'autre du symbole d'affectation \icode{<-}; ces
+\item de part et d'autre du symbole d'affectation «\icode{<-}»; ces
   espaces sont ajoutées automatiquement avec les raccourcis-clavier
   des éditeurs spécialisés GNU~Emacs\index{Emacs}
   (\autoref{sec:emacs+ess:commandes:script}) et \index{RStudio}RStudio
@@ -266,7 +266,7 @@ suivantes:
     Sauf peut-être la division: je préfère \code{(x + y)/z} à \code{(x
       + y) / z}.};
 \item après les virgules;
-\item avant la parenthèse ouvrante \code{(}, sauf dans les appels de
+\item avant la parenthèse ouvrante «\code{(}», sauf dans les appels de
   fonction.
 \end{itemize}
 Comparez les deux blocs de code de la
@@ -510,9 +510,9 @@ square <- function(x) x * x
   \label{fig:pratiques:doc}
 \end{figure}
 
-Dans R, le symbole numéro \code{\#} --- ou carré --- marque le début
+Dans R, le symbole numéro «\code{\#}» --- ou carré --- marque le début
 d'un commentaire, et ce, peu importe où le symbole se trouve sur la
-ligne. Il est possible de combiner les \code{\#} pour développer une
+ligne. Il est possible de combiner les «\code{\#}» pour développer une
 forme de hiérarchie dans les commentaires ou pour délimiter
 différentes sections d'un fichier de script. Pour les fichiers
 d'exemples du présent document, j'ai utilisé la
@@ -540,15 +540,67 @@ niveaux de titres du langage de balisage
 \link{https://daringfireball.net/projects/markdown/syntax}{Markdown},
 dont la hiérarchie est exactement l'inverse de celle de Emacs. Ainsi,
 les commentaires de premier niveau sont ceux qui débutent par un seul
-carré, \code{\#}; les commentaires de deuxième niveau débutent par
-deux carrés, \code{\#\#}, etc.
+carré, «\code{\#}»; les commentaires de deuxième niveau débutent par
+deux carrés, «\code{\#\#}», etc.
 
-\gotorbox{Le fichier de script \code{\scriptfilename} reproduit
-  ci-dessous contient un long exemple d'amélioration du style et de la
-  présentation du code d'une fonction, ainsi qu'un exemple de
+\gotorbox{Le fichier de script \code{\scriptfilename} reproduit à la
+  \autoref{sec:pratiques:exemples} contient, aux lignes
+  \reflines{pratiques:style}, un long exemple d'amélioration du style
+  et de la présentation du code d'une fonction, ainsi qu'un exemple de
   documentation.}
 
+<<sqrt>>=
+###
+### sqrt(x)
+###
+##  Calculer la racine carrée d'un nombre.
+##
+##  Argument
+##
+##  x: nombre réel positif.
+##
+##  Valeur
+##
+##  Nombre y tel que y^2 = x.
+##
+##  Exemples
+##
+##  sqrt(9)
+##
+sqrt <- function(x)
+{
+    ## Vérification de la validité de 'x'.
+    if (x < 0)
+        stop("x doit être un nombre positif")
+
+    ## Cas trivial.
+    if (x == 0)
+        return(0)
+
+    ## Fonction pour calculer la prochaine approximation selon
+    ## la méthode de Newton. Si 'y' est l'approximation
+    ## actuelle de la racine carrée de 'x', alors la nouvelle
+    ## approximation est '(y + x/y)/2'.
+    improve <- function(guess, x)
+        mean(c(guess, x/guess))
+
+    ## Valeur de départ de la procédure itérative.
+    y <- 1
+
+    ## Approximations successives.
+    while (abs(y^2 - x) >= 0.001)
+        y <- improve(y, x)
+
+    ## Retourner la valeur tel que y^2 - x < 0.001.
+    y
+}                          #-*- `\labelline{pratiques:style:fin}`
+@
+
 <<script, results=hide>>=
+###
+### STYLE, PRÉSENTATION, COMMENTAIRES ET DOCUMENTATION `\labelline{pratiques:style}`
+###
+
 ## Afin d'illustrer l'utilité de bien présenter et de
 ## commenter son code, nous allons prendre une fonction dans
 ## un état assez pitoyable et l'améliorer graduellement.
@@ -684,17 +736,22 @@ sqrt <- function(x)
 ## le calcul de la nouvelle approximation est placé sous une
 ## couche d'abstraction dans une fonction interne...
 ##
-## Il reste tout de même deux choses à améliorer.
+## Il reste tout de même trois choses à améliorer.
 ##
-## Tout d'abord, l'expression logique dans la clause 'while'
-## qui utilise une formulation «n'est pas plus petite que
-## 0.001» est inutilement compliquée. De plus, elle repose sur
-## la priorité des opérations: la négation logique a-t-elle
-## bel et bien une priorité plus faible que l'inégalité? Il
-## suffit de réécrire l'expression sous la forme «est plus
-## grand ou égal à 0.001» et tout sera plus clair.
+## Tout d'abord, nous pouvons traiter séparément le cas
+## trivial où l'argument est égal à 0. Il n'y a aucun calcul à
+## faire dans ce cas et la fonction peut directement retourner
+## la réponse 0.
 ##
-## Ensuite, il y a ce 'return' à la dernière ligne de la
+## Ensuite, l'expression logique dans la clause 'while' qui
+## utilise une formulation «n'est pas plus petite que 0.001»
+## est inutilement compliquée. De plus, elle repose sur la
+## priorité des opérations: la négation logique a-t-elle bel
+## et bien une priorité plus faible que l'inégalité? Il suffit
+## de réécrire l'expression sous la forme «est plus grand ou
+## égal à 0.001» et tout sera plus clair.
+##
+## Enfin, il y a ce 'return' à la dernière ligne de la
 ## fonction. Ça, c'est un gros non en R.
 ##
 ## Améliorons le style.
@@ -702,6 +759,9 @@ sqrt <- function(x)
 {
     if (x < 0)
         stop("x doit être un nombre positif")
+
+    if (x == 0)
+        return(0)
 
     improve <- function(guess, x)
         mean(c(guess, x/guess))
@@ -719,47 +779,364 @@ sqrt <- function(x)
 ## Dernier élément manquant dans notre code: les commentaires
 ## et la documentation.
 
-###
-### sqrt(x)
-###
-##  Calculer la racine carrée d'un nombre.
-##
-##  Argument
-##
-##  x: nombre réel positif.
-##
-##  Valeur
-##
-##  Nombre y tel que y^2 = x.
-##
-##  Exemples
-##
-##  sqrt(9)
-##
-sqrt <- function(x)
-{
-    ## Vérification de la validité de 'x'.
-    if (x < 0)
-        stop("x doit être un nombre positif")
-
-    ## Fonction pour calculer la prochaine approximation selon
-    ## la méthode de Newton. Si 'y' est l'approximation
-    ## actuelle de la racine carrée de 'x', alors la nouvelle
-    ## approximation est '(y + x/y)/2'.
-    improve <- function(guess, x)
-        mean(c(guess, x/guess))
-
-    ## Valeur de départ de la procédure itérative.
-    y <- 1
-
-    ## Approximations successives.
-    while (abs(y^2 - x) >= 0.001)
-        y <- improve(y, x)
-
-    ## Retourner la valeur tel que y^2 - x < 0.001.
-    y
-}
+<<sqrt>>
 @
+
+
+\section{Tests unitaires}
+\label{sec:pratiques:tests}
+
+Lorsque vous rédigez un programme, vous savez ce que celui-ci doit
+accomplir.\footnote{%
+  Si ce n'est pas le cas, retournez soit à la table à dessin, soit
+  consulter la personne qui vous a confié le mandat de
+  programmation!} %
+Il tombe sous le sens qu'une fois la programmation complétée, vous
+devriez tester que le programme effectue le traitement adéquat, non?
+Et pourtant\dots\ Tout bogue dans un logiciel signale un test non ou
+mal exécuté.
+
+Cette section explique brièvement comment mettre en place une
+infrastructure de tests pour du code R. Comme
+\citet{Hunt:pragmatic:1999} le soulignent, effectuer des tests est
+davantage une question culturelle que technique, en ce sens que le
+plus difficile n'est pas tant d'apprendre à tester le code dans un
+langage donné que de \emph{prendre l'habitude} de tester son code.
+Efforcez-vous donc d'intégrer les tests dès maintenant dans votre
+routine de programmation.
+
+Compte tenu de la portée de cet ouvrage, nous allons limiter la
+discussion aux \index{tests unitaires}\emph{tests unitaires}
+(\emph{unit tests}). Ceux-ci permettent de vérifier le bon
+fonctionnement d'une partie d'un grand programme. Dans notre contexte,
+un test unitaire porte sur une fonction R.
+
+Au moment d'écrire une fonction, vous devriez avoir en main --- ou au
+moins en tête --- sa
+\index{specification@spécification}\emph{spécification}. Celle-ci
+contient normalement:
+\begin{enumerate}
+\item la \index{signature}signature de la fonction;
+\item la liste des arguments de la fonction;
+\item la valeur retournée par la fonction.
+\item une description détaillée de ce que doit réaliser la fonction, y
+  compris les cas limites et la gestion des erreurs, le cas échéant;
+\end{enumerate}
+Vous aurez reconnu plusieurs des éléments de la documentation d'une
+fonction mentionnés à la \autoref{sec:pratiques:commentaires}. En
+effet, une large part de la documentation s'écrit toute seule à partir
+de la spécification.
+
+Les \index{tests unitaires}tests unitaires confrontent la réalisation
+d'une fonction à sa \index{specification@spécification}spécification.
+Les bons tests ne valident pas uniquement les cas triviaux, mais
+également les cas limites et les erreurs, lorsque la fonction se doit
+de les traiter. Si la fonction est vectorielle, assurez-vous aussi de
+la tester tant avec un vecteur de longueur $1$ qu'avec un vecteur de
+longueur supérieure à $1$.
+
+Par exemple, pour une fonction simple qui calcule la racine carrée
+d'un nombre, vous devriez écrire des tests unitaires pour les cas
+suivants:
+\begin{enumerate}
+\item la fonction retourne une erreur (ou \code{NaN}) si l'argument
+  est strictement négatif;
+\item la fonction retourne un véritable $0$ (et non une approximation)
+  pour le cas limite où l'argument est nul;
+\item le carré de la valeur retournée par la fonction est
+  approximativement égal à l'argument lorsque celui-ci est strictement
+  supérieur à $0$;
+\item si la fonction est vectorielle, elle effectue le traitement
+  approprié pour chaque élément d'un vecteur de valeurs positives,
+  négatives ou nulles.
+\end{enumerate}
+
+Concrètement, les tests consistent en des expressions qui retournent
+une erreur uniquement lorsque la réalisation d'une fonction n'est pas
+conforme à la spécification. Si l'évaluation de l'ensemble des
+expressions se déroule sans erreur, vous savez que tous les tests sont
+réussis.
+
+Où placer ces \index{tests unitaires}tests unitaires? Pour les petits
+projets très simples, vous pouvez les insérer dans le fichier de
+script contenant la définition de votre ou de vos fonctions. Cette
+stratégie a toutefois toutes les chances de devenir laborieuse,
+surtout si les tests sont longs à exécuter. Une meilleure pratique
+consiste à placer les tests dans un ou plusieurs fichiers de script
+dédiés. Si un jour vous développez votre propre paquetage R, vous
+pourrez déposer les fichiers dans un répertoire spécial justement
+nommé \code{tests}.
+
+Plusieurs \index{paquetage}paquetages externes\footnote{%
+  L'utilisation de paquetages fait l'objet du
+  \autoref{chap:paquetages}.} %
+proposent des outils pour enjoliver l'écriture ou les résultats des
+tests unitaires, par exemple \pkg{tinytest} \citep{Rpackage:tinytest},
+\pkg{testthat} \citep{Rpackage:testthat} ou \pkg{RUnit}
+\citep{Rpackage:RUnit}, pour n'en nommer que trois. Pour ma part,
+j'estime que les fonctions ci-dessous de la distribution R de base
+s'avèrent généralement suffisantes pour la mise en place d'une
+infrastructure de \index{tests unitaires}tests unitaires.
+
+\begin{ttscript}{assertWarning}
+\item[\Icode{source}] évaluation séquentielle d'un fichier de script.
+<<echo=TRUE, eval=FALSE>>=
+source("tests.R")
+@
+\item[\Icode{stopifnot}] erreur dès qu'une expression n'est pas vraie.
+\begin{Schunk}
+\begin{Sinput}
+> stopifnot(1 == 1, 1 < 2)
+> stopifnot(3 < 2)
+\end{Sinput}
+\begin{Soutput}
+Erreur : 3 < 2 n'est pas TRUE
+\end{Soutput}
+\end{Schunk}
+%
+\item[\Icode{assertError}] validation qu'une expression retourne une
+  erreur.
+\begin{Schunk}
+\begin{Sinput}
+> assertError(sqrt("abc"))
+> assertError(sqrt(4))
+\end{Sinput}
+\begin{Soutput}
+Erreur : Aucune erreur n'a été renvoyée lors
+de l'évaluation de sqrt(4)
+\end{Soutput}
+\end{Schunk}
+%
+\item[\Icode{assertWarning}] validation qu'une expression retourne un
+  avertissement.
+\begin{Schunk}
+\begin{Sinput}
+> assertWarning(matrix(1:8, 4, 3))
+> assertWarning(matrix(1:12, 4, 3))
+\end{Sinput}
+\begin{Soutput}
+Error in [...] : warning n'a pas été obtenu
+lors de l'évaluation de matrix(1:12, 4, 3)
+\end{Soutput}
+\end{Schunk}
+%
+\item[\Icode{all.equal}] égalité entre deux nombres à une (petite)
+  différence près.
+<<echo=TRUE>>=
+tan(pi/4) == 1
+1 - tan(pi/4)
+all.equal(tan(pi/4), 1)
+all.equal(pi, 355/113)
+@
+%
+\item[\Icode{identical}] égalité \emph{exacte} entre deux objets, y
+  compris leurs classes, leurs attributs, etc.
+<<echo=TRUE>>=
+identical("abc", "abc")
+identical(1, as.integer(1))
+@
+\end{ttscript}
+
+\warningbox{Lorsqu'il s'agit de comparer des valeurs numériques
+  résultant de calculs, vous devez absolument éviter d'utiliser
+  l'opérateur «\icode{==}». Il est hors de la portée de cet ouvrage de
+  discuter d'arithmérique en virgule flottante, mais consultez déjà
+  l'\link{https://tinyurl.com/y2c46aug}{entrée 7.31} (la plus célèbre
+  de toutes!) de la foire aux questions de R \citep{R-FAQ}.}
+
+\tipbox{Deux objets vous apparaissent identiques et \icode{identical}
+  persiste à dire que ce n'est pas le cas? La fonction \Icode{str}
+  vous révèlera la structure interne des objets, ce qui pourrait vous
+  aider à identifier les différences que R y voit.}
+
+\gotorbox{Difficile de bien saisir comment concevoir un fichier de
+  tests sans un exemple. Il s'en trouve un complet pour une fonction
+  simple aux lignes \reflines{pratiques:tests} du fichier de script
+  \code{\scriptfilename} reproduit à la
+  \autoref{sec:pratiques:exemples}.}
+
+<<tests-sqrt>>=
+## Tests unitaires de la fonction 'sqrt' de calcul de la
+## racine carrée par la méthode des approximations successives
+## de Newton.
+stopifnot({
+    tools::assertError(sqrt(-1))
+    identical(0, sqrt(0))
+    all.equal(3, sqrt(3)^2,
+              tolerance = 0.001)
+})
+@
+
+<<script, results=hide>>=
+###
+### TESTS UNITAIRES  `\labelline{pratiques:tests}`
+###
+
+## FONCTIONS UTILES
+
+## La fonction 'source' permet d'évaluer intégralemnent un
+## fichier de script. C'est l'équivalent, en une commande,
+## d'évaluer un fichier ligne par ligne de manière
+## interactive. La fonction est particulièrement utile pour
+## définir rapidement des fonctions dans un espace de travail
+## ou pour exécuter des tests unitaires.
+##
+## Le fichier 'sqrt.R' contient le code et la documentation de
+## la fonction 'sqrt' ci-dessus. Nous pouvons définir la
+## fonction dans l'espace de travail rapidement avec
+## l'expression suivante.
+source("sqrt.R")
+
+## La fonction 'stopifnot' permet de générer une erreur dès
+## qu'une des expressions en argument n'est pas vraie.
+##
+## Vous pouvez l'utiliser dans vos fonctions lorsqu'il y a
+## plusieurs tests de validité des arguments, mais elle sert
+## surtout pour les tests unitaires.
+##-!- stopifnot(1 == 2)                       # erreur
+stopifnot(1 < 2)                        # pas d'erreur
+
+## Pour tester plusieurs expressions à la fois dans
+## 'stopifnot', deux options. La première, les séparer par des
+## virgules, possiblement sur plusieurs lignes.
+stopifnot(1 < 2, 2 == 2, "a" < "b")
+stopifnot(1 < 2,
+          2 == 2,
+          "a" < "b")
+
+## L'autre option permet d'éviter les virgules, ce qui est
+## plus pratique pour l'évaluation interactive ligne par
+## ligne. Il s'agit de regrouper les expressions entre
+## accolades «{ }» et de les séparer les unes des autres par
+## un retour à la ligne.
+stopifnot({
+    1 < 2
+    2 == 2
+    "a" < "b"
+})
+
+## Les fonctions 'assertError' et 'assertWarning' font partie
+## de la distribution R de base, mais elles se trouvent dans
+## le paquetage 'tools' qui n'est pas chargé par défaut. Les
+## appeler sous la forme 'tools:assertError' et
+## 'tools::asserWarning' permet d'éviter de devoir charger le
+## paquetage en mémoire.
+##
+## Attention avec 'assertError': pour cette fonction le
+## comportement correct de l'expression en argument consiste
+## à... retourner une erreur! (C'est ce que l'on veut tester.)
+##-!- TRUE <- 3                     # erreur
+tools::assertError(TRUE <- 3) # ok!
+T <- 3                        # valide
+##-!- tools::assertError(T <- 3)    # erreur: pas d'erreur!
+
+## Similaire pour 'assertWarning'.
+##-!- 1:4 + 1:3                       # avertissement
+tools::assertWarning(1:4 + 1:3) # ok!
+1:4 + 1:2                       # valide
+##-!- tools::assertWarning(1:4 + 1:2) # erreur: pas d'avertissement!
+
+## La fonction 'all.equal' est extrêmement importante pour
+## vérifier l'égalité ou, plutôt, la presque égalité de deux
+## nombres en virgule flottante dans R.
+##
+## Ne vérifiez JAMAIS l'égalité de deux nombres obtenus à
+## partir de calculs avec '==' (à moins d'avoir la certitude
+## que les calculs n'impliquent que des entiers).
+1.2 + 1.4 + 2.8                 # 5.4
+1.2 + 1.4 + 2.8 == 5.4          # non?!?
+5.4 - (1.2 + 1.4 + 2.8)         # petit écart
+all.equal(1.2 + 1.4 + 2.8, 5.4) # ok
+
+## Vous pouvez utiliser '==' pour les chaines de caractères,
+## mais n'oubliez pas que la comparaison se fait élément par
+## élément.
+letters[1:3] == c("a", "b", "c")
+
+## La fonction 'identical', comme son nom l'indique, vérifie
+## que deux objets sont rigoureusement identiques.
+identical(letters[1:3], c("a", "b", "c"))
+identical(42, 40 + 2)
+
+## Une différence dans le type d'objet, les attributs ou la
+## classe et le résultat est FALSE.
+(x <- 42)                  # nombre réel en double précision
+str(x)                     # confirmation
+(y <- as.integer(42))      # véritable entier
+str(y)                     # confirmation
+x == y                     # visuellement pareils et égaux...
+identical(x, y)            # ... mais pas identiques
+
+(x <- c(a = 2))            # nombre étiqueté
+(y <- c(b = 2))            # idem
+x == y                     # nombres égaux...
+identical(x, y)            # ... mais objets non identiques
+
+## TESTS
+
+## Nous avons maintenant tout en main pour rédiger des tests
+## unitaires.
+##
+## À titre d'exemple, nous allons composer les tests pour la
+## fonction 'sqrt' ci-dessus (ou qui se trouve dans le fichier
+## d'accompagnement 'sqrt.R').
+##
+## La fonction n'est PAS vectorielle. Nous n'avons donc pas à
+## tester sa validité avec un vecteur de nombres de longueur
+## supérieure à 1.
+##
+## Premier test: la fonction retourne une erreur pour un
+## argument strictement négatif.
+tools::assertError(sqrt(-1))
+
+## Deuxième test: la fonction retourne un véritable 0 pour un
+## argument nul.
+stopifnot(identical(0, sqrt(0)))
+
+## Troisième test: le carré de la réponse est
+## (approximativement) égal à l'argument.
+##
+## Dans cet exemple précis, la précision de la fonction 'sqrt'
+## est limitée à 0,001. Nous devons donc fournir une tolérance
+## à 'all.equal'. Prenez note que ce n'est généralement pas
+## nécessaire.
+stopifnot(all.equal(3, sqrt(3)^2,
+                    tolerance = 0.001))
+
+## Nous pouvons aussi regrouper les trois tests en un seul
+## appel à 'stopifnot'.
+stopifnot({
+    tools::assertError(sqrt(-1))
+    identical(0, sqrt(0))
+    all.equal(3, sqrt(3)^2,
+              tolerance = 0.001)
+})
+
+## Comme les tests ci-dessus sont rapides à évaluer, nous
+## aurions pu les placer directement dans le fichier 'sqrt.R'.
+## Ainsi, 'source("sqrt.R")' permet à la fois de définir la
+## fonction et de vérifier sa validité. C'est suffisant pour
+## les petits projets ou les fonctions seules.
+##
+## De manière plus générale, je vous recommande de placer les
+## tests dans des fichiers de script séparés.
+##
+## Le fichier de script 'tests-sqrt.R' distribué avec
+## l'ouvrage reprend les tests ci-dessus.
+##
+## Vous pouvez ensuite définir la fonction et évaluer les
+## tests avec les expressions suivantes.
+source("sqrt.R")           # définition de la fonction
+source("tests-sqrt.R")     # exécution des tests
+
+### NETTOYAGE
+
+## La fonction 'sqrt' ci-dessus masque la fonction interne de
+## R. Question d'éviter les éventuels problèmes, effaçons
+## notre fonction moins performante.
+rm("sqrt")                 #-*- `\labelline{pratiques:tests:fin}`
+@
+
 
 
 \section{Exemples}
@@ -798,6 +1175,7 @@ sqrt <- function(x)
 
 \enlargethispage{5mm}
 \begin{exercice}
+  \label{ex:pratiques:irr}
   Présenter le code ci-dessous selon les normes d'espacement,
   d'indentation et de positionnement des accolades mentionnées dans ce
   chapitre. Pour ajuster automatiquement l'indentation avec RStudio,
@@ -812,7 +1190,7 @@ f <- function(x){
   if (sum(diff(sign(x[x!=0]))!=0)>1)
   warning("more than one sign change")
  r<-polyroot(x)
-i<-1/Re(r)[abs(Im(r))< .Machine$double.eps^0.5]-1
+i<-1/Re(r)[abs(Im(r))<    1.5e-8]-1
 i[i > -1]
 }
 \end{Verbatim}
@@ -821,9 +1199,8 @@ i[i > -1]
     La présentation correcte comporte des espaces autour de tous les
     opérateurs, une indentation de quatre (4) caractères et des
     accolades ouvrante et fermante placées sur leur propre ligne.
-    \begin{Schunk}
-\begin{Verbatim}[fontsize=\relsize{-1}]
-tri <- function(x)
+<<echo=FALSE>>=
+f <- function(x)
 {
     if (all(x >= 0) || all(x <= 0))
     {
@@ -832,11 +1209,74 @@ tri <- function(x)
     if (sum(diff(sign(x[x != 0])) != 0) > 1)
         warning("more than one sign change")
     r <- polyroot(x)
-    i <- 1/Re(r)[abs(Im(r)) < .Machine$double.eps^0.5] - 1
+    i <- 1/Re(r)[abs(Im(r)) < 1.5e-8] - 1
+    i[i > -1]
+}
+@
+  \begin{Schunk}
+\begin{Verbatim}
+f <- function(x)
+{
+    if (all(x >= 0) || all(x <= 0))
+    {
+        stop("all x are the same sign")
+    }
+    if (sum(diff(sign(x[x != 0])) != 0) > 1)
+        warning("more than one sign change")
+    r <- polyroot(x)
+    i <- 1/Re(r)[abs(Im(r)) < 1.5e-8] - 1
     i[i > -1]
 }
 \end{Verbatim}
-    \end{Schunk}
+  \end{Schunk}
+\end{sol}
+\end{exercice}
+
+\begin{exercice}
+  Rédiger des tests unitaires pour la fonction de
+  l'\autoref{ex:pratiques:irr} à partir de la lecture du code de la
+  fonction et des informations additionnelles suivantes:
+  \begin{enumerate}[1.]
+  \item la fonction prend en argument une série de nombres réels
+    positifs, négatifs ou nuls sous forme de vecteur;
+  \item elle vérifie le nombre de changements de signe dans le vecteur
+    après avoir éliminé les valeurs nulles;
+  \item la réponse correcte correspondant au vecteur
+    $(-10, -7, 12, 0, 11)$ est $\nombre{0,128564783114}$;
+  \item la réponse correcte correspondant au vecteur
+    $(-10, 12, -7, 0, 11)$ est $\nombre{0,225982251102}$.
+  \end{enumerate}
+  \begin{sol}
+    Nous devons effectuer les vérifications suivantes:
+    \begin{enumerate}[1.]
+    \item erreur si tous les éléments du vecteur en argument sont
+      positifs;
+    \item erreur si tous les éléments du vecteur en argument sont
+      négatifs;
+    \item avertissement s'il y a plus d'un changement de signe;
+    \item réponses adéquates pour les deux cas fournis dans l'énoncé.
+    \end{enumerate}
+    Le code ci-dessous permet d'effectuer les tests.
+<<echo=FALSE>>=
+stopifnot({
+    tools::assertError(f(c(4, 3, 0, 6, 21)))
+    tools::assertError(f(-c(4, 3, 0, 6, 21)))
+    tools::assertWarning(f(c(4, -3, 0, 21, -6)))
+    all.equal(0.128564783114, f(c(-10, -7, 12, 0, 11)))
+    all.equal(0.225982251102, f(c(-10, 12, -7, 0, 11)))
+})
+@
+  \begin{Schunk}
+\begin{Verbatim}
+stopifnot({
+    tools::assertError(f(c(4, 3, 0, 6, 21)))
+    tools::assertError(f(-c(4, 3, 0, 6, 21)))
+    tools::assertWarning(f(c(4, -3, 0, 21, -6)))
+    all.equal(0.128564783114, f(c(-10, -7, 12, 0, 11)))
+    all.equal(0.225982251102, f(c(-10, 12, -7, 0, 11)))
+})
+\end{Verbatim}
+  \end{Schunk}
   \end{sol}
 \end{exercice}
 

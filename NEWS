@@ -13,11 +13,17 @@
   l'ouvrage de la ligne de commande Unix et des systèmes de gestion de
   versions, avec un lien vers ma formation concomitante «Ligne de
   commande et gestion de versions avec Git».
+- Chapitre 6: nouvelle section sur les tests unitaires. Cela entraine
+  l'ajout de code correspondant à cette section les exemples du
+  chapitre et l'ajout d'un exercice. De plus, l'ouvrage est maintenant
+  distribué avec deux fichiers additionnels pour illustrer les tests
+  unitaires, soit `sqrt.R` et `tests-sqrt.R`.
 - Chapitre 10: révision des explications sur la création d'une
   bibliothèque personnelle à la section 10.3. Les instructions,
   beaucoup simplifiées, ont maintenant recours à la ligne de commande
   Unix. Ceci évite d'avoir à expliquer comment créer un fichier dans
   RStudio, ou comment accéder à des fichiers ou des dossiers cachés.
+  Changements stimulés par des commentaires de Alec Van Rassel.
 - Chapitre 10: dans la même veine que ci-dessus, une procédure de
   création d'une bibliothèque personnelle entièrement depuis la ligne
   de commande de R (avec `dir.create` et `writeLines`) a été ajoutée
@@ -28,7 +34,7 @@
 - Chapitre 11: ajout d'une section et d'un fichier de script
   d'exemples pour les fonctions R utilisant les expressions
   régulières. Ce chapitre est donc exceptionnellement livré avec deux
-  fichiers de script.
+  fichiers de script (`texte.sh` et `texte.R`).
 
 ## Changements
 

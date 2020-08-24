@@ -54,9 +54,10 @@ TEXFILES = $(addsuffix .tex, \
                        $(filter-out $(basename ${RNWFILES} ${MASTER} $(wildcard solutions-*.tex)),\
                                     $(basename $(wildcard *.tex))))
 
-## Les fichiers de script sont tous extraits des fichiers .Rnw. Celui
-## d'un chapitre a une extension .sh.
-SCRIPTS = ${RNWFILES:.Rnw=.R} texte.sh
+## Les fichiers de script sont tous extraits des fichiers .Rnw. Un
+## chapitre est livré avec deux fichiers d'accompagnement pour les
+## exemples. Un fichier de script a une extension .sh.
+SCRIPTS = ${RNWFILES:.Rnw=.R} sqrt.R tests-sqrt.R texte.sh 
 
 ## Informations de publication extraites du fichier maitre
 TITLE = $(shell grep "\\\\title" ${MASTER:.pdf=.tex} \
