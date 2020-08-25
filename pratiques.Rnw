@@ -829,15 +829,19 @@ de la spécification.
 
 Les \index{tests unitaires}tests unitaires confrontent la réalisation
 d'une fonction à sa \index{specification@spécification}spécification.
-Les bons tests ne valident pas uniquement les cas triviaux, mais
+Les bons tests ne valident pas uniquement les cas «normaux», mais
 également les cas limites et les erreurs, lorsque la fonction se doit
 de les traiter. Si la fonction est vectorielle, assurez-vous aussi de
 la tester tant avec un vecteur de longueur $1$ qu'avec un vecteur de
 longueur supérieure à $1$.
 
-Par exemple, pour une fonction simple qui calcule la racine carrée
-d'un nombre, vous devriez écrire des tests unitaires pour les cas
-suivants:
+\tipbox{Durant le codage d'une fonction, vous effectuez sans doute des
+  petits tests pour valider votre fonction. Conservez ces bouts de
+  code! Ils formeront la base de vos tests unitaires.}
+
+Prenons l'exemple d'une fonction simple qui calcule la racine carrée
+d'un seul nombre. Vous devriez alors écrire des tests unitaires pour
+les cas suivants:
 \begin{enumerate}
 \item la fonction retourne une erreur (ou \code{NaN}) si l'argument
   est strictement négatif;
@@ -854,29 +858,17 @@ conforme à la spécification. Si l'évaluation de l'ensemble des
 expressions se déroule sans erreur, vous savez que tous les tests sont
 réussis.
 
-\tipbox{Durant le codage d'une fonction, vous effectuez sans doute des
-  petits tests pour valider votre fonction. Conservez ces bouts de
-  code! Ils formeront la base de vos tests unitaires.}
-
-Où placer les \index{tests unitaires}tests unitaires? Pour les projets
-simples, vous pouvez les insérer dans le fichier de script contenant
-la définition de votre fonction. Cette stratégie convient toutefois
-mal aux grands projets ou aux tests longs à exécuter. Une meilleure
-pratique consiste à placer les tests dans des fichiers de script
-dédiés. Si un jour vous développez votre propre paquetage R, vous
-pourrez déposer les fichiers dans un répertoire spécial justement
-nommé \code{tests}.
-
-Plusieurs \index{paquetage}paquetages externes\footnote{%
+Reste à savoir quelles fonctions utiliser pour rédiger les
+\index{tests unitaires}tests unitaires. Plusieurs
+\index{paquetage}paquetages externes\footnote{%
   L'utilisation de paquetages fait l'objet du
   \autoref{chap:paquetages}.} %
-proposent des outils pour enjoliver l'écriture ou les résultats des
-\index{tests unitaires}tests unitaires, par exemple \pkg{tinytest}
-\citep{Rpackage:tinytest}, \pkg{testthat} \citep{Rpackage:testthat} ou
-\pkg{RUnit} \citep{Rpackage:RUnit}, pour n'en nommer que trois. Pour
-ma part, j'estime que les fonctions ci-dessous de la distribution R de
-base s'avèrent généralement suffisantes pour la mise en place d'une
-infrastructure de tests.
+proposent des outils pour enjoliver leur écriture ou leurs résultats,
+par exemple \pkg{tinytest} \citep{Rpackage:tinytest}, \pkg{testthat}
+\citep{Rpackage:testthat} ou \pkg{RUnit} \citep{Rpackage:RUnit}, pour
+n'en nommer que trois. Pour ma part, j'estime que les fonctions
+ci-dessous de la distribution R de base s'avèrent généralement
+suffisantes pour la mise en place d'une infrastructure de tests.
 
 \begin{ttscript}{assertWarning}
 \item[\Icode{source}] évaluation séquentielle d'un fichier de script.
@@ -944,15 +936,23 @@ identical(1, as.integer(1))
   de toutes!) de la foire aux questions de R \citep{R-FAQ}.}
 
 \tipbox{Deux objets vous apparaissent identiques et \icode{identical}
-  persiste à dire que ce n'est pas le cas? La fonction \Icode{str}
-  vous révèlera la structure interne des objets, ce qui pourrait vous
-  aider à identifier les différences que R y voit.}
+  persiste à dire que ce n'est pas le cas? La fonction \icode{str},
+  qui révèle la structure interne des objets, pourrait vous aider à
+  identifier les différences que R y voit.}
+
+Terminons avec une question toute pratique: où placer les \index{tests
+  unitaires}tests unitaires? Pour les projets simples, vous pouvez les
+insérer dans le fichier de script contenant la définition de votre
+fonction. Cette stratégie convient toutefois mal aux grands projets ou
+aux tests longs à exécuter. Une meilleure pratique consiste à placer
+les tests dans des fichiers de script dédiés. Si un jour vous
+développez votre propre paquetage R, vous pourrez déposer les fichiers
+dans un répertoire spécial justement nommé \code{tests}.
 
 \gotorbox{Difficile de bien saisir comment concevoir un fichier de
   tests sans un exemple. Il s'en trouve un complet pour une fonction
   simple aux lignes \reflines{pratiques:tests} du fichier de script
-  \code{\scriptfilename} reproduit à la
-  \autoref{sec:pratiques:exemples}.}
+  \code{\scriptfilename} reproduit à la section suivante.}
 
 <<tests-sqrt>>=
 ## Tests unitaires de la fonction 'sqrt' de calcul de la

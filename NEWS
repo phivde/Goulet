@@ -14,10 +14,10 @@
   versions, avec un lien vers ma formation concomitante «Ligne de
   commande et gestion de versions avec Git».
 - Chapitre 6: nouvelle section sur les tests unitaires. Cela entraine
-  l'ajout de code correspondant à cette section les exemples du
-  chapitre et l'ajout d'un exercice. De plus, l'ouvrage est maintenant
-  distribué avec deux fichiers additionnels pour illustrer les tests
-  unitaires, soit `sqrt.R` et `tests-sqrt.R`.
+  l'ajout d'un exemple dans le fichier de script du chapitre et
+  l'ajout d'un exercice. De plus, l'ouvrage est maintenant distribué
+  avec les fichiers `sqrt.R` et `tests-sqrt.R` pour illustrer les
+  tests unitaires.  
 - Chapitre 10: révision des explications sur la création d'une
   bibliothèque personnelle à la section 10.3. Les instructions,
   beaucoup simplifiées, ont maintenant recours à la ligne de commande
@@ -38,6 +38,8 @@
 
 ## Changements
 
+- Chapitre 6: la version finale de la fonction `sqrt` des exemples
+  traite maintenant à part le cas trivial x = 0.
 - Section 11.4.3: amélioration de l'explication de l'exemple en
   respectant l'ordre des règles du programme `awk`.
 
