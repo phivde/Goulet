@@ -13,6 +13,8 @@
   l'ouvrage de la ligne de commande Unix et des systèmes de gestion de
   versions, avec un lien vers ma formation concomitante «Ligne de
   commande et gestion de versions avec Git».
+- Section 1.4: les vignettes XKCD, c'est toujours bien. Cette fois sur
+  les systèmes d'exploitation.
 - Chapitre 6: nouvelle section sur les tests unitaires. Cela entraine
   l'ajout d'un exemple dans le fichier de script du chapitre et
   l'ajout d'un exercice. De plus, l'ouvrage est maintenant distribué
