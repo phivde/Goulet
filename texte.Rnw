@@ -2182,7 +2182,7 @@ apportons deux simplifications à la commande ci-dessus:
   par défaut de l'argument gauche de l'opérateur %
   \index{\string~@\code{\string~} (\code{awk})}«\code{\string~}»;
 \item la troisième règle peut être remplacée par un motif identité
-  («\code{1}») qui est toujours vrai et aucune action, l'instruction
+  qui est toujours vrai («\code{1}») et aucune action, l'instruction
   \icode[\code{awk}]{print} étant implicite dans ce cas.
 \end{itemize}
 \begin{Schunk}
