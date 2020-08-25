@@ -85,22 +85,6 @@ boot           Bootstrap Functions
 \end{Soutput}
 \end{Schunk}
 
-<<script, results=hide>>=
-###
-### SYSTÈME DE BASE
-###
-
-## La fonction 'search' retourne la liste des environnements
-## dans lesquels R va chercher un objet (en particulier une
-## fonction). '.GlobalEnv' est l'environnement de travail.
-search()
-
-## Liste de tous les packages installés sur votre système.
-## Noter que MASS en fait partie. C'est un paquetage livré
-## avec R, mais qui n'est pas chargé par défaut.
-##-!- library()
-@
-
 
 \section{Utilisation d'un paquetage}
 \label{sec:paquetages:utilisation}
@@ -113,16 +97,6 @@ C'est le principal rôle de la fonction \Icode{library}.
 library("\meta{paquetage}")
 \end{Verbatim}
 \end{Schunk}
-
-<<script, results=hide>>=
-###
-### UTILISATION D'UN PAQUETAGE
-###
-
-## Chargement du package MASS qui contient plusieurs
-## fonctions statistiques très utiles.
-##-!- library("MASS")
-@
 
 
 \section{Création d'une bibliothèque personnelle}
@@ -221,7 +195,7 @@ principale.
   des bibliothèques.}
 
 \gotorbox{Le fichier de script \code{\scriptfilename} reproduit à la
-  \autoref{sec:donnees:exemples} propose, aux lignes
+  \autoref{sec:paquetages:exemples} propose, aux lignes
   \reflines{paquetages:library}, une procédure alternative --- et en
   tous points équivalente --- pour créer une bibliothèque personnelle
   entièrement depuis la ligne de commande de R.}
@@ -263,7 +237,7 @@ principale.
 ## Pour tous les autres systèmes d'exploitation, utilisez
 ## plutôt la commande suivante.
 ##-!- writeLines('R_LIBS_USER="~/R/library"',
-##-!-            con = "~/.Renviron")  `\labelline{paquetages:library:fin}`
+##-!-            con = "~/.Renviron")  #-*- `\labelline{paquetages:library:fin}`
 @
 
 
@@ -298,6 +272,29 @@ spécifié dans les bibliothèques de
   \autoref{sec:paquetages:exemples}.}
 
 <<script, results=hide>>=
+###
+### SYSTÈME DE BASE
+###
+
+## La fonction 'search' retourne la liste des environnements
+## dans lesquels R va chercher un objet (en particulier une
+## fonction). '.GlobalEnv' est l'environnement de travail.
+search()
+
+## Liste de tous les packages installés sur votre système.
+## Noter que MASS et tools en fant partie. Ce sont des
+## paquetages livrés avec R, mais qui ne sont pas chargés par
+## défaut.
+##-!- library()
+
+###
+### UTILISATION D'UN PAQUETAGE
+###
+
+## Chargement du package MASS qui contient plusieurs
+## fonctions statistiques très utiles.
+##-!- library("MASS")
+
 ###
 ### INSTALLATION DE PAQUETAGES ADDITIONNELS
 ###
