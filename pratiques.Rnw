@@ -818,9 +818,9 @@ contient normalement:
 \begin{enumerate}
 \item la \index{signature}signature de la fonction;
 \item la liste des arguments de la fonction;
-\item la valeur retournée par la fonction.
+\item la valeur retournée par la fonction;
 \item une description détaillée de ce que doit réaliser la fonction, y
-  compris les cas limites et la gestion des erreurs, le cas échéant;
+  compris les cas limites et la gestion des erreurs, le cas échéant.
 \end{enumerate}
 Vous aurez reconnu plusieurs des éléments de la documentation d'une
 fonction mentionnés à la \autoref{sec:pratiques:commentaires}. En
@@ -846,9 +846,6 @@ suivants:
 \item le carré de la valeur retournée par la fonction est
   approximativement égal à l'argument lorsque celui-ci est strictement
   supérieur à $0$;
-\item si la fonction est vectorielle, elle effectue le traitement
-  approprié pour chaque élément d'un vecteur de valeurs positives,
-  négatives ou nulles.
 \end{enumerate}
 
 Concrètement, les tests consistent en des expressions qui retournent
@@ -857,12 +854,15 @@ conforme à la spécification. Si l'évaluation de l'ensemble des
 expressions se déroule sans erreur, vous savez que tous les tests sont
 réussis.
 
-Où placer ces \index{tests unitaires}tests unitaires? Pour les petits
-projets très simples, vous pouvez les insérer dans le fichier de
-script contenant la définition de votre ou de vos fonctions. Cette
-stratégie a toutefois toutes les chances de devenir laborieuse,
-surtout si les tests sont longs à exécuter. Une meilleure pratique
-consiste à placer les tests dans un ou plusieurs fichiers de script
+\tipbox{Durant le codage d'une fonction, vous effectuez sans doute des
+  petits tests pour valider votre fonction. Conservez ces bouts de
+  code! Ils formeront la base de vos tests unitaires.}
+
+Où placer les \index{tests unitaires}tests unitaires? Pour les projets
+simples, vous pouvez les insérer dans le fichier de script contenant
+la définition de votre fonction. Cette stratégie convient toutefois
+mal aux grands projets ou aux tests longs à exécuter. Une meilleure
+pratique consiste à placer les tests dans des fichiers de script
 dédiés. Si un jour vous développez votre propre paquetage R, vous
 pourrez déposer les fichiers dans un répertoire spécial justement
 nommé \code{tests}.
@@ -871,12 +871,12 @@ Plusieurs \index{paquetage}paquetages externes\footnote{%
   L'utilisation de paquetages fait l'objet du
   \autoref{chap:paquetages}.} %
 proposent des outils pour enjoliver l'écriture ou les résultats des
-tests unitaires, par exemple \pkg{tinytest} \citep{Rpackage:tinytest},
-\pkg{testthat} \citep{Rpackage:testthat} ou \pkg{RUnit}
-\citep{Rpackage:RUnit}, pour n'en nommer que trois. Pour ma part,
-j'estime que les fonctions ci-dessous de la distribution R de base
-s'avèrent généralement suffisantes pour la mise en place d'une
-infrastructure de \index{tests unitaires}tests unitaires.
+\index{tests unitaires}tests unitaires, par exemple \pkg{tinytest}
+\citep{Rpackage:tinytest}, \pkg{testthat} \citep{Rpackage:testthat} ou
+\pkg{RUnit} \citep{Rpackage:RUnit}, pour n'en nommer que trois. Pour
+ma part, j'estime que les fonctions ci-dessous de la distribution R de
+base s'avèrent généralement suffisantes pour la mise en place d'une
+infrastructure de tests.
 
 \begin{ttscript}{assertWarning}
 \item[\Icode{source}] évaluation séquentielle d'un fichier de script.
@@ -929,8 +929,7 @@ all.equal(tan(pi/4), 1)
 all.equal(pi, 355/113)
 @
 %
-\item[\Icode{identical}] égalité \emph{exacte} entre deux objets, y
-  compris leurs classes, leurs attributs, etc.
+\item[\Icode{identical}] égalité exacte et complète entre deux objets.
 <<echo=TRUE>>=
 identical("abc", "abc")
 identical(1, as.integer(1))
