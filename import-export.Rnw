@@ -31,7 +31,7 @@ source("Stangle.R")        # lancement de Stangle
 \end{objectifs}
 
 «Est-ce que je peux transférer mes données de Excel à R?» Cette
-question et ses multiples variantes est assurément l'une des plus
+question et ses multiples variantes sont assurément les plus
 fréquemment posées par les utilisateurs de R. La réponse courte: oui,
 c'est possible d'importer (c'est la terminologie correcte) des données
 de source externe dans R. La réponse longue: oui, c'est possible, mais
