@@ -931,7 +931,7 @@ identical(1, as.integer(1))
 \warningbox{Lorsqu'il s'agit de comparer des valeurs numériques
   résultant de calculs, vous devez absolument éviter d'utiliser
   l'opérateur «\icode{==}». Il est hors de la portée de cet ouvrage de
-  discuter d'arithmérique en virgule flottante, mais consultez déjà
+  discuter d'arithmétique en virgule flottante, mais consultez déjà
   l'\link{https://tinyurl.com/y2c46aug}{entrée 7.31} (la plus célèbre
   de toutes!) de la foire aux questions de R \citep{R-FAQ}.}
 
