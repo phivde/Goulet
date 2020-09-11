@@ -98,7 +98,7 @@ length_of_x <- length(x)
   et bien plus simple à utiliser au fil d'un programme.
 
   Certains noms d'objets sans réelle signification sont tellement
-  usuels qu'il est contre-productif de leur préférer des versions plus
+  usuels qu'il devient contreproductif de leur préférer des versions plus
   explicites. Pensons, ici, à \code{x} comme premier argument d'une
   fonction R ou à \code{i}, \code{j} et \code{k} comme compteurs dans
   les boucles \icode{for}.
@@ -421,7 +421,7 @@ commenter, jusqu'à l'évidence.
 z <- sum(x)
 \end{Verbatim}
 \end{Schunk}
-Cette pratique s'avère plus souvent qu'autrement contre-productive:
+Cette pratique s'avère plus souvent qu'autrement contreproductive:
 non seulement force-t-elle le programmeur à passer du temps à rédiger
 des commentaires sans véritable utilité, mais elle surcharge également
 le code, le rendant de ce fait plus difficile à lire.
