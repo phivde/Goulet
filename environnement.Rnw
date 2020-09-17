@@ -760,7 +760,7 @@ f()
     les valeurs de \code{x} et de \code{y} au moment du calcul. C'est
     facile pour \code{y}: l'objet n'est défini que dans l'espace de
     travail et sa valeur est $10$. Quant à \code{x}, même si sa valeur
-    change à plusieurs reprise (plus précisément: l'objet est défini
+    change à plusieurs reprises (plus précisément: l'objet est défini
     dans plusieurs environnements successifs), R utilisera celle qui a
     cours lorsque l'addition est effectuée, soit celle à l'intérieur
     de la fonction \code{h}. Le résultat cherché est donc $13$.
