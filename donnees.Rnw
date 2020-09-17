@@ -1686,13 +1686,6 @@ x$Age
 Il est possible d'ajouter des lignes ou des colonnes à un tableau de
 données avec les fonctions \icode{rbind} et \icode{cbind}.
 
-\tipbox{Vous remarquerez, ci-dessus, que les données de la colonne
-  \code{Nom} sont considérées comme des facteurs. C'est une
-  caractéristique de la fonction \code{data.frame} de convertir
-  automatiquement les chaines de caractères en facteurs. L'option
-  \code{stringAsFactors = FALSE} permet d'éviter la conversion
-  forcée.}
-
 \gotorbox{Étudiez les quelques exemples de tableaux de données
   présentés aux lignes \reflines{donnees:dataframe} du fichier de
   script \code{\scriptfilename} reproduit à la
@@ -1708,15 +1701,9 @@ données avec les fonctions \icode{rbind} et \icode{cbind}.
 ## attribut 'dim', ce qui fait qu'il est représenté comme une
 ## matrice. Cependant, les colonnes peuvent être de modes
 ## différents.
-##
-## Nous créons ici le même data frame que dans l'exemple du
-## chapitre, mais avec l'option 'stringsAsFactors = FALSE'
-## pour éviter la conversion automatique de la colonne 'Nom'
-## en facteur.
 data.frame(Nom = c("Pierre", "Jean", "Jacques"),
            Age = c(42, 34, 19),
-           Fumeur = c(TRUE, TRUE, FALSE),
-           stringsAsFactors = FALSE)
+           Fumeur = c(TRUE, TRUE, FALSE))
 
 ## R est livré avec plusieurs jeux de données, la plupart sous
 ## forme de data frames.

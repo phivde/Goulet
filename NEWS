@@ -8,7 +8,14 @@
 
 - Annexe A: lien vers la nouvelle vidéo sur une session de travail
   type avec RStudio.
-  
+
+## Changements
+
+- Section 5.6: l'utilisation de `stringAsFactors` n'étant plus requise
+  dans `data.frame` depuis la version 4.0.0 de R, toute référence à
+  cette notion est disparue de la section et du code informatique
+  correspondant.
+
 
 # 2020.08 (2020-08-25)
 
