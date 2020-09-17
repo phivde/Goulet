@@ -1706,15 +1706,15 @@ data.frame(Nom = c("Pierre", "Jean", "Jacques"),
            Fumeur = c(TRUE, TRUE, FALSE))
 
 ## R est livré avec plusieurs jeux de données, la plupart sous
-## forme de data frames.
+## forme de tableaux de données.
 ##-!- data()                     # liste complète
 
-## Nous allons illustrer certaines manipulations des data
-## frames avec le jeu de données 'USArrests'.
+## Nous allons illustrer certaines manipulations des tableaux
+## de données avec le jeu de données 'USArrests'.
 USArrests                  # jeu de données
 
 ## Analyse succincte de l'objet.
-mode(USArrests)            # un data frame est une liste...
+mode(USArrests)            # une liste...
 length(USArrests)          # ... de quatre éléments...
 class(USArrests)           # ... de classe 'data.frame'
 dim(USArrests)             # dimensions implicites
@@ -1725,7 +1725,7 @@ USArrests$Murder           # idem, plus simple
 USArrests[1, ]             # première ligne
 
 ## La fonction 'subset' permet d'extraire des lignes et des
-## colonnes d'un data frame de manière très intuitive.
+## colonnes d'un tablau de données de manière très intuitive.
 ##
 ## Par exemple, nous pouvons extraire ainsi le nombre
 ## d'assauts dans les états comptant un taux de meurtre
