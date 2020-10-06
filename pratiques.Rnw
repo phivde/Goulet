@@ -1017,7 +1017,7 @@ stopifnot({
 ## Les fonctions 'assertError' et 'assertWarning' font partie
 ## de la distribution R de base, mais elles se trouvent dans
 ## le paquetage 'tools' qui n'est pas chargé par défaut. Les
-## appeler sous la forme 'tools:assertError' et
+## appeler sous la forme 'tools::assertError' et
 ## 'tools::asserWarning' permet d'éviter de devoir charger le
 ## paquetage en mémoire.
 ##
