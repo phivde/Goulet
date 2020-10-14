@@ -1853,7 +1853,7 @@ calendrier. Nous pourrions y consacrer un chapitre entier.
 
 R contient dans le système de base les fonctionnalités essentielles
 pour manipuler les dates: stockage dans divers formats, tri,
-comparaison, génération de suites, etc. L'infractructure repose sur
+comparaison, génération de suites, etc. L'infrastructure repose sur
 trois classes d'objets principales: \Icode{Date}, \Icode{POSIXct} et
 \Icode{POSIXlt}.\footnote{%
   \index{POSIX}POSIX est une famille de normes techniques de
