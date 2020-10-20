@@ -1,4 +1,4 @@
-%%% Copyright (C) 2019 Vincent Goulet
+%%% Copyright (C) 2020 Vincent Goulet
 %%%
 %%% Ce fichier fait partie du projet
 %%% «Programmer avec R»
@@ -12,9 +12,65 @@
 \chapter{Analyse et contrôle de texte}
 \label{chap:texte}
 
-<<echo=FALSE>>=
-options(width=50)
+\def\shscriptfilename{\currfilebase.sh}
+\def\rscriptfilename{\currfilebase.R}
+\SweaveOpts{echo=FALSE}
+\SweaveInput{share/license-by-sa.nw}
+
+<<echo=FALSE, results=hide>>=
+source(".Sweaveprofile")   # configuration
+source("Stangle.R")        # lancement de Stangle
+
+##
+## Affiche une commande exécutée par le système et son résultat.
+##
+exec <- function(command, args, echo = TRUE, max.lines = NULL, eval = TRUE, ...)
+{
+    cmd <- paste("$", command, paste(args, collapse = " "))
+    output <- if (eval)
+    {
+        res <- system2(command, args, stdout = TRUE, ...)
+        if (echo)
+            if (is.null(max.lines))
+                paste(cmd, paste(res, collapse = "\n"), sep = "\n")
+            else
+                paste(cmd, paste(head(res, max.lines), collapse = "\n"),
+                      "...\n", sep = "\n")
+        else
+            paste(res, collapse = "\n")
+    }
+    else
+        cmd
+    cat(output)
+    invisible(output)
+}
 @
+<<script-cli>>=
+<<license-by-sa>>
+
+## Les exemples de ce fichier utilisent les fichiers suivants
+## distribués avec le présent ouvrage:
+##
+## - fichiers de script *.R
+## - chanson.txt
+## - 100metres.dat
+## - carburant.dat
+## - NEWS
+##
+## Assurez-vous d'exécuter les exemples dans un répertoire
+## contenant ces fichiers.
+##
+## Vous pouvez exécuter les commandes ci-dessous telles
+## quelles à une ligne de commande Unix, ou encore dans le
+## terminal RStudio avec Bash (macOS) ou Git Bash (Windows)
+## comme interpréteur de commandes.
+@
+
+<<script-r>>=
+<<license-by-sa>>
+@
+
+\epigraph{\emph{And now for something completely different}}{Monty Python}
 
 \begin{objectifs}
 \item Utiliser les expressions régulières pour décrire ou identifier
@@ -22,14 +78,13 @@ options(width=50)
 \item Effectuer l'analyse et le contrôle de texte à l'aide des outils
   informatiques standards \code{grep}, \code{sed} et \code{awk}.
 \item Effectuer des opérations de recherche et de remplacement de
-  texte à l'aide d'expressions régulières avec les divers outils de R.
+  texte à l'aide d'expressions régulières dans R.
 \end{objectifs}
 
-
-Peut-être vous êtes-vous déjà demandé comment s'effectue la validation
-de certains champs comme le code postal ou l'adresse de courrier
-électronique dans les formulaires électroniques. Sûrement pas en
-vérifiant si l'entrée figure dans la liste des quelques 17,5 millions
+Vous êtes-vous déjà demandé comment s'effectue la validation de
+certains champs comme le code postal ou l'adresse de courrier
+électronique dans les formulaires électroniques? Surement pas en
+vérifiant si l'entrée figure dans la liste des quelques 17,5~millions
 de codes postaux possibles au Canada ou, pire, parmi les milliards
 d'adresse de courriel que les
 \link{https://tools.ietf.org/html/rfc3696}{règles internationales}
@@ -37,48 +92,29 @@ permettent de concevoir! Non, ce qu'il faut, c'est un «langage» qui
 permet de décrire \emph{comment} une chaine de caractères peut être
 composée, sans toutefois en fixer la composition exacte. Un tel
 langage existe: ce sont les \emph{expressions régulières} ou
-expressions relationnelles.
+expressions rationnelles.
 
-Une expression régulière (\emph{regular expression}, ou regex ou
-regexp) est une chaine de caractères qui décrit, selon une syntaxe
-précise, un ensemble de chaines de caractères possibles
-\citep{Wikipedia:Expression_reguliere}.
+Une \index{expression régulière}expression régulière (\emph{regular
+  expression}; souvent abrégé «regex» ou «regexp») est une suite de
+caractères typographiques qui décrit, selon une syntaxe précise, un
+ensemble de chaines de caractères possibles
+\citep{Wikipedia:Expression_reguliere}. L'expression elle-même est
+souvent appelée un \Index{motif}«motif» (\emph{pattern}). Les
+expressions régulières s'avèrent particulièrement utiles dans
+l'analyse de données textuelles et dans le traitement de la langue
+naturelle (\emph{natural language processing}, NLP), une branche
+importante de l'intelligence artificielle.
 
-Par exemple, les plaques d'immatriculation récentes distribuées par la
-Société d'assurance automobile du Québec (SAAQ) sont composées ainsi:
-une lettre, deux chiffres, une espace, trois lettres. Les lettres
-\textsf{O}, \textsf{I} et \textsf{U} ne sont pas utilisées à cause de
-leur similitude avec, respectivement, le chiffre {\fullcaps 0}, le
-chiffre {\fullcaps 1} et la lettre \textsf{V}. L'expression régulière
-suivante permet de décrire l'ensemble des numéros de plaques possibles
-(y compris les combinaisons de lettres exclues comme \code{LSD} ou
-\code{SEX}):
-\begin{Schunk}
-\begin{Verbatim}
-[A-HJ-NP-TV-Z][0-9]{2} [A-HJ-NP-TV-Z]{3}
-\end{Verbatim}
-\end{Schunk}
-
-Voici quelques autres utilisations possibles des expressions
-régulières.
+Voici quelques utilisations possibles des expressions régulières.
 \begin{itemize}
 \item Rechercher du texte pouvant contenir des variations ou des
   fautes d'orthographe comme, par exemple, «je transfert» plutôt que
   «je transfère», ou encore les multiples variations autour du verbe
   «appeler»: appel, appelle, appellent, appeler, appelez, etc.
-\item Remplacer le nom d'une commande par un autre lorsque la commande
-  s'étend de part et d'autre d'un argument qui, lui, change d'une fois
-  à l'autre. Par exemple, dans le système de mise en page {\LaTeX}, la
-  syntaxe des commandes est la suivante:
-  \cmdprint{\cmd}\oarg{option}\marg{arg}. Pour remplacer toutes les
-  utilisations d'une commande \cmdprint{\foo} par \cmdprint{\bar}, il
-  faut pouvoir tenir compte de la présence possible d'un argument
-  optionnel \oarg{option} ainsi que de l'argument \marg{arg} qui
-  change d'une utilisation de la commande à une autre.
 \item Extraire les coordonnées géographiques d'un lieu (latitude et
   longitude) de l'URL d'une carte Google Maps. Par exemple, l'%
   \link{https://www.google.ca/maps/place/Universite+Laval/@46.7817463,-71.2769311,17z/data=!3m1!4b1!4m5!3m4!1s0x4cb896c469ff32f9:0x15feb853bd2f8247!8m2!3d46.7817463!4d-71.2747424}{URL
-    correspondant} à la recherche «Université Laval» est
+    correspondant à la recherche «Université Laval»} est
   \begin{Schunk}
 \begin{Verbatim}
 https://www.google.ca/maps/place/Universite+Laval/
@@ -90,11 +126,32 @@ https://www.google.ca/maps/place/Universite+Laval/
   dont on décode que le lieu se trouve à une latitude de
   $\nombre{46,7817463}$ et à une longitude de $\nombre{-71.2769311}$
   en degrés décimaux.
+\item Extraire d'une base de données les adresses se trouvant sur une
+  rue ou une avenue numérotée («1{\iere} Avenue» ou «4{\ieme} Rue»),
+  et ce, peu importe comment est orthographié l'abréviation de
+  l'adjectif numéral ordinal («re» ou «ère», «e» ou «ième»).
+\item Sélectionner les entrées d'une base de données qui débutent ou
+  qui se terminent par un caractère spécifique.
+\item Déterminer par programmation si un dépôt Git contient une
+  branche autre que \code{master} en examinant le résultat de la
+  commande \code{git branch}.
+\item Mettre en italique tous les mots d'un texte qui se trouvent
+  entre guillemets (mais pas les guillemets eux-mêmes), et ce, quels
+  que soient les mots.
 \end{itemize}
 
 Un jour ou l'autre, vous aurez à traiter des chaines de caractères en
 programmation ou en analyse de données. Ce jour-là, connaitre les
-expressions régulières vous sauvera énormément de temps.
+expressions régulières vous sera d'un grand secours.
+
+\notebox{Dans la littérature informatique, la présentation des
+  expressions régulières s'accompagne généralement de celle du langage
+  de programmation \index{Perl}Perl. En effet, Perl a été créé par
+  Larry Wall en 1987 justement pour traiter facilement du texte. Le
+  langage prend en charge les expressions régulières dans sa syntaxe
+  même et il comporte plusieurs extensions aux expressions prises en
+  charge par \icode{grep} et \icode{sed}. Le présent ouvrage ne traite
+  pas de \icode{Perl}.}
 
 \begin{figure}[t]
   \centering
@@ -106,76 +163,2278 @@ expressions régulières vous sauvera énormément de temps.
   \end{minipage}
 \end{figure}
 
+
+\section{Conventions typographiques et texte des exemples}
+\label{sec:texte:conventions}
+
+La présentation des expressions régulières exige souvent de clairement
+délimiter un \index{motif}motif et d'afficher certains caractères
+invisibles, comme les espaces ou les retours à la ligne. Ce chapitre
+utilise les conventions typographiques suivantes.
+\begin{itemize}
+\item Les motifs sont encadrés de «coins» de couleur contrastante,
+  comme \regex{ceci} \citep[une notation que j'emprunte
+  à][]{Friedl:regex:2006}.
+\item Les espaces sont représentées par le symbole \aspace, ce qui
+  permet, par exemple, de bien discerner que le motif
+  \regex{\#\aspace\aspace\aspace\aspace A} compte quatre espaces entre
+  \code{\#} et \code{A}.
+\item La chaine dans laquelle s'effectue une recherche est représentée
+  en police non proportionnelle et les correspondances d'un motif dans
+  celle-ci sont mis en surbrillance, comme dans l'exemple suivant:
+  \begin{center}
+    le motif \regex{chat} correspond à \chaine{Les \matches{chat}s
+      sont très mignons.}
+  \end{center}
+\end{itemize}
+
+Dans les exemples, nous utiliserons le texte de la chanson «La journée
+qui s'en vient est flambant neuve» de l'album \emph{Astronomie} (2012)
+du groupe québécois Avec pas d'casque. Le texte est fourni avec le
+présent document dans le fichier \code{chanson.txt}. Pour référence,
+il est également reproduit à la \autoref{fig:texte:chanson}.
+
+\begin{figure}
+  \centering
+  \lstinputlisting[frame=single,numbers=none]{chanson.txt}
+  \caption{Texte de la chanson «La journée qui s'en vient est flambant
+    neuve» de Avec pas d'casque}
+  \label{fig:texte:chanson}
+\end{figure}
+
+
 \section{Outils d'analyse et de contrôle du texte}
 \label{sec:texte:outils}
 
-L'expression régulière ne constitue qu'un langage de description d'une
-chaine de texte. Pour exploiter ce langage, des outils sont
-nécessaires. Aux fins de cet ouvrage, j'ai choisi de concentrer notre
-étude sur les utilitaires Unix standards en ligne de commande
-\code{grep}, \code{sed} et \code{awk}. Ils font partie intégrante des
-systèmes d'exploitation macOS et Linux et, sous Windows, ils sont
-livrés avec les interpréteurs de commande MSYS de
-\index{MSYS2}\link{https://www.msys2.org}{MSYS2} et
-\index{Git~Bash}Git~Bash de \link{https://git-scm.com/downloads}{Git
-  for Windows}.
+L'\index{expression régulière}expression régulière n'est qu'un langage
+de description d'une chaine de texte. Pour exploiter ce langage, des
+outils sont nécessaires. Aux fins de cet ouvrage, j'ai choisi de
+concentrer notre étude sur les utilitaires \index{Unix}Unix standards
+en ligne de commande \icode{grep}, \icode{sed} et \icode{awk}. Ils
+font partie intégrante des systèmes d'exploitation macOS et Linux et,
+sous Windows, ils sont livrés avec les interpréteurs de commande
+\index{MSYS}MSYS de \index{MSYS2}\link{https://www.msys2.org}{MSYS2}
+et \index{Git~Bash}Git~Bash de
+\link{https://git-scm.com/downloads}{Git for Windows}.
 
-Comme la plupart des utilitaires Unix, \Icode{grep}, \Icode{sed} et
-\Icode{awk} prennent en entrée un flux de texte ou un ou plusieurs
-fichiers en format texte brut et ils opèrent sur cette entrée ligne
-par ligne. Le résultat du traitement est affiché à la ligne de
-commande, envoyé à un autre programme ou redirigé vers un fichier. Les
-outils diffèrent quant au type de traitement qu'ils peuvent effectuer.
-\begin{description}
+Il va sans dire que les utilitaires \icode{grep}, \icode{sed} et
+\icode{awk} s'utilisent depuis une ligne de commande \index{Unix}Unix:
+dans le \index{Terminal}Terminal sous macOS, ou dans
+\index{Git~Bash}Git~Bash ou MSYS sous Windows. Si vous n'êtes pas
+familier avec la ligne de commande,
+\citet{Goulet:laboratoire-cli-git:2019} offre une rapide introduction
+suffisante pour suivre la matière de ce chapitre. Nous reviendrons à R
+à la \autoref{sec:texte:internes} lorsque nous étudierons les
+fonctions internes de R aux fonctionnalités équivalentes à \code{grep}
+et \code{sed}.
+
+Comme la plupart des utilitaires Unix, \icode{grep}, \icode{sed} et
+\icode{awk} prennent en entrée un flux de texte ou un ou plusieurs
+fichiers en format texte brut. Ils opèrent ensuite sur cette entrée
+\emph{ligne par ligne}. Le résultat du traitement est affiché à la
+sortie standard (le terminal), transféré à un autre programme avec le
+tuyau \index{{"|}@\code{\textbar} (tuyau Unix)} «\code{\textbar}», ou
+encore redirigé vers un fichier avec l'opérateur «\code{>}». La
+\autoref{fig:texte:flux-cli}, reprise de
+\citet{Goulet:laboratoire-cli-git:2019} avec quelques simplifications,
+illustre ce flux des données.
+
+\begin{figure}
+  \centering
+  \setlength{\unitlength}{4mm}
+  \small
+  \begin{picture}(31.25,8.5)(-0.25,0)
+    \thicklines
+    \put(3,6){\makebox(0,0)[t]{\parbox{6.5\unitlength}{
+          \centering{\LARGE\faStream~\faFile*[regular]} \\[4pt]
+          entrée standard ou fichier}}}
+    \put(6,5){\vector(1,0){3.5}}
+    \put(12,6){\makebox(0,0)[t]{\parbox{6\unitlength}{
+          \centering{\LARGE\faCogs} \\[4pt]
+          \code{grep}, \code{sed}, \code{awk}}}}
+    \put(14.75,5){\line(1,0){1.5}}
+    \put(16.25,7){\line(0,-1){4}}
+    \put(16.25,7){\vector(1,0){1.75}}
+    \put(16.25,3){\vector(1,0){1.75}}
+    \put(21,8){\makebox(0,0)[t]{\parbox{6.5\unitlength}{
+          \centering{\LARGE\faStream} \\[4pt]
+          erreur standard}}}
+    \put(21,4){\makebox(0,0)[t]{\parbox{6\unitlength}{
+          \centering{\LARGE\faStream} \\[4pt]
+          sortie standard}}}
+    \put(23.75,3){\vector(1,0){2.75}}
+    \put(25,3.75){\makebox(0,0){\color{regex}\code{>}}}
+    \put(28,4){\makebox(0,0)[t]{\parbox{4\unitlength}{
+          \centering{\LARGE\faFile*[regular]} \\[4pt]
+            fichier}}}
+    \Line(21,0.75)(21,0)(3,0)
+    \put(3,0){\vector(0,1){1.5}}
+    \put(16.25,0.75){\makebox(0,0){\color{regex}\code{\textbar}}}
+  \end{picture}
+  \caption{Flux des données à la ligne de commande Unix}
+  \label{fig:texte:flux-cli}
+\end{figure}
+
+Les outils \icode{grep}, \icode{sed} et \icode{awk} diffèrent quant au
+type de traitement qu'ils peuvent effectuer.
+\begin{ttscript}{grep}
 \item[\code{grep}] sélectionne les lignes en entrée correspondant à
-  une expression régulière;
-\item[\code{sed}] sert surtout pour rechercher et remplacer du texte;
-\item[\code{awk}] permet de traiter aisément du texte séparé en champs
-  ainsi que du texte réparti sur plusieurs lignes.
-\end{description}
+  une expression régulière.
+\item[\code{sed}] sert surtout pour rechercher et remplacer du texte.
+\item[\code{awk}] permet de traiter aisément du texte séparé en
+  champs, ainsi que du texte réparti sur plusieurs lignes.
+\end{ttscript}
 
-\warningbox{Il existe plusieurs versions différentes de ces outils,
-  parfois avec des différences importantes, notamment en ce qui a
-  trait à \code{sed}. Les versions sous Linux, \index{MSYS2}MSYS2 et
-  \index{Git~Bash}Git~Bash sont généralement celles du
-  \link{https://www.gnu.org/}{projet GNU}. Dans macOS, elles
-  proviennent de
-  \link{https://en.wikipedia.org/wiki/Berkeley_Software_Distribution}{BSD}.}
+Puisque nous utiliserons les utilitaires \icode{grep} et \icode{sed} à
+profusion dans la présentation sur les expressions régulières à la
+\autoref{sec:texte:regex}, prenons un moment pour apprendre comment
+les utiliser. L'utilitaire \icode{awk}, quant à lui, fera l'objet
+de la \autoref{sec:texte:awk}.
 
+\index{\string\@\code{\bs} (Bash)}%
+\importantbox{L'espace horizontal étant compté dans un document en
+  format PDF, il est parfois nécessaire de scinder une commande sur
+  deux lignes ou plus. Vous remarquerez dans ces cas la présence du
+  symbole «\code{\bs}» en fin de ligne. C'est le symbole de
+  continuation de ligne de Bash qui permet d'écrire une commande sur
+  plus d'une ligne. Il ne fait pas partie de la syntaxe des
+  commandes.}
+
+\subsection{Extraction de lignes avec \code{grep}}
+\label{sec:texte:outils:grep}
+
+L'utilitaire \Icode{grep}\footnote{%
+  Le nom de l'utilitaire provient de la commande \code{:g/re/p} de
+  l'antédiluvien éditeur de texte \icode{ed} qui permet de rechercher
+  globalement (\code{g}) une expression régulière (\emph{regular
+    expression}, \code{re}) et d'afficher (\emph{print}, \code{p}) les
+  lignes qui correspondent à l'expression.} %
+prend en argument une \index{expression régulière}expression régulière
+entre guillemets (simples ou doubles), lit l'entrée standard ou une
+liste de fichiers ligne par ligne, puis retourne sur la sortie
+standard les lignes qui contiennent des correspondances avec
+l'expression régulière. C'est très utile pour savoir si un fichier
+contient --- ou quels fichiers contiennent --- un mot ou une
+expression, assez pour que le nom de l'utilitaire soit devenu, en
+anglais, un verbe dans le %
+\link{http://www.catb.org/jargon/html/G/grep.html}{jargon
+  informatique} %
+(\emph{to grep}).
+
+Pour reprendre plus formellement ce qui précède, la syntaxe d'une
+commande \icode{grep} est:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+grep \meta{options} '\meta{motif}' \meta{fichiers}
+\end{Verbatim}
+\end{Schunk}
+\begin{itemize}
+\item \meta{options} est une liste facultative d'options (ou drapeaux)
+  qui modifient le comportement de \icode{grep}.
+\item \meta{motif} est une %
+  \index{expression régulière}expression régulière qui définit le
+  texte à rechercher.
+\item \meta{fichiers} est le ou les fichiers dans lesquels rechercher
+  le texte; si aucun fichier n'est spécifié, \icode{grep} recherche
+  dans l'entrée standard.
+\end{itemize}
+
+Les trois exemples ci-dessous permettent, dans l'ordre, d'extraire du
+fichier \code{chanson.txt}: le vers de la chanson qui contient le mot
+«temps»; les vers qui débutent par «M»; le vers qui contient le mot
+«chat» (aucun\footnote{%
+  Sachez que la \link{https://youtu.be/eR_44AzYIZs}{vidéo} de la
+  chanson est, elle, emplie de chatons très mignons.}).
+<<echo=FALSE>>=
+exec("grep", c("'temps'", "chanson.txt"))
+@
+<<echo=FALSE>>=
+exec("grep", c("'^M'", "chanson.txt"))
+@
+<<echo=FALSE>>=
+exec("grep", c("'chat'", "chanson.txt"))
+@
+
+Les \meta{options} mentionnées ci-dessus pour modifier le comportement
+de \icode{grep} se présentent généralement en deux versions: courte
+sous forme d'une seule lettre précédée d'un tiret, ou longue sous
+forme d'un mot (ou une expression) précédé de deux tirets. Les options
+de \icode{grep} sont très nombreuses; je n'en ai retenu que quelques
+unes ici.
+
+\begin{ttscript}{-E, --extended-regexp}
+\item[\code{-E, --extended-regexp}] interprète le motif comme une expression
+  régulière étendue.
+\item[\code{-c, --count}] retourne seulement le nombre de lignes qui
+  correspondent au motif.
+\item[\code{-o, --only-matching}] retourne uniquement la portion de la
+  ligne qui correspond au motif, plutôt que la ligne au complet.
+\item[\code{-v, --invert-match}] sélectionne les lignes
+  qui ne correspondent \emph{pas} au motif.
+\end{ttscript}
+
+Nous aurons l'occasion d'illustrer chacune de ces options dans la suite.
+
+\subsection{Recherche et remplacement avec \code{sed}}
+\label{sec:texte:outils:sed}
+
+L'utilitaire \Icode{sed}\footnote{%
+  Pour \emph{stream editor}, ou éditeur de flux de texte. Comme
+  \code{grep}, \code{sed} tire son origine de l'éditeur \icode{ed}.} %
+est en quelque sorte un éditeur de texte qui opère sur un texte une
+seule ligne à la fois et de manière non-interactive. (Vous pourriez
+objecter que cela ne correspond en rien à l'idée que l'on se fait d'un
+éditeur de texte, mais il n'en reste pas moins que le programme
+effectue des tâches d'édition sur du texte.) L'éventail des
+traitements que \icode{sed} peut appliquer à un texte est très vaste,
+mais la syntaxe des commandes qu'il faut entrer pour y arriver est
+particulièrement ésotérique\footnote{%
+  Jugez-en: la commande pour supprimer l'une de deux lignes blanches
+  consécutives dans un texte est \code{N;/\string^\bs n\$/D;P;D;}.}. %
+Nous nous attarderons donc à une seule commande de \icode{sed}, celle
+qui permet de rechercher et de remplacer à l'intérieur d'un texte. La
+commande est fournie en argument à \icode{sed} entre guillemets
+(simples ou doubles). L'utilitaire lit ensuite l'entrée standard ou
+une liste de fichiers ligne par ligne. La syntaxe est donc la
+suivante:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+sed \meta{options} 's/\meta{motif}/\meta{remplacement}/\meta{modificateur}'
+    \meta{fichiers}
+\end{Verbatim}
+\end{Schunk}
+\begin{itemize}
+\item \meta{options} est une liste facultative d'options (ou drapeaux)
+  qui modifient le comportement de \icode{sed}.
+\item \code{s} est le nom de la commande \icode{sed} qui sert à
+  rechercher et remplacer.
+\item \meta{motif} est une %
+  \index{expression régulière}expression régulière qui définit le
+  texte à rechercher.
+\item \meta{remplacement} est le texte qui sert à remplacer le texte
+  qui correspond à \meta{motif}.
+\item \meta{modificateur} est un symbole qui permet de modifier le
+  comportement de la commande; nous utiliserons uniquement le
+  modificateur \code{g} (pour «global») qui indique de remplacer
+  toutes les correspondances de \meta{motif} sur une ligne, et non
+  seulement la première.
+\item «\code{/}» est un symbole qui sert à délimiter les différentes
+  parties de la commande; n'importe quel symbole (qui ne se trouve pas
+  autrement dans la commande) fait l'affaire, mais «\code{/}» est le
+  symbole le plus couramment utilisé.
+\item \meta{fichiers} est le ou les fichiers dans lesquels rechercher
+  le texte; si aucun fichier n'est spécifié, \icode{sed} recherche
+  dans l'entrée standard.
+\end{itemize}
+
+Contraitement à ce que l'on pourrait penser, \icode{sed} ne modifie
+pas le ou les fichiers d'origine. Le texte modifié est simplement
+affiché à la sortie standard. Pour sauvegarder ce texte modifié, vous
+devez rediriger la sortie standard vers un fichier avec l'opérateur de
+redirection «\code{>}» comme expliqué à la \autoref{sec:texte:outils}.
+Le nom de ce fichier doit être différent de celui que \icode{sed} est
+occupé à traiter\footnote{%
+  Il existe une option pour remplacer directement dans le fichier
+  d'origine, mais elle n'est pas standard dans toutes les versions de
+  \icode{sed}. Je vous recommande de ne pas vous y fier.}.
+
+Les trois exemples ci-dessous permettent de faire les changements
+suivants dans le texte du fichier \code{chanson.txt}, dans l'ordre:
+remplacer «Oh» par «Ah»; remplacer «mm» par «MM»; remplacer toutes les
+occurrences de «promets» sur une ligne par «jure». (J'ai abrégé les
+sorties des commandes pour économiser de l'espace.)
+\begin{Schunk}
+\begin{Verbatim}
+$ sed 's/Oh/Ah/' chanson.txt
+Ah comme il est lourd
+Le temps qui s'appelle hier
+...
+\end{Verbatim}
+\end{Schunk} %$
+
+\begin{Schunk}
+\begin{Verbatim}
+$ sed 's/mm/MM/' chanson.txt
+Oh coMMe il est lourd
+Le temps qui s'appelle hier
+...
+Mes bras désolés
+Rampent coMMe des chiens
+...
+Gave-moi de ton amour
+Pour shiMMer l'Univers
+...
+\end{Verbatim}
+\end{Schunk} %$
+
+\begin{Schunk}
+\begin{Verbatim}
+$ sed 's/promets/jure/g' chanson.txt
+...
+Dans ma tête il est pour toi
+Je jure, je jure que
+la journée qui s'en vient est flambant neuve
+...
+Rampent comme des chiens
+Je jure, je jure que
+la journée qui s'en vient est flambant neuve
+...
+Voudrait que tu deviennes
+Je jure, je jure que
+la journée qui s'en vient est flambant neuve
+...
+Il manque la manière
+Je jure, je jure que
+la journée qui s'en vient est flambant neuve
+...
+Pour shimmer l'Univers
+Je jure, je jure que
+la journée qui s'en vient est flambant neuve
+...
+Nos plus beaux accidents
+Je jure, je jure que
+la journée qui s'en vient est flambant neuve
+\end{Verbatim}
+\end{Schunk} %$
+
+Il n'est pas tout à fait exact de dire que \icode{sed} traite une
+seule ligne à la fois. En effet, il est possible d'appliquer des
+commandes sur un intervalle de lignes par le biais d'une mémoire
+tampon (\emph{hold space}). Nous n'aurons pas recours à la mémoire
+tampon de \icode{sed} dans le présent ouvrage.
+
+\warningbox{Il existe plusieurs versions différentes de \icode{grep},
+  \icode{sed} et \icode{awk}, parfois avec des différences
+  importantes, surtout dans le cas de \code{sed}. Les versions sous
+  Linux, \index{MSYS2}MSYS2 et \index{Git~Bash}Git~Bash sont
+  généralement celles du \link{https://www.gnu.org/}{projet GNU}. Dans
+  macOS, elles proviennent de
+  \link{https://en.wikipedia.org/wiki/Berkeley_Software_Distribution}{BSD}.
+  J'ai tâché de fournir ici des expressions universelles qui
+  fonctionnent dans ces deux principales variantes.}
+
+\gotorbox{Le fichier de script \code{\shscriptfilename} reproduit à la
+  \autoref{sec:texte:exemples-cli} contient des exemples d'utilisation de
+  \icode{grep}, \icode{sed} et \icode{awk}. Vous pouvez ouvrir le
+  fichier de script dans votre éditeur de texte pour facilement copier
+  les commandes à la ligne de commande, ou encore évaluer celle-ci
+  directement dans le terminal RStudio tel qu'expliqué à la
+  \autoref{sec:rstudio:terminal}. Étudiez pour l'instant les lignes
+  \reflines{texte:outils}.}
+
+<<script-cli>>=
+##-!- ###
+##-!- ### OUTILS D'ANALYSE ET DE CONTRÔLE DE TEXTE  `\labelline{texte:outils}`
+##-!- ###
+##-!-
+##-!- ## EXTRACTION DE LIGNES AVEC grep
+##-!-
+##-!- ## L'utilitaire 'grep' permet d'identifier les lignes d'un
+##-!- ## fichier (ou du texte en entrée standard) qui contiennent
+##-!- ## des correspondances avec une expression régulière.
+##-!- ##
+##-!- ## L'expression régulière la plus simple est une chaine de
+##-!- ## caractères standard.
+##-!- ##
+##-!- ## Effectuons d'abord quelques recherches simples dans le
+##-!- ## texte de la chanson «La journée qui s'en vient est flambant
+##-!- ## neuve».
+##-!- grep 'temps' chanson.txt   # vers contenant le mot «temps»
+##-!- grep 'chat' chanson.txt	   # vers contenant le mot «chat»
+##-!-
+##-!- ## Remarquez que 'grep' est sensible à la casse.
+##-!- grep 'Même' chanson.txt	   # vers contenant le mot «Même»
+##-!- grep 'même' chanson.txt	   # vers contenant le mot «même»
+##-!-
+##-!- ## Dressons maitenant la liste de toutes les utilisations de
+##-!- ## la fonction 'matrix' dans les fichiers d'exemples.
+##-!- ##
+##-!- ## Lorsque 'grep' recoit plusieurs fichiers en entrée, il
+##-!- ## effectue la recherche dans tous les fichiers tour à tour.
+##-!- ##
+##-!- ## La syntaxe '*.R' signifie: tous les fichiers dont le nom se
+##-!- ## termine par l'extension «.R». (Attention: il s'agit d'une
+##-!- ## syntaxe de l'interpréteur de commande Bash, et non d'une
+##-!- ## expression régulière.)
+##-!- grep 'matrix' *.R
+##-!-
+##-!- ## L'option '-l' de 'grep' permet de limiter les résultats à
+##-!- ## la liste des fichiers contenant au moins une utilisation de
+##-!- ## 'matrix'.
+##-!- grep -l 'matrix' *.R
+##-!-
+##-!- ## Recherchons maintenant les fichiers d'exemples dans
+##-!- ## lesquels apparaissent les objets 'letters' et 'LETTERS'.
+##-!- ## Nous devons rechercher sans égard à la casse pour attraper
+##-!- ## les deux cas. L'option '-i' de 'grep' permet d'ignorer la
+##-!- ## casse.
+##-!- grep -i 'letters' *.R
+##-!-
+##-!- ## RECHERCHE ET REMPLACEMENT DE TEXTE AVEC sed
+##-!-
+##-!- ## L'utilitaire 'sed' est un éditeur de texte en ligne très
+##-!- ## puissant, mais dont le fonctionnement et la syntaxe des
+##-!- ## commandes laissent souvent perplexe. Dans le cadre de cet
+##-!- ## ouvrage, nous nous pencherons uniquement sur les opérations
+##-!- ## de recherche et de remplacement de texte de 'sed'.
+##-!- ##
+##-!- ## La syntaxe de la commande de recherche et remplacement est
+##-!- ## la suivante:
+##-!- ##
+##-!- ##   s/<motif>/<remplacement>/[g]
+##-!- ##
+##-!- ## - <motif> est une expression régulière qui définit le texte
+##-!- ##   à rechercher;
+##-!- ## - <remplacement> est le texte qui doit remplacer le texte
+##-!- ##   identifié par <motif>;
+##-!- ## - «/» est en fait un symbole quelconque (mais «/» est celui
+##-!- ##   le plus souvent utilisé) qui sert à délimiter les parties
+##-!- ##   de la commande;
+##-!- ## - g est un modificateur optionnel qui indique à 'sed'
+##-!- ##   d'effectuer le remplacement pour toutes les
+##-!- ##   correspondances sur une même ligne ('sed'
+##-!- ##   effectue le changement uniquement pour la première
+##-!- ##   correspondance par défaut).
+##-!- ##
+##-!- ## Reprenons d'abord les exemples du chapitre basés sur le
+##-!- ## fichier chanson.txt.
+##-!- sed 's/Oh/Ah/' chanson.txt # remplacer «Oh» par «Ah»
+##-!- sed 's~Oh~Ah~' chanson.txt # idem avec un autre séparateur
+##-!- sed 's|Oh|Ah|' chanson.txt # idem avec un autre séparateur
+##-!- sed 's/mm/MM/' chanson.txt # remplacer «mm» par «MM»;
+##-!-
+##-!- ## Observez maintenant l'effet du modificateur 'g' dans le
+##-!- ## remplacement de «promets» par «jure». Sans lui, seul le
+##-!- ## premier mot de la ligne est remplacé. Pour remplacer toutes
+##-!- ## les occurrences de «promets» sur une ligne par «jure», il
+##-!- ## faut ajouter le modificateur 'g' à la commande.
+##-!- sed 's/promets/jure/' chanson.txt
+##-!- sed 's/promets/jure/g' chanson.txt
+##-!-
+##-!- ## Remplaçons maintenant les symboles de commentaires triples
+##-!- ## '###' en début de ligne (à la Emacs) dans le fichier
+##-!- ## 'pratiques.R' par un symbole unique '#' (à la RStudio).
+##-!- ##
+##-!- ## Comme nous le verrons dans la suite du chapitre, le symbole
+##-!- ## «^» identifie le début d'une ligne.
+##-!- sed 's/^###/#/' pratiques.R
+##-!-
+##-!- ## Le texte modifié par 'sed' est affiché à la sortie standard
+##-!- ## sans modifier le fichier d'origine.
+##-!- ##
+##-!- ## Pour sauvegarder le texte modifié, il faut rediriger la
+##-!- ## sortie standard vers un fichier avec l'opérateur de
+##-!- ## redirection «>». Le nom de ce fichier doit être différent
+##-!- ## de celui que 'sed' est occupé à traiter.
+##-!- ##
+##-!- ## Reprenons l'exemple précédent en sauvegardant le résultat
+##-!- ## dans un nouveau fichier 'pratiques-new.R'.
+##-!- sed 's/^###/#/' pratiques.R > pratiques-new.R #-*- `\labelline{texte:outils:fin}`
+@
 
 \section{Expressions régulières}
 \label{sec:texte:regex}
 
-Il existe une multitude de tutoriels et de documents de référence sur
-les expressions régulières et sur les utilitaires \icode{grep},
-\icode{sed} et \icode{awk}, que ce soit dans Internet ou sous forme de
-livre. Or, le guide \link{https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/}{\emph{Shell Scripting Primer}} de la bibliothèque
-pour développeurs de Apple \citep{Apple:shellprimer} s'avère une
-référence idéale pour vous accompagner dans l'atteinte des objectifs
-d'apprentissage mentionnés au début du chapitre.
+Tel que mentionné dans l'introduction de ce chapitre, une
+\index{expression régulière}expression régulière, ou expression
+rationnelle, est un langage, muni d'une syntaxe précise, qui permet de
+décrire un ensemble de chaines de caractères possibles. Vous avez
+rencontré quelques expressions régulières très simples et intuitives à
+la section précédente. Ainsi, l'expression régulière \regex{chat}
+correspond à \chaine{\matches{chat}}, mais aussi à
+\chaine{\matches{chat}s}, \chaine{\matches{chat}on} ou
+\chaine{a\matches{chat}}. Nous verrons dans la suite comment
+restreindre l'expression au seul mot «chat».
 
-Je vous invite donc à étudier les chapitres suivants du guide
-\emph{Shell Scripting Primer}:
+Cette section propose une introduction au langage des expressions
+régulières. Il existe une multitude de tutoriels et de documents de
+référence sur le sujet dans Internet et sous forme de livre. Pour vous
+accompagner dans l'atteinte des objectifs d'apprentissage mentionnés
+au début du chapitre, je me suis inspiré de l'excellent
+\link{https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/}{\emph{Shell
+    Scripting Primer}} de la bibliothèque pour développeurs de Apple
+\citep{Apple:shellprimer}. Si vous souhaitez étudier les expressions
+régulières vraiment en profondeur, je vous recommande l'ouvrage
+classique de \citet{Friedl:regex:2006}.
+
+\subsection{Types d'expressions régulières}
+\label{sec:texte:regex:types}
+
+Avant d'aller plus loin, vous devez savoir qu'il existe trois grands
+types d'expressions régulières: les
+\index{expression régulière!basique}expressions régulières basiques ou
+classiques (\emph{Basic Regular Expressions}, \index{BRE}BRE), les
+\index{expression régulière!étendue}expressions régulières étendues
+(\emph{Extended Regular Expressions}, \index{ERE}ERE) et les
+\index{expression régulière!Perl}expressions régulières de Perl
+(\emph{Perl Compatible Regular Expressions}, \index{PCRE}PCRE). Les
+utilitaires \icode{grep} et \icode{sed} utilisent les expressions
+régulières basiques par défaut.
+
+Voici les principales différences entre les expressions régulières
+basiques et étendues. Si ce qui suit n'est pas tout à fait clair à la
+première lecture, ça le deviendra dès la prochaine section lorsque
+nous entamerons l'étude des opérateurs des expressions régulières.
 \begin{itemize}
-\item
-  \link{https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/RegularExpressionsUnfettered/RegularExpressionsUnfettered.html}{\emph{Regular
-      Expressions Unfettered}} jusqu'à la section \emph{Using
-    Modifiers}, inclusivement;
-\item
-  \link{https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/Howawk-ward/Howawk-ward.html}{\emph{How
-      AWK-ward}} jusqu'à la section \emph{Changing the Record and
-    Field Separators in AWK Scripts}, inclusivement.
+\item Dans les expressions régulières étendues, les symboles
+  «\icode[regex]{+}» et «\icode[regex]{?}» sont des opérateurs de
+  répétition. Dans les expressions régulières basiques, ce sont des
+  caractères ordinaires et il n'existe aucun équivalent pour leur
+  fonctionnalité respective.
+\item Dans les expressions régulières étendues, le symbole
+  \index{{"|}@\code{\textbar} (regex)}«\code{\textbar}» est un
+  opérateur de choix entre plusieurs possibilités. Dans les
+  expressions régulières basiques, c'est un caractère ordinaire et il
+  n'existe aucun équivalent pour sa fonctionnalité.
+\item Dans les expressions régulières étendues, les parenthèses
+  «\icode[regex]{(~)}» et les accolades «\icode[regex]{\{~\}}» sont,
+  respectivement, des opérateurs de regroupement et de quantificateur
+  borné. Dans les expressions régulières basiques, ce sont des
+  caractères ordinaires et il faut les précéder du caractère
+  d'échappement «\code{\bs}» pour les convertir en opérateurs.
 \end{itemize}
-Revenez ensuite ici pour des exemples additionnels et des exercices.
 
-\warningbox{Vous pouvez ignorer toutes les notions relatives à Perl
-  exposées dans \emph{Shell Scripting Primer}.}
+Dans la suite, lorsqu'il existe une différence entre les expressions
+régulières basiques et les expressions régulières étendues, nous
+utiliserons toujours ces dernières. Pour indiquer à \icode{grep} et à
+\icode{sed} d'utiliser la syntaxe des %
+\index{expression régulière!étendue}expressions régulières étendues,
+il suffit de leur ajouter l'option \code{-E} mentionnée à la
+\autoref{sec:texte:outils:grep}.
 
-\windowsbox{Utilisateurs de Windows: pas de souci! Bien qu'émanant de
-  Apple, \emph{Shell Scripting Primer} traite de procédures et
-  d'outils Unix standards. Or, vous disposez de ces outils si vous
-  avez installé \index{Git}\emph{Git for Windows} ou
-  MSYS2\index{MSYS2}.}
+Dans le premier exemple ci-dessous, le motif \regex{chien|chat} est
+interprété par \icode{grep} comme une expression régulière basique
+dans laquelle le symbole «\code{|}» est un caractère comme les autres.
+Comme le fichier \code{chanson.txt} ne contient pas la chaine
+\chaine{chien|chat}, le motif ne correspond à aucune ligne. Dans le
+second exemple \icode{grep} est invoqué avec l'option \code{-E} et,
+par conséquent, le motif est interprété comme une expression régulière
+étendue qui signifie plutôt: \chaine{chien} \emph{ou} \chaine{chat}.
+<<echo=FALSE>>=
+exec("grep", c("'chien|chat'", "chanson.txt"))
+@
+<<echo=FALSE>>=
+exec("grep", c("-E", "'chien|chat'", "chanson.txt"))
+@
+
+\tipbox{Pour effacer tout doute, n'hésitez pas à simplement utiliser
+  toujours \icode{grep} et \icode{sed} avec l'option \code{-E}. La
+  plupart des systèmes fournissent d'ailleurs un utilitaire
+  \Icode{egrep} en tous points équivalent à \code{grep -E}.}
+
+\subsection{Syntaxe de base}
+\label{sec:texte:regex:syntaxe}
+
+Comme mentionné précédemment, une %
+\index{expression régulière}expression régulière est une suite de
+caractères typographiques qui décrit une chaine de texte. Elle est
+composée de caractères littéraux (dont la «valeur» correspond au
+symbole lui-même) et de caractères spéciaux qui font office
+d'opérateurs\footnote{%
+  Les opérateurs ou caractères spéciaux des expressions régulières
+  sont aussi parfois appelés \emph{métacaractères}.}. %
+La syntaxe obéit à quelques règles fondamentales en définitive assez
+simples.
+\begin{enumerate}
+\item Un caractère littéral correspond à la \emph{première} occurrence
+  de ce caractère dans la chaine de texte. Par exemple, le motif
+  \regex{a} correspond à \chaine{G\matches{a}ve-moi de ton amour}. Que
+  la lettre se trouve à l'intérieur d'un mot n'a pas d'importance.
+\item Une expression régulière peut être formée par
+  \index{concaténation}concaténation de deux ou plusieurs expressions
+  régulières. Elle correspond alors à toute chaine de texte qui
+  correspond aux sous-expressions. Autrement dit, les composantes
+  d'une expression régulière sont par défaut reliées par une clause
+  «et». Dans l'exemple précédent, le motif \regex{am} correspond à
+  \chaine{Gave-moi de ton \matches{am}our}.
+\item Une douzaine d'opérateurs permettent de rechercher dans une
+  chaine de texte autre chose que des caractères littéraux.
+\end{enumerate}
+
+Vous pouvez visualiser le texte auquel un motif correspond à l'aide
+d'un testeur d'expressions régulières en ligne\footnote{%
+  Recherchez \emph{regular expression tester} pour en obtenir une
+  liste et choisissez votre favori.}, %
+ou encore simplement en remplaçant les correspondances par du texte
+quelconque avec \icode{sed}. Je vous laisse exécuter les deux
+commandes ci-dessous et en étudier attentivement les résultats.
+<<echo=FALSE>>=
+exec("sed", c("'s/a/!/'", "chanson.txt"), eval = FALSE)
+@
+<<echo=FALSE>>=
+exec("sed", c("'s/am/--/'", "chanson.txt"), eval = FALSE)
+@
+
+Le \autoref{tab:texte:operateurs} présente les opérateurs des
+expressions régulières étendues. Dans la suite, nous allons
+graduellement les intégrer dans les expressions régulières afin de
+sans cesse augmenter l'éventail des motifs disponibles.
+
+\begin{table}
+  \centering
+  \renewcommand{\arraystretch}{1.1}
+  \caption{Principaux opérateurs des expressions régulières étendues}
+  \label{tab:texte:operateurs}
+  \begin{tabular}{cp{9cm}}
+    \toprule
+    Opérateur  & Fonction \\
+    \midrule
+    \index{{"|}@\code{\textbar} (regex)}\code{\textbar} & alternance
+                                                          («ou») \\
+    \index{\string^@\code{\string^} (regex)}\code{\string^} & début de la ligne;
+                                                négation (à
+                                                l'intérieur d'une
+                                                classe) \\
+    \index{\string$@\code{\$} (regex)}\code{\$} & fin de la ligne \\
+    \icode[regex]{.} & caractère de remplacement \\
+    \icode[regex]{*} & zéro, une ou plusieurs occurrences \\
+    \icode[regex]{+} & une ou plusieurs occurrences \\
+    \icode[regex]{?} & zéro ou une occurrence \\
+    \icode[regex]{(~)} & groupe de caractères \\
+    \icode[regex]{[~]} & classe de caractères \\
+    \icode[regex]{\{~\}} & quantificateur du nombre d'occurrences \\
+    \index{\string\@\code{\bs} (regex)}\code{\bs} & caractère d'échappement \\
+    \bottomrule
+  \end{tabular}
+\end{table} %$
+
+\importantbox{L'espace est un «caractère» comme les autres dans les
+  expressions régulières. Le motif \regex{e} correspond donc à
+  \chaine{Gav\matches{e}-moi de ton amour}, alors que le motif
+  \regex{e\aspace} correspond plutôt à \chaine{Gave-moi
+    d\matches{e~}ton amour}.}
+
+\gotorbox{Avant de véritablement entrer dans le vif du sujet, prenez
+  le temps d'étudier les quelques exemples d'expressions régulières
+  qui se trouvent aux lignes \reflines{texte:regex:syntaxe} du fichier
+  de script \code{\shscriptfilename} reproduit à la
+  \autoref{sec:texte:exemples-cli}.}
+
+<<script-cli>>=
+##-!- ###
+##-!- ### EXPRESSIONS RÉGULIÈRES  `\labelline{texte:regex}`
+##-!- ###
+##-!-
+##-!- ## SYNTAXE DE BASE  `\labelline{texte:regex:syntaxe}`
+##-!-
+##-!- ## Les règles de base des expressions régulières sont simples
+##-!- ## et peu nombreuses:
+##-!- ##
+##-!- ## 1. un caractère littéral correspond à lui-même (plus
+##-!- ##    précisément: à sa première occurrence dans le texte
+##-!- ##    examiné);
+##-!- ## 2. les composantes d'une expression régulière sont reliées
+##-!- ##    par «et» par défaut;
+##-!- ## 3. des opérateurs permettent de définir des motifs
+##-!- ##    contenant autre chose que des caractères littéraux.
+##-!- ##
+##-!- ## Examinons quelques exemples simples de recherches dans le
+##-!- ## mot «chatons». Exécutez aussi ces exemples dans un testeur
+##-!- ## d’expressions régulières en ligne afin de mieux voir à quel
+##-!- ## texte les motifs correspondent.
+##-!- ##
+##-!- ## Le texte est composé avec la commande 'echo' et passé
+##-!- ## ensuite à 'grep' avec l'opérateur de transfert de données
+##-!- ## (tuyau).
+##-!- echo "chatons" | grep 'c'
+##-!- echo "chatons" | grep 't'
+##-!- echo "chatons" | grep 'b'
+##-!- echo "chatons" | grep 'chat'
+##-!- echo "chatons" | grep 'chaton'
+##-!- echo "chatons" | grep 'ton'
+##-!- echo "chatons" | grep 'chats'
+##-!-
+##-!- ## Il existe des différences importantes dans les définitions
+##-!- ## des opérateurs entre les expressions régulières basiques
+##-!- ## (BRE) et les expressions régulières étendues (ERE).
+##-!- ##
+##-!- ## Dès lors que votre motif contient un opérateur, je vous
+##-!- ## recommande d'utiliser les expressions régulières étendues.
+##-!- ## On les active dans 'grep' et dand 'sed' avec l'option '-E'.
+##-!- ##
+##-!- ## Par exemple, le symbole «|» est l'opérateur d'alternance
+##-!- ## («ou») dans les ERE et un caractère littéral dans les BRE.
+##-!- grep 'chat|chien' chanson.txt	 # recherche «chat|chien»
+##-!- grep -E 'chat|chien' chanson.txt # recherche «chat» ou «chien»
+##-!-
+##-!- ## Illustrons quelques-uns des principaux opérateurs des
+##-!- ## expressions régulières étendues. Nous reviendrons sur
+##-!- ## ceux-ci plus en détail plus loin.
+##-!- ##
+##-!- ## Débutons avec un autre exemple d'alternance («ou»).
+##-!- grep -E 'amour' chanson.txt	   # «amour» sur une ligne
+##-!- grep -E 'mieux' chanson.txt	   # «mieux» sur une ligne
+##-!- grep -E 'amour|mieux' chanson.txt  # l'un OU l'autre
+##-!-
+##-!- ## Début et fin de ligne.
+##-!- grep -E 'la' chanson.txt	   # «la» sur une ligne
+##-!- grep -E '^la' chanson.txt	   # «la» en début de ligne
+##-!- grep -E 'que' chanson.txt	   # «que» sur une ligne
+##-!- grep -E 'que$' chanson.txt   # «que» en fin de ligne
+##-!-
+##-!- ## Le point «.» a un rôle très important dans les expressions
+##-!- ## régulières: il représente «n'importe quel caractère».
+##-!- ##
+##-!- ## Puisque l'espace constitue également un caractère littéral,
+##-!- ## le motif ' . ' permet de rechercher un mot d'une lettre
+##-!- ## (non placé en début ou en fin de ligne puisqu'il doit être
+##-!- ## précédé et suivi d'une espace).
+##-!- grep -E ' . ' chanson.txt
+##-!-
+##-!- ## Voici deux manières de rechercher un mot d'exactement deux
+##-!- ## lettres (toujours placé ailleurs qu'en début ou en fin de
+##-!- ## ligne):
+##-!- grep -E ' .. ' chanson.txt      # doublement de l'opérateur
+##-!- grep -E ' .{2} ' chanson.txt    # opérateur + quantificateur
+##-!- grep -E -o ' .{2} ' chanson.txt # afficher les correspondances
+##-!-
+##-!- ## Une autre manière simple de visualiser les correspondances
+##-!- ## d'un motif dans du texte consiste à remplacer celles-ci
+##-!- ## avec 'sed' par du texte facile à repérer.
+##-!- sed 's/a/!/' chanson.txt
+##-!- sed 's/am/--/' chanson.txt #-*- `\labelline{texte:regex:syntaxe:fin}`
+@
+
+\subsection{Remplacement et répétition}
+\label{sec:texte:regex:wildcards}
+
+Nous avons établi que l'un des principes de base des expressions
+régulière est qu'un caractère littéral correspond à lui-même dans un
+motif. Ce qu'il nous manque pour augmenter considérablement l'éventail
+des motifs disponibles, c'est une façon de signifier «n'importe quel
+caractère» et «n'importe quelle suite de caractères». C'est le rôle du
+caractère de remplacement et des opérateurs de répétition.
+
+Dans les expressions régulières, le point «\Icode[regex]{.}» est le
+\index{caractere de remplacement@caractère de remplacement}%
+\index{wildcard@\emph{wildcard character}|see{caractère de
+    remplacement}}caractère de remplacement (\emph{wildcard
+  character}). Par exemple, le motif \regex{le.} correspond à
+\chaine{le} suivi d'un caractère quelconque, \emph{y compris
+  l'espace}. Par conséquent, tant \chaine{\matches{les}} que
+\chaine{\matches{len}t} ou \chaine{el\matches{le~}mange} correspondent
+à ce motif, mais pas \chaine{belle} placé en fin de ligne.
+
+Effectuons une autre recherche dans le fichier \code{chanson.txt}: les
+lignes contenant un mot se terminant par \chaine{ou} et une lettre
+quelconque. Nous allons délimiter un mot en supposant que la chaine
+recherchée est suivie d'une espace --- ce qui a pour effet d'exclure
+les mots situés en fin de vers. Le motif approprié pour la recherche
+est \regex{ou.\aspace}\,.
+<<echo=FALSE>>=
+exec("grep", c("'ou. '", "chanson.txt"))
+@
+
+Affichons, à l'aide de l'option \code{-o} de \icode{grep}, la portion
+de chaque ligne qui correspond au motif dans l'exemple précédent.
+<<echo=FALSE>>=
+exec("grep", c("-o", "'ou. '", "chanson.txt"))
+@
+
+Les \index{operateur de repetition@opérateur de répétition}opérateurs
+de répétition (ou de quantification), quant à eux, permettent de
+décrire des suites de caractères. Comme le montre le
+\autoref{tab:texte:operateurs}, il existe quatre opérateurs de
+répétition dans les expressions régulières (étendues): les caractères
+réservés «\icode[regex]{*}», «\icode[regex]{+}» et «\icode[regex]{?}»,
+ainsi que les accolades «\icode[regex]{\{~\}}». Ces opérateurs
+s'appliquent à ce qui les précède immédiatement.
+
+L'opérateur «\Icode[regex]{*}» signifie: «ce qui précède, zéro ou
+plusieurs fois». Ainsi le motif \regex{a*b} correspond, entre autres,
+aux chaines \chaine{\matches{b}}, \chaine{\matches{ab}} ou
+\chaine{\matches{aaab}}. C'est le seul opérateur de répétition aussi
+pris en charge par les expressions régulières basiques.
+
+L'opérateur «\Icode[regex]{+}» signifie: «ce qui précède, une ou
+plusieurs fois». Ainsi le motif \regex{a+b} correspond aux chaines
+\chaine{\matches{ab}} ou \chaine{\matches{aaab}}, mais pas à
+\chaine{b}.
+
+Quant à l'opérateur «\Icode[regex]{?}», il signifie: «ce qui précède,
+zéro ou une fois». Autrement dit, «\code{?}» rend le caractère qui
+précède optionnel dans la chaine recherchée. Par exemple, le motif
+\regex{ab?c} correspond aux chaines \chaine{\matches{ac}} et
+\chaine{\matches{abc}}.
+
+Combinés avec le caractère de remplacement, les trois opérateurs de
+répétition ci-dessus permettent de décrire des chaines de caractères
+très générales puisque l'opération «n'importe quel caractère» s'en
+trouve repétée autant de fois que nécessaire. Ce sont les combinaisons
+d'opérateurs les plus utilisées dans les expressions régulières.
+\begin{ttscript}{\regex{mm}}
+\item[\regex{.*}] correspond à une chaine de caractères quelconques de
+  longueur arbitraire, y compris zéro.
+\item[\regex{.+}] correspond à une chaine de caractères quelconques
+  longue d'au moins un caractère; équivalent à \regex{..*}\,.
+\item[\regex{.?}] correspond à aucun ou un seul caractère quelconque.
+\end{ttscript}
+Comparez attentivement les résultats des deux exemples ci-dessous.
+<<echo=FALSE>>=
+exec("grep", c("-E", "'Le .*e'", "chanson.txt"))
+@
+<<echo=FALSE>>=
+exec("grep", c("-E", "'Le .?e'", "chanson.txt"))
+@
+
+Enfin, les accolades «\Icode[regex]{\{~\}}» font office de
+quantificateurs bornés, c'est-à-dire qu'elles permettent de spécifier
+le nombre minimal de répétitions \emph{requises} et, de manière
+optionnelle, le nombre maximal de répétitions \emph{permises}. Il
+existe trois manières de les utiliser. (Dans ce qui suit, $n$ et $m$
+sont des entiers et $m > n$.)
+\begin{ttscript}{\code{\{$n$,$m$\}}}
+\item[\code{\{$n$\}}] répète ce qui précède exactement
+  $n$ fois.
+\item[\code{\{$n$,\}}] répète ce qui précède au moins $n$ fois.
+\item[\code{\{$n$,$m$\}}] répète ce qui précède au moins $n$ fois et
+  jusqu'à $m$ fois.
+\end{ttscript}
+Les opérateurs «\icode[regex]{*}», «\icode[regex]{+}» et
+«\icode[regex]{?}» sont donc simplement des raccourcis pour, dans
+l'ordre, \code{\{0,\}}, \code{\{1,\}} et \code{\{0,1\}}. Le
+\autoref{tab:texte:accolades} fournit des exemples de correspondances
+pour chaque variante des accolades.
+
+\begin{table}
+  \centering
+  \caption{Comparaison des trois variantes des quantificateurs bornés}
+  \label{tab:texte:accolades}
+  \begin{tabular}{*{7}{l}}
+    \toprule
+    Motif & \multicolumn{6}{c}{Correspondances} \\
+    \midrule
+    \regex{ah\{2\}}   & \chaine{ah} & \chaine{\matches{ahh}} & \chaine{\matches{ahh}h} & \chaine{\matches{ahh}hh} & \chaine{\matches{ahh}hhh} & \chaine{\matches{ahh}hhhh} \\ \addlinespace[6pt]
+    \regex{ah\{2,\}}  & \chaine{ah} & \chaine{\matches{ahh}} & \chaine{\matches{ahhh}} & \chaine{\matches{ahhhh}} & \chaine{\matches{ahhhhh}} & \chaine{\matches{ahhhhhh}} \\ \addlinespace[6pt]
+    \regex{ah\{2,4\}} & \chaine{ah} & \chaine{\matches{ahh}} & \chaine{\matches{ahhh}} & \chaine{\matches{ahhhh}} & \chaine{\matches{ahhhh}h} & \chaine{\matches{ahhhh}hh} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\tipbox{Les quantificateurs des expressions régulières sont par défaut
+  gloutons (\emph{greedy}), c'est-à-dire qu'ils trouvent la plus
+  longue chaine possible en accord avec un motif. Par exemple, le
+  motif \regex{L.+c} correspond à \chaine{\matches{Le chemin du plus
+      lâc}he}, et non à seulement \chaine{\matches{Le c}hemin du plus
+    lâche}. Il existe aussi des quantificateurs non gloutons; vous
+  pourrez les rechercher lorsque vous souhaiterez restreindre la
+  portée d'un quantificateur à la plus petite chaine possible. Vous
+  trouverez également dans les exemples de la
+  \autoref{sec:texte:exemples-cli} une solution de contournement.}
+
+\subsection{Caractère d'échappement}
+\label{sec:texte:regex:escape}
+
+Si les caractères «\code{*}»,  «\code{+}» ou «\code{?}» --- en fait,
+tous ceux du \autoref{tab:texte:operateurs} --- ont une signification
+particulière dans les expressions régulières, comment alors rechercher
+ces caractères dans du texte? C'est là qu'entre en jeu le %
+\index{caractere d'echappement@caractère d'échappement}caractère
+d'échappement %
+\index{\string\@\code{\bs} (regex)|bfhyperpage}«\code{\bs}». %
+Lorsqu'il précède un symbole, le caractère d'échappement désactive la
+signification spéciale de ce symbole. Par exemple, le motif
+\regex{\bs.} trouve un accord avec le caractère «\chaine{.}». Pour
+rechercher un nom de fichier long d'un à huit caractères et suivi
+d'une extension \code{.txt}, un motif approprié\footnote{%
+  Cet exemple très simplifié ne tient pas compte des éventuelles
+  règles de validité d'un nom de fichier.} %
+serait donc: \regex{.\{1,8\}\bs.txt}\,.
+
+\subsection{Marqueurs de position}
+\label{sec:texte:regex:marqueurs}
+
+Les expressions régulières comportent deux marqueurs de position qui
+permettent de fixer une condition pour qu'un motif trouve un accord
+dans une chaine de caractères: le
+\index{caret|see{\code{\string^} (regex)}}caret (ou accent circonflexe)
+\index{\string^@\code{\string^} (regex)}«\code{\string^}» et le signe
+de dollar \index{\string$@\code{\$} (regex)}«\code{\$}». Ils
+identifient respectivement le début et la fin d'une ligne de texte.
+
+Par exemple, la première commande ci-dessous identifie uniquement les
+lignes qui contiennent \chaine{la} en début de ligne, alors que la
+seconde retient seulement les lignes qui contiennent \chaine{que} en
+fin de ligne. (Il est laissé en exercice de comparer avec les
+résultats sans les marqueurs de position.)
+<<echo=FALSE>>=
+exec("grep", c("'^la'", "chanson.txt"))
+@
+<<echo=FALSE>>=
+exec("grep", c("'que$'", "chanson.txt"))
+@
+
+Combien de lignes de \code{chanson.txt} débutent par \chaine{la}?
+C'est un travail pour \icode{grep} muni de l'option \code{-c}.
+<<echo=FALSE>>=
+exec("grep", c("-c", "'^la'", "chanson.txt"))
+@
+
+Observez maintenant le motif particulier \regex{\string^\$} et prenez
+une minute pour déterminer à quoi il correspond.
+
+Vous avez trouvé?
+
+Le motif décrit un début de ligne suivi immédiatement d'une fin de
+ligne, soit\dots\ une ligne blanche! Ce motif est surtout utile
+lorsque combiné avec l'option \code{-v} de \icode{grep} qui permet
+d'inverser les résultats. Ainsi, la commande suivante retourne toutes
+les lignes du fichier \code{chanson.txt} qui ne sont \emph{pas} vides.
+Autrement dit, la commande supprime les lignes blanches du fichier.
+(Question d'économiser de l'espace en ces pages, je vous laisse le
+soin d'en faire la vérification.)
+<<echo=FALSE>>=
+exec("grep", c("-v", "'^$'", "chanson.txt"), eval = FALSE)
+@
+
+\gotorbox{Nous avons déjà couvert plusieurs éléments importants de la
+  syntaxe des expressions régulières. Étudiez les lignes
+  \reflines{texte:regex:wildcards-marqueurs} du fichier de script
+  \code{\shscriptfilename} reproduit à la \autoref{sec:texte:exemples-cli}.}
+
+<<script-cli>>=
+##-!- ## REMPLACEMENT ET RÉPÉTITION  `\labelline{texte:regex:wildcards-marqueurs}`
+##-!-
+##-!- ## Comme mentionné ci-dessus, le caractère «.» est le
+##-!- ## caractère de remplacement dans les expressions régulières.
+##-!- ## Il signigie «n'importe quel caractère», y compris l'espace.
+##-!- ##
+##-!- ## Le motif 'ou. ' permet d'identifier les mots se terminant
+##-!- ## par «ou» et un caractère quelconque. L'espace dans le motif
+##-!- ## permet de délimiter un mot. Les mots en fin de ligne sont
+##-!- ## donc exlus de l'expression régulière.
+##-!- grep -E 'ou. ' chanson.txt
+##-!-
+##-!- ## L'option '-o' de 'grep' permet d'afficher la partie de la
+##-!- ## ligne qui correspond au motif.
+##-!- grep -E -o 'ou. ' chanson.txt
+##-!-
+##-!- ## Les opérateurs de répétition permettent de décrire des
+##-!- ## suites de caractères. Il existe quatre opérateurs de
+##-!- ## répétition dans les expressions régulières étendues:
+##-!- ##
+##-!- ##   *   : ce qui précède 0 ou plusieurs fois;
+##-!- ##   ?   : ce qui précède 0 ou 1 fois;
+##-!- ##   +   : ce qui précède 1 ou plusieurs fois;
+##-!- ##   { } : quantificateurs bornés.
+##-!- ##
+##-!- ## Pour illustrer le fonctionnement des opérateurs de
+##-!- ## répétition, nous allons créer un petit fichier 'ah.txt'
+##-!- ## contenant des onomatopées "ah!" de diverses longueurs, à
+##-!- ## raison de une par ligne.
+##-!- s="h"
+##-!- for i in {1..6}; do echo "a${s}"'!'; s+="h"; done > ah.txt
+##-!-
+##-!- ## Vérification du contenu du fichier.
+##-!- cat ah.txt
+##-!-
+##-!- ## Comparez les résultats des trois commandes suivantes.
+##-!- grep -E 'ahh?!' ah.txt	   # un ou deux «h»
+##-!- grep -E 'ahh*!' ah.txt	   # un «h» un plus
+##-!- grep -E 'ahh+!' ah.txt	   # deux «h» et plus
+##-!-
+##-!- ## Les quantificateurs bornés s'utilisent de trois façons:
+##-!- ##
+##-!- ##   {n}   : ce qui précède exactement 'n' fois
+##-!- ##   {n,m} : ce qui précède entre 'n' et 'm' fois
+##-!- ##   {n,}  : ce qui précède au moins 'n' fois
+##-!- ##
+##-!- ## Nous devons avoir recours aux quantificateurs bornés
+##-!- ## lorsque les cas les plus fréquents couverts par '*', '+' et
+##-!- ## '?' ne suffisent plus ou seraient trop longs à écrire (et
+##-!- ## moins lisibles).
+##-!- grep -E 'ah{3}!' ah.txt	   # exactement trois «h»
+##-!- grep -E 'ah{3,5}!' ah.txt  # entre trois et cinq «h»
+##-!- grep -E 'ah{3,}!' ah.txt   # trois «h» et plus
+##-!-
+##-!- ## Les opérateurs de répétition sont souvent utilisés avec le
+##-!- ## caractère de remplacement pour décrire des chaines de
+##-!- ## caractères arbitraires.
+##-!- ##
+##-!- ## La commande suivante permet d'extraire du fichier
+##-!- ## 'chanson.txt' les vers qui débutent par «L» (les majuscules
+##-!- ## se trouvant uniquement en début de ligne) et qui
+##-!- ## contiennent un «i» quelque part sur la ligne.
+##-!- grep -E 'L.*i' chanson.txt
+##-!-
+##-!- ## Remplacer le motif 'L.*i' dans la commande précédente par
+##-!- ## 'L.*e' permet d'illustrer le caractère glouton des
+##-!- ## opérateurs de répétition.
+##-!- ##
+##-!- ## Au premier abord, il semble que 'L.*e' devrait correspondre
+##-!- ## au mot «Le» que l'on retrouve au début de plusieurs vers.
+##-!- ## Or, la chaine correspondante se prolonge plutôt jusqu'au
+##-!- ## dernier «e» de la ligne, comme l'option '-o' de 'grep'
+##-!- ## permet de le constater.
+##-!- grep -E 'L.*e' chanson.txt
+##-!- grep -E -o 'L.*e' chanson.txt
+##-!-
+##-!- ## La commande suivante permet d'extraire les lignes de
+##-!- ## commentaires contenant du texte du fichier 'bases.R'.
+##-!- ## Celles-ci sont constituées de deux ou trois symboles «#»
+##-!- ## successifs suivis d'une espace et d'au moins un autre
+##-!- ## caractère
+##-!- grep -E '^###? .+' bases.R
+##-!-
+##-!- ## Nettoyage: supprimer le fichier 'ah.txt'
+##-!- rm ah.txt
+##-!-
+##-!- ## CARACTÈRE D'ÉCHAPPEMENT
+##-!-
+##-!- ## Y a-t-il un point final quelque part dans le fichier
+##-!- ## 'chanson.txt'? Demandons à 'grep' de nous trouver ça.
+##-!- grep '.' chanson.txt
+##-!-
+##-!- ## La commande ci-dessus n'a pas donné le résultat escompté,
+##-!- ## hein? Puisque le symbole «.» est un opérateur signifiant
+##-!- ## «n'importe quel caractère» dans les expressions régulières,
+##-!- ## le motif '.' correspond à toute ligne contenant au moins un
+##-!- ## caractère. C'est pourquoi la commande précédente retourne
+##-!- ## l'intégralité du fichier... sauf les lignes blanches.
+##-!- ##
+##-!- ## Pour rechercher le caractère «.», il faut enlever au
+##-!- ## symbole sa signification particulière en le précédant d'une
+##-!- ## barre oblique inversée «\». (Il s'agit là d'une convention
+##-!- ## très répandue dans plusieurs langages informatiques.)
+##-!- grep '\.' chanson.txt	   # aucun point final dans le fichier
+##-!-
+##-!- ## Dans le même esprit, recherchons dans le fichier 'bases.R'
+##-!- ## toutes les occurrences du caractère «?». Dans les
+##-!- ## expressions régulières étendues, c'est un symbole spécial
+##-!- ## qu'il faut désactiver avec le caractère d'échappement.
+##-!- grep -E '\?' bases.R
+##-!-
+##-!- ## MARQUEURS DE POSITION
+##-!-
+##-!- ## Le symbole «^» identifie le début d'une ligne. Comparer les
+##-!- ## résultats des deux commandes ci-dessous.
+##-!- grep 'la' chanson.txt 	   # «la» n'importe où sur la ligne
+##-!- grep '^la' chanson.txt 	   # «la» en début de ligne
+##-!-
+##-!- ## Le symbole «$» identifie la fin d'une ligne. Comparer les
+##-!- ## résultats des deux commandes ci-dessous.
+##-!- grep 'que' chanson.txt 	   # «que» n'importe où sur la ligne
+##-!- grep 'que$' chanson.txt	   # «que» en fin de ligne
+##-!-
+##-!- ## Le motif '^$' signifie: un début de ligne immédiatement
+##-!- ## suivi d'une fin de ligne. Il s'agit du motif robuste pour
+##-!- ## rechercher une ligne blanche (ou vide) dans du texte. (Le
+##-!- ## motif '.' mentionné ci-dessous retiendrait une ligne
+##-!- ## comptant au moins une espace.)
+##-!- grep -c '^$' chanson.txt   # nombre de lignes blanches
+##-!- grep -v '^$' chanson.txt   # lignes blanches supprimées `\labelline{texte:regex:wildcards-marqueurs:fin}`
+@
+
+\subsection{Classes de caractères}
+\label{sec:texte:regex:classes}
+
+La rectification de l'orthographe du français --- ou
+\link{http://www.nouvelleorthographe.info}{nouvelle orthographe} --- a
+mené à la disparition de l'accent circonflexe sur les lettres \emph{i}
+et \emph{u}: «chaine» plutôt que «chaîne», «disparaitre» plutôt que
+«disparaître», «bruler» plutôt que «brûler», etc.\ Si vous devez
+rechercher l'une ou l'autre graphie dans un texte, vous souhaiterez
+pouvoir les décrire toutes les deux à l'aide d'une seule expression
+régulière. C'est le rôle des opérateurs «\Icode[regex]{[~]}» qui
+définissent ce que l'on appelle une %
+\index{classe de caracteres@classe de caractères}\emph{classe de
+  caractères}. Par exemple, \regex{cha[iî]ne} correspond à la fois à
+\matches{chaine} et à \matches{chaîne}.
+
+Rappelez-vous la seconde règle fondamentale de la syntaxe des expressions
+régulières énoncée à la \autoref{sec:texte:regex:syntaxe}: il y a un
+«et» implicite entre les composantes d'une expression régulière. À
+l'intérieur d'une classe de caractères, c'est l'inverse: les
+composantes de la classe sont reliées par un «ou».
+
+Voici un autre exemple pour lequel les classes de caractères sont
+souvent utilisées: permettre qu'un mot débute par une majuscule ou une
+minuscule.
+<<echo=FALSE>>=
+exec("grep", c("'[Mm]ême'", "chanson.txt"))
+@
+
+Une classe peut contenir autant de caractères que vous le souhaitez.
+Par exemple, \regex{[123456]} trouve une correspondance avec n'importe
+lequel des entiers de 1 à 6. Question de simplifier la composition de
+longues listes de caractères, le tiret «\Icode[regex]{-}» a une
+signification particulière lorsqu'il est employé à l'intérieur d'une
+classe: il définit une plage de caractères. Ainsi, \regex{[1-6]} est
+équivalent à l'exemple précédent. Les plages les plus fréquemment
+employées sont les suivantes.
+\begin{ttscript}{\regex{[abc]}}
+\item[\regex{[0-9]}] les entiers de 0 à 9.
+\item[\regex{[a-z]}] les lettres minuscules de a à z, sans les lettres
+  accentuées.
+\item[\regex{[A-Z]}] les lettres majuscules de A à Z, sans les lettres
+  accentuées.
+\end{ttscript}
+
+Je dois immédiatement apporter une précision à ce qui précède: le
+\indexcode[regex]{-}tiret devient un opérateur à l'intérieur d'une
+classe de caractères seulement lorsqu'il est employé \emph{ailleurs
+  que comme premier caractère} de la classe. Comme il ne saurait
+définir une plage en se trouvant au début de la classe, il conserve
+alors son rôle de caractère littéral. Cela permet d'inclure le tiret
+lui-même dans une classe de caractères: le motif \regex{-A-F}
+recherche le tiret en plus des lettres majuscules de A à F.
+
+Lorsque le caret \index{\string^@\code{\string^} (regex)}«\string^»
+suit immédiatement le crochet ouvrant d'une classe, la signification
+de celle-ci est renversée pour correspondre à tous les caractères qui
+ne se trouvent \emph{pas} dans la classe. Par exemple, le motif
+\regex{[\string^aeiouy]} correspond à toute consonne, ce qui est plus
+simple que de dresser la liste des vingt lettres. L'expression
+ci-dessous permet, quant à elle, d'identifier dans le fichier
+\code{chanson.txt} les occurrences de \chaine{ou} qui se sont suivies
+ni de la lettre \chaine{r}, ni de la lettre \chaine{s}.
+<<echo=FALSE>>=
+exec("grep", c("'ou[^rs]'", "chanson.txt"))
+@
+
+\tipbox{Comme vous pouvez le voir, les classes de caractères
+  comportent en quelque sorte leur propre syntaxe et leurs opérateurs
+  spécifiques. Il s'avère simplement que certains symboles --- en
+  particulier «\code{\string^}» --- jouent un rôle différent à
+  l'intérieur et à l'extérieur des classes de caractères.}
+
+Il y aurait encore une foule de petits détails à couvrir au sujet des
+classes de caractères, mais pour les fins de cet ouvrage je me
+contenterai de traiter brièvement des \index{classe prédéfinie}classes
+prédéfinies.\footnote{%
+  J'ai tenté de contourner une source possible de confusion dans la
+  terminologie anglaise relative aux classes de caractères. Alors que
+  plusieurs auteurs les nomment tout simplement \emph{character
+    class}, la norme POSIX --- déjà abordée au \autoref{chap:donnees}
+  lorsqu'il s'agissait de la représentation des dates --- les nomme
+  \emph{bracket expression}. La norme POSIX réserve le terme
+  \emph{character class} aux classes prédéfinies. Prenez garde à cette
+  nuance si vous consultez de la documentation en anglais.} %
+Celles-ci peuvent s'avérer particulièrement utiles pour travailler
+avec des lettres accentuées ou des caractères invisibles. La liste des
+classes prédéfinies varie beaucoup d'un système d'expressions
+régulières à un autre. Je fournis au \autoref{tab:texte:POSIXclasses}
+les classes prédéfinies de ce qui constitue généralement le
+dénominateur commun, soit la norme \index{POSIX}POSIX.
+
+\begin{table}
+  \centering
+  \caption{Classes de caractères prédéfinies de la norme POSIX}
+  \label{tab:texte:POSIXclasses}
+  \begin{tabularx}{1.0\linewidth}{lX}
+    \toprule
+    Nom & Signification \\
+    \midrule
+    \code{[:alnum:]} & caractères alphabétiques et numériques \\
+    \code{[:alpha:]} & caractères alphabétiques selon les paramètres
+                       régionaux en vigueur \\
+    \code{[:blank:]} & espace et tabulation \\
+    \code{[:cntrl:]} & caractères de contrôle \\
+    \code{[:digit:]} & caractères numériques \\
+    \code{[:graph:]} & caractères visibles (tout sauf les espaces et les caractères de contrôle) \\
+    \code{[:lower:]} & minuscules \\
+    \code{[:print:]} & caractères et espaces visibles \\
+    \code{[:punct:]} & ponctuations et symboles \\
+    \code{[:space:]} & tous les caractères d'espacement, y compris les sauts de ligne \\
+    \code{[:upper:]} & majuscules \\
+    \code{[:xdigit:]} & caractères numériques hexadécimaux (0--9, a--f, A--F) \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\importantbox{Les crochets font partie intégrante du nom des
+  \index{classe prédéfinie}classes prédéfinies. Comme nous utilisons
+  celles-ci dans une classe de caractères, il faut dédoubler les
+  crochets. Par exemple, le motif pour rechercher un caractère
+  numérique à l'aide d'une classe prédéfinie est
+  \regex{[[:digit:]]}\,, alors que celui pour exclure toute lettre
+  majuscule est \regex{[\string^[:upper:]]}\,.}
+
+\subsection{Alternance}
+\label{sec:texte:regex:alternance}
+
+Nous arrivons à l'un des derniers opérateurs du
+\autoref{tab:texte:operateurs}: le symbole %
+\index{{"|}@\code{\textbar} (regex)|bfhyperpage}«\code{\textbar}» %
+qui représente l'alternance, ou le choix, entre deux sous-expressions
+d'une expression régulière. Par exemple, tel que déjà mentionné à la
+\autoref{sec:texte:regex:types}, le motif \regex{chien|chat}
+correspond à \chaine{\matches{chien}} ou \chaine{\matches{chat}}.
+Voici un autre exemple ayant recours à notre fichier
+\code{chanson.txt}.\footnote{%
+  Rappelons que le caractère «\code{\textbar}» n'est un opérateur que
+  dans les expressions régulières étendues, ce qui nous oblige à
+  utiliser l'option \code{-E} dans \icode{grep} et \icode{sed}.}
+<<echo=FALSE>>=
+exec("grep", c("-E", "'mouvement|fatigue'", "chanson.txt"))
+@
+
+Retournons à notre exemple \regex{cha[iî]ne} de la
+\autoref{sec:texte:regex:classes}. Nous pouvons réécrire le motif
+ainsi: \regex{chaine|chaîne}\,, ou encore \regex{cha(i|î)ne}\,. Dans ce
+dernier cas, nous devons avoir recours aux parenthèses --- sur
+lesquelles nous élaborerons à la section suivante --- afin de limiter
+la portée de l'alternance. Attention, toutefois: \regex{cha[i|î]ne}
+n'est pas ce que nous voulons, car «\code{\textbar}» est un caractère
+littéral à l'intérieur d'une classe de caractères.
+
+À ce stade, vous devez faire la distinction entre les concepts
+d'alternance et de classe de caractère. La classe de caractère ne
+trouve des correspondances qu'avec \emph{un seul caractère} à
+l'intérieur de la classe. En revanche, chaque possibilité d'une
+alternance étant une expression régulière en soi, cette opération peut
+décrire une quantité de texte de longueur quelconque.
+
+Terminons cette section avec un exemple de substitution de texte qui
+regroupe plusieurs concepts. Supposons que l'on souhaite remplacer les
+mots \emph{mouvement} et \emph{fatigue} dans «La journée qui s'en
+vient est flambant neuve» par \emph{pendule} (un choix complètement
+arbitraire). Le mot étant masculin, il faut également modifier le
+déterminant. Voici quatre commandes \icode{sed} pour effectuer le
+traitement. Analysez ces commandes attentivement et essayez
+d'identifier leurs différences, s'il y en a. Nous y reviendrons plus
+loin.
+%% les commandes sont trop longues et l'insfrastructure de la fonction
+%% 'exec' ne permet pas de les couper; j'inclus néanmoins les
+%% commandes dans des blocs de code afin de valider qu'elles
+%% fonctionnent correctement
+\begin{Schunk}
+\begin{Verbatim}
+$ sed -E 's/le mouvement|la fatigue/le pendule/' \
+chanson.txt
+<<echo=FALSE, results=hide>>=
+exec("sed", c("-E", "'s/le mouvement|la fatigue/le pendule/'", "chanson.txt"))
+@
+\end{Verbatim}
+\end{Schunk}
+\begin{Schunk}
+\begin{Verbatim}
+$ sed -E 's/l[ea] (mouvement|fatigue)/le pendule/' \
+chanson.txt
+<<echo=FALSE, results=hide>>=
+exec("sed", c("-E", "'s/l[ea] (mouvement|fatigue)/le pendule/'", "chanson.txt"))
+@
+\end{Verbatim}
+\end{Schunk}
+\begin{Schunk}
+\begin{Verbatim}
+$ sed -E 's/le|la mouvement|fatigue/le pendule/' \
+chanson.txt
+<<echo=FALSE, results=hide>>=
+exec("sed", c("-E", "'s/le|la mouvement|fatigue/le pendule/'", "chanson.txt"))
+@
+\end{Verbatim}
+\end{Schunk}
+\begin{Schunk}
+\begin{Verbatim}
+$ sed -E 's/(le|la) (mouvement|fatigue)/le pendule/' \
+chanson.txt
+<<echo=FALSE, results=hide>>=
+exec("sed", c("-E", "'s/(le|la) (mouvement|fatigue)/le pendule/'", "chanson.txt"))
+@
+\end{Verbatim}
+\end{Schunk}
+
+\subsection{Groupes}
+\label{sec:texte:regex:groupes}
+
+Les parenthèses \Icode[regex]{(~)} sont des opérateurs de regroupement
+dans les expressions régulières étendues. Elles ont trois rôles
+principaux. Nous avons vu le premier à la section précédente, soit
+de limiter la portée de l'opérateur d'alternance %
+\index{{"|}@\code{\textbar} (regex)}«\code{\textbar}».
+
+Nous pouvons également utiliser les parenthèses pour créer un
+\index{groupe de caractères}%
+\index{groupe|see{\code{(~)} (regex)}}%
+groupe de caractères auquel sera appliqué un des opérateurs de
+répétition de la \autoref{sec:texte:regex:wildcards}. Cela permet de
+répéter autre chose qu'un caractère seul. Par exemple, le motif
+\regex{(co)\{2\}} permet d'identifier dans un dictionnaire
+français\footnote{%
+  Comme, par exemple, les
+  \link{https://extensions.libreoffice.org/extensions/dictionnaires-francais/}{dictionnaires
+    français} de la suite bureautique Libre~Office.} %
+des mots comme \chaine{\matches{coco}n}, \chaine{\matches{coco}tier}
+ou \chaine{ro\matches{coco}}.
+
+Enfin, les parenthèses permettent de créer des %
+\index{groupe de capture}groupes de capture numérotés. C'est une
+fonctionnalité à laquelle on a principalement recours avec
+\icode{sed}. Le texte qui correspond à un motif entre parenthèses est
+«capturé» --- ou mémorisé --- et devient disponible pour être
+réutilisé dans le texte de substitution sous un numéro: \code{\bs1}
+pour le premier groupe, \code{\bs2} pour le second groupe, etc.
+
+Clarifions le tout par un exemple. Tous les vers du fichier
+\code{chanson.txt} qui débutent par \chaine{Le} comptent exactement
+quatre mots après ce déterminant.
+<<echo=FALSE>>=
+exec("grep", c("'^Le'", "chanson.txt"))
+@
+
+Amusons-nous à créer des nouveaux vers en changeant l'ordre des mots.
+Pour ce faire, nous allons créer trois groupes: les deux mots qui
+suivent immédiatement \chaine{Le}; l'avant-dernier mot du vers; le
+dernier mot du vers. Le motif pour capturer ces trois groupes est
+\regex{Le (.*) (.*) (.*)}\,. Rappelez-vous: les opérateurs de
+répétition sont gloutons, donc le premier groupe capture deux mots
+pour ensuite laisser un mot à chacun des deux autres groupes.
+Confirmons d'abord le contenu de chacun des groupes.
+\begin{Schunk}
+\begin{Verbatim}
+$ grep '^Le' chanson.txt | \
+sed -E 's/Le (.*) (.*) (.*)/Premier groupe: \1/'
+<<echo=FALSE, results=tex>>=
+exec("grep", c("'^Le'", "chanson.txt", r"(| sed -E 's/Le (.*) (.*) (.*)/Premier groupe: \1/')"), echo = FALSE)
+@
+
+\end{Verbatim}
+\end{Schunk}
+\begin{Schunk}
+\begin{Verbatim}
+$ grep '^Le' chanson.txt | \
+sed -E 's/Le (.*) (.*) (.*)/Deuxième groupe: \2/'
+<<echo=FALSE, results=tex>>=
+exec("grep", c("'^Le'", "chanson.txt", r"(| sed -E 's/Le (.*) (.*) (.*)/Deuxième groupe: \2/')"), echo = FALSE)
+@
+
+\end{Verbatim}
+\end{Schunk}
+\begin{Schunk}
+\begin{Verbatim}
+$ grep '^Le' chanson.txt | \
+sed -E 's/Le (.*) (.*) (.*)/Troisième groupe: \3/'
+<<echo=FALSE, results=tex>>=
+exec("grep", c("'^Le'", "chanson.txt", r"(| sed -E 's/Le (.*) (.*) (.*)/Troisième groupe: \3/')"), echo = FALSE)
+@
+
+\end{Verbatim}
+\end{Schunk}
+
+Nous sommes maintenant prêts à changer l'ordre des mots en réutilisant
+tous les groupes dans la chaine de substitution.
+\begin{Schunk}
+\begin{Verbatim}
+$ grep '^Le' chanson.txt | \
+sed -E 's/Le (.*) (.*) (.*)/Le \2 \3 \1/'
+<<echo=FALSE, results=tex>>=
+exec("grep", c("'^Le'", "chanson.txt", r"(| sed -E 's/Le (.*) (.*) (.*)/Le \2 \3 \1/')"), echo = FALSE)
+@
+
+\end{Verbatim}
+\end{Schunk}
+
+Terminons cette très longue section sur les expressions régulières en
+revenant, comme promis, sur les quatre commandes de substitution de
+mots de la fin de la \autoref{sec:texte:regex:alternance}.
+\begin{itemize}
+\item La première commande effectue le traitement désiré, de surcroit
+  avec la syntaxe la plus simple. Le motif trouve des correspondances
+  avec \chaine{\matches{le mouvement}} ou avec \chaine{\matches{la
+      fatigue}} et le texte est remplacé par \chaine{le pendule}.
+\item Il faut lire le motif de la seconde commande ainsi: «\chaine{l}
+  suivi de \chaine{a} ou de \chaine{e}, suivi d'une espace, suivi de
+  \chaine{mouvement} ou de \chaine{fatigue}». Cela correpond bien au
+  texte que nous voulons remplacer par \chaine{le pendule}. Cependant,
+  à la différence de la première variante, le motif correspond aussi à
+  \chaine{\matches{la mouvement}} et à \chaine{\matches{le fatigue}}.
+  C'est sans conséquence ici.
+\item La troisième commande n'effectue pas le traitement attendu. En
+  l'absence de parenthèses pour limiter la portée de l'opérateur %
+  \index{{"|}@\code{\textbar} (regex)}«\code{\textbar}», le motif
+  correspond à \chaine{\matches{le}} ou à \chaine{\matches{la
+      mouvement}} ou à \chaine{\matches{fatigue}}. Cette commande
+  remplacerait toutes les occurrences de \chaine{le} dans le texte de
+  la chanson --- y compris dans \chaine{Frôle} --- par la chaine
+  \chaine{le pendule}. Ce n'est certainement pas ce que nous voulons!
+\item Par l'utilisation de parenthèses dans le motif, la quatrième
+  commande vient corriger la troisième. Elle est fonctionnellement
+  équivalente à la seconde commande.
+\end{itemize}
+
+\gotorbox{Étudiez les lignes \reflines{texte:regex:classes-groupes}
+  du fichier de script \code{\shscriptfilename} reproduit à la
+  \autoref{sec:texte:exemples-cli}.}
+
+<<script-cli>>=
+##-!- ## CLASSES DE CARACTÈRES  `\labelline{texte:regex:classes-groupes}`
+##-!-
+##-!- ## Les crochets '[ ]' définissent une classe de caractères
+##-!- ## dans les expressions régulières. Les classes de caractères
+##-!- ## sont particulièrement utiles pour:
+##-!- ##
+##-!- ## - définir un choix entre plusieurs caractères, les
+##-!- ##   composantes d'une classe étant reliées par «ou»;
+##-!- ## - définir facilement une longue liste de symboles (toutes
+##-!- ##   les lettres minuscules, par exemple);
+##-!- ## - définir un motif par la négative («n'importe quoi
+##-!- ##   sauf...»).
+##-!- ##
+##-!- ## (D'ailleurs, les crochets sont souvent utilisés dans la
+##-!- ## documentation en informatique pour représenter un choix
+##-!- ## entre plusieurs éléments ou quelque chose d'optionnel.)
+##-!- ##
+##-!- ## Premier exemple: rechercher un mot écrit avec une majuscule
+##-!- ## ou une minuscule initiale.
+##-!- grep '[Mm]ême' chanson.txt # fonctionne toujours
+##-!- grep -i 'même' chanson.txt # idem, mais dépend de 'grep'
+##-!-
+##-!- ## La commande suivante identifie les utilisations de «ou»
+##-!- ## dans 'chanson.txt' qui ne sont PAS suivies de «r» ni de
+##-!- ## «s».
+##-!- grep 'ou[^rs]' chanson.txt
+##-!-
+##-!- ## La commande suivante extrait toutes les mentions des
+##-!- ## fonction 'lapply', 'sapply' et 'tapply' du fichier
+##-!- ## 'donnees.R'.
+##-!- grep '[slt]apply' donnees.R
+##-!-
+##-!- ## Pour exclure les mentions dans les commentaires, ajoutons
+##-!- ## des pièces au motif pour exiger que la ligne débute par
+##-!- ## tout caractère AUTRE que '#'. Permettons également, avec
+##-!- ## l'opérateur '*' que ce caractère apparaisse 0 ou plusieurs
+##-!- ## fois, ce qui permet d'identifier les utilisations des
+##-!- ## fonctions d'application ailleurs qu'au début d'une ligne.
+##-!- grep '^[^#]*[slt]apply' donnees.R
+##-!-
+##-!- ## La classe de caractère renversée (qui débute par «^») est
+##-!- ## particulièrement utile pour restreindre la portée des
+##-!- ## quantificateurs gloutons.
+##-!- ##
+##-!- ## Par exemple, tel qu'expliqué dans le chapitre, le motif
+##-!- ## 'L.+c' --- que l'on voudrait signifier «L suivi d'au moins
+##-!- ## un caractère, puis un c» ---- trouve un accord avec les
+##-!- ## caractères jusqu'au «c» dans «lâche» lorsque appliqué à «Le
+##-!- ## chemin du plus lâche»
+##-!- echo 'Le chemin du plus lâche' | grep -E -o 'L.+c'
+##-!-
+##-!- ## Le truc pour limiter la portée du quantificateur («+» dans
+##-!- ## le présent exemple) consiste à modifier la recherche
+##-!- ##
+##-!- ##   L suivi d'au moins un caractère, puis un c
+##-!- ##
+##-!- ## par
+##-!- ##
+##-!- ##   L suivi de n'importe quoi d'autre qu'un c, puis un c.
+##-!- ##
+##-!- ## De cette manière, le moteur d'expressions régulière devra
+##-!- ## cesser sa recherche au tout premier «c» rencontré!
+##-!- echo 'Le chemin du plus lâche' | grep -E -o 'L[^c]+c'
+##-!-
+##-!- ## Utilisons ce truc pour identifier dans le fichier 'bases.R'
+##-!- ## les utilisations de la fonction de concaténation 'c' avec
+##-!- ## exactement trois arguments. Les arguments sont séparés par
+##-!- ## des virgules.
+##-!- ##
+##-!- ## Les parenthèses étant des opérateurs dans les expressions
+##-!- ## régulières étendues, il faut les désactiver dans le motif
+##-!- ## avec le caractère d'échappement pour rechercher les
+##-!- ## caractères eux-mêmes.
+##-!- grep -E 'c\([^,]*, [^,]*, [^,]*\)' bases.R
+##-!-
+##-!- ## Si vous avez étudié attentivement le résultat de la
+##-!- ## commande précédente, vous aurez identifié quelques
+##-!- ## anomalies.
+##-!- ##
+##-!- ## Pourquoi retrouve-t-on quelques appels de fonction avec
+##-!- ## seulement deux arguments?
+##-!- ##
+##-!- ## Réponse: une autre virgule suivie de texte et d'une
+##-!- ## parenthèse fermante se trouve plus loin sur la ligne,
+##-!- ## au-delà de la véritable fin de l'appel de fonction.
+##-!- ##
+##-!- ## Améliorons un peu notre motif pour empêcher de trouver un
+##-!- ## accord avec une parenthèse fermante avant le troisième
+##-!- ## argument.
+##-!- grep -E 'c\([^,)]*, [^,)]*, [^,]*\)' bases.R
+##-!-
+##-!- ## Tournons-nous brièvement vers les plages de caractères et
+##-!- ## les classes prédéfinies.
+##-!- ##
+##-!- ## Le fichier '100metres.dat' contient la liste des 31
+##-!- ## meilleurs temps enregistrés au 100 mètres homme entre 1964
+##-!- ## et 2005. Identifions, parmi les records effectués dans les
+##-!- ## mois de mai, juin et juillet.
+##-!- ##
+##-!- ## (J'ai ajouté un «-» à la fin du motif pour m'assurer de ne
+##-!- ## pas identifier une date entre le 6e et le 8e jour du mois.
+##-!- ## Vous remarquerez aussi que le motif utilisé ne résisterait
+##-!- ## pas à l'ajout de dates entre 2006 et 2008, inclusivement.)
+##-!- grep '0[6-8]-' 100metres.dat
+##-!-
+##-!- ## Le fichier 'NEWS' contient l'historique des versions de
+##-!- ## l'ouvrage.
+##-!- ##
+##-!- ## Les nouvelles versions sont toujours identifiées par un
+##-!- ## symbole '#' unique en début de ligne suivi d'un chiffre (le
+##-!- ## premier du numéro de version).
+##-!- ##
+##-!- ## La commande suivante dresse la liste des numéros de
+##-!- ## versions de l'ouvrage au fil des années.
+##-!- grep -E '^# [[:digit:]]' NEWS
+##-!-
+##-!- ## ALTERNANCE
+##-!-
+##-!- ## Le caractère «|» permet d'effectuer un choix entre deux
+##-!- ## expressions régulières étendues. Autrement dit, c'est
+##-!- ## l'opérateur «ou» comme dans plusieurs langages de
+##-!- ## programmation (dont R).
+##-!- grep -E 'mouvement|fatigue' chanson.txt
+##-!-
+##-!- ## L'alternance se fait entre tout ce qui se trouve à gauche
+##-!- ## de l'opérateur et tout ce qui se trouve à droite.
+##-!- ##
+##-!- ## Conséquemment, il faut souvent utiliser l'opérateur
+##-!- ## d'alternance avec les parenthèses pour en limiter la
+##-!- ## portée.
+##-!- ##
+##-!- ## La comparaison des quatre commandes de substitution
+##-!- ## ci-dessous permet d'observer l'effet des parenthèses.
+##-!- sed -E 's/le mouvement|la fatigue/le pendule/'
+##-!- sed -E 's/l[ea] (mouvement|fatigue)/le pendule/'
+##-!- sed -E 's/le|la mouvement|fatigue/le pendule/'
+##-!- sed -E 's/(le|la) (mouvement|fatigue)/le pendule/'
+##-!-
+##-!- ## Allons-y maintenant d'une expression régulière qui permet
+##-!- ## de trouver toutes les utilisations de la fonction 'g' dans
+##-!- ## les fichiers d'exemples, c'est-à-dire la chaine 'g('
+##-!- ## précédée d'au moins une espace ou en début de ligne.
+##-!- grep -E '( |^)g\(' *.R
+##-!-
+##-!- ## GROUPES
+##-!-
+##-!- ## Outre limiter la portée de l'opérateur d'alternance, les
+##-!- ## parenthèses servent, un peu comme en mathématiques, à
+##-!- ## définir des groupes dans les expressions régulières
+##-!- ## étendues. Nous pouvons ensuite appliquer des opérateurs à
+##-!- ## ces groupes.
+##-!- ##
+##-!- ## Penchons-nous de nouveau sur l'exemple d'identification des
+##-!- ## utilisations de la fonction de concaténation 'c' avec
+##-!- ## exactement trois arguments dans 'donnees.R'.
+##-!- ##
+##-!- ## Puisque le premier et le second bloc du motif sont
+##-!- ## identiques, nous pouvons réécrire le motif comme
+##-!- ## ci-dessous. (Ça devient moins lisible, hein?).
+##-!- grep -E 'c\(([^,)]*, ){2}[^,]*\)' bases.R
+##-!-
+##-!- ## Les parenthèses servent aussi à créer des groupes de
+##-!- ## capture. C'est surtout utile avec 'sed' pour réutiliser
+##-!- ## dans le texte de remplacement du texte trouvé lors de la
+##-!- ## recherche.
+##-!- sed -E 's/Le (.*) (.*) (.*)/Le \2 \3 \1/'
+##-!-
+##-!- ## La commande ci-dessous remplace toutes les occurrences de
+##-!- ## la chaine «foo», mais pas de «foob» (comme «foobar»), dans
+##-!- ## 'bases.R' par «abc» et le caractère qui suit «foo».
+##-!- sed -E 's/foo([^b])/abc\1/g' bases.R #-*- `\labelline{texte:regex:classes-groupes:fin}`
+@
+
+\section{Traitement de texte divisé en champs avec \code{awk}}
+\label{sec:texte:awk}
+
+\Index{AWK}AWK \citep{awk:1988} est un langage de programmation
+spécialisé dans le traitement de texte et l'extraction de données
+développé à partir de 1977 chez Bell Labs. Le nom du langage provient
+des initiales de ses trois auteurs: Alfred Aho, Peter Weinberger et
+Brian Kernighan. Ce dernier est l'un des auteurs du grand classique de
+l'informatique \emph{The C Programming Language} \citep{KandR:1978}
+que nous avons déjà mentionné au \autoref{chap:informatique}. La
+syntaxe de AWK s'apparente donc beaucoup à celle du \index{C}C.
+
+L'\index{interpréteur}interpréteur du langage AWK auquel nous allons
+nous intéresser est l'utilitaire \Icode{awk}. Comme \icode{grep} et
+\icode{sed}, \code{awk} est un utilitaire standard des systèmes Unix.
+Véritable couteau suisse, c'est un outil basé sur les expressions
+régulières qui est souvent plus simple à utiliser que \code{sed},
+surtout s'il faut effectuer des opérations complexes ou sur plusieurs
+lignes du texte à traiter.
+
+Je vise avec cette section à piquer votre curiosité pour \icode{awk}
+et à vous montrer à effectuer certaines opérations simples, mais
+néanmoins fort utiles. Un large pan des détails d'utilisation du
+langage est toutefois laissé de côté. Si vous souhaitez en découvrir
+davantage --- chose que je vous encourage à faire! --- je vous
+recommande l'excellent
+\link{https://www.gnu.org/software/gawk/manual/}{guide d'utilisation
+  de GNU~Awk} \citep{gawk:5.0}.
+
+Pour vous convaincre d'entrée de jeu de la puissance et de l'utilité
+de \icode{awk}, imaginez le contexte suivant. On vous fournit une base
+de données en format \index{CSV}CSV qui compte un million
+d'enregistrements (lignes) et quelques dizaines de champs (colonnes).
+Vous devez produire une nouvelle base de données composée des deux
+premières colonnes et d'une colonne contenant la somme des deux
+autres. Votre premier réflexe consistera sans doute à:
+\begin{enumerate}
+\item importer le fichier CSV dans un tableur;
+\item supprimer les colonnes autres que les deux premières;
+\item ajouter dans une troisième colonne une formule pour calculer la
+  somme des deux premières colonne, puis copier cette formule dans
+  toutes les lignes;
+\item exporter la base de données en format CSV.
+\end{enumerate}
+Cette procédure est fastidieuse, lente --- surtout avec une grande
+base de données --- et désespérément manuelle. Sous peu, vous saurez
+remplacer de telles manipulations par un simple appel à \icode{awk}.
+En effet, la commande ci-dessous effectue le traitement requis
+\emph{en une fraction de seconde} et sans même avoir à lancer un lourd
+tableur.
+\label{pg:awk:exemple-conversion}
+\begin{Schunk}
+\begin{Verbatim}
+$ awk -F ',' '{ print $1 "," $2 "," $1 + $2 }' data.csv \
+  > data-new.csv
+\end{Verbatim}
+\end{Schunk}
+
+\subsection{Concepts de base}
+\label{sec:texte:awk:base}
+
+\index{AWK}AWK est conçu autour du concept de séparation du texte
+à traiter en \emph{enregistrements} (\emph{records}), puis en
+\emph{champs} (\emph{fields}). Le %
+\index{separateur@séparateur!d'enregistrements}séparateur
+d'enregistrements par défaut est le retour à la ligne. Dans la suite,
+nous ne ferons plus de différence entre une ligne du texte et un
+enregistrement.
+
+Lorsque \icode{awk} a terminé de lire une ligne du texte fourni en
+entrée, il sépare automatiquement celle-ci en champs. Le %
+\index{separateur@séparateur!de champs}séparateur de champs par défaut
+est l'espace, mais, comme nous le verrons à la
+\autoref{sec:texte:awk:separateur} il est facile de le changer pour
+tout autre caractère.
+
+Un \emph{programme} (ou script) \icode{awk} est constitué d'une série
+de \index{regle@règle (\code{awk})}\emph{règles}. Une fois que
+\icode{awk} a séparé un enregistrement en champs, il exécute les
+règles une par une. Les règles ont accès à des variables qui
+contiennent l'enregistrement complet et chacun des champs, ce qui
+facilite grandement les opérations sur une ligne et sur ses
+composantes. La variable \code{\$0} contient l'enregistrement complet,
+alors que les champs se trouvent dans des variables nommées
+\code{\$1}, \code{\$2}, \code{\$3}, \dots.
+
+Illustrons ces concepts de base à l'aide de quelques exemples.
+\begin{itemize}
+\item En traitant le fichier \code{carburant.txt} présenté au haut de
+  la \autoref{fig:import-export:read.table}, \icode{awk} rend
+  disponible dans la variable \code{\$0} le contenu complet d'une
+  ligne et dans les variables \code{\$1}, \code{\$2}, \code{\$3},
+  \code{\$4} et \code{\$5} les données de chacune des colonnes. À la
+  première ligne, ces cinq variables contiennent les noms des
+  colonnes.
+\item Pour effectuer un traitement équivalent avec le fichier
+  \code{carburant.csv} présenté au bas de la
+  \autoref{fig:import-export:read.table}, il faudrait spécifier à
+  \icode{awk} d'utiliser la virgule «\code{,}» comme %
+  \index{separateur@séparateur!de champs}séparateur de
+  champs.
+\item Lorsque le texte du fichier \code{chanson.txt} de la
+  \autoref{fig:texte:chanson} est fourni à \code{awk}, chaque vers est
+  séparé en mots. Le nombre de champs est donc variable d'une ligne à
+  l'autre. Une règle ayant recours au motif \regex{\string^M}
+  permettrait d'effectuer un traitement uniquement sur les lignes qui
+  débutent par «M».
+\end{itemize}
+
+\subsection{Commandes simples}
+\label{sec:texte:awk:commandes}
+
+L'\index{interpréteur}interpréteur \icode{awk} prend en argument un
+programme entre guillemets simples\footnote{%
+  Les guillemets doubles sont aussi permis, mais ils risquent fort
+  d'entrer en conflit avec des guillemets dans le script. Je
+  recommande de toujours utiliser des guillemets simples pour
+  encadrer un programme \code{awk}.}. %
+Comme \icode{grep} et \icode{sed}, \icode{awk} lit ensuite l’entrée
+standard ou une liste de fichiers ligne par ligne. La syntaxe d'une
+commande est donc:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+awk \meta{options} '\meta{programme}' \meta{fichiers}
+\end{Verbatim}
+\end{Schunk}
+\begin{itemize}
+\item \meta{options} est une liste facultative d'options (ou drapeaux)
+  qui modifient le comportement de \icode{awk}.
+\item \meta{programme} est un programme \icode{awk} formé de règles.
+\item \meta{fichiers} est le ou les fichiers à traiter; si aucun
+  fichier n'est spécifié, \icode{awk} traite l'entrée standard.
+\end{itemize}
+
+Un programme \icode{awk} décrit le traitement à effectuer sur le texte
+en entrée. Tel que mentionné précédemment, il est constitué d'une
+série de règles, souvent séparées par des retours à la ligne. Chaque
+règle spécifie un motif à rechercher dans l'enregistrement courant et
+une action à exécuter lorsque le texte correspond au motif.
+
+Plus précisément, une \index{regle@règle (\code{awk})}règle est formée
+d'un \Index{motif@motif (\code{awk})}\emph{motif} suivi d'une
+\Index{action@action (\code{awk})}\emph{action}. L'action est placée
+entre accolades «\icode[\code{awk}]{\{~\}}» pour la séparer du motif.
+La forme générale d'un programme \icode{awk} est donc la suivante:
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+\meta{motif} \{ \meta{action} \}
+\meta{motif} \{ \meta{action} \}
+...
+\end{Verbatim}
+\end{Schunk}
+
+Étudions quelques exemples pour mieux comprendre ces principes de la
+programmation \icode{awk}. Nous reviendrons plus en détail sur la
+construction de motifs et d'actions dans les sections suivantes.
+
+Le premier exemple effectue avec \icode{awk} une opération que nous
+avons déjà réalisée avec \icode{grep} à la
+\autoref{sec:texte:outils:grep}: afficher les lignes du fichier
+\code{chanson.txt} qui débutent par la lettre «M». Le motif à
+rechercher est l'\index{expression régulière}expression régulière
+\regex{\string^M}\,. La syntaxe de \icode{awk} exige que les expressions
+régulières soient placées entre barres obliques «\icode[\code{awk}]{/}».
+Nous avons déjà vu à la \autoref{sec:texte:awk:base} qu'à l'intérieur
+d'une règle, la variable \code{\$0} contient l'intégralité de
+l'enregistrement courant.
+<<echo=FALSE>>=
+exec("awk", c("'/^M/ { print $0 }'", "chanson.txt"))
+@
+
+Vous aurez compris que la commande \icode[\code{awk}]{print} sert à
+afficher du texte en sortie. L'instruction \code{print} sans argument
+est équivalente à \code{print \$0}. Nous pourrions donc simplifier
+légèrement la commande ci-dessus en remplaçant «\code{print \$0}» par
+«\code{print}».
+
+Cela dit, il est permis d'omettre le %
+\index{motif@motif (\code{awk})}motif ou %
+l'\index{action@action (\code{awk})}action dans une règle
+\icode{awk} --- mais pas les deux. Si le motif est absent, l'action
+est exécutée pour chaque enregistrement. Si c'est l'action qui est
+absente, l'instruction \icode[\code{awk}]{print} est exécutée
+implicitement. Nous pouvons donc aller encore plus loin dans la
+simplification de la commande précédente en omettant l'action.
+<<echo=FALSE>>=
+exec("awk", c("'/^M/'", "chanson.txt"))
+@
+
+Voici maintenant une variante qui est compliquée à réaliser avec
+\icode{grep}, mais très simple avec \icode{awk}: afficher uniquement
+le deuxième mot des lignes qui débutent par «M».
+<<echo=FALSE>>=
+exec("awk", c("'/^M/ { print $2 }'", "chanson.txt"))
+@
+
+Parce que la règle ne comporte pas de motif, la commande ci-dessous
+affiche plutôt le deuxième mot de chaque ligne du fichier
+\code{chanson.txt}. (Vérifiez par vous-même.)
+<<echo=FALSE>>=
+exec("awk", c("'{ print $2 }'", "chanson.txt"), max.lines = 6)
+@
+
+Pour limiter le traitement ci-dessus aux cinq premières lignes du
+fichier, nous pouvons utiliser comme motif une expression
+relationnelle et la variable \icode[\code{awk}]{NR} qui contient le
+numéro de l'enregistrement courant. Celle-ci est une des variables
+fournies automatiquement par \icode{awk} durant l'exécution des
+règles.
+<<echo=FALSE>>=
+exec("awk", c("'NR <= 5 { print $2 }'", "chanson.txt"))
+@
+
+L'instruction \icode[\code{awk}]{print} accepte également en argument
+une liste d'éléments à afficher en sortie, séparés par des
+\indexcode[\code{awk}]{,}virgules. Ils sont séparés par une espace
+dans les résultats de la commande.
+<<echo=FALSE>>=
+exec("awk", c("'NR <= 5 { print NR, \":\", $1, $2 }'", "chanson.txt"))
+@
+
+Une autre variable fournie automatiquement par \icode{awk} est
+\icode[\code{awk}]{NF}, le nombre de champs dans l'enregistrement
+courant. Nous pouvons utiliser cette variable pour extraire les vers
+de la chanson qui comptent moins de quatre mots.
+<<echo=FALSE, strip.white=false>>=
+exec("awk", c("'NF < 4'", "chanson.txt"))
+@
+
+Vous aurez remarqué que la commande précédente a aussi extrait les
+lignes blanches du fichier. Pour ne pas en tenir compte, il suffit
+d'exiger aussi qu'un enregistrement compte au moins un champ.
+<<echo=FALSE>>=
+exec("awk", c("'NF > 0 && NF < 4'", "chanson.txt"))
+@
+
+Le prochain exemple est plus élaboré. La commande \icode{awk} permet
+de calculer la longueur --- en caractères --- du plus cours vers de
+\code{chanson.txt}. Cela nécessite trois règles:
+\begin{itemize}
+\item la première initialise une variable \code{min} à la longueur du
+  premier enregistrement du fichier;
+\item la seconde met à jour la valeur de \code{min} si
+  l'enregistrement courant n'est pas une ligne blanche et si sa
+  longueur est inférieure à la valeur courante de \code{min};
+\item la troisième utilise le motif spécial \icode[\code{awk}]{END}
+  qui permet d'exécuter des instructions après la lecture de tous les
+  enregistrements, ici l'affichage de la valeur de \code{min}.
+\end{itemize}
+En plus d'étudier la commande, analysez attentivement l'algorithme.
+\begin{Schunk}
+\begin{Verbatim}
+$ awk 'NR == 1 { min = length($0) }
+       NF > 0 { if (length($0) < min) min = length($0) }
+       END { print min }' chanson.txt
+<<echo=FALSE, results=tex>>=
+exec("awk", c("'NR == 1 { min = length($0) } NF > 0 { if (length($0) < min) min = length($0) } END { print min }'", "chanson.txt"), echo = FALSE)
+@
+
+\end{Verbatim}
+\end{Schunk}
+
+Terminons avec deux exemples basés sur des données divisées
+naturellement en enregistrements et en champs. Comme les résultats de
+ces deux exemples occupent plusieurs lignes, la validation des
+commandes vous est laissée en exercice.
+
+Le fichier \code{carburant.dat} livré avec le présent ouvrage contient
+des données de consommation de carburant pour divers types de
+voitures\footnote{%
+  Comme la présence marquée des antédiluviens moteurs 8~cylindres
+  l'indique, il s'agit d'un très vieux jeu de données!}. %
+Examinez le contenu du fichier dans votre éditeur de texte avant
+d'aller plus loin.
+
+En premier lieu, nous pouvons facilement créer une nouvelle base de
+données ne contenant que les modèles de voitures 4~cyclindres sans
+passer par un tableur ou par R. La commande suivante conserve
+uniquement les commentaires et les noms de colonnes en entête du
+fichier, ainsi que les enregistrements dont le second champ est égal à
+4.
+<<echo=FALSE>>=
+exec("awk", c("'/^[#a-z]/ || $2 == 4'", "carburant.dat"), eval = FALSE)
+@
+
+En second lieu, l'ajout d'une action à la commande précédente permet
+de conserver uniquement les deux premiers champs des données. La
+sélection doit évidemment s'effectuer uniquement sur les titres de
+colonnes et sur les données. Examinez d'abord la commande, les
+explications détaillées suivent.
+\begin{Schunk}
+\begin{Verbatim}
+$ awk '/^[#a-z]/ || $2 == 4 {
+           print ($0 ~ /^#/) ? $0 : $1 " " $2
+       }' carburant.dat
+\end{Verbatim}
+\end{Schunk}
+L'action fait appel à deux opérateurs de \icode{awk} que nous n'avons
+pas rencontrés auparavant, ainsi qu'à la concaténation.
+\begin{ttscript}{?:}
+\item[\code{\string~}] %
+  \index{\string~@\code{\string~} (\code{awk})|bfhyperpage}%
+  \index{"!\string~@\code{"!\string~} (\code{awk})|bfhyperpage}%
+  retourne vrai lorsque la chaine de caractères du côté gauche de
+  l'opérateur (\code{\$0} par défaut) correspond à %
+  l'\index{expression régulière}expression régulière du côté droit. La
+  version négative «!\string~» existe aussi.
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+\meta{chaine} ~ /\meta{motif}/
+\meta{chaine} !~ /\meta{motif}/
+\end{Verbatim}
+  \end{Schunk}
+\item[\code{?:}] \Indexcode[\code{awk}]{?:} retourne le résultat de
+  l'expression en second ou en troisième argument selon que la
+  condition en premier argument est, respectivement, vraie ou
+  fausse.\footnote{%
+    Souvent appelé \emph{opérateur ternaire}, cet opérateur existe
+    dans plusieurs langages de programmation. Dans R, ce qui s'en
+    approche le plus est la fonction \icode{ifelse}.} %
+  \begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+\meta{condition} ? \meta{expression\_si\_vrai} : \meta{expression\_si_faux}
+\end{Verbatim}
+  \end{Schunk}
+\end{ttscript}
+Pour ce qui est de la concaténation de chaines de caractères, aussi
+étrange que cela puisse paraitre, il n'existe pas d'opérateur désigné
+dans \icode{awk}. Il suffit de placer les chaines de caractères les
+unes à la suite des autres pour en créer une nouvelle. L'action dans
+la commande ci-dessus affiche donc le contenu complet de
+l'enregistrement (\code{\$0}) lorsque celui-ci débute par le symbole
+«\code{\#}», et les deux premiers champs séparés par une espace (la
+chaine «\code{"~"}») autrement.
+
+À ce stade, vous disposez déjà de connaissances suffisantes pour
+réaliser plusieurs tâches de manipulation de texte avec \icode{awk}.
+Les sections suivantes ne font qu'ajouter des détails sur l'écriture
+des règles et la configuration de l'outil. Si vous souhaitez étudier
+des exemples additionnels, consultez \citet[sections~1.3 à
+1.5]{gawk:5.0}.
+
+\subsection{Motifs}
+\label{sec:texte:awk:motifs}
+
+Comme nous l'avons déjà vu, les \index{motif@motif (\code{awk})}motifs
+dans \icode{awk} contrôlent l'exécution des règles: l'action d'une
+règle est exécutée lorsque le motif correspond à l'enregistrement
+courant. Il existe six types de motifs dans \icode{awk}, dont quatre
+que nous avons déjà rencontrés dans les exemples de la section
+précédente.
+
+\begin{ttscript}{\code{\meta{expression}}}
+  \def\beginendlabel{%
+    \parbox[t][0pt]{\labelwidth}{\code{BEGIN} \\ \code{END}}}
+  \def\beginfileendfilelabel{%
+    \parbox[t][0pt]{\labelwidth}{\code{BEGINFILE} \\ \code{ENDFILE}}}
+\item[\code{/\meta{expression régulière}/}]  \mbox{}\\
+  correspond lorsque l'\index{expression régulière}expression
+  régulière correspond à l'enregistrement courant.
+\item[\code{\meta{expression}}] correspond lorsque la valeur de l'expression
+  \icode{awk} est non nulle (s'il s'agit d'une valeur numérique) ou
+  non vide (s'il s'agit d'une chaine de caractères).
+\item[\code{\meta{motif\_début}, \meta{motif\_fin}}] \mbox{}\\
+  correspond lorsque l'enregistrement courant se trouve dans l'étendue
+  définie par \meta{motif\_début} et \meta{motif\_fin}, inclusivement
+  (attention: la virgule «\code{,}» entre les deux motifs fait partie
+  intégrante de l'instruction).
+\item[\beginendlabel] motifs spéciaux qui permettent
+  d'exécuter des actions avant la lecture du premier enregistrement
+  (\code{BEGIN}) et après la lecture du dernier (\code{END}).
+\item[\beginfileendfilelabel] motifs spéciaux qui permettent
+  d'exécuter des actions au début et à la fin de la lecture d'un
+  fichier, lorsqu'il y a plusieurs fichiers à traiter.
+\item[\meta{vide}] un motif vide correspond à tous les
+  enregistrements.
+\end{ttscript}
+\Indexcode[\code{awk}]{BEGIN}
+\Indexcode[\code{awk}]{END}
+\Indexcode[\code{awk}]{BEGINFILE}
+\Indexcode[\code{awk}]{ENDFILE}
+
+Nous n'étudierons pas davantage les étendues d'enregistrements ni les
+motifs spéciaux \code{BEGINFILE} et \code{ENDFILE}.
+
+Toute expression \icode{awk} est valide en tant que motif. La
+définition d'expression \code{awk} est en tous points équivalente à
+celle d'expression R donnée à la
+\autoref{sec:bases:commandes:expression}. L'expression est réévaluée à
+chaque fois que la règle est testée pour un nouvel enregistrement. Si
+l'expression fait appel à la valeur d'un champ --- \code{\$1} par
+exemple ---, c'est celle de l'enregistrement courant qui prévaut.
+Autrement, la valeur de l'expression dépend de l'état du programme au
+moment de son évaluation.
+
+Les expressions logiques sont évidemment les plus souvent utilisées en
+tant que motifs. Les opérateurs arithmétiques et logiques de
+\icode{awk} sont, pour l'essentiel, les mêmes que les opérateurs de R
+figurant dans le \autoref{tab:bases:operateurs}. Principale
+différence: «\Icode[awk]{=}» est l'opérateur d'affectation d'une
+valeur à une variable dans \icode{awk}. Il faut aussi ajouter à cette
+liste les opérateurs %
+\index{\string~@\code{\string~} (\code{awk})}«\code{\string~}» %
+et %
+\index{"!\string~@\code{"!\string~} (\code{awk})}«\code{!\string~}» %
+mentionnés à la \autoref{sec:texte:awk:commandes}. Vous trouverez une
+liste exhaustive des opérateurs de \icode{awk} dans
+\citet[section~6.2]{gawk:5.0}.
+
+\tipbox{Puisque la valeur d'une expression \icode{awk} dépend de
+  l'état du programme, l'ordre dans lequel les règles apparaissent
+  dans le programme est important.}
+
+Illustrons certains des concepts ci-dessus à l'aide d'un exemple,
+notamment l'importance de l'ordre des règles dans un programme. La
+commande suivante permet d'extraire les deux premiers couplets de «La
+journée qui s'en vient est flambant neuve». Ceux-ci sont délimités par
+des lignes blanches dans le fichier. La tâche consiste donc à extraire
+le texte jusqu'à la seconde ligne blanche, exclusivement.
+\begin{Schunk}
+\begin{Verbatim}
+$ awk '$0 ~ /^$/ && state == 1 { exit }
+       $0 ~ /^$/ { state = 1 }
+       { print }' chanson.txt
+<<echo=FALSE, results=tex>>=
+exec("awk", c("'$0 ~ /^$/ && state == 1 { exit } $0 ~ /^$/ { state = 1 } { print }'", "chanson.txt"), echo = FALSE)
+@
+\end{Verbatim}
+\end{Schunk}
+
+La première règle provoque la sortie du programme lorsque \icode{awk}
+rencontre une ligne blanche \emph{et} qu'une variable d'«état» ---
+d'où le nom que j'ai choisi de lui donner --- est égale à 1. Ici, vous
+devez savoir que tant qu'une valeur n'a pas été explicitement assignée
+à une variable, la valeur de celle-ci est 0. La seconde règle du
+programme affecte la valeur 1 à la variable d'état lorsque \icode{awk}
+rencontre la première ligne blanche. Enfin, la troisième règle extrait
+les enregistrements. En combinant les règles dans cet ordre, le
+programme se termine à la \emph{seconde} ligne blanche du fichier,
+donc après avoir extrait les deux premiers couplets. Si l'ordre des
+deux premières règles était inversé, la commande n'extrairait que le
+premier couplet. (Déterminez pourquoi.)
+
+Question de parfaire notre style de programmation \icode{awk},
+apportons deux simplifications à la commande ci-dessus:
+\begin{itemize}
+\item l'expression \code{/\string^\$/} est équivalente à
+  \code{\$0~\string~~/\string^\$/} puisque \code{\$0} est la valeur
+  par défaut de l'argument gauche de l'opérateur %
+  \index{\string~@\code{\string~} (\code{awk})}«\code{\string~}»;
+\item la troisième règle peut être remplacée par un motif identité
+  qui est toujours vrai («\code{1}») et aucune action, l'instruction
+  \icode[\code{awk}]{print} étant implicite dans ce cas.
+\end{itemize}
+\begin{Schunk}
+\begin{Verbatim}
+$ awk '$/^$/ && state == 1 { exit }
+       $/^$/ { state = 1 }
+       1' chanson.txt
+<<echo=FALSE, results=tex>>=
+exec("awk", c("'/^$/ && state == 1 { exit } /^$/ { state = 1 } 1'", "chanson.txt"), echo = FALSE)
+@
+\end{Verbatim}
+\end{Schunk}
+
+
+\subsection{Actions}
+\label{sec:texte:awk:actions}
+
+L'\index{action@action (\code{awk})}action d'une règle dans un
+programme \icode{awk} indique à l'interpréteur quoi faire lorsqu'un
+enregistrement correspond à un motif. Une action est constituée d'une
+ou plusieurs instructions \icode{awk} placées entre accolades
+«\icode[\code{awk}]{\{~\}}» et séparées les unes des autres par un
+retour à la ligne ou par un point-virgule «\code{;}». Chaque
+instruction d'une action indique une chose à faire.
+
+Une action absente est équivalente à «\code{\{~print \$0~\}}».
+Cependant, une action vide «\code{\{~\}}» ne fait rien lorsque
+l'enregistrement correspond au motif. Autrement dit, les deux règles
+ci-dessous sont bien différentes: la première ne fait rien lorsque
+l'enregistrement correspond à \regex{foo}\,, alors que
+la seconde affiche le contenu de l'enregistrement.
+\begin{Schunk}
+\begin{Verbatim}
+/foo/ { }
+\end{Verbatim}
+\end{Schunk}
+\begin{Schunk}
+\begin{Verbatim}
+/foo/
+\end{Verbatim}
+\end{Schunk}
+
+Les principaux types d'instructions que l'on retrouve dans les actions
+sont: les expressions (au premier chef l'affectation de variables);
+les structures de contrôle (%
+\icode[\code{awk}]{if}, %
+\icode[\code{awk}]{for}, %
+\icode[\code{awk}]{while} et %
+\icode[\code{awk}]{do}); %
+les instructions d'affichage (comme \icode[\code{awk}]{print} et
+\icode[\code{awk}]{printf}). Les expressions peuvent faire appel à
+plusieurs fonctions \icode{awk} internes, notamment pour la
+manipulation de chaines de caractères. Consultez \citet[chapitres~6, 7
+et 9]{gawk:5.0}.
+
+Les données du fichier \code{carburant.dat} sont entièrement en unités
+de mesure impériales. La commande \icode{awk} suivante permet de
+convertir le poids des voitures, actuellement en milliers en livres,
+vers des kilogrammes. L'action de la première règle remplace le poids
+du véhicule en milliers de livres --- le cinquième champ --- par le
+poids en kilogrammes ($2,20462$ étant le facteur de conversion entre
+les deux unités). Remarquez que cette action n'affiche rien, elle ne
+fait que modifier un champ de l'enregistrement courant. C'est la
+seconde règle utilisant un motif identité et l'action implicite qui
+affiche les résultats. Sans celle-ci, le programme ne retournerait
+aucun résultat.
+<<echo=FALSE>>=
+exec("awk", c("'/^[^#a-z]/ { $5 = $5*1000/2.20462 } 1'", "carburant.dat"),
+     max.lines = 16, env = "LC_NUMERIC=en_US.UTF-8")
+@
+
+\subsection{Changer le séparateur d'enregistrements et de champs }
+\label{sec:texte:awk:separateur}
+
+Les %
+\index{separateur@séparateur!d'enregistrements}%
+\index{separateur@séparateur!de champs}séparateurs d'enregistrements
+et de champs par défaut sont, respectivement, le retour à la ligne et
+l'espace. Ces symboles sont stockés dans les variables prédéfinies
+\icode[\code{awk}]{RS} (\emph{record separator}) et
+\icode[\code{awk}]{FS} (\emph{field separator}). Pour changer l'un ou
+l'autre de ces séparateurs, il suffit d'affecter un nouveau symbole ou
+une %
+\index{expression régulière}expression régulière dans la variable
+correspondante, habituellement dans une règle spéciale
+\icode[\code{awk}]{BEGIN}.
+
+Pour des raisons historiques, il est également possible de changer le
+séparateur de champs --- et uniquement celui-ci --- à la ligne de
+commande avec l'option \code{-F}. C'est l'approche que j'ai retenue
+dans le tout premier exemple de la section, à la
+\autopageref{pg:awk:exemple-conversion}.
+
+Voici deux exemples de changement du séparateur de champs. Dans le
+premier, le nouveau séparateur est la virgule. Dans le second, de par
+l'utilisation d'une expression régulière, le séparateur est l'espace
+\emph{ou} le tiret.
+\begin{Schunk}
+\begin{Verbatim}
+BEGIN { FS = "," }
+\end{Verbatim}
+\end{Schunk}
+\begin{Schunk}
+\begin{Verbatim}
+BEGIN { FS = "[ -]" }
+\end{Verbatim}
+\end{Schunk}
+
+Chose intéressante, il est également possible de modifier les
+séparateurs d'enregistrements et de champs que \icode{awk} utilise
+lors de la sortie des résultats. Ceux-ci sont stockés dans les
+variables prédéfinies \icode[\code{awk}]{ORS} (\emph{output record
+  separator}) et \icode[\code{awk}]{OFS} (\emph{output field
+  separator}). Les séparateurs de sortie par défaut sont aussi le
+retour et la ligne et l'espace.
+
+Avec la règle suivante dans un programme \icode{awk}, les champs
+seront séparés par un point-virgule dans les résultats.
+\begin{Schunk}
+\begin{Verbatim}
+BEGIN { OFS = ";" }
+\end{Verbatim}
+\end{Schunk}
+
+\notebox{Les opérations de composition de «\thetitle», de publication
+  dans GitLab et de mise à jour de la page web sont entièrement
+  automatisées avec une combinaison des utilitaires de ce chapitre et
+  de \link{https://fr.wikipedia.org/wiki/Make}{\code{make}}, un autre
+  outil standard des systèmes Unix. Je vous invite à jete un coup
+  d'œil au fichier de configuration \code{Makefile} qui se trouve dans
+  le \link{\reposurl}{code source du projet}.}
+
+\gotorbox{Le fichier de script \code{\shscriptfilename} reproduit à la
+  \autoref{sec:texte:exemples-cli} fournit des exemples additionnels
+  d'utilisation de \code{awk}. Étudiez attentivement les lignes
+  \reflines{texte:awk}.}
+
+<<script-cli>>=
+##-!- ###
+##-!- ### TRAITEMENT DE TEXTE DIVISÉ EN CHAMPS AVEC AWK  `\labelline{texte:awk}`
+##-!- ###
+##-!-
+##-!- ## Cette section regroupe certains exemples d'utilisation de
+##-!- ## 'awk' tirés du texte du chapitre, ainsi que des exemples
+##-!- ## additionnels.
+##-!- ##
+##-!- ## Effectuons d'abord l'extraction des temps des records dans
+##-!- ## le fichier '100metres.dat'. C'est le second champ du
+##-!- ## fichier. Voilà un travail tout désigné pour 'awk'.
+##-!- awk '{ print $2 }' 100metres.dat
+##-!-
+##-!- ## Nous pouvons aussi aisément avec 'awk' inverser les deux
+##-!- ## colonnes du fichier.
+##-!- awk '{ print $2, $1 }' 100metres.dat
+##-!-
+##-!- ## Les colonnes du fichier '100metres.dat' sont séparées par
+##-!- ## une espace. Remplaçons ces espaces par des virgules pour
+##-!- ## convertir le fichier en format CSV. Je fournis deux
+##-!- ## solutions, avec 'awk' (la plus simple) et avec 'sed'.
+##-!- awk '{ print $1 \",\" $2 }' 100metres.dat
+##-!- sed 's/ /,/' 100metres.dat
+##-!-
+##-!- ## Changeons maintenant le format de la date du format ISO
+##-!- ## 8601 'aaaa-mm-qq' vers le format américain 'qq/mm/aa'.
+##-!- ## D'abord une solution avec 'awk'.
+##-!- ##
+##-!- ## En premier lieu, nous devons changer le séparateur de
+##-!- ## champs de 'awk' pour l'espace et le tiret. Ainsi, 'awk' va
+##-!- ## non seulement séparer les deux colonnes du fichier, mais
+##-!- ## aussi les champs de la date.
+##-!- ##
+##-!- ## Il suffit ensuite de replacer les champs dans l'ordre voulu
+##-!- ## avec les bons séparateurs. La fonction 'substr' de awk
+##-!- ## permet de sélectionner une partie d'une chaine de
+##-!- ## caractères (voir la section~9.1.3 du guide d'utilisation de
+##-!- ## GNU Awk).
+##-!- awk 'BEGIN { FS = "[ -]" }
+##-!-      { print $2"/"$3"/"substr($1, 3), $4 }' \
+##-!-      100metres.dat
+##-!-
+##-!- ## La solution avec 'sed' maintenant, qui repose non pas
+##-!- ## sur des champs détectés automatiquement, mais plutôt sur la
+##-!- ## recherche et le remplacement d'expressions régulières.
+##-!- ##
+##-!- ## Le motif recherche, en capturant chaque élément trouvé
+##-!- ## (sauf les tirets):
+##-!- ##
+##-!- ## - les nombres 19 ou 20;
+##-!- ## - deux chiffres;
+##-!- ## - un tiret;
+##-!- ## - deux chiffres;
+##-!- ## - un tiret;
+##-!- ## - deux chiffres;
+##-!- ## - tout le reste de la ligne.
+##-!- ##
+##-!- ## Il s'agit ensuite de replacer les éléments capturés dans
+##-!- ## l'ordre souhaité avec des barres obliques '/' entre les
+##-!- ## éléments de dates.
+##-!- ##
+##-!- ## Comme le symbole '/' est utilisé dans la chaine de sortie,
+##-!- ## il vaut mieux utiliser un autre symbole pour séparer les
+##-!- ## champs de la commande 'sed'. J'ai utilisé le symbole '~'.
+##-!- sed -E \
+##-!-   's~(19|20)([0-9]{2})-([0-9]{2})-([0-9]{2})(.*)~\3/\4/\2\5~'\
+##-!-   100metres.dat
+##-!-
+##-!- ## Les deux commandes suivantes sont reprises du texte du
+##-!- ## chapitre. Elles utilisent le fichier 'carburant.txt'.
+##-!- ##
+##-!- ## La première permet de créer une nouvelle base de données ne
+##-!- ## contenant que les modèles de voitures 4 cyclindres sans
+##-!- ## passer par un tableur ou par R.
+##-!- awk '/^[#a-z]/ || $2 == 4' carburant.dat
+##-!-
+##-!- ## L'ajout d'une action à la commande précédente permet de
+##-!- ## conserver uniquement les deux premiers champs des données.
+##-!- ## La sélection doit évidemment s'effectuer uniquement sur les
+##-!- ## titres de colonnes et sur les données.
+##-!- awk '/^[#a-z]/ || $2 == 4 {
+##-!-          print ($0 ~ /^#/) ? $0 : $1 " " $2
+##-!-      }' carburant.dat
+##-!-
+##-!- ## La commande suivante, aussi reprise du texte du chapitre,
+##-!- ## extrait les deux premiers couplets de «La journée qui s'en
+##-!- ## vient est flambant neuve».
+##-!- awk '$/^$/ && state == 1 { exit }
+##-!-      $/^$/ { state = 1 }
+##-!-      1' chanson.txt
+##-!-
+##-!- ## Dans la même veine, nous souhaitons extraire du fichier
+##-!- ## 'NEWS' les notes de mise à jour de la plus récente version
+##-!- ## de l'ouvrage.
+##-!- ##
+##-!- ## Les notes relatives à une version donnée débutent toujours
+##-!- ## à une ligne marqué par '# '.
+##-!- ##
+##-!- ## Cette opération requiert une variable d'état pour
+##-!- ## identifier les lignes que vous souhaitons extraire.
+##-!- ##
+##-!- ## De la manière dont les règles sont écrites dans la
+##-!- ## commande, leur ordre n'a pas d'importance. (Déterminez
+##-!- ## pourquoi en comparant avec l'exemple similaire ci-dessus.)
+##-!- ##
+##-!- ## La dernière règle sert à afficher les lignes que nous
+##-!- ## voulons extraire (grâce à l'action implicite). Le motif est
+##-!- ## équivalent à 'state == 1' ou 'state != 0' puisque 'awk'
+##-!- ## évalue l'expression et détermine que le motif correspond si
+##-!- ## la valeur est non nulle.
+##-!- awk '(state == 0) && /^# / { state = 1; next }
+##-!-      (state == 1) && /^# / { exit }
+##-!-      state' NEWS	   #-*- `\labelline{texte:awk:fin}`
+@
 
 
 \section{Fonctions internes utiles}
@@ -183,281 +2442,238 @@ Revenez ensuite ici pour des exemples additionnels et des exercices.
 
 Cette section présente quelques unes seulement des fonctions internes
 qu'offre R pour rechercher et remplacer du texte à l'aide
-d'expressions régulières. Consultez la rubrique d'aide (commune) de
-n'importe laquelle de celles-ci pour connaitre l'ensemble des
-fonctions disponibles et les détails concernant leur fonctionnement.
-Vous trouverez également dans la rubrique d'aide de nombreux exemples
-d'utilisation additionnels.
-
-Les exemples de cette section utilisent le vecteur \icode{state.name}
-fourni avec R et qui contient les noms des cinquante États américains.
-<<echo=FALSE>>=
-op <- options(width=55)                 # trois colonnes
-@
-<<echo=TRUE>>=
-state.name
-@
-<<echo=FALSE>>=
-options(op)                             # rétablir défaut
-@
+d'\index{expression régulière}expressions régulières. Consultez la
+rubrique d'aide (commune) de n'importe laquelle de celles-ci pour
+connaitre l'ensemble des fonctions disponibles et les détails
+concernant leur fonctionnement. Vous trouverez également dans la
+rubrique d'aide de nombreux exemples d'utilisation additionnels.
 
 \warningbox{Rappelons qu'en R un vecteur de mode \icode{character} peut
   contenir plusieurs chaines de caractères. Les fonctions ci-dessous
   effectuent leur traitement sur chacune des chaines d'un vecteur.}
 
-\begin{ttscript}{regexpr}
-\item[\code{grep}] \index{grep@\code{grep} (R)|bfhyperpage} recherche
-  d'une expression régulière dans un vecteur de chaines de caractères
-<<echo=TRUE>>=
-grep("na$", state.name)
-grep("na$", state.name, value = TRUE)
+Le vecteur \icode{state.name} fourni avec R contient les noms des
+cinquante États américains. Les exemples de cette section utilisent
+seulement les dix premiers.
+<<echo=FALSE>>=
+op <- options(width=60)                 # quatre colonnes
 @
-\item[\Icode{regexpr}] comme \index{grep@\code{grep} (R)}grep, mais
-  avec des informations additionnelles sur la position et la longueur
-  des appariements dans les résultats
 <<echo=TRUE>>=
-regexpr("na$", state.name)
+(state.name.10 <- head(state.name, 10))
+@
+<<echo=FALSE>>=
+options(op)                             # rétablir défaut
+@
+
+\begin{ttscript}{regexpr}
+\item[\code{grep}] \Indexcode[R]{grep}%
+  recherche d'une expression régulière dans un vecteur de chaines de
+  caractères.
+<<echo=TRUE>>=
+grep("ia$", state.name.10)
+grep("ia$", state.name.10, value = TRUE)
+@
+\item[\Icode{regexpr}] comme \code{grep}, mais avec des informations
+  additionnelles sur la position et la longueur des appariements dans
+  les résultats.
+<<echo=TRUE>>=
+regexpr("ia$", state.name.10)
 @
 \item[\Icode{sub}] recherche une expression régulière dans un vecteur
   de chaines de caractères et remplace uniquement la première
-  occurence dans chaque chaine par une autre chaine
+  occurence dans chaque chaine par une autre chaine.
 <<echo=TRUE>>=
-sub("i", "*", state.name)
+sub("a", "*", state.name.10)
 @
 \item[\Icode{gsub}] comme \icode{sub}, mais remplace toutes les
-  occurences dans chaque chaine par une autre chaine
+  occurences dans chaque chaine par une autre chaine.
 <<echo=TRUE>>=
-gsub("i", "*", state.name)
+gsub("a", "*", state.name.10)
 @
 \end{ttscript}
 
 \tipbox{Plusieurs langages de programmation contiennent des
   utilitaires \code{grep}, \code{sub} et \code{gsub}. Par exemple,
-  dans \icode{awk} des fonctions \code{sub} et \code{gsub} permettent
+  dans \icode{awk}, des fonctions \code{sub} et \code{gsub} permettent
   d'effectuer des remplacements à l'intérieur des champs.}
 
+Les fonctions ci-dessus prennent toutes le motif de l'expression
+régulière en argument sous forme d'une chaine de caractères. Lorsque
+le motif contient un %
+\index{caractere d'echappement@caractère d'échappement}caractère
+d'échappement %
+\index{\string\@\code{\bs} (regex)|bfhyperpage}«\code{\bs}», il faut
+doubler celui-ci dans la chaine de caractère de R. Par exemple, pour
+fournir en argument à une fonction R le motif \regex{.\{1,8\}\bs.txt}
+rencontré à la \autoref{sec:texte:regex:escape}, il faut l'entrer sous
+la forme \code{".\{1,8\}\bs\bs.txt"}.
 
-\section{Exemples additionnels}
-\label{sec:texte:exemples}
-
-Exceptionnellement, je présente les exemples additionnels de ce
-chapitre en texte normal plutôt que sous forme de fichier de script.
-
-Les exemples ci-dessous utilisent des fichiers distribués avec le
-présent document dans l'archive \code{programmer-avec-r.zip}.
-Assurez-vous d'avoir extrait les fichiers de l'archive quelque part
-sur votre disque et notez bien cet endroit: vous en aurez besoin dans
-un instant.
-
-Vous devez entrer les expressions ci-dessous à une ligne de commande
-du \index{Terminal}Terminal sous macOS, ou de \index{Git~Bash}Git~Bash
-ou MSYS sous Windows.
-
-\importantbox{L'espace horizontal étant compté dans un document en
-  format PDF, il est parfois nécessaire de scinder une commande sur
-  deux lignes ou plus. Pour ces cas, j'ai inséré le symbole de
-  continuation de ligne «\bs» de Bash à la fin des lignes. Vous pouvez
-  ainsi copier les commandes directement du document et les coller
-  dans une ligne de commande. Le symbole {\bs} ne fait \emph{pas}
-  partie des commandes.}
-
-En premier lieu, déplacez, à l'aide de la commande \icode{cd},
-l'invite de commande dans le répertoire où vous avez extrait les
-fichiers de l'archive.
-
-Comme premier exemple, dressons la liste de toutes les utilisations de
-la fonction \code{matrix} dans les fichiers d'exemples. C'est un
-travail pour l'utilitaire \icode{grep}.
+Depuis la version 4.0.0, R offre une alternative pour entrer plus
+aisément des chaines de caractères contenant, entre autres, des
+caractères d'échappement ou des guillemets. Il s'agit de \index{chaine
+  de caractères!brute}chaines de caractères brutes (\emph{raw strings}
+ou \emph{raw character constants}). La syntaxe pour créer une chaine
+brute est la suivante:
 \begin{Schunk}
-\begin{Verbatim}
-$ grep matrix *.R
+\begin{Verbatim}[commandchars=\\\{\}]
+r"(\meta{...})"
 \end{Verbatim}
 \end{Schunk}
+Ici, \code{\meta{...}} représente n'importe quelle suite de caractères
+qui ne se termine pas par «\code{)"}».
 
-L'option \code{-l} de \icode{grep} permet de limiter les résultats à
-la liste des fichiers contenant au moins une utilisation de
-\code{matrix}.
-\begin{Schunk}
-\begin{Verbatim}
-$ grep -l matrix *.R
-\end{Verbatim}
-\end{Schunk}
+Ainsi, pour passer le motif ci-dessus à une fonction R sans avoir à se
+soucier de doubler les caractères d'échappement, il est possible de
+l'entrer plutôt sous la forme \code{r"(.\{1,8\}\bs\bs.txt)"}.
 
-Pour connaitre les fichiers d'exemples dans lesquels apparaissent les
-objets \code{letters} et \code{LETTERS}, nous devons rechercher sans
-égard à la casse pour attraper les deux cas.
-\begin{Schunk}
-\begin{Verbatim}
-$ grep -i letters *.R
-\end{Verbatim}
-\end{Schunk}
+\gotorbox{Le fichier de script \code{\rscriptfilename} reproduit à la
+  \autoref{sec:texte:exemples-r} contient des exemples d'utilisation
+  de fonctions R utilisant les expressions régulières, de même que des
+  exemples additionnels de chaines de caractères brutes. Étudiez
+  l'entièreté du fichier.}
 
-Allons-y maintenant d'une expression régulière plus élaborée pour
-trouver toutes les utilisations de la fonction \code{g} dans les
-fichiers d'exemples, c'est-à-dire la chaine \code{g(} précédée d'au
-moins une espace ou en début de ligne.
-\begin{Schunk}
-\begin{Verbatim}
-$ grep -E '( |^)g\(' *.R
-\end{Verbatim}
-\end{Schunk}
+<<script-r, results=hide>>=
+## Reprenons d'abord certains des exemples pour la ligne de
+## commande Unix effectués sur le fichier chanson.txt.
+##
+## Pour ce faire, il faut importer le contenu du fichier dans
+## R. La fonction 'readLines' lit un fichier et retourne un
+## vecteur de chaines de caractères, à raison d'une chaine par
+## ligne du fichier.
+##
+## Vous remarquerez que cela correspond au mode de
+## fonctionnement de 'grep', 'sed' et 'awk': une ligne à la
+## fois.
+chanson <- readLines("chanson.txt") # importer le fichier
+chanson                             # contenu du vecteur
 
-Tel que mentionné à la \autoref{sec:texte:outils}, la fonction
-\icode{sed} sert surtout pour rechercher et remplacer dans un fichier,
-et ce, ligne par ligne par défaut. Remplaçons les symboles de
-commentaires triples «\code{\#\#\#}» en début de ligne (à la Emacs) dans
-le fichier \code{pratiques.R} par un symbole unique «\code{\#}» (à
-la RStudio). Pour faire bonne mesure, plaçons le résultat dans un
-nouveau fichier \code{pratiques-new.R} à l'aide de l'opérateur de
-redirection de Bash \index{>@\code{>} (Bash)}«\code{>}».
-\begin{Schunk}
-\begin{Verbatim}
-$ sed 's/^###/#/' pratiques.R > pratiques-new.R
-\end{Verbatim}
-\end{Schunk}
+## Effectuons maintenant quelques recherches dans le vecteur
+## avec la fonction 'grep' de R. Le résultat est l'indice de
+## l'élément du vecteur contenant le motif.
+grep("temps", chanson)     # vers contenant le mot «temps»
+grep("chat", chanson)      # vers contenant le mot «chat»
 
-Le programme \icode{awk} est particulièrement utile pour traiter des
-fichiers dont les lignes sont séparées en «champs», comme des colonnes
-de données, par exemple. Or, le présent document est justement livré
-avec le fichier \code{100metres.data} qui contient la liste des 31
-meilleurs temps enregistrés au 100~mètres homme entre 1964 et 2005
-(voir l'\autoref{ex:tri:100metres}).
-\begin{Schunk}
-\begin{Verbatim}
-$ cat 100metres.data
-\end{Verbatim}
-\end{Schunk}
+## Pour obtenir le texte de l'élément plutôt que sa position
+## dans le vecteur, il faut utiliser 'value = TRUE'.
+grep("temps", chanson, value = TRUE)
 
-Effectuons dans un premier temps l'extraction des temps des records
-(second champ). La première commande utilise un transfert de données
-du programme \icode{cat} vers \icode{awk} avec l'opérateur de
-transfert de données de Bash \index{{"|}@\code{\textbar} (Bash)}
-«\code{\textbar}», alors que la seconde, plus usuelle et tout à fait
-équivalente, emploie un fichier en entrée.
-\begin{Schunk}
-\begin{Verbatim}
-$ cat 100metres.data | awk '{ print $2 }'
-$ awk '{ print $2 }' 100metres.data
-\end{Verbatim}
-\end{Schunk}
+## R utilise par défaut des expressions régulières étendues
+## (donc le symbole | est un opérateur d'alternance).
+grep("amour|mieux", chanson, value = TRUE)
 
-L'inversion des deux colonnes du fichier est simple à réaliser avec
-\icode{awk}.
-\begin{Schunk}
-\begin{Verbatim}
-$ awk '{ print $2, $1 }' 100metres.data
-\end{Verbatim}
-\end{Schunk}
+## Changeons un peu de jeu de données.
+##
+## La fonction 'data' retourne la liste des jeux de données
+## disponible dans la session R courante. Le résultat est une
+## liste de plusieurs éléments.
+##-!- data()
 
-Les colonnes du fichier \code{100metres.data} sont séparées par une
-espace. Remplaçons ces espaces par des virgules pour convertir le
-fichier en format CSV. Je fournis deux solutions, avec \icode{awk} et avec
-\icode{sed}.
-\begin{Schunk}
-\begin{Verbatim}
-$ awk '{ print $1","$2 }' 100metres.data
-$ sed 's/ /,/' 100metres.data
-\end{Verbatim}
-\end{Schunk}
+## L'expression ci-dessus permet de ne conserver que les noms
+## d'objets.
+(nm <- data()$results[, "Item"])
 
-Changeons maintenant le format de la date du format
-\link{https://fr.wikipedia.org/wiki/ISO_8601}{ISO~8601} aaaa-mm-qq
-vers le format américain qq/mm/aa. D'abord une solution avec
-\icode{awk}. En premier lieu, nous devons changer le séparateur de
-champs de \code{awk} (l'espace par défaut) pour l'espace et le tiret.
-Ainsi, \code{awk} va non seulement séparer les deux colonnes du
-fichier, mais aussi les champs de la date. Ensuite, nous replaçons les
-champs dans l'ordre voulu avec les bons séparateurs. La fonction
-\index{substr@\code{substr} (awk)}\code{substr} de \code{awk} permet
-de sélectionner une partie d'une chaine de caractères
-\citep[section~9.1.3]{awk}.
-\begin{Schunk}
-\begin{Verbatim}
-$ awk 'BEGIN { FS = "[ -]" } \
-       { print $2"/"$3"/"substr($1, 3), $4 }' \
-       100metres.data
-\end{Verbatim}
-\end{Schunk}
+## Pour extraire de la liste les objets dont le nom comporte
+## un point «.», il faut désactiver le rôle spécial de ce
+## caractère dans l'expression régulière à l'aide du caractère
+## d'échappement.
+##-!- grep("\.", nm)             # erreur!
 
-La solution avec \icode{sed} maintenant, qui repose non pas sur des
-champs détectés automatiquement, mais plutôt sur la recherche et le
-remplacement d'expressions régulières. Nous recherchons l'expression
-régulière suivante en capturant chaque élément trouvé (sauf les
-tirets): les nombres 19 ou 20; deux chiffres; un tiret; deux chiffres;
-un tiret; deux chiffres; tout le reste de la ligne. Nous replaçons
-ensuite les éléments capturés dans l'ordre souhaité avec des barres
-obliques \code{/} entre les éléments de dates. Comme le symbole
-\code{/} est utilisé dans la chaine de sortie, il faut utiliser un
-autre symbole pour séparer les champs de la commande \code{sed}. J'ai
-utilisé le symbole «\verb|~|» ici.
-\begin{Schunk}
-\begin{Verbatim}
-$ sed -E 's~(19|20)([0-9]{2})-([0-9]{2})-([0-9]{2})(.*)~'\
-'\3/\4/\2\5~' 100metres.data
-\end{Verbatim}
-\end{Schunk}
+## L'expression ci-dessus cause une erreur parce que R
+## interprète le caractère d'échappement à l'intérieur du
+## motif.
+##
+## Il existe deux solutions pour régler ce problème.
+##
+## La première consiste à doubler le caractère d'échappement.
+## Ça devient rapidement pénible s'il y a plusieurs caractères
+## à doubler.
+grep("\\.", nm, value = TRUE)
 
-Amusons-nous maintenant avec le fichier \code{NEWS} qui contient
-l'historique des versions du document. La commande suivante dresse la
-liste des numéros de versions.
-\begin{Schunk}
-\begin{Verbatim}
-$ grep '^# [[:digit:]]' NEWS
-$ grep -E '^# [[:digit:]]' NEWS
-\end{Verbatim}
-\end{Schunk}
+## La seconde est disponible depuis la version 4.0.0 de R. Il
+## s'agit des chaines de caractères brutes. En gros, une
+## chaine de caractères brute se charge d'ajouter les
+## caractères d'échappement aux bons endroits et retourne une
+## chaine de caractères standard.
+##
+## On crée une chaine brute avec 'r"(...)"'.
+r"(\.)"                    # syntaxe d'une chaine brute
+r"(g.*\..*\()"             # autre exemple
+grep(r"(\.)", nm, value = TRUE) # utilisation dans 'grep'
 
-Un dernier exemple plus avancé. Nous souhaitons extraire du fichier
-\code{NEWS} les notes de mise à jour de la plus récente version. Si
-vous examinez le fichier, vous constaterez que les notes de mise à
-jour relatives à une version donnée débutent toujours à une ligne
-marqué par %
-\verb*|# |. %
-Le meilleur outil pour effectuer des opérations sur plusieurs lignes
-d'un fichier est \icode{awk}, tel que mentionné à la
-\autoref{sec:texte:outils}.
+## L'expression suivante identifie les éléments (ou vers) de
+## 'chanson' qui débutent par «L» et qui contiennent un «i»
+## quelque part dans la chaine. Le résultat est un vecteur des
+## positions des éléments qui correspondent au motif.
+grep("^L.*i", chanson)     # positions des éléments
 
-L'idée, ici, consiste à avoir recours à une variable dite d'«état».
-Avant qu'elle ne soit explicitement définie, la valeur de cette
-variable est $0$ (faux). Lorsque la chaine marquant le début des notes
-d'une version est trouvée, on donne une valeur de $1$ (vrai) à la
-variable, puis l'on affiche les lignes jusqu'à ce que l'on rencontre
-une nouvelle ligne débutant par %
-\verb*|# |, %
-moment où cesse le traitement du fichier.
-\begin{Schunk}
-\begin{Verbatim}
-$ awk '(state == 0) && /^# / { state = 1; next } \
-       (state == 1) && /^# / { exit } \
-       state == 1 { print }' NEWS
-\end{Verbatim}
-\end{Schunk}
+## La fonction 'regexpr' retourne davantage d'informations sur
+## la position et la longueur des appariements du motif dans
+## la chaine de caractères.
+##
+## Le vecteur des résultats contient une valeur positive
+## correspondant à la position dans la chaine où débute chacun
+## des appariements, ou -1 si la chaine ne correspond pas au
+## motif. (Dans notre exemple, les nombres positifs sont tous
+## des 1 puisque nous recherchons précisément des appariements
+## dès le début de la ligne.)
+##
+## Le vecteur des résultats est également muni d'un attribut
+## qui contient la longueur des appariements.
+regexpr("^L.*i", chanson)  # plus d'informations
 
-Nous pouvons écrire la commande ci-dessus de manière légèrement plus
-compacte. En effet, écrire \code{state == 1} pour tester que la
-variable \code{state} est vraie n'est pas nécessaire dans la mesure où
-il est sous-entendu que l'expression qui précède l'action dans une
-commande \icode{awk} est un test conditionnel et que \code{awk} traite
-la valeur
-$1$ comme vraie. De plus, la commande \code{print} est implicite avec
-\code{awk}. Il n'est donc pas nécessaire de la demander explicitement.
-\begin{Schunk}
-\begin{Verbatim}
-$ awk '(state == 0) && /^# / { state = 1; next } \
-       (state == 1) && /^# / { exit } \
-       state' NEWS
-\end{Verbatim}
-\end{Schunk}
+## À partir des résultats de 'regexpr', il est possible
+## d'extraire uniquement les portions de texte qui
+## correspondent au motif, un peu comme avec l'option '-o' de
+## 'grep'.
+##
+## Il suffit, pour chaque appariement, d'extraire le texte de
+## la chaine à partir de la position initiale de l'appariement
+## et pour la longueur de celui-ci.
+##
+## Ce travail, la fonction 'regmatches' le fait pour nous.
+regmatches(chanson, regexpr("^L.*i", chanson))
 
-\notebox{Les opérations de composition du présent document, de
-  publication dans GitLab et de mise à jour de la page web sont
-  entièrement automatisées à l'aide de
-  \link{https://fr.wikipedia.org/wiki/Make}{\code{make}}, un autre de
-  ces outils standards sur les systèmes Unix. Vous pouvez retrouver
-  une variante un peu plus élaborée de la commande \code{awk}
-  ci-dessus dans la règle \code{create-release} du fichier de
-  configuration \code{Makefile} qui se trouve dans le
-  \link{\reposurl}{code source} du document. Jetez-y un coup d'œil!}
+## Les fonctions 'sub' et 'gsub' jouent en partie le rôle de
+## 'sed' dans R, soit remplacer des chaines de caractères.
+##
+## La fonction 'sub' remplace uniquement la première
+## occurrence dans une chaine de caractères, alors que 'gsub'
+## remplace toutes les occurences (comme 'sed' lorsque muni du
+## modificateur 'g').
+sub("Oh", "Ah", chanson)
+sub("promets", "jure", chanson)
+gsub("promets", "jure", chanson)
+
+## Plusieurs autres fonctions de R acceptent des expressions
+## régulières en argument.
+##
+## Par exemple, la fonction 'list.files' permet d'obtenir la
+## liste des fichiers (du répertoire de travail par défaut)
+## dont le nom correspond à un certain motif.
+##
+## Les expressions ci-dessous affichent la liste des fichiers
+## dont le nom se termine par l'extension ".R".
+list.files(pattern = "\\.R$")   # avec chaine standard
+list.files(pattern = r"(\.R$)") # avec chaine brute
+@
+
+\section{Exemples pour la ligne de commande Unix}
+\label{sec:texte:exemples-cli}
+
+Exceptionnellement, ce chapitre propose des exemples d'utilisation des
+outils \icode{grep}, \icode{sed} et \icode{awk} que vous devez
+exécuter depuis une ligne de commande \index{Unix}Unix.
+
+\medskip
+\scriptfile{\shscriptfilename}
+\lstinputlisting[language=shenhanced,firstline=\scriptfirstline]{\shscriptfilename}
+
+
+\section{Exemples pour les fonctions R}
+\label{sec:texte:exemples-r}
+
+\scriptfile{\rscriptfilename}
+\lstinputlisting[language=shenhanced,firstline=\scriptfirstline]{\rscriptfilename}
 
 
 \section{Exercices}
@@ -473,170 +2689,152 @@ $ awk '(state == 0) && /^# / { state = 1; next } \
 
 \begin{exercice}
   Dans chacun des cas ci-dessous, déterminer à laquelle ou auxquelles
-  des chaines de caractères correspond l'expression régulière donnée.
-  Les symboles \verb=/= ne servent qu'à délimiter le début et la fin
-  des expressions régulières. Ne pas tenir compte des espaces avant ou
-  après les chaines.\footnote{%
+  des chaines de caractères correspond le motif de l'expression
+  régulière (étendue).\footnote{%
     Exercice adapté de
     \url{https://regex.sketchengine.co.uk/extra_regexps.html}.}
   \begin{enumerate}
     \setlength{\multicolsep}{2pt}
-  \item \verb~/a(ab)*a/~
-    \begin{enumerate}[1)]
-      \begin{multicols}{3}
-      \item \verb~abababa~
-      \item \verb~aaba~
-      \item \verb~aabbaa~
-      \end{multicols}
-      \begin{multicols}{3}
-      \item \verb~aba~
-      \item \verb~aabababa~
-      \end{multicols}
-    \end{enumerate}
+  \item \regex{a(ab)*a}
+    \begin{multicols}{3}
+      \begin{enumerate}[1)]
+      \item \code{abababa}
+      \item \code{aaba}
+      \item \code{aabbaa}
+      \item \code{aba}
+      \item \code{aabababa}
+      \item[\vspace{\fill}]
+      \end{enumerate}
+    \end{multicols}
     \pagebreak[1]
-  \item \verb~/ab+c?/~
-    \begin{enumerate}[1)]
-      \begin{multicols}{3}
-      \item \verb~abc~
-      \item \verb~ac~
-      \item \verb~abbb~
-      \end{multicols}
-      \begin{multicols}{3}
-      \item \verb~bbc~
-      \item \verb~abcc~
-      \end{multicols}
-    \end{enumerate}
+  \item \regex{ab+c?}
+    \begin{multicols}{3}
+      \begin{enumerate}[1)]
+      \item \code{abc}
+      \item \code{ac}
+      \item \code{abbb}
+      \item \code{bbc}
+      \item \code{abcc}
+      \item[\vspace{\fill}]
+      \end{enumerate}
+    \end{multicols}
+  \item \regex{a.[bc]+}
+    \begin{multicols}{3}
+      \begin{enumerate}[1)]
+      \item \code{abc}
+      \item \code{abbbbbbbb}
+      \item \code{azc}
+      \item \code{abcbcbcbc}
+      \item \code{ac}
+      \item \code{asccbbbbcbcccc}
+      \end{enumerate}
+    \end{multicols}
     \pagebreak[1]
-  \item \verb~/a.[bc]+/~
-    \begin{enumerate}[1)]
-      \begin{multicols}{3}
-      \item \verb~abc~
-      \item \verb~abbbbbbbb~
-      \item \verb~azc~
-      \end{multicols}
-      \begin{multicols}{3}
-      \item \verb~abcbcbcbc~
-      \item \verb~ac~
-      \item \verb~asccbbbbcbcccc~
-      \end{multicols}
-    \end{enumerate}
+  \item \regex{abc|xyz}
+    \begin{multicols}{3}
+      \begin{enumerate}[1)]
+      \item \code{abc}
+      \item \code{xyz}
+      \item \code{abc|xyz}
+      \end{enumerate}
+    \end{multicols}
     \pagebreak[1]
-  \item \verb~/abc|xyz/~
-    \begin{enumerate}[1)]
-      \begin{multicols}{3}
-      \item \verb~abc~
-      \item \verb~xyz~
-      \item \verb~abc|xyz~
-      \end{multicols}
-    \end{enumerate}
+  \item \regex{[a-z]+[\bs.\bs?!]}
+    \begin{multicols}{3}
+      \begin{enumerate}[1)]
+      \item \code{battle!}
+      \item \code{Hot}
+      \item \code{green}
+      \item \code{swamping.}
+      \item \code{jump~up.}
+      \item \code{undulate?}
+      \item \code{is.?}
+      \item[\vspace{\fill}]
+      \item[\vspace{\fill}]
+      \end{enumerate}
+    \end{multicols}
     \pagebreak[1]
-  \item \verb~/[a-z]+[\.\?!]/~
-    \begin{enumerate}[1)]
-      \begin{multicols}{3}
-      \item \verb~battle!~
-      \item \verb~Hot~
-      \item \verb~green~
-      \end{multicols}
-      \begin{multicols}{3}
-      \item \verb~swamping.~
-      \item \verb~jump up.~
-      \item \verb~undulate?~
-      \end{multicols}
-      \begin{multicols}{3}
-      \item \verb~is.?~
-      \end{multicols}
-    \end{enumerate}
+  \item \regex{[a-zA-Z]*[\string^,]=}
+    \begin{multicols}{3}
+      \begin{enumerate}[1)]
+      \item \code{Butt=}
+      \item \code{BotHEr,=}
+      \item \code{Ample}
+      \item \code{FIdDlE7h=}
+      \item \code{Brittle~=}
+      \item \code{Other.=}
+      \end{enumerate}
+    \end{multicols}
     \pagebreak[1]
-  \item \verb~/[a-zA-Z]*[^,]=/~
-    \begin{enumerate}[1)]
-      \begin{multicols}{3}
-      \item \verb~Butt=~
-      \item \verb~BotHEr,=~
-      \item \verb~Ample~
-      \end{multicols}
-      \begin{multicols}{3}
-      \item \verb~FIdDlE7h=~
-      \item \verb~Brittle =~
-      \item \verb~Other.=~
-      \end{multicols}
-    \end{enumerate}
+  \item \regex{[a-z][\bs.\bs?!][[:blank:]]+[A-Z]}
+    \begin{multicols}{3}
+      \begin{enumerate}[1)]
+      \item \code{A.~B}
+      \item \code{c!~d}
+      \item \code{e~f}
+      \item \code{g.~H}
+      \item \code{i?~J}
+      \item \code{k~L}
+      \end{enumerate}
+    \end{multicols}
     \pagebreak[1]
-  \item \verb~/[a-z][\.\?!]\s+[A-Z]/~
-    \begin{enumerate}[1)]
-      \begin{multicols}{3}
-      \item \verb~A. B~
-      \item \verb~c! d~
-      \item \verb~e f~
-      \end{multicols}
-      \begin{multicols}{3}
-      \item \verb~g. H~
-      \item \verb~i? J~
-      \item \verb~k L~
-      \end{multicols}
-    \end{enumerate}
-    \pagebreak[1]
-  \item \verb~/<[^>]+>/~
-    \begin{enumerate}[1)]
-      \begin{multicols}{2}
-      \item \verb~<an xml tag>~
-      \item \verb~<opentag> <closetag>~
-      \end{multicols}
-      \begin{multicols}{2}
-      \item \verb~</closetag>~
-      \item \verb~<>~
-      \end{multicols}
-      \begin{multicols}{2}
-      \item \verb~<with attribute=”77”>~
-      \end{multicols}
-    \end{enumerate}
+  \item \regex{<[\string^>]+>}
+    \begin{multicols}{2}
+      \begin{enumerate}[1)]
+      \item \code{<an~xml~tag>}
+      \item \code{<opentag>~<closetag>}
+      \item \code{</closetag>}
+      \item \code{<>}
+      \item \code{<with~attribute=”77”>}
+      \item[\vspace{\fill}]
+      \end{enumerate}
+    \end{multicols}
   \end{enumerate}
 
   \begin{sol}
     \begin{enumerate}
-    \item L'expression régulière identifie la lettre minuscule
-      «\verb=a=», suivie de zéro, une ou plusieurs occurrences des
-      lettres minuscules «\verb=ab=», suivies de la lettre minuscule
-      «\verb=b=». Les choix 2 et 5 satisfont ces conditions.
-    \item L'expression régulière identifie la lettre
-      «\verb=a=», suivie d'au moins une occurrence de la lettre
-      minuscule «\verb=b=», suivie de zéro ou une occurrence de la
-      lettre minuscule «\verb=c=». Les choix 1 et 3 satisfont ces
-      conditions.
-    \item L'expression régulière identifie la lettre minuscule
-      «\verb=a=», suivie de n'importe quel caractère (incluant les
-      lettres «\verb=b=» et «\verb=c=»), suivi d'au moins une
-      occurrence des lettres minuscules «\verb=b=» ou «\verb=c=». Les
-      choix 1, 2, 3, 4 et 6 satisfont ces conditions.
-    \item L'expression régulière identifie les suites de lettres
-      minuscules «\verb=abc=» ou «\verb=xyz=». Les choix 1 et 2
-      satisfont la condition. Le troisième choix n'est pas valide
-      puisque l'expression n'identifie pas le symbole «\verb=|=».
-    \item L'expression régulière identifie au moins une lettre
-      minuscule (à l'exclusion de tout autre symbole), suivie de l'un
-      ou l'autre des symboles «\verb=.=», «\verb=?=», «\verb=!=» (sans
+    \item Le motif identifie la lettre minuscule «\code{a}», suivie de
+      zéro, une ou plusieurs occurrences des lettres minuscules
+      «\code{ab}», suivies de la lettre minuscule «\code{b}». Les
+      choix 2 et 5 satisfont ces conditions.
+    \item Le motif identifie la lettre «\code{a}», suivie d'au moins
+      une occurrence de la lettre minuscule «\code{b}», suivie de zéro
+      ou une occurrence de la lettre minuscule «\code{c}». Les choix 1
+      et 3 satisfont ces conditions.
+    \item Le motif identifie la lettre minuscule «\code{a}», suivie de
+      n'importe quel caractère (incluant les lettres «\code{b}» et
+      «\code{c}»), suivi d'au moins une occurrence des lettres
+      minuscules «\code{b}» ou «\code{c}». Les choix 1, 2, 3, 4 et 6
+      satisfont ces conditions.
+    \item Le motif identifie les suites de lettres minuscules
+      «\code{abc}» ou «\code{xyz}». Les choix 1 et 2 satisfont la
+      condition. Le troisième choix n'est pas valide puisque
+      l'expression n'identifie pas le symbole «\code{|}».
+    \item Le motif identifie au moins une lettre minuscule (à
+      l'exclusion de tout autre symbole), suivie de l'un ou l'autre
+      des symboles «\code{.}», «\code{?}», «\code{!}» (sans
       répétition). Les choix 1, 4 et 6 satisfont ces conditions.
-    \item L'expression régulière identifie zéro, une ou plusieurs
-      lettres minuscules ou majuscule (mais aucun autre symbole),
-      suivies de tout caractère autre qu'une virgule, suivi du symbole
-      «\verb|=|». Les choix 1, 5 et 6 satisfont ces conditions.
-    \item L'expression régulière identifie une lettre minuscule,
-      suivie de l'un ou l'autre des symboles «\verb=.=», «\verb=?=»,
-      «\verb=!=» (sans répétition), suivi d'au moins une espace,
-      suivie d'une lettre majuscule. Les choix 4 et 5 satisfont ces
-      conditions.
-    \item L'expression régulière identifie le symbole «\verb=<=»,
-      suivi d'au moins un symbole autre que «\verb=>=», suivi du symbole
-      «\verb=>=». Les choix 1, 3 et 5 satisfont ces conditions. Dans
-      le choix 2, tant \verb~<opentag>~ que \verb~<closetag>~
-      satisfont la condition, mais pas les deux ensemble.
+    \item Le motif identifie zéro, une ou plusieurs lettres minuscules
+      ou majuscule (mais aucun autre symbole), suivies de tout
+      caractère autre qu'une virgule, suivi du symbole «\code{=}». Les
+      choix 1, 5 et 6 satisfont ces conditions.
+    \item Le motif identifie une lettre minuscule, suivie de l'un ou
+      l'autre des symboles «\code{.}», «\code{?}», «\code{!}» (sans
+      répétition), suivi d'au moins une espace, suivie d'une lettre
+      majuscule. Les choix 4 et 5 satisfont ces conditions.
+    \item Le motif identifie le symbole «\code{<}», suivi d'au moins
+      un symbole autre que «\code{>}», suivi du symbole «\code{>}».
+      Les choix 1, 3 et 5 satisfont ces conditions. Dans le choix 2,
+      tant \code{<opentag>} que \code{<closetag>} satisfont la
+      condition, mais pas les deux ensemble.
     \end{enumerate}
   \end{sol}
 \end{exercice}
 
 \begin{exercice}
-  Composer une expression régulière qui correspond à tous les mots de
-  la liste de gauche, ci-dessous, mais à aucun des mots de la liste de
-  droite.\footnote{%
+  Composer un motif d'expression régulière qui correspond à tous les
+  mots de la liste de gauche, ci-dessous, mais à aucun des mots de la
+  liste de droite.\footnote{%
     Exercice adapté de
     \url{https://regex.sketchengine.co.uk/cgi/ex1.cgi}.}
   \begin{center}
@@ -655,126 +2853,118 @@ $ awk '(state == 0) && /^# / { state = 1; next } \
     \end{minipage}
   \end{center}
   \begin{sol}
-    L'expression doit identifier la lettre minuscule «\verb=p=»
+    Le motif doit identifier la lettre minuscule «\code{p}»
     précédée ou non d'une ou de plusieurs lettres (ou symboles, ce n'est
     pas spécifié), suivie d'une (et une seule) lettre ou d'une espace,
-    de la lettre «\verb=t=» et, enfin, de zéro ou de plusieurs
+    de la lettre «\code{t}» et, enfin, de zéro ou de plusieurs
     lettres. Il y a assurément plusieurs réponses valides. En voici
-    une: \verb=/.*p[a-z ]t.*/=.
+    une: \regex{.*p[a-z~]t.*}\,.
   \end{sol}
 \end{exercice}
 
 \begin{exercice}
-  Composer une expression régulière qui permet de vérifier la validité
-  d'un code postal canadien dans un formulaire électronique. Ne pas
-  tenir compte des règles précises de composition d'un code postal,
-  mais bien seulement qu'il s'agit d'une suite de six caractères
-  alternant entre une lettre et un chiffre. Les lettres peuvent être
-  fournies en majuscule ou en minuscule et l'espace entre le troisième
-  et le quatrième symbole peut être présent ou non.
+  Composer un motif d'expression régulière qui permet de vérifier la
+  validité d'un code postal canadien dans un formulaire électronique.
+  Ne pas tenir compte des règles précises de composition d'un code
+  postal, mais bien seulement qu'il s'agit d'une suite de six
+  caractères alternant entre une lettre et un chiffre. Les lettres
+  peuvent être fournies en majuscule ou en minuscule et l'espace entre
+  le troisième et le quatrième symbole peut être présente ou non.
   \begin{sol}
-    L'expression \verb=[a-zA-z][0-9][a-zA-z]\s?[0-9][a-zA-z][0-9]=
+    Le motif
+    \begin{center}
+      \regex{[a-zA-z][0-9][a-zA-z][[:blank:]]?[0-9][a-zA-z][0-9]}
+    \end{center}
     convient si l'on ne permet que zéro ou une espace entre les deux
     blocs. S'il n'y a pas de limite au nombre d'espaces, remplacer
-    «\verb=?=» par «\verb=*=».
+    «\code{?}» par «\code{*}».
   \end{sol}
 \end{exercice}
 
 \begin{exercice}
-  Écrire une commande \code{sed} permettant de changer le séparateur
-  décimal dans les temps du fichier \code{100metres.data} pour une
+  Écrire une commande \icode{sed} permettant de changer le séparateur
+  décimal dans les temps du fichier \code{100metres.dat} pour une
   virgule.
   \begin{sol}
     \code{sed} est l'outil idéal pour de tels traitements simples à
     effectuer ligne par ligne.
-    \begin{Schunk}
-\begin{Verbatim}
-$ sed 's/\./,/' 100metres.data
-\end{Verbatim}
-    \end{Schunk}
+<<echo=FALSE>>=
+exec("sed", c(r"('s/\./,/')", "100metres.dat"), eval = FALSE)
+@
     Pour placer le fichier modifié dans, disons,
     \code{100metres-dec.data}, utiliser
-    \begin{Schunk}
-\begin{Verbatim}
-$ sed 's/\./,/' 100metres.data > 100metres-dec.data
-\end{Verbatim}
-    \end{Schunk}
+<<echo=FALSE>>=
+exec("sed", c(r"('s/\./,/')", "100metres.dat > 100metres-dec.data"), eval = FALSE)
+@
   \end{sol}
 \end{exercice}
 
 \begin{exercice}
+  Utiliser les outils étudiés dans ce chapitre pour extraire les
+  informations suivantes du fichier \code{100metres.dat}.
   \begin{enumerate}
-  \item Extraire du fichier \code{100metres.data} les informations des
-    temps réalisés au mois d'août.
-  \item Extraire les informations des temps de moins de 10~secondes.
-  \item Extraire les lignes du fichier satisfaisant les deux
-    conditions précédentes. Vous pouvez avoir recours à l'opérateur de
-    transfert de données de Bash \index{{"|}@\code{\textbar} (Bash)}%
+  \item Les informations des temps réalisés au mois d'aout.
+  \item Les informations des temps de moins de 10~secondes.
+  \item Les informations des temps de moins de 10~secondes réalisés au
+    mois d'aout. Vous pouvez avoir recours au tuyau Unix
+    \index{{"|}@\code{\textbar} (tuyau Unix)}%
     «\code{\textbar}» pour combiner les commandes des parties a) et
     b).
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-    \item C'est un travail pour \code{grep}. La solution la plus
+    \item C'est un travail pour \icode{grep}. La solution la plus
       simple serait:
-      \begin{Schunk}
-\begin{Verbatim}
-$ grep '-08-' 100metres.data
-\end{Verbatim}
-      \end{Schunk}
-      Cependant, \code{grep} n'aime pas cette commande puisque le
-      symbole \verb=-= est utilisé pour passer des options. Dans ce
-      cas, il vaut mieux utiliser une option \verb=-e= pour déclarer
-      explicitement à \code{grep} que ce qui suit est l'expression à
+<<echo=FALSE>>=
+exec("grep", c("'-08-'", "100metres.dat"), eval = FALSE)
+@
+      Cependant, \icode{grep} n'aime pas cette commande puisque le
+      symbole \verb=-= est le préfixe des options. Dans de tels cas,
+      il faut utiliser l'option «\code{-e}» pour déclarer
+      explicitement à \icode{grep} que ce qui suit est le motif à
       rechercher:
-      \begin{Schunk}
-\begin{Verbatim}
-$ grep -e '-08-' 100metres.data
-\end{Verbatim}
-      \end{Schunk}
-      Autrement, simplement ajouter quelque chose à chercher avant le tiret:
-      \begin{Schunk}
-\begin{Verbatim}
-$ grep '.*-08-' 100metres.data
-\end{Verbatim}
-      \end{Schunk}
-    \item Le plus simple, ici, consiste à utiliser \code{awk} puisque
+<<echo=FALSE>>=
+exec("grep", c("-e", "'-08-'", "100metres.dat"), eval = FALSE)
+@
+      Autrement, simplement ajouter quelque chose à chercher avant le
+      tiret:
+<<echo=FALSE>>=
+exec("grep", c("'.*-08-'", "100metres.dat"), eval = FALSE)
+@
+    \item Le plus simple, ici, consiste à utiliser \icode{awk} puisque
       les seconds champs --- les temps --- seront automatiquement
       disponibles.
-      \begin{Schunk}
-\begin{Verbatim}
-$ awk '$2 < 10 { print }' 100metres.data
-\end{Verbatim}
-      \end{Schunk} %$
+<<echo=FALSE>>=
+exec("awk", c("'$2 < 10'", "100metres.dat"), eval = FALSE)
+@
       Malheureusement, cette commande risque de ne pas fonctionner sur
       certains systèmes qui traitent la virgule comme le séparateur
       décimal, notamment les Mac en configuration française. Dans ce
-      cas, essayer plutôt (j'ai supprimé la commande \verb={ print }=
-      ci-dessous puisqu'elle est implicite):
+      cas, essayer plutôt:
       \begin{Schunk}
 \begin{Verbatim}
-$ LC_NUMERIC="en_US.UTF-8" awk '$2 < 10' 100metres.data
-\end{Verbatim}
-      \end{Schunk} %$
-      Une solution avec \code{grep} consisterait à rechercher un
-      «\verb=9.=» après l'espace sur chaque ligne:
-      \begin{Schunk}
-\begin{Verbatim}
-$ grep ' 9\.' 100metres.data
+$ LC_NUMERIC="en_US.UTF-8" awk '$2 < 10' 100metres.dat
 \end{Verbatim}
       \end{Schunk}
+      Une solution avec \icode{grep} consisterait à rechercher
+      «\code{9.}» après l'espace sur chaque ligne:
+<<echo=FALSE>>=
+exec("grep", c(r"(' 9\.')", "100metres.dat"), eval = FALSE)
+@
     \item Nous pouvons combiner les deux commandes ainsi:
-      \begin{Schunk}
-\begin{Verbatim}
-$ grep -e '-08-' 100metres.data | awk '$2 < 10'
-\end{Verbatim}
-      \end{Schunk} %$
+<<echo=FALSE>>=
+exec("grep", c("-e", "'-08-'", "100metres.dat | awk '$2 < 10'"), eval = FALSE,
+     env = "LC_NUMERIC=en_US.UTF-8")
+@
       ou
-      \begin{Schunk}
-\begin{Verbatim}
-$ grep -e '-08-' 100metres.data | grep ' 9\.'
-\end{Verbatim}
-      \end{Schunk}
+<<echo=FALSE>>=
+exec("grep", c("-e", "'-08-'", r"(100metres.dat | grep ' 9\.')"), eval = FALSE)
+@
+      C'est aussi possible de tout faire en un seul appel à \icode{awk}:
+<<echo=FALSE>>=
+exec("awk", c("'/-08-/ && $2 < 10'", "100metres.dat"), eval = FALSE,
+     env = "LC_NUMERIC=en_US.UTF-8")
+@
     \end{enumerate}
   \end{sol}
 \end{exercice}
@@ -782,18 +2972,18 @@ $ grep -e '-08-' 100metres.data | grep ' 9\.'
 \begin{exercice}
   Pour tous les appels à une fonction \code{f} comportant deux
   arguments dans le fichier \code{environnement.R} livré avec le
-  présent document, changer le nom de la fonction pour \code{fun} et
+  présent ouvrage, changer le nom de la fonction pour \code{fun} et
   inverser l'ordre des deux arguments.
   \begin{sol}
-    Ce traitement s'effectue bien avec \code{sed}:
+    Ce traitement s'effectue bien avec \icode{sed}:
     \begin{Schunk}
 \begin{Verbatim}
 $ sed -E 's/( |^)f\((.*), (.*)\)/fun(\3, \2)/' \
-  environnement.R
+environnement.R
 \end{Verbatim}
     \end{Schunk}
-    Le premier groupe \verb=( |^)= capture une espace avant \code{f}
-    ou le début de la ligne.
+    Le premier groupe «\code{(~|\string^)}» sert à capturer une espace
+    avant \code{f} ou le début de la ligne.
   \end{sol}
 \end{exercice}
 
@@ -812,8 +3002,8 @@ $ sed -E 's/( |^)f\((.*), (.*)\)/fun(\3, \2)/' \
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-    \item On utilise la fonction \icode{grep}. L'expression régulière
-      est très simple dans le cas présent. Avec l'argument
+    \item Utilisons la fonction \icode[R]{grep}. Le motif de l'expression
+      régulière est très simple dans ce cas. Avec l'argument
       \code{value} à \code{FALSE} (la valeur par défaut), la fonction
       retourne les positions dans le vecteur des chaines de caractères
       qui correspondent à l'expression régulière. Comme le vecteur de
@@ -821,7 +3011,7 @@ $ sed -E 's/( |^)f\((.*), (.*)\)/fun(\3, \2)/' \
 <<echo=TRUE,eval=FALSE>>=
 grep("ss", state.name)
 @
-    \item C'est toujours un travail pour \icode{grep}, mais
+    \item C'est toujours un travail pour \icode[R]{grep}, mais
       l'expression régulière est cette fois un peu plus complexe. Deux
       solutions sont proposées ci-dessous. Il faut utiliser l'argument
       \code{value = TRUE} pour obtenir les noms des États, et non
@@ -830,17 +3020,30 @@ grep("ss", state.name)
 grep("(.*s){3,}", state.name, value = TRUE)
 grep(".*s.*s.*s", state.name, value = TRUE)
 @
-    \item Nous devons extraire les États avec \icode{grep}, puis
+    \item Nous devons extraire les États avec \icode[R]{grep}, puis
       utiliser \icode{sub} pour remplacer les caractères après le
       quatrième par un point. Ceci requiert de sauvegarder les
       caractères jusqu'aux deux «s» successifs pour les réutiliser
       dans la chaine de remplacement.
-<<echo=TRUE,eval=FALSE>>=
-sub("(^.{0,2}ss).*", "\\1.",
+<<echo=TRUE, eval=FALSE>>=
+sub("(^.{0,2}ss).*", r"(\1.)",
     grep("(^.{0,2}ss)", state.name, value = TRUE))
 @
     \end{enumerate}
   \end{sol}
+\end{exercice}
+
+\begin{exercice}[nosol]
+  Les commandes R suivantes créent une base de données \code{data.csv}
+  d'un million d'enregistrements et 20~champs.
+<<echo=TRUE, eval=FALSE>>=
+x <- sample(1:100, 20 * 1e6, replace = TRUE)
+write.csv(matrix(x, ncol = 20), file = "data.csv")
+@
+  Produire une nouvelle base de données composée des deux premières
+  colonnes et d'une colonne contenant la somme des deux autres,
+  d'abord avec un tableur, puis avec \icode{awk}. (Vous aurez reconnu
+  le contexte de l'exemple au début de la \autoref{sec:texte:awk}.)
 \end{exercice}
 
 \Closesolutionfile{solutions}

@@ -1,4 +1,4 @@
-%%% Copyright (C) 2019 Vincent Goulet
+%%% Copyright (C) 2020 Vincent Goulet
 %%%
 %%% Ce fichier fait partie du projet
 %%% «Programmer avec R»
@@ -14,22 +14,14 @@
 
 \def\scriptfilename{\currfilebase.R}
 \SweaveOpts{echo=FALSE}
+\SweaveInput{share/license-by-sa.nw}
 
 <<echo=FALSE, results=hide>>=
 source(".Sweaveprofile")   # configuration
 source("Stangle.R")        # lancement de Stangle
 @
 <<script>>=
-## Copyright (C) 2019 Vincent Goulet
-##
-## Ce fichier fait partie du projet
-## «Programmer avec R»
-## https://gitlab.com/vigou3/programmer-avec-r
-##
-## Cette création est mise à disposition sous licence
-## Attribution-Partage dans les mêmes conditions 4.0
-## International de Creative Commons.
-## https://creativecommons.org/licenses/by-sa/4.0/
+<<license-by-sa>>
 @
 
 \begin{objectifs}
@@ -410,7 +402,7 @@ d'autres. Voici quelques bons choix.
   d'inspiration à RStudio à maints égards, notamment pour la
   disposition du fichier de script et de la ligne de commande R dans
   une seule fenêtre. La \autoref{fig:presentation:emacs} présente une
-  fenêtre de GNU Emacs en mode d'édition de code R.
+  fenêtre de GNU~Emacs en mode d'édition de code R.
 
   Emblème du logiciel libre, Emacs est disponible gratuitement et est
   identique sur toutes les plateformes supportées par R, dont
@@ -430,7 +422,7 @@ d'autres. Voici quelques bons choix.
     est configurable, extensible et programmable.
   \end{quote}
   Emacs satisfait les trois conditions ci-dessus. Cependant, la
-  puissance de l'éditeur a un coût: Emacs est un logiciel difficile à
+  puissance de l'éditeur a un cout: Emacs est un logiciel difficile à
   apprivoiser, surtout pour les personnes moins à l'aise avec
   l'informatique. Si vous en êtes à votre première expérience avec un
   éditeur de texte, optez pour RStudio.
@@ -438,8 +430,8 @@ d'autres. Voici quelques bons choix.
   \begin{figure}[t]
     \centering
     \includegraphics[width=0.9\textwidth]{images/emacs-screenshot}
-    \caption[Fenêtre de GNU Emacs sous macOS en mode d'édition de code
-    R]{Fenêtre de GNU Emacs sous macOS en mode d'édition de code R.
+    \caption[Fenêtre de GNU~Emacs sous macOS en mode d'édition de code
+    R]{Fenêtre de GNU~Emacs sous macOS en mode d'édition de code R.
       Dans la partie du haut, on retrouve le fichier de script de la
       \autoref{fig:presentation:script} et dans la partie du bas, la
       ligne de commande R.}
@@ -520,7 +512,7 @@ gamma(5)                   # fonction gamma
 ## Taper le nom d'un objet affiche son contenu. Pour une
 ## fonction, c'est son code source qui est affiché.
 pi                         # constante numérique intégrée
-letters                    # chaîne de caractères intégrée
+letters                    # chaine de caractères intégrée
 LETTERS                    # version en majuscules
 rnorm                      # fonction
 

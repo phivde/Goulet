@@ -1,6 +1,6 @@
 ### -*-Makefile-*- pour préparer "Programmer avec R"
 ##
-## Copyright (C) 2019 Vincent Goulet
+## Copyright (C) 2020 Vincent Goulet
 ##
 ## 'make pdf' crée les fichiers .tex à partir des fichiers .Rnw avec
 ## Sweave et compile le document maitre avec XeLaTeX.
@@ -15,10 +15,13 @@
 ##
 ## 'make Rout' crée les fichiers .Rout avec R CMD BATCH.
 ##
+## 'make update-copyright' met à jour l'année de copyright dans toutes
+## les sources du document
+##
 ## 'make zip' crée l'archive de la distribution.
 ##
-## 'make release' crée une nouvelle version dans GitLab, téléverse le
-## fichier .zip et modifie les liens de la page web.
+## 'make release' téléverse la distribution dans GitLab, crée une
+## nouvelle version et modifie les liens de la page web.
 ##
 ## 'make check-url' vérifie la validité de toutes les url présentes
 ## dans les sources du document.
@@ -31,8 +34,6 @@
 ## Ce fichier fait partie du projet "Programmer avec R"
 ## https://gitlab.com/vigou3/programmer-avec-r
 
-## Bash requis pour 'process substitution'
-SHELL := /bin/bash
 
 ## Principaux fichiers
 MASTER = programmer-avec-r.pdf
@@ -44,7 +45,7 @@ LICENSE = LICENSE
 
 ## Autres fichiers à inclure dans l'archive
 CONTRIBUTING = CONTRIBUTING.md
-OTHER = 100metres.data gabarit-documentation-fonction.R
+OTHER = gabarit-documentation-fonction.R chanson.txt carburant.dat 100metres.dat
 
 ## Le document maitre dépend de tous les fichiers .Rnw et de tous les
 ## fichiers .tex autres que lui-même qui n'ont pas de version .Rnw.
@@ -53,10 +54,10 @@ TEXFILES = $(addsuffix .tex, \
                        $(filter-out $(basename ${RNWFILES} ${MASTER} $(wildcard solutions-*.tex)),\
                                     $(basename $(wildcard *.tex))))
 
-## Les fichiers de script sont tous extraits des fichiers .Rnw.
-## Certains fichiers .Rnw ne contiennent pas de fichier de script.
-SCRIPTS = $(filter-out texte.R, \
-	               ${RNWFILES:.Rnw=.R})
+## Les fichiers de script sont tous extraits des fichiers .Rnw. Un
+## chapitre est livré avec deux fichiers d'accompagnement pour les
+## exemples. Un fichier de script a une extension .sh.
+SCRIPTS = ${RNWFILES:.Rnw=.R} sqrt.R tests-sqrt.R texte.sh 
 
 ## Informations de publication extraites du fichier maitre
 TITLE = $(shell grep "\\\\title" ${MASTER:.pdf=.tex} \
@@ -73,7 +74,7 @@ VERSION = ${YEAR}.${MONTH}
 OMITAUTHORS = Vincent Goulet|Inconnu|unknown
 
 ## Outils de travail
-SWEAVE = R CMD Sweave --encoding="utf-8"
+SWEAVE = _R_CHECK_LENGTH_1_CONDITION_=false R CMD Sweave --encoding="utf-8"
 TEXI2DVI = LATEX=xelatex TEXINDY=makeindex texi2dvi -b
 RBATCH = R CMD BATCH --no-timing
 CP = cp -p
@@ -109,15 +110,14 @@ FORCE: ;
 	${RBATCH} $<.tmp $@
 	${RM} $<.tmp
 
-${MASTER}: ${MASTER:.pdf=.tex} ${RNWFILES:.Rnw=.tex} ${TEXFILES} ${SCRIPTS} \
+${MASTER}: ${MASTER:.pdf=.tex} ${RNWFILES:.Rnw=.tex} ${TEXFILES} \
 	   $(wildcard data/*) $(wildcard images/*)
 	${TEXI2DVI} ${MASTER:.pdf=.tex}
 
 ${COLLABORATEURS}: FORCE
 	git log --pretty="%an%n" | sort | uniq | \
-	  grep -v -E "${OMITAUTHORS}" | \
 	  awk 'BEGIN { print "Les personnes dont le nom [1] apparait ci-dessous ont contribué à\nl'\''amélioration de «${TITLE}»." } \
-	       { print $$0 } \
+	       $$0 !~ "${OMITAUTHORS}" \
 	       END { print "\n[1] Noms tels qu'\''ils figurent dans le journal du dépôt Git\n    ${REPOSURL}" }' > ${COLLABORATEURS}
 
 .PHONY: pdf
@@ -136,7 +136,16 @@ Rout: ${SCRIPTS:.R=.Rout}
 contrib: ${COLLABORATEURS}
 
 .PHONY: release
-release: zip check-status upload create-release publish
+release: update-copyright zip check-status upload create-release publish
+
+.PHONY: update-copyright
+update-copyright: ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES}
+	for f in $?; \
+	    do sed -E '/^(#|%)* +Copyright \(C\)/s/20[0-9]{2}/${YEAR}/' \
+	           $$f > $$f.tmp && \
+	           ${CP} $$f.tmp $$f && \
+	           ${RM} $$f.tmp; \
+	done
 
 .PHONY: zip
 zip: ${MASTER} ${README} ${NEWS} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS} ${CONTRIBUTING}
@@ -220,7 +229,7 @@ publish:
 	@echo ----- Done publishing
 
 .PHONY: check-url
-check-url: ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES} ${SCRIPTS}
+check-url: ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES}
 	@echo ----- Checking urls in sources...
 	$(eval url=$(shell grep -E -o -h 'https?:\/\/[^./]+(?:\.[^./]+)+(?:\/[^ ]*)?' $? \
 		   | cut -d \} -f 1 \

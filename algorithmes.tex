@@ -1,4 +1,4 @@
-%%% Copyright (C) 2019 Vincent Goulet
+%%% Copyright (C) 2020 Vincent Goulet
 %%%
 %%% Ce fichier fait partie du projet
 %%% «Programmer avec R»
@@ -92,9 +92,10 @@ problème et non \emph{comment le faire}.
 Illustrons le concept d'algorithme par l'un de ses plus illustres
 représentants: l'\Index{Euclide@Euclide (algorithme)}algorithme
 d'Euclide (c.~300 av. J.-C.), une procédure de calcul du plus grand
-commun diviseur (PGCD) de deux nombres entiers $m$ et $n$.
-L'algorithme repose sur l'idée que le PGCD de $m$ et $n$ est aussi le
-PGCD de $n$ et du reste de la division de $m$ par $n$.
+commun diviseur (PGCD) de deux nombres entiers $m$ et $n$. Selon
+\citet{Knuth:ACP:vol2:1997}, il s'agirait de l'un des plus anciens
+algorithmes. Il repose sur l'idée que le PGCD de $m$ et $n$ est aussi
+le PGCD de $n$ et du reste de la division de $m$ par $n$.
 
 \begin{algorithme}[Algorithme d'Euclide]
   \label{algo:algorithmes:euclide}
@@ -205,7 +206,7 @@ la lecture de données, l'indiçage d'un vecteur, etc.
 En revanche, on s'attend généralement d'un algorithme, qui est destiné
 à un ordinateur, qu'il soit plus précis qu'une recette. En effet, un
 ordinateur éprouverait beaucoup de difficulté avec une instruction
-comme «saler et poivrer au goût»!
+comme «saler et poivrer au gout»!
 
 \tipbox{C'est une erreur commune dans la rédaction d'un algorithme de
   fournir des détails de mise en œuvre superflus, de surcroit dans un
@@ -632,7 +633,7 @@ Or, puisque
   n \cdot (n - 1)!,
 \end{equation*}
 la fonction est récursive et une manière toute naturelle de calculer
-la factorielle d'un nombre utilise la récursion. Exprimons ceci sous
+la factorielle d'un nombre utilise la récursion. Exprimons cela  sous
 forme d'algorithme. Le pseudocode sied un peu mieux aux algorithmes
 récursifs.
 
@@ -1031,8 +1032,8 @@ Si \meta{condition}
 \begin{exercice}
   Soit $p$ et $q$ des expressions logiques. Compléter les tables de
   vérité ci-dessous.
-  \begin{enumerate}
-    \begin{multicols}{2}
+  \begin{multicols}{2}
+    \begin{enumerate}
     \item
       \begin{tabular}{ccc}
         \toprule
@@ -1056,8 +1057,8 @@ Si \meta{condition}
         F & F \\
         \bottomrule
       \end{tabular}
-    \end{multicols}
-  \end{enumerate}
+    \end{enumerate}
+  \end{multicols}
   \begin{sol}
     Nous pouvons compléter les tables de vérité directement à partir
     des définitions des opérateurs ET et OU fournies à la
@@ -1273,7 +1274,7 @@ Fin Fib
       ailleurs. En fait, cet algorithme est souvent utilisé comme cas
       pathologique dans les ouvrages d'algorithmique.
     \item L'algorithme ci-dessous permet de calculer les nombres de
-      Fibonacci de manière récursive.
+      Fibonacci de manière itérative.
       \begin{algorithme}[Suite de Fibonacci]
         \label{algo:algorithmes:Fibonacci-iter}
         Calculer la valeur $f(n)$ de la suite de

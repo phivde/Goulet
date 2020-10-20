@@ -1,4 +1,4 @@
-%%% Copyright (C) 2019 Vincent Goulet
+%%% Copyright (C) 2020 Vincent Goulet
 %%%
 %%% Ce fichier fait partie du projet
 %%% «Programmer avec R»
@@ -14,22 +14,14 @@
 
 \def\scriptfilename{\currfilebase.R}
 \SweaveOpts{echo=FALSE}
+\SweaveInput{share/license-by-sa.nw}
 
 <<echo=FALSE, results=hide>>=
 source(".Sweaveprofile")   # configuration
 source("Stangle.R")        # lancement de Stangle
 @
 <<script>>=
-## Copyright (C) 2019 Vincent Goulet
-##
-## Ce fichier fait partie du projet
-## «Programmer avec R»
-## https://gitlab.com/vigou3/programmer-avec-r
-##
-## Cette création est mise à disposition sous licence
-## Attribution-Partage dans les mêmes conditions 4.0
-## International de Creative Commons.
-## https://creativecommons.org/licenses/by-sa/4.0/
+<<license-by-sa>>
 @
 
 \begin{objectifs}
@@ -134,7 +126,7 @@ Ils sont accompagnés d'une description succincte.
     \midrule
     \icode{\$} & extraction d'une liste \\ %$
     \icode{[}\, \icode{[[} & indiçage \\
-    \verb|^|\index{\string^@\verb=^=} & puissance \\
+    \code{\string^}\index{\string^@\code{\string^}} & puissance \\
     \icode{-} & changement de signe \\
     {\NoAutoSpacing\verb|:|}\index{:@\NoAutoSpacing\verb=:=} & génération de suites \\
     \icode{\%*\%}\, \icode{\%\%}\, \icode{\%/\%} & produit matriciel,
@@ -143,24 +135,24 @@ Ils sont accompagnés d'une description succincte.
     \icode{*}\, \icode{/} & multiplication, division \\
     \icode{+}\, \icode{-} & addition, soustraction \\
     \icode{<}\, \icode{<=}\, \icode{==}\, \icode{>=}\,
-    \icode{>}\, \verb|!=|\index{"!=@\code{"!=}} & plus petit,
+    \icode{>}\, \code{!=}\index{"!=@\code{"!=}} & plus petit,
                                                   plus petit ou égal,
                                                   égal,
                                                   plus grand ou égal,
                                                   plus grand,
                                                   différent de \\
-    \verb=!=\index{"!@\code{"!}}  & négation logique \\
+    \code{!}\index{"!@\code{"!}}  & négation logique \\
     \icode{\&}\, \icode{\&\&} & «et» logique \\
     \code{\textbar}\index{{"|}@\code{\textbar}}\,
     \code{\textbar\textbar}\index{{"|"|}@\code{\textbar\textbar}} & «ou» logique \\
-    \icode{->}\, \verb|->>|\index{->>@\verb=->>=} & affectation \\
-    \icode{<-}\, \verb|<<-|\index{<<-@\verb=<<-=} & affectation \\
+    \icode{->}\, \code{->>}\index{->>@\code{->>}} & affectation \\
+    \icode{<-}\, \code{<<-}\index{<<-@\code{<<-}} & affectation \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\tipbox{Les opérateurs de puissance \code{\string^} et d'affectation
-  \icode{<-} sont évalués de droite à gauche; tous les autres le sont
+\tipbox{Les opérateurs de puissance «\code{\string^}» et d'affectation
+  «\icode{<-}» sont évalués de droite à gauche; tous les autres le sont
   de gauche à droite. Ainsi, \code{2\string^2\string^3} est \code{2\string^8}, et non
   \code{4\string^3}, alors que \code{1 - 1 - 1} vaut \code{-1}, et non
   \code{1}.}
@@ -444,9 +436,9 @@ mais le résultat est stocké dans un \emph{objet} (ou \emph{variable})
 dans %
 l'\index{espace de travail}espace de travail %
 et rien n'est affiché à l'écran. Tel que mentionné précédemment,
-l'opérateur d'affectation est \icode{<-}, c'est-à-dire les deux
-caractères \verb|<| et \verb|-| placés obligatoirement l'un à la suite
-de l'autre, et l'opération d'affectation est évaluée de droite à
+l'opérateur d'affectation est «\icode{<-}», c'est-à-dire les deux
+caractères «\code{<}» et «\code{-}» placés obligatoirement l'un à la
+suite de l'autre, et l'opération d'affectation est évaluée de droite à
 gauche. Ainsi, toute expression est évaluée avant que son résultat ne
 soit placé dans l'objet.
 <<echo=TRUE>>=
@@ -461,15 +453,15 @@ circ
 Pour affecter le résultat d'un calcul dans un objet et simultanément
 afficher ce résultat, il suffit de placer l'affectation entre
 parenthèses pour ainsi créer une nouvelle expression.\footnote{%
-  En fait, l'opérateur d'affectation \code{<-} retourne un résultat
+  En fait, l'opérateur d'affectation «\code{<-}» retourne un résultat
   --- la valeur affectée ---, mais de manière \emph{invisible}. Une
   affectation placée entre parenthèses devient un appel à l'opérateur
-  \code{"("} qui, lui, ne fait que retourner son argument.}
+  «\code{(}» qui, lui, ne fait que retourner son argument.}
 <<echo=TRUE>>=
 (circ <- 2 * pi * 10)
 @
 
-L'opérateur d'affectation inversé \icode{->} existe aussi, mais il
+L'opérateur d'affectation inversé «\icode{->}» existe aussi, mais il
 est rarement utilisé.
 
 \cautionbox{Évitez d'utiliser l'opérateur \,\icode{=}\, pour
@@ -521,7 +513,7 @@ a <- 5; a + 2
 @
 
 Pour regrouper plusieurs commandes et en former une seule expression,
-il faut entourer les commandes d'accolades \Icode{\{~\}}. Le résultat
+il faut entourer les commandes d'accolades «\code{\{~\}}». Le résultat
 du regroupement est la valeur de la \emph{dernière} commande. Par
 conséquent, si le regroupement se termine par une affectation, aucune
 valeur n'est retournée ni affichée à l'écran.
@@ -571,7 +563,7 @@ gamma(5)                   # fonction gamma
 ## Entrer le nom d'un objet affiche son contenu. Pour une
 ## fonction, c'est son code source qui est affiché.
 pi                         # constante numérique intégrée
-letters                    # chaîne de caractères intégrée
+letters                    # chaine de caractères intégrée
 LETTERS                    # version en majuscules
 matrix                     # fonction interne
 
@@ -622,8 +614,8 @@ définition du vecteur est encore plus large. En fait, \emph{tout} est
 un vecteur dans R et il s'agit simplement d'une collection de données
 contigües (numériques ou non) auxquelles il est possible d'accéder
 directement par une opération d'\index{indiçage}indiçage. La
-\autoref{fig:bases:vecteur} représente schématiquement un vecteur
-simple dans R.
+\autoref{fig:bases:vecteur} représente schématiquement un
+\index{vecteur!simple}vecteur simple dans R.
 
 \begin{figure}
   \centering
@@ -653,9 +645,11 @@ simple dans R.
   \label{fig:bases:vecteur}
 \end{figure}
 
-Nous allons nous restreindre pour le moment aux vecteurs simples
-(atomiques) dans lesquels tous les éléments sont du même type ou, plus
-précisément, du même \index{mode}\emph{mode}\footnote{%
+Nous allons nous restreindre pour le moment aux
+\index{vecteur!simple}vecteurs simples
+(\index{vecteur!atomique}atomiques) dans lesquels tous les éléments
+sont du même type ou, plus précisément, du même
+\index{mode}\emph{mode}\footnote{%
   Nous reviendrons sur le concept de mode à la
   \autoref{sec:donnees:objets:mode}.}. %
 Les vecteurs plus généraux feront leur entrée au
@@ -665,7 +659,8 @@ Les vecteurs plus généraux feront leur entrée au
 \label{sec:bases:vecteurs:creation}
 
 La fonction de base pour créer un vecteur est la fonction de
-concaténation \Icode{c}.
+\index{vecteur!concaténation}\index{concaténation}concaténation
+\Icode{c}.
 <<echo=TRUE>>=
 (x <- c(2, 5.1, 42))
 @
@@ -682,11 +677,14 @@ character(10)
 @
 
 Il est possible --- et souvent souhaitable --- de nommer les éléments
-d'un vecteur; on dit qu'on leur attribue une \emph{étiquette}. Il y a
-deux grandes façons de procéder: en spécificant les noms dès la
-création du vecteur, ou à posteriori en ajoutant l'attribut au vecteur
-à l'aide de la fonction \Icode{names}. Celle-ci permet aussi
-d'extraire les étiquettes du vecteur.
+d'un vecteur; on dit qu'on leur attribue une
+\Index{etiquette@étiquette}\emph{étiquette}. Le résultat est un
+\Index{vecteur!étiqueté}\emph{vecteur étiqueté}, ou
+\Index{vecteur!nommé}\emph{vecteur nommé}. Il y a deux grandes façons
+de procéder: en spécificant les noms dès la création du vecteur, ou à
+posteriori en ajoutant l'attribut au vecteur à l'aide de la fonction
+\Icode{names}. Celle-ci permet aussi d'extraire les
+\index{etiquette@étiquette}étiquettes du vecteur.
 <<echo=TRUE>>=
 (x <- c(a = 1, b = 2, c = 5))
 names(x)
@@ -697,10 +695,11 @@ names(x) <- c("a", "b", "c")
 x
 @
 
-Si vous tentez de créer un vecteur simple avec des données de modes
-différents, R effectuera une \index{conversion forcée}conversion
-forcée (\emph{coercion}) vers un mode unique. Celui-ci est choisi pour
-minimiser la perte d'information sur les objets originaux.
+Si vous tentez de créer un \index{vecteur!simple}vecteur simple avec
+des données de modes différents, R effectuera une %
+\index{conversion forcée}conversion forcée (\emph{coercion}) vers un
+mode unique. Celui-ci est choisi pour minimiser la perte d'information
+sur les objets originaux.
 <<echo=TRUE>>=
 c(2, TRUE, FALSE)
 c(2, FALSE, "a")
@@ -747,9 +746,9 @@ c(TRUE, TRUE, FALSE, FALSE) & c(TRUE, FALSE, TRUE, FALSE)
 
 La seconde règle de base se rapporte aux opérations entre des vecteurs
 de longueurs différentes. Dans de tels cas, les vecteurs les plus
-courts sont \emph{recyclés} autant de fois que nécessaire pour
-correspondre au plus long vecteur. Cette règle est particulièrement
-apparente avec les vecteurs de longueur $1$.
+courts sont \Index{recyclage}\emph{recyclés} autant de fois que
+nécessaire pour correspondre au plus long vecteur. Cette règle est
+particulièrement apparente avec les vecteurs de longueur $1$.
 <<echo=TRUE>>=
 1:10 + 2
 @
@@ -760,10 +759,10 @@ autres vecteurs, ces derniers sont recyclés un nombre entier de fois.
 1:10 + 1:5 + c(2, 4)
 @
 
-Autrement, le plus court vecteur est recyclé un nombre fractionnaire
-de fois, mais comme ce résultat est rarement celui souhaité et qu'il
-provient généralement d'une erreur de programmation, un avertissement
-est affiché.
+Autrement, le plus court vecteur est \index{recyclage}recyclé un
+nombre fractionnaire de fois, mais comme ce résultat est rarement
+celui souhaité et qu'il provient généralement d'une erreur de
+programmation, un avertissement est affiché.
 \begin{Schunk}
 \begin{Sinput}
 > 1:10 + c(2, 4, 6)
@@ -777,19 +776,19 @@ taille d'un objet plus court
 \end{Soutput}
 \end{Schunk}
 
-\cautionbox{La règle de recyclage des vecteurs fait en sorte qu'il y a
-  très peu d'erreurs de longueur dans R. Qu'une expression soit
-  valide ne signifie donc pas qu'elle effectue le bon calcul!}
+\cautionbox{La règle de \index{recyclage}recyclage des vecteurs fait
+  en sorte qu'il y a très peu d'erreurs de longueur dans R. Qu'une
+  expression soit valide ne signifie donc pas qu'elle effectue le bon
+  calcul!}
 
 Il tombe sous le sens que les opérateurs arithmétiques sont conçus
-pour des arguments numériques et les
-opérateurs logiques, pour des arguments booléens. Si un
-argument n'est pas du bon mode, R effectuera la \index{conversion
-  forcée}conversion forcée vers le mode approprié. En particulier, les
-valeurs booléennes \code{TRUE} et \code{FALSE} se verront converties
-en $1$ et $0$, respectivement, dans les opérations arithmétiques. À
-l'inverse, dans les opérations logiques, $0$ est converti en
-\code{FALSE} et \emph{tout} autre nombre est converti en
+pour des arguments numériques et les opérateurs logiques, pour des
+arguments booléens. Si un argument n'est pas du bon mode, R effectuera
+la \index{conversion forcée}conversion forcée vers le mode approprié.
+En particulier, les valeurs booléennes \code{TRUE} et \code{FALSE} se
+verront converties en $1$ et $0$, respectivement, dans les opérations
+arithmétiques. À l'inverse, dans les opérations logiques, $0$ est
+converti en \code{FALSE} et \emph{tout} autre nombre est converti en
 \code{TRUE}.
 <<echo=TRUE>>=
 2 + c(TRUE, FALSE)
@@ -803,8 +802,8 @@ L'indiçage\Index{indiçage!vecteur} des vecteurs est une procédure
 beaucoup utilisée dans R, aussi est-il important d'en maitriser toutes
 les subtilités. L'opération sert principalement à deux choses:
 extraire des éléments d'un objet avec la construction
-\verb|x[i]|\indexcode{[}, ou remplacer des éléments avec la
-construction \verb|x[i] <- y|\Indexcode{[<-}.
+\code{x[i]}\indexcode{[}, ou remplacer des éléments avec la
+construction \code{x[i]~<-~y}\Indexcode{[<-}.
 
 Dans un cas comme dans l'autre, il faut d'abord indicer le vecteur. Il
 existe cinq façons de le faire, toujours à l'intérieur de crochets
@@ -834,11 +833,12 @@ x[c(-2, -3)]
 x > 0
 x[x > 0]
 @
-\item \textbf{Extraction par nom} avec un vecteur de chaines de
-  caractères. Les éléments dont l'étiquette correspond à l'une des
-  chaines sont extraits du vecteur. Cette méthode d'indiçage a
-  comme principal avantage de permettre l'extraction d'éléments d'un
-  vecteur indépendamment de leur position dans celui-ci.
+\item \textbf{Extraction par étiquette} avec un vecteur de chaines de
+  caractères. Les éléments dont \index{etiquette@étiquette}l'étiquette
+  correspond à l'une des chaines sont extraits du vecteur. Cette
+  méthode d'indiçage a comme principal avantage de permettre
+  l'extraction d'éléments d'un vecteur indépendamment de leur position
+  dans celui-ci.
 <<echo=TRUE>>=
 x[c("B", "D")]
 @
@@ -856,7 +856,7 @@ x[]
 
 \tipbox{Il n'est pas inutile de savoir que les opérations d'extraction
   et de remplacement sont en fait traduites par l'interpréteur R en
-  des appels à des fonctions nommées \icode{[} et \icode{[<-},
+  des appels à des fonctions nommées «\icode{[}» et «\icode{[<-}»,
   dans l'ordre.}
 
 \gotorbox{La présente section est très importante pour la suite.
@@ -898,7 +898,7 @@ numeric(5)                 # équivalent
 numeric                    # en effet, voici la fonction
 logical(5)                 # initialisé avec FALSE
 complex(5)                 # initialisé avec 0 + 0i
-character(5)               # initialisé avec chaînes vides
+character(5)               # initialisé avec chaines vides
 
 ## Si l'on mélange dans un même vecteur des objets de mode
 ## différents, il y a conversion forcée vers le mode pour
@@ -996,7 +996,7 @@ x[1]                       # extraction par position
 x[-2]                      # suppression par position
 x[x > 5]                   # extraction par critère
 x[0 < x & x < 10]          # autre extraction par critère
-x["c"]                     # extraction par nom
+x["c"]                     # extraction par étiquette
 x[]                        # tous les éléments
 x[numeric(0)]              # différent d'indice vide
 
@@ -1141,12 +1141,12 @@ fonction est la suivante:
 \item \meta{arguments} est la liste des arguments formels de la
   fonction, séparés par des virgules.
 
-  Une fonction peut n'avoir aucun \index{fonction!argument
-    formel}argument formel ou plusieurs. Il n'y a pas de limite
-  pratique au nombre d'arguments formels que peut avoir une fonction.
-  Les arguments peuvent être des symboles, des constructions de la
-  forme \code{symbole = défaut}, ou encore l'argument formel spécial
-  `\icode{...}'.
+  Une fonction peut n'avoir aucun %
+  \index{fonction!argument formel}argument formel ou plusieurs. Il n'y
+  a pas de limite pratique au nombre d'arguments formels que peut
+  avoir une fonction. Les arguments peuvent être des symboles, des
+  constructions de la forme \code{symbole = défaut}, ou encore
+  l'argument formel spécial `\icode{...}'.
 
   Lorsqu'un symbole seul est utilisé comme argument, il indique le nom
   de celui-ci. L'objet de ce nom sera disponible à l'intérieur de la
@@ -1514,10 +1514,10 @@ else
   révèlent utiles dans les clauses \code{if} pour réduire les vecteurs
   booléens à une valeur unique.
 \item \meta{conséquence} est une expression, ou un groupe
-  d'expressions regroupées entre accolades \verb={ }=, qui sont
+  d'expressions regroupées entre accolades «\code{\{~\}}», qui sont
   exécutées lorsque la \meta{condition} est \texttt{TRUE}.
 \item \meta{alternative} est une expression, ou un groupe
-  d'expressions regroupées entre accolades \verb={ }=, qui sont
+  d'expressions regroupées entre accolades «\code{\{~\}}», qui sont
   exécutées lorsque la \meta{condition} est \texttt{FALSE}.
 \end{itemize}
 
@@ -1531,10 +1531,10 @@ imbriquer les structures \code{if ... else ...} les unes dans les
 autres.
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
-if (\meta{condition\textsubscript{\upshape{}1}})
-    \meta{conséquence\textsubscript{\upshape{}1}}
-else if (\meta{condition\textsubscript{\upshape{}2}})
-    \meta{conséquence\textsubscript{\upshape{}2}}
+if (\meta{condition 1})
+    \meta{conséquence 1}
+else if (\meta{condition 2})
+    \meta{conséquence 2}
 else
     \meta{alternative}
 \end{Verbatim}
@@ -1544,14 +1544,14 @@ Les constructions de type «Selon que» se conçoivent en R avec la
 fonction \Icode{switch}. Sa syntaxe est la suivante:
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
-switch(\meta{expression}, \meta{cas\textsubscript{\upshape{}1}} = \meta{action\textsubscript{\upshape{}1}},
-                     \meta{cas\textsubscript{\upshape{}2}} = \meta{action\textsubscript{\upshape{}2}}, ...)
+switch(\meta{expression}, \meta{cas 1} = \meta{action 1},
+                     \meta{cas 2} = \meta{action 2}, ...)
 \end{Verbatim}
 \end{Schunk}
 La fonction évalue d'abord l'\meta{expression}. Si le résultat est une
-valeur numérique $k$, alors l'\meta{action$_k$} est exécutée. Si le
+valeur numérique $k$, alors l'\meta{action $k$} est exécutée. Si le
 résultat de l'\meta{expression} est l'une des chaines de caractères
-\meta{cas$_1$}, \meta{cas$_2$}, \dots, alors c'est l'action correspondante
+\meta{cas 1}, \meta{cas 2}, \dots, alors c'est l'action correspondante
 qui est exécutée.
 <<echo=TRUE>>=
 switch(2, 2 + 3, mean(1:10), 5:1)
@@ -1701,6 +1701,70 @@ abs(-2)
 ## en conflit avec la fonction interne de R du même nom.
 rm("abs")
 
+## L'exemple suivant vise à vous faire réaliser que les
+## valeurs booléennes constituent implicitement des résultats
+## de tests logiques.
+##
+## Nous voulons écrire une fonction 'is.odd' qui détermine si
+## les éléments d'un vecteur sont impairs ou non. Un nombre
+## est impair si le reste de sa division par 2 (le modulo) est
+## égal à 1.
+##
+## Voici une première mise en oeuvre naïve.
+is.odd <- function(x)
+{
+    if (x %% 2 == 1)
+        TRUE
+    else
+        FALSE
+}
+
+## Le résultat de 'x %% 2' est nécessairement 0 ou 1. Ces
+## valeurs étant automatiquement converties en FALSE et TRUE
+## dans une opération logique, nous pouvons les utiliser
+## directement à l'intérieur de la condition d'une clause 'if'
+## sans tester leur égalité avec 0 ou 1.
+##
+## De plus, comme le résultat d'une condition est
+## nécessairement TRUE ou FALSE, la construction ci-dessus
+## revient à dire: «si la condition est vraie, retourner VRAI,
+## sinon retourner FAUX». N'est-ce pas redondant?
+##
+## Enfin, la mise en oeuvre ci-dessus n'est pas vectorielle
+## puisqu'il ne peut y avoir qu'un seul test à l'intérieur de
+## la clause 'if'.
+##-!- is.odd(c(0, 4, 3, 6, 8, 9, 1))
+
+## Avant d'étudier une meilleure mise en oeuvre, voyons
+## comment ça aurait pu être pire en testant explicitement
+## 'TRUE == TRUE'.
+is.odd <- function(x)
+{
+    if ((x %% 2 == 1) == TRUE)
+        TRUE
+    else
+        FALSE
+}
+
+## Ou pire encore en utilisant une logique tordue ou l'on
+## retourne FAUX lorsque la condition est vraie et VRAI
+## lorsqu'elle est fausse! (Je n'invente rien, c'est un cas
+## rencontré.)
+is.odd <- function(x)
+{
+    if ((x %% 2 == 0) == TRUE)
+        FALSE
+    else
+        TRUE
+}
+
+## En fait, la solution simple, élégante et vectorielle
+## retourne simplement les résultats de l'opération modulo
+## convertis en valeurs booléennes, chacune constituant
+## implicitement le résultat d'un test logique.
+is.odd <- function(x) as.logical(x %% 2)
+is.odd(c(0, 4, 3, 6, 8, 9, 1))
+
 ## Détail intéressant sur la structure 'if ... else ...': il
 ## est possible de l'utiliser comme une fonction normale,
 ## c'est-à-dire d'affecter le résultat de la structure à une
@@ -1804,7 +1868,7 @@ Pour chaque fonction présentée dans cette section, je fournis un ou
 deux exemples d'utilisation. Ces exemples sont loin de couvrir toutes
 les utilisations possibles d'une fonction. La
 \autoref{sec:bases:exemples} fournit des exemples additionnels.
-Consultez les rubriques d'aide des fonctions pour connaître toutes
+Consultez les rubriques d'aide des fonctions pour connaitre toutes
 leurs options.
 
 \tipbox{Vraiment, consultez les rubriques d'aide.}
@@ -1813,38 +1877,38 @@ leurs options.
 \label{sec:bases:internes:math}
 
 \begin{ttscript}{factorial}
-\item[\Icode{exp}] fonction \index{exponentielle}exponentielle $e^x$
+\item[\Icode{exp}] fonction \index{exponentielle}exponentielle $e^x$.
 <<echo=TRUE>>=
 exp(1)
 @
 \item[\Icode{log}] \index{logarithme}logarithme naturel ou dans une
-  base quelconque
+  base quelconque.
 <<echo=TRUE>>=
 log(exp(1))
 log(9, base = 3)
 @
-\item[\Icode{sqrt}] \index{racine@racine carrée}racine carrée
+\item[\Icode{sqrt}] \index{racine@racine carrée}racine carrée.
 <<echo=TRUE>>=
 sqrt(9)
 @
-\item[\Icode{abs}] \index{valeur absolue}valeur absolue
+\item[\Icode{abs}] \index{valeur absolue}valeur absolue.
 <<echo=TRUE>>=
 abs(c(-1, 0, 2))
 @
 \item[\Icode{gamma}] fonction \index{gamma}gamma $\Gamma(x) =
   \int_0^\infty t^{x - 1} e^{-t}\, dt$ (et les fonctions apparentées
-  \icode{lgamma}, \icode{digamma}, \icode{trigamma})
+  \icode{lgamma}, \icode{digamma}, \icode{trigamma}).
 <<echo=TRUE>>=
 gamma(5)
 @
 \item[\Icode{factorial}] \index{factorielle}factorielle $x!$ (et la
-  fonction apparentée \icode{lfactorial})
+  fonction apparentée \icode{lfactorial}).
 <<echo=TRUE>>=
 factorial(4)
 @
 \item[\Icode{cos}] \index{trigonometrie@trigonométrie}cosinus en radians
   (et les autres fonctions trigonométriques: \icode{sin},
-  \icode{tan}, \icode{acos}, etc.)
+  \icode{tan}, \icode{acos}, etc.).
 <<echo=TRUE>>=
 cos(pi/4)
 @
@@ -1854,36 +1918,36 @@ cos(pi/4)
 \label{sec:bases:internes:seq}
 
 \begin{ttscript}{seqmalong}
-\item[\Icode{seq}] suite de nombres générale
+\item[\Icode{seq}] suite de nombres générale.
 <<echo=TRUE>>=
 seq(1, 9, by = 2)
 @
 \item[\Icode{\protect seq\_len}] \index{suite}suite de nombres de la
   longueur donnée en argument à partir de $1$ (plus rapide que
-  \code{seq})
+  \code{seq}).
 <<echo=TRUE>>=
 seq_len(10)
 @
 \item[\Icode{\protect seq\_along}] suite de nombres de la longueur du
-  vecteur en argument à partir de $1$ (plus rapide que \code{seq})
+  vecteur en argument à partir de $1$ (plus rapide que \code{seq}).
 <<echo=TRUE>>=
 seq_along(c(-1, 0, 2))
 @
 \item[\Icode{rep}] \index{repetition@répétition}répétition de
   vecteurs, de chaque élément d'un vecteur ou d'une combinaison des
-  deux
+  deux.
 <<echo=TRUE>>=
 rep(2, 10)
 rep(c(1, 3), each = 4)
 rep(c(1, 3), times = 2, each = 4)
 @
 \item[\Icode{rep.int}] répétition de vecteurs complets uniquement
-  (plus rapide que \code{rep})
+  (plus rapide que \code{rep}).
 <<echo=TRUE>>=
 rep.int(2, 10)
 @
 \item[\Icode{rep\_len}] répétition de vecteurs jusqu'à une certaine
-  longueur (plus rapide que \code{rep})
+  longueur (plus rapide que \code{rep}).
 <<echo=TRUE>>=
 rep_len(1:3, 10)
 @
@@ -1904,12 +1968,12 @@ rep_len(1:3, 10)
 \begin{ttscript}{head}
 \item[\Icode{head}] avec second argument $n > 0$ ($n = 6$ par défaut):
   $n$ premières composantes d'un objet (éléments d'un vecteur, lignes
-  d'une matrice ou d'un \emph{data frame})
+  d'une matrice ou d'un \emph{data frame});
 <<echo=TRUE>>=
 head(1:10, 3)
 @
   avec second argument
-  $n < 0$: objet sans les $|n|$ dernières composantes
+  $n < 0$: objet sans les $|n|$ dernières composantes.
 <<echo=TRUE>>=
 head(1:10, -3)
 @
@@ -1920,7 +1984,7 @@ head(1:10, -3)
 tail(1:10, 3)
 @
   avec second argument $n < 0$: objet sans les $|n|$ premières
-  composantes
+  composantes.
 <<echo=TRUE>>=
 tail(1:10, -3)
 @
@@ -1939,22 +2003,22 @@ x
 
 \begin{ttscript}{ceiling}
 \item[\Icode{round}] \index{arrondi}arrondi à un nombre défini de
-  décimales ($0$ par défaut)
+  décimales ($0$ par défaut).
 <<echo=TRUE>>=
 round(x)
 round(x, 3)
 @
-\item[\Icode{floor}] plus grand entier inférieur ou égal à l'argument
+\item[\Icode{floor}] plus grand entier inférieur ou égal à l'argument.
 <<echo=TRUE>>=
 floor(x)
 @
 \item[\Icode{ceiling}] plus petit entier supérieur ou égal à
-  l'argument
+  l'argument.
 <<echo=TRUE>>=
 ceiling(x)
 @
 \item[\Icode{trunc}] troncature vers zéro; différent de \texttt{floor}
-  pour les nombres négatifs
+  pour les nombres négatifs.
 <<echo=TRUE>>=
 trunc(x)
 @
@@ -1973,13 +2037,13 @@ x
 
 \begin{ttscript}{any}
 \item[\Icode{any}] \index{any}vrai si au moins une valeur du vecteur
-  booléen en argument est vraie
+  booléen en argument est vraie.
 <<echo=TRUE>>=
 any(x < 0)
 any(x > 10)
 @
 \item[\Icode{all}] \index{all}vrai si toutes les valeurs du vecteur
-  booléen en argument sont vraies
+  booléen en argument sont vraies.
 <<echo=TRUE>>=
 all(x < 0)
 all(x > -5)
@@ -1999,50 +2063,50 @@ x
 @
 
 \begin{ttscript}{quantile}
-\item[\Icode{sum}] \index{somme}somme des éléments
+\item[\Icode{sum}] \index{somme}somme des éléments.
 <<echo=TRUE>>=
 sum(x)
 @
-\item[\Icode{prod}] \index{produit}produit des éléments
+\item[\Icode{prod}] \index{produit}produit des éléments.
 <<echo=TRUE>>=
 prod(x)
 @
 \item[\Icode{diff}] \index{différences}différences entre les éléments
-  (opérateur mathématique $\nabla$)
+  (opérateur mathématique $\nabla$).
 <<echo=TRUE>>=
 diff(x)
 @
-\item[\Icode{mean}] \index{moyenne}moyenne arithmétique
+\item[\Icode{mean}] \index{moyenne}moyenne arithmétique.
 <<echo=TRUE>>=
 mean(x)
 @
-\item[\Icode{var}] \index{variance}variance (et \index{ecart
-    type@écart type}écart type avec \Icode{sd})
+\item[\Icode{var}] \index{variance}variance %
+  (et \index{ecart type@écart type}écart type avec \Icode{sd}).
 <<echo=TRUE>>=
 var(x)
 @
-\item[\Icode{min}] \index{minimum!valeur}minimum
+\item[\Icode{min}] \index{minimum!valeur}minimum.
 <<echo=TRUE>>=
 min(x)
 @
-\item[\Icode{max}] \index{maximum!valeur}maximum
+\item[\Icode{max}] \index{maximum!valeur}maximum.
 <<echo=TRUE>>=
 max(x)
 @
 \item[\Icode{range}] \index{etendue@étendue}étendue (minimum et
-  maximum)
+  maximum).
 <<echo=TRUE>>=
 range(x)
 @
-\item[\Icode{median}] \index{mediane@médiane}médiane empirique
+\item[\Icode{median}] \index{mediane@médiane}médiane empirique.
 <<echo=TRUE>>=
 median(x)
 @
-\item[\Icode{quantile}] \index{quantile}quantiles empiriques
+\item[\Icode{quantile}] \index{quantile}quantiles empiriques.
 <<echo=TRUE>>=
 quantile(x)
 @
-\item[\Icode{summary}] principales statistiques descriptives
+\item[\Icode{summary}] principales statistiques descriptives.
 <<echo=TRUE>>=
 summary(x)
 @
@@ -2061,31 +2125,66 @@ x
 @
 
 \begin{ttscript}{cumprod}
-\item[\Icode{cumsum}] \index{somme!cumulative}somme cumulative
+\item[\Icode{cumsum}] \index{somme!cumulative}somme cumulative.
 <<echo=TRUE>>=
 cumsum(x)
 @
-\item[\Icode{cumprod}] \index{produit!cumulatif}produit cumulatif
+\item[\Icode{cumprod}] \index{produit!cumulatif}produit cumulatif.
 <<echo=TRUE>>=
 cumprod(x)
 @
-\item[\Icode{cummin}] \index{minimum!cumulatif}minimum cumulatif
+\item[\Icode{cummin}] \index{minimum!cumulatif}minimum cumulatif.
 <<echo=TRUE>>=
 cummin(x)
 @
-\item[\Icode{cummax}] \index{maximum!cumulatif}maximum cumulatif
+\item[\Icode{cummax}] \index{maximum!cumulatif}maximum cumulatif.
 <<echo=TRUE>>=
 cummax(x)
 @
 \item[\Icode{pmin}] \index{minimum!parallèle}minimum élément par
-  élément (en parallèle)
+  élément (en parallèle).
 <<echo=TRUE>>=
 pmin(x, 12)
 @
 \item[\Icode{pmax}] \index{maximum!parallèle}maximum élément par
-  élément (en parallèle)
+  élément (en parallèle).
 <<echo=TRUE>>=
 pmax(x, c(16, 23,  4, 12,  3))
+@
+\end{ttscript}
+
+\subsection{Manipulation de chaines de caractères}
+\label{sec:bases:internes:texte}
+
+\begin{ttscript}{strsplit}
+\item[\Icode{paste}] \index{chaine de caractères!concaténation}
+  \index{concaténation}concaténation de vecteurs après les avoir
+  convertis en chaines de caractères, séparés par défaut par des
+  espaces
+<<echo=TRUE>>=
+paste(c("Camille", "Marianne", "Alexandre"),
+      "porte le numéro", c(8, 7, 2))
+@
+\item[\Icode{paste0}] comme \icode{paste}, mais sans séparateur entre
+  les éléments
+<<echo=TRUE>>=
+paste0(1:5, c("er", rep("e", 4)))
+@
+\item[\Icode{nchar}] \index{chaine de caractères!nombre de caractères}
+  nombre de caractères dans une chaine de caractères
+<<echo=TRUE>>=
+nchar(c("foo", "foobar"))
+@
+\item[\Icode{substr}] \index{chaine de caractères!sous-chaine}
+  sous-chaine (partie) d'une chaine de caractères
+<<echo=TRUE>>=
+substr("abcdef", 2, 4)
+@
+\item[\Icode{strsplit}] \index{chaine de caractères!séparation}
+  séparation d'une chaine de caractères en parties sur un caractère
+  quelconque
+<<echo=TRUE>>=
+strsplit("Luc va à l'école", " ")
 @
 \end{ttscript}
 
@@ -2245,7 +2344,30 @@ rev(cumprod(rev(y)))       # produit cumulatif renversé
 cummin(x)                  # minimum cumulatif
 cummax(y)                  # maximum cumulatif
 pmin(x, y)                 # minimum élément par élément
-pmax(x, y)                 # maximum élément par élément `\labelline{bases:internes:fin}`
+pmax(x, y)                 # maximum élément par élément
+
+## MANIPULATION DE CHAINES DE CARACTÈRES
+
+## Une chaine de caractères est un regroupement entre
+## guillemets " " de 0, 1 ou plusieurs caractères. Puisque
+## tout objet dans R est un vecteur, une chaine de caractères
+## seule est un vecteur contenant une seule chaine de
+## caractères. Un vecteur peut également contenir plusieurs
+## chaines de caractères de longueurs différentes.
+"foo"                      # vecteur d'une seule chaine
+c("", "foo", "foobar")     # vecteur de 3 chaines
+
+## Les fonctions ci-dessous permettent de manipuler une chaine
+## de caractères. Elles sont vectorielles, c'est-à-dire
+## qu'elles peuvent effectuer leur traitement sur chaque
+## chaine d'un vecteur.
+s <- c("Programmation", "analyse", "données")
+paste(1:3, "-", s)         # création de 3 chaines
+paste0(1:3, "-", s)        # idem, sans espace
+paste0(s, collapse = " ")  # concaténation des 3 chaines
+nchar(s)                   # nombres de caractères
+substr(s, 2, 5)            # sous-chaines
+strsplit("2001-05", "-")   # séparation en sous-chaines  `\labelline{bases:internes:fin}`
 @
 
 \gotorbox{Vous trouverez plusieurs exemples additionnels d'utilisation des
@@ -2312,8 +2434,8 @@ c(TRUE, FALSE, FALSE) & c(TRUE, TRUE, FALSE)
      \item Attention à la priorité des opérations! En vertu des
        priorités énoncées au \autoref{tab:bases:operateurs}, les
        opérations sont effectuées dans cet ordre: inégalité
-       (\verb=<=), négation logique (\verb=!=) , «ou» logique
-       (\verb=|=).
+       (\code{<}), négation logique (\code{!}) , «ou» logique
+       (\code{|}).
 <<echo=FALSE>>=
 c(TRUE, FALSE, FALSE) | !2 < 3
 @
@@ -2577,15 +2699,15 @@ is.odd
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-    \item Les fonctions \code{abs} de \code{\scriptfilename} utilisent
-      la structure \code{if ... else ...} qui n'est pas vectorielle.
+    \item Les fonctions utilisent la structure \code{if ... else ...}
+      qui n'est pas vectorielle.
     \item Dans les mises en œuvre des algorithmes
       \ref{algo:algorithmes:abs} et
       \ref{algo:algorithmes:abs:simplifie}, le résultat de la fonction
       est directement le résultat d'une expression conditionnelle. La
       mise en œuvre de l'\autoref{algo:algorithmes:abs:simplifie:bis},
       de son côté, contient une expression après la clause \code{if}.
-      Si nous ne forçions pas la sortie de la fonction avec
+      Si nous ne forcions pas la sortie de la fonction avec
       \icode{return} à l'intérieur de la condition, l'évaluation de la
       fonction se poursuivrait et le résultat ne serait pas celui
       attendu. <<echo=TRUE>>= abs <- function(x) { if (x < 0) -x x }
@@ -2631,7 +2753,7 @@ pow2 <- function(b, n)
 }
 @
 <<echo=TRUE>>=
-pow
+pow2
 @
   \end{sol}
 \end{exercice}
@@ -2755,9 +2877,10 @@ f
     déterminer les valeurs des objets \code{x} et \code{y} à
     l'intérieur de la fonction \code{g}. Sans doute avez-vous utilisé
     les valeurs déjà définies dans la fonction \code{f}, ce qui est
-    juste en vertu des règles de \index{portee lexicale@portée
-      lexicale}\emph{portée lexicale} de R. Celles-ci font l'objet de
-    la \autoref{sec:environnement:portee}. Dans certains langages de
+    juste en vertu des règles de %
+    \index{portee lexicale@portée lexicale}\emph{portée lexicale} de
+    R. Celles-ci font l'objet de la
+    \autoref{sec:environnement:portee}. Dans certains langages de
     programmation, les objets seraient indéfinis et les appels de
     fonction résulteraient tous en une erreur.
     \begin{enumerate}

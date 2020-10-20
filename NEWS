@@ -6,10 +6,145 @@
 
 ## Nouveautés
 
-
+- Annexe A: lien vers la nouvelle vidéo sur une session de travail
+  type avec RStudio.
 
 ## Changements
 
+- Section 5.6: l'utilisation de `stringAsFactors` n'étant plus requise
+  dans `data.frame` depuis la version 4.0.0 de R, toute référence à
+  cette notion est disparue de la section et du code informatique
+  correspondant.
+
+
+# 2020.08 (2020-08-25)
+
+## Nouveautés
+
+- Ajout d'une page liminaire avec, au recto, une citation de D.E.
+  Knuth et, au verso, la vignette de XKCD. La référence de la citation
+  se trouve dans la page des notices.
+- Introduction: ajout d'une section expliquant l'importance dans
+  l'ouvrage de la ligne de commande Unix et des systèmes de gestion de
+  versions, avec un lien vers ma formation concomitante «Ligne de
+  commande et gestion de versions avec Git».
+- Section 1.4: les vignettes XKCD, c'est toujours bien. Cette fois sur
+  les systèmes d'exploitation.
+- Chapitre 6: nouvelle section sur les tests unitaires. Cela entraine
+  l'ajout d'un exemple dans le fichier de script du chapitre et
+  l'ajout d'un exercice. De plus, l'ouvrage est maintenant distribué
+  avec les fichiers `sqrt.R` et `tests-sqrt.R` pour illustrer les
+  tests unitaires.  
+- Chapitre 10: révision des explications sur la création d'une
+  bibliothèque personnelle à la section 10.3. Les instructions,
+  beaucoup simplifiées, ont maintenant recours à la ligne de commande
+  Unix. Ceci évite d'avoir à expliquer comment créer un fichier dans
+  RStudio, ou comment accéder à des fichiers ou des dossiers cachés.
+  Changements stimulés par des commentaires de Alec Van Rassel.
+- Chapitre 10: dans la même veine que ci-dessus, une procédure de
+  création d'une bibliothèque personnelle entièrement depuis la ligne
+  de commande de R (avec `dir.create` et `writeLines`) a été ajoutée
+  dans le fichier de script du chapitre.
+- Section 11.5: explications sur la nécessité de doubler les
+  caractères d'échappement dans les motifs dans R, ainsi que sur les
+  nouvelles chaines de caractères brutes introduites dans R 4.0.0.
+- Chapitre 11: ajout d'une section et d'un fichier de script
+  d'exemples pour les fonctions R utilisant les expressions
+  régulières. Ce chapitre est donc exceptionnellement livré avec deux
+  fichiers de script (`texte.sh` et `texte.R`).
+
+## Changements
+
+- Chapitre 6: la version finale de la fonction `sqrt` des exemples
+  traite maintenant à part le cas trivial x = 0.
+- Section 11.4.3: amélioration de l'explication de l'exemple en
+  respectant l'ordre des règles du programme `awk`.
+
+## Corrections
+
+- Exemples du chapitre 11 pour la ligne de commande: suppression d'un
+  symbole «\» en trop dans une commande `grep`.
+
+
+# 2020.05 (2020-04-29)
+
+## Nouveautés majeures
+
+- Chapitre 11: le chapitre est maintenant distribué avec des exemples
+  réunis dans un fichier de script `texte.sh` reproduit à la section
+  11.6, comme dans les autres chapitres. Il s'agit d'une version
+  beaucoup augmentée des exemples additionnels de l'édition
+  précédente.
+- Annexe A: nouvelle section A.6 sur le terminal de RStudio et ajout
+  d'une configuration à la section A.7 (anciennement A.6) pour utiliser
+  Git Bash comme ligne de commande (Windows seulement).
+
+## Autres nouveautés
+
+- Section 4.5: exemple de construction d'une fonction `is.odd` dans le
+  code informatique pour illustrer qu'une valeur booléenne constitue
+  implicitement le résultat d'un test logique.
+- Section 11.4.5: exemple de changement du séparateur de champs de
+  sortie via la redéfinition de la variable OFS.
+
+## Changements
+
+- Section 11.2: astuce sur l'option de 'sed' pour remplacer
+  directement dans le fichier d'origine transformée en simple note de
+  bas de page.
+- Section 11.3.3: titre de la section changé pour «Remplacement et
+  répétition», notamment parce que le caractère d'échappement fait
+  plutôt l'objet de la section 11.3.4.
+- Section 11.3.3: le paragraphe décrivant l'opérateur de répétition
+  `?` a été réécrit pour corriger une affirmation fausse.
+- Section 11.3.3: astuce sur les quantificateurs gloutons réécrite
+  avec un exemple différent et un renvoi vers les exemples qui
+  présentent une solution de contournement.
+- Section 11.5: afin de raccourcir les résultats, les exemples
+  d'utilisation des fonctions R de recherche et de remplacement de
+  texte utilisent seulement les 10 premiers noms de `state.name`.
+  
+## Corrections
+
+- Section 11.3.7, dernier exemple de la section: dans la seconde
+  commande, il ne doit pas y avoir d'opérateur d'alternance à
+  l'intérieur de la classe de caractères (ou le symbole `|` n'est
+  d'ailleurs pas un opérateur). Merci à Laurence Boivert pour sa
+  vigilance.
+
+
+# 2020.04 (2020-04-08)
+
+## Nouveautés majeures
+
+- Chapitre 11 sur l'analyse et le contrôle de texte entièrement révisé
+  pour ne plus dépendre de ressources externes. Les objectifs
+  d'apprentissage et la matière couverte demeurent sensiblement les
+  mêmes, mais la présentation est assez différente.  
+- Fichier de données `carburant.data` inclus dans la distribution pour
+  les exemples du chapitre 11. Les données de la figure 9.2 étaient
+  tirées de ce jeu de données et c'est maintenant mentionné dans le
+  texte du chapitre 9.
+
+## Autres nouveautés
+
+- Section 4.3: mention explicite qu'un vecteur dont les éléments sont
+  étiquetés, ou nommés, est un «vecteur étiqueté» ou «vecteur nommé».
+- Section 4.7: sous-section 4.7.8 sur les fonctions utiles pour la
+  manipulation de chaines de caractères (et exemples correspondants
+  dans `bases.R`).
+- Exemples de la section 5.9: utilisation de `seq` avec une date (donc
+  de `seq.Date`) à partir du 31 du mois pour illustrer le passage au
+  mois suivant en cas de date invalide; présentation d'une astuce
+  pour contourner le problème.
+- Section A.6: recommandation de désactiver l'option \code{Restore
+  .RData into workspace at startup} dans RStudio afin de toujours
+  démarrer avec une séance de travail vierge.
+
+## Changements
+
+- Terme «étiquette» utilisé plus systématiquement en lieu et place de
+  «nom» lorsqu'il s'agit de l'attribut d'un vecteur ou d'une liste.
 - Terme «encodage» changé pour «codage de caractères» tel que
   recommandé par l'Office québécois de la langue française.
 - Section 2.7: quelques détails additionnels sur la gestion du
@@ -19,6 +154,18 @@
   additionnels sur le fait que l'opérateur d'affectation retourne un
   résultat de manière invisible. Aussi, remplacement de «symbole
   d'affectation» par «opérateur d'affectation».
+- Fichier de données `100metres.data` renommé `100metres.dat` par
+  symétrie avec le nouveau fichier de données `carburant.dat`.
+- Chapitre 7: ordre des exercices 7.11 et 7.12 inversé. Dans le
+  (nouvel) exercice 7.12, les données `100metres.dat` ne sont plus
+  présentées sous forme de code R, mais plutôt à l'intérieur d'une
+  figure.
+- Exercice 11.1: les choix de réponses sont maintenant disposés par
+  colonne plutôt que par ligne.
+- Mise à jour des captures d'écran des options de configuration de
+  RStudio aux figures 6.3, A.2 et A.3 pour la version 1.2 de
+  l'éditeur.
+- Ajout d'entrées d'index et suppression de doublons.
 
 ## Corrections
 
@@ -29,7 +176,10 @@
 - Exercice 5.11: il manquait à la solution une définition de la
   fonction `ppareto` pour calculer la fonction de répartition de la
   loi de Pareto (dans la mesure où le paquetage actuar n'est pas
-  chargé).
+  chargé). De plus, l'exemple d'utilisaiton de la fonction `paste` à
+  la partie b) a été supprimé puisque la fonction est maintenant
+  présentée à la section 4.7.8.
+- Plusieurs coquilles relevées par les étudiantes et les étudiants.
 
 
 # 2019.10 (2019-10-17)
@@ -62,7 +212,7 @@
   concepts de tranche et de carotte introduits à la section 5.2 au
   moment de parler d'application sur des tableaux à trois dimensions.
 
-# Corrections
+## Corrections
 
 - Fichier `CONTRIBUTING.md`: suppression de la remarque obsolète sur
   les sections tirées de Pro Git.

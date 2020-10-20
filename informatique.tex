@@ -1,4 +1,4 @@
-%%% Copyright (C) 2019 Vincent Goulet
+%%% Copyright (C) 2020 Vincent Goulet
 %%%
 %%% Ce fichier fait partie du projet
 %%% «Programmer avec R»
@@ -67,8 +67,8 @@ Programmer est une activité scientifique consistant d'abord et avant
 tout à \emph{résoudre des problèmes}. Plutôt que d'avoir recours aux
 mathématiques ou à l'expérimentation, les programmeurs demandent à une
 machine de résoudre le problème pour eux. Comme le souligne
-\citet{Swinnen:python:2012} --- dont la lecture du chapitre~1 est
-chaudement recommandée --- programmer est «une compétence de haut
+\citet{Swinnen:python:2012} --- dont je vous recommande chaudement la
+lecture du chapitre~1 --- programmer est «une compétence de haut
 niveau, qui implique des capacités et des connaissances diverses: être
 capable de (re)formuler un problème de plusieurs manières différentes,
 être capable d’imaginer des solutions innovantes et efficaces, être
@@ -173,20 +173,21 @@ interprétation.
 
 Un \index{compilateur}compilateur est un programme informatique qui
 transforme en langage machine le code source rédigé dans un langage
-donné. On dit alors de ce langage qu'il est \index{compilé
-  (langage)}\emph{compilé}. Le compilateur produit un fichier
-informatique que l'ordinateur peut ensuite exécuter directement. Sur
-la plateforme Windows, on reconnait notamment ces fichiers par leurs
-extensions \code{.exe} ou \code{.dll}. Les noyaux d'à peu près toutes
-les applications sur nos ordinateurs sont des fichiers compilés.
+donné. On dit alors de ce langage qu'il est %
+\index{compilé (langage)}\emph{compilé}. Le compilateur produit un
+fichier informatique que l'ordinateur peut ensuite exécuter
+directement. Sur la plateforme Windows, on reconnait notamment ces
+fichiers par leurs extensions \code{.exe} ou \code{.dll}. Les noyaux
+d'à peu près toutes les applications sur nos ordinateurs sont des
+fichiers compilés.
 
 Un \index{interpréteur}interpréteur, quant à lui, est un programme qui
 analyse, traduit et exécute le code source d'un programme
 informatique, et ce, à chaque fois que le programme doit être exécuté.
 Un langage qui nécessite l'intermédiaire d'un interpréteur est dit
-\emph{interprété}. Un programme écrit dans un \index{interprété
-  (langage)}langage interprété ne peut être distribué sans son
-interpréteur.
+\emph{interprété}. Un programme écrit dans un %
+\index{interprété (langage)}langage interprété ne peut être distribué
+sans son interpréteur.
 
 Le traitement additionnel entre le code source et le langage machine
 fait généralement en sorte que les langages interprétés sont plus
@@ -263,11 +264,11 @@ les années 1940. On programme alors ceux-ci en
 faciliter l'entrée de programmes dans un ordinateur
 (\autoref{fig:informatique:assembleur}). Le langage demeure loin
 d'être facile à déchiffrer, mais c'est toujours préférable au langage
-machine, constitué uniquement de 0 et de 1. Le coût d'utilisation d'un
+machine, constitué uniquement de 0 et de 1. Le cout d'utilisation d'un
 ordinateur est à l'époque bien supérieur à celui d'une personne, aussi
 la traduction du langage assembleur vers le langage machine
 demeure-t-elle confiée à des humains. Au fil des années, le rapport de
-coût s'inversera et il deviendra financièrement plus avantageux de
+cout s'inversera et il deviendra financièrement plus avantageux de
 confier cette tâche cléricale à l'ordinateur lui-même, via un
 programme d'assembleur\footnote{%
   J'ai tiré cette manière de présenter les choses de
@@ -620,6 +621,16 @@ la famille des systèmes \index{Unix}Unix. Cela ne laisse donc en fait
 que deux grandes classes de systèmes d'exploitation couramment
 utilisés: Windows et Unix.
 
+\begin{figure}[t]
+  \centering
+  \begin{minipage}{0.9\linewidth}
+    \setkeys{Gin}{width=\textwidth}
+    \includegraphics{images/operating_systems} \\
+    \footnotesize\sffamily%
+    Tiré de \href{https://xkcd.com/1508/}{XKCD.com}
+  \end{minipage}
+\end{figure}
+
 \subsection{Windows}
 \label{sec:informatique:os:windows}
 
@@ -681,8 +692,9 @@ nette entre les droits accordés à l'administrateur système
 aux utilisateurs normaux. Ceux-ci ne peuvent écrire que dans l'espace
 disque qui leur est réservé, identifié comme le %
 \index{repertoire personnel@répertoire personnel}\emph{répertoire
-  personnel} ou le \index{dossier de départ|see{répertoire
-    personnel}}\emph{dossier de départ} (\emph{home directory}).
+  personnel} ou le %
+\index{dossier de départ|see{répertoire personnel}}\emph{dossier de
+  départ} (\emph{home directory}).
 
 Ensuite, la
 \Index{Unix!philosophie}\link{https://fr.wikipedia.org/wiki/Philosophie_d\%27Unix}{philosophie
@@ -905,7 +917,7 @@ fichiers. Un chemin d'accès peut être absolu ou relatif.
 \item[Chemin absolu] \index{chemin d'accès!absolu} La position d'un
   fichier est décrite à partir de la racine, de telle sorte que le
   chemin d'accès demeure valide depuis n'importe quel point dans le
-  système de fichier.
+  système de fichiers.
 
   Dans l'extrait de système de fichier \index{Windows}Windows de la
   \autoref{fig:informatique:fs}, le chemin d'accès absolu vers le
@@ -1009,8 +1021,9 @@ réponse se trouve à une requête près dans un moteur de recherche.
   \index{repertoire personnel@répertoire personnel}répertoire
   personnel des utilisateurs tant dans \index{Windows}Windows que dans
   \index{macOS}macOS. Localiser ces deux répertoires dans le système
-  de fichier à partir de la racine avec l'\index{Explorateur
-    Windows}Explorateur Windows ou avec le \index{Finder}Finder.
+  de fichier à partir de la racine avec %
+  l'\index{Explorateur Windows}Explorateur Windows ou avec le
+  \index{Finder}Finder.
 \end{exercice}
 
 \begin{exercice}[nosol]

@@ -1,4 +1,4 @@
-%%% Copyright (C) 2019 Vincent Goulet
+%%% Copyright (C) 2020 Vincent Goulet
 %%%
 %%% Ce fichier fait partie du projet
 %%% «Programmer avec R»
@@ -14,22 +14,14 @@
 
 \def\scriptfilename{\currfilebase.R}
 \SweaveOpts{echo=FALSE}
+\SweaveInput{share/license-by-sa.nw}
 
 <<echo=FALSE, results=hide>>=
 source(".Sweaveprofile")   # configuration
 source("Stangle.R")        # lancement de Stangle
 @
 <<script>>=
-## Copyright (C) 2019 Vincent Goulet
-##
-## Ce fichier fait partie du projet
-## «Programmer avec R»
-## https://gitlab.com/vigou3/programmer-avec-r
-##
-## Cette création est mise à disposition sous licence
-## Attribution-Partage dans les mêmes conditions 4.0
-## International de Creative Commons.
-## https://creativecommons.org/licenses/by-sa/4.0/
+<<license-by-sa>>
 @
 
 \begin{objectifs}
@@ -207,15 +199,15 @@ Quelques fonctions permettent de manipuler les environnements de
 fonctions. Nous en avons déjà utilisé trois ci-dessus.
 \begin{ttscript}{environment}
 \item[\Icode{environment}] extraction ou modification de
-  l'environnement
+  l'environnement.
 \item[\icode{ls}] affichage de la liste des éléments
-  de l'environnement
+  de l'environnement.
 \item[\Icode{get}] extraction de la valeur associée à un symbole
-  dans l'environnement
+  dans l'environnement.
 \item[\Icode{assign}] affectation d'une nouvelle paire
-  symbole-valeur dans l'environnement
+  symbole-valeur dans l'environnement.
 \item[\Icode{new.env}] création d'un nouvel environnement (vide par
-  défaut)
+  défaut).
 \end{ttscript}
 
 \tipbox{La fonction \Icode{ls.str} permet d'afficher en une seule
@@ -288,7 +280,7 @@ Il y a toutefois plus à connaitre à ce sujet. C'est l'objet de la
 prochaine section.
 
 \warningbox{La mécanique de création d'environnements d'évaluation
-  pour tous les appels de fonctions fait en sorte que ceux-ci coûtent
+  pour tous les appels de fonctions fait en sorte que ceux-ci coutent
   cher en temps et en ressources système. C'est pour cette raison que
   le calcul récursif est plutôt inefficace en R.}
 
@@ -768,7 +760,7 @@ f()
     les valeurs de \code{x} et de \code{y} au moment du calcul. C'est
     facile pour \code{y}: l'objet n'est défini que dans l'espace de
     travail et sa valeur est $10$. Quant à \code{x}, même si sa valeur
-    change à plusieurs reprise (plus précisément: l'objet est défini
+    change à plusieurs reprises (plus précisément: l'objet est défini
     dans plusieurs environnements successifs), R utilisera celle qui a
     cours lorsque l'addition est effectuée, soit celle à l'intérieur
     de la fonction \code{h}. Le résultat cherché est donc $13$.

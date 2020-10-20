@@ -1,4 +1,4 @@
-%%% Copyright (C) 2019 Vincent Goulet
+%%% Copyright (C) 2020 Vincent Goulet
 %%%
 %%% Ce fichier fait partie du projet
 %%% «Programmer avec R»
@@ -14,22 +14,14 @@
 
 \def\scriptfilename{\currfilebase.R}
 \SweaveOpts{echo=FALSE}
+\SweaveInput{share/license-by-sa.nw}
 
 <<echo=FALSE, results=hide>>=
 source(".Sweaveprofile")   # configuration
 source("Stangle.R")        # lancement de Stangle
 @
 <<script>>=
-## Copyright (C) 2019 Vincent Goulet
-##
-## Ce fichier fait partie du projet
-## «Programmer avec R»
-## https://gitlab.com/vigou3/programmer-avec-r
-##
-## Cette création est mise à disposition sous licence
-## Attribution-Partage dans les mêmes conditions 4.0
-## International de Creative Commons.
-## https://creativecommons.org/licenses/by-sa/4.0/
+<<license-by-sa>>
 @
 
 \begin{objectifs}
@@ -379,7 +371,7 @@ l'aide de tests de contrôle. Le sujet ne sera pas étudié plus en détail ici.
 
 
 \tipbox{Lorsqu'une erreur survient, assurez-vous de bien lire les
-  messages d'erreur de R. Il faut parfois apprendre à les reconnaître.
+  messages d'erreur de R. Il faut parfois apprendre à les reconnaitre.
   Par exemple, le message assez fréquent «\code{valeur manquante là où
     TRUE / FALSE est requis}» provient d'une clause \code{if} dont
   l'argument vaut \code{NA} plutôt que \code{TRUE} ou \code{FALSE}. En
@@ -625,7 +617,7 @@ des étapes du programme. Le regard neuf que vous porterez au code peut
 vous permettre d'y déceler les problèmes.
 
 \gotorbox{Étudiez le fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:paquetages:exemples}.}
+  reproduit à la \autoref{sec:debogage:exemples}.}
 
 <<script, results=hide>>=
 ## Ce fichier fournit le code utile pour refaire les exemples
@@ -909,7 +901,7 @@ rgamma <- function(n, shape, rate = 1, scale = 1/rate)
 ##-!- rgamma(5, 0.5, 1)
 
 ## Afficher la pile des appels de fonctions. On voit que c'est
-## l'appel à 'Ginv' qui cause problème.
+## l'appel à 'Ginv' qui pose problème.
 ##-!- traceback()
 
 ###

@@ -10,7 +10,7 @@ Vincent Goulet, professeur titulaire, École d'actuariat, Université Laval
 
 ## Modèle de développement
 
-Le processus de rédaction et de maintenance du projet se conforme au modèle [*Gitflow Workflow*](https://www.atlassian.com/git/tutorials/comparing-workflows#gitflow-workflow). Seule particularité: la branche *master* se trouve [sur GitLab]((https://gitlab.com/vigou3/programmer-avec-r)), alors que la branche de développement se trouve dans un [dépôt public](https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-develop) de la Faculté des sciences et de génie de l'Université Laval.
+Le processus de rédaction et de maintenance du projet suit le modèle [*Gitflow Workflow*](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow ). Seule particularité: la branche *master* se trouve [sur GitLab]((https://gitlab.com/vigou3/programmer-avec-r)), alors que la branche de développement se trouve dans un [dépôt public](https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-devel) de la Faculté des sciences et de génie de l'Université Laval.
 
 Prière de passer par ce dépôt pour proposer des modifications; consulter le fichier `CONTRIBUTING.md` pour la marche à suivre.
 

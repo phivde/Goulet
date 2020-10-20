@@ -1,4 +1,4 @@
-%%% Copyright (C) 2019 Vincent Goulet
+%%% Copyright (C) 2020 Vincent Goulet
 %%%
 %%% Ce fichier fait partie du projet
 %%% «Programmer avec R»
@@ -14,22 +14,14 @@
 
 \def\scriptfilename{\currfilebase.R}
 \SweaveOpts{echo=FALSE}
+\SweaveInput{share/license-by-sa.nw}
 
 <<echo=FALSE, results=hide>>=
 source(".Sweaveprofile")   # configuration
 source("Stangle.R")        # lancement de Stangle
 @
 <<script>>=
-## Copyright (C) 2019 Vincent Goulet
-##
-## Ce fichier fait partie du projet
-## «Programmer avec R»
-## https://gitlab.com/vigou3/programmer-avec-r
-##
-## Cette création est mise à disposition sous licence
-## Attribution-Partage dans les mêmes conditions 4.0
-## International de Creative Commons.
-## https://creativecommons.org/licenses/by-sa/4.0/
+<<license-by-sa>>
 @
 
 \begin{objectifs}
@@ -328,12 +320,12 @@ Les commandes de contrôle du flux permettent d'infléchir le
 déroulement normal d'une boucle.
 
 \begin{ttscript}{break}
-\item[\Icode{break}] Force la sortie de la boucle courante. La
+\item[\Icode{break}] force la sortie de la boucle courante. La
   commande \code{break} peut être utilisée dans les boucles
   \icode{for} ou \icode{while}, mais elle est presque indissociable de
   la boucle \icode{repeat}, tel qu'illustré à la
   \autoref{sec:tri:boucles:repeat}.
-\item[\Icode{next}] Force le passage à la prochaine itération de la
+\item[\Icode{next}] force le passage à la prochaine itération de la
   boucle \icode{for}, \icode{while} ou \icode{repeat}. Comme
   \icode{break}, la commande est généralement utilisée à l'intérieur
   d'une structure conditionnelle.
@@ -445,7 +437,7 @@ la suite avec une construction comme ci-dessous.
 ## exprimé non plus en fonction de l'écart entre 'y'^2 et 'x',
 ## mais plutôt en fonction de l'écart entre deux
 ## approximations successives. De plus, la valeur de départ et
-## l'erreur d'approximation sont passés en argument à la
+## l'erreur d'approximation sont passées en argument à la
 ## fonction.
 ##
 ## Puisqu'il faut au minimum vérifier si la valeur initiale
@@ -576,25 +568,25 @@ fonctions internes pour ces opérations.
 
 \begin{ttscript}{unique}
 \item[\Icode{sort}] \index{tri}tri en ordre croissant ou
-  décroissant
+  décroissant.
 <<echo=TRUE>>=
 sort(c(4, -1, 2, 6))
 @
 \item[\Icode{rank}] \index{rang}rang des éléments d'un vecteur dans
-  l'ordre croissant ou décroissant
+  l'ordre croissant ou décroissant.
 <<echo=TRUE>>=
 rank(c(4, -1, 2, 6))
 @
 \item[\Icode{order}] \index{ordre}ordre d'extraction des éléments d'un
-  vecteur pour les placer en ordre croissant ou décroissant
+  vecteur pour les placer en ordre croissant ou décroissant.
 <<echo=TRUE>>=
 order(c(4, -1, 2, 6))
 @
-\item[\Icode{rev}] vecteur \index{renverser}renversé
+\item[\Icode{rev}] vecteur \index{renverser}renversé.
 <<echo=TRUE>>=
 rev(1:10)
 @
-\item[\Icode{unique}] éléments uniques d'un vecteur
+\item[\Icode{unique}] éléments uniques d'un vecteur.
 <<echo=TRUE>>=
 unique(c(2, 4, 2, 5, 9, 5, 0))
 @
@@ -618,24 +610,24 @@ x
 
 \begin{ttscript}{which.max}
 \item[\Icode{which}] positions des éléments satisfaisant la condition
-  en argument
+  en argument.
 <<echo=TRUE>>=
 which(x < 0)
 @
-\item[\Icode{which.min}] position du \index{minimum!position}minimum
+\item[\Icode{which.min}] position du \index{minimum!position}minimum.
 <<echo=TRUE>>=
 which.min(x)
 @
-\item[\Icode{which.max}] position du \index{maximum!position}maximum
+\item[\Icode{which.max}] position du \index{maximum!position}maximum.
 <<echo=TRUE>>=
 which.max(x)
 @
-\item[\Icode{match}] position de la première occurrence d'un élément
+\item[\Icode{match}] position de la première occurrence d'un élément.
 <<echo=TRUE>>=
 match(2, x)
 @
 \item[\Icode{\%in\%}] appartenance d'une ou plusieurs valeurs au
-  vecteur
+  vecteur.
 <<echo=TRUE>>=
 -1:2 %in% x
 @
@@ -1080,63 +1072,6 @@ fibonacci(10)
 \end{exercice}
 
 \begin{exercice}
-  \label{ex:tri:100metres}
-  On vous donne la liste et la date des 31 meilleurs temps enregistrés
-  au 100~mètres homme entre 1964 et 2005.
-<<echo=TRUE, eval=TRUE>>=
-temps <- c(10.06, 10.03, 10.02,  9.95, 10.04, 10.07,
-           10.08, 10.05,  9.98, 10.09, 10.01, 10.00,
-            9.97,  9.93,  9.96,  9.99,  9.92,  9.94,
-            9.90,  9.86,  9.88,  9.87,  9.85,  9.91,
-            9.84,  9.89,  9.79,  9.80,  9.82,  9.78,
-            9.77)
-names(temps) <- c("1964-10-15", "1968-06-20",
-    "1968-10-13", "1968-10-14", "1968-10-14",
-    "1968-10-14", "1968-10-14", "1975-08-20",
-    "1977-08-11", "1978-07-30", "1979-09-04",
-    "1981-05-16", "1983-05-14", "1983-07-03",
-    "1984-05-05", "1984-05-06", "1988-09-24",
-    "1989-06-16", "1991-06-14", "1991-08-25",
-    "1991-08-25", "1993-08-15", "1994-07-06",
-    "1994-08-23", "1996-07-27", "1996-07-27",
-    "1999-06-16", "1999-08-22", "2001-08-05",
-    "2002-09-14", "2005-06-14")
-@
-<<echo=FALSE, eval=TRUE>>=
-cat(temps, file = "100metres.data", labels = names(temps), fill = 1)
-@
-  Les données se trouvent dans le fichier
-  \code{100metres.data} distribué avec ce document. Les dates se
-  trouvent la première colonne du fichier et les temps, dans la
-  seconde. La commande \icode{scan} utilisée avec l'argument
-  \code{what = list("", 1)} permet d'importer ces données dans R.
-
-  Extraire de ce vecteur les records du monde seulement, c'est-à-dire
-  la première fois que chaque temps a été réalisé.
-  \begin{sol}
-    D'abord, recréons le vecteur des temps à partir des données du
-    fichier \code{100metres.data}.
-<<eval=TRUE>>=
-x <- scan("100metres.data", what = list("", 1))
-temps <- x[[2]]
-names(temps) <- x[[1]]
-@
-    Ensuite, la clé pour obtenir les premiers records consiste à
-    calculer les minimums cumulatifs avec \icode{cummin}. Une première
-    expression retourne les temps, mais sans les dates.
-<<eval=TRUE>>=
-unique(cummin(temps))
-@
-    Nous pouvons récupérer les dates en retrouvant les records dans le
-    vecteur.
-<<eval=TRUE>>=
-temps[match(unique(cummin(temps)), temps)]
-@
-  \end{sol}
-\end{exercice}
-
-
-\begin{exercice}
   Effectuer une mise en œuvre de l'algorithme \emph{Bucketsort} de
   \citet[chapitre~6]{Stephens:algorithms:2013} permettant de trier des
   entiers entre $1$ et $x_{\max}$. La fonction prend en argument le
@@ -1173,6 +1108,48 @@ bucketsort <- function(x, max, nbuckets)
     ## retourner le vecteur trié
     unlist(buck)
 }
+@
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
+  \label{ex:tri:100metres}
+  Les fichier \code{100metres.dat} distribué avec cet ouvrage et
+  reproduit à la \autoref{fig:tri:100metres} contient la date et le
+  temps des 31 meilleurs résultats enregistrés au 100~mètres homme
+  entre 1964 et 2005. Les dates se trouvent dans la première colonne
+  du fichier et les temps, dans la seconde. La commande \icode{scan}
+  utilisée avec l'argument \code{what = list("", 1)} permet d'importer
+  ces données dans R. Extraire de ce vecteur les records du monde
+  seulement, c'est-à-dire la première fois que chaque temps a été
+  enregistré.
+  \begin{figure}[t]
+    \lstset{frame=single,language={},numbers=none}
+    \centering
+    \begin{minipage}{0.5\linewidth}
+      \lstinputlisting{100metres.dat}
+    \end{minipage}
+    \caption{Données du fichier \code{100metres.dat}}
+    \label{fig:tri:100metres}
+  \end{figure}
+  \begin{sol}
+    D'abord, recréons le vecteur des temps à partir des données du
+    fichier \code{100metres.dat}.
+<<eval=TRUE>>=
+x <- scan("100metres.dat", what = list("", 1))
+temps <- x[[2]]
+names(temps) <- x[[1]]
+@
+    Ensuite, la clé pour obtenir les premiers records consiste à
+    calculer les minimums cumulatifs avec \icode{cummin}. Une première
+    expression retourne les temps, mais sans les dates.
+<<eval=TRUE>>=
+unique(cummin(temps))
+@
+    Nous pouvons récupérer les dates en retrouvant les records dans le
+    vecteur.
+<<eval=TRUE>>=
+temps[match(unique(cummin(temps)), temps)]
 @
   \end{sol}
 \end{exercice}

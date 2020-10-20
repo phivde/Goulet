@@ -1,4 +1,4 @@
-%%% Copyright (C) 2019 Vincent Goulet
+%%% Copyright (C) 2020 Vincent Goulet
 %%%
 %%% Ce fichier fait partie du projet
 %%% «Programmer avec R»
@@ -14,22 +14,14 @@
 
 \def\scriptfilename{\currfilebase.R}
 \SweaveOpts{echo=FALSE}
+\SweaveInput{share/license-by-sa.nw}
 
 <<echo=FALSE, results=hide>>=
 source(".Sweaveprofile")   # configuration
 source("Stangle.R")        # lancement de Stangle
 @
 <<script>>=
-## Copyright (C) 2019 Vincent Goulet
-##
-## Ce fichier fait partie du projet
-## «Programmer avec R»
-## https://gitlab.com/vigou3/programmer-avec-r
-##
-## Cette création est mise à disposition sous licence
-## Attribution-Partage dans les mêmes conditions 4.0
-## International de Creative Commons.
-## https://creativecommons.org/licenses/by-sa/4.0/
+<<license-by-sa>>
 @
 
 \begin{objectifs}
@@ -194,13 +186,13 @@ mode(v)
   \end{tabular}
 \end{table}
 
-Les objets de mode \code{numeric}, \code{complex},
-\code{logical} et \code{character} sont des objets \emph{simples}
+Les objets de mode \code{numeric}, \code{complex}, \code{logical} et
+\code{character} sont des objets \index{vecteur!simple}\emph{simples}
 (\emph{atomic}) qui contiennent des données d'un seul type. En
-revanche, les objets de mode \code{list} ou \code{expression} sont
-des objets \emph{récursifs} qui peuvent contenir d'autres objets. Par
-exemple, une liste peut contenir une ou plusieurs autres listes; nous
-y reviendrons plus loin.
+revanche, les objets de mode \code{list} ou \code{expression} sont des
+objets \index{vecteur!récursif}\emph{récursifs} qui peuvent contenir
+d'autres objets. Par exemple, une liste peut contenir une ou plusieurs
+autres listes; nous y reviendrons plus loin.
 
 \tipbox{La fonction \Icode{typeof} permet d'obtenir une description
   plus précise de la représentation interne d'un objet (c'est-à-dire
@@ -325,12 +317,12 @@ fonction du même nom servant à extraire l'attribut d'un objet.
     \icode{class}    &
     affecte le comportement d'un objet \\
     \icode{dim}      &
-    dimensions\index{dimension} des matrices et tableaux \\
+    \index{dimension}dimensions des matrices et tableaux \\
     \icode{dimnames} &
-    étiquettes\index{etiquette@étiquette} des dimensions des matrices
+    \index{etiquette@étiquette}étiquettes des dimensions des matrices
     et tableaux \\
     \icode{names}    &
-    étiquettes des éléments d'un objet \\
+    \index{etiquette@étiquette}étiquettes des éléments d'un objet \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -395,7 +387,7 @@ foo <- 1
 mode(c(1, 4.1, pi))        # nombres réels
 mode(c(2, 1 + 5i))         # nombres complexes
 mode(c(TRUE, FALSE, TRUE)) # valeurs booléennes
-mode("foobar")             # chaînes de caractères
+mode("foobar")             # chaines de caractères
 
 ## Par défaut, tous les nombres sont représentés en double
 ## précision dans R. Il n'y a donc pas de différence entre
@@ -423,16 +415,16 @@ mode(expression(x <- 5))   # une expression non évaluée
 (x <- 1:4)
 length(x)
 
-## Une chaîne de caractères ne compte que pour un seul
+## Une chaine de caractères ne compte que pour un seul
 ## élément.
 (x <- "foobar")
 length(x)
 
-## Pour obtenir la longueur de la chaîne, il faut utiliser
+## Pour obtenir la longueur de la chaine, il faut utiliser
 ## nchar().
 nchar(x)
 
-## Un objet peut néanmoins contenir plusieurs chaînes de
+## Un objet peut néanmoins contenir plusieurs chaines de
 ## caractères.
 (x <- c("f", "o", "o", "b", "a", "r"))
 length(x)
@@ -441,7 +433,7 @@ length(x)
 ## mais qui existe.
 (x <- numeric(0))          # création du contenant
 length(x)                  # l'objet 'x' existe...
-x[1] <- 1                  # définition du permier élément
+x[1] <- 1                  # définition du premier élément
 
 ## Si un objet n'existe pas au préalable, il est impossible
 ## d'affecter directement la valeur d'un élément.
@@ -1228,11 +1220,12 @@ sum(x[1, , 1])         # équivalent pour la première somme  `\labelline{donnee
 \label{sec:donnees:liste}
 
 La liste\Index{liste} est la structure de données la plus générale et
-polyvalente du langage R. Si les éléments d'un vecteur simple doivent
-tous être du même mode, ceux de la liste peuvent être de n'importe
-quel mode, y compris le mode \icode{list}. Par conséquent, il est
-possible d'emboîter des listes, d'où le qualificatif de
-\emph{récursif} pour ce type d'objet.
+polyvalente du langage R. Si les éléments d'un
+\index{vecteur!simple}vecteur simple doivent tous être du même mode,
+ceux de la liste peuvent être de n'importe quel mode, y compris le
+mode \icode{list}. Par conséquent, il est possible d'emboîter des
+listes, d'où le qualificatif de
+\index{vecteur!récursif}\emph{récursif} pour ce type d'objet.
 
 La liste est la structure de données par excellence pour réunir dans
 un objet plusieurs types d'objets différents. La fonction de base pour
@@ -1245,10 +1238,10 @@ créer des listes est \Icode{list}.
 vecteur de mode \code{numeric}, le second un vecteur de mode
 \code{character} et le troisième, un vecteur de mode \code{logical}.)
 
-\tipbox{Nommez les éléments des listes puisqu'il peut s'avérer
+\tipbox{Étiquetez les éléments des listes puisqu'il peut s'avérer
   difficile autrement de les identifier. De plus, comme nous le
   verrons ci-dessous, il est très simple d'extraire les éléments d'une
-  liste par leur étiquette.}
+  liste par leur \index{etiquette@étiquette}étiquette.}
 
 L'indiçage\Index{indiçage!liste} des listes recèle quelques subtilités
 auxquelles il faut porter une attention particulière. Tout d'abord, il
@@ -1262,11 +1255,11 @@ jusqu'ici).
 \item Les crochets simples\indexcode{[} fonctionnent avec la liste
   comme avec tout vecteur. Le résultat de l'indiçage avec \code{[~]}
   est une liste. Quand on y pense, c'est le seul résultat logique
-  lorsque l'on indice une liste avec un vecteur. Par conséquent, le
-  résultat de l'extraction d'un seul élément d'une liste avec les
-  crochets simples est non pas l'objet en question, mais bien une
-  liste d'un élément contenant l'objet. C'est rarement ce que l'on
-  souhaite obtenir.
+  lorsque l'on indice une liste avec un vecteur. Toutefois, cette
+  règle fait en sorte que le résultat de l'extraction d'un seul
+  élément d'une liste avec les crochets simples est non pas l'objet en
+  question, mais bien une liste d'un élément contenant l'objet. C'est
+  rarement ce que l'on souhaite obtenir.
 <<echo=TRUE>>=
 x[1]
 x[-2]
@@ -1463,11 +1456,12 @@ sapply(x, sort)
   vecteur avec \code{sapply}, ou modifier \code{f} pour y intégrer un
   appel à \code{sapply}.}
 
-\importantbox{Outre l'\index{arithmetique@arithmétique
-    vectorielle}algèbre vectorielle, l'application avec \icode{lapply}
-  et \icode{sapply} constitue le principal moyen d'effectuer des
-  calculs répétitifs dans R. On ne saurait donc trop insister sur
-  l'importance de ces deux fonctions.}
+\importantbox{Outre %
+  l'\index{arithmetique@arithmétique vectorielle}arithmétique
+  vectorielle, l'application avec \icode{lapply} et \icode{sapply}
+  constitue le principal moyen d'effectuer des calculs répétitifs dans
+  R. On ne saurait donc trop insister sur l'importance de ces deux
+  fonctions.}
 
 Autre membre de la famille des fonctions d'application sur les listes
 et les vecteurs, \Icode{mapply} est une version multidimensionnelle de
@@ -1648,8 +1642,9 @@ mapply(mean, x, 0:3/10)    #-*- `\labelline{donnees:lsmapply:fin}`
 \section{Tableau de données}
 \label{sec:donnees:dataframes}
 
-Le \Index{tableau de données}\index{data frame|see{tableau de
-    données}}tableau de données (\emph{data frame}\footnote{%
+Le \Index{tableau de données}%
+\index{data frame|see{tableau de données}}tableau de données
+(\emph{data frame}\footnote{%
   Il n'y a pas de traduction française universelle pour \emph{data
     frame}, mais «tableau de données» semble la plus répandue. Ne vous
   surprenez pas de voir tout bonnement «data frame» dans les messages
@@ -1691,13 +1686,6 @@ x$Age
 Il est possible d'ajouter des lignes ou des colonnes à un tableau de
 données avec les fonctions \icode{rbind} et \icode{cbind}.
 
-\tipbox{Vous remarquerez, ci-dessus, que les données de la colonne
-  \code{Nom} sont considérées comme des facteurs. C'est une
-  caractéristique de la fonction \code{data.frame} de convertir
-  automatiquement les chaines de caractères en facteurs. L'option
-  \code{stringAsFactors = FALSE} permet d'éviter la conversion
-  forcée.}
-
 \gotorbox{Étudiez les quelques exemples de tableaux de données
   présentés aux lignes \reflines{donnees:dataframe} du fichier de
   script \code{\scriptfilename} reproduit à la
@@ -1713,26 +1701,20 @@ données avec les fonctions \icode{rbind} et \icode{cbind}.
 ## attribut 'dim', ce qui fait qu'il est représenté comme une
 ## matrice. Cependant, les colonnes peuvent être de modes
 ## différents.
-##
-## Nous créons ici le même data frame que dans l'exemple du
-## chapitre, mais avec l'option 'stringsAsFactors = FALSE'
-## pour éviter la conversion automatique de la colonne 'Nom'
-## en facteur.
 data.frame(Nom = c("Pierre", "Jean", "Jacques"),
            Age = c(42, 34, 19),
-           Fumeur = c(TRUE, TRUE, FALSE),
-           stringsAsFactors = FALSE)
+           Fumeur = c(TRUE, TRUE, FALSE))
 
 ## R est livré avec plusieurs jeux de données, la plupart sous
-## forme de data frames.
+## forme de tableaux de données.
 ##-!- data()                     # liste complète
 
-## Nous allons illustrer certaines manipulations des data
-## frames avec le jeu de données 'USArrests'.
+## Nous allons illustrer certaines manipulations des tableaux
+## de données avec le jeu de données 'USArrests'.
 USArrests                  # jeu de données
 
 ## Analyse succincte de l'objet.
-mode(USArrests)            # un data frame est une liste...
+mode(USArrests)            # une liste...
 length(USArrests)          # ... de quatre éléments...
 class(USArrests)           # ... de classe 'data.frame'
 dim(USArrests)             # dimensions implicites
@@ -1743,7 +1725,7 @@ USArrests$Murder           # idem, plus simple
 USArrests[1, ]             # première ligne
 
 ## La fonction 'subset' permet d'extraire des lignes et des
-## colonnes d'un data frame de manière très intuitive.
+## colonnes d'un tablau de données de manière très intuitive.
 ##
 ## Par exemple, nous pouvons extraire ainsi le nombre
 ## d'assauts dans les états comptant un taux de meurtre
@@ -2001,6 +1983,22 @@ auj >= d                   # après le 2000-02-29?
 (dixsem <- seq(Sys.Date(), length.out = 10, by = "1 week"))
 ##-!- ?seq.Date                  # voir les autres possibilités
 
+## Attention: dans la génération de suites par mois, le jour du mois
+## ne change pas sauf si cela résulte en un jour invalide. Cela arrive
+## seulement si la date de départ est le 31 du mois. Dans ce cas,
+## c'est le jour du mois suivant qui est utilisé.
+seq(as.Date("2042-05-31"), length.out = 4, by = "+1 month")
+
+## Un truc pour se prémunir contre cet éventuel problème consiste à
+## ajouter un jour à la date de départ avant de générer la suite, puis
+## à soustraire un jour ensuite.
+##
+## Comme ça, si la date de départ est un 31, on génère la suite à
+## partir du 1er du mois suivant pour revenir ensuite en arrière; si
+## la date de départ est n'importe quel autre jour dans le mois, ça ne
+## change rien.
+seq(as.Date("2042-05-31") + 1, length.out = 4, by = "+1 month") - 1
+
 ## Quelques fonctions d'extraction utiles.
 weekdays(dixsem)           # jours de la semaine
 months(dixsem)             # mois
@@ -2059,72 +2057,72 @@ x
 @
 
 \begin{ttscript}{rowMeans}
-\item[\Icode{nrow}] \index{matrice!nombre de
-    lignes}nombre de lignes
+\item[\Icode{nrow}] \index{matrice!nombre de lignes}nombre de
+  lignes.
 <<echo=TRUE>>=
 nrow(x)
 @
-\item[\Icode{ncol}] nombre de \index{matrice!nombre de
-    colonnes}colonnes
+\item[\Icode{ncol}] \index{matrice!nombre de colonnes}nombre de
+  colonnes.
 <<echo=TRUE>>=
 ncol(x)
 @
 \item[\Icode{rowSums}] \index{matrice!sommes par ligne}sommes par
-  ligne
+  ligne.
 <<echo=TRUE>>=
 rowSums(x)
 @
 \item[\Icode{colSums}] \index{matrice!sommes par colonne}sommes par
-  colonne
+  colonne.
 <<echo=TRUE>>=
 colSums(x)
 @
 \item[\Icode{rowMeans}] \index{matrice!moyennes par ligne}moyennes par
-  ligne
+  ligne.
 <<echo=TRUE>>=
 rowMeans(x)
 @
 \item[\Icode{colMeans}] \index{matrice!moyennes par colonne}moyennes
-  par colonne
+  par colonne.
 <<echo=TRUE>>=
 colMeans(x)
 @
-\item[\code{\%*\%}] \index{matrice!produit}produit matriciel
+\item[\code{\%*\%}] \index{matrice!produit}produit matriciel.
 <<echo=TRUE>>=
 x %*% x
 @
-\item[\Icode{t}] \index{matrice!transposée}transposée
+\item[\Icode{t}] \index{matrice!transposée}transposée.
 <<echo=TRUE>>=
 t(x)
 @
-\item[\Icode{det}] \index{matrice!déterminant}déterminant
+\item[\Icode{det}] \index{matrice!déterminant}déterminant.
 <<echo=TRUE>>=
 det(x)
 @
 \item[\Icode{solve}] avec un seul argument (une matrice carrée):
-  \index{matrice!inverse}inverse
+  \index{matrice!inverse}inverse;
 <<echo=TRUE>>=
 solve(x)
 @
   avec deux arguments (une matrice
   carrée et un vecteur): solution du système d'équations linéaires
-  $\mat{A} \mat{x} = \mat{b}$
+  $\mat{A} \mat{x} = \mat{b}$;
 <<echo=TRUE>>=
 solve(x, c(1, 2))
 @
 \item[\Icode{diag}] avec une matrice en argument:
-  \index{matrice!diagonale}diagonale de la matrice
+  \index{matrice!diagonale}diagonale de la matrice;
 <<echo=TRUE>>=
 diag(x)
 @
   avec un vecteur en
-  argument: matrice diagonale formée avec le vecteur
+  argument: matrice diagonale formée avec le vecteur;
 <<echo=TRUE>>=
 diag(c(5, 1))
 @
   avec un scalaire
   $p$ en argument: \index{matrice!identité}matrice identité
-  $p \times p$
+  $p \times p$.
 <<echo=TRUE>>=
 diag(2)
 @
@@ -2679,13 +2677,9 @@ rpareto <- function(n, shape, scale)
     tailles $100$, $150$, $200$, $250$ et $300$ d'une loi de Pareto
     avec $\alpha = 2$ et $\lambda = \nombre{5000}$. Les échantillons
     aléatoires devraient être stockés dans une liste.
-  \item On vous fournit l'exemple suivant d'utilisation de la
-    fonction \icode{paste}:
-<<echo=TRUE>>=
-paste("a", 1:5, sep = "")
-@
-    Nommer les éléments de la liste créée en a) \code{sample1},
-    \code{sample2}, \dots, \code{sample5}.
+  \item Nommer les éléments de la liste créée en a) \code{sample1},
+    \code{sample2}, \dots, \code{sample5} à l'aide de la fonction
+    \icode{paste} présentée à la \autoref{sec:bases:internes:texte}.
   \item Calculer la moyenne de chacun des échantillons aléatoires
     obtenus en a). Retourner le résultat dans un vecteur.
   \item Évaluer la fonction de répartition de la loi de Pareto$(2,

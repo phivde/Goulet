@@ -1,4 +1,4 @@
-%%% Copyright (C) 2019 Vincent Goulet
+%%% Copyright (C) 2020 Vincent Goulet
 %%%
 %%% Ce fichier et tous les fichiers .tex ou .Rnw dont la racine est
 %%% mentionnée dans les commandes \include ci-dessous font partie du
@@ -31,6 +31,8 @@
   \usepackage{dirtree}                 % arborescence de fichiers
   \usepackage{fontawesome5}            % icônes \fa*
   \usepackage{awesomebox}              % boites info, important, etc.
+  \usepackage{ullrcorners}             % expressions régulières
+  \usepackage{soul}                    % surbrillance (expressions régulières)
   \usepackage{answers}                 % exercices et solutions
   \usepackage{listings}                % code informatique
   \usepackage{refcount}                % numéros de ligne en surbrillance
@@ -40,8 +42,8 @@
   %%% =============================
   \title{Programmer avec R}
   \author{Vincent Goulet}
-  \renewcommand{\year}{2019}
-  \renewcommand{\month}{10}
+  \renewcommand{\year}{2020}
+  \renewcommand{\month}{08}
   \newcommand{\reposurl}{https://gitlab.com/vigou3/programmer-avec-r/}
 
   %%% ===================
@@ -66,6 +68,7 @@
   [
     Extension = .otf,
     UprightFont = *-Book,
+    ItalicFont = *-BookItalic,
     BoldFont = *-SemiBold,
     BoldItalicFont = *-SemiBoldItalic,
     Scale = 0.98,
@@ -87,6 +90,8 @@
   \definecolor{link}{rgb}{0,0.4,0.6}        % liens internes
   \definecolor{url}{rgb}{0.6,0,0}           % liens externes
   \definecolor{citation}{rgb}{0,0.5,0}      % citations
+  \colorlet{regex}{Snow4}                   % coins des regex
+  \colorlet{regexmatch}{Snow3}              % correspondances regex
   \colorlet{codebg}{LightYellow1}           % fond code R
   \colorlet{indexedface}{PaleGreen2}        % cellule indexée (2D et 3D)
   \colorlet{indexedtop}{PaleGreen3}         % cellule indexée (3D, dessus)
@@ -99,7 +104,7 @@
   \definecolor{or}{rgb}{1,0.8,0}            % or bandeau UL
 
   %% Hyperliens
-  \usepackage{hyperref}
+  \usepackage[backref=page]{hyperref}
   \hypersetup{%
     pdfauthor = \theauthor,
     pdftitle = \thetitle,
@@ -110,6 +115,15 @@
     citecolor = {citation},
     pdfpagemode = {UseOutlines},
     pdfstartview = {Fit}}
+  \renewcommand*{\backrefalt}[4]{%
+    \ifcase #1 %
+      Aucune citation.%
+    \or
+      Cité à la page #2.%
+    \else
+      Cité aux pages #2.%
+    \fi
+  }
   \setlength{\XeTeXLinkMargin}{1pt}
 
   %% Affichage de la table des matières du PDF
@@ -144,6 +158,7 @@
   \renewcommand{\cfttableafterpnum}{\cftparfillskip}
   \renewcommand{\cftfigureleader}{\hspace{1.5em}}
   \renewcommand{\cftfigureafterpnum}{\cftparfillskip}
+  \setlength{\cftbeforechapterskip}{1.0em plus 0.5em minus 0.5em}
   \setlength{\cftfigurenumwidth}{3.2em}
 
   %% Création d'une «liste des vidéos» similaires à la
@@ -177,6 +192,7 @@
   \setlist[enumerate,2]{label=\alph*),labelsep=*,leftmargin=1.5em}
   \setlist[enumerate,3]{label=\roman*),labelsep=*,leftmargin=1.5em,align=right}
   \setlist[itemize]{leftmargin=*,align=left}
+  \setlist[trivlist]{nosep}
 
   %% Options de babel
   \frenchbsetup{CompactItemize=false,%
@@ -193,14 +209,18 @@
   %%% =========================
 
   %% Syntaxe de R avec ajouts de quelques mots clés.
-  \lstloadlanguages{R}
+  \lstloadlanguages{R,sh}
   \lstdefinelanguage{Renhanced}[]{R}{%
     morekeywords={colMeans,colSums,head,is.na,is.null,mapply,ms,na.rm,%
       nlmin,replicate,row.names,rowMeans,rowSums,sys.time,system.time,%
       tail,which.max,which.min,letters,LETTERS,Trig},
-    deletekeywords={c,start},
-    alsoletter={.\%},%
-    alsoother={:_\$}}
+    deletekeywords={c,start,q},
+    alsoletter={.\%},
+    alsoother={:_\$},
+    moredelim=[il]{\#-*-}}
+  \lstdefinelanguage{shenhanced}[]{sh}{%
+    morekeywords={grep},
+    moredelim=[il]{\#-*-}}
 
   %% Mise en forme du code source.
   %%
@@ -229,7 +249,6 @@
       \fi},
     firstnumber=\scriptfirstline,
     escapechar=`,
-    moredelim=[il]{\#-*-},
     index=[1][keywords],
     indexstyle=\indexcode}
 
@@ -246,7 +265,7 @@
 
   %% L'entête des fichiers de script n'est pas affiché dans le
   %% document.
-  \def\scriptfirstline{12}      % nombre magique!
+  \def\scriptfirstline{11}      % nombre magique!
 
   %%% =========================
   %%%  Nouveaux environnements
@@ -372,6 +391,23 @@
   \newcommand{\code}[1]{\texttt{#1}}
   \newcommand{\pkg}[1]{\textbf{#1}}
 
+  %% Expressions régulières; utilise le paquetage local
+  %% ullrcorners pour tracer les coins autour de l'expression et le
+  %% paquetage soul pour mettre les correspondances en surbrillance.
+  \newcommand{\regex}[1]{\ullrcorners{regex}{\code{#1}}}
+  \newcommand{\chaine}[1]{\code{#1}}
+  \newcommand{\matches}{\sethlcolor{regexmatch}\hl}
+
+  %% J'ai besoin d'afficher le symbole d'espace de \verb* à
+  %% l'intérieur d'expressions régulières, donc en argument à \regex.
+  %% Pour ce faire, le symbole est sauvegardé à l'intérieur d'une
+  %% boite. [https://tex.stackexchange.com/a/50805]
+  \newsavebox{\spacebox}
+  \begin{lrbox}{\spacebox}
+    \verb*! !
+  \end{lrbox}
+  \newcommand{\aspace}{\usebox{\spacebox}}
+
   %% Hyperlien avec symbole de lien externe juste après; second
   %% argument peut être vide pour afficher l'url comme lien
   %% [https://tex.stackexchange.com/q/53068/24355 pour procédure de
@@ -437,10 +473,35 @@
     Les numéros de page en caractères gras indiquent les pages où les
     concepts sont introduits, définis ou expliqués.\vskip\onelineskip}
   \newcommand{\Index}[1]{\index{#1|bfhyperpage}}
-  \newcommand{\indexcode}[1]{\index{#1@\code{#1}}}
-  \newcommand{\Indexcode}[1]{\Index{#1@\code{#1}}}
-  \newcommand{\icode}[1]{\indexcode{#1}\code{#1}}
-  \newcommand{\Icode}[1]{\Indexcode{#1}\code{#1}}
+
+  %% Les entrées d'index générées par listings avec \indexcode,
+  %% ci-dessous, causent problème lorsque le mot clé est suivi d'une
+  %% virgule. La redéfinition de \lst@nolig règle le problème.
+  %% https://tex.stackexchange.com/q/510104
+  \makeatletter
+  \newcommand{\indexcode}[2][]{%
+    \begingroup
+    \def\lst@nolig{}%
+    \def\param{#1}%
+    \ifx\param\empty
+      \index{#2@\code{#2}}%
+    \else
+      \index{#2@\code{#2} (#1)}%
+    \fi
+    \endgroup
+  }
+  \makeatother
+
+  \newcommand{\Indexcode}[2][]{%
+    \def\param{#1}%
+    \ifx\param\empty
+      \Index{#2@\code{#2}}%
+    \else
+      \Index{#2@\code{#2} (#1)}%
+    \fi
+  }
+  \newcommand{\icode}[2][]{\indexcode[#1]{#2}\code{#2}}
+  \newcommand{\Icode}[2][]{\Indexcode[#1]{#2}\code{#2}}
   \makeindex
 
   %%% =======
@@ -487,18 +548,16 @@
     puis-que
   }
 
-%  \includeonly{algorithmes,bases,donnees,solutions}
+%  \includeonly{}
 
 \begin{document}
-
-
 
 \frontmatter
 
 \pagestyle{empty}
 
 \input{couverture-avant}
-\null\cleardoublepage           % cf. section 2.2 textpos.pdf
+\null\cleartoverso              % cf. section 2.2 textpos.pdf
 
 \include{notices}
 \clearpage
@@ -517,7 +576,22 @@
 
 \include{comment}
 
-%% Vignette tirée de xkcd.com
+%% Citation de D.E. Knuth (recto)
+\cleartorecto
+\thispagestyle{empty}
+\begin{vplace}[0.45]
+  \begin{quote}
+    L'ultime test pour vérifier si je comprends quelque chose
+    consiste à l'expliquer à un ordinateur. Je peux vous dire quelque
+    chose et vous hocherez la tête, mais sans que je sois certain d'avoir
+    bien expliqué. L'ordinateur, lui, ne hoche pas la tête. Il répète
+    exactement ce que je lui ai dit. Vous pouvez faire illusion dans
+    plusieurs aspects de la vie, mais pas avec les ordinateurs.
+    \sourceatright{Donald E.~Knuth}
+  \end{quote}
+\end{vplace}
+
+%% Vignette tirée de xkcd.com (verso)
 \cleartoverso
 \thispagestyle{empty}
 \begin{vplace}[0.45]

@@ -1,4 +1,4 @@
-%%% Copyright (C) 2019 Vincent Goulet
+%%% Copyright (C) 2020 Vincent Goulet
 %%%
 %%% Ce fichier fait partie du projet
 %%% «Programmer avec R»
@@ -14,22 +14,14 @@
 
 \def\scriptfilename{\currfilebase.R}
 \SweaveOpts{echo=FALSE}
+\SweaveInput{share/license-by-sa.nw}
 
 <<echo=FALSE, results=hide>>=
 source(".Sweaveprofile")   # configuration
 source("Stangle.R")        # lancement de Stangle
 @
 <<script>>=
-## Copyright (C) 2019 Vincent Goulet
-##
-## Ce fichier fait partie du projet
-## «Programmer avec R»
-## https://gitlab.com/vigou3/programmer-avec-r
-##
-## Cette création est mise à disposition sous licence
-## Attribution-Partage dans les mêmes conditions 4.0
-## International de Creative Commons.
-## https://creativecommons.org/licenses/by-sa/4.0/
+<<license-by-sa>>
 @
 
 \begin{objectifs}
@@ -82,15 +74,15 @@ search()
 \begin{Sinput}
 > library()
 \end{Sinput}
-\begin{Verbatim}[commandchars=\\\{\}]
+\begin{Soutput}[commandchars=\\\{\}]
 Packages dans la bibliothèque
 ‘/Library/Frameworks/R.framework/\meta{...}/library’ :
 
 base           The R Base Package
 boot           Bootstrap Functions
                (Originally by Angelo Canty for S)
-\meta{...}
-\end{Verbatim}
+...
+\end{Soutput}
 \end{Schunk}
 
 
@@ -99,7 +91,7 @@ boot           Bootstrap Functions
 
 Pour rendre disponibles les fonctionnalités d'un paquetage, peu
 importe sa provenance, il faut le charger dans la session de travail.
-C'est là le principal rôle de la fonction \Icode{library}.
+C'est le principal rôle de la fonction \Icode{library}.
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
 library("\meta{paquetage}")
@@ -111,63 +103,87 @@ library("\meta{paquetage}")
 \label{sec:paquetages:library}
 
 Nous verrons à la \autoref{sec:paquetages:install} comment ajouter des
-paquetages au système de base. Je recommande fortement de prévoir une
-bibliothèque personnelle pour contenir ces nouveaux paquetages. Tout
-d'abord, cela permet d'éviter les éventuels problèmes d'accès en
+paquetages au système de base. Je vous recommande fortement de prévoir
+une bibliothèque personnelle pour contenir ces nouveaux paquetages.
+Tout d'abord, cela permet d'éviter les éventuels problèmes d'accès en
 écriture dans la bibliothèque principale, surtout sur des systèmes
 partagés. Ensuite, les paquetages placés dans une bibliothèque
 personnelle résistent mieux au processus de mise à jour de R que ceux
-ajoutés à la bibliothèque principale.
+ajoutés à la bibliothèque principale. Il s'agit d'un préréglage
+absolu\footnote{L'expression «préréglage absolu» est celle proposée
+  par l'Office québécois de la langue française comme équivalent de
+  l'expression anglaise \emph{set and forget}.} %
+que vous aurez à effectuer une seule fois. L'investissement en temps
+--- minime --- en vaut largement la peine.
 
-Avant toute chose, il faut créer un répertoire dans son système de
-fichiers qui servira de bibliothèque personnelle. Dans la suite, nous
-utiliserons \verb=~/R/library=, où \verb=~= représente le dossier de
-départ (\autoref{sec:informatique:os:unix}).
+La mise sur pied d'une bibliothèque personnelle consiste simplement à
+créer un répertoire dans son système de fichier pour accueillir la
+bibliothèque, puis à indiquer à R, via un fichier de configuration,
+l'existence et l'emplacement de cette bibliothèque.
 
-\osxbox{Sous macOS, le dossier tout indiqué pour la bibliothèque
-  personnelle est \code{\string~/Library/R/library}. Toutefois, le
-  dossier \code{\string~/Library} est caché dans le Finder. Pour y
-  accéder, cliquez sur le menu \code{Aller} en appuyant simultanément
-  sur la touche Option (\optkey), puis sélectionnez
-  \code{Bibliothèque}.}
+Voici une procédure pas à pas pour compléter les opérations de
+création d'une bibliothèque personnelle depuis une une ligne de
+commande Unix (\index{Terminal}Terminal sous macOS; \index{MSYS}MSYS
+de \index{MSYS2}\link{https://www.msys2.org}{MSYS2} ou
+\index{Git~Bash}Git~Bash de \link{https://git-scm.com/downloads}{Git
+  for Windows} sous Windows; terminal RStudio).
 
-Au démarrage, R lit le fichier de configuration \verb=~/.Renviron=,
-s'il existe. C'est dans ce fichier que l'on indique à R l'existence
-d'une bibliothèque personnelle de même que l'endroit où elle se trouve
-dans le système de fichiers.
-
-À l'aide d'un éditeur de texte, ouvrir ou créer\footnote{Pour créer le
-  fichier dans RStudio, sélectionner \code{File|New File|Text
-    File}.} %
-le fichier \verb=~/.Renviron= et y ajouter la ligne ci-dessous. Au
-besoin, remplacer le chemin \verb=~/R/library= par celui du répertoire
-créé précédemment. Utiliser la barre oblique avant (\code{/}) pour
-séparer les répertoires dans le chemin d'accès.
-\begin{Schunk}
-\begin{verbatim}
-R_LIBS_USER="~/R/library"
-\end{verbatim}
-\end{Schunk}
-
-\osxbox{Pour afficher les fichiers débutant par un point dans la boite
-  de dialogue d'ouverture de fichier d'une application comme RStudio,
-  appuyez sur \shiftkey\cmdkey\code{.} (\shiftkey\cmdkey~«point»).}
-
-Une fois la configuration terminée et après un redémarrage de R, le
-chemin vers la bibliothèque personnelle devrait apparaitre dans les
-résultats de la commande
-\index{libPaths@\code{.libPaths}}\code{.libPaths}.
-\begin{Schunk}
+\begin{enumerate}
+\item Créer les répertoires dans votre système de fichiers pour
+  accueillir la bibliothèque personnelle. Sous macOS, je recommande
+  d'utiliser le répertoire \code{\string~/Library/R/library}. Pour les
+  autres systèmes d'exploitation, \code{\string~/R/library} devrait
+  convenir. (Ici, «\code{\string~}» représente le dossier de départ
+  tel qu'expliqué à la \autoref{sec:informatique:os:unix}.)
+  \begin{trivlist}
+  \item \textbf{macOS}
+    \begin{Schunk}
+\begin{Verbatim}
+$ mkdir -p ~/Library/R/library
+\end{Verbatim}
+    \end{Schunk}
+  \item \textbf{autres systèmes d'exploitation}
+    \begin{Schunk}
+\begin{Verbatim}
+$ mkdir -p ~/R/library
+\end{Verbatim}
+    \end{Schunk}
+  \end{trivlist}
+\item Inscrire l'emplacement de la bibliothèque dans le fichier de
+  configuration \code{\string~/.Renviron} que R lit au démarrage.
+  \begin{trivlist}
+  \item \textbf{macOS}
+    \begin{Schunk}
+\begin{Verbatim}
+$ echo 'R_LIBS_USER="~/Library/R/library"' >> ~/.Renviron
+\end{Verbatim}
+    \end{Schunk}
+  \item \textbf{autres systèmes d'exploitation}
+    \begin{Schunk}
+\begin{Verbatim}
+$ echo 'R_LIBS_USER="~/R/library"' >> ~/.Renviron
+\end{Verbatim}
+    \end{Schunk}
+  \end{trivlist}
+  \warningbox{Les commandes ci-dessus utilisent des guillemets simples
+    «\code{'}» et doubles «\code{"}». Veillez à respecter leur nature
+    et leur position.}
+\item Redémarrer R et vérifier que le chemin vers la bibliothèque
+  personnelle apparait dans les résultats de la commande
+  \index{libPaths@\code{.libPaths}}\code{.libPaths}.
+  \begin{Schunk}
 \begin{Sinput}
 > .libPaths()
 \end{Sinput}
-\begin{Verbatim}[commandchars=\\\{\}]
+\begin{Soutput}[commandchars=\\\{\}]
 <<echo=FALSE, results=tex, strip.white=false>>=
 cat(paste0('"', sub("Versions/.*?/Resources", "\\\\meta{...}", .libPaths()), '"'),
     fill = TRUE, labels = c("[1]", "[2]"))
 @
-\end{Verbatim}
-\end{Schunk}
+\end{Soutput}
+  \end{Schunk}
+\item Il n'y a même pas de quatrième étape.
+\end{enumerate}
 
 La bibliothèque personnelle a toujours préséance sur la bibliothèque
 principale.
@@ -177,6 +193,52 @@ principale.
   configuration et celles de \icode{library} et de
   \index{libPaths@\code{.libPaths}}\code{.libPaths} pour la gestion
   des bibliothèques.}
+
+\gotorbox{Le fichier de script \code{\scriptfilename} reproduit à la
+  \autoref{sec:paquetages:exemples} propose, aux lignes
+  \reflines{paquetages:library}, une procédure alternative --- et en
+  tous points équivalente --- pour créer une bibliothèque personnelle
+  entièrement depuis la ligne de commande de R.}
+
+<<script, results=hide>>=
+###
+### CRÉATION D'UNE BIBLIOTHÈQUE PERSONNELLE `\labelline{paquetages:library}`
+###
+
+## Liste des bibliothèques consultées par R. Votre
+## bibliothèque personnelle devrait y apparaitre si vous avez
+## suivi la procédure expliquée dans le chapitre.
+.libPaths()
+
+## Comme alternative à la procédure du chapitre, il est
+## possible de créer le répertoire pour la bibliothèque
+## personnelle, puis d'inscrire son emplacement dans le
+## fichier ~/.Renviron directement depuis R.
+##
+## Tout d'abord, la commande 'dir.create' crée un répertoire
+## dans le système de fichier. Adaptez les chemins d'accès
+## selon vos besoins.
+##
+## Si vous êtes sous macOS, utilisez la commande suivante.
+##-!- dir.create("~/Library/R/library", recursive = TRUE) # macOS
+
+## Pour tous les autres systèmes d'exploitation, utilisez
+## plutôt la commande suivante.
+##-!- dir.create("~/R/library", recursive = TRUE) # autres OS
+
+## Ensuite, la commande 'writeLines' permet d'écrire
+## directement dans un fichier. Assurez-vous que le chemin
+## d'accès correspond à celui utilisé ci-dessus.
+##
+## Si vous êtes sous macOS, utilisez la commande suivante.
+##-!- writeLines('R_LIBS_USER="~/Library/R/library"',
+##-!-            con = "~/.Renviron")
+
+## Pour tous les autres systèmes d'exploitation, utilisez
+## plutôt la commande suivante.
+##-!- writeLines('R_LIBS_USER="~/R/library"',
+##-!-            con = "~/.Renviron")  #-*- `\labelline{paquetages:library:fin}`
+@
 
 
 \section{Installation de paquetages additionnels}
@@ -205,6 +267,10 @@ Pour utiliser le paquetage, il faut le charger en mémoire avec
 spécifié dans les bibliothèques de
 \index{libPaths@\code{.libPaths}}\code{.libPaths}.
 
+\gotorbox{Étudiez l'intégralité du fichier de script
+  \code{\scriptfilename} reproduit à la
+  \autoref{sec:paquetages:exemples}.}
+
 <<script, results=hide>>=
 ###
 ### SYSTÈME DE BASE
@@ -216,8 +282,9 @@ spécifié dans les bibliothèques de
 search()
 
 ## Liste de tous les packages installés sur votre système.
-## Noter que MASS en fait partie. C'est un paquetage livré
-## avec R, mais qui n'est pas chargé par défaut.
+## Noter que MASS et tools en fant partie. Ce sont des
+## paquetages livrés avec R, mais qui ne sont pas chargés par
+## défaut.
 ##-!- library()
 
 ###
@@ -226,23 +293,14 @@ search()
 
 ## Chargement du package MASS qui contient plusieurs
 ## fonctions statistiques très utiles.
-library("MASS")
-
-###
-### CRÉATION D'UNE BIBLIOTHÈQUE PERSONNELLE
-###
-
-## Liste des bibliothèques consultées par R. Votre
-## bibliothèque personnelle devrait y apparaitre si vous avez
-## suivi la procédure expliquée dans le chapitre.
-.libPaths()
+##-!- library("MASS")
 
 ###
 ### INSTALLATION DE PAQUETAGES ADDITIONNELS
 ###
 
-## Installation du paquetage actuar depuis le miroir canadien
-## de CRAN.
+## Installation du paquetage actuar depuis un site miroir de
+## CRAN sélectionné automatiquement.
 ##
 ## Si vous avez configuré une bibliothèque personnelle et
 ## qu'elle apparait dans le résultat de '.libPaths()',
@@ -255,9 +313,6 @@ library("MASS")
 ## '.libPaths()'.
 library("actuar")
 @
-
-\gotorbox{Étudiez le fichier de script \code{\scriptfilename}
-  reproduit à la \autoref{sec:paquetages:exemples}.}
 
 
 \section{Exemples}

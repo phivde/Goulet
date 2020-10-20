@@ -1,4 +1,4 @@
-%%% Copyright (C) 2019 Vincent Goulet
+%%% Copyright (C) 2020 Vincent Goulet
 %%%
 %%% Ce fichier fait partie du projet
 %%% «Programmer avec R»
@@ -14,22 +14,14 @@
 
 \def\scriptfilename{\currfilebase.R}
 \SweaveOpts{echo=FALSE}
+\SweaveInput{share/license-by-sa.nw}
 
 <<echo=FALSE, results=hide>>=
 source(".Sweaveprofile")   # configuration
 source("Stangle.R")        # lancement de Stangle
 @
 <<script>>=
-## Copyright (C) 2019 Vincent Goulet
-##
-## Ce fichier fait partie du projet
-## «Programmer avec R»
-## https://gitlab.com/vigou3/programmer-avec-r
-##
-## Cette création est mise à disposition sous licence
-## Attribution-Partage dans les mêmes conditions 4.0
-## International de Creative Commons.
-## https://creativecommons.org/licenses/by-sa/4.0/
+<<license-by-sa>>
 @
 
 \begin{objectifs}
@@ -39,7 +31,7 @@ source("Stangle.R")        # lancement de Stangle
 \end{objectifs}
 
 «Est-ce que je peux transférer mes données de Excel à R?» Cette
-question et ses multiples variantes est assurément l'une des plus
+question et ses multiples variantes sont assurément les plus
 fréquemment posées par les utilisateurs de R. La réponse courte: oui,
 c'est possible d'importer (c'est la terminologie correcte) des données
 de source externe dans R. La réponse longue: oui, c'est possible, mais
@@ -194,9 +186,12 @@ statistiques peuvent exporter leurs tableaux de données sous forme de
 fichier texte dans lequel les champs sont séparés par un caractère
 quelconque, souvent une espace. Le format le plus universel utilise
 toutefois comme séparateur la virgule ou le point-virgule; c'est le
-format de fichier CSV (\emph{comma-separated values}). La
-\autoref{fig:import-export:read.table} présente le même jeu de données dans
-deux formats différents.
+format de fichier \index{CSV}CSV (\emph{comma-separated values}). La
+\autoref{fig:import-export:read.table} présente le même jeu de
+données\footnote{%
+  Ce jeu de données est une version réduite et simplifiée des données
+  du fichier \code{carburant.dat} livré avec le présent ouvrage.} %
+dans deux formats différents.
 
 \begin{figure}
   \lstset{frame=single,language={},numbers=none}
@@ -394,7 +389,7 @@ write(x, file = "matrice.data", ncolumns = 4, append = TRUE)
 
 ## Pour illustrer l'exportation avec 'write.table',
 ## 'write.csv' et 'write.csv2', nous allons exporter le jeu de
-## données 'USArrests' utilisé précédemment.
+## données 'USArrests' livré avec R.
 ##
 ## Les titres des lignes sont importants dans ce jeu de
 ## données puisqu'ils contiennent les noms des États. Par

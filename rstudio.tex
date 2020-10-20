@@ -1,4 +1,4 @@
-%%% Copyright (C) 2019 Vincent Goulet
+%%% Copyright (C) 2020 Vincent Goulet
 %%%
 %%% Ce fichier fait partie du projet
 %%% «Programmer avec R»
@@ -185,29 +185,29 @@ les deux jeux, séparés par le symbole $\bullet$.
 \item[\code{Alt+-} $\bullet$ \code{\optkey\,-}] insérer le symbole
   d'affectation \verb*| <- | (pour les Mac avec un clavier
   canadien-français, consulter l'encadré de la
-  \autopageref{fig:rstudio:affectation})
+  \autopageref{fig:rstudio:affectation}).
 \item[\code{Ctrl+Retour} $\bullet$ \code{\cmdkey\,\returnkey}]
   évaluer dans le processus R la ligne sous le curseur ou la région
-  sélectionnée, puis déplacer le curseur à la prochaine expression
+  sélectionnée, puis déplacer le curseur à la prochaine expression.
 \item[\code{Ctrl+Shift+S} $\bullet$ \code{\shiftkey\,\cmdkey\,S}]
-  évaluer le code du fichier courant en entier dans le processus R
+  évaluer le code du fichier courant en entier dans le processus R.
 \item[\code{Ctrl+Alt+B} $\bullet$ \code{\optkey\,\cmdkey\,B}]
   évaluer dans le processus R le code source du début du fichier
-  jusqu'à la ligne sous le curseur
+  jusqu'à la ligne sous le curseur.
 \item[\code{Ctrl+Alt+E} $\bullet$ \code{\optkey\,\cmdkey\,E}]
   évaluer dans le processus R le code source de la ligne sous le curseur
-  jusqu'à la fin du fichier
+  jusqu'à la fin du fichier.
 \item[\code{Ctrl+Alt+F} $\bullet$ \code{\optkey\,\cmdkey\,F}]
-  évaluer le code de la fonction courante dans le processus R
+  évaluer le code de la fonction courante dans le processus R.
 \end{ttscript}
 
 À la console --- ou ligne de commande --- R, les raccourcis suivants
 sont particulièrement utiles.
 \begin{ttscript}{Ctrl-I $\bullet$ \cmdkey\,I}
 \item[$\uparrow$ | $\downarrow$] commande
-  précédente~|~suivante dans l'historique
+  précédente~|~suivante dans l'historique.
 \item[\code{Ctrl+}$\uparrow$ $\bullet$ \cmdkey\,$\uparrow$] afficher
-  la fenêtre d'historique des commandes
+  la fenêtre d'historique des commandes.
 \end{ttscript}
 
 \begin{figure}[t]
@@ -335,6 +335,35 @@ par les menus.
   fermeture de l'application.
 \end{enumerate}
 
+\videobox{\link{https://youtu.be/jX5QP0lWpF4}{Anatomie d'une session de travail
+    avec RStudio}}{%
+  La session de travail type avec RStudio ci-dessus fait aussi l'objet
+  d'\link{https://youtu.be/jX5QP0lWpF4}{une vidéo}.}
+
+
+\section{Terminal RStudio}
+\label{sec:rstudio:terminal}
+
+Le \index{terminal (RStudio)}terminal RStudio permet d'exécuter une
+ligne de commande du système d'exploitation à l'intérieur de
+l'interface familière de RStudio. C'est très utile pour exécuter des
+commande ou des scripts Bash.
+
+Le terminal se présente dans un onglet à côté de celui de la console
+R. Si aucun onglet n'apparait dans votre interface, vous pouvez
+démarrer un terminal depuis le menu \code{Tools|Terminal}.
+
+Lorsqu'un fichier de script avec l'extension \code{.sh} est ouvert
+dans RStudio, le raccourci clavier
+\code{Ctrl+Retour}~$\bullet$~\code{\cmdkey\,\returnkey} évalue la
+ligne sous le curseur dans le terminal plutôt que dans la console R.
+
+\windowsbox{Pour utiliser une ligne de commande \index{Bash}Bash dans
+  RStudio sous Windows, il faut au préalable installer l'interpréteur
+  \index{Git~Bash}Git~Bash de \link{https://git-scm.com/downloads}{Git
+    for Windows} sur le système et configurer l'éditeur tel
+  qu'expliqué à la \autoref{sec:rstudio:configuration}.}
+
 
 \section{Configuration de l'éditeur}
 \index{RStudio!configuration}
@@ -348,11 +377,13 @@ sous macOS.
 
 Je recommande d'effectuer les configurations suivantes.
 \begin{enumerate}
-\item Dans la catégorie des options de configuration générales, régler
-  l'option \code{Save workspace to .RData on exit} à \code{Never}, tel
-  qu'illustré à la \autoref{fig:rstudio:rstudio-on-exit}. Avec ce
-  réglage, l'espace de travail de R ne sera pas sauvegardé à la
-  fermeture de RStudio.
+\item Dans la catégorie \code{General}, désactiver l'option
+  \code{Restore .RData into workspace at startup} et régler l'option
+  \code{Save workspace to .RData on exit} à \code{Never}, tel
+  qu'illustré à la \autoref{fig:rstudio:rstudio-startup-and-exit}.
+  Avec ces réglages, RStudio démarre toujours avec une séance de
+  travail vierge et ne sauvegarde pas l'espace de travail de R à la
+  fermeture de l'application.
 \item Dans la catégorie \code{Code} et la sous-catégorie
   \code{Editing}, régler l'option \code{Tab width} à \code{4} afin
   d'indenter le code de quatre caractères par défaut. (Ce réglage fait
@@ -364,14 +395,17 @@ Je recommande d'effectuer les configurations suivantes.
   contenant des accents et autres symboles seront ensuite sauvegardés
   dans un codage de caractères standard sur toutes les plateformes
   informatiques.
+\item (Windows seulement) Dans la catégorie \code{Terminal},
+  sélectionner \index{Git~Bash}\code{Git~Bash} dans le menu déroulant
+  de l'option \code{New Terminals open with}.
 \end{enumerate}
 
 \begin{figure}
   \centering
-  \includegraphics{images/rstudio-on-exit}
+  \includegraphics{images/rstudio-startup-and-exit}
   \caption{Réglage de RStudio pour ne pas sauvegarder l'espace
     de travail de R au moment de quitter l'application}
-  \label{fig:rstudio:rstudio-on-exit}
+  \label{fig:rstudio:rstudio-startup-and-exit}
 \end{figure}
 
 \begin{figure}
