@@ -2,7 +2,7 @@
 === Programmer avec R
 ===
 
-# (en développement)
+# 2020.10 (2020-10-29)
 
 ## Nouveautés
 
@@ -15,6 +15,12 @@
   dans `data.frame` depuis la version 4.0.0 de R, toute référence à
   cette notion est disparue de la section et du code informatique
   correspondant.
+- Chapitre 7: introduction retravaillée et nouvelle section 7.1. La
+  révision complète du chapitre est toujours en cours, mais je publie
+  quand même ces petits changements.
+- Exercice 7.12: ajout d'informations sur l'importation des données;
+  données du fichier `100metres.dat` présentées sous forme de tableau
+  plutôt que sous forme de fichier brut.
 
 
 # 2020.08 (2020-08-25)
