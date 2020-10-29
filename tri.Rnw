@@ -339,13 +339,11 @@ Il arrive souvent que les fonctions itératives calculent un à un les
 construction comme celle-ci pour effectuer les calculs.
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\+*]
-{
-    ...
-    x <- numeric(0)
-    for (i in seq_len(n))
-        x <- c(x, \meta+calcul*)
-    ...
-}
+...
+x <- numeric(0)
+for (i in seq_len(n))
+    x <- c(x, \meta+calcul*)
+...
 \end{Verbatim}
 \end{Schunk}
 
@@ -355,37 +353,36 @@ du vecteur doit constamment augmenter pour stocker un résultat
 additionnel.
 
 Tentons une (autre) analogie alimentaire pour cette manière de
-procéder. Pour ranger des biscuits frais sortis du four, vous prenez
-un premier biscuit et vous le rangez dans un plat ne pouvant contenir
-qu'un seul biscuit. Au second biscuit, constatant que le contenant
-n'est pas assez grand, vous sortez un plat pouvant contenir deux
-biscuits, vous changez le premier biscuit de plat et vous y rangez
-aussi le second biscuit. Au troisième biscuit, le petit manège
-recommence, et ainsi de suite jusqu'à ce que le plateau de biscuits
-soit épuisé. C'est ce que je nomme, non sans un sourire en coin, le
-Syndrome de la plaque à
+procéder. Pour ranger dans une boite des biscuits frais sortis du
+four, vous prenez un premier biscuit et vous le rangez dans une boite
+ne pouvant contenir qu'un seul biscuit. Au second biscuit, constatant
+que le contenant n'est pas assez grand, vous sortez une boite pouvant
+contenir deux biscuits, vous changez le premier biscuit de boite et
+vous y rangez aussi le second biscuit. Au troisième biscuit, le petit
+manège recommence, et ainsi de suite jusqu'à ce que le plateau de
+biscuits soit épuisé. C'est ce que je nomme, non sans un sourire en
+coin, le Syndrome de la plaque à
 biscuits{\texttrademark}\index{syndrome@Syndrome de la plaque à
   biscuits}\index{biscuits|see{Syndrome de la plaque à biscuits}}.
 
 Le manège décrit ci-dessus se reproduit à l'identique dans la mémoire
-de l'ordinateur, l'odeur des biscuits chauds en moins. En effet,
-l'ordinateur doit constamment allouer de la nouvelle mémoire et
-déplacer les termes déjà sauvegardés au fur et à mesure qu'un vecteur
-grandit. Vous aurez compris qu'une telle façon de faire est à éviter
-absolument lorsque c'est possible --- et ça l'est la plupart du temps.
+de l'ordinateur, l'odeur des biscuits chauds en moins. En effet, pour
+ajouter des éléments à un vecteur, l'ordinateur doit allouer de la
+nouvelle mémoire et déplacer les termes déjà sauvegardés avant de
+pouvoir sauvegarder un terme additionnel. Vous aurez compris que vous
+devriez absolument éviter de procéder ainsi lorsque c'est possible ---
+et ça l'est la plupart du temps.
 
 Quand vous savez quelle sera la longueur finale d'un objet, il vaut
 mieux créer un contenant vide de la bonne longueur et le remplir par
 la suite avec une construction comme ci-dessous.
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\+*]
-{
-    ...
-    x <- numeric(n)
-    for (i in seq_len(n))
-        x[i] <- \meta+calcul*
-    ...
-}
+...
+x <- numeric(n)
+for (i in seq_len(n))
+    x[i] <- \meta+calcul*
+...
 \end{Verbatim}
 \end{Schunk}
 
@@ -509,7 +506,7 @@ rm("sqrt")
 fibonacci0 <- function(nterm)
 {
     if (nterm < 1)
-        stop("'nterm' doit être supérieur ou égal à 1")
+        stop("'nterm' doit être supérieur ou égal à 1")
     if (nterm == 1)
         return(0)
     x <- c(0, 1)
@@ -531,7 +528,7 @@ fibonacci0(5)
 fibonacci <- function(nterm)
 {
     if (nterm < 1)
-        stop("'nterm' doit être supérieur ou égal à 1")
+        stop("'nterm' doit être supérieur ou égal à 1")
     if (nterm == 1)
         return(0)
     x <- numeric(nterm)
