@@ -2020,7 +2020,7 @@ auj - 24 * 3600            # hier, même heure
 auj - as.POSIXct("2000-02-29") # écart entre deux dates
 difftime(auj, as.POSIXct("2000-02-29")) # idem
 
-## La classe POSIXlt est un représentation sous forme de liste
+## La classe POSIXlt est une représentation sous forme de liste
 ## des informations contenues dans un objet POSIXct. Elle est
 ## surtout utile pour extraire facilement des informations
 ## d'une date sous forme numérique, ce qui permet ensuite
