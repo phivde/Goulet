@@ -105,7 +105,7 @@ l'un ou l'autre des types suivants
   petites qu'une carte donnée pour déterminer son rang dans la main
   triée;
 \item tri par une méthode \emph{ad hoc} qui fonctionne pour une main
-  de cinq cartes, mais qui en saurait se généraliser à un problème de
+  de cinq cartes, mais qui ne saurait se généraliser à un problème de
   plus grande taille;
 \item tri paresseux, qui consiste à ne pas faire l'expérience
   recommandée.
