@@ -949,15 +949,35 @@ les tests dans des fichiers de script dédiés. Si un jour vous
 développez votre propre paquetage R, vous pourrez déposer les fichiers
 dans un répertoire spécial justement nommé \code{tests}.
 
+Un fichier de tests dédié doit pouvoir être évalué intégralement dans
+une session R vierge. Par conséquent, assurez-vous d'inclure des
+appels à \icode{source} (pour du code libre) ou à \icode{library}
+(pour du code dans un paquetage) pour faire en sorte que les fonctions
+testées existent dans l'espace de travail de la session R.
+
 \gotorbox{Difficile de bien saisir comment concevoir un fichier de
   tests sans un exemple. Il s'en trouve un complet pour une fonction
   simple aux lignes \reflines{pratiques:tests} du fichier de script
   \code{\scriptfilename} reproduit à la section suivante.}
 
 <<tests-sqrt>>=
-## Tests unitaires de la fonction 'sqrt' de calcul de la
-## racine carrée par la méthode des approximations successives
-## de Newton.
+###
+### Tests unitaires de la fonction 'sqrt'
+###
+
+## Définir la fonction dans l'espace de travail.
+source("sqrt.R")
+
+## La fonction 'sqrt' calcule la racine carrée d'un nombre par
+## la méthode des approximations successives de Newton.
+##
+## Tests unitaires:
+##
+## 1. Erreur pour un argument négatif.
+## 2. Véritable 0 pour un argument nul.
+## 3. Carré de la réponse égal à l'argument autrement; il faut
+##    ajuster la tolérance en fonction de celle utilisée dans
+##    la fonction.
 stopifnot({
     tools::assertError(sqrt(-1))
     identical(0, sqrt(0))
@@ -1118,14 +1138,16 @@ stopifnot({
 ## les petits projets ou les fonctions seules.
 ##
 ## De manière plus générale, je vous recommande de placer les
-## tests dans des fichiers de script séparés.
+## tests dans des fichiers de script dédiés et intégralement
+## évaluables dans une session R vierge.
 ##
 ## Le fichier de script 'tests-sqrt.R' distribué avec
-## l'ouvrage reprend les tests ci-dessus.
+## l'ouvrage reprend les tests ci-dessus. Le fichier a aussi
+## recours à 'source' pour faire en sorte que la fonction
+## 'sqrt' existe dans l'espace de travail de la session R.
 ##
-## Vous pouvez ensuite définir la fonction et évaluer les
-## tests avec les expressions suivantes.
-source("sqrt.R")           # définition de la fonction
+## Vous pouvez ainsi ensuite évaluer les tests simplement
+## en évaluant séquentiellement le fichier de tests.
 source("tests-sqrt.R")     # exécution des tests
 
 ### NETTOYAGE

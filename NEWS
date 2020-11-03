@@ -2,6 +2,18 @@
 === Programmer avec R
 ===
 
+# (en développement)
+
+## Changements
+
+- Section 6.4: un fichier de tests dédié devrait être évaluable
+  intégralement dans une nouvelle session R. Ajout d'un paragraphe à
+  cet effet à la toute fin de la section, et modification en
+  conséquence des commentaires dans les exemples du chapitre.
+- Fichier d'accompagnement `tests-sqrt.R` modifié pour inclure un
+  appel à `source("sqrt.R")` (voir ci-dessus) et pour ajouter de
+  meilleurs commentaires.
+
 # 2020.10 (2020-10-29)
 
 ## Nouveautés
