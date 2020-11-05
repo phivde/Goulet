@@ -1005,11 +1005,11 @@ names(x) <- NULL           # suppression de l'attribut 'names'
 
 ## Quelques cas spéciaux d'indiçage.
 length(x)                  # rappel de la longueur
-x[1:8]                     # vecteur allongé avec des NA
+x[1:8]                     # vecteur allongé avec des 'NA'
 x[0]                       # extraction de rien
 x[0] <- 1; x               # affectation de rien
 x[c(0, 1, 2)]              # indice 0 ignoré
-x[c(1, NA, 5)]             # indice NA retourne NA
+x[c(1, NA, 5)]             # indice 'NA' retourne NA
 x[2.6]                     # fractions tronquées vers 0 `\labelline{bases:vecteurs:fin}`
 @
 
@@ -1510,9 +1510,11 @@ else
   fréquente consiste à construire un test de telle sorte que la
   \meta{condition} est un vecteur, ce qui n'a guère de sens. Les
   fonctions \icode{any}, \icode{all}
-  (\autoref{sec:bases:internes:tests}) et \icode{isTRUE} se
-  révèlent utiles dans les clauses \code{if} pour réduire les vecteurs
-  booléens à une valeur unique.
+  (\autoref{sec:bases:internes:tests}) se révèlent utiles dans les
+  clauses \code{if} pour réduire les vecteurs booléens à une valeur
+  unique. Les fonctions \icode{isTRUE} et \icode{isFALSE}, quant à
+  elles, permettent de s'assurer que la condition est un vecteur
+  booléen de longueur $1$ différent de \icode{NA}.
 \item \meta{conséquence} est une expression, ou un groupe
   d'expressions regroupées entre accolades «\code{\{~\}}», qui sont
   exécutées lorsque la \meta{condition} est \texttt{TRUE}.
