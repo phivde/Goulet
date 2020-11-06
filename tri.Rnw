@@ -95,7 +95,7 @@ l'un ou l'autre des types suivants
 \begin{enumerate}[i)]
 \item tri par insertion, où chaque carte de la main est évaluée tour à
   tour et placée au bon endroit dans la liste des cartes déjà triées;
-\item tri par échange, où deux cartes qui se sont pas dans le bon
+\item tri par échange, où deux cartes qui ne sont pas dans le bon
   ordre sont échangées, le procédé étant répété tant et aussi
   longtemps que les cartes ne sont pas entièrement triées;
 \item tri par sélection, où la plus petite carte est identifiée et
