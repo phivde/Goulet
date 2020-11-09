@@ -2007,7 +2007,7 @@ Examinez le contenu du fichier dans votre éditeur de texte avant
 d'aller plus loin.
 
 En premier lieu, nous pouvons facilement créer une nouvelle base de
-données ne contenant que les modèles de voitures 4~cyclindres sans
+données ne contenant que les modèles de voitures 4~cylindres sans
 passer par un tableur ou par R. La commande suivante conserve
 uniquement les commentaires et les noms de colonnes en entête du
 fichier, ainsi que les enregistrements dont le second champ est égal à
