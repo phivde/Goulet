@@ -232,7 +232,7 @@ d'entrer dans la boucle, celle-ci peut ne jamais s'exécuter. La
 syntaxe de la boucle \code{while} est la suivante:
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
-while(\meta{condition})
+while (\meta{condition})
     \meta{expression}
 \end{Verbatim}
 \end{Schunk}
