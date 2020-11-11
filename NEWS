@@ -20,6 +20,11 @@
 - Fichier d'accompagnement `tests-sqrt.R` modifié pour inclure un
   appel à `source("sqrt.R")` (voir ci-dessus) et pour ajouter de
   meilleurs commentaires.
+- Section 8.1: les tests unitaires étant maintenant couverts dans
+  l'ouvrage, une référence vers la section 6.4 est insérée à la toute
+  fin de la section.
+- Section 8.2: dans l'astuce à la fin de la section, ajout d'une
+  référence vers le chapitre 12 qui traite de portée lexicale.
 
 # 2020.10 (2020-10-29)
 

@@ -320,13 +320,13 @@ rgamma(5, 0.5, 1)
 Les résultats précédents nous apprennent que lorsque la première
 valeur \code{y} est acceptée, elle est placée en seconde position dans
 le vecteur \code{x}. Le coupable est donc notre compteur \code{i}! En
-y regardant de plus près, nous réalisons, en effet, qu'il est
-initialisé à la valeur $1$ à l'extérieur de la boucle \code{while}
-(ligne 19 de la \autoref{fig:debogage:rgamma}) et qu'il est ensuite
-incrémenté \emph{avant} que l'affectation dans \code{x} ne soit
-effectuée dans la clause \code{if} (ligne 24). Le correctif est donc
-facile à appliquer: initialiser \code{i} avec la valeur $0$. Ceci
-fait, la fonction retourne maintenant des valeurs plausibles.
+y regardant de plus près, nous réalisons qu'il est initialisé à la
+valeur $1$ à l'extérieur de la boucle \code{while} (ligne 19 de la
+\autoref{fig:debogage:rgamma}) et qu'il est ensuite incrémenté
+\emph{avant} que l'affectation dans \code{x} ne soit effectuée dans la
+clause \code{if} (ligne 24). Le correctif est donc facile à appliquer:
+initialiser \code{i} avec la valeur $0$. Ceci fait, la fonction
+retourne maintenant des valeurs plausibles.
 <<echo=FALSE>>=
 rgamma <- function(n, shape, rate = 1, scale = 1/rate)
 {
@@ -361,14 +361,13 @@ rgamma <- function(n, shape, rate = 1, scale = 1/rate)
 rgamma(5, 0.5, 1)
 @
 
-En l'état, la fonction \code{rgamma} semble valide. Je vous
-rappelle la mise en garde de la
-\autoref{sec:bases:vecteurs:arithmetique}: avec le recyclage des
-vecteurs dans R, ce n'est pas parce qu'une expression --- ou une
-fonction --- s'exécute sans erreur apparente que le calcul effectué
-est bon pour autant. Il faut vérifier l'exactitude des calculs à
-l'aide de tests de contrôle. Le sujet ne sera pas étudié plus en détail ici.
-
+En l'état, la fonction \code{rgamma} semble valide. Je vous rappelle
+la mise en garde de la \autoref{sec:bases:vecteurs:arithmetique}: avec
+le recyclage des vecteurs dans R, ce n'est pas parce qu'une expression
+--- ou une fonction --- s'exécute sans erreur apparente que le calcul
+effectué est bon pour autant. Il faut vérifier l'exactitude des
+calculs à l'aide de tests unitaires, tel que décrit à la
+\autoref{sec:pratiques:tests}.
 
 \tipbox{Lorsqu'une erreur survient, assurez-vous de bien lire les
   messages d'erreur de R. Il faut parfois apprendre à les reconnaitre.
@@ -464,9 +463,9 @@ initialisé.
 \tipbox{Une fois la séance de débogage terminée, supprimez de l'espace
   de travail les objets que vous avez créés au cours de celle-ci, puis
   évaluez de nouveau votre fonction. Cela vous prémunira contre une
-  fonction qui, par la magie de la portée lexicale de R, serait valide
-  seulement lorsque certains objets existent dans l'espace de
-  travail.}
+  fonction qui, par la magie de la portée lexicale de R
+  (\autoref{chap:environnement}), serait valide seulement lorsque
+  certains objets existent dans l'espace de travail.}
 
 
 \section{Navigateur d'environnements}
