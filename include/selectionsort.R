@@ -1,7 +1,7 @@
 selectionsort <- function(x)
 {
-    xlen <- length(x)      # sert souvent
-    for (i in seq_len(xlen))
+    xlen <- length(x)                   # sert souvent
+    for (i in seq_len(xlen - 1))
     {
         ## recherche de la position de la plus petite valeur
         ## parmi x[i], ..., x[xlen]
