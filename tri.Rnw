@@ -53,7 +53,7 @@ temps de calcul de leurs ordinateurs était consacré au tri! Dans
 certaines applications, cela dépassait même la part de 50~\% du temps
 de calcul. Selon Knuth, de telles statistiques signifient ou bien
 qu'il existe plusieurs applications importantes du tri; ou bien que
-plusieurs personnes trient sans que ne soit nécessaire; ou bien que
+plusieurs personnes trient sans que ça ne soit nécessaire; ou bien que
 les algorithmes employés sont inefficaces. Il y a sans doute une part
 de vérité dans chacune de ces hypothèses, mais le fait est que le tri
 s'avère, d'un point de vue pratique, un sujet d'étude important.
