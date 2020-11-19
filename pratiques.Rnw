@@ -177,7 +177,7 @@ if (!any(is.na(x)))
     C'est \code{(!p) | (q \& r)}.}
   \begin{Schunk}
 \begin{Verbatim}
-!p | q & r
+! p | q & r
 \end{Verbatim}
   \end{Schunk}
   %
@@ -222,6 +222,11 @@ z <- sapply(x, mean)
   place à la toute fin d'une fonction.
 \end{itemize}
 
+\videobox{\link{https://youtu.be/3uD67Z5Rd88}{Le guide de style R du
+    \emph{geek} de placard}}{%
+  La vidéo «\link{https://youtu.be/3uD67Z5Rd88}{Le guide de style R du
+    \emph{geek} de placard}» propose, sur un ton humoristique, trois
+  autres éléments de style à surveiller en programmation R.}
 
 \section{Présentation du code}
 \label{sec:pratiques:presentation}

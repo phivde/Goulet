@@ -10,6 +10,8 @@
   fonctions sont maintenant présentées comme des outils pour s'assurer
   que la condition d'une clause `if` est un vecteur booléen de
   longueur $1$ différent de \icode{NA}.
+- Section 6.1: lien vers la nouvelle vidéo «Le guide de style R du
+    geek de placard».
 - Section A.7: recommandation de cocher l'option `Strip trailing
   horizontal whitespace when saving` dans les options de RStudio. La
   figure A.3 a été modifiée en conséquence.
