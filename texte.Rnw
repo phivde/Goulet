@@ -718,9 +718,7 @@ exec("grep", c("-E", "'chien|chat'", "chanson.txt"))
 @
 
 \tipbox{Pour effacer tout doute, n'hésitez pas à simplement utiliser
-  toujours \icode{grep} et \icode{sed} avec l'option \code{-E}. La
-  plupart des systèmes fournissent d'ailleurs un utilitaire
-  \Icode{egrep} en tous points équivalent à \code{grep -E}.}
+  toujours \icode{grep} et \icode{sed} avec l'option \code{-E}.}
 
 \subsection{Syntaxe de base}
 \label{sec:texte:regex:syntaxe}
