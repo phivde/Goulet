@@ -491,8 +491,8 @@ et les noms d'objets. Il y arrive par le biais d'un
 \index{dictionnaire}dictionnaire et d'un
 \index{environnement}environnement. La mécanique d'appariement demeure
 généralement transparente, mais au fur et à mesure que votre apprentissage
-du language progressera, le rôle de l'environnement deviendra plus important.
-Nous étudierons le conceptau \autoref{chap:environnement}.
+du langage progressera, le rôle de l'environnement deviendra plus important.
+Nous étudierons le concept au \autoref{chap:environnement}.
 
 
 \subsection{Regroupement de commandes}
