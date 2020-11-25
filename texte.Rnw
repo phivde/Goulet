@@ -2342,7 +2342,7 @@ BEGIN { OFS = ";" }
 ##-!- ## une espace. Remplaçons ces espaces par des virgules pour
 ##-!- ## convertir le fichier en format CSV. Je fournis deux
 ##-!- ## solutions, avec 'awk' (la plus simple) et avec 'sed'.
-##-!- awk '{ print $1 \",\" $2 }' 100metres.dat
+##-!- awk '{ print $1 "," $2 }' 100metres.dat
 ##-!- sed 's/ /,/' 100metres.dat
 ##-!-
 ##-!- ## Changeons maintenant le format de la date du format ISO
@@ -2420,7 +2420,7 @@ BEGIN { OFS = ";" }
 ##-!- ## à une ligne marqué par '# '.
 ##-!- ##
 ##-!- ## Cette opération requiert une variable d'état pour
-##-!- ## identifier les lignes que vous souhaitons extraire.
+##-!- ## identifier les lignes que nous souhaitons extraire.
 ##-!- ##
 ##-!- ## De la manière dont les règles sont écrites dans la
 ##-!- ## commande, leur ordre n'a pas d'importance. (Déterminez
