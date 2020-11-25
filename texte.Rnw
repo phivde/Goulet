@@ -2311,7 +2311,7 @@ BEGIN { OFS = ";" }
   dans GitLab et de mise à jour de la page web sont entièrement
   automatisées avec une combinaison des utilitaires de ce chapitre et
   de \link{https://fr.wikipedia.org/wiki/Make}{\code{make}}, un autre
-  outil standard des systèmes Unix. Je vous invite à jete un coup
+  outil standard des systèmes Unix. Je vous invite à jeter un coup
   d'œil au fichier de configuration \code{Makefile} qui se trouve dans
   le \link{\reposurl}{code source du projet}.}
 
