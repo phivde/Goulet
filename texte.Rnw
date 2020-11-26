@@ -1286,8 +1286,8 @@ ne se trouvent \emph{pas} dans la classe. Par exemple, le motif
 \regex{[\string^aeiouy]} correspond à toute consonne, ce qui est plus
 simple que de dresser la liste des vingt lettres. L'expression
 ci-dessous permet, quant à elle, d'identifier dans le fichier
-\code{chanson.txt} les occurrences de \chaine{ou} qui se sont suivies
-ni de la lettre \chaine{r}, ni de la lettre \chaine{s}.
+\code{chanson.txt} les occurrences de \chaine{ou} qui ne sont pas suivies
+de la lettre \chaine{r}, ni de la lettre \chaine{s}.
 <<echo=FALSE>>=
 exec("grep", c("'ou[^rs]'", "chanson.txt"))
 @
