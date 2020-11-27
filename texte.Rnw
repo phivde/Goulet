@@ -427,7 +427,7 @@ sed \meta{options} 's/\meta{motif}/\meta{remplacement}/\meta{modificateur}'
   dans l'entrée standard.
 \end{itemize}
 
-Contraitement à ce que l'on pourrait penser, \icode{sed} ne modifie
+Contrairement à ce que l'on pourrait penser, \icode{sed} ne modifie
 pas le ou les fichiers d'origine. Le texte modifié est simplement
 affiché à la sortie standard. Pour sauvegarder ce texte modifié, vous
 devez rediriger la sortie standard vers un fichier avec l'opérateur de
