@@ -1284,8 +1284,8 @@ ne se trouvent \emph{pas} dans la classe. Par exemple, le motif
 \regex{[\string^aeiouy]} correspond à toute consonne, ce qui est plus
 simple que de dresser la liste des vingt lettres. L'expression
 ci-dessous permet, quant à elle, d'identifier dans le fichier
-\code{chanson.txt} les occurrences de \chaine{ou} qui se sont suivies
-ni de la lettre \chaine{r}, ni de la lettre \chaine{s}.
+\code{chanson.txt} les occurrences de \chaine{ou} qui ne sont pas suivies
+de la lettre \chaine{r}, ni de la lettre \chaine{s}.
 <<echo=FALSE>>=
 exec("grep", c("'ou[^rs]'", "chanson.txt"))
 @
@@ -2309,7 +2309,7 @@ BEGIN { OFS = ";" }
   dans GitLab et de mise à jour de la page web sont entièrement
   automatisées avec une combinaison des utilitaires de ce chapitre et
   de \link{https://fr.wikipedia.org/wiki/Make}{\code{make}}, un autre
-  outil standard des systèmes Unix. Je vous invite à jete un coup
+  outil standard des systèmes Unix. Je vous invite à jeter un coup
   d'œil au fichier de configuration \code{Makefile} qui se trouve dans
   le \link{\reposurl}{code source du projet}.}
 
@@ -2340,7 +2340,7 @@ BEGIN { OFS = ";" }
 ##-!- ## une espace. Remplaçons ces espaces par des virgules pour
 ##-!- ## convertir le fichier en format CSV. Je fournis deux
 ##-!- ## solutions, avec 'awk' (la plus simple) et avec 'sed'.
-##-!- awk '{ print $1 \",\" $2 }' 100metres.dat
+##-!- awk '{ print $1 "," $2 }' 100metres.dat
 ##-!- sed 's/ /,/' 100metres.dat
 ##-!-
 ##-!- ## Changeons maintenant le format de la date du format ISO
@@ -2418,7 +2418,7 @@ BEGIN { OFS = ";" }
 ##-!- ## à une ligne marqué par '# '.
 ##-!- ##
 ##-!- ## Cette opération requiert une variable d'état pour
-##-!- ## identifier les lignes que vous souhaitons extraire.
+##-!- ## identifier les lignes que nous souhaitons extraire.
 ##-!- ##
 ##-!- ## De la manière dont les règles sont écrites dans la
 ##-!- ## commande, leur ordre n'a pas d'importance. (Déterminez
