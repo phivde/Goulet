@@ -108,7 +108,7 @@ importante de l'intelligence artificielle.
 Voici quelques utilisations possibles des expressions régulières.
 \begin{itemize}
 \item Rechercher du texte pouvant contenir des variations ou des
-  fautes d'orthographe comme, par exemple, «je transfert» plutôt que
+  fautes d'orthographe comme «je transfert» plutôt que
   «je transfère», ou encore les multiples variations autour du verbe
   «appeler»: appel, appelle, appellent, appeler, appelez, etc.
 \item Extraire les coordonnées géographiques d'un lieu (latitude et
