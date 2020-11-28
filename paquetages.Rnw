@@ -282,7 +282,7 @@ spécifié dans les bibliothèques de
 search()
 
 ## Liste de tous les packages installés sur votre système.
-## Noter que MASS et tools en fant partie. Ce sont des
+## Noter que MASS et tools en font partie. Ce sont des
 ## paquetages livrés avec R, mais qui ne sont pas chargés par
 ## défaut.
 ##-!- library()
