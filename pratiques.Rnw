@@ -32,7 +32,7 @@ source("Stangle.R")        # lancement de Stangle
 \end{objectifs}
 
 De manière générale, le développement et la maintenance de code
-informatique repose sur la contribution de plusieurs personnes. En
+informatique reposent sur la contribution de plusieurs personnes. En
 effet, il est plutôt rare, dans le milieu professionnel, d'être appelé
 à concevoir un programme informatique à partir d'une page blanche et
 en complète autarcie, c'est-à-dire sans que quiconque n'ait à
