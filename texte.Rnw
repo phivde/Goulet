@@ -1097,7 +1097,7 @@ exec("grep", c("-v", "'^$'", "chanson.txt"), eval = FALSE)
 ##-!-
 ##-!- ## Comme mentionné ci-dessus, le caractère «.» est le
 ##-!- ## caractère de remplacement dans les expressions régulières.
-##-!- ## Il signigie «n'importe quel caractère», y compris l'espace.
+##-!- ## Il signifie «n'importe quel caractère», y compris l'espace.
 ##-!- ##
 ##-!- ## Le motif 'ou. ' permet d'identifier les mots se terminant
 ##-!- ## par «ou» et un caractère quelconque. L'espace dans le motif
