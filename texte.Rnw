@@ -2544,7 +2544,7 @@ l'entrer plutôt sous la forme \code{r"(.\{1,8\}\bs\bs.txt)"}.
 ## Vous remarquerez que cela correspond au mode de
 ## fonctionnement de 'grep', 'sed' et 'awk': une ligne à la
 ## fois.
-chanson <- readLines("chanson.txt") # importer le fichier
+chanson <- readLines("chanson.txt", encoding = "UTF-8") # importer le fichier
 chanson                             # contenu du vecteur
 
 ## Effectuons maintenant quelques recherches dans le vecteur
