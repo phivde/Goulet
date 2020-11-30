@@ -1130,7 +1130,7 @@ exec("grep", c("-v", "'^$'", "chanson.txt"), eval = FALSE)
 ##-!-
 ##-!- ## Comparez les résultats des trois commandes suivantes.
 ##-!- grep -E 'ahh?!' ah.txt	   # un ou deux «h»
-##-!- grep -E 'ahh*!' ah.txt	   # un «h» un plus
+##-!- grep -E 'ahh*!' ah.txt	   # un «h» et plus
 ##-!- grep -E 'ahh+!' ah.txt	   # deux «h» et plus
 ##-!-
 ##-!- ## Les quantificateurs bornés s'utilisent de trois façons:
