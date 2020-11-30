@@ -1691,10 +1691,10 @@ mots de la fin de la \autoref{sec:texte:regex:alternance}.
 ##-!- ##
 ##-!- ## La comparaison des quatre commandes de substitution
 ##-!- ## ci-dessous permet d'observer l'effet des parenthèses.
-##-!- sed -E 's/le mouvement|la fatigue/le pendule/'
-##-!- sed -E 's/l[ea] (mouvement|fatigue)/le pendule/'
-##-!- sed -E 's/le|la mouvement|fatigue/le pendule/'
-##-!- sed -E 's/(le|la) (mouvement|fatigue)/le pendule/'
+##-!- sed -E 's/le mouvement|la fatigue/le pendule/' chanson.txt
+##-!- sed -E 's/l[ea] (mouvement|fatigue)/le pendule/' chanson.txt
+##-!- sed -E 's/le|la mouvement|fatigue/le pendule/' chanson.txt
+##-!- sed -E 's/(le|la) (mouvement|fatigue)/le pendule/' chanson.txt
 ##-!-
 ##-!- ## Allons-y maintenant d'une expression régulière qui permet
 ##-!- ## de trouver toutes les utilisations de la fonction 'g' dans
