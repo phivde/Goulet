@@ -108,7 +108,7 @@ importante de l'intelligence artificielle.
 Voici quelques utilisations possibles des expressions régulières.
 \begin{itemize}
 \item Rechercher du texte pouvant contenir des variations ou des
-  fautes d'orthographe comme, par exemple, «je transfert» plutôt que
+  fautes d'orthographe comme «je transfert» plutôt que
   «je transfère», ou encore les multiples variations autour du verbe
   «appeler»: appel, appelle, appellent, appeler, appelez, etc.
 \item Extraire les coordonnées géographiques d'un lieu (latitude et
@@ -427,7 +427,7 @@ sed \meta{options} 's/\meta{motif}/\meta{remplacement}/\meta{modificateur}'
   dans l'entrée standard.
 \end{itemize}
 
-Contraitement à ce que l'on pourrait penser, \icode{sed} ne modifie
+Contrairement à ce que l'on pourrait penser, \icode{sed} ne modifie
 pas le ou les fichiers d'origine. Le texte modifié est simplement
 affiché à la sortie standard. Pour sauvegarder ce texte modifié, vous
 devez rediriger la sortie standard vers un fichier avec l'opérateur de
@@ -1095,7 +1095,7 @@ exec("grep", c("-v", "'^$'", "chanson.txt"), eval = FALSE)
 ##-!-
 ##-!- ## Comme mentionné ci-dessus, le caractère «.» est le
 ##-!- ## caractère de remplacement dans les expressions régulières.
-##-!- ## Il signigie «n'importe quel caractère», y compris l'espace.
+##-!- ## Il signifie «n'importe quel caractère», y compris l'espace.
 ##-!- ##
 ##-!- ## Le motif 'ou. ' permet d'identifier les mots se terminant
 ##-!- ## par «ou» et un caractère quelconque. L'espace dans le motif
@@ -1128,7 +1128,7 @@ exec("grep", c("-v", "'^$'", "chanson.txt"), eval = FALSE)
 ##-!-
 ##-!- ## Comparez les résultats des trois commandes suivantes.
 ##-!- grep -E 'ahh?!' ah.txt	   # un ou deux «h»
-##-!- grep -E 'ahh*!' ah.txt	   # un «h» un plus
+##-!- grep -E 'ahh*!' ah.txt	   # un «h» et plus
 ##-!- grep -E 'ahh+!' ah.txt	   # deux «h» et plus
 ##-!-
 ##-!- ## Les quantificateurs bornés s'utilisent de trois façons:
@@ -1689,10 +1689,10 @@ mots de la fin de la \autoref{sec:texte:regex:alternance}.
 ##-!- ##
 ##-!- ## La comparaison des quatre commandes de substitution
 ##-!- ## ci-dessous permet d'observer l'effet des parenthèses.
-##-!- sed -E 's/le mouvement|la fatigue/le pendule/'
-##-!- sed -E 's/l[ea] (mouvement|fatigue)/le pendule/'
-##-!- sed -E 's/le|la mouvement|fatigue/le pendule/'
-##-!- sed -E 's/(le|la) (mouvement|fatigue)/le pendule/'
+##-!- sed -E 's/le mouvement|la fatigue/le pendule/' chanson.txt
+##-!- sed -E 's/l[ea] (mouvement|fatigue)/le pendule/' chanson.txt
+##-!- sed -E 's/le|la mouvement|fatigue/le pendule/' chanson.txt
+##-!- sed -E 's/(le|la) (mouvement|fatigue)/le pendule/' chanson.txt
 ##-!-
 ##-!- ## Allons-y maintenant d'une expression régulière qui permet
 ##-!- ## de trouver toutes les utilisations de la fonction 'g' dans
