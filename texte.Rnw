@@ -2539,13 +2539,16 @@ l'entrer plutôt sous la forme \code{r"(.\{1,8\}\bs\bs.txt)"}.
 ## Pour ce faire, il faut importer le contenu du fichier dans
 ## R. La fonction 'readLines' lit un fichier et retourne un
 ## vecteur de chaines de caractères, à raison d'une chaine par
-## ligne du fichier.
+## ligne du fichier. Il faut spécifier le type de codage du
+## fichier lorsque l'UTF-8 n'est pas le type par défaut de
+## votre système d'exploitation (bref, sous Windows).
 ##
 ## Vous remarquerez que cela correspond au mode de
 ## fonctionnement de 'grep', 'sed' et 'awk': une ligne à la
 ## fois.
-chanson <- readLines("chanson.txt", encoding = "UTF-8") # importer le fichier
-chanson                             # contenu du vecteur
+chanson <- readLines("chanson.txt",
+                     encoding = "UTF-8") # importer le fichier
+chanson                                  # contenu du vecteur
 
 ## Effectuons maintenant quelques recherches dans le vecteur
 ## avec la fonction 'grep' de R. Le résultat est l'indice de
