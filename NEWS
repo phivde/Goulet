@@ -4,7 +4,7 @@
 
 # (en développement)
 
-## Ajouts
+## Nouveautés
 
 - Section 4.5: mention de `isFALSE` conjointement avec `isTRUE`. Les
   fonctions sont maintenant présentées comme des outils pour s'assurer
@@ -12,6 +12,11 @@
   longueur $1$ différent de \icode{NA}.
 - Section 6.1: lien vers la nouvelle vidéo «Le guide de style R du
     geek de placard».
+- Section 7.3: précisions, dans le code informatique correspondant à
+  la section, sur le fait que la classe du vecteur d'itérateurs n'est
+  pas prise en compte dans définition d'une boucle `for`. Cela peut a
+  des effets surprenants si, par exemple, l'on veut itérer sur un
+  vecteur de dates.
 - Section A.7: recommandation de cocher l'option `Strip trailing
   horizontal whitespace when saving` dans les options de RStudio. La
   figure A.3 a été modifiée en conséquence.

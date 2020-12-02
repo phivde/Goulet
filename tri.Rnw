@@ -196,9 +196,9 @@ for (\meta{variable} in \meta{suite})
   dans \meta{suite}. La variable est habituellement --- mais pas
   nécessairement --- utilisée dans les calculs à l'intérieur de la
   boucle.
-\item \meta{suite} est un vecteur de valeurs. À noter que la
-  \meta{suite} n'a pas à être composée de nombres consécutifs, ni même
-  de nombres, en fait.
+\item \meta{suite} est une expression dont le résultat est un vecteur
+  (y compris une liste). À noter que le résultat n'a pas à être
+  composé de nombres consécutifs, ni même de nombres, en fait.
 \item \meta{expression} est le contenu de la boucle à proprement
   parler. L'itérateur \meta{variable} apparait habituellement dans
   l'\meta{expression}. Comme toujours, si le contenu est constitué de
@@ -396,9 +396,86 @@ for (i in seq_len(n))
 ### BOUCLES ITÉRATIVES  `\labelline{tri:boucles}`
 ###
 
-## Nous allons illustrer l'utilisation des boucles avec la
-## méthode du point fixe. On dit qu'une valeur x est un «point
-## fixe» d'une fonction f si cette valeur satisfait l'équation
+## Débutons par illustrer les boucles à dénombrement avec des
+## boucles triviales qui ne font qu'afficher des valeurs à
+## l'écran.
+##
+## La syntaxe de la déclaration d'une boucle 'for' dans R est
+## la suivante:
+##
+##   for(<variable> in <suite>)
+##
+## La <variable> est un compteur (ou itérateur) et <suite> est
+## une expression qui permet de créer un vecteur (ou une
+## liste) des valeurs successives du compteur.
+##
+## Plus souvent qu'autrement, l'expression fait appel à une
+## fonction de génération de suites de valeurs.
+for (n in 1:10)
+    print(n)
+
+## Je recommande d'utiliser les fonctions 'seq_len' et
+## 'seq_along', ou alors 'seq' avec l'argument 'length.out',
+## afin de vous prémunir contre le risque de générer une suite
+## non vide alors le nombre d'itérations de la bouche devrait
+## être zéro.
+##
+## Voici un exemple où les deux approches sont équivalentes.
+n <- 5
+for (i in 1:n) print(i)        # approche avec ':'
+for (i in seq_len(n)) print(i) # approche avec 'seq_len'
+
+## Si le nombre d'itérations devait toutefois être nul,
+## l'approche avec ':' ne donne pas le résultat escompté;
+## celle avec 'seq_len', oui.
+n <- 0
+for (i in 1:n) print(i)        # deux itérations!
+for (i in seq_len(n)) print(i) # aucune itération
+
+## De manière équivalente, s'il faut répéter une boucle un
+## nombre de fois égal à la longueur d'un vecteur déjà connu,
+## la fonction 'seq_along' permet de générer la suite de
+## valeurs de manière robuste.
+x <- c(5, 32, 57, 42, 0)         # vecteur de longueur 5...
+for (i in seq_along(x)) print(i) # ... 5 itérations
+x <- numeric(0)                  # vecteur vide...
+for (i in seq_along(x)) print(i) # ... 0 itération
+
+## Il y a une petite subtilité avec les boucles 'for' à
+## laquelle vous devez faire bien attention: la classe du
+## vecteur (ou de la liste) créé par l'expression n'est PAS
+## prise en compte.
+##
+## Vous rencontrerez ce cas si, par exemple, vous souhaitez
+## itérer sur un vecteur de dates. Rappelez-vous: une date
+## dans R n'est qu'un nombre entier «maquillé» pour être plus
+## lisible lorsque présenté à l'écran. (Ce «maquillage» est
+## fourni par la classe de l'objet.)
+dates <- seq(as.Date("2042-05-09"), by = "+1 month",
+             length.out = 6)
+dates                      # objet «maquillé»
+unclass(dates)             # sans classe, sans maquillage
+
+## Si l'on essaie d'itérer sur un vecteur de dates, la classe
+## (le «maquillage») ne suit pas dans la boucle.
+for (d in dates)
+    print(d)
+
+## Si vous devez utiliser les dates successives sous forme de
+## chaines de caractères à l'intérieur de la boucle, vous
+## pouvez soit indicer le vecteur de dates dans la boucle,
+## soit «cacher» les dates à l'intérieur d'une liste.
+for (i in seq_along(dates))
+    print(dates[i])
+for (d in as.list(dates))
+    print(d)
+
+## Passons maintenant aux boucles 'while' et 'repeat'.
+##
+## Nous allons illustrer leur utilisation avec la méthode
+## numérique du point fixe. On dit qu'une valeur x est un
+## «point fixe» d'une fonction f si cette valeur satisfait
+## l'équation
 ##
 ##   x = f(x).
 ##
