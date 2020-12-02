@@ -1923,14 +1923,18 @@ cos(pi/4)
 <<echo=TRUE>>=
 seq(1, 9, by = 2)
 @
-\item[\Icode{\protect seq\_len}] \index{suite}suite de nombres de la
-  longueur donnée en argument à partir de $1$ (plus rapide que
-  \code{seq}).
+%% Utilisation de \char 95\relax pour générer un « _ » pour que le
+%% terme soit regroupé avec les entrées générées par listings dans
+%% l'index.
+\item[\Icode{seq\char 95\relax len}] \index{suite}suite de
+  nombres de la longueur donnée en argument à partir de $1$ (plus
+  rapide que \code{seq}).
 <<echo=TRUE>>=
 seq_len(10)
 @
-\item[\Icode{\protect seq\_along}] suite de nombres de la longueur du
-  vecteur en argument à partir de $1$ (plus rapide que \code{seq}).
+\item[\Icode{seq\char 95\relax along}] suite de nombres de
+  la longueur du vecteur en argument à partir de $1$ (plus rapide que
+  \code{seq}).
 <<echo=TRUE>>=
 seq_along(c(-1, 0, 2))
 @
@@ -1947,21 +1951,21 @@ rep(c(1, 3), times = 2, each = 4)
 <<echo=TRUE>>=
 rep.int(2, 10)
 @
-\item[\Icode{rep\_len}] répétition de vecteurs jusqu'à une certaine
-  longueur (plus rapide que \code{rep}).
+\item[\Icode{rep\char 95\relax len}] répétition de vecteurs jusqu'à une
+  certaine longueur (plus rapide que \code{rep}).
 <<echo=TRUE>>=
 rep_len(1:3, 10)
 @
 \end{ttscript}
 
-\cautionbox{La fonction \icode{\protect seq\_len} est plus robuste que
-  \icode{seq} ou que l'opérateur «\code{:}» pour la programmation.
-  L'expression \code{seq\_len(\meta{n})} génère une suite de longueur
-  \meta{n}. C'est généralement équivalent à \code{seq(\meta{n})} ou
-  \code{1:\meta{n}}, sauf lorsque \meta{n} vaut $0$. En effet,
-  \code{seq\_len(0)} résulte en un vecteur de longueur nulle, alors
-  que le résultat de \code{seq(0)} et de \code{1:0} est
-  malencontreusement le vecteur \code{c(1, 0)}.}
+\cautionbox{La fonction \icode{seq\char 95\relax len} est plus
+  robuste que \icode{seq} ou que l'opérateur «\code{:}» pour la
+  programmation. L'expression \code{seq\_len(\meta{n})} génère une
+  suite de longueur \meta{n}. C'est généralement équivalent à
+  \code{seq(\meta{n})} ou \code{1:\meta{n}}, sauf lorsque \meta{n}
+  vaut $0$. En effet, \code{seq\_len(0)} génère un vecteur de
+  longueur nulle, alors que le résultat de \code{seq(0)} et de
+  \code{1:0} est malencontreusement le vecteur \code{c(1, 0)}.}
 
 \subsection{Extraction du début et de la fin d'un objet}
 \label{sec:bases:internes:head}

@@ -20,6 +20,8 @@
 - Section A.7: recommandation de cocher l'option `Strip trailing
   horizontal whitespace when saving` dans les options de RStudio. La
   figure A.3 a été modifiée en conséquence.
+- Nouvelles entrées d'index pour les fonctions `rep_len`, `seq_len` et
+  `seq_along`.
 
 ## Changements
 
