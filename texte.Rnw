@@ -309,10 +309,10 @@ L'utilitaire \Icode{grep}\footnote{%
   globalement (\code{g}) une expression régulière (\emph{regular
     expression}, \code{re}) et d'afficher (\emph{print}, \code{p}) les
   lignes qui correspondent à l'expression.} %
-prend en argument une \index{expression régulière}expression régulière
-entre guillemets (simples ou doubles), lit l'entrée standard ou une
-liste de fichiers ligne par ligne, puis retourne sur la sortie
-standard les lignes qui contiennent des correspondances avec
+en argument une \index{expression régulière}expression régulière
+(habituellement entre guillemets simples ou doubles), lit l'entrée
+standard ou une liste de fichiers ligne par ligne, puis retourne sur
+la sortie standard les lignes qui contiennent des correspondances avec
 l'expression régulière. C'est très utile pour savoir si un fichier
 contient --- ou quels fichiers contiennent --- un mot ou une
 expression, assez pour que le nom de l'utilitaire soit devenu, en
