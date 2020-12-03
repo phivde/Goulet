@@ -37,6 +37,13 @@
   fin de la section.
 - Section 8.2: dans l'astuce à la fin de la section, ajout d'une
   référence vers le chapitre 12 qui traite de portée lexicale.
+- Sections 12.1: correction sur ce qu'est l'environnement d'une
+  fonction; l'environnement actif est l'environnement d'une fonction,
+  et non son environnement englobant. Ce changement fait en sorte que
+  le texte de la section 12.1 correspond à l'exemple de la section
+  12.2, qui était juste.
+- Figure 12.1: représentation du couple symbole-valeur à l'aide de la
+  même notation qu'à la section 12.2.
 
 # 2020.10 (2020-10-29)
 
