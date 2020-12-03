@@ -453,11 +453,11 @@ for (i in seq_along(x)) print(i) # ... 0 itération
 ## fourni par la classe de l'objet.)
 dates <- seq(as.Date("2042-05-09"), by = "+1 month",
              length.out = 6)
-dates                      # objet «maquillé»
+dates                      # objet maquillé
 unclass(dates)             # sans classe, sans maquillage
 
 ## Si l'on essaie d'itérer sur un vecteur de dates, la classe
-## (le «maquillage») ne suit pas dans la boucle.
+## (le maquillage) ne suit pas dans la boucle.
 for (d in dates)
     print(d)
 
