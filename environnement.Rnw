@@ -140,8 +140,8 @@ représentation schématique de l'environnement.
           \rule{0mm}{2ex}% increase distance from frame
           dictionnaire \\[6pt]
           \small
-          (\meta{symbole}, \meta{valeur}) \\
-          (\meta{symbole}, \meta{valeur}) \\
+          \meta{symbole} $\mapsto$ \meta{valeur} \\
+          \meta{symbole} $\mapsto$ \meta{valeur} \\
           $\vdots$
         \end{minipage}}}
     \put(10,20){\line(-1,0){8}}
