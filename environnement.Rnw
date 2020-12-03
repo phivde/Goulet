@@ -168,18 +168,19 @@ troisième élément est l'environnement de la fonction. Les fonctions
 \Icode{formals}, \Icode{body} et \Icode{environment} permettent
 d'extraire ces trois éléments, dans l'ordre.
 
-L'environnement d'une fonction est toujours construit comme suit:
-l'environnement englobant est l'environnement actif au moment de la
-définition de la fonction (à moins qu'il ne soit changé) et le
+L'environnement d'une fonction est l'environnement actif au moment de
+la définition de la fonction (à moins qu'il ne soit changé) et le
 dictionnaire «capture» tous les objets (ou toutes les paires
-symbole-valeur) de ce même environnement actif.
+symbole-valeur) de ce même environnement actif. L'environnement
+englobant de la fonction est donc le même que celui de l'environnement
+actif.
 
 Autrement dit, dès que nous définissons une fonction, R lui attribue
 un environnement. Lorsque la fonction est créée dans l'espace de
-travail, son environnement englobant est l'\emph{environnement
+travail, son environnement est l'\emph{environnement
   global}\Index{environnement!global}, représenté par le symbole
-\index{GlobalEnv@\code{.GlobalEnv}|bfhyperpage}\code{.GlobalEnv}, et son
-dictionnaire contient tous les objets se trouvant dans l'espace de
+\index{GlobalEnv@\code{.GlobalEnv}|bfhyperpage}\code{.GlobalEnv}, et
+son dictionnaire contient tous les objets se trouvant dans l'espace de
 travail. (Les expressions ci-dessous sont exécutées dans un espace de
 travail vide au préalable.)
 <<echo=FALSE>>=
@@ -261,8 +262,9 @@ square(10)
 @
 
 Conformément à ce qui a été établi plus haut, l'environnement
-englobant de $\rho_1$ est celui de la fonction \code{square},
-$\rho_0$. De plus, le dictionnaire contient la paire (\code{x}, $10$),
+englobant de $\rho_1$ est celui de la fonction \code{square}, soit
+$\rho_0$ puisque la fonction a été définie dans l'environnement
+global. De plus, le dictionnaire contient la paire (\code{x}, $10$),
 soit le symbole et la valeur de l'argument de la fonction. La fonction
 \code{square} est donc évaluée dans l'environnement
 \begin{equation*}
