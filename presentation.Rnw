@@ -477,8 +477,8 @@ Dans ses grandes lignes, une session de travail avec R comporte les
 \item Si nécessaire --- et c'est rarement le cas --- sauvegarder
   l'espace de travail de la session R avec
   \code{save.image()}\index{save.image@\code{save.image}}. En fait, on ne voudra
-  sauvegarder nos objets R que lorsque ceux-ci sont très longs à créer
-  comme, par exemple, les résultats d'une simulation.
+  sauvegarder nos objets R que lorsque ceux-ci sont très longs à créer,
+  comme les résultats d'une simulation.
 \item Quitter R en tapant \code{q()}\index{q@\code{q}} à la ligne de
   commande ou en fermant l'interface graphique par la procédure
   usuelle. Encore ici, la manière de procéder est quelque peu
