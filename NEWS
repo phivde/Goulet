@@ -14,9 +14,13 @@
     geek de placard».
 - Section 7.3: précisions, dans le code informatique correspondant à
   la section, sur le fait que la classe du vecteur d'itérateurs n'est
-  pas prise en compte dans définition d'une boucle `for`. Cela peut a
-  des effets surprenants si, par exemple, l'on veut itérer sur un
-  vecteur de dates.
+  pas prise en compte dans la définition d'une boucle `for`. Cela peut
+  avoir un effet inattendu, par exemple en itérant sur un vecteur de
+  dates.
+- Chapitre 12: représentation schématique de l'environnement d'une
+  fonction (figure 12.2), de l'environnement d'évaluation (figure
+  12.3) et de l'arbre des environnements dans un appel de fonction
+  (figure 12.4).
 - Section A.7: recommandation de cocher l'option `Strip trailing
   horizontal whitespace when saving` dans les options de RStudio. La
   figure A.3 a été modifiée en conséquence.
@@ -41,9 +45,12 @@
   fonction; l'environnement actif est l'environnement d'une fonction,
   et non son environnement englobant. Ce changement fait en sorte que
   le texte de la section 12.1 correspond à l'exemple de la section
-  12.2, qui était juste.
+  12.2 qui, lui, était juste.
 - Figure 12.1: représentation du couple symbole-valeur à l'aide de la
   même notation qu'à la section 12.2.
+- Annexe A: il restait quelques occurrences de «package» qui ont été
+  converties en «paquetage».
+
 
 # 2020.10 (2020-10-29)
 

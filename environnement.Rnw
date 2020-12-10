@@ -142,11 +142,11 @@ représentation schématique de l'environnement.
           \small
           \meta{symbole} $\mapsto$ \meta{valeur} \\
           \meta{symbole} $\mapsto$ \meta{valeur} \\
-          $\vdots$
+          $\dots$
         \end{minipage}}}
-    \put(10,20){\line(-1,0){8}}
+    \polyline(10,20)(2,20)(2,27)
+    \put(2,26.5){\vector(0,1){1}}
     \put(10,20){\circle*{0.8}}
-    \put(2,20){\vector(0,1){7}}
     \put(0,29){environnement englobant}
   \end{picture}
   \caption{Représentation schématique d'un environnement dans R}
@@ -175,10 +175,11 @@ symbole-valeur) de ce même environnement actif. L'environnement
 englobant de la fonction est donc le même que celui de l'environnement
 actif.
 
-Autrement dit, dès que nous définissons une fonction, R lui attribue
-un environnement. Lorsque la fonction est créée dans l'espace de
-travail, son environnement est l'\emph{environnement
-  global}\Index{environnement!global}, représenté par le symbole
+Autrement dit, dès que nous définissons une fonction dans R,
+l'interpréteur lui attribue un environnement. Lorsque la fonction est
+créée dans l'espace de travail, son environnement est
+l'\emph{environnement global}\Index{environnement!global}, représenté
+par le symbole
 \index{GlobalEnv@\code{.GlobalEnv}|bfhyperpage}\code{.GlobalEnv}, et
 son dictionnaire contient tous les objets se trouvant dans l'espace de
 travail. (Les expressions ci-dessous sont exécutées dans un espace de
@@ -195,6 +196,32 @@ environment(square)
 ls(envir = environment(square))
 get("x", envir = environment(square))
 @
+
+La \autoref{fig:environnement:environnement:fonction} propose une
+représentation schématique de l'environnement de la fonction
+\code{square}.
+
+\begin{figure}
+  \centering
+  \setlength{\unitlength}{1mm}
+  \begin{picture}(70,27)
+    \put(10,0){%
+      \framebox(30,20)[tl]{
+        \parbox{25\unitlength}{%
+          \rule{0mm}{2ex}%
+          \code{x} $\mapsto$ $5$ \\
+          \code{square} $\mapsto$ $\phi$}}}
+    \polyline(10,15)(2,15)(2,22)
+    \put( 2,21.5){\vector(0,1){1}}
+    \put(10,15){\circle*{0.8}}
+    \put( 0,24){parent de \code{.GlobalEnv}}
+    \put(42,10){\parbox{45\unitlength}{%
+        \code{.GlobalEnv}: \\
+        environnement de \code{square}}}
+  \end{picture}
+  \caption{Environnement de la fonction \code{square}}
+  \label{fig:environnement:environnement:fonction}
+\end{figure}
 
 Quelques fonctions permettent de manipuler les environnements de
 fonctions. Nous en avons déjà utilisé trois ci-dessus.
@@ -264,14 +291,48 @@ square(10)
 Conformément à ce qui a été établi plus haut, l'environnement
 englobant de $\rho_1$ est celui de la fonction \code{square}, soit
 $\rho_0$ puisque la fonction a été définie dans l'environnement
-global. De plus, le dictionnaire contient la paire (\code{x}, $10$),
-soit le symbole et la valeur de l'argument de la fonction. La fonction
-\code{square} est donc évaluée dans l'environnement
+global. De plus, le dictionnaire contient la paire symbole-valeur
+$\code{x} \mapsto 10$ correspondant à l'argument de la fonction. La
+fonction \code{square} est donc évaluée dans l'environnement
 \begin{equation*}
   \rho_1 = \{ \code{x} \mapsto 10; \rho_0 \}.
 \end{equation*}
 Or, dans cet environnement, la valeur de \code{x} est $10$. C'est
-pourquoi l'expression \verb=x * x= retourne la valeur $100$.
+pourquoi l'expression \verb=x * x= retourne la valeur $100$. La
+\autoref{fig:environnement:environnement:evaluation} offre une
+représentation plus schématique de ce qui précède.
+
+\begin{figure}
+  \centering
+  \setlength{\unitlength}{1mm}
+  \begin{picture}(105,46)
+    \put(10,19){%
+      \framebox(30,20)[tl]{
+        \parbox{25\unitlength}{%
+          \rule{0mm}{2ex}%
+          \code{x} $\mapsto$ $5$ \\
+          \code{square} $\mapsto$ $\phi$}}}
+    \polyline(10,34)(2,34)(2,41)
+    \put( 2,40.5){\vector(0,1){1}}
+    \put(10,34){\circle*{0.8}}
+    \put( 0,43){$\rho_s$: parent de \code{.GlobalEnv}}
+    \put(42,29){\parbox{45\unitlength}{%
+        $\rho_0$ ou \code{.GlobalEnv}: \\
+        environnement de \code{square}}}
+    \put(20,0){%
+      \framebox(30,15)[tl]{
+        \parbox{25\unitlength}{%
+          \rule{0mm}{2ex}%
+          \code{x} $\mapsto$ $10$}}}
+    \polyline(20,10)(12,10)(12,17)
+    \put(12,16.5){\vector(0,1){1}}
+    \put(20,10){\circle*{0.8}}
+    \put(52,7){\makebox(50,0)[l]{%
+        $\rho_1$: environnement de \code{square(10)}}}
+  \end{picture}
+  \caption{Environnement d'évaluation de la fonction \code{square}}
+  \label{fig:environnement:environnement:evaluation}
+\end{figure}
 
 C'est ainsi, à l'aide des environnements d'évaluation, que R ne
 confond pas la valeur de \code{x} dans l'espace de travail et celle à
@@ -413,7 +474,7 @@ search()
 
 Les règles de portée lexicale méritent une bonne illustration.
 Reprenons le second exemple de l'introduction du chapitre.
-<<echo=TRUE>>=
+<<echo=TRUE, results=hide>>=
 y <- 123
 f <- function(x)
 {
@@ -447,26 +508,94 @@ qui entraine l'ajout de deux objets dans l'environnement:
               \code{g} \mapsto \gamma; \rho_0 \},
 \end{equation*}
 où $\gamma$ est une représentation symbolique de la fonction \code{g}.
-Celle-ci se voit automatiquement munie d'un environnement dont
-l'environnement englobant est $\rho_1$.
+Celle-ci se voit automatiquement munie d'un environnement $\rho_2$
+dont l'environnement englobant est $\rho_1$:
+\begin{equation*}
+  \rho_2 = \{ \code{x} \mapsto 10, \code{y} \mapsto 100,
+              \code{g} \mapsto \gamma; \rho_1 \}.
+\end{equation*}
 
 Toujours à l'intérieur de la fonction \code{f}, l'appel \code{g()}
-crée un nouvel environnement d'évaluation $\rho_2$ pour la fonction
-\code{g}. L'environnement englobant est $\rho_1$ et, comme cette
+crée un nouvel environnement d'évaluation $\rho_3$ pour la fonction
+\code{g}. L'environnement englobant est $\rho_2$ et, comme cette
 fonction n'a aucun argument, son dictionnaire est vide:
 \begin{equation*}
-  \rho_2 = \{ ; \rho_1 \}.
+  \rho_3 = \{ ; \rho_2 \}.
 \end{equation*}
 L'expression \code{print(y)} est ensuite évaluée dans l'environnement
-$\rho_2$. L'objet \code{y} n'existe pas dans cet environnement. En
+$\rho_3$. Le symbole \code{y} n'existe pas dans cet environnement. En
 vertu des règles de portée lexicale, R va alors rechercher le symbole
-\code{y} dans l'environnement enrobant $\rho_1$. À cet endroit, la
-valeur $100$ correspond au symbole. C'est donc cette valeur qui est
-affichée à l'écran. La valeur $123$ dans l'espace de travail n'entre
-jamais en jeu.
+dans l'environnement englobant $\rho_2$. À cet endroit, la valeur
+$100$ correspond à \code{y}. C'est donc cette valeur qui est affichée
+à l'écran. La valeur $123$ dans l'espace de travail n'entre jamais en
+jeu.
 <<echo=TRUE>>=
 f(10)
 @
+
+La \autoref{fig:environnement:arbre} illustre l'arbre des
+environnements créés par l'appel de fonction dans l'exemple ci-dessus.
+
+\begin{figure}
+  \centering
+  \setlength{\unitlength}{1mm}
+  %% env. global
+  \begin{picture}(110,94)
+    \put(10,67){%
+      \framebox(30,20)[tl]{
+        \parbox{25\unitlength}{%
+          \rule{0mm}{2ex}%
+          \code{y} $\mapsto$ $123$ \\
+          \code{f} $\mapsto$ $\phi$}}}
+    \polyline(10,82)(2,82)(2,89)
+    \put( 2,88.5){\vector(0,1){1}}
+    \put(10,82){\circle*{0.8}}
+    \put(0,91){$\rho_S$: parent de \code{.GlobalEnv}}
+    \put(42,77){\parbox{45\unitlength}{%
+        $\rho_0$ ou \code{.GlobalEnv}: \\
+        environnement de \code{f}}}
+
+    %% env. évaluation f(10)
+    \put(20,43){%
+      \framebox(30,20)[tl]{
+        \parbox{25\unitlength}{%
+          \rule{0mm}{2ex}%
+          \code{x} $\mapsto$ $10$ \\
+          \code{y} $\mapsto$ $100$ \\
+          \code{g} $\mapsto$ $\gamma$}}}
+    \polyline(20,58)(12,58)(12,65)
+    \put(12,64.5){\vector(0,1){1}}
+    \put(20,58){\circle*{0.8}}
+    \put(52,53.5){\makebox(50,0)[l]{%
+        $\rho_1$: environnement de \code{f(10)}}}
+
+    %% env. de g
+    \put(30,19){%
+      \framebox(30,20)[tl]{
+        \parbox{25\unitlength}{%
+          \rule{0mm}{2ex}%
+          \code{x} $\mapsto$ $10$ \\
+          \code{y} $\mapsto$ $100$ \\
+          \code{g} $\mapsto$ $\gamma$}}}
+    \polyline(30,34)(22,34)(22,41)
+    \put(22,40.5){\vector(0,1){1}}
+    \put(30,34){\circle*{0.8}}
+    \put(62,29.5){\makebox(50,0)[l]{%
+        $\rho_2$: environnement de \code{g}}}
+
+    %% env. évaluation g()
+    \put(40,0){%
+      \framebox(30,15)[tl]{}}
+    \polyline(40,10)(32,10)(32,17)
+    \put(32,16.5){\vector(0,1){1}}
+    \put(40,10){\circle*{0.8}}
+    \put(72,7.25){\makebox(50,0)[l]{%
+        $\rho_3$: environnement de \code{g()}}}
+  \end{picture}
+  \caption[Arbre des environnements]{%
+    Arbre des environnements créés par un appel de fonction}
+  \label{fig:environnement:arbre}
+\end{figure}
 
 \cautionbox{Vous aurez compris que R trouvera éventuellement dans
   l'espace de travail une variable qui n'est pas définie à l'intérieur
