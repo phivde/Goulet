@@ -151,7 +151,7 @@ pas le code comme je pense qu'il devrait l'être, c'est moi qui ai fait
 une erreur quelque part. Pratique.
 
 Dans \index{RStudio}RStudio, pour obtenir une fonctionnalité
-équivalente, il suffit de réfaire l'indentation du code avec l'option
+équivalente, il suffit de refaire l'indentation du code avec l'option
 \code{Reindent Lines} du menu \code{Code}.
 
 La simple édition du code de la \autoref{fig:debogage:rgamma} avec
