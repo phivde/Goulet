@@ -2522,7 +2522,7 @@ qui ne se termine pas par «\code{)"}».
 
 Ainsi, pour passer le motif ci-dessus à une fonction R sans avoir à se
 soucier de doubler les caractères d'échappement, il est possible de
-l'entrer plutôt sous la forme \code{r"(.\{1,8\}\bs\bs.txt)"}.
+l'entrer plutôt sous la forme \code{r"(.\{1,8\}\bs.txt)"}.
 
 \gotorbox{Le fichier de script \code{\rscriptfilename} reproduit à la
   \autoref{sec:texte:exemples-r} contient des exemples d'utilisation
