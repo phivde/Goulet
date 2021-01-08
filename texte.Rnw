@@ -2939,12 +2939,12 @@ exec("grep", c("'.*-08-'", "100metres.dat"), eval = FALSE)
 exec("awk", c("'$2 < 10'", "100metres.dat"), eval = FALSE)
 @
       Malheureusement, cette commande risque de ne pas fonctionner sur
-      certains systèmes qui traitent la virgule comme le séparateur
-      décimal, notamment les Mac en configuration française. Dans ce
-      cas, essayer plutôt:
+      certains systèmes qui utilisent non pas le point, mais la
+      virgule comme séparateur décimal. C'est le cas, notamment, des
+      Mac en configuration française. Dans ce cas, essayer plutôt:
       \begin{Schunk}
 \begin{Verbatim}
-$ LC_NUMERIC="en_US.UTF-8" awk '$2 < 10' 100metres.dat
+$ LC_ALL="en_US.UTF-8" awk '$2 < 10' 100metres.dat
 \end{Verbatim}
       \end{Schunk}
       Une solution avec \icode{grep} consisterait à rechercher

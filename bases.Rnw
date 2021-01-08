@@ -2478,19 +2478,21 @@ x
 x <- c(18, 11, 10, 2, 19, 9, 12, 15, 13, 12, 1, 6)
 @
     \begin{enumerate}
-\item
+\item Indiçage avec un seul entier positif pour extraire une donnée.
 <<echo=TRUE,eval=FALSE>>=
 x[2]
 @
-\item
+\item Indiçage avec un vecteur d'entiers positifs pour extraire
+  plusieurs données.
 <<echo=TRUE,eval=FALSE>>=
 x[1:5]
 @
-\item
+\item Indiçage avec un vecteur booléen pour extraire par critère.
 <<echo=TRUE,eval=FALSE>>=
 x[x > 14]
 @
-\item
+\item Indiçage avec un vecteur d'entiers négatifs pour laisser tomber
+  des données.
 <<echo=TRUE,eval=FALSE>>=
 x[-c(6, 7, 12)]
 @
@@ -2520,31 +2522,38 @@ x[-c(6, 7, 12)]
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-    \item
+    \item La somme de deux vecteurs --- qui s'effectue élément par
+      élément --- fait partie intégrante du langage R.
 <<echo=TRUE,eval=FALSE>>=
 3 * (x + y)
 @
-    \item
+    \item La fonction \icode{sum} additionne tous les éléments d'un
+      vecteur.
 <<echo=TRUE,eval=FALSE>>=
 sum(x)/length(x)
 @
-    \item
+    \item La fonction \icode{prod} multiplie entre eux tous les
+      éléments d'un vecteur.
 <<echo=TRUE,eval=FALSE>>=
 prod(x)^(1/length(x))
 @
-    \item
+    \item Le calcul de la moyenne harmonique repose lui aussi sur la
+      fonction \icode{prod}.
 <<echo=TRUE,eval=FALSE>>=
 1/prod(1/x)
 @
-    \item
+    \item Le produit scalaire est la somme des produits élément par
+      élément de deux vecteurs.
 <<echo=TRUE,eval=FALSE>>=
 sum(x * y)
 @
-    \item
+    \item La norme $1$ est la somme des différences en valeurs
+      absolues élément par élément de deux vecteurs.
 <<echo=TRUE,eval=FALSE>>=
 sum(abs(x - y))
 @
-    \item
+    \item La norme «infini» est la plus grande des différences en
+      valeurs absolues élément par élément de deux vecteurs.
 <<echo=TRUE,eval=FALSE>>=
 max(abs(x - y))
 @
@@ -2566,27 +2575,27 @@ max(abs(x - y))
   \begin{sol}
     \begin{enumerate}
       \stepcounter{enumi}
-    \item
+    \item On a
 <<echo=TRUE, eval=FALSE>>=
 amean <- function(x) sum(x)/length(x)
 @
-    \item
+    \item On a
 <<echo=TRUE, eval=FALSE>>=
 gmean <- function(x) prod(x)^(1/length(x))
 @
-    \item
+    \item On a
 <<echo=TRUE, eval=FALSE>>=
 hmean <- function(x) 1/prod(1/x)
 @
-    \item
+    \item On a
 <<echo=TRUE, eval=FALSE>>=
 pscal <- function(x, y) sum(x * y)
 @
-    \item
+    \item On a
 <<echo=TRUE, eval=FALSE>>=
 norm1 <- function(x, y) sum(abs(x - y))
 @
-    \item
+    \item On a
 <<echo=TRUE, eval=FALSE>>=
 normINF <- function(x, y) max(abs(x - y))
 @
@@ -2889,15 +2898,22 @@ f
     programmation, les objets seraient indéfinis et les appels de
     fonction résulteraient tous en une erreur.
     \begin{enumerate}
-    \item
+    \item Dans l'appel \code{f(1, 1)}, les valeurs de \code{x} et
+      \code{y} sont égales à $1$ dans la fonction $f$ et l'argument
+      \code{a} de la fonction \code{g} est égal à $2$.
 <<echo=FALSE>>=
 f(1, 1)
 @
-    \item
+    \item Dans l'appel \code{f(f(1, 1), 1)}, l'argument \code{x} de la
+      fonction \code{f} externe est égal au résultat en a), soit
+      $\Sexpr{f(1, 1)}$, et l'argument \code{y} est égal à $1$. Le
+      reste des calculs s'effectue comme en a).
 <<echo=FALSE>>=
 f(f(1, 1), 1)
 @
-    \item
+    \item Cette fois, l'argument \code{x} de la
+      fonction \code{f} externe est égal à $1$ et l'argument \code{y}
+      est égal  au résultat en b).
 <<echo=FALSE>>=
 f(1, f(f(1, 1), 1))
 @
@@ -2954,31 +2970,33 @@ cat(rep(1:3, rep(4, 3)))
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-\item
+\item Suite de $0$ à $6$ par bonds de $3$.
 <<echo=TRUE, eval=FALSE>>=
 rep(c(0, 6), 3)
 @
-\item
+\item Suite de $1$ à $10$ par bonds de $3$.
 <<echo=TRUE, eval=FALSE>>=
 seq(1, 10, by = 3)
 @
-\item
+\item Suite $1, 2, 3$ répétée quatre fois.
 <<echo=TRUE, eval=FALSE>>=
 rep(1:3, 4)
 @
-\item
+\item Suite $1, 2, 3$ dont les éléments sont répétés une, deux et
+  trois fois, dans l'ordre.
 <<echo=TRUE, eval=FALSE>>=
 rep(1:3, 1:3)
 @
-\item
+\item Suite $1, 2, 3$ dont les éléments sont répétés trois, deux et
+  une fois, dans l'ordre.
 <<echo=TRUE, eval=FALSE>>=
 rep(1:3, 3:1)
 @
-\item
+\item Suite de trois nombres équidistants entre $1$ à $10$, inclusivement.
 <<echo=TRUE, eval=FALSE>>=
 seq(1, 10, length = 3)
 @
-\item
+\item Suite $1, 2, 3$ dont les éléments sont chacun répétés quatre fois.
 <<echo=TRUE, eval=FALSE>>=
 rep(1:3, rep(4,3))
 @
@@ -3024,23 +3042,24 @@ cat(10 * 1:10)
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-\item
+\item Générer les entiers de $11$ à $20$ et diviser ensuite par $10$.
 <<echo=TRUE, eval=FALSE>>=
 11:20/10
 @
-\item
+\item Générer la suite $0, 2, 4, \dots, 18$ en multipliant par $2$ la
+  suite $0, 1, 2, \dots, 9$, puis ajouter $1$.
 <<echo=TRUE, eval=FALSE>>=
 2 * 0:9 + 1
 @
-\item
+\item Répéter la suite $-2, -1, 0, 1, 2$ deux fois.
 <<echo=TRUE, eval=FALSE>>=
 rep(-2:2, 2)
 @
-\item
+\item Répéter deux fois chaque élément de la suite $-2, -1, 0, 1, 2$.
 <<echo=TRUE, eval=FALSE>>=
 rep(-2:2, each = 2)
 @
-\item
+\item Générer la suite $1, 2, \dots, 10$ et multiplier par $10$.
 <<echo=TRUE, eval=FALSE>>=
 10 * 1:10
 @
@@ -3054,6 +3073,8 @@ rep(-2:2, each = 2)
   $1!, 2!, \dots, 10!$, où $n! = n(n - 1)(n - 2) \cdots 2 \cdot 1$ est
   la fonction factorielle.
   \begin{sol}
+    Il s'agit de calculer le produit cumulatif des nombres de $1$ à
+    $10$.
 <<echo=TRUE, eval=FALSE>>=
 cumprod(1:10)
 @
@@ -3080,21 +3101,26 @@ cumprod(1:10)
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-\item
+\item Extraction par position des cinq premiers éléments du vecteur.
 <<echo=TRUE, eval=FALSE>>=
 x[1:5]
 head(x, 5)
 @
-\item
+\item La fonction \icode{max} retourne la plus grande valeur d'un
+  vecteur.
 <<echo=TRUE, eval=FALSE>>=
 max(x)
 @
-\item
+\item Il s'agit d'extraire les cinq premiers éléments du vecteur et de
+  calculer la moyenne des valeurs obtenues.
 <<echo=TRUE, eval=FALSE>>=
 mean(x[1:5])
 mean(head(x, 5))
 @
-\item
+\item Il s'agit d'extraire les cinq derniers éléments du vecteur et de
+  calculer la moyenne des valeurs obtenues. Deux solutions: une qui
+  implique de connaitre exactement la longueur du vecteur et l'autre,
+  préférable, qui demeure valable peu importe la longueur du vecteur.
 <<echo=TRUE, eval=FALSE>>=
 mean(x[16:20])
 mean(tail(x, 5))

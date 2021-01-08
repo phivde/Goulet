@@ -1131,16 +1131,16 @@ factorial(5)
     de Fibonnacci de manière récursive est très lent parce que
     plusieurs valeurs sont calculées à de multiples reprises.
 <<echo=TRUE>>=
-fibonacci <- function(n)
-    if (n <= 1) n else fibonacci(n - 1) + fibonacci(n - 2)
-fibonacci(0)
-fibonacci(1)
-fibonacci(2)
-fibonacci(5)
-fibonacci(10)
-# fibonacci(30)              # déjà lent
-# fibonacci(35)              # long
-# fibonacci(40)              # à vos risques et périls
+fib <- function(n)
+    if (n <= 1) n else fib(n - 1) + fib(n - 2)
+fib(0)
+fib(1)
+fib(2)
+fib(5)
+fib(10)
+# fib(30)            # déjà lent
+# fib(35)            # long
+# fib(40)            # à vos risques et périls
 @
   \end{sol}
 \end{exercice}

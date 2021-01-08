@@ -2325,19 +2325,22 @@ x <- matrix(sample(1:100, 70), 7, 10)
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-\item
+\item Extraction d'un élément unique à l'aide de d'un indice de ligne
+  et d'un indice de colonne.
 <<echo=TRUE,eval=FALSE>>=
 x[4, 3]
 @
-\item
+\item Extraction d'une ligne complète à l'aide d'un indice de ligne.
 <<echo=TRUE,eval=FALSE>>=
 x[6, ]
 @
-\item
+\item Extraction de deux colonnes complètes à l'aide de deux indices
+  de colonne.
 <<echo=TRUE,eval=FALSE>>=
 x[, c(1, 4)]
 @
-\item
+\item Extraction de lignes par critère, critère lui-même obtenu par un
+  calcul sur les éléments de la première colonne.
 <<echo=TRUE,eval=FALSE>>=
 x[x[, 1] > 50, ]
 @
@@ -2378,19 +2381,20 @@ x[x[, 1] > 50, ]
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-\item
+\item Sommes par ligne.
 <<echo=TRUE, eval=FALSE>>=
 rowSums(m)
 @
-\item
+\item Moyennes par colonne.
 <<echo=TRUE, eval=FALSE>>=
 colMeans(m)
 @
-\item
+\item Indiçage de la matrice d'origine et calcul du maximum.
 <<echo=TRUE, eval=FALSE>>=
 max(m[1:3, 1:3])
 @
-\item
+\item Extraction par critère, celui-ci étant obtenu en calculant les
+  moyennes par ligne.
 <<echo=TRUE, eval=FALSE>>=
 m[rowMeans(m) > 7, ]
 @
@@ -2456,24 +2460,32 @@ x
 x <- list(1:5, data = matrix(1:6, 2, 3), numeric(3),
           test = logical(4))
 @
-    \item
+    \item La fonction \icode{names} permet d'extraire les étiquettes
+      d'un objet.
 <<echo=TRUE,eval=FALSE>>=
 names(x)
 @
-    \item
+    \item Extraire le quatrième élément de la liste avant d'utiliser
+      \icode{mode} et \icode{length} pour obtenir son mode et sa
+      longueur.
 <<echo=TRUE,eval=FALSE>>=
 mode(x$test)
 length(x$test)
 @
-    \item
+    \item Extraire le deuxième élément de la liste avant d'utiliser
+      \icode{dim} pour obtenir ses dimensions.
 <<echo=TRUE,eval=FALSE>>=
 dim(x$data)
 @
-    \item
+    \item Le truc ici consiste à indicer deux fois: d'abord avec des
+      crochets doubles pour extraire le second élément de la liste,
+      puis avec des crochets simples (puisque le résultat de la
+      première extraction est un vecteur) pour extraire les deuxième
+      et troisième éléments.
 <<echo=TRUE,eval=FALSE>>=
 x[[2]][c(2, 3)]
 @
-    \item
+    \item Il faut utiliser des crochets doubles.
 <<echo=TRUE,eval=FALSE>>=
 x[[3]] <- 3:8
 @
@@ -2531,6 +2543,7 @@ apply(outer(1/(1 + i), n, "^"), 1, cumsum)
     &= (0,15,\; 0,04,\; 0,05,\; 0,06,\; 0,17,\; 0,16,\; 0,11,\; 0,09).
   \end{align*}
   \begin{sol}
+    On a
 <<echo=TRUE>>=
 x <- c(7, 13, 3, 8, 12, 12, 20, 11)
 w <- c(0.15, 0.04, 0.05, 0.06, 0.17, 0.16, 0.11, 0.09)
@@ -2583,7 +2596,7 @@ sum(x * w)/sum(w)
     Soit \code{Xij} et \code{wij} des matrices, et \code{Xijk}
     et \code{wijk} des tableaux à trois dimensions.
     \begin{enumerate}
-\item
+\item Il s'agit de calculer les moyennes pondérées par lignes.
 <<echo=TRUE,eval=FALSE>>=
 apply(Xij * wij, 1, sum)/apply(wij, 1, sum)
 @
@@ -2591,7 +2604,7 @@ ou
 <<echo=TRUE,eval=FALSE>>=
 rowSums(Xij * wij)/rowSums(wij)
 @
-\item
+\item Il s'agit de calculer les moyennes pondérées par colonnes.
 <<echo=TRUE,eval=FALSE>>=
 apply(Xij * wij, 2, sum)/apply(wij, 2, sum)
 @
@@ -2599,24 +2612,28 @@ ou
 <<echo=TRUE,eval=FALSE>>=
 colSums(Xij * wij)/colSums(wij)
 @
-\item
+\item Ici, le résultat est la moyenne pondérée de toutes les données.
 <<echo=TRUE,eval=FALSE>>=
 sum(Xij * wij)/sum(wij)
 @
-\item
+\item Il s'agit de calculer les moyennes pondérées par carottes
+  horizontales.
 <<echo=TRUE,eval=FALSE>>=
 apply(Xijk * wijk, c(1, 2), sum) /
     apply(wijk, c(1, 2), sum)
 @
-\item
+\item Il s'agit de calculer les moyennes pondérées par tranches
+  horizontales.
 <<echo=TRUE,eval=FALSE>>=
 apply(Xijk * wijk, 1, sum)/apply(wijk, 1, sum)
 @
-\item
+\item Il s'agit de calculer les moyennes pondérées par tranches
+  verticales.
 <<echo=TRUE,eval=FALSE>>=
 apply(Xijk * wijk, 2, sum)/apply(wijk, 2, sum)
 @
-\item
+\item Il s'agit à nouveau de la moyenne pondérée de toutes les
+  données.
 <<echo=TRUE,eval=FALSE>>=
 sum(Xijk * wijk)/sum(wijk)
 @
@@ -2635,22 +2652,24 @@ sum(Xijk * wijk)/sum(wijk)
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-\item
+\item Générer séparément les suites de $0$ jusqu'à $1, 2, \dots, 10$, puis
+  les placer bout à bout.
 <<echo=TRUE>>=
 unlist(lapply(0:10, seq, from = 0))
 @
-\item
+\item Générer séparément les suites de $1, 2, \dots, 10$ $0$ jusqu'à $10$,
+  puis les placer bout à bout.
 <<echo=TRUE>>=
 unlist(lapply(1:10, seq, from = 10))
 @
-\item
+\item Générer séparément les suites de $10, 9, \dots, 1$ $0$ jusqu'à $1$,
+  puis les placer bout à bout.
 <<echo=TRUE>>=
 unlist(lapply(10:1, seq, to = 1))
 @
     \end{enumerate}
   \end{sol}
 \end{exercice}
-
 
 \begin{exercice}
   La fonction de densité de probabilité et la fonction de répartition
@@ -2692,30 +2711,40 @@ rpareto <- function(n, shape, scale)
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-\item
+\item La fonction \code{rpareto} n'est pas vectorielle pour son argument
+  \code{n}. Il faut avoir recours à une fonction d'application pour
+  simuler plusieurs échantillons de taille différentes. La fonction à
+  utiliser est \icode{lapply} puisqu'elle  permet d'itérer
+  sur un vecteur de tailles d'échantillons et qu'elle retourne son
+  résultat dans une liste, tel que demandé.
 <<echo=TRUE>>=
 x <- lapply(seq(100, 300, by = 50), rpareto,
             shape = 2, scale = 5000)
 @
-\item
+\item On attribue des étiquettes à la liste avec \icode{names}.
 <<echo=TRUE>>=
 names(x) <- paste("sample", 1:5, sep = "")
 @
-\item
+\item Il faut encore utiliser un fonction d'application. Pour
+  retourner le résultat directement sous forme de vecteur, c'est
+  \icode{sapply} qu'il nous faut.
 <<echo=TRUE,eval=FALSE>>=
 sapply(x, mean)
 @
 \item Définissons d'abord une fonction pour calculer la fonction de
-  répartition de la loi de Pareto.
+  répartition de la loi de Pareto. Celle-ci est vectorielle pour son
+  argument \code{q}.
 <<echo=TRUE>>=
 ppareto <- function(q, shape, scale)
     1 - (scale/(q + scale))^shape
 @
-  Nous pouvons ensuite effectuer le calcul demandé.
+  Nous pouvons ensuite effectuer le calcul demandé, mais nous avons
+  besoin d'une fonction anonyme pour aussi trier les résultats.
 <<echo=TRUE,eval=FALSE>>=
 lapply(x, function(x) sort(ppareto(x, 2, 5000)))
 @
-\item
+\item Pour utiliser un opérateur arithmétique comme fonction dans une
+  fonction d'application, il faut le placer entre guillemets.
 <<echo=TRUE,eval=FALSE>>=
 lapply(x, "+", 1000)
 @
