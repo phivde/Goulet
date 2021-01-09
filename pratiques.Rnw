@@ -41,7 +41,7 @@ travail de programmation consiste à corriger, à mettre à jour ou à
 améliorer du code existant. Dans ce contexte, l'adhésion à un certain
 nombre de normes et de bonnes pratiques permet de faciliter le travail
 de tous les intervenants et de réduire les risques d'erreurs. Ce
-chapitre présente quelques unes de ces bonnes pratiques à adopter en
+chapitre présente quelques-unes de ces bonnes pratiques à adopter en
 matière de style de programmation, de présentation du code et de
 documentation.
 
