@@ -205,7 +205,7 @@ create-release:
 	        next } \
 	      (state == 1) && /^# / { exit } \
 	      state == 1 { printf "%s\\n", $$0 } \
-	      END { print "\",\"assets\": { \"links\": [{ \"name\": \"${ARCHIVE}\", \"url\": \"${REPOSURL}${upload_url}\" }] }}" }' \
+	      END { print "\",\"assets\": { \"links\": [{ \"name\": \"${ARCHIVE}\", \"url\": \"${REPOSURL}${upload_url}\", \"link_type\": \"package\" }] }}" }' \
 	     ${NEWS} >> relnotes.in
 	curl --request POST \
 	     --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
