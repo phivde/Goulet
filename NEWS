@@ -2,22 +2,20 @@
 === Programmer avec R
 ===
 
-# (en développement)
+# 2021.01 (2021-01-19)
 
 ## Nouveautés
 
 - Section 4.5: mention de `isFALSE` conjointement avec `isTRUE`. Les
   fonctions sont maintenant présentées comme des outils pour s'assurer
   que la condition d'une clause `if` est un vecteur booléen de
-  longueur $1$ différent de \icode{NA}.
+  longueur $1$ différent de `NA`.
 - Section 6.1: ajout de l'élément de style «Évitez de vous répéter».
 - Section 6.1: lien vers la nouvelle vidéo «Le guide de style R du
     geek de placard».
 - Section 7.3: précisions, dans le code informatique correspondant à
   la section, sur le fait que la classe du vecteur d'itérateurs n'est
-  pas prise en compte dans la définition d'une boucle `for`. Cela peut
-  avoir un effet inattendu, par exemple en itérant sur un vecteur de
-  dates.
+  pas prise en compte dans la définition d'une boucle `for`.
 - Chapitre 12: représentation schématique de l'environnement d'une
   fonction (figure 12.2), de l'environnement d'évaluation (figure
   12.3) et de l'arbre des environnements dans un appel de fonction
