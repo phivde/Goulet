@@ -44,6 +44,10 @@ La compilation du document requiert les polices de caractères suivantes:
 - [Fira Sans](https://www.fontsquirrel.com/fonts/fira-sans) (les versions OpenType de Mozilla) en graisses *Book*, *Semi Bold*, *Book Italic* et *Semi Bold Italic*.
 - [Font Awesome](https://fontawesome.com/). Cette police fournit une multitude d'icônes et de symboles. Depuis juillet 2019, le document utilise la version 5.x de la police. Celle-ci est normalement installée avec TeX Live.
 
+### Bases de données bibliographiques
+
+Les bases de données bibliographiques (fichiers ` .bib`) ne font pas partie du code source du projet. Vous pouvez toutefois les récupérer en clonant mon [dépôt Git de bibliographie)[https://gitlab.com/vigou3/bibliography).
+
 ### Outils Unix additionnels (Windows)
 
 La composition du document de référence est rendue plus facile par l'utilisation de l'outil Unix standard `make` qui n'est pas livré avec Windows. 
