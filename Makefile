@@ -47,12 +47,14 @@ LICENSE = LICENSE
 CONTRIBUTING = CONTRIBUTING.md
 OTHER = gabarit-documentation-fonction.R chanson.txt carburant.dat 100metres.dat
 
-## Le document maitre dépend de tous les fichiers .Rnw et de tous les
-## fichiers .tex autres que lui-même qui n'ont pas de version .Rnw.
+## Le document maitre dépend de tous les fichiers .Rnw; de tous les
+## fichiers .tex autres que lui-même qui n'ont pas de version .Rnw;
+## des fichiers partagés du répertoire 'share'.
 RNWFILES = $(wildcard *.Rnw)
 TEXFILES = $(addsuffix .tex, \
                        $(filter-out $(basename ${RNWFILES} ${MASTER} $(wildcard solutions-*.tex)),\
                                     $(basename $(wildcard *.tex))))
+SHARE = share/license-by-sa.nw
 
 ## Les fichiers de script sont tous extraits des fichiers .Rnw. Un
 ## chapitre est livré avec deux fichiers d'accompagnement pour les
@@ -102,6 +104,9 @@ FORCE: ;
 %.tex %.R: %.Rnw
 	${SWEAVE} '$<'
 
+paquetages.Rout:
+	echo "fichier paquetages.Rout sans intérêt"
+
 %.Rout: %.R
 	echo "options(error=expression(NULL))" | cat - $< | \
 	  sed -e 's/`.*`//' \
@@ -110,7 +115,7 @@ FORCE: ;
 	${RBATCH} $<.tmp $@
 	${RM} $<.tmp
 
-${MASTER}: ${MASTER:.pdf=.tex} ${RNWFILES:.Rnw=.tex} ${TEXFILES} \
+${MASTER}: ${MASTER:.pdf=.tex} ${RNWFILES:.Rnw=.tex} ${TEXFILES} ${SHARE} \
 	   $(wildcard data/*) $(wildcard images/*)
 	${TEXI2DVI} ${MASTER:.pdf=.tex}
 
@@ -139,7 +144,7 @@ contrib: ${COLLABORATEURS}
 release: update-copyright zip check-status upload create-release publish
 
 .PHONY: update-copyright
-update-copyright: ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES}
+update-copyright: ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES} ${SHARE}
 	for f in $?; \
 	    do sed -E '/^(#|%)* +Copyright \(C\)/s/20[0-9]{2}/${YEAR}/' \
 	           $$f > $$f.tmp && \
