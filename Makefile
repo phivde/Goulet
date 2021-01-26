@@ -146,7 +146,7 @@ release: update-copyright zip check-status upload create-release publish
 .PHONY: update-copyright
 update-copyright: ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES} ${SHARE}
 	for f in $?; \
-	    do sed -E '/^(#|%)* +Copyright \(C\)/s/20[0-9]{2}/${YEAR}/' \
+	    do sed -E '/^(#|%)* +Copyright \(C\)/s/20[0-9]{2}/$(shell date "+%Y")/' \
 	           $$f > $$f.tmp && \
 	           ${CP} $$f.tmp $$f && \
 	           ${RM} $$f.tmp; \
