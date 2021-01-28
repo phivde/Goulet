@@ -4,6 +4,14 @@
 
 # (en développement)
 
+## Changements:
+
+- Section A.4: le problème de raccourci-clavier pour le symbole
+  d'affectation sur les Mac munis d'un clavier canadien-français
+  semblé réglé depuis RStudio 1.3 (environ). L'encadré à ce sujet est
+  maintenu, mais le texte a été adapté en conséquence. Merci à Émilie
+  Guénard pour sa vigilance.
+
 ## Corrections
 
 - L'année de copyright était erronée dans les fichiers de script.
