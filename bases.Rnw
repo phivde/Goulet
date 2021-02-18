@@ -2511,7 +2511,7 @@ x[-c(6, 7, 12)]
   \item $3 (\mat{x} + \mat{y})$
   \item $n^{-1} \sum_{i = 1}^n x_i$ (moyenne arithmétique de $\mat{x}$)
   \item $(\prod_{i = 1}^n x_i)^{1/n}$ (moyenne géométrique de $\mat{x}$)
-  \item $1/(\prod_{i = 1}^n x_i^{-1})$ (moyenne harmonique de
+  \item $n/(\sum_{i = 1}^n x_i^{-1})$ (moyenne harmonique de
     $\mat{x}$)
   \item $\langle \mat{x}, \mat{y} \rangle = \sum_{i = 1}^n x_i y_i$
     (produit scalaire entre $\mat{x}$ et $\mat{y}$)
@@ -2537,10 +2537,10 @@ sum(x)/length(x)
 <<echo=TRUE,eval=FALSE>>=
 prod(x)^(1/length(x))
 @
-    \item Le calcul de la moyenne harmonique repose lui aussi sur la
-      fonction \icode{prod}.
+    \item Le calcul de la moyenne harmonique repose sur la fonction
+      \icode{sum}.
 <<echo=TRUE,eval=FALSE>>=
-1/prod(1/x)
+n/sum(1/x)
 @
     \item Le produit scalaire est la somme des produits élément par
       élément de deux vecteurs.
