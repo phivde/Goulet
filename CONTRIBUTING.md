@@ -6,17 +6,17 @@
 
 > Ce guide est également disponible en [vidéo](https://youtu.be/nag48IGh8eo).
 
-La version de développement du projet [Programmer avec R](https://vigou3.gitlab.io/programmer-avec-r) est hébergée dans un [dépôt Git public](https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-develop) de la Faculté des sciences et de génie de l'Université Laval. Le référentiel utilise [Atlassian BitBucket Server](https://www.atlassian.com/software/bitbucket/server).
+La version de développement du projet [Programmer avec R](https://vigou3.gitlab.io/programmer-avec-r) est hébergée dans un [dépôt Git public](https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-devel) de la Faculté des sciences et de génie de l'Université Laval. Le référentiel utilise [Atlassian BitBucket Server](https://www.atlassian.com/software/bitbucket/server).
 
 La branche `master` du dépôt est réservée en écriture au gestionnaire du projet.
 
 Pour collaborer au projet, vous devez publier vos modifications dans une nouvelle branche et effectuer une demande de tirage (*pull request*) vers la branche `master` tel qu'expliqué ci-dessous.
 
-1. Si  vous travaillez sur le code source pour la première fois, déplacez-vous avec la commande `cd` dans le répertoire dans lequel vous voulez enregistrer le code source du projet (le répertoire `programmer-avec-r-develop` sera créé automatiquement), clonez le dépôt et déplacez-vous ensuite dans le dossier du code source:
+1. Si  vous travaillez sur le code source pour la première fois, déplacez-vous avec la commande `cd` dans le répertoire dans lequel vous voulez enregistrer le code source du projet (le répertoire `programmer-avec-r-devel` sera créé automatiquement), clonez le dépôt et déplacez-vous ensuite dans le dossier du code source:
 
 ```
-git clone https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-develop.git
-cd programmer-avec-r-develop
+git clone https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-devel.git
+cd programmer-avec-r-devel
 ```
 
 **OU**
