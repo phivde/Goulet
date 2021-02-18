@@ -2537,8 +2537,8 @@ sum(x)/length(x)
 <<echo=TRUE,eval=FALSE>>=
 prod(x)^(1/length(x))
 @
-    \item Le calcul de la moyenne harmonique repose lui aussi sur la
-      fonction \icode{prod}.
+    \item Le calcul de la moyenne harmonique repose sur la fonction
+      \icode{sum}.
 <<echo=TRUE,eval=FALSE>>=
 n/sum(1/x)
 @
