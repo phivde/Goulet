@@ -470,7 +470,7 @@ Dans ses grandes lignes, une session de travail avec R comporte les
   R que l'on souhaite sauvegarder et les commentaires qui permettront
   de s'y retrouver plus tard. Tester les commandes à la ligne de
   commande. Au cours de la phase de développement, on fera
-  généralement de nombreux aller-retours entre la ligne de commande et
+  généralement de nombreux allers-retours entre la ligne de commande et
   le fichier de script.
 \item Sauvegarder son fichier de script et quitter l'éditeur ou
   l'environnement de développement.
