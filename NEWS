@@ -6,9 +6,13 @@
 
 ## Changements:
 
+- Section 6.4: dans le code informatique correspondant à la section,
+  la fonction `assertError` est plutôt utilisée à l'extérieur de
+  `stopifnot`. Le changement apparait également dans le fichier
+  `tests-sqrt.R`.
 - Section A.4: le problème de raccourci-clavier pour le symbole
   d'affectation sur les Mac munis d'un clavier canadien-français
-  semblé réglé depuis RStudio 1.3 (environ). L'encadré à ce sujet est
+  semble réglé depuis RStudio 1.3 (environ). L'encadré à ce sujet est
   maintenu, mais le texte a été adapté en conséquence. Merci à Émilie
   Guénard pour sa vigilance.
 

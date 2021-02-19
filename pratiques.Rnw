@@ -1010,8 +1010,8 @@ source("sqrt.R")
 ## 3. Carré de la réponse égal à l'argument autrement; il faut
 ##    ajuster la tolérance en fonction de celle utilisée dans
 ##    la fonction.
+tools::assertError(sqrt(-1))
 stopifnot({
-    tools::assertError(sqrt(-1))
     identical(0, sqrt(0))
     all.equal(3, sqrt(3)^2,
               tolerance = 0.001)
@@ -1154,10 +1154,9 @@ stopifnot(identical(0, sqrt(0)))
 stopifnot(all.equal(3, sqrt(3)^2,
                     tolerance = 0.001))
 
-## Nous pouvons aussi regrouper les trois tests en un seul
-## appel à 'stopifnot'.
+## Nous pouvons aussi regrouper les deux derniers tests en un
+## seul appel à 'stopifnot'.
 stopifnot({
-    tools::assertError(sqrt(-1))
     identical(0, sqrt(0))
     all.equal(3, sqrt(3)^2,
               tolerance = 0.001)
