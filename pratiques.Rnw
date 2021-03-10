@@ -133,7 +133,7 @@ mean(x)
   programme et que vous devez un jour y changer quelque chose, il vous
   faudra penser à effectuer le changement partout. Et tôt ou tard vous
   allez oublier un cas et introduire un bogue. C'est une règle de
-  l'univers, ne pensez y échapper. Comment éviter les périls de la
+  l'univers, ne pensez pas y échapper. Comment éviter les périls de la
   répétition?
   \begin{enumerate}
   \item Révisez votre algorithme pour éliminer la répétition. Voici un
