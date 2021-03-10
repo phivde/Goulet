@@ -1725,7 +1725,7 @@ USArrests$Murder           # idem, plus simple
 USArrests[1, ]             # première ligne
 
 ## La fonction 'subset' permet d'extraire des lignes et des
-## colonnes d'un tablau de données de manière très intuitive.
+## colonnes d'un tableau de données de manière très intuitive.
 ##
 ## Par exemple, nous pouvons extraire ainsi le nombre
 ## d'assauts dans les états comptant un taux de meurtre
