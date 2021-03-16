@@ -6,6 +6,11 @@
 
 ## Changements:
 
+- Chapitre 6: lorsque plusieurs tests sont regroupés dans `stopifnot`
+  à l'intérieur d'accolades, il faut nommer explicitement l'argument
+  `exprs`. Tous les exemples de cette forme dans le code informatique
+  correspondant à la section 6.4, ainsi que la solution de l'exercice
+  6.3 étaient donc erronés.
 - Section 6.4: dans le code informatique correspondant à la section,
   la fonction `assertError` est plutôt utilisée à l'extérieur de
   `stopifnot`. Le changement apparait également dans le fichier
