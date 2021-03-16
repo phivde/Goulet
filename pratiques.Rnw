@@ -1011,7 +1011,7 @@ source("sqrt.R")
 ##    ajuster la tolérance en fonction de celle utilisée dans
 ##    la fonction.
 tools::assertError(sqrt(-1))
-stopifnot({
+stopifnot(exprs = {
     identical(0, sqrt(0))
     all.equal(3, sqrt(3)^2,
               tolerance = 0.001)
@@ -1057,10 +1057,11 @@ stopifnot(1 < 2,
 
 ## L'autre option permet d'éviter les virgules, ce qui est
 ## plus pratique pour l'évaluation interactive ligne par
-## ligne. Il s'agit de regrouper les expressions entre
-## accolades «{ }» et de les séparer les unes des autres par
-## un retour à la ligne.
-stopifnot({
+## ligne. Il s'agit de fournir à l'argument 'exprs' (qu'il
+## faut nommer explicitement) un groupe d'expressions entre
+## accolades «{ }» et séparées les unes des autres par un
+## retour à la ligne.
+stopifnot(exprs = {
     1 < 2
     2 == 2
     "a" < "b"
@@ -1156,7 +1157,7 @@ stopifnot(all.equal(3, sqrt(3)^2,
 
 ## Nous pouvons aussi regrouper les deux derniers tests en un
 ## seul appel à 'stopifnot'.
-stopifnot({
+stopifnot(exprs = {
     identical(0, sqrt(0))
     all.equal(3, sqrt(3)^2,
               tolerance = 0.001)
@@ -1310,7 +1311,7 @@ f <- function(x)
     \end{enumerate}
     Le code ci-dessous permet d'effectuer les tests.
 <<echo=FALSE>>=
-stopifnot({
+stopifnot(exprs = {
     tools::assertError(f(c(4, 3, 0, 6, 21)))
     tools::assertError(f(-c(4, 3, 0, 6, 21)))
     tools::assertWarning(f(c(4, -3, 0, 21, -6)))
@@ -1320,7 +1321,7 @@ stopifnot({
 @
   \begin{Schunk}
 \begin{Verbatim}
-stopifnot({
+stopifnot(exprs = {
     tools::assertError(f(c(4, 3, 0, 6, 21)))
     tools::assertError(f(-c(4, 3, 0, 6, 21)))
     tools::assertWarning(f(c(4, -3, 0, 21, -6)))
