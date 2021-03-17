@@ -1311,20 +1311,20 @@ f <- function(x)
     \end{enumerate}
     Le code ci-dessous permet d'effectuer les tests.
 <<echo=FALSE>>=
+tools::assertError(f(c(4, 3, 0, 6, 21)))
+tools::assertError(f(-c(4, 3, 0, 6, 21)))
+tools::assertWarning(f(c(4, -3, 0, 21, -6)))
 stopifnot(exprs = {
-    tools::assertError(f(c(4, 3, 0, 6, 21)))
-    tools::assertError(f(-c(4, 3, 0, 6, 21)))
-    tools::assertWarning(f(c(4, -3, 0, 21, -6)))
     all.equal(0.128564783114, f(c(-10, -7, 12, 0, 11)))
     all.equal(0.225982251102, f(c(-10, 12, -7, 0, 11)))
 })
 @
   \begin{Schunk}
 \begin{Verbatim}
+tools::assertError(f(c(4, 3, 0, 6, 21)))
+tools::assertError(f(-c(4, 3, 0, 6, 21)))
+tools::assertWarning(f(c(4, -3, 0, 21, -6)))
 stopifnot(exprs = {
-    tools::assertError(f(c(4, 3, 0, 6, 21)))
-    tools::assertError(f(-c(4, 3, 0, 6, 21)))
-    tools::assertWarning(f(c(4, -3, 0, 21, -6)))
     all.equal(0.128564783114, f(c(-10, -7, 12, 0, 11)))
     all.equal(0.225982251102, f(c(-10, 12, -7, 0, 11)))
 })
