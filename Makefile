@@ -165,8 +165,8 @@ zip: ${MASTER} ${README} ${NEWS} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS
 	           -e 's/ *#-\*-.*//' \
 	           $$f > ${BUILDDIR}/$$f; \
 	done
-	${CP} ${MASTER} ${SCRIPTS:.R=.Rout} ${NEWS} ${LICENSE} \
-	      ${COLLABORATEURS} ${CONTRIBUTING} ${OTHER} \
+	${CP} ${MASTER} $(filter-out paquetages.Rout,${SCRIPTS:.R=.Rout}) \
+	      ${NEWS} ${LICENSE} ${COLLABORATEURS} ${CONTRIBUTING} ${OTHER} \
 	      ${BUILDDIR}
 	cd ${BUILDDIR} && zip --filesync -r ../${ARCHIVE} *
 	if [ -e ${COLLABORATEURS} ]; then ${RM} ${COLLABORATEURS}; fi
