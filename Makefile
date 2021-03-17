@@ -1,6 +1,6 @@
 ### -*-Makefile-*- pour préparer "Programmer avec R"
 ##
-## Copyright (C) 2020 Vincent Goulet
+## Copyright (C) 2021 Vincent Goulet
 ##
 ## 'make pdf' crée les fichiers .tex à partir des fichiers .Rnw avec
 ## Sweave et compile le document maitre avec XeLaTeX.
