@@ -2,6 +2,15 @@
 === Programmer avec R
 ===
 
+# (en développement)
+
+## Changements
+
+- Exercice 7.12: il manquait les expressions R dans la solution.
+  Celle-ci a aussi été légèrement retravaillée pour mieux expliquer la
+  démarche.
+  
+
 # 2021.03 (2021-03-16)
 
 ## Changements:

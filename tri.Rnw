@@ -1230,20 +1230,21 @@ cat(mapply(paste,
   \begin{sol}
     D'abord, recréons le vecteur des temps à partir des données du
     fichier \code{100metres.dat}.
-<<eval=TRUE>>=
+<<echo=TRUE, eval=TRUE>>=
 x <- scan("100metres.dat", what = list("", 1))
 temps <- x[[2]]
 names(temps) <- x[[1]]
 @
-    Ensuite, la clé pour obtenir les premiers records consiste à
-    calculer les minimums cumulatifs avec \icode{cummin}. Une première
+    Ensuite, nous pouvons identifier les premiers records en
+    calculant les minimums cumulatifs avec \icode{cummin}, puis en
+    conservant une seule occurrence de chaque temps. Une première
     expression retourne les temps, mais sans les dates.
-<<eval=TRUE>>=
+<<echo=TRUE, eval=TRUE>>=
 unique(cummin(temps))
 @
     Nous pouvons récupérer les dates en retrouvant les records dans le
     vecteur.
-<<eval=TRUE>>=
+<<echo=TRUE, eval=TRUE>>=
 temps[match(unique(cummin(temps)), temps)]
 @
   \end{sol}
