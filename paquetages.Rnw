@@ -226,18 +226,25 @@ principale.
 ## plutôt la commande suivante.
 ##-!- dir.create("~/R/library", recursive = TRUE) # autres OS
 
-## Ensuite, la commande 'writeLines' permet d'écrire
-## directement dans un fichier. Assurez-vous que le chemin
-## d'accès correspond à celui utilisé ci-dessus.
+## Ensuite, la commande 'cat' permet d'écrire directement dans un
+## fichier. Assurez-vous que le chemin d'accès correspond à celui
+## utilisé ci-dessus.
+##
+## Comme dans les instructions du chapitre, les commandes ci-dessous
+## ajoutent du contenu à un fichier si celui-ci existe déjà. Évitez
+## donc d'évaluer les expressions plusieurs fois.
 ##
 ## Si vous êtes sous macOS, utilisez la commande suivante.
-##-!- writeLines('R_LIBS_USER="~/Library/R/library"',
-##-!-            con = "~/.Renviron")
+##-!- cat('R_LIBS_USER="~/Library/R/library"', file = "~/.Renviron",
+##-!-     append = TRUE)
 
 ## Pour tous les autres systèmes d'exploitation, utilisez
 ## plutôt la commande suivante.
-##-!- writeLines('R_LIBS_USER="~/R/library"',
-##-!-            con = "~/.Renviron")  #-*- `\labelline{paquetages:library:fin}`
+##-!- cat('R_LIBS_USER="~/R/library"', file = "~/.Renviron",
+##-!-     append = TRUE)
+
+## Vérification: afficher le contenu du fichier ~/.Renviron.
+##-!- file.show("~/.Renviron")  #-*- `\labelline{paquetages:library:fin}`
 @
 
 
