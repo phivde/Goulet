@@ -155,19 +155,20 @@ $ mkdir -p ~/R/library
   \item \textbf{macOS}
     \begin{Schunk}
 \begin{Verbatim}
-$ echo 'R_LIBS_USER="~/Library/R/library"' >> ~/.Renviron
+$ cat >> ~/.Renviron <<EOF
+R_LIBS_USER="~/Library/R/library"
+EOF
 \end{Verbatim}
     \end{Schunk}
   \item \textbf{autres systèmes d'exploitation}
     \begin{Schunk}
 \begin{Verbatim}
-$ echo 'R_LIBS_USER="~/R/library"' >> ~/.Renviron
+$ cat >> ~/.Renviron <<EOF
+R_LIBS_USER="~/R/library"
+EOF
 \end{Verbatim}
     \end{Schunk}
   \end{trivlist}
-  \warningbox{Les commandes ci-dessus utilisent des guillemets simples
-    «\code{'}» et doubles «\code{"}». Veillez à respecter leur nature
-    et leur position.}
 \item Redémarrer R et vérifier que le chemin vers la bibliothèque
   personnelle apparait dans les résultats de la commande
   \index{libPaths@\code{.libPaths}}\code{.libPaths}.

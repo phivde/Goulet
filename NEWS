@@ -9,11 +9,13 @@
 - Exercice 7.12: il manquait les expressions R dans la solution.
   Celle-ci a aussi été légèrement retravaillée pour mieux expliquer la
   démarche.
-- Chapitre 10: les expressions dans le code informatique ajoutent
-  maintenant du contenu dans le fichier `~/.Renviron` au lieu de créer
-  un nouveau fichier. Cela correspond aux instructions fournies dans
-  le chapitre. Une expression a aussi été ajoutée pour afficher le
-  contenu du fichier pour valider que la configuration a fonctionné.
+- Section 10.3: utilisation de la commande `cat` et d'une redirection
+  *here document* pour créer le fichier `~/.Renviron`. De plus, les
+  expressions dans le code informatique correspondant à la section
+  ajoutent maintenant du contenu dans le fichier `~/.Renviron` au lieu
+  de créer un nouveau fichier. Une expression a aussi été ajoutée pour
+  afficher le contenu du fichier pour valider que la configuration a
+  fonctionné.
 
 
 # 2021.03 (2021-03-16)
