@@ -78,7 +78,7 @@ temps de réaliser la petite expérience suivante:
     Si vous n'avez pas de jeu de carte à portée de la main, une simple
     liste de nombres tirés aléatoirement de votre cerveau fertile et
     inscrits sur une feuille de papier fera l'affaire.} %
-  Déterminer un algorithme ou une procédure pas-à-pas pour trier les
+  Déterminer un algorithme ou une procédure pas à pas pour trier les
   cartes en ordre croissant. Comparer votre méthode de tri avec celles
   d'autres personnes de votre entourage\footnote{%
     À défaut d'entourage apte à trier des cartes, déterminer une ou

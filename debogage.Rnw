@@ -378,7 +378,7 @@ calculs à l'aide de tests unitaires, tel que décrit à la
   votre insu dans les calculs jusqu'à l'instruction \code{if}.}
 
 
-\section{Évaluation pas-à-pas}
+\section{Évaluation pas à pas}
 \label{sec:debogage:pas-a-pas}
 
 La technique d'affichage de résultats intermédiaires s'est avérée
@@ -388,7 +388,7 @@ toujours ainsi.
 
 Une autre méthode de débogage simple à mettre en œuvre avec les
 langages de programmation interprétés comme R consiste à évaluer
-pas-à-pas le code d'une fonction. Voici comment procéder.
+pas à pas le code d'une fonction. Voici comment procéder.
 \begin{enumerate}
 \item Définir dans l'espace de travail tous les arguments de la
   fonction en y affectant les valeurs avec lesquelles vous souhaitez
@@ -405,7 +405,7 @@ pas-à-pas le code d'une fonction. Voici comment procéder.
 \end{enumerate}
 
 Vous trouverez ci-dessous la transcription d'une session de débogage
-par la méthode pas-à-pas pour l'exemple de la section précédente.
+par la méthode pas à pas pour l'exemple de la section précédente.
 Remarquez comment je n'ai pas évalué les lignes 1--2 et 20--21 de la
 \autoref{fig:debogage:rgamma}. J'ai également placé le nombre
 aléatoire issu de l'expression \code{runif(1)} dans la clause
@@ -471,7 +471,7 @@ initialisé.
 \section{Navigateur d'environnements}
 \label{sec:debogage:browser}
 
-Pour efficace qu'elle soit, la technique d'évaluation pas-à-pas devient
+Pour efficace qu'elle soit, la technique d'évaluation pas à pas devient
 rapidement fastidieuse lorsque la fonction à déboguer est longue ou,
 surtout, lorsqu'elle contient de nombreux appels à des fonctions dont
 nous souhaitons également valider le code. Dans de telles situations,
@@ -497,7 +497,7 @@ introuvable
 \end{Schunk}
 
 Le second --- et plus puissant --- outil de débogage de R permet en
-quelque sorte d'automatiser la technique d'évaluation pas-à-pas.
+quelque sorte d'automatiser la technique d'évaluation pas à pas.
 L'idée est la suivante: pour analyser le déroulement d'une fonction
 \code{fun}, vous ajoutez un appel à la fonction \Icode{browser} en un
 point quelconque de la fonction et vous définissez la fonction dans
@@ -508,7 +508,7 @@ dans un mode d'interaction spécial nommé «navigateur d'environnement».
 Celui-ci vous permet d'explorer à loisir l'environnement d'évaluation
 (\autoref{chap:environnement}) de la fonction en ce point. Vous
 pouvez également poursuivre l'exécution de la fonction ligne par ligne
-comme dans la technique d'évaluation pas-à-pas. Avantage non
+comme dans la technique d'évaluation pas à pas. Avantage non
 négligeable: le navigateur peut entrer récursivement dans
 l'environnement d'évaluation de chaque appel de fonction.
 
@@ -814,15 +814,15 @@ rgamma <- function(n, shape, rate = 1, scale = 1/rate)
 }
 
 ###
-### ÉVALUATION PAS-À-PAS
+### ÉVALUATION PAS À PAS
 ###
 
-## La technique d'évaluation pas-à-pas consiste à définir tous
+## La technique d'évaluation pas à pas consiste à définir tous
 ## les arguments de la fonction dans l'espace de travail, puis
 ## à exécuter le corps de la fonction ligne par ligne.
 ##
 ## Évaluons l'équivalent de l'appel 'rgamma(5, 0.5, 1)'
-## pas-à-pas avec le bogue 'i <- 1' remis en place.
+## pas à pas avec le bogue 'i <- 1' remis en place.
 ##
 ## Explorez les valeurs des objets 'x', 'i' et 'y' après
 ## l'évaluation de chaque expression, ci-dessous (ou, plus
