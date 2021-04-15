@@ -309,7 +309,7 @@ L'utilitaire \Icode{grep}\footnote{%
   globalement (\code{g}) une expression régulière (\emph{regular
     expression}, \code{re}) et d'afficher (\emph{print}, \code{p}) les
   lignes qui correspondent à l'expression.} %
-en argument une \index{expression régulière}expression régulière
+prend en argument une \index{expression régulière}expression régulière
 (habituellement entre guillemets simples ou doubles), lit l'entrée
 standard ou une liste de fichiers ligne par ligne, puis retourne sur
 la sortie standard les lignes qui contiennent des correspondances avec
