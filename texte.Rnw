@@ -2874,7 +2874,7 @@ exécuter depuis une ligne de commande \index{Unix}Unix.
   \begin{sol}
     Le motif
     \begin{center}
-      \regex{[a-zA-z][0-9][a-zA-z][[:blank:]]?[0-9][a-zA-z][0-9]}
+      \regex{[a-zA-Z][0-9][a-zA-Z][[:blank:]]?[0-9][a-zA-Z][0-9]}
     \end{center}
     convient si l'on ne permet que zéro ou une espace entre les deux
     blocs. S'il n'y a pas de limite au nombre d'espaces, remplacer
