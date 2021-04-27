@@ -2816,7 +2816,7 @@ exécuter depuis une ligne de commande \index{Unix}Unix.
       des symboles «\code{.}», «\code{?}», «\code{!}» (sans
       répétition). Les choix 1, 4 et 6 satisfont ces conditions.
     \item Le motif identifie zéro, une ou plusieurs lettres minuscules
-      ou majuscule (mais aucun autre symbole), suivies de tout
+      ou majuscules (mais aucun autre symbole), suivies de tout
       caractère autre qu'une virgule, suivi du symbole «\code{=}». Les
       choix 1, 5 et 6 satisfont ces conditions.
     \item Le motif identifie une lettre minuscule, suivie de l'un ou
