@@ -6,6 +6,11 @@
 
 ## Changements
 
+- Section 1.3.2 et exercice 1.2: le contenu de l'encadré sur les
+  notations infixée, préfixée et suffixée a été déplacé vers
+  l'exercice 1.2 Celui-ci a été retravaillé pour accueillir ce texte.
+  La solution propose aussi maintenant une interprétation du
+  fonctionnement des notations préfixée et suffixée.
 - Exercice 7.12: il manquait les expressions R dans la solution.
   Celle-ci a aussi été légèrement retravaillée pour mieux expliquer la
   démarche.

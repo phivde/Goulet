@@ -149,8 +149,8 @@ signification du message s'en trouve changée. En revanche, avec
 «\emph{I have thirsty}», le bon message se rendra, mais peut-être pas
 sans que l'erreur de syntaxe n'ait d'abord suscité une hésitation chez
 l'interlocuteur\footnote{%
-  La formule correcte est «I am thirsty», soit littéralement «Je suis
-  soif», en français.}.
+  La formulation correcte est «I am thirsty», soit littéralement «Je
+  suis soif», en français.}.
 
 Comme pour une langue, la maitrise d'un langage de programmation exige
 de respecter à la fois les règles de sémantique et les règles de
@@ -331,53 +331,12 @@ aujourd'hui une famille de langages comprenant de nombreux dialectes,
 dont Common Lisp, Scheme et Emacs Lisp.
 
 Le Lisp se distingue en outre par une syntaxe simple en
-\index{notation!préfixée}notation préfixée (voir l'encadré à la
-\autopageref{fig:informatique:notations}), le support pour la
+\index{notation!préfixée}notation préfixée (voir
+l'\autoref{ex:informatique:notation}), le support pour la
 programmation fonctionnelle
 (\autoref{sec:informatique:concepts:paradigmes}) et la faculté de
 manipuler le code source en tant que structure de données. Autre trait
 distinctif: la syntaxe du Lisp fait un usage immodéré des parenthèses.
-
-\begin{figure}[t]
-  \refstepcounter{dummy}
-  \label{fig:informatique:notations}
-  \setlength{\FrameRule}{1pt}
-  \lstset{backgroundcolor=\color{codebg},
-    frame=lr, rulecolor=\color{codebg},
-    numbers=none,
-    xleftmargin=3.4pt, xrightmargin=3.4pt}
-  \begin{titled-frame}{Notations infixée, préfixée et suffixée}
-    Les notations \index{notation!infixée}infixée (\emph{infix}),
-    \index{notation!préfixée}préfixée (\emph{prefix}) et
-    \index{notation!suffixée}suffixée (\emph{postfix}) sont trois
-    manières différentes, mais équivalentes, d'écrire des expressions
-    en mathématiques ou en programmation.
-
-    Par exemple, l'opération d'addition de deux opérandes $x$ et $y$
-    s'écrit en notation infixée
-\begin{lstlisting}
-x + y
-\end{lstlisting}
-    En notation préfixée, aussi appelée notation polonaise,
-    l'opérateur est placé avant les opérandes:
-\begin{lstlisting}
-+ x y
-\end{lstlisting}
-    On l'aura compris, en notation suffixée, ou notation polonaise
-    inversée, l'opérateur apparait après les opérandes:
-\begin{lstlisting}
-x y +
-\end{lstlisting}
-    Nous sommes davantage habitués à lire la notation infixée, quoique
-    la notation préfixée nous soit familière pour les opérateurs à un
-    seul opérande (comme la négation) ou pour les appels de fonctions.
-    La notation suffixée n'a jamais recours aux parenthèses.
-
-    La compagnie HP commercialise de très prisées calculatrices
-    scientifiques utilisant la notation suffixée (libellées RPN pour
-    \emph{Reverse Polish Notation}) depuis 1972.
-  \end{titled-frame}
-\end{figure}
 
 Le Lisp est entouré d'une aura de beauté et d'élégance dont peu
 d'autres langages peuvent se targuer. Citons Eric Raymond dans
@@ -527,7 +486,7 @@ long qu'exige le C par rapport à des langages de plus haut niveau.
 \notebox{Dans l'ouvrage classique de \cite{KandR:1978}, le premier
   exemple d'un programme C affiche le message «\emph{hello, world}» à
   l'écran. Ça deviendra ensuite une tradition de démontrer le
-  fonctionnement ou la syntaxe d'un langage avec cet exemple.}
+  fonctionnement ou la syntaxe d'un langage avec ce même exemple.}
 
 \subsection{Autres jalons}
 \label{sec:informatique:historique:autres}
@@ -978,21 +937,38 @@ réponse se trouve à une requête près dans un moteur de recherche.
 \end{exercice}
 
 \begin{exercice}
-  Soit $A$, $B$, $C$ et $D$ quatre nombres. L'opération en notation
-  infixée
-  \begin{equation*}
-    A \times B + C \div D
-  \end{equation*}
-  s'écrit
-  \begin{equation*}
-    +\, \times\, A\; B\, \div\, C\; D
-  \end{equation*}
-  en notation préfixée et
-  \begin{equation*}
-    A\; B\, \times\, C\; D\, \div +
-  \end{equation*}
-  en notation suffixée.
+  \label{ex:informatique:notation}
+  Les notations \index{notation!infixée}infixée (\emph{infix}),
+  \index{notation!préfixée}préfixée (\emph{prefix}) et
+  \index{notation!suffixée}suffixée (\emph{postfix}) sont trois
+  manières différentes, mais équivalentes, d'écrire des expressions en
+  mathématiques ou en programmation.
+
+  La notation infixée est celle qui nous est la plus familière.
+  L'opérateur y est placé entre les opérandes: $x + y$. En notation
+  préfixée, aussi appelée notation polonaise, l'opérateur est plutôt
+  placé \emph{avant} les opérandes: $+\, x\; y$. On l'aura compris, en
+  notation suffixée, ou notation polonaise inversée, l'opérateur
+  apparait \emph{après} les opérandes: $x\; y\, +$. La notation
+  suffixée n'a jamais recours aux parenthèses.\footnote{%
+    La compagnie HP commercialise depuis 1972 de très prisées
+    calculatrices scientifiques utilisant la notation suffixée
+    (libellées RPN pour \emph{Reverse Polish Notation}).}
+
   \begin{enumerate}
+  \item Soit $A$, $B$, $C$ et $D$ quatre nombres. Observer que
+    l'opération en notation infixée
+    \begin{equation*}
+      A \times B + C \div D
+    \end{equation*}
+    s'écrit en notation préfixée
+    \begin{equation*}
+      +\, \times\, A\; B\, \div\, C\; D
+    \end{equation*}
+    et en notation suffixée
+    \begin{equation*}
+      A\; B\, \times\, C\; D\, \div +.
+    \end{equation*}
   \item Exprimer en notations préfixée et suffixée l'opération en
     notation infixée suivante:
     \begin{equation*}
@@ -1008,6 +984,13 @@ réponse se trouve à une requête près dans un moteur de recherche.
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
+    \item Une opération est formée d'un opérateur et de deux
+      opérandes. En notation préfixée, les opérateurs s'entassent dans
+      une pile jusqu'à ce qu'ils recoivent deux opérandes. Lorsque
+      c'est le cas, l'opérateur est retiré de la pile et le résultat
+      de l'opération devient un opérande de l'opérateur plus bas dans
+      la pile. En notation suffixée, ce sont plutôt les opérandes qui
+      sont placés dans la pile.
     \item $\div \times\, A\, +\, B\; C\; D$ en notation préfixée;
       $A\; B\; C\, +\, \times\, D\, \div$ en notation suffixée.
     \item $A \times (B + C \div D)$
