@@ -30,7 +30,7 @@ l'apprentissage plus poussé de l'éditeur.
 \begin{figure}[t]
   \centering
   \includegraphics{images/emacs.png} \\
-  \footnotesize\sffamily\flushleft\vspace{-\baselineskip}%
+  \footnotesize\sffamily\flushleft%
   Tiré de \href{https://xkcd.com/378/}{XKCD.com}. La commande \code{M-x
     butterfly} existe vraiment dans Emacs\dots\ en référence à cette
   bande dessinée!
@@ -73,10 +73,10 @@ fichier dont le nom se termine par l'extension \code{.R}.
 \section{Installation}
 \label{sec:emacs+ess:installation}
 
-Le présent auteur prépare des distributions modifiées de GNU~Emacs
-pour \link{https://vigou3.github.io/emacs-modified-windows/}{Windows}
-et pour \link{https://vigou3.github.io/emacs-modified-macos/}{macOS}
-qui intègrent le mode ESS.
+Utilisateur invétéré de GNU~Emacs, je prépare des distributions pour
+\link{https://vigou3.github.io/emacs-modified-windows/}{Windows} et
+pour \link{https://vigou3.github.io/emacs-modified-macos/}{macOS} qui
+intègrent le mode ESS.
 
 Sous Linux, GNU Emacs et le mode ESS font normalement partie de toutes
 les distributions.
@@ -189,7 +189,7 @@ Windows et macOS.
 \begin{figure}[t]
   \refstepcounter{dummy}
   \label{fig:ess:meta}
-  \begin{osxblock}
+  \begin{macosblock}
     Par défaut sous macOS, la touche \code{Meta} est assignée à
     \code{Option} (\optkey). Sur les claviers français, cela empêche
     d'accéder à certains caractères spéciaux tels que {\og}[{\fg},
@@ -210,7 +210,7 @@ Windows et macOS.
 (setq-default ns-option-modifier 'none)
 \end{verbatim}
     \vspace{-\baselineskip}
-  \end{osxblock}
+  \end{macosblock}
 \end{figure}
 
 
@@ -285,10 +285,11 @@ raccourci-clavier.
 \item[\code{C-k}] supprimer jusqu'à la fin de la ligne (\code{kill-line}).
 \end{ttscript}
 
-\osxbox{Plusieurs des raccourcis-clavier de Emacs composés avec la
-  touche \code{Contrôle} (\ctlkey) sont valides sous macOS. Par
-  exemple, \ctlkey\,\code{A} et \ctlkey\,\code{E} déplacent le curseur
-  au début et à la fin de la ligne dans les champs texte.}
+\macosbox{Plusieurs des raccourcis-clavier de Emacs composés avec la
+  touche \code{Contrôle} (\ctlkey) sont valides sous
+  \index{macOS}macOS. Par exemple, \ctlkey\,\code{A} et
+  \ctlkey\,\code{E} déplacent le curseur au début et à la fin de la
+  ligne dans les champs texte.}
 
 
 \subsection{Sélection de texte, copier, coller, couper}
