@@ -4,6 +4,11 @@
 
 # (en développement)
 
+## Nouveautés
+
+- Section 5.1.1: bloc signalétique sur les noms de variables `foo`,
+  `bar`, `foobar` et autres variantes.
+
 ## Changements
 
 - Section 1.3.2 et exercice 1.2: le contenu de l'encadré sur les

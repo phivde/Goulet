@@ -153,6 +153,14 @@ rm(T)
 \tipbox{Écrivez toujours les valeurs booléennes \code{TRUE} et
   \code{FALSE} au long pour éviter des bogues difficiles à détecter.}
 
+\notebox{Que signifient ces noms \code{foo}, \code{bar}, \code{foobar}
+  et autres variantes que l'on rencontre souvent dans la documentation
+  informatique? Rien de particulier, justement! Ce sont des
+  \link{https://fr.wikipedia.org/wiki/Variable_m\%C3\%A9tasyntaxique}{variables
+    métasyntaxiques} sans signification propre. Chez les francophones,
+  l'équivalent le plus répandu est sans doute \code{toto}.}
+
+
 \subsection{Modes et types de données}
 \label{sec:donnees:objets:mode}
 
