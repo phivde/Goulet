@@ -164,7 +164,7 @@ Windows et macOS.
   \item \code{C} est la touche \code{Contrôle} (\ctlkey);
   \item \code{M} est la touche \code{Meta}, qui correspond à la touche
     \code{Alt} de gauche sur un PC ou la touche \code{Option}
-    (\optkey) sur un Mac (toutefois, voir l'encadré à la
+    (\optkey) sur un Mac (toutefois, voir le bloc signalétique de la
     \autopageref{fig:ess:meta});
   \item \code{ESC} est la touche \code{Échap} (\esckey) et
     est équivalente à \code{Meta};
@@ -189,16 +189,16 @@ Windows et macOS.
 \begin{figure}[t]
   \refstepcounter{dummy}
   \label{fig:ess:meta}
-  \begin{titled-frame}{Configuration de la touche Meta sous macOS}
+  \begin{osxblock}
     Par défaut sous macOS, la touche \code{Meta} est assignée à
     \code{Option} (\optkey). Sur les claviers français, cela empêche
     d'accéder à certains caractères spéciaux tels que {\og}[{\fg},
     «]», «\{» ou «\}».
 
-    Une solution à cette fâcheuse situation consiste à assigner
-    la touche \code{Meta} à \code{Commande} (\cmdkey). Cela bloque
-    alors l'accès à certains raccourcis Mac, mais la situation est
-    moins critique ainsi.
+    Une solution à cette fâcheuse situation consiste à assigner la
+    touche \code{Meta} à \code{Commande} (\cmdkey). Cela bloque alors
+    l'accès à certains raccourcis Mac, mais la situation est moins
+    critique ainsi.
 
     Pour assigner la touche \code{Meta} à \code{Commande} (\cmdkey) et
     laisser la touche \code{Option} (\optkey) jouer son rôle usuel, il
@@ -209,9 +209,9 @@ Windows et macOS.
 (setq-default ns-command-modifier 'meta)
 (setq-default ns-option-modifier 'none)
 \end{verbatim}
-  \end{titled-frame}
+    \vspace{-\baselineskip}
+  \end{osxblock}
 \end{figure}
-
 
 
 \section{Commandes de base}

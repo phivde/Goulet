@@ -458,6 +458,9 @@
   %% spécifiques à macOS et Windows.
   \newcommand{\osxbox}[1]{%
     \awesomebox{\aweboxrulewidth}{\faApple}{black}{#1}}
+  \newenvironment{osxblock}{%
+    \begin{awesomeblock}{\aweboxrulewidth}{\faApple}{black}}
+    {\end{awesomeblock}}
   \newcommand{\windowsbox}[1]{%
     \awesomebox{\aweboxrulewidth}{\faWindows}{black}{#1}}
 
