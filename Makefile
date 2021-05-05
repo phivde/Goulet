@@ -262,7 +262,6 @@ clean-all: clean
 	      ${ARCHIVE} \
 	      ${RNWFILES:.Rnw=.tex} \
 	      ${SCRIPTS} \
-	      ${OTHER} \
 	      solutions-* \
 	      *-[0-9][0-9][0-9].pdf \
 	      *.aux *.bbl
