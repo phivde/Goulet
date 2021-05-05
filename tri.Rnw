@@ -792,7 +792,7 @@ insertionsort(x)
     L'algorithme \emph{selectionsort} déplace graduellement vers
     l'avant la plus petite valeur du vecteur, la deuxième plus petite
     valeur, et ainsi de suite. Deux boucles sont encore nécessaires:
-    une pour passer à travers toutes les positions du vecteur et un
+    une pour passer à travers toutes les positions du vecteur et une
     autre pour, à chaque itération de la première boucle, trouver le
     minimum dans les valeurs restantes du vecteur.
 
