@@ -24,7 +24,9 @@
 - Exercice 11.3: correction du motif dans la solution.
 - Annexe B: encadré sur la configuration de la touche `Meta` dans
   Emacs sous macOS remplacé par un bloc signalétique.
-  
+- Annexe C: encadré sur la configuration du raccourci-clavier du
+  symbole d'affectation sous macOS remplacé par un bref bloc
+  signalétique (le problème semble réglé dans RStudio).
 
 
 # 2021.03 (2021-03-16)

@@ -183,9 +183,7 @@ les deux jeux, séparés par le symbole $\bullet$.
 \begin{ttscript}{Ctrl-Shift-S $\bullet$ \cmdkey\shiftkey S}
   \index{RStudio!symbole d'affectation}
 \item[\code{Alt+-} $\bullet$ \code{\optkey\,-}] insérer le symbole
-  d'affectation \verb*| <- | (consulter l'encadré de la
-  \autopageref{fig:rstudio:affectation} si cela ne fonctionne pas sur
-  un Mac avec un clavier canadien-français).
+  d'affectation \verb*| <- |.
 \item[\code{Ctrl+Retour} $\bullet$ \code{\cmdkey\,\returnkey}]
   évaluer dans le processus R la ligne sous le curseur ou la région
   sélectionnée, puis déplacer le curseur à la prochaine expression.
@@ -210,54 +208,13 @@ sont particulièrement utiles.
   la fenêtre d'historique des commandes.
 \end{ttscript}
 
-\begin{figure}[t]
-  \refstepcounter{dummy}
-  \label{fig:rstudio:affectation}
-  \begin{titled-frame}{Symbole d'affectation et
-      Mac munis d'un clavier canadien-français}
-
-    \emph{Le problème ci-dessous semble réglé depuis la version 1.3 de
-      RStudio. Je laisse l'information ici au cas où elle pourrait
-      toujours s'avérer utile.}
-
-    Le très pratique raccourci-clavier \code{\optkey\,-} servant à
-    insérer le symbole d'affectation dans RStudio pourrait ne pas
-    fonctionner correctement sur les Mac munis d'un clavier
-    canadien-français, et ce, à la console R, dans les fichiers de
-    script ou les deux.
-
-    La combinaison de touches \code{\optkey\,-} insère normalement le
-    symbole «\textbar». Il s'agit en fait d'un doublon puisque ce
-    symbole est principalement associé à la touche \code{\optkey\,/}.
-
-    Il est possible d'associer un autre raccourci-clavier au symbole
-    d'affectation. Je recommande d'utiliser la combinaison
-    \code{\optkey\,=}. D'une part, c'est un choix mnémonique
-    raisonnable (davantage même que \code{\optkey\,-}) et, d'autre
-    part, le caractère lié normalement à cette touche («\code{¬}»)
-    n'est d'aucune utilité dans R.
-
-    \begin{enumerate}
-    \item Accéder à la fenêtre d'édition des raccourcis-clavier via le
-      menu \code{Tools|Modify Keyboard Shortcuts\dots}.
-    \item Dans le champ de recherche en haut, taper les lettres de
-      «assignment» jusqu'à ce que la commande \code{Insert Assignment
-        Operator} apparaisse.
-    \item Cliquer sur la case du raccourci-clavier (qui devrait être
-      \code{Alt+-} par défaut) pour l'activer. Appuyer sur
-      \code{\optkey\,=} pour utiliser cette combinaison de touches
-      comme raccourci.
-    \item Appuyer sur le bouton \code{Apply} pour activer le raccourci
-      et pour fermer la fenêtre de configuration.
-    \end{enumerate}
-
-    \videobox{\link{https://youtu.be/alGs2KFpBJw}{Configuration du
-        raccourci pour \code{<-} dans RStudio pour les Mac avec clavier
-        canadien-français}}{%
-      La description de cette procédure de configuration est également
-      disponible en \link{https://youtu.be/alGs2KFpBJw}{vidéo}.}
-  \end{titled-frame}
-\end{figure}
+\osxbox{Dans les versions de RStudio antérieures à 1.3, le
+  raccourci-clavier \code{\optkey\,-} ne fonctionnait pas correctement
+  sur les Mac munis d'un clavier canadien-français, et ce, à la
+  console R, dans les fichiers de script ou les deux. La solution:
+  associer un autre raccourci-clavier au symbole d'affectation. La
+  description de la procédure de configuration est disponible en
+  \link{https://youtu.be/alGs2KFpBJw}{vidéo}.}
 
 
 \section{Anatomie d'une session de travail (bis)}
