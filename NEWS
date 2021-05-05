@@ -24,6 +24,8 @@
 - Exercice 11.3: correction du motif dans la solution.
 - Annexe B: encadré sur la configuration de la touche `Meta` dans
   Emacs sous macOS remplacé par un bloc signalétique.
+- Section B.5.2: une partie des commandes a été déplacée vers une
+  nouvelle section «Annuler, rechercher et remplacer».
 - Annexe C: encadré sur la configuration du raccourci-clavier du
   symbole d'affectation sous macOS remplacé par un bref bloc
   signalétique (le problème semble réglé dans RStudio).

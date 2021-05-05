@@ -217,8 +217,7 @@ Windows et macOS.
 \section{Commandes de base}
 \label{sec:emacs+ess:commandes}
 
-Emacs comporte une pléthore de commandes, il serait donc futile de
-tenter d'en faire une liste exhaustive ici. Nous nous contenterons de
+Emacs compte une pléthore de commandes. Je me contenterai de
 mentionner les commandes les plus importantes regroupées par tâche.
 
 \subsection{Les essentielles}
@@ -237,10 +236,6 @@ Entre parenthèses, le nom de la commande Emacs correspondante. On peut
 entrer cette commande dans le \emph{minibuffer} au lieu d'utiliser le
 raccourci-clavier.
 
-\tipbox{Il n'existe pas de commande «nouveau
-  fichier» dans Emacs. Pour créer un nouveau fichier, il suffit
-  d'ouvrir un fichier qui n'existe pas déjà.\index{Emacs!nouveau fichier}}
-
 \begin{ttscript}{C-x C-w}
 \item[\code{C-x C-f}] ouvrir un fichier (\code{find-file}).
 \item[\code{C-x C-s}] sauvegarder
@@ -248,17 +243,11 @@ raccourci-clavier.
 \item[\code{C-x C-w}] sauvegarder sous
   (\code{write-file})\index{Emacs!sauvegarder sous}.
 \item[\code{C-x k}] fermer un fichier (\code{kill-buffer}).
-  \\[\baselineskip]
-\item[\code{C-\_}] annuler (pratiquement illimité); aussi
-  \code{C-x u} (\code{undo}).
-  \\
-\item[\code{C-s}] recherche incrémentale avant
-  (\code{isearch-forward}).
-\item[\code{C-r}] Recherche incrémentale arrière
-  (\code{isearch-backward}).
-\item[\code{M-\%}] rechercher et remplacer
-  (\code{query-replace})\index{Emacs!rechercher et remplacer}.
 \end{ttscript}
+
+\tipbox{Il n'existe pas de commande «nouveau
+  fichier» dans Emacs. Pour créer un nouveau fichier, il suffit
+  d'ouvrir un fichier qui n'existe pas déjà.\index{Emacs!nouveau fichier}}
 
 
 \subsection{Déplacements simples du curseur}
@@ -291,6 +280,22 @@ raccourci-clavier.
   \ctlkey\,\code{E} déplacent le curseur au début et à la fin de la
   ligne dans les champs texte.}
 
+\subsection{Annuler, rechercher, remplacer}
+\label{sec:emacs+ess:commandes:annuler}
+
+\begin{ttscript}{C-x C-w}
+\item[\code{C-\_}] annuler (pratiquement illimité); aussi
+  \code{C-x u} (\code{undo})\index{Emacs!annuler}.
+\end{ttscript}
+
+\begin{ttscript}{C-x C-w}
+\item[\code{C-s}] recherche incrémentale avant
+  (\code{isearch-forward}).
+\item[\code{C-r}] Recherche incrémentale arrière
+  (\code{isearch-backward}).
+\item[\code{M-\%}] rechercher et remplacer
+  (\code{query-replace})\index{Emacs!rechercher et remplacer}.
+\end{ttscript}
 
 \subsection{Sélection de texte, copier, coller, couper}
 \index{Emacs!sélection}
