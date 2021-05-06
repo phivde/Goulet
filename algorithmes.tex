@@ -368,19 +368,20 @@ Afin d'illustrer ce qui précède, exprimons le calcul de la valeur
 absolue sous forme d'algorithme. Je fournis d'un coup les versions en
 langage naturel et en pseudocode.
 
-\begin{algorithme}
-  \label{algo:algorithmes:abs}
-  Calculer la valeur absolue d'un nombre réel $x$.
-
-  \noindent
-  \begin{minipage}[t]{0.48\linewidth}
+\begin{multicols}{2}
+  \raggedcolumns
+  \begin{algorithme}[Lang. nat.]
+    \label{algo:algorithmes:abs}
+    Calculer la valeur absolue d'un nombre réel $x$.
     \begin{enumerate}
     \item Si $x > 0$, retourner $x$; sinon si $x = 0$, retourner $0$;
       sinon retourner $-x$.
     \end{enumerate}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[t]{0.48\linewidth}
+  \end{algorithme}
+  \columnbreak
+  \addtocounter{algorithme}{-1}
+  \begin{algorithme}[Pseudocode]
+    Calculer la valeur absolue d'un nombre réel $x$.
     \begin{Schunk}
 \begin{Verbatim}
 abs(réel x)
@@ -393,8 +394,8 @@ abs(réel x)
 Fin abs
 \end{Verbatim}
     \end{Schunk}
-  \end{minipage}
-\end{algorithme}
+  \end{algorithme}
+\end{multicols}
 
 Pouvons-nous simplifier un peu tout cela? Vous aurez sans doute
 remarqué que le cas $x = 0$ ne nécessite pas vraiment de traitement
@@ -403,23 +404,25 @@ $x < 0$ sans changer le résultat. C'est une leçon que vous devez
 retenir: un algorithme simple et efficace ne correspond pas toujours
 directement à une formule mathématique.
 
-Voici une version simplifiée de l'algorithme du calcul de la valeur
-absolue. J'en ai inversé la logique. Présenté ainsi, l'algorithme met
-l'accent sur le fait qu'un traitement ne doit être effectué que pour
-les nombres négatifs.
+Voici une version de l'algorithme du calcul de la valeur absolue qui
+n'a recours qu'à une expression conditionnelle à un volet. Vous
+remarquerez que j'ai aussi inversé la logique. Présenté ainsi,
+l'algorithme met l'accent sur le fait qu'un traitement ne doit être
+effectué que pour les nombres négatifs.
 
-\begin{algorithmebis}
-  \label{algo:algorithmes:abs:simplifie}
-  Calculer la valeur absolue d'un nombre réel $x$.
-
-  \noindent
-  \begin{minipage}[t]{0.48\linewidth}
+\begin{multicols}{2}
+  \raggedcolumns
+  \begin{algorithmebis}[Lang. nat.]
+    \label{algo:algorithmes:abs:simplifie}
+    Calculer la valeur absolue d'un nombre réel $x$.
     \begin{enumerate}
     \item Si $x < 0$, retourner $-x$; sinon retourner $x$.
     \end{enumerate}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[t]{0.48\linewidth}
+  \end{algorithmebis}
+  \columnbreak
+  \addtocounter{algorithmebis}{-1}
+  \begin{algorithmebis}[Pseudocode]
+    Calculer la valeur absolue d'un nombre réel $x$.
     \begin{Schunk}
 \begin{Verbatim}
 abs(réel x)
@@ -430,8 +433,8 @@ abs(réel x)
 Fin abs
 \end{Verbatim}
     \end{Schunk}
-  \end{minipage}
-\end{algorithmebis}
+  \end{algorithmebis}
+\end{multicols}
 
 Nous pouvons aussi voir la fonction valeur absolue comme une fonction
 identité (qui retourne son argument inchangé), sauf lorsque l'argument
@@ -441,19 +444,20 @@ passe d'une clause «sinon».\footnote{%
   \meta{conséquence} d'une instruction conditionnelle à deux volets
   contient une instruction «Retourner».}
 
-\begin{algorithmebis}
-  \label{algo:algorithmes:abs:simplifie:bis}
-  Calculer la valeur absolue d'un nombre réel $x$.
-
-  \noindent
-  \begin{minipage}[t]{0.48\linewidth}
+\begin{multicols}{2}
+  \raggedcolumns
+  \begin{algorithmebis}[Lang. nat.]
+    \label{algo:algorithmes:abs:simplifie:bis}
+    Calculer la valeur absolue d'un nombre réel $x$.
     \begin{enumerate}
     \item Si $x < 0$, retourner $-x$.
     \item Retourner $x$.
     \end{enumerate}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[t]{0.48\linewidth}
+  \end{algorithmebis}
+  \columnbreak
+  \addtocounter{algorithmebis}{-1}
+  \begin{algorithmebis}[Pseudocode]
+    Calculer la valeur absolue d'un nombre réel $x$.
     \begin{Schunk}
 \begin{Verbatim}
 abs(réel x)
@@ -463,8 +467,8 @@ abs(réel x)
 Fin abs
 \end{Verbatim}
     \end{Schunk}
-  \end{minipage}
-\end{algorithmebis}
+  \end{algorithmebis}
+\end{multicols}
 
 Jusqu'à maintenant, nous avons réussi à énoncer la \meta{condition}
 des instructions conditionnelles uniquement à partir d'opérateurs
