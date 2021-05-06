@@ -151,7 +151,7 @@ expressions régulières vous sera d'un grand secours.
   langage prend en charge les expressions régulières dans sa syntaxe
   même et il comporte plusieurs extensions aux expressions prises en
   charge par \icode{grep} et \icode{sed}. Le présent ouvrage ne traite
-  pas de \icode{Perl}.}
+  pas de Perl.}
 
 \begin{figure}[t]
   \centering
