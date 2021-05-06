@@ -511,10 +511,12 @@ personne la procédure à suivre pour peinturer une clôture longue de
 $n$ planches. (Pour simplifier, nous allons omettre de peinturer les
 supports horizontaux.)
 
-Dans l'approche itérative, nous supposons que les planches sont
-numérotées de $1$ à $n$, puis nous indiquons à la personne d'appliquer
-de la peinture sur la planche $i$, pour $i$ allant de $1$ à $n$.
-Transcrites en pseudocode, les instructions vont comme suit.
+Dans l'approche itérative, la plus naturelle, nous indiquons à la
+personne d'appliquer de la peinture sur les planches de la première à
+la dernière. En supposant que les planches sont numérotées de $1$ à
+$n$, cela revient à indiquer d'appliquer de la peinture sur la planche
+$i$, pour $i$ allant de $1$ à $n$. Transcrites en pseudocode, les
+instructions vont comme suit.
 \begin{Schunk}
 \begin{Verbatim}
 Peinturer(entier n)
@@ -541,9 +543,11 @@ L'approche récursive est plus difficile à bien saisir de prime abord.
 Une vieille blague dit d'ailleurs que pour comprendre la récursion, il
 faut d'abord comprendre la récursion! Dans cette approche, le
 processus de peinturer une clôture de $n$ planches est découpé en deux
-étapes: appliquer de la peinture sur la première planche et peinturer
-une clôture de $n - 1$ planches, et ce, tant qu'il y a des planches à
-peinturer. Examinez bien le pseudocode correspondant ci-dessous.
+étapes: appliquer de la peinture sur une planche et peinturer une
+clôture de $n - 1$ planches, et ce, tant qu'il y a des planches à
+peinturer. Remarquez comment la procédure pour peinturer une clôture
+est définie en fonction d'elle-même. Examinez bien le pseudocode
+correspondant ci-dessous.
 \begin{Schunk}
 \begin{Verbatim}
 Peinturer(entier n)

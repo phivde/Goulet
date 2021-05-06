@@ -18,6 +18,8 @@
   fonctionnement des notations préfixée et suffixée.
 - Section 3.3: disposition améliorée des deux versions des algorithmes
   3.2, 3.2a et 3.2b.
+- Section 3.4: explications additionnelles sur les approches itérative
+  et récursive d'envisager la peinture d'une clôture.
 - Exercice 7.12: il manquait les expressions R dans la solution.
   Celle-ci a aussi été légèrement retravaillée pour mieux expliquer la
   démarche.
