@@ -1,14 +1,13 @@
 ---
 title: Programmer avec R
-description: Apprendre la programmation. Avec R.
+description: Apprendre à programmer. Avec R.
 ---
 
 ## Présentation
 
 *Programmer avec R* propose une introduction à la programmation
-informatique avec [R](https://www.r-project.org), le langage de
-programmation sous-jacent aux fonctionnalités statistiques du système
-du même nom.
+informatique avec [R](https://www.r-project.org), le langage
+sous-jacent aux fonctionnalités statistiques du système du même nom.
 
 L'ouvrage repose sur une philosophie d'apprentissage du langage
 R par l'exposition à un maximum de code et par la pratique de la
