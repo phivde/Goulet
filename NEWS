@@ -12,6 +12,9 @@
 
 ## Changements
 
+- Introduction: adaptation du texte au fait que la formation
+  concomitante sur la ligne de commande et Git est maintenant
+  scindée en deux formations autonomes, une pour chaque sujet.
 - Section 1.3.2 et exercice 1.2: le contenu de l'encadré sur les
   notations infixée, préfixée et suffixée a été déplacé vers
   l'exercice 1.2 Celui-ci a été retravaillé pour accueillir ce texte.

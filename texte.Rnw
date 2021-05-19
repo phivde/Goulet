@@ -222,7 +222,7 @@ Il va sans dire que les utilitaires \icode{grep}, \icode{sed} et
 dans le \index{Terminal}Terminal sous macOS, ou dans
 \index{Git~Bash}Git~Bash ou MSYS sous Windows. Si vous n'êtes pas
 familier avec la ligne de commande,
-\citet{Goulet:laboratoire-cli-git:2019} offre une rapide introduction
+\citet{Goulet:laboratoire-cli:2021} offre une rapide introduction
 suffisante pour suivre la matière de ce chapitre. Nous reviendrons à R
 à la \autoref{sec:texte:internes} lorsque nous étudierons les
 fonctions internes de R aux fonctionnalités équivalentes à \code{grep}
@@ -236,7 +236,7 @@ sortie standard (le terminal), transféré à un autre programme avec le
 tuyau \index{{"|}@\code{\textbar} (tuyau Unix)} «\code{\textbar}», ou
 encore redirigé vers un fichier avec l'opérateur «\code{>}». La
 \autoref{fig:texte:flux-cli}, reprise de
-\citet{Goulet:laboratoire-cli-git:2019} avec quelques simplifications,
+\citet{Goulet:laboratoire-cli:2021} avec quelques simplifications,
 illustre ce flux des données.
 
 \begin{figure}
