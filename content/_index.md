@@ -36,7 +36,7 @@ Vincent Goulet, professeur titulaire, [École d'actuariat](https://www.act.ulava
 
 ## Édition
 
-2021.03 ([notes de mise à jour](https://gitlab.com/vigou3/programmer-avec-r/tags/v2021.03/))
+2021.05 ([notes de mise à jour](https://gitlab.com/vigou3/programmer-avec-r/tags/v2021.05/))
 
 ## Table des matières abrégée
 
