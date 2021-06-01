@@ -24,10 +24,9 @@ Question de développer, chez le lecteur, une culture de l'informatique
 et une connaissance des outils de développement informatique
 essentiels, *Programmer avec R* traite également de l'histoire des
 langages de programmation; des principes de base des systèmes
-d'exploitation et des systèmes de gestion de fichiers; des outils de
-travail collaboratif, dont le système de gestion
-[Git](https://git-scm.com); des outils d'analyse et de contrôle de
-texte `grep`, `sed` et `awk`.
+d'exploitation et des systèmes de gestion de fichiers; des bonnes
+pratiques en matière de travail collaboratif; des outils d'analyse et
+de contrôle de texte `grep`, `sed` et `awk`.
 
 ## Auteur
 
