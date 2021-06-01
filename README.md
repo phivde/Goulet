@@ -8,6 +8,12 @@
 
 Vincent Goulet, professeur titulaire, École d'actuariat, Université Laval
 
+## Licence
+
+«Ligne de commande Unix» est mis à disposition sous licence [Attribution-Partage dans les mêmes conditions 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/deed.fr) de Creative Commons.
+
+Consulter le fichier `LICENSE` pour la licence complète.
+
 ## Modèle de développement
 
 Le processus de rédaction et de maintenance du projet suit le modèle [*Gitflow Workflow*](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow ). Seule particularité: la branche *master* se trouve dans le dépôt [`programmer-avec-r`]((https://gitlab.com/vigou3/programmer-avec-r)) dans GitLab, alors que la branche de développement se trouve dans le dépôt [`programmer-avec-r-devel`](https://projets.fsg.ulaval.ca/git/scm/vg/programmer-avec-r-devel) dans le serveur BitBucket de la Faculté des sciences et de génie de l'Université Laval.
