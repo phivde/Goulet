@@ -10,7 +10,7 @@ Vincent Goulet, professeur titulaire, École d'actuariat, Université Laval
 
 ## Licence
 
-«Ligne de commande Unix» est mis à disposition sous licence [Attribution-Partage dans les mêmes conditions 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/deed.fr) de Creative Commons.
+«Programmer avec R» est mis à disposition sous licence [Attribution-Partage dans les mêmes conditions 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/deed.fr) de Creative Commons.
 
 Consulter le fichier `LICENSE` pour la licence complète.
 
