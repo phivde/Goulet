@@ -4,6 +4,12 @@
 
 [*Programmer avec R*](https://vigou3.gitlab.io/programmer-avec-r) est un ouvrage d'initiation à la programmation informatique basé sur le langage R. Les fonctionnalités statistiques de R n'y sont pas abordées. On se concentre plutôt sur l'apprentissage du langage de programmation sous-jacent.
 
+L'ouvrage repose sur une philosophie d'apprentissage du langage R par l'exposition à un maximum de code et par la pratique de la programmation. C'est pourquoi les chapitres sont rédigés de manière synthétique et qu'ils comportent peu d'exemples au fil du texte. 
+
+En revanche, le lecteur est appelé à lire et à exécuter le code informatique se trouvant dans les sections d'exemples à la fin de chacun des chapitres. Ce code et les commentaires qui l'accompagnent reviennent sur l'essentiel des concepts du chapitre et les complémentent souvent.
+
+Question de développer, chez le lecteur, une culture de l'informatique et une connaissance des outils de développement informatique essentiels, *Programmer avec R* traite également de l'histoire des langages de programmation; des principes de base des systèmes d'exploitation et des systèmes de gestion de fichiers; des bonnes pratiques en matière de travail collaboratif; des outils d'analyse et de contrôle de texte `grep`, `sed` et `awk`.
+
 ## Auteur
 
 Vincent Goulet, professeur titulaire, École d'actuariat, Université Laval
