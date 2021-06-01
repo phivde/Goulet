@@ -22,7 +22,7 @@ enableRobotsTXT = true
   ## https://jeremybise.com/google-fonts-in-hugo-themes/
   ##
   ## See also assets/scss/main.scss; layouts/partials/google-fonts.html;
-  ## layouts/_default/baseof.html.
+  ## layouts/partials/head-additions.html.
   google_fonts = [
     ["Fira Sans", "300, 300i, 400, 400i, 600, 600i"],
     ["Fira Code", "300"]
