@@ -73,8 +73,8 @@ un juste équilibre entre les trois pôles.
 style en programmation; \citet{Hunt:pragmatic:1999} offrent quasiment
 un traité sur le sujet; \citet{Martin:CleanCode:2009} est la bible des
 ingénieurs logiciels\footnote{%
-  L'auteur est affectueusement appelé \emph{Uncle Bob} dans la
-  discipline.}. %
+  Les disciples appellent d'ailleurs affectueusement l'auteur
+  \emph{Uncle Bob}.}. %
 Je ne saurais être aussi exhaustif que ces auteurs établis. Néanmoins,
 je vous incite à porter une attention particulière aux quelques points
 de style livrés en vrac ci-dessous.
@@ -179,35 +179,38 @@ mean(x)
   \citep{Wikipedia:Nombre_magique}. Les nombres magiques rendent les
   programmes difficiles à lire, à interpréter et à déboguer. Voici une
   expression qui en est truffée:
-<<echo=TRUE, eval=FALSE>>=
+  \begin{Schunk}
+\begin{Verbatim}
 cost <- 4.79 + 3 * floor(x/900)
-@
+\end{Verbatim}
+  \end{Schunk}
   Que représentent au juste les trois constantes? Difficile de savoir
-  sans la documentation appropriée.
+  sans la documentation appropriée. Et même là, la documentation
+  pourrait ne plus être à jour ou se trouver loin de l'endroit où les
+  constantes apparaissent dans le code.
 
-  Pour éviter le problème des nombres magiques, il suffit d'affecter
-  les constantes à des variables --- portant des noms significatifs
-  --- puis d'utiliser ces variables dans les opérations arithmétiques.
-  Par convention, les noms de ces variables s'écrivent en majuscules.
+  Pour clarifier la \index{semantique@sémantique}sémantique des
+  nombres magiques et éviter du même coup les périls de la répétition,
+  il vous suffit d'affecter les constantes à des variables --- portant
+  des noms significatifs! --- puis d'utiliser ces variables dans les
+  opérations arithmétiques. Par convention, vous devriez écrire les
+  noms de ces variables en majuscules.
 
-  Le code suivant est fonctionnellement équivalent à l'expression
-  ci-dessus, mais vous pouvez sans doute décoder sa signification même
-  sans documentation:
-<<echo=TRUE, eval=FALSE>>=
+  Le code ci-dessous est fonctionnellement équivalent à l'expression
+  précédente, mais vous pouvez sans doute maintenant décoder sa
+  signification même sans documentation:
+  \begin{Schunk}
+\begin{Verbatim}
 BASE <- 4.79
 EXTRA <- 3
-HALFHOUR <- 30 * 60
-cost <- BASE + EXTRA * floor(x/HALFHOUR)
-@
-  La \index{semantique@sémantique}sémantique des nombres $4,79$, $3$
-  et $900$ est maintenant claire: en supposant que \code{x} représente
-  la durée d'utilisation d'un service en secondes, il s'agit, dans
-  l'ordre, du coût de base du service, du montant additionnel par
-  demi-heure et du facteur de conversion de la durée en heures.
-
+TIMESLICE <- 30 * 60
+cost <- BASE + EXTRA * floor(x/TIMESLICE)
+\end{Verbatim}
+  \end{Schunk}
   Les nombres $-1$, $0$ et $1$ ne sont généralement pas considérés
   comme des nombres magiques. Selon le contexte, il peut en aller de
-  même pour $2$ et $100$ dans des expressions arithmétiques.
+  même pour $2$, $100$ ou d'autres valeurs dans les opérations
+  arithmétiques.
   %
 \item Évitez les expressions logiques complexes, surtout celles
   reposant sur la double négation. Par exemple, pour exécuter une
