@@ -208,9 +208,10 @@ cost <- BASE + EXTRA * floor(x/TIMESLICE)
 \end{Verbatim}
   \end{Schunk}
   Les nombres $-1$, $0$ et $1$ ne sont généralement pas considérés
-  comme des nombres magiques. Selon le contexte, il peut en aller de
-  même pour $2$, $100$ ou d'autres valeurs dans les opérations
-  arithmétiques.
+  comme des nombres magiques, tout comme $2$ (souvent utilisé pour
+  déterminer si un nombre est pair) et $100$ (beaucoup utilisé dans la
+  conversion des pourcentages). Selon le contexte, il peut convenir
+  d'omettre d'autres valeurs.
   %
 \item Évitez les expressions logiques complexes, surtout celles
   reposant sur la double négation. Par exemple, pour exécuter une
