@@ -185,16 +185,18 @@ cost <- 4.79 + 3 * floor(x/900)
 \end{Verbatim}
   \end{Schunk}
   Que représentent au juste les trois constantes? Difficile de savoir
-  sans la documentation appropriée. Et même là, la documentation
-  pourrait ne plus être à jour ou se trouver loin de l'endroit où les
-  constantes apparaissent dans le code.
+  sans la documentation appropriée. Dès qu'une constante dans une
+  ligne de code nécessite de documenter sa signification, vous avez
+  affaire à un nombre magique. Cependant, la documentation n'est pas
+  une panacée: elle pourrait ne plus être à jour ou se trouver loin de
+  l'endroit où les constantes apparaissent dans le code.
 
   Pour clarifier la \index{semantique@sémantique}sémantique des
-  nombres magiques et éviter du même coup les périls de la répétition,
-  il vous suffit d'affecter les constantes à des variables --- portant
-  des noms significatifs! --- puis d'utiliser ces variables dans les
+  nombres magiques et pour éviter du même coup les périls de la
+  répétition, affectez les constantes à des variables --- portant des
+  noms significatifs! --- puis utilisez ces variables dans les
   opérations arithmétiques. Par convention, vous devriez écrire les
-  noms de ces variables en majuscules.
+  noms des variables contenant des nombres magiques en majuscules.
 
   Le code ci-dessous est fonctionnellement équivalent à l'expression
   précédente, mais vous pouvez sans doute maintenant décoder sa
