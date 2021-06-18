@@ -187,10 +187,10 @@ check-status:
 upload:
 	@echo ----- Uploading archive to GitLab...
 	$(eval upload_url=$(shell curl --form "file=@${ARCHIVE}" \
-	                                        --header "PRIVATE-TOKEN: ${OAUTHTOKEN}"	\
-	                                        --silent \
-	                                        ${APIURL}/uploads \
-	                                   | awk -F '"' '{ print $$8 }'))
+	                               --header "PRIVATE-TOKEN: ${OAUTHTOKEN}"	\
+	                               --silent \
+	                               ${APIURL}/uploads \
+	                          | awk -F '"' '{ print $$8 }'))
 	@echo url to file:
 	@echo "${upload_url}"
 	@echo ----- Done uploading files
