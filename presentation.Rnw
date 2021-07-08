@@ -381,7 +381,7 @@ d'autres. Voici quelques bons choix.
     \includegraphics[width=0.9\textwidth]{images/rstudio-screenshot}
     \caption[Fenêtre de RStudio sous macOS dans sa configuration par
     défaut]{Fenêtre de RStudio sous macOS dans sa configuration par
-      défaut. Dans le sens des aiguilles d'une montre, on y retrouve:
+      défaut. On y retrouve, dans le sens des aiguilles d'une montre:
       le fichier de script de la \autoref{fig:presentation:script}; la
       liste des objets de l'environnement (vide, ici); une interface
       pour charger des paquetages; la ligne de commande R.}
