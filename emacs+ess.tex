@@ -90,8 +90,8 @@ vers différentes ressources. Cet écran disparait dès que l'on appuie
 sur une touche. La fenêtre Emacs se divise en quatre zones principales
 (voir la \autoref{fig:ess:emacswindow}):
 \begin{enumerate}
-\item tout au haut de la fenêtre (ou de l'écran sous macOS), on trouve
-  l'habituelle barre de menu dont le contenu change selon le mode dans
+\item tout au haut de la fenêtre (ou de l'écran sous macOS) se trouve
+  l'habituelle barre des menus dont le contenu change selon le mode dans
   lequel se trouve Emacs;
 \item l'essentiel de la fenêtre sert à afficher un \emph{buffer}, soit
   le contenu d'un fichier ouvert ou l'invite de commande d'un
@@ -105,48 +105,13 @@ Il est possible de séparer la fenêtre Emacs en sous-fenêtres pour
 afficher plusieurs \emph{buffers} à la fois. Il y a alors une ligne de
 mode pour chaque \emph{buffer}.
 
-\begin{figure}[t]
-  %% Capture d'écran
+\begin{figure}
+  \centering
   \includegraphics{images/emacswindow-screenshot}
-
-  \begingroup
-  \TPoptions{absolute=false}
-  %% Identification de la barre de menu
-  \begin{textblock}{0.35}(7.38,-6.58)
-    \Large\faLongArrowAltRight
-  \end{textblock}
-  \begin{textblock}{1.75}(7.88,-6.59)
-    \footnotesize\sffamily Barre de menu
-  \end{textblock}
-
-  %% Identification du buffer
-  \begin{textblock}{0.35}(7.38,-3.38)
-    \Large\faLongArrowAltRight
-  \end{textblock}
-  \begin{textblock}{1.75}(7.88,-3.39)
-    \footnotesize\sffamily \emph{Buffer}
-  \end{textblock}
-
-  %% Identification de la mode line
-  \begin{textblock}{0.35}(7.38,-0.28)
-    \Large\faLongArrowAltRight
-  \end{textblock}
-  \begin{textblock}{1.75}(7.88,-0.29)
-    \footnotesize\sffamily Ligne de mode
-  \end{textblock}
-
-  %% Identification du minibuffer
-  \begin{textblock}{0.35}(7.38,-0.08)
-    \Large\faLongArrowAltRight
-  \end{textblock}
-  \begin{textblock}{1.75}(7.88,-0.09)
-    \footnotesize\sffamily \emph{Minibuffer}
-  \end{textblock}
-  \endgroup
   \caption[Fenêtre de GNU~Emacs sous macOS]{Fenêtre de GNU~Emacs et
     ses différentes parties au lancement de l'application sous macOS.
-    Sous Windows et Linux, la barre de menu se trouve à l'intérieur de
-    la fenêtre.}
+    La barre des menus se trouve au haut de l'écran dans macOS et à
+    l'intérieur de la fenêtre de Emacs sous Windows et Linux.}
   \label{fig:ess:emacswindow}
 \end{figure}
 
