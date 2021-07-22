@@ -345,7 +345,7 @@ suivantes:
 \item de part et d'autre de tous les opérateurs\footnote{%
     Sauf peut-être la division: je préfère \code{(x + y)/z} à \code{(x
       + y) / z}.};
-\item après les virgules;
+\item après les virgules (mais jamais avant);
 \item avant la parenthèse ouvrante «\code{(}», sauf dans les appels de
   fonction.
 \end{itemize}
