@@ -36,65 +36,66 @@
 
 
 ## Principaux fichiers
-MASTER = programmer-avec-r.pdf
-ARCHIVE = ${MASTER:.pdf=.zip}
-README = README.md
-NEWS = NEWS
-COLLABORATEURS = COLLABORATEURS
-LICENSE = LICENSE
+MASTER := programmer-avec-r.pdf
+ARCHIVE := ${MASTER:.pdf=.zip}
+README := README.md
+NEWS := NEWS
+COLLABORATEURS := COLLABORATEURS
+LICENSE := LICENSE
 
 ## Autres fichiers à inclure dans l'archive
-CONTRIBUTING = CONTRIBUTING.md
-OTHER = gabarit-documentation-fonction.R chanson.txt carburant.dat 100metres.dat
+CONTRIBUTING := CONTRIBUTING.md
+OTHER := gabarit-documentation-fonction.R chanson.txt carburant.dat 100metres.dat
 
 ## Le document maitre dépend de tous les fichiers .Rnw; de tous les
 ## fichiers .tex autres que lui-même qui n'ont pas de version .Rnw;
 ## des fichiers partagés du répertoire 'share'.
-RNWFILES = $(wildcard *.Rnw)
-TEXFILES = $(addsuffix .tex, \
+RNWFILES := $(wildcard *.Rnw)
+TEXFILES := $(addsuffix .tex, \
                        $(filter-out $(basename ${RNWFILES} ${MASTER} $(wildcard solutions-*.tex)),\
                                     $(basename $(wildcard *.tex))))
-SHARE = share/license-by-sa.nw
+SHARE := share/license-by-sa.nw
 
 ## Les fichiers de script sont tous extraits des fichiers .Rnw. Un
 ## chapitre est livré avec deux fichiers d'accompagnement pour les
 ## exemples. Un fichier de script a une extension .sh.
-SCRIPTS = ${RNWFILES:.Rnw=.R} sqrt.R tests-sqrt.R texte.sh 
+SCRIPTS := ${RNWFILES:.Rnw=.R} sqrt.R tests-sqrt.R texte.sh 
 
 ## Informations de publication extraites du fichier maitre
-TITLE = $(shell grep "\\\\title" ${MASTER:.pdf=.tex} \
+TITLE := $(shell grep "\\\\title" ${MASTER:.pdf=.tex} \
 	| cut -d { -f 2 | tr -d })
-REPOSURL = $(shell grep "newcommand{\\\\reposurl" ${MASTER:.pdf=.tex} \
+REPOSURL := $(shell grep "newcommand{\\\\reposurl" ${MASTER:.pdf=.tex} \
 	| cut -d } -f 2 | tr -d {)
-YEAR = $(shell grep "newcommand{\\\\year" ${MASTER:.pdf=.tex} \
+YEAR := $(shell grep "newcommand{\\\\year" ${MASTER:.pdf=.tex} \
 	| cut -d } -f 2 | tr -d {)
-MONTH = $(shell grep "newcommand{\\\\month" ${MASTER:.pdf=.tex} \
+MONTH := $(shell grep "newcommand{\\\\month" ${MASTER:.pdf=.tex} \
 	| cut -d } -f 2 | tr -d {)
-VERSION = ${YEAR}.${MONTH}
+VERSION := ${YEAR}.${MONTH}
 
 ## Auteurs à exclure du fichier COLLABORATEURS (regex)
-OMITAUTHORS = Vincent Goulet|Inconnu|unknown
+OMITAUTHORS := Vincent Goulet|Inconnu|unknown
 
 ## Outils de travail
-SWEAVE = _R_CHECK_LENGTH_1_CONDITION_=false R CMD Sweave --encoding="utf-8"
-TEXI2DVI = LATEX=xelatex TEXINDY=makeindex texi2dvi -b
-RBATCH = R CMD BATCH --no-timing
-CP = cp -p
-RM = rm -rf
+SWEAVE := _R_CHECK_LENGTH_1_CONDITION_=false R CMD Sweave --encoding="utf-8"
+TEXI2DVI := LATEX=xelatex TEXINDY=makeindex texi2dvi -b
+RBATCH := R CMD BATCH --no-timing
+CP := cp -p
+RM := rm -rf
+MD := mkdir -p
 
 ## Indiquer à TeX de rechercher des fichiers dans texmf
 export TEXINPUTS := ./texmf//:${TEXINPUTS}
 
 ## Dossier temporaire pour construire l'archive
-BUILDDIR = tmpdir
+BUILDDIR := tmpdir
 
 ## Dépôt GitLab et authentification
-REPOSNAME = $(shell basename ${REPOSURL})
-APIURL = https://gitlab.com/api/v4/projects/vigou3%2F${REPOSNAME}
-OAUTHTOKEN = $(shell cat ~/.gitlab/token)
+REPOSNAME := $(shell basename ${REPOSURL})
+APIURL := https://gitlab.com/api/v4/projects/vigou3%2F${REPOSNAME}
+OAUTHTOKEN := $(shell cat ~/.gitlab/token)
 
 ## Variable automatique
-TAGNAME = v${VERSION}
+TAGNAME := v${VERSION}
 
 
 all: pdf
@@ -155,7 +156,7 @@ update-copyright: ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES} ${SHARE}
 .PHONY: zip
 zip: ${MASTER} ${README} ${NEWS} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS} ${CONTRIBUTING}
 	if [ -d ${BUILDDIR} ]; then ${RM} ${BUILDDIR}; fi
-	mkdir -p ${BUILDDIR}
+	${MD} ${BUILDDIR}
 	touch ${BUILDDIR}/${README} && \
 	  awk '(state == 0) && /^# / { state = 1 }; \
 	       /^## Auteur/ { printf("## Édition\n\n%s\n\n", "${VERSION}") } \
