@@ -142,7 +142,7 @@ Rout: ${SCRIPTS:.R=.Rout}
 contrib: ${COLLABORATEURS}
 
 .PHONY: release
-release: update-copyright zip check-status upload create-release publish
+release: update-copyright zip check-status create-release publish
 
 .PHONY: update-copyright
 update-copyright: ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES} ${SHARE}
@@ -197,7 +197,7 @@ upload:
 	@echo ----- Done uploading files
 
 .PHONY: create-release
-create-release:
+create-release: upload
 	@echo ----- Creating release on GitLab...
 	if [ -e relnotes.in ]; then ${RM} relnotes.in; fi
 	touch relnotes.in
