@@ -1,7 +1,7 @@
 ### -*-Makefile-*- pour préparer la page web de
 ###                "Programmer avec R"
 ##
-## Copyright (C) 2018 Vincent Goulet
+## Copyright (C) 2021 Vincent Goulet
 ##
 ## Auteur: Vincent Goulet
 ##
@@ -10,46 +10,50 @@
 ## http://gitlab.com/vigou3/programmer-avec-r
 
 
-## Numéro de version extrait du document maître
+## Informations de version extraites du document maître
 MASTER = programmer-avec-r.pdf
-REPOSURL = $(shell git show master:${MASTER:.pdf=.tex} \
-	| grep "newcommand{\\\\reposurl" \
-	| cut -d } -f 2 | tr -d {)
-YEAR = $(shell git show master:${MASTER:.pdf=.tex} \
-	| grep "newcommand{\\\\year" \
-	| cut -d } -f 2 | tr -d {)
-MONTH = $(shell git show master:${MASTER:.pdf=.tex} \
-	| grep "newcommand{\\\\month" \
-	| cut -d } -f 2 | tr -d {)
+VERSIONINFO := $(shell \
+  git show master:${MASTER:.pdf=.tex} | \
+  awk 'BEGIN { FS = "[\{\}]" } \
+       /\\reposurl/ { repos = $$4 } \
+       /\\year/     { year = $$4 } \
+       /\\month/    { month = $$4 } \
+       END { print repos " " year " " month }')
+REPOSURL = $(word 1,${VERSIONINFO})
+YEAR = $(word 2,${VERSIONINFO})
+MONTH = $(word 3,${VERSIONINFO})
 VERSION = ${YEAR}.${MONTH}
+TAGNAME = v${VERSION}
 
 ## Dépôt GitLab et authentification
 REPOSNAME = $(shell basename ${REPOSURL})
 APIURL = https://gitlab.com/api/v4/projects/vigou3%2F${REPOSNAME}
 OAUTHTOKEN = $(shell cat ~/.gitlab/token)
 
-## Variables automatiques
-TAGNAME = v${VERSION}
-
+## Extraire les url des fichiers joints à la mise en production
+ASSETS := $(shell \
+  curl --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+       --silent \
+       ${APIURL}/releases/${TAGNAME}/assets/links | \
+  sed 's/,/\n/g' | \
+  awk 'BEGIN { FS = "\"" } \
+       /direct_asset_url/ \
+       { \
+         sub(/.*\/uploads/, "uploads", $$4); \
+         f = f " " $$4 \
+       } \
+       END { print f }')
+ZIP_ID := $(filter %.zip,${ASSETS})
 
 all: files commit
 
 files:
-	$(eval file_id=$(shell curl --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
-	                             --silent \
-	                             ${APIURL}/releases/${TAGNAME}/assets/links \
-	                       | sed -E 's/.*\"direct_asset_url\":\".*\/(uploads\/[^\"]*)\".*/\1/'))
 	awk 'BEGIN { FS = "\""; OFS = "\"" } \
-	     /file_id/ { $$2 = "${file_id}" } \
+	     /version/ { $$2 = "${VERSION}" } \
+	     /zip_id/ { $$2 = "${ZIP_ID}" } \
 	     1' \
 	    config.toml > tmpfile && \
 	  mv tmpfile config.toml
-	awk 'BEGIN { FS = "/"; OFS = "/" } \
-	     /^## Édition/ { print; getline; print; getline; \
-	                     gsub(/[0-9]{4}\.[0-9]{2}(-[0-9]*[a-z]*)?/, "${VERSION}") } \
-	     1' \
-	    content/_index.md > tmpfile && \
-	  mv tmpfile content/_index.md
 
 commit:
 	git commit config.toml content/_index.md \

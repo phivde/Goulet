@@ -8,11 +8,15 @@ DefaultContentLanguage = "fr"
 enableRobotsTXT = true
 
 [params]
+  ## Links
   pages_home = "https://vigou3.gitlab.io/"
   gitlab = "https://gitlab.com/vigou3"
   repos = "programmer-avec-r"
-  file_id = "uploads/5ac920a131c0ebfdd8e238a459b5162e/programmer-avec-r.zip"
+  version = "2021.05"
+  zip_id = "uploads/5ac920a131c0ebfdd8e238a459b5162e/programmer-avec-r.zip"
   release_notes = "-/releases/"
+
+  ## Look and feel
   custom_css = ["/css/custom.css"]
   background_color_class = "bg-black"
   featured_image = "/images/Xerus_inauris_1.jpg"
