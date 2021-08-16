@@ -30,7 +30,7 @@ REPOSNAME = $(shell basename ${REPOSURL})
 APIURL = https://gitlab.com/api/v4/projects/vigou3%2F${REPOSNAME}
 OAUTHTOKEN = $(shell cat ~/.gitlab/token)
 
-## Extraire les url des fichiers joints à la mise en production
+## Extraction des url des fichiers joints à la mise en production
 ASSETS := $(shell \
   curl --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
        --silent \
