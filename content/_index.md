@@ -39,8 +39,8 @@ Vincent Goulet, professeur titulaire, [École d'actuariat](https://www.act.ulava
 ## Table des matières abrégée
 
 1\. Éléments d'informatique pour programmeurs  
-2\. Présentation de R  
-3\. Algorithmes et algorithmique  
+2\. Algorithmes et algorithmique  
+3\. Présentation de R  
 4\. Bases de la programmation  
 5\. Structures de données de R et fonctions d'application  
 6\. Bonnes pratiques de la programmation  
