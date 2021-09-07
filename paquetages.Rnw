@@ -213,8 +213,8 @@ principale.
 
 ## Comme alternative à la procédure du chapitre, il est
 ## possible de créer le répertoire pour la bibliothèque
-## personnelle, puis d'inscrire son emplacement dans le
-## fichier ~/.Renviron directement depuis R.
+## personnelle et d'inscrire son emplacement dans le fichier
+## ~/.Renviron directement depuis R.
 ##
 ## Tout d'abord, la commande 'dir.create' crée un répertoire
 ## dans le système de fichier. Adaptez les chemins d'accès
@@ -227,13 +227,14 @@ principale.
 ## plutôt la commande suivante.
 ##-!- dir.create("~/R/library", recursive = TRUE) # autres OS
 
-## Ensuite, la commande 'cat' permet d'écrire directement dans un
-## fichier. Assurez-vous que le chemin d'accès correspond à celui
-## utilisé ci-dessus.
+## Ensuite, la commande 'cat' permet d'écrire directement dans
+## un fichier. Assurez-vous que le chemin d'accès correspond à
+## celui utilisé ci-dessus.
 ##
-## Comme dans les instructions du chapitre, les commandes ci-dessous
-## ajoutent du contenu à un fichier si celui-ci existe déjà. Évitez
-## donc d'évaluer les expressions plusieurs fois.
+## Comme dans les instructions du chapitre, les commandes
+## ci-dessous ajoutent du contenu à un fichier si celui-ci
+## existe déjà. Évitez donc d'évaluer les expressions
+## plusieurs fois.
 ##
 ## Si vous êtes sous macOS, utilisez la commande suivante.
 ##-!- cat('R_LIBS_USER="~/Library/R/library"', file = "~/.Renviron",
@@ -299,8 +300,8 @@ search()
 ### UTILISATION D'UN PAQUETAGE
 ###
 
-## Chargement du package MASS qui contient plusieurs
-## fonctions statistiques très utiles.
+## Chargement du package MASS qui contient plusieurs fonctions
+## statistiques très utiles.
 ##-!- library("MASS")
 
 ###
