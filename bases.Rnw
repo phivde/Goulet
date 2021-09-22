@@ -2544,7 +2544,7 @@ prod(x)^(1/length(x))
     \item Le calcul de la moyenne harmonique repose sur la fonction
       \icode{sum}.
 <<echo=TRUE,eval=FALSE>>=
-n/sum(1/x)
+length(x)/sum(1/x)
 @
     \item Le produit scalaire est la somme des produits élément par
       élément de deux vecteurs.
