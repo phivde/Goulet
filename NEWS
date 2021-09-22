@@ -6,9 +6,14 @@
 
 ## Nouveautés
 
-- Chapitre 4: fonction 'is.na' présentée brièvement dans le code
+- Chapitre 4: fonction `is.na` présentée brièvement dans le code
   informatique correspondant à la section 4.1.
 
+## Changements
+
+- Exercice 4.3 d): correction de la solution (l'objet `n` n'existe pas
+  dans la solution). Merci à Dominik Chevalier.
+  
 
 # 2021.08 (2021-08-19)
 
