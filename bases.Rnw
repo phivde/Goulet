@@ -2345,8 +2345,8 @@ summary(x)                 # plusieurs des résultats ci-dessus
 (y <- sample(1:20, 6))
 cumsum(x)                  # somme cumulative de 'x'
 cumprod(y)                 # produit cumulatif de 'y'
-rev(cumprod(y))            # produit cumulatif renversé
-rev(cumprod(rev(y)))       # produit cumulatif renversé d'un vecteur renversé
+rev(cumprod(y))            # produit cumulatif (de g. à d.)
+rev(cumprod(rev(y)))       # produit cumulatif (de d. à g.)
 cummin(x)                  # minimum cumulatif
 cummax(y)                  # maximum cumulatif
 pmin(x, y)                 # minimum élément par élément
