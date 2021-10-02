@@ -249,7 +249,7 @@ y                          # ... plutôt une affectation
 ## les chaines de caractères en fonction de l'ordre
 ## lexicographique. Attention: c'est un terrain miné selon la
 ## langue utilisée; consultez la rubrique d'aide de
-## 'Comparison' au besoin (qui vous dira de ne pas faire
+## 'Comparaison' au besoin (qui vous dira de ne pas faire
 ## d'hypothèses sur l'ordre lexicographique entre deux chaines
 ## de caractères). Quelques exemples simples.
 "a" < "d"                  # ordre alphabétique
