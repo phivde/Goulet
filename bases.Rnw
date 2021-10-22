@@ -2307,7 +2307,7 @@ trunc(x)                   # troncature des décimales
 any(c(TRUE, FALSE, FALSE))  # au moins une valeur TRUE
 any(c(FALSE, FALSE, FALSE)) # aucune valeur TRUE
 all(c(TRUE, TRUE, TRUE))    # toutes les valeurs TRUE
-all(c(TRUE, FALSE, TRUE))   # aucune valeur TRUE
+all(c(TRUE, FALSE, TRUE))   # pas toutes les valeurs TRUE
 
 ## Les fonctions sont des compléments l'une de l'autre: si
 ## 'any(x)' est TRUE, alors 'all(!x)' est FALSE, et
