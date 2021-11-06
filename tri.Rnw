@@ -1188,7 +1188,7 @@ bucketsort <- function(x, max, nbuckets)
 
 \begin{exercice}
   \label{ex:tri:100metres}
-  Les fichier \code{100metres.dat} distribué avec cet ouvrage contient
+  Le fichier \code{100metres.dat} distribué avec cet ouvrage contient
   la date et le temps des 31 meilleurs résultats enregistrés au
   100~mètres homme entre 1964 et 2005. Les dates se trouvent dans la
   première colonne du fichier et les temps, dans la seconde. Les
