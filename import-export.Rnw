@@ -79,7 +79,7 @@ write(t(mat), file = "matrice.data", append = TRUE)
 
 Le plus simple jeu de données à transférer d'un système à un autre est
 un vecteur ou une matrice de données toutes du même mode. Pour ce
-genre d'applications, un fichier en format texte brut convient
+genre d'application, un fichier en format texte brut convient
 parfaitement. Les données y sont disposées les unes à la suite des
 autres sur une ou plusieurs lignes. Le fichier peut aussi contenir
 des commentaires, ceux-ci étant normalement délimités par un caractère
