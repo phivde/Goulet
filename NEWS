@@ -13,7 +13,10 @@
 
 - Exercice 4.3 d): correction de la solution (l'objet `n` n'existe pas
   dans la solution). Merci à Dominik Chevalier.
-  
+- Section 10.3: précision que la troisième étape de la procédure de
+  création d'une bibliothèque personnelle s'effectue depuis la ligne
+  de commande de R.
+
 
 # 2021.08 (2021-08-19)
 

@@ -169,8 +169,9 @@ EOF
 \end{Verbatim}
     \end{Schunk}
   \end{trivlist}
-\item Redémarrer R et vérifier que le chemin vers la bibliothèque
-  personnelle apparait dans les résultats de la commande
+\item Démarrer ou redémarrer R et, depuis à la ligne de commande de R,
+  vérifier que le chemin vers la bibliothèque personnelle apparait
+  dans les résultats de la commande
   \index{libPaths@\code{.libPaths}}\code{.libPaths}.
   \begin{Schunk}
 \begin{Sinput}
