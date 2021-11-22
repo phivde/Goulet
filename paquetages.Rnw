@@ -91,7 +91,7 @@ boot           Bootstrap Functions
 
 Pour rendre disponibles les fonctionnalités d'un paquetage, peu
 importe sa provenance, il faut le charger dans la session de travail.
-C'est le principal rôle de la fonction \Icode{library}.
+C'est le rôle principal de la fonction \Icode{library}.
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
 library("\meta{paquetage}")
