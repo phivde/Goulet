@@ -958,7 +958,7 @@ précède optionnel dans la chaine recherchée. Par exemple, le motif
 Combinés avec le caractère de remplacement, les trois opérateurs de
 répétition ci-dessus permettent de décrire des chaines de caractères
 très générales puisque l'opération «n'importe quel caractère» s'en
-trouve repétée autant de fois que nécessaire. Ce sont les combinaisons
+trouve répétée autant de fois que nécessaire. Ce sont les combinaisons
 d'opérateurs les plus utilisées dans les expressions régulières.
 \begin{ttscript}{\regex{mm}}
 \item[\regex{.*}] correspond à une chaine de caractères quelconques de
