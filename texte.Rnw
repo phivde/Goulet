@@ -546,7 +546,7 @@ tampon de \icode{sed} dans le présent ouvrage.
 ##-!- grep 'Même' chanson.txt	   # vers contenant le mot «Même»
 ##-!- grep 'même' chanson.txt	   # vers contenant le mot «même»
 ##-!-
-##-!- ## Dressons maitenant la liste de toutes les utilisations de
+##-!- ## Dressons maintenant la liste de toutes les utilisations de
 ##-!- ## la fonction 'matrix' dans les fichiers d'exemples.
 ##-!- ##
 ##-!- ## Lorsque 'grep' recoit plusieurs fichiers en entrée, il
