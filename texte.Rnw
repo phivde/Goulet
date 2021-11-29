@@ -2238,7 +2238,7 @@ et 9]{gawk:5.0}.
 
 Les données du fichier \code{carburant.dat} sont entièrement en unités
 de mesure impériales. La commande \icode{awk} suivante permet de
-convertir le poids des voitures, actuellement en milliers en livres,
+convertir le poids des voitures, actuellement en milliers de livres,
 vers des kilogrammes. L'action de la première règle remplace le poids
 du véhicule en milliers de livres --- le cinquième champ --- par le
 poids en kilogrammes ($2,20462$ étant le facteur de conversion entre
