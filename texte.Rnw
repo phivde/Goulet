@@ -1533,7 +1533,7 @@ mots de la fin de la \autoref{sec:texte:regex:alternance}.
       fatigue}} et le texte est remplacé par \chaine{le pendule}.
 \item Il faut lire le motif de la seconde commande ainsi: «\chaine{l}
   suivi de \chaine{a} ou de \chaine{e}, suivi d'une espace, suivi de
-  \chaine{mouvement} ou de \chaine{fatigue}». Cela correpond bien au
+  \chaine{mouvement} ou de \chaine{fatigue}». Cela correspond bien au
   texte que nous voulons remplacer par \chaine{le pendule}. Cependant,
   à la différence de la première variante, le motif correspond aussi à
   \chaine{\matches{la mouvement}} et à \chaine{\matches{le fatigue}}.
