@@ -25,7 +25,7 @@ source("Stangle.R")        # lancement de Stangle
 @
 
 \begin{objectifs}
-\item Décrire les concepts d'environnement d'une fonction et
+\item Décrire les concepts d'environnement de fonction et
   d'environnement d'évaluation de R.
 \item Comprendre comment R associe des symboles à des valeurs.
 \item Utiliser la portée lexicale et l'évaluation paresseuse pour
