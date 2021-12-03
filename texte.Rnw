@@ -546,7 +546,7 @@ tampon de \icode{sed} dans le présent ouvrage.
 ##-!- grep 'Même' chanson.txt	   # vers contenant le mot «Même»
 ##-!- grep 'même' chanson.txt	   # vers contenant le mot «même»
 ##-!-
-##-!- ## Dressons maitenant la liste de toutes les utilisations de
+##-!- ## Dressons maintenant la liste de toutes les utilisations de
 ##-!- ## la fonction 'matrix' dans les fichiers d'exemples.
 ##-!- ##
 ##-!- ## Lorsque 'grep' recoit plusieurs fichiers en entrée, il
@@ -958,7 +958,7 @@ précède optionnel dans la chaine recherchée. Par exemple, le motif
 Combinés avec le caractère de remplacement, les trois opérateurs de
 répétition ci-dessus permettent de décrire des chaines de caractères
 très générales puisque l'opération «n'importe quel caractère» s'en
-trouve repétée autant de fois que nécessaire. Ce sont les combinaisons
+trouve répétée autant de fois que nécessaire. Ce sont les combinaisons
 d'opérateurs les plus utilisées dans les expressions régulières.
 \begin{ttscript}{\regex{mm}}
 \item[\regex{.*}] correspond à une chaine de caractères quelconques de
@@ -2241,7 +2241,7 @@ et 9]{gawk:5.0}.
 
 Les données du fichier \code{carburant.dat} sont entièrement en unités
 de mesure impériales. La commande \icode{awk} suivante permet de
-convertir le poids des voitures, actuellement en milliers en livres,
+convertir le poids des voitures, actuellement en milliers de livres,
 vers des kilogrammes. L'action de la première règle remplace le poids
 du véhicule en milliers de livres --- le cinquième champ --- par le
 poids en kilogrammes ($2,20462$ étant le facteur de conversion entre
