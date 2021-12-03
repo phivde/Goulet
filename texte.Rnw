@@ -2034,8 +2034,11 @@ pas rencontrés auparavant, ainsi qu'à la concaténation.
   \index{"!\string~@\code{"!\string~} (\code{awk})|bfhyperpage}%
   retourne vrai lorsque la chaine de caractères du côté gauche de
   l'opérateur (\code{\$0} par défaut) correspond à %
-  l'\index{expression régulière}expression régulière du côté droit. La
-  version négative «!\string~» existe aussi.
+  l'\index{expression régulière}expression régulière du côté
+  droit.\footnote{%
+    Non, l'opérateur \icode[\code{awk}]{==} n'est pas valide entre une
+    chaine de caractères et une expression régulière.} %
+  La version négative «\code{!\string~}» existe aussi.
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
 \meta{chaine} ~ /\meta{motif}/
