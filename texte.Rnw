@@ -2298,7 +2298,7 @@ lors de la sortie des résultats. Ceux-ci sont stockés dans les
 variables prédéfinies \icode[\code{awk}]{ORS} (\emph{output record
   separator}) et \icode[\code{awk}]{OFS} (\emph{output field
   separator}). Les séparateurs de sortie par défaut sont aussi le
-retour et la ligne et l'espace.
+retour à la ligne et l'espace.
 
 Avec la règle suivante dans un programme \icode{awk}, les champs
 seront séparés par un point-virgule dans les résultats.
