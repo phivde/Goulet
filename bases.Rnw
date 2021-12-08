@@ -1028,7 +1028,7 @@ donnait pas aussi accès à des fonctions\footnote{%
   Le nom que nous donnons dorénavant au concept de procédure.} %
 plus élaborées. Or, le langage R compte justement un très grand nombre
 (des milliers!) de fonctions internes. Vous en avez déjà rencontré
-quelques unes dans les exemples, comme \icode{exp} ou \icode{cos}, et
+quelques-unes dans les exemples, comme \icode{exp} ou \icode{cos}, et
 vous en découvrirez de nouvelles à la \autoref{sec:bases:internes}.
 Chose plus importante, R nous permet aussi de définir nos propres
 fonctions. C'est là l'une des techniques d'abstraction les plus
