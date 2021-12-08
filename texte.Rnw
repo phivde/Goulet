@@ -546,7 +546,7 @@ tampon de \icode{sed} dans le présent ouvrage.
 ##-!- grep 'Même' chanson.txt	   # vers contenant le mot «Même»
 ##-!- grep 'même' chanson.txt	   # vers contenant le mot «même»
 ##-!-
-##-!- ## Dressons maitenant la liste de toutes les utilisations de
+##-!- ## Dressons maintenant la liste de toutes les utilisations de
 ##-!- ## la fonction 'matrix' dans les fichiers d'exemples.
 ##-!- ##
 ##-!- ## Lorsque 'grep' recoit plusieurs fichiers en entrée, il
@@ -958,7 +958,7 @@ précède optionnel dans la chaine recherchée. Par exemple, le motif
 Combinés avec le caractère de remplacement, les trois opérateurs de
 répétition ci-dessus permettent de décrire des chaines de caractères
 très générales puisque l'opération «n'importe quel caractère» s'en
-trouve repétée autant de fois que nécessaire. Ce sont les combinaisons
+trouve répétée autant de fois que nécessaire. Ce sont les combinaisons
 d'opérateurs les plus utilisées dans les expressions régulières.
 \begin{ttscript}{\regex{mm}}
 \item[\regex{.*}] correspond à une chaine de caractères quelconques de
@@ -1533,7 +1533,7 @@ mots de la fin de la \autoref{sec:texte:regex:alternance}.
       fatigue}} et le texte est remplacé par \chaine{le pendule}.
 \item Il faut lire le motif de la seconde commande ainsi: «\chaine{l}
   suivi de \chaine{a} ou de \chaine{e}, suivi d'une espace, suivi de
-  \chaine{mouvement} ou de \chaine{fatigue}». Cela correpond bien au
+  \chaine{mouvement} ou de \chaine{fatigue}». Cela correspond bien au
   texte que nous voulons remplacer par \chaine{le pendule}. Cependant,
   à la différence de la première variante, le motif correspond aussi à
   \chaine{\matches{la mouvement}} et à \chaine{\matches{le fatigue}}.
@@ -2034,8 +2034,11 @@ pas rencontrés auparavant, ainsi qu'à la concaténation.
   \index{"!\string~@\code{"!\string~} (\code{awk})|bfhyperpage}%
   retourne vrai lorsque la chaine de caractères du côté gauche de
   l'opérateur (\code{\$0} par défaut) correspond à %
-  l'\index{expression régulière}expression régulière du côté droit. La
-  version négative «!\string~» existe aussi.
+  l'\index{expression régulière}expression régulière du côté
+  droit.\footnote{%
+    Non, l'opérateur \icode[\code{awk}]{==} n'est pas valide entre une
+    chaine de caractères et une expression régulière.} %
+  La version négative «\code{!\string~}» existe aussi.
 \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
 \meta{chaine} ~ /\meta{motif}/
@@ -2238,7 +2241,7 @@ et 9]{gawk:5.0}.
 
 Les données du fichier \code{carburant.dat} sont entièrement en unités
 de mesure impériales. La commande \icode{awk} suivante permet de
-convertir le poids des voitures, actuellement en milliers en livres,
+convertir le poids des voitures, actuellement en milliers de livres,
 vers des kilogrammes. L'action de la première règle remplace le poids
 du véhicule en milliers de livres --- le cinquième champ --- par le
 poids en kilogrammes ($2,20462$ étant le facteur de conversion entre
@@ -2295,7 +2298,7 @@ lors de la sortie des résultats. Ceux-ci sont stockés dans les
 variables prédéfinies \icode[\code{awk}]{ORS} (\emph{output record
   separator}) et \icode[\code{awk}]{OFS} (\emph{output field
   separator}). Les séparateurs de sortie par défaut sont aussi le
-retour et la ligne et l'espace.
+retour à la ligne et l'espace.
 
 Avec la règle suivante dans un programme \icode{awk}, les champs
 seront séparés par un point-virgule dans les résultats.

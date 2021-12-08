@@ -25,7 +25,7 @@ source("Stangle.R")        # lancement de Stangle
 @
 
 \begin{objectifs}
-\item Décrire les concepts d'environnement d'une fonction et
+\item Décrire les concepts d'environnement de fonction et
   d'environnement d'évaluation de R.
 \item Comprendre comment R associe des symboles à des valeurs.
 \item Utiliser la portée lexicale et l'évaluation paresseuse pour
@@ -516,7 +516,7 @@ dont l'environnement englobant est $\rho_1$:
 \end{equation*}
 
 Toujours à l'intérieur de la fonction \code{f}, l'appel \code{g()}
-crée un nouvel environnement d'évaluation $\rho_3$ pour la fonction
+crée un nouvel environnement $\rho_3$ pour l'évaluation de la fonction
 \code{g}. L'environnement englobant est $\rho_2$ et, comme cette
 fonction n'a aucun argument, son dictionnaire est vide:
 \begin{equation*}
@@ -612,11 +612,11 @@ portée lexicale dans les fonctions conçues pour être appelées depuis
 la ligne de commande. Par contre, la portée lexicale est très utile
 pour simplifier le code des fonctions créées à l'intérieur d'autres
 fonctions puisque nous pouvons faire l'économie de passer tous les
-arguments d'une fonction à l'autre. Vous trouverez un exemple complet
-dans le code informatique de la \autoref{sec:environnement:exemples}.
+arguments d'une fonction à l'autre.
 
-\gotorbox{Étudiez les lignes \reflines{environnement:portee}
-  du fichier de script \code{\scriptfilename} reproduit à la
+\gotorbox{Vous trouverez un exemple complet de portée lexicale aux
+  lignes \reflines{environnement:portee} du fichier de script
+  \code{\scriptfilename} reproduit à la
   \autoref{sec:environnement:exemples}.}
 
 <<script, results=hide>>=
@@ -717,11 +717,11 @@ sumsq <- function(y, about = mean(y))
     sum((y - about)^2)
 @
 
-Avec l'évaluation paresseuse, d'une part, le calcul de la moyenne sera
-effectué uniquement lorsque l'argument \code{about} n'est pas spécifié
-dans l'appel de \code{sumsq}, et ce, seulement au moment d'effectuer
-le calcul \code{y - about}. D'autre part, la valeur de \code{y} sera
-connue au moment d'effectuer ce calcul. Joli, non?
+Avec l'évaluation paresseuse, le calcul de la moyenne sera effectué
+uniquement lorsque l'argument \code{about} n'est pas spécifié dans
+l'appel de \code{sumsq}, et ce, seulement au moment d'effectuer le
+calcul \code{y - about}. Le cas échéant, la valeur de \code{y} sera
+alors connue au moment d'effectuer le calcul. Joli, non?
 
 \gotorbox{Étudiez les lignes \reflines{environnement:lazy} du fichier
   de script \code{\scriptfilename}.}

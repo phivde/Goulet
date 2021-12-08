@@ -8,6 +8,9 @@
 
 - Chapitre 4: fonction `is.na` présentée brièvement dans le code
   informatique correspondant à la section 4.1.
+- Chapitre 11: ajout d'une note de bas de page pour préciser que
+  l'opérateur `==` n'est pas valide entre une chaine de caractères et
+  une expression régulière dans awk.
 
 ## Changements
 
@@ -16,6 +19,7 @@
 - Section 10.3: précision que la troisième étape de la procédure de
   création d'une bibliothèque personnelle s'effectue depuis la ligne
   de commande de R.
+- Chapitre 12: quelques améliorations au texte.
 
 
 # 2021.08 (2021-08-19)
