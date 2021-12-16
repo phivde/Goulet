@@ -1596,7 +1596,7 @@ Une fois que l'on a compris son fonctionnement, la fonction
 \icode{ifelse} peut apparaitre comme un outil de choix dans notre
 arsenal de fonctions R, en particulier pour la programmation de
 fonctions mathématiques définies par branches. En réalité, c'est plus
-ou moins le cas car \code{ifelse} est une fonction très lente. Dans la
+ou moins le cas, car \code{ifelse} est une fonction très lente. Dans la
 plupart des cas, il vaut mieux lui préférer des constructions moins
 élégantes, mais bien plus rapides. En particulier, la rubrique d'aide
 de la fonction souligne que la structure \code{if ... else ...} est
