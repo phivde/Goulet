@@ -1028,7 +1028,7 @@ donnait pas aussi accès à des fonctions\footnote{%
   Le nom que nous donnons dorénavant au concept de procédure.} %
 plus élaborées. Or, le langage R compte justement un très grand nombre
 (des milliers!) de fonctions internes. Vous en avez déjà rencontré
-quelques unes dans les exemples, comme \icode{exp} ou \icode{cos}, et
+quelques-unes dans les exemples, comme \icode{exp} ou \icode{cos}, et
 vous en découvrirez de nouvelles à la \autoref{sec:bases:internes}.
 Chose plus importante, R nous permet aussi de définir nos propres
 fonctions. C'est là l'une des techniques d'abstraction les plus
@@ -1596,7 +1596,7 @@ Une fois que l'on a compris son fonctionnement, la fonction
 \icode{ifelse} peut apparaitre comme un outil de choix dans notre
 arsenal de fonctions R, en particulier pour la programmation de
 fonctions mathématiques définies par branches. En réalité, c'est plus
-ou moins le cas car \code{ifelse} est une fonction très lente. Dans la
+ou moins le cas, car \code{ifelse} est une fonction très lente. Dans la
 plupart des cas, il vaut mieux lui préférer des constructions moins
 élégantes, mais bien plus rapides. En particulier, la rubrique d'aide
 de la fonction souligne que la structure \code{if ... else ...} est
