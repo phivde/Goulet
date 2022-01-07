@@ -1,4 +1,4 @@
-%%% Copyright (C) 2021 Vincent Goulet
+%%% Copyright (C) 2022 Vincent Goulet
 %%%
 %%% Ce fichier et tous les fichiers .tex ou .Rnw dont la racine est
 %%% mentionnée dans les commandes \include ci-dessous font partie du
@@ -43,8 +43,8 @@
   %%% =============================
   \title{Programmer avec R}
   \author{Vincent Goulet}
-  \renewcommand{\year}{2021}
-  \renewcommand{\month}{08}
+  \renewcommand{\year}{2022}
+  \renewcommand{\month}{01}
   \newcommand{\reposurl}{https://gitlab.com/vigou3/programmer-avec-r}
 
   %%% ===================
@@ -536,7 +536,7 @@
   %%%  Varia
   %%% =======
 
-  %%% Sous-figures
+  %% Sous-figures
   \newsubfloat{figure}
 
   %% Boites utilisées pour la construction d'images
@@ -552,8 +552,12 @@
   \newsavebox{\ccube}
   \newsavebox{\tableau}
 
-  %%% Style de la bibliographie
+  %% Style de la bibliographie
   \bibliographystyle{francais}
+
+  %% Permettre la coupure des url aux traits d'union
+  %% https://tex.stackexchange.com/a/256190
+  \def\UrlBreaks{\do\/\do-}
 
   %% Compteur bidon pour hyperlien vers des flottants non numérotés
   %% https://stackoverflow.com/q/2745731
