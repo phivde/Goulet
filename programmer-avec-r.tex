@@ -37,6 +37,7 @@
   \usepackage{answers}                 % exercices et solutions
   \usepackage{listings}                % code informatique
   \usepackage{refcount}                % numéros de ligne en surbrillance
+  \usepackage{imakeidx}                % configuration de l'index
 
   %%% =============================
   %%%  Informations de publication
@@ -519,7 +520,6 @@
     \endgroup
   }
   \makeatother
-
   \newcommand{\Indexcode}[2][]{%
     \def\param{#1}%
     \ifx\param\empty
@@ -530,7 +530,26 @@
   }
   \newcommand{\icode}[2][]{\indexcode[#1]{#2}\code{#2}}
   \newcommand{\Icode}[2][]{\Indexcode[#1]{#2}\code{#2}}
-  \makeindex
+
+  %% Configuration des titres des regroupements par lettre et
+  %% inscription dans la tdm du PDF; tiré de memoir. Voir aussi le
+  %% fichier .ist.
+  \makeatletter
+  \newcommand{\doidxbookmark}[1]{{\def\@tempa{Symbols}\def\@tempb{#1}%
+      \centering\bfseries \ifx\@tempa\@tempb %
+      Symboles
+      \phantomsection%
+      \pdfbookmark[1]{Symboles}{symbols-idx}%
+      \else
+      #1%
+      \phantomsection%
+      \pdfbookmark[1]{#1}{#1-idx}%
+      \fi%
+      \nopagebreak\par}}
+  \makeatother
+
+  %% Création de l'index; options de imakeidx
+  \makeindex[intoc,columns=2,options=-s \jobname.ist]
 
   %%% =======
   %%%  Varia

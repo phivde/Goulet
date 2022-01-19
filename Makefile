@@ -77,7 +77,7 @@ OMITAUTHORS := Vincent Goulet|Inconnu|unknown
 
 ## Outils de travail
 SWEAVE := _R_CHECK_LENGTH_1_CONDITION_=false R CMD Sweave --encoding="utf-8"
-TEXI2DVI := LATEX=xelatex TEXINDY=makeindex texi2dvi -b
+TEXI2DVI := LATEX=xelatex texi2dvi -b
 RBATCH := R CMD BATCH --no-timing
 CP := cp -p
 RM := rm -rf
@@ -116,7 +116,8 @@ paquetages.Rout:
 	${RBATCH} $<.tmp $@
 	${RM} $<.tmp
 
-${MASTER}: ${MASTER:.pdf=.tex} ${RNWFILES:.Rnw=.tex} ${TEXFILES} ${SHARE} \
+${MASTER}: ${MASTER:.pdf=.tex} ${MASTER:.pdf=.ist} \
+	   ${RNWFILES:.Rnw=.tex} ${TEXFILES} ${SHARE} \
 	   $(wildcard data/*) $(wildcard images/*)
 	${TEXI2DVI} ${MASTER:.pdf=.tex}
 
