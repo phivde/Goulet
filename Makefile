@@ -143,7 +143,7 @@ Rout: ${SCRIPTS:.R=.Rout}
 contrib: ${COLLABORATEURS}
 
 .PHONY: release
-release: update-copyright zip check-status create-release publish
+release: update-copyright zip check-status create-release create-link publish
 
 .PHONY: update-copyright
 update-copyright: ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES} ${SHARE}
@@ -176,56 +176,79 @@ zip: ${MASTER} ${README} ${NEWS} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS
 
 .PHONY: check-status
 check-status:
-	@echo ----- Checking status of working directory...
-	@if [ "master" != $(shell git branch --list | grep '^*' | cut -d " " -f 2-) ]; then \
-	     echo "not on branch master"; exit 2; fi
-	@if [ -n "$(shell git status --porcelain | grep -v '^??')" ]; then \
-	     echo "uncommitted changes in repository; not creating release"; exit 2; fi
-	@if [ -n "$(shell git log origin/master..HEAD | head -n1)" ]; then \
-	    echo "unpushed commits in repository; pushing to origin"; \
-	     git push; fi
-
-.PHONY: upload
-upload:
-	@echo ----- Uploading archive to GitLab...
-	$(eval upload_url=$(shell curl --form "file=@${ARCHIVE}" \
-	                               --header "PRIVATE-TOKEN: ${OAUTHTOKEN}"	\
-	                               --silent \
-	                               ${APIURL}/uploads \
-	                          | awk -F '"' '{ print $$8 }'))
-	@echo url to file:
-	@echo "${upload_url}"
-	@echo ----- Done uploading files
+	@{ \
+	    printf "%s" "----- Checking status of working directory... "; \
+	    branch=$$(git branch --list | grep ^* | cut -d " " -f 2-); \
+	    if [ "$${branch}" != "master"  ] && [ "$${branch}" != "main" ]; \
+	    then \
+	        printf "\n%s\n" "not on branch master or main"; exit 2; \
+	    fi; \
+	    if [ -n "$$(git status --porcelain | grep -v '^??')" ]; \
+	    then \
+	        printf "\n%s\n" "uncommitted changes in repository; not creating release"; exit 2; \
+	    fi; \
+	    if [ -n "$$(git log origin/master..HEAD | head -n1)" ]; \
+	    then \
+	        printf "\n%s\n" "unpushed commits in repository; pushing to origin"; \
+	        git push; \
+	    else \
+	        printf "%s\n" "ok"; \
+	    fi; \
+	}
 
 .PHONY: create-release
-create-release: upload
-	@echo ----- Creating release on GitLab...
-	if [ -e relnotes.in ]; then ${RM} relnotes.in; fi
-	touch relnotes.in
-	awk 'BEGIN { ORS = " "; print "{\"tag_name\": \"${TAGNAME}\"," } \
-	      /^$$/ { next } \
-	      (state == 0) && /^# / { \
-		state = 1; \
-		out = $$2; \
-	        for(i = 3; i <= NF; i++) { out = out" "$$i }; \
-	        printf "\"name\": \"Édition %s\", \"description\":\"", out; \
-	        next } \
-	      (state == 1) && /^# / { exit } \
-	      state == 1 { printf "%s\\n", $$0 } \
-	      END { print "\",\"assets\": { \"links\": [{ \"name\": \"${ARCHIVE}\", \"url\": \"${REPOSURL}${upload_url}\", \"link_type\": \"package\" }] }}" }' \
-	     ${NEWS} >> relnotes.in
-	curl --request POST \
-	     --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
-	     --output /dev/null --silent \
-	     "${APIURL}/repository/tags?tag_name=${TAGNAME}&ref=master"
-	curl --request POST \
-	     --data @relnotes.in \
-	     --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
-	     --header "Content-Type: application/json" \
-	     --output /dev/null --silent \
-	     ${APIURL}/releases
-	${RM} relnotes.in
-	@echo ----- Done creating the release
+create-release:
+	@{ \
+	    printf "%s" "----- Checking if a release already exists... "; \
+	    http_code=$$(curl -I ${APIURL}/releases/${TAGNAME} 2>/dev/null \
+	                     | head -n1 | cut -d " " -f2) ; \
+	    if [ "$${http_code}" = "200" ]; \
+	    then \
+	        printf "%s\n" "yes"; \
+	        printf "%s\n" "using the existing release"; \
+	    else \
+	        printf "%s\n" "no"; \
+	        printf "%s" "Creating release on GitLab... "; \
+	        name=$$(awk '/^# / { sub(/# +/, "", $$0); print $$0; exit }' ${NEWS}); \
+	        desc=$$(awk ' \
+	                      /^$$/ { next } \
+	                      (state == 0) && /^# / { state = 1; next } \
+	                      (state == 1) && /^# / { exit } \
+	                      (state == 1) { print } \
+	                    ' ${NEWS}); \
+	        curl --request POST \
+	             --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+	             --output /dev/null --silent \
+	             "${APIURL}/repository/tags?tag_name=${TAGNAME}&ref=master" && \
+	        curl --request POST \
+	             --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+	             --data tag_name="${TAGNAME}" \
+	             --data name="$${name}" \
+	             --data description="$${desc}" \
+	             --output /dev/null --silent \
+	             ${APIURL}/releases; \
+	        printf "%s\n" "done"; \
+	    fi; \
+	}
+
+.PHONY: create-link
+create-link: create-release
+	@{ \
+	    printf "%s" "----- Adding asset to the release... "; \
+	    url=$$(curl --form "file=@${ARCHIVE}" \
+	                --header "PRIVATE-TOKEN: ${OAUTHTOKEN}"	\
+	                --silent \
+	           ${APIURL}/uploads \
+	           | awk -F '"' '{ print $$8 }'); \
+	    curl --request POST \
+	         --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+	         --data name="${PACKAGE}.$*" \
+	         --data url="${REPOSURL}$${url}" \
+	         --data link_type="package" \
+	         --output /dev/null --silent \
+	         ${APIURL}/releases/${TAGNAME}/assets/links; \
+	    printf "%s\n" "done"; \
+	}
 
 .PHONY: publish
 publish:
