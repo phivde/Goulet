@@ -242,7 +242,7 @@ create-link: create-release
 	           | awk -F '"' '{ print $$8 }'); \
 	    curl --request POST \
 	         --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
-	         --data name="${PACKAGE}.$*" \
+	         --data name="${ARCHIVE}" \
 	         --data url="${REPOSURL}$${url}" \
 	         --data link_type="package" \
 	         --output /dev/null --silent \
