@@ -1197,6 +1197,16 @@ raisons mentionnées à la \autoref{sec:bases:commandes:affectation}, la
 fonction ne retournerait alors aucun résultat \emph{visible}
 susceptible d'être affiché à l'écran.
 
+Lorsque le résultat de l'évaluation d'une fonction n'est pas affecté à
+une variable, R affiche par défaut le résultat à l'écran.
+
+\warningbox{N'utilisez \emph{jamais} la fonction \icode{print} à
+  l'intérieur d'une fonction pour afficher ses résultats à l'écran.
+  Cette fonction sert principalement pour le débogage
+  (\autoref{sec:debogage:syntaxe}) ou pour des méthodes spécialisées
+  d'affichage des résultats --- un sujet qui n'est pas abordé dans le
+  présent ouvrage.}
+
 Les fonctions suivantes permettent de retourner un résultat, un
 avertissement ou un message d'erreur avant même la fin d'une fonction.
 Vous les utiliserez à peu près exclusivement à l'intérieur
@@ -1345,6 +1355,14 @@ c(seq, rep)                # vecteur de fonctions!
 ## Voici un exemple trivial.
 square <- function(x) x * x
 square(10)
+
+## Suite à l'appel de fonction ci-dessus, R a automatiquement
+## affiché le résultat à l'écran, et ce, parce que le résultat
+## n'est pas affecté à une variable. L'expression suivante
+## effectue le même calcul, mais en affectant le résultat dans
+## un objet. Comme à l'habitude, aucun résultat ne s'affiche
+## alors à l'écran.
+y <- square(10)
 
 ## Supposons que l'on veut écrire une fonction pour calculer
 ##
