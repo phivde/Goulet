@@ -9,8 +9,12 @@
 - Section 4.4: ajout, à la section 4.4.3, d'une précision sur le fait
   que R affiche par défaut le résultat d'une fonction à l'écran s'il
   n'est pas affecté à une variable, ainsi que d'un avertissement de ne
-  pas utiliser `print` à l'intérieur d'une fonction. Le code
-  informatique de la section gagne une illustration de cette idée.
+  pas utiliser `print` à l'intérieur d'une fonction. Les exemples
+  informatiques de la section gagnent une illustration de cette idée.
+- Section 4.7: l'avertissement à la fin de la section 4.7.2 a été
+  amélioré pour faire aussi mention de la fonction `seq_along`. Les
+  exemples informatiques de la section ont aussi été améliorés en
+  conséquence.
 - Index: regroupement des termes par leur première lettres. Les
   regroupements sont affichés dans la table des matières virtuelle du
   fichier PDF.

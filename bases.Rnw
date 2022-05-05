@@ -1980,14 +1980,13 @@ rep_len(1:3, 10)
 @
 \end{ttscript}
 
-\cautionbox{La fonction \icode{seq\char 95\relax len} est plus
-  robuste que \icode{seq} ou que l'opérateur «\code{:}» pour la
-  programmation. L'expression \code{seq\_len(\meta{n})} génère une
-  suite de longueur \meta{n}. C'est généralement équivalent à
-  \code{seq(\meta{n})} ou \code{1:\meta{n}}, sauf lorsque \meta{n}
-  vaut $0$. En effet, \code{seq\_len(0)} génère un vecteur de
-  longueur nulle, alors que le résultat de \code{seq(0)} et de
-  \code{1:0} est malencontreusement le vecteur \code{c(1, 0)}.}
+\cautionbox{Les fonctions \icode{seq\char 95\relax len} et
+  \icode{seq\char 95\relax along} sont plus robustes que \icode{seq}
+  ou que l'opérateur «\code{:}» pour la programmation. Lorsque leur
+  argument est, dans l'ordre, $0$ et un vecteur de longueur nulle, les
+  fonctions retournent un vecteur de longueur nulle. En revanche, le
+  résultat de \code{seq(0)} ou de \code{1:0} est le vecteur \code{c(1,
+    0)}.}
 
 \subsection{Extraction du début et de la fin d'un objet}
 \label{sec:bases:internes:head}
@@ -2260,15 +2259,20 @@ seq(1, length.out = 10)    # idem robuste
 seq_len(10)                # équivalent et plus rapide
 seq(0)                     # pas ce que l'on penserait!
 seq(1, length.out = 0)     # plus prudent
-seq_len(0)                 # plus simple
+seq_len(0)                 # plus simple, plus robuste
 
 ## La fonction 'seq_along' génère une suite de la longueur du
 ## vecteur en argument à partir de 1. C'est une version
 ## simplifiée et plus rapide de 'seq(..., along = x)' et de
-## 'seq_len(length(x))'.
+## 'seq_len(length(x))'. De plus, elle est plus robuste que
+## 'seq' lorsque la longueur du vecteur est 0.
 seq(1, along = x)            # suite de la longueur de x
 seq_len(length(x))           # idem, mais deux fonctions
 seq_along(x)                 # plus rapide, plus simple
+y <- numeric(0)              # vecteur de longueur nulle
+seq(length(y))               # pas ce qui souhaité!
+1:length(y)                  # ça non plus!
+seq_along(y)                 # plus simple, plus robuste
 
 ## La fonction 'rep' permet de répéter des vecteurs de
 ## plusieurs manières différentes.
