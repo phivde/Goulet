@@ -1194,7 +1194,7 @@ bucketsort <- function(x, max, nbuckets)
   première colonne du fichier et les temps, dans la seconde. Les
   données sont reproduites au \autoref{tab:tri:100metres}.
 
-  La commande \icode{scan} utilisée avec l'argument \code{what =
+  La fonction \icode{scan} utilisée avec l'argument \code{what =
     list("", 1)} permet d'importer ces données dans R. Le résultat
   sera une liste de deux éléments: un vecteur de chaines de caractères
   contenant les dates des records; un vecteur numérique contenant

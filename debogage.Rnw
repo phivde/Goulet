@@ -259,12 +259,12 @@ incrémentés trop tôt ou trop tard dans la boucle?
 
 Il est temps de regarder une première technique de débogage, de loin
 la plus simple. Lorsqu'une fonction ne retourne pas le résultat
-attendu, placez des commandes \icode{print} à des endroits
-stratégiques dans la fonction de façon à pouvoir suivre les valeurs
-prises par les différents objets. Dans notre exemple, nous aimerions
-suivre les valeurs du vecteur \code{x}, du compteur \code{i} et de
-l'objet \code{y}. Pour ce faire, nous remplaçons les lignes 20 à 25 de
-la \autoref{fig:debogage:rgamma} par l'extrait de code
+attendu, placez des commandes utilisant la fonction \icode{print} à
+des endroits stratégiques dans la fonction de façon à pouvoir suivre
+les valeurs prises par les différents objets. Dans notre exemple, nous
+aimerions suivre les valeurs du vecteur \code{x}, du compteur \code{i}
+et de l'objet \code{y}. Pour ce faire, nous remplaçons les lignes 20 à
+25 de la \autoref{fig:debogage:rgamma} par l'extrait de code
 ci-dessous\footnote{%
   Le code modifié est fourni en exemple dans la
   \autoref{sec:debogage:exemples}.}, %
