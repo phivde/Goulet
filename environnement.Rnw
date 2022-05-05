@@ -57,7 +57,12 @@ x
 Examinons maintenant cet autre exemple quelque peu artificiel, mais
 néanmoins instructif, tiré de \citet{Ihaka:R:1996}. Une fonction
 \code{f} calcule le carré d'un nombre, puis affiche le résultat à
-l'écran par le biais d'une autre fonction \code{g}.
+l'écran\footnote{%
+  Oui, je vous ai dit à la \autoref{sec:bases:fonctions:resultats} de
+  ne \emph{jamais} utiliser \icode{print} ainsi. Permettons aux
+  créateurs de R cette entorse à la règle en les soupçonnant de savoir
+  ce qu'ils font.} %
+par le biais d'une autre fonction \code{g}.
 <<echo=TRUE>>=
 f <- function(x)
 {
