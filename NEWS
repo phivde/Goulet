@@ -23,7 +23,12 @@
   regroupements sont affichés dans la table des matières virtuelle du
   fichier PDF.
 
+## Changements
 
+- Section 6.1: un paragraphe a été révisé pour préciser d'utiliser des
+  noms de variables qui expliquent le rôle des nombres magiques, pas
+  leur valeur numérique (parce que j'ai vu des choses comme `UN <- 1`,
+  `DEUX <- 2` dans des travaux).
 
 # 2022.01 (2022-01-07)
 

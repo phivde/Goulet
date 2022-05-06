@@ -191,11 +191,12 @@ cost <- 4.79 + 3 * floor(x/900)
   une panacée: elle pourrait ne plus être à jour ou se trouver loin de
   l'endroit où les constantes apparaissent dans le code.
 
-  Pour clarifier la \index{semantique@sémantique}sémantique des
-  nombres magiques et pour éviter du même coup les périls de la
-  répétition, affectez les constantes à des variables --- portant des
-  noms significatifs! --- puis utilisez ces variables dans les
-  opérations arithmétiques. Par convention, vous devriez écrire les
+  Afin de déjouer à la fois les périls des nombres magiques et de la
+  répétition, affectez les constantes à des variables, puis employez
+  ces variables dans les opérations arithmétiques. Utilisez des noms
+  qui expliquent le rôle --- ou la
+  \index{semantique@sémantique}sémantique --- des nombres magiques,
+  pas leur valeur numérique. Par convention, vous devriez écrire les
   noms des variables contenant des nombres magiques en majuscules.
 
   Le code ci-dessous est fonctionnellement équivalent à l'expression
