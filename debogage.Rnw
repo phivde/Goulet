@@ -28,8 +28,6 @@ source("Stangle.R")        # lancement de Stangle
 \item Repérer et corriger des erreurs de programmation, syntaxiques et
   logiques.
 \item Utiliser les outils de débogage de R.
-\item Valider des résultats calculés avec ceux de l'expérimentation et
-  analyser des résultats obtenus.
 \end{objectifs}
 
 Il est assez rare d'arriver à écrire un bout de code sans bogue du

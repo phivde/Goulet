@@ -29,6 +29,7 @@ source("Stangle.R")        # lancement de Stangle
   travail collaboratif.
 \item Respecter les normes de programmation reconnues en matière de
   style, de présentation du code et de documentation.
+\item Interpréter les résultats de tests unitaires.
 \end{objectifs}
 
 De manière générale, le développement et la maintenance de code

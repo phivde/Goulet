@@ -25,7 +25,7 @@ source("Stangle.R")        # lancement de Stangle
 @
 
 \begin{objectifs}
-\item Distinguer les concepts de bibliothèque et de paquetage dans R.
+\item Expliquer les concepts de bibliothèque et de paquetage dans R.
 \item Utiliser les fonctionnalités d'un paquetage dans une session de
   travail R.
 \item Installer de nouveaux paquetages R depuis le site
