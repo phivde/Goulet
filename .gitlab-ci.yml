@@ -3,7 +3,7 @@ image: registry.gitlab.com/pages/hugo/hugo_extended:latest
 default:
   before_script:
     - apk add --update --no-cache git go
-    - hugo mod init gitlab.com/vigou3/atelier-science-donnees
+    - hugo mod init gitlab.com/vigou3/programmer-avec-r
     - hugo mod get -u github.com/theNewDynamic/gohugo-theme-ananke
 
 pages:
