@@ -9,7 +9,7 @@ enableRobotsTXT = true
 
 [params]
   ## Links
-  pages_home = "https://vigou3.gitlab.io/"
+  pages_home = "https://vigou3.gitlab.io/fr"
   gitlab = "https://gitlab.com/vigou3"
   repos = "programmer-avec-r"
   version = "2022.01"
