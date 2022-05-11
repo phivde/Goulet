@@ -1,7 +1,7 @@
 title = "Vincent Goulet"
 baseURL = "https://vigou3.gitlab.io/programmer-avec-r"
 languageCode = "fr-ca"
-theme = "ananke"
+theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
 
 MetaDataFormat = "yaml"
 DefaultContentLanguage = "fr"
