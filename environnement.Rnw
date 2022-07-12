@@ -809,7 +809,7 @@ Fn(0:3)
 @
   Expliquer pourquoi il n'est pas nécessaire de fournir les valeurs du
   vecteur \code{x} à \code{Fn} lorsque l'on veut calculer $F_n(x)$.
-  \emph{Astuce}: fouiller dans l'environnement de la fonction
+  \emph{Indice}: fouiller dans l'environnement de la fonction
   \code{Fn}.
   \begin{sol}
     La réponse au mystère se cache dans l'environnement de la
@@ -906,7 +906,7 @@ f()
 \begin{exercice}
   Écrire une fonction R qui calcule le produit de deux nombres passés
   en arguments. Si un seul nombre est donné en argument, la fonction
-  calcule le produit de ce nombre avec son logarithme. \emph{Astuce}:
+  calcule le produit de ce nombre avec son logarithme. \emph{Indice}:
   tirer profit de l'évaluation paresseuse.
   \begin{sol}
     Grâce à l'évaluation paresseuse, il suffit de spécifier comme
