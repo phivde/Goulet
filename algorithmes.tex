@@ -1319,12 +1319,12 @@ Fin Fib
   \citet{Sussman:scheme:1996}.
 
   \begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
+\begin{Verbatim}
 A(entier x, entier y)
   Si (y = 0)
     Retourner 0
   Sinon Si (x = 0)
-    Retourner 2 \times y
+    Retourner 2 * y
   Sinon Si (y = 1)
     Retourner 2
   Sinon
@@ -1362,41 +1362,53 @@ Fin A
 \end{exercice}
 
 \begin{exercice}
-  Soit un algorithme avec $n$ entrées qui génère des valeurs pour
-  chacun des carrés unitaires à la surface d'un cube
-  $n \times n \times n$. Calculer la performance de l'algorithme. %
+  Calculer la performance des algorithmes ci-dessous.
+  \begin{enumerate}
+  \item Un algorithme avec $n$ entrées qui génère des valeurs pour
+    chacun des carrés unitaires à la surface d'un cube
+    $n \times n \times n$, tel qu'illustré à la gauche de la
+    \autoref{fig:algorithmes:cubes}.
+  \item Un algorithme avec $n$ entrées qui génère des valeurs
+    pour chacun des cubes unitaires sur le pourtour d'un cube
+    $n \times n \times n$, tel qu'illustré à la droite de la
+    \autoref{fig:algorithmes:cubes}.
+  \end{enumerate}
   \citep[Tiré de][]{Stephens:algorithms:2013}
   \begin{sol}
-    Si le cube a $n$ unités de côté, sa surface est $6 n^2$. La
-    performance de l'algorithme est donc $O(n^2)$. Nous pouvons
-    obtenir cette réponse simplement en remarquant que l'algorithme
-    doit calculer une aire.
+    \begin{enumerate}
+    \item Si le cube a $n$ unités de côté, sa surface est $6 n^2$. La
+      performance de l'algorithme est donc $O(n^2)$. Nous pouvons
+      obtenir cette réponse simplement en remarquant que l'algorithme
+      doit calculer une aire.
+    \item Le cube $n \times n \times n$ compte $8$ coins et $12$
+      côtés. La longueur de chaque côté en excluant les extrémités est
+      $n - 2$. Le nombre total de cubes sur le pourtour est donc
+      $12(n - 2) + 8 = 12n - 16$. La performance de l'algorithme est
+      donc $O(n)$. Nous pouvons aussi obtenir cette réponse en
+      remarquant que l'algorithme doit en définitive calculer une
+      longueur.
   \end{sol}
-\end{exercice}
-
-\begin{exercice}
-  Soit un algorithme avec $n$ entrées qui génère des valeurs pour
-  chacun des cubes unitaires sur le pourtour d'un cube
-  $n \times n \times n$, tel qu'illustré à la
-  \autoref{fig:algorithmes:cubes-pourtour}. Calculer la performance de
-  l'algorithme. %
-  \citep[Tiré de][]{Stephens:algorithms:2013}
-  \begin{sol}
-    Le cube $n \times n \times n$ compte $8$ coins et $12$ côtés. La
-    longueur de chaque côté en excluant les extrémités est $n - 2$. Le
-    nombre total de cubes sur le pourtour est donc
-    $12(n - 2) + 8 = 12n - 16$. La performance de l'algorithme est
-    donc $O(n)$. Nous pouvons aussi obtenir cette réponse en
-    remarquant que l'algorithme doit en définitive calculer une
-    longueur.
-  \end{sol}
-
   \begin{figure}
     \centering
     \setlength{\unitlength}{5mm}
     \thicklines
     \input{include/cube}
-    \begin{picture}(11,3.9)(-4.5,0)
+    \begin{picture}(16,3.9)(-6.5,0)
+      \multiput(1.0,0.6)(1,0){3}{\usebox{\cube}}
+      \multiput(0.5,0.3)(1,0){3}{\usebox{\cube}}
+      \multiput(0.0,0.0)(1,0){3}{\usebox{\cube}}
+
+      \multiput(1.0,1.6)(1,0){3}{\usebox{\cube}}
+      \multiput(0.5,1.3)(1,0){3}{\usebox{\cube}}
+      \multiput(0.0,1.0)(1,0){3}{\usebox{\cube}}
+
+      \multiput(1.0,2.6)(1,0){3}{\usebox{\cube}}
+      \multiput(0.5,2.3)(1,0){3}{\usebox{\cube}}
+      \multiput(0.0,2.0)(1,0){3}{\usebox{\cube}}
+
+      \put(-4.5,1.5){\makebox(0,0)[l]{$n = 3$}}
+    \end{picture}
+    \begin{picture}(9,3.9)(-1.0,0)
       \multiput(1.0,0.6)(1,0){3}{\usebox{\cube}}
       \multiput(0.5,0.3)(2,0){2}{\usebox{\cube}}
       \multiput(0.0,0.0)(1,0){3}{\usebox{\cube}}
@@ -1407,11 +1419,32 @@ Fin A
       \multiput(1.0,2.6)(1,0){3}{\usebox{\cube}}
       \multiput(0.5,2.3)(2,0){2}{\usebox{\cube}}
       \multiput(0.0,2.0)(1,0){3}{\usebox{\cube}}
-
-      \put(-4.5,1.5){\makebox(0,0)[l]{$n = 3$}}
     \end{picture} \\
     \bigskip
-    \begin{picture}(11,5.2)(-4,0)
+    \begin{picture}(16,5.2)(-6,0)
+      \multiput(1.5,0.9)(1,0){4}{\usebox{\cube}}
+      \multiput(1.0,0.6)(1,0){4}{\usebox{\cube}}
+      \multiput(0.5,0.3)(1,0){4}{\usebox{\cube}}
+      \multiput(0.0,0.0)(1,0){4}{\usebox{\cube}}
+
+      \multiput(1.5,1.9)(1,0){4}{\usebox{\cube}}
+      \multiput(1.0,1.6)(1,0){4}{\usebox{\cube}}
+      \multiput(0.5,1.3)(1,0){4}{\usebox{\cube}}
+      \multiput(0.0,1.0)(1,0){4}{\usebox{\cube}}
+
+      \multiput(1.5,2.9)(1,0){4}{\usebox{\cube}}
+      \multiput(1.0,2.6)(1,0){4}{\usebox{\cube}}
+      \multiput(0.5,2.3)(1,0){4}{\usebox{\cube}}
+      \multiput(0.0,2.0)(1,0){4}{\usebox{\cube}}
+
+      \multiput(1.5,3.9)(1,0){4}{\usebox{\cube}}
+      \multiput(1.0,3.6)(1,0){4}{\usebox{\cube}}
+      \multiput(0.5,3.3)(1,0){4}{\usebox{\cube}}
+      \multiput(0.0,3.0)(1,0){4}{\usebox{\cube}}
+
+      \put(-4,2){\makebox(0,0)[l]{$n = 4$}}
+    \end{picture}
+    \begin{picture}(9,5.2)(-0.5,0)
       \multiput(1.5,0.9)(1,0){4}{\usebox{\cube}}
       \multiput(1.0,0.6)(3,0){2}{\usebox{\cube}}
       \multiput(0.5,0.3)(3,0){2}{\usebox{\cube}}
@@ -1427,11 +1460,42 @@ Fin A
       \multiput(1.0,3.6)(3,0){2}{\usebox{\cube}}
       \multiput(0.5,3.3)(3,0){2}{\usebox{\cube}}
       \multiput(0.0,3.0)(1,0){4}{\usebox{\cube}}
-
-      \put(-4,2){\makebox(0,0)[l]{$n = 4$}}
     \end{picture} \\
     \bigskip
-    \begin{picture}(11,6.5)(-3.5,0)
+    \begin{picture}(16,6.5)(-5.5,0)
+      \multiput(2.0,1.2)(1,0){5}{\usebox{\cube}}
+      \multiput(1.5,0.9)(1,0){5}{\usebox{\cube}}
+      \multiput(1.0,0.6)(1,0){5}{\usebox{\cube}}
+      \multiput(0.5,0.3)(1,0){5}{\usebox{\cube}}
+      \multiput(0.0,0.0)(1,0){5}{\usebox{\cube}}
+
+      \multiput(2.0,2.2)(1,0){5}{\usebox{\cube}}
+      \multiput(1.5,1.9)(1,0){5}{\usebox{\cube}}
+      \multiput(1.0,1.6)(1,0){5}{\usebox{\cube}}
+      \multiput(0.5,1.3)(1,0){5}{\usebox{\cube}}
+      \multiput(0.0,1.0)(1,0){5}{\usebox{\cube}}
+
+      \multiput(2.0,3.2)(1,0){5}{\usebox{\cube}}
+      \multiput(1.5,2.9)(1,0){5}{\usebox{\cube}}
+      \multiput(1.0,2.6)(1,0){5}{\usebox{\cube}}
+      \multiput(0.5,2.3)(1,0){5}{\usebox{\cube}}
+      \multiput(0.0,2.0)(1,0){5}{\usebox{\cube}}
+
+      \multiput(2.0,4.2)(1,0){5}{\usebox{\cube}}
+      \multiput(1.5,3.9)(1,0){5}{\usebox{\cube}}
+      \multiput(1.0,3.6)(1,0){5}{\usebox{\cube}}
+      \multiput(0.5,3.3)(1,0){5}{\usebox{\cube}}
+      \multiput(0.0,3.0)(1,0){5}{\usebox{\cube}}
+
+      \multiput(2.0,5.2)(1,0){5}{\usebox{\cube}}
+      \multiput(1.5,4.9)(1,0){5}{\usebox{\cube}}
+      \multiput(1.0,4.6)(1,0){5}{\usebox{\cube}}
+      \multiput(0.5,4.3)(1,0){5}{\usebox{\cube}}
+      \multiput(0.0,4.0)(1,0){5}{\usebox{\cube}}
+
+      \put(-3.5,2.5){\makebox(0,0)[l]{$n = 5$}}
+    \end{picture}
+    \begin{picture}(9,6.5)
       \multiput(2.0,1.2)(1,0){5}{\usebox{\cube}}
       \multiput(1.5,0.9)(4,0){2}{\usebox{\cube}}
       \multiput(1.0,0.6)(4,0){2}{\usebox{\cube}}
@@ -1452,12 +1516,11 @@ Fin A
       \multiput(1.0,4.6)(4,0){2}{\usebox{\cube}}
       \multiput(0.5,4.3)(4,0){2}{\usebox{\cube}}
       \multiput(0.0,4.0)(1,0){5}{\usebox{\cube}}
-
-      \put(-3.5,2.5){\makebox(0,0)[l]{$n = 5$}}
     \end{picture}
-    \caption{Illustrations pour un algorithme qui génère des valeurs
-      sur le pourtour d'un cube}
-    \label{fig:algorithmes:cubes-pourtour}
+    \caption{Illustrations pour des algorithmes qui génèrent des
+      valeurs sur la surface d'une cube (gauche) et sur le pourtour
+      d'un cube (droite)}
+    \label{fig:algorithmes:cubes}
   \end{figure}
 \end{exercice}
 
@@ -1485,7 +1548,7 @@ Fin A
       \sum_{k = 1}^n \frac{k (k + 1)}{2} = \frac{n^3 + 3 n^2 + 2n}{6}.
     \end{equation*}
     La performance de l'algorithme est donc $O(n^3)$, une réponse
-    intuitivement claire dans la mesure où l'algorithme calcule un
+    intuitivement évidente dans la mesure où l'algorithme calcule un
     volume.
   \end{sol}
 

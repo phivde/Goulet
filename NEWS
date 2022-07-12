@@ -8,7 +8,7 @@
 
 - Section 4.4: ajout, à la section 4.4.3, d'une précision sur le fait
   que R affiche par défaut le résultat d'une fonction à l'écran s'il
-  n'est pas affecté à une variable, ainsi que d'un avertissement de ne
+  n'est pas affecté à une variable, ainsi qu'un avertissement de ne
   pas utiliser `print` à l'intérieur d'une fonction. Les exemples
   informatiques de la section gagnent une illustration de cette idée.
 - Section 4.7: l'avertissement à la fin de la section 4.7.2 a été
@@ -27,6 +27,11 @@
 
 - Chapitre 2: diminution du niveau de complexité d'un objectif du
   chapitre de «évaluer» à «établir».
+
+- Chapitre 2: fusion des exercices 2.9 et 2.10 et ajout
+  d'illustrations pour le cas du calcul de la surface d'un cube à la
+  figure 2.5.
+
 - Chapitre 6: ajout d'un objectif de chapitre sur les tests unitaires.
 - Section 6.1: un paragraphe a été révisé pour préciser d'utiliser des
   noms de variables qui expliquent le rôle des nombres magiques, pas
