@@ -1335,7 +1335,10 @@ Fin A
 
   Calculer la valeur de $A(1, 10)$.
   \begin{sol}
-    On a
+    La fonction de Ackermann est récursive. Pour la calculer, il faut
+    arriver à un point où la valeur de la fonction est définie
+    directement, soit l'un ou l'autre des cas $y = 0$, $x = 0$ ou
+    $y = 1$. On obtient:
     \begin{align*}
       A(1, 10)
       &= A(0, A(1, 9)) \\
