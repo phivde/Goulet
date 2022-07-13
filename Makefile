@@ -77,7 +77,7 @@ OMITAUTHORS := Vincent Goulet|Inconnu|unknown
 
 ## Outils de travail
 SWEAVE := R CMD Sweave --encoding="utf-8"
-TEXI2DVI := LATEX=xelatex texi2dvi -b
+TEXI2DVI := LATEX=xelatex TEXINDY=makeindex texi2dvi -b
 RBATCH := R CMD BATCH --no-timing
 CP := cp -p
 RM := rm -rf
