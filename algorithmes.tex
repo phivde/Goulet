@@ -106,7 +106,7 @@ le PGCD de $n$ et du reste de la division de $m$ par $n$.
     (Nous avons alors $0 \leq r < n$.)
   \item Si $r = 0$, retourner la valeur $n$.
   \item Poser $m \leftarrow n$, $n \leftarrow r$, puis retourner à
-    l'étape 1.
+    l'étape 1. \qed
   \end{enumerate}
 \end{algorithme}
 
@@ -188,7 +188,7 @@ la sortie, le plat préparé.
 
 Comme un algorithme, une recette repose sur un certain nombre
 d'instructions élémentaires qui se passent d'explication, comme
-saisir, mijoter, mélanger, etc. La recette est aussi indépendante des
+saisir, mijoter, mélanger, etc. La recette est indépendante des
 ustensiles utilisés comme l'algorithme l'est du langage de
 programmation.
 
@@ -208,10 +208,8 @@ En revanche, on s'attend généralement d'un algorithme, qui est destiné
 ordinateur éprouverait beaucoup de difficulté avec une instruction
 comme «saler et poivrer au gout»!
 
-\tipbox{C'est une erreur commune dans la rédaction d'un algorithme de
-  fournir des détails de mise en œuvre superflus, de surcroit dans un
-  langage de programmation bien précis. Lorsque vous écrirez un
-  algorithme, demandez-vous si vous êtes en train d'expliquer comment
+\tipbox{C'est une erreur commune de fournir des détails de mise en
+  œuvre superflus dans un algorithme. Évitez d'expliquer comment
   mesurer une quantité de lait avec une tasse à mesurer de marque
   ACME.}
 
@@ -240,7 +238,7 @@ versions de l'algorithme retournent bien le même résultat.
   \label{algo:algorithmes:euclide:pseudo}
   Calculer le plus grand commun diviseur de deux entiers positifs $m$
   et $n$ avec, sans perte de généralité, $n < m$.
-\begin{Schunk}
+  \begin{Schunk}
 \begin{Verbatim}[commandchars=\\\{\}]
 PGCD(entier m, entier n)
   Tant que (n \neq 0)
@@ -249,9 +247,9 @@ PGCD(entier m, entier n)
     n \leftarrow r
   Fin Tant que
   Retourner m
-Fin PGCD
+Fin PGCD  \qed
 \end{Verbatim}
-\end{Schunk}
+  \end{Schunk}
 \end{algorithme}
 
 \tipbox{L'opération \index{modulo}modulo, notée en mathématiques
@@ -375,7 +373,7 @@ langage naturel et en pseudocode.
     Calculer la valeur absolue d'un nombre réel $x$.
     \begin{enumerate}
     \item Si $x > 0$, retourner $x$; sinon si $x = 0$, retourner $0$;
-      sinon retourner $-x$.
+      sinon retourner $-x$. \qed
     \end{enumerate}
   \end{algorithme}
   \columnbreak
@@ -383,7 +381,7 @@ langage naturel et en pseudocode.
   \begin{algorithme}[Pseudocode]
     Calculer la valeur absolue d'un nombre réel $x$.
     \begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
 abs(réel x)
   Si (x > 0)
     Retourner x
@@ -391,7 +389,7 @@ abs(réel x)
     Retourner 0
   Sinon
     Retourner -x
-Fin abs
+Fin abs  \qed
 \end{Verbatim}
     \end{Schunk}
   \end{algorithme}
@@ -416,7 +414,7 @@ effectué que pour les nombres négatifs.
     \label{algo:algorithmes:abs:simplifie}
     Calculer la valeur absolue d'un nombre réel $x$.
     \begin{enumerate}
-    \item Si $x < 0$, retourner $-x$; sinon retourner $x$.
+    \item Si $x < 0$, retourner $-x$; sinon retourner $x$. \qed
     \end{enumerate}
   \end{algorithmebis}
   \columnbreak
@@ -424,13 +422,13 @@ effectué que pour les nombres négatifs.
   \begin{algorithmebis}[Pseudocode]
     Calculer la valeur absolue d'un nombre réel $x$.
     \begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
 abs(réel x)
   Si (x < 0)
     Retourner -x
   Sinon
     Retourner x
-Fin abs
+Fin abs  \qed
 \end{Verbatim}
     \end{Schunk}
   \end{algorithmebis}
@@ -451,7 +449,7 @@ passe d'une clause «sinon».\footnote{%
     Calculer la valeur absolue d'un nombre réel $x$.
     \begin{enumerate}
     \item Si $x < 0$, retourner $-x$.
-    \item Retourner $x$.
+    \item Retourner $x$. \qed
     \end{enumerate}
   \end{algorithmebis}
   \columnbreak
@@ -459,12 +457,12 @@ passe d'une clause «sinon».\footnote{%
   \begin{algorithmebis}[Pseudocode]
     Calculer la valeur absolue d'un nombre réel $x$.
     \begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
 abs(réel x)
   Si (x < 0)
     Retourner -x
   Retourner x
-Fin abs
+Fin abs  \qed
 \end{Verbatim}
     \end{Schunk}
   \end{algorithmebis}
@@ -654,7 +652,7 @@ factorial(entier n)
   Si (n = 1)
     Retourner 1
   Retourner n \times factorial(n - 1)
-Fin factorial
+Fin factorial  \qed
 \end{Verbatim}
   \end{Schunk}
 \end{algorithme}
@@ -704,6 +702,7 @@ Exprimons cette fois l'algorithme en langage naturel.
   \item Si $i = n$, retourner la valeur $p$.
   \item Incrémenter le compteur $i$: $i \leftarrow i + 1$.
   \item Poser $p \leftarrow p \times i$, puis retourner à l'étape 2.
+    \qed
   \end{enumerate}
 \end{algorithme}
 
@@ -749,6 +748,7 @@ d'effectuer ce calcul.
   \item Sélectionner les données supérieures à $d$.
   \item Soustraire $d$ de chaque valeur retenue à l'étape 1.
   \item Retourner la moyenne des valeurs obtenues à l'étape 2.
+    \qed
   \end{enumerate}
 \end{algorithme}
 
@@ -764,6 +764,7 @@ y apportant une toute petite modification.
   \item Effectuer la moyenne des valeurs obtenues à l'étape 1.
   \item Retourner la différence entre la moyenne obtenue à l'étape 2
     et $d$.
+    \qed
   \end{enumerate}
 \end{algorithmebis}
 
@@ -804,7 +805,7 @@ Puissance(nombre réel b, entier positif n)
   Si (n = 0)
     Retourner 1
   Retourner b \times Puissance(b, n - 1)
-Fin Puissance
+Fin Puissance \qed
 \end{Verbatim}
   \end{Schunk}
 \end{algorithme}
@@ -823,11 +824,11 @@ opérations arithmétiques de base et du carré, et que vous devez élever
 un nombre à la puissance, disons, $21$. Comment feriez-vous pour
 réduire le nombre d'opérations à entrer au clavier?
 
-\notebox{Cet exemple est moins fantaisiste qu'il n'y parait! Jusqu'au
-  milieu des années 1990, les étudiants en actuariat ne disposaient
-  que de ce type de calculatrice pour les examens professionnels. Il
-  s'agissait d'un modèle de Texas Instruments affectueusement surnommé
-  «TI-zéro».}
+\notebox{Cet exemple est beaucoup moins fantaisiste qu'il n'y parait!
+  Jusqu'au milieu des années 1990, les étudiants en actuariat ne
+  disposaient que de ce type de calculatrice pour les examens
+  professionnels. Il s'agissait d'un modèle de Texas Instruments
+  affectueusement surnommé «TI-zéro».}
 
 Vous avez pensé à un algorithme? Votre idée consiste fort probablement
 à diviser la puissance par deux autant de fois que possible et à
@@ -840,7 +841,7 @@ Vous avez pensé à un algorithme? Votre idée consiste fort probablement
   & = b ((b (b^4))^2)^2 \\
   &= b ((b (b^2)^2)^2)^2.
 \end{align*}
-Ce calcul se traduit en un nouvel algorithme récursif comme suit.
+Ce calcul se traduit en un nouvel algorithme récursif.
 
 \begin{algorithmebis}
   \label{algo:algorithmes:puissance:bis}
@@ -854,7 +855,7 @@ Puissance(nombre réel b, entier positif n)
     Retourner (Puissance(b, n/2))^2
   Si (n est impair)
    Retourner b \times Puissance(b, n - 1)
-Fin Puissance
+Fin Puissance  \qed
 \end{Verbatim}
   \end{Schunk}
 \end{algorithmebis}
@@ -951,7 +952,7 @@ opérations d'un algorithme, consultez
   \begin{sol}
     Voici des versions en langage naturel et en pseudocode.
 
-    \begin{algorithme}
+    \begin{algorithme*}
       Calculer les racines du polynôme $a x^2 + b x + c$ à partir des
       coefficients réels $a$, $b$ et $c$.
       \begin{enumerate}[1.]
@@ -960,10 +961,11 @@ opérations d'un algorithme, consultez
       \item Si $d = 0$, retourner $-b/(2a)$.
       \item Retourner $(-b - \sqrt{d})/(2a)$ et
         $(-b + \sqrt{d})/(2a)$.
+        \qed
       \end{enumerate}
-    \end{algorithme}
+    \end{algorithme*}
 
-    \begin{algorithme}
+    \begin{algorithme*}
       Calculer les racines du polynôme $a x^2 + b x + c$ à partir des
       coefficients réels $a$, $b$ et $c$.
       \begin{Schunk}
@@ -977,10 +979,10 @@ quadroots(réel a, réel b, réel c)
   x \leftarrow (-b - sqrt(d))/(2 \times a)
   y \leftarrow (-b + sqrt(d))/(2 \times a)
   Retourner x et y
-Fin quadroots
+Fin quadroots  \qed
 \end{Verbatim}
       \end{Schunk}
-    \end{algorithme}
+    \end{algorithme*}
   \end{sol}
 \end{exercice}
 
@@ -1210,17 +1212,21 @@ Si \meta{condition}
   d'\index{Euclide@Euclide (algorithme)}Euclide.
   \begin{sol}
     Tel que mentionné à la \autoref{sec:algorithmes:iteration}, les
-    algorithmes récusifs s'expriment généralement mieux en pseudocode.
+    algorithmes récursifs s'expriment généralement mieux en pseudocode.
     L'algorithme d'\index{Euclide@Euclide (algorithme)}Euclide est
     particulièrement simple exprimé ainsi.
-    \begin{Schunk}
-\begin{Verbatim}
+    \begin{algorithme*}
+      Calculer le plus grand commun diviseur de deux entiers positifs
+      $m$ et $n$ avec, sans perte de généralité, $n < m$.
+      \begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
 PGCD(entier m, entier n)
   Si (n = 0) retourner m
   Retourner PGCD(n, m mod n)
-Fin PGCD
+Fin PGCD  \qed
 \end{Verbatim}
-    \end{Schunk}
+      \end{Schunk}
+    \end{algorithme*}
   \end{sol}
 \end{exercice}
 
@@ -1258,24 +1264,23 @@ Fin PGCD
     \begin{enumerate}
     \item L'algorithme ci-dessous permet de calculer les nombres de
       Fibonacci de manière récursive.
-      \begin{algorithme}[Suite de Fibonacci]
-        \label{algo:algorithmes:Fibonacci}
+      \begin{algorithme*}[Suite de Fibonacci]
         Calculer la valeur $f(n)$ de la suite de
         \index{Fibonacci}Fibonacci pour un entier non négatif $n$.
         \begin{Schunk}
-\begin{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
 Fib(entier n)
   Si (n = 0), retourner 0
   Si (n = 1), retourner 1
   Retourner Fib(n - 2) + Fib(n - 1)
-Fin Fib
+Fin Fib  \qed
 \end{Verbatim}
         \end{Schunk}
-      \end{algorithme}
+      \end{algorithme*}
     \item Les 10 premiers nombres de Fibonacci sont:
       $0, 1, 1, 2, 3, 5, 8, 13, 21, 34$.
     \item En décomposant la méthode de calcul des nombres de Fibonacci
-      employée par l'\autoref{algo:algorithmes:Fibonacci}, on obtient:
+      employée par l'algorithme de la partie a), on obtient:
       \begin{align*}
         f(5)
         &= f(4) + f(3) \\
@@ -1292,7 +1297,7 @@ Fin Fib
       pathologique dans les ouvrages d'algorithmique.
     \item L'algorithme ci-dessous permet de calculer les nombres de
       Fibonacci de manière itérative.
-      \begin{algorithme}[Suite de Fibonacci]
+      \begin{algorithme*}[Suite de Fibonacci]
         \label{algo:algorithmes:Fibonacci-iter}
         Calculer la valeur $f(n)$ de la suite de
         \index{Fibonacci}Fibonacci pour un entier non négatif $n$.
@@ -1306,8 +1311,9 @@ Fin Fib
         \item Poser $a \leftarrow b$ et $b \leftarrow r$,
         \item Incrémenter le compteur $i$: $i \leftarrow i + 1$, puis
           retouner à l'étape 4.
+          \qed
         \end{enumerate}
-      \end{algorithme}
+      \end{algorithme*}
     \end{enumerate}
   \end{sol}
 \end{exercice}
@@ -1365,6 +1371,145 @@ Fin A
 \end{exercice}
 
 \begin{exercice}
+  On vous propose ci-dessous trois algorithmes différents pour
+  calculer et afficher à l'écran les diviseurs d'un nombre naturel
+  $n$.
+
+  \begingroup
+  \setcounter{algorithme}{0}
+  \renewcommand{\thealgorithme}{\Alph{algorithme}}
+  \begin{algorithme}
+    Afficher les diviseurs d'un nombre naturel $n$.
+    \begin{enumerate}[1.]
+    \item Poser $i \leftarrow 1$.
+    \item Si $n \mod i = 0$, afficher la valeur $i$.
+    \item Incrémenter $i$: $i \leftarrow i + 1$.
+    \item Si $i \leq n$, retourner à l'étape 2.
+      \qed
+    \end{enumerate}
+  \end{algorithme}
+
+  \begin{algorithme}
+    Afficher les diviseurs d'un nombre naturel $n$.
+    \begin{enumerate}[1.]
+    \item Poser $i \leftarrow 1$.
+    \item Si $n \mod i = 0$, afficher les valeurs de $i$ et $n/i$.
+    \item Incrémenter $i$: $i \leftarrow i + 1$.
+    \item Si $i \leq n$, retourner à l'étape 2.
+      \qed
+    \end{enumerate}
+  \end{algorithme}
+
+  \begin{algorithme}
+    Afficher les diviseurs d'un nombre naturel $n$.
+    \begin{enumerate}[1.]
+    \item Poser $i \leftarrow 1$.
+    \item Si $n \mod i = 0$, afficher les valeurs de $i$ et $n/i$.
+    \item Incrémenter $i$: $i \leftarrow i + 1$.
+    \item Si $i \leq \left\lfloor \sqrt{n} \right\rfloor$, où
+      $\lfloor x \rfloor$ représente le plus grand entier inférieur ou
+      égal à $x$, retourner à l'étape 2.
+      \qed
+    \end{enumerate}
+  \end{algorithme}
+  \endgroup
+
+  \begin{enumerate}
+  \item Calculer la performance de chacun des algorithmes.
+  \item Évaluer chacun des algorithmes (à la lettre!) pour $n = 12$ et
+    pour $n = 16$.
+  \item Proposer une version de l'algorithme~C qui corrige les deux
+    erreurs d'affichage identifiées en b). \emph{Indice}: entreposer
+    les diviseurs dans un «vecteur» (un contenant de valeurs).
+  \end{enumerate}
+  \begin{sol}
+    \begin{enumerate}
+    \item Les trois algorithmes sont itératifs. L'algorithme~A
+      effectue sa boucle $n$ fois; l'algorithme~B, $n/2$ fois;
+      l'algorithme~C, $\left\lfloor \sqrt{n} \right\rfloor$ fois. La
+      performance de chacun est donc $O(n)$, $O(n/2)$ et
+      $O(\sqrt{n})$, dans l'ordre.
+    \item Si l'on suit à la lettre les étapes des algorithmes, ont
+      obtient les affichages suivants:
+      \begin{center}
+        \begin{tabular}{rl}
+          \multicolumn{2}{l}{\textbf{Algorithme A}} \\
+          $n = 12$: & $1\quad 2\quad 3\quad 4\quad 6\quad 12$ \\
+          $n = 16$: & $1\quad 2\quad 4\quad 8\quad 16$ \\[6pt]
+          \multicolumn{2}{l}{\textbf{Algorithmes B et C}} \\
+          $n = 12$: & $1\quad 12\quad 2\quad 6\quad 3\quad 4$ \\
+          $n = 16$: & $1\quad 16\quad 2\quad 8\quad 4\quad 4$ \\[6pt]
+        \end{tabular}
+      \end{center}
+    \item Les algorithmes~B et C comportent deux erreurs (ou
+      anomalies): les diviseurs ne s'affichent en ordre croissant; la
+      valeur de $\sqrt{n}$ s'affiche deux fois lorsque $n$ est un
+      carré.
+
+      Corrigeons d'abord l'affichage en ordre croissant. Une solution
+      simple consiste à afficher uniquement les diviseurs $i$ sans
+      leur contrepartie $n/i$, à entreposer les contreparties dans un
+      «vecteur», puis, avant de quitter la procédure, à afficher le
+      contenu du vecteur de la dernière valeur à la première. %
+      \begingroup %
+      \setcounter{algorithme}{2}
+      \renewcommand{\thealgorithme}{\Alph{algorithme}'}
+      \begin{algorithme}
+        Afficher les diviseurs d'un nombre naturel $n$.
+        \begin{enumerate}[1.]
+        \item Poser $i \leftarrow 1$ et $v$ un vecteur vide.
+        \item Si $n \mod i = 0$, afficher la valeur $i$ et ajouter
+          $n/i$ au vecteur $v$: $v \leftarrow v, n/i$.
+        \item Incrémenter $i$: $i \leftarrow i + 1$.
+        \item Si $i \leq \left\lfloor \sqrt{n} \right\rfloor$,
+          retourner à l'étape 2.
+        \item Afficher les valeurs de $v$ de la dernière à la
+          première.
+          \qed
+        \end{enumerate}
+      \end{algorithme}
+      \endgroup %
+      Avec $n = 12$, l'algorithme révisé affichera les valeurs
+      \begin{center}
+        $1\quad 2\quad 3$,
+      \end{center}
+      entreposera les valeurs $(12, 6, 4)$ dans $v$, puis affichera
+      les valeurs
+      \begin{center}
+        $4\quad 6\quad 12$.
+      \end{center}
+
+      Avec $n = 16$, la valeur $4$ s'affichera cependant toujours deux
+      fois. Le second correctif à apporter à l'algorithme consiste à
+      entreposer la valeur $n/i$ seulement lorsqu'elle n'est pas égale
+      à $i$. %
+      \begingroup %
+      \addtocounter{algorithme}{-1}
+      \renewcommand{\thealgorithme}{\Alph{algorithme}''}
+      \begin{algorithme}
+        Afficher les diviseurs d'un nombre naturel $n$.
+        \begin{enumerate}[1.]
+        \item Poser $i \leftarrow 1$ et $v$ un vecteur vide.
+        \item Si $n \mod i = 0$:
+          \begin{enumerate}[{2}.1,leftmargin=2em]
+          \item afficher la valeur $i$;
+          \item si $n/i \neq i$, ajouter $n/i$ au vecteur $v$:
+            $v \leftarrow v, n/i$.
+          \end{enumerate}
+        \item Incrémenter $i$: $i \leftarrow i + 1$.
+        \item Si $i \leq \left\lfloor \sqrt{n} \right\rfloor$,
+          retourner à l'étape 2.
+        \item Afficher les valeurs de $v$ de la dernière à la
+          première.
+          \qed
+        \end{enumerate}
+      \end{algorithme}
+      \endgroup %
+    \end{enumerate}
+  \end{sol}
+\end{exercice}
+
+\begin{exercice}
   Calculer la performance des algorithmes ci-dessous.
   \begin{enumerate}
   \item Un algorithme avec $n$ entrées qui génère des valeurs pour
@@ -1390,6 +1535,7 @@ Fin A
       donc $O(n)$. Nous pouvons aussi obtenir cette réponse en
       remarquant que l'algorithme doit en définitive calculer une
       longueur.
+    \end{enumerate}
   \end{sol}
   \begin{figure}
     \centering
