@@ -35,6 +35,10 @@
   d'illustrations pour le cas du calcul de la surface d'un cube à la
   figure 2.5. Le nombre total d'exercices du chapitre demeure donc
   inchangé malgré l'ajout d'un exercice.
+- Chapitre 4: le code informatique correspondant à la section 4.5
+  mentionne maintenant qu'une valeur non unique dans une clause `if`
+  cause une erreur. Depuis la version 4.2.0, R ne retourne plus jamais
+  un avertissement.
 - Chapitre 6: ajout d'un objectif de chapitre sur les tests unitaires.
 - Section 6.1: un paragraphe a été révisé pour préciser d'utiliser des
   noms de variables qui expliquent le rôle des nombres magiques, pas

@@ -1636,14 +1636,10 @@ if (any(x < 0)) print("il y a des nombres négatifs")
 if (all(x > 0)) print("tous les nombres sont positifs")
 
 ## Première erreur fréquente dans l'utilisation de 'if': la
-## condition en argument n'est pas une valeur unique.
-##
-## Portez bien attention au message d'avertissement de R: le
-## test a été effectué, mais uniquement avec la première
-## valeur du vecteur booléen 'x < 0'. Comme, dans le présent
-## exemple, la première valeur de 'x' est négative,
-## l'expression 'print' est exécutée.
-if (x < 0)  print("il y a des nombres négatifs")
+## condition en argument n'est pas une valeur unique. Il n'y a
+## pas de scénario dans lequel ce pourrait être souhaitable de
+## procéder ainsi. R signale donc une erreur.
+##-!- if (x < 0)  print("il y a des nombres négatifs")
 
 ## Seconde erreur fréquente: tester que vrai est vrai. (Ce
 ## n'est pas une «erreur» au sens propre puisque la syntaxe
