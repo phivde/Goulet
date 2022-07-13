@@ -717,8 +717,8 @@ exec("grep", c("'chien|chat'", "chanson.txt"))
 exec("grep", c("-E", "'chien|chat'", "chanson.txt"))
 @
 
-\tipbox{Pour effacer tout doute, n'hésitez pas à simplement utiliser
-  toujours \icode{grep} et \icode{sed} avec l'option \code{-E}.}
+\tipbox{Évitez-vous bien des maux de tête en utilisant toujours
+  \icode{grep} et \icode{sed} avec l'option \code{-E}.}
 
 \subsection{Syntaxe de base}
 \label{sec:texte:regex:syntaxe}
@@ -950,8 +950,8 @@ plusieurs fois». Ainsi le motif \regex{a+b} correspond aux chaines
 \chaine{b}.
 
 Quant à l'opérateur «\Icode[regex]{?}», il signifie: «ce qui précède,
-zéro ou une fois». Autrement dit, «\code{?}» rend le caractère qui
-précède optionnel dans la chaine recherchée. Par exemple, le motif
+zéro ou une fois». En d'autres termes, «\code{?}» rend le caractère
+qui précède optionnel dans la chaine recherchée. Par exemple, le motif
 \regex{ab?c} correspond aux chaines \chaine{\matches{ac}} et
 \chaine{\matches{abc}}.
 
@@ -1966,7 +1966,7 @@ exec("awk", c("'NF > 0 && NF < 4'", "chanson.txt"))
 @
 
 Le prochain exemple est plus élaboré. La commande \icode{awk} permet
-de calculer la longueur --- en caractères --- du plus cours vers de
+de calculer la longueur --- en caractères --- du plus court vers de
 \code{chanson.txt}. Cela nécessite trois règles:
 \begin{itemize}
 \item la première initialise une variable \code{min} à la longueur du
@@ -2184,7 +2184,7 @@ apportons deux simplifications à la commande ci-dessus:
   \index{\string~@\code{\string~} (\code{awk})}«\code{\string~}»;
 \item la troisième règle peut être remplacée par un motif identité
   qui est toujours vrai («\code{1}») et aucune action, l'instruction
-  \icode[\code{awk}]{print} étant implicite dans ce cas.
+  \icode[\code{awk}]{print} étant implicite.
 \end{itemize}
 \begin{Schunk}
 \begin{Verbatim}
