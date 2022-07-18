@@ -17,6 +17,10 @@
   amélioré pour faire aussi mention de la fonction `seq_along`. Les
   exemples informatiques de la section ont aussi été améliorés en
   conséquence.
+- Section 11.4: améliorations diverses au texte sur `awk`, notamment:
+  explications additionnelles pour l'exemple en introduction de la
+  section; explications additionnelles sur le traitement sur plusieurs
+  lignes à la section 11.4.3.
 - Introduction du chapitre 12: en lien avec la modification à la
   section 4.4, ajout d'une note de bas de page pour excuser
   l'utilisation de `print` dans l'exemple de Ihaka et Gentleman
