@@ -1763,22 +1763,22 @@ de \icode{awk}, imaginez le contexte suivant. On vous fournit une base
 de données en format \index{CSV}CSV qui compte un million
 d'enregistrements (lignes) et quelques dizaines de champs (colonnes).
 Vous devez produire une nouvelle base de données composée des deux
-premières colonnes et d'une colonne contenant la somme des deux
-autres. Votre premier réflexe consistera sans doute à:
+premières colonnes et d'une nouvelle colonne contenant la somme de
+celles-ci. Votre premier réflexe consistera sans doute à utiliser un
+tableur pour effectuer les opérations suivantes:
 \begin{enumerate}
-\item importer le fichier CSV dans un tableur;
+\item importer le fichier CSV;
 \item supprimer les colonnes autres que les deux premières;
 \item ajouter dans une troisième colonne une formule pour calculer la
-  somme des deux premières colonne, puis copier cette formule dans
-  toutes les lignes;
+  somme des deux premières;
+\item copier la formule dans toutes les lignes;
 \item exporter la base de données en format CSV.
 \end{enumerate}
 Cette procédure est fastidieuse, lente --- surtout avec une grande
 base de données --- et désespérément manuelle. Sous peu, vous saurez
-remplacer de telles manipulations par un simple appel à \icode{awk}.
-En effet, la commande ci-dessous effectue le traitement requis
-\emph{en une fraction de seconde} et sans même avoir à lancer un lourd
-tableur.
+remplacer de telles manipulations par un simple appel à \icode{awk}
+qui effectuera le traitement requis \emph{en une fraction de seconde}
+et sans même avoir à lancer un lourd tableur:
 \label{pg:awk:exemple-conversion}
 \begin{Schunk}
 \begin{Verbatim}
@@ -1786,6 +1786,12 @@ $ awk -F ',' '{ print $1 "," $2 "," $1 + $2 }' data.csv \
   > data-new.csv
 \end{Verbatim}
 \end{Schunk}
+(De gauche à droite, la commande ci-dessus indique à \icode{awk}
+d'utiliser la virgule comme séparateur de champs; d'afficher à la
+sortie standard les résultats désirés séparés par des virgules; de
+lire les données dans un fichier \code{data.csv}. Ensuite, les
+résultats sont redirigés de la sortie standard vers un fichier
+\code{data-new.csv}.)
 
 \subsection{Concepts de base}
 \label{sec:texte:awk:base}
@@ -2121,11 +2127,16 @@ Toute expression \icode{awk} est valide en tant que motif. La
 définition d'expression \code{awk} est en tous points équivalente à
 celle d'expression R donnée à la
 \autoref{sec:bases:commandes:expression}. L'expression est réévaluée à
-chaque fois que la règle est testée pour un nouvel enregistrement. Si
-l'expression fait appel à la valeur d'un champ --- \code{\$1} par
-exemple ---, c'est celle de l'enregistrement courant qui prévaut.
-Autrement, la valeur de l'expression dépend de l'état du programme au
-moment de son évaluation.
+chaque fois que la règle est testée pour un nouvel enregistrement.
+C'est d'ailleurs cette réévaluation des motifs à chaque enregistrement
+qui rend simple avec \icode{awk} d'effectuer un traitement sur
+plusieurs lignes du texte en entrée. Nous y reviendrons dans l'exemple
+ci-dessous.
+
+Si l'expression du motif fait appel à la valeur d'un champ ---
+\code{\$1} par exemple ---, c'est celle de l'enregistrement courant
+qui prévaut. Autrement, la valeur de l'expression dépend de l'état du
+programme au moment de son évaluation.
 
 Les expressions logiques sont évidemment les plus souvent utilisées en
 tant que motifs. Les opérateurs arithmétiques et logiques de
@@ -2150,7 +2161,8 @@ notamment l'importance de l'ordre des règles dans un programme. La
 commande suivante permet d'extraire les deux premiers couplets de «La
 journée qui s'en vient est flambant neuve». Ceux-ci sont délimités par
 des lignes blanches dans le fichier. La tâche consiste donc à extraire
-le texte jusqu'à la seconde ligne blanche, exclusivement.
+le texte jusqu'à la seconde ligne blanche, exclusivement. C'est donc
+un traitement sur plusieurs lignes.
 \begin{Schunk}
 \begin{Verbatim}
 $ awk '$0 ~ /^$/ && state == 1 { exit }
@@ -2164,16 +2176,24 @@ exec("awk", c("'$0 ~ /^$/ && state == 1 { exit } $0 ~ /^$/ { state = 1 } { print
 
 La première règle provoque la sortie du programme lorsque \icode{awk}
 rencontre une ligne blanche \emph{et} qu'une variable d'«état» ---
-d'où le nom que j'ai choisi de lui donner --- est égale à 1. Ici, vous
-devez savoir que tant qu'une valeur n'a pas été explicitement assignée
-à une variable, la valeur de celle-ci est 0. La seconde règle du
-programme affecte la valeur 1 à la variable d'état lorsque \icode{awk}
-rencontre la première ligne blanche. Enfin, la troisième règle extrait
-les enregistrements. En combinant les règles dans cet ordre, le
-programme se termine à la \emph{seconde} ligne blanche du fichier,
-donc après avoir extrait les deux premiers couplets. Si l'ordre des
-deux premières règles était inversé, la commande n'extrairait que le
-premier couplet. (Déterminez pourquoi.)
+d'où le nom, \code{state}, que j'ai choisi de lui donner --- est égale
+à 1. Ici, vous devez savoir que tant qu'une valeur n'a pas été
+explicitement assignée à une variable, la valeur de celle-ci est 0. Le
+programme ne peut donc quitter avant qu'une valeur de 1 n'ait été
+explicitement affectée à la variable d'état.
+
+La seconde règle du programme affecte justement la valeur 1 à la
+variable d'état lorsque \icode{awk} rencontre une ligne blanche. Dans
+le déroulement du programme, ce sera à la première ligne blanche.
+
+La troisième règle extrait simplement les enregistrements au fur et à
+mesure qu'ils sont lus.
+
+En combinant les règles dans cet ordre précis, le programme se termine
+à la \emph{seconde} ligne blanche du fichier, donc après avoir extrait
+les deux premiers couplets. Si l'ordre des deux premières règles était
+inversé, la commande n'extrairait que le premier couplet. (Déterminez
+pourquoi.)
 
 Question de parfaire notre style de programmation \icode{awk},
 apportons deux simplifications à la commande ci-dessus:
@@ -2182,9 +2202,11 @@ apportons deux simplifications à la commande ci-dessus:
   \code{\$0~\string~~/\string^\$/} puisque \code{\$0} est la valeur
   par défaut de l'argument gauche de l'opérateur %
   \index{\string~@\code{\string~} (\code{awk})}«\code{\string~}»;
-\item la troisième règle peut être remplacée par un motif identité
-  qui est toujours vrai («\code{1}») et aucune action, l'instruction
-  \icode[\code{awk}]{print} étant implicite.
+\item la troisième règle peut être remplacée par un motif identité qui
+  est toujours vrai («\code{1}») et aucune action, l'instruction
+  \icode[\code{awk}]{print} étant implicite. C'est la règle «affiche
+  le contenu de l'enregistrement courant» que l'on retrouve souvent à la fin
+  des programmes \icode{awk}.
 \end{itemize}
 \begin{Schunk}
 \begin{Verbatim}
@@ -2211,20 +2233,10 @@ instruction d'une action indique une chose à faire.
 
 Une action absente est équivalente à «\code{\{~print \$0~\}}».
 Cependant, une action vide «\code{\{~\}}» ne fait rien lorsque
-l'enregistrement correspond au motif. Autrement dit, les deux règles
-ci-dessous sont bien différentes: la première ne fait rien lorsque
-l'enregistrement correspond à \regex{foo}\,, alors que
-la seconde affiche le contenu de l'enregistrement.
-\begin{Schunk}
-\begin{Verbatim}
-/foo/ { }
-\end{Verbatim}
-\end{Schunk}
-\begin{Schunk}
-\begin{Verbatim}
-/foo/
-\end{Verbatim}
-\end{Schunk}
+l'enregistrement correspond au motif. Autrement dit, la règle
+«\code{/foo/ \{ \}}» ne fait rien lorsque l'enregistrement correspond
+à \regex{foo}\,, alors que la règle «\code{/foo/}» affiche le contenu
+de l'enregistrement.
 
 Les principaux types d'instructions que l'on retrouve dans les actions
 sont: les expressions (au premier chef l'affectation de variables);
@@ -2236,23 +2248,22 @@ les structures de contrôle (%
 les instructions d'affichage (comme \icode[\code{awk}]{print} et
 \icode[\code{awk}]{printf}). Les expressions peuvent faire appel à
 plusieurs fonctions \icode{awk} internes, notamment pour la
-manipulation de chaines de caractères. Consultez \citet[chapitres~6, 7
-et 9]{gawk:5.0}.
+manipulation de chaines de caractères. Consultez au besoin
+\citet[chapitres~6, 7 et 9]{gawk:5.0}.
 
 Les données du fichier \code{carburant.dat} sont entièrement en unités
 de mesure impériales. La commande \icode{awk} suivante permet de
 convertir le poids des voitures, actuellement en milliers de livres,
 vers des kilogrammes. L'action de la première règle remplace le poids
-du véhicule en milliers de livres --- le cinquième champ --- par le
-poids en kilogrammes ($2,20462$ étant le facteur de conversion entre
-les deux unités). Remarquez que cette action n'affiche rien, elle ne
-fait que modifier un champ de l'enregistrement courant. C'est la
-seconde règle utilisant un motif identité et l'action implicite qui
-affiche les résultats. Sans celle-ci, le programme ne retournerait
-aucun résultat.
+du véhicule --- le cinquième champ --- par le poids en kilogrammes
+($2,20462$ étant le facteur de conversion entre les deux unités).
+Remarquez que cette action n'affiche rien, elle ne fait que modifier
+un champ de l'enregistrement courant. C'est la seconde règle «affiche
+  le contenu de l'enregistrement courant» qui affiche les résultats.
+Sans celle-ci, le programme ne retournerait aucun résultat.
 <<echo=FALSE>>=
 exec("awk", c("'/^[^#a-z]/ { $5 = $5*1000/2.20462 } 1'", "carburant.dat"),
-     max.lines = 16, env = "LC_NUMERIC=en_US.UTF-8")
+     max.lines = 15, env = "LC_NUMERIC=en_US.UTF-8")
 @
 
 \subsection{Changer le séparateur d'enregistrements et de champs }
@@ -2277,10 +2288,9 @@ commande avec l'option \code{-F}. C'est l'approche que j'ai retenue
 dans le tout premier exemple de la section, à la
 \autopageref{pg:awk:exemple-conversion}.
 
-Voici deux exemples de changement du séparateur de champs. Dans le
-premier, le nouveau séparateur est la virgule. Dans le second, de par
-l'utilisation d'une expression régulière, le séparateur est l'espace
-\emph{ou} le tiret.
+Par exemple, la première règle ci-dessous modifie le séparateur de
+champs pour la virgule, alors que seconde, qui a recours à un motif
+d'expression régulière, le modifie pour l'espace \emph{ou} le tiret.
 \begin{Schunk}
 \begin{Verbatim}
 BEGIN { FS = "," }
@@ -2300,18 +2310,20 @@ variables prédéfinies \icode[\code{awk}]{ORS} (\emph{output record
   separator}). Les séparateurs de sortie par défaut sont aussi le
 retour à la ligne et l'espace.
 
-Avec la règle suivante dans un programme \icode{awk}, les champs
-seront séparés par un point-virgule dans les résultats.
+Par exemple, pour séparer les champs par un point-virgule dans les
+résultats, il suffit d'inclure la règle ci-dessous dans son programme
+\icode{awk}.
 \begin{Schunk}
 \begin{Verbatim}
 BEGIN { OFS = ";" }
 \end{Verbatim}
 \end{Schunk}
 
-\notebox{Les opérations de composition de «\thetitle», de publication
-  dans GitLab et de mise à jour de la page web sont entièrement
-  automatisées avec une combinaison des utilitaires de ce chapitre et
-  de \link{https://fr.wikipedia.org/wiki/Make}{\code{make}}, un autre
+\notebox{Les opérations de composition du présent ouvrage, de
+  publication d'une nouvelle version et de mise à jour de la page web
+  sont entièrement automatisées avec une combinaison des utilitaires
+  de ce chapitre et de
+  \link{https://fr.wikipedia.org/wiki/Make}{\code{make}}, un autre
   outil standard des systèmes Unix. Je vous invite à jeter un coup
   d'œil au fichier de configuration \code{Makefile} qui se trouve dans
   le \link{\reposurl}{code source du projet}.}
@@ -2757,7 +2769,7 @@ exécuter depuis une ligne de commande \index{Unix}Unix.
       \item[\vspace{\fill}]
       \end{enumerate}
     \end{multicols}
-    \pagebreak[1]
+    \pagebreak[4]
   \item \regex{[a-zA-Z]*[\string^,]=}
     \begin{multicols}{3}
       \begin{enumerate}[1)]
