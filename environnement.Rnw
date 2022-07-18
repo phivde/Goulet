@@ -846,8 +846,8 @@ f(10)
 \end{exercice}
 
 \begin{exercice}
-  Déterminer le résultat du bloc d'expressions ci-dessous \citep[tiré
-  de][]{Wickham:adv-r:2017}.
+  Déterminer le résultat du bloc d'expressions ci-dessous. \footnote{%
+    Exercice tiré de \citet{Wickham:adv-r:2017}.}
 <<echo=TRUE, eval=FALSE>>=
 x <- 20
 f <- function()
@@ -868,8 +868,8 @@ g()
 \end{exercice}
 
 \begin{exercice}
-  Déterminer le résultat du bloc d'expressions ci-dessous \citep[tiré
-  de][]{Wickham:adv-r:2017}.
+  Déterminer le résultat du bloc d'expressions ci-dessous.\footnote{%
+    \emph{Idem}.} %
 <<echo=TRUE, eval=FALSE>>=
 x <- 0
 y <- 10
