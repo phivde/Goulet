@@ -1788,7 +1788,7 @@ $ awk -F ',' '{ print $1 "," $2 "," $1 + $2 }' data.csv \
 \end{Schunk}
 (De gauche à droite, la commande ci-dessus indique à \icode{awk}
 d'utiliser la virgule comme séparateur de champs; d'afficher à la
-sortie standard les résultats désirés séparés par des virgules; de
+sortie standard, séparés par des virgules, le contenu de la première colonne, le contenu de la deuxième colonne, puis la somme de ces deux colonnes; de
 lire les données dans un fichier \code{data.csv}. Ensuite, les
 résultats sont redirigés de la sortie standard vers un fichier
 \code{data-new.csv}.)
