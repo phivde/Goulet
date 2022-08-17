@@ -234,16 +234,15 @@ create-release:
 .PHONY: create-link
 create-link: create-release
 	@{ \
-	    printf "%s" "----- Adding asset to the release... "; \
-	    url=$$(curl --form "file=@${ARCHIVE}" \
-	                --header "PRIVATE-TOKEN: ${OAUTHTOKEN}"	\
-	                --silent \
-	           ${APIURL}/uploads \
-	           | awk -F '"' '{ print $$8 }'); \
+	    printf "%s\n" "----- Uploading package to registry..."; \
+	    file_id=$$(curl --upload-file "${ARCHIVE}" \
+	                    --header "PRIVATE-TOKEN: ${OAUTHTOKEN}"	\
+	                    "${APIURL}/packages/generic/Programmer-avec-R/${VERSION}/${ARCHIVE}?select=package_file" \
+	           | awk -F '[":,]' '{ print $$4 }'); \
 	    curl --request POST \
 	         --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
 	         --data name="${ARCHIVE}" \
-	         --data url="${REPOSURL}$${url}" \
+	         --data url="${REPOSURL}/-/package_files/$${file_id}/download" \
 	         --data link_type="package" \
 	         --output /dev/null --silent \
 	         ${APIURL}/releases/${TAGNAME}/assets/links; \
