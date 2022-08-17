@@ -1,6 +1,6 @@
 {{ $featured_image := .Param "featured_image" | default "images/gohugo-default-sample-hero-image.jpg" }}
 {{ $repos_url := printf "%s/%s" .Site.Params.gitlab .Site.Params.repos }}
-{{ $file_url := printf "%s/%s" $repos_url .Site.Params.zip_id }}
+{{ $file_url := printf "%s" .Site.Params.zip_url }}
 {{ $release_notes_url := printf "%s/%s" $repos_url .Site.Params.release_notes }}
 
 {{ if $featured_image }}

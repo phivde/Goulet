@@ -31,26 +31,18 @@ APIURL = https://gitlab.com/api/v4/projects/vigou3%2F${REPOSNAME}
 OAUTHTOKEN = $(shell cat ~/.gitlab/token)
 
 ## Extraction des url des fichiers joints à la mise en production
-ASSETS := $(shell \
+ZIP_URL := $(shell \
   curl --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
        --silent \
        ${APIURL}/releases/${TAGNAME}/assets/links | \
-  sed 's/,/\n/g' | \
-  awk 'BEGIN { FS = "\"" } \
-       /direct_asset_url/ \
-       { \
-         sub(/.*\/uploads/, "uploads", $$4); \
-         f = f " " $$4 \
-       } \
-       END { print f }')
-ZIP_ID := $(filter %.zip,${ASSETS})
+  sed -E 's/.*\"direct_asset_url\":\"([^\"]*)\".*/\1/')
 
 all: files commit
 
 files:
 	awk 'BEGIN { FS = "\""; OFS = "\"" } \
 	     /version/ { $$2 = "${VERSION}" } \
-	     /zip_id/ { $$2 = "${ZIP_ID}" } \
+	     /zip_url/ { $$2 = "${ZIP_URL}" } \
 	     1' \
 	    config.toml > tmpfile && \
 	  mv tmpfile config.toml
