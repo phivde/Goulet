@@ -1,7 +1,6 @@
-### -*-Makefile-*- pour préparer la page web de
-###                "Programmer avec R"
+### -*-Makefile-*- pour préparer la page web de "Programmer avec R"
 ##
-## Copyright (C) 2021 Vincent Goulet
+## Copyright (C) 2018-2022 Vincent Goulet
 ##
 ## Auteur: Vincent Goulet
 ##
@@ -30,26 +29,20 @@ REPOSNAME = $(shell basename ${REPOSURL})
 APIURL = https://gitlab.com/api/v4/projects/vigou3%2F${REPOSNAME}
 OAUTHTOKEN = $(shell cat ~/.gitlab/token)
 
-## Extraction des url des fichiers joints à la mise en production
-ZIP_URL := $(shell \
-  curl --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
-       --silent \
-       ${APIURL}/releases/${TAGNAME}/assets/links | \
-  sed -E 's/.*\"direct_asset_url\":\"([^\"]*)\".*/\1/')
-
 all: files commit
 
 files:
+	$(eval zip_url=$(shell curl --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+                                    --silent \
+                                    "${APIURL}/releases/${TAGNAME}/assets/links" \
+	                       | sed -E 's/.*\"direct_asset_url\":\"([^\"]*)\".*/\1/')
 	awk 'BEGIN { FS = "\""; OFS = "\"" } \
 	     /version/ { $$2 = "${VERSION}" } \
-	     /zip_url/ { $$2 = "${ZIP_URL}" } \
+	     /zip_url/ { $$2 = "${zip_url}" } \
 	     1' \
-	    config.toml > tmpfile && \
-	  mv tmpfile config.toml
+	    config.toml > tmpfile && mv tmpfile config.toml
 
 commit:
 	git commit config.toml content/_index.md \
-	    -m "Updated web page for version ${VERSION}"; \
+	    -m "Mise à jour de la page web pour la version ${VERSION}"; \
 	git push
-
-
