@@ -106,7 +106,7 @@ FORCE: ;
 	${SWEAVE} '$<'
 
 paquetages.Rout:
-	echo "fichier paquetages.Rout sans intérêt"
+	@echo "fichier paquetages.Rout sans intérêt" && true
 
 %.Rout: %.R
 	echo "options(error=expression(NULL))" | cat - $< | \
@@ -177,19 +177,19 @@ zip: ${MASTER} ${README} ${NEWS} ${SCRIPTS:.R=.Rout} ${LICENSE} ${COLLABORATEURS
 .PHONY: check-status
 check-status:
 	@{ \
-	    printf "%s" "----- Checking status of working directory... "; \
+	    printf "%s" "vérification de l'état du dépôt local... "; \
 	    branch=$$(git branch --list | grep ^* | cut -d " " -f 2-); \
 	    if [ "$${branch}" != "master"  ] && [ "$${branch}" != "main" ]; \
 	    then \
-	        printf "\n%s\n" "not on branch master or main"; exit 2; \
+	        printf "\n%s\n" "! pas sur la branche main"; exit 2; \
 	    fi; \
 	    if [ -n "$$(git status --porcelain | grep -v '^??')" ]; \
 	    then \
-	        printf "\n%s\n" "uncommitted changes in repository; not creating release"; exit 2; \
+	        printf "\n%s\n" "! changements non archivés dans le dépôt"; exit 2; \
 	    fi; \
 	    if [ -n "$$(git log origin/master..HEAD | head -n1)" ]; \
 	    then \
-	        printf "\n%s\n" "unpushed commits in repository; pushing to origin"; \
+	        printf "\n%s\n" "changements non publiés dans le dépôt; publication dans origin"; \
 	        git push; \
 	    else \
 	        printf "%s\n" "ok"; \
@@ -199,16 +199,16 @@ check-status:
 .PHONY: create-release
 create-release:
 	@{ \
-	    printf "%s" "----- Checking if a release already exists... "; \
+	    printf "%s" "vérification que la version existe déjà... "; \
 	    http_code=$$(curl -I ${APIURL}/releases/${TAGNAME} 2>/dev/null \
 	                     | head -n1 | cut -d " " -f2) ; \
 	    if [ "$${http_code}" = "200" ]; \
 	    then \
-	        printf "%s\n" "yes"; \
-	        printf "%s\n" "using the existing release"; \
+	        printf "%s\n" "oui"; \
+	        printf "%s\n" "-> utilisation de la version actuelle"; \
 	    else \
-	        printf "%s\n" "no"; \
-	        printf "%s" "Creating release on GitLab... "; \
+	        printf "%s\n" "non"; \
+	        printf "%s" "création d'une version dans GitLab... "; \
 	        name=$$(awk '/^# / { sub(/# +/, "", $$0); print $$0; exit }' ${NEWS}); \
 	        desc=$$(awk ' \
 	                      /^$$/ { next } \
@@ -227,14 +227,14 @@ create-release:
 	             --data description="$${desc}" \
 	             --output /dev/null --silent \
 	             ${APIURL}/releases; \
-	        printf "%s\n" "done"; \
+	        printf "%s\n" "ok"; \
 	    fi; \
 	}
 
 .PHONY: create-link
 create-link: create-release
 	@{ \
-	    printf "%s\n" "----- Uploading package to registry..."; \
+	    printf "%s\n" "téléversement des archives vers le registre..."; \
 	    file_id=$$(curl --upload-file "${ARCHIVE}" \
 	                    --header "PRIVATE-TOKEN: ${OAUTHTOKEN}"	\
 	                    "${APIURL}/packages/generic/Programmer-avec-R/${VERSION}/${ARCHIVE}?select=package_file" \
@@ -246,30 +246,31 @@ create-link: create-release
 	         --data link_type="package" \
 	         --output /dev/null --silent \
 	         ${APIURL}/releases/${TAGNAME}/assets/links; \
-	    printf "%s\n" "done"; \
+	    printf "%s\n" "ok"; \
 	}
 
 .PHONY: publish
 publish:
-	@echo ----- Publishing the web page...
+	@printf "%s" "mise à jour de la page web..."
 	git checkout pages && \
 	  ${MAKE} && \
 	  git checkout master
-	@echo ----- Done publishing
+	@printf "%s\n" "ok"
 
 .PHONY: check-url
 check-url: ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES}
-	@echo ----- Checking urls in sources...
+	@printf "%s\n" "vérification des adresses URL dans les fichiers source"
 	$(eval url=$(shell grep -E -o -h 'https?:\/\/[^./]+(?:\.[^./]+)+(?:\/[^ ]*)?' $? \
 		   | cut -d \} -f 1 \
 		   | cut -d ] -f 1 \
 		   | cut -d '"' -f 1 \
 		   | sort | uniq))
-	for u in ${url}; \
-	    do if curl --output /dev/null --silent --head --fail --max-time 5 $$u; then \
-	        echo "URL exists: $$u"; \
+	@for u in ${url}; do \
+	    printf "%s... " "$$u"; \
+	    if curl --output /dev/null --silent --head --fail --max-time 5 $$u; then \
+	        printf "%s\n" "ok"; \
 	    else \
-		echo "URL does not exist (or times out): $$u"; \
+		printf "%s\n" "invalide ou ne répond pas"; \
 	    fi; \
 	done
 
