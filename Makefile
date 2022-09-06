@@ -143,7 +143,7 @@ Rout: ${SCRIPTS:.R=.Rout}
 contrib: ${COLLABORATEURS}
 
 .PHONY: release
-release: update-copyright zip check-status create-release create-link publish
+release: update-copyright zip check-status create-release upload create-link publish
 
 .PHONY: update-copyright
 update-copyright: ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES} ${SHARE}
@@ -209,7 +209,7 @@ create-release:
 	    else \
 	        printf "%s\n" "non"; \
 	        printf "%s" "création d'une version dans GitLab... "; \
-	        name=$$(awk '/^# / { sub(/# +/, "", $$0); print $$0; exit }' ${NEWS}); \
+	        name=$$(awk '/^# / { sub(/# +/, "", $$0); print "Édition", $$0; exit }' ${NEWS}); \
 	        desc=$$(awk ' \
 	                      /^$$/ { next } \
 	                      (state == 0) && /^# / { state = 1; next } \
@@ -231,23 +231,36 @@ create-release:
 	    fi; \
 	}
 
+.PHONY: upload
+upload:
+	@printf "%s\n" "téléversement de l'archive vers le registre..."; \
+	curl --upload-file "${ARCHIVE}" \
+	      --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+	      --silent \
+	      "${APIURL}/packages/generic/${REPOSNAME}/${VERSION}/${ARCHIVE}"
+	@printf "%s\n" "ok"
+
 .PHONY: create-link
-create-link: create-release
-	@{ \
-	    printf "%s\n" "téléversement des archives vers le registre..."; \
-	    file_id=$$(curl --upload-file "${ARCHIVE}" \
-	                    --header "PRIVATE-TOKEN: ${OAUTHTOKEN}"	\
-	                    "${APIURL}/packages/generic/Programmer-avec-R/${VERSION}/${ARCHIVE}?select=package_file" \
-	           | awk -F '[":,]' '{ print $$4 }'); \
-	    curl --request POST \
-	         --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
-	         --data name="${ARCHIVE}" \
-	         --data url="${REPOSURL}/-/package_files/$${file_id}/download" \
-	         --data link_type="package" \
-	         --output /dev/null --silent \
-	         ${APIURL}/releases/${TAGNAME}/assets/links; \
-	    printf "%s\n" "ok"; \
-	}
+create-link:
+	@printf "%s" "ajout du lien dans la description de la version..."; \
+	$(eval pkg_id=$(shell curl --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+	                           --silent \
+	                           "${APIURL}/packages" \
+	                      | grep -o -E '\{.*"version":"${VERSION}"[^}]*}' \
+	                      | grep -o '"id":[0-9]*' | cut -d: -f 2))
+	$(eval file_id=$(shell curl --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+	                            --silent \
+	                            "${APIURL}/packages/${pkg_id}/package_files" \
+	                       | grep -o -E '\{.*"file_name":"${ARCHIVE}"[^}]*}' \
+	                       | grep -o '"id":[0-9]*' | cut -d: -f 2))
+	@curl --request POST \
+	      --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+	      --data name="${ARCHIVE}" \
+	      --data url="${REPOSURL}/-/package_files/${file_id}/download" \
+	      --data link_type="package" \
+	      --output /dev/null --silent \
+	      ${APIURL}/releases/${TAGNAME}/assets/links
+	@printf "%s\n" "ok"
 
 .PHONY: publish
 publish:
