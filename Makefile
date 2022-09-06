@@ -35,7 +35,7 @@ files:
 	$(eval zip_url=$(shell curl --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
                                     --silent \
                                     "${APIURL}/releases/${TAGNAME}/assets/links" \
-	                       | sed -E 's/.*\"direct_asset_url\":\"([^\"]*)\".*/\1/')
+	                       | sed -E 's/.*\"direct_asset_url\":\"([^\"]*)\".*/\1/'))
 	awk 'BEGIN { FS = "\""; OFS = "\"" } \
 	     /version/ { $$2 = "${VERSION}" } \
 	     /zip_url/ { $$2 = "${zip_url}" } \
