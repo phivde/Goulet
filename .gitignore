@@ -25,3 +25,5 @@ auto/
 auto/*
 COLLABORATEURS
 100metres.data
+go.*
+*hugo*
