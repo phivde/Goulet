@@ -2288,9 +2288,10 @@ commande avec l'option \code{-F}. C'est l'approche que j'ai retenue
 dans le tout premier exemple de la section, à la
 \autopageref{pg:awk:exemple-conversion}.
 
-Par exemple, la première règle ci-dessous modifie le séparateur de
-champs pour la virgule, alors que seconde, qui a recours à un motif
-d'expression régulière, le modifie pour l'espace \emph{ou} le tiret.
+Dans le premier exemple, ci-dessous, la règle modifie le séparateur de
+champs pour la virgule. Dans le second, le recours à un motif
+d'expression régulière permet de définir comme séparateur de champs
+l'espace \emph{ou} le tiret.
 \begin{Schunk}
 \begin{Verbatim}
 BEGIN { FS = "," }
