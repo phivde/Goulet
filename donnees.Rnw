@@ -1952,7 +1952,7 @@ d$hour
   n'existait pas dans leur calendrier. C'est beaucoup par espièglerie
   que le \emph{R Core Team} a justement choisi cette journée pour
   lancer la
-  \link{ftp://cran.r-project.org/pub/R/R-release-1.0.0.html}{version
+  \link{https://stat.ethz.ch/pipermail/r-announce/2000/000127.html}{version
     1.0.0 de R}.}
 
 \gotorbox{Les lignes \reflines{donnees:date} du fichier de script
