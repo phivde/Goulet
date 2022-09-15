@@ -1895,6 +1895,15 @@ as.Date("2019-09-01") > d
 seq(as.Date("2019-09-01"), as.Date("2020-05-31"),
     by = "month")
 @
+\begin{figure}[t]
+  \centering
+  \begin{minipage}{0.65\linewidth}
+    \setkeys{Gin}{width=\textwidth}
+    \includegraphics{images/bug} \\
+    \footnotesize\sffamily%
+    Tiré de \href{https://xkcd.com/376/}{XKCD.com}
+  \end{minipage}
+\end{figure}
 %
 \item La classe \icode{POSIXct} permet de représenter une date et une
   heure à la seconde près (incluant le fuseau horaire). C'est
@@ -1934,14 +1943,15 @@ d$hour
   additionnels sur la représentation et le traitement des dates dans
   R.}
 
-\notebox{Que s'est-il passé de spécial le 29 février 2000? Les années
-  multiples de 100 ne sont pas bissextiles, sauf celles multiples de
-  400. C'est pourquoi 2000 était bel et bien une année bissextile. La
-  prochaine du type aura donc lieu en{\dots} 2400. Certains logiciels
-  à l'époque étaient affligés d'un bogue qui faisait en sorte que la
-  date n'existait pas dans leur calendrier. C'est beaucoup par
-  espièglerie que le \emph{R Core Team} a justement choisi cette
-  journée pour lancer la
+\notebox{Les exemples ci-dessus utilisent la date du 29 février 2000.
+  Que s'est-il passé de spécial ce jour-là? Les années multiples de
+  100 ne sont pas bissextiles, sauf celles multiples de 400. C'est
+  pourquoi 2000 était bel et bien une année bissextile. La prochaine
+  du type aura donc lieu en{\dots} 2400. Certains logiciels à l'époque
+  étaient affligés d'un bogue qui faisait en sorte que la date
+  n'existait pas dans leur calendrier. C'est beaucoup par espièglerie
+  que le \emph{R Core Team} a justement choisi cette journée pour
+  lancer la
   \link{ftp://cran.r-project.org/pub/R/R-release-1.0.0.html}{version
     1.0.0 de R}.}
 
@@ -2120,6 +2130,7 @@ solve(x)
 <<echo=TRUE>>=
 solve(x, c(1, 2))
 @
+\enlargethispage{6pt}
 \item[\Icode{diag}] avec une matrice en argument:
   \index{matrice!diagonale}diagonale de la matrice;
 <<echo=TRUE>>=
