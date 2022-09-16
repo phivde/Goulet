@@ -1897,7 +1897,9 @@ seq(as.Date("2019-09-01"), as.Date("2020-05-31"),
 @
 \begin{figure}[t]
   \centering
-  \begin{minipage}{0.65\linewidth}
+  %% taille d'image choisie pour que toutes les boites signalétiques
+  %% entrent sur la page suivante
+  \begin{minipage}{0.46\linewidth}
     \setkeys{Gin}{width=\textwidth}
     \includegraphics{images/bug} \\
     \footnotesize\sffamily%
@@ -1943,9 +1945,9 @@ d$hour
   additionnels sur la représentation et le traitement des dates dans
   R.}
 
-\notebox{Les exemples ci-dessus utilisent la date du 29 février 2000.
-  Que s'est-il passé de spécial ce jour-là? Les années multiples de
-  100 ne sont pas bissextiles, sauf celles multiples de 400. C'est
+\notebox{Les exemples ci-dessus utilisent tous la date du 29 février
+  2000. Que s'est-il passé de spécial ce jour-là? Les années multiples
+  de 100 ne sont pas bissextiles, sauf celles multiples de 400. C'est
   pourquoi 2000 était bel et bien une année bissextile. La prochaine
   du type aura donc lieu en{\dots} 2400. Certains logiciels à l'époque
   étaient affligés d'un bogue qui faisait en sorte que la date
@@ -2130,7 +2132,6 @@ solve(x)
 <<echo=TRUE>>=
 solve(x, c(1, 2))
 @
-\enlargethispage{6pt}
 \item[\Icode{diag}] avec une matrice en argument:
   \index{matrice!diagonale}diagonale de la matrice;
 <<echo=TRUE>>=
