@@ -283,7 +283,7 @@ NA + 2                     # tout calcul avec 'NA' donne NA
 NA == 2                    # 'NA' n'est égale à rien...
 NA == NA                   # ... pas même elle-même!
 is.na(NA)                  # test si une valeur est 'NA'
-is.na(2)                   # '2' n'est pas manquantex
+is.na(2)                   # '2' n'est pas manquante
 
 ## Valeurs infinies et indéterminée. 'Inf', '-Inf' et 'NaN'
 ## sont des noms réservés.
