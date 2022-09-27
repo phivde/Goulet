@@ -535,6 +535,62 @@ l'\autoref{chap:rstudio} pour la procédure détaillée avec
 l'environnement intégré \index{RStudio}RStudio, ou
 l'\autoref{chap:emacs+ess} pour celle avec \index{Emacs}Emacs.
 
+
+\section{Obtenir de l'aide}
+\label{sec:presentation:doc}
+
+Il est normal, durant l'apprentissage d'un nouveau langage de
+programmation, d'éprouver par moments un certain vertige devant la
+masse d'informations à intégrer. Lorsque cela survient, il faut savoir
+vers où se tourner pour obtenir de l'aide ou de la documentation.
+
+Votre première ressource devrait être non pas Internet, mais bien
+l'aide en ligne de R. Les rubriques d'aide des fonctions contiennent
+une foule d'informations ainsi que des exemples d'utilisation. Leur
+consultation est tout à fait essentielle.
+
+Les fonctions \Icode{?} et \Icode{help} permettent de consulter
+la rubrique d'aide d'une fonction ou d'un autre type d'objet.
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+> ?\meta{fonction}
+> help(\meta{fonction})
+\end{Verbatim}
+\end{Schunk}
+
+La fonction \Icode{help.search} permet quant à elle de rechercher
+de l'aide sur un sujet.
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+help.search("\meta{sujet}")
+\end{Verbatim}
+\end{Schunk}
+
+Le système d'aide de R contient également bon nombre de documents plus
+longs en format PDF. Les «vignettes» abordent habituellement une
+thématique dans son ensemble plutôt que simplement par le biais d'une
+suite de fonctions.
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+vignette("\meta{sujet}")
+\end{Verbatim}
+\end{Schunk}
+
+Vous pouvez également vous tourner vers la documentation officielle de
+R. Celle-ci se compose de six guides accessibles depuis le menu
+\texttt{Aide} des interfaces graphiques ou encore
+\link{https://cran.r-project.org/manuals.html}{en ligne} dans le site
+du projet R. Concentrez-vous au départ sur les guides \emph{An
+  Introduction to R} et \emph{R Data Import/Export}.
+
+Les livres sur R emplissent aujourd'hui de pleins rayons de
+bibliothèques. Les ouvrages de \citet{Venables:s:2000,MASS} demeurent
+des références standards \emph{de facto} sur les langages S et R. Plus
+récents, \cite{Braun:Rprogramming:2007,Braun:Rprogramming:2e:2016}
+participent du même effort que le présent ouvrage en se concentrant
+sur la programmation en R plutôt que sur ses applications
+statistiques.
+
 <<script, results=hide>>=
 ###
 ### COMMANDES R            `\labelline{presentation}`
@@ -646,72 +702,13 @@ rm(x, y, v, m)             #-*- `\labelline{presentation:fin}`
 @
 
 \gotorbox{C'est le temps de vous lancer dans une première session de
-  travail avec R.
-
-  Le fichier de script \code{\scriptfilename} livré avec le présent
-  document et reproduit à la \autoref{sec:presentation:exemples}
-  contient du code qui passe en revue quelques unes des
-  fonctionnalités de R. Ouvrez ce fichier dans votre éditeur de texte,
-  puis exécutez une par une les lignes \reflines{presentation} en
+  travail avec R. Le fichier de script \code{\scriptfilename} livré
+  avec le présent document et reproduit à la
+  \autoref{sec:presentation:exemples} contient du code qui passe en
+  revue quelques unes des fonctionnalités de R. Ouvrez ce fichier dans
+  votre éditeur de texte, puis exécutez les lignes une par une en
   prenant bien soin de lire les commentaires et d'examiner les
-  résultats.
-
-  Poursuivez la lecture une fois la session de travail terminée. (En
-  consultation électronique, les numéros de lignes dans le code
-  informatique permettent de revenir ici directement.)}
-
-
-\section{Consulter l'aide en ligne}
-\label{sec:presentation:aide}
-
-Les rubriques d'aide des diverses fonctions de R contiennent une foule
-d'informations ainsi que des exemples d'utilisation. Leur consultation
-est tout à fait essentielle.
-
-Les fonctions \Icode{?} et \Icode{help} permettent de consulter
-la rubrique d'aide d'une fonction ou d'un autre type d'objet.
-\begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
-> ?\meta{fonction}
-> help(\meta{fonction})
-\end{Verbatim}
-\end{Schunk}
-
-La fonction \Icode{help.search} permet quant à elle de rechercher
-de l'aide sur un sujet.
-\begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
-help.search("\meta{sujet}")
-\end{Verbatim}
-\end{Schunk}
-
-Enfin, le système d'aide de R contient bon nombre de documents plus
-longs en format PDF. Les «vignettes» abordent habituellement une
-thématique dans son ensemble plutôt que simplement par le biais d'une
-suite de fonctions.
-\begin{Schunk}
-\begin{Verbatim}[commandchars=\\\{\}]
-vignette("\meta{sujet}")
-\end{Verbatim}
-\end{Schunk}
-
-
-\section{Où trouver de la documentation}
-\label{sec:presentation:doc}
-
-La documentation officielle de R se compose de six guides accessibles
-depuis le menu \texttt{Aide} des interfaces graphiques ou encore
-\link{https://cran.r-project.org/manuals.html}{en ligne} dans le site
-du projet R. Pour les débutants, seuls \emph{An Introduction to R} et,
-possiblement, \emph{R Data Import/Export} peuvent s'avérer des
-ressources utiles à court terme.
-
-Depuis plusieurs années maintenant, les ouvrages de
-\citet{Venables:s:2000,MASS} demeurent des références standards
-\emph{de facto} sur les langages S et R. Plus récents,
-\cite{Braun:Rprogramming:2007,Braun:Rprogramming:2e:2016} participent du
-même effort que le présent ouvrage en se concentrant sur la
-programmation en R plutôt que sur ses applications statistiques.
+  résultats.}
 
 
 \section{Exemples}
