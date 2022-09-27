@@ -351,7 +351,7 @@ un environnement de développement intégré (\emph{integrated
 
 Un éditeur de texte est différent d'un traitement de texte en ce qu'il
 s'agit d'un logiciel destiné à la création, l'édition et la sauvegarde
-de fichiers textes purs, c'est-à-dire dépourvus d'information de
+de fichiers textes bruts, c'est-à-dire dépourvus d'information de
 présentation et de mise en forme. Les applications Bloc-notes sous
 Windows ou TextEdit sous macOS sont deux exemples d'éditeurs de texte
 simples.
@@ -454,6 +454,54 @@ d'autres. Voici quelques bons choix.
 \end{itemize}
 
 
+\section{Répertoire de travail}
+\Index{repertoire@répertoire de travail}
+\index{dossier de travail|see{répertoire de travail}}
+\label{sec:presentation:workspace}
+
+Le répertoire de travail (\emph{workspace}) de R est le répertoire par
+défaut dans lequel le logiciel, d'une part, recherche des fichiers de
+script ou de données et, d'autre part, sauvegarde %
+l'\index{espace de travail}espace de travail %
+dans le fichier \code{.RData}. Le répertoire de travail est déterminé
+au lancement de R. La fonction \Icode{getwd} permet d'afficher le
+répertoire de travail courant de R.
+\begin{Schunk}
+\begin{Sinput}
+> getwd()
+\end{Sinput}
+\begin{Soutput}
+[1] "/Users/vincent"
+\end{Soutput}
+\end{Schunk}
+
+Il est possible de changer le répertoire de travail depuis la ligne de
+commande avec \Icode{setwd}:
+\begin{Schunk}
+\begin{Sinput}
+> setwd("~/Documents/programmer-avec-r")
+> getwd()
+\end{Sinput}
+\begin{Soutput}
+[1] "/Users/vincent/Documents/programmer-avec-r"
+\end{Soutput}
+\end{Schunk}
+
+Les interfaces graphiques de R et les environnements de développement
+intégrés démarrent généralement avec un répertoire de travail par
+défaut. On change le répertoire de travail à partir du menu \texttt{Fichier} (Windows) ou
+\texttt{Divers} (macOS) des interfaces graphiques. Dans
+\index{RStudio}RStudio, c'est via le menu \code{Session|Set Working Directory}.
+
+Les foires aux questions spécifiques aux interfaces graphiques
+\citep{Rw-FAQ,RMacOSX-FAQ} contiennent des détails additionnels sur la
+gestion du répertoire de travail.
+
+Avec \index{Emacs}Emacs, la situation est un peu plus simple puisqu'on
+spécifie le répertoire de travail dès le lancement d'un processus R; ceci
+est expliqué plus en détail à l'\autoref{chap:emacs+ess}.
+
+
 \section{Anatomie d'une session de travail}
 \label{sec:presentation:session}
 
@@ -463,31 +511,29 @@ Dans ses grandes lignes, une session de travail avec R comporte les
 \item Démarrer une session R en cliquant sur l'icône de l'application
   si l'on utilise une interface graphique ou RStudio, ou alors en
   suivant la procédure appropriée pour travailler avec son éditeur de
-  texte.
-\item Ouvrir un fichier de script existant ou en créer un nouveau à
-  l'aide de l'éditeur de texte de son choix.
+  texte. Ouvrir un fichier de script existant ou en créer un nouveau.
+\item Si nécessaire, changer le répertoire de travail de R pour le
+  répertoire contenant le fichier de script.
 \item Bâtir graduellement un fichier de script en y consignant le code
   R que l'on souhaite sauvegarder et les commentaires qui permettront
   de s'y retrouver plus tard. Tester les commandes à la ligne de
-  commande. Au cours de la phase de développement, on fera
-  généralement de nombreux allers-retours entre la ligne de commande et
-  le fichier de script.
-\item Sauvegarder son fichier de script et quitter l'éditeur ou
-  l'environnement de développement.
+  commande. Cette phase de développement comporte généralement de
+  nombreux allers-retours entre la ligne de commande et le fichier de
+  script.
+\item Sauvegarder le fichier de script.
 \item Si nécessaire --- et c'est rarement le cas --- sauvegarder
   l'espace de travail de la session R avec
   \code{save.image()}\index{save.image@\code{save.image}}. En fait, on ne voudra
-  sauvegarder nos objets R que lorsque ceux-ci sont très longs à créer,
+  sauvegarder les objets R que lorsque ceux-ci sont très longs à créer,
   comme les résultats d'une simulation.
 \item Quitter R en tapant \code{q()}\index{q@\code{q}} à la ligne de
   commande ou en fermant l'interface graphique par la procédure
-  usuelle. Encore ici, la manière de procéder est quelque peu
-  différente dans GNU~Emacs; voir l'\autoref{chap:emacs+ess}.
+  usuelle.
 \end{enumerate}
-Les étapes 1 et 2 sont interchangeables, tout comme les étapes 4, 5 et
-6. Consultez l'\autoref{chap:emacs+ess} pour la procédure à suivre
-détaillée lorsque l'on utilise GNU~Emacs, ou l'\autoref{chap:rstudio}
-pour l'environnement intégré RStudio.
+L'ordre exact des étapes peut varier. Consultez
+l'\autoref{chap:rstudio} pour la procédure détaillée avec
+l'environnement intégré \index{RStudio}RStudio, ou
+l'\autoref{chap:emacs+ess} pour celle avec \index{Emacs}Emacs.
 
 <<script, results=hide>>=
 ###
@@ -613,54 +659,6 @@ rm(x, y, v, m)             #-*- `\labelline{presentation:fin}`
   Poursuivez la lecture une fois la session de travail terminée. (En
   consultation électronique, les numéros de lignes dans le code
   informatique permettent de revenir ici directement.)}
-
-
-\section{Répertoire de travail}
-\Index{repertoire@répertoire de travail}
-\index{dossier de travail|see{répertoire de travail}}
-\label{sec:presentation:workspace}
-
-Le répertoire de travail (\emph{workspace}) de R est le répertoire par
-défaut dans lequel le logiciel, d'une part, recherche des fichiers de
-script ou de données et, d'autre part, sauvegarde %
-l'\index{espace de travail}espace de travail %
-dans le fichier \code{.RData}. Le répertoire de travail est déterminé
-au lancement de R. La fonction \Icode{getwd} permet d'afficher le
-répertoire de travail courant de R.
-\begin{Schunk}
-\begin{Sinput}
-> getwd()
-\end{Sinput}
-\begin{Soutput}
-[1] "/Users/vincent"
-\end{Soutput}
-\end{Schunk}
-
-Il est possible de changer le répertoire de travail depuis la ligne de
-commande avec \Icode{setwd}:
-\begin{Schunk}
-\begin{Sinput}
-> setwd("~/Documents/programmer-avec-r")
-> getwd()
-\end{Sinput}
-\begin{Soutput}
-[1] "/Users/vincent/Documents/programmer-avec-r"
-\end{Soutput}
-\end{Schunk}
-
-Les interfaces graphiques de R et les environnements de développement
-intégrés démarrent généralement avec un répertoire de travail par
-défaut. On change le répertoire de travail à partir du menu \texttt{Fichier} (Windows) ou
-\texttt{Divers} (macOS) des interfaces graphiques. Dans
-\index{RStudio}RStudio, c'est via le menu \code{Session|Set Working Directory}.
-
-Les foires aux questions spécifiques aux interfaces graphiques
-\citep{Rw-FAQ,RMacOSX-FAQ} contiennent des détails additionnels sur la
-gestion du répertoire de travail.
-
-Avec GNU~Emacs, la situation est un peu plus simple puisqu'on
-spécifie le répertoire de travail dès le lancement d'un processus R; ceci
-est expliqué plus en détail à l'\autoref{chap:emacs+ess}.
 
 
 \section{Consulter l'aide en ligne}
