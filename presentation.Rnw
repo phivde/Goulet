@@ -737,18 +737,11 @@ q()
 \end{exercice}
 
 \begin{exercice}[nosol]
-  Ouvrir dans un éditeur de texte le fichier de script
-  \code{\scriptfilename} reproduit à la section précédente. Exécuter
-  le code ligne par ligne et observer les résultats. Répéter
-  l'exercice avec un ou deux autres éditeurs de texte afin de les
-  comparer et de vous permettre d'en choisir un pour la suite.
-\end{exercice}
-
-\begin{exercice}[nosol]
   Consulter les rubriques d'aide d'une ou plusieurs des fonctions
-  rencontrées lors de l'exercice précédent. Observer d'abord comment
-  les rubriques d'aide sont structurées --- elles sont toutes
-  identiques --- puis exécuter quelques expressions tirées des sections
+  rencontrées dans le code informatique de la
+  \autoref{sec:presentation:exemples}. Observer d'abord comment les
+  rubriques d'aide sont structurées --- elles sont toutes identiques
+  --- puis exécuter quelques expressions tirées des sections
   d'exemples.
 \end{exercice}
 
@@ -757,7 +750,8 @@ q()
   Identifier le répertoire de travail de votre session de travail R,
   puis localiser ce répertoire dans le système de fichier de votre
   poste de travail. Changer ensuite le répertoire de travail de R pour
-  un autre répertoire.
+  celui contenant le fichier \code{\scriptfilename} reproduit à la
+  \autoref{sec:presentation:exemples}.
 \end{exercice}
 
 \begin{exercice}[nosol]
@@ -765,6 +759,12 @@ q()
   trouve à l'annexe~A de \citet{R-intro}. En plus d'aider à se
   familiariser avec R, cet exercice permet de découvrir les
   fonctionnalités du logiciel en tant qu'outil statistique.
+\end{exercice}
+
+\begin{exercice}[nosol]
+  Répéter l'exercice d'évaluation du code du fichier
+  \code{\scriptfilename} avec un ou deux autres éditeurs de texte afin
+  de les comparer et de vous permettre d'en choisir un pour la suite.
 \end{exercice}
 
 %%% Local Variables:
