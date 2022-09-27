@@ -10,6 +10,21 @@
 
 ## Changements
 
+- Chapitre 3: les sections 3.6 (Anatomie d'une session de travail) et
+  3.7 (Répertoire de travail) ont été inversées suite à la révision de
+  la première. La révision permet d'uniformiser les étapes clés d'une
+  session de travail entre le chapitre 3 et les annexes A et B. En
+  particulier, le changement du répertoire de travail a été ajouté à
+  la session de travail type du chapitre 3.
+- Chapitre 3: les sections 3.8 et 3.9 sur les rubriques d'aide et la
+  documentation ont été fusionnées en une seule.
+- Chapitre 3: la redirection vers le code informatique du fichier
+  `presentation.R` apparait maintenant en toute fin de chapitre.
+- Chapitre 3: l'exercice 3.2 est déplacé en 3.5 et sa première partie,
+  qui était redondante avec la redirection vers le code informatique,
+  a été supprimée. De plus, l'exercice 3.3 (anciennement 3.4) demande
+  maintenant de changer le répertoire de travail de R pour celui
+  contenant le fichier `presentation.R`.
 - Section 5.9: l'hyperlien vers la version 1.0.0 de R utilisait le
   protocole ftp qui n'est plus beaucoup supporté. Il a été changé pour
   un lien vers l'annonce du lancement de la version dans le forum
