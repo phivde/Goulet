@@ -356,14 +356,14 @@ Je recommande d'effectuer les configurations suivantes.
   d'indenter le code de quatre caractères par défaut. (Ce réglage fait
   aussi l'objet de l'\autoref{ex:pratiques:rstudio-tab-width}.)
 \item Toujours dans la catégorie \code{Code}, mais dans la
-  sous-catégorie \code{Saving}, cocher l'option \code{Strip trailing
-    horizontal whitespace when saving} et régler l'option
-  \code{Default text encoding} à \code{UTF-8}, tel qu'illustré à la
-  \autoref{fig:rstudio:rstudio-utf-8}. Les fichiers de script
-  contenant des accents et autres symboles seront ensuite sauvegardés
-  dans un codage de caractères standard sur toutes les plateformes
-  informatiques et les espaces inutiles en fin de ligne seront
-  automatiquement supprimées.
+  sous-catégorie \code{Saving}, cocher les options \code{Ensure that
+    source files end with newline} et \code{Strip trailing horizontal
+    whitespace when saving}, puis régler l'option \code{Default text
+    encoding} à \code{UTF-8}, tel qu'illustré à la
+  \autoref{fig:rstudio:rstudio-utf-8}. RStudio sauvegardera ensuite
+  les fichiers de script dans un format portable sur toutes les
+  plateformes informatiques et supprimera automatiquement les espaces
+  inutiles en fin de ligne.
 \item (Windows seulement) Dans la catégorie \code{Terminal},
   sélectionner \index{Git~Bash}\code{Git~Bash} dans le menu déroulant
   de l'option \code{New Terminals open with}.
@@ -380,8 +380,8 @@ Je recommande d'effectuer les configurations suivantes.
 \begin{figure}
   \centering
   \includegraphics{images/rstudio-utf-8+whitespace}
-  \caption{Réglage de RStudio pour enregistrer les fichiers dans
-    le codage de caractères UTF-8}
+  \caption{Réglage de RStudio pour la sauvegarde des fichiers dans un
+    format portable et sans espaces en fin de ligne}
   \label{fig:rstudio:rstudio-utf-8}
 \end{figure}
 
