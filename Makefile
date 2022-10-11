@@ -242,7 +242,7 @@ upload:
 
 .PHONY: create-link
 create-link:
-	@printf "%s" "ajout du lien dans la description de la version..."; \
+	@printf "%s" "ajout du lien dans la description de la version..."
 	$(eval pkg_id=$(shell curl --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
 	                           --silent \
 	                           "${APIURL}/packages" \
