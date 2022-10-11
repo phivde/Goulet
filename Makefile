@@ -200,7 +200,7 @@ check-status:
 create-release:
 	@{ \
 	    printf "%s" "vérification que la version existe déjà... "; \
-	    http_code=$$(curl -I ${APIURL}/releases/${TAGNAME} 2>/dev/null \
+	    http_code=$$(curl -I "${APIURL}/releases/${TAGNAME}" 2>/dev/null \
 	                     | head -n1 | cut -d " " -f2) ; \
 	    if [ "$${http_code}" = "200" ]; \
 	    then \
@@ -233,12 +233,12 @@ create-release:
 
 .PHONY: upload
 upload:
-	@printf "%s\n" "téléversement de l'archive vers le registre..."; \
+	@printf "%s\n" "téléversement de l'archive vers le registre..."
 	curl --upload-file "${ARCHIVE}" \
-	      --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
-	      --silent \
-	      "${APIURL}/packages/generic/${REPOSNAME}/${VERSION}/${ARCHIVE}"
-	@printf "%s\n" "ok"
+	     --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+	     --silent \
+	     "${APIURL}/packages/generic/${REPOSNAME}/${VERSION}/${ARCHIVE}"
+	@printf "\n%s\n" "ok"
 
 .PHONY: create-link
 create-link:
@@ -259,7 +259,7 @@ create-link:
 	      --data url="${REPOSURL}/-/package_files/${file_id}/download" \
 	      --data link_type="package" \
 	      --output /dev/null --silent \
-	      ${APIURL}/releases/${TAGNAME}/assets/links
+	      "${APIURL}/releases/${TAGNAME}/assets/links"
 	@printf "%s\n" "ok"
 
 .PHONY: publish
@@ -280,7 +280,7 @@ check-url: ${MASTER:.pdf=.tex} ${RNWFILES} ${TEXFILES}
 		   | sort | uniq))
 	@for u in ${url}; do \
 	    printf "%s... " "$$u"; \
-	    if curl --output /dev/null --silent --head --fail --max-time 5 $$u; then \
+	    if curl --output /dev/null --silent --head --fail --max-time 5 "$$u"; then \
 	        printf "%s\n" "ok"; \
 	    else \
 		printf "%s\n" "invalide ou ne répond pas"; \
