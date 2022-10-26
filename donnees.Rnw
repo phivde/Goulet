@@ -902,7 +902,7 @@ dim(x)[2]                  # idem
 
 ## Les matrices et les tableaux étant des vecteurs, ils sont
 ## soumis aux règles usuelles de l'arithmétique vectorielle.
-## Certains des opérations qui en résultent ne sont pas
+## Certaines des opérations qui en résultent ne sont pas
 ## définies en algèbre linéaire usuelle.
 (x <- matrix(1:4, 2))      # matrice 2 x 2
 (y <- matrix(3:6, 2))      # autre matrice 2 x 2
