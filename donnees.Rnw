@@ -902,7 +902,7 @@ dim(x)[2]                  # idem
 
 ## Les matrices et les tableaux étant des vecteurs, ils sont
 ## soumis aux règles usuelles de l'arithmétique vectorielle.
-## Certains des opérations qui en résultent ne sont pas
+## Certaines des opérations qui en résultent ne sont pas
 ## définies en algèbre linéaire usuelle.
 (x <- matrix(1:4, 2))      # matrice 2 x 2
 (y <- matrix(3:6, 2))      # autre matrice 2 x 2
@@ -2277,7 +2277,7 @@ outer(x, y, function(x, y) x + 2 * y) # fonction quelconque  `\labelline{donnees
   \item \verb|mode(c(5, "5", "cinq"))|
   \item \verb|sum(is.na(c(4, NA, 3, 8, NA)))|
   \item \verb|matrix(1:6, 2)[, 2]|
-  \item \verb|as.POSIXlt(as.Date("2001-05-09"))$day|
+  \item \verb|as.POSIXlt(as.Date("2001-05-09"))$mday|
   \item \verb|list(NA, 1:10, list(NA, 1:10))|
   \item \verb|x <- data.frame(A = 1:3, B = 5:7); x$A|
   \end{enumerate}
