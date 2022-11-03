@@ -398,6 +398,16 @@
   \def\let@protect@string{\let\protect\string}
   \makeatother
 
+  %% Algorithmes en pseudocode
+  \newenvironment{pseudocode}{%
+    \begin{list}{}{%
+      \renewcommand{\makelabel}{}
+      \setlength{\topsep}{2pt}
+      \setlength{\labelwidth}{0pt}
+      \setlength{\leftmargin}{0pt}}
+    \item}%
+  {\end{list}}
+
   %% Listes de commandes
   \newenvironment{ttscript}[1]{%
     \begin{list}{}{%
@@ -602,7 +612,7 @@
     puis-que
   }
 
-%  \includeonly{algorithmes,texte}
+%  \includeonly{algorithmes}
 
 \begin{document}
 

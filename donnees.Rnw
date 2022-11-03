@@ -1002,7 +1002,7 @@ naturel et l'autre en pseudocode.)
 
 \begin{algorithme}
   Calculer les sommes par colonne d'une matrice $\mat{A}$.
-  \begin{Schunk}
+  \begin{pseudocode}
 \begin{Verbatim}[commandchars=\\\{\}]
 colsum(matrice A)
   n \leftarrow nombre de colonnes de A
@@ -1014,7 +1014,7 @@ colsum(matrice A)
   Retourner Sommes
 Fin colsum
 \end{Verbatim}
-  \end{Schunk}
+  \end{pseudocode}
 \end{algorithme}
 
 Vous pouvez vérifier que les résultats de ces algorithmes sont %

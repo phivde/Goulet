@@ -238,7 +238,7 @@ versions de l'algorithme retournent bien le même résultat.
   \label{algo:algorithmes:euclide:pseudo}
   Calculer le plus grand commun diviseur de deux entiers positifs $m$
   et $n$ avec, sans perte de généralité, $n < m$.
-  \begin{Schunk}
+  \begin{pseudocode}
 \begin{Verbatim}[commandchars=\\\{\}]
 PGCD(entier m, entier n)
   Tant que (n \neq 0)
@@ -249,7 +249,7 @@ PGCD(entier m, entier n)
   Retourner m
 Fin PGCD  \qed
 \end{Verbatim}
-  \end{Schunk}
+  \end{pseudocode}
 \end{algorithme}
 
 \tipbox{L'opération \index{modulo}modulo, notée en mathématiques
@@ -380,7 +380,7 @@ langage naturel et en pseudocode.
   \addtocounter{algorithme}{-1}
   \begin{algorithme}[Pseudocode]
     Calculer la valeur absolue d'un nombre réel $x$.
-    \begin{Schunk}
+    \begin{pseudocode}
 \begin{Verbatim}[commandchars=\\\{\}]
 abs(réel x)
   Si (x > 0)
@@ -391,7 +391,7 @@ abs(réel x)
     Retourner -x
 Fin abs  \qed
 \end{Verbatim}
-    \end{Schunk}
+    \end{pseudocode}
   \end{algorithme}
 \end{multicols}
 
@@ -421,7 +421,7 @@ effectué que pour les nombres négatifs.
   \addtocounter{algorithmebis}{-1}
   \begin{algorithmebis}[Pseudocode]
     Calculer la valeur absolue d'un nombre réel $x$.
-    \begin{Schunk}
+    \begin{pseudocode}
 \begin{Verbatim}[commandchars=\\\{\}]
 abs(réel x)
   Si (x < 0)
@@ -430,7 +430,7 @@ abs(réel x)
     Retourner x
 Fin abs  \qed
 \end{Verbatim}
-    \end{Schunk}
+    \end{pseudocode}
   \end{algorithmebis}
 \end{multicols}
 
@@ -456,7 +456,7 @@ passe d'une clause «sinon».\footnote{%
   \addtocounter{algorithmebis}{-1}
   \begin{algorithmebis}[Pseudocode]
     Calculer la valeur absolue d'un nombre réel $x$.
-    \begin{Schunk}
+    \begin{pseudocode}
 \begin{Verbatim}[commandchars=\\\{\}]
 abs(réel x)
   Si (x < 0)
@@ -464,7 +464,7 @@ abs(réel x)
   Retourner x
 Fin abs  \qed
 \end{Verbatim}
-    \end{Schunk}
+    \end{pseudocode}
   \end{algorithmebis}
 \end{multicols}
 
@@ -515,7 +515,7 @@ la dernière. En supposant que les planches sont numérotées de $1$ à
 $n$, cela revient à indiquer d'appliquer de la peinture sur la planche
 $i$, pour $i$ allant de $1$ à $n$. Transcrites en pseudocode, les
 instructions vont comme suit.
-\begin{Schunk}
+\begin{pseudocode}
 \begin{Verbatim}
 Peinturer(entier n)
   Pour i de 1 à n
@@ -523,7 +523,7 @@ Peinturer(entier n)
   Fin Pour
 Fin Peinturer
 \end{Verbatim}
-\end{Schunk}
+\end{pseudocode}
 
 La \autoref{fig:algorithmes:peinture-iter} illustre le processus itératif.
 
@@ -546,7 +546,7 @@ clôture de $n - 1$ planches, et ce, tant qu'il y a des planches à
 peinturer. Remarquez comment la procédure pour peinturer une clôture
 est définie en fonction d'elle-même. Examinez bien le pseudocode
 correspondant ci-dessous.
-\begin{Schunk}
+\begin{pseudocode}
 \begin{Verbatim}
 Peinturer(entier n)
   Si (n = 0)
@@ -554,7 +554,7 @@ Peinturer(entier n)
   AppliquerPeintureSurPlanche(1) ET Peinturer(n - 1)
 Fin Peinturer
 \end{Verbatim}
-\end{Schunk}
+\end{pseudocode}
 
 La personne qui suit les instructions récursives ne peut commencer à
 appliquer de la peinture tant qu'elle n'a pas rencontré la condition
@@ -646,7 +646,7 @@ récursifs.
 \begin{algorithme}[Factorielle, approche récursive]
   \label{algo:algorithmes:factorielle-recursive}
   Calculer la \index{factorielle}factorielle d'un entier positif $n$.
-  \begin{Schunk}
+  \begin{pseudocode}
 \begin{Verbatim}[commandchars=\\\{\}]
 factorial(entier n)
   Si (n = 1)
@@ -654,7 +654,7 @@ factorial(entier n)
   Retourner n \times factorial(n - 1)
 Fin factorial  \qed
 \end{Verbatim}
-  \end{Schunk}
+  \end{pseudocode}
 \end{algorithme}
 
 La \autoref{fig:algorithmes:factorial} illustre le processus de calcul
@@ -799,7 +799,7 @@ ce qui mène à un premier algorithme.
 \begin{algorithme}
   \label{algo:algorithmes:puissance}
   Élever un nombre $b$ à la puissance entière positive $n$.
-  \begin{Schunk}
+  \begin{pseudocode}
 \begin{Verbatim}[commandchars=\\\{\}]
 Puissance(nombre réel b, entier positif n)
   Si (n = 0)
@@ -807,7 +807,7 @@ Puissance(nombre réel b, entier positif n)
   Retourner b \times Puissance(b, n - 1)
 Fin Puissance \qed
 \end{Verbatim}
-  \end{Schunk}
+  \end{pseudocode}
 \end{algorithme}
 
 Vous aurez tout de suite identifié que
@@ -846,7 +846,7 @@ Ce calcul se traduit en un nouvel algorithme récursif.
 \begin{algorithmebis}
   \label{algo:algorithmes:puissance:bis}
   Élever un nombre $b$ à la puissance entière positive $n$.
-  \begin{Schunk}
+  \begin{pseudocode}
 \begin{Verbatim}[commandchars=\\\{\}]
 Puissance(nombre réel b, entier positif n)
   Si (n = 0)
@@ -857,7 +857,7 @@ Puissance(nombre réel b, entier positif n)
    Retourner b \times Puissance(b, n - 1)
 Fin Puissance  \qed
 \end{Verbatim}
-  \end{Schunk}
+  \end{pseudocode}
 \end{algorithmebis}
 
 Là où l'\autoref{algo:algorithmes:puissance} requiert $20$ opérations
@@ -968,7 +968,7 @@ opérations d'un algorithme, consultez
     \begin{algorithme*}
       Calculer les racines du polynôme $a x^2 + b x + c$ à partir des
       coefficients réels $a$, $b$ et $c$.
-      \begin{Schunk}
+      \begin{pseudocode}
 \begin{Verbatim}[commandchars=\\\{\}]
 quadroots(réel a, réel b, réel c)
   d \leftarrow b^2 - 4 \times a \times c
@@ -981,7 +981,7 @@ quadroots(réel a, réel b, réel c)
   Retourner x et y
 Fin quadroots  \qed
 \end{Verbatim}
-      \end{Schunk}
+      \end{pseudocode}
     \end{algorithme*}
   \end{sol}
 \end{exercice}
@@ -1000,7 +1000,7 @@ Fin quadroots  \qed
 
     Par exemple, supposons qu'une fonction contient les instructions
     suivantes:
-    \begin{Schunk}
+    \begin{pseudocode}
 \begin{Verbatim}[commandchars=\\\{\}]
 Si \meta{condition}
   \meta{conséquence}
@@ -1008,21 +1008,21 @@ sinon
   \meta{alternative}
 \meta{instruction}
 \end{Verbatim}
-    \end{Schunk}
+    \end{pseudocode}
     Avec une telle structure, l'\meta{instruction} sera évaluée en
     tout temps, que la \meta{condition} soit vraie ou fausse. Or, si la
     \meta{conséquence} contient «Retourner», tant l'\meta{alternative}
     que l'\meta{instruction} ne seront évaluée que lorsque la
     \meta{condition} est fausse. La formulation ci-dessous est donc
     tout à fait équivalente.
-    \begin{Schunk}
+    \begin{pseudocode}
 \begin{Verbatim}[commandchars=\\\{\}]
 Si \meta{condition}
   \meta{conséquence}
 \meta{alternative}
 \meta{instruction}
 \end{Verbatim}
-    \end{Schunk}
+    \end{pseudocode}
   \end{sol}
 \end{exercice}
 
@@ -1218,14 +1218,14 @@ Si \meta{condition}
     \begin{algorithme*}
       Calculer le plus grand commun diviseur de deux entiers positifs
       $m$ et $n$ avec, sans perte de généralité, $n < m$.
-      \begin{Schunk}
+      \begin{pseudocode}
 \begin{Verbatim}[commandchars=\\\{\}]
 PGCD(entier m, entier n)
   Si (n = 0) retourner m
   Retourner PGCD(n, m mod n)
 Fin PGCD  \qed
 \end{Verbatim}
-      \end{Schunk}
+      \end{pseudocode}
     \end{algorithme*}
   \end{sol}
 \end{exercice}
@@ -1267,7 +1267,7 @@ Fin PGCD  \qed
       \begin{algorithme*}[Suite de Fibonacci]
         Calculer la valeur $f(n)$ de la suite de
         \index{Fibonacci}Fibonacci pour un entier non négatif $n$.
-        \begin{Schunk}
+        \begin{pseudocode}
 \begin{Verbatim}[commandchars=\\\{\}]
 Fib(entier n)
   Si (n = 0), retourner 0
@@ -1275,7 +1275,7 @@ Fib(entier n)
   Retourner Fib(n - 2) + Fib(n - 1)
 Fin Fib  \qed
 \end{Verbatim}
-        \end{Schunk}
+        \end{pseudocode}
       \end{algorithme*}
     \item Les 10 premiers nombres de Fibonacci sont:
       $0, 1, 1, 2, 3, 5, 8, 13, 21, 34$.
@@ -1324,7 +1324,7 @@ Fin Fib  \qed
   négatifs $x$ et $y$ telle que définie dans
   \citet{Sussman:scheme:1996}.
 
-  \begin{Schunk}
+  \begin{pseudocode}
 \begin{Verbatim}
 A(entier x, entier y)
   Si (y = 0)
@@ -1337,7 +1337,7 @@ A(entier x, entier y)
     Retourner A(x - 1, A(x, y - 1))
 Fin A
 \end{Verbatim}
-  \end{Schunk}
+  \end{pseudocode}
 
   Calculer la valeur de $A(1, 10)$.
   \begin{sol}
