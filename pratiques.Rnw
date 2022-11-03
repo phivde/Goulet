@@ -503,10 +503,10 @@ commenter, jusqu'à l'évidence.
 z <- sum(x)
 \end{Verbatim}
 \end{Schunk}
-Cette pratique s'avère plus souvent qu'autrement contreproductive:
-non seulement force-t-elle le programmeur à passer du temps à rédiger
-des commentaires sans véritable utilité, mais elle surcharge également
-le code, le rendant de ce fait plus difficile à lire.
+Cette pratique s'avère plus souvent qu'autrement contreproductive: non
+seulement vous force-t-elle à passer du temps à rédiger des
+commentaires sans véritable utilité, mais elle surcharge également le
+code, le rendant de ce fait plus difficile à lire.
 
 Comme bien des choses en ce monde, la meilleure solution se trouve
 dans le juste milieu: commentez ni trop, ni trop peu. Les quelques
