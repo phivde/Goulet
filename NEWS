@@ -14,6 +14,10 @@
 
 ## Changements
 
+- Chapitre 2: les algorithmes en pseudocode ne sont plus présentés
+  dans des blocs de couleur contrastante comme le code informatique,
+  et ce, afin d'éviter de donner l'impression qu'il s'agit de code
+  informatique.
 - Chapitre 3: les sections 3.6 (Anatomie d'une session de travail) et
   3.7 (Répertoire de travail) ont été inversées suite à la révision de
   la première. La révision permet d'uniformiser les étapes clés d'une
