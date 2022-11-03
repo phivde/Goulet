@@ -7,6 +7,10 @@
 ## Nouveautés
 
 - Section 5.9: ajout d'un strip XKCD portant sur l'époque POSIX.
+- Section A.7: la configuration de RStudio à la catégorie `Code`,
+  sous-catégorie `Saving` mentionne maintenant la nouvelle option
+  `Ensure that source files end with newline`. La capture d'écran de
+  la figure a été mise à jour en conséquence.
 
 ## Changements
 
@@ -29,7 +33,9 @@
   protocole ftp qui n'est plus beaucoup supporté. Il a été changé pour
   un lien vers l'annonce du lancement de la version dans le forum
   `r-announce`.
-
+- Mise à jour des captures d'écran des figures 6.3 et A.2 pour la
+  version courante de RStudio.
+  
 
 # 2022.08 (2022-08-17)
 
