@@ -1,4 +1,5 @@
-\savebox{\cube}(1,1.5)[bl]{%
+%% unités de base en blanc
+\savebox{\cube}(1.5,1.3)[bl]{%
   \roundjoin
   \color{white}
   \polygon*(0,0)(0,1)(1,1)(1,0)
@@ -14,6 +15,109 @@
   \polyline(0,1)(0.5,1.3)(1.5,1.3)(1,1)(0,1)
   \polyline(1,1)(1.5,1.3)(1.5,0.3)(1,0)(1,1)
 }
+\savebox{\mcube}(1,1.5)[bl]{%
+  \roundjoin
+  \color{lightgray}
+  \polygon*(0,0)(0,1)(1,1)(1,0)
+  \color{gray}
+  \polygon*(0,1)(0.5,1.3)(1.5,1.3)(1,1)
+  \color{darkgray}
+  \polygon*(1,1)(1.5,1.3)(1.5,0.3)(1,0)
+  \color{black}
+  \moveto(0,0)
+  \lineto(0,1) \lineto(1,1) \lineto(1,0)
+  \closepath
+  \strokepath
+  \polyline(0,1)(0.5,1.3)(1.5,1.3)(1,1)(0,1)
+  \polyline(1,1)(1.5,1.3)(1.5,0.3)(1,0)(1,1)
+}
+\savebox{\dcube}(1,1.5)[bl]{%
+  \roundjoin
+  \color{gray}
+  \polygon*(0,0)(0,1)(1,1)(1,0)
+  \color{darkgray}
+  \polygon*(0,1)(0.5,1.3)(1.5,1.3)(1,1)
+  \color{black!85}
+  \polygon*(1,1)(1.5,1.3)(1.5,0.3)(1,0)
+  \color{black}
+  \moveto(0,0)
+  \lineto(0,1) \lineto(1,1) \lineto(1,0)
+  \closepath
+  \strokepath
+  \polyline(0,1)(0.5,1.3)(1.5,1.3)(1,1)(0,1)
+  \polyline(1,1)(1.5,1.3)(1.5,0.3)(1,0)(1,1)
+}
+\savebox{\ligne}(0,0)[bl]{%
+  \multiput(0.0,0.0)(1,0){5}{\usebox{\cube}}
+}
+\savebox{\colonne}(0,0)[bl]{%
+  \multiput(0.0,0.0)(0,1){3}{\usebox{\cube}}
+}
+\savebox{\carotte}(0,0)[bl]{%
+  \multiput(1.5,0.9)(-0.5,-0.3){4}{\usebox{\cube}}
+}
+\savebox{\matrice}(0,0)[bl]{%
+  \multiput(0.0,0.0)(0,1){3}{\usebox{\ligne}}
+}
+\savebox{\trancheh}(0,0)[bl]{%
+  \multiput(1.5,0.9)(-0.5,-0.3){4}{\usebox{\ligne}}
+}
+\savebox{\tranchev}(0,0)[bl]{%
+  \multiput(1.5,0.9)(-0.5,-0.3){4}{\usebox{\colonne}}
+}
+\savebox{\tableau}(0,0)[bl]{
+  \multiput(1.5,0.9)(-0.5,-0.3){4}{\usebox{\matrice}}
+}
+\savebox{\cubedouble}(3,2.6)[bl]{%
+  \roundjoin
+  \color{white}
+  \polygon*(0,0)(0,2)(2,2)(2,0)
+  \color{lightgray}
+  \polygon*(0,2)(1,2.6)(3,2.6)(2,2)
+  \color{gray}
+  \polygon*(2,2)(3,2.6)(3,0.6)(2,0)
+  \color{black}
+  \moveto(0,0)
+  \lineto(0,2) \lineto(2,2) \lineto(2,0)
+  \closepath
+  \strokepath
+  \polyline(0,2)(1,2.6)(3,2.6)(2,2)(0,2)
+  \polyline(2,2)(3,2.6)(3,0.6)(2,0)(2,2)
+}
+\savebox{\polygone}(6,2.6)[bl]{%
+  \roundjoin
+  \color{white}
+  \polygon*(0,0)(0,2)(5,2)(5,0)
+  \color{lightgray}
+  \polygon*(0,2)(1.0,2.6)(6,2.6)(5,2)
+  \color{gray}
+  \polygon*(5,2)(6,2.6)(6,0.6)(5,0)
+  \color{black}
+  \moveto(0,0)
+  \lineto(0,2) \lineto(5,2) \lineto(5,0)
+  \closepath
+  \strokepath
+  \polyline(0,2)(1.0,2.6)(6,2.6)(5,2)(0,2)
+  \polyline(5,2)(6,2.6)(6,0.6)(5,0)(5,2)
+}
+\savebox{\gpolygone}(14.25,4.55)[bl]{%
+  \roundjoin
+  \color{white}
+  \polygon*(0,0)(0,3.5)(12.5,3.5)(12.5,0)
+  \color{lightgray}
+  \polygon*(0,3.5)(1.75,4.55)(14.25,4.55)(12.5,3.5)
+  \color{gray}
+  \polygon*(12.5,3.5)(14.25,4.55)(14.25,1.05)(12.5,0)
+  \color{black}
+  \moveto(0,0)
+  \lineto(0,3.5) \lineto(12.5,3.5) \lineto(12.5,0)
+  \closepath
+  \strokepath
+  \polyline(0,3.5)(1.75,4.55)(14.25,4.55)(12.5,3.5)(0,3.5)
+  \polyline(12.5,3.5)(14.25,4.55)(14.25,1.05)(12.5,0)(12.5,3.5)
+}
+
+%% versions colorées
 \savebox{\ccube}(1,1.5)[bl]{%
   \roundjoin
   \color{indexedface}
@@ -30,20 +134,56 @@
   \polyline(0,1)(0.5,1.3)(1.5,1.3)(1,1)(0,1)
   \polyline(1,1)(1.5,1.3)(1.5,0.3)(1,0)(1,1)
 }
-\savebox{\tableau}(7,4.2)[bl]{
-  \multiput(1.5,0.9)(1,0){5}{\usebox{\cube}}
-  \multiput(1.0,0.6)(1,0){5}{\usebox{\cube}}
-  \multiput(0.5,0.3)(1,0){5}{\usebox{\cube}}
-  \multiput(0.0,0.0)(1,0){5}{\usebox{\cube}}
-
-  \multiput(1.5,1.9)(1,0){5}{\usebox{\cube}}
-  \multiput(1.0,1.6)(1,0){5}{\usebox{\cube}}
-  \multiput(0.5,1.3)(1,0){5}{\usebox{\cube}}
-  \multiput(0.0,1.0)(1,0){5}{\usebox{\cube}}
-
-  \multiput(1.5,2.9)(1,0){5}{\usebox{\cube}}
-  \multiput(1.0,2.6)(1,0){5}{\usebox{\cube}}
-  \multiput(0.5,2.3)(1,0){5}{\usebox{\cube}}
-  \multiput(0.0,2.0)(1,0){5}{\usebox{\cube}}
+\savebox{\mccube}(1,1.5)[bl]{%
+  \roundjoin
+  \color{mindexedface}
+  \polygon*(0,0)(0,1)(1,1)(1,0)
+  \color{mindexedtop}
+  \polygon*(0,1)(0.5,1.3)(1.5,1.3)(1,1)
+  \color{mindexedside}
+  \polygon*(1,1)(1.5,1.3)(1.5,0.3)(1,0)
+  \color{black}
+  \moveto(0,0)
+  \lineto(0,1) \lineto(1,1) \lineto(1,0)
+  \closepath
+  \strokepath
+  \polyline(0,1)(0.5,1.3)(1.5,1.3)(1,1)(0,1)
+  \polyline(1,1)(1.5,1.3)(1.5,0.3)(1,0)(1,1)
 }
-
+\savebox{\dccube}(1,1.5)[bl]{%
+  \roundjoin
+  \color{dindexedface}
+  \polygon*(0,0)(0,1)(1,1)(1,0)
+  \color{dindexedtop}
+  \polygon*(0,1)(0.5,1.3)(1.5,1.3)(1,1)
+  \color{dindexedside}
+  \polygon*(1,1)(1.5,1.3)(1.5,0.3)(1,0)
+  \color{black}
+  \moveto(0,0)
+  \lineto(0,1) \lineto(1,1) \lineto(1,0)
+  \closepath
+  \strokepath
+  \polyline(0,1)(0.5,1.3)(1.5,1.3)(1,1)(0,1)
+  \polyline(1,1)(1.5,1.3)(1.5,0.3)(1,0)(1,1)
+}
+\savebox{\cligne}(0,0)[bl]{%
+  \multiput(0.0,0.0)(1,0){5}{\usebox{\ccube}}
+}
+\savebox{\ccolonne}(0,0)[bl]{%
+  \multiput(0.0,0.0)(0,1){3}{\usebox{\ccube}}
+}
+\savebox{\ccarotte}(0,0)[bl]{%
+  \multiput(1.5,0.9)(-0.5,-0.3){4}{\usebox{\ccube}}
+}
+\savebox{\cmatrice}(0,0)[bl]{%
+  \multiput(0.0,0.0)(0,1){3}{\usebox{\cligne}}
+}
+\savebox{\ctrancheh}(0,0)[bl]{%
+  \multiput(1.5,0.9)(-0.5,-0.3){4}{\usebox{\cligne}}
+}
+\savebox{\ctranchev}(0,0)[bl]{%
+  \multiput(1.5,0.9)(-0.5,-0.3){4}{\usebox{\ccolonne}}
+}
+\savebox{\ctableau}(0,0)[bl]{
+  \multiput(1.5,0.9)(-0.5,-0.3){4}{\usebox{\cmatrice}}
+}

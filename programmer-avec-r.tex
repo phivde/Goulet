@@ -95,9 +95,15 @@
   \colorlet{regex}{Snow4}                   % coins des regex
   \colorlet{regexmatch}{Snow3}              % correspondances regex
   \colorlet{codebg}{LightYellow1}           % fond code R
-  \colorlet{indexedface}{PaleGreen2}        % cellule indexée (2D et 3D)
-  \colorlet{indexedtop}{PaleGreen3}         % cellule indexée (3D, dessus)
-  \colorlet{indexedside}{PaleGreen4}        % cellule indexée (3D, côté)
+  \colorlet{indexedface}{LightSkyBlue2}     % cellule indexée (face)
+  \colorlet{indexedtop}{LightSkyBlue3}      % cellule indexée (dessus)
+  \colorlet{indexedside}{LightSkyBlue4}     % cellule indexée (côté)
+  \colorlet{mindexedface}{SkyBlue2} % cellule indexée médium (face)
+  \colorlet{mindexedtop}{SkyBlue3}  % cellule indexée médium (dessus)
+  \colorlet{mindexedside}{SkyBlue4} % cellule indexée médium (côté)
+  \colorlet{dindexedface}{DeepSkyBlue2} % cellule indexée foncé (face)
+  \colorlet{dindexedtop}{DeepSkyBlue3}  % cellule indexée foncé (dessus)
+  \colorlet{dindexedside}{DeepSkyBlue4} % cellule indexée foncé (côté)
   \colorlet{prob}{orange}                   % encadrés «problème»
   \colorlet{lineno}{gray}                   % numéros de lignes
   \colorlet{TFFrameColor}{black}            % encadrés (cadre)
@@ -574,13 +580,29 @@
   \newsavebox{\planchep}
   \newsavebox{\supports}
   \newsavebox{\peintre}
-  \newsavebox{\plainmat}
-  \newsavebox{\carre}
-  \newsavebox{\ccarre}
-  \newsavebox{\matrice}
   \newsavebox{\cube}
-  \newsavebox{\ccube}
+  \newsavebox{\mcube}
+  \newsavebox{\dcube}
+  \newsavebox{\ligne}
+  \newsavebox{\colonne}
+  \newsavebox{\carotte}
+  \newsavebox{\matrice}
+  \newsavebox{\trancheh}
+  \newsavebox{\tranchev}
   \newsavebox{\tableau}
+  \newsavebox{\cubedouble}
+  \newsavebox{\polygone}
+  \newsavebox{\gpolygone}
+  \newsavebox{\ccube}
+  \newsavebox{\mccube}
+  \newsavebox{\dccube}
+  \newsavebox{\cligne}
+  \newsavebox{\ccolonne}
+  \newsavebox{\ccarotte}
+  \newsavebox{\cmatrice}
+  \newsavebox{\ctrancheh}
+  \newsavebox{\ctranchev}
+  \newsavebox{\ctableau}
 
   %% Style de la bibliographie
   \bibliographystyle{francais}
@@ -612,7 +634,7 @@
     puis-que
   }
 
-%  \includeonly{algorithmes}
+  \includeonly{donnees}
 
 \begin{document}
 

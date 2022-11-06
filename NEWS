@@ -6,6 +6,8 @@
 
 ## Nouveautés
 
+- Section 5.3: illustrations schématiques des opérations d'application
+  sur les matrices et les tableaux.
 - Section 5.9: ajout d'un strip XKCD portant sur l'époque POSIX.
 - Section A.7: la configuration de RStudio à la catégorie `Code`,
   sous-catégorie `Saving` mentionne maintenant la nouvelle option
@@ -33,6 +35,7 @@
   a été supprimée. De plus, l'exercice 3.3 (anciennement 3.4) demande
   maintenant de changer le répertoire de travail de R pour celui
   contenant le fichier `presentation.R`.
+- Section 5.2: représentation uniforme des objets en 3 dimensions.
 - Section 5.9: l'hyperlien vers la version 1.0.0 de R utilisait le
   protocole ftp qui n'est plus beaucoup supporté. Il a été changé pour
   un lien vers l'annonce du lancement de la version dans le forum
