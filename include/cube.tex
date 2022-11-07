@@ -116,6 +116,17 @@
   \polyline(0,3.5)(1.75,4.55)(14.25,4.55)(12.5,3.5)(0,3.5)
   \polyline(12.5,3.5)(14.25,4.55)(14.25,1.05)(12.5,0)(12.5,3.5)
 }
+\savebox{\nametag}(6,2)[bl]{
+  \color{white}
+  \polygon*(0,1)(1,2)(6,2)(6,0)(1,0)
+  \roundjoin
+  \color{black}
+  \closepath
+  \strokepath
+  \polyline(0,1)(1,2)(6,2)(6,0)(1,0)(0,1)
+  \color{black}
+  \put(0.75,1){\circle{0.5}}
+}
 
 %% versions colorées
 \savebox{\ccube}(1,1.5)[bl]{%

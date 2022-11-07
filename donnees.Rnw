@@ -1306,12 +1306,51 @@ La liste est la structure de données par excellence pour réunir dans
 un objet plusieurs types d'objets différents. La fonction de base pour
 créer des listes est \Icode{list}.
 <<echo=TRUE>>=
-(x <- list(size = c(1, 5, 2), user = "Joe", new = TRUE))
+(x <- list(score = c(1, 5, 2), user = "Joe", new = TRUE))
 @ %
 
-(Dans l'exemple ci-dessus, le premier élément de la liste est un
-vecteur de mode \code{numeric}, le second un vecteur de mode
-\code{character} et le troisième, un vecteur de mode \code{logical}.)
+Dans l'exemple ci-dessus, la liste compte trois éléments. Le premier,
+étiqueté \code{score}, est un vecteur de mode \code{numeric}; le
+second, étiqueté \code{user}, est un vecteur de mode \code{character};
+le troisième, étiqueté \code{new} est un vecteur de mode
+\code{logical}. La \autoref{fig:donnees:liste} propose une
+représentation schématique de cette liste.
+
+\begin{figure}
+  \setlength{\unitlength}{2.5mm}
+  \thicklines
+  \input{include/cube}
+  \centering
+  \begin{picture}(39.25,6)
+    \ttfamily
+    %% liste
+    \multiput(0,0)(12.5,0){3}{\usebox{\gpolygone}}
+
+    %% premier élément
+    \multiput(3,0.5)(2,0){3}{\usebox{\cubedouble}}
+    \put( 4,1.5){\makebox(0,0){1}}
+    \put( 6,1.5){\makebox(0,0){5}}
+    \put( 8,1.5){\makebox(0,0){2}}
+    \put(3.5,4.0){\usebox{\nametag}}
+    \put(7.5,5.0){\makebox(0,0){score}}
+
+    %% deuxième élément
+    \put(16.25,0.5){\usebox{\polygone}}
+    \put(18.75,1.5){\makebox(0,0){Joe}}
+    \put(16.0,4.0){\usebox{\nametag}}
+    \put(20.0,5.0){\makebox(0,0){user}}
+
+    %% troisième élément
+    \put(28.75,0.5){\usebox{\polygone}}
+    \put(31.25,1.5){\makebox(0,0){TRUE}}
+    \put(28.5,4.0){\usebox{\nametag}}
+    \put(32.5,5.0){\makebox(0,0){new}}
+  \end{picture}
+  \caption[Représentation schématique d'une liste]{%
+    Représentation schématique d'une liste composée d'un vecteur
+    numérique, d'un vecteur caractère et d'un vecteur booléen}
+  \label{fig:donnees:liste}
+\end{figure}
 
 \tipbox{Étiquetez les éléments des listes puisqu'il peut s'avérer
   difficile autrement de les identifier. De plus, comme nous le
@@ -1346,7 +1385,7 @@ x[c(1, 3)]
   chaine de caractères. Le résultat est l'objet «sorti» de la liste.
 <<echo=TRUE>>=
 x[[1]]
-x[["size"]]
+x[["score"]]
 @
 
   Petite fonctionnalité peu employée, mais élégante des crochets
@@ -1363,9 +1402,47 @@ x[[c(1, 2)]]
   sélectionner un seul élément d'une liste est par son étiquette avec
   l'opérateur \Icode{\$}.
 <<echo=TRUE>>=
-x$size
+x$score
 @
 \end{itemize}
+
+Consultez la \autoref{fig:donnees:liste:indicage} pour une
+illustration de l'indiçage d'une liste.
+
+\begin{figure}
+  \setlength{\unitlength}{2.5mm}
+  \thicklines
+  \input{include/cube}
+  \centering
+  \begin{minipage}[t]{0.4\linewidth}
+    \centering
+    \code{x[1]} \\
+    \begin{picture}(14.25,7.0)
+      \ttfamily
+      \put(0,0){\usebox{\gpolygone}}
+      \multiput(3,0.5)(2,0){3}{\usebox{\cubedouble}}
+      \put( 4,1.5){\makebox(0,0){1}}
+      \put( 6,1.5){\makebox(0,0){5}}
+      \put( 8,1.5){\makebox(0,0){2}}
+      \put(3.5,4.0){\usebox{\nametag}}
+      \put(7.5,5.0){\makebox(0,0){score}}
+    \end{picture}
+  \end{minipage}
+  \begin{minipage}[t]{0.4\linewidth}
+    \centering
+    \code{x[[1]]} ou \code{x\$score} \\
+    \begin{picture}(7,3.5)
+      \ttfamily
+      \multiput(0,0)(2,0){3}{\usebox{\cubedouble}}
+      \put(1,1){\makebox(0,0){1}}
+      \put(3,1){\makebox(0,0){5}}
+      \put(5,1){\makebox(0,0){2}}
+    \end{picture}
+  \end{minipage}
+  \caption{Représentation schématique des opérations d'indiçage d'une
+    liste}
+  \label{fig:donnees:liste:indicage}
+\end{figure}
 
 Mentionnons en terminant la fonction \Icode{unlist} qui convertit une
 liste en un vecteur simple. Elle est surtout utile pour concaténer les
@@ -1525,11 +1602,66 @@ sapply(x, sum)
 sapply(x, sort)
 @
 
+La \autoref{fig:donnees:application:lapply+sapply} illustre
+schématiquement l'effet respectif des fonctions d'application
+\code{lapply} et \code{sapply} sur une liste.
+
+\begin{figure}
+  \setlength{\unitlength}{3.5mm}
+  \thicklines
+  \input{include/cube}
+  \centering
+  \begin{tabular}{c}
+    \code{X} \\
+    \begin{picture}(16,2.9)
+      %% liste
+      \multiput(0,0)(5,0){3}{\usebox{\polygone}}
+      %% premier élément
+      \multiput(0.75,0.5)(1,0){3}{\usebox{\cube}}
+      %% deuxième élément
+      \put(6.75,0.5){\usebox{\cube}}
+      %% troisième élément
+      \multiput(11.25,0.5)(1,0){2}{\usebox{\cube}}
+    \end{picture}
+  \end{tabular} \\[4mm]
+  \begin{tabularx}{0.92\linewidth}{cXc}
+    \code{lapply(X, FUN)} \\
+    \begin{picture}(12.5,2.3)(-4.0,0)
+      \put(-4.0,1.0){\makebox(4.0,0)[l]{\code{FUN} $\mapsto$}}
+      \multiput(0,0.5)(1,0){3}{\usebox{\ccube}}
+      \put(4,0.5){\usebox{\ccube}}
+      \multiput(6,0.5)(1,0){2}{\usebox{\ccube}}
+    \end{picture}
+    & \raisebox{0.5\unitlength}{\faArrowRight} &
+    \begin{picture}(16,2.3)
+      %% liste
+      \multiput(0,0)(5,0){3}{\usebox{\polygone}}
+      %% résultats
+      \multiput(1.75,0.5)(5,0){3}{\usebox{\cube}}
+    \end{picture}
+    \\[4mm]
+    \code{sapply(X, FUN)} \\
+    \begin{picture}(12.5,2.3)(-4.0,0)
+      \put(-4.0,1.0){\makebox(4.0,0)[l]{\code{FUN} $\mapsto$}}
+      \multiput(0,0.5)(1,0){3}{\usebox{\ccube}}
+      \put(4,0.5){\usebox{\ccube}}
+      \multiput(6,0.5)(1,0){2}{\usebox{\ccube}}
+    \end{picture}
+    & \raisebox{0.5\unitlength}{\faArrowRight} &
+    \begin{picture}(3.5,1.8)
+      %% résultats
+      \multiput(0,0.5)(1,0){3}{\usebox{\cube}}
+    \end{picture}
+  \end{tabularx}
+  \caption{Représentation schématique des fonctions d'application
+    \code{lapply} et \code{sapply}}
+  \label{fig:donnees:application:lapply+sapply}
+\end{figure}
+
 \tipbox{La fonction \icode{sapply} est souvent utile pour rendre
-  vectorielle une fonction \code{f} qui ne le serait pas autrement. Il
-  y a deux stratégies possibles: appliquer la fonction \code{f} à un
-  vecteur avec \code{sapply}, ou modifier \code{f} pour y intégrer un
-  appel à \code{sapply}.}
+  vectorielle une fonction \code{f} qui ne le serait pas autrement. La
+  stratégie consiste généralement à vectoriser les calculs en
+  intégrant à la fonction \code{f} un appel à \code{sapply}.}
 
 \importantbox{Outre %
   l'\index{arithmetique@arithmétique vectorielle}arithmétique
@@ -1553,7 +1685,40 @@ Le résultat de \code{mapply} est l'application de la fonction
 Par exemple, si \code{v} et \code{w} sont des vecteurs,
 \code{mapply(FUN, v, w)} retourne sous forme de liste, de vecteur ou
 de matrice, selon le cas, \code{FUN(v[1], w[1])}, \code{FUN(v[2],
-  w[2])}, \code{FUN(v[3], w[3])}, etc.
+  w[2])}, \code{FUN(v[3], w[3])}, etc. La
+\autoref{fig:donnees:application:mapply} offre une représentation de
+cette fonction d'application.
+
+\begin{figure}
+  \setlength{\unitlength}{3.5mm}
+  \thicklines
+  \input{include/cube}
+  \centering
+  \begin{tabularx}{0.8\linewidth}{cXcXc}
+    & & \code{mapply(FUN, x, y)} \\
+    \begin{picture}(4.5,2.3)
+      \put(0,2.5){\makebox(0,0){\code{x}}}
+      \multiput(1,2.0)(1,0){3}{\usebox{\cube}}
+      \put(0,0.5){\makebox(0,0){\code{y}}}
+      \multiput(1,0.0)(1,0){3}{\usebox{\dcube}}
+    \end{picture}
+    & \quad\raisebox{1.0\unitlength}{\faArrowRight} &
+    \begin{picture}(3.5,4.3)(-1.0,0.0)
+      \put(-4.0,1.0){\makebox(4.0,0)[l]{\code{FUN} $\mapsto$}}
+      \multiput(0,-1.5)(0,2){3}{\usebox{\ccube}}
+      \multiput(1.5,-1.5)(0,2){3}{\usebox{\dccube}}
+    \end{picture}
+    \rule[-1.5\unitlength]{0pt}{4.3\unitlength} % éloigner légende
+    & \quad\raisebox{1.0\unitlength}{\faArrowRight} &
+    \begin{picture}(3.5,1.8)
+      %% résultats
+      \multiput(0,1.0)(1,0){3}{\usebox{\cube}}
+    \end{picture}
+  \end{tabularx}
+  \caption{Représentation schématique de la fonction d'application
+    \code{mapply}}
+  \label{fig:donnees:application:mapply}
+\end{figure}
 
 \gotorbox{Étudiez les lignes \reflines{donnees:lsmapply}
   du fichier de script \code{\scriptfilename}
@@ -1861,11 +2026,57 @@ tapply(X, INDEX, FUN, ...)
   données définis par les catégories des facteurs dans \code{INDEX}.
 \end{itemize}
 <<echo=TRUE>>=
-x <- data.frame(couleur=c("r", "v", "r", "r", "v"),
-                score=c(2, 0, 4, 3, 10))
-str(x)
+x <- data.frame(couleur = c("r", "v", "r", "r", "v"),
+                score = c(2, 0, 4, 3, 10))
 tapply(x$score, x$couleur, mean)
 @
+
+La mécanique de \code{tapply} est illustrée à la
+\autoref{fig:donnees:application:tapply}.
+
+\begin{figure}
+  \setlength{\unitlength}{3.5mm}
+  \thicklines
+  \input{include/cube}
+  \centering
+  \begin{tabular}{cc}
+    \code{X} & \code{INDEX} \\
+    \begin{picture}(10.5,1.3)
+      \multiput(0,0)(1,0){10}{\usebox{\cube}}
+    \end{picture}
+    &
+    \begin{picture}(10.5,1.3)
+      \put(0,0){\usebox{\mcube}}
+      \put(1,0){\usebox{\dcube}}
+      \put(2,0){\usebox{\mcube}}
+      \put(3,0){\usebox{\mcube}}
+      \put(4,0){\usebox{\cube}}
+      \put(5,0){\usebox{\dcube}}
+      \put(6,0){\usebox{\cube}}
+      \put(7,0){\usebox{\mcube}}
+      \put(8,0){\usebox{\cube}}
+      \put(9,0){\usebox{\mcube}}
+    \end{picture}
+  \end{tabular} \\[4mm]
+  \begin{tabularx}{0.6\linewidth}{cXc}
+    \code{tapply(X, INDEX, FUN)} \\
+    \begin{picture}(10.5,5)(-4.0,-0.8)
+      \thicklines
+      \put(-4.0,1.0){\makebox(4.0,0)[l]{\code{FUN} $\mapsto$}}
+      \multiput(0.0, 2.5)(1,0){3}{\usebox{\ccube}}
+      \multiput(0.0, 0.5)(1,0){5}{\usebox{\mccube}}
+      \multiput(0.0,-1.5)(1,0){2}{\usebox{\dccube}}
+    \end{picture}
+    \rule[-1\unitlength]{0pt}{5\unitlength} % éloigner légende
+    & \raisebox{1.5\unitlength}{\faArrowRight} &
+    \begin{picture}(3.5,1.3)(0,-0.8)
+      \multiput(0,0.5)(1,0){3}{\usebox{\cube}}
+    \end{picture}
+  \end{tabularx}
+  \caption{Représentation schématique de la fonction d'application
+    \code{tapply}}
+  \label{fig:donnees:application:tapply}
+\end{figure}
 
 \gotorbox{Étudiez les lignes \reflines{donnees:facteur}
   du fichier de script \code{\scriptfilename}
@@ -2005,22 +2216,25 @@ d$hour
 @
 \end{itemize}
 
-\tipbox{Consultez les rubriques d'aide de \code{Date} et de
-  \code{DateTimeClasses}. Elles contiennent une foule de détails
-  additionnels sur la représentation et le traitement des dates dans
-  R.}
+\tipbox{Les rubriques d'aide de \code{Date} et de
+  \code{DateTimeClasses} contiennent une foule de détails additionnels
+  sur la représentation et le traitement des dates dans R.}
 
-\notebox{Les exemples ci-dessus utilisent tous la date du 29 février
-  2000. Que s'est-il passé de spécial ce jour-là? Les années multiples
-  de 100 ne sont pas bissextiles, sauf celles multiples de 400. C'est
-  pourquoi 2000 était bel et bien une année bissextile. La prochaine
-  du type aura donc lieu en{\dots} 2400. Certains logiciels à l'époque
-  étaient affligés d'un bogue qui faisait en sorte que la date
-  n'existait pas dans leur calendrier. C'est beaucoup par espièglerie
-  que le \emph{R Core Team} a justement choisi cette journée pour
-  lancer la
-  \link{https://stat.ethz.ch/pipermail/r-announce/2000/000127.html}{version
-    1.0.0 de R}.}
+%% La boite signalétique ci-dessus étant grande, je la place dans un
+%% float pour éviter un saut de page disgracieux
+\begin{figure}
+  \notebox{Les exemples de la \autoref{sec:donnees:date} utilisent
+    tous la date du 29 février 2000. Que s'est-il passé de spécial ce
+    jour-là? Les années multiples de 100 ne sont pas bissextiles, sauf
+    celles multiples de 400. C'est pourquoi 2000 était bel et bien une
+    année bissextile. La prochaine du type aura donc lieu en{\dots}
+    2400. Certains logiciels de l'époque étaient affligés d'un bogue
+    qui faisait en sorte que le 29 février 2000 n'existait pas dans
+    leur calendrier. C'est beaucoup par espièglerie que le \emph{R
+      Core Team} a justement choisi cette journée pour lancer la
+    \link{https://stat.ethz.ch/pipermail/r-announce/2000/000127.html}{version
+      1.0.0 de R}.}
+\end{figure}
 
 \gotorbox{Les lignes \reflines{donnees:date} du fichier de script
   \code{\scriptfilename} reproduit à la \autoref{sec:donnees:exemples}
