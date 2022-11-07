@@ -8,6 +8,12 @@
 
 - Section 5.3: illustrations schématiques des opérations d'application
   sur les matrices et les tableaux.
+- Section 5.4: illustrations schématiques d'une liste et des
+  opérations d'indiçage sur celle-ci.
+- Section 5.5: illustrations schématiques des fonctions d'application
+  `lapply`, `sapply` et `mapply`.
+- Section 5.8: illustrations schématiques de la fonction d'application
+  `tapply`.
 - Section 5.9: ajout d'un strip XKCD portant sur l'époque POSIX.
 - Section A.7: la configuration de RStudio à la catégorie `Code`,
   sous-catégorie `Saving` mentionne maintenant la nouvelle option
