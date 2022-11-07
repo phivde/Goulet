@@ -597,12 +597,12 @@ des matrices et des tableaux à trois et à quatre dimensions.
       \put(8.0,0.8){\vector(5,3){3.2}}
     \end{picture}
   \end{minipage}
-  \caption[Représentations schématiques de tableaux à trois et à
-  quatre dimensions]{%
-    Représentations schématiques d'une matrice (en haut à gauche),
-    d'un tableau à trois dimensions (en bas à gauche) et d'un tableau
-    à quatre dimensions (à droite). Les chiffres encerclés identifient
-    l'ordre de remplissage des dimensions.}
+  \caption[Représentations de tableaux à trois et à quatre
+  dimensions]{%
+    Représentations d'une matrice (en haut à gauche), d'un tableau à
+    trois dimensions (en bas à gauche) et d'un tableau à quatre
+    dimensions (à droite). Les chiffres encerclés identifient l'ordre
+    de remplissage des dimensions.}
   \label{fig:donnees:tableaux}
 \end{figure}
 
@@ -706,11 +706,10 @@ et d'un tableau à trois dimensions.
       \multiput(3,2)(1,0){2}{\usebox{\cube}}
     \end{picture}
   \end{minipage}
-  \caption[Représentations schématiques d'opérations d'indiçage sur
-  une matrice]{%
-    Représentations schématiques d'opérations d'indiçage sur une
-    matrice. De gauche à droite: matrice complète; sélection d'une
-    ligne; sélection d'une colonne; sélection d'un élément unique.}
+  \caption[Représentations d'opérations d'indiçage sur une matrice]{%
+    Représentations d'opérations d'indiçage sur une matrice. De gauche
+    à droite: matrice complète; sélection d'une ligne; sélection d'une
+    colonne; sélection d'un élément unique.}
   \label{fig:donnees:indicage:matrice}
 \end{figure}
 
@@ -761,12 +760,12 @@ et d'un tableau à trois dimensions.
       \put(0.0,2.0){\usebox{\ligne}}
     \end{picture}
   \end{minipage}
-  \caption[Représentations schématiques d'opérations d'indiçage sur un
-  tableau à trois dimensions]{%
-    Représentations schématiques d'opérations d'indiçage sur un
-    tableau à trois dimensions. De gauche à droite: tableau
-    complet; sélection d'une tranche horizontale; sélection d'une carotte
-    transversale; sélection d'un élément unique.}
+  \caption[Représentations d'opérations d'indiçage sur un tableau à
+  trois dimensions]{%
+    Représentations d'opérations d'indiçage sur un tableau à trois
+    dimensions. De gauche à droite: tableau complet; sélection d'une
+    tranche horizontale; sélection d'une carotte transversale;
+    sélection d'un élément unique.}
   \label{fig:donnees:indicage:tableau}
 \end{figure}
 
@@ -1030,9 +1029,9 @@ apply(X, MARGIN, FUN, ...)
   \code{FUN}, séparés par des virgules.
 \end{itemize}
 
-La \autoref{fig:donnees:application:matrice} propose une
-représentation schématique des opérations d'applications sur les
-lignes et les colonnes d'une matrice.
+La \autoref{fig:donnees:application:matrice} représente
+schématiquement des opérations d'applications sur les lignes et les
+colonnes d'une matrice.
 
 \begin{figure}
   \setlength{\unitlength}{4mm}
@@ -1073,8 +1072,8 @@ lignes et les colonnes d'une matrice.
       \put(0,1){\usebox{\ligne}}
     \end{picture}
   \end{tabularx}
-  \caption{Représentations schématiques des opérations d'application
-    sur une matrice}
+  \caption{Représentations de la fonction d'application \code{apply}
+    avec une matrice}
   \label{fig:donnees:application:matrice}
 \end{figure}
 
@@ -1174,8 +1173,8 @@ schématiquement.
       \put(0,0){\usebox{\matrice}}
     \end{picture}
   \end{tabularx}
-  \caption{Représentations schématiques d'opérations d'application
-    sur un tableau}
+  \caption{Représentations de la fonction d'application \code{apply}
+    avec un tableau à trois dimensions}
   \label{fig:donnees:application:tableau}
 \end{figure}
 
@@ -1346,9 +1345,9 @@ représentation schématique de cette liste.
     \put(28.5,4.0){\usebox{\nametag}}
     \put(32.5,5.0){\makebox(0,0){new}}
   \end{picture}
-  \caption[Représentation schématique d'une liste]{%
-    Représentation schématique d'une liste composée d'un vecteur
-    numérique, d'un vecteur caractère et d'un vecteur booléen}
+  \caption[Représentation d'une liste]{%
+    Représentation d'une liste composée d'un vecteur numérique, d'un
+    vecteur caractère et d'un vecteur booléen}
   \label{fig:donnees:liste}
 \end{figure}
 
@@ -1439,8 +1438,7 @@ illustration de l'indiçage d'une liste.
       \put(5,1){\makebox(0,0){2}}
     \end{picture}
   \end{minipage}
-  \caption{Représentation schématique des opérations d'indiçage d'une
-    liste}
+  \caption{Représentations d'opérations d'indiçage sur une liste}
   \label{fig:donnees:liste:indicage}
 \end{figure}
 
@@ -1602,9 +1600,9 @@ sapply(x, sum)
 sapply(x, sort)
 @
 
-La \autoref{fig:donnees:application:lapply+sapply} illustre
-schématiquement l'effet respectif des fonctions d'application
-\code{lapply} et \code{sapply} sur une liste.
+La \autoref{fig:donnees:application:lapply+sapply} illustre l'effet
+respectif des fonctions d'application \code{lapply} et \code{sapply}
+sur une liste.
 
 \begin{figure}
   \setlength{\unitlength}{3.5mm}
@@ -1653,8 +1651,8 @@ schématiquement l'effet respectif des fonctions d'application
       \multiput(0,0.5)(1,0){3}{\usebox{\cube}}
     \end{picture}
   \end{tabularx}
-  \caption{Représentation schématique des fonctions d'application
-    \code{lapply} et \code{sapply}}
+  \caption{Représentations des fonctions d'application \code{lapply}
+    et \code{sapply}}
   \label{fig:donnees:application:lapply+sapply}
 \end{figure}
 
@@ -1715,8 +1713,7 @@ cette fonction d'application.
       \multiput(0,1.0)(1,0){3}{\usebox{\cube}}
     \end{picture}
   \end{tabularx}
-  \caption{Représentation schématique de la fonction d'application
-    \code{mapply}}
+  \caption{Représentation de la fonction d'application \code{mapply}}
   \label{fig:donnees:application:mapply}
 \end{figure}
 
@@ -2073,8 +2070,7 @@ La mécanique de \code{tapply} est illustrée à la
       \multiput(0,0.5)(1,0){3}{\usebox{\cube}}
     \end{picture}
   \end{tabularx}
-  \caption{Représentation schématique de la fonction d'application
-    \code{tapply}}
+  \caption{Représentation de la fonction d'application \code{tapply}}
   \label{fig:donnees:application:tapply}
 \end{figure}
 
