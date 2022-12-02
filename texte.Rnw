@@ -30,14 +30,14 @@ exec <- function(command, args, echo = TRUE, max.lines = NULL, eval = TRUE, ...)
     output <- if (eval)
     {
         res <- system2(command, args, stdout = TRUE, ...)
-        if (echo)
-            if (is.null(max.lines))
-                paste(cmd, paste(res, collapse = "\n"), sep = "\n")
-            else
-                paste(cmd, paste(head(res, max.lines), collapse = "\n"),
-                      "...\n", sep = "\n")
+        if (is.null(max.lines))
+            res <- paste(res, collapse = "\n")
         else
-            paste(res, collapse = "\n")
+            res <- paste(head(res, max.lines), collapse = "\n")
+        if (echo)
+            paste(cmd, res, sep = "\n")
+        else
+            res
     }
     else
         cmd
