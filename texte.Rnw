@@ -33,7 +33,8 @@ exec <- function(command, args, echo = TRUE, max.lines = NULL, eval = TRUE, ...)
         if (is.null(max.lines))
             res <- paste(res, collapse = "\n")
         else
-            res <- paste(head(res, max.lines), collapse = "\n")
+            res <- paste(paste(head(res, max.lines), collapse = "\n"),
+                         "...\n", sep = "\n")
         if (echo)
             paste(cmd, res, sep = "\n")
         else
@@ -2457,10 +2458,11 @@ BEGIN { OFS = ";" }
 Cette section présente quelques unes seulement des fonctions internes
 qu'offre R pour rechercher et remplacer du texte à l'aide
 d'\index{expression régulière}expressions régulières. Consultez la
-rubrique d'aide (commune) de n'importe laquelle de celles-ci pour
-connaitre l'ensemble des fonctions disponibles et les détails
-concernant leur fonctionnement. Vous trouverez également dans la
-rubrique d'aide de nombreux exemples d'utilisation additionnels.
+rubrique d'aide (commune, sauf pour \icode{regmatches}) de n'importe
+laquelle de celles-ci pour connaitre l'ensemble des fonctions
+disponibles et les détails concernant leur fonctionnement. Vous
+trouverez également dans la rubrique d'aide de nombreux exemples
+d'utilisation additionnels.
 
 \warningbox{Rappelons qu'en R un vecteur de mode \icode{character} peut
   contenir plusieurs chaines de caractères. Les fonctions ci-dessous
@@ -2479,7 +2481,7 @@ op <- options(width=60)                 # quatre colonnes
 options(op)                             # rétablir défaut
 @
 
-\begin{ttscript}{regexpr}
+\begin{ttscript}{regmatches}
 \item[\code{grep}] \Indexcode[R]{grep}%
   recherche d'une expression régulière dans un vecteur de chaines de
   caractères.
@@ -2488,10 +2490,17 @@ grep("ia$", state.name.10)
 grep("ia$", state.name.10, value = TRUE)
 @
 \item[\Icode{regexpr}] comme \code{grep}, mais avec des informations
-  additionnelles sur la position et la longueur des appariements dans
-  les résultats.
+  additionnelles sur la position et la longueur du premier appariement
+  dans les résultats. Pour identifier tous les appariements plutôt que
+  seulement le premier, utiliser la fonction \Icode{gregexpr}.
 <<echo=TRUE>>=
 regexpr("ia$", state.name.10)
+@
+\item[\Icode{regmatches}] extrait le texte des appariements à partir
+  des informations de \icode{regexpr} ou \icode{gregexpr}.
+<<echo=TRUE>>=
+m <- regexpr("ia$", state.name.10)
+regmatches(state.name.10, m)
 @
 \item[\Icode{sub}] recherche une expression régulière dans un vecteur
   de chaines de caractères et remplace uniquement la première
@@ -2647,7 +2656,7 @@ regexpr("^L.*i", chanson)  # plus d'informations
 ## la chaine à partir de la position initiale de l'appariement
 ## et pour la longueur de celui-ci.
 ##
-## Ce travail, la fonction 'regmatches' le fait pour nous.
+## C'est ce travail qu'effectue la fonction 'regmatches'.
 regmatches(chanson, regexpr("^L.*i", chanson))
 
 ## Les fonctions 'sub' et 'gsub' jouent en partie le rôle de

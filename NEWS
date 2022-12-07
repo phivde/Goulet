@@ -15,6 +15,10 @@
 - Section 5.8: illustrations schématiques de la fonction d'application
   `tapply`.
 - Section 5.9: ajout d'un strip XKCD portant sur l'époque POSIX.
+- Section 11.5: ajout des fonctions `gregrexpr` et `regmatches`. Cette
+  dernière apparaissait dans les exemples, mais pas dans le texte du
+  chapitre. Elle est à peu près essentielle pour travailler avec les
+  résultats de `regexpr` et `gregexpr`.
 - Section A.7: la configuration de RStudio à la catégorie `Code`,
   sous-catégorie `Saving` mentionne maintenant la nouvelle option
   `Ensure that source files end with newline`. La capture d'écran de
