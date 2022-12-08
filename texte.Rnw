@@ -214,9 +214,9 @@ concentrer notre étude sur les utilitaires \index{Unix}Unix standards
 en ligne de commande \icode{grep}, \icode{sed} et \icode{awk}. Ils
 font partie intégrante des systèmes d'exploitation macOS et Linux et,
 sous Windows, ils sont livrés avec les interpréteurs de commande
-\index{MSYS}MSYS de \index{MSYS2}\link{https://www.msys2.org}{MSYS2}
-et \index{Git~Bash}Git~Bash de
-\link{https://git-scm.com/downloads}{Git for Windows}.
+\index{Git~Bash}Git~Bash de \link{https://git-scm.com/downloads}{Git
+  for Windows} et \index{MSYS}MSYS de
+\index{MSYS2}\link{https://www.msys2.org}{MSYS2}.
 
 Il va sans dire que les utilitaires \icode{grep}, \icode{sed} et
 \icode{awk} s'utilisent depuis une ligne de commande \index{Unix}Unix:
