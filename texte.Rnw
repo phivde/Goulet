@@ -2713,7 +2713,7 @@ exécuter depuis une ligne de commande \index{Unix}Unix.
 
 \end{Filesave}
 
-\begin{exercice}
+\begin{exercice}[nosol]
   Voici l'exercice --- une série d'exercices, en fait --- la plus
   ludique du document: les mots croisés d'expressions régulières de
   \link{https://regexcrossword.com}{Regex Crossword}. Compléter les
