@@ -24,6 +24,7 @@
   \usepackage{framed}                  % env. snugshade*, oframed
   \usepackage[absolute]{textpos}       % éléments des pages de titre
   \usepackage[shortlabels]{enumitem}   % configuration listes
+  \usepackage{tasks}                   % configuration listes
   \usepackage{multicol}                % environnement multicols
   \usepackage{relsize}                 % \smaller et al.
   \usepackage{manfnt}                  % \mantriangleright (puce)
@@ -403,6 +404,10 @@
   }
   \def\let@protect@string{\let\protect\string}
   \makeatother
+
+  %% Listes horizontales basées sur l'environnement tasks de
+  %% tasks.sty.
+  \NewTasksEnvironment[item-indent=1.3333em,label-align=left]{horizenum}[\item]
 
   %% Algorithmes en pseudocode
   \newenvironment{pseudocode}{%

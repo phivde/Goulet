@@ -2714,107 +2714,95 @@ exécuter depuis une ligne de commande \index{Unix}Unix.
 \end{Filesave}
 
 \begin{exercice}
-  Dans chacun des cas ci-dessous, déterminer à laquelle ou auxquelles
-  des chaines de caractères correspond le motif de l'expression
-  régulière (étendue).\footnote{%
+  Voici l'exercice --- une série d'exercices, en fait --- la plus
+  ludique du document: les mots croisés d'expressions régulières de
+  \link{https://regexcrossword.com}{Regex Crossword}. Compléter les
+  casse-têtes jusqu'au niveau «\emph{Experienced}»\dots\ ou au-delà si
+  le cœur vous en dit!
+\end{exercice}
+
+\begin{exercice}
+  Déterminer à laquelle ou auxquelles des chaines de caractères
+  correspondent les motifs d'expression régulière étendue
+  ci-dessous.\footnote{%
     Exercice adapté de
     \url{https://regex.sketchengine.co.uk/extra_regexps.html}.}
   \begin{enumerate}
-    \setlength{\multicolsep}{2pt}
+    \settasks{style=enumerate,before-skip=2pt}
   \item \regex{a(ab)*a}
-    \begin{multicols}{3}
-      \begin{enumerate}[1)]
-      \item \code{abababa}
-      \item \code{aaba}
-      \item \code{aabbaa}
-      \item \code{aba}
-      \item \code{aabababa}
-      \item[\vspace{\fill}]
-      \end{enumerate}
-    \end{multicols}
+    \begin{horizenum}(3)
+    \item \code{abababa}
+    \item \code{aaba}
+    \item \code{aabbaa}
+    \item \code{aba}
+    \item \code{aabababa}
+    \end{horizenum}
     \pagebreak[1]
   \item \regex{ab+c?}
-    \begin{multicols}{3}
-      \begin{enumerate}[1)]
-      \item \code{abc}
-      \item \code{ac}
-      \item \code{abbb}
-      \item \code{bbc}
-      \item \code{abcc}
-      \item[\vspace{\fill}]
-      \end{enumerate}
-    \end{multicols}
+    \begin{horizenum}(3)
+    \item \code{abc}
+    \item \code{ac}
+    \item \code{abbb}
+    \item \code{bbc}
+    \item \code{abcc}
+    \end{horizenum}
+    \pagebreak[1]
   \item \regex{a.[bc]+}
-    \begin{multicols}{3}
-      \begin{enumerate}[1)]
-      \item \code{abc}
-      \item \code{abbbbbbbb}
-      \item \code{azc}
-      \item \code{abcbcbcbc}
-      \item \code{ac}
-      \item \code{asccbbbbcbcccc}
-      \end{enumerate}
-    \end{multicols}
+    \begin{horizenum}(3)
+    \item \code{abc}
+    \item \code{abbbbbbbb}
+    \item \code{azc}
+    \item \code{abcbcbcbc}
+    \item \code{ac}
+    \item \code{asccbbbbcbcccc}
+    \end{horizenum}
     \pagebreak[1]
   \item \regex{abc|xyz}
-    \begin{multicols}{3}
-      \begin{enumerate}[1)]
-      \item \code{abc}
-      \item \code{xyz}
-      \item \code{abc|xyz}
-      \end{enumerate}
-    \end{multicols}
+    \begin{horizenum}(3)
+    \item \code{abc}
+    \item \code{xyz}
+    \item \code{abc|xyz}
+    \end{horizenum}
     \pagebreak[1]
   \item \regex{[a-z]+[\bs.\bs?!]}
-    \begin{multicols}{3}
-      \begin{enumerate}[1)]
-      \item \code{battle!}
-      \item \code{Hot}
-      \item \code{green}
-      \item \code{swamping.}
-      \item \code{jump~up.}
-      \item \code{undulate?}
-      \item \code{is.?}
-      \item[\vspace{\fill}]
-      \item[\vspace{\fill}]
-      \end{enumerate}
-    \end{multicols}
-    \pagebreak[4]
+    \begin{horizenum}(3)
+    \item \code{battle!}
+    \item \code{Hot}
+    \item \code{green}
+    \item \code{swamping.}
+    \item \code{jump~up.}
+    \item \code{undulate?}
+    \item \code{is.?}
+    \end{horizenum}
+    \pagebreak[1]
   \item \regex{[a-zA-Z]*[\string^,]=}
-    \begin{multicols}{3}
-      \begin{enumerate}[1)]
-      \item \code{Butt=}
-      \item \code{BotHEr,=}
-      \item \code{Ample}
-      \item \code{FIdDlE7h=}
-      \item \code{Brittle~=}
-      \item \code{Other.=}
-      \end{enumerate}
-    \end{multicols}
+    \begin{horizenum}(3)
+    \item \code{Butt=}
+    \item \code{BotHEr,=}
+    \item \code{Ample}
+    \item \code{FIdDlE7h=}
+    \item \code{Brittle~=}
+    \item \code{Other.=}
+    \end{horizenum}
     \pagebreak[1]
   \item \regex{[a-z][\bs.\bs?!][[:blank:]]+[A-Z]}
-    \begin{multicols}{3}
-      \begin{enumerate}[1)]
-      \item \code{A.~B}
-      \item \code{c!~d}
-      \item \code{e~f}
-      \item \code{g.~H}
-      \item \code{i?~J}
-      \item \code{k~L}
-      \end{enumerate}
-    \end{multicols}
+    \begin{horizenum}(3)
+    \item \code{A.~B}
+    \item \code{c!~d}
+    \item \code{e~f}
+    \item \code{g.~H}
+    \item \code{i?~J}
+    \item \code{k~L}
+    \end{horizenum}
     \pagebreak[1]
   \item \regex{<[\string^>]+>}
-    \begin{multicols}{2}
-      \begin{enumerate}[1)]
-      \item \code{<an~xml~tag>}
-      \item \code{<opentag>~<closetag>}
-      \item \code{</closetag>}
-      \item \code{<>}
-      \item \code{<with~attribute=”77”>}
-      \item[\vspace{\fill}]
-      \end{enumerate}
-    \end{multicols}
+    \begin{horizenum}(2)
+    \item \code{<an~xml~tag>}
+    \item \code{<opentag>~<closetag>}
+    \item \code{</closetag>}
+    \item \code{<>}
+    \item \code{<with~attribute=”77”>}
+    \end{horizenum}
   \end{enumerate}
 
   \begin{sol}

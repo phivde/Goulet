@@ -1051,64 +1051,58 @@ Si \meta{condition}
 \begin{exercice}
   Soit $p$ et $q$ des expressions logiques. Compléter les tables de
   vérité ci-dessous.
-  \begin{multicols}{2}
-    \begin{enumerate}
+  \begin{horizenum}[label=\alph*)](2)
+  \item
+    \begin{tabular}{ccc}
+      \toprule
+      $p$ & $q$ & $p$ ET $q$ \\
+      \midrule
+      V & V \\
+      V & F \\
+      F & V \\
+      F & F \\
+      \bottomrule
+    \end{tabular}
+  \item
+    \begin{tabular}{ccc}
+      \toprule
+      $p$ & $q$ & $p$ OU $q$ \\
+      \midrule
+      V & V \\
+      V & F \\
+      F & V \\
+      F & F \\
+      \bottomrule
+    \end{tabular}
+  \end{horizenum}
+  \begin{sol}
+    Nous pouvons compléter les tables de vérité directement à partir
+    des définitions des opérateurs ET et OU fournies à la
+    \autoref{sec:algorithmes:if-else}:
+    \begin{horizenum}(2)
     \item
       \begin{tabular}{ccc}
         \toprule
         $p$ & $q$ & $p$ ET $q$ \\
         \midrule
-        V & V \\
-        V & F \\
-        F & V \\
-        F & F \\
+        V & V & V \\
+        V & F & F \\
+        F & V & F \\
+        F & F & F \\
         \bottomrule
       \end{tabular}
-      \columnbreak
     \item
       \begin{tabular}{ccc}
         \toprule
         $p$ & $q$ & $p$ OU $q$ \\
         \midrule
-        V & V \\
-        V & F \\
-        F & V \\
-        F & F \\
+        V & V & V \\
+        V & F & V \\
+        F & V & V \\
+        F & F & F \\
         \bottomrule
       \end{tabular}
-    \end{enumerate}
-  \end{multicols}
-  \begin{sol}
-    Nous pouvons compléter les tables de vérité directement à partir
-    des définitions des opérateurs ET et OU fournies à la
-    \autoref{sec:algorithmes:if-else}:
-    \begin{multicols}{2}
-      \begin{enumerate}
-      \item
-        \begin{tabular}{ccc}
-          \toprule
-          $p$ & $q$ & $p$ ET $q$ \\
-          \midrule
-          V & V & V \\
-          V & F & F \\
-          F & V & F \\
-          F & F & F \\
-          \bottomrule
-        \end{tabular}
-        \columnbreak
-      \item
-        \begin{tabular}{ccc}
-          \toprule
-          $p$ & $q$ & $p$ OU $q$ \\
-          \midrule
-          V & V & V \\
-          V & F & V \\
-          F & V & V \\
-          F & F & F \\
-          \bottomrule
-        \end{tabular}
-      \end{enumerate}
-    \end{multicols}
+    \end{horizenum}
   \end{sol}
 \end{exercice}
 
