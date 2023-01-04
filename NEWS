@@ -2,9 +2,6 @@
 === Programmer avec R
 ===
 
-# (en développement)
-
-
 
 # 2023.01 (2023-01-04)
 
@@ -23,6 +20,7 @@
   dernière apparaissait dans les exemples, mais pas dans le texte du
   chapitre. Elle est à peu près essentielle pour travailler avec les
   résultats de `regexpr` et `gregexpr`.
+- Chapitre 11: nouvel exercice renvoyant à Regex Crossword.
 - Section A.7: la configuration de RStudio à la catégorie `Code`,
   sous-catégorie `Saving` mentionne maintenant la nouvelle option
   `Ensure that source files end with newline`. La capture d'écran de
@@ -54,9 +52,10 @@
   protocole ftp qui n'est plus beaucoup supporté. Il a été changé pour
   un lien vers l'annonce du lancement de la version dans le forum
   `r-announce`.
+- Chapitre 11: les sous-parties de l'exercice 11.2 (anciennement 11.1)
+  sont maintenant affichées à l'horizontale.
 - Mise à jour des captures d'écran des figures 6.3 et A.2 pour la
   version courante de RStudio.
-  
 
 # 2022.08 (2022-08-17)
 
