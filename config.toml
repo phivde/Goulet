@@ -12,8 +12,8 @@ enableRobotsTXT = true
   pages_home = "https://vigou3.gitlab.io"
   gitlab = "https://gitlab.com/vigou3"
   repos = "programmer-avec-r"
-  version = "2022.08"
-  zip_url = "https://gitlab.com/vigou3/programmer-avec-r/-/package_files/49736237/download"
+  version = "2023.01"
+  zip_url = "https://gitlab.com/vigou3/programmer-avec-r/-/package_files//download"
   release_notes = "-/releases/"
 
   ## Look and feel
