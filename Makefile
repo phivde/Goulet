@@ -242,18 +242,18 @@ upload:
 
 .PHONY: create-link
 create-link:
-	@printf "%s" "ajout du lien dans la description de la version..."
+	@printf "%s\n" "ajout du lien dans la description de la version..."
 	$(eval pkg_id=$(shell curl --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
 	                           --silent \
 	                           "${APIURL}/packages" \
-	                      | grep -o -E '\{.*"version":"${VERSION}"[^}]*}' \
+	                      | grep -o -E '\{[^{]*"version":"${VERSION}"[^}]*}' \
 	                      | grep -o '"id":[0-9]*' | cut -d: -f 2))
 	$(eval file_id=$(shell curl --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
 	                            --silent \
 	                            "${APIURL}/packages/${pkg_id}/package_files" \
-	                       | grep -o -E '\{.*"file_name":"${ARCHIVE}"[^}]*}' \
+	                       | grep -o -E '\{[^{]*"file_name":"${ARCHIVE}"[^}]*}' \
 	                       | grep -o '"id":[0-9]*' | cut -d: -f 2))
-	@curl --request POST \
+	curl --request POST \
 	      --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
 	      --data name="${ARCHIVE}" \
 	      --data url="${REPOSURL}/-/package_files/${file_id}/download" \
