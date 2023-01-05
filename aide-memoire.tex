@@ -1,0 +1,41 @@
+%%% Copyright (C) 2018-2023 Vincent Goulet
+%%%
+%%% Ce fichier fait partie du projet
+%%% «Programmer avec R»
+%%% https://gitlab.com/vigou3/programmer-avec-r
+%%%
+%%% Cette création est mise à disposition sous licence
+%%% Attribution-Partage dans les mêmes conditions 4.0
+%%% International de Creative Commons.
+%%% https://creativecommons.org/licenses/by-sa/4.0/
+
+\chapter{Aide-mémoire}
+\label{chap:aide-memoire}
+
+\begingroup
+
+\smaller
+\setsecheadstyle{\normalfont\large\sffamily\bfseries\raggedright}
+
+\begin{multicols}{2}
+  \section*{Indiçage des vecteurs}
+
+  \begin{description}
+  \item[\code{x[i]}] élément $i$
+  \item[\code{x[c(2, 7)]}] éléments spécifiques
+  \item[\code{x[-i]}] tous sauf l'élément $i$
+  \item[\code{x[-c(2, 7)]}] tous sauf les éléments spécifiques
+  \item[\code{x[\meta{condition}]}] éléments satisfaisant la
+    \meta{condition} (vecteur booléen)
+  \item[\code{x["nom"]}] élément étiqueté \code{"nom"}
+  \end{description}
+\end{multicols}
+
+\endgroup
+
+%%% Local Variables:
+%%% mode: noweb
+%%% TeX-engine: xetex
+%%% TeX-master: "programmer-avec-r"
+%%% coding: utf-8
+%%% End:
