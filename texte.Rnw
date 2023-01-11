@@ -2809,7 +2809,7 @@ exécuter depuis une ligne de commande \index{Unix}Unix.
     \begin{enumerate}
     \item Le motif identifie la lettre minuscule «\code{a}», suivie de
       zéro, une ou plusieurs occurrences des lettres minuscules
-      «\code{ab}», suivies de la lettre minuscule «\code{b}». Les
+      «\code{ab}», suivies de la lettre minuscule «\code{a}». Les
       choix 2 et 5 satisfont ces conditions.
     \item Le motif identifie la lettre «\code{a}», suivie d'au moins
       une occurrence de la lettre minuscule «\code{b}», suivie de zéro
