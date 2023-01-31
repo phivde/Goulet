@@ -2,8 +2,15 @@
 === Programmer avec R
 ===
 
-# (en développement)
+# 2023.02 (2023-01-31)
 
+## Changements
+
+- Chapitre 3: les exemples et les exercices étaient absents de
+  l'édition précédente.
+- Chapitre 3: l'explication du rôle du caractère `#` dans la légende
+  de la figure 3.3 faisait doublon avec la boite signalétique de la
+  fin de la section correspondante. Elle a été supprimée.
 
 
 # 2023.01 (2023-01-05)
