@@ -303,9 +303,7 @@ vous utiliserez cette seconde approche d'interaction avec R.
   \lstinputlisting[frame=single,language={},numbers=none,firstline=2]{include/script.Rout}
   \caption[Fichier de script et ligne de commande R]{Fichier de script
     (en haut) et ligne de commande R dans laquelle les expressions R
-    ont été exécutées (en bas). Les lignes débutant par \code{\#} dans
-    le fichier de script sont des commentaires ignorés par
-    l'interpréteur de commandes.}
+    ont été exécutées (en bas).}
   \label{fig:presentation:script}
 \end{figure}
 
@@ -333,8 +331,8 @@ vous utiliserez cette seconde approche d'interaction avec R.
   progiciel évalue constamment et en temps réel les formules pour
   afficher les résultats dans les cellules.}
 
-\importantbox{Dans les fichiers de script comme à la ligne de commande, le
-  caractère \code{\#} marque le début d'un
+\importantbox{Dans les fichiers de script comme à la ligne de
+  commande, le caractère \code{\#} marque le début d'un
   \index{commentaire}commentaire dans R. Ainsi, tout ce qui est inclus
   entre ce caractère et le saut à la ligne suivant est complètement
   ignoré par l'interpréteur.}
