@@ -8,6 +8,9 @@
 
 - Chapitre 3: les exemples et les exercices étaient absents de
   l'édition précédente.
+- Exemples du chapitre 3: la matrice `m` n'est plus créée à partir du
+  vecteur aléatoire `v`. Elle pouvait s'avérer numériquement
+  singulière dans les exemples d'utilisation de `solve`.
 - Chapitre 3: l'explication du rôle du caractère `#` dans la légende
   de la figure 3.3 faisait doublon avec la boite signalétique de la
   fin de la section correspondante. Elle a été supprimée.
