@@ -664,11 +664,13 @@ v
 ( v <- runif(12, min = 1, max = 10) )
 
 ## Arrondi des valeurs de v à l'entier près.
-( v <- round(v) )
+round(v)
 
-## Créer une matrice 3 x 4 à partir des valeurs de
-## v. Remarquer que la matrice est remplie par colonne.
-( m <- matrix(v, nrow = 3, ncol = 4) )
+## Créer une matrice 3 x 4 à partir d'un vecteur de 12
+## éléments. Remarquer que la matrice est remplie par colonne.
+m <- matrix(c(1, 1, 2, -1, -2, 3, 3, 07, 4),
+            nrow = 3, ncol = 4)
+m
 
 ## Les opérateurs arithmétiques de base s'appliquent aux
 ## matrices comme aux vecteurs.
@@ -678,7 +680,7 @@ m ^ 2
 
 ## Éliminer la quatrième colonne afin d'obtenir une matrice
 ## carrée.
-( m <- m[,-4] )
+( m <- m[, -4] )
 
 ## Transposée et inverse de la matrice m.
 t(m)
