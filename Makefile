@@ -125,7 +125,7 @@ ${COLLABORATEURS}: FORCE
 	git log --pretty="%an%n" | sort | uniq | \
 	  awk 'BEGIN { print "Les personnes dont le nom [1] apparait ci-dessous ont contribué à\nl'\''amélioration de «${TITLE}»." } \
 	       $$0 !~ "${OMITAUTHORS}" \
-	       END { print "\n[1] Noms tels qu'\''ils figurent dans le journal du dépôt Git\n    ${REPOSURL}" }' > ${COLLABORATEURS}
+	       END { print "\n[1] Noms tels qu'\''ils figurent dans le journal du dépôt Git\n    ${REPOSURL:/=}" }' > ${COLLABORATEURS}
 
 .PHONY: pdf
 pdf: ${MASTER}
@@ -256,7 +256,7 @@ create-link:
 	curl --request POST \
 	      --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
 	      --data name="${ARCHIVE}" \
-	      --data url="${REPOSURL}/-/package_files/${file_id}/download" \
+	      --data url="${REPOSURL:/=}/-/package_files/${file_id}/download" \
 	      --data link_type="package" \
 	      --output /dev/null --silent \
 	      "${APIURL}/releases/${TAGNAME}/assets/links"
