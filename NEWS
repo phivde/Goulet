@@ -4,6 +4,13 @@
 
 # (en développement)
 
+## Changements
+
+- La configuration de RStudio recommandée à la section A.7 était
+  éparpillée et pas suffisamment visible. Le contenu de l'exercice 6.1
+  a été entièrement rapatrié à la section A.7 (l'exercice est donc
+  supprimé) et un nouvel exercice recommande, dès le chapitre 3,
+  d'effectuer la configuration.
 
 
 # 2023.02 (2023-01-31)
