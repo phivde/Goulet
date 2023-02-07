@@ -767,6 +767,12 @@ q()
   de les comparer et de vous permettre d'en choisir un pour la suite.
 \end{exercice}
 
+\begin{exercice}[nosol]
+  Si vous utilisez l'environnement de développement intégré
+  \index{RStudio}RStudio, configurer l'éditeur tel que recommandé à
+  la \autoref{sec:rstudio:configuration}.
+\end{exercice}
+
 %%% Local Variables:
 %%% mode: noweb
 %%% TeX-engine: xetex

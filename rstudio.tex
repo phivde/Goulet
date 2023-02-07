@@ -351,10 +351,24 @@ Je recommande d'effectuer les configurations suivantes.
   Avec ces réglages, RStudio démarre toujours avec une séance de
   travail vierge et ne sauvegarde pas l'espace de travail de R à la
   fermeture de l'application.
+  \begin{figure}
+    \centering
+    \includegraphics{images/rstudio-startup-and-exit}
+    \caption{Réglage de RStudio pour ne pas sauvegarder l'espace
+      de travail de R au moment de quitter l'application}
+    \label{fig:rstudio:rstudio-startup-and-exit}
+  \end{figure}
 \item Dans la catégorie \code{Code} et la sous-catégorie
-  \code{Editing}, régler l'option \code{Tab width} à \code{4} afin
-  d'indenter le code de quatre caractères par défaut. (Ce réglage fait
-  aussi l'objet de l'\autoref{ex:pratiques:rstudio-tab-width}.)
+  \code{Editing}, régler l'option \code{Tab width} à \code{4}, tel
+  qu'illustré à la \autoref{fig:pratiques:rstudio-tab-width}. Avec ce
+  réglage, RStudio indentera par défaut le code de quatre caractères.
+  \begin{figure}
+    \centering
+    \includegraphics{images/rstudio-tab-width}
+    \caption{Réglage de RStudio pour une indentation du code
+      de quatre caractères}
+    \label{fig:pratiques:rstudio-tab-width}
+  \end{figure}
 \item Toujours dans la catégorie \code{Code}, mais dans la
   sous-catégorie \code{Saving}, cocher les options \code{Ensure that
     source files end with newline} et \code{Strip trailing horizontal
@@ -364,26 +378,18 @@ Je recommande d'effectuer les configurations suivantes.
   les fichiers de script dans un format portable sur toutes les
   plateformes informatiques et supprimera automatiquement les espaces
   inutiles en fin de ligne.
+  \begin{figure}
+    \centering
+    \includegraphics{images/rstudio-utf-8+whitespace}
+    \caption{Réglage de RStudio pour la sauvegarde des fichiers dans un
+      format portable et sans espaces en fin de ligne}
+    \label{fig:rstudio:rstudio-utf-8}
+  \end{figure}
 \item (Windows seulement) Dans la catégorie \code{Terminal},
   sélectionner \index{Git~Bash}\code{Git~Bash} dans le menu déroulant
   de l'option \code{New Terminals open with}.
 \end{enumerate}
 
-\begin{figure}
-  \centering
-  \includegraphics{images/rstudio-startup-and-exit}
-  \caption{Réglage de RStudio pour ne pas sauvegarder l'espace
-    de travail de R au moment de quitter l'application}
-  \label{fig:rstudio:rstudio-startup-and-exit}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics{images/rstudio-utf-8+whitespace}
-  \caption{Réglage de RStudio pour la sauvegarde des fichiers dans un
-    format portable et sans espaces en fin de ligne}
-  \label{fig:rstudio:rstudio-utf-8}
-\end{figure}
 
 
 \section{Aide et documentation}

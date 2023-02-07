@@ -1264,23 +1264,6 @@ rm("sqrt")                 #-*- `\labelline{pratiques:tests:fin}`
 
 \end{Filesave}
 
-\begin{exercice}[nosol]
-  \label{ex:pratiques:rstudio-tab-width}
-  Configurer votre éditeur de texte pour indenter le code R de quatre
-  (4) caractères. Dans RStudio, ouvrir le panneau des options
-  globales, sélectionner la catégorie \code{Code} et inscrire la
-  valeur \code{4} dans le champ \code{Tab width} (voir la
-  \autoref{fig:pratiques:rstudio-tab-width}).
-  \begin{figure}
-    \centering
-    \includegraphics{images/rstudio-tab-width}
-    \caption{Réglage de RStudio pour une indentation du code
-      de quatre caractères}
-    \label{fig:pratiques:rstudio-tab-width}
-  \end{figure}
-\end{exercice}
-
-\enlargethispage{5mm}
 \begin{exercice}
   \label{ex:pratiques:irr}
   Présenter le code ci-dessous selon les normes d'espacement,
