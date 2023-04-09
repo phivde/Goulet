@@ -16,7 +16,7 @@
 ## 'make Rout' crée les fichiers .Rout avec R CMD BATCH.
 ##
 ## 'make update-copyright' met à jour l'année de copyright dans toutes
-## les sources du document
+## les sources du document.
 ##
 ## 'make zip' crée l'archive de la distribution.
 ##
