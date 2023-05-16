@@ -100,7 +100,7 @@ l'un ou l'autre des types suivants
   ordre sont échangées, le procédé étant répété tant et aussi
   longtemps que les cartes ne sont pas entièrement triées;
 \item tri par sélection, où la plus petite carte est identifiée et
-  placée au début de la main, puis la seconde plus grande, et ainsi de
+  placée au début de la main, puis la seconde plus petite, et ainsi de
   suite;
 \item tri par dénombrement, où l'on compte le nombre de cartes plus
   petites qu'une carte donnée pour déterminer son rang dans la main
