@@ -203,15 +203,20 @@
   \setlist[itemize]{leftmargin=*,align=left}
   \setlist[trivlist]{nosep}
 
+  %% Tableaux et figures
+  \captionnamefont{\scshape}    % style des noms de tableaux et figures
+  \newsubfloat{figure}          % sous-figures
+
   %% Options de babel
-  \frenchbsetup{CompactItemize=false,%
+  \frenchsetup{%
+    CompactItemize=false,%
     ThinSpaceInFrenchNumbers=true,
     ItemLabeli=\mantriangleright,
     ItemLabelii=\textendash,
     og=«, fg=»}
-  \def\frenchtablename{{\scshape Tab.}}
-  \def\frenchfigurename{{\scshape Fig.}}
-  \def\frenchlistfigurename{Liste des figures}
+  \renewcommand*{\frenchtablename}{Tab.}
+  \renewcommand*{\frenchfigurename}{Fig.}
+  \renewcommand*{\frenchlistfigurename}{Liste des figures}
 
   %%% =========================
   %%%  Sections de code source
@@ -576,9 +581,6 @@
   %%% =======
   %%%  Varia
   %%% =======
-
-  %% Sous-figures
-  \newsubfloat{figure}
 
   %% Boites utilisées pour la construction d'images
   \newsavebox{\planche}
