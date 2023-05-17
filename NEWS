@@ -4,6 +4,12 @@
 
 # (en développement)
 
+## Nouveautés
+
+- Section 5.7: ajout, en fin de section, d'un avertissement sur
+  l'utilisation des codes d'un facteur dans des calculs, ainsi que
+  d'un exemple dans le code informatique correspondant à la section.
+
 ## Changements
 
 - La configuration de RStudio recommandée à la section A.7 était
