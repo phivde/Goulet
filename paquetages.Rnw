@@ -122,7 +122,7 @@ bibliothèque, puis à indiquer à R, via un fichier de configuration,
 l'existence et l'emplacement de cette bibliothèque.
 
 Voici une procédure pas à pas pour compléter les opérations de
-création d'une bibliothèque personnelle depuis une une ligne de
+création d'une bibliothèque personnelle depuis une ligne de
 commande Unix (\index{Terminal}Terminal sous macOS; \index{MSYS}MSYS
 de \index{MSYS2}\link{https://www.msys2.org}{MSYS2} ou
 \index{Git~Bash}Git~Bash de \link{https://git-scm.com/downloads}{Git
