@@ -33,6 +33,7 @@
   \usepackage{dirtree}                 % arborescence de fichiers
   \usepackage{fontawesome5}            % icônes \fa*
   \usepackage{awesomebox}              % boites info, important, etc.
+  \usepackage{utfsym}                  % symboles de cartes à jouer
   \usepackage{ullrcorners}             % expressions régulières
   \usepackage{soul}                    % surbrillance (expressions régulières)
   \usepackage{answers}                 % exercices et solutions
@@ -611,6 +612,15 @@
   \newsavebox{\ctrancheh}
   \newsavebox{\ctranchev}
   \newsavebox{\ctableau}
+  \newsavebox{\kingc}           % --
+  \newsavebox{\damec}           % noms de longueur égale
+  \newsavebox{\huitc}           % pour faciliter la disposition
+  \newsavebox{\septc}           % en colonnes
+  \newsavebox{\quatc}           % --
+  \newsavebox{\handl}
+  \newsavebox{\handr}
+  \newsavebox{\handu}
+  \newsavebox{\handsep}
 
   %% Style de la bibliographie
   \bibliographystyle{francais}
@@ -642,7 +652,7 @@
     puis-que
   }
 
-%  \includeonly{}
+  \includeonly{tri}
 
 \begin{document}
 
