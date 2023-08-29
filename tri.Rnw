@@ -102,8 +102,8 @@ l'un ou l'autre des types suivants
 \item tri paresseux, qui consiste à ne pas faire l'expérience
   recommandée.
 \end{enumerate}
-La \autoref{fig:tri:cartes} propose des illustrations pour les quatre
-premières méthodes de tri ci-dessus.
+La \autoref{fig:tri:cartes} illustre les quatre premières méthodes de
+tri ci-dessus.
 
 \begin{figure}
   %% proportion des cartes (L:H) = 1:1.25
@@ -270,12 +270,11 @@ premières méthodes de tri ci-dessus.
     \subcaption{Tri par dénombrement}
   \end{minipage}
   \caption{Illustrations de quatre méthodes de tri pour une main de
-    cinq cartes à jouer. Les lignes verticales délimitent les cartes
-    triées de celles qui ne le sont pas. Les symboles
-    «{\smaller\faAngleLeft}» et «{\smaller\faAngleRight}» indiquent le
-    sens et le nombre de déplacements à effectuer. Le symbole
-    «{\smaller\faAngleUp}» identifie la plus faible parmi les cartes
-    non triées.}
+    cinq cartes. Les lignes verticales délimitent les cartes triées de
+    celles qui ne le sont pas. Les symboles «{\smaller\faAngleLeft}»
+    et «{\smaller\faAngleRight}» indiquent le sens et le nombre de
+    déplacements à effectuer. Le symbole «{\smaller\faAngleUp}»
+    identifie la plus petite carte non triée.}
   \label{fig:tri:cartes}
 \end{figure}
 

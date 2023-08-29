@@ -1190,15 +1190,15 @@ x
 
 Les expressions ci-dessous calculent, dans l'ordre:
 \begin{enumerate}
-\item les sommes des trois \index{tranche}tranches horizontales (de
+\item Les sommes des trois \index{tranche}tranches horizontales (de
   l'avant vers l'arrière) dans le tableau;
-\item les sommes des quatre \index{tranche}tranches verticales (du
+\item Les sommes des quatre \index{tranche}tranches verticales (du
   haut vers le bas);
 \item les sommes des deux \index{tranche}tranches transversales (de la
   gauche vers la droite);
-\item les sommes des douze \index{carotte}carottes horizontales;
-\item les sommes des huit \index{carotte}carottes verticales.
-\item les sommes des six \index{carotte}carottes transversales;
+\item Les sommes des douze \index{carotte}carottes horizontales;
+\item Les sommes des huit \index{carotte}carottes verticales;
+\item Les sommes des six \index{carotte}carottes transversales.
 \end{enumerate}
 <<echo=TRUE>>=
 apply(x, 1, sum)

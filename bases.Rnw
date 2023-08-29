@@ -1274,8 +1274,8 @@ de l'argument \code{p} est $2$.
 L'ordre des arguments dans la définition de la fonction est important.
 Nous avons deux choix au moment d'appeler une fonction:
 \begin{enumerate}
-\item spécifier les valeurs des arguments dans le bon ordre; ou
-\item nommer explicitement les arguments avec une construction de la
+\item Spécifier les valeurs des arguments dans le bon ordre.
+\item Nommer explicitement les arguments avec une construction de la
   forme \code{symbole = expression}, auquel cas l'ordre n'importe
   plus.
 \end{enumerate}

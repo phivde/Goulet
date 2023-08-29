@@ -733,7 +733,7 @@ d'opérateurs\footnote{%
   Les opérateurs ou caractères spéciaux des expressions régulières
   sont aussi parfois appelés \emph{métacaractères}.}. %
 La syntaxe obéit à quelques règles fondamentales en définitive assez
-simples.
+simples:
 \begin{enumerate}
 \item Un caractère littéral correspond à la \emph{première} occurrence
   de ce caractère dans la chaine de texte. Par exemple, le motif
@@ -1768,12 +1768,12 @@ premières colonnes et d'une nouvelle colonne contenant la somme de
 celles-ci. Votre premier réflexe consistera sans doute à utiliser un
 tableur pour effectuer les opérations suivantes:
 \begin{enumerate}
-\item importer le fichier CSV;
-\item supprimer les colonnes autres que les deux premières;
-\item ajouter dans une troisième colonne une formule pour calculer la
+\item Importer le fichier CSV;
+\item Supprimer les colonnes autres que les deux premières;
+\item Ajouter dans une troisième colonne une formule pour calculer la
   somme des deux premières;
-\item copier la formule dans toutes les lignes;
-\item exporter la base de données en format CSV.
+\item Copier la formule dans toutes les lignes;
+\item Exporter la base de données en format CSV.
 \end{enumerate}
 Cette procédure est fastidieuse, lente --- surtout avec une grande
 base de données --- et désespérément manuelle. Sous peu, vous saurez
