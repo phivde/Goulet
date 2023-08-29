@@ -80,6 +80,16 @@ Je ne saurais être aussi exhaustif que ces auteurs établis. Néanmoins,
 je vous incite à porter une attention particulière aux quelques points
 de style livrés en vrac ci-dessous.
 
+\begin{figure}[t]
+  \centering
+  \begin{minipage}{0.9\linewidth}
+    \setkeys{Gin}{width=\textwidth}
+    \includegraphics{images/code_quality} \\
+    \footnotesize\sffamily%
+    Tiré de \href{https://xkcd.com/1513/}{XKCD.com}
+  \end{minipage}
+\end{figure}
+
 \begin{itemize}
 \item Utilisez des noms de variables significatifs. Ne soyez pas ce
   collègue qui nomme les variables d'un programme \code{x}, \code{xx}
@@ -110,10 +120,15 @@ length_of_x <- length(x)
   les boucles itératives.
 
   Quant à la composition des noms d'objets formés de plusieurs mots,
-  divers styles s'affrontent: \code{variable.name},
-  \code{variable\_name}, \code{variableName}, \code{VariableName},
-  etc. Assurez-vous simplement de suivre le standard en vigueur dans
-  votre équipe de travail, et, par-dessus tout, soyez constant. Ma
+  divers styles s'affrontent, notamment:
+\begin{Verbatim}
+variable.name
+variable_name
+variableName
+VariableName
+\end{Verbatim}
+  Assurez-vous simplement de suivre le standard en vigueur dans votre
+  équipe de travail, et, par-dessus tout, soyez constant. Ma
   préférence, qui concorde avec une grande partie du code source de R,
   va aux noms d'objets courts et entièrement en minuscules.
   %
@@ -169,9 +184,9 @@ mean(x)
   propos, \citet{Oualline:C:1997} ramène la quinzaine de règles de
   priorité des opérations (du langage C) à seulement deux:
   \begin{enumerate}
-  \item la multiplication et la division précèdent l'addition et la
-    soustraction;
-  \item placer tout le reste entre parenthèses.
+  \item La multiplication et la division précèdent l'addition et la
+    soustraction.
+  \item Placer tout le reste entre parenthèses.
   \end{enumerate}
   %
 \item Évitez les \emph{nombres magiques}. Un \Index{nombre
@@ -545,16 +560,16 @@ juste équilibre.
 fonction, sa définition devrait toujours être précédée d'un bloc de
 documentation contenant au minimum:
 \begin{enumerate}
-\item la \Index{signature}\emph{signature} de la fonction (son nom
+\item La \Index{signature}\emph{signature} de la fonction (son nom
   suivi, entre parenthèses, de tous les arguments avec leur valeur par
   défaut, le cas échéant);
-\item une courte description de ce que fait la fonction (en mode
+\item Une courte description de ce que fait la fonction (en mode
   infinitif, de manière à compléter la phrase «Cette fonction permet
   de\dots»);
-\item la liste des arguments, de leur signification et des valeurs
+\item La liste des arguments, de leur signification et des valeurs
   admissibles;
-\item la valeur retournée par la fonction;
-\item un ou plusieurs exemples d'utilisation de la fonction, selon le
+\item La valeur retournée par la fonction;
+\item Un ou plusieurs exemples d'utilisation de la fonction, selon le
   niveau de complexité de celle-ci.
 \end{enumerate}
 Il s'agit de la structure générale des rubriques d'aide de R. La
@@ -616,13 +631,13 @@ ouvrage la
   code.
 \end{itemize}
 
-L'éditeur \index{RStudio}RStudio, de son côté, utilise par défaut les
+L'éditeur \index{RStudio}RStudio, pour sa part, utilise par défaut les
 niveaux de titres du langage de balisage
 \link{https://daringfireball.net/projects/markdown/syntax}{Markdown},
 dont la hiérarchie est exactement l'inverse de celle de Emacs. Ainsi,
-les commentaires de premier niveau sont ceux qui débutent par un seul
-carré, «\code{\#}»; les commentaires de deuxième niveau débutent par
-deux carrés, «\code{\#\#}», etc.
+les commentaires de premier niveau débutent par un seul carré,
+«\code{\#}»; les commentaires de deuxième niveau débutent par deux
+carrés, «\code{\#\#}», etc.
 
 \gotorbox{Le fichier de script \code{\scriptfilename} reproduit à la
   \autoref{sec:pratiques:exemples} contient, aux lignes
@@ -902,10 +917,10 @@ moins en tête --- sa
 \index{specification@spécification}\emph{spécification}. Celle-ci
 contient normalement:
 \begin{enumerate}
-\item la \index{signature}signature de la fonction;
-\item la liste des arguments de la fonction;
-\item la valeur retournée par la fonction;
-\item une description détaillée de ce que doit réaliser la fonction, y
+\item La \index{signature}signature de la fonction;
+\item La liste des arguments de la fonction;
+\item La valeur retournée par la fonction;
+\item Une description détaillée de ce que doit réaliser la fonction, y
   compris les cas limites et la gestion des erreurs, le cas échéant.
 \end{enumerate}
 Vous aurez reconnu plusieurs des éléments de la documentation d'une
@@ -929,13 +944,13 @@ Prenons l'exemple d'une fonction simple qui calcule la racine carrée
 d'un seul nombre. Vous devriez alors écrire des tests unitaires pour
 les cas suivants:
 \begin{enumerate}
-\item la fonction retourne une erreur (ou \code{NaN}) si l'argument
+\item La fonction retourne une erreur (ou \code{NaN}) si l'argument
   est strictement négatif;
-\item la fonction retourne un véritable $0$ (et non une approximation)
+\item La fonction retourne un véritable $0$ (et non une approximation)
   pour le cas limite où l'argument est nul;
 \item le carré de la valeur retournée par la fonction est
   approximativement égal à l'argument lorsque celui-ci est strictement
-  supérieur à $0$;
+  supérieur à $0$.
 \end{enumerate}
 
 Concrètement, les tests consistent en des expressions qui retournent
@@ -1327,14 +1342,20 @@ f <- function(x)
   l'\autoref{ex:pratiques:irr} à partir de la lecture du code de la
   fonction et des informations additionnelles suivantes:
   \begin{enumerate}[1.]
-  \item la fonction prend en argument une série de nombres réels
-    positifs, négatifs ou nuls sous forme de vecteur;
-  \item elle vérifie le nombre de changements de signe dans le vecteur
+  \item La fonction prend en argument un vecteur de nombres réels
+    positifs, négatifs ou nuls;
+  \item Elle vérifie le nombre de changements de signe dans le vecteur
     après avoir éliminé les valeurs nulles;
-  \item la réponse correcte correspondant au vecteur
-    $(-10, -7, 12, 0, 11)$ est $\nombre{0,128564783114}$;
-  \item la réponse correcte correspondant au vecteur
-    $(-10, 12, -7, 0, 11)$ est $\nombre{0,225982251102}$.
+  \item La réponse correcte correspondant au vecteur
+    $(-10, -7, 12, 0, 11)$ est:
+    \begin{center}
+      $\nombre{0,128564783114}$;
+    \end{center}
+  \item La réponse correcte correspondant au vecteur
+    $(-10, 12, -7, 0, 11)$ est:
+    \begin{center}
+      $\nombre{0,225982251102}$.
+    \end{center}
   \end{enumerate}
   \begin{sol}
     Nous devons effectuer les vérifications suivantes:
