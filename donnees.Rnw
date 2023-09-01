@@ -123,7 +123,7 @@ utiliser comme nom d'objet. Les mots réservés pour le système sont:
   \verb|NA_character_|, \\
   \code{...}, \code{..1}, \code{..2}, etc.
 \end{quote}
-Oui, l'argument spécial `\icode{...}' rencontré à la
+Oui, l'argument spécial «\icode{...}» rencontré à la
 \autoref{sec:bases:fonctions:definition} est un objet dans R!
 
 Les variables \code{T}\index{T@\code{T}|see{\code{TRUE}}} et
@@ -1347,7 +1347,8 @@ représentation schématique de cette liste.
   \end{picture}
   \caption[Représentation d'une liste]{%
     Représentation d'une liste composée d'un vecteur numérique, d'un
-    vecteur caractère et d'un vecteur booléen}
+    vecteur caractère et d'un vecteur booléen, chaque élément de la
+    liste étant étiqueté}
   \label{fig:donnees:liste}
 \end{figure}
 
@@ -1359,14 +1360,14 @@ représentation schématique de cette liste.
 L'indiçage\Index{indiçage!liste} des listes recèle quelques subtilités
 auxquelles il faut porter une attention particulière. Tout d'abord, il
 existe trois opérateurs d'indiçage: les crochets simples usuels
-\code{[~]}, les crochets doubles \code{[[~]]} et le signe de dollar
-\code{\$} (ces deux derniers opérateurs figurent au
+«\code{[~]}», les crochets doubles «\code{[[~]]}» et le signe de
+dollar «\code{\$}» (ces deux derniers opérateurs figurent au
 \autoref{tab:bases:operateurs}, mais nous n'en avions pas parlé
 jusqu'ici).
 
 \begin{itemize}
 \item Les crochets simples\indexcode{[} fonctionnent avec la liste
-  comme avec tout vecteur. Le résultat de l'indiçage avec \code{[~]}
+  comme avec tout vecteur. Le résultat de l'indiçage avec «\code{[~]}»
   est une liste. Quand on y pense, c'est le seul résultat logique
   lorsque l'on indice une liste avec un vecteur. Toutefois, cette
   règle fait en sorte que le résultat de l'extraction d'un seul
@@ -1399,7 +1400,7 @@ x[[c(1, 2)]]
 %
 \item Finalement, l'autre façon --- la meilleure, en fait --- de
   sélectionner un seul élément d'une liste est par son étiquette avec
-  l'opérateur \Icode{\$}.
+  l'opérateur «\Icode{\$}».
 <<echo=TRUE>>=
 x$score
 @
@@ -1558,7 +1559,7 @@ lapply(X, FUN, ...)
   \code{X}. Ceux-ci ne sont pas nommés lorsqu'ils sont passés à la
   fonction. Les règles habituelles d'évaluation d'un appel de fonction
   s'appliquent: les données constituent le premier argument de
-  \code{FUN}, à moins que des arguments nommés dans `\code{...}'
+  \code{FUN}, à moins que des arguments nommés dans «\code{...}»
   n'aient préséance.
 \end{itemize}
 
@@ -1678,7 +1679,7 @@ mapply(FUN, ...)
 \end{Schunk}
 Le résultat de \code{mapply} est l'application de la fonction
 \code{FUN} aux premiers éléments de tous les arguments contenus dans
-`\code{...}', puis à tous les seconds éléments, et ainsi de suite.
+«\code{...}», puis à tous les seconds éléments, et ainsi de suite.
 
 Par exemple, si \code{v} et \code{w} sont des vecteurs,
 \code{mapply(FUN, v, w)} retourne sous forme de liste, de vecteur ou

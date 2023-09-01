@@ -810,7 +810,7 @@ construction \code{x[i]~<-~y}\Indexcode{[<-}.
 
 Dans un cas comme dans l'autre, il faut d'abord indicer le vecteur. Il
 existe cinq façons de le faire, toujours à l'intérieur de crochets
-\code{[~]}.
+«\code{[~]}».
 \begin{enumerate}
 \item \textbf{Extraction par position} avec un vecteur d'entiers
   positifs. Les éléments se trouvant aux positions correspondant aux
@@ -1149,7 +1149,7 @@ fonction est la suivante:
   a pas de limite pratique au nombre d'arguments formels que peut
   avoir une fonction. Les arguments peuvent être des symboles, des
   constructions de la forme \code{symbole = défaut}, ou encore
-  l'argument formel spécial `\icode{...}'.
+  l'argument formel spécial «\icode{...}».
 
   Lorsqu'un symbole seul est utilisé comme argument, il indique le nom
   de celui-ci. L'objet de ce nom sera disponible à l'intérieur de la
@@ -1168,10 +1168,10 @@ f(2)
 f()
 @
 
-  Enfin, l'argument spécial `\Icode{...}' (\emph{point-point-point})
+  Enfin, l'argument spécial «\Icode{...}» (\emph{point-point-point})
   peut contenir un nombre arbitraire d'éléments. La fonction y ayant
   recours se trouve donc à accepter un nombre variable d'arguments. On
-  utilise généralement `\code{...}' pour passer des arguments tels quels
+  utilise généralement «\code{...}» pour passer des arguments tels quels
   à une autre fonction qui, elle, saura quoi faire de ceux-ci. Vous
   trouverez un meilleur exemple à la \autoref{sec:bases:exemples} que ce
   que nous pourrions faire ici en quelques lignes.
@@ -1309,7 +1309,7 @@ passées.
   script \code{\scriptfilename} reproduit à la
   \autoref{sec:bases:exemples} pour des exemples additionnels de
   définitions de fonctions et, surtout, d'utilisation des fonctions
-  anonymes et de l'argument `\code{...}`.}
+  anonymes et de l'argument «\code{...}».}
 
 <<script, results=hide>>=
 ###
