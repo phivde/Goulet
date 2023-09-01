@@ -11,6 +11,9 @@
   d'un exemple dans le code informatique correspondant à la section.
 - Section 6.1: ajout d'un strip XKCD portant sur le style en
   programmation.
+- Chapitre 7: introduction du chapitre révisée et, en marge de
+  l'expérience de tri, ajout d'illustrations des quatre principaux
+  algorithmes.
 
 ## Changements
 
@@ -19,6 +22,8 @@
   a été entièrement rapatrié à la section A.7 (l'exercice est donc
   supprimé) et un nouvel exercice recommande, dès le chapitre 3,
   d'effectuer la configuration.
+- Affichage de la licence Creative Commons simplifié dans la page de
+  copyright.
 
 
 # 2023.02 (2023-01-31)
