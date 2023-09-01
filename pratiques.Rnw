@@ -1347,15 +1347,9 @@ f <- function(x)
   \item Elle vérifie le nombre de changements de signe dans le vecteur
     après avoir éliminé les valeurs nulles;
   \item La réponse correcte correspondant au vecteur
-    $(-10, -7, 12, 0, 11)$ est:
-    \begin{center}
-      $\nombre{0,128564783114}$;
-    \end{center}
+    $(-10, -7, 12, 0, 11)$ est $\nombre{0,128564783114}$;
   \item La réponse correcte correspondant au vecteur
-    $(-10, 12, -7, 0, 11)$ est:
-    \begin{center}
-      $\nombre{0,225982251102}$.
-    \end{center}
+    $(-10, 12, -7, 0, 11)$ est $\nombre{0,225982251102}$.
   \end{enumerate}
   \begin{sol}
     Nous devons effectuer les vérifications suivantes:
