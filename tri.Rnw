@@ -284,100 +284,100 @@ se prête donc aussi tout naturellement à la conception de boucles
 itératives dans R.
 
 
-\section{Définition du problème et notation}
-\label{sec:tri:notation}
+%% \section{Définition du problème et notation}
+%% \label{sec:tri:notation}
 
-Avant d'aller plus loin, prenons le temps de définir formellement le
-problème de tri et de nous munir de la notation qui sera utilisée tout
-au long du chapitre. Nous allons tâcher de trier $n$
-\emph{enregistrements}
-\begin{equation*}
-  E_1, E_2, \dots, E_n.
-\end{equation*}
-Un enregistrement est un ensemble d'informations formant un tout
-logique et qui sont manipulées en bloc. Lorsque ce sera nécessaire,
-l'ensemble des enregistrements sera nommé \emph{fichier}. À chaque
-enregistrement $E_j$ correspond une \emph{clé} de tri $C_j$.
+%% Avant d'aller plus loin, prenons le temps de définir formellement le
+%% problème de tri et de nous munir de la notation qui sera utilisée tout
+%% au long du chapitre. Nous allons tâcher de trier $n$
+%% \emph{enregistrements}
+%% \begin{equation*}
+%%   E_1, E_2, \dots, E_n.
+%% \end{equation*}
+%% Un enregistrement est un ensemble d'informations formant un tout
+%% logique et qui sont manipulées en bloc. Lorsque ce sera nécessaire,
+%% l'ensemble des enregistrements sera nommé \emph{fichier}. À chaque
+%% enregistrement $E_j$ correspond une \emph{clé} de tri $C_j$.
 
-Par exemple, dans le fichier des résultats d'un cours universitaire,
-un enregistrement correspond aux résultats d'un étudiant ou d'une
-étudiante. Il est généralement formé d'un numéro d'identification
-unique, du nom, du prénom et des résultats de toutes les évaluations.
-Chacun de ces éléments peut constituer une clé de tri, afin de classer
-la liste par numéro d'identification, par nom, par résultat à une
-évaluation donnée, etc.
+%% Par exemple, dans le fichier des résultats d'un cours universitaire,
+%% un enregistrement correspond aux résultats d'un étudiant ou d'une
+%% étudiante. Il est généralement formé d'un numéro d'identification
+%% unique, du nom, du prénom et des résultats de toutes les évaluations.
+%% Chacun de ces éléments peut constituer une clé de tri, afin de classer
+%% la liste par numéro d'identification, par nom, par résultat à une
+%% évaluation donnée, etc.
 
-\tipbox{Vous avez déjà rencontré ce genre d'interface dans une page
-  web: des données présentées sous forme de tableau avec la
-  possibilité de cliquer sur un titre de colonne pour trier les
-  données selon celle-ci. Chaque ligne du tableau constitue un
-  enregistrement et chaque colonne constitue une éventuelle clé de
-  tri.}
+%% \tipbox{Vous avez déjà rencontré ce genre d'interface dans une page
+%%   web: des données présentées sous forme de tableau avec la
+%%   possibilité de cliquer sur un titre de colonne pour trier les
+%%   données selon celle-ci. Chaque ligne du tableau constitue un
+%%   enregistrement et chaque colonne constitue une éventuelle clé de
+%%   tri.}
 
-Sans perte de généralité, nous allons étudier le tri en ordre
-croissant. Le problème consiste donc à trouver une permutation
-$\{(1), (2), \dots, (n)\}$ des indices $\{1, 2, \dots, n\}$ qui
-ordonne les clés de telle sorte que
-\begin{equation*}
-  C_{(1)} \leq C_{(2)} \leq \cdots \leq C_{(n)}.
-\end{equation*}
+%% Sans perte de généralité, nous allons étudier le tri en ordre
+%% croissant. Le problème consiste donc à trouver une permutation
+%% $\{(1), (2), \dots, (n)\}$ des indices $\{1, 2, \dots, n\}$ qui
+%% ordonne les clés de telle sorte que
+%% \begin{equation*}
+%%   C_{(1)} \leq C_{(2)} \leq \cdots \leq C_{(n)}.
+%% \end{equation*}
 
 
 
-\section{Tri par insertion}
-\label{sec:tri:insertion}
+%% \section{Tri par insertion}
+%% \label{sec:tri:insertion}
 
-Le tri par insertion est l'une des techniques de tri les plus simples
-et intuitives. C'est probablement celle que vous avez utilisée lors de
-la petite expérience du début du chapitre. Elle consiste à examiner
-les enregistrements tour à tour à partir du deuxième et, pour chacun,
-à trouver sa position dans les enregistrements déjà triés qui le
-précèdent. En d'autres termes, lors de l'examen de l'enregistrement
-$E_j$, $j \geq 2$, les enregistrements $E_1, \dots, E_{j - 1}$ sont
-déjà triés et il s'agit de trouver la position de $E_j$ parmi ceux-ci.
+%% Le tri par insertion est l'une des techniques de tri les plus simples
+%% et intuitives. C'est probablement celle que vous avez utilisée lors de
+%% la petite expérience du début du chapitre. Elle consiste à examiner
+%% les enregistrements tour à tour à partir du deuxième et, pour chacun,
+%% à trouver sa position dans les enregistrements déjà triés qui le
+%% précèdent. En d'autres termes, lors de l'examen de l'enregistrement
+%% $E_j$, $j \geq 2$, les enregistrements $E_1, \dots, E_{j - 1}$ sont
+%% déjà triés et il s'agit de trouver la position de $E_j$ parmi ceux-ci.
 
-Dans la suite, nous allons illustrer les algorithmes en triant le
-vecteur de 16 nombres entiers suivant:
+%% Dans la suite, nous allons illustrer les algorithmes en triant le
+%% vecteur de 16 nombres entiers suivant:
 
-<<script, results=hide>>=
-set.seed(4)
-x <- sample(sample(10:900, 16))
-xf <- sprintf("%03d", x)
-@
+%% <<script, results=hide>>=
+%% set.seed(4)
+%% x <- sample(sample(10:900, 16))
+%% xf <- sprintf("%03d", x)
+%% @
 
-\begin{gather*}
-<<echo=FALSE, results = tex>>=
-cat(paste(paste(xf[1:8], collapse = "\\quad "), "\\\\ ",
-          paste(xf[9:16], collapse = "\\quad ")))
-@
-\end{gather*}
+%% \begin{gather*}
+%% <<echo=FALSE, results = tex>>=
+%% cat(paste(paste(xf[1:8], collapse = "\\quad "), "\\\\ ",
+%%           paste(xf[9:16], collapse = "\\quad ")))
+%% @
+%% \end{gather*}
 
-\begin{algorithme}[Tri par insertion]
-  \label{algo:tri:insertion}
-  Réorganiser les enregistrements $E_1, \dots, E_n$ de telle sorte
-  qu'en sortie leurs clés soient en ordre croissant,
-  $C_{1} \leq \cdots \leq C_{n}$.
-  \begin{enumerate}
-  \item Répéter les étapes 2 à 5 pour $j = 2, 3, \dots, n$, puis
-    terminer l'algorithme. [Trier les enregistrements un à un, sauf le
-    premier.]
-  \item Poser $i \leftarrow j - 1$, $C \leftarrow C_j$, $E \leftarrow
-    E_j$. [Les étapes suivantes permettront de déterminer
-    l'emplacement de l'enregistrement $E$ en comparant sa clé $C$ avec
-    les clés $C_i$ des enregistrements déjà triés, et ce, en ordre
-    décroissant de $i$.]
-  \item Si $C \geq C_i$, aller à l'étape~5. [La position de
-    l'enregistrement est trouvée.]
-  \item Poser $E_{i + 1} \leftarrow E_i$, puis $i \leftarrow i - 1$.
-    Si $i > 0$, retourner à l'étape~3. [Déplacer l'enregistrement
-    $E_i$, puis s'apprêter à reprendre la comparaison avec
-    l'enregistrement trié précédent. Si $i = 0$, $C$ est la plus
-    petite clé et la position de l'enregistrement est au début du
-    fichier.]
-  \item Poser $E_{i + 1} \leftarrow E$. [Placer l'enregistrement à sa
-    position.]
-  \end{enumerate}
-\end{algorithme}
+%% \begin{algorithme}[Tri par insertion]
+%%   \label{algo:tri:insertion}
+%%   Réorganiser les enregistrements $E_1, \dots, E_n$ de telle sorte
+%%   qu'en sortie leurs clés soient en ordre croissant,
+%%   $C_{1} \leq \cdots \leq C_{n}$.
+%%   \begin{enumerate}
+%%   \item Répéter les étapes 2 à 5 pour $j = 2, 3, \dots, n$, puis
+%%     terminer l'algorithme. [Trier les enregistrements un à un, sauf le
+%%     premier.]
+%%   \item Poser $i \leftarrow j - 1$, $C \leftarrow C_j$, $E \leftarrow
+%%     E_j$. [Les étapes suivantes permettront de déterminer
+%%     l'emplacement de l'enregistrement $E$ en comparant sa clé $C$ avec
+%%     les clés $C_i$ des enregistrements déjà triés, et ce, en ordre
+%%     décroissant de $i$.]
+%%   \item Si $C \geq C_i$, aller à l'étape~5. [La position de
+%%     l'enregistrement est trouvée.]
+%%   \item Poser $E_{i + 1} \leftarrow E_i$, puis $i \leftarrow i - 1$.
+%%     Si $i > 0$, retourner à l'étape~3. [Déplacer l'enregistrement
+%%     $E_i$, puis s'apprêter à reprendre la comparaison avec
+%%     l'enregistrement trié précédent. Si $i = 0$, $C$ est la plus
+%%     petite clé et la position de l'enregistrement est au début du
+%%     fichier.]
+%%   \item Poser $E_{i + 1} \leftarrow E$. [Placer l'enregistrement à sa
+%%     position.]
+%%   \end{enumerate}
+%% \end{algorithme}
 
 
 \section{Algorithmes classiques}
