@@ -426,8 +426,8 @@ opérations percolent du bas vers le haut.
 
     \put(10,21){\makebox(0,1){\texttt{105}}}
   \end{picture}
-  \caption{Représentation en arbre de l'évaluation d'une expression
-    composée}
+  \caption{Représentation en arbre de l'évaluation de l'expression
+    composée \code{(2 + ((2 + (4 * 6)) * (3 + 5)))/2}}
   \label{fig:bases:evaluation}
 \end{figure}
 
@@ -1072,7 +1072,7 @@ L'expression ci-dessus peut se lire ainsi:
 
 \begin{center}
   \setlength{\unitlength}{7mm}
-  \begin{picture}(18,4.2)
+  \begin{picture}(17.5,4.2)
     \linethickness{1pt}
 
     \put(0,1){\code{square}}     \put(0,3.5){\code{square}}
