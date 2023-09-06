@@ -14,7 +14,7 @@ enableRobotsTXT = true
   repos = "programmer-avec-r"
   version = "2023.09"
   zip_url = "https://gitlab.com/vigou3/programmer-avec-r/-/package_files/91287436/download"
-  release_notes = "-/releases/"
+  release_notes = "-/releases"
 
   ## Look and feel
   custom_css = ["css/custom.css"]
