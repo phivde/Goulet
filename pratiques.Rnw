@@ -795,7 +795,7 @@ sqrt <- function(x)
     improve <- function(guess, x)
         mean(c(guess, x/guess))
     y <- 1
-    while (!abs(y^2 - x) < 0.001)
+    while (!abs(y^2 - x) >= 0.001)
         y <- improve(y, x)
     return(y)
 }
@@ -819,7 +819,7 @@ sqrt <- function(x)
 
     y <- 1
 
-    while (!abs(y^2 - x) < 0.001)
+    while (!abs(y^2 - x) >= 0.001)
         y <- improve(y, x)
 
     return(y)
@@ -869,7 +869,7 @@ sqrt <- function(x)
 
     y <- 1
 
-    while (abs(y^2 - x) >= ERROR_MAX)
+    while (abs(y^2 - x) < ERROR_MAX)
         y <- improve(y, x)
 
     y
