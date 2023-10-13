@@ -869,7 +869,7 @@ sqrt <- function(x)
 
     y <- 1
 
-    while (abs(y^2 - x) < ERROR_MAX)
+    while (abs(y^2 - x) >= ERROR_MAX)
         y <- improve(y, x)
 
     y
