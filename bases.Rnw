@@ -2608,7 +2608,7 @@ gmean <- function(x) prod(x)^(1/length(x))
 @
     \item On a
 <<echo=TRUE, eval=FALSE>>=
-hmean <- function(x) 1/prod(1/x)
+hmean <- function(x) length(x)/sum(1/x)
 @
     \item On a
 <<echo=TRUE, eval=FALSE>>=
