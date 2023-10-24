@@ -2747,8 +2747,13 @@ is.odd
       Si nous ne forcions pas la sortie de la fonction avec
       \icode{return} à l'intérieur de la condition, l'évaluation de la
       fonction se poursuivrait et le résultat ne serait pas celui
-      attendu. <<echo=TRUE>>= abs <- function(x) { if (x < 0) -x x }
-      abs(-5) @
+      attendu.
+<<echo=TRUE>>=
+abs <- function(x) { if (x < 0) -x x }
+@
+<<echo=TRUE>>=
+ abs(-5)
+@
     \end{enumerate}
   \end{sol}
 \end{exercice}
