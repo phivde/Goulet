@@ -2752,7 +2752,7 @@ is.odd
 abs <- function(x) { if (x < 0) -x x }
 @
 <<echo=TRUE>>=
- abs(-5)
+abs(-5)
 @
     \end{enumerate}
   \end{sol}
