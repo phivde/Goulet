@@ -4,7 +4,17 @@
 
 # (en développement)
 
+## Nouveautés
 
+- Chapitre 10: nouvelle (très courte) section 10.5 sur la mise à jour
+  des bibliothèques de paquetage, ce qui ajoute au document la
+  fonction `update.packages`.
+
+## Changements
+
+- Exemples du chapitre 6: plusieurs inégalités étaient inversées dans
+  les révisions successives de la fonction `sqrt`. Merci à Joseph
+  Descarreaux.
 
 
 # 2023.09 (2023-09-01)
