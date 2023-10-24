@@ -271,11 +271,23 @@ install.packages("\meta{paquetage}")
 \end{Verbatim}
 \end{Schunk}
 
-Pour utiliser le paquetage, il faut le charger en mémoire avec
-\icode{library}, tel qu'expliqué à la
+Pour utiliser le paquetage, vous devez d'abord le charger en mémoire
+avec \icode{library}, tel qu'expliqué à la
 \autoref{sec:paquetages:utilisation}. R recherche le paquetage
 spécifié dans les bibliothèques de
 \index{libPaths@\code{.libPaths}}\code{.libPaths}.
+
+\section{Mise à jour des bibliothèques de paquetages}
+\label{sec:paquetages:update}
+
+La fonction \Icode{update.packages} effectue la mise à jour depuis
+CRAN des bibliothèques fournies en argument ou, si aucun argument
+n'est fourni, de toutes les bibliothèques de paquetages.
+\begin{Schunk}
+\begin{Verbatim}[commandchars=\\\{\}]
+update.packages()
+\end{Verbatim}
+\end{Schunk}
 
 \gotorbox{Étudiez l'intégralité du fichier de script
   \code{\scriptfilename} reproduit à la
@@ -321,7 +333,14 @@ search()
 ## Chargement du paquetage dans la session de travail. R
 ## recherche le paquetage dans toutes les bibliothèques de
 ## '.libPaths()'.
-library("actuar")
+##-!- library("actuar")
+
+###
+### MISE À JOUR DES BIBLIOTHÈQUES DE PAQUETAGES
+###
+
+## Mise à jour de la bibliothèque personnelle.
+##-!- update.packages(.libPaths()[1])
 @
 
 
