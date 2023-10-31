@@ -2993,7 +2993,7 @@ cat(rep(1:3, rep(4, 3)))
   \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-\item Suite de $0, 6$ répétée trois fois.
+\item Vecteur des nombres $0$ et $6$, répété trois fois.
 <<echo=TRUE, eval=FALSE>>=
 rep(c(0, 6), 3)
 @
