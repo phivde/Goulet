@@ -2749,7 +2749,12 @@ is.odd
       fonction se poursuivrait et le résultat ne serait pas celui
       attendu.
 <<echo=TRUE>>=
-abs <- function(x) { if (x < 0) -x x }
+abs <- function(x)
+{
+    if (x < 0)
+        -x
+    x
+}
 @
 <<echo=TRUE>>=
 abs(-5)
