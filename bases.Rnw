@@ -2608,7 +2608,7 @@ gmean <- function(x) prod(x)^(1/length(x))
 @
     \item On a
 <<echo=TRUE, eval=FALSE>>=
-hmean <- function(x) 1/prod(1/x)
+hmean <- function(x) length(x)/sum(1/x)
 @
     \item On a
 <<echo=TRUE, eval=FALSE>>=
@@ -2747,8 +2747,18 @@ is.odd
       Si nous ne forcions pas la sortie de la fonction avec
       \icode{return} à l'intérieur de la condition, l'évaluation de la
       fonction se poursuivrait et le résultat ne serait pas celui
-      attendu. <<echo=TRUE>>= abs <- function(x) { if (x < 0) -x x }
-      abs(-5) @
+      attendu.
+<<echo=TRUE>>=
+abs <- function(x)
+{
+    if (x < 0)
+        -x
+    x
+}
+@
+<<echo=TRUE>>=
+abs(-5)
+@
     \end{enumerate}
   \end{sol}
 \end{exercice}
