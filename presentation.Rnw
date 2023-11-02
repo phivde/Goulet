@@ -698,7 +698,7 @@ rm(x, y, v, m)             #-*- `\labelline{presentation:fin}`
   travail avec R. Le fichier de script \code{\scriptfilename} livré
   avec le présent document et reproduit à la
   \autoref{sec:presentation:exemples} contient du code qui passe en
-  revue quelques unes des fonctionnalités de R. Ouvrez ce fichier dans
+  revue quelques-unes des fonctionnalités de R. Ouvrez ce fichier dans
   votre éditeur de texte, puis exécutez les lignes une par une en
   prenant bien soin de lire les commentaires et d'examiner les
   résultats.}
