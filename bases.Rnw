@@ -1765,7 +1765,7 @@ is.odd <- function(x)
         FALSE
 }
 
-## Ou pire encore en utilisant une logique tordue ou l'on
+## Ou pire encore en utilisant une logique tordue où l'on
 ## retourne FAUX lorsque la condition est vraie et VRAI
 ## lorsqu'elle est fausse! (Je n'invente rien, c'est un cas
 ## rencontré.)
