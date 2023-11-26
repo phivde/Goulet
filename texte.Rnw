@@ -1476,7 +1476,7 @@ Amusons-nous à créer des nouveaux vers en changeant l'ordre des mots.
 Pour ce faire, nous allons créer trois groupes: les deux mots qui
 suivent immédiatement \chaine{Le}; l'avant-dernier mot du vers; le
 dernier mot du vers. Le motif pour capturer ces trois groupes est
-\regex{Le (.*) (.*) (.*)}\,. Rappelez-vous: les opérateurs de
+\regex{Le\aspace(.*)\aspace(.*)\aspace(.*)}\,. Rappelez-vous: les opérateurs de
 répétition sont gloutons, donc le premier groupe capture deux mots
 pour ensuite laisser un mot à chacun des deux autres groupes.
 Confirmons d'abord le contenu de chacun des groupes.
