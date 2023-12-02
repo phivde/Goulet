@@ -1291,6 +1291,11 @@ de la lettre \chaine{r}, ni de la lettre \chaine{s}.
 exec("grep", c("'ou[^rs]'", "chanson.txt"))
 @
 
+Les caractères spéciaux autres que le caret et le tiret perdent leurs
+significations particulières à l'intérieur des classes de caractères.
+Il est donc possible d'identifier les différentes marques de fin de
+phrase avec \regex{[.?!]}.
+
 \tipbox{Comme vous pouvez le voir, les classes de caractères
   comportent en quelque sorte leur propre syntaxe et leurs opérateurs
   spécifiques. Il s'avère simplement que certains symboles --- en
@@ -2764,7 +2769,7 @@ exécuter depuis une ligne de commande \index{Unix}Unix.
     \item \code{abc|xyz}
     \end{horizenum}
     \pagebreak[1]
-  \item \regex{[a-z]+[\bs.\bs?!]}
+  \item \regex{[a-z]+[.?!]}
     \begin{horizenum}(3)
     \item \code{battle!}
     \item \code{Hot}
@@ -2785,7 +2790,7 @@ exécuter depuis une ligne de commande \index{Unix}Unix.
     \item \code{Other.=}
     \end{horizenum}
     \pagebreak[1]
-  \item \regex{[a-z][\bs.\bs?!][[:blank:]]+[A-Z]}
+  \item \regex{[a-z][.?!][[:blank:]]+[A-Z]}
     \begin{horizenum}(3)
     \item \code{A.~B}
     \item \code{c!~d}
