@@ -9,12 +9,24 @@
 - Chapitre 10: nouvelle (très courte) section 10.5 sur la mise à jour
   des bibliothèques de paquetage, ce qui ajoute au document la
   fonction `update.packages`.
+- Section 11.3.6: ajout d'un paragraphe pour préciser que les
+  caractères spéciaux perdent leur signification à l'intérieur des
+  classes de caractères.
 
 ## Changements
 
 - Exemples du chapitre 6: plusieurs inégalités étaient inversées dans
   les révisions successives de la fonction `sqrt`. Merci à Joseph
   Descarreaux.
+- Section 11.4.3: dans le tout dernier bloc de code de la section, les
+  deux motifs `$/^$/` devaient plutôt se lire `/^$/`. Les symboles `$`
+  en trop ont été supprimés.
+- Exercices du chapitre 11: correction de l'adresse URL du site duquel
+  est tiré l'exercice 11.2.
+- Exercices 11.2 e) et g): puisqu'il n'est pas nécessaire de
+  désactiver les caractères spéciaux à l'intérieur des classes de
+  caractères, `[\.\?!]` est remplacé par `[.?!]` dans les expressions
+  régulières.
 
 
 # 2023.09 (2023-09-01)
