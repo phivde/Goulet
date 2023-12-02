@@ -2726,7 +2726,7 @@ exécuter depuis une ligne de commande \index{Unix}Unix.
   correspondent les motifs d'expression régulière étendue
   ci-dessous.\footnote{%
     Exercice adapté de
-    \url{https://regex.sketchengine.co.uk/extra_regexps.html}.}
+    \url{https://regex.sketchengine.eu/basic-exercises.html}.}
   \begin{enumerate}
     \settasks{style=enumerate,before-skip=2pt}
   \item \regex{a(ab)*a}
