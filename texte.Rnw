@@ -2211,8 +2211,8 @@ apportons deux simplifications à la commande ci-dessus:
 \end{itemize}
 \begin{Schunk}
 \begin{Verbatim}
-$ awk '$/^$/ && state == 1 { exit }
-       $/^$/ { state = 1 }
+$ awk '/^$/ && state == 1 { exit }
+       /^$/ { state = 1 }
        1' chanson.txt
 <<echo=FALSE, results=tex>>=
 exec("awk", c("'/^$/ && state == 1 { exit } /^$/ { state = 1 } 1'", "chanson.txt"), echo = FALSE)
