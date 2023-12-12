@@ -1398,10 +1398,9 @@ déterminant. Voici quatre commandes \icode{sed} pour effectuer le
 traitement. Analysez ces commandes attentivement et essayez
 d'identifier leurs différences, s'il y en a. Nous y reviendrons plus
 loin.
-%% les commandes sont trop longues et l'insfrastructure de la fonction
-%% 'exec' ne permet pas de les couper; j'inclus néanmoins les
-%% commandes dans des blocs de code afin de valider qu'elles
-%% fonctionnent correctement
+%% les commandes sont trop longues et la fonction 'exec' ne permet pas
+%% de les couper; j'inclus néanmoins les commandes dans des blocs de
+%% code afin de valider qu'elles fonctionnent correctement
 \begin{Schunk}
 \begin{Verbatim}
 $ sed -E 's/le mouvement|la fatigue/le pendule/' \
