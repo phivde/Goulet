@@ -6,6 +6,10 @@
 
 ## Nouveautés
 
+- Chapitre 3: nouvelle section 3.7 sur l'organisation des projets et
+  des fichiers.
+- Chapitre 3: nouvelle section 3.8 sur la rédaction de fichiers
+  portables.
 - Chapitre 10: nouvelle (très courte) section 10.5 sur la mise à jour
   des bibliothèques de paquetage, ce qui ajoute au document la
   fonction `update.packages`.
@@ -15,12 +19,17 @@
 
 ## Changements
 
+- Section 3.4 retravaillée pour simplifier la présentation des
+  stratégies de travail. Le contenu de la boite signalétique sur
+  l'analogie avec Excel est intégré au texte.
+- Section 3.6: explication du répertoire de travail a bonifiée pour
+  mieux faire ressortir l'importance du concept.
 - Exemples du chapitre 6: plusieurs inégalités étaient inversées dans
   les révisions successives de la fonction `sqrt`. Merci à Joseph
   Descarreaux.
 - Section 11.4.3: dans le tout dernier bloc de code de la section, les
-  deux motifs `$/^$/` devaient plutôt se lire `/^$/`. Les symboles `$`
-  en trop ont été supprimés.
+  deux motifs `$/^$/` devaient plutôt se lire `/^$/`. Le symbole `$`
+  en trop a été supprimé.
 - Exercices du chapitre 11: correction de l'adresse URL du site duquel
   est tiré l'exercice 11.2.
 - Exercices 11.2 e) et g): puisqu'il n'est pas nécessaire de
