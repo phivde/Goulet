@@ -139,7 +139,7 @@ L'interpréteur évalue immédiatement l'expression pour ensuite afficher
 le résultat.
 
 Par exemple, si l'on entre simplement un nombre à la ligne de commande
-(identifiée ci-dessous par le caractère \code{>}), l'interpréteur
+(identifiée ci-dessous par le symbole \code{>}), l'interpréteur
 retourne la valeur de ce nombre.
 <<echo=TRUE>>=
 42
@@ -149,7 +149,7 @@ Nous pouvons aussi composer des expressions plus élaborées qui
 combinent des nombres et des opérateurs mathématiques standards.
 <<echo=TRUE>>=
 2 + 3
-1000 - 334
+1000 - 958
 5 * 7
 10/5
 2.7 + 12.8
@@ -162,16 +162,16 @@ permettent de réaliser une tâche donnée.
 Risquons une analogie avec le tableur \index{Excel}Excel, qui est
 aussi un logiciel de manipulation de données, de mise en forme et de
 préparation de graphiques. Or, au sens large, Excel est également un
-langage de programmation interprété! Pensez-y: nous utilisons le
-langage de programmation lorsque nous entrons des commandes dans une
+langage de programmation interprété! Pensez-y: vous utilisez le
+langage de programmation lorsque vous entrez des commandes dans une
 cellule d'une feuille de calcul, puis
-l'\index{interpréteur}interpréteur exécute les commandes et affiche
+l'\index{interpréteur}interpréteur évalue les commandes et affiche
 les résultats dans la cellule.
 
-Le R est un langage particulièrement puissant pour les applications
+R est un langage particulièrement puissant pour les applications
 mathématiques et statistiques, chose peu surprenante puisqu'il a
 précisément été développé dans ce but. Parmi ses caractéristiques
-particulièrement intéressantes, on note:
+intéressantes, on note:
 \begin{itemize}
 \item langage basé sur la notion de vecteur, ce qui simplifie les
   calculs mathématiques et réduit considérablement le recours aux
@@ -204,10 +204,10 @@ par ailleurs aux capacités d'édition plutôt réduites.
   \label{fig:presentation:console}
 \end{figure}
 
-Sous Windows, l'interface graphique fournie avec R est plutôt
-rudimentaire. Elle facilite certaines opérations tel que
-l'installation de paquetages externes, mais elle n'offre autrement que
-peu de fonctionnalités pour l'édition de code R.
+Sous Windows, l'interface graphique fournie avec R est rudimentaire.
+Elle facilite certaines opérations tel que l'installation de
+paquetages externes, mais elle n'offre autrement que peu de
+fonctionnalités pour l'édition de code R.
 
 L'interface graphique de R sous macOS est la plus élaborée. Outre la
 console présentée à la \autoref{fig:presentation:console},
@@ -222,9 +222,11 @@ Peu importe la plateforme utilisée --- quoique dans une moindre mesure
 sous macOS --- je recommande d'interagir avec R par le biais d'un
 éditeur de texte pour programmeur ou d'un environnement de
 développement intégré. Nous y reviendrons à la
-\autoref{sec:presentation:editeurs}.
+\autoref{sec:presentation:editeurs}; le choix de cette interface
+coulera de source une fois que vous connaitrez la stratégie de
+travail que nous adopterons avec R.
 
-\enlargethispage{5mm}
+%\enlargethispage{5mm}
 \section{Stratégies de travail}
 \label{sec:presentation:strategies}
 
@@ -232,70 +234,78 @@ Dans la mesure où R se présente essentiellement sous forme d'une
 ligne de commande, il existe deux grandes stratégies de travail avec
 cet environnement statistique.
 
-\subsection{Code virtuel et objets réels}
-\label{sec:presentation:strategies:code-virtuel}
-
-Dans l'approche dite de «code virtuel et objets réels», on entre des
-expressions à la ligne de commande pour les évaluer immédiatement.
+\begin{enumerate}
+\item \textbf{Code virtuel et objets réels}\; L'approche dite de «code
+  virtuel et objets réels» semble la plus naturelle avec les
+  interfaces standards de R, mais elle souffre de sévère limites.
+  Selon cette approche, les expressions R sont entrées à la ligne de
+  commande et évaluées immédiatement.
 <<echo=TRUE>>=
 2 + 3
 @
-
-On peut également créer des objets contenant le résultat d'un calcul.
-Ces objets sont stockés en mémoire dans %
-l'\index{espace de travail}espace de travail %
-de R.
+  Il est aussi possible d'enregistrer le résultat d'un calcul dans un
+  objet. Cet objet est alors stocké en mémoire dans %
+  l'\index{espace de travail}espace de travail %
+  de R.
 <<echo=TRUE>>=
 x <- exp(2)
 x
 @
-
-Lorsque la session de travail est terminée, on sauvegarde une image de
-l'espace de travail sur le disque dur de l'ordinateur afin de pouvoir
-conserver les objets pour une future séance de
-travail\index{save.image@\code{save.image}}.
+  À la fin de la session de la session de travail, l'image de l'espace
+  de travail est sauvegardée sur le poste de travail afin de pouvoir
+  conserver les objets pour une future séance de
+  travail\index{save.image@\code{save.image}}.
 <<eval=FALSE>>=
 save.image()
 @
-
-Par défaut, l'image est sauvegardée dans un fichier nommé
-\code{.RData} dans le répertoire de travail courant (plus de détails à
-la \autoref{sec:presentation:workspace}) et cette image est
-automatiquement chargée en mémoire au prochain lancement de R, tel
-qu'indiqué à la fin du message d'accueil:
-\begin{Schunk}
+  Par défaut, l'image est sauvegardée dans un fichier nommé
+  \code{.RData} dans le répertoire de travail courant (plus de détails à
+  la \autoref{sec:presentation:workspace}) et cette image est
+  automatiquement chargée en mémoire au prochain lancement de R, tel
+  qu'indiqué à la fin du message d'accueil:
+  \begin{Schunk}
 \begin{verbatim}
 [Sauvegarde de la session précédente restaurée]
 \end{verbatim}
-\end{Schunk}
+  \end{Schunk}
+  Cette approche a toutefois un énorme inconvénient: le code utilisé
+  pour créer les objets n'est pas sauvegardé entre les sessions de
+  travail. Sans accès au code qui a servi à créer l'objet \code{x},
+  comment savoir ce que la valeur %
+  \code{\Sexpr{format(x, dec = ".")}} %
+  représente au juste? Si l'on poursuit l'analogie avec un tableur,
+  cela correspondrait à ne sauvegarder que les valeurs calculées d'une
+  feuille de calcul, sans les formules.
+  %
+\item \textbf{Code réel et objets virtuels}\; L'approche dite de «code
+  réel et objets virtuels» considère que ce qu'il importe de conserver
+  au terme d'une session de travail, ce ne sont pas tant les objets
+  que le code qui a servi à les créer. Ainsi, nous aurons recours à
+  des \emph{fichiers de script} pour sauvegarder nos expressions R et
+  le code de nos fonctions. Par convention, on donne aux fichiers de
+  script un nom se terminant par l'extension \code{.R}.
 
-Cette approche a toutefois un gros inconvénient: le code utilisé pour
-créer les objets n'est pas sauvegardé entre les sessions de travail.
-Or, celui-ci est souvent bien plus compliqué que l'exemple ci-dessus.
-De plus, sans accès au code qui a servi à créer l'objet \code{x},
-comment savoir ce que la valeur \code{\Sexpr{format(x, dec = ".")}}
-représente au juste?
+  Les objets --- fonctions et «variables» contenant des résultats de
+  calculs --- sont créés au besoin en évaluant à la volée le code des
+  fichiers de script. Comment? Simplement en copiant le code du
+  fichier de script et en le collant dans la ligne de commande de R.
+  La \autoref{fig:presentation:script} illustre schématiquement ce que
+  le programmeur R a constamment sous les yeux: son fichier de script
+  et la ligne de commande R dans laquelle son code a été évalué.
+  Rassurez-vous: les éditeurs de texte et les environnements de
+  développement intégrés dont traite la prochaine section rendent
+  l'opération de copier-coller simple et rapide.
 
-\subsection{Code réel et objets virtuels}
-\label{sec:presentation:strategies:code-reel}
+  Les tableurs adoptent en fait cette approche «code réel et objets
+  virtuels»: lorsque vous sauvegardez une feuille de calcul, le
+  tableur enregistre les formules qui se trouvent dans les cellules
+  (et non les valeurs) et il réévalue celles-ci à l'ouverture de la
+  feuille, puis constamment et en temps réel durant la session de
+  travail pour afficher les résultats dans les cellules.
 
-L'approche dite de «code réel et objets virtuels» considère que ce
-qu'il importe de conserver au terme d'une session de travail, ce ne
-sont pas tant les objets que le code qui a servi à les créer. Ainsi,
-on sauvegardera dans ce que l'on nommera des \emph{fichiers de script}
-nos expressions R et le code de nos fonctions. Par convention, on
-donne aux fichiers de script un nom se terminant avec l'extension
-\code{.R}.
-
-Avec cette approche, les objets sont créés au besoin en exécutant le
-code des fichiers de script. Comment? Simplement en copiant le code du
-fichier de script et en le collant dans la ligne de commande de R. La
-\autoref{fig:presentation:script} illustre schématiquement ce que le
-programmeur R a constamment sous les yeux: son fichier de script et la
-ligne de commande R dans laquelle son code a été exécuté.
-
-La méthode d'apprentissage préconisée dans cet ouvrage suppose que
-vous utiliserez cette seconde approche d'interaction avec R.
+  La méthode d'apprentissage préconisée dans cet ouvrage suppose que
+  vous utiliserez cette seconde approche d'interaction avec R.
+\end{enumerate}
 
 \begin{figure}
   \centering
@@ -303,28 +313,11 @@ vous utiliserez cette seconde approche d'interaction avec R.
   \lstinputlisting[frame=single,language={},numbers=none,firstline=2]{include/script.Rout}
   \caption[Fichier de script et ligne de commande R]{Fichier de script
     (en haut) et ligne de commande R dans laquelle les expressions R
-    ont été exécutées (en bas).}
+    ont été évaluées (en bas).}
   \label{fig:presentation:script}
 \end{figure}
 
-\tipbox{Toute analogie est boiteuse, mais celle-ci peut néanmoins
-  s'avérer utile pour illustrer l'approche «code réel, objets
-  virtuels». Avec un tableur comme Excel, que choisiriez-vous si l'on
-  vous proposait les options suivantes:
-  \begin{enumerate}
-  \item Ne sauvegarder que les valeurs calculées d'une feuille de
-    calcul;
-  \item Ne sauvegarder que les formules d'une feuille de calcul,
-    quitte à les réévaluer par la suite pour obtenir les valeurs
-    correspondantes.
-  \end{enumerate}
-  La seconde, assurément{\dots} Or, c'est justement à celle-ci que
-  correspond l'approche «code réel, objets virtuels». La raison pour
-  laquelle on n'a jamais à se poser la question avec un tableur, c'est
-  que le progiciel évalue constamment et en temps réel les formules
-  pour afficher les résultats dans les cellules.}
-
-\importantbox{Dans les fichiers de script comme à la ligne de
+\tipbox{Dans les fichiers de script comme à la ligne de
   commande, le caractère «\code{\#}» marque le début d'un
   \index{commentaire}commentaire dans R. Ainsi, tout ce qui est inclus
   entre ce caractère et le saut à la ligne suivant est complètement
@@ -342,16 +335,17 @@ un environnement de développement intégré (\emph{integrated
 
 Un éditeur de texte est différent d'un traitement de texte en ce qu'il
 s'agit d'un logiciel destiné à la création, l'édition et la sauvegarde
-de fichiers textes bruts, c'est-à-dire dépourvus d'information de
-présentation et de mise en forme. Les applications Bloc-notes sous
+de fichiers en format texte brut, c'est-à-dire dépourvus d'information
+de présentation et de mise en forme. Les applications Bloc-notes sous
 Windows ou TextEdit sous macOS sont deux exemples d'éditeurs de texte
 simples.
 
 Un éditeur de texte pour programmeur saura en plus reconnaitre la
 syntaxe d'un langage de programmation et assister à sa mise en forme:
 indentation automatique du code, marquage des mots-clés, manipulation
-d'objets, etc. Enfin, un éditeur compatible avec R réduira, entre
-autres, l'opération de copier-coller à un simple raccourci-clavier.
+d'objets, etc. Enfin, un éditeur compatible avec R réduira l'opération
+de copier-coller du fichier de script vers la ligne de commande R à un
+simple raccourci-clavier.
 
 Vous pouvez utiliser le logiciel de votre choix pour l'édition de code
 R. Certains éditeurs offrent simplement plus de fonctionnalités que
@@ -386,7 +380,7 @@ d'autres. Voici quelques bons choix.
   vénérable et très puissant éditeur pour programmeur
   GNU~Emacs\index{Emacs}. À la question~6.2 de la foire aux questions
   de R \citep{R-FAQ}, «Devrais-je utiliser R à l'intérieur de
-  Emacs?»\index{Emacs}, la réponse est: «Oui, absolument.» En effet,
+  Emacs?»\index{Emacs}, la réponse est: «Oui, assurément.» En effet,
   combiné avec le mode ESS\index{Emacs!mode ESS} (\emph{Emacs Speaks
     Statistics}), Emacs offre un environnement de développement
   particulièrement riche et efficace. Il a d'ailleurs servi
@@ -446,17 +440,27 @@ d'autres. Voici quelques bons choix.
 
 
 \section{Répertoire de travail}
-\Index{repertoire@répertoire de travail}
-\index{dossier de travail|see{répertoire de travail}}
 \label{sec:presentation:workspace}
 
-Le répertoire de travail (\emph{workspace}) de R est le répertoire par
-défaut dans lequel le logiciel, d'une part, recherche des fichiers de
-script ou de données et, d'autre part, sauvegarde %
+Une difficulté à laquelle se butent presque invariablement les
+personnes qui débutent avec R peut se résumer par ce cri à l'aide: «R
+ne trouve pas mes fichiers!» Pour éviter de vous retrouver dans cette
+situation, vous devez dès maintenant comprendre le concept de %
+\Index{repertoire@répertoire de travail}%
+\index{dossier de travail|see{répertoire de travail}}%
+répertoire de travail (\emph{workspace}) de R.
+
+Durant son exécution, l'interpréteur R garde les yeux rivés sur un
+seul répertoire de votre poste de travail: c'est son \emph{répertoire
+  de travail}. C'est dans ce répertoire que R va, d'une part,
+rechercher par défaut des fichiers de script ou de données ou, d'autre
+part, sauvegarder %
 l'\index{espace de travail}espace de travail %
-dans le fichier \code{.RData}. Le répertoire de travail est déterminé
-au lancement de R. La fonction \Icode{getwd} permet d'afficher le
-répertoire de travail courant de R.
+dans le fichier \code{.RData}. À chaque session R son répertoire de
+travail. Ce n'est pas plus compliqué que ça.
+
+La fonction \Icode{getwd} permet d'afficher le répertoire de travail
+de R.
 \begin{Schunk}
 \begin{Sinput}
 > getwd()
@@ -466,8 +470,18 @@ répertoire de travail courant de R.
 \end{Soutput}
 \end{Schunk}
 
-Il est possible de changer le répertoire de travail depuis la ligne de
-commande avec \Icode{setwd}:
+Comment ce répertoire de travail est-il déterminé? Ici, ça dépend de
+l'interface utilisée. Avec les interfaces graphiques de R et avec
+RStudio, c'est généralement votre répertoire personnel, comme dans
+l'exemple ci-dessus.\footnote{%
+  Les foires aux questions spécifiques aux interfaces graphiques
+  \citep{Rw-FAQ,RMacOSX-FAQ} contiennent des détails additionnels sur
+  la gestion du répertoire de travail.} %
+Avec Emacs, c'est plus simple: vous déterminez le répertoire de travail au
+lancement d'un processus R; voir l'\autoref{chap:emacs+ess}.
+
+La fonction \Icode{setwd} permet, quant à elle, de changer le
+répertoire de travail.
 \begin{Schunk}
 \begin{Sinput}
 > setwd("~/Documents/programmer-avec-r")
@@ -477,21 +491,78 @@ commande avec \Icode{setwd}:
 [1] "/Users/vincent/Documents/programmer-avec-r"
 \end{Soutput}
 \end{Schunk}
+Dans les interfaces graphiques de R, vous pouvez aussi changer le
+répertoire de travail à partir du menu \texttt{Fichier} (Windows) ou
+\texttt{Divers} (macOS). Dans \index{RStudio}RStudio, c'est via le
+menu \code{Session|Set Working Directory}.
 
-Les interfaces graphiques de R et les environnements de développement
-intégrés démarrent généralement avec un répertoire de travail par
-défaut. On change le répertoire de travail à partir du menu \texttt{Fichier} (Windows) ou
-\texttt{Divers} (macOS) des interfaces graphiques. Dans
-\index{RStudio}RStudio, c'est via le menu \code{Session|Set Working Directory}.
+\section{Organisation des projets et des fichiers}
+\label{sec:presentation:organisation}
 
-Les foires aux questions spécifiques aux interfaces graphiques
-\citep{Rw-FAQ,RMacOSX-FAQ} contiennent des détails additionnels sur la
-gestion du répertoire de travail.
+Durant vos premiers pas avec R, vous aurez sans doute tendance à
+regrouper tous vos fichiers de script dans un même répertoire sur
+votre poste de travail. Cela risque toutefois de devenir problématique
+lorsque les projets et les fichiers se multiplieront. Or, votre
+ordinateur est justement doté d'un puissant système de classement: son
+système de fichiers (\autoref{sec:informatique:fs}).
 
-Avec \index{Emacs}Emacs, la situation est un peu plus simple puisqu'on
-spécifie le répertoire de travail dès le lancement d'un processus R; ceci
-est expliqué plus en détail à l'\autoref{chap:emacs+ess}.
+Avec sa logique du %
+\index{repertoire@répertoire de travail} %
+répertoire de travail, R impose en quelque sorte une organisation des
+projets et des fichiers qui s'arrime tout naturellement au système de
+fichiers de l'ordinateur. Veillez donc à adopter dès le départ ces
+bonnes pratiques en matière d'organisation des projets et des
+fichiers.
+\begin{enumerate}
+\item Utiliser un répertoire par projet et y regrouper tous les
+  fichiers de ce projet.
+\item Faire de ce répertoire le répertoire de travail de R dès le
+  lancement de la session, soit via la commande \icode{setwd}, soit
+  via un menu d'une interface graphique.
+\item Placer le code sous contrôle de versions avec un système tel que
+  \index{Git}\link{https://git-scm.org}{Git}.
+\end{enumerate}
 
+\section{Programmer pour collaborer}
+\label{sec:presentation:collaborer}
+
+Je l'ai déjà mentionné dans l'introduction de cet ouvrage: la
+programmation se pratique beaucoup plus souvent en groupe que seul.
+Autrement dit, vous serez fort probablement appelé à un jour partager
+vos fichiers de script avec des collaborateurs --- ou l'univers
+entier, via des plateformes de partage de code informatique. Dans de
+telles circonstances, vous devrez fournir des fichiers de script
+\emph{portables}, c'est-à-dire susceptibles d'être utilisés sur
+d'autres systèmes sans modification. Suivez dès maintenant les
+préceptes suivants dans la rédaction de vos fichiers de script et vous
+serez sur la bonne voie.
+\begin{enumerate}
+\item Ne jamais utiliser la commande \icode{setwd} dans un fichier de
+  script. Changez plutôt le \index{repertoire@répertoire de
+    travail}répertoire de travail au lancement de la session de
+  travail, tel qu'expliqué à la section précédente.
+\item Ne jamais utiliser de \index{chemin d'accès!absolu}chemins
+  d'accès absolus (\autoref{sec:informatique:fs:path}). Vous ne pouvez
+  compter sur une organisation des fichiers identique à la vôtre sur
+  les postes de travail des autres. Utilisez exclusivement des
+  \index{chemin d'accès!relatif}chemins d'accès relatifs.
+\item Ne jamais utiliser un chemin d'accès vers l'extérieur du projet,
+  donc du répertoire. Les seuls chemins d'accès (relatifs) permis
+  doivent mener vers des sous-répertoires du répertoire courant.
+\item Ne jamais dépendre d'objets qui ne sont pas créés dans un script
+  du projet. Vous ne pouvez pas supposer qu'un objet \code{x}
+  contenant la valeur \code{5} existe dans la session R d'une
+  collaboratrice.
+\item Toujours utiliser un codage de caractères universel tel que
+  \link{https://fr.wikipedia.org/wiki/American_Standard_Code_for_Information_Interchange}{ASCII}
+  ou \link{https://fr.wikipedia.org/wiki/UTF-8}{UTF-8}, surtout si vos
+  fichiers de script comportent des signes diacritiques (accents,
+  cédille, tréma) ou des symboles spéciaux.
+\end{enumerate}
+
+\windowsbox{L'UTF-8 n'étant toujours pas le codage par défaut sous
+  Windows, vous devez porter une attention articulière à ce point si
+  vous utilisez ce système d'exploitation.}
 
 \section{Anatomie d'une session de travail}
 \label{sec:presentation:session}
@@ -503,8 +574,8 @@ Dans ses grandes lignes, une session de travail avec R comporte les
   si l'on utilise une interface graphique ou RStudio, ou alors en
   suivant la procédure appropriée pour travailler avec son éditeur de
   texte. Ouvrir un fichier de script existant ou en créer un nouveau.
-\item Si nécessaire, changer le répertoire de travail de R pour le
-  répertoire contenant le fichier de script.
+\item Changer le répertoire de travail de R pour le répertoire
+  contenant le fichier de script.
 \item Bâtir graduellement un fichier de script en y consignant le code
   R que l'on souhaite sauvegarder et les commentaires qui permettront
   de s'y retrouver plus tard. Tester les commandes à la ligne de
@@ -699,7 +770,7 @@ rm(x, y, v, m)             #-*- `\labelline{presentation:fin}`
   avec le présent document et reproduit à la
   \autoref{sec:presentation:exemples} contient du code qui passe en
   revue quelques-unes des fonctionnalités de R. Ouvrez ce fichier dans
-  votre éditeur de texte, puis exécutez les lignes une par une en
+  votre éditeur de texte, puis évaluez les lignes une par une en
   prenant bien soin de lire les commentaires et d'examiner les
   résultats.}
 
@@ -734,7 +805,7 @@ q()
   rencontrées dans le code informatique de la
   \autoref{sec:presentation:exemples}. Observer d'abord comment les
   rubriques d'aide sont structurées --- elles sont toutes identiques
-  --- puis exécuter quelques expressions tirées des sections
+  --- puis évaluez quelques expressions tirées des sections
   d'exemples.
 \end{exercice}
 
@@ -748,7 +819,7 @@ q()
 \end{exercice}
 
 \begin{exercice}[nosol]
-  Exécuter le code de l'exemple de session de travail R que l'on
+  Évaluer le code de l'exemple de session de travail R que l'on
   trouve à l'annexe~A de \citet{R-intro}. En plus d'aider à se
   familiariser avec R, cet exercice permet de découvrir les
   fonctionnalités du logiciel en tant qu'outil statistique.
